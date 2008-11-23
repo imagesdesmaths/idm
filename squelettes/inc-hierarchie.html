@@ -1,0 +1,10 @@
+<B_hierarchie>
+<ul>
+  <BOUCLE_hierarchie(RUBRIQUES) {id_parent=#ENV{id_parent}} {id_rubrique != 18}>
+<li[(#ID_RUBRIQUE|=={#ENV{courant}}|?{' class="courant"'})]>
+<a href="#URL_RUBRIQUE">#TITRE</a>
+[(#ID_RUBRIQUE|!={6}|?{#INCLURE{fond=inc-hierarchie}{id_parent=#ID_RUBRIQUE}{courant}})]
+</li>
+</BOUCLE_hierarchie>
+</ul>
+</B_hierarchie>

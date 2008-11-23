@@ -1,0 +1,27 @@
+<BOUCLE_article(ARTICLES){id_article=#ENV{id_article}}>
+<div class="related">
+  <h2 class="titre">Articles reliés</h2>
+
+  [(#ID_SECTEUR|=={18}|?{'',' '})
+    [(#INCLURE{fond=inc-meme-auteur}{id_article=#ID_ARTICLE})]
+  ]
+
+  <B_memerubrique>
+  <h3 class="type">Dans la même rubrique</h3>
+  <ul>
+    <BOUCLE_memerubrique(ARTICLES){id_rubrique}{par date}{inverse}{exclus}>
+      <li><a href="#URL_ARTICLE">#TITRE</a></li>
+    </BOUCLE_memerubrique>
+  </ul>
+  </B_memerubrique>
+
+  <B_mot>
+  <h3 class="type">Mots-clefs</h3>
+  <ul>
+    <BOUCLE_mot(MOTS){id_article} {id_groupe != 2}>
+      <li><a href="#URL_MOT">#TITRE</a></li>
+    </BOUCLE_mot>
+  </ul>
+  </B_mot>
+</div>
+</BOUCLE_article>

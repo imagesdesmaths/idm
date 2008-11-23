@@ -1,0 +1,31 @@
+<INCLURE{fond=inc-head}>
+
+<BOUCLE_nospecial(ARTICLES) {id_secteur = 18} {doublons}>
+</BOUCLE_nospecial>
+
+<div id="une">
+  <div class="titre"><h2>&Agrave; la une</h2></div>
+  <BOUCLE_featured(ARTICLES) {id_secteur IN 1,4} {par date} {inverse} {0,1} {doublons}>
+  [(#INCLURE{fond=inc-resume}{id_article})]
+  </BOUCLE_featured>
+</div>
+
+<div class="recents">
+  <h2>Derniers articles publiés</h2>
+  <BOUCLE_rub(RUBRIQUES) {racine} {id_rubrique != 6} {id_rubrique != 18}>
+    <BOUCLE_old(ARTICLES) {branche} {par date} {inverse} {doublons} {0,1}>
+      [(#INCLURE{fond=inc-resume}{id_article})]
+    </BOUCLE_old>
+  </BOUCLE_rub>
+</div>
+
+<B_billets>
+<div class="billets no_rubrique">
+  <h2>Les billets de la semaine</h2>
+  <BOUCLE_billets(ARTICLES) {id_rubrique = 6} {par date} {inverse} {doublons}>
+  [(#INCLURE{fond=inc-resume}{id_article})]
+  </BOUCLE_billets>
+</div>
+</B_billets>
+
+#INCLURE{fond=inc-foot}

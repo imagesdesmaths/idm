@@ -1,0 +1,14 @@
+#CACHE{0}
+<INCLURE{fond=inc-head}{title=Gestion des relecteurs}>
+
+[(#REM) Que faire quand le visiteur est administrateur ?]
+[(#SESSION{statut}|=={0minirezo}|?{' ',''})
+#INCLUDE{fond=inc-relecteurs}
+]
+
+[(#REM) Que faire sinon ?]
+[(#SESSION{statut}|=={0minirezo}|?{'',' '})
+<h1>Go away, you non-administrator !</h1>
+]
+
+#INCLURE{fond=inc-foot}

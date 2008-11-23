@@ -1,0 +1,28 @@
+#SET{base_url,http://www.umpa.ens-lyon.fr/~vbeffara/bulk/#ENV{id}}
+<?php 
+  $url = "#GET{base_url}/data";
+  eval(file_get_contents($url));
+?>
+
+<div class='spip_documents spip_documents_center[ spip_document_video(#ENV{id})]'>
+  <object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B"
+          codebase="http://www.apple.com/qtactivex/qtplugin.cab"
+          width='<?php print $img_width; ?>'
+          height='<?php print $img_height + 16; ?>'
+          data='#GET{base_url}/video.mp4'>
+          <param name="type" value="video/mp4" />
+          <param name="src" value="#GET{base_url}/video.mp4" />
+          <param name="autoplay" value="false" />
+          <object width='<?php print $img_width; ?>'
+                  height='<?php print $img_height + 16; ?>'
+                  data='#GET{base_url}/video.mp4'>
+                  <param name="type" value="video/mp4" />
+                  <param name="src" value="#GET{base_url}/video.mp4" />
+                  <param name="autoplay" value="false" />
+                  <a href="#GET{base_url}/video.mp4">
+                    <img src="#GET{base_url}/video.jpg" alt="<?php print $img_title; ?>" />
+                  </a>
+          </object>
+  </object>
+  <div class='spip_doc_titre'><?php print $img_title; ?></div>
+</div>

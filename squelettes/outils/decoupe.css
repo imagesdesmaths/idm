@@ -1,0 +1,36 @@
+div.onglets_bloc h2.onglets_titre a { text-decoration:none; }
+
+div.onglets_bloc h2.onglets_titre {
+  background-color : #eeeeee;
+  height:20px;
+  position:relative;
+  display:inline;
+  float:left;
+  margin:1px -1px 0px 0px;
+  padding:3px 1em 0px;
+  border: solid red;
+  border-width : 1px 1px 1px;
+
+  z-index:11;
+  white-space:nowrap;
+  text-align:center;
+  font-size: 90%;
+  top: -1px;
+}
+
+div.onglets_bloc h2.onglets_titre.selected {
+  background-color : white;
+  border-width : 3px 1px 0px;
+  z-index:11;
+  top:-3px;
+}
+
+div.onglets_bloc .onglets_contenu {
+  display:none;
+  border: solid red;
+  border-width : 0px 0px 1px 1px;
+  z-index:10;
+  padding: 24px 0px 0px 2ex;
+}
+
+div.onglets_bloc .onglets_contenu.selected { display:block; }

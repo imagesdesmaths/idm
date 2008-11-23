@@ -1,0 +1,26 @@
+<BOUCLE_article(ARTICLES) {id_article} {recherche ?}>
+  <div class="resume_out resume_out_rubrique_#ID_RUBRIQUE resume_out_secteur_#ID_SECTEUR">
+    <div class="resume resume_rubrique_#ID_RUBRIQUE resume_secteur_#ID_SECTEUR">
+      #DEBUT_SURLIGNE
+      [(#LOGO_ARTICLE|right|#URL_ARTICLE|image_reduire{150,150})]
+      [(#LOGO_ARTICLE|fichier|?{'',' '}) <INCLURE{fond=inc-auteur}{id_article=#ID_ARTICLE}{taille=150}>]
+
+      <h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+
+      <BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {id_secteur != 18}>
+      <div class="rubrique rubrique_#ID_RUBRIQUE"><a 
+          href="#URL_RUBRIQUE">#TITRE</a></div>
+      </BOUCLE_rubrique>
+
+      <h4 class="auteur[(#ID_SECTEUR|=={18}|?{' invisible'})]">&nbsp;
+      <B_noms>Par 
+        <BOUCLE_noms(AUTEURS) {par nom} {id_article} {", "}><a href="#URL_AUTEUR">[(#NOM|prenom_nom)]</a></BOUCLE_noms>
+      </B_noms>
+      </h4>
+
+      [<div class="introduction"><a class="plain" href="#URL_ARTICLE">(#DESCRIPTIF|sinon{[(#INTRODUCTION|textebrut)]})</a></div>]
+      #FIN_SURLIGNE
+    </div>
+    <div class="nettoyeur"></div>
+  </div>
+</BOUCLE_article>

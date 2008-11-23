@@ -1,0 +1,29 @@
+<BOUCLE_article(ARTICLES){id_article}>
+<INCLURE{fond=inc-head}{title=#TITRE - <:poster_message:>}>
+
+<div class="no_rubrique">
+  [(#INCLURE{fond=inc-resume}{id_article})]
+</div>
+
+<BOUCLE_auteur(spip_auteurs_articles) {id_article} {0,1}>
+<BOUCLE_auteur2(AUTEURS){id_auteur}>
+[(#SET{auteur_article,#NOM})]
+</BOUCLE_auteur2>
+</BOUCLE_auteur>
+
+<INCLURE{fond=inc-forum}{id_article}{id_forum}{auteur_article=#GET{auteur_article}}>
+
+[(#SESSION{id_auteur}|?{' '})#FORMULAIRE_FORUM]
+
+[(#SESSION{id_auteur}|?{'',' '})
+<p>Pour participer &agrave; la discussion merci de <a 
+  href="#URL_PAGE{perso}">vous identifier</a> (ou de <a 
+  href="#URL_PAGE{inscription}">vous inscrire</a> si vous ne l'avez pas 
+  encore fait).</p>
+]
+
+#INCLURE{fond=inc-foot}
+</BOUCLE_article>
+<INCLURE{fond=sommaire}>
+<//B_article>
+

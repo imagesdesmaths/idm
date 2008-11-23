@@ -1,0 +1,28 @@
+<BOUCLE_article(ARTICLES){id_article}>
+<INCLURE{fond=inc-head}{title=#TITRE}{id_rubrique=#ID_RUBRIQUE}{id_article=#ID_ARTICLE}>
+
+#DEBUT_SURLIGNE
+[(#LOGO_ARTICLE|right||image_reduire{200,200})]
+[(#LOGO_ARTICLE|fichier|?{'',' '}) <INCLURE{fond=inc-auteur}{id_article=#ID_ARTICLE}{taille=200}>]
+[<h2 class="#EDIT{surtitre} surtitre">(#SURTITRE)</h2>]
+[<h1 class="#EDIT{titre} titre">(#TITRE)</h1>]
+[<h2 class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</h2>]
+
+<B_noms>
+  <h3 class="auteur">Par
+<BOUCLE_noms(AUTEURS) {par nom} {id_article} {", "}><a href="#URL_AUTEUR">[(#NOM|prenom_nom)]</a></BOUCLE_noms>
+  </h3>
+</B_noms>
+
+[<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
+[<div class="#EDIT{texte} texte">(#TEXTE|lettrine)</div>]
+[<div class="#EDIT{ps} ps"><span class="ps">P.S. :</span> (#PS)</div>]
+[<div class="notes"><h3>Notes</h3>(#NOTES)</div>]
+#FIN_SURLIGNE
+
+<h3 class="discuter"><a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">Discuter cet article ...</a></h3>
+
+#INCLURE{fond=inc-foot}
+</BOUCLE_article>
+<INCLURE{fond=sommaire}>
+<//B_article>

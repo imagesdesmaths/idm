@@ -1,0 +1,5 @@
+<BOUCLE_cetarticle(ARTICLES){id_article = #ENV{id_article}}{id_secteur != 18}>
+<BOUCLE_auteurs(AUTEURS) {id_article} {0,1}>
+  [(#LOGO_AUTEUR|right|#URL_AUTEUR|image_reduire{#ENV{taille},#ENV{taille}})]
+  </BOUCLE_auteurs>
+</BOUCLE_cetarticle>

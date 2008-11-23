@@ -1,0 +1,30 @@
+#CACHE{0}
+
+[(#REM) Donner acces si le visiteur est un des relecteurs :]
+
+<BOUCLE_securite(spip_relecteurs_articles) {id_auteur = #SESSION{id_auteur}} {id_article}>
+</BOUCLE_securite>
+<INCLURE{fond=inc-propose}{id_article}{id_forum}>
+</B_securite>
+
+[(#REM) Donner aussi acces si le visiteur est l'auteur de l'article :]
+
+<BOUCLE_securite2(ARTICLES) {statut = prop} {id_article} {id_auteur = #SESSION{id_auteur}}>
+</BOUCLE_securite2>
+<INCLURE{fond=inc-propose}{id_article}{id_forum}>
+</B_securite2>
+
+[(#REM) Donner aussi acces si le visiteur est un administrateur du site :]
+
+[(#SESSION{statut}|=={0minirezo}|?{' ',''})
+<INCLURE{fond=inc-propose}{id_article}{id_forum}>
+]
+
+[(#REM) Sinon, on renvoie sur la page d'accueil du site :]
+
+[(#SESSION{statut}|=={0minirezo}|?{'',' '})
+<INCLURE{fond=sommaire}>
+]
+
+<//B_securite2>
+<//B_securite>

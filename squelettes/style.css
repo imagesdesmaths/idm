@@ -1,0 +1,145 @@
+
+/* Global styles */
+
+h1 { text-align : center; margin : 0px; }
+h2 { text-align : center; }
+h3 { text-align : left; }
+h4 { text-align : center; font-style : italic; font-weight : bold; }
+
+h2.surtitre { text-align : left; font-weight : normal; font-size : large; margin : .5ex 0ex; }
+h2.soustitre { font-weight : normal; font-style : italic; font-size : large; margin : .5ex; }
+h2.plan { border : 2px solid #e20000; border-width : 0px 0px 2px; }
+
+h3.spip { text-align : center; padding : 1ex; border-top : 2px solid #e20000; border-bottom : 2px solid #e20000; clear : both; }
+h3.discuter { text-align : right; font-style : italic; }
+h3.auteur { text-align : right; font-weight : normal; }
+
+a { color : #e20000; inherit; font-weight : bold; text-decoration : none; }
+/*a:hover { text-decoration : underline; }*/
+
+img { border : none; }
+img.spip_logos { padding : 0px 0px 1ex 2em; background : inherit; }
+
+table { margin: 0px auto; text-align: center; border : 1px solid #e20000; border-collapse: collapse; }
+th { font-weight : bold; border : 1px solid #e20000; padding : 1px .5em; }
+td { border : 1px solid #e20000; padding : 1px .5em; }
+
+form { text-align : center; }
+
+/* Styles for the navigation bar */
+
+div#nav h2 { margin : 2ex 0px 1ex; font-size : medium; padding : .2ex 0px .2ex; border : 1px solid #e20000; border-width : 1px 0px; }
+div#nav h3 { margin : 1ex 0px .5ex; font-size : medium; }
+
+div#nav a { font-weight : normal; color : white; text-decoration : none; }
+div#nav a.active { color : #e20000; }
+div#nav a:hover { text-decoration : underline; }
+
+div#nav ul { margin : 0px; padding-left : 0em; font-size : small; list-style-type : none; }
+div#nav ul ul { padding-left : 2em; }
+div#nav ul ul ul { padding-left : 1em; }
+
+div#nav form { margin-top : 1ex; }
+div#nav form label { display : none; }
+div#nav form input { width : 10em; }
+
+div#nav div.bottom { position : fixed; bottom : .2ex; }
+
+/* Styles for abstracts */
+
+div.resume_out { margin : 2ex 0px 0px; clear : both; background : inherit; }
+div.resume { background : inherit; }
+
+div.resume a { color : inherit; background : inherit; text-decoration : none; }
+div.resume a.plain { font-weight : normal; }
+div.resume h3.titre a:hover { color : #e20000; }
+
+
+h3.titre { margin : 0px; border-bottom : 2px solid #e20000; }
+h4.auteur { font-style : normal; text-align : right; font-weight : normal; margin : .2ex 0px 0px; padding : 0px; }
+
+div.resume img.spip_logos { padding : 0px 0px 0px 1em; background : white; }
+div#une div.resume img.spip_logos { background : inherit; }
+
+div.introduction { margin : .5ex 0px 0px 1em; font-size : small; font-style : italic; }
+
+div.rubrique { font-style : italic; font-size : 80%; color : #e20000; float : left; margin-top : .2ex; }
+div.rubrique a { color : #e20000; background : inherit; font-weight : bold; }
+
+div.rubrique_3, div.rubrique_13, div.rubrique_14, div.rubrique_23 { margin-top : .4ex; }
+div.rubrique_13 a { color : white; background : #00aa00; padding : .2ex .5em; }
+div.rubrique_14 a { color : white; background : #3333ff; padding : .2ex .5em; }
+div.rubrique_3 a { color : white; background : #666666; padding : .2ex .5em; }
+div.rubrique_23 a { color : white; background : #666666; padding : .2ex .5em; }
+
+/* Styles for articles */
+
+div.chapo { margin : 1ex 4em; font-weight : bold; font-style : italic; }
+div.texte { padding-top : 2ex; }
+div.texte h4 { text-align : center; font-style : italic; font-weight : bold; text-decoration : underline; padding-top : .5ex; font-size : 110%; }
+div.texte h5 { text-align : left; font-style : italic; font-weight : bold; text-decoration : none; padding : .5ex 2em; margin : 0px; font-size : 110%; }
+div.texte blockquote { color : black; background : #ffeeee; padding : .5ex 1em; border : 1px dashed #e20000; }
+div.texte pre { padding-left : 1em; margin-left : 1em; border-left : 1px solid #e20000; }
+div.texte li { margin-top : 1ex; }
+div.ps { margin-top : 1ex; padding-top : 1ex; border-top : 1px solid #e20000; font-style : italic; }
+div.ps span.ps { font-weight : bold; }
+
+div.texte a { color : inherit; }
+div.texte a:link, div.texte a:visited { color : #e20000; }
+
+div.texte p.lettrine { text-indent : 0px; }
+div.texte p.lettrine span.lettrine { text-transform : uppercase; }
+div.texte p.lettrine span.lettrine span.lettrine_first { font-family : "Arial Black", sans-serif; color : #500; float : left; font-size : 440%; font-weight : bold; margin : -.4ex .1em -.4ex 0px; }
+
+/* Specific styles */
+
+div#une div.titre { margin-top : -2.5ex; text-align : center; }
+div#une h2 { display : inline; border : 1px solid #e20000; padding : .3ex 1em; background-color : white; }
+
+a.article { font-weight : normal; }
+
+.invisible { display : none; }
+.nettoyeur { clear : both; }
+.spip_surligne { color : black; background : yellow; }
+
+.relecteurs_vote_pas_vu { background-color : #cccccc; }
+.relecteurs_vote_vu { background-color : white; }
+.relecteurs_vote_non { background-color : #e20000; }
+.relecteurs_vote_moyen { background-color : #ffd700; }
+.relecteurs_vote_oui { background-color : #00ff00; }
+
+hr.huge { margin : 2ex 0px; height : 20px; color : #e20000; background-color : #e20000; border : 0px; }
+
+div.cs_blocs h4 { text-align : left; font-style : normal; }
+
+.spip_documents { text-align : center; }
+.spip_documents_left { float : left; margin-right : 2em; margin-bottom : 1ex; }
+.spip_documents_right { float : right; margin-left : 2em; margin-bottom : 1ex; }
+.spip_documents_center { width : 100%; margin : auto; }
+span.spip_documents_center { display : block; margin-top : 1em; }
+.spip_doc_titre { font-weight : bold; font-size : small; margin : 1ex auto; }
+.spip_doc_descriptif { clear : both; font-size : small; margin-left : auto; margin-right : auto; }
+
+ul.forum { padding : 0px; list-style-type : none; }
+ul.forum li { padding : 1ex 0px 0px 0em; }
+ul.forum ul { padding : 0ex 0px 0px 2em; list-style-type : none; }
+ul.forum ul ul ul ul { padding-left : 0px; }
+
+div.forum-message { }
+div.forum-message h3 { margin : 0px; font-size : medium; border-bottom : 1px solid #e20000; }
+div.forum-message h4 { margin : 3px 0px; text-align : right; font-size : small ; font-style : italic; }
+div.forum-message h4.repondre { margin-top : 1ex; }
+div.forum-message div.forum-texte { margin : 1ex 0px; font-size : medium; }
+div.forum-message p { margin : .5ex 0px; }
+
+div.forum-message-delauteur { background-color : #ffcccc; padding : 1ex; }
+
+div.spip-admin-bloc { margin-top : 2ex; }
+div.spip-admin-bloc a { display : block; color : white; background : #550000; border : 1px solid #e20000; margin : -1px 0px 0px; }
+div.spip-admin-bloc a:hover { background : #550000; text-decoration : none; border : 1px solid #e20000; }
+
+div.plan { width : 100%; }
+
+div.texte .jsMath_number { right : 0px; }
+
+div.texte div.preuve { margin-left : 4em; font-size : small; font-style : italic; }

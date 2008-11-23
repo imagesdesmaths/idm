@@ -1,0 +1,40 @@
+<INCLURE{fond=inc-head}{title=Plan du site}>
+
+<div class="plan">
+
+<BOUCLE_secteurs(RUBRIQUES) {racine} {id_rubrique != 18}>
+<h2 class="plan"><a href="#URL_RUBRIQUE">#TITRE</a></h2>
+
+<B_articles_racine>
+<ul>
+  <BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par num titre, date}>
+  <li><a class="article" href="#URL_ARTICLE">#TITRE</a></li>
+  </BOUCLE_articles_racine>
+</ul>
+</B_articles_racine>
+
+<B_rubriques>
+<ul>
+  <BOUCLE_rubriques(RUBRIQUES) {id_parent} {par num titre, date}>
+  <li class="rubrique"><strong><a href="#URL_RUBRIQUE">#TITRE</a></strong>
+
+  <B_articles>
+  <ul>
+    <BOUCLE_articles(ARTICLES) {id_rubrique} {par num titre, date}>
+    <li><a class="article" href="#URL_ARTICLE">#TITRE</a></li>
+    </BOUCLE_articles>
+  </ul>
+  </B_articles>
+
+  <BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+
+  </li>
+  </BOUCLE_rubriques>
+</ul>
+</B_rubriques>
+
+</BOUCLE_secteurs>
+
+</div>
+
+#INCLURE{fond=inc-foot}

@@ -1,0 +1,44 @@
+[(#PARAMETRES_FORUM|?)]
+
+<B_one_forum>
+  <h3><a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">Voir tous les messages</a> -
+    <a href="#URL_ARTICLE">Retourner &agrave; l'article</a></h3>
+
+  <ul class="forum">
+    <BOUCLE_one_forum(FORUMS) {id_article} {id_forum}>
+      <li class="forum-fil">
+      <INCLURE {fond=inc-forum-message} {id_forum} {auteur_article}>
+      </li>
+    </BOUCLE_one_forum>
+  </ul>
+  
+  <h3>Répondre à ce message :</h3>
+
+</B_one_forum>
+<h3>
+<BOUCLE_decompte(FORUMS) {id_article} {plat}></BOUCLE_decompte>
+  [(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})
+  [(#TOTAL_BOUCLE|=={1}|?{<:message:>,<:messages:>})] -]
+<//B_decompte>
+<a href="#URL_ARTICLE">Retourner &agrave; l'article</a></h3>
+
+<B_forums>
+  <ul class="forum">
+    <BOUCLE_forums(FORUMS) {id_article} {par date}>
+      <li class="forum-fil">
+      <INCLURE {fond=inc-forum-message} {id_forum} {auteur_article}>
+        <B_forums_fils>
+          <ul>
+            <BOUCLE_forums_fils(FORUMS){id_parent}{par date}>
+            <li>
+            <INCLURE {fond=inc-forum-message} {id_forum} {auteur_article}>
+              <BOUCLE_Forums_Boucle(boucle_forums_fils)></BOUCLE_Forums_Boucle>
+              </li>
+            </BOUCLE_forums_fils>
+          </ul>
+        </B_forums_fils>
+      </li>
+    </BOUCLE_forums>
+  </ul>
+</B_forums>
+<//B_one_forum>

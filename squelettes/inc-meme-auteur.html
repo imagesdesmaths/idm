@@ -1,0 +1,10 @@
+<BOUCLE_auteur(AUTEURS){id_article=#ENV{id_article}}>
+  <B_memeauteur>
+  <h3 class="type"><a href="#URL_AUTEUR">Du m&ecirc;me auteur</a></h3>
+  <ul>
+    <BOUCLE_memeauteur(ARTICLES){id_auteur}{par date}{inverse}{exclus}{id_secteur != 18}>
+      <li><a href="#URL_ARTICLE">#TITRE</a></li>
+    </BOUCLE_memeauteur>
+  </ul>
+  </B_memeauteur>
+</BOUCLE_auteur>

@@ -1,0 +1,21 @@
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+<INCLURE{fond=inc-head}{title=#TITRE}{id_rubrique=#ID_RUBRIQUE}>
+
+<h1><BOUCLE_parent(RUBRIQUES){id_rubrique=#ID_PARENT}>
+  <a href="#URL_RUBRIQUE">#TITRE</a> :</BOUCLE_parent> #TITRE</h1>
+
+[<div class="texte">(#TEXTE)</div>]
+
+<BOUCLE_articles(ARTICLES) {id_rubrique} {par num titre}>
+[(#INCLURE{fond=inc-resume}{id_article})]
+</BOUCLE_articles>
+
+<BOUCLE_articles_hors(ARTICLES) {branche} {par num titre}>
+[(#INCLURE{fond=inc-resume}{id_article})]
+</BOUCLE_articles_hors>
+<//B_articles>
+
+#INCLURE{fond=inc-foot}
+</BOUCLE_rubrique>
+<INCLURE{fond=sommaire}>
+<//B_rubrique>

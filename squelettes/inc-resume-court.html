@@ -1,0 +1,23 @@
+<BOUCLE_article(ARTICLES) {id_article} {recherche ?}>
+  <div class="resume_out resume_out_rubrique_#ID_RUBRIQUE resume_out_secteur_#ID_SECTEUR">
+    <BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>
+      <div class="rubrique">
+        [(#ID_SECTEUR|=={6}|?{Un billet de #TITRE :,Dans la rubrique « #TITRE » :})]
+      </div>
+    </BOUCLE_rubrique>
+
+    <div class="resume resume_rubrique_#ID_RUBRIQUE resume_secteur_#ID_SECTEUR">
+      #DEBUT_SURLIGNE
+      <h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+
+      [<h4 class="soustitre">(#SOUSTITRE)</h4>]
+
+      <h4 class="auteur[(#ID_SECTEUR|=={18}|?{' invisible'})]">Par 
+        <BOUCLE_noms(AUTEURS) {par nom} {id_article} {", "}><a href="#URL_AUTEUR">[(#NOM|prenom_nom)]</a></BOUCLE_noms>
+      </h4>
+
+      [<div class="introduction">(#INTRODUCTION|textebrut|couper{200})</div>]
+      #FIN_SURLIGNE
+    </div>
+  </div>
+</BOUCLE_article>

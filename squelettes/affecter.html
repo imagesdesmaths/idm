@@ -1,0 +1,11 @@
+#CACHE{0}
+
+[(#REM) Ne donner accès qu'aux administrateurs :]
+
+[(#SESSION{statut}|=={0minirezo}|?{' ',''})
+<INCLURE{fond=inc-affecter}>
+]
+
+[(#SESSION{statut}|=={0minirezo}|?{'',' '})
+<INCLURE{fond=sommaire}>
+]

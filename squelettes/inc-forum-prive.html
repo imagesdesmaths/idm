@@ -1,0 +1,49 @@
+#CACHE{0}
+
+<B_forum_precis>
+  <h3><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">Voir tous les messages</a></h3>
+
+  <ul class="forum">
+    <BOUCLE_forum_precis(FORUMS) {id_article} {id_forum} {statut = prive}>
+      <li class="forum-fil">
+      [(#INCLURE {fond=inc-forum-message-prive} {id_forum} {auteur_article})]
+        <B_forum_precis_fils>
+          <ul>
+            <BOUCLE_forum_precis_fils(FORUMS) {id_parent} {par date} {statut = prive}>
+              <li>
+              [(#INCLURE {fond=inc-forum-message-prive} {id_forum} {auteur_article})]
+                <BOUCLE_Forums_Boucle(boucle_forum_precis_fils)></BOUCLE_Forums_Boucle>
+              </li>
+            </BOUCLE_forum_precis_fils>
+          </ul>
+        </B_forum_precis_fils>
+      </li>
+    </BOUCLE_forum_precis>
+  </ul>
+
+  <h3>Répondre à ce message :</h3>
+</B_forum_precis>
+
+<B_reforums>
+  <ul class="forum">
+    <BOUCLE_reforums(FORUMS) {id_article} {par date} {statut = prive}>
+      <li class="forum-fil">
+      [(#INCLURE {fond=inc-forum-message-prive} {id_forum} {auteur_article})]
+        <B_reforums_fils>
+          <ul>
+            <BOUCLE_reforums_fils(FORUMS) {id_parent} {par date} {statut = prive}>
+              <li>
+              [(#INCLURE {fond=inc-forum-message-prive} {id_forum} {auteur_article})]
+                <BOUCLE_reForums_Boucle(boucle_reforums_fils)></BOUCLE_reForums_Boucle>
+              </li>
+            </BOUCLE_reforums_fils>
+          </ul>
+        </B_reforums_fils>
+      </li>
+    </BOUCLE_reforums>
+  </ul>
+</B_reforums>
+
+<h3>Un commentaire sur cet article ?</h3>
+
+<//B_forum_precis>

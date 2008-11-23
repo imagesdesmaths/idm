@@ -1,0 +1,17 @@
+#CACHE{0}
+<INCLURE{fond=inc-head}{title=Votre espace personnel}>
+
+[(#REM) Que faire quand le visiteur est identifié ?]
+[(#SESSION{id_auteur}|?{' ',''})
+<INCLURE{fond=inc-perso}>
+]
+
+[(#REM) Que faire si le visiteur est anonyme ?]
+[(#SESSION{id_auteur}|?{'',' '})
+<h1>Merci de vous identifier</h1>
+#LOGIN_PUBLIC
+
+<p>Si vous n'avez pas d'identifiant, vous pouvez <a href="#URL_PAGE{inscription}">vous inscrire</a>.</p>
+]
+
+#INCLURE{fond=inc-foot}

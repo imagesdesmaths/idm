@@ -1,0 +1,15 @@
+<BOUCLE_mot_principal(MOTS) {id_mot} {doublons}>
+<INCLURE{fond=inc-head}{title=#TITRE}>
+
+<h1>#TITRE</h1>
+
+<BOUCLE_articles(ARTICLES) {id_mot} {par date} {inverse}>
+<div class="no_rubrique">
+  [(#INCLURE{fond=inc-resume}{id_article})]
+</div>
+</BOUCLE_articles>
+
+#INCLURE{fond=inc-foot}
+</BOUCLE_mot_principal>
+<INCLURE{fond=sommaire}>
+<//B_mot_principal>
