@@ -42,6 +42,7 @@ div#nav ul ul ul { padding-left : 1em; }
 div#nav form { margin-top : 1ex; }
 div#nav form label { display : none; }
 div#nav form input { width : 10em; }
+div#nav form input.submit { display : none; }
 
 div#nav div.bottom { position : fixed; bottom : .2ex; }
 
@@ -51,7 +52,7 @@ div.resume_out { margin : 2ex 0px 0px; clear : both; background : inherit; }
 div.resume { background : inherit; }
 
 div.resume a { color : inherit; background : inherit; text-decoration : none; }
-div.resume a.plain { font-weight : normal; }
+div.resume div.introduction a { font-weight : normal; }
 div.resume h3.titre a:hover { color : #e20000; }
 
 
@@ -132,7 +133,7 @@ div.forum-message h4.repondre { margin-top : 1ex; }
 div.forum-message div.forum-texte { margin : 1ex 0px; font-size : medium; }
 div.forum-message p { margin : .5ex 0px; }
 
-div.forum-message-delauteur { background-color : #ffcccc; padding : 1ex; }
+div.forum-message-delauteur { background-color : #ffcccc; padding : 1ex; margin : 0ex -1ex 1ex; }
 
 div.spip-admin-bloc { margin-top : 2ex; }
 div.spip-admin-bloc a { display : block; color : white; background : #550000; border : 1px solid #e20000; margin : -1px 0px 0px; }
