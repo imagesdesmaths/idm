@@ -1,0 +1,72 @@
+
+<!-- descriptif=<h4>Configuration du plugin jsMath pour SPIP</h4> Ce 
+formulaire vous permet de gérer quelques options, qui se trouvent toutes 
+ce qui se trouve d'habitude dans easy/load.js. Certaines ne sont pas 
+réglables (en particulier, processSlashParens et compagnie, parce que le 
+plugin transforme tout en éléments span et div). -->
+
+#CACHE{0}
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset>
+  <legend>Options générales</legend>
+  <p>Les noms d'options correspondent à ceux de jsMath.</p>
+
+  <p><input type="checkbox" name="autoload" 
+  [checked="(#ENV{autoload}|?{'checked',''})" ] /> Activer le chargement 
+  automatique (option <strong>autoload</strong>)
+
+  <br /><input type="checkbox" name="allowDisableTag" 
+  [checked="(#ENV{allowDisableTag}|?{'checked',''})" ] /> Autoriser 
+  <tt>id="tex2math_off"</tt> (option 
+  <strong>allowDisableTag</strong>)
+
+  <br /><input type="checkbox" name="allowDoubleClicks" 
+  [checked="(#ENV{allowDoubleClicks}|?{'checked',''})" ] /> Autoriser le 
+  double-clic sur les formules (option 
+  <strong>allowDoubleClicks</strong>)
+
+  <br /><input type="checkbox" name="showFontWarnings" 
+  [checked="(#ENV{showFontWarnings}|?{'checked',''})" ] /> Message
+  si fontes manquantes (option <strong>showFontWarnings</strong>)
+
+  <br /><input type="checkbox" name="allowGlobal" 
+  [checked="(#ENV{allowGlobal}|?{'checked',''})" ] /> Autoriser le mode 
+  global (option <strong>allowGlobal</strong>)</p>
+</fieldset>
+
+<fieldset>
+  <legend>Chemin d'accès</legend>
+  <p>Entrez ci-dessous le chemin d'accès au répertoire jsMath. Si ce 
+  champ est laissé vide, le plugin cherchera ce répertoire en utilisant 
+  les fonctions de SPIP.</p>
+
+  <p><input type="text" name="root" [value="(#ENV{root})" ] size="80" /></p>
+  
+  <p><em>C'est sans doute une mauvaise idée de remplir ce champ si 
+    jsMath est visible par SPIP, par contre en cas de mutualisation ça 
+    peut servir ... Dans tous les cas, il doit s'agir d'une adresse dans 
+    le même domaine que les pages fabriquées par SPIP.</em></p>
+</fieldset>
+
+<fieldset>
+  <legend>Divers</legend>
+  <table>
+    <tr>
+      <td>Échelle (option <strong>scale</strong>) :</td>
+      <td><input type="text" name="scale" [value="(#ENV{scale})" ] /></td>
+      <td>(défaut : 120)</td>
+    </tr>
+    <tr>
+      <td>Méthode (option <strong>method</strong>) :</td>
+      <td><input type="text" name="method" [value="(#ENV{method})" ] /></td>
+      <td>(défaut : Process)</td>
+    </tr>
+  </table>
+</fieldset>
+
+<input type="submit" name="_cfg_ok" value="<:cfg:OK:>" />
+<input type="reset" value="<:cfg:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:cfg:Supprimer:>" />
+</form>

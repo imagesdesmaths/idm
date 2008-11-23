@@ -1,0 +1,70 @@
+8
+
+dir
+22696
+svn://zone.spip.org/spip-zone/_plugins_/_test_/jsMath
+svn://zone.spip.org/spip-zone
+
+
+
+2008-04-27T17:06:28.490099Z
+20202
+marcimat@free.fr
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+ac52e18a-acf5-0310-9fe8-c4428f23b10a
+
+jsMath_easy_load.js.html
+file
+22697
+
+
+
+2008-09-22T07:41:49.000000Z
+b6bf996afc9e4be3442d4bed118a3332
+2008-09-22T07:51:23.366980Z
+22697
+vbeffara+ml@gmail.com
+
+jsMath
+dir
+
+fonds
+dir
+
+jsMath.php
+file
+
+
+
+
+2008-03-22T16:59:33.000000Z
+7ecde6fb7ec82d9a8ee3b725eceebdb6
+2008-03-22T16:47:15.020273Z
+19404
+vbeffara+ml@gmail.com
+
+plugin.xml
+file
+22697
+
+
+
+2008-09-22T07:47:05.000000Z
+9bdb01545ae3abccec249a09c2a03b83
+2008-09-22T07:51:23.366980Z
+22697
+vbeffara+ml@gmail.com
+
