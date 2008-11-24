@@ -144,3 +144,20 @@ div.plan { width : 100%; }
 div.texte .jsMath_number { right : 0px; }
 
 div.texte div.preuve { margin-left : 4em; font-size : small; font-style : italic; }
+
+/* We override the default Couteau Suisse styles for blocs and onglets. */
+
+div.texte div.cs_blocs {}
+div.texte div.cs_blocs h4 { background : transparent url(img/triangle-bas.gif) no-repeat scroll left center; font-size : 100%; font-weight : normal; padding:0pt 0pt 0pt 20px; }
+div.texte div.cs_blocs h4:hover { cursor : pointer; text-decoration : underline; }
+div.texte div.cs_blocs h4.blocs_replie { background : transparent url(img/triangle.gif) no-repeat scroll left center; }
+
+div.texte div.onglets_bloc h2.onglets_titre { background-color : #eeeeee; height : 20px; position : relative; display : inline; float : left; margin : 1px -1px 0px 0px; padding : 3px 1em 0px; border : solid red; border-width : 1px 1px 1px; z-index : 11; white-space : nowrap; text-align : center; font-size : 90%; top : -1px; }
+div.texte div.onglets_bloc h2.onglets_titre a { text-decoration : none; }
+div.texte div.onglets_bloc h2.onglets_titre.selected { background-color : white; border-width : 3px 1px 0px; z-index : 11; top : -3px; }
+div.texte div.onglets_bloc .onglets_contenu { display : none; border : solid red; border-width : 0px 0px 1px 1px; z-index : 10; padding : 35px 0px 1ex 2ex; } 
+div.texte div.onglets_bloc .onglets_contenu.selected { display : block; }
+
+[(#REM)
+vim: ft=css
+]
