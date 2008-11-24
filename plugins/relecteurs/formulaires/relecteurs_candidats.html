@@ -1,0 +1,22 @@
+<?php relecteurs_effect_change ('#SELF', 'admin'); ?>
+
+<B_candidats>
+<h2>Liste des candidats &agrave &ecirc;tre relecteurs</h2>
+
+<form method="post" action="#SELF">
+  <table>
+    <tr><th>ID</th><th>Signature / Pseudo</th><th>Accepter</th><th>Refuser</th><th>Décider plus tard</th></tr>
+    <BOUCLE_candidats(AUTEURS) {tous} {role = candidat} {par id_auteur}>
+    <tr>
+      <td>#ID_AUTEUR</td>
+      <td>#NOM</td>
+      <td><input type="radio" name="form_relecteur_statut_#ID_AUTEUR" value="relecteur" /></td>
+      <td><input type="radio" name="form_relecteur_statut_#ID_AUTEUR" value="visiteur" /></td>
+      <td><input type="radio" name="form_relecteur_statut_#ID_AUTEUR" value="candidat" checked="checked" /></td>
+    </tr>
+    </BOUCLE_candidats>
+  </table>
+
+  <p style="text-align : center;"><input type="submit" value="Modifier les statuts indiqu&eacute;s" name="form_relecteur_go" /></p>
+</form>
+</B_candidats>

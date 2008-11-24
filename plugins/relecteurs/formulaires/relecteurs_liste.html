@@ -1,0 +1,21 @@
+<?php relecteurs_effect_change ('#SELF', 'admin'); ?>
+
+<B_relecteurs>
+<h2>Liste des relecteurs enregistrés</h2>
+
+<form method="post" action="#SELF">
+  <table>
+    <tr><th>ID</th><th>Signature / Pseudo</th><th>e-mail</th><th>Supprimer</th></tr>
+    <BOUCLE_relecteurs(AUTEURS) {tous} {role = relecteur} {par id_auteur}>
+    <tr>
+      <td>#ID_AUTEUR</td>
+      <td>#NOM</td>
+      <td>#EMAIL</td>
+      <td><input type="checkbox" name="form_relecteur_exterminate_#ID_AUTEUR"/></td>
+    </tr>
+    </BOUCLE_relecteurs>
+  </table>
+
+  <p style="text-align : center;"><input type="submit" value="&Eacute;liminer les relecteurs coch&eacute;s" name="form_relecteur_go" /></p>
+</form>
+</B_relecteurs>

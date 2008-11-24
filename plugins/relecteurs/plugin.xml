@@ -1,0 +1,17 @@
+<plugin>
+  <nom> Gestion des relecteurs </nom>
+  <auteur> [Vincent Beffara->vbeffara@ens-lyon.fr] </auteur>
+  <version>0.5</version>
+  <etat>test</etat>
+
+  <description> Ce plugin permet la gestion de relecteurs publics : des 
+    visiteurs du site qui n'ont pas acc&egrave;s &agrave; l'espace 
+    priv&eacute;, et qui ne peuvent pas &eacute;crire d'articles, mais 
+    disposent d'une interface sp&eacute;cifique pour commenter les 
+    articles propos&eacute;s qui leur sont soumis. </description>
+
+  <prefix>relecteurs</prefix>
+
+  <fonctions>relecteurs.php</fonctions>
+  <install>base/relecteurs_install.php</install>
+</plugin>

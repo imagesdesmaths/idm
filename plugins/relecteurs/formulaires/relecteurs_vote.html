@@ -1,0 +1,31 @@
+<?php
+  spip_log ("Relecteurs : auteur #SESSION{id_auteur}, article #ENV{id_article}.");
+  relecteurs_effect_change ('',#SESSION{id_auteur,0});
+?>
+
+<BOUCLE_first_time(spip_relecteurs_articles) {id_article} {id_auteur = #SESSION{id_auteur}} {status = pas_vu}>
+  <?php
+    spip_log ("Relecteurs : First visit of #ID_AUTEUR to #ID_ARTICLE.");
+    spip_log ("Relecteurs : UPDATE spip_relecteurs_articles SET status='vu' WHERE id_article = #ID_ARTICLE AND id_auteur = #ID_AUTEUR AND status = 'pas_vu'");
+    spip_query ("UPDATE spip_relecteurs_articles SET status='vu' WHERE id_article = #ID_ARTICLE AND id_auteur = #ID_AUTEUR AND status = 'pas_vu'");
+    @header ("Location: " . str_replace('&amp;','&',self()));
+  ?>
+</BOUCLE_first_time>
+
+<table>
+  <BOUCLE_votes(spip_relecteurs_articles) {id_article} {par id_auteur}>
+  <tr> <BOUCLE_gars(AUTEURS) {id_auteur} {tous}> <td>#NOM</td> </BOUCLE_gars> <td class="relecteurs_vote_#STATUS">#STATUS</td> </tr>
+  </BOUCLE_votes>
+</table>
+
+<BOUCLE_monvote(spip_relecteurs_articles) {id_article} {id_auteur = #SESSION{id_auteur}}>
+<form method="post" action="#SELF"> <p><label for="vote">Votre vote :</label>
+  <select name="form_relecteurs_vote_[(#ID_AUTEUR)]_[(#ID_ARTICLE)]">
+    <option value="vu" [(#STATUS|=={vu}|?{'selected="yes"',''})]>Pas encore voté / Abstention</option>
+    <option value="non" [(#STATUS|=={non}|?{'selected="yes"',''})]>Avis défavorable</option>
+    <option value="moyen" [(#STATUS|=={moyen}|?{'selected="yes"',''})]>Quelques corrections à faire</option>
+    <option value="oui" [(#STATUS|=={oui}|?{'selected="yes"',''})]>Avis favorable</option>
+  </select>
+  <input type="submit" name="form_relecteurs_go" value="Voter" />
+</p></form>
+</BOUCLE_monvote>
