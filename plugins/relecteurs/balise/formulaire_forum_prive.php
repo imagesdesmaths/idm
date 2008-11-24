@@ -85,6 +85,26 @@ function balise_FORMULAIRE_FORUM_PRIVE_dyn ($titre, $table, $type, $script, $id_
   foreach ($ids as $id => $v)
     $script_hidden = parametre_url($script_hidden, $id, $v, '&');
 
+  if (_request('confirmer_forum')) {
+    if ($id_forum) $id_thread = sql_getfetsel ('id_thread', 'spip_forum', "id_forum = $id_forum");
+    else $id_thread = $id_message;
+
+    $id_message = sql_insertq ('spip_forum', array(
+      'date_heure' => 'NOW()',
+      'id_parent' => $id_forum,
+      'id_rubrique' => $id_rubrique,
+      'id_article' => $id_article,
+      'id_thread' => $id_thread,
+      'statut' => 'prive',
+      'titre' => $titre,
+      'texte' => $texte,
+      'id_auteur' => $GLOBALS['auteur_session']['id_auteur'],
+      'auteur' => $auteur));
+
+    @header ("Location: spip.php?page=propose&id_article=$id_article");
+    return "Message enregistr&eacute, rechargement de la page.";
+  }
+
   return array('formulaires/forum_prive', 0,
     array(
       'auteur' => $auteur,
@@ -105,43 +125,43 @@ function balise_FORMULAIRE_FORUM_PRIVE_dyn ($titre, $table, $type, $script, $id_
       'hash' => $hash,
       'nobot' => _request('nobot'),
     ));
-}
+  }
 
-function sql_recherche_donnees_forum_prive ($idf, $ida) {
-  $titre = sql_getfetsel('titre', 'spip_articles', "statut = 'prop' AND id_article = $ida");
-  if ($idf) $titre = sql_getfetsel('titre', 'spip_forum', "statut = 'prive' AND id_forum = $idf");
+  function sql_recherche_donnees_forum_prive ($idf, $ida) {
+    $titre = sql_getfetsel('titre', 'spip_articles', "statut = 'prop' AND id_article = $ida");
+    if ($idf) $titre = sql_getfetsel('titre', 'spip_forum', "statut = 'prive' AND id_forum = $idf");
 
-  return array ($titre, 'articles', 'abo');
-}
+    return array ($titre, 'articles', 'abo');
+  }
 
-function inclure_previsu_prive ($texte,$titre, $email_auteur, $auteur, $url_site, $nom_site)
-{
-  $erreur = $bouton = '';
+  function inclure_previsu_prive ($texte,$titre, $email_auteur, $auteur, $url_site, $nom_site)
+  {
+    $erreur = $bouton = '';
 
-  if (strlen($texte) < 10)
-    $erreur = _T('forum_attention_dix_caracteres');
-  else if (strlen($titre) < 3)
-    $erreur = _T('forum_attention_trois_caracteres');
-  else if (defined('_FORUM_LONGUEUR_MAXI')
-    AND _FORUM_LONGUEUR_MAXI > 0
+    if (strlen($texte) < 10)
+      $erreur = _T('forum_attention_dix_caracteres');
+    else if (strlen($titre) < 3)
+      $erreur = _T('forum_attention_trois_caracteres');
+    else if (defined('_FORUM_LONGUEUR_MAXI')
+      AND _FORUM_LONGUEUR_MAXI > 0
       AND strlen($texte) > _FORUM_LONGUEUR_MAXI)
       $erreur = _T('forum_attention_trop_caracteres',
         array(
           'compte' => strlen($texte),
           'max' => _FORUM_LONGUEUR_MAXI
         ));
-  else
-    $bouton = _T('forum_message_definitif');
+    else
+      $bouton = _T('forum_message_definitif');
 
-  // supprimer les <form> de la previsualisation
-  // (sinon on ne peut pas faire <cadre>...</cadre> dans les forums)
+    // supprimer les <form> de la previsualisation
+    // (sinon on ne peut pas faire <cadre>...</cadre> dans les forums)
 
-  return preg_replace("@<(/?)f(orm[>[:space:]])@ism",
-    "<\\1no-f\\2",
-    inclure_balise_dynamique(array('formulaires/forum_previsu_prive',
-    0,
-    array(
-      'titre' => safehtml(typo($titre)),
+    return preg_replace("@<(/?)f(orm[>[:space:]])@ism",
+      "<\\1no-f\\2",
+      inclure_balise_dynamique(array('formulaires/forum_previsu_prive',
+      0,
+      array(
+        'titre' => safehtml(typo($titre)),
       'auteur' => safehtml(typo($auteur)),
       'texte' => safehtml(propre($texte)),
       'erreur' => $erreur,
@@ -149,23 +169,23 @@ function inclure_previsu_prive ($texte,$titre, $email_auteur, $auteur, $url_site
     )
   ),
   false));
-}
+  }
 
-function forum_fichier_tmp($arg)
-{
-# astuce : mt_rand pour autoriser les hits simultanes
-	while (($alea = time() + @mt_rand()) + intval($arg)
-	       AND @file_exists($f = _DIR_TMP."forum_$alea.lck"))
-	  {};
-	spip_touch ($f);
+  function forum_fichier_tmp($arg)
+  {
+    # astuce : mt_rand pour autoriser les hits simultanes
+    while (($alea = time() + @mt_rand()) + intval($arg)
+      AND @file_exists($f = _DIR_TMP."forum_$alea.lck"))
+    {};
+    spip_touch ($f);
 
-# et maintenant on purge les locks de forums ouverts depuis > 4 h
+    # et maintenant on purge les locks de forums ouverts depuis > 4 h
 
-	if ($dh = @opendir(_DIR_TMP))
-		while (($file = @readdir($dh)) !== false)
-			if (preg_match('/^forum_([0-9]+)\.lck$/', $file)
-			AND (time()-@filemtime(_DIR_TMP.$file) > 4*3600))
-				spip_unlink(_DIR_TMP.$file);
-	return $alea;
-}
+    if ($dh = @opendir(_DIR_TMP))
+      while (($file = @readdir($dh)) !== false)
+        if (preg_match('/^forum_([0-9]+)\.lck$/', $file)
+          AND (time()-@filemtime(_DIR_TMP.$file) > 4*3600))
+          spip_unlink(_DIR_TMP.$file);
+    return $alea;
+  }
 ?>
