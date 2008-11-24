@@ -13,7 +13,7 @@
 
 <INCLURE{fond=inc-forum}{id_article}{id_forum}{auteur_article=#GET{auteur_article}}>
 
-[(#SESSION{id_auteur}|?{' '})#FORMULAIRE_FORUM{#URL_PAGE{forum,id_article=#ID_ARTICLE}}]
+[(#SESSION{id_auteur}|?{' '})#FORMULAIRE_FORUM]
 
 [(#SESSION{id_auteur}|?{'',' '})
 <p>Pour participer &agrave; la discussion merci de <a 

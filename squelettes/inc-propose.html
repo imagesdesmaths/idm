@@ -10,7 +10,9 @@
 partie publique du site s'il était publié en l'état. En dessous de 
 l'article, vous pourrez faire vos commentaires à l'auteur et aux autres 
 relecteurs. Vos commentaires ne seront lisibles que par l'auteur, les 
-relecteurs dont vous voyez la liste, et le comité de rédaction.</p>
+relecteurs dont vous voyez la liste, et le comité de rédaction. Les 
+commentaires émis par l'auteur ou les auteurs de l'article sont mis en 
+évidence.</p>
 
 <p>Le formulaire qui suit vous permet de donner votre opinion sur la
 publication de l'article dans l'état actuel. Le comité de rédaction sera
@@ -35,13 +37,7 @@ votes :</p>
 
 <hr class="huge" />
 
-<BOUCLE_auteur(spip_auteurs_articles) {id_article} {0,1}>
-<BOUCLE_auteur2(AUTEURS){id_auteur}{tous}>
-[(#SET{auteur_article,#NOM})]
-</BOUCLE_auteur2>
-</BOUCLE_auteur>
-
-[(#INCLURE{fond=inc-forum-prive}{id_article}{id_forum}{auteur_article=#GET{auteur_article}})]
+[(#INCLURE{fond=inc-forum-prive}{id_article}{id_forum})]
 
 #FORMULAIRE_FORUM_PRIVE
 
