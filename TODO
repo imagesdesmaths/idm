@@ -1,13 +1,14 @@
 Urgent :
 
-- Relecteurs
-- Plugins : Couteau Suisse (blocs, onglets), Inscription2, thickbox
+- Plugins : Inscription2, thickbox
 - jsMath : make it so that header_prive works.
 
 
 Can wait :
 
 - Plugins : Corbeille, Effacer URL propres, Gestion de documents
+- Relecteurs : pinkish hue according to id_auteur only
+- Blocs / Onglets : fix the CSS
 
 
 For later :
