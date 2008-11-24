@@ -19,7 +19,7 @@
       <fieldset>
         <p><label for="titre"><:forum_titre:></label>
         <input type="text" class="forml" name="titre" id="titre"[ value="(#ENV{titre})"] size="40" /></p>
-        [(#ENV**{texte}|barre_textarea{12,60})]
+        <textarea name="texte" id="texte" rows="12" cols="60">[(#ENV{texte})]</textarea>
       </fieldset>
       <input type="hidden" name="nom_site" value="" />
       <input type="hidden" name="url_site" value="" />

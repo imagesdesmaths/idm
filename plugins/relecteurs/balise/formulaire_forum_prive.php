@@ -108,12 +108,8 @@ function balise_FORMULAIRE_FORUM_PRIVE_dyn ($titre, $table, $type, $script, $id_
 }
 
 function sql_recherche_donnees_forum_prive ($idf, $ida) {
-  $titre = spip_abstract_fetsel('titre', 'spip_articles', "statut = 'prop' AND id_article = $ida");
-
-  if ($idf)
-    $titre = spip_abstract_fetsel('titre', 'spip_forum', "statut = 'prive' AND id_forum = $idf");
-
-  $titre = supprimer_numero($titre['titre']);
+  $titre = sql_getfetsel('titre', 'spip_articles', "statut = 'prop' AND id_article = $ida");
+  if ($idf) $titre = sql_getfetsel('titre', 'spip_forum', "statut = 'prive' AND id_forum = $idf");
 
   return array ($titre, 'articles', 'abo');
 }
