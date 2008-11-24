@@ -135,6 +135,7 @@ function inclure_previsu_prive ($texte,$titre, $email_auteur, $auteur, $url_site
 
   // supprimer les <form> de la previsualisation
   // (sinon on ne peut pas faire <cadre>...</cadre> dans les forums)
+
   return preg_replace("@<(/?)f(orm[>[:space:]])@ism",
     "<\\1no-f\\2",
     inclure_balise_dynamique(array('formulaires/forum_previsu_prive',
@@ -148,5 +149,23 @@ function inclure_previsu_prive ($texte,$titre, $email_auteur, $auteur, $url_site
     )
   ),
   false));
+}
+
+function forum_fichier_tmp($arg)
+{
+# astuce : mt_rand pour autoriser les hits simultanes
+	while (($alea = time() + @mt_rand()) + intval($arg)
+	       AND @file_exists($f = _DIR_TMP."forum_$alea.lck"))
+	  {};
+	spip_touch ($f);
+
+# et maintenant on purge les locks de forums ouverts depuis > 4 h
+
+	if ($dh = @opendir(_DIR_TMP))
+		while (($file = @readdir($dh)) !== false)
+			if (preg_match('/^forum_([0-9]+)\.lck$/', $file)
+			AND (time()-@filemtime(_DIR_TMP.$file) > 4*3600))
+				spip_unlink(_DIR_TMP.$file);
+	return $alea;
 }
 ?>
