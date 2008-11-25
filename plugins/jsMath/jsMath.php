@@ -117,7 +117,7 @@ function jsMath_pre_typo ($texte) {
 }
 
 function jsMath_insert_head ($texte) {
-  $texte .= '<script type="text/javascript" src="' . generer_url_public('jsMath_easy_load.js') . "\">\n</script>\n";
+  $texte .= "\n" . '<script type="text/javascript" src="' . generer_url_public('jsMath_easy_load.js') . "\"></script>\n";
   return $texte;
 }
 

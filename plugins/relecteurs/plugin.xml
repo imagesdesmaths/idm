@@ -13,5 +13,11 @@
   <prefix>relecteurs</prefix>
 
   <fonctions>relecteurs.php</fonctions>
+
   <install>base/relecteurs_install.php</install>
+
+  <pipeline>
+    <nom>insert_head</nom>
+    <inclure>relecteurs.php</inclure>
+  </pipeline>
 </plugin>
