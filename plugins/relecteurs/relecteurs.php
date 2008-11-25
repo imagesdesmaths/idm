@@ -16,7 +16,7 @@ function relecteurs_update_referee ($id, $status) {
 function relecteurs_notify_user ($id_auteur, $id_article) {
   $email = sql_getfetsel ("email", "spip_auteurs", "id_auteur = $id_auteur");
   $titre = sql_getfetsel ("titre", "spip_articles", "id_article = $id_article");
-  $titre = utf8_decode ($tmp['titre']);
+  $titre = utf8_decode ($titre);
 
   $subject = "Relecture d'un article pour Images des Maths";
 
