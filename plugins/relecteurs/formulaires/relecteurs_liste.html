@@ -5,12 +5,13 @@
 
 <form method="post" action="#SELF">
   <table>
-    <tr><th>ID</th><th>Signature / Pseudo</th><th>e-mail</th><th>Supprimer</th></tr>
-    <BOUCLE_relecteurs(AUTEURS) {tous} {role = relecteur} {par id_auteur}>
+    <tr><th>Signature / Pseudo</th><th>En charge de :</th><th>Supprimer</th></tr>
+    <BOUCLE_relecteurs(AUTEURS) {tous} {role = relecteur} {par nom}>
     <tr>
-      <td>#ID_AUTEUR</td>
       <td>#NOM</td>
-      <td>#EMAIL</td>
+      <td><BOUCLE_article (spip_relecteurs_articles) {id_auteur} {par id_article}>
+        <BOUCLE_titre(ARTICLES) {statut == .} {id_article}>#TITRE</BOUCLE_titre>
+      </BOUCLE_article></td>
       <td><input type="checkbox" name="form_relecteur_exterminate_#ID_AUTEUR"/></td>
     </tr>
     </BOUCLE_relecteurs>
