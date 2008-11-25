@@ -7,7 +7,7 @@ body { padding : 0px; margin : 0px; background : white; }
 #outer { width : 100%; height : 100%; background : white; padding : 0px; }
   #head  { width : 100%; height : 75px; position : fixed; top : 0px; z-index : 10; color : white; background : #e20000; padding : 0px 0px 0px 5em; }
   #spacer { height : 80px; }
-  #nav   { width : 11em; height : 100%; position : fixed; top : 0px; z-index : 5; padding : 0px .5em; text-align : left; color : white; background : #550000; overflow : auto; }
+  #nav   { width : 12em; height : 100%; position : fixed; top : 0px; z-index : 5; padding : 0px .5em; text-align : left; color : white; background : #550000; overflow : auto; }
   #main  { position : absolute; top : 75px; left : 0px; width : 100%; margin : 0px; background : white; }
-  #main_in { margin-left : 12em; padding : 1ex 2em; }
+  #main_in { margin-left : 13em; padding : 1ex 2em; }
     #une { padding : 1ex 1em; background-color : #ffcccc; margin : 3ex -1em 0ex; }
