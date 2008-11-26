@@ -1,16 +1,5 @@
-
-Kind of urgent :
-
-- Fix public forums
-
-
-Can wait :
-
 - Plugins : Effacer URL propres, Gestion de documents
 - Plugins : Inscription2
 - Billettistes : make a nice interface
-
-
-For later :
-
 - use sql_* functions everywhere.
+- Pinkish hue for public forums as well.
