@@ -1,5 +1,9 @@
-- Plugins : Effacer URL propres, Gestion de documents
-- Plugins : Inscription2
-- Billettistes : make a nice interface
-- use sql_* functions everywhere.
+- Plugins : Effacer URL propres, Gestion de documents, Inscription2
 - Pinkish hue for public forums as well.
+
+- Relecteurs :
+  + Installation stuff (create tables ...)
+  + Use sql_* everywhere
+  + Use AJAX for the forums
+
+- Billettistes : make a nice interface

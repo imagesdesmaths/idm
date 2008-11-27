@@ -3,13 +3,14 @@ include_spip ('base/serial.php');
 include_spip ('inc/envoyer_mail');
 
 global $tables_principales;
-$tables_principales['spip_auteurs']['field']['role'] =
-  "enum('visiteur','candidat','relecteur') NOT NULL DEFAULT 'visiteur'";
+$tables_principales['spip_auteurs']['field']['role'] = "enum('visiteur','candidat','relecteur') NOT NULL DEFAULT 'visiteur'";
 
 function relecteurs_update_referee ($id, $status) {
-  $id = intval($id);
   if (($status == 'visiteur') || ($status == 'candidat') || ($status == 'relecteur')) {
-    spip_query ( "UPDATE spip_auteurs SET role = '$status' WHERE id_auteur = $id LIMIT 1");
+    sql_updateq ("spip_auteurs", array("role"=>$status), "id_auteur = $id");
+  }
+  if ($status == "visiteur") {
+    sql_delete ("spip_relecteurs_articles", "id_auteur = $id");
   }
 }
 
@@ -79,7 +80,8 @@ function relecteurs_effect_change ($target='', $caller='admin') {
 
       if (preg_match('/^form_relecteur_exterminate_([0-9]*)$/', $key, $matches)) {
         if ( ($value == 'on') && (($caller == 'admin') || ($caller == $matches[1])) ) {
-          relecteurs_update_referee ($matches[1],'visiteur');
+          $id_auteur = $matches[1];
+          relecteurs_update_referee ($id_auteur,'visiteur');
           $reload = true;
         }
       }
@@ -88,7 +90,7 @@ function relecteurs_effect_change ($target='', $caller='admin') {
         $id_auteur = $matches[1];
         $id_article = $matches[2];
         if ( ($caller==$id_auteur) && (($value=='vu')||($value=='oui')||($value=='moyen')||($value=='non'))) {
-          spip_query ("UPDATE spip_relecteurs_articles SET status = '$value' WHERE id_auteur = $id_auteur AND id_article = $id_article");
+          sql_updateq ("spip_relecteurs_articles", array("status"=>$value), "id_auteur = $id_auteur AND id_article = $id_article");
           $reload = true;
         }
       }
@@ -97,7 +99,7 @@ function relecteurs_effect_change ($target='', $caller='admin') {
         if ($caller == 'admin') {
           $id_auteur = $matches[1];
           $id_article = $matches[2];
-          spip_query ("DELETE FROM spip_relecteurs_articles WHERE id_auteur = $id_auteur AND id_article = $id_article");
+          sql_delete ("spip_relecteurs_articles", "id_auteur = $id_auteur AND id_article = $id_article");
           $reload = true;
         }
       }
@@ -106,7 +108,7 @@ function relecteurs_effect_change ($target='', $caller='admin') {
         if ($caller == 'admin') {
           $id_auteur = $matches[1];
           $id_article = $matches[2];
-          spip_query ("INSERT INTO spip_relecteurs_articles (id_auteur,id_article) VALUES ($id_auteur,$id_article)");
+          sql_insertq ("spip_relecteurs_articles", array("id_auteur"=>$id_auteur, "id_article"=>$id_article));
           relecteurs_notify_user ($id_auteur, $id_article);
           $reload = true;
         }

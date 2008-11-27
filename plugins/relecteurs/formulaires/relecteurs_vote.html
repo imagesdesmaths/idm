@@ -1,13 +1,8 @@
-<?php
-  spip_log ("Relecteurs : auteur #SESSION{id_auteur}, article #ENV{id_article}.");
-  relecteurs_effect_change ('',#SESSION{id_auteur,0});
-?>
+<?php relecteurs_effect_change ('',#SESSION{id_auteur,0}); ?>
 
 <BOUCLE_first_time(spip_relecteurs_articles) {id_article} {id_auteur = #SESSION{id_auteur}} {status = pas_vu}>
   <?php
-    spip_log ("Relecteurs : First visit of #ID_AUTEUR to #ID_ARTICLE.");
-    spip_log ("Relecteurs : UPDATE spip_relecteurs_articles SET status='vu' WHERE id_article = #ID_ARTICLE AND id_auteur = #ID_AUTEUR AND status = 'pas_vu'");
-    spip_query ("UPDATE spip_relecteurs_articles SET status='vu' WHERE id_article = #ID_ARTICLE AND id_auteur = #ID_AUTEUR AND status = 'pas_vu'");
+    sql_updateq ("spip_relecteurs_articles", array("status"=>"vu"), "id_article = #ID_ARTICLE AND id_auteur = #ID_AUTEUR AND status = 'pas_vu'");
     @header ("Location: " . str_replace('&amp;','&',self()));
   ?>
 </BOUCLE_first_time>
