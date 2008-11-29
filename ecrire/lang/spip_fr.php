@@ -243,7 +243,7 @@ sera ignor&eacute;e) :
 'form_forum_login' => 'login :',
 'form_forum_message_auto' => '(ceci est un message automatique)',
 'form_forum_pass' => 'mot de passe :',
-'form_forum_probleme_mail' => 'Probl&egrave;me de mail&nbsp;: l\'identifiant ne peut pas &ecirc;tre envoy&eacute;.',
+'form_forum_probleme_mail' => 'Votre identifiant vient de vous &ecirc;tre envoy&eacute;.',
 'form_forum_voici1' => 'Voici vos identifiants pour pouvoir participer &agrave; la vie
 du site "@nom_site_spip@" (@adresse_site@) :',
 'form_forum_voici2' => 'Voici vos identifiants pour proposer des articles sur
