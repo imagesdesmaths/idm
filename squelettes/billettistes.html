@@ -12,6 +12,7 @@
         <th>Date de publication</th>
         <th>Titre</th>
         <th>Auteur</th>
+        <th>Nombre</th>
     </tr></thead>
     <tbody>
 <BOUCLE_deja(AUTEURS) {tous} {billettiste=oui}>
@@ -24,6 +25,7 @@
         <td>-</td>
   <//B_billet>
         <td><a href="#URL_AUTEUR">#NOM</a></td>
+        <td><BOUCLE_compte(ARTICLES) {statut=publie} {id_auteur} {id_rubrique=6}></BOUCLE_compte>#TOTAL_BOUCLE<//B_compte></td>
       </tr>
 </BOUCLE_deja>
     </tbody>
