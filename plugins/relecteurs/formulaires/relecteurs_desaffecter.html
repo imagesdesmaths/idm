@@ -3,17 +3,20 @@
 
 <B_relecteurs>
 <form method="post" action="#SELF">
-  <table>
-    <BOUCLE_relecteurs(spip_relecteurs_articles) {id_article}>
-    <tr>
-      <BOUCLE_auteur(AUTEURS) {tous} {id_auteur}>
-      <td>#NOM</td>
-      <td>#EMAIL</td>
-      </BOUCLE_auteur>
-      <td class="relecteurs_vote_#STATUS">#STATUS</td>
-      <td><input type="checkbox" name="form_relecteurs_unassign_[(#ID_AUTEUR)]_[(#ID_ARTICLE)]"></td>
-    </tr>
-    </BOUCLE_relecteurs>
+  <table class="sortable">
+    <thead><tr><th>Signature / Pseudo</th><th>e-mail</th><th>Vote</th><th></th></tr></thead>
+    <tbody>
+      <BOUCLE_relecteurs(spip_relecteurs_articles) {id_article}>
+      <tr>
+        <BOUCLE_auteur(AUTEURS) {tous} {id_auteur}>
+        <td>#NOM</td>
+        <td>#EMAIL</td>
+        </BOUCLE_auteur>
+        <td class="relecteurs_vote_#STATUS">#STATUS</td>
+        <td><input type="checkbox" name="form_relecteurs_unassign_[(#ID_AUTEUR)]_[(#ID_ARTICLE)]"/></td>
+      </tr>
+      </BOUCLE_relecteurs>
+    </tbody>
   </table>
   <p><input type="submit" name="form_relecteurs_go" value="D&eacute;saffecter ces relecteurs"/></p>
 </form>

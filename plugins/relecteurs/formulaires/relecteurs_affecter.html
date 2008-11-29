@@ -8,14 +8,17 @@
 
 <B_gars>
 <form method="post" action="#SELF">
-  <table>
-    <BOUCLE_gars(AUTEURS) {tous} {role = relecteur} {par nom} {doublons}>
-    <tr>
-      <td>#NOM</td>
-      <td>#EMAIL</td>
-      <td><input type="checkbox" name="form_relecteurs_assign_[(#ID_AUTEUR)]_[(#ID_ARTICLE)]"></td>
-    </tr>
-    </BOUCLE_gars>
+  <table class="sortable">
+    <thead><tr><th>Signature / Pseudo</th><th>e-mail</th><th></th></tr></thead>
+    <tbody>
+      <BOUCLE_gars(AUTEURS) {tous} {role = relecteur} {par nom} {doublons}>
+      <tr>
+        <td>#NOM</td>
+        <td>#EMAIL</td>
+        <td><input type="checkbox" name="form_relecteurs_assign_[(#ID_AUTEUR)]_[(#ID_ARTICLE)]"/></td>
+      </tr>
+      </BOUCLE_gars>
+    </tbody>
   </table>
   <p><input type="submit" name="form_relecteurs_go" value="Affecter ces relecteurs"/></p>
 </form>
