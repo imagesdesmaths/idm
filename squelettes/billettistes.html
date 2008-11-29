@@ -3,6 +3,7 @@
 <INCLURE{fond=inc-head}{title=Gestion des billettistes}>
 
 <BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
+<?php billettistes_effect_change ('#SELF', 'admin'); ?>
 
 <B_deja>
   <h2>Le dernier billet de chaque billettiste :</h2>
@@ -11,7 +12,6 @@
         <th>Date de publication</th>
         <th>Titre</th>
         <th>Auteur</th>
-        <th>id</th>
     </tr></thead>
     <tbody>
 <BOUCLE_deja(AUTEURS) {tous} {billettiste=oui}>
@@ -24,12 +24,75 @@
         <td>-</td>
   <//B_billet>
         <td><a href="#URL_AUTEUR">#NOM</a></td>
-        <td>#ID_AUTEUR</td>
       </tr>
 </BOUCLE_deja>
     </tbody>
   </table>
 </B_deja>
+
+<B_new>
+  <div class='cs_blocs'>
+    <h4 class='blocs_titre blocs_replie blocs_click' style="margin : 2ex 0ex 1ex;"><a href='javascript:;'>Approuver de nouveaux relecteurs ...</a></h4>
+    <div class='blocs_destination blocs_invisible'>
+      <form method="post" action="#SELF">
+        <table class="sortable">
+          <thead><tr>
+              <th>id</td>
+              <th>Signature / Pseudo</th>
+              <th>e-mail</th>
+              <th>statut</th>
+              <th>Approuver</th>
+          </tr></thead>
+          <tbody>
+<BOUCLE_new(AUTEURS) {statut == 6forum|nouveau} {billettiste=non}>
+            <tr>
+              <td>#ID_AUTEUR</td>
+              <td>#NOM</td>
+              <td>#EMAIL</td>
+              <td>#STATUT</td>
+              <td><input type="checkbox" name="form_billettistes_bless_#ID_AUTEUR"/></td>
+            </tr>
+</BOUCLE_new>
+          </tbody>
+        </table>
+
+        <p style="text-align : center;"><input type="submit" value="Approuver les visiteurs indiqu&eacute;s comme billettistes" name="form_billettistes_go" /></p>
+      </form>
+    </div>
+  </div>
+</B_new>
+
+<B_kill>
+  <div class='cs_blocs'>
+    <h4 class='blocs_titre blocs_replie blocs_click' style="margin : 2ex 0ex 1ex;"><a href='javascript:;'>&Eacute;liminer des billettistes ...</a></h4>
+    <div class='blocs_destination blocs_invisible'>
+      <form method="post" action="#SELF">
+        <table class="sortable">
+          <thead><tr>
+              <th>id</td>
+              <th>Signature / Pseudo</th>
+              <th>e-mail</th>
+              <th>statut</th>
+              <th>&Eacute;liminer</th>
+          </tr></thead>
+          <tbody>
+<BOUCLE_kill(AUTEURS) {tous} {billettiste=oui}>
+            <tr>
+              <td>#ID_AUTEUR</td>
+              <td>#NOM</td>
+              <td>#EMAIL</td>
+              <td>#STATUT</td>
+              <td><input type="checkbox" name="form_billettistes_demote_#ID_AUTEUR"/></td>
+            </tr>
+</BOUCLE_kill>
+          </tbody>
+        </table>
+
+        <p style="text-align : center;"><input type="submit" value="&eacute;liminre les billettistes indiqu&eacute;s" name="form_billettistes_go" /></p>
+      </form>
+    </div>
+  </div>
+</B_kill>
 
 </BOUCLE_securite>
 <h1>Go away, you non-administrator !</h1>
