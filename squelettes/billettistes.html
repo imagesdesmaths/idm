@@ -1,0 +1,38 @@
+#CACHE{0}
+
+<INCLURE{fond=inc-head}{title=Gestion des billettistes}>
+
+<BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
+
+<B_deja>
+  <h2>Le dernier billet de chaque billettiste :</h2>
+  <table class="sortable">
+    <thead><tr>
+        <th>Date de publication</th>
+        <th>Titre</th>
+        <th>Auteur</th>
+        <th>id</th>
+    </tr></thead>
+    <tbody>
+<BOUCLE_deja(AUTEURS) {tous} {billettiste=oui}>
+      <tr>
+  <BOUCLE_billet(ARTICLES) {statut=publie} {id_auteur} {id_rubrique=6} {par date} {inverse} {0,1}>
+        <td>#DATE</td>
+        <td><a href="#URL_ARTICLE">#TITRE</a></td>
+  </BOUCLE_billet>
+        <td>-</td>
+        <td>-</td>
+  <//B_billet>
+        <td><a href="#URL_AUTEUR">#NOM</a></td>
+        <td>#ID_AUTEUR</td>
+      </tr>
+</BOUCLE_deja>
+    </tbody>
+  </table>
+</B_deja>
+
+</BOUCLE_securite>
+<h1>Go away, you non-administrator !</h1>
+<//B_securite>
+
+#INCLURE{fond=inc-foot}

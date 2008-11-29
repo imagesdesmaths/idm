@@ -130,7 +130,7 @@ function relecteurs_insert_head ($texte) {
   $texte .= "\n";
   $texte .= '<script type="text/javascript" src="' . find_in_path('javascript/jquery.tablesorter.min.js') . "\"></script>\n";
   $texte .= '<script type="text/javascript">' . "\n";
-  $texte .= '  $(document).ready(function() { $(".relecteurs_sortable").tablesorter( {sortList : [[0,0]]} ); } ); ' . "\n";
+  $texte .= '  $(document).ready(function() { $(".sortable").tablesorter( {sortList : [[0,0]]} ); } ); ' . "\n";
   $texte .= '</script>' . "\n";
   return $texte;
 }
