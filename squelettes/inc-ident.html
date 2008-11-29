@@ -12,9 +12,8 @@
     <BOUCLE_relecteurs(spip_relecteurs_articles) {id_auteur=#SESSION{id_auteur}}>
       <li><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">Un article à relire !</a></li>
     </BOUCLE_relecteurs>
-    [(#SESSION{statut}|=={0minirezo}|?{' '})<li><a href="#URL_PAGE{relecteurs}">Gestion des relecteurs</a></li>]
-    [(#SESSION{statut}|=={0minirezo}|?{' '})<li><a href="#URL_PAGE{affecter}">Affecter des relecteurs</a></li>]
     [(#SESSION{statut}|=={0minirezo}|?{' '})<li><a href="#URL_PAGE{billettistes}">Gestion des billettistes</a></li>]
+    [(#SESSION{statut}|=={0minirezo}|?{' '})<li><a href="#URL_PAGE{relecteurs}">Gestion des relecteurs</a></li>]
     [(#SESSION{statut}|=={0minirezo}|?{' '})<li><a href="#URL_SITE_SPIP/ecrire/">Espace privé</a></li>]
     [(#SESSION{statut}|=={1comite}|?{' '})<li><a href="#URL_SITE_SPIP/ecrire/">Espace de rédaction</a></li>]
     [(#SESSION{id_auteur}|?{' ',''})<li><a href="#URL_LOGOUT{#URL_SITE_SPIP}"><b>Se déconnecter</b></a></li>]

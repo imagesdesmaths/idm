@@ -1,28 +1,5 @@
 #CACHE{0}
-
 <?php relecteurs_effect_change (); ?>
-
-[(#REM) Afficher les relecteurs déjà affectés et leurs votes :]
-
-<B_relecteurs>
-<form method="post" action="#SELF">
-  <table>
-    <BOUCLE_relecteurs(spip_relecteurs_articles) {id_article}>
-    <tr>
-      <BOUCLE_auteur(AUTEURS) {tous} {id_auteur}>
-      <td>#NOM</td>
-      <td>#EMAIL</td>
-      </BOUCLE_auteur>
-      <td class="relecteurs_vote_#STATUS">#STATUS</td>
-      <td><input type="checkbox" name="form_relecteurs_unassign_[(#ID_AUTEUR)]_[(#ID_ARTICLE)]"></td>
-    </tr>
-    </BOUCLE_relecteurs>
-  </table>
-  <p><input type="submit" name="form_relecteurs_go" value="D&eacute;saffecter ces relecteurs"/></p>
-</form>
-</B_relecteurs>
-
-[(#REM) Afficher les relecteurs au chômage, pour pouvoir les affecter :]
 
 <BOUCLE_affectes (spip_relecteurs_articles)>
 <BOUCLE_affectes2 (AUTEURS) {tous} {id_auteur} {doublons}>
