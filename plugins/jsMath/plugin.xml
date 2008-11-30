@@ -63,9 +63,4 @@
     <nom>header_prive</nom>
     <inclure>jsMath.php</inclure>
   </pipeline>
-
-  <pipeline>
-    <nom>affiche_milieu</nom>
-    <inclure>jsMath.php</inclure>
-  </pipeline>
 </plugin>

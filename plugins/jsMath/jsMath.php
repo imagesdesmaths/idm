@@ -125,8 +125,4 @@ function jsMath_header_prive ($texte) {
   return jsMath_insert_head ($texte);
 }
 
-function jsMath_affiche_milieu ($texte) {
-  return jsMath_pre_typo ($texte);
-}
-
 ?>
