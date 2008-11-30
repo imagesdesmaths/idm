@@ -12,6 +12,9 @@ $tables_principales['spip_relecteurs_articles'] = array (
     'status' => "ENUM('pas_vu','vu','non','moyen','oui')" ),
   'key' => array());
 
+global $table_des_tables;
+$table_des_tables['relecteurs_articles'] = 'relecteurs_articles';
+
 function relecteurs_install_orig ($action) {
   $desc = spip_abstract_showtable('spip_auteurs', '', true);
 
