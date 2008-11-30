@@ -28,7 +28,7 @@ function relecteurs_install ($action) {
       'id_article' => 'BIGINT(21) NOT NULL',
       'id_auteur' => 'BIGINT(21) NOT NULL',
       'date_change' => 'TIMESTAMP',
-      'status' => "ENUM('pas_vu','vu','non','moyen','oui')") );
+      'status' => "ENUM('pas_vu','vu','non','moyen','oui') NOT NULL DEFAULT 'pas_vu'") );
     break;
 
   case 'uninstall':
