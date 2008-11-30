@@ -7,9 +7,7 @@
       <BOUCLE_relecteurs(AUTEURS) {tous} {role = relecteur} {par nom}>
       <tr>
         <td>#NOM</td>
-        <td><BOUCLE_article (RELECTEURS_ARTICLES) {id_auteur} {par id_article}>
-          <BOUCLE_titre(ARTICLES) {statut == .} {id_article}>#TITRE</BOUCLE_titre>
-        </BOUCLE_article></td>
+        <td><BOUCLE_article (relecteurs_articles articles) {id_auteur} {par id_article}>#TITRE</BOUCLE_article></td>
         <td><input type="checkbox" name="form_relecteur_exterminate_#ID_AUTEUR"/></td>
       </tr>
       </BOUCLE_relecteurs>
