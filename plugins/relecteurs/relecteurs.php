@@ -2,8 +2,10 @@
 include_spip ('base/serial.php');
 include_spip ('inc/envoyer_mail');
 
+global $tables_principales;
+$tables_principales['spip_auteurs']['field']['role'] = "ENUM ('visiteur','candidat','relecteur') NOT NULL DEFAULT 'visiteur'";
+
 global $tables_auxiliaires;
-$tables_auxiliaires['spip_auteurs']['field']['role'] = "enum('visiteur','candidat','relecteur') NOT NULL DEFAULT 'visiteur'";
 $tables_auxiliaires['spip_relecteurs_articles'] = array (
   'field' => array (
     'id_article' => 'BIGINT(21) NOT NULL',
