@@ -41,8 +41,8 @@ if ($newhash != $hash) { ?>
 
 <?php } else {
 
-  $titre = addslashes(corriger_caracteres($titre));
-  $texte = addslashes(corriger_caracteres($texte));
+  $titre = corriger_caracteres($titre);
+  $texte = corriger_caracteres($texte);
 
   $id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 
