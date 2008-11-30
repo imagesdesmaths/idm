@@ -2,9 +2,9 @@
 include_spip ('base/serial.php');
 include_spip ('inc/envoyer_mail');
 
-global $tables_principales;
-$tables_principales['spip_auteurs']['field']['role'] = "enum('visiteur','candidat','relecteur') NOT NULL DEFAULT 'visiteur'";
-$tables_principales['spip_relecteurs_articles'] = array (
+global $tables_auxiliaires;
+$tables_auxiliaires['spip_auteurs']['field']['role'] = "enum('visiteur','candidat','relecteur') NOT NULL DEFAULT 'visiteur'";
+$tables_auxiliaires['spip_relecteurs_articles'] = array (
   'field' => array (
     'id_article' => 'BIGINT(21) NOT NULL',
     'id_auteur' => 'BIGINT(21) NOT NULL',
@@ -15,22 +15,24 @@ $tables_principales['spip_relecteurs_articles'] = array (
 global $table_des_tables;
 $table_des_tables['relecteurs_articles'] = 'relecteurs_articles';
 
-function relecteurs_install_orig ($action) {
-  $desc = spip_abstract_showtable('spip_auteurs', '', true);
-
+function relecteurs_install ($action) {
   switch ($action) {
-
   case 'test':
-    return (isset($desc['field']['role']));
+    $desc = sql_showtable ('spip_relecteurs_articles');
+    if ($desc) return true; else return false;
     break;
 
   case 'install':
-    spip_query("ALTER TABLE spip_auteurs ADD `role` enum('visiteur','candidat','relecteur') NOT NULL DEFAULT 'visiteur'");
+    sql_alter ("TABLE spip_auteurs ADD `role` enum('visiteur','candidat','relecteur') NOT NULL DEFAULT 'visiteur'");
+    sql_create ("spip_relecteurs_articles", array (
+      'id_article' => 'BIGINT(21) NOT NULL',
+      'id_auteur' => 'BIGINT(21) NOT NULL',
+      'date_change' => 'TIMESTAMP',
+      'status' => "ENUM('pas_vu','vu','non','moyen','oui')") );
     break;
 
   case 'uninstall':
-    spip_query("ALTER TABLE spip_auteurs DROP COLUMN role");
-    break;
+    // bad idea to drop the table ...
   }
 }	
 

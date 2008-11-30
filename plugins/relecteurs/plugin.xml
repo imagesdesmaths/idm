@@ -13,8 +13,7 @@
   <prefix>relecteurs</prefix>
 
   <fonctions>relecteurs.php</fonctions>
-
-  <install>base/relecteurs_install.php</install>
+  <install>relecteurs.php</install>
 
   <pipeline>
     <nom>insert_head</nom>
