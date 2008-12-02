@@ -12,7 +12,8 @@ h2.plan { border : 2px solid #e20000; border-width : 0px 0px 2px; }
 
 h3.spip { text-align : center; padding : 1ex; border-top : 2px solid #e20000; border-bottom : 2px solid #e20000; clear : both; }
 h3.discuter { text-align : right; font-style : italic; }
-h3.auteur { text-align : right; font-weight : normal; }
+h3.auteur { text-align : right; font-weight : normal; margin-bottom : 0px; }
+h3.auteur_bio { text-align : right; font-weight : normal; margin-top : 0px; }
 
 a { color : #e20000; inherit; font-weight : bold; text-decoration : none; }
 /*a:hover { text-decoration : underline; }*/

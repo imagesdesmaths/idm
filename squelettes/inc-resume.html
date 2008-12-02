@@ -12,8 +12,8 @@
           href="#URL_RUBRIQUE">#TITRE</a></div>
       </BOUCLE_rubrique>
 
-      <h4 class="auteur[(#ID_SECTEUR|=={18}|?{' invisible'})]">&nbsp;
-      <B_noms>Par 
+      <h4 class="auteur[(#ID_SECTEUR|=={18}|?{' invisible'})]">
+        Le [(#DATE|affdate)]<B_noms>, par 
         <BOUCLE_noms(AUTEURS) {par nom} {id_article} {", "}><a href="#URL_AUTEUR">[(#NOM|prenom_nom)]</a></BOUCLE_noms>
       </B_noms>
       </h4>
