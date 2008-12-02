@@ -9,11 +9,12 @@ h4 { text-align : center; font-style : italic; font-weight : bold; }
 h2.surtitre { text-align : left; font-weight : normal; font-size : large; margin : .5ex 0ex; }
 h2.soustitre { font-weight : normal; font-style : italic; font-size : large; margin : .5ex; }
 h2.plan { border : 2px solid #e20000; border-width : 0px 0px 2px; }
+h2.bio { margin-top : 0px; }
 
 h3.spip { text-align : center; padding : 1ex; border-top : 2px solid #e20000; border-bottom : 2px solid #e20000; clear : both; }
 h3.discuter { text-align : right; font-style : italic; }
-h3.auteur { text-align : right; font-weight : normal; margin-bottom : 0px; }
-h3.auteur_bio { text-align : right; font-weight : normal; margin-top : 0px; }
+h3.auteur { text-align : right; font-weight : normal; }
+h3.bio { text-align : right; font-weight : normal; font-size : medium; margin-top : -2ex; }
 
 a { color : #e20000; inherit; font-weight : bold; text-decoration : none; }
 /*a:hover { text-decoration : underline; }*/
@@ -159,6 +160,5 @@ div.texte div.onglets_bloc h2.onglets_titre.selected { background-color : white;
 div.texte div.onglets_bloc .onglets_contenu { display : none; border : solid red; border-width : 0px 0px 1px 1px; z-index : 10; padding : 35px 0px 1ex 2ex; } 
 div.texte div.onglets_bloc .onglets_contenu.selected { display : block; }
 
-[(#REM)
-vim: ft=css
-]
+/* vim: ft=css
+ */
