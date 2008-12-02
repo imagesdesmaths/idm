@@ -178,7 +178,7 @@ function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = ""
 	case 'free':
 		return false;
 	default:
-		return @mail($email, $sujet, $texte, $headers, "-f $from");
+		return @mail($email, $sujet, $texte, $headers, "-f noreply@images.math.cnrs.fr");
 	}
 }
 
