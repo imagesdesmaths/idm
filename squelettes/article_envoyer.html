@@ -17,9 +17,10 @@ if ($newhash != $hash) { ?>
 <form action="#URL_PAGE{article_envoyer}" method="post">
   <fieldset>
     <legend>Prévisualisation</legend>
-    <h1><?=safehtml(typo($titre))?></h1>
 
-    <?=safehtml(propre($texte))?>
+    <h1 class="titre"><?=safehtml(typo($titre))?></h1>
+
+    <div class="texte" style="text-align : justify"><?=safehtml(propre($texte))?></div>
   </fieldset>
 
   <div style="text-align:center;">
