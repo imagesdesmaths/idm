@@ -90,6 +90,9 @@ div.ps span.ps { font-weight : bold; }
 div.texte a { color : inherit; }
 div.texte a:link, div.texte a:visited { color : #e20000; }
 
+div.plan a { color : black; }
+div.plan a:hover { color : #e20000; }
+
 div.texte p.lettrine { text-indent : 0px; }
 div.texte p.lettrine span.lettrine { text-transform : uppercase; }
 div.texte p.lettrine span.lettrine span.lettrine_first { font-family : "Arial Black", sans-serif; color : #500; float : left; font-size : 440%; font-weight : bold; margin : -.4ex .1em -.4ex 0px; }
