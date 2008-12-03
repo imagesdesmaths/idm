@@ -92,11 +92,6 @@ function lettrine ($texte) {
   return implode ("\n", $lines);
 }
 
-function prenom_nom ($texte) {
-  $texte = preg_replace ('/([^,]+), ([^,]+)/s', '\2 \1', $texte);
-  return $texte;
-}
-
 function billettistes_effect_change ($target='', $caller='admin') {
   if (!$target) $target = str_replace('&amp;','&',self());
 

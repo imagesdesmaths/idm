@@ -14,6 +14,11 @@ $type_urls = "propres2";
 
 include_spip('inc/cookie');
 
+function prenom_nom ($texte) {
+  $texte = preg_replace ('/([^,]+), ([^,]+)/s', '\2 \1', $texte);
+  return $texte;
+}
+
 $table_des_traitements['TITRE'][]= 'supprimer_numero(typo(%s))';
 $table_des_traitements['NOM'][]= 'prenom_nom(%s)';
 
