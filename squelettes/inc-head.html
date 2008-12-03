@@ -52,13 +52,14 @@
 
       [(#FORMULAIRE_RECHERCHE)]
 
-      <h2>Quelques liens ...</h2>
-      <ul style="text-align:center">
-        <li><a href="http://www.cnrs.fr/">CNRS</a> / <a href="http://www.cnrs.fr/mppu/">MPPU</a></li>
-        <li><a href="http://www.portail-math.fr/">Portail des mathématiques</a></li>
-        <li><a href="http://www.cnrs.fr/publications/imagesdelaphysique/">Images de la Physique</a></li>
-        [<li>(#MODELE{special}{mot=blogs})</li>]
-      </ul>
+      <BOUCLE_liens(RUBRIQUES) {id_rubrique = 25}>
+        <h2><a href="#URL_RUBRIQUE">#TITRE</a></h2>
+        <ul style="text-align:center">
+          <BOUCLE_lienss(ARTICLES) {id_rubrique} {par num titre, titre}>
+            <li><a href="#URL_ARTICLE">#TITRE</a></li>
+          </BOUCLE_lienss>
+        </ul>
+      </BOUCLE_liens>
 
       [(#ENV{id_rubrique}|=={18}|?{'',''})[(#INCLURE{fond=inc-related}{id_article=#ENV{id_article}})]]
 
