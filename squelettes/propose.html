@@ -37,8 +37,10 @@
     [<div class="notes"><h3>Notes</h3>(#NOTES)</div>]
     <hr class="huge" />
 
-    [(#INCLURE{fond=inc-forum-prive}{id_article}{id_forum})]
-    #FORMULAIRE_FORUM_PRIVE
+    <BOUCLE_cetarticle(ARTICLES) {id_article} {statut=prop}>
+      [(#INCLURE{fond=inc-forum-prive}{id_article}{id_forum})]
+      #FORMULAIRE_FORUM_PRIVE
+    </BOUCLE_cetarticle>
     <INCLURE{fond=inc-foot}{stats=no}>
   </BOUCLE_securite>
     <h1>What do you think you are doing here ???</h1>
