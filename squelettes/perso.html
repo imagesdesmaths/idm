@@ -2,7 +2,74 @@
 <INCLURE{fond=inc-head}{title=Votre espace personnel}>
 
 <BOUCLE_moi(AUTEURS) {tous} {id_auteur=#SESSION{id_auteur}}>
-  <INCLURE{fond=inc-perso}>
+  <h1>Bonjour, [(#NOM|prenom_nom)]&nbsp;!</h1>
+
+  <p>Bienvenue dans votre espace personnel sur Images des Mathématiques. 
+  C'est à partir de cette page que vous pouvez gérer votre participation 
+  au site et accéder à vos informations personnelles.</p>
+
+  [(#BILLETTISTE|=={oui}?{' '}) <h3>Vous êtes billettiste.</h3>
+
+  <p>Pour écrire un billet, il vous suffit de cliquer ici :
+  <a href="#URL_PAGE{billet}">écrire un nouveau billet</a> (ou sur le lien 
+  de même titre dans la colonne de gauche).  Votre billet sera publié 
+  aussitôt que vous l'aurez validé. Si toutefois nous constations que trop 
+  de billets sont soumis le même jour, il se peut que nous le retirions 
+  ensuite de la page d'accueil pour l'y remettre quelques jours plus tard, 
+  afin de réguler le flot de nouveautés ; ne vous inquiétez donc pas si 
+  votre contribution disparaît, elle n'est pas perdue !</p>]
+
+  [(#STATUT|=={1comite}|?{' '}) <h3>Vous êtes rédacteur.</h3>
+
+  <p>Vous pouvez accéder à la partie privée du site (où vous pourrez 
+  écrire puis suivre le devenir de votre article) en suivant le lien 
+  intitulé "espace de rédaction" dans la colonne de gauche. Une fois votre 
+  article soumis, vous aurez également la possibilité de dialoguer avec 
+  ses relecteurs.</p>]
+
+  [(#ROLE|=={visiteur}|?{' ',''}) <h3>Relire des articles.</h3>
+
+  <p>Tous les articles des revues mathématiques sont relus et vérifiés par 
+  des spécialistes avant leur publication. Ce site s'adressant au grand 
+  public, nous souhaitons faire relire nos articles par des relecteurs 
+  aussi variés que possible avant de les faire apparaître au public ; le 
+  but étant de s'assurer qu'ils sont non seulement corrects, mais surtout 
+  lisibles. C'est bien le but d'une revue de vulgarisation !</p>
+
+  <p>Nous cherchons donc des relecteurs. Si cela vous intéresse de nous 
+  aider, et de nous donner votre avis de temps en temps, nous vous en 
+  remercions par avance ! Vous n'avez qu'à cliquer sur le bouton 
+  ci-dessous. Dès que le comité de rédaction aura validé votre 
+  inscription, vous deviendrez un relecteur officiel de <em>Images des 
+    Mathématiques</em>.</p>]
+
+  [(#ROLE|=={candidat}|?{' ',''}) <h3>Relire des articles.</h3>
+
+  <p>Nous avons bien enregistré votre inscription à la liste des 
+  relecteurs, et nous vous en remercions. Dès que le comité de rédaction 
+  aura validé votre inscription, vous ferez partie de l'équipe, et vous 
+  commencerez à recevoir des articles sur lesquels vous pourrez donner 
+  votre avis. Si toutefois vous ne souhaitez plus relire d'articles, vous 
+  n'avez qu'à cliquer sur le bouton ci-dessous.</p>]
+
+  [(#ROLE|=={relecteur}|?{' ',''}) <h3>Vous êtes relecteur.</h3>
+
+  <p>Vous faites partie des relecteur de ce site. Merci pour votre aide ! 
+  Quand un nouvel article sera proposé, si vous êtes choisi(e) pour le 
+  relire vous recevrez un courier électronique vous donnant plus 
+  d'informations sur la marche à suivre ; vous aurez accès à un espace de 
+  discussion pour dialoguer avec l'auteur, et vous pourrez donner votre 
+  avis sur la publication de l'article ou les changements à y apporter. Si 
+  toutefois vous ne souhaitez plus relire d'articles, vous n'avez qu'à 
+  cliquer sur le bouton ci-dessous.</p>]
+
+  <div style="text-align:center">
+    #RELECTEURS_BOUTON
+  </div>
+
+  <BOUCLE_relecteurs(relecteurs_articles articles) {id_auteur=#SESSION{id_auteur}}>
+      <h3>Vous avez un article à relire : <a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">#TITRE</a></h3>
+  </BOUCLE_relecteurs>
 </BOUCLE_moi>
   <h1>Merci de vous identifier</h1>
   #LOGIN_PUBLIC
