@@ -247,7 +247,7 @@ sera ignor&eacute;e) :
 'form_forum_voici1' => 'Voici vos identifiants pour pouvoir participer &agrave; la vie
 du site "@nom_site_spip@" (@adresse_site@) :',
 'form_forum_voici2' => 'Voici vos identifiants pour proposer des articles sur
-le site "@nom_site_spip@" (@adresse_login@) :',
+le site "@nom_site_spip@" (@adresse_site@) :',
 'form_indiquer_email' => 'Veuillez indiquer votre adresse email.',
 'form_indiquer_nom' => 'Veuillez indiquer votre nom.',
 'form_indiquer_nom_site' => 'Veuillez indiquer le nom de votre site.',
