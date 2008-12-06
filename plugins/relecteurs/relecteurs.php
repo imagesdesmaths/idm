@@ -84,13 +84,15 @@ function relecteurs_notify_user ($id_auteur, $id_article) {
 function relecteurs_nettoie () {
   $reload = false;
 
-  $liberes = sql_fetsel ( "spip_relecteurs_articles.id_auteur",
-    array ("spip_relecteurs_articles", "spip_articles"),
-    array ("spip_relecteurs_articles.id_article = spip_articles.id_article", "spip_articles.statut = 'publie'"));
-
-  if ($liberes) {
-    foreach ($liberes as $id) { sql_delete ("spip_relecteurs_articles", "id_auteur = $id"); }
-    $reload = true;
+  $affectes = sql_allfetsel ( array("id_auteur","id_article"), "spip_relecteurs_articles" );
+  foreach ($affectes as $line) {
+    $id_auteur = $line["id_auteur"];
+    $id_article = $line["id_article"];
+    $statut = sql_getfetsel ("statut", "spip_articles", "id_article = $id_article");
+    if ($statut != "prop") {
+      sql_delete ("spip_relecteurs_articles", "id_auteur = $id_auteur");
+      $reload = true;
+    }
   }
 
   return $reload;
