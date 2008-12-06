@@ -1,40 +1,40 @@
 <INCLURE{fond=inc-head}{title=Plan du site}>
 
 <div class="plan">
+  #ONGLETS_DEBUT{par rubrique}
 
-<BOUCLE_secteurs(RUBRIQUES) {racine} {id_rubrique != 18}>
-<h2 class="plan"><a href="#URL_RUBRIQUE">#TITRE</a></h2>
+  <B_rub><ul><BOUCLE_rub(RUBRIQUES) {id_parent} {id_secteur != 18} {doublons rub} {par num titre, titre}>
+    <li><a href="#URL_RUBRIQUE" [(#ID_PARENT|?{'','class="heading"'})]>#TITRE</a>
+    <B_art><ul><BOUCLE_art(ARTICLES) {id_rubrique} {par num titre, date}>
+      <li><a class="article" href="#URL_ARTICLE">#TITRE</a></li>
+    </BOUCLE_art></ul></B_art>
+    <BOUCLE_sousrub(BOUCLE_rub)></BOUCLE_sousrub>
+    </li>
+  </BOUCLE_rub></ul></B_rub>
 
-<B_articles_racine>
-<ul>
-  <BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par num titre, date}>
-  <li><a class="article" href="#URL_ARTICLE">#TITRE</a></li>
-  </BOUCLE_articles_racine>
-</ul>
-</B_articles_racine>
+  #ONGLETS_TITRE{par auteur}
 
-<B_rubriques>
-<ul>
-  <BOUCLE_rubriques(RUBRIQUES) {id_parent} {par num titre, date}>
-  <li class="rubrique"><strong><a href="#URL_RUBRIQUE">#TITRE</a></strong>
+  <B_aut><ul><BOUCLE_aut(AUTEURS) {par nom}>
+    <li><a href="#URL_AUTEUR" class="heading">#NOM</a>
+    <B_artaut><ul><BOUCLE_artaut(ARTICLES) {id_auteur} {par titre}>
+      <li><a class="article" href="#URL_ARTICLE">#TITRE</a>
+      <B_coaut>(avec <BOUCLE_coaut(AUTEURS) {id_auteur != #ID_AUTEUR} {id_article} {par nom} {", "}>
+        <a href="#URL_AUTEUR">#NOM</a></BOUCLE_coaut>)</B_coaut>
+      </li>
+      </BOUCLE_artaut></ul></B_artaut></li>
+  </BOUCLE_aut></ul></B_aut>
 
-  <B_articles>
-  <ul>
-    <BOUCLE_articles(ARTICLES) {id_rubrique} {par num titre, date}>
-    <li><a class="article" href="#URL_ARTICLE">#TITRE</a></li>
-    </BOUCLE_articles>
-  </ul>
-  </B_articles>
+  #ONGLETS_TITRE{par th?me}
 
-  <BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+  <B_mot><ul><BOUCLE_mot(MOTS) {id_groupe = 1} {par titre}>
+    <li><a class="heading" name="#TITRE">#TITRE</a>
+    <B_artmot><ul><BOUCLE_artmot(ARTICLES) {id_mot} {par titre}>
+      <li><a class="article" href="#URL_ARTICLE">#TITRE</a> (par #LESAUTEURS)</li>
+    </BOUCLE_artmot></ul></B_artmot>
+    </li>
+  </BOUCLE_mot></ul></B_mot>
 
-  </li>
-  </BOUCLE_rubriques>
-</ul>
-</B_rubriques>
-
-</BOUCLE_secteurs>
-
+  #ONGLETS_FIN
 </div>
 
 #INCLURE{fond=inc-foot}
