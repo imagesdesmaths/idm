@@ -5,27 +5,27 @@
 
 <div id="une">
   <div class="titre"><h2>&Agrave; la une</h2></div>
-  <BOUCLE_featured(ARTICLES) {id_secteur IN 1,4} {par date} {inverse} {0,1} {doublons}>
+  <BOUCLE_featured(ARTICLES) {id_secteur IN 1,4,20,21,22} {par date} {inverse} {0,1} {doublons}>
   [(#INCLURE{fond=inc-resume}{id_article})]
   </BOUCLE_featured>
 </div>
 
+<B_billets>
+<div class="billets">
+  <h2>Les derniers billets (<a href="#URL_RUBRIQUE{6}">plus ...</a>)</h2>
+  <BOUCLE_billets(ARTICLES) {id_rubrique = 6} {par date} {inverse} {0,3}>
+  [(#INCLURE{fond=inc-resume}{id_article})]
+  </BOUCLE_billets>
+</div>
+</B_billets>
+
 <div class="recents">
-  <h2>Derniers articles publiés</h2>
-  <BOUCLE_rub(RUBRIQUES) {racine} {id_rubrique != 6} {id_rubrique != 18}>
+  <h2>Quelques articles rÃ©cents</h2>
+  <BOUCLE_rub(RUBRIQUES) {racine} {id_secteur IN 1,4,20,21,22}>
     <BOUCLE_old(ARTICLES) {branche} {par date} {inverse} {doublons} {0,1}>
       [(#INCLURE{fond=inc-resume}{id_article})]
     </BOUCLE_old>
   </BOUCLE_rub>
 </div>
-
-<B_billets>
-<div class="billets no_rubrique">
-  <h2>Les billets de la semaine</h2>
-  <BOUCLE_billets(ARTICLES) {id_rubrique = 6} {par date} {inverse} {doublons}>
-  [(#INCLURE{fond=inc-resume}{id_article})]
-  </BOUCLE_billets>
-</div>
-</B_billets>
 
 #INCLURE{fond=inc-foot}
