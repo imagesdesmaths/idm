@@ -7,11 +7,13 @@
 
 [<div class="texte">(#TEXTE)</div>]
 
-<BOUCLE_articles(ARTICLES) {id_rubrique} {par date} {inverse}>
+<B_articles>#PAGINATION{idm}
+<BOUCLE_articles(ARTICLES) {id_rubrique} {par date} {inverse} {pagination}>
 [(#INCLURE{fond=inc-resume}{id_article})]
 </BOUCLE_articles>
 
-<BOUCLE_articles_hors(ARTICLES) {branche} {par date} {inverse}>
+<B_articles_hors>#PAGINATION{idm}
+<BOUCLE_articles_hors(ARTICLES) {branche} {par date} {inverse} {pagination}>
 [(#INCLURE{fond=inc-resume}{id_article})]
 </BOUCLE_articles_hors>
 <//B_articles>
