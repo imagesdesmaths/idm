@@ -6,7 +6,7 @@ body { padding : 0px; margin : 0px; background : inherit; }
 
 #outer { width : 100%; height : 100%; background : inherit; padding : 0px; }
   #head  { display : none; }
-  #nav   { display : none; }
+  #left  { display : none; }
   #main  { background : inherit; margin : 0px; padding : 1ex 1em; }
     #une { padding : 1ex 1em; margin : 3ex -1em 0ex; }
 

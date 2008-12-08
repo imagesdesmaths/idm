@@ -5,9 +5,10 @@ html { padding : 0px; margin : 0px; font-family : Arial, sans-serif; text-align 
 body { padding : 0px; margin : 0px; background : white; }
 
 #outer { width : 100%; height : 100%; background : white; padding : 0px; }
-  #head  { width : 100%; height : 75px; position : fixed; top : 0px; z-index : 100; color : white; background : #e20000; padding : 0px 0px 0px 5em; }
-  #spacer { height : 80px; }
-  #nav   { width : 12em; height : 100%; position : fixed; top : 0px; z-index : 5; padding : 0px .5em; text-align : left; color : white; background : #550000; overflow : auto; }
-  #main  { position : absolute; top : 75px; left : 0px; width : 100%; margin : 0px; background : white; }
-  #main_in { margin-left : 13em; padding : 1ex 2em; }
+  #head  { width : 100%; height : 75px; color : white; background : #e20000; }
+  #left  { width : 13em; position : absolute; z-index : 5; top : 75px; text-align : left; }
+    #nav  { padding : 1ex .5em; text-align : left; color : white; background : #550000; border : solid #e20000; border-width : 0px 1px 1px 0px; }
+    #actu { padding : 1ex .5em; }
+  #main  { position : absolute; top : 75px; width : 100%; }
+  #main_in { margin-left : 13em; padding : 1ex 2em 2ex; }
     #une { padding : 1ex 1em; background-color : #ffcccc; margin : 3ex -1em 0ex; }

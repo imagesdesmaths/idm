@@ -30,7 +30,7 @@ form { text-align : center; }
 
 /* Styles for the navigation bar */
 
-div#nav h2 { margin : 2ex 0px 1ex; font-size : medium; padding : .2ex 0px .2ex; border : 1px solid #e20000; border-width : 1px 0px; }
+div#nav h2 { margin : 1ex 0px 1ex; font-size : medium; padding : .2ex 0px .2ex; border : 1px solid #e20000; border-width : 1px 0px; }
 div#nav h3 { margin : 1ex 0px .5ex; font-size : medium; }
 
 div#nav a { font-weight : normal; color : white; text-decoration : none; }
@@ -47,6 +47,12 @@ div#nav form input { width : 10em; }
 div#nav form input.submit { display : none; }
 
 div#nav div.bottom { position : fixed; bottom : .2ex; }
+
+div#actu { font-size : small; margin-top : 0px; }
+div#actu h2 { font-size : medium; margin : 1ex; }
+div#actu h3 { font-size : small; margin-bottom : 0px; }
+div#actu p { margin-top : 0px; }
+div#actu a { font-weight : normal; }
 
 /* Styles for abstracts */
 

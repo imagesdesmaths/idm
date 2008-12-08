@@ -1,3 +1,4 @@
+#CACHE{3600}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 
@@ -21,48 +22,58 @@
 <body>
   <div id="outer">
     <div id="head">
-      <a style="position:absolute;left:20px;top:0px" href="http://www.cnrs.fr/"><img src="#CHEMIN{img/Logo_CNRS_blanc_e00000.gif}" alt="CNRS" /></a>
+      <a style="float:left;padding-left:1em;" href="http://www.cnrs.fr/"><img src="#CHEMIN{img/Logo_CNRS_blanc_e00000.gif}" alt="CNRS" /></a>
       <h1><a href="#URL_SITE_SPIP/">
           <img src="#CHEMIN{img/Logo_IDM_blanc_e00000.gif}"
                alt="Images des mathematiques" />
       </a></h1>
     </div>
 
-    <div id="nav">
-      <div id="spacer"></div>
-      <ul style="text-align:center">
-        <li><a href="#URL_SITE_SPIP">Sommaire</a> / <a href="#URL_ARTICLE{63}">Présentation</a></li>
-        <li><a href="#URL_PAGE{plan}">Plan du site</a> [/ <a href="(#URL_RUBRIQUE{19})">Documentation</a>]</li>
-        [<li>(#MODELE{special}{mot=ours})</li>]
-        <li><a href="mailto:#EMAIL_WEBMASTER"><b>Nous contacter</b></a></li>
-      </ul>
+    <div id="left">
+      <div id="nav">
+        <ul style="text-align:center">
+          <li><a href="#URL_SITE_SPIP">Sommaire</a> / <a href="#URL_ARTICLE{63}">Présentation</a></li>
+          <li><a href="#URL_PAGE{plan}">Plan du site</a> [/ <a href="(#URL_RUBRIQUE{19})">Documentation</a>]</li>
+          [<li>(#MODELE{special}{mot=ours})</li>]
+          <li><a href="mailto:#EMAIL_WEBMASTER"><b>Nous contacter</b></a></li>
+        </ul>
 
-      <h2><a href="#URL_ARTICLE{63}">Les rubriques</a></h2>
-      <ul><BOUCLE_secteurs(RUBRIQUES) {racine} {par num titre} {id_rubrique != 18}>
-        <li><a href="#URL_RUBRIQUE" [(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{class="active"})]>#TITRE</a>
-        <B_rubriques>
+        <h2><a href="#URL_ARTICLE{63}">Les rubriques</a></h2>
+        <ul><BOUCLE_secteurs(RUBRIQUES) {racine} {par num titre} {id_rubrique != 18} {id_rubrique != 26}>
+          <li><a href="#URL_RUBRIQUE" [(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{class="active"})]>#TITRE</a>
+          <B_rubriques>
           <ul><BOUCLE_rubriques(RUBRIQUES) {id_parent} {par num titre}>
             <li><a href="#URL_RUBRIQUE" [(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{class="active"})]>#TITRE</a>
             <BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
             </li>
-          </BOUCLE_rubriques></ul>
-        </B_rubriques>
-        </li>
-      </BOUCLE_secteurs></ul>
+            </BOUCLE_rubriques></ul>
+            </B_rubriques>
+            </li>
+            </BOUCLE_secteurs></ul>
 
-      [(#FORMULAIRE_RECHERCHE)]
+            [(#FORMULAIRE_RECHERCHE)]
 
-      <BOUCLE_liens(RUBRIQUES) {id_rubrique = 25}>
-        <h2><a href="#URL_RUBRIQUE">#TITRE</a></h2>
-        <ul style="text-align:center">
-          <BOUCLE_lienss(ARTICLES) {id_rubrique} {par num titre, titre}>
-            <li><a href="#URL_ARTICLE">#TITRE</a></li>
-          </BOUCLE_lienss>
-        </ul>
-      </BOUCLE_liens>
+            <BOUCLE_liens(RUBRIQUES) {id_rubrique = 25}>
+            <h2><a href="#URL_RUBRIQUE">#TITRE</a></h2>
+            <ul style="text-align:center">
+              <BOUCLE_lienss(ARTICLES) {id_rubrique} {par num titre, titre}>
+              <li><a href="#URL_ARTICLE">#TITRE</a></li>
+              </BOUCLE_lienss>
+            </ul>
+            </BOUCLE_liens>
 
-      <INCLURE{fond=inc-ident}>
-    </div>
+            <INCLURE{fond=inc-ident}>
+          </div>
 
-    <div id="main">
-      <div id="main_in">
+          <div id="actu">
+            <h2>Actualit&eacute;s</h2>
+
+            <BOUCLE_actu(BREVES) {id_rubrique=26} {par date} {inverse} {0,10}>
+            <h3>- [(#DATE|affdate)] -</h3>
+            <a href="#URL_BREVE">#TITRE</a>
+            </BOUCLE_actu>
+          </div>
+        </div>
+
+        <div id="main">
+          <div id="main_in">
