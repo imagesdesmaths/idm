@@ -1,0 +1,9 @@
+<B_img>
+<div class="figure">
+  <BOUCLE_img(DOCUMENTS) {id_document = #ENV{id}}>
+  <img src="#URL_DOCUMENT">
+  [<p class="titre">(#TITRE)</p>]
+  [<div class="legende">(#DESCRIPTIF)</div>]
+  </BOUCLE_img>
+</div>
+</B_img>
