@@ -1,8 +1,8 @@
 <plugin>
   <nom>jsMath</nom>
   <auteur>[Vincent Beffara->vbeffara@ens-lyon.fr]</auteur>
-  <version>3.6-1</version>
-  <etat>test</etat>
+  <version>3.6a-1</version>
+  <etat>stable</etat>
   <description>
     Inclusion de fonctionnalit&eacute;s permettant l'utilisation de 
     [jsMath->http://www.math.union.edu/~dpvc/jsmath/] dans SPIP. Tapez 
