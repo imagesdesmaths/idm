@@ -11,11 +11,13 @@
 <BOUCLE_articles(ARTICLES) {id_rubrique} {par date} {inverse} {pagination}>
 [(#INCLURE{fond=inc-resume}{id_article})]
 </BOUCLE_articles>
+#PAGINATION{idm}</B_articles>
 
 <B_articles_hors>#PAGINATION{idm}
 <BOUCLE_articles_hors(ARTICLES) {branche} {par date} {inverse} {pagination}>
 [(#INCLURE{fond=inc-resume}{id_article})]
 </BOUCLE_articles_hors>
+#PAGINATION{idm}</B_articles_hors>
 <//B_articles>
 
 #INCLURE{fond=inc-foot}
