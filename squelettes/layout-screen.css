@@ -6,9 +6,11 @@ body { padding : 0px; margin : 0px; background : white; }
 
 #outer { width : 100%; height : 100%; background : white; padding : 0px; }
   #head  { width : 100%; height : 75px; position : absolute; color : white; background : #e20000; z-index : 3; }
+    #head h1 { margin-left : 6.5em; }
+  #logo  { position : absolute; width : 13em; top : 0px; color : white; background : transparent; z-index : 4; text-align : center; }
   #lisiere { width : 13em; height : 100%; position : fixed; top : 0px; background : #550000; z-index : 1; }
   #left  { width : 13em; position : absolute; z-index : 5; top : 75px; text-align : left; z-index : 2; }
-    #nav  { padding : 1ex .5em; text-align : left; color : white; background : #550000; }
+    #nav  { padding : 15px .5em 0ex; text-align : left; color : white; background : #550000; }
     #actu { padding : 0ex .5em 1ex; background : white; border : 1em solid #550000; }
   #main  { position : absolute; top : 75px; width : 100%; z-index : 0; }
   #main_in { margin-left : 13em; padding : 1ex 2em 2ex; }
