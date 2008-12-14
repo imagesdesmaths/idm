@@ -24,7 +24,12 @@
 [<div class="notes"><h3>Notes</h3>(#NOTES)</div>]
 #FIN_SURLIGNE
 
-<h3 class="discuter"><a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">Discuter cet article ...</a></h3> 
+<BOUCLE_msg(FORUMS) {id_article}>
+</BOUCLE_msg>
+<h3 class="discuter"><a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">Il y a #TOTAL_BOUCLE commentaire[(#TOTAL_BOUCLE|>{1}|?{s})] sur cet article ...</a></h3> 
+</B_msg>
+<h3 class="discuter"><a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">Soyez le premier à déposer un commentaire sur cet article !</a></h3> 
+<//B_msg>
 
 #INCLURE{fond=inc-foot}
 </BOUCLE_article>
