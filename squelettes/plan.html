@@ -4,7 +4,7 @@
   #ONGLETS_DEBUT{par rubrique}
 
   <B_rub><ul><BOUCLE_rub(RUBRIQUES) {id_parent} {id_secteur != 18} {doublons rub} {par num titre, titre}>
-    <li><a href="#URL_RUBRIQUE" [(#ID_PARENT|?{'','class="heading"'})]>#TITRE</a>
+    <li><span[ (#ID_PARENT|?{'','class="heading"'})]><a href="#URL_RUBRIQUE" >#TITRE</a></span>
     <B_art><ul><BOUCLE_art(ARTICLES) {id_rubrique} {par num titre, date}>
       <li><a class="article" href="#URL_ARTICLE">#TITRE</a></li>
     </BOUCLE_art></ul></B_art>
@@ -22,9 +22,9 @@
 
   [(#SET{initiale,' '})]
   <B_aut><ul><BOUCLE_aut(AUTEURS) {par nom}>
-    [(#GET{initiale}|=={' '}|?{' ',''}) <li><a class="heading" id="ini_[(#NOM*|initiale)]">- [(#NOM*|initiale)] -</a><ul>]
+    [(#GET{initiale}|=={' '}|?{' ',''}) <li><span class="heading"><a id="ini_[(#NOM*|initiale)]">&nbsp;</a>- [(#NOM*|initiale)] -</span><ul>]
     [(#GET{initiale}|=={' '}|?{'',' '}) [(#GET{initiale}|=={[(#NOM*|initiale)]}|?{'',' '})
-        </ul></li><li><a class="heading" id="ini_[(#NOM*|initiale)]">- [(#NOM*|initiale)] -</a><ul>] ]
+      </ul></li><li><span class="heading"><a id="ini_[(#NOM*|initiale)]">&nbsp;</a>- [(#NOM*|initiale)] -</span><ul>] ]
     [(#SET{initiale,[(#NOM*|initiale)]})]
 
     <li><a href="#URL_AUTEUR">#NOM</a>
@@ -39,7 +39,7 @@
   #ONGLETS_TITRE{par thème}
 
   <B_mot><ul><BOUCLE_mot(MOTS) {id_groupe = 1} {par titre}>
-    <li><a class="heading" name="#TITRE">#TITRE</a>
+    <li><span class="heading">#TITRE</span>
     <B_artmot><ul><BOUCLE_artmot(ARTICLES) {id_mot} {par titre}>
       <li><a class="article" href="#URL_ARTICLE">#TITRE</a> (par #LESAUTEURS)</li>
     </BOUCLE_artmot></ul></B_artmot>
