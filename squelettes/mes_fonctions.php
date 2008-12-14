@@ -92,6 +92,10 @@ function lettrine ($texte) {
   return implode ("\n", $lines);
 }
 
+function initiale ($mot) {
+  return strtoupper($mot[0]);
+}
+
 function billettistes_effect_change ($target='', $caller='admin') {
   if (!$target) $target = str_replace('&amp;','&',self());
 

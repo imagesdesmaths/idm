@@ -159,6 +159,7 @@ div.plan a:hover { color : #e20000; }
 div.plan ul { padding-left : 0em; list-style-type : none; }
 div.plan ul ul ul { padding-left : 2em; }
 div.plan a.heading { display : block; text-align : center; font-size : x-large; border-bottom : 2px solid #e20000; margin : 1ex 0px; }
+div.plan a.heading:hover { color : black; }
 div.plan a.article { font-weight : normal; }
 
 div.plan div.onglets_bloc h2.onglets_titre { background-color : #dddddd; position : relative; display : inline; float : left; padding : 2px 1em; border : 1px solid #e20000; }

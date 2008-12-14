@@ -14,15 +14,27 @@
 
   #ONGLETS_TITRE{par auteur}
 
+  [(#SET{initiale,' '})]
+  <B_init><p style="text-align : right; margin-top : 0px;"><BOUCLE_init(AUTEURS) {par nom}>
+    [(#GET{initiale}|=={[(#NOM*|initiale)]}|?{'',' '}) <a href="#ini_[(#NOM*|initiale)]">[(#NOM*|initiale)]</a>]
+    [(#SET{initiale,[(#NOM*|initiale)]})]
+  </BOUCLE_init></p></B_init>
+
+  [(#SET{initiale,' '})]
   <B_aut><ul><BOUCLE_aut(AUTEURS) {par nom}>
-    <li><a href="#URL_AUTEUR" class="heading">#NOM</a>
+    [(#GET{initiale}|=={' '}|?{' ',''}) <li><a class="heading" id="ini_[(#NOM*|initiale)]">- [(#NOM*|initiale)] -</a><ul>]
+    [(#GET{initiale}|=={' '}|?{'',' '}) [(#GET{initiale}|=={[(#NOM*|initiale)]}|?{'',' '})
+        </ul></li><li><a class="heading" id="ini_[(#NOM*|initiale)]">- [(#NOM*|initiale)] -</a><ul>] ]
+    [(#SET{initiale,[(#NOM*|initiale)]})]
+
+    <li><a href="#URL_AUTEUR">#NOM</a>
     <B_artaut><ul><BOUCLE_artaut(ARTICLES) {id_auteur} {par titre}>
       <li><a class="article" href="#URL_ARTICLE">#TITRE</a>
       <B_coaut>(avec <BOUCLE_coaut(AUTEURS) {id_auteur != #ID_AUTEUR} {id_article} {par nom} {", "}>
         <a href="#URL_AUTEUR">#NOM</a></BOUCLE_coaut>)</B_coaut>
       </li>
-      </BOUCLE_artaut></ul></B_artaut></li>
-  </BOUCLE_aut></ul></B_aut>
+    </BOUCLE_artaut></ul></B_artaut></li>
+  </BOUCLE_aut></ul></li></ul></B_aut>
 
   #ONGLETS_TITRE{par thème}
 
