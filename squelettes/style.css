@@ -59,9 +59,10 @@ div#actu a { font-weight : normal; }
 div.resume_out { margin : 2ex 0px 0px; clear : both; background : inherit; }
 div.resume { background : inherit; }
 
-div.resume a { color : inherit; background : inherit; text-decoration : none; }
-div.resume div.introduction a { font-weight : normal; }
+div.resume a { color : black; text-decoration : none; }
 div.resume h3.titre a:hover { color : #e20000; }
+div.resume h4.auteur a:hover { color : #e20000; }
+div.resume div.introduction a { font-weight : normal; }
 
 
 h3.titre { margin : 0px; border-bottom : 2px solid #e20000; }
