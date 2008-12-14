@@ -1,0 +1,18 @@
+#CACHE{3600}
+<BOUCLE_mot(MOTS){id_mot}>
+<INCLURE{fond=inc-head}{title=#TITRE}>
+
+<h1>#TITRE</h1>
+
+[<div class="texte">(#TEXTE)</div>]
+
+<B_articles>#PAGINATION{idm}
+<BOUCLE_articles(ARTICLES) {id_mot} {par date} {inverse} {pagination}>
+[(#INCLURE{fond=inc-resume}{id_article})]
+</BOUCLE_articles>
+#PAGINATION{idm}</B_articles>
+
+#INCLURE{fond=inc-foot}
+</BOUCLE_mot>
+<INCLURE{fond=sommaire}>
+<//B_mot>
