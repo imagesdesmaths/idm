@@ -1,6 +1,12 @@
 <BOUCLE_article(ARTICLES){id_article}>
 <INCLURE{fond=inc-head}{title=#TITRE}{id_rubrique=#ID_RUBRIQUE}{id_article=#ID_ARTICLE}>
 
+<div class="relies"><p>
+  Rubrique : <BOUCLE_rub(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rub>
+  <B_mots> &mdash; Thème[(#TOTAL_BOUCLE|>{1}|?{s})] : <BOUCLE_mots(MOTS) {id_article} {par titre} {', '}><a href="#URL_MOT">#TITRE</a></BOUCLE_mots>
+  <BOUCLE_msg(FORUMS) {id_article} {plat}></BOUCLE_msg> &mdash; <a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">#TOTAL_BOUCLE commentaire[(#TOTAL_BOUCLE|>{1}|?{s})]</a> <//B_msg>
+</p></div>
+
 #DEBUT_SURLIGNE
 [(#LOGO_ARTICLE|right||image_reduire{200,200})]
 [(#LOGO_ARTICLE|fichier|?{'',' '}) <INCLURE{fond=inc-auteur}{id_article=#ID_ARTICLE}{taille=200}>]
@@ -24,12 +30,12 @@
 [<div class="notes"><h3>Notes</h3>(#NOTES)</div>]
 #FIN_SURLIGNE
 
-<BOUCLE_msg(FORUMS) {id_article}>
-</BOUCLE_msg>
+<BOUCLE_msg2(FORUMS) {id_article} {plat}>
+</BOUCLE_msg2>
 <h3 class="discuter"><a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">Il y a #TOTAL_BOUCLE commentaire[(#TOTAL_BOUCLE|>{1}|?{s})] sur cet article ...</a></h3> 
-</B_msg>
+</B_msg2>
 <h3 class="discuter"><a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">Soyez le premier à déposer un commentaire sur cet article !</a></h3> 
-<//B_msg>
+<//B_msg2>
 
 #INCLURE{fond=inc-foot}
 </BOUCLE_article>

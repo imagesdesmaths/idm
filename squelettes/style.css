@@ -170,6 +170,9 @@ div.texte .jsMath_number { right : 0px; }
 
 div.texte div.preuve { margin-left : 4em; font-size : small; font-style : italic; }
 
+div.relies { margin : -1ex -2em 2ex; padding : 0px .3em; text-align : right; }
+div.relies p { margin : 0px; font-size : 90%; }
+
 /* We override the default Couteau Suisse styles for blocs and onglets. */
 
 div.texte div.cs_blocs {}
