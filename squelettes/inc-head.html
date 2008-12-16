@@ -66,11 +66,15 @@
           </div>
 
           <div id="actu">
-            <h2>Actualit&eacute;s</h2>
+            <BOUCLE_rdp(ARTICLES) {id_rubrique=26} {par date} {inverse} {0,1}>
+            <a href="#URL_ARTICLE" class="big">Revue de presse</a>
+            </BOUCLE_rdp>
 
-            <BOUCLE_actu(BREVES) {id_rubrique=26} {par date} {inverse} {0,10}>
+            <h2>Les br&egrave;ves :</h2>
+
+            <BOUCLE_actu(BREVES) {id_rubrique=26} {par date} {inverse} {0,5}>
             <h3>- [(#DATE|affdate)] -</h3>
-            <a href="#URL_BREVE">#TITRE</a>
+            <a href="#URL_BREVE" class="plain">#TITRE</a>
             </BOUCLE_actu>
           </div>
         </div>

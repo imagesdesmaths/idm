@@ -48,11 +48,13 @@ div#nav form input.submit { display : none; }
 
 div#nav div.bottom { position : fixed; bottom : .2ex; }
 
-div#actu { font-size : small; margin-top : 0px; }
+div#actu { font-size : small; margin-top : 1ex; }
 div#actu h2 { font-size : medium; margin : 1ex; }
 div#actu h3 { font-size : small; margin-bottom : 0px; }
 div#actu p { margin-top : 0px; }
-div#actu a { font-weight : normal; }
+div#actu a.plain { font-weight : normal; }
+div#actu a.big { display : block; text-align : center; font-size : medium; border-bottom : 2px solid #e20000; padding : .5ex 0px; }
+div#actu a.big:hover { text-decoration : underline; }
 
 /* Styles for abstracts */
 
