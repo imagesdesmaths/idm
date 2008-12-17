@@ -43,7 +43,7 @@ div#nav ul ul ul { padding-left : 1em; }
 
 div#nav form { margin-top : 1ex; }
 div#nav form label { display : none; }
-div#nav form input { width : 10em; }
+div#nav form input { width : 80%; font-weight : bold; background : white url(img/rechercher.gif) no-repeat right center; }
 div#nav form input.submit { display : none; }
 
 div#nav div.bottom { position : fixed; bottom : .2ex; }
