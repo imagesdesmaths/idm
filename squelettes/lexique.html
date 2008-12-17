@@ -1,0 +1,25 @@
+<INCLURE{fond=inc-head}{title=Lexique}>
+
+<h1>Petit lexique</h1>
+<div class="lexique">
+  [(#SET{initiale,' '})]
+  <B_init><p style="text-align : right; margin-top : 2ex;"><BOUCLE_init(MOTS) {par titre} {id_groupe = 4}>
+    [(#GET{initiale}|=={[(#TITRE*|initiale)]}|?{'',' '}) <a href="#ini_[(#TITRE*|initiale)]">[(#TITRE*|initiale)]</a>]
+    [(#SET{initiale,[(#TITRE*|initiale)]})]
+  </BOUCLE_init></p></B_init>
+
+  [(#SET{initiale,' '})]
+  <B_mot><ul><BOUCLE_mot(MOTS) {par titre} {id_groupe = 4}>
+    [(#GET{initiale}|=={' '}|?{' ',''}) <li><span class="heading"><a id="ini_[(#TITRE*|initiale)]">&nbsp;</a>- [(#TITRE*|initiale)] -</span><ul>]
+    [(#GET{initiale}|=={' '}|?{'',' '}) [(#GET{initiale}|=={[(#TITRE*|initiale)]}|?{'',' '})
+      </ul></li><li><span class="heading"><a id="ini_[(#TITRE*|initiale)]">&nbsp;</a>- [(#TITRE*|initiale)] -</span><ul>] ]
+    [(#SET{initiale,[(#TITRE*|initiale)]})]
+
+    <li>
+    <a id="mot_#ID_MOT" class="mot">#TITRE</a>
+      #TEXTE
+    </li>
+  </BOUCLE_mot></ul></li></ul></B_mot>
+</div>
+
+#INCLURE{fond=inc-foot}
