@@ -2,6 +2,8 @@
 <BOUCLE_mot(MOTS){id_mot}>
 <INCLURE{fond=inc-head}{title=#TITRE}>
 
+[(#ID_GROUPE|=={4}|oui) <?php @header ("Location: #URL_PAGE{lexique}#mot_#ID_MOT"); ?>]
+
 <h1>#TITRE</h1>
 
 [<div class="texte">(#TEXTE)</div>]
