@@ -8,7 +8,7 @@
   C'est à partir de cette page que vous pouvez gérer votre participation 
   au site et accéder à vos informations personnelles.</p>
 
-  [(#BILLETTISTE|=={oui}?{' '}) <h3>Vous êtes billettiste.</h3>
+  [(#BILLETTISTE|=={oui}|oui) <h3>Vous êtes billettiste.</h3>
 
   <p>Pour écrire un billet, il vous suffit de cliquer ici :
   <a href="#URL_PAGE{billet}">écrire un nouveau billet</a> (ou sur le lien 
@@ -19,7 +19,7 @@
   afin de réguler le flot de nouveautés ; ne vous inquiétez donc pas si 
   votre contribution disparaît, elle n'est pas perdue !</p>]
 
-  [(#STATUT|=={1comite}|?{' '}) <h3>Vous êtes rédacteur.</h3>
+  [(#STATUT|=={1comite}|oui) <h3>Vous êtes rédacteur.</h3>
 
   <p>Vous pouvez accéder à la partie privée du site (où vous pourrez 
   écrire puis suivre le devenir de votre article) en suivant le lien 
@@ -27,7 +27,7 @@
   article soumis, vous aurez également la possibilité de dialoguer avec 
   ses relecteurs.</p>]
 
-  [(#ROLE|=={visiteur}|?{' ',''}) <h3>Relire des articles.</h3>
+  [(#ROLE|=={visiteur}|oui) <h3>Relire des articles.</h3>
 
   <p>Tous les articles des revues mathématiques sont relus et vérifiés par 
   des spécialistes avant leur publication. Ce site s'adressant au grand 
@@ -43,7 +43,7 @@
   inscription, vous deviendrez un relecteur officiel de <em>Images des 
     Mathématiques</em>.</p>]
 
-  [(#ROLE|=={candidat}|?{' ',''}) <h3>Relire des articles.</h3>
+  [(#ROLE|=={candidat}|oui) <h3>Relire des articles.</h3>
 
   <p>Nous avons bien enregistré votre inscription à la liste des 
   relecteurs, et nous vous en remercions. Dès que le comité de rédaction 
@@ -52,7 +52,7 @@
   votre avis. Si toutefois vous ne souhaitez plus relire d'articles, vous 
   n'avez qu'à cliquer sur le bouton ci-dessous.</p>]
 
-  [(#ROLE|=={relecteur}|?{' ',''}) <h3>Vous êtes relecteur.</h3>
+  [(#ROLE|=={relecteur}|oui) <h3>Vous êtes relecteur.</h3>
 
   <p>Vous faites partie des relecteur de ce site. Merci pour votre aide ! 
   Quand un nouvel article sera proposé, si vous êtes choisi(e) pour le 

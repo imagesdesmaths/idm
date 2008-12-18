@@ -3,7 +3,7 @@
     <div class="resume resume_rubrique_#ID_RUBRIQUE resume_secteur_#ID_SECTEUR">
       #DEBUT_SURLIGNE
       [(#LOGO_ARTICLE|right|#URL_ARTICLE|image_reduire{150,150})]
-      [(#LOGO_ARTICLE|fichier|?{'',' '}) <INCLURE{fond=inc-auteur}{id_article=#ID_ARTICLE}{taille=150}>]
+      [(#LOGO_ARTICLE|fichier|non) <INCLURE{fond=inc-auteur}{id_article=#ID_ARTICLE}{taille=150}>]
 
       <h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
 

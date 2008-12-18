@@ -13,9 +13,9 @@
 
 <INCLURE{fond=inc-forum}{id_article}{id_forum}{auteur_article=#GET{auteur_article}}>
 
-[(#SESSION{id_auteur}|?{' '})#FORMULAIRE_FORUM{#URL_PAGE{forum,id_article=#ID_ARTICLE}}]
+[(#SESSION{id_auteur}|oui)#FORMULAIRE_FORUM{#URL_PAGE{forum,id_article=#ID_ARTICLE}}]
 
-[(#SESSION{id_auteur}|?{'',' '})
+[(#SESSION{id_auteur}|non)
 <p>Pour participer &agrave; la discussion merci de <a 
   href="#URL_PAGE{perso}">vous identifier</a> (ou de <a 
   href="#URL_PAGE{inscription}">vous inscrire</a> si vous ne l'avez pas 

@@ -35,49 +35,45 @@
           <li><a href="#URL_SITE_SPIP">Sommaire</a> / <a href="#URL_ARTICLE{63}">Présentation</a></li>
           <li><a href="#URL_PAGE{plan}">Plan du site</a> [/ <a href="(#URL_RUBRIQUE{19})">Documentation</a>]</li>
           [<li>(#MODELE{special}{mot=ours})</li>]
-          <li><a href="mailto:#EMAIL_WEBMASTER"><b>Nous contacter</b></a></li>
+          <li><a href="mailto:#EMAIL_WEBMASTER">Nous contacter</a></li>
         </ul>
 
         <h2><a href="#URL_ARTICLE{63}">Les rubriques</a></h2>
         <ul><BOUCLE_secteurs(RUBRIQUES) {racine} {par num titre} {id_rubrique != 18} {id_rubrique != 26}>
           <li><a href="#URL_RUBRIQUE" [(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{class="active"})]>#TITRE</a>
-          <B_rubriques>
-          <ul><BOUCLE_rubriques(RUBRIQUES) {id_parent} {par num titre}>
+          <B_rubriques><ul><BOUCLE_rubriques(RUBRIQUES) {id_parent} {par num titre}>
             <li><a href="#URL_RUBRIQUE" [(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{class="active"})]>#TITRE</a>
-            <BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
-            </li>
-            </BOUCLE_rubriques></ul>
-            </B_rubriques>
-            </li>
-            </BOUCLE_secteurs></ul>
+            <BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques></li>
+          </BOUCLE_rubriques></ul></B_rubriques></li>
+        </BOUCLE_secteurs></ul>
 
-            [(#FORMULAIRE_RECHERCHE)]
+        [(#FORMULAIRE_RECHERCHE)]
 
-            <BOUCLE_liens(RUBRIQUES) {id_rubrique = 25}>
-            <h2><a href="#URL_RUBRIQUE">#TITRE</a></h2>
-            <ul style="text-align:center">
-              <BOUCLE_lienss(ARTICLES) {id_rubrique} {par num titre, titre}>
-              <li><a href="#URL_ARTICLE">#TITRE</a></li>
-              </BOUCLE_lienss>
-            </ul>
-            </BOUCLE_liens>
+        <BOUCLE_liens(RUBRIQUES) {id_rubrique = 25}>
+        <h2><a href="#URL_RUBRIQUE">#TITRE</a></h2>
+        <ul style="text-align:center">
+          <BOUCLE_lienss(ARTICLES) {id_rubrique} {par num titre, titre}>
+          <li><a href="#URL_ARTICLE">#TITRE</a></li>
+          </BOUCLE_lienss>
+        </ul>
+        </BOUCLE_liens>
 
-            <INCLURE{fond=inc-ident}>
-          </div>
+        <INCLURE{fond=inc-ident}>
+      </div>
 
-          <div id="actu">
-            <BOUCLE_rdp(ARTICLES) {id_rubrique=26} {par date} {inverse} {0,1}>
-            <a href="#URL_ARTICLE" class="big">Revue de presse</a>
-            </BOUCLE_rdp>
+      <div id="actu">
+        <BOUCLE_rdp(ARTICLES) {id_rubrique=26} {par date} {inverse} {0,1}>
+        <a href="#URL_ARTICLE" class="big">Revue de presse</a>
+        </BOUCLE_rdp>
 
-            <h2>Les br&egrave;ves :</h2>
+        <h2>Les br&egrave;ves :</h2>
 
-            <BOUCLE_actu(BREVES) {id_rubrique=26} {par date} {inverse} {0,5}>
-            <h3>- [(#DATE|affdate)] -</h3>
-            <a href="#URL_BREVE" class="plain">#TITRE</a>
-            </BOUCLE_actu>
-          </div>
-        </div>
+        <BOUCLE_actu(BREVES) {id_rubrique=26} {par date} {inverse} {0,5}>
+        <h3>- [(#DATE|affdate)] -</h3>
+        <a href="#URL_BREVE" class="plain">#TITRE</a>
+        </BOUCLE_actu>
+      </div>
+    </div>
 
-        <div id="main">
-          <div id="main_in">
+    <div id="main">
+      <div id="main_in">

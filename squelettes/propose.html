@@ -1,6 +1,6 @@
 #CACHE{0}
 <BOUCLE_article(ARTICLES) {statut=prop} {id_article}>
-  #SET{auth,no} [(#SESSION{statut}|=={0minirezo}|?{' ',''}) #SET{auth,yes}]
+  #SET{auth,no} [(#SESSION{statut}|=={0minirezo}|oui) #SET{auth,yes}]
   <BOUCLE_auteurs(AUTEURS) {id_article} {id_auteur=#SESSION{id_auteur}}> #SET{auth,yes} </BOUCLE_auteurs>
   <BOUCLE_relecteurs(spip_relecteurs_articles) {id_article} {id_auteur=#SESSION{id_auteur}}> #SET{auth,yes} </BOUCLE_relecteurs>
   <BOUCLE_securite(CONDITION) {SI #GET{auth}|=={yes}}>

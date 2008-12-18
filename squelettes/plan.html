@@ -16,15 +16,14 @@
 
   [(#SET{initiale,' '})]
   <B_init><p style="text-align : right; margin-top : 0px;"><BOUCLE_init(AUTEURS) {par nom}>
-    [(#GET{initiale}|=={[(#NOM*|initiale)]}|?{'',' '}) <a href="#ini_[(#NOM*|initiale)]">[(#NOM*|initiale)]</a>]
-    [(#SET{initiale,[(#NOM*|initiale)]})]
+    [(#GET{initiale}|=={[(#NOM*|initiale)]}|non) <a href="#ini_[(#NOM*|initiale)]">[(#NOM*|initiale)]</a> [(#SET{initiale,[(#NOM*|initiale)]})]]
   </BOUCLE_init></p></B_init>
 
   [(#SET{initiale,' '})]
   <B_aut><ul><BOUCLE_aut(AUTEURS) {par nom}>
-    [(#GET{initiale}|=={' '}|?{' ',''}) <li><span class="heading"><a id="ini_[(#NOM*|initiale)]">&nbsp;</a>- [(#NOM*|initiale)] -</span><ul>]
-    [(#GET{initiale}|=={' '}|?{'',' '}) [(#GET{initiale}|=={[(#NOM*|initiale)]}|?{'',' '})
-      </ul></li><li><span class="heading"><a id="ini_[(#NOM*|initiale)]">&nbsp;</a>- [(#NOM*|initiale)] -</span><ul>] ]
+    [(#GET{initiale}|=={' '}|oui) <li><span class="heading"><a id="ini_[(#NOM*|initiale)]">&nbsp;</a>- [(#NOM*|initiale)] -</span><ul>]
+    [(#GET{initiale}|=={' '}|non) [(#GET{initiale}|=={[(#NOM*|initiale)]}|non)
+      </ul></li><li><span class="heading"><a id="ini_[(#NOM*|initiale)]">&nbsp;</a>- [(#NOM*|initiale)] -</span><ul>]]
     [(#SET{initiale,[(#NOM*|initiale)]})]
 
     <li><a href="#URL_AUTEUR">#NOM</a>

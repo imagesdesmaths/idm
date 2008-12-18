@@ -171,6 +171,7 @@ div.plan div.onglets_bloc .onglets_contenu.selected { display : block; }
 div.lexique ul { padding-left : 0em; list-style-type : none; }
 div.lexique ul ul ul { padding-left : 2em; }
 div.lexique span.heading { display : block; text-align : center; font-size : x-large; font-weight : bold; border-bottom : 2px solid #e20000; margin : 1ex 0px; }
+div.lexique span.descriptif { font-style : italic; }
 div.lexique a.mot { font-size : 110%; color : black; font-weight : bold; }
 div.lexique ul ul p { padding-left : 2em; }
 a.lexique { font-weight : normal; border-bottom : 1px dotted; }
