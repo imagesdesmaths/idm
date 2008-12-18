@@ -1,2 +1,6 @@
 [(#SET{mot,[(#ENV{args}|table_valeur{mot})]})]
-<BOUCLE_mot(MOTS) {titre=#GET{mot}}><a class="lexique" href="#URL_MOT"[ title="(#DESCRIPTIF|textebrut)"]>#GET{mot}</a></BOUCLE_mot>#GET{mot}<//B_mot>
+<BOUCLE_lexique(MOTS) {titre=#GET{mot}} {id_groupe=4}>
+<a class="lexique" href="#URL_PAGE{lexique}#mot_#ID_MOT"[ title="(#DESCRIPTIF|textebrut)"]>#GET{mot}</a>
+</BOUCLE_lexique><BOUCLE_mot(MOTS) {titre=#GET{mot}}>
+<a class="lexique" href="#URL_MOT"[ title="(#DESCRIPTIF|textebrut)"]>#GET{mot}</a>
+</BOUCLE_mot>#GET{mot}<//B_mot><//B_lexique>
