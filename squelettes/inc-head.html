@@ -49,11 +49,6 @@
 
         [(#FORMULAIRE_RECHERCHE)]
 
-        <BOUCLE_rdp(ARTICLES) {id_rubrique=26} {par date} {inverse} {0,1}>
-        <h2><a href="#URL_ARTICLE" class="big">Revue de presse</a></h2>
-        </BOUCLE_rdp>
-
-
         <BOUCLE_liens(RUBRIQUES) {id_rubrique = 25}>
         <h2><a href="#URL_RUBRIQUE">#TITRE</a></h2>
         <ul style="text-align:center">
@@ -62,6 +57,13 @@
           </BOUCLE_lienss>
         </ul>
         </BOUCLE_liens>
+
+        <BOUCLE_rdp(ARTICLES) {id_rubrique=26} {par date} {inverse} {0,1}>
+        <h2><a href="#URL_ARTICLE" class="big">Revue de presse</a></h2>
+        </BOUCLE_rdp>
+        <B_rdpall><ul style="text-align:center"><BOUCLE_rdpall(ARTICLES) {id_rubrique=26} {par date} {inverse} {0,3}>
+          <li><a href="#URL_ARTICLE">[(#DATE|affdate)]</a></li>
+        </BOUCLE_rdpall></ul></B_rdpall>
 
         <INCLURE{fond=inc-ident}>
       </div>
