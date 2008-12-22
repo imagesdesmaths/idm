@@ -175,5 +175,11 @@ div.texte p.lettrine { text-indent : 0px; }
 div.texte pre { padding-left : 1em; margin-left : 1em; border-left : 1px solid #e20000; }
 div.texte { padding-top : 2ex; }
 
+div.thm { border-left : 2px solid #e20000; margin-left : 1.5em; padding-left : 1em; font-style : italic; }
+div.thm span.titre { font-weight : bold; font-style : normal; margin-left : -2.5em; background : white; border-bottom : 2px solid #e20000; }
+div.thm ol { margin : 0ex; list-style-type : lower-roman; padding-left : 1em; list-style : lower-roman; }
+div.thm ul { margin : 0ex; }
+div.thm li { margin-top : .2ex; padding-left : 0px; }
+
 /* vim: ft=css
  */
