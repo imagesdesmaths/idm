@@ -14,8 +14,8 @@
       </ul></li><li><span class="heading"><a id="ini_[(#TITRE*|initiale)]">&nbsp;</a>- [(#TITRE*|initiale)] -&nbsp;</span><ul>]]
     [(#SET{initiale,[(#TITRE*|initiale)]})]
 
-    <li><a id="mot_#ID_MOT" class="mot">#TITRE</a>[ <span class="descriptif">((#DESCRIPTIF|cesure{#LANG}|textebrut))</span>]
-    [(#TEXTE|cesure{#LANG})] </li>
+    <li><a id="mot_#ID_MOT" class="mot">#TITRE</a>[ <span class="descriptif">((#DESCRIPTIF|textebrut))</span>]
+    #TEXTE </li>
   </BOUCLE_mot></ul></li></ul></B_mot>
 </div>
 
