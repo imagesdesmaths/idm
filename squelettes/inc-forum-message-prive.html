@@ -2,7 +2,7 @@
   <div class="forum-message <BOUCLE_auteur(AUTEURS) {id_article} {id_auteur}>forum-message-delauteur</BOUCLE_auteur>">
     <h3>#TITRE</h3>
     <h4>[le&nbsp;(#DATE|affdate_jourcourt)][&nbsp;&agrave&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM)]</h4>
-    [<div class="forum-texte">(#TEXTE)</div>]
+    [<div class="forum-texte">(#TEXTE|cesure{#LANG})</div>]
     [<h4 class="repondre"><a 
         href="(#URL_PAGE{propose,id_article=[(#ID_ARTICLE)]&id_forum=[(#ID_FORUM)]})"><:repondre_message:></a></h4>]
   </div>

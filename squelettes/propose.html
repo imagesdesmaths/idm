@@ -31,8 +31,8 @@
     <h3 class="#EDIT{auteur} auteur">Par 
       <BOUCLE_noms(AUTEURS) {par nom} {id_article} {", "}><a href="#URL_AUTEUR">[(#NOM|prenom_nom)]</a></BOUCLE_noms>
     </h3>
-    [<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
-    [<div class="#EDIT{texte} texte">(#TEXTE|lettrine)</div>]
+    [<div class="#EDIT{chapo} chapo">(#CHAPO|cesure{#LANG})</div>]
+    [<div class="#EDIT{texte} texte">(#TEXTE|cesure{#LANG}|lettrine)</div>]
     [<div class="#EDIT{ps} ps"><span class="ps">P.S. :</span> (#PS)</div>]
     [<div class="notes"><h3>Notes</h3>(#NOTES)</div>]
     <hr class="huge" />

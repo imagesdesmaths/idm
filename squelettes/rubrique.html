@@ -5,7 +5,7 @@
 <h1><BOUCLE_parent(RUBRIQUES){id_rubrique=#ID_PARENT}>
   <a href="#URL_RUBRIQUE">#TITRE</a> :</BOUCLE_parent> #TITRE</h1>
 
-[<div class="texte">(#TEXTE)</div>]
+[<div class="texte">(#TEXTE|cesure{#LANG})</div>]
 
 <B_articles>#PAGINATION{idm}
 <BOUCLE_articles(ARTICLES) {id_rubrique} {par date} {inverse} {pagination}>
