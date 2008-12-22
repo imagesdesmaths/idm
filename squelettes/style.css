@@ -58,7 +58,7 @@ div#actu a.big:hover { text-decoration : underline; }
 
 /* Styles for abstracts */
 
-div.resume_out { margin : 2ex 0px 0px; clear : both; background : inherit; }
+div.resume_out { margin : 1ex 0px 0px; clear : both; background : inherit; }
 div.resume { background : inherit; }
 
 div.resume a { color : black; text-decoration : none; }
@@ -71,7 +71,6 @@ h3.titre { margin : 0px; border-bottom : 2px solid #e20000; }
 h4.auteur { font-style : normal; text-align : right; font-weight : normal; margin : .2ex 0px 0px; padding : 0px; }
 
 div.resume img.spip_logos { padding : 0px 0px 0px 1em; background : white; }
-div#une div.resume img.spip_logos { background : inherit; }
 
 div.introduction { margin : .5ex 0px 0px 1em; font-size : small; font-style : italic; }
 
@@ -111,8 +110,11 @@ div.figure div.legende p { font-size : 90%; font-style : italic; margin-top : 0p
 
 /* Specific styles */
 
+div#une { margin-top : 2ex; }
 div#une div.titre { margin-top : -2.5ex; text-align : center; }
-div#une h2 { display : inline; border : 1px solid #e20000; padding : .3ex 1em; background-color : white; }
+div#une h2 { display : inline; border : 1px solid #e20000; padding : .3ex 1em .1ex; background-color : white; }
+div#une div.resume img.spip_logos { background : inherit; }
+div#une h3.titre { margin-top : -.5ex; }
 
 a.article { font-weight : normal; }
 
