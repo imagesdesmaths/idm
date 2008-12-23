@@ -1,11 +1,11 @@
 .invisible { display : none; }
 .nettoyeur { clear : both; }
 
-.relecteurs_vote_moyen { background-color : #ffd700; }
-.relecteurs_vote_non { background-color : #e20000; }
-.relecteurs_vote_oui { background-color : #00ff00; }
-.relecteurs_vote_pas_vu { background-color : #cccccc; }
-.relecteurs_vote_vu { background-color : white; }
+.relecteurs_vote_moyen { color : transparent; background-color : #ffd700; }
+.relecteurs_vote_non { color : transparent; background-color : #e20000; }
+.relecteurs_vote_oui { color : transparent; background-color : #00ff00; }
+.relecteurs_vote_pas_vu { color : transparent; background-color : #cccccc; }
+.relecteurs_vote_vu { color : transparent; background-color : white; }
 
 .spip_doc_descriptif { clear : both; font-size : small; margin-left : auto; margin-right : auto; }
 .spip_doc_titre { font-weight : bold; font-size : small; margin : 1ex auto; }
@@ -90,7 +90,11 @@ div#une { margin-top : 2ex; }
 
 div.chapo { margin : 1ex 4em; font-weight : bold; font-style : italic; }
 
-div.cs_blocs h4 { text-align : left; font-style : normal; }
+div#main div.cs_blocs h4 { text-align : left; font-style : normal; background : transparent url(img/triangle-bas.gif) no-repeat scroll left center; font-size : 100%; font-weight : normal; padding:0pt 0pt 0pt 20px; }
+div#main div.cs_blocs h4 { text-align : left; font-style : normal; background : transparent url(img/triangle-bas.gif) no-repeat scroll left center; font-size : 100%; font-weight : normal; padding:0pt 0pt 0pt 20px; }
+div#main div.cs_blocs h4.blocs_replie { background : transparent url(img/triangle.gif) no-repeat scroll left center; }
+div#main div.cs_blocs h4:hover { cursor : pointer; text-decoration : underline; }
+div#main div.cs_blocs {}
 
 div.figure div.legende p { font-size : 90%; font-style : italic; margin-top : 0px; }
 div.figure div.legende { width : 80%; margin : 0px auto; text-align : justify; }
@@ -161,10 +165,6 @@ div.texte .jsMath_number { right : 0px; }
 div.texte a { color : inherit; }
 div.texte a:link, div.texte a:visited { color : #e20000; }
 div.texte blockquote { color : black; background : #ffeeee; padding : .5ex 1em; border : 1px dashed #e20000; }
-div.texte div.cs_blocs h4 { background : transparent url(img/triangle-bas.gif) no-repeat scroll left center; font-size : 100%; font-weight : normal; padding:0pt 0pt 0pt 20px; }
-div.texte div.cs_blocs h4.blocs_replie { background : transparent url(img/triangle.gif) no-repeat scroll left center; }
-div.texte div.cs_blocs h4:hover { cursor : pointer; text-decoration : underline; }
-div.texte div.cs_blocs {}
 div.texte div.onglets_bloc .onglets_contenu { display : none; border : solid #e20000; border-width : 0px 0px 1px 1px; z-index : 10; padding : 35px 0px 1ex 2ex; } 
 div.texte div.onglets_bloc .onglets_contenu.selected { display : block; }
 div.texte div.onglets_bloc h2.onglets_titre a { text-decoration : none; }
