@@ -129,8 +129,13 @@ div.plan ul { padding-left : 0em; list-style-type : none; }
 div.ps span.ps { font-weight : bold; }
 div.ps { margin-top : 1ex; padding-top : 1ex; border-top : 1px solid #e20000; font-style : italic; }
 
-div.relies p { margin : 0px; font-size : 90%; }
-div.relies { margin : -1ex -2em 2ex; padding : 0px .3em; text-align : right; }
+div.notation { float : right; margin : -.8ex -1.8em 1ex 2.1em; font-size : 90%; }
+div.notation span.note { color : black; }
+div.notation span.note:before { content : '('; }
+div.notation span.note:after { content : ')'; }
+
+div.relies { float : right; margin : -.8ex -1.8em 2ex 0px; font-size : 90%; }
+div.relies p { margin : 0px; }
 
 div.resume a { color : black; text-decoration : none; }
 div.resume div.introduction a { font-weight : normal; }
@@ -176,7 +181,7 @@ div.texte pre { padding-left : 1em; margin-left : 1em; border-left : 1px solid #
 div.texte { padding-top : 2ex; }
 
 div.thm { border-left : 2px solid #e20000; margin-left : 1.5em; padding-left : 1em; font-style : italic; }
-div.thm span.titre { font-weight : bold; font-style : normal; margin-left : -2.5em; background : white; border-bottom : 2px solid #e20000; }
+div.thm span.titre { font-weight : bold; font-style : normal; margin-left : -2.5em; background : white; border-bottom : 2px solid #e20000; border-top : 1px solid white; }
 div.thm ol { margin : 0ex; list-style-type : lower-roman; padding-left : 1em; list-style : lower-roman; }
 div.thm ul { margin : 0ex; }
 div.thm li { margin-top : .2ex; padding-left : 0px; }
