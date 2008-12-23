@@ -153,9 +153,10 @@ div.rubrique a { color : #e20000; background : inherit; font-weight : bold; }
 div.rubrique { font-style : italic; font-size : 80%; color : #e20000; float : left; margin-top : .2ex; }
 div.rubrique_13 a { color : white; background : #00aa00; padding : .2ex .5em; }
 div.rubrique_14 a { color : white; background : #3333ff; padding : .2ex .5em; }
+div.rubrique_15 a { color : white; background : #e20000; padding : .2ex .5em; }
 div.rubrique_23 a { color : white; background : #666666; padding : .2ex .5em; }
 div.rubrique_3 a { color : white; background : #666666; padding : .2ex .5em; }
-div.rubrique_3, div.rubrique_13, div.rubrique_14, div.rubrique_23 { margin-top : .4ex; }
+div.rubrique_3, div.rubrique_13, div.rubrique_14, div.rubrique_15, div.rubrique_23 { margin-top : .4ex; }
 
 div.spip-admin-bloc a { display : block; color : white; background : #550000; border : 1px solid #e20000; margin : -1px 0px 0px; }
 div.spip-admin-bloc a:hover { background : #550000; text-decoration : none; border : 1px solid #e20000; }
