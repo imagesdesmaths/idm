@@ -10,12 +10,7 @@
   <p>Le voici tel qu'il appara&icirc;tra sur le site.</p> <hr class="huge" />]
   [(#STATUT|=={tmp}|oui)<fieldset><legend>Prévisualisation (article #ID_ARTICLE)</legend>]
 
-  <h1 class="titre">#TITRE</h1>
-
-  <div class="texte" style="text-align : justify">
-    #TEXTE
-    [<div class="notes"><h3>Notes</h3>(#NOTES)</div>]
-  </div>
+  [(#INCLURE{fond=inc/article}{id_article})]
 
   [(#STATUT|=={tmp}|oui)</fieldset>]
 </BOUCLE_preview>

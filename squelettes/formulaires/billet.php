@@ -21,10 +21,14 @@ function formulaires_billet_verifier () {
         "id_rubrique" => 6,
         "statut" => "tmp",
         "accepter_forum" => "abo",
-        "date" => "NULL"));
-    }
-    $id_article = intval($id_article);
+        "date" => "NOW()"));
 
+      sql_insertq ("spip_auteurs_articles",
+        array ("id_article" => $id_article,
+               "id_auteur" => $GLOBALS['auteur_session']['id_auteur']));
+    }
+
+    $id_article = intval($id_article);
     sql_updateq ('spip_articles',
                  array ("titre" => _request("titre"), "texte" => _request("texte")),
                  "id_article = $id_article");

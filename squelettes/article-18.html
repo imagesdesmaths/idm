@@ -1,14 +1,7 @@
 <BOUCLE_article(ARTICLES){id_article}>
 <INCLURE{fond=inc-head}{title=#TITRE}{id_article=#ID_ARTICLE}{id_rubrique=#ID_RUBRIQUE}>
 
-#DEBUT_SURLIGNE
-[<h1 class="#EDIT{titre} titre">(#TITRE)</h1>]
-[<h2 class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</h2>]
-[<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
-[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
-[<div class="#EDIT{ps} ps"><span class="ps">P.S. :</span> (#PS)</div>]
-[<div class="notes"><h3>Notes</h3>(#NOTES)</div>]
-#FIN_SURLIGNE
+[(#INCLURE{fond=inc/article}{id_article})]
 
 #INCLURE{fond=inc-foot}
 </BOUCLE_article>
