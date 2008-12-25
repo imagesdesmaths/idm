@@ -83,7 +83,7 @@ div#nav ul ul ul { padding-left : 1em; }
 div#nav ul ul { padding-left : 2em; }
 div#nav ul { margin : 0px; padding-left : 0em; font-size : small; list-style-type : none; }
 
-div#une div.resume img.spip_logos { background : inherit; }
+div#une div.resume img.spip_logos { background : #ffcccc; }
 div#une div.titre { margin-top : -2.5ex; text-align : center; }
 div#une h2 { display : inline; border : 1px solid #e20000; padding : .3ex 1em .1ex; background-color : white; }
 div#une h3.titre { margin-top : -.5ex; }
