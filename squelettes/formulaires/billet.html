@@ -1,3 +1,4 @@
+<span class="math"></span>
 [(#SET{id_article,[(#ENV{id_article}|sinon{[(#ENV**{erreurs}|table_valeur{id_article})]})]})]
 
 <BOUCLE_preview(ARTICLES) {id_article = #GET{id_article}} {statut == .}>
@@ -8,11 +9,12 @@
   elle est d&eacute;j&agrave; valide) :</p>
   <p style="text-align:center;"><a href="#URL_SITE_SPIP/#URL_ARTICLE">#URL_SITE_SPIP/#URL_ARTICLE</a></p>
   <p>Le voici tel qu'il appara&icirc;tra sur le site.</p> <hr class="huge" />]
-  [(#STATUT|=={tmp}|oui)<fieldset><legend>Prévisualisation (article #ID_ARTICLE)</legend>]
 
+  [(#STATUT|=={tmp}|oui)<fieldset id="preview"><legend>Pr&eacute;visualisation (article #ID_ARTICLE)</legend>]
   [(#INCLURE{fond=inc/article}{id_article})]
-
   [(#STATUT|=={tmp}|oui)</fieldset>]
+
+  <script>jsMath.Process('preview');</script>
 </BOUCLE_preview>
 
 [(#ENV{message_ok}|non)
