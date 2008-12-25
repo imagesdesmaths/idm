@@ -94,6 +94,40 @@
   </div>
 </B_kill>
 
+<B_bug>
+  <div class='cs_blocs'>
+    <h4 class='blocs_titre blocs_replie blocs_click' style="margin : 2ex 0ex 1ex;"><a href='javascript:;'>Billets dont l'&eacute;dition a &eacute;t&eacute; abandonn&eacute;e ...</a></h4>
+    <div class='blocs_destination blocs_invisible'>
+      <form method="post" action="#SELF">
+        <table class="sortable">
+          <thead><tr>
+              <th>id</td>
+              <th>date</th>
+              <th>auteur</th>
+              <th>titre</th>
+              <th>&Eacute;liminer</th>
+              <th>R&eacute;cup&eacute;rer</th>
+          </tr></thead>
+          <tbody>
+<BOUCLE_bug(ARTICLES) {tous} {statut=tmp}>
+            <tr>
+              <td>#ID_ARTICLE</td>
+              <td>#DATE</td>
+              <td>#LESAUTEURS</td>
+              <td>#TITRE</td>
+              <td><input type="checkbox" name="form_billettistes_erase_#ID_ARTICLE"/></td>
+              <td><input type="checkbox" name="form_billettistes_salvage_#ID_ARTICLE"/></td>
+            </tr>
+</BOUCLE_bug>
+          </tbody>
+        </table>
+
+        <p style="text-align : center;"><input type="submit" value="&Eacute;liminer ou r&eacute;cup&eacute;rer les billets indiqu&eacute;s" name="form_billettistes_go" /></p>
+      </form>
+    </div>
+  </div>
+</B_bug>
+
 </BOUCLE_securite>
 <h1>Go away, you non-administrator !</h1>
 <//B_securite>

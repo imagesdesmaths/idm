@@ -108,8 +108,21 @@ function billettistes_effect_change ($target='', $caller='admin') {
       }
 
       if (preg_match('/^form_billettistes_demote_([0-9]*)$/', $key, $matches)) {
-        $id = $matches[1];
+        $id = intval($matches[1]);
         sql_updateq ('spip_auteurs', array('billettiste'=>'non'), "id_auteur = $id");
+        $reload = true;
+      }
+
+      if (preg_match('/^form_billettistes_salvage_([0-9]*)$/', $key, $matches)) {
+        $id = intval($matches[1]);
+        sql_updateq ('spip_articles', array('statut'=>'prepa'), "(id_article = $id) and (statut = 'tmp')");
+        $reload = true;
+      }
+
+      if (preg_match('/^form_billettistes_erase_([0-9]*)$/', $key, $matches)) {
+        $id = intval($matches[1]);
+        sql_delete ('spip_articles', "id_article = $id");
+        sql_delete ('spip_auteurs_articles', "(id_article = $id) and (statut = 'tmp')");
         $reload = true;
       }
     }
