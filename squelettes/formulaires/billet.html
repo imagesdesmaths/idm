@@ -1,32 +1,31 @@
 <span class="math"></span>
 [(#SET{id_article,[(#ENV{id_article}|sinon{[(#ENV**{erreurs}|table_valeur{id_article})]})]})]
 
+<B_preview><div id="preview">
 <BOUCLE_preview(ARTICLES) {id_article = #GET{id_article}} {statut == .}>
   [(#STATUT|=={publie}|oui)
-  <p>Merci pour votre billet ! Il appara7icirc;tra automatiquement sur
+  <p>Merci pour votre billet ! Il appara&icirc;tra automatiquement sur
   la page d'accueil du site d'ici une heure, le temps que le cache soit
   renouvel&eacute;. Son adresse d&eacute;finitive est la suivante (et
   elle est d&eacute;j&agrave; valide) :</p>
   <p style="text-align:center;"><a href="#URL_SITE_SPIP/#URL_ARTICLE">#URL_SITE_SPIP/#URL_ARTICLE</a></p>
-  <p>Le voici tel qu'il appara&icirc;tra sur le site.</p> <hr class="huge" />]
+  <p>Le voici tel qu'il appara&icirc;tra sur le site.</p>
+  <hr class="huge" />]
 
-  [(#STATUT|=={tmp}|oui)<fieldset id="preview"><legend>Pr&eacute;visualisation (article #ID_ARTICLE)</legend>]
+  [(#STATUT|=={tmp}|oui)<fieldset><legend>Pr&eacute;visualisation (article #ID_ARTICLE)</legend>]
   [(#INCLURE{fond=inc/article}{id_article})]
   [(#STATUT|=={tmp}|oui)</fieldset>]
-
-  <script>jsMath.Process('preview');</script>
 </BOUCLE_preview>
+</div><script>jsMath.Process('preview');</script></B_preview>
+<h1>&Eacute;crire un nouveau billet</h1><//B_preview>
 
 [(#ENV{message_ok}|non)
-<form action="#ENV{action}" method="post">
+<form action="#ENV{action}" method="post" class="billet">
   #ACTION_FORMULAIRE{#ENV{action}}
-
-  <div style="text-align:center;">
-    <input name="id_article" type="hidden" value="#GET{id_article}" />
-    [(#GET{id_article}|oui)<p><input type="submit" name="ok" value="Confirmer et publier votre billet" /></p>]
-    <p><strong>Titre :</strong> <input type="text" name="titre" size="60" value="#ENV{titre}" /></p> [<p class="erreur">(#ENV**{erreurs}|table_valeur{titre})</p>]
-    <p><textarea name="texte" cols="75" rows="20">#ENV{texte}</textarea></p>                         [<p class="erreur">(#ENV**{erreurs}|table_valeur{texte})</p>]
-    <p><input type="submit" name="preview" value="[(#GET{id_article}|?{Mettre à jour,Prévisualiser})]" /></p>
-  </div>
+  <input name="id_article" type="hidden" value="#GET{id_article}" />
+  [(#GET{id_article}|oui)<p><input type="submit" name="ok" value="Confirmer et publier votre billet" /></p>]
+  <p><label for="titre">Titre :</label><input type="text" name="titre" size="60" value="#ENV{titre}" /></p>  [<p class="erreur">(#ENV**{erreurs}|table_valeur{titre})</p>]
+  <p><textarea name="texte" cols="75" rows="20">#ENV{texte}</textarea></p>                                   [<p class="erreur">(#ENV**{erreurs}|table_valeur{texte})</p>]
+  <p><input type="submit" name="preview" value="[(#GET{id_article}|?{Mettre à jour,Prévisualiser})]" /></p>
 </form>
 ]
