@@ -54,6 +54,8 @@ td { border : 1px solid #e20000; padding : 1px .5em; }
 
 th { font-weight : bold; border : 1px solid #e20000; padding : 1px .5em; }
 
+ul { margin : 0px; }
+
 ul.forum li { padding : 1ex 0px 0px 0em; }
 ul.forum ul ul ul ul { padding-left : 0px; }
 ul.forum ul { padding : 0ex 0px 0px 2em; list-style-type : none; }
