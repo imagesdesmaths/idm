@@ -137,7 +137,7 @@ div.plan ul { padding-left : 0em; list-style-type : none; }
 div.ps span.ps { font-weight : bold; }
 div.ps { margin-top : 1ex; padding-top : 1ex; border-top : 1px solid #e20000; font-style : italic; }
 
-div.notation { float : right; margin : -.8ex -.8em 1ex 2.1em; font-size : 90%; }
+div.notation { float : right; margin : -.8ex -.8em 1ex 1em; font-size : 90%; }
 div.notation span.note { color : black; }
 div.notation span.note:before { content : '('; }
 div.notation span.note:after { content : ')'; }

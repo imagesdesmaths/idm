@@ -6,9 +6,7 @@
   [<h1 class="#EDIT{titre} titre">(#TITRE)</h1>]
   [<h2 class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</h2>]
 
-  <h3 class="auteur">Le [(#DATE|affdate)]<B_noms>, par
-    <BOUCLE_noms(AUTEURS) {par nom} {id_article} {", "}><a href="#URL_AUTEUR">[(#NOM|prenom_nom)]</a></BOUCLE_noms>
-  </h3>
+  [<h3 class="auteur">Le [(#DATE|affdate)], par (#LESAUTEURS)</h3>]
 
   <BOUCLE_auteur(AUTEURS) {id_article}>[(#SET{uniqueauteur,#ID_AUTEUR})]</BOUCLE_auteur>
   <BOUCLE_auteurs(AUTEURS) {id_article} {1,1}>[(#SET{uniqueauteur,0})]</BOUCLE_auteurs>

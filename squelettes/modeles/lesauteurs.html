@@ -1,0 +1,4 @@
+<BOUCLE_auteurs(AUTEURS) {id_article} {par nom}>
+<a class="auteur" href="#URL_AUTEUR">#NOM</a>[(#COMPTEUR_BOUCLE|plus{1}|<{#TOTAL_BOUCLE}|?{", "})]
+[(#COMPTEUR_BOUCLE|plus{1}|=={#TOTAL_BOUCLE}|?{" et "})]
+</BOUCLE_auteurs>

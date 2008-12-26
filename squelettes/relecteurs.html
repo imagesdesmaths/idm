@@ -5,9 +5,7 @@
 <B_prop>
 <h1>#TOTAL_BOUCLE articles proposés pour publication :</h1>
 <BOUCLE_prop(ARTICLES) {statut = prop} {par date}>
-<h2><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">#TITRE</a>, par
-  <BOUCLE_noms(AUTEURS) {par nom} {id_article} {", "}><a href="#URL_AUTEUR">[(#NOM|prenom_nom)]</a></BOUCLE_noms>
-</h2>
+<h2><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">#TITRE</a>[, par (#LESAUTEURS)]</h2>
 [<h4 style="margin-top : -2ex;">(propos&eacute; le (#DATE|affdate))</h4>]
 
 #RELECTEURS_DESAFFECTER
