@@ -4,6 +4,19 @@
 <BOUCLE_nospecial(ARTICLES) {id_secteur = 18} {doublons}>
 </BOUCLE_nospecial>
 
+<B_edito><div id="edito"><BOUCLE_edito(ARTICLES) {titre_mot=editorial} {par date} {inverse} {age<14} {0,1}>
+  <div class="titre"><h2>Éditorial : #TITRE</h2></div>
+  [<h3 class="auteur">Le [(#DATE|affdate)], par (#LESAUTEURS)</h3>]
+
+  <BOUCLE_auteur(AUTEURS) {id_article}>[(#SET{uniqueauteur,#ID_AUTEUR})]</BOUCLE_auteur>
+  <BOUCLE_auteurs(AUTEURS) {id_article} {1,1}>[(#SET{uniqueauteur,0})]</BOUCLE_auteurs>
+  <BOUCLE_unique(AUTEURS) {id_auteur=#GET{uniqueauteur}}>
+    [<h3 class="bio">(#BIO*) [(<a href="(#URL_SITE)">page web</a>)]</h3>]
+  </BOUCLE_unique>
+
+  #TEXTE
+</BOUCLE_edito></div></B_edito>
+
 <div id="une">
   <div class="titre"><h2>&Agrave; la une</h2></div>
   <BOUCLE_featured(ARTICLES) {id_secteur IN 1,4,20,21,22} {par date} {inverse} {0,1} {doublons}>
