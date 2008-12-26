@@ -13,5 +13,10 @@ body { padding : 0px; margin : 0px; background : white; }
     #nav  { padding : 15px .5em 0ex; text-align : left; color : white; background : #550000; }
     #actu { padding : 0ex .5em 1ex; background : white; border : 1em solid #550000; }
   #main  { position : absolute; top : 75px; width : 100%; z-index : 0; }
-  #main_in { margin-left : 13em; padding : 1ex 2em 2ex; }
-    #une { padding : 1ex 1em; background-color : #ffcccc; margin : 3ex -1em 0ex; }
+  #main_in { margin-left : 13em; padding : 1ex 1em 2ex; }
+    #une { padding : 1ex 1em; background-color : #ffcccc; margin : 3ex 0em 0ex; }
+    #front { position : relative; }
+      #billets { position : absolute; width : 50%; padding-bottom : 1ex; }
+        #billets .resume { margin-right : 1em; }
+      #recents { position : absolute; width : 50%; margin-left : 50%; padding-bottom : 1ex; }
+        #recents .resume { margin-left : 1em; }
