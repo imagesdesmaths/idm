@@ -87,6 +87,8 @@ div#nav ul { margin : 0px; padding-left : 0em; font-size : small; list-style-typ
 
 div#une div.resume_out { margin-top : 1ex; }
 div#une div.resume img.spip_logos { background : #ffcccc; }
+div#une div.resume div.introduction { font-size : 95%; }
+div#une div.resume div.introduction a { color : black; }
 div#une div.titre { margin-top : -2.5ex; text-align : center; }
 div#une h2 { display : inline; border : 1px solid #e20000; padding : .3ex 1em .1ex; background-color : white; }
 div#une h3.titre { margin-top : -.5ex; }
@@ -113,8 +115,6 @@ div.forum-message h4.repondre { margin-top : 1ex; }
 div.forum-message p { margin : .5ex 0px; }
 div.forum-message { }
 div.forum-message-delauteur { background-color : #ffcccc; padding : 1ex; margin : 0ex -1ex 1ex; }
-
-div.introduction { margin : .5ex 0px 0px 1em; font-size : small; font-style : italic; }
 
 div.lexique a.mot { font-size : 110%; color : black; font-weight : bold; }
 div.lexique span.descriptif { font-style : italic; }
@@ -145,12 +145,13 @@ div.notation span.note:after { content : ')'; }
 div.relies { float : right; margin : -.8ex -.8em 2ex 0px; font-size : 90%; }
 div.relies p { margin : 0px; }
 
+div.resume_out { margin : 2ex 0px 0px; clear : both; }
 div.resume a { color : black; text-decoration : none; }
-div.resume div.introduction a { font-weight : normal; }
+div.resume div.introduction { margin : .5ex 0px 0px 2em; font-size : small; font-style : italic; }
+div.resume div.introduction a { font-weight : normal; color : #666666; }
 div.resume h3.titre a:hover { color : #e20000; }
 div.resume h4.auteur a:hover { color : #e20000; }
 div.resume img.spip_logos { padding : 0px 0px 0px 1em; background : white; }
-div.resume_out { margin : 2ex 0px 0px; clear : both; }
 
 div.rubrique { font-style : italic; font-size : 80%; color : #e20000; float : left; margin : .2ex .5em 0px 0px; }
 div.rubrique a { color : #e20000; background : inherit; font-weight : bold; }
