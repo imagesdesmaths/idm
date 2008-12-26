@@ -5,7 +5,8 @@
 
 <div class="relies"><p>
   Rubrique : <BOUCLE_rub(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rub>
-  <B_mots> &mdash; Thème[(#TOTAL_BOUCLE|>{1}|?{s})] : <BOUCLE_mots(MOTS) {id_article} {par titre} {', '}><a href="#URL_MOT">#TITRE</a></BOUCLE_mots>
+  <B_mots> &mdash; Thème[(#TOTAL_BOUCLE|>{1}|?{s})] : <BOUCLE_mots(MOTS) {id_article} {id_groupe=1} {par titre} {', '}>
+  <a href="#URL_MOT">#TITRE</a></BOUCLE_mots>
   <BOUCLE_msg(FORUMS) {id_article} {plat}></BOUCLE_msg> &mdash; <a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">#TOTAL_BOUCLE commentaire[(#TOTAL_BOUCLE|>{1}|?{s})]</a> <//B_msg>
 &mdash;</p></div>
 
