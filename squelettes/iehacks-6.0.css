@@ -1,0 +1,7 @@
+#une { border-left : 14em solid white; margin-left : -14em; }
+#billets { margin-top : 2ex; border-left : 14em solid white; padding-right : 50%; }
+  #billets div.resume { padding-right : 13em; }
+  #billets img { padding : 0px; border-left : 1em solid white; }
+  #billets h2 { padding-right : 9em; }
+#recents { margin-top : 2ex; background : white; }
+  #recents div.resume { padding : 0px 1em 0px 0em; }
