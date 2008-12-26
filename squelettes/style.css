@@ -89,7 +89,7 @@ div#edito { margin : 2ex 2em 4ex; border : 2px solid #e20000; padding : 1ex 1em 
 div#edito div.titre { margin-top : -2.5ex; text-align : center; }
 div#edito h3.auteur { margin-top : 1ex; }
 div#edito h2 { display : inline; border : 2px solid #e20000; padding : .3ex .5em .1ex; background-color : white; }
-div#edito p { font-size : 110%; }
+div#edito p { font-size : 100%; }
 
 div#une div.resume_out { margin-top : 1ex; }
 div#une div.resume img.spip_logos { background : #ffcccc; }
