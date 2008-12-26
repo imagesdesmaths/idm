@@ -1,6 +1,7 @@
 <BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
 <INCLURE{fond=inc-head}{title=#TITRE}{id_rubrique=#ID_RUBRIQUE}>
 
+[(#LOGO_RUBRIQUE|right||image_reduire{200,200})]
 <h1><BOUCLE_parent(RUBRIQUES){id_rubrique=#ID_PARENT}>
   <a href="#URL_RUBRIQUE">#TITRE</a> :</BOUCLE_parent> #TITRE</h1>
 
