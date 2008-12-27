@@ -4,7 +4,7 @@
 <B_candidats><div class='cs_blocs'>
   <h4 class='blocs_titre blocs_replie blocs_click'><a href='javascript:;'>Il y a #TOTAL_BOUCLE candidat(s) à être relecteurs ...</a></h4>
   <div class='blocs_destination blocs_invisible'>
-<table class="sortable"><thead><tr>
+<table id="lescandidats"><thead><tr>
   <th>ID</th>
   <th>Signature / Pseudo</th>
   <th>E-Mail</th>
@@ -30,7 +30,7 @@
 <B_relecteurs><div class='cs_blocs'>
   <h4 class='blocs_titre blocs_replie blocs_click'><a href='javascript:;'>Modifier ou supprimer les #TOTAL_BOUCLE relecteurs déjà inscrits ...</a></h4>
   <div class='blocs_destination blocs_invisible'>
-<table class="sortable"><thead><tr>
+<table id="lesrelecteurs"><thead><tr>
   <th>Signature / Pseudo</th>
   <th>E-Mail</th>
   <th>Qui est-ce ?</th>
@@ -47,3 +47,8 @@
 <p style="text-align : center;"><input type="submit" value="Modifier les statuts indiqu&eacute;s" name="go" /></p>
 </div></div></B_relecteurs>
 </form>
+
+<script type="text/javascript">
+  $("#lesrelecteurs").tablesorter( {sortList : [[0,0]]} );
+  $("#lescandidats").tablesorter( {sortList : [[0,0]]} );
+</script>
