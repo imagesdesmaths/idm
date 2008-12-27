@@ -14,9 +14,4 @@
 
   <fonctions>relecteurs.php</fonctions>
   <install>relecteurs.php</install>
-
-  <pipeline>
-    <nom>insert_head</nom>
-    <inclure>relecteurs.php</inclure>
-  </pipeline>
 </plugin>

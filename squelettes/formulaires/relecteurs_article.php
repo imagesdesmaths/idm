@@ -37,8 +37,20 @@ function notify_user ($id_auteur, $id_article) {
   inc_envoyer_mail_dist ($email, $subject, utf8_encode($texte));
 }
 
+function nettoie () {
+  $affectes = sql_allfetsel ( array("id_auteur","id_article"), "spip_relecteurs_articles" );
+  foreach ($affectes as $line) {
+    $id_auteur = $line["id_auteur"];
+    $id_article = $line["id_article"];
+    $statut = sql_getfetsel ("statut", "spip_articles", "id_article = $id_article");
+    $role = sql_getfetsel ("role", "spip_auteurs", "id_auteur = $id_auteur");
+    if (($statut != "prop") OR ($role != "relecteur"))
+      sql_delete ("spip_relecteurs_articles", "id_auteur = $id_auteur");
+  }
+}
 
 function formulaires_relecteurs_article_charger ($id_article) {
+  nettoie();
   $valeurs = array('id_article'=>$id_article);
   return $valeurs;
 }
