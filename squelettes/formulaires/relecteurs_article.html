@@ -1,0 +1,38 @@
+#CACHE{0}
+<BOUCLE_article(ARTICLES) {statut = prop} {id_article}>
+<form action="#ENV{action}" method="post">#ACTION_FORMULAIRE{#ENV{action}}
+  <h3><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">#TITRE</a>[, par (#LESAUTEURS)][ <em>(proposé le (#DATE|affdate))</em>]</h3>
+
+  <B_relecteurs><table class="sortable"><thead><tr>
+    <th>Signature / Pseudo</th>
+    <th>Qui est-ce ?</th>
+    <th>Vote</th>
+    <th>Supprimer</th>
+  </tr></thead><tbody><BOUCLE_relecteurs(spip_relecteurs_articles spip_auteurs) {id_article}><tr>
+    <td>#NOM</td>
+    <td>#MATH</td>
+    <td class="relecteurs_vote_#STATUS">#STATUS</td>
+    <td><input type="checkbox" name="unassign_#ID_AUTEUR" /></td>
+  </tr></BOUCLE_relecteurs></tbody></table></B_relecteurs>
+
+  <div class='cs_blocs'>
+    <h4 class='blocs_titre blocs_replie blocs_click' style="margin : 1ex 0px .5ex; text-align : center;">
+      <a href='javascript:;'>Affecter des relecteurs &agrave; cet article ...</a>
+    </h4>
+    <div class='blocs_destination blocs_invisible'>
+      <BOUCLE_affectes (spip_relecteurs_articles)><BOUCLE_affectes2 (AUTEURS) {tous} {id_auteur} {doublons}></BOUCLE_affectes2></BOUCLE_affectes>
+      <B_gars><table class="sortable"><thead><tr>
+        <th>Signature / Pseudo</th>
+        <th>Qui est-ce ?</th>
+        <th>Affecter</th>
+      </tr></thead><tbody><BOUCLE_gars(AUTEURS) {tous} {role = relecteur} {par nom} {doublons}><tr>
+        <td>#NOM</td>
+        <td>#MATH</td>
+        <td><input type="checkbox" name="assign_#ID_AUTEUR"/></td>
+      </tr></BOUCLE_gars></tbody></table></B_gars>
+    </div>
+  </div>
+
+  <p><input type="submit" name="go" value="Allons-y !"/></p>
+</form>
+</BOUCLE_article>

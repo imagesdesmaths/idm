@@ -47,40 +47,6 @@ function relecteurs_update_referee ($id, $status) {
   }
 }
 
-function relecteurs_notify_user ($id_auteur, $id_article) {
-  $email = sql_getfetsel ("email", "spip_auteurs", "id_auteur = $id_auteur");
-  $titre = sql_getfetsel ("titre", "spip_articles", "id_article = $id_article");
-  $titre = utf8_decode ($titre);
-
-  $subject = "Relecture d'un article pour Images des Maths";
-
-  $texte = "Bonjour !\n" .
-    "\n" .
-    "Un article vient d'être proposé pour publication dans \"Images des\n" .
-    "Mathématiques\". Il s'intitule :\n" .
-    "\n" .
-    "  « $titre »\n" .
-    "\n" .
-    "Comme vous avez manifesté votre intérêt à participer à notre\n" .
-    "processus éditorial, nous vous invitons à en être un des relecteurs,\n" .
-    "et à nous faire part de vos commentaires. Pour ce faire, après vous\n" .
-    "être identifié(e) sur le site, il vous suffit de vous rendre à\n" .
-    "l'adresse suivante :\n" .
-    "\n" .
-    "  http://images.math.cnrs.fr/spip/spip.php?page=propose&id_article=$id_article\n" .
-    "\n" .
-    "Vous y trouverez l'article dans son état actuel, un forum de discussion\n" .
-    "vous permettant de déposer vos commentaires et de dialoguer avec les\n" .
-    "autres relecteurs ainsi qu'avec l'auteur de l'article, et enfin un\n" .
-    "formulaire de vote pour donner votre avis sur sa publication.\n" .
-    "\n" .
-    "Merci pour votre aide !\n\n" .
-    "-- \n" .
-    "Le comité de rédaction de \"Images des Mathématiques\".";
-
-  inc_envoyer_mail ($email, $subject, utf8_encode($texte));
-}
-
 function relecteurs_nettoie () {
   $reload = false;
 
