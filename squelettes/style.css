@@ -21,6 +21,7 @@ a.article { font-weight : normal; }
 a.lexique { font-weight : normal; border-bottom : 1px dotted; }
 
 form { text-align : center; }
+form h2 { margin : 0px; }
 form p.erreur { color : #e20000; font-weight : bold; }
 
 h1 { text-align : center; margin : 0px; }
