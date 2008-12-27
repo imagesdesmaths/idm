@@ -6,12 +6,12 @@
   <B_relecteurs><table id="assigned_#ID_ARTICLE"><thead><tr>
     <th>Signature / Pseudo</th>
     <th>Qui est-ce ?</th>
-    <th>Vote</th>
+    <th>Avis</th>
     <th>Supprimer</th>
   </tr></thead><tbody><BOUCLE_relecteurs(spip_relecteurs_articles spip_auteurs) {id_article}><tr>
     <td>#NOM</td>
     <td>#MATH</td>
-    <td class="relecteurs_vote_#STATUS">#STATUS</td>
+    <td class="relecteurs_vote_#STATUS"></td>
     <td><input type="checkbox" name="unassign_#ID_AUTEUR" /></td>
   </tr></BOUCLE_relecteurs></tbody></table></B_relecteurs>
 

@@ -5,16 +5,16 @@
   <h4 class='blocs_titre blocs_replie blocs_click'><a href='javascript:;'>Il y a #TOTAL_BOUCLE candidat(s) à être relecteurs ...</a></h4>
   <div class='blocs_destination blocs_invisible'>
 <table id="lescandidats"><thead><tr>
-  <th>ID</th>
   <th>Signature / Pseudo</th>
+  <th>ID</th>
   <th>E-Mail</th>
   <th>Qui est-ce ?</th>
   <th>Décision</th>
 </tr></thead><tbody>
 <BOUCLE_candidats(AUTEURS) {tous} {role = candidat} {par id_auteur}>
 <tr>
-  <td>#ID_AUTEUR</td>
   <td>#NOM</td>
+  <td>#ID_AUTEUR</td>
   <td>#EMAIL</td>
   <td><input type="text" name="math_#ID_AUTEUR" value="#ENV{math_#ID_AUTEUR}" size=20 /></td>
   <td><select name="decision_#ID_AUTEUR">
@@ -32,6 +32,7 @@
   <div class='blocs_destination blocs_invisible'>
 <table id="lesrelecteurs"><thead><tr>
   <th>Signature / Pseudo</th>
+  <th>ID</th>
   <th>E-Mail</th>
   <th>Qui est-ce ?</th>
   <th>Supprimer</th>
@@ -39,6 +40,7 @@
 <BOUCLE_relecteurs(AUTEURS) {tous} {role = relecteur} {par nom}>
 <tr>
   <td>#NOM</td>
+  <td>#ID_AUTEUR</td>
   <td>#EMAIL</td>
   <td><input type="text" name="math_#ID_AUTEUR" value="#ENV{math_#ID_AUTEUR}" size=20 /></td>
   <td><input type="checkbox" name="exterminate_#ID_AUTEUR"/></td>
