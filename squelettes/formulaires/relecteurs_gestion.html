@@ -1,0 +1,29 @@
+#CACHE{0}
+<B_candidats>
+<form action="#ENV{action}" method="post">
+  #ACTION_FORMULAIRE{#ENV{action}}
+  <table class="sortable">
+    <thead><tr>
+        <th>ID</th>
+        <th>Signature / Pseudo</th>
+        <th>Qui est-ce ?</th>
+        <th>Décision</th>
+    </tr></thead><tbody>
+<BOUCLE_candidats(AUTEURS) {tous} {role = candidat} {par id_auteur}>
+      <tr>
+        <td>#ID_AUTEUR</td>
+        <td>#NOM</td>
+        <td><input type="text" name="math_#ID_AUTEUR" value="#ENV{math_#ID_AUTEUR}" size=60 /></td>
+        <td><select name="decision_#ID_AUTEUR">
+            <option value="rien">Décider plus tard</option>
+            <option value="oui">Accepter</option>
+            <option value="non">Refuser</option>
+        </select></td>
+    </tr>
+</BOUCLE_candidats>
+    </tbody>
+  </table>
+
+  <p style="text-align : center;"><input type="submit" value="Modifier les statuts indiqu&eacute;s" name="go" /></p>
+</form>
+</B_candidats>
