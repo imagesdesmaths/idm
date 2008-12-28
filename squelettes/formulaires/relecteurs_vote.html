@@ -1,0 +1,33 @@
+#CACHE{0}
+<BOUCLE_article(ARTICLES) {statut = prop} {id_article}>
+<B_relecteurs><table id="assigned_#ID_ARTICLE"><thead><tr>
+  <th>Signature / Pseudo</th>
+  <th>Qui est-ce ?</th>
+  <th>Avis</th>
+</tr></thead><tbody><BOUCLE_relecteurs(spip_relecteurs_articles spip_auteurs) {id_article}><tr>
+  <td>#NOM</td>
+  <td>#MATH</td>
+  <td class="relecteurs_vote_#STATUS">#AVIS</td>
+</tr></BOUCLE_relecteurs></tbody></table></B_relecteurs>
+
+<BOUCLE_monvote(spip_relecteurs_articles) {id_article} {id_auteur = #SESSION{id_auteur}}>
+  <form action="#ENV{action}" method="post">#ACTION_FORMULAIRE{#ENV{action}}
+    <p style="margin-top : 1ex;"><label for="avis">Votre commentaire en quelques mots :</label>
+       <input type="text" name="avis" size=30 value="#ENV{avis}" /></p>
+   [<p class="erreur">(#ENV**{erreurs}|table_valeur{avis})</p>]
+    <p><label for="vote">Votre avis :</label>
+       <select name="vote">
+         <option value="vu" [(#STATUS|=={vu}|?{'selected="yes"',''})]>Pas encore voté / Abstention</option>
+         <option value="non" [(#STATUS|=={non}|?{'selected="yes"',''})]>Avis défavorable</option>
+         <option value="moyen" [(#STATUS|=={moyen}|?{'selected="yes"',''})]>Quelques corrections à faire</option>
+         <option value="oui" [(#STATUS|=={oui}|?{'selected="yes"',''})]>Avis favorable</option>
+       </select></p>
+    <input type="submit" name="form_relecteurs_go" value="Voter" />
+  </form>
+</BOUCLE_monvote>
+
+</BOUCLE_article>
+
+<script type="text/javascript">
+  $("#assigned_#ID_ARTICLE").tablesorter( {sortList : [[0,0]]} );
+</script>

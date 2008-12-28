@@ -8,24 +8,39 @@
     <h1>En cours de relecture : #TITRE</h1>
     <h2 style="margin-top : 0ex;">(dans la rubrique « <BOUCLE_rub(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rub> »)</h2>
 
-    <p>Voici le texte de l'article, présenté tel qu'il le serait sur la 
-    partie publique du site s'il était publié en l'état. En dessous de 
-    l'article, vous pourrez faire vos commentaires à l'auteur et aux autres 
-    relecteurs. Vos commentaires ne seront lisibles que par l'auteur, les 
-    relecteurs dont vous voyez la liste, et le comité de rédaction. Les 
-    commentaires émis par l'auteur ou les auteurs de l'article sont mis en 
+    <p>Bienvenue dans l'espace de relecture collaborative de <i>Images 
+      des Mathématiques</i>. C'est ici que vous pourrez participer au 
+    processus éditorial de la revue, en donnant votre opinion sur 
+    l'article qui vous a été assigné. Le but n'est pas de décider du 
+    sort de ce texte (la décision finale revient au comité de rédaction 
+    !) mais bien de collaborer avec l'auteur afin de rendre son article 
+    le plus lisible possible. Tous les commentaires que vous déposerez 
+    seront visibles par l'auteur, par les autres relecteurs et par le 
+    comité de rédaction et les responsables de la rubrique 
+    concernée. Vous pouvez intervenir ici de deux façons différentes :</p>
+
+    <p>- Un forum, disposé en bas de cette page, vous permet de 
+    dialoguer avec l'auteur et avec les autres relecteurs. Utilisez-le 
+    pour faire tous commentaires un peu longs sur l'article, que ce soit 
+    sur la forme ou sur le fond. Les réponse de l'auteur sont mises en 
     évidence.</p>
 
-    <p>Le formulaire qui suit vous permet de donner votre opinion sur la
-    publication de l'article dans l'état actuel. Le comité de rédaction sera
-    notifié automatiquement des diverses opinions. Voici l'état actuel des
-    votes :</p>
+    <p>- Le formulaire ci-dessous vous permet de donner votre opinion 
+    sur la publication de l'article dans l'état actuel. Le comité de 
+    rédaction sera notifié automatiquement des diverses opinions, et en 
+    tiendra compte dans sa décision. Vous avez deux informations à 
+    donner ici : un commentaire de quelques mots résumant votre opinion 
+    sur le texte, et votre avis sur sa publication. Voici l'état actuel 
+    des opinions :</p>
 
     <BOUCLE_bug(ARTICLES) {id_article} {statut=prop}>
-      RELECTEURS_VOTE
-      <hr class="huge" />
-      [(#INCLURE{fond=inc/article}{id_article})]
-      <hr class="huge" />
+    <div class="ajax">#FORMULAIRE_RELECTEURS_VOTE{#ID_ARTICLE}</div>
+
+    <p>Voici le texte de l'article, présenté tel qu'il le serait sur la 
+    partie publique du site s'il était publié en l'état. Bonne lecture 
+    !</p>
+
+    <hr class="huge" />[(#INCLURE{fond=inc/article}{id_article})]<hr class="huge" />
     </BOUCLE_bug>
 
     <BOUCLE_cetarticle(ARTICLES) {id_article} {statut=prop}>

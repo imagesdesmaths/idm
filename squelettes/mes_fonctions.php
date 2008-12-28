@@ -11,7 +11,8 @@ $tables_auxiliaires['spip_relecteurs_articles'] = array (
     'id_article' => 'BIGINT(21) NOT NULL',
     'id_auteur' => 'BIGINT(21) NOT NULL',
     'date_change' => 'TIMESTAMP',
-    'status' => "ENUM('pas_vu','vu','non','moyen','oui')" ),
+    'status' => "ENUM('pas_vu','vu','non','moyen','oui')",
+    'avis' => "TINYTEXT"),
   'key' => array());
 
 global $table_des_tables;

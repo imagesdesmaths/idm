@@ -1,11 +1,11 @@
 .invisible { display : none; }
 .nettoyeur { clear : both; }
 
-.relecteurs_vote_moyen { color : transparent; background-color : #ffd700; }
-.relecteurs_vote_non { color : transparent; background-color : #e20000; }
-.relecteurs_vote_oui { color : transparent; background-color : #00ff00; }
-.relecteurs_vote_pas_vu { color : transparent; background-color : #cccccc; }
-.relecteurs_vote_vu { color : transparent; background-color : white; }
+.relecteurs_vote_pas_vu { background-color : #cccccc; }
+.relecteurs_vote_vu     { background-color : #ffffff; }
+.relecteurs_vote_non    { background-color : #e20000; }
+.relecteurs_vote_moyen  { background-color : #ffd700; }
+.relecteurs_vote_oui    { background-color : #00ff00; }
 
 .spip_doc_descriptif { clear : both; font-size : small; margin-left : auto; margin-right : auto; }
 .spip_doc_titre { font-weight : bold; font-size : small; margin : 1ex auto; }
@@ -22,6 +22,7 @@ a.lexique { font-weight : normal; border-bottom : 1px dotted; }
 
 form { text-align : center; }
 form h2 { margin : 0px; }
+form p { margin : .5ex 0px; }
 form p.erreur { color : #e20000; font-weight : bold; }
 
 h1 { text-align : center; margin : 0px; }
