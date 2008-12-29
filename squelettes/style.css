@@ -80,14 +80,14 @@ div#left ul ul ul { padding-left : 1em; }
 div#left ul ul { padding-left : 2em; }
 div#left ul { margin : 0px; padding-left : 0em; font-size : small; list-style-type : none; }
 
-div#actu { font-size : small; margin : 2ex .5em; padding : .1ex .5em 1ex; color : black; background : white; }
-div#actu h3 a { color : #e20000; font-weight : bold; }
-div#actu a.big { display : block; text-align : center; font-size : medium; border-bottom : 2px solid #e20000; padding : .5ex 0px; }
-div#actu a.big:hover { text-decoration : underline; }
-div#actu a.plain { font-weight : normal; color : #e20000; }
-div#actu h2 { font-size : medium; margin : 1ex 0ex; border : none; }
-div#actu h3 { font-size : small; font-weight : bold; margin-bottom : 0px; }
-div#actu p { margin-top : 0px; }
+div#left div.actu { font-size : small; margin : 2ex .5em; padding : .1ex .5em 1ex; color : black; background : white; }
+div#left div.actu h3 a { color : #e20000; font-weight : bold; }
+div#left div.actu a.big { display : block; text-align : center; font-size : medium; border-bottom : 2px solid #e20000; padding : .5ex 0px; }
+div#left div.actu a.big:hover { text-decoration : underline; }
+div#left div.actu a.plain { font-weight : normal; color : #e20000; }
+div#left div.actu h2 { font-size : medium; margin : 1ex 0ex; border : none; }
+div#left div.actu h3 { font-size : small; font-weight : bold; margin-bottom : 0px; }
+div#left div.actu p { margin-top : 0px; }
 
 div#edito { margin : 2ex 2em 4ex; border : 2px solid #e20000; padding : 1ex 1em 0ex; }
 div#edito div.titre { margin-top : -2.5ex; text-align : center; }
@@ -97,7 +97,7 @@ div#edito p { font-size : 100%; }
 
 div#une div.resume_out { margin-top : 1ex; }
 div#une div.resume img.spip_logos { background : #ffcccc; }
-div#une div.resume div.introduction { font-size : 95%; }
+div#une div.resume div.introduction { font-size : 95%; margin-left : 0px; }
 div#une div.resume div.introduction a { color : black; }
 div#une div.titre { margin-top : -2.5ex; text-align : center; }
 div#une h2 { display : inline; border : 1px solid #e20000; padding : .3ex 1em .1ex; background-color : white; }
