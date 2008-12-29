@@ -126,7 +126,7 @@ div.forum-message p { margin : .5ex 0px; }
 div.forum-message { }
 div.forum-message-delauteur { background-color : #ffcccc; padding : 1ex; margin : 0ex -1ex 1ex; }
 
-div.lexique a.mot { font-size : 110%; color : black; font-weight : bold; }
+div.lexique span.mot { font-size : 110%; font-weight : bold; }
 div.lexique span.descriptif { font-style : italic; }
 div.lexique span.heading { display : block; text-align : center; font-size : x-large; font-weight : bold; border-bottom : 2px solid #e20000; margin : 1ex 0px; }
 div.lexique ul ul p { padding-left : 2em; }

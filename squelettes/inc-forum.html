@@ -6,8 +6,7 @@
 
   <ul class="forum">
     <BOUCLE_one_forum(FORUMS) {id_article} {id_forum}>
-      <a name="forum#ID_FORUM"></a>
-      <li class="forum-fil">
+      <li id="forum#ID_FORUM" class="forum-fil">
       <INCLURE {fond=inc-forum-message} {id_forum} {auteur_article}>
       </li>
     </BOUCLE_one_forum>
@@ -26,14 +25,12 @@
 <B_forums>
   <ul class="forum">
     <BOUCLE_forums(FORUMS) {id_article} {par date}>
-      <a name="forum#ID_FORUM"></a>
-      <li class="forum-fil">
+      <li id="forum#ID_FORUM" class="forum-fil">
       <INCLURE {fond=inc-forum-message} {id_forum} {auteur_article}>
         <B_forums_fils>
           <ul>
             <BOUCLE_forums_fils(FORUMS){id_parent}{par date}>
-            <a name="forum#ID_FORUM"></a>
-            <li>
+            <li id="forum#ID_FORUM">
             <INCLURE {fond=inc-forum-message} {id_forum} {auteur_article}>
               <BOUCLE_Forums_Boucle(boucle_forums_fils)></BOUCLE_Forums_Boucle>
               </li>

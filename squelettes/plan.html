@@ -21,9 +21,9 @@
 
   [(#SET{initiale,' '})]
   <B_aut><ul><BOUCLE_aut(AUTEURS) {par nom}>
-    [(#GET{initiale}|=={' '}|oui) <li><span class="heading"><a id="ini_[(#NOM*|initiale)]">&nbsp;</a>- [(#NOM*|initiale)] -</span><ul>]
+    [(#GET{initiale}|=={' '}|oui) <li><span class="heading" id="ini_[(#NOM*|initiale)]">- [(#NOM*|initiale)] -</span><ul>]
     [(#GET{initiale}|=={' '}|non) [(#GET{initiale}|=={[(#NOM*|initiale)]}|non)
-      </ul></li><li><span class="heading"><a id="ini_[(#NOM*|initiale)]">&nbsp;</a>- [(#NOM*|initiale)] -</span><ul>]]
+      </ul></li><li><span class="heading" id="ini_[(#NOM*|initiale)]">- [(#NOM*|initiale)] -</span><ul>]]
     [(#SET{initiale,[(#NOM*|initiale)]})]
 
     <li><a href="#URL_AUTEUR">#NOM</a>

@@ -9,13 +9,13 @@
 
   [(#SET{initiale,' '})]
   <B_mot><ul><BOUCLE_mot(MOTS) {par titre} {id_groupe = 4}>
-    [(#GET{initiale}|=={' '}|oui) <li><span class="heading"><a id="ini_[(#TITRE*|initiale)]">&nbsp;</a>- [(#TITRE*|initiale)] -&nbsp;</span><ul>]
+    [(#GET{initiale}|=={' '}|oui) <li><span class="heading" id="ini_[(#TITRE*|initiale)]">- [(#TITRE*|initiale)] -</span><ul>]
     [(#GET{initiale}|=={' '}|non) [(#GET{initiale}|=={[(#TITRE*|initiale)]}|non)
-      </ul></li><li><span class="heading"><a id="ini_[(#TITRE*|initiale)]">&nbsp;</a>- [(#TITRE*|initiale)] -&nbsp;</span><ul>]]
+      </ul></li><li><span class="heading" id="ini_[(#TITRE*|initiale)]">- [(#TITRE*|initiale)] -</span><ul>]]
     [(#SET{initiale,[(#TITRE*|initiale)]})]
 
-    <li><a id="mot_#ID_MOT" class="mot">#TITRE</a>[ <span class="descriptif">((#DESCRIPTIF|textebrut))</span>]
-    #TEXTE </li>
+    <li id="mot_#ID_MOT"><span class="mot">#TITRE</span>[ <span class="descriptif">((#DESCRIPTIF|textebrut))</span>]
+    #TEXTE</li>
   </BOUCLE_mot></ul></li></ul></B_mot>
 </div>
 
