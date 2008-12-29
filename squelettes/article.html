@@ -1,5 +1,5 @@
 <BOUCLE_article(ARTICLES){id_article}>
-<INCLURE{fond=inc-head}{title=#TITRE}{id_rubrique=#ID_RUBRIQUE}{id_article=#ID_ARTICLE}>
+<INCLURE{fond=inc/head}{title=#TITRE}{id_rubrique=#ID_RUBRIQUE}{id_article=#ID_ARTICLE}>
 
 <div class="notation">#FORMULAIRE_NOTATION</div>
 
@@ -21,7 +21,7 @@
 <h3 class="discuter"><a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">Soyez le premier à déposer un commentaire sur cet article !</a></h3> 
 <//B_msg2>
 
-#INCLURE{fond=inc-foot}
+#INCLURE{fond=inc/foot}
 </BOUCLE_article>
 <INCLURE{fond=sommaire}>
 <//B_article>

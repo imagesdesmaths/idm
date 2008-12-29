@@ -1,5 +1,5 @@
 #CACHE{0}
-<INCLURE{fond=inc-head}{title=Gestion des billettistes}>
+<INCLURE{fond=inc/head}{title=Gestion des billettistes}>
 <BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
 <?php billettistes_effect_change ('#SELF', 'admin'); ?>
 
@@ -131,4 +131,4 @@
 </BOUCLE_securite>
 <h1>Go away, you non-administrator !</h1>
 <//B_securite>
-<INCLURE{fond=inc-foot}{stats=no}>
+<INCLURE{fond=inc/foot}{stats=no}>

@@ -1,4 +1,4 @@
-<INCLURE{fond=inc-head}>
+<INCLURE{fond=inc/head}>
 
 #DEBUT_SURLIGNE
 <h1><:resultats_recherche:></h1>
@@ -6,11 +6,11 @@
 <B_articles>
 <h3>Articles contenant &#171;&nbsp;#RECHERCHE&nbsp;&#187; :</h3>
 <BOUCLE_articles(ARTICLES) {recherche} {par points} {inverse}>
-[(#INCLURE {fond=inc-resume} {id_article} {recherche})]
+[(#INCLURE {fond=inc/resume} {id_article} {recherche})]
 </BOUCLE_articles>
 </B_articles>
 <h3>Aucun article contenant &#171;&nbsp;#RECHERCHE&nbsp;&#187; !</h3>
 <//B_articles>
 #FIN_SURLIGNE
 
-#INCLURE{fond=inc-foot}
+#INCLURE{fond=inc/foot}

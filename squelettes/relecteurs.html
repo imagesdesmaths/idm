@@ -1,5 +1,5 @@
 #CACHE{0}
-<INCLURE{fond=inc-head}{title=Gestion des relecteurs}>
+<INCLURE{fond=inc/head}{title=Gestion des relecteurs}>
 <BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
 
 <B_prop><h2 style="margin : 0px;">#TOTAL_BOUCLE articles proposés pour publication :</h2>
@@ -15,4 +15,4 @@
 </BOUCLE_securite>
   <h1>Go away, you non-administrator !</h1>
 <//B_securite>
-<INCLURE{fond=inc-foot}{stats=no}>
+<INCLURE{fond=inc/foot}{stats=no}>

@@ -1,6 +1,6 @@
 #CACHE{3600}
 <BOUCLE_mot(MOTS){id_mot}>
-<INCLURE{fond=inc-head}{title=#TITRE}>
+<INCLURE{fond=inc/head}{title=#TITRE}>
 
 [(#ID_GROUPE|=={4}|oui) <?php @header ("Location: #URL_PAGE{lexique}#mot_#ID_MOT"); ?>]
 
@@ -10,11 +10,11 @@
 
 <B_articles>#PAGINATION{idm}
 <BOUCLE_articles(ARTICLES) {id_mot} {par date} {inverse} {pagination}>
-[(#INCLURE{fond=inc-resume}{id_article})]
+[(#INCLURE{fond=inc/resume}{id_article})]
 </BOUCLE_articles>
 #PAGINATION{idm}</B_articles>
 
-#INCLURE{fond=inc-foot}
+#INCLURE{fond=inc/foot}
 </BOUCLE_mot>
 <INCLURE{fond=sommaire}>
 <//B_mot>

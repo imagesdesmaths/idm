@@ -1,5 +1,5 @@
 #CACHE{0}
-<INCLURE{fond=inc-head}{title=Votre espace personnel}>
+<INCLURE{fond=inc/head}{title=Votre espace personnel}>
 
 <BOUCLE_moi(AUTEURS) {tous} {id_auteur=#SESSION{id_auteur}}>
   <h1>Bonjour, [(#NOM|prenom_nom)]&nbsp;!</h1>
@@ -38,4 +38,4 @@
   <p>Si vous n'avez pas d'identifiant, vous pouvez <a href="#URL_PAGE{inscription}">vous inscrire</a>.</p>
 <//B_moi>
 
-<INCLURE{fond=inc-foot}{stats=no}>
+<INCLURE{fond=inc/foot}{stats=no}>

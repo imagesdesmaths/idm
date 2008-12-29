@@ -1,5 +1,5 @@
 <BOUCLE_breve(BREVES){id_breve}>
-<INCLURE{fond=inc-head}{title=#TITRE}>
+<INCLURE{fond=inc/head}{title=#TITRE}>
 
 #DEBUT_SURLIGNE
   [<h1 class="#EDIT{titre} titre">(#TITRE)</h1>]
@@ -10,7 +10,7 @@
   [<p><a href="(#URL_SITE)">[(#NOM_SITE*|sinon{"Pour en savoir plus ..."})]</a></p>]
 #FIN_SURLIGNE
 
-#INCLURE{fond=inc-foot}
+#INCLURE{fond=inc/foot}
 </BOUCLE_breve>
 <INCLURE{fond=sommaire}>
 <//B_breve>

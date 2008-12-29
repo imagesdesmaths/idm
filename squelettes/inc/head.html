@@ -6,12 +6,12 @@
   <title>#NOM_SITE_SPIP[ - (#ENV*{title}|textebrut)]</title>
   <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET"/>
 
-  <link rel="stylesheet" type="text/css" media="all"    href="#CHEMIN{style.css}"/>
-  <link rel="stylesheet" type="text/css" media="screen" href="#CHEMIN{layout-screen.css}"/>
-  <link rel="stylesheet" type="text/css" media="print"  href="#CHEMIN{layout-print.css}"/>
+  <link rel="stylesheet" type="text/css" media="all"    href="#CHEMIN{css/style.css}"/>
+  <link rel="stylesheet" type="text/css" media="screen" href="#CHEMIN{css/layout-screen.css}"/>
+  <link rel="stylesheet" type="text/css" media="print"  href="#CHEMIN{css/layout-print.css}"/>
   <?php if (preg_match('/MSIE ([0-9.]*)/', $_SERVER['HTTP_USER_AGENT'] , $matches)) {
     $version = $matches[1];  
-    print "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\"    href=\"squelettes/iehacks-$version.css\"/>\n";
+    print "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\"    href=\"squelettes/css/iehacks-$version.css\"/>\n";
   } ?>
 
   <link rel="home" title="Page principale" href="#URL_SITE_SPIP/"/>
@@ -67,7 +67,7 @@
       </ul>
       </BOUCLE_liens>
 
-      <INCLURE{fond=inc-ident}>
+      <INCLURE{fond=inc/ident}>
 
       <div class="actu">
         <h2>Revues de presse</h2>

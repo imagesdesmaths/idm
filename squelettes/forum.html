@@ -1,8 +1,8 @@
 <BOUCLE_article(ARTICLES){id_article}>
-<INCLURE{fond=inc-head}{title=#TITRE - <:poster_message:>}>
+<INCLURE{fond=inc/head}{title=#TITRE - <:poster_message:>}>
 
 <div class="no_rubrique">
-  [(#INCLURE{fond=inc-resume}{id_article})]
+  [(#INCLURE{fond=inc/resume}{id_article})]
 </div>
 
 <BOUCLE_auteur(spip_auteurs_articles) {id_article} {0,1}>
@@ -11,7 +11,7 @@
 </BOUCLE_auteur2>
 </BOUCLE_auteur>
 
-<INCLURE{fond=inc-forum}{id_article}{id_forum}{auteur_article=#GET{auteur_article}}>
+<INCLURE{fond=inc/forum}{id_article}{id_forum}{auteur_article=#GET{auteur_article}}>
 
 [(#SESSION{id_auteur}|oui)#FORMULAIRE_FORUM{#URL_PAGE{forum,id_article=#ID_ARTICLE}}]
 
@@ -22,7 +22,7 @@
   encore fait).</p>
 ]
 
-#INCLURE{fond=inc-foot}
+#INCLURE{fond=inc/foot}
 </BOUCLE_article>
 <INCLURE{fond=sommaire}>
 <//B_article>

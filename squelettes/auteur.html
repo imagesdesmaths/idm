@@ -1,6 +1,6 @@
 <BOUCLE_auteur(AUTEURS){id_auteur}>
 [(#SET{nom,[(#NOM|prenom_nom)]})]
-<INCLURE{fond=inc-head}{title=#GET{nom}}>
+<INCLURE{fond=inc/head}{title=#GET{nom}}>
 
 [(#LOGO_AUTEUR|right)]
 
@@ -12,10 +12,10 @@
 <B_articles>
 <h2>Tous ses articles :</h2>
 <BOUCLE_articles(ARTICLES) {id_auteur} {id_secteur != 18} {par date} {inverse}>
-[(#INCLURE{fond=inc-resume}{id_article})]
+[(#INCLURE{fond=inc/resume}{id_article})]
 </BOUCLE_articles>
 
-#INCLURE{fond=inc-foot}
+#INCLURE{fond=inc/foot}
 </BOUCLE_auteur>
 <INCLURE{fond=sommaire}>
 <//B_auteur>

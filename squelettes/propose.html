@@ -4,7 +4,7 @@
   <BOUCLE_auteurs(AUTEURS) {id_article} {id_auteur=#SESSION{id_auteur}}> #SET{auth,yes} </BOUCLE_auteurs>
   <BOUCLE_relecteurs(spip_relecteurs_articles) {id_article} {id_auteur=#SESSION{id_auteur}}> #SET{auth,yes} </BOUCLE_relecteurs>
   <BOUCLE_securite(CONDITION) {SI #GET{auth}|=={yes}}>
-    <INCLURE{fond=inc-head}{title=#TITRE - En cours de relecture}{id_rubrique=#ID_RUBRIQUE}{id_article=#ID_ARTICLE}>
+    <INCLURE{fond=inc/head}{title=#TITRE - En cours de relecture}{id_rubrique=#ID_RUBRIQUE}{id_article=#ID_ARTICLE}>
     <h1>En cours de relecture : #TITRE</h1>
     <h2 style="margin-top : 0ex;">(dans la rubrique « <BOUCLE_rub(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rub> »)</h2>
 
@@ -44,12 +44,12 @@
     </BOUCLE_bug>
 
     <BOUCLE_cetarticle(ARTICLES) {id_article} {statut=prop}>
-      [(#INCLURE{fond=inc-forum-prive}{id_article}{id_forum})]
+      [(#INCLURE{fond=inc/forum-prive}{id_article}{id_forum})]
       #FORMULAIRE_FORUM_PRIVE
     </BOUCLE_cetarticle>
-    <INCLURE{fond=inc-foot}{stats=no}>
+    <INCLURE{fond=inc/foot}{stats=no}>
   </BOUCLE_securite>
-    <INCLURE{fond=inc-head}{title=Acc&egrave;s refus&eacute;}>
+    <INCLURE{fond=inc/head}{title=Acc&egrave;s refus&eacute;}>
     <h1>Acc&egrave;s refus&eacute; !</h1>
     
     [(#SESSION{id_auteur}|oui)
@@ -60,15 +60,15 @@
     <p>Avez-vous pens&eacute; &agrave; vous <a href="#URL_PAGE{perso}">identifier</a>
     ?</p>]
 
-    <INCLURE{fond=inc-foot}{stats=no}>
+    <INCLURE{fond=inc/foot}{stats=no}>
   <//B_securite>
 </BOUCLE_article>
-  <INCLURE{fond=inc-head}{title=Acc&egrave;s refus&eacute;}>
+  <INCLURE{fond=inc/head}{title=Acc&egrave;s refus&eacute;}>
   <h1>Cet article n'est pas/plus propos&eacute; &agrave; la publication !</h1>
 
   <BOUCLE_reel(ARTICLES) {id_article=#ENV{id_article}}>
   <p>L'article intitul&eacute; <a href="#URL_ARTICLE">#TITRE</a> a été 
   accepté ...</p>
   </BOUCLE_reel>
-  <INCLURE{fond=inc-foot}{stats=no}>
+  <INCLURE{fond=inc/foot}{stats=no}>
 <//B_article>
