@@ -65,27 +65,29 @@ ul.forum { padding : 0px; list-style-type : none; }
 
 /************************************************************************/
 
+div#left { padding : 15px .5em 0ex; text-align : left; color : white; background : #550000; }
+div#left a { font-weight : normal; color : white; text-decoration : none; }
+div#left a.active { color : #e20000; }
+div#left a:hover { text-decoration : underline; }
+div#left div.bottom { position : fixed; bottom : .2ex; }
+div#left form input { width : 80%; font-weight : bold; background : white url(img/rechercher.gif) no-repeat right center; }
+div#left form input.submit { display : none; }
+div#left form label { display : none; }
+div#left form { margin-top : 1ex; }
+div#left h2 { margin : 1ex 0px 1ex; font-size : medium; padding : .2ex 0px .2ex; border : 1px solid #e20000; border-width : 1px 0px; }
+div#left h3 { margin : 1ex 0px .5ex; font-size : medium; }
+div#left ul ul ul { padding-left : 1em; }
+div#left ul ul { padding-left : 2em; }
+div#left ul { margin : 0px; padding-left : 0em; font-size : small; list-style-type : none; }
+
+div#actu { font-size : small; margin : 2ex .5em; padding : .1ex .5em 1ex; color : black; background : white; }
+div#actu h3 a { color : #e20000; font-weight : bold; }
 div#actu a.big { display : block; text-align : center; font-size : medium; border-bottom : 2px solid #e20000; padding : .5ex 0px; }
 div#actu a.big:hover { text-decoration : underline; }
-div#actu a.plain { font-weight : normal; }
-div#actu h2 { font-size : medium; margin : 1ex; }
-div#actu h3 { font-size : small; margin-bottom : 0px; }
+div#actu a.plain { font-weight : normal; color : #e20000; }
+div#actu h2 { font-size : medium; margin : 1ex 0ex; border : none; }
+div#actu h3 { font-size : small; font-weight : bold; margin-bottom : 0px; }
 div#actu p { margin-top : 0px; }
-div#actu { font-size : small; margin-top : 1ex; }
-
-div#nav a { font-weight : normal; color : white; text-decoration : none; }
-div#nav a.active { color : #e20000; }
-div#nav a:hover { text-decoration : underline; }
-div#nav div.bottom { position : fixed; bottom : .2ex; }
-div#nav form input { width : 80%; font-weight : bold; background : white url(img/rechercher.gif) no-repeat right center; }
-div#nav form input.submit { display : none; }
-div#nav form label { display : none; }
-div#nav form { margin-top : 1ex; }
-div#nav h2 { margin : 1ex 0px 1ex; font-size : medium; padding : .2ex 0px .2ex; border : 1px solid #e20000; border-width : 1px 0px; }
-div#nav h3 { margin : 1ex 0px .5ex; font-size : medium; }
-div#nav ul ul ul { padding-left : 1em; }
-div#nav ul ul { padding-left : 2em; }
-div#nav ul { margin : 0px; padding-left : 0em; font-size : small; list-style-type : none; }
 
 div#edito { margin : 2ex 2em 4ex; border : 2px solid #e20000; padding : 1ex 1em 0ex; }
 div#edito div.titre { margin-top : -2.5ex; text-align : center; }
