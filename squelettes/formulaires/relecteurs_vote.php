@@ -1,6 +1,7 @@
 <?php
 
 include_spip('base/abstract_sql');
+include_spip('inc/filtres');
 
 function formulaires_relecteurs_vote_charger ($id_article) {
   $id_auteur = $GLOBALS['auteur_session']['id_auteur'];
@@ -25,7 +26,7 @@ function formulaires_relecteurs_vote_verifier ($id_article) {
 function formulaires_relecteurs_vote_traiter ($id_article) {
   $id_auteur = $GLOBALS['auteur_session']['id_auteur'];
   sql_updateq ('spip_relecteurs_articles',
-    array('status'=>_request('vote'), 'avis'=>_request('avis')),
+    array('status'=>_request('vote'), 'avis'=>supprimer_tags(_request('avis'))),
     "id_auteur=$id_auteur AND id_article=$id_article");
 }
 

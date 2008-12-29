@@ -1,6 +1,7 @@
 <?php
 
 include_spip('base/abstract_sql');
+include_spip('inc/filtres');
 
 function formulaires_relecteurs_perso_charger () {
   $valeurs = array('qui'=>'');
@@ -21,7 +22,7 @@ function formulaires_relecteurs_perso_traiter () {
 
   if (_request('inscription')) {
     sql_updateq ('spip_auteurs',
-      array ('role' => 'candidat', 'math' => _request('qui')),
+      array ('role' => 'candidat', 'math' => supprimer_tags(_request('qui'))),
       "id_auteur = $id_auteur");
   } else {
     sql_updateq ('spip_auteurs',

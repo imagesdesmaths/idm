@@ -1,6 +1,7 @@
 <?php
 
 include_spip('base/abstract_sql');
+include_spip('inc/filtres');
 
 function formulaires_relecteurs_gestion_charger () {
   $valeurs = array();
@@ -26,11 +27,11 @@ function formulaires_relecteurs_gestion_traiter () {
     $id = $row["id_auteur"];
     if ($row["role"] == "candidat") {
       $decision = _request("decision_$id");
-      if ($decision == "oui") sql_updateq ("spip_auteurs", array("role"=>"relecteur", "math" => _request("math_$id")), "id_auteur=$id");
-      if ($decision == "non") sql_updateq ("spip_auteurs", array("role"=>"visiteur", "math" => _request("math_$id")), "id_auteur=$id");
+      if ($decision == "oui") sql_updateq ("spip_auteurs", array("role"=>"relecteur", "math" => supprimer_tags(_request("math_$id"))), "id_auteur=$id");
+      if ($decision == "non") sql_updateq ("spip_auteurs", array("role"=>"visiteur", "math" => supprimer_tags(_request("math_$id"))), "id_auteur=$id");
     } else {
-      if (_request("math_$id") != $row["math"]) sql_updateq ("spip_auteurs", array("math"=>_request("math_$id")), "id_auteur=$id");
-      if (_request("exterminate_$id"))          sql_updateq ("spip_auteurs", array("role"=>"visiteur"), "id_auteur=$id");
+      if (_request("math_$id") != $row["math"]) sql_updateq ("spip_auteurs", array("math"=>supprimer_tags(_request("math_$id"))), "id_auteur=$id");
+      if (_request("exterminate_$id"))          sql_updateq ("spip_auteurs", array("role"=>"visiteur","math"=>""), "id_auteur=$id");
     }
   }
 }
