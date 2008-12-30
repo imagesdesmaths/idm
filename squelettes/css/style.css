@@ -70,7 +70,7 @@ div#left a { font-weight : normal; color : white; text-decoration : none; }
 div#left a.active { color : #e20000; }
 div#left a:hover { text-decoration : underline; }
 div#left div.bottom { position : fixed; bottom : .2ex; }
-div#left form input { width : 80%; font-weight : bold; background : white url(img/rechercher.gif) no-repeat right center; }
+div#left form input { width : 80%; font-weight : bold; background : white url(../img/rechercher.gif) no-repeat right center; }
 div#left form input.submit { display : none; }
 div#left form label { display : none; }
 div#left form { margin-top : 1ex; }
