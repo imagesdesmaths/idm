@@ -176,6 +176,8 @@ div.spip-admin-bloc a { display : block; color : white; background : #550000; bo
 div.spip-admin-bloc a:hover { background : #550000; text-decoration : none; border : 1px solid #e20000; }
 div.spip-admin-bloc { margin-top : 2ex; }
 
+div.article { clear : both; }
+
 div.texte .jsMath_number { right : 0px; }
 div.texte a { color : inherit; }
 div.texte a:link, div.texte a:visited { color : #e20000; }

@@ -1,4 +1,5 @@
 <BOUCLE_article(ARTICLES) {id_article = #ENV{id_article}} {statut == .}>
+<div class="article">
 #DEBUT_SURLIGNE
   [(#LOGO_ARTICLE|right||image_reduire{200,200})]
   [(#LOGO_ARTICLE|fichier|non) <INCLURE{fond=inc/auteur}{id_article=#ID_ARTICLE}{taille=200}>]
@@ -19,4 +20,5 @@
   [<div class="#EDIT{ps} ps"><span class="ps">P.S. :</span> (#PS)</div>]
   [<div class="notes"><h3>Notes</h3>(#NOTES)</div>]
 #FIN_SURLIGNE
+</div>
 </BOUCLE_article>

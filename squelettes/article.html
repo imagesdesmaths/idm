@@ -3,23 +3,25 @@
 
 <div class="notation">#FORMULAIRE_NOTATION</div>
 
+<?php $nb = sql_countsel ('spip_forum', "id_article=#ID_ARTICLE AND statut='publie'"); ?>
+
 <div class="relies"><p>
   Rubrique : <BOUCLE_rub(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rub>
   <B_mots> &mdash; Thème[(#TOTAL_BOUCLE|>{1}|?{s})] : <BOUCLE_mots(MOTS) {id_article} {id_groupe=1} {par titre} {', '}>
-  <a href="#URL_MOT">#TITRE</a></BOUCLE_mots>
-  <BOUCLE_msg(FORUMS) {id_article} {plat}></BOUCLE_msg> &mdash; <a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">#TOTAL_BOUCLE commentaire[(#TOTAL_BOUCLE|>{1}|?{s})]</a> <//B_msg>
-&mdash;</p></div>
-
-<div class="nettoyeur"></div>
+  <a href="#URL_MOT">#TITRE</a></BOUCLE_mots> &mdash;
+  <a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}"><?php
+         if ($nb>1)  print "$nb commentaires";
+    else if ($nb==1) print "1 commentaire";
+    else             print "0 commentaire"; ?></a> &mdash;
+</p></div>
 
 [(#INCLURE{fond=inc/article}{id_article})]
 
-<BOUCLE_msg2(FORUMS) {id_article} {plat}>
-</BOUCLE_msg2>
-<h3 class="discuter"><a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">Il y a #TOTAL_BOUCLE commentaire[(#TOTAL_BOUCLE|>{1}|?{s})] sur cet article ...</a></h3> 
-</B_msg2>
-<h3 class="discuter"><a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">Soyez le premier à déposer un commentaire sur cet article !</a></h3> 
-<//B_msg2>
+<h3 class="discuter"><a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}"><?php
+         if ($nb>1)  print "Il y a $nb commentaires sur cet article ...";
+    else if ($nb==1) print "Il y a 1 commentaire sur cet article ...";
+    else             print "Soyez le premier à déposer un commentaire sur cet article !";
+?></a></h3>
 
 #INCLURE{fond=inc/foot}
 </BOUCLE_article>
