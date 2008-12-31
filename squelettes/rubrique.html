@@ -3,7 +3,7 @@
 <INCLURE{fond=inc/head}{title=#TITRE}{id_rubrique=#ID_RUBRIQUE}>
 
 [(#LOGO_RUBRIQUE|right||image_reduire{200,200})]
-<h1><BOUCLE_parent(RUBRIQUES){id_rubrique=#ID_PARENT}>
+<h1><BOUCLE_parent(RUBRIQUES){id_rubrique=#ID_PARENT}{id_rubrique != 18}>
   <a href="#URL_RUBRIQUE">#TITRE</a> :</BOUCLE_parent> #TITRE</h1>
 
 [<div class="texte">(#TEXTE)</div>]
