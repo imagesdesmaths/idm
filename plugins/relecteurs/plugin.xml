@@ -11,7 +11,4 @@
     articles propos&eacute;s qui leur sont soumis. </description>
 
   <prefix>relecteurs</prefix>
-
-  <fonctions>relecteurs.php</fonctions>
-  <install>relecteurs.php</install>
 </plugin>
