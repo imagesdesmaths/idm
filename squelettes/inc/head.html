@@ -6,9 +6,9 @@
   <title>#NOM_SITE_SPIP[ - (#ENV*{title}|textebrut)]</title>
   <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET"/>
 
-  <link rel="stylesheet" type="text/css" media="all"    href="#CHEMIN{css/style.css}"/>
   <link rel="stylesheet" type="text/css" media="screen" href="#CHEMIN{css/layout-screen.css}"/>
   <link rel="stylesheet" type="text/css" media="print"  href="#CHEMIN{css/layout-print.css}"/>
+  <link rel="stylesheet" type="text/css" media="all"    href="#CHEMIN{css/style.css}"/>
   <?php if (preg_match('/MSIE ([0-9.]*)/', $_SERVER['HTTP_USER_AGENT'] , $matches)) {
     $version = $matches[1];  
     print "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\"    href=\"squelettes/css/iehacks-$version.css\"/>\n";

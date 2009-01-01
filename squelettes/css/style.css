@@ -16,7 +16,7 @@
 
 .spip_surligne { color : black; background : yellow; }
 
-a { color : #e20000; font-weight : bold; text-decoration : none; }
+a { color : #e20000; font-weight : bold; text-decoration : none; outline : none; }
 a.article { font-weight : normal; }
 a.lexique { font-weight : normal; border-bottom : 1px dotted; }
 
