@@ -89,12 +89,6 @@ div#left div.actu h2 { font-size : medium; margin : 1ex 0ex; border : none; }
 div#left div.actu h3 { font-size : small; font-weight : bold; margin-bottom : 0px; }
 div#left div.actu p { margin-top : 0px; }
 
-div#edito { margin : 2ex 2em 4ex; border : 2px solid #e20000; padding : 1ex 1em 0ex; }
-div#edito div.titre { margin-top : -2.5ex; text-align : center; }
-div#edito h3.auteur { margin-top : 1ex; }
-div#edito h2 { display : inline; border : 2px solid #e20000; padding : .3ex .5em .1ex; background-color : white; }
-div#edito p { font-size : 100%; }
-
 div#une div.resume_out { margin-top : 1ex; }
 div#une div.resume img.spip_logos { background : #ffcccc; }
 div#une div.resume div.introduction { font-size : 95%; margin-left : 0px; }
@@ -103,6 +97,9 @@ div#une div.titre { margin-top : -2.5ex; text-align : center; }
 div#une h2 { display : inline; border : 1px solid #e20000; padding : .3ex 1em .1ex; background-color : white; }
 div#une h3.titre { margin-top : -.5ex; }
 div#une { margin-top : 2ex; }
+
+div#editolink { text-align : center; font-size : 180%; font-weight : bold; margin : .5ex 0em 2.5ex; font-variant : small-caps; }
+div#editolink a:hover { text-decoration : underline; }
 
 div.chapo { margin : 1ex 4em; font-weight : bold; font-style : italic; }
 
@@ -177,6 +174,7 @@ div.spip-admin-bloc a:hover { background : #550000; text-decoration : none; bord
 div.spip-admin-bloc { margin-top : 2ex; }
 
 div.article { clear : both; }
+#TB_window div.article { font-size : 130%; line-height : 1.3; text-align : justify; padding : 1ex 2em; }
 
 div.texte .jsMath_number { right : 0px; }
 div.texte a { color : inherit; }

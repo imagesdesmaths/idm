@@ -4,18 +4,22 @@
 <BOUCLE_nospecial(ARTICLES) {id_secteur = 18} {doublons}>
 </BOUCLE_nospecial>
 
-<B_edito><div id="edito"><BOUCLE_edito(ARTICLES) {titre_mot=editorial} {par date} {inverse} {age<14} {0,1}>
-  <div class="titre"><h2>Éditorial : #TITRE</h2></div>
-  [<h3 class="auteur">Le [(#DATE|affdate)], par (#LESAUTEURS)</h3>]
+<BOUCLE_edito(ARTICLES) {titre_mot=editorial} {par date} {inverse} {age<14} {0,1} {doublons}>
+  <div id="edito" style="display:none;"><div class="article">
+      <div class="titre"><h2>#TITRE</h2></div>
 
-  <BOUCLE_auteur(AUTEURS) {id_article}>[(#SET{uniqueauteur,#ID_AUTEUR})]</BOUCLE_auteur>
-  <BOUCLE_auteurs(AUTEURS) {id_article} {1,1}>[(#SET{uniqueauteur,0})]</BOUCLE_auteurs>
-  <BOUCLE_unique(AUTEURS) {id_auteur=#GET{uniqueauteur}}>
-    [<h3 class="bio">(#BIO*) [(<a href="(#URL_SITE)">page web</a>)]</h3>]
-  </BOUCLE_unique>
+      <BOUCLE_auteur(AUTEURS) {id_article}>[(#SET{uniqueauteur,#ID_AUTEUR})]</BOUCLE_auteur>
+      <BOUCLE_auteurs(AUTEURS) {id_article} {1,1}>[(#SET{uniqueauteur,0})]</BOUCLE_auteurs>
+      <BOUCLE_unique(AUTEURS) {id_auteur=#GET{uniqueauteur}}>
+      [<h3 class="bio">(#BIO*) [(<a href="(#URL_SITE)">page web</a>)]</h3>]
+      </BOUCLE_unique>
 
-  #TEXTE
-</BOUCLE_edito></div></B_edito>
+      #TEXTE
+
+      [<h3 class="auteur">Le [(#DATE|affdate)], par (#LESAUTEURS)</h3>]
+  </div></div>
+  <div id="editolink">Éditorial : <a class="thickbox" href="#[(#REM)]TB_inline?width=700&height=500&inlineId=edito">#TITRE</a></div>
+</BOUCLE_edito>
 
 <div id="une">
   <div class="titre"><h2>&Agrave; la une</h2></div>
@@ -27,7 +31,7 @@
 <div id="front">
   <div id="billets">
     <h2>Derniers billets (<a href="#URL_RUBRIQUE{6}">tous les billets</a>)</h2>
-    <BOUCLE_billets(ARTICLES) {id_rubrique = 6} {par date} {inverse} {0,5}>
+    <BOUCLE_billets(ARTICLES) {id_rubrique = 6} {par date} {inverse} {0,5} {doublons}>
     [(#INCLURE{fond=inc/resume}{id_article})]
     </BOUCLE_billets>
   </div>
