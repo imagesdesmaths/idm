@@ -15,3 +15,5 @@ plugins/jsMath/jsMath/fonts
 *experimental*
 /files
 /wiki
+.DS_Store
+.svn
