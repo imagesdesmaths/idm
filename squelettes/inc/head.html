@@ -23,8 +23,13 @@
   #INSERT_HEAD
 
   <script type="text/javascript" src="#CHEMIN{javascript/jquery.tablesorter.min.js}"></script>
+  <script type="text/javascript" src="#CHEMIN{javascript/jsMath_Font_Detector.js}"></script>
+
   <script type="text/javascript">
-    $(document).ready(function() { $(".sortable").tablesorter( {sortList : [[0,0]]} ); } );
+    $(document).ready(function() {
+        $(".sortable").tablesorter( {sortList : [[0,0]]} );
+        if (!jsMath_Font_Detector()) $("#nojsfont").fadeIn('slow');
+    } );
   </script>
 </head>
 
@@ -89,6 +94,18 @@
         <li><a href="#URL_PAGE{backend}"><img src="#CHEMIN{img/rss.jpg}" alt="RSS" /> Syndication (RSS)</a></li>
         <li style="margin-top:.5ex;"><a href="http://www.spip.net/">Site sous SPIP 2.0 <img src="#CHEMIN{img/spip.jpg}" alt="SPIP" /></a></li>
       </ul>
+
+      <div id="nojsfont" style="display:none;" class="jsmathwarning">
+        <h2>Polices de maths</h2>
+
+        <p>Ce site utilise un système appelé <a 
+          href="http://www.math.union.edu/~dpvc/jsMath/">jsMath</a> pour 
+        la typographie des formules mathématiques. Leur affichage sera 
+        bien meilleur (et plus rapide) si vous installez les polices 
+        True Type associées !</p>
+
+        <h3><a href="#URL_ARTICLE{9}">Tout est expliqué ici.</a></h3>
+      </div>
     </div>
 
     <div id="main">
