@@ -8,21 +8,21 @@
 </url>
 <BOUCLE_secteurs(RUBRIQUES) {id_parent=0}>
 <url>
-  <loc>[(#URL_RUBRIQUE|utf8_encode)]</loc>
+  <loc>#URL_SITE_SPIP/[(#URL_RUBRIQUE|utf8_encode)]</loc>
   <lastmod>[(#DATE|affdate{'Y-m-d'})]</lastmod>
   <changefreq>daily</changefreq>
 </url>
     <B_rubriques>
     <BOUCLE_rubriques(RUBRIQUES) {id_parent}>
     <url>
-        <loc>[(#URL_RUBRIQUE|utf8_encode)]</loc>
+        <loc>#URL_SITE_SPIP/[(#URL_RUBRIQUE|utf8_encode)]</loc>
         <lastmod>[(#DATE|affdate{'Y-m-d'})]</lastmod>
         <changefreq>daily</changefreq>
     </url>
         <B_articles_rubriques>
         <BOUCLE_articles_rubriques(ARTICLES) {id_rubrique}>
         <url>
-            <loc>[(#URL_ARTICLE|utf8_encode)]</loc>
+            <loc>#URL_SITE_SPIP/[(#URL_ARTICLE|utf8_encode)]</loc>
             <lastmod>[(#DATE_MODIF|affdate{'Y-m-d'})]</lastmod>
             <changefreq>weekly</changefreq>
         </url>
@@ -34,7 +34,7 @@
     <B_breves>
     <BOUCLE_breves(BREVES) {id_rubrique}>
     <url>
-        <loc>[(#URL_BREVE|utf8_encode)]</loc>
+        <loc>#URL_SITE_SPIP/[(#URL_BREVE|utf8_encode)]</loc>
         <lastmod>[(#DATE|affdate{'Y-m-d'})]</lastmod>
         <changefreq>weekly</changefreq>
     </url>
@@ -43,7 +43,7 @@
     <B_articles>
     <BOUCLE_articles(ARTICLES) {id_rubrique}>
     <url>
-        <loc>[(#URL_ARTICLE|utf8_encode)]</loc>
+        <loc>#URL_SITE_SPIP/[(#URL_ARTICLE|utf8_encode)]</loc>
         <lastmod>[(#DATE_MODIF|affdate{'Y-m-d'})]</lastmod>
         <changefreq>weekly</changefreq>
       </url>
