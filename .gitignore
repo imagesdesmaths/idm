@@ -13,3 +13,5 @@ pdf2004
 pdf2006
 plugins/jsMath/jsMath/fonts
 *experimental*
+/files
+/wiki

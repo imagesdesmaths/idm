@@ -127,7 +127,7 @@ RewriteRule ^sitemap[.]xml$      spip.php?page=sitemap.xml [QSA,L]
 # voir http://www.spip.net/fr_article3226.html
 # Pour que le serveur http renvoie les erreurs 404 vers SPIP, supprimer le '#'
 
-# ErrorDocument 404 /spip.php?page=404
+ErrorDocument 404 /404.html
 
 #
 ###
