@@ -150,13 +150,18 @@ div.plan ul { padding-left : 0em; list-style-type : none; }
 div.ps span.ps { font-weight : bold; }
 div.ps { margin-top : 1ex; padding-top : 1ex; border-top : 1px solid #e20000; font-style : italic; }
 
-div.notation { float : right; margin : -.8ex -.8em 1ex 1em; font-size : 90%; }
+div.notation { float : left; margin : -.8ex 0em 0ex -.8em; font-size : 90%; }
 div.notation span.note { color : black; }
 div.notation span.note:before { content : '('; }
 div.notation span.note:after { content : ')'; }
 
-div.relies { float : right; margin : -.8ex -.8em 2ex 0px; font-size : 90%; }
+div.relies { float : right; margin : -.8ex -.6em 2ex 0px; font-size : 90%; }
 div.relies p { margin : 0px; }
+div.relies a.piste_20 { color : #009900; }
+div.relies a.piste_21 { color : #3333ff; }
+div.relies a.piste_22 { color : #e20000; }
+div.relies a.piste_23 { color : #000000; }
+div.relies a.piste_24 { color : #888888; }
 
 div.resume_out { margin : 2ex 0px 0px; clear : both; }
 div.resume a { color : black; text-decoration : none; }
