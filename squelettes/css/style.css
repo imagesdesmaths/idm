@@ -95,7 +95,7 @@ div#left div.jsmathwarning h3 { font-size : small; margin : .5ex 0px 0px; border
 div#left div.jsmathwarning p { margin : 0px; text-align : justify; }
 div#left div.jsmathwarning a { color : #550000; font-weight : bold; text-decoration : underline; }
 
-div#imagedujour { width : 30%; float : right; border-left : 1em solid white; background : white; }
+div#imagedujour { width : 30%; float : right; border-left : 1em solid white; background : white; text-align : center; }
 div#imagedujour img { max-width : 100%; }
 
 div#une { margin-top : 2ex; padding : 1ex 0em 0ex 1em; margin : 3ex 0em 0ex; }
