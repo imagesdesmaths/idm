@@ -166,14 +166,12 @@ div.resume h3.titre a:hover { color : #e20000; }
 div.resume h4.auteur a:hover { color : #e20000; }
 div.resume img.spip_logos { padding : 0px 0px 0px 1em; background : white; }
 
-div.rubrique { font-style : italic; font-size : 80%; color : #e20000; float : left; margin : .2ex .5em 0px 0px; }
-div.rubrique a { color : #e20000; background : inherit; font-weight : bold; }
-div.rubrique_13 a { color : white; background : #00aa00; padding : .2ex .5em; }
-div.rubrique_14 a { color : white; background : #3333ff; padding : .2ex .5em; }
-div.rubrique_15 a { color : white; background : #e20000; padding : .2ex .5em; }
-div.rubrique_23 a { color : white; background : #666666; padding : .2ex .5em; }
-div.rubrique_3 a { color : white; background : #666666; padding : .2ex .5em; }
-div.rubrique_3, div.rubrique_13, div.rubrique_14, div.rubrique_15, div.rubrique_23 { margin-top : .4ex; }
+div.rubrique { font-style : italic; font-size : 80%; float : left; margin : .2ex .5em 0px 0px; }
+div.rubrique a.piste_20 { color : #00aa00; }
+div.rubrique a.piste_21 { color : #3333ff; }
+div.rubrique a.piste_22 { color : #e20000; }
+div.rubrique a.piste_23 { color : #000000; }
+div.rubrique a.piste_24 { color : #888888; }
 
 div.spip-admin-bloc a { display : block; color : white; background : #550000; border : 1px solid #e20000; margin : -1px 0px 0px; }
 div.spip-admin-bloc a:hover { background : #550000; text-decoration : none; border : 1px solid #e20000; }

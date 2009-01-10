@@ -7,10 +7,10 @@
 
       <h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
 
-      <BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {id_secteur != 18}>
-      <div class="rubrique rubrique_#ID_RUBRIQUE"><a 
-          href="#URL_RUBRIQUE">#TITRE</a></div>
-      </BOUCLE_rubrique>
+      <div class="rubrique">
+        <BOUCLE_rubrique(RUBRIQUES) {id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rubrique>
+        <BOUCLE_diff(MOTS) {id_groupe=5} {id_article}>&mdash; <a class="piste_#ID_MOT" href="#URL_MOT">#TITRE</a></BOUCLE_diff>
+      </div>
 
       [<h4 class="auteur[(#ID_SECTEUR|=={18}|?{' invisible'})]">Le [(#DATE|affdate)], par (#LESAUTEURS)</h4>]
       [<div class="introduction"><a class="plain" href="#URL_ARTICLE">(#DESCRIPTIF|sinon{[(#INTRODUCTION|textebrut)]})</a></div>]
