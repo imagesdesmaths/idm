@@ -4,12 +4,6 @@
 <BOUCLE_nospecial(ARTICLES) {id_secteur = 18} {doublons}>
 </BOUCLE_nospecial>
 
-<div id="imagedujour">
-  <BOUCLE_img(DOCUMENTS) {id_article=167} {tous} {0,1} {par hasard}>
-  <a href="#URL_PAGE{image,id_document=#ID_DOCUMENT}"><img src="#URL_DOCUMENT"[ alt="(#TITRE)" title="#TITRE"]></a>
-  </BOUCLE_img>
-</div>
-
 <BOUCLE_edito(ARTICLES) {titre_mot=editorial} {par date} {inverse} {age<14} {0,1} {doublons}>
   <div id="edito" style="display:none;"><div class="article">
       <div class="titre"><h2>#TITRE</h2></div>

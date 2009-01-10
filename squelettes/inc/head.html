@@ -52,6 +52,12 @@
         <li><a href="mailto:#EMAIL_WEBMASTER">Nous contacter</a></li>
       </ul>
 
+      <div id="imagedujour">
+        <BOUCLE_img(DOCUMENTS) {id_article=167} {tous} {0,1} {par hasard}>
+        <a href="#URL_PAGE{image,id_document=#ID_DOCUMENT}"><img src="#URL_DOCUMENT"[ alt="(#TITRE)" title="#TITRE"]></a>
+        </BOUCLE_img>
+      </div>
+
       <h2><a href="#URL_ARTICLE{63}">Les rubriques</a></h2>
       <ul><BOUCLE_secteurs(RUBRIQUES) {racine} {par num titre} {id_rubrique != 18} {id_rubrique != 26}>
         <li><a href="#URL_RUBRIQUE" [(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{class="active"})]>#TITRE</a>
