@@ -167,11 +167,14 @@ div.resume h4.auteur a:hover { color : #e20000; }
 div.resume img.spip_logos { padding : 0px 0px 0px 1em; background : white; }
 
 div.rubrique { font-style : italic; font-size : 80%; float : left; margin : .2ex .5em 0px 0px; }
-div.rubrique a.piste_20 { color : #00aa00; }
-div.rubrique a.piste_21 { color : #3333ff; }
-div.rubrique a.piste_22 { color : #e20000; }
-div.rubrique a.piste_23 { color : #000000; }
-div.rubrique a.piste_24 { color : #888888; }
+div.rubrique a:hover { color : #e20000; }
+
+div.piste { float : right; margin-top : .3ex; }
+div.piste a.piste_20 { color : #009900; }
+div.piste a.piste_21 { color : #3333ff; }
+div.piste a.piste_22 { color : #e20000; }
+div.piste a.piste_23 { color : #000000; }
+div.piste a.piste_24 { color : #888888; }
 
 div.spip-admin-bloc a { display : block; color : white; background : #550000; border : 1px solid #e20000; margin : -1px 0px 0px; }
 div.spip-admin-bloc a:hover { background : #550000; text-decoration : none; border : 1px solid #e20000; }
