@@ -21,7 +21,7 @@ $table_des_tables['relecteurs_articles'] = 'relecteurs_articles';
 function lettrine ($texte) {
   $lines = explode ("\n", $texte);
   for ($i=0; $i<count($lines); $i++) {
-    if (preg_match ('/(.*)<p>[\\s]*([A-Za-z])([A-Za-zç]*)/', $lines[$i], $matches)) {
+    if (preg_match ('/(.*)<p>[\\s]*([A-Za-z]|&#171;)([A-Za-zç]*)/', $lines[$i], $matches)) {
       $lettrine = $matches[1] . '<p class="spip lettrine"><span class="lettrine"><span class="lettrine_first">' . $matches[2] . '</span>' . $matches[3] . '</span>';
       $lines[$i] = str_replace ($matches[0], $lettrine, $lines[$i]);
       break;
