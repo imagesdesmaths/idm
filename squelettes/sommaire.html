@@ -4,6 +4,12 @@
 <BOUCLE_nospecial(ARTICLES) {id_secteur = 18} {doublons}>
 </BOUCLE_nospecial>
 
+<div id="imagedujour">
+  <BOUCLE_img(DOCUMENTS) {id_article=167} {titre==.} {tous} {0,1} {par hasard}>
+  <a href="#URL_PAGE{image,id_document=#ID_DOCUMENT}"><img src="#URL_DOCUMENT"[ alt="(#TITRE)" title="#TITRE"]></a>
+  </BOUCLE_img>
+</div>
+
 <BOUCLE_edito(ARTICLES) {titre_mot=editorial} {par date} {inverse} {age<14} {0,1} {doublons}>
   <div id="edito" style="display:none;"><div class="article">
       <div class="titre"><h2>#TITRE</h2></div>
@@ -22,11 +28,13 @@
 </BOUCLE_edito>
 
 <div id="une">
-  <div class="titre"><h2>&Agrave; la une</h2></div>
+  <div class="titre"><h2>&Agrave; la une :</h2></div>
   <BOUCLE_featured(ARTICLES) {id_secteur IN 1,4,20,21,22,27} {par date} {inverse} {0,1} {doublons}>
   [(#INCLURE{fond=inc/resume}{id_article})]
   </BOUCLE_featured>
 </div>
+
+<div class="nettoyeur"></div>
 
 <div id="front">
   <div id="billets">

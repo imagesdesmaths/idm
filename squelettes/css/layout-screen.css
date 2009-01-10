@@ -12,7 +12,6 @@ body { padding : 0px; margin : 0px; background : white; }
   #left  { width : 12em; position : absolute; z-index : 5; top : 75px; text-align : left; z-index : 2; }
   #main  { position : absolute; top : 75px; width : 100%; z-index : 0; }
   #main_in { margin-left : 13em; padding : 1ex 1em 2ex; }
-    #une { padding : 1ex 1em; background-color : #ffcccc; margin : 3ex 0em 0ex; }
     #front { position : relative; }
       #billets { position : absolute; width : 50%; padding-bottom : 1ex; }
         #billets .resume { margin-right : 1em; }

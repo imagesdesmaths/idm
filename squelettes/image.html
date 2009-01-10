@@ -1,0 +1,15 @@
+<BOUCLE_img(DOCUMENTS){id_document=#ENV{id_document}}{tous}>
+<INCLURE{fond=inc/head}{title=#TITRE}>
+
+[<h1>(#TITRE)</h1>]
+
+<div class="figure">
+  <a href="#URL_DOCUMENT"><img src="#URL_DOCUMENT"[ alt="(#TITRE)" title="#TITRE"]></a>
+</div>
+
+[(#DESCRIPTIF)]
+
+#INCLURE{fond=inc/foot}
+</BOUCLE_img>
+<INCLURE{fond=sommaire}>
+<//B_img>
