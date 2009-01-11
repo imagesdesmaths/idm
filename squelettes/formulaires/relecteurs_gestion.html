@@ -35,6 +35,8 @@
   <th>ID</th>
   <th>E-Mail</th>
   <th>Qui est-ce ?</th>
+  <th>Combien ?</th>
+  <th>Dernière relecture</th>
   <th>Supprimer</th>
 </tr></thead><tbody>
 <BOUCLE_relecteurs(AUTEURS) {tous} {role = relecteur} {par nom}>
@@ -43,6 +45,8 @@
   <td>#ID_AUTEUR</td>
   <td>#EMAIL</td>
   <td><input type="text" name="math_#ID_AUTEUR" value="#ENV{math_#ID_AUTEUR}" size=20 /></td>
+  <td>#RELECTEUR_COMBIEN</td>
+  <td>#RELECTEUR_QUAND</td>
   <td><input type="checkbox" name="exterminate_#ID_AUTEUR"/></td>
 </tr>
 </BOUCLE_relecteurs></tbody></table>

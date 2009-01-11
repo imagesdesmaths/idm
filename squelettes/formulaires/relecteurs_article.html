@@ -24,10 +24,14 @@
       <B_gars><table id="unassigned_#ID_ARTICLE"><thead><tr>
         <th>Signature / Pseudo</th>
         <th>Qui est-ce ?</th>
+        <th>Combien ?</th>
+        <th>Dernière relecture</th>
         <th>Affecter</th>
       </tr></thead><tbody><BOUCLE_gars(AUTEURS) {tous} {role = relecteur} {par nom} {doublons}><tr>
         <td>#NOM</td>
         <td>#MATH</td>
+        <td>#RELECTEUR_COMBIEN</td>
+        <td>#RELECTEUR_QUAND</td>
         <td><input type="checkbox" name="assign_#ID_AUTEUR"/></td>
       </tr></BOUCLE_gars></tbody></table></B_gars>
     </div>

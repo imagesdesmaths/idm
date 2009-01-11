@@ -2,8 +2,11 @@
 
 global $tables_principales;
 $tables_principales['spip_auteurs']['field']['billettiste'] = "enum('oui','non') NOT NULL DEFAULT 'non'";
+
 $tables_principales['spip_auteurs']['field']['role'] = "ENUM ('visiteur','candidat','relecteur') NOT NULL DEFAULT 'visiteur'";
 $tables_principales['spip_auteurs']['field']['math'] = "TINYTEXT";
+$tables_principales['spip_auteurs']['field']['relecteur_combien'] = "INT NOT NULL DEFAULT 0";
+$tables_principales['spip_auteurs']['field']['relecteur_quand'] = "TIMESTAMP";
 
 global $tables_auxiliaires;
 $tables_auxiliaires['spip_relecteurs_articles'] = array (
