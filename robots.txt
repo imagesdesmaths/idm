@@ -1,2 +1,4 @@
+Sitemap: http://images.math.cnrs.fr/spip.php?page=sitemap
+
 User-Agent: *
 Disallow: /wiki/
