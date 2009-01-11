@@ -1,11 +1,10 @@
 #HTTP_HEADER{Content-type: text/xml; charset=utf-8}
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url>
-  <loc>#URL_SITE_SPIP/</loc>
-  <changefreq>daily</changefreq>
-  <priority>1.0</priority>
-</url>
+<url><loc>#URL_SITE_SPIP/</loc>                  <changefreq>daily</changefreq> <priority>1.0</priority></url>
+<url><loc>#URL_SITE_SPIP/#URL_PAGE{anciens}</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+<url><loc>#URL_SITE_SPIP/#URL_PAGE{lexique}</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+<url><loc>#URL_SITE_SPIP/#URL_PAGE{plan}</loc>   <changefreq>weekly</changefreq><priority>1.0</priority></url>
 <BOUCLE_secteurs(RUBRIQUES) {id_parent=0}>
 <url>
   <loc>#URL_SITE_SPIP/[(#URL_RUBRIQUE|utf8_encode)]</loc>
