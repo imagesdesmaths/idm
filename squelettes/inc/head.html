@@ -86,7 +86,7 @@
 
         <h2>Quelques br&egrave;ves</h2>
 
-        <BOUCLE_actu(BREVES) {id_rubrique=26} {age>0} {par date} {inverse} {0,5}>
+        <BOUCLE_actu(BREVES) {id_rubrique=26} {age>=0} {par date} {inverse} {0,5}>
         <h3>- [(#DATE|affdate)] -</h3>
         <a href="#URL_BREVE" class="plain">#TITRE</a>
         </BOUCLE_actu>
