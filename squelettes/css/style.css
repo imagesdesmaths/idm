@@ -98,7 +98,7 @@ div#left div.jsmathwarning a { color : #550000; font-weight : bold; text-decorat
 div#imagedujour { width : 13em; margin : 1ex 0px 1ex -.5em; text-align : center; }
 div#imagedujour img { max-width : 100%; }
 
-div#une { margin-top : 2ex; padding : 1ex 0em 0ex 1em; margin : 3ex 0em 0ex; }
+div#une { 2ex; padding : 1ex 0em 0ex; margin : 2ex 2em 0ex; }
 div#une div.resume_out { margin-top : 1ex; }
 div#une div.resume div.introduction { font-size : 95%; margin-left : 0px; }
 div#une div.resume div.introduction a { color : black; }
