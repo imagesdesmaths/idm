@@ -115,7 +115,7 @@ div#main div.cs_blocs h4 { text-align : left; font-style : normal; background : 
 div#main div.cs_blocs h4 { text-align : left; font-style : normal; background : transparent url(img/triangle-bas.gif) no-repeat scroll left center; font-size : 100%; font-weight : normal; padding:0pt 0pt 0pt 20px; }
 div#main div.cs_blocs h4.blocs_replie { background : transparent url(img/triangle.gif) no-repeat scroll left center; }
 div#main div.cs_blocs h4:hover { cursor : pointer; text-decoration : underline; }
-div#main div.cs_blocs {}
+div#main div.cs_blocs { margin : 1ex 0em; }
 
 div.figure div.legende p { font-size : 90%; font-style : italic; margin-top : 0px; }
 div.figure div.legende { width : 80%; margin : 0px auto; text-align : justify; }
@@ -209,7 +209,7 @@ div.texte p.lettrine { text-indent : 0px; }
 div.texte pre { padding-left : 1em; margin-left : 1em; border-left : 1px solid #e20000; }
 div.texte { padding : 2ex 1em 1ex; }
 
-div.thm { border-left : 2px solid #e20000; margin-left : 1.5em; padding-left : 1em; font-style : italic; }
+div.thm { border-left : 2px solid #e20000; margin : 1ex 0em 1ex 1.5em; padding-left : 1em; font-style : italic; }
 div.thm span.titre { font-weight : bold; font-style : normal; margin-left : -2.5em; background : white; border-bottom : 2px solid #e20000; border-top : 1px solid white; }
 div.thm ol { margin : 0ex; list-style-type : lower-roman; padding-left : 1em; list-style : lower-roman; }
 div.thm ul { margin : 0ex; }
