@@ -98,7 +98,15 @@ div#left div.jsmathwarning a { color : #550000; font-weight : bold; text-decorat
 div#imagedujour { width : 13em; margin : 1ex 0px 1ex -.5em; text-align : center; }
 div#imagedujour img { max-width : 100%; }
 
-div#une { 2ex; padding : 1ex 0em 0ex; margin : 2ex 2em 0ex; }
+div#featured { padding : 1ex 0em 0ex; margin : 1ex 2em 0ex; }
+div#featured div.resume_out { margin-top : 1ex; }
+div#featured div.resume div.introduction { font-size : 95%; margin-left : 0px; }
+div#featured div.resume div.introduction a { color : black; }
+div#featured div.titre { margin-top : -2.5ex; text-align : center; }
+div#featured h2 { display : inline; padding : .3ex 1em .1ex; background-color : white; }
+div#featured h3.titre { margin-top : -.5ex; }
+
+div#une { padding : 1ex 0em 0ex; margin : 1ex 2em 0ex; }
 div#une div.resume_out { margin-top : 1ex; }
 div#une div.resume div.introduction { font-size : 95%; margin-left : 0px; }
 div#une div.resume div.introduction a { color : black; }
