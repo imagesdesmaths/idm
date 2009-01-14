@@ -5,15 +5,27 @@
 
 <?php $nb = sql_countsel ('spip_forum', "id_article=#ID_ARTICLE AND statut='publie'"); ?>
 
+<div id="print" style="display:none;"><div class="article">
+    <div class="titre"><h2>Imprimer cet article</h2></div>
+    <p>Il vous suffit d'utiliser la fonction "imprimer" de votre 
+    navigateur ! Les différentes barres de navigation disparaissent 
+    automatiquement à l'impression.</p>
+</div></div>
+
 <div class="relies"><p>
   <BOUCLE_rub(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rub>
+
   <BOUCLE_diff(MOTS) {id_groupe=5} {id_article}> &mdash; <a class="piste_#ID_MOT" href="#URL_MOT">#TITRE</a></BOUCLE_diff>
+
   <B_mots> &mdash; <BOUCLE_mots(MOTS) {id_article} {id_groupe=1} {par titre} {', '}>
   <a href="#URL_MOT">#TITRE</a></BOUCLE_mots> &mdash;
+
   <a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}"><?php
          if ($nb>1)  print "$nb commentaires";
     else if ($nb==1) print "1 commentaire";
     else             print "0 commentaire"; ?></a>
+
+  &mdash; <a class="thickbox" href="#[(#REM)]TB_inline?width=400&height=200&inlineId=print">Imprimer</a>
 </p></div>
 
 [(#INCLURE{fond=inc/article}{id_article})]
