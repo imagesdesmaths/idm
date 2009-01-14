@@ -14,3 +14,6 @@ body { padding : 0px; margin : 0px; background : inherit; }
 /* Non-print-worthy stuff should be hidden too ... */
 
 h3.discuter { display : none; }
+div.notation { display : none; }
+div.relies { display : none; }
+div.spip-admin-float { display : none; }
