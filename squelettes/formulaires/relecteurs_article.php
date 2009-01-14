@@ -23,12 +23,16 @@ function notify_user ($id_auteur, $id_article) {
     "être identifié(e) sur le site, il vous suffit de vous rendre à\n" .
     "l'adresse suivante :\n" .
     "\n" .
-    "  http://images.math.cnrs.fr/spip/spip.php?page=propose&id_article=$id_article\n" .
+    "  http://images.math.cnrs.fr/spip.php?page=propose&id_article=$id_article\n" .
     "\n" .
     "Vous y trouverez l'article dans son état actuel, un forum de discussion\n" .
     "vous permettant de déposer vos commentaires et de dialoguer avec les\n" .
     "autres relecteurs ainsi qu'avec l'auteur de l'article, et enfin un\n" .
     "formulaire de vote pour donner votre avis sur sa publication.\n" .
+    "\n" .
+    "Nous souhaiterions pouvoir publier cet article dans les 15 jours qui\n" .
+    "viennent. Si vous n'avez pas le temps de le relire d'ici là, ça n'est\n" .
+    "pas grave - mais nous le publierons peut-être sans vous attendre ...\n".
     "\n" .
     "Merci pour votre aide !\n\n" .
     "-- \n" .
