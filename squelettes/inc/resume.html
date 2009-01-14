@@ -2,8 +2,11 @@
   <div class="resume_out resume_out_rubrique_#ID_RUBRIQUE resume_out_secteur_#ID_SECTEUR">
     <div class="resume resume_rubrique_#ID_RUBRIQUE resume_secteur_#ID_SECTEUR">
       #DEBUT_SURLIGNE
-      [(#LOGO_ARTICLE|right|#URL_ARTICLE|image_reduire{150,150})]
-      [(#LOGO_ARTICLE|fichier|non) <INCLURE{fond=inc/auteur}{id_article=#ID_ARTICLE}{taille=150}>]
+
+      [(#LOGO_ARTICLE|right|#URL_ARTICLE|image_reduire{150,150}
+      | sinon { [(#INCLURE{fond=inc/auteur}{id_article=#ID_ARTICLE}{taille=150}
+      | sinon { [(#LOGO_RUBRIQUE|right|#URL_ARTICLE|image_reduire{150,150}
+      )] } )] } )]
 
       <div class="piste">
         <BOUCLE_diff(MOTS) {id_groupe=5} {id_article}> <a class="piste_#ID_MOT" href="#URL_MOT">#TITRE</a></BOUCLE_diff>
