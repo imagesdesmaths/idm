@@ -51,7 +51,7 @@
     {{Documentation}}
 
     Elle est en travaux, et se trouve sur [cette 
-    page->http://images.math.cnrs.fr/spip/Ecrire-des-maths-dans-SPIP.html].
+    page->http://images.math.cnrs.fr/Ecrire-des-maths-dans-SPIP.html].
   </description>
   <prefix>jsMath</prefix>
   <fonctions>jsMath.php</fonctions>
