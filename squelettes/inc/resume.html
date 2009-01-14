@@ -16,6 +16,10 @@
 
       <div class="rubrique">
         <BOUCLE_rubrique(RUBRIQUES) {id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rubrique>
+        <BOUCLE_rep(FORUMS){id_article}{tout}></BOUCLE_rep>
+        [(#TOTAL_BOUCLE|>{0}|oui) &mdash; <a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">#TOTAL_BOUCLE
+          réponse[(#TOTAL_BOUCLE|>{1}|?{s})]</a>]
+        <//B_rep>
       </div>
 
       [<h4 class="auteur[(#ID_SECTEUR|=={18}|?{' invisible'})]">Le [(#DATE|affdate)], par (#LESAUTEURS)</h4>]
