@@ -5,3 +5,5 @@
   #billets h2 { padding-right : 9em; }
 #recents { margin-top : 2ex; background : white; }
   #recents div.resume { padding : 0px 1em 0px 0em; }
+
+#imagedujour { display : none; }

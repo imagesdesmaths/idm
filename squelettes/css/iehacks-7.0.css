@@ -1,3 +1,5 @@
 #une { border-left : 14em solid white; margin-left : -14em; }
 #billets { margin-top : 2ex; }
 #recents { left : -8em; margin-top : 2ex; }
+
+#imagedujour { display : none; }
