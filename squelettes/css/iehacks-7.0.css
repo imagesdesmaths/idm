@@ -2,4 +2,5 @@
 #billets { margin-top : 2ex; }
 #recents { left : -8em; margin-top : 2ex; }
 
-#imagedujour { width : 0px; display : none; }
+#imagedujour { display : none; }
+#une { border-left : 0px; }
