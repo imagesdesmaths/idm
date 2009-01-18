@@ -65,7 +65,7 @@ ul.forum { padding : 0px; list-style-type : none; }
 
 /************************************************************************/
 
-div#left { padding : 15px .5em 1ex; text-align : left; color : white; background : #550000; }
+div#left { padding : 1ex .5em 1ex; text-align : left; color : white; background : #550000; }
 div#left a { font-weight : normal; color : white; text-decoration : none; }
 div#left a.active { color : #e20000; }
 div#left a:hover { text-decoration : underline; }
