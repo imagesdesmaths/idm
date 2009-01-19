@@ -5,6 +5,38 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // On hérite du formulaire standard.
 include_spip('balise/formulaire_forum');
+include_spip('inc/envoyer_mail');
+
+function notify_authors ($id_article) {
+  $titre = sql_getfetsel ("titre", "spip_articles", "id_article = $id_article");
+  $titre = utf8_decode ($titre);
+
+  $subject = "Un message sur votre article pour Images des Maths";
+
+  $texte = "Bonjour !\n" .
+    "\n" .
+    "Un message vient d'être déposé sur l'interface de relecture de votre\n" .
+    "article pour \"Images des mathématiques\" intitulé :\n" .
+    "\n" .
+    "  « $titre »\n" .
+    "\n" .
+    "Vous pouvez accéder a cette interface pour le lire et éventuellement\n" .
+    "y répondre a l'URL suivante (une fois identifié sur le site) :\n" .
+    "\n" .
+    "  http://images.math.cnrs.fr/spip.php?page=propose&id_article=$id_article\n" .
+    "\n" .
+    "Merci pour votre aide !\n\n" .
+    "-- \n" .
+    "Le comité de rédaction de \"Images des Mathématiques\".";
+
+  $auteurs = sql_allfetsel ( "id_auteur", "spip_auteurs_articles", "id_article = $id_article" );
+  foreach ($auteurs as $line) {
+    $id_auteur = $line["id_auteur"];
+    $email = sql_getfetsel ("email","spip_auteurs","id_auteur=$id_auteur");
+    inc_envoyer_mail_dist ($email, $subject, utf8_encode($texte));
+  }
+}
+
 
 // La balise #FORMULAIRE_FORUM_PRIVE, équivalente à #FORMULAIRE_FORUM 
 // (avec quelques champs en moins, parce qu'on suppose que l'auteur est 
@@ -101,6 +133,7 @@ function balise_FORMULAIRE_FORUM_PRIVE_dyn ($titre, $table, $type, $script, $id_
       'id_auteur' => $GLOBALS['auteur_session']['id_auteur'],
       'auteur' => $auteur));
 
+    notify_authors ($id_article);
     @header ("Location: spip.php?page=propose&id_article=$id_article");
     return "Message enregistr&eacute, rechargement de la page.";
   }
