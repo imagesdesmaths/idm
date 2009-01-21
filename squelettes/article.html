@@ -10,10 +10,12 @@
 
   <BOUCLE_diff(MOTS) {id_groupe=5} {id_article}> &mdash; <a class="piste_#ID_MOT" href="#URL_MOT">#TITRE</a></BOUCLE_diff>
 
-  <B_mots> &mdash; <BOUCLE_mots(MOTS) {id_article} {id_groupe=1} {par titre} {', '}>
-  <a href="#URL_MOT">#TITRE</a></BOUCLE_mots> &mdash;
+  <B_mots><span id="mots"[(#ID_RUBRIQUE|=={6}|oui) style="display:none;"]> &mdash;
+  <BOUCLE_mots(MOTS) {id_article} {id_groupe=1} {par titre} {', '}>
+    <a href="#URL_MOT">#TITRE</a>
+  </BOUCLE_mots></span></B_mots>
 
-  <a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}"><?php
+  &mdash; <a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}"><?php
          if ($nb>1)  print "$nb commentaires";
     else if ($nb==1) print "1 commentaire";
     else             print "0 commentaire"; ?></a>
