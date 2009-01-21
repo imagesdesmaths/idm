@@ -1,7 +1,7 @@
 <BOUCLE_article(ARTICLES){id_article}>
 <INCLURE{fond=inc/head}{title=#TITRE}{id_rubrique=#ID_RUBRIQUE}{id_article=#ID_ARTICLE}>
 
-<div class="notation">#FORMULAIRE_NOTATION</div>
+[(#REM)<div class="notation">#FORMULAIRE_NOTATION</div>]
 
 <?php $nb = sql_countsel ('spip_forum', "id_article=#ID_ARTICLE AND statut='publie'"); ?>
 
