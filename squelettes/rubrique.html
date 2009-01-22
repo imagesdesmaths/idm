@@ -2,6 +2,17 @@
 <BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
 <INCLURE{fond=inc/head}{title=#TITRE}{id_rubrique=#ID_RUBRIQUE}>
 
+<B_nav>
+<form action="#URL_SITE_SPIP/#URL_RUBRIQUE" method="post" name="nav_menu" style="text-align:right;margin-bottom:1ex;">
+  <select name="nav_url" onChange="document.location.href = document.nav_menu.nav_url.options[document.nav_menu.nav_url.selectedIndex].value">
+    <option value="#URL_SITE_SPIP/#URL_RUBRIQUE" selected>Navigation rapide :</option>
+<BOUCLE_nav(ARTICLES) {id_rubrique} {par titre}>
+    <option value="#URL_SITE_SPIP/#URL_ARTICLE">- #TITRE</option>
+</BOUCLE_nav>
+  </select>
+</form>
+</B_nav>
+
 [(#LOGO_RUBRIQUE|right||image_reduire{200,200})]
 <h1><BOUCLE_parent(RUBRIQUES){id_rubrique=#ID_PARENT}{id_rubrique != 18}>
   <a href="#URL_RUBRIQUE">#TITRE</a> :</BOUCLE_parent> #TITRE</h1>
