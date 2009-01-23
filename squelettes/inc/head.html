@@ -13,6 +13,9 @@
     $version = $matches[1];  
     print "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\"    href=\"squelettes/css/iehacks-$version.css\"/>\n";
   } ?>
+  <?php if (preg_match('/AppleWebKit.[1-4]/', $_SERVER['HTTP_USER_AGENT'] , $matches)) {
+    print "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\"    href=\"squelettes/css/oldsafarihack.css\"/>\n";
+  } ?>
 
   <link rel="home" title="Page principale" href="#URL_SITE_SPIP/"/>
   <link rel="start" title="Page principale" href="#URL_SITE_SPIP/"/>
