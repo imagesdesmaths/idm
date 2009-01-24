@@ -41,9 +41,17 @@ function formulaires_billet_verifier () {
 
 function formulaires_billet_traiter () {
   $id_article = intval(_request("id_article"));
+  $id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+  
+  $previous = sql_getfetsel ("UNIX_TIMESTAMP(date)",
+    "spip_auteurs_articles,spip_articles",
+    "(spip_articles.id_article=spip_auteurs_articles.id_article) AND (id_auteur=$id_auteur) AND (statut='publie')",
+    array(), "date DESC", "1");
+
+  $when = max (time(), $previous + 7*24*3600);
 
   sql_updateq ("spip_articles",
-    array ("statut" => "publie", "date" => "NOW()"),
+    array ("statut" => "publie", "date" => date("Y-m-d H:i:s", $when)),
     "id_article = $id_article");
 
   return array('message_ok' => "done");
