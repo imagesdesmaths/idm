@@ -9,13 +9,16 @@
   <link rel="stylesheet" type="text/css" media="screen" href="#CHEMIN{css/layout-screen.css}"/>
   <link rel="stylesheet" type="text/css" media="print"  href="#CHEMIN{css/layout-print.css}"/>
   <link rel="stylesheet" type="text/css" media="all"    href="#CHEMIN{css/style.css}"/>
-  <?php if (preg_match('/MSIE ([0-9.]*)/', $_SERVER['HTTP_USER_AGENT'] , $matches)) {
-    $version = $matches[1];  
-    print "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\"    href=\"squelettes/css/iehacks-$version.css\"/>\n";
-  } ?>
-  <?php if (preg_match('/AppleWebKit.[1-4]/', $_SERVER['HTTP_USER_AGENT'] , $matches)) {
-    print "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\"    href=\"squelettes/css/oldsafarihack.css\"/>\n";
-  } ?>
+  <?php
+    $agent = $_SERVER['HTTP_USER_AGENT'];
+    if (preg_match('/MSIE ([0-9.]*)/', $agent, $matches)) {
+      $version = $matches[1];
+      print "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\"    href=\"squelettes/css/iehacks-$version.css\"/>\n";
+    } else if (preg_match('/AppleWebKit.[1-4]/', $agent, $matches)) {
+      print "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\"    href=\"squelettes/css/oldsafarihack.css\"/>\n";
+    }
+    print "<!-- $agent -->\n";
+  ?>
 
   <link rel="home" title="Page principale" href="#URL_SITE_SPIP/"/>
   <link rel="start" title="Page principale" href="#URL_SITE_SPIP/"/>
@@ -46,7 +49,7 @@
     <div id="logo"><a href="http://www.cnrs.fr/"><img src="#CHEMIN{img/CNRS.jpg}" alt="CNRS" /></a></div>
     <div id="head">
       <h1><a href="#URL_SITE_SPIP/">
-          <img src="#CHEMIN{img/Logo_IDM_blanc_e00000.gif}" alt="Images des mathematiques" />
+          <img src="#CHEMIN{img/Logo_IDM_blanc_e00000.gif}" alt="#NOM_SITE_SPIP" />
       </a></h1>
     </div>
 
