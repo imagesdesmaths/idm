@@ -1,0 +1,17 @@
+#CACHE{3600}
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+<INCLURE{fond=inc/head}{title=#TITRE : archives}{id_rubrique=#ID_RUBRIQUE}>
+
+<h1>#TITRE : archives</h1>
+
+<B_actu><ul style="margin-top : 2ex;">
+<BOUCLE_actu(BREVES) {id_rubrique} {age>=0} {par date} {inverse}>
+<li><strong>[(#DATE|affdate) :]</strong>
+<a href="#URL_BREVE" class="plain">#TITRE</a>
+</BOUCLE_actu>
+</ul></B_actu>
+
+#INCLURE{fond=inc/foot}
+</BOUCLE_rubrique>
+<INCLURE{fond=sommaire}>
+<//B_rubrique>
