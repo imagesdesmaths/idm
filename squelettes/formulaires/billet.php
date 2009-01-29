@@ -1,6 +1,34 @@
 <?php
 
 include_spip('base/abstract_sql');
+include_spip('inc/envoyer_mail');
+
+function notify_comite ($id_auteur, $titre, $date) {
+  $email = "comite@images.math.cnrs.fr";
+  $qui = sql_getfetsel ("nom", "spip_auteurs", "id_auteur = $id_auteur");
+  $qui = utf8_decode ($qui);
+  $titre = utf8_decode ($titre);
+
+  $subject = "Un nouveau billet pour Images des Maths";
+
+  $texte = "Bonjour !\n" .
+    "\n" .
+    "Un nouveau billet vient d'être validé pour Images des Maths.\n" .
+    "\n" .
+    "  Auteur : $qui\n" .
+    "\n" .
+    "  Titre : « $titre »\n" .
+    "\n" .
+    "Sans action de la part du comité éditorial, il sera publié à\n" .
+    "la date suivante :\n" .
+    "\n" .
+    "  $date\n" .
+    "\n" .
+    "-- \n" .
+    "Le comité de rédaction de \"Images des Mathématiques\".";
+
+  inc_envoyer_mail_dist ($email, $subject, utf8_encode($texte));
+}
 
 function formulaires_billet_charger () {
   $valeurs = array('titre'=>'', 'texte'=>'', 'id_article'=>false);
@@ -69,6 +97,7 @@ function formulaires_billet_traiter () {
     array ("statut" => "publie", "date" => date("Y-m-d H:i:s", $when)),
     "id_article = $id_article");
 
+  notify_comite ($id_auteur, _request("titre"), date("d/m/Y, H:i:s", $when));
   return array('message_ok' => "done");
 }
 
