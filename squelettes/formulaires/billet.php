@@ -53,11 +53,17 @@ function formulaires_billet_traiter () {
   $previous -= $previous % (24*3600); // Their last contribution to the site
 
   $when = max ($today + 2*24*3600, $previous + 7*24*3600); // Publish the day after tomorrow, with one week minimum for the same contributor.
-
-  // TODO : here, check for backlog and the like, while (more than 2) 
-  // add 24 hours.
-
   $when += 7*3600; // Publish at 7:00 AM
+
+  $threshold = 2;
+
+  while (true) {
+    $sqldate = date("Y-m-d H:i:s", $when);
+    $howmany = sql_countsel('spip_articles', "(id_rubrique=6) AND (statut='publie') AND (date='$sqldate')");
+    if ($howmany<$threshold) break;
+    $when += 24*3600;
+    $threshold += 1;
+  }
 
   sql_updateq ("spip_articles",
     array ("statut" => "publie", "date" => date("Y-m-d H:i:s", $when)),
