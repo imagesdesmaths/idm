@@ -1,7 +1,7 @@
 <B_img>
-<div class="figure">
+<div class="figure"[ style="text-align:(#ENV{align})"]>
   <BOUCLE_img(DOCUMENTS) {id_document = #ENV{id}} {tous}>
-  <img src="#URL_DOCUMENT">
+  <img src="#URL_DOCUMENT"[ style="max-width:(#ENV{width})"]>
   [<p class="titre">(#TITRE)</p>]
   [<div class="legende">(#DESCRIPTIF)</div>]
   </BOUCLE_img>
