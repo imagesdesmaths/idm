@@ -39,7 +39,7 @@
 <div id="front">
   <div id="billets">
     <h2>Derniers billets (<a href="#URL_RUBRIQUE{6}">tous les billets</a>)</h2>
-    <BOUCLE_billets(ARTICLES) {id_rubrique = 6} {par date} {inverse} {0,5} {doublons}>
+    <BOUCLE_billets(ARTICLES) {id_rubrique = 6} {par date} {age>=0} {inverse} {0,5} {doublons}>
     [(#INCLURE{fond=inc/resume}{id_article})]
     </BOUCLE_billets>
   </div>
