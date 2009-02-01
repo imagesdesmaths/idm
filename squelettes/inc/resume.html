@@ -8,21 +8,25 @@
       | sinon { [(#LOGO_RUBRIQUE|right|#URL_ARTICLE|image_reduire{150,150}
       )] } )] } )]
 
-      <div class="piste">
-        <BOUCLE_diff(MOTS) {id_groupe=5} {id_article}> <a class="piste_#ID_MOT" href="#URL_MOT">#TITRE</a></BOUCLE_diff>
-      </div>
 
       <h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+      [<h4 class="auteur[(#ID_SECTEUR|=={18}|?{' invisible'})]">Le [(#DATE|affdate)], par (#LESAUTEURS)</h4>]
 
       <div class="rubrique">
-        <BOUCLE_rubrique(RUBRIQUES) {id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rubrique>
+        <BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {id_rubrique != 6}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rubrique>
+        <span class="piste">
+          <BOUCLE_diff(MOTS) {id_groupe=5} {id_article}> &mdash; <a class="piste_#ID_MOT" href="#URL_MOT">#TITRE</a></BOUCLE_diff>
+        </span>
+      </div>
+
+      <div class="rubrique">
         <BOUCLE_rep(FORUMS){id_article}{tout}></BOUCLE_rep>
-        [(#TOTAL_BOUCLE|>{0}|oui) &mdash; <a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">#TOTAL_BOUCLE
-          réponse[(#TOTAL_BOUCLE|>{1}|?{s})]</a>]
+        [(#TOTAL_BOUCLE|>{0}|oui) <a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">
+          #TOTAL_BOUCLE réponse[(#TOTAL_BOUCLE|>{1}|?{s})]
+        </a>]
         <//B_rep>
       </div>
 
-      [<h4 class="auteur[(#ID_SECTEUR|=={18}|?{' invisible'})]">Le [(#DATE|affdate)], par (#LESAUTEURS)</h4>]
       [<div class="introduction"><a class="plain" href="#URL_ARTICLE">(#DESCRIPTIF|sinon{[(#INTRODUCTION|textebrut)]})</a></div>]
       #FIN_SURLIGNE
     </div>

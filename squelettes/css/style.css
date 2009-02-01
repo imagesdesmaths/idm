@@ -173,23 +173,22 @@ div.relies a.piste_22 { color : #e20000; }
 div.relies a.piste_23 { color : #000000; }
 div.relies a.piste_24 { color : #888888; }
 
-div.resume_out { margin : 2ex 0px 0px; }
-div.resume a { color : black; text-decoration : none; }
-div.resume div.introduction { margin : .5ex 0px 0px 2em; font-size : small; font-style : italic; }
-div.resume div.introduction a { font-weight : normal; color : #666666; }
+div.resume_out { margin : 3ex 0px 0px; }
 div.resume h3.titre a:hover { color : #e20000; }
+div.resume div.rubrique { font-size : 90%; text-align : right; margin : .2ex .5em 0px 0px; }
+div.resume div.rubrique a:hover { color : #e20000; }
+div.resume h4.auteur { font-size : 90%; text-align : right; }
 div.resume h4.auteur a:hover { color : #e20000; }
+div.resume div.introduction a { font-weight : normal; color : #777777; }
+div.resume div.introduction { margin : .5ex 0px 0px 2em; font-size : small; font-style : italic; }
 div.resume img.spip_logos { padding : 0px 0px 0px 1em; background : white; }
+div.resume a { color : black; text-decoration : none; }
 
-div.rubrique { font-style : italic; font-size : 80%; float : left; margin : .2ex .5em 0px 0px; }
-div.rubrique a:hover { color : #e20000; }
-
-div.piste { float : right; margin-top : .3ex; }
-div.piste a.piste_20 { color : #009900; }
-div.piste a.piste_21 { color : #3333ff; }
-div.piste a.piste_22 { color : #e20000; }
-div.piste a.piste_23 { color : #000000; }
-div.piste a.piste_24 { color : #888888; }
+span.piste a.piste_20 { color : #009900; }
+span.piste a.piste_21 { color : #3333ff; }
+span.piste a.piste_22 { color : #e20000; }
+span.piste a.piste_23 { color : #000000; }
+span.piste a.piste_24 { color : #888888; }
 
 div.spip-admin-bloc a { display : block; color : white; background : #550000; border : 1px solid #e20000; margin : -1px 0px 0px; }
 div.spip-admin-bloc a:hover { background : #550000; text-decoration : none; border : 1px solid #e20000; }
