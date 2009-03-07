@@ -1,0 +1,19 @@
+<BOUCLE_article(ARTICLES) {id_article} {recherche ?}>
+  <div class="resume_out resume_out_rubrique_#ID_RUBRIQUE resume_out_secteur_#ID_SECTEUR">
+    <div class="resume resume_rubrique_#ID_RUBRIQUE resume_secteur_#ID_SECTEUR">
+      <h2><a href="#URL_ARTICLE">À la une : #TITRE</a></h2>
+      <h3>
+          Le [(#DATE|affdate)], par #LESAUTEURS
+
+          <BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {id_rubrique != 6}><a href="#URL_RUBRIQUE">&mdash #TITRE</a></BOUCLE_rubrique>
+          <span class="piste">
+            <BOUCLE_diff(MOTS) {id_groupe=5} {id_article}> &mdash; <a class="piste_#ID_MOT" href="#URL_MOT">#TITRE</a></BOUCLE_diff>
+          </span>
+      </h3>
+
+      [<div class="unelogo">(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{600,300})</div>]
+      [<div class="introduction"><a class="plain" href="#URL_ARTICLE">(#DESCRIPTIF|sinon{[(#INTRODUCTION|textebrut)]})</a></div>]
+    </div>
+    <div class="nettoyeur"></div>
+  </div>
+  </BOUCLE_article>

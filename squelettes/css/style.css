@@ -107,14 +107,15 @@ div#featured div.titre { margin-top : -2.5ex; text-align : center; }
 div#featured h2 { display : inline; padding : .3ex 1em .1ex; background-color : white; }
 div#featured h3.titre { margin-top : -.5ex; }
 
-div#une { padding : 1ex 0em 0ex; margin : 1ex 2em 0ex; }
+div#une { margin : 0ex 2em; padding : 0ex 1em; border : 1px solid #ffcccc; background : #ffcccc; }
 div#une div.resume_out { margin-top : 1ex; }
-div#une div.resume div.introduction { font-size : 95%; margin-left : 0px; }
+div#une h2 { margin : 0px; font-size : x-large; border-bottom : 2px solid #e20000; }
+div#une h2 a:hover { color : #e20000; }
+div#une h3 { text-align : center; font-weight : normal; font-size : 100%; margin : 0px; }
+div#une div.resume div.introduction { font-size : 100%; margin : 0px; font-style : normal; }
 div#une div.resume div.introduction a { color : black; }
-div#une div.resume h4.auteur { font-size : 100%; }
-div#une div.titre { margin-top : -2.5ex; text-align : center; }
-div#une h2 { display : inline; padding : .3ex 1em .1ex; background-color : white; }
-div#une h3.titre { margin-top : -.5ex; }
+div#une div.unelogo { margin : 1ex 0em 0ex; text-align : center; clear : both; }
+div#une img { padding : 0px; margin : 1ex 0em 0ex; }
 
 div#editolink { text-align : center; font-size : 180%; font-weight : bold; margin : .5ex 0em 2.5ex; font-variant : small-caps; }
 div#editolink a:hover { text-decoration : underline; }
