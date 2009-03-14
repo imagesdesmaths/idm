@@ -1,0 +1,27 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	<multi>
+	[fr]Recherche FULLTEXT
+	</multi>
+	</nom>
+	<auteur>Fil</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Indexation FULLTEXT du contenu pour acc&#233;l&#233;rer le moteur de recherche
+	<ul>
+	<li>exploite le mode FULLTEXT SEARCH IN BOOLEAN MODE de MySQL, cf. [->http://dev.mysql.com/doc/refman/5.0/fr/fulltext-boolean.html]</li>
+	</ul>
+	</description>
+	<lien>http://www.spip-contrib.net/Fulltext</lien> <!-- URI de documentation -->
+	<prefix>
+	Fulltext
+	</prefix>
+
+	<chemin dir='' />
+	<necessite id="SPIP" version="[2.0.0;]" />
+</plugin>
