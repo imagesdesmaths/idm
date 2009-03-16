@@ -1,5 +1,9 @@
 <?php
 
+// Super-administrateur :
+
+define ('_ID_WEBMESTRES', '1');
+
 // Afficher les messages d'erreurs de PHP (en cours de développement, 
 // mettre à 0 en production !)
 
