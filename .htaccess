@@ -135,7 +135,7 @@ RewriteRule ^sitemap[.]xml$      spip.php?page=sitemap.xml [QSA,L]
 ExpiresActive On
 ExpiresDefault A0
  
-<FilesMatch "\.(gif|png|css|js)$">
+<FilesMatch "\.(gif|png|jpg|css|js)$">
   ExpiresDefault "access plus 1 month"
   Header append Cache-Control "public"
 </FilesMatch>
