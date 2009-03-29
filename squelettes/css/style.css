@@ -122,8 +122,8 @@ div#editolink a:hover { text-decoration : underline; }
 
 div.chapo { margin : 1ex 4em; font-weight : bold; font-style : italic; }
 
-div#main div.cs_blocs h4 { text-align : left; font-style : normal; background : transparent url(img/triangle-bas.gif) no-repeat scroll left center; font-size : 100%; font-weight : normal; padding:0pt 0pt 0pt 20px; }
-div#main div.cs_blocs h4.blocs_replie { background : transparent url(img/triangle.gif) no-repeat scroll left center; }
+div#main div.cs_blocs h4 { text-align : left; font-style : normal; background : transparent url(../img/triangle-bas.gif) no-repeat scroll left center; font-size : 100%; font-weight : normal; padding:0pt 0pt 0pt 20px; }
+div#main div.cs_blocs h4.blocs_replie { background : transparent url(../img/triangle.gif) no-repeat scroll left center; }
 div#main div.cs_blocs h4:hover { cursor : pointer; text-decoration : underline; }
 div#main div.cs_blocs { margin : 1ex 0em; }
 div#main div.cs_blocs div.blocs_destination { margin-left : 1em; padding-left : 1em; border-left : 2px solid #e20000; font-size : small; font-style : italic; }
