@@ -143,3 +143,5 @@ ExpiresDefault A0
 <FilesMatch "\.(html|php|js|css)$">
   SetOutputFilter DEFLATE
 </FilesMatch>
+
+FileETag none
