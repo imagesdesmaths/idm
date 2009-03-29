@@ -2,11 +2,13 @@
 <INCLURE{fond=inc/head}{title=Gestion des relecteurs}>
 <BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
 
-<B_prop><h2 style="margin : 0px;">#TOTAL_BOUCLE articles proposÃ©s pour publication :</h2>
-<BOUCLE_prop(ARTICLES) {statut = prop} {par date}>
+<BOUCLE_titre(RUBRIQUES) {id_rubrique}><h1>Rubrique « #TITRE »</h1></BOUCLE_titre>
+
+<B_prop><h2 style="margin : 0px;">#TOTAL_BOUCLE articles proposés pour publication :</h2>
+<BOUCLE_prop(ARTICLES) {statut = prop} {par date} {id_rubrique?}>
   <div class="ajax">#FORMULAIRE_RELECTEURS_ARTICLE{#ID_ARTICLE}</div>
 </BOUCLE_prop>
-<h2>Aucun article proposÃ© !</h2><//B_prop>
+<h2>Aucun article proposé !</h2><//B_prop>
 
 <hr class="huge" />
 
