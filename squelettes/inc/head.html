@@ -27,21 +27,6 @@
   [<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
 
   #INSERT_HEAD
-
-  <script type="text/javascript" src="#CHEMIN{javascript/jquery.tablesorter.min.js}"></script>
-  <script type="text/javascript" src="#CHEMIN{javascript/jsMath_Font_Detector.js}"></script>
-
-  <script type="text/javascript">
-    $(document).ready(function() {
-        $(".sortable").tablesorter( {sortList : [[0,0]]} );
-        if (!jsMath_Font_Detector()) $("#nojsfont").show();
-    } );
-    
-    function unfold_and_print () {
-      $(".blocs_invisible").show();
-      window.print();
-    }
-  </script>
 </head>
 
 <body>
