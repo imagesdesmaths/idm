@@ -1,0 +1,14 @@
+<plugin>
+  <nom>Gestion de relecteurs</nom>
+  <auteur>[Vincent Beffara->vbeffara@gmail.com]</auteur>
+  <version>0.1</version>
+  <etat>dev</etat>
+  <licence>GPL 3 - &copy; 2009</licence>
+  <description>Gestion de la relecture des articles propos&eacute;s par des relecteurs ext&eacute;rieurs</description>
+  <prefix>relecteurs</prefix>
+  <icon>relecteurs.gif</icon>
+
+  <fonctions>relecteurs.php</fonctions>
+
+  <pipeline><nom>boite_infos</nom></pipeline>
+</plugin>
