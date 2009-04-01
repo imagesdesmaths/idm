@@ -16,7 +16,9 @@
 
   [(#SET{initiale,' '})]
   <B_init><p style="text-align : right; margin-top : 0px;"><BOUCLE_init(AUTEURS) {par nom}>
-    [(#GET{initiale}|=={[(#NOM*|initiale)]}|non) <a href="#ini_[(#NOM*|initiale)]">[(#NOM*|initiale)]</a> [(#SET{initiale,[(#NOM*|initiale)]})]]
+    [(#SET{newinitiale,[(#NOM*|initiale)]})]
+    [(#GET{initiale}|=={#GET{newinitiale}}|non) <a href="#ini_#GET{newinitiale}">#GET{newinitiale}</a>]
+    [(#SET{initiale,#GET{newinitiale}})]
   </BOUCLE_init></p></B_init>
 
   [(#SET{initiale,' '})]
@@ -24,7 +26,7 @@
     [(#SET{newinitiale,[(#NOM*|initiale)]})]
     [(#GET{initiale}|!={#GET{newinitiale}}|oui)
       [(#GET{initiale}|!={' '}|oui) </ul></li>]
-      <li><span class="heading" id="ini_[(#NOM*|initiale)]">- [(#NOM*|initiale)] -</span><ul>
+      <li><span class="heading" id="ini_#GET{newinitiale}">-&nbsp;#GET{newinitiale}&nbsp;-</span><ul>
       [(#SET{initiale,#GET{newinitiale}})]
     ]
 
