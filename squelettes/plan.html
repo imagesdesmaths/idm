@@ -21,10 +21,12 @@
 
   [(#SET{initiale,' '})]
   <B_aut><ul><BOUCLE_aut(AUTEURS) {par nom}>
-    [(#GET{initiale}|=={' '}|oui) <li><span class="heading" id="ini_[(#NOM*|initiale)]">- [(#NOM*|initiale)] -</span><ul>]
-    [(#GET{initiale}|=={' '}|non) [(#GET{initiale}|=={[(#NOM*|initiale)]}|non)
-      </ul></li><li><span class="heading" id="ini_[(#NOM*|initiale)]">- [(#NOM*|initiale)] -</span><ul>]]
-    [(#SET{initiale,[(#NOM*|initiale)]})]
+    [(#SET{newinitiale,[(#NOM*|initiale)]})]
+    [(#GET{initiale}|!={#GET{newinitiale}}|oui)
+      [(#GET{initiale}|!={' '}|oui) </ul></li>]
+      <li><span class="heading" id="ini_[(#NOM*|initiale)]">- [(#NOM*|initiale)] -</span><ul>
+      [(#SET{initiale,#GET{newinitiale}})]
+    ]
 
     <li><a href="#URL_AUTEUR">#NOM</a>
     <B_artaut><ul><BOUCLE_artaut(ARTICLES) {id_auteur} {par titre}>
@@ -35,7 +37,7 @@
     </BOUCLE_artaut></ul></B_artaut></li>
   </BOUCLE_aut></ul></li></ul></B_aut>
 
-  #ONGLETS_TITRE{par thème}
+  #ONGLETS_TITRE{par sujet}
 
   <B_mot><ul><BOUCLE_mot(MOTS) {id_groupe = 1} {par titre}>
     <li><span class="heading"><a href="#URL_MOT">#TITRE</a></span>
@@ -44,6 +46,20 @@
     </BOUCLE_artmot></ul></B_artmot>
     </li>
   </BOUCLE_mot></ul></B_mot>
+
+  #ONGLETS_TITRE{par date}
+
+  [(#SET{month,' '})]
+  <B_date><ul><BOUCLE_date(ARTICLES) {par date} {inverse}>
+    [(#SET{newmonth,[(#DATE|affdate{mois_annee})]})]
+    [(#GET{month}|!={#GET{newmonth}}|oui)
+      [(#GET{month}|!={' '}|oui) </ul></li>]
+      <li><span class="heading">#GET{newmonth}</span><ul>
+      [(#SET{month,#GET{newmonth}})]
+    ]
+
+    <li><a class="article" href="#URL_ARTICLE">#TITRE</a>, par #LESAUTEURS</li>
+  </BOUCLE_date></ul></li></ul></B_date>
 
   #ONGLETS_FIN
 </div>
