@@ -3,7 +3,7 @@
 include_spip('base/abstract_sql');
 include_spip('inc/envoyer_mail');
 
-function notify_comite ($id_auteur, $titre, $date) {
+function notify_comite ($id_auteur, $id_article, $titre, $date) {
   $email = "comite@images.math.cnrs.fr";
   $qui = sql_getfetsel ("nom", "spip_auteurs", "id_auteur = $id_auteur");
   $qui = utf8_decode ($qui);
@@ -23,6 +23,10 @@ function notify_comite ($id_auteur, $titre, $date) {
     "la date suivante :\n" .
     "\n" .
     "  $date\n" .
+    "\n" .
+    "En attendant, il est accessible aux administrateurs ici :\n" .
+    "\n" .
+    "  http://images.math.cnrs.fr/ecrire/?exec=articles&action=redirect&type=article&id=$id_article&var_mode=preview\n" .
     "\n" .
     "-- \n" .
     "Le comité de rédaction de \"Images des Mathématiques\".";
@@ -97,7 +101,7 @@ function formulaires_billet_traiter () {
     array ("statut" => "publie", "date" => date("Y-m-d H:i:s", $when)),
     "id_article = $id_article");
 
-  notify_comite ($id_auteur, _request("titre"), date("d/m/Y, H:i:s", $when));
+  notify_comite ($id_auteur, $id_article, _request("titre"), date("d/m/Y, H:i:s", $when));
   return array('message_ok' => "done");
 }
 
