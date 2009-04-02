@@ -37,41 +37,4 @@ function initiale ($mot) {
   return strtoupper($mot[0]);
 }
 
-function billettistes_effect_change ($target='', $caller='admin') {
-  if (!$target) $target = str_replace('&amp;','&',self());
-
-  if (!empty($_POST)) {
-    foreach($_POST as $key=>$value) {
-      if (preg_match('/^form_billettistes_bless_([0-9]*)$/', $key, $matches)) {
-        $id = $matches[1];
-        sql_updateq ('spip_auteurs', array('billettiste'=>'oui'), "id_auteur = $id");
-        $reload = true;
-      }
-
-      if (preg_match('/^form_billettistes_demote_([0-9]*)$/', $key, $matches)) {
-        $id = intval($matches[1]);
-        sql_updateq ('spip_auteurs', array('billettiste'=>'non'), "id_auteur = $id");
-        $reload = true;
-      }
-
-      if (preg_match('/^form_billettistes_salvage_([0-9]*)$/', $key, $matches)) {
-        $id = intval($matches[1]);
-        sql_updateq ('spip_articles', array('statut'=>'prepa'), "(id_article = $id) and (statut = 'tmp')");
-        $reload = true;
-      }
-
-      if (preg_match('/^form_billettistes_erase_([0-9]*)$/', $key, $matches)) {
-        $id = intval($matches[1]);
-        sql_delete ('spip_articles', "id_article = $id");
-        sql_delete ('spip_auteurs_articles', "(id_article = $id) and (statut = 'tmp')");
-        $reload = true;
-      }
-    }
-
-    if ($reload) {
-      $_POST = array();
-      @header ("Location: $target");
-    }
-  }
-}
 ?>
