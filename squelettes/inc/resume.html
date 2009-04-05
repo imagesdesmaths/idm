@@ -3,9 +3,9 @@
     <div class="resume resume_rubrique_#ID_RUBRIQUE resume_secteur_#ID_SECTEUR">
       #DEBUT_SURLIGNE
 
-      [(#LOGO_ARTICLE|right|#URL_ARTICLE|image_reduire{150,150}
-      | sinon { [(#INCLURE{fond=inc/auteur}{id_article=#ID_ARTICLE}{taille=150}
-      | sinon { [(#LOGO_RUBRIQUE|right|#URL_ARTICLE|image_reduire{150,150}
+      [(#LOGO_ARTICLE|right|#URL_ARTICLE|image_reduire{150,150}|image_recadre{150,150}
+      | sinon { [(#INCLURE{fond=inc/auteur}{id_article=#ID_ARTICLE}{taille=150}|image_recadre{150,150}
+      | sinon { [(#LOGO_RUBRIQUE|right|#URL_ARTICLE|image_reduire{150,150}|image_recadre{150,150}
       )] } )] } )]
 
 
