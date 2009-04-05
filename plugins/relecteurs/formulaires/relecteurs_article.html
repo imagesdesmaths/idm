@@ -3,7 +3,7 @@
 <form action="#ENV{action}" method="post">#ACTION_FORMULAIRE{#ENV{action}}
   <h3><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">#TITRE</a>[, par (#LESAUTEURS)][ <em>(proposé le (#DATE|affdate))</em>]</h3>
 
-  <B_relecteurs><table id="assigned_#ID_ARTICLE"><thead><tr>
+  <B_relecteurs><table id="assigned_#ID_ARTICLE" class="sortable"><thead><tr>
     <th>Signature / Pseudo</th>
     <th>Qui est-ce ?</th>
     <th>Avis</th>
@@ -21,7 +21,7 @@
     </h4>
     <div class='blocs_destination blocs_invisible'>
       <BOUCLE_affectes (spip_relecteurs_articles)><BOUCLE_affectes2 (AUTEURS) {tous} {id_auteur} {doublons}></BOUCLE_affectes2></BOUCLE_affectes>
-      <B_gars><table id="unassigned_#ID_ARTICLE"><thead><tr>
+      <B_gars><table id="unassigned_#ID_ARTICLE" class="sortable"><thead><tr>
         <th>Signature / Pseudo</th>
         <th>Qui est-ce ?</th>
         <th>Combien ?</th>
