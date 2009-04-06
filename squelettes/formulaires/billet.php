@@ -4,7 +4,19 @@ include_spip('base/abstract_sql');
 include_spip('inc/envoyer_mail');
 
 function notify_comite ($id_auteur, $id_article, $titre, $date) {
+  $staff = array();
+  $staff[] = "Aurelien.Alvarez@umpa.ens-lyon.fr";
+  $staff[] = "Olivier.DRUET@umpa.ens-lyon.fr";
+  $staff[] = "Edouard.Oudet@univ-savoie.fr";
+  $staff[] = "Bruno.Sevennec@umpa.ens-lyon.fr";
+  $staff[] = "paul.vigneaux@umpa.ens-lyon.fr";
+
+  $today = floor (time() / (24*3600));
+  $today = $today % 5;
+
+  $gars = $staff[$today];
   $email = "comite@images.math.cnrs.fr";
+
   $qui = sql_getfetsel ("nom", "spip_auteurs", "id_auteur = $id_auteur");
   $qui = utf8_decode ($qui);
   $titre = utf8_decode ($titre);
@@ -32,6 +44,7 @@ function notify_comite ($id_auteur, $id_article, $titre, $date) {
     "Le comité de rédaction de \"Images des Mathématiques\".";
 
   inc_envoyer_mail_dist ($email, $subject, utf8_encode($texte));
+  inc_envoyer_mail_dist ($gars,  $subject, utf8_encode($texte));
 }
 
 function formulaires_billet_charger () {
@@ -74,7 +87,7 @@ function formulaires_billet_verifier () {
 function formulaires_billet_traiter () {
   $id_article = intval(_request("id_article"));
   $id_auteur = $GLOBALS['auteur_session']['id_auteur'];
-  
+
   $today = time();
   $today -= $today % (24*3600); // Midnight this morning
 
