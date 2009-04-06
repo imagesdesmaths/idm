@@ -1,7 +1,9 @@
-#CACHE{0}
 <BOUCLE_article(ARTICLES) {statut = prop} {id_article}>
 <form action="#ENV{action}" method="post">#ACTION_FORMULAIRE{#ENV{action}}
-  <h3><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">#TITRE</a>[, par (#LESAUTEURS)][ <em>(proposé le (#DATE|affdate))</em>]</h3>
+  <h3>
+  <BOUCLE_rub(RUBRIQUES) {id_rubrique}>Dans la rubrique « #TITRE » :</BOUCLE_rub>
+  <br /><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">#TITRE</a>[, par (#LESAUTEURS)]
+  <br />[<em>(proposé le (#DATE|affdate))</em>]</h3>
 
   <B_relecteurs><table id="assigned_#ID_ARTICLE" class="sortable"><thead><tr>
     <th>Signature / Pseudo</th>
