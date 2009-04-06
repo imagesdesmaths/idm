@@ -58,4 +58,16 @@ function relecteurs_boite_infos (&$flux) {
   return $flux;
 }
 
+function relecteurs_autoriser() {}
+
+function autoriser_article_relire_dist ($faire, $type, $id, $qui, $opt) {
+  if ($qui['id_auteur'] == 0) return false;
+  if ($qui['statut'] == '0minirezo') return true;
+
+  $id_auteur = $qui['id_auteur'];
+  if (sql_countsel('spip_auteurs_articles', "id_article = $id AND id_auteur = $id_auteur")) return true;
+  if (sql_countsel('spip_relecteurs_articles', "id_article = $id AND id_auteur = $id_auteur")) return true;
+
+  return false;
+}
 ?>

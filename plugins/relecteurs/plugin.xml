@@ -17,4 +17,9 @@
   <install>relecteurs.php</install>
 
   <pipeline><nom>boite_infos</nom></pipeline>
+
+  <pipeline>
+    <nom>autoriser</nom>
+    <inclure>relecteurs.php</inclure>
+  </pipeline>
 </plugin>
