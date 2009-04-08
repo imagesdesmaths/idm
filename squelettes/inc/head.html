@@ -28,6 +28,9 @@
 
   #INSERT_HEAD
   <script type="text/javascript" src="#CHEMIN{javascript/jquery.tablesorter.min.js}"></script>
+  <script type="text/javascript" src="#CHEMIN{javascript/jquery.easing.js}"></script>
+  <script type="text/javascript" src="#CHEMIN{javascript/jquery.dimension.js}"></script>
+  <script type="text/javascript" src="#CHEMIN{javascript/jquery.accordion.js}"></script>
   <script type="text/javascript" src="#CHEMIN{javascript/jsMath_Font_Detector.js}"></script>
 </head>
 
@@ -54,26 +57,28 @@
 
       [(#FORMULAIRE_RECHERCHE)]
 
-      <h2><a href="#URL_ARTICLE{63}">Les rubriques</a></h2>
-      <ul><BOUCLE_secteurs(RUBRIQUES) {racine} {par num titre} {id_rubrique != 18} {id_rubrique != 26}>
-        <li><a href="#URL_RUBRIQUE" [(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{class="active"})]>#TITRE</a></li>
-      </BOUCLE_secteurs></ul>
+      <div id="navleft">
+        <h2>Les rubriques</h2>
+        <ul><BOUCLE_secteurs(RUBRIQUES) {racine} {par num titre} {id_rubrique != 18} {id_rubrique != 26}>
+          <li><a href="#URL_RUBRIQUE" [(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{class="active"})]>#TITRE</a></li>
+        </BOUCLE_secteurs></ul>
 
-      <B_dossiers><h2>Les dossiers</h2>
-      <ul><BOUCLE_dossiers(MOTS) {id_groupe=3}>
-        <li><a href="#URL_MOT">#TITRE</a></li>
-      </BOUCLE_dossiers></ul></B_dossiers>
+        <B_dossiers><h2>Les dossiers</h2>
+        <ul><BOUCLE_dossiers(MOTS) {id_groupe=3}>
+          <li><a href="#URL_MOT">#TITRE</a></li>
+        </BOUCLE_dossiers></ul></B_dossiers>
 
-      <BOUCLE_liens(RUBRIQUES) {id_rubrique = 25}>
-      <h2><a href="#URL_RUBRIQUE">#TITRE</a></h2>
-      <ul style="text-align:center">
-        <BOUCLE_lienss(ARTICLES) {id_rubrique} {par num titre, titre}>
-        <li><a href="#URL_ARTICLE">#TITRE</a></li>
-        </BOUCLE_lienss>
-      </ul>
-      </BOUCLE_liens>
+        <BOUCLE_liens(RUBRIQUES) {id_rubrique = 25}>
+        <h2>#TITRE</h2>
+        <ul style="text-align:center">
+          <BOUCLE_lienss(ARTICLES) {id_rubrique} {par num titre, titre}>
+          <li><a href="#URL_ARTICLE">#TITRE</a></li>
+          </BOUCLE_lienss>
+        </ul>
+        </BOUCLE_liens>
 
-      <INCLURE{fond=inc/ident}>
+        <INCLURE{fond=inc/ident}>
+      </div>
 
       <div class="actu">
         <h2>Revues de presse</h2>
@@ -97,6 +102,7 @@
         <li><a href="javascript:unfold_and_print();">Imprimer cette page</a></li>
         <li><a href="#URL_PAGE{backend}"><img src="#CHEMIN{img/rss.jpg}" alt="RSS" /> Syndication (RSS)</a></li>
         <li style="margin-top:.5ex;"><a href="http://www.spip.net/">Site sous SPIP 2.0 <img src="#CHEMIN{img/spip.jpg}" alt="SPIP" /></a></li>
+        <li><a id="whizbang">Whiz Bang</a></li>
       </ul>
 
       <div id="nojsfont" style="display:none;" class="jsmathwarning">

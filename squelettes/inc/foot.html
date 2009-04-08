@@ -8,6 +8,17 @@
       $(document).ready(function() {
           $(".sortable").tablesorter( {sortList : [[0,0]]} );
           if (!jsMath_Font_Detector()) $("#nojsfont").show();
+
+          $("#whizbang")
+            .css({cursor:"pointer"})
+            .click(function(){
+              $("#navleft").accordion({
+                header : 'h2',
+                autoheight : false,
+                animated : 'slide'
+              });
+              $("#navleft h2").css({cursor:"pointer"});
+          });
       } );
       
       function unfold_and_print () {
