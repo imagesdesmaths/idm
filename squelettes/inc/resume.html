@@ -1,5 +1,11 @@
+<BOUCLE_prediff(MOTS) {id_groupe=5} {id_article}>
+  #SET{piste_id,#ID_MOT}
+  #SET{piste_url,#URL_MOT}
+  #SET{piste_titre,#TITRE}
+</BOUCLE_prediff>
+
 <BOUCLE_article(ARTICLES) {id_article} {recherche ?}>
-  <div class="resume_out resume_out_rubrique_#ID_RUBRIQUE resume_out_secteur_#ID_SECTEUR">
+  <div class="resume_out resume_out_rubrique_#ID_RUBRIQUE resume_out_secteur_#ID_SECTEUR[ piste_(#GET{piste_id})]">
     <div class="resume resume_rubrique_#ID_RUBRIQUE resume_secteur_#ID_SECTEUR">
       #DEBUT_SURLIGNE
 
