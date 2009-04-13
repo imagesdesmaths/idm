@@ -5,9 +5,10 @@
       <h3>
           Le [(#DATE|affdate)], par #LESAUTEURS
 
-          <BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {id_rubrique != 6}><a href="#URL_RUBRIQUE">&mdash #TITRE</a></BOUCLE_rubrique>
+          <BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {id_rubrique != 6}>&mdash; <a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rubrique>
+          <B_diff>&mdash;
           <span class="piste">
-            <BOUCLE_diff(MOTS) {id_groupe=5} {id_article}> &mdash; <a class="piste_#ID_MOT" href="#URL_MOT">#TITRE</a></BOUCLE_diff>
+            <BOUCLE_diff(MOTS) {id_groupe=5} {id_article}><a class="piste_#ID_MOT" href="#URL_MOT">#TITRE</a></BOUCLE_diff>
           </span>
       </h3>
 
