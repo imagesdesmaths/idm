@@ -64,6 +64,11 @@ function jsMath_accents ($texte) {
   $acc_tex[] = '\^{\i}';   $acc_html[] = '&icirc;';
   $acc_tex[] = '\"{\i}';   $acc_html[] = '&iuml;';
 
+  $acc_tex[] = '\c{c}';    $acc_html[] = '&ccedil;';
+  $acc_tex[] = '\c c';     $acc_html[] = '&ccedil;';
+  $acc_tex[] = '\c{C}';    $acc_html[] = '&Ccedil;';
+  $acc_tex[] = '\c C';     $acc_html[] = '&Ccedil;';
+
   return str_replace ($acc_tex, $acc_html, $texte);
 }
 
