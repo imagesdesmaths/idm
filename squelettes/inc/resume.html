@@ -16,7 +16,7 @@
 
 
       <h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
-      [<h4 class="auteur[(#ID_SECTEUR|=={18}|?{' invisible'})]">Le [(#DATE|affdate)], par (#LESAUTEURS)</h4>]
+      [<h4 class="auteur[(#ID_SECTEUR|=={18}|?{' invisible'})]">Le [(#DATE_REDAC|sinon{#DATE}|affdate)], par (#LESAUTEURS)</h4>]
 
       <div class="rubrique">
         <BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {id_rubrique != 6}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rubrique>

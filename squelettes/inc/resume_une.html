@@ -3,7 +3,7 @@
     <div class="resume resume_rubrique_#ID_RUBRIQUE resume_secteur_#ID_SECTEUR">
       <h2><a href="#URL_ARTICLE">À la une : #TITRE</a></h2>
       <h3>
-          Le [(#DATE|affdate)], par #LESAUTEURS
+          Le [(#DATE_REDAC|sinon{#DATE}|affdate)], par #LESAUTEURS
 
           <BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {id_rubrique != 6}>&mdash; <a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rubrique>
           <B_diff>&mdash;
