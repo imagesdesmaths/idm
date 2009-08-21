@@ -33,6 +33,10 @@ h2.plan { border : 2px solid #e20000; border-width : 0px 0px 2px; }
 h2.soustitre { font-weight : normal; font-style : italic; font-size : large; margin : .5ex; }
 h2.surtitre { text-align : left; font-weight : normal; font-size : large; margin : .5ex 0ex; }
 
+h2.rdp { margin : 0ex 0px 1ex; text-align : right; }
+h2.rdp a { color : black; border-bottom : 2px solid #e20000; }
+h2.rdp a:hover { color : #e20000; }
+
 h3 { text-align : left; }
 h3.auteur { text-align : right; font-weight : normal; }
 h3.bio { text-align : right; font-weight : normal; font-size : medium; margin-top : -2ex; }

@@ -7,6 +7,10 @@
 <BOUCLE_nodouble(ARTICLES) {titre_mot=double} {doublons}>
 </BOUCLE_nodouble>
 
+<BOUCLE_rdp(ARTICLES) {id_rubrique=26} {age < 8} {par date} {inverse} {0,1}>
+<h2 class="rdp"><a href="#URL_ARTICLE">La revue de presse du [(#DATE|affdate)]</a></h2>
+</BOUCLE_rdp>
+
 <BOUCLE_edito(ARTICLES) {titre_mot=editorial} {par date} {inverse} {age<14} {0,1} {doublons}>
   <div id="edito" style="display:none;"><div class="article">
       <div class="titre"><h2>#TITRE</h2></div>
@@ -21,7 +25,7 @@
 
       [<h3 class="auteur">Le [(#DATE|affdate)], par (#LESAUTEURS)</h3>]
   </div></div>
-  <div id="editolink">Éditorial : <a class="thickbox" href="#[(#REM)]TB_inline?width=700&amp;height=500&amp;inlineId=edito">#TITRE</a></div>
+  <div id="editolink">&Eacute;ditorial : <a class="thickbox" href="#[(#REM)]TB_inline?width=700&amp;height=500&amp;inlineId=edito">#TITRE</a></div>
 </BOUCLE_edito>
 
 <div id="une">
@@ -40,14 +44,15 @@
 
 <div id="front">
   <div id="billets">
-    <h2>Derniers billets (<a href="#URL_RUBRIQUE{6}">tous les billets</a>)</h2>
+    <h2>Les billets des habitu&eacute;s</h2>
     <BOUCLE_billets(ARTICLES) {id_rubrique = 6} {par date} {age>=0} {inverse} {0,5} {doublons}>
       [(#INCLURE{fond=inc/resume}{id_article})]
     </BOUCLE_billets>
+    <h2><a href="#URL_RUBRIQUE{6}">tous les billets du site</a></h2>
   </div>
 
   <div id="recents">
-    <h2>Quelques articles récents</h2>
+    <h2>Quelques articles r&eacute;cents</h2>
     <BOUCLE_old(ARTICLES) {id_secteur IN 1,4,20,21,22,24,27} {par date} {inverse} {0,5} {doublons}>
       [(#INCLURE{fond=inc/resume}{id_article})]
     </BOUCLE_old>
