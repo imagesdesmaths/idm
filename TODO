@@ -1,7 +1,0 @@
-- Plugins : Effacer URL propres, Gestion de documents, Inscription2
-
-- Relecteurs :
-  + Installation stuff (create tables ...)
-  + Use AJAX for the forums
-
-- inc-auteur : static #INCLUDE maybe ?
