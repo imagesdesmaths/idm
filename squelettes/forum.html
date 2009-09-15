@@ -1,8 +1,9 @@
+#CACHE{0}
 <BOUCLE_article(ARTICLES){id_article}>
 <INCLURE{fond=inc/head}{title=#TITRE - <:poster_message:>}>
 
 <div class="no_rubrique">
-  [(#INCLURE{fond=inc/resume}{id_article})]
+  <INCLURE{fond=inc/resume}{id_article}>
 </div>
 
 <BOUCLE_auteur(spip_auteurs_articles) {id_article} {0,1}>
