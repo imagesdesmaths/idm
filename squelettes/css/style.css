@@ -231,5 +231,7 @@ div.thm ol { margin : 0ex; list-style-type : lower-roman; padding-left : 1em; li
 div.thm ul { margin : 0ex; }
 div.thm li { margin-top : .2ex; padding-left : 0px; }
 
+div.mp3 { text-align : center; padding : 0.5ex 0em; }
+
 /* vim: ft=css
  */
