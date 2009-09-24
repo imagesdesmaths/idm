@@ -1,0 +1,27 @@
+<BOUCLE_si_extras(CONDITION){si #ENV{extras}}>
+[(#CHEMIN{images/iextras-24.png}|debut_cadre_trait_couleur{1, "", <:iextras:liste_des_extras_possibles:>})]
+	<BOUCLE_tables(POUR){tableau #ENV**{extras}}>
+	<h2>[(#ENV**{noms_tables}|table_valeur{#CLE|replace{^spip_|s$,''}}|table_valeur{nom})]</h2>
+		<B_extras>
+		<ul class="liste_extras_possibles">
+		<BOUCLE_extras(POUR){tableau #VALEUR}>
+			<li>
+				#CLE
+				<ul class="actions">
+				<li><a href="[(#URL_ACTION_AUTEUR{iextras, [associer_champ/#_tables:CLE/(#CLE)], #SELF})]" title="<:iextras:action_associer_title|attribut_html:>"><:iextras:action_associer:></a></li>
+				<li><a href="[(#URL_ACTION_AUTEUR{iextras, [supprimer_champ/#_tables:CLE/(#CLE)], #SELF})]" class="supprimer" title="<:iextras:action_supprimer_title|attribut_html:>"><:iextras:action_supprimer:></a></li>
+				</ul>
+			</li>
+		</BOUCLE_extras>
+		</ul>
+		</B_extras>
+	</BOUCLE_tables>
+<script type="text/javascript">
+(function($) {
+	$('ul.liste_extras_possibles .supprimer').click(function(){
+		return confirm("<:iextras:supprimer_reelement|attribut_html:>");
+	});
+})(jQuery);
+</script>
+[(#VAL{1}|fin_cadre_trait_couleur)]
+</BOUCLE_si_extras>

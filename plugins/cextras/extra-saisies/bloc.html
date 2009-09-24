@@ -1,0 +1,6 @@
+<li class="editer_[(#ENV{champ_extra})][ (#ENV{obligatoire_extra})][ (#ENV{erreur_extra}|oui)erreur]">
+	<label for="#ENV{champ_extra}">#ENV{label_extra}</label>
+		[<span class='erreur_message'>(#ENV**{erreur_extra})</span>]
+		[<p class="explication">(#ENV{precisions_extra})</p>]
+		<textarea name='#ENV{champ_extra}'[ lang='(#LANG)'] id='#ENV{champ_extra}' rows='7'>#ENV{valeur_extra}</textarea>
+</li>
