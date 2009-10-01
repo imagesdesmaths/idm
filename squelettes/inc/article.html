@@ -19,6 +19,11 @@
   [<div class="#EDIT{texte} texte">(#TEXTE|lettrine)</div>]
   [<div class="#EDIT{ps} ps"><span class="ps">P.S. :</span> (#PS)</div>]
   [<div class="notes"><h3>Notes</h3>(#NOTES)</div>]
+
+  <BOUCLE_affiliation(AUTEURS) {id_auteur=#GET{uniqueauteur}}>
+    [<div class="notes"><h3>Affiliation de l'auteur</h3>(#AFFILIATION)</div>]
+  </BOUCLE_affiliation>
+
 #FIN_SURLIGNE
 </div>
 </BOUCLE_article>
