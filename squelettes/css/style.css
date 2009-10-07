@@ -94,7 +94,7 @@ div#left div.actu h3 { font-size : small; font-weight : bold; margin-bottom : 0p
 div#left div.actu p { margin-top : 0px; }
 
 div#left div.jsmathwarning { font-size : x-small; margin : 4ex .5em 1ex; padding : .5ex 1ex 1ex; color : #550000; background : #994444; }
-div#left div.jsmathwarning h2 { font-size : normal; margin : 0px; border : none; }
+div#left div.jsmathwarning h2 { font-size : medium; margin : 0px; border : none; }
 div#left div.jsmathwarning h3 { font-size : small; margin : .5ex 0px 0px; border : none; text-align : center;}
 div#left div.jsmathwarning p { margin : 0px; text-align : justify; }
 div#left div.jsmathwarning a { color : #550000; font-weight : bold; text-decoration : underline; }
@@ -104,7 +104,7 @@ div#imagedujour img { max-width : 100%; }
 
 div#featured { padding : 1ex 0em 0ex; margin : 1ex 2em 0ex; }
 div#featured div.resume_out { margin-top : 1ex; }
-div#featured div.resume div.introduction { font-size : 95%; margin-left : 0px; }
+div#featured div.resume div.introduction { font-size : 95%; margin : 1ex 0px; }
 div#featured div.resume div.introduction a { color : black; }
 div#featured div.resume h4.auteur { font-size : 100%; }
 div#featured div.titre { margin-top : -2.5ex; text-align : center; }
@@ -116,7 +116,7 @@ div#une div.resume_out { margin-top : 1ex; }
 div#une h2 { margin : 0px; font-size : x-large; border-bottom : 2px solid #e20000; }
 div#une h2 a:hover { color : #e20000; }
 div#une h3 { text-align : center; font-weight : normal; font-size : 100%; margin : 0px; }
-div#une div.resume div.introduction { font-size : 100%; margin : 0px; font-style : normal; }
+div#une div.resume div.introduction { font-size : 100%; margin : 1ex 0px; font-style : normal; }
 div#une div.resume div.introduction a { color : black; }
 div#une div.unelogo { margin : 1ex 0em 0ex; text-align : center; clear : both; }
 div#une img { padding : 0px; margin : 1ex 0em 0ex; }
