@@ -1,0 +1,9 @@
+<div class='nettoyeur' style="width:600px;"></div>
+[(#ENV{editable,' '}|oui)
+[<script type="text/javascript" src='(#CHEMIN{javascript/jquery.MultiFile.js})'></script>]
+<script type='text/javascript'>
+jQuery.MultiFile();
+onAjaxLoad(function(){jQuery.MultiFile();});
+</script>
+]
+<INCLURE{fond=prive/inc-galerie}{media}{ajax}{env}>
