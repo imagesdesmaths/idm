@@ -2,8 +2,9 @@
 <BOUCLE_article(ARTICLES) {statut=prop} {id_article}>
   <BOUCLE_securite(CONDITION) {SI #AUTORISER{relire,article,#ID_ARTICLE}}>
     <INCLURE{fond=inc/head}{title=#TITRE - En cours de relecture}{id_rubrique=#ID_RUBRIQUE}{id_article=#ID_ARTICLE}>
-    <h1>En cours de relecture : #TITRE</h1>
-    <h2 style="margin-top : 0ex;">(dans la rubrique « <BOUCLE_rub(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rub> »)</h2>
+    <h1>Article en cours de relecture</h1>
+    <h2 style="margin-top : 0ex;">dans la rubrique : <BOUCLE_rub(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rub></h2>
+    <B_ed><h2 style="margin-top : -1.5ex;">article suivi par : <BOUCLE_ed(AUTEURS){id_auteur=#EDITEUR}><a class="auteur" href="#URL_AUTEUR">#NOM</a></BOUCLE_ed></h2></B_ed>
 
     <p>Bienvenue dans l'espace de relecture collaborative de <i>Images 
       des Mathématiques</i>. C'est ici que vous pourrez participer au 
