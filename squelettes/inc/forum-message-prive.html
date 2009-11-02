@@ -1,4 +1,4 @@
-<BOUCLE_message(FORUMS) {id_forum} {statut = prive}>
+<BOUCLE_message(FORUMS) {id_forum} {statut IN prive,rel}>
   <div class="forum-message <BOUCLE_auteur(AUTEURS) {id_article} {id_auteur}>forum-message-delauteur</BOUCLE_auteur>">
     <h3>#TITRE</h3>
     <h4>[le&nbsp;(#DATE|affdate_jourcourt)][&nbsp;&agrave&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM)]</h4>

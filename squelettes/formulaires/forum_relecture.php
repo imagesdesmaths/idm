@@ -1,7 +1,5 @@
 <?php
 
-include_spip('base/abstract_sql');
-
 function formulaires_forum_relecture_charger ($id_article, $id_parent) {
   $id_article = intval ($id_article);
   $valeurs = array('titre'      => sql_getfetsel ('titre', 'spip_articles', "id_article = $id_article"),
@@ -36,7 +34,7 @@ function formulaires_forum_relecture_traiter ($id_article, $id_parent) {
     'texte'      => _request("texte"),
     'auteur'     => $auteur,
     'id_auteur'  => $id_auteur,
-    'statut'     => 'prive'
+    'statut'     => 'relmod'
     ));
 
   return array ('message_ok' => "done");

@@ -1,0 +1,18 @@
+#CACHE{0}
+
+<BOUCLE_forum (FORUMS) {id_forum = #ENV{id_forum}} {statut IN relmod,relref}>
+  <form action="#SELF" method="post" class="billet">
+    #ACTION_FORMULAIRE{#ENV{action}}
+    <fieldset>
+      <legend>&nbsp;#TITRE (par [(#AUTEUR|prenom_nom)]) 
+        <span style="color:#e20000;font-weight:bold;">[[(#STATUT|=={relmod}|?{SOUMIS,REFUS&Eacute;})]]</span>
+      &nbsp;</legend>
+      #TEXTE
+    </fieldset>
+
+    <p>
+      <input type="submit" name="accept" value="Accepter" />
+      <input type="submit" name="refuse" value="Refuser" />
+    </p>
+  </form>
+</BOUCLE_forum>

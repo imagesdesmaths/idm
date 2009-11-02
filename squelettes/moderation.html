@@ -1,0 +1,19 @@
+#CACHE{0}
+<INCLURE{fond=inc/head}{title=Mod&eacute;ration des forums de relecture}>
+<BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
+
+<h1>Mod&eacute;ration des forums de relecture</h1>
+
+#SET{id,0}
+<BOUCLE_forums(FORUMS) {statut = relmod} {par id_article, date}>
+  <BOUCLE_article (ARTICLES) {id_article = #ID_ARTICLE} {id_article !== #GET{id}} {statut = prop}>
+    <h3>#TITRE[, par (#LESAUTEURS)]</h3>
+    #SET{id,#ID_ARTICLE}
+  </BOUCLE_article>
+  <div class="ajax">#FORMULAIRE_MODERATION{#ID_FORUM}</div>
+</BOUCLE_forums>
+
+</BOUCLE_securite>
+  <h1>Go away, you non-administrator !</h1>
+<//B_securite>
+<INCLURE{fond=inc/foot}{stats=no}>
