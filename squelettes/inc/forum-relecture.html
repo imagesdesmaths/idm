@@ -4,12 +4,12 @@
   <h3><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">Voir tous les messages</a></h3>
 
   <ul class="forum">
-    <BOUCLE_forum_precis(FORUMS) {id_article} {id_forum} {statut = prive}>
+    <BOUCLE_forum_precis(FORUMS) {id_article} {id_forum} {statut IN prive,rel}>
       <li class="forum-fil">
       [(#INCLURE {fond=inc/forum-message-prive} {id_forum})]
         <B_forum_precis_fils>
           <ul>
-            <BOUCLE_forum_precis_fils(FORUMS) {id_parent} {par date} {statut = prive}>
+            <BOUCLE_forum_precis_fils(FORUMS) {id_parent} {par date} {statut IN prive,rel}>
               <li>
               [(#INCLURE {fond=inc/forum-message-prive} {id_forum})]
                 <BOUCLE_Forums_Boucle(boucle_forum_precis_fils)></BOUCLE_Forums_Boucle>
@@ -26,12 +26,12 @@
 
 <B_reforums>
   <ul class="forum">
-    <BOUCLE_reforums(FORUMS) {id_article} {par date} {statut = prive}>
+    <BOUCLE_reforums(FORUMS) {id_article} {par date} {statut IN prive,rel}>
       <li class="forum-fil">
       [(#INCLURE {fond=inc/forum-message-prive} {id_forum})]
         <B_reforums_fils>
           <ul>
-            <BOUCLE_reforums_fils(FORUMS) {id_parent} {par date} {statut = prive}>
+            <BOUCLE_reforums_fils(FORUMS) {id_parent} {par date} {statut IN prive,rel}>
               <li>
               [(#INCLURE {fond=inc/forum-message-prive} {id_forum})]
                 <BOUCLE_reForums_Boucle(boucle_reforums_fils)></BOUCLE_reForums_Boucle>

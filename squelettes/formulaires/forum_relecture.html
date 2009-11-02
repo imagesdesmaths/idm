@@ -1,0 +1,25 @@
+#CACHE{0}
+
+[(#ENV{message_ok}|non)
+  <form action="#SELF" method="post" class="billet">
+    #ACTION_FORMULAIRE{#ENV{action}}
+    <p><label for="titre">Titre :</label><input type="text" name="titre" size="60" value="#ENV{titre}" /></p>  [<p class="erreur">(#ENV**{erreurs}|table_valeur{titre})</p>]
+    <p><textarea name="texte" cols="75" rows="20">#ENV{texte}</textarea></p>                                   [<p class="erreur">(#ENV**{erreurs}|table_valeur{texte})</p>]
+
+    [(#ENV**{erreurs}|table_valeur{preview}|=={preview}|oui)
+      <fieldset>
+        <legend>Pr&eacute;visualisation &mdash; #ENV{titre}</legend>
+        #ENV{texte}
+      </fieldset>
+    ]
+
+    <p>
+      <input type="submit" name="preview" value="[(#ENV**{erreurs}|table_valeur{preview}|?{Mettre &agrave; jour,Pr&eacute;visualiser})]" />
+      [(#ENV**{erreurs}|table_valeur{preview}|=={preview}|oui) <input type="submit" name="ok" value="Confirmer et poster ce message" />]
+    </p>
+  </form>
+]
+
+[(#ENV{message_ok}|oui)<p>Merci pour votre message ! Il doit maintenant 
+subir une validation de forme avant de pouvoir apparaitre dans le 
+forum.</p>]

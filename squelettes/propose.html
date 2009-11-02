@@ -43,8 +43,8 @@
     </BOUCLE_bug>
 
     <BOUCLE_cetarticle(ARTICLES) {id_article} {statut=prop}>
-      [(#INCLURE{fond=inc/forum-prive}{id_article}{id_forum})]
-      #FORMULAIRE_FORUM_PRIVE
+      [(#INCLURE{fond=inc/forum-relecture}{id_article}{id_forum})]
+      <div class="ajax">#FORMULAIRE_FORUM_RELECTURE{#ID_ARTICLE,#ID_FORUM}</div>
     </BOUCLE_cetarticle>
     <INCLURE{fond=inc/foot}{stats=no}>
   </BOUCLE_securite>
