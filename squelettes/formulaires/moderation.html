@@ -5,7 +5,7 @@
     #ACTION_FORMULAIRE{#ENV{action}}
     <fieldset>
       <legend>&nbsp;#TITRE (par [(#AUTEUR|prenom_nom)]) 
-        <span style="color:#e20000;font-weight:bold;">[[(#STATUT|=={relmod}|?{SOUMIS,REFUS&Eacute;})]]</span>
+        [(#STATUT|=={relref}|oui)<span style="color:#e20000;font-weight:bold;">MESSAGE REFUS&Eacute;</span>]
       &nbsp;</legend>
       #TEXTE
     </fieldset>
