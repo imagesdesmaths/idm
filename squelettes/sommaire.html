@@ -29,7 +29,7 @@
 </BOUCLE_edito>
 
 <div id="une">
-  <BOUCLE_une(ARTICLES) {id_secteur !IN 2,6,18} {par date} {inverse} {0,1} {doublons}>
+  <BOUCLE_une(ARTICLES) {id_rubrique !IN 2,3,6,18,19,23,25,28,29} {par date} {inverse} {0,1} {doublons}>
     [(#INCLURE{fond=inc/resume_une}{id_article})]
   </BOUCLE_une>
 </div>
