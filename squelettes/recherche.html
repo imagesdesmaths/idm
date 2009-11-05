@@ -1,16 +1,47 @@
-<INCLURE{fond=inc/head}>
+#CACHE{0}
+<INCLURE{fond=inc/head}{title=Recherche sur le site}>
 
-#DEBUT_SURLIGNE
-<h1><:resultats_recherche:></h1>
+[(#ENV{avancee}|=={1}?{" ",""})<INCLURE{fond=formulaires/recherche-avancee}{recherche}{avancee}{depuis}{id_mot}{id_nomot}{id_groupe}{id_rubrique}{tri}{titre}>]
 
-<B_articles>
-<h3>Articles contenant &#171;&nbsp;#RECHERCHE&nbsp;&#187; :</h3>
-<BOUCLE_articles(ARTICLES) {recherche} {par points} {inverse}>
-[(#INCLURE {fond=inc/resume} {id_article} {recherche})]
-</BOUCLE_articles>
-</B_articles>
-<h3>Aucun article contenant &#171;&nbsp;#RECHERCHE&nbsp;&#187; !</h3>
+[(#REM) Calcul du pourcentage ]
+<BOUCLE_a(ARTICLES){recherche} {par points} {inverse}{0,1}>
+[(#SET{pc,[(#EVAL{100/#POINTS})]})]
+</BOUCLE_a>
+
+<B_articles><div class="liste-articles">
+  #ANCRE_PAGINATION
+  <h2>&#171;&nbsp;#RECHERCHE&nbsp;&#187; : #GRAND_TOTAL [(#GRAND_TOTAL|=={1}|?{article trouv&eacute;,articles trouv&eacute;s})].</h2>
+  <ul><BOUCLE_articles(ARTICLES) {recherche} {!par #ENV{tri,points}} {!par date} {age<(#ENV{depuis,1E100})} {id_mot?} {id_groupe?} {id_mot != (#ENV{id_nomot})} {branche?} {pagination 7} >
+    <li>
+    <h3 class="titre" style="margin-top:2ex;"><a href="#URL_ARTICLE">#TITRE</a></h3>
+    <div class="rinfo">
+      <BOUCLE_rub(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rub>
+      <BOUCLE_mot(MOTS){id_article}> / <a href="#URL_MOT">#TITRE</a></BOUCLE_mot>
+      [(#SET{pt,[(#POINTS|mult{#GET{pc}})]})]
+      [ (<:rechercheavancee:point:> : (#GET{pt}|round)%)]
+      [ (<:popularite:> : (#POPULARITE_ABSOLUE))]
+    </div>
+    <small class="rdate">[le (#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)] </small><br>
+    [(#CHAPO|recherche_avancee_google_like|sinon{[(#TEXTE|recherche_avancee_google_like{1})]})]
+    </li>
+  </BOUCLE_articles></ul>
+  <p class="pagination" style="text-align:center">[<br><:rechercheavancee:pages:> (#PAGINATION{page_precedent_suivant})]</p>
+</div></B_articles>
+  [<h2>&#171;&nbsp;(#RECHERCHE)&nbsp;&#187; : aucun article trouv&eacute; !</h2>]
 <//B_articles>
-#FIN_SURLIGNE
 
-#INCLURE{fond=inc/foot}
+<B_mots><div class="liste-articles">
+  <h3>Voir aussi dans le lexique :</h3>
+  <ul><BOUCLE_mots(MOTS) {recherche} {par points} {inverse} {id_groupe=4}>
+    <li><a href="#URL_PAGE{lexique}#mot_#ID_MOT">#TITRE</a></li>
+  </BOUCLE_mots></ul>
+</div></B_mots>
+
+<B_breves><div class="liste-articles">
+  <h3>Voir aussi dans les brèves :</h3>
+  <ul><BOUCLE_breves(BREVES) {recherche} {par date} {inverse}>
+    <li><a href="#URL_BREVE">#TITRE</a> [(le (#DATE|affdate))]</li>
+  </BOUCLE_breves></ul>
+</div></B_breves>
+
+<INCLURE{fond=inc/foot}{stats=no}>

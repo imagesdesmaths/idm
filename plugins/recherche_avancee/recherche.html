@@ -1,0 +1,191 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title><:resultats_recherche:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+<INCLURE{fond=inc-head}>
+<meta name="robots" content="none" />
+</head>
+
+<body class="page_recherche">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_rechercher:>[ &gt; (#RECHERCHE)]</div>
+
+	
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : Resultats de la recherche ]
+		<div id="contenu">
+
+			<table border=0 cellspacing=0 cellpadding=0 width=310><tr><td width=160>
+				<img src="#CHEMIN{img_pack/search-logo.gif}">
+			</td>
+			[(#REM) Formulaire de recherche ou recherche avancee]
+			[(#ENV{avancee}|=={1}?{""," "})
+				<td valign=bottom height=50>
+				#FORMULAIRE_RECHERCHE
+				</td>
+			]
+			</tr></table>
+			[(#ENV{avancee}|=={1}?{" ",""})
+				<INCLURE{fond=formulaires/recherche-avancee}{recherche}{avancee}{depuis}{id_mot}{id_nomot}{id_groupe}{id_rubrique}{tri}{titre}>
+			]
+
+
+			<!div class="contre-encart">
+				[(#REM) Calcul du pourcentage ]
+				<BOUCLE_a(ARTICLES){recherche} {par points} {inverse}{0,1}>
+					[(#SET{pc,[(#EVAL{100/#POINTS})]})]
+				</BOUCLE_a>
+
+				[(#REM) Articles trouves ]
+				<B_articles>
+				<div class="liste-articles">
+					#ANCRE_PAGINATION
+     				<div class="cartouche">
+					<h1 class="surtitre"><:resultats_recherche:>
+						<span class="titre">&#171;&nbsp;#RECHERCHE&nbsp;&#187;</span> : #GRAND_TOTAL [(#GRAND_TOTAL|=={1}|?{<:rechercheavancee:resultat_trouve:>.,<:rechercheavancee:resultats_trouves:>.})]</h1>
+					</div>
+					<hr>
+					<h2 class="invisible"><:articles:></h2>
+					<ul>
+						<BOUCLE_articles(ARTICLES) {recherche} {!par #ENV{tri,points}} {!par date} {age<(#ENV{depuis,1E100})} {id_mot?} {id_groupe?} {id_mot != (#ENV{id_nomot})} {branche?} {pagination 7} >
+						<li>
+						<BOUCLE_titre(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}{unique}>
+							[(#ENV{tri}|=={id_rubrique}|?{" ",""})
+									<br><h2 class="surtitre"><:rubrique:> : #TITRE</h2><hr/>
+							]
+						</BOUCLE_titre>
+						<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+						<div class="rinfo">
+							<BOUCLE_rub(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rub>
+							<BOUCLE_mot(MOTS){id_article}>[<a href="#URL_MOT">/ (#TITRE)</a>]</BOUCLE_mot>
+							[(#SET{pt,[(#POINTS|mult{#GET{pc}})]})]
+							[ (<:rechercheavancee:point:> : (#GET{pt}|round)%)]
+							[ (<:popularite:> : (#POPULARITE_ABSOLUE))]
+						</div>
+						[(#REM) faut-il un texte_script ou texte_backend ?]
+						[(#CHAPO|recherche_avancee_google_like|sinon{[(#TEXTE|recherche_avancee_google_like{1})]})]
+						<small class="rdate">[le (#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)] </small>
+						</li>
+						</BOUCLE_articles>
+					</ul>
+					<p class="pagination" style="text-align:center"><img src="#CHEMIN{img_pack/search.gif}">[<br><:rechercheavancee:pages:> (#PAGINATION{page_precedent_suivant})<hr/>]
+					<center>
+					#FORMULAIRE_RECHERCHE<hr/>
+					</center></p>
+				</div>
+				</B_articles>
+     				[<div class="cartouche">
+					<h1 class="surtitre"><:rechercheavancee:pas_resultats_recherche:>
+							<span class="titre">&#171;&nbsp;(#RECHERCHE)&nbsp;&#187;</span></h1>
+					</div><hr>]
+				<//B_articles>
+
+			<!/div><!-- fin contre-encart -->
+
+			<!div class="encart">
+
+				[(#REM) Rubriques trouvees ]
+				<B_rubriques>
+				<div class="liste-articles">
+					#ANCRE_PAGINATION
+					<h2 class="titre"><:rechercheavancee:autres_resultats:><:rubriques:></h2>
+					[<p class="pagination">(#PAGINATION)</p>]<hr/>
+						<BOUCLE_rubriques(RUBRIQUES) {recherche} {par points}{inverse} {pagination 5}>
+						<h2 class=surtitre><a href="#URL_RUBRIQUE">#TITRE</a></h2>
+						</BOUCLE_rubriques>
+					</ul>
+				</div><hr/>
+				</B_rubriques>
+
+				[(#REM) Mots-cles trouves ]
+				<B_mots>
+				<div class="liste-articles">
+					#ANCRE_PAGINATION
+					<h2 class="titre"><:rechercheavancee:autres_resultats:><:mots_clefs:></h2>
+					[<p class="pagination">(#PAGINATION)</p>]<hr/>
+						<BOUCLE_mots(MOTS) {recherche} {par points}{inverse} {pagination 5}>
+						<h2 class=surtitre><a href="#URL_MOT">#TITRE</a></h2>
+						</BOUCLE_mots>
+				</div><hr/>
+				</B_mots>
+
+				[(#REM) Breves trouvees ]
+				<B_breves>
+				<div class="liste-articles">
+					#ANCRE_PAGINATION
+					<h2 class="titre"><:rechercheavancee:autres_resultats:><:breves:></h2>
+					[<p class="pagination">(#PAGINATION)</p>]<hr/>
+						<BOUCLE_breves(BREVES) {recherche} {par points}{inverse} {pagination 5}>
+						<h2 class=surtitre>[(#DATE|affdate_court) : ]<a href="#URL_BREVE">#TITRE</a></h2>
+						</BOUCLE_breves>
+				</div><hr/>
+				</B_breves>
+
+				[(#REM) Messages trouves ]
+				<B_messages>
+				<div class="liste-articles">
+					#ANCRE_PAGINATION
+					<h2 class="titre"><:rechercheavancee:autres_resultats:><:messages_forum:></h2>
+					[<p class="pagination">(#PAGINATION)</p>]<hr/>
+						<BOUCLE_messages(FORUMS) {recherche} {par points}{inverse} {pagination 5}>
+						<h2 class=surtitre>[(#DATE|affdate_court) : ]<a href="#URL_FORUM">#TITRE</a></h2>
+						</BOUCLE_messages>
+				</div><hr/>
+				</B_messages>
+
+				[(#REM) Sites web trouves ]
+				<B_sites>
+				<div class="liste-articles">
+					#ANCRE_PAGINATION
+					<h2 class="titre"><:rechercheavancee:autres_resultats:><:sites_web:></h2>
+					[<p class="pagination">(#PAGINATION)</p>]<hr/>
+						<BOUCLE_sites(SITES) {recherche} {par points}{inverse} {pagination 5}>
+						<h2 class=surtitre><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></h2>
+						</BOUCLE_sites>
+				</div><hr/>
+				</B_sites>
+
+			<!/div><!-- fin encart -->
+
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			[(#ENV{id_rubrique}|=={""}?{" ",""})
+				<INCLURE{fond=inc-rubriques}>
+			]
+			[(#ENV{id_rubrique}|=={""}?{""," "})
+				<INCLURE{fond=inc-rubriques}{id_rubrique}>
+			]
+
+			[(#REM) Menu de navigation mots-cles : les autres mots cles du meme groupe ]
+			<B_mots_freres>
+			<div class="divers">
+				<h2 class="menu-titre"><:mots_clefs:></h2>
+				<ul>
+					<BOUCLE_mots_freres(MOTS) {id_mot}>
+					<li><a href="#URL_MOT">#TITRE</a></li>
+					</BOUCLE_mots_freres>
+				</ul>
+			</div>
+			</B_mots_freres>
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+	
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>

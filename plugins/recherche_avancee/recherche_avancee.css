@@ -1,0 +1,49 @@
+/*  ------------------------------------------
+/*  Affichage des recherches
+/*  ------------------------------------------ */
+.rinfo {
+	font-size:0.71em; 
+}
+.rinfo a {
+	color : #700; 
+}
+.rintro {
+	font-size:0.91em;
+}
+.rdate {
+	color:Green;
+}
+.rdate a {
+	color:#050;
+}
+.rbold {
+	color:navy;
+}
+.rsusp {
+	font-size:0.71em; 
+	color:Green;
+}
+
+.formulaire_recherche_avancee .bouton { width: 12em; }
+.formulaire_recherche_avancee table 
+{	border:2px solid #CBDCED; 
+	width:100% 
+}
+.formulaire_recherche_avancee thead 
+{	background-color: #CBDCED; 
+}
+	
+.formulaire_recherche a { color:#993300; }
+.formulaire_recherche form { margin:0; }
+
+/* Rajouter la loupe dans le formulaire d'entete */
+#entete .formulaire_recherche {
+	width:160px;
+}
+
+#entete .formulaire_recherche input {
+	padding:2px 0px 2px 18px;
+	width:142px;
+	background: #fff url(img_pack/q.png) no-repeat 4px center;
+	border:1px solid #7F9DB9;
+}

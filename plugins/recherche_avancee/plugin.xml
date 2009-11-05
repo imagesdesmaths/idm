@@ -1,0 +1,40 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Recherche avanc&eacute;e
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	  JEM (jean-marc.viglino@ign.fr)
+	</auteur>
+	<version>
+	0.2
+	</version>
+	<icon>recherche.png</icon>
+	<etat>stable</etat>
+	<description>Noisette de recherche avanc&eacute;e
+<br/>
+en limitant la recherche :
+- &agrave; une p&eacute;riode
+- &agrave; une rubrique
+- &agrave; un mot cl&eacute;
+- choix du tri
+
+Affichage au format google-like  de 
+Nicolas Steinmetz (modifi&eacute;)
+http://www.spip-contrib.net/Google-Like
+
+Traduction : Abelass.
+
+Cette noisette surcharge les fichiers 
+recherche.html et formulaires/recherche.html de Spip.
+	</description>
+	<fonctions>
+	recherche_avancee_fonctions.php
+	</fonctions>
+	<prefix>
+	recherche_avancee
+	</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+</plugin>
