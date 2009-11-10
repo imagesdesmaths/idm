@@ -1,0 +1,12 @@
+#CACHE{0}
+<INCLURE{fond=inc/head}{title=Suivi des forums de relecture}>
+<BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
+
+<BOUCLE_forums(FORUMS) {statut = rel} {par date} {inverse}>
+  <INCLURE {fond=inc/forum-message-prive} {id_forum} {auteur_article}>
+</BOUCLE_forums>
+
+</BOUCLE_securite>
+  <h1>Go away, you non-administrator !</h1>
+<//B_securite>
+<INCLURE{fond=inc/foot}{stats=no}>
