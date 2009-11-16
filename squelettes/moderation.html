@@ -5,7 +5,7 @@
 <h1>Mod&eacute;ration des forums de relecture</h1>
 
 #SET{id,0}
-<BOUCLE_forums(FORUMS) {statut = relmod} {par id_article, date}>
+<BOUCLE_forums(FORUMS) {plat} {statut = relmod} {par id_article, date}>
   <BOUCLE_article (ARTICLES) {id_article = #ID_ARTICLE} {id_article !== #GET{id}} {statut = prop}>
     <h3>#TITRE[, par (#LESAUTEURS)]</h3>
     #SET{id,#ID_ARTICLE}
