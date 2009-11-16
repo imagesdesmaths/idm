@@ -2,7 +2,7 @@
 <INCLURE{fond=inc/head}{title=Suivi des forums de relecture}>
 <BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
 
-<BOUCLE_forums(FORUMS) {statut = rel} {par date} {inverse}>
+<BOUCLE_forums(FORUMS) {plat} {statut = rel} {par date} {inverse}>
   <INCLURE {fond=inc/forum-message-prive} {id_forum} {auteur_article}>
 </BOUCLE_forums>
 
