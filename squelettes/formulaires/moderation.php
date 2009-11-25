@@ -20,6 +20,8 @@ function formulaires_moderation_traiter ($id_forum) {
   $id_auteur  = sql_getfetsel ('id_auteur',  'spip_forum', "id_forum = $id_forum");
   $title      = sql_getfetsel ('titre', 'spip_articles', "id_article = $id_article");
 
+  $title = utf8_decode($title);
+
   $mail_subject = "Un nouveau message de relecture sur IdM";
   $mail_text    = <<< END
 Bonjour !
@@ -28,8 +30,8 @@ Un nouveau message a été déposé sur le forum de relecture de votre article
 
   « $title »
 
-proposé pour publication dans Images des Maths. Vous pouvez suivre le forum
-de relecture de cet article à cette adresse :
+proposé pour publication dans Images des Maths. Vous pouvez suivre le
+forum de relecture de cet article à cette adresse :
 
   http://images.math.cnrs.fr/spip.php?page=propose&amp;id_article=$id_article
 
