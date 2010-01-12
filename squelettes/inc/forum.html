@@ -42,4 +42,11 @@
     </BOUCLE_forums>
   </ul>
 </B_forums>
+
+<BOUCLE_mod(FORUMS) {id_article} {par date} {plat} {statut=prop} {id_auteur = #SESSION{id_auteur}}>
+  <p>Votre message du [(#DATE|affdate_jourcourt)] intitul&eacute; 
+  <em>#TITRE</em> est bien pris en compte mais il doit &ecirc;tre 
+  valid&eacute; par un mod&eacute;rateur avant d'appara&icirc;tre sur le 
+  site. Cela devrait &ecirc;tre fait incessamment !</p>
+</BOUCLE_mod>
 <//B_one_forum>
