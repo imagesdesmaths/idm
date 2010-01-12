@@ -1,0 +1,62 @@
+URGENT :
+
+RAPIDEMENT :
+- jsmath_font_test dans le plugin par défaut
+- <fig132|width=70%>
+- Copyright des images
+- AJAX pour le moteur de recherche
+- ISSN sur la page d'accueil
+- Modération des messages : afficher un truc quand même.
+
+UN JOUR :
+- Afficher les films sur un clic (jQuery)
+- Ajaxifier les billettistes
+- Anti-spam messages longs : mettre ailleurs que dans NOSPAM
+- Bouton ecrire aux relecteurs
+- Finir plugins/relecteurs
+- Finir #AUTORISER/autoriser()
+- Historique des relecteurs
+- Tableau de bord ???
+- Tampon CC par article
+- « N'hésitez pas à traduire les articles »
+- que les visiteurs puissent modifier leur mdp
+- éradiquer le vote des relecteurs
+- « Pour citer cet article »
+- RSS par difficulté
+- Contacter un auteur / tableau de bord par rubrique
+- Prévenir tous les relecteurs
+
+A EXPLORER :
+- Groupe de mots "Lectures"
+- Lunettes vertes
+- Nouveau logo (et déclinaisons) et nouveau sous-titre
+- Mot-clef "bon billet" ???
+- Traquer la recherche sur le site
+- Distinguer visuellement les billets (bleu ?)
+- Fusion lexique/mondedelarecherche
+- Sous-listes
+
+POUR LE FUN :
+- Cross-links
+- Include_spip / charger_fonction
+- Securiser_action ?
+
+FEATURES SPIP A ESSAYER :
+
+- #_parent:TITRE
+
+- pipeline jquery_plugins :
+    function XXX_jquery_plugins($scripts) { 
+      $scripts[] = "js/bla.js";
+      return $scripts;
+    }
+
+- pipeline taches_generales_cron :
+    function XXX_taches_generales_cron ($taches) {
+      $taches['toto'] = 24*3600; // en secondes
+    }
+    
+    fichier genie/toto.php, genie_toto_dist(), retour :
+      =0 : rien à faire
+      >0 : fait
+      <0 : il en reste, revenir dans |.| secondes
