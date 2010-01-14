@@ -5,10 +5,8 @@ RAPIDEMENT :
 - <fig132|width=70%>
 - Copyright des images
 - AJAX pour le moteur de recherche
-- Vidéos dans Chrome (MAC)
 
 UN JOUR :
-- Afficher les films sur un clic (jQuery)
 - Ajaxifier les billettistes
 - Anti-spam messages longs : mettre ailleurs que dans NOSPAM
 - Bouton ecrire aux relecteurs
@@ -24,9 +22,9 @@ UN JOUR :
 - RSS par difficulté
 - Contacter un auteur / tableau de bord par rubrique
 - Prévenir tous les relecteurs
-- Mathjax à la place de jsMath
 
 A EXPLORER :
+- Mathjax à la place de jsMath
 - Groupe de mots "Lectures"
 - Lunettes vertes
 - Nouveau logo (et déclinaisons) et nouveau sous-titre
