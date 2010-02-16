@@ -7,7 +7,7 @@
     <p><textarea name="texte" cols="75" rows="20">#ENV{texte}</textarea></p>                                   [<p class="erreur">(#ENV**{erreurs}|table_valeur{texte})</p>]
 
     [(#ENV**{erreurs}|table_valeur{preview}|=={preview}|oui)
-      <fieldset>
+      <fieldset class="previsu">
         <legend>Pr&eacute;visualisation &mdash; #ENV{titre}</legend>
         #ENV{texte}
       </fieldset>

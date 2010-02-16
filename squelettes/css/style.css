@@ -24,6 +24,8 @@ form { text-align : center; }
 form h2 { margin : 0px; }
 form p { margin : .5ex 0px; }
 form p.erreur { color : #e20000; font-weight : bold; }
+form fieldset.previsu { text-align : justify; }
+form fieldset.previsu ul { list-style-type : none; }
 
 h1 { text-align : center; margin : 0px; }
 
