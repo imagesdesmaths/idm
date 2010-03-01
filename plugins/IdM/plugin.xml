@@ -1,0 +1,16 @@
+<plugin>
+  <nom>Images des Maths</nom>
+  <auteur>[Vincent Beffara->vbeffara@ens-lyon.fr]</auteur>
+  <licence>(c) 2010 GPL</licence>
+  <version>0.1</version>
+  <etat>dev</etat>
+  <prefix>idm</prefix>
+  <necessite id="SPIP" version="[2.0.0;]" />
+
+  <description>Fonctionnalit&eacute;s utiles au fonctionnement du site [Images des Maths->http://images.math.cnrs.fr]</description>
+
+  <pipeline>
+    <nom>pre_edition</nom>
+    <inclure>idm_pipelines.php</inclure>
+  </pipeline>
+</plugin>
