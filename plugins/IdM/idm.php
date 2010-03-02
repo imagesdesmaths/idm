@@ -11,8 +11,13 @@ $tables_principales['spip_auteurs']['field']['relecteur_quand']   = "TIMESTAMP";
 
 $tables_principales['spip_idm_projets'] = array (
   'field' => array (
-    'id_editeur' => 'BIGINT(21) NOT NULL'),
-  'key' => array());
+    'id_projet'   => 'BIGINT(21) NOT NULL',
+    'id_editeur'  => 'BIGINT(21) NOT NULL',
+    'id_auteur'   => 'BIGINT(21)',
+    'nom_auteur'  => 'TINYTEXT NOT NULL',
+    'sujet'       => 'TINYTEXT NOT NULL'),
+  'key' => array(
+    'PRIMARY KEY' => 'id_projet'));
 
 $tables_auxiliaires['spip_relecteurs_articles'] = array (
   'field' => array (

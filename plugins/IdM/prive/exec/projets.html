@@ -1,0 +1,16 @@
+<h1>Gestion des articles en projet</h1>
+
+<h3>Articles actuellement en projet :</h3>
+
+<?php include_spip ('base/create'); maj_tables('spip_idm_projets'); ?>
+
+<BOUCLE_proj(IDM_PROJETS)>
+<div class='cadre cadre-trait-couleur'>
+  <div class='titrem'>#SUJET</div>
+  <div class='cadre_padding'>
+    <p>&Eacute;diteur en charge : <BOUCLE_ed(AUTEURS){id_auteur=#ID_EDITEUR}{tous}>#NOM</BOUCLE_ed></p>
+    <p>Auteur : <BOUCLE_aut(AUTEURS){id_auteur=#ID_AUTEUR}{tous}>#NOM (affect&eacute;)</BOUCLE_aut>#NOM_AUTEUR (propos&eacute;)<//B_aut></p>
+#NOM
+  </div>
+</div>
+</BOUCLE_proj>
