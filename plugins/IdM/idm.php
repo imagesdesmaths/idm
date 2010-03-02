@@ -14,10 +14,13 @@ $tables_principales['spip_idm_projets'] = array (
     'id_projet'   => 'BIGINT(21) NOT NULL',
     'id_editeur'  => 'BIGINT(21) NOT NULL',
     'id_auteur'   => 'BIGINT(21)',
+    'id_article'  => 'BIGINT(21)',
     'nom_auteur'  => 'TINYTEXT NOT NULL',
-    'sujet'       => 'TINYTEXT NOT NULL'),
-  'key' => array(
-    'PRIMARY KEY' => 'id_projet'));
+    'sujet'       => 'TINYTEXT NOT NULL',
+    'modif'       => 'TIMESTAMP NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP',
+    'statut'      => "ENUM ('initial', 'contacte', 'affecte', 'fini', 'refus') NOT NULL DEFAULT 'initial'"),
+  'key' => array (
+    'PRIMARY KEY'   => 'id_projet'));
 
 $tables_auxiliaires['spip_relecteurs_articles'] = array (
   'field' => array (
@@ -35,12 +38,13 @@ function idm_install ($action) {
   switch ($action) {
   case 'test':
     $desc = sql_showtable ('spip_idm_projets');
-    if ($desc) return true; else return false;
+    if ($desc AND $desc['field']['id_article']) return true; else return false;
     break;
 
   case 'install':
     include_spip ('base/create');
     creer_base();
+    maj_tables(array('spip_idm_projets','spip_relecteurs_articles'));
     break;
 
   case 'uninstall':
