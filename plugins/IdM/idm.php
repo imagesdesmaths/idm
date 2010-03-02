@@ -19,7 +19,7 @@ $tables_auxiliaires['spip_relecteurs_articles'] = array (
 global $table_des_tables;
 $table_des_tables['relecteurs_articles'] = 'relecteurs_articles';
 
-function relecteurs_install ($action) {
+function idm_install ($action) {
   switch ($action) {
   case 'test':
     $desc = sql_showtable ('spip_relecteurs_articles');
@@ -37,7 +37,7 @@ function relecteurs_install ($action) {
   }
 }
 
-function relecteurs_boite_infos (&$flux) {
+function idm_boite_infos (&$flux) {
   if ($flux['args']['type'] == 'article'
     AND $id_article = intval($flux['args']['id'])
     AND $statut = $flux['args']['row']['statut']
@@ -45,7 +45,7 @@ function relecteurs_boite_infos (&$flux) {
 
       $message = 'G&eacute;rer la relecture';
       $url     = generer_url_public ("propose", array("id_article" => $id_article));
-      $previsu = icone_horizontale ($message, $url, find_in_path("relecteurs.gif"), "rien.gif", false);
+      $previsu = icone_horizontale ($message, $url, find_in_path("img/relecteurs.gif"), "rien.gif", false);
 
       if ($p = strpos ($flux['data'], '</ul>')) {
         while ($q = strpos ($flux['data'],'</ul>',$p+5))
@@ -58,7 +58,7 @@ function relecteurs_boite_infos (&$flux) {
   return $flux;
 }
 
-function relecteurs_autoriser() {}
+function idm_autoriser() {}
 
 function autoriser_article_relire_dist ($faire, $type, $id, $qui, $opt) {
   if ($qui['id_auteur'] == 0) return false;
