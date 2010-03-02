@@ -15,10 +15,10 @@ $tables_principales['spip_idm_projets'] = array (
     'id_editeur'  => 'BIGINT(21) NOT NULL',
     'id_auteur'   => 'BIGINT(21)',
     'id_article'  => 'BIGINT(21)',
-    'nom_auteur'  => 'TINYTEXT NOT NULL',
+    'auteur'      => 'TINYTEXT NOT NULL',
     'sujet'       => 'TINYTEXT NOT NULL',
     'modif'       => 'TIMESTAMP NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP',
-    'statut'      => "ENUM ('initial', 'contacte', 'affecte', 'fini', 'refus') NOT NULL DEFAULT 'initial'"),
+    'statut'      => "ENUM ('contact', 'redaction', 'relecture', 'publie', 'refus') NOT NULL DEFAULT 'contact'"),
   'key' => array (
     'PRIMARY KEY'   => 'id_projet'));
 
