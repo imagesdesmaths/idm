@@ -4,7 +4,6 @@
   [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
   [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 
-  [(#ENV*{message_ok}|non)
   <form action="#ENV{action}" method="post">
     #ACTION_FORMULAIRE{#ENV{action}}
     <ul>
@@ -16,7 +15,15 @@
         <label for="sujet">Sujet de l'article</label>
         <input type="text" name="sujet" id="sujet" value="#ENV{sujet}" class="text" />
       </li>
+      <li class="editer_id_rubrique obligatoire">
+        <label for="id_rubrique">Rubrique</label>
+        <select name="id_rubrique" id="id_rubrique" value="#ENV{id_rubrique}">
+          <BOUCLE_rub(RUBRIQUES){id_rubrique IN 1,4,20,21,24,27,32}{par titre}>
+            <option value="#ID_RUBRIQUE" [(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|oui) selected="yes"]>#TITRE</option>
+          </BOUCLE_rub>
+        </select>
+      </li>
     </ul>
     <p class="boutons"><input type="submit" class="submit" value="C'est parti" /></p>
-  </form>]
+  </form>
 </div>
