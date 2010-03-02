@@ -1,12 +1,19 @@
 <?php
 
 global $tables_principales;
+global $tables_auxiliaires;
+global $table_des_tables;
+
 $tables_principales['spip_auteurs']['field']['role']              = "ENUM ('visiteur','candidat','relecteur') NOT NULL DEFAULT 'visiteur'";
 $tables_principales['spip_auteurs']['field']['math']              = "TINYTEXT";
 $tables_principales['spip_auteurs']['field']['relecteur_combien'] = "INT NOT NULL DEFAULT 0";
 $tables_principales['spip_auteurs']['field']['relecteur_quand']   = "TIMESTAMP";
 
-global $tables_auxiliaires;
+$tables_principales['spip_idm_projets'] = array (
+  'field' => array (
+    'id_editeur' => 'BIGINT(21) NOT NULL'),
+  'key' => array());
+
 $tables_auxiliaires['spip_relecteurs_articles'] = array (
   'field' => array (
     'id_article'  => 'BIGINT(21) NOT NULL',
@@ -16,13 +23,13 @@ $tables_auxiliaires['spip_relecteurs_articles'] = array (
     'avis'        => "TINYTEXT"),
   'key' => array());
 
-global $table_des_tables;
 $table_des_tables['relecteurs_articles'] = 'relecteurs_articles';
+$table_des_tables['idm_projets']         = 'idm_projets';
 
 function idm_install ($action) {
   switch ($action) {
   case 'test':
-    $desc = sql_showtable ('spip_relecteurs_articles');
+    $desc = sql_showtable ('spip_idm_projets');
     if ($desc) return true; else return false;
     break;
 
