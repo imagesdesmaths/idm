@@ -4,7 +4,7 @@
   [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
   [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 
-  [(#ENV{editable})
+  [(#ENV*{message_ok}|non)
   <form action="#ENV{action}" method="post">
     #ACTION_FORMULAIRE{#ENV{action}}
     <ul>

@@ -2,11 +2,7 @@
 
 function formulaires_idm_projet_charger () {
   if ($GLOBALS['auteur_session']['statut'] != "0minirezo") return false;
-  return array (
-    "auteur"   => "",
-    "sujet"    => "",
-    "editable" => true,
-  );
+  return array ("auteur"=>"", "sujet"=>"");
 }
 
 function formulaires_idm_projet_verifier () {
@@ -16,8 +12,8 @@ function formulaires_idm_projet_verifier () {
     if (!_request($champ)) $erreurs[$champ] = "Ce champ est obligatoire !";
   }
 
-  if (count($erreurs)) $erreurs['message_erreur'] = "Tous les champs doivent &ecirc;tre remplis !";
-
+  if (count($erreurs))
+    $erreurs['message_erreur'] = "Tous les champs doivent &ecirc;tre remplis !";
   return $erreurs;
 }
 
@@ -28,8 +24,7 @@ function formulaires_idm_projet_traiter () {
     "sujet"      => _request("sujet")));
 
   return array (
-    "message_ok" => "Projet cr&eacute;&eacute; !",
-    "editable"   => false,
+    "message_ok" => "Projet cr&eacute;&eacute;.",
   );
 }
 
