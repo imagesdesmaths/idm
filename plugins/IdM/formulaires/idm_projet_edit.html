@@ -32,6 +32,16 @@
           </select>
           </li>
 
+          <li class="editer_id_article obligatoire">
+          <label for="id_article">Identifier l'article</label>
+          <select name="id_article" id="id_article" value="#ENV{id_article}">
+            <option value="0" [(#ENV{id_article}|non) selected="yes"]></option>
+            <BOUCLE_article(ARTICLES){tous}{par id_article}{inverse}>
+            <option value="#ID_ARTICLE" [(#ENV{id_article}|=={#ID_ARTICLE}|oui) selected="yes"]>#TITRE</option>
+            </BOUCLE_article>
+          </select>
+          </li>
+
           <hr />
 
           <!--<li class="editer_auteur obligatoire [(#ENV**{erreurs}|table_valeur{auteur}|oui)erreur]">-->
