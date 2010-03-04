@@ -1,0 +1,57 @@
+<BOUCLE_proj(IDM_PROJETS){id_projet=#ENV{id_projet}}>
+  <div class='cadre cadre-trait-couleur'>
+    <div class='titrem'>#SUJET (statut : #STATUT)</div>
+    <div class='cadre_padding'>
+      <p>Auteur : <BOUCLE_aut(AUTEURS){id_auteur}{tous}>#NOM (affect&eacute;)</BOUCLE_aut>#AUTEUR (propos&eacute;)<//B_aut></p>
+      <p>Rubrique : <BOUCLE_rub(RUBRIQUES){id_rubrique}>#TITRE</BOUCLE_rub></p>
+      <p>Derni&egrave;re modification : #MODIF par <BOUCLE_ed(AUTEURS){id_auteur=#ID_EDITEUR}{tous}>#NOM</BOUCLE_ed>.</p>
+      <fieldset>
+        <legend>&nbsp;Commentaires de l'&eacute;diteur&nbsp;</legend>
+        [(#COMMENT|propre)]
+      </fieldset>
+    </div>
+
+    <div class="formulaire_spip formulaire_demo">
+      [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+      [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+
+      <form action="#ENV{action}" method="post">
+        #ACTION_FORMULAIRE{#ENV{action}}
+        [(#ENV{step}|=={display}|oui)<p class="boutons"><input type="submit" class="submit" value="Modifier" /></p>]
+        [(#ENV{step}|=={display}|oui)<input type="hidden" name="step" value="edit" />]
+        <BOUCLE_edit(CONDITION){si #ENV{step}|=={edit}}>
+        <input type="hidden" name="step" value="display" />
+        <ul>
+          <li class="editer_id_auteur obligatoire">
+          <label for="id_auteur">Identifier l'auteur</label>
+          <select name="id_auteur" id="id_auteur" value="#ENV{id_auteur}">
+            <option value="0" [(#ENV{id_auteur}|non) selected="yes"]></option>
+            <BOUCLE_auteur(AUTEURS){tous}{par nom}>
+            <option value="#ID_AUTEUR" [(#ENV{id_auteur}|=={#ID_AUTEUR}|oui) selected="yes"]>#NOM*</option>
+            </BOUCLE_auteur>
+          </select>
+          </li>
+
+          <hr />
+
+          <!--<li class="editer_auteur obligatoire [(#ENV**{erreurs}|table_valeur{auteur}|oui)erreur]">-->
+          <!--<label for="auteur">Auteur contact&eacute;</label>-->
+          <!--<input type="text" name="auteur" id="auteur" value="#ENV{auteur}" class="text" />-->
+          <!--</li>-->
+          <!--<li class="editer_sujet obligatoire [(#ENV**{erreurs}|table_valeur{sujet}|oui)erreur]">-->
+          <!--<label for="sujet">Sujet de l'article</label>-->
+          <!--<input type="text" name="sujet" id="sujet" value="#ENV{sujet}" class="text" />-->
+          <!--</li>-->
+          <!--<li class="editer_comment">-->
+          <!--<label for="comment">Commentaires</label>-->
+          <!--<textarea name="comment" id="comment" rows="5">#ENV{comment}</textarea>-->
+          <!--<textarea name="comment" cols="75" rows="20">#ENV{texte}</textarea></p>                                   [<p class="erreur">(#ENV**{erreurs}|table_valeur{texte})</p>]-->
+          <!--</li>-->
+        </ul>
+        <p class="boutons"><input type="submit" class="submit" value="C'est parti" /></p>
+        </BOUCLE_edit>
+      </form>
+    </div>
+
+  </div>
+</BOUCLE_proj>

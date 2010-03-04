@@ -2,7 +2,7 @@
 
 function formulaires_idm_projet_charger () {
   if ($GLOBALS['auteur_session']['statut'] != "0minirezo") return false;
-  return array ("auteur"=>"", "sujet"=>"", "id_rubrique"=>1);
+  return array ("auteur"=>"", "sujet"=>"", "comment"=>"", "id_rubrique"=>1);
 }
 
 function formulaires_idm_projet_verifier () {
@@ -21,7 +21,8 @@ function formulaires_idm_projet_traiter () {
     "id_editeur"  => $GLOBALS['auteur_session']['id_auteur'],
     "id_rubrique" => _request("id_rubrique"),
     "auteur"      => _request("auteur"),
-    "sujet"       => _request("sujet")));
+    "sujet"       => _request("sujet"),
+    "comment"     => _request("comment")));
   return array ("message_ok" => "Projet cr&eacute;&eacute;.");
 }
 

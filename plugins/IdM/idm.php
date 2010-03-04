@@ -13,12 +13,13 @@ $tables_principales['spip_idm_projets'] = array (
   'field' => array (
     'id_projet'   => 'BIGINT(21) NOT NULL',
     'id_editeur'  => 'BIGINT(21) NOT NULL',
-    'id_auteur'   => 'BIGINT(21)',
-    'id_article'  => 'BIGINT(21)',
-    'id_rubrique' => 'BIGINT(21)',
+    'id_auteur'   => 'BIGINT(21) NOT NULL default 0',
+    'id_article'  => 'BIGINT(21) NOT NULL default 0',
+    'id_rubrique' => 'BIGINT(21) NOT NULL',
     'auteur'      => 'TINYTEXT NOT NULL',
     'sujet'       => 'TINYTEXT NOT NULL',
     'modif'       => 'TIMESTAMP NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP',
+    'comment'     => 'TEXT NOT NULL',
     'statut'      => "ENUM ('contact', 'redaction', 'relecture', 'publie', 'refus') NOT NULL DEFAULT 'contact'"),
   'key' => array (
     'PRIMARY KEY'   => 'id_projet'));
@@ -39,7 +40,7 @@ function idm_install ($action) {
   switch ($action) {
   case 'test':
     $desc = sql_showtable ('spip_idm_projets');
-    if ($desc AND $desc['field']['id_rubrique']) return true; else return false;
+    if ($desc AND $desc['field']['comment']) return true; else return false;
     break;
 
   case 'install':

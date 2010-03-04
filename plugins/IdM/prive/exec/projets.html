@@ -3,15 +3,7 @@
 <B_proj>
   <h4>Articles actuellement en projet :</h4>
 <BOUCLE_proj(IDM_PROJETS)>
-  <div class='cadre cadre-trait-couleur'>
-    <div class='titrem'>#SUJET (statut : #STATUT)</div>
-    <div class='cadre_padding'>
-      <p>Auteur : <BOUCLE_aut(AUTEURS){id_auteur}{tous}>#NOM (affect&eacute;)</BOUCLE_aut>#AUTEUR (propos&eacute;)<//B_aut></p>
-      <p>Rubrique : <BOUCLE_rub(RUBRIQUES){id_rubrique}>#TITRE</BOUCLE_rub></p>
-      <p>&Eacute;diteur en charge : <BOUCLE_ed(AUTEURS){id_auteur=#ID_EDITEUR}{tous}>#NOM</BOUCLE_ed></p>
-      <p>Derni&egrave;re modification : #MODIF</p>
-    </div>
-  </div>
+  #FORMULAIRE_IDM_PROJET_EDIT{#ID_PROJET}
 </BOUCLE_proj>
 
 #FORMULAIRE_IDM_PROJET
