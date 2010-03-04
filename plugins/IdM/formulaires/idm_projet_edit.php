@@ -19,29 +19,29 @@ function formulaires_idm_projet_edit_traiter ($id_projet) {
   if (_request("step") != "display") return;
   $modif = false;
 
-  $old_id_auteur = intval (sql_getfetsel ("id_auteur","spip_idm_projets","id_projet=$id_projet"));
-  $new_id_auteur = intval (_request("id_auteur"));
+  $projet = sql_fetsel (array("id_auteur","id_article","comment","statut"), "spip_idm_projets", "id_projet=$id_projet");
 
-  if ($new_id_auteur != $old_id_auteur) {
-    sql_updateq ("spip_idm_projets", array("id_auteur"=>$new_id_auteur), "id_projet=$id_projet");
+  if (intval($projet["id_auteur"]) != intval(_request("id_auteur"))) {
+    $projet["id_auteur"] = _request("id_auteur");
     $modif = true;
   }
 
-  $old_id_article = intval (sql_getfetsel ("id_article","spip_idm_projets","id_projet=$id_projet"));
-  $new_id_article = intval (_request("id_article"));
-
-  if ($new_id_article != $old_id_article) {
-    sql_updateq ("spip_idm_projets", array("id_article"=>$new_id_article), "id_projet=$id_projet");
+  if (intval($projet["id_article"]) != intval(_request("id_article"))) {
+    $projet["id_article"] = _request("id_article");
     $modif = true;
   }
 
-  $old_comment = sql_getfetsel ("comment","spip_idm_projets","id_projet=$id_projet");
-  $new_comment = _request("comment");
-
-  if ($new_comment != $old_comment) {
-    sql_updateq ("spip_idm_projets", array("comment"=>$new_comment), "id_projet=$id_projet");
+  if ($projet["comment"] != _request("comment")) {
+    $projet["comment"] = _request("comment");
     $modif = true;
   }
+
+  if ($projet["id_article"] AND $projet["id_auteur"] AND ($projet["statut"]=="contact")) {
+    $projet["statut"] = "redaction";
+    $modif = true;
+  }
+
+  if ($modif) sql_updateq ("spip_idm_projets", $projet, "id_projet=$id_projet");
 
   return array();
 }
