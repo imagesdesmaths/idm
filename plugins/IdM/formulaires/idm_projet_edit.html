@@ -27,8 +27,12 @@
 
     <form action="#ENV{action}" method="post">
       #ACTION_FORMULAIRE{#ENV{action}}
-      [(#ENV{step}|=={display}|oui)<p class="boutons"><input type="submit" class="submit" value="Modifier" /></p>]
-      [(#ENV{step}|=={display}|oui)<input type="hidden" name="step" value="edit" />]
+
+      [(#ENV{step}|=={display}|oui)
+        <p class="boutons"><input type="submit" class="submit" name="submit" value="Modifier" /></p>
+        <input type="hidden" name="step" value="edit" />
+      ]
+
       <BOUCLE_edit(CONDITION){si #ENV{step}|=={edit}}>
       <input type="hidden" name="step" value="display" />
       <ul>
@@ -57,7 +61,11 @@
         <textarea name="comment" id="comment" rows="5">#ENV{comment}</textarea>
         </li>
       </ul>
-      <p class="boutons"><input type="submit" class="submit" value="C'est parti" /></p>
+      <p class="boutons">
+        [(#STATUT|=={redaction}|oui)<input type="submit" class="submit" name="submit" value="Mettre en relecture" />]
+        <input type="submit" class="submit" name="submit" value="Supprimer" />
+        <input type="submit" class="submit" name="submit" value="Appliquer" />
+      </p>
       </BOUCLE_edit>
     </form>
   </div>
