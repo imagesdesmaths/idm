@@ -2,13 +2,16 @@
   <div class='cadre cadre-trait-couleur'>
     <div class='titrem'>#SUJET (statut : #STATUT)</div>
     <div class='cadre_padding'>
-      <p>Auteur : <BOUCLE_aut(AUTEURS){id_auteur}{tous}>#NOM (affect&eacute;)</BOUCLE_aut>#AUTEUR (propos&eacute;)<//B_aut></p>
-      <p>Rubrique : <BOUCLE_rub(RUBRIQUES){id_rubrique}>#TITRE</BOUCLE_rub></p>
-      <p>Derni&egrave;re modification : #MODIF par <BOUCLE_ed(AUTEURS){id_auteur=#ID_EDITEUR}{tous}>#NOM</BOUCLE_ed>.</p>
+      Article : <BOUCLE_art(ARTICLES){id_article}{statut IN prepa,prop}>
+        <strong>#TITRE</strong>
+      </BOUCLE_art>(pas attribu&eacute;)<//B_art><br/>
+      Auteur : <BOUCLE_aut(AUTEURS){id_auteur}{tous}><strong>#NOM</strong></BOUCLE_aut>#AUTEUR (contact&eacute;)<//B_aut><br/>
+      Rubrique : <BOUCLE_rub(RUBRIQUES){id_rubrique}>#TITRE</BOUCLE_rub><br/>
       <fieldset>
-        <legend>&nbsp;Commentaires de l'&eacute;diteur&nbsp;</legend>
+        <legend>&nbsp;Commentaires&nbsp;</legend>
         [(#COMMENT|propre)]
       </fieldset>
+      Derni&egrave;re modification : #MODIF par <BOUCLE_ed(AUTEURS){id_auteur=#ID_EDITEUR}{tous}>#NOM</BOUCLE_ed>.<br/>
     </div>
 
     <div class="formulaire_spip formulaire_demo">
@@ -36,7 +39,7 @@
           <label for="id_article">Identifier l'article</label>
           <select name="id_article" id="id_article" value="#ENV{id_article}">
             <option value="0" [(#ENV{id_article}|non) selected="yes"]></option>
-            <BOUCLE_article(ARTICLES){tous}{par id_article}{inverse}>
+            <BOUCLE_article(ARTICLES){statut IN prepa,prop}{par id_article}{inverse}>
             <option value="#ID_ARTICLE" [(#ENV{id_article}|=={#ID_ARTICLE}|oui) selected="yes"]>#TITRE</option>
             </BOUCLE_article>
           </select>
