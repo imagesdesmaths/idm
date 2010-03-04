@@ -7,6 +7,7 @@ function formulaires_idm_projet_edit_charger ($id_projet) {
 
   $params["id_auteur"]  = sql_getfetsel ("id_auteur",  "spip_idm_projets", "id_projet=$id_projet");
   $params["id_article"] = sql_getfetsel ("id_article", "spip_idm_projets", "id_projet=$id_projet");
+  $params["comment"]    = sql_getfetsel ("comment", "spip_idm_projets", "id_projet=$id_projet");
 
   return $params;
 }
@@ -34,9 +35,15 @@ function formulaires_idm_projet_edit_traiter ($id_projet) {
     $modif = true;
   }
 
-  $output = array();
-  if ($modif) $output["message_ok"] =  "Modification(s) effectu&eacute;e(s).";
-  return $output;
+  $old_comment = sql_getfetsel ("comment","spip_idm_projets","id_projet=$id_projet");
+  $new_comment = _request("comment");
+
+  if ($new_comment != $old_comment) {
+    sql_updateq ("spip_idm_projets", array("comment"=>$new_comment), "id_projet=$id_projet");
+    $modif = true;
+  }
+
+  return array();
 }
 
 ?>
