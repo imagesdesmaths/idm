@@ -26,4 +26,9 @@
     <nom>pre_edition</nom>
     <inclure>idm_pipelines.php</inclure>
   </pipeline>
+
+  <bouton id="projets">
+    <icone>favicon.ico</icone>
+    <titre>Planification</titre>
+  </bouton>
 </plugin>
