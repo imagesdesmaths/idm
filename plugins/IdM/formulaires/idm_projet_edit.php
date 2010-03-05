@@ -46,6 +46,11 @@ function formulaires_idm_projet_edit_traiter ($id_projet) {
     $modif = true;
   }
 
+  if (_request("submit") == "Supprimer") {
+    $projet["statut"] = "refus";
+    $modif = true;
+  }
+
   if ($modif) sql_updateq ("spip_idm_projets", $projet, "id_projet=$id_projet");
 
   return array();
