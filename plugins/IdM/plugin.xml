@@ -27,8 +27,19 @@
     <inclure>idm_pipelines.php</inclure>
   </pipeline>
 
-  <bouton id="projets">
-    <icone>favicon.ico</icone>
+  <bouton id="idm">
+    <titre>IdM</titre>
+  </bouton>
+  <bouton id="projets" parent="idm">
     <titre>Planification</titre>
+  </bouton>
+  <bouton id="relecteurs" parent="idm">
+    <titre>Relecteurs</titre>
+  </bouton>
+  <bouton id="relecture" parent="idm">
+    <titre>Relecture</titre>
+  </bouton>
+  <bouton id="billettistes" parent="idm">
+    <titre>Billettistes</titre>
   </bouton>
 </plugin>
