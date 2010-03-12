@@ -1,0 +1,8 @@
+<BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
+<h1>Gestion des articles en relecture</h1>
+
+<BOUCLE_prop(ARTICLES) {statut = prop} {par date} {id_rubrique?}>
+<div class="ajax">#FORMULAIRE_RELECTEURS_ARTICLE{#ID_ARTICLE}</div>
+</BOUCLE_prop>
+<h2>Aucun article proposé !</h2><//B_prop>
+</BOUCLE_securite>

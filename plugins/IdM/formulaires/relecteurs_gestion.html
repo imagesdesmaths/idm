@@ -1,60 +1,68 @@
-#CACHE{0}
-<form method="post" action="#SELF">#ACTION_FORMULAIRE{#ENV{action}}
+<div class="formulaire_spip">
+  <form action="#ENV{action}" method="post">
+    #ACTION_FORMULAIRE{#ENV{action}}
+    <B_candidats>
+    <h3>Il y a #TOTAL_BOUCLE candidat(s) à être relecteurs ...</h3>
+    <table id="lescandidats" class="sortable">
+      <thead>
+        <tr>
+          <th>Signature / Pseudo</th>
+          <th>ID</th>
+          <th>E-Mail</th>
+          <th>Qui est-ce ?</th>
+          <th>Décision</th>
+        </tr>
+      </thead>
+      <tbody>
+        <BOUCLE_candidats(AUTEURS) {tous} {role = candidat} {par id_auteur}>
+        <tr>
+          <td>#NOM</td>
+          <td>#ID_AUTEUR</td>
+          <td>#EMAIL</td>
+          <td><input type="text" name="math_#ID_AUTEUR" value="#ENV{math_#ID_AUTEUR}" size=20 /></td>
+          <td><select name="decision_#ID_AUTEUR">
+              <option value="rien">Décider plus tard</option>
+              <option value="oui">Accepter</option>
+              <option value="non">Refuser</option>
+          </select></td>
+        </tr>
+        </BOUCLE_candidats>
+      </tbody>
+    </table>
+    <p style="text-align : center;"><input type="submit" value="Modifier les statuts indiqu&eacute;s" name="go" /></p>
+    </B_candidats>
 
-<B_candidats><div class='cs_blocs'>
-  <h4 class='blocs_titre blocs_replie blocs_click'><a href='javascript:;'>Il y a #TOTAL_BOUCLE candidat(s) à être relecteurs ...</a></h4>
-  <div class='blocs_destination blocs_invisible'>
-<table id="lescandidats" class="sortable"><thead><tr>
-  <th>Signature / Pseudo</th>
-  <th>ID</th>
-  <th>E-Mail</th>
-  <th>Qui est-ce ?</th>
-  <th>Décision</th>
-</tr></thead><tbody>
-<BOUCLE_candidats(AUTEURS) {tous} {role = candidat} {par id_auteur}>
-<tr>
-  <td>#NOM</td>
-  <td>#ID_AUTEUR</td>
-  <td>#EMAIL</td>
-  <td><input type="text" name="math_#ID_AUTEUR" value="#ENV{math_#ID_AUTEUR}" size=20 /></td>
-  <td><select name="decision_#ID_AUTEUR">
-      <option value="rien">Décider plus tard</option>
-      <option value="oui">Accepter</option>
-      <option value="non">Refuser</option>
-  </select></td>
-</tr>
-</BOUCLE_candidats></tbody></table>
-<p style="text-align : center;"><input type="submit" value="Modifier les statuts indiqu&eacute;s" name="go" /></p>
-</div></div></B_candidats>
+    <B_relecteurs>
+    <h3>Modifier ou supprimer les #TOTAL_BOUCLE relecteurs déjà inscrits ...</h3>
+    <table id="lesrelecteurs" class="sortable">
+      <thead>
+        <tr>
+          <th>Signature / Pseudo</th>
+          <th>Qui est-ce ?</th>
+          <th>Combien ?</th>
+          <th>Dernière relecture</th>
+          <th>Supprimer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <BOUCLE_relecteurs(AUTEURS) {tous} {role = relecteur} {par nom}>
+        <tr>
+          <td>#NOM</td>
+          <td><input type="text" name="math_#ID_AUTEUR" value="#ENV{math_#ID_AUTEUR}" size=20 /></td>
+          <td>#RELECTEUR_COMBIEN</td>
+          <td>#RELECTEUR_QUAND</td>
+          <td><input type="checkbox" name="exterminate_#ID_AUTEUR"/></td>
+        </tr>
+        </BOUCLE_relecteurs>
+      </tbody>
+    </table>
+    <p style="text-align : center;"><input type="submit" value="Modifier les statuts indiqu&eacute;s" name="go" /></p>
+    </B_relecteurs>
+  </form>
+</div>
 
-<B_relecteurs><div class='cs_blocs'>
-  <h4 class='blocs_titre blocs_replie blocs_click'><a href='javascript:;'>Modifier ou supprimer les #TOTAL_BOUCLE relecteurs déjà inscrits ...</a></h4>
-  <div class='blocs_destination blocs_invisible'>
-<table id="lesrelecteurs" class="sortable"><thead><tr>
-  <th>Signature / Pseudo</th>
-  <th>ID</th>
-  <th>E-Mail</th>
-  <th>Qui est-ce ?</th>
-  <th>Combien ?</th>
-  <th>Dernière relecture</th>
-  <th>Supprimer</th>
-</tr></thead><tbody>
-<BOUCLE_relecteurs(AUTEURS) {tous} {role = relecteur} {par nom}>
-<tr>
-  <td>#NOM</td>
-  <td>#ID_AUTEUR</td>
-  <td>#EMAIL</td>
-  <td><input type="text" name="math_#ID_AUTEUR" value="#ENV{math_#ID_AUTEUR}" size=20 /></td>
-  <td>#RELECTEUR_COMBIEN</td>
-  <td>#RELECTEUR_QUAND</td>
-  <td><input type="checkbox" name="exterminate_#ID_AUTEUR"/></td>
-</tr>
-</BOUCLE_relecteurs></tbody></table>
-<p style="text-align : center;"><input type="submit" value="Modifier les statuts indiqu&eacute;s" name="go" /></p>
-</div></div></B_relecteurs>
-</form>
-
+<script type="text/javascript" src="#CHEMIN{javascript/jquery.tablesorter.min.js}"></script>
 <script type="text/javascript">
   $("#lesrelecteurs").tablesorter( {sortList : [[0,0]]} );
   $("#lescandidats").tablesorter( {sortList : [[0,0]]} );
-</script>
+  </script>
