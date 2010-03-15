@@ -28,6 +28,7 @@
   </pipeline>
 
   <bouton id="idm">
+    <icone>img/IdM_gestion_48.png</icone>
     <titre>IdM</titre>
   </bouton>
   <bouton id="projets" parent="idm">
