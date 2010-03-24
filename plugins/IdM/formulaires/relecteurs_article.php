@@ -47,7 +47,7 @@ function nettoie () {
     $id_auteur = $line["id_auteur"];
     $id_article = $line["id_article"];
     $statut = sql_getfetsel ("statut", "spip_articles", "id_article = $id_article");
-    $role = sql_getfetsel ("role", "spip_auteurs", "id_auteur = $id_auteur");
+    $role = sql_getfetsel ("role", "spip_idm_relecteurs", "id_auteur = $id_auteur");
     if (($statut != "prop") OR ($role != "relecteur"))
       sql_delete ("spip_relecteurs_articles", "id_auteur = $id_auteur");
   }
@@ -65,7 +65,7 @@ function formulaires_relecteurs_article_verifier ($id_article) {
 }
 
 function formulaires_relecteurs_article_traiter ($id_article) {
-  $relecteurs = sql_allfetsel ('id_auteur', 'spip_auteurs', "role = 'relecteur'");
+  $relecteurs = sql_allfetsel ('id_auteur', 'spip_idm_relecteurs', "role = 'relecteur'");
   foreach ($relecteurs as $row) {
     $id_auteur = $row['id_auteur'];
     if (_request("unassign_$id_auteur")) {
@@ -73,7 +73,7 @@ function formulaires_relecteurs_article_traiter ($id_article) {
     }
     if (_request("assign_$id_auteur")) {
       sql_insertq ("spip_relecteurs_articles", array("id_auteur"=>$id_auteur, "id_article"=>$id_article));
-      sql_update ("spip_auteurs", array("relecteur_combien"=>"relecteur_combien+1", "relecteur_quand"=>"NOW()"), "id_auteur = $id_auteur");
+      sql_update ("spip_idm_relecteurs", array("combien"=>"combien+1"), "id_auteur = $id_auteur");
       notify_user ($id_auteur, $id_article);
     }
   }

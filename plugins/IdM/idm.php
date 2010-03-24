@@ -4,10 +4,10 @@ global $tables_principales;
 global $tables_auxiliaires;
 global $table_des_tables;
 
-$tables_principales['spip_auteurs']['field']['role']              = "ENUM ('visiteur','candidat','relecteur') NOT NULL DEFAULT 'visiteur'";
-$tables_principales['spip_auteurs']['field']['math']              = "TINYTEXT";
-$tables_principales['spip_auteurs']['field']['relecteur_combien'] = "INT NOT NULL DEFAULT 0";
-$tables_principales['spip_auteurs']['field']['relecteur_quand']   = "TIMESTAMP";
+//$tables_principales['spip_auteurs']['field']['role']              = "ENUM ('visiteur','candidat','relecteur') NOT NULL DEFAULT 'visiteur'";
+//$tables_principales['spip_auteurs']['field']['math']              = "TINYTEXT";
+//$tables_principales['spip_auteurs']['field']['relecteur_combien'] = "INT NOT NULL DEFAULT 0";
+//$tables_principales['spip_auteurs']['field']['relecteur_quand']   = "TIMESTAMP";
 
 $tables_principales['spip_idm_projets'] = array (
   'field' => array (
@@ -31,7 +31,7 @@ $tables_principales['spip_idm_relecteurs'] = array (
     'math'        => "TEXT NOT NULL",
     'combien'     => "INT NOT NULL DEFAULT 0",
     'lus'         => "INT NOT NULL DEFAULT 0",
-    'quand'       => "TIMESTAMP",
+    'quand'       => "TIMESTAMP NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
     'comment'     => "TEXT NOT NULL"),
   'key' => array(
     'PRIMARY KEY' => "id_auteur"));
@@ -40,13 +40,14 @@ $tables_auxiliaires['spip_relecteurs_articles'] = array (
   'field' => array (
     'id_article'  => 'BIGINT(21) NOT NULL',
     'id_auteur'   => 'BIGINT(21) NOT NULL',
-    'date_change' => 'TIMESTAMP',
+    'date_change' => 'TIMESTAMP NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP',
     'status'      => "ENUM('pas_vu','vu','non','moyen','oui') NOT NULL DEFAULT 'pas_vu'",
     'avis'        => "TINYTEXT"),
   'key' => array());
 
-$table_des_tables['relecteurs_articles'] = 'relecteurs_articles';
 $table_des_tables['idm_projets']         = 'idm_projets';
+$table_des_tables['idm_relecteurs']      = 'idm_relecteurs';
+$table_des_tables['relecteurs_articles'] = 'relecteurs_articles';
 
 function idm_install ($action) {
   switch ($action) {

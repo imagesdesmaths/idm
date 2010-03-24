@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <BOUCLE_candidats(AUTEURS) {tous} {role = candidat} {par id_auteur}>
+        <BOUCLE_candidats(IDM_RELECTEURS spip_auteurs) {role = candidat}>
         <tr>
           <td>#NOM</td>
           <td>#ID_AUTEUR</td>
@@ -45,12 +45,12 @@
         </tr>
       </thead>
       <tbody>
-        <BOUCLE_relecteurs(AUTEURS) {tous} {role = relecteur} {par nom}>
+        <BOUCLE_relecteurs(IDM_RELECTEURS spip_auteurs) {role = relecteur}>
         <tr>
-          <td>#NOM</td>
+          <td><a href="mailto:#EMAIL*">#NOM</a></td>
           <td><input type="text" name="math_#ID_AUTEUR" value="#ENV{math_#ID_AUTEUR}" size=20 /></td>
-          <td>#RELECTEUR_COMBIEN</td>
-          <td>#RELECTEUR_QUAND</td>
+          <td>#COMBIEN</td>
+          <td>#QUAND</td>
           <td><input type="checkbox" name="exterminate_#ID_AUTEUR"/></td>
         </tr>
         </BOUCLE_relecteurs>

@@ -42,12 +42,12 @@ function formulaires_relecteurs_perso_traiter () {
   $id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 
   if (_request('inscription')) {
-    sql_updateq ('spip_auteurs',
+    sql_updateq ('spip_idm_relecteurs',
       array ('role' => 'candidat', 'math' => supprimer_tags(_request('qui'))),
       "id_auteur = $id_auteur");
     notify_franz ($id_auteur);
   } else {
-    sql_updateq ('spip_auteurs',
+    sql_updateq ('spip_idm_relecteurs',
       array ('role' => 'visiteur', 'math' => ''),
       "id_auteur = $id_auteur");
   }
