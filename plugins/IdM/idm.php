@@ -22,7 +22,19 @@ $tables_principales['spip_idm_projets'] = array (
     'comment'     => 'TEXT NOT NULL',
     'statut'      => "ENUM ('contact', 'redaction', 'relecture', 'publie', 'refus') NOT NULL DEFAULT 'contact'"),
   'key' => array (
-    'PRIMARY KEY'   => 'id_projet'));
+    'PRIMARY KEY' => 'id_projet'));
+
+$tables_principales['spip_idm_relecteurs'] = array (
+  'field' => array (
+    'id_auteur'   => "BIGINT(21) NOT NULL",
+    'role'        => "ENUM ('visiteur', 'candidat', 'relecteur', 'occasionnel') NOT NULL DEFAULT 'visiteur'",
+    'math'        => "TEXT NOT NULL",
+    'combien'     => "INT NOT NULL DEFAULT 0",
+    'lus'         => "INT NOT NULL DEFAULT 0",
+    'quand'       => "TIMESTAMP",
+    'comment'     => "TEXT NOT NULL"),
+  'key' => array(
+    'PRIMARY KEY' => "id_auteur"));
 
 $tables_auxiliaires['spip_relecteurs_articles'] = array (
   'field' => array (
@@ -39,14 +51,14 @@ $table_des_tables['idm_projets']         = 'idm_projets';
 function idm_install ($action) {
   switch ($action) {
   case 'test':
-    $desc = sql_showtable ('spip_idm_projets');
+    $desc = sql_showtable ('spip_idm_relecteurs');
     if ($desc AND $desc['field']['comment']) return true; else return false;
     break;
 
   case 'install':
     include_spip ('base/create');
     creer_base();
-    maj_tables(array('spip_idm_projets','spip_relecteurs_articles'));
+    maj_tables(array('spip_idm_projets','spip_idm_relecteurs','spip_relecteurs_articles'));
     break;
 
   case 'uninstall':
