@@ -1,6 +1,5 @@
-#CACHE{0}
-<INCLURE{fond=inc/head}{title=Gestion des billettistes}>
 <BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
+<h1>Gestion des billettistes</h1>
 
 <?php function billettistes_effect_change ($target='', $caller='admin') {
   if (!$target) $target = str_replace('&amp;','&',self());
@@ -51,7 +50,7 @@ billettistes_effect_change ('#SELF', 'admin'); ?>
         <th>Nombre</th>
     </tr></thead>
     <tbody>
-<BOUCLE_deja(AUTEURS) {tous} {billettiste=oui}>
+<BOUCLE_deja(AUTEURS) {tous} {billettiste=oui} {par nom}>
       <tr>
   <BOUCLE_billet(ARTICLES) {statut=publie} {id_auteur} {id_rubrique=6} {par date} {inverse} {0,1}>
         <td>#DATE</td>
@@ -82,7 +81,7 @@ billettistes_effect_change ('#SELF', 'admin'); ?>
               <th>Approuver</th>
           </tr></thead>
           <tbody>
-<BOUCLE_new(AUTEURS) {statut == .} {billettiste=non}>
+            <BOUCLE_new(AUTEURS) {statut == .} {billettiste=non} {par nom}>
             <tr>
               <td>#ID_AUTEUR</td>
               <td>#NOM</td>
@@ -166,7 +165,8 @@ billettistes_effect_change ('#SELF', 'admin'); ?>
   </div>
 </B_bug>
 
+<script type="text/javascript" src="#CHEMIN{javascript/jquery.tablesorter.min.js}"></script>
+<script type="text/javascript">
+  $(".sortable").tablesorter();
+</script>
 </BOUCLE_securite>
-<h1>Go away, you non-administrator !</h1>
-<//B_securite>
-<INCLURE{fond=inc/foot}{stats=no}>
