@@ -57,10 +57,10 @@ img.spip_logos { padding : 0px 0px 1ex 2em; }
 span.spip_documents_center { display : block; margin-top : 1em; }
 
 table { margin: 0px auto; text-align: center; border : 1px solid #e20000; border-collapse: collapse; }
-
 td { border : 1px solid #e20000; padding : 1px .5em; }
-
 th { font-weight : bold; border : 1px solid #e20000; padding : 1px .5em; }
+
+div.plaintables table * { border-color:white; }
 
 ul { margin : 0px; }
 
