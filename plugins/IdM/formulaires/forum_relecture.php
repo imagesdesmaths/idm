@@ -1,6 +1,6 @@
 <?php
 
-include_spip('inc/envoyer_mail');
+include_spip('idm');
 
 function formulaires_forum_relecture_charger ($id_article, $id_parent) {
   $id_article = intval ($id_article);
@@ -37,21 +37,19 @@ function formulaires_forum_relecture_traiter ($id_article, $id_parent) {
     'statut'     => 'relmod'
   ));
 
-  $mail_to      = "huyghe@math.u-strasbg.fr";
-  $mail_subject = "Un nouveau message de relecture sur IdM";
-  $mail_text    = <<< END
-Bonjour Christine !
-
-Un nouveau commentaire a été posté dans un forum de relecture. Tu peux
-aller le lire et le valider sur la page habituelle, à savoir :
+  $subject = "Un nouveau message de relecture sur \"Images des Maths\"";
+  $message = <<< END
+Un nouveau commentaire a été posté dans un forum de relecture du site
+"Images des Mathématiques". Il faut maintenant le valider ici :
 
   http://images.math.cnrs.fr/spip.php?page=moderation
-
--- 
-Le robot de "Images des maths"
 END;
 
-  inc_envoyer_mail_dist ($mail_to, $mail_subject, utf8_encode($mail_text));
+  $id_recipients = array ( 327, 637 ); // Christine and Julien
+
+  foreach ($id_recipients as $id)
+    idm_notify ($id, utf8_encode($message), $subject);
+
   return array ('message_ok' => "done");
 }
 

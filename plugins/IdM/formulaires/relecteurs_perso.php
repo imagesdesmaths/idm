@@ -12,7 +12,8 @@ function notify_franz ($id_auteur) {
            "\n" .
            "  $qui";
 
-  idm_notify (1, $texte, $subject);
+  idm_notify (327, $texte, $subject); // Christine Noot-Huyghe
+  idm_notify (637, $texte, $subject); // Julien Melleray
 }
 
 function formulaires_relecteurs_perso_charger () {
