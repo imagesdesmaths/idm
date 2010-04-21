@@ -1,13 +1,10 @@
 <?php
 
+include_spip('inc/envoyer_mail');
+
 global $tables_principales;
 global $tables_auxiliaires;
 global $table_des_tables;
-
-//$tables_principales['spip_auteurs']['field']['role']              = "ENUM ('visiteur','candidat','relecteur') NOT NULL DEFAULT 'visiteur'";
-//$tables_principales['spip_auteurs']['field']['math']              = "TINYTEXT";
-//$tables_principales['spip_auteurs']['field']['relecteur_combien'] = "INT NOT NULL DEFAULT 0";
-//$tables_principales['spip_auteurs']['field']['relecteur_quand']   = "TIMESTAMP";
 
 $tables_principales['spip_idm_projets'] = array (
   'field' => array (
@@ -121,6 +118,13 @@ function autoriser_relecture_bouton_dist ($faire, $type, $id, $qui, $opt) {
 
 function autoriser_billettistes_bouton_dist ($faire, $type, $id, $qui, $opt) {
   return autoriser_idm_bouton_dist ($faire, $type, $id, $qui, $opt);
+}
+
+function idm_notify ($id, $message, $subject = "Un message du site \"Images des Maths\"") {
+  $email   = sql_getfetsel ("email", "spip_auteurs", "id_auteur = $id");
+  $message = "Bonjour !\n\n" . $message . "\n\n-- \nLe robot du site http://images.math.cnrs.fr/\n";
+
+  inc_envoyer_mail_dist ($email, $subject, $message);
 }
 
 ?>
