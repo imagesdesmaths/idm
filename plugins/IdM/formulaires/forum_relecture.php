@@ -37,7 +37,7 @@ function formulaires_forum_relecture_traiter ($id_article, $id_parent) {
     'statut'     => 'relmod'
   ));
 
-  $subject = "Un nouveau message de relecture sur \"Images des Maths\"";
+  $subject = "Un nouveau message de relecture soumis sur IdM";
   $message = <<< END
 Un nouveau commentaire a été posté dans un forum de relecture du site
 "Images des Mathématiques". Il faut maintenant le valider ici :
