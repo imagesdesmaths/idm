@@ -42,7 +42,7 @@ function formulaires_forum_relecture_traiter ($id_article, $id_parent) {
 Un nouveau commentaire a été posté dans un forum de relecture du site
 "Images des Mathématiques". Il faut maintenant le valider ici :
 
-  http://images.math.cnrs.fr/spip.php?page=moderation
+  http://images.math.cnrs.fr/ecrire/?exec=idm_moderation
 END;
 
   $id_recipients = array ( 327, 637 ); // Christine and Julien

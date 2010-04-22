@@ -31,16 +31,19 @@
     <icone>img/IdM_gestion_48.png</icone>
     <titre>IdM</titre>
   </bouton>
-  <bouton id="projets" parent="idm">
+  <bouton id="idm_projets" parent="idm">
     <titre>Planification</titre>
   </bouton>
-  <bouton id="relecteurs" parent="idm">
+  <bouton id="idm_relecteurs" parent="idm">
     <titre>Relecteurs</titre>
   </bouton>
-  <bouton id="relecture" parent="idm">
+  <bouton id="idm_relecture" parent="idm">
     <titre>Relecture</titre>
   </bouton>
-  <bouton id="billettistes" parent="idm">
+  <bouton id="idm_moderation" parent="idm">
+    <titre>Mod&eacute;ration</titre>
+  </bouton>
+  <bouton id="idm_billettistes" parent="idm">
     <titre>Billettistes</titre>
   </bouton>
 </plugin>

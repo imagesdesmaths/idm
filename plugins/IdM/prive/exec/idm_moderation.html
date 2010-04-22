@@ -1,0 +1,9 @@
+<BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
+  <h1>Mod&eacute;ration des forums de relecture</h1>
+  <BOUCLE_forums(FORUMS) {plat} {statut = relmod} {par id_article, date}>
+    <BOUCLE_article (ARTICLES) {id_article = #ID_ARTICLE} {doublons} {statut = prop}>
+      <hr /><h3>#TITRE[, par (#LESAUTEURS)]</h3>
+    </BOUCLE_article>
+    <div class="ajax">#FORMULAIRE_RELECTEURS_MODERATION{#ID_FORUM}</div>
+  </BOUCLE_forums>
+</BOUCLE_securite>
