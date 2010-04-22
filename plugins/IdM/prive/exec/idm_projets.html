@@ -53,7 +53,7 @@
     <ul>
       <BOUCLE_gars(AUTEURS) {statut = 0minirezo} {par nom}>
       <BOUCLE_test2(IDM_PROJETS) {statut !IN publie,refus} {id_editeur = #ID_AUTEUR} {0,1}>
-      <li><a href="?exec=idm_projets&id_editeur=#ID_AUTEUR">#NOM</a></li>
+      <li><a href="?exec=idm_projets&id_editeur=#ID_EDITEUR">#NOM</a></li>
       </BOUCLE_test2>
       </BOUCLE_gars>
     </ul>
