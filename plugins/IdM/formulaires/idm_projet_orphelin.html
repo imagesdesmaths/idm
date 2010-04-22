@@ -1,0 +1,15 @@
+<BOUCLE_article(ARTICLES) {id_article} {statut IN prepa,prop}>
+<div class='cadre cadre-trait-couleur'>
+  <div class='titrem'><a href="?exec=articles&id_article=#ID_ARTICLE" style="color:white">#TITRE</a></div>
+  <div class='cadre_padding'>
+    [Auteur(s) : (#LESAUTEURS)<br/>]
+    Date de modification : #DATE
+  </div>
+  <div class="formulaire_spip">
+    <form action="#ENV{action}" method="post">
+      #ACTION_FORMULAIRE{#ENV{action}}
+      <p class="boutons"><input type="submit" class="submit" value="Il est &agrave; moi !" /></p>
+    </form>
+  </div>
+</div>
+</BOUCLE_article>

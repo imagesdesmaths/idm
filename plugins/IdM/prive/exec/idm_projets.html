@@ -70,10 +70,9 @@
 #FORMULAIRE_IDM_PROJET
 
 <B_unknown>
-<h4>Articles non suivis :</h4>
+  <h4>Articles non suivis :</h4>
 <BOUCLE_unknown(ARTICLES){statut IN prepa,prop}>
-<BOUCLE_test3(IDM_PROJETS){id_article}> </BOUCLE_test3>
-<p><a href="?exec=articles&id_article=#ID_ARTICLE"><strong>#TITRE</strong></a>
-[<br/>par (#LESAUTEURS)]</p>
-<//B_test3>
+  <BOUCLE_test3(IDM_PROJETS){id_article}> </BOUCLE_test3>
+    #FORMULAIRE_IDM_PROJET_ORPHELIN{#ID_ARTICLE}
+  <//B_test3>
 </BOUCLE_unknown>
