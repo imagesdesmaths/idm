@@ -43,7 +43,7 @@
     Par rubrique :
     <ul>
       <BOUCLE_rub(RUBRIQUES) {par titre}>
-      <BOUCLE_test(IDM_PROJETS) {id_rubrique} {0,1}>
+      <BOUCLE_test(IDM_PROJETS) {statut !IN publie,refus} {id_rubrique} {0,1}>
       <li><a href="?exec=idm_projets&id_rubrique=#ID_RUBRIQUE">#TITRE</a></li>
       </BOUCLE_test>
       </BOUCLE_rub>
@@ -52,7 +52,7 @@
     Par r&eacute;dacteur :
     <ul>
       <BOUCLE_gars(AUTEURS) {statut = 0minirezo} {par nom}>
-      <BOUCLE_test2(IDM_PROJETS) {id_editeur = #ID_AUTEUR} {0,1}>
+      <BOUCLE_test2(IDM_PROJETS) {statut !IN publie,refus} {id_editeur = #ID_AUTEUR} {0,1}>
       <li><a href="?exec=idm_projets&id_editeur=#ID_AUTEUR">#NOM</a></li>
       </BOUCLE_test2>
       </BOUCLE_gars>
