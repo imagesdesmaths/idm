@@ -4,9 +4,11 @@
     <INCLURE{fond=inc/head}{title=#TITRE - En cours de relecture}{id_rubrique=#ID_RUBRIQUE}{id_article=#ID_ARTICLE}>
     <h1>Article en cours de relecture</h1>
     <h2 style="margin-top : 0ex;">dans la rubrique : <BOUCLE_rub(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rub></h2>
-    <B_ed><h2 style="margin-top : -1.5ex;">article suivi par :
-      <BOUCLE_ed(IDM_PROJETS spip_auteurs) {id_article}><a class="auteur" href="#URL_AUTEUR">#NOM</a></BOUCLE_ed>
-    </h2></B_ed>
+    <BOUCLE_ed(IDM_PROJETS) {id_article}>
+      <BOUCLE_edd(AUTEURS) {id_auteur = #ID_EDITEUR}>
+        <h2 style="margin-top : -1.5ex;">article suivi par #NOM</h2>
+      </BOUCLE_edd>
+    </BOUCLE_ed>
 
     <p>Bienvenue dans l'espace de relecture collaborative de Images des 
     Math&eacute;matiques. C'est ici que vous pourrez participer au 
