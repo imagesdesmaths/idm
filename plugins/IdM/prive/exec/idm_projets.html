@@ -1,4 +1,4 @@
-<h1>[(#ENV{id_editeur}|?{Mes a,A})]rticles en [(#ENV{statut}|sinon{projet})]</h1>
+<h1>Articles en [(#ENV{statut}|sinon{projet})]</h1>
 
 <!--#extra--> <!-- -->
 <div class='cadre cadre-info'>
@@ -17,9 +17,9 @@
     <br>- relecture ;
     <br>- publi&eacute; (invisible ici).</p>
 
-    <p>L'&eacute;diteur en charge d'un projet est le dernier &agrave; 
-    l'avoir modifi&eacute; (nom indiqu&eacute; apr&egrave;s la date de 
-    erni&egrave;re modification).</p>
+    <p>Le r&eacute;dacteur en charge d'un projet est le dernier &agrave; 
+    l'avoir modifi&eacute; (nom indiqu&eacute; apr&egrave;s les 
+    commentaires et la date de derni&egrave;re modification).</p>
   </div>
 </div>
 <!--/#extra-->
@@ -27,32 +27,53 @@
 <!--#navigation--> <!-- -->
 <div class='cadre'>
   <div class='titrem'>Filtrer l'affichage</div>
-  <ul>
-    <li><a href="?exec=projets">Tous les projets</a></li>
-    <li><a href="?exec=projets&id_editeur=#SESSION{id_auteur}">Mes projets</a></li>
-    <br>
-    <li><a href="?exec=projets&statut=contact">Auteurs contact&eacute;s</a></li>
-    <li><a href="?exec=projets&statut=redaction">Articles en r&eacute;daction</a></li>
-    <li><a href="?exec=projets&statut=relecture">Articles en relecture</a></li>
-  </ul>
   <div class='cadre_padding'>
+    <ul>
+      <li><a href="?exec=idm_projets">Tous les projets</a></li>
+      <li><a href="?exec=idm_projets&id_editeur=#SESSION{id_auteur}">Mes projets</a></li>
+    </ul>
+
+    Par statut :
+    <ul>
+      <li><a href="?exec=idm_projets&statut=contact">Auteurs contact&eacute;s</a></li>
+      <li><a href="?exec=idm_projets&statut=redaction">Articles en r&eacute;daction</a></li>
+      <li><a href="?exec=idm_projets&statut=relecture">Articles en relecture</a></li>
+    </ul>
+
+    Par rubrique :
+    <ul>
+      <BOUCLE_rub(RUBRIQUES) {par titre}>
+      <BOUCLE_test(IDM_PROJETS) {id_rubrique} {0,1}>
+      <li><a href="?exec=idm_projets&id_rubrique=#ID_RUBRIQUE">#TITRE</a></li>
+      </BOUCLE_test>
+      </BOUCLE_rub>
+    </ul>
+
+    Par r&eacute;dacteur :
+    <ul>
+      <BOUCLE_gars(AUTEURS) {statut = 0minirezo} {par nom}>
+      <BOUCLE_test2(IDM_PROJETS) {id_editeur = #ID_AUTEUR} {0,1}>
+      <li><a href="?exec=idm_projets&id_editeur=#ID_AUTEUR">#NOM</a></li>
+      </BOUCLE_test2>
+      </BOUCLE_gars>
+    </ul>
   </div>
 </div>
 <!--/#navigation-->
 
-<BOUCLE_proj(IDM_PROJETS){statut?}{statut !IN publie,refus}{id_editeur?}>
-  <div class="ajax">
-    #FORMULAIRE_IDM_PROJET_EDIT{#ID_PROJET}
-  </div>
+<BOUCLE_proj(IDM_PROJETS){statut?}{statut !IN publie,refus}{id_editeur?}{id_rubrique?}>
+<div class="ajax">
+  #FORMULAIRE_IDM_PROJET_EDIT{#ID_PROJET}
+</div>
 </BOUCLE_proj>
 
 #FORMULAIRE_IDM_PROJET
 
 <B_unknown>
-  <h4>Articles non suivis :</h4>
+<h4>Articles non suivis :</h4>
 <BOUCLE_unknown(ARTICLES){statut IN prepa,prop}>
-  <BOUCLE_test(IDM_PROJETS){id_article}> </BOUCLE_test>
-    <p><a href="?exec=articles&id_article=#ID_ARTICLE"><strong>#TITRE</strong></a>
-    [<br/>par (#LESAUTEURS)]</p>
-  <//B_test>
+<BOUCLE_test3(IDM_PROJETS){id_article}> </BOUCLE_test3>
+<p><a href="?exec=articles&id_article=#ID_ARTICLE"><strong>#TITRE</strong></a>
+[<br/>par (#LESAUTEURS)]</p>
+<//B_test3>
 </BOUCLE_unknown>
