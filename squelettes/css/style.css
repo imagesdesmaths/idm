@@ -101,6 +101,8 @@ div#left div.jsmathwarning h3 { font-size : small; margin : .5ex 0px 0px; border
 div#left div.jsmathwarning p { margin : 0px; text-align : justify; }
 div#left div.jsmathwarning a { color : #550000; font-weight : bold; text-decoration : underline; }
 
+div#left .blocs_titre { padding : 0px; background : transparent; }
+
 div#imagedujour { width : 13em; margin : 1ex 0px 1ex -.5em; text-align : center; }
 div#imagedujour img { max-width : 100%; }
 

@@ -33,7 +33,6 @@
   <script type="text/javascript" src="#CHEMIN{javascript/jquery.accordion.js}"></script>
   <script type="text/javascript" src="#CHEMIN{javascript/jquery.cookie.js}"></script>
   <script type="text/javascript" src="#CHEMIN{javascript/jsMath_Font_Detector.js}"></script>
-  <script type="text/javascript" src="#CHEMIN{javascript/whizbang.js}"></script>
 </head>
 
 <body>
@@ -61,24 +60,29 @@
       [(#FORMULAIRE_RECHERCHE)]
 
       <div id="navleft">
-        <h2 class="whizbang">Les rubriques</h2>
+        #BLOC_TITRE
+        <h2>Les rubriques</h2>
+        #BLOC_DEBUT
         <ul><BOUCLE_secteurs(RUBRIQUES) {racine} {par num titre} {id_rubrique != 18} {id_rubrique != 26}>
           <li><a href="#URL_RUBRIQUE" [(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{class="active"})]>#TITRE</a></li>
         </BOUCLE_secteurs></ul>
+        #BLOC_FIN
 
-        <B_dossiers><h2 class="whizbang">Les dossiers</h2>
+        #BLOC_TITRE
+        <h2>Les dossiers</h2>
+        #BLOC_DEBUT
         <ul><BOUCLE_dossiers(MOTS) {id_groupe=3}>
           <li><a href="#URL_MOT">#TITRE</a></li>
         </BOUCLE_dossiers></ul></B_dossiers>
+        #BLOC_FIN
 
-        <BOUCLE_liens(RUBRIQUES) {id_rubrique = 25}>
-        <h2 class="whizbang">#TITRE</h2>
-        <ul style="text-align:center">
-          <BOUCLE_lienss(ARTICLES) {id_rubrique} {par num titre, titre}>
+        #BLOC_TITRE
+        <h2>Les liens</h2>
+        #BLOC_DEBUT
+        <ul><BOUCLE_liens(ARTICLES) {id_rubrique = 25} {par num titre, titre}>
           <li><a href="#URL_ARTICLE">#TITRE</a></li>
-          </BOUCLE_lienss>
-        </ul>
-        </BOUCLE_liens>
+        </BOUCLE_liens></ul>
+        #BLOC_FIN
 
         <INCLURE{fond=inc/ident}>
       </div>
@@ -105,14 +109,7 @@
         <li>ISSN : 2105-1003</li>
         <li><a href="#URL_PAGE{backend}"><img src="#CHEMIN{img/rss.jpg}" alt="RSS" /> Syndication (RSS)</a></li>
         <li style="margin-top:.5ex;"><a href="http://www.spip.net/">Site sous SPIP 2.0 <img src="#CHEMIN{img/spip.jpg}" alt="SPIP" /></a></li>
-        <li><a class="whizbang" id="whizbang">Whiz Bang</a></li>
       </ul>
-
-      <div class="actu" id="whizpanel" style="display:none">
-        <h2>Whiz Bang</h2>
-
-        <h3><a class="whizbang" id="whizoff">D&eacute;sactiver</a></h3>
-      </div>
 
       <div id="nojsfont" style="display:none;" class="jsmathwarning">
         <h2>Polices de maths</h2>

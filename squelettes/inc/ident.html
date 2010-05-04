@@ -1,7 +1,7 @@
 #CACHE{0}
 
-[(#SESSION{id_auteur}|oui)<h2 class="whizbang">[(#SESSION{nom}|prenom_nom)]</h2>]
-[(#SESSION{id_auteur}|non)<h2 class="whizbang">Identification</h2>]
+[(#SESSION{id_auteur}|oui)<h2>[(#SESSION{nom}|prenom_nom)]</h2>]
+[(#SESSION{id_auteur}|non)<h2>Identification</h2>]
 
 <ul style="text-align:center">
   [(#SESSION{id_auteur}|non)<li><a href="#URL_PAGE{perso}">S'identifier</a></li>]
