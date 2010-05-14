@@ -20,3 +20,4 @@ plugins/jsMath/jsMath/fonts
 .dbdump
 .log
 /media
+/plugins/MathJax/MathJax/fonts
