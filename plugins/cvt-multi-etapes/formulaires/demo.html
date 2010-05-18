@@ -1,0 +1,29 @@
+[(#REM)
+
+  Squelette #FORMULAIRE_DEMO par etapes
+  (c) 2010 Cedric Morin
+  Distribue sous licence GPL
+
+]
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+	<h3>Formulaire multi etapes #ENV{_etape}/#ENV{_etapes}</h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action},#FORM}
+	  <ul>
+			<li class="editer_nom obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
+				<label for="nom">Nom</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>
+				]<input type='text' class='text' name='nom' id='nom' value="#ENV{nom}" />
+			</li>
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><input type='submit' class='submit' value='suivant' /></p>
+	</div></form>
+	]
+</div>

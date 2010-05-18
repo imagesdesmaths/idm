@@ -1,0 +1,31 @@
+[(#REM)
+
+  Squelette #FORMULAIRE_DEMO par etapes
+  (c) 2010 Cedric Morin
+  Distribue sous licence GPL
+
+]
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+	<h3>Formulaire multi etapes #ENV{_etape}/#ENV{_etapes}</h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	[Votre Nom : (#ENV{nom})<br />]
+	[Votre prenom : (#ENV{prenom})<br />]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action},#FORM}
+	  <ul>
+			<li class="editer_email obligatoire[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
+				<label for="email">Email</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>
+				]<input type='text' class='text' name='email' id='email' value="#ENV{email}" />
+			</li>
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><input type='submit' class='submit' name="_retour_etape_2" value='precedent' /> <input type='submit' class='submit' value='Fin' /></p>
+	</div></form>
+	]
+</div>
