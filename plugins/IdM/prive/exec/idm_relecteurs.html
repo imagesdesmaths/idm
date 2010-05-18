@@ -6,30 +6,30 @@
 <B_relecteurs>
 <h3>Modifier ou supprimer les #TOTAL_BOUCLE relecteurs déjà inscrits ...</h3>
 <div class="formulaire_spip">
-<table id="lesrelecteurs2" class="sortable">
-  <thead>
-    <tr>
-      <th>Signature / Pseudo</th>
-      <th>Nb</th>
-      <th>lus</th>
-    </tr>
-  </thead>
-  <tbody>
-    <BOUCLE_relecteurs(IDM_RELECTEURS spip_auteurs) {role = relecteur}>
-    <tr>
-      <td><span style="display:none">#NOM*</span>
-        #BLOC_TITRE
-        #NOM*
-        #BLOC_DEBUT
-        <div class="ajax">#FORMULAIRE_IDM_RELECTEUR{#ID_AUTEUR}</div>
-        #BLOC_FIN
-      </td>
-      <td>#COMBIEN</td>
-      <td>#LUS</td>
-    </tr>
-    </BOUCLE_relecteurs>
-  </tbody>
-</table>
+  <table id="lesrelecteurs2" class="sortable">
+    <thead>
+      <tr>
+        <th>Signature / Pseudo</th>
+        <th>Nb</th>
+        <th>lus</th>
+      </tr>
+    </thead>
+    <tbody>
+      <BOUCLE_relecteurs(IDM_RELECTEURS spip_auteurs) {role = relecteur}>
+      <tr>
+        <td><span style="display:none">#NOM*</span>
+          #BLOC_TITRE
+          #NOM*
+          #BLOC_DEBUT
+          <div class="ajax">#FORMULAIRE_IDM_RELECTEUR{#ID_AUTEUR}</div>
+          #BLOC_FIN
+        </td>
+        <td>#COMBIEN</td>
+        <td>#LUS</td>
+      </tr>
+      </BOUCLE_relecteurs>
+    </tbody>
+  </table>
 </div>
 </B_relecteurs>
 

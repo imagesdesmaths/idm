@@ -1,7 +1,7 @@
+<B_candidats>
 <div class="formulaire_spip">
   <form action="#ENV{action}" method="post">
     #ACTION_FORMULAIRE{#ENV{action}}
-    <B_candidats>
     <h3>Il y a #TOTAL_BOUCLE candidat(s) à être relecteurs ...</h3>
     <table id="lescandidats" class="sortable">
       <thead>
@@ -30,7 +30,6 @@
       </tbody>
     </table>
     <p style="text-align : center;"><input type="submit" value="Modifier les statuts indiqu&eacute;s" name="go" /></p>
-    </B_candidats>
   </form>
 </div>
 
@@ -38,3 +37,4 @@
 <script type="text/javascript">
   $("#lescandidats").tablesorter( {sortList : [[0,0]]} );
 </script>
+</B_candidats>
