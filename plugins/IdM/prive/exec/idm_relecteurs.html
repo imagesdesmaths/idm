@@ -1,4 +1,43 @@
 <BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
 <h1>Gestion des relecteurs</h1>
+
 #FORMULAIRE_RELECTEURS_GESTION
+
+<B_relecteurs>
+<h3>Modifier ou supprimer les #TOTAL_BOUCLE relecteurs déjà inscrits ...</h3>
+<div class="formulaire_spip">
+<table id="lesrelecteurs2" class="sortable">
+  <thead>
+    <tr>
+      <th>Signature / Pseudo</th>
+      <th>Nb</th>
+      <th>lus</th>
+      <th>Dernière relecture</th>
+    </tr>
+  </thead>
+  <tbody>
+    <BOUCLE_relecteurs(IDM_RELECTEURS spip_auteurs) {role = relecteur}>
+    <tr>
+      <td><span style="display:none">#NOM*</span>
+        #BLOC_TITRE
+        #NOM
+        #BLOC_DEBUT
+        <div class="ajax">#FORMULAIRE_IDM_RELECTEUR{#ID_AUTEUR}</div>
+        #BLOC_FIN
+      </td>
+      <td>#COMBIEN</td>
+      <td>#LUS</td>
+      <td>#QUAND</td>
+    </tr>
+    </BOUCLE_relecteurs>
+  </tbody>
+</table>
+</div>
+</B_relecteurs>
+
+<script type="text/javascript" src="#CHEMIN{javascript/jquery.tablesorter.min.js}"></script>
+<script type="text/javascript">
+  $("#lesrelecteurs2").tablesorter( {sortList : [[0,0]]} );
+</script>
+
 </BOUCLE_securite>

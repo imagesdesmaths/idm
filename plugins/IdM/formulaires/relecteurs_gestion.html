@@ -31,38 +31,10 @@
     </table>
     <p style="text-align : center;"><input type="submit" value="Modifier les statuts indiqu&eacute;s" name="go" /></p>
     </B_candidats>
-
-    <B_relecteurs>
-    <h3>Modifier ou supprimer les #TOTAL_BOUCLE relecteurs déjà inscrits ...</h3>
-    <table id="lesrelecteurs" class="sortable">
-      <thead>
-        <tr>
-          <th>Signature / Pseudo</th>
-          <th>Qui est-ce ?</th>
-          <th>Combien ?</th>
-          <th>Dernière relecture</th>
-          <th>Supprimer</th>
-        </tr>
-      </thead>
-      <tbody>
-        <BOUCLE_relecteurs(IDM_RELECTEURS spip_auteurs) {role = relecteur}>
-        <tr>
-          <td><a href="mailto:#EMAIL*">#NOM</a></td>
-          <td><input type="text" name="math_#ID_AUTEUR" value="#ENV{math_#ID_AUTEUR}" size=20 /></td>
-          <td>#COMBIEN</td>
-          <td>#QUAND</td>
-          <td><input type="checkbox" name="exterminate_#ID_AUTEUR"/></td>
-        </tr>
-        </BOUCLE_relecteurs>
-      </tbody>
-    </table>
-    <p style="text-align : center;"><input type="submit" value="Modifier les statuts indiqu&eacute;s" name="go" /></p>
-    </B_relecteurs>
   </form>
 </div>
 
 <script type="text/javascript" src="#CHEMIN{javascript/jquery.tablesorter.min.js}"></script>
 <script type="text/javascript">
-  $("#lesrelecteurs").tablesorter( {sortList : [[0,0]]} );
   $("#lescandidats").tablesorter( {sortList : [[0,0]]} );
-  </script>
+</script>
