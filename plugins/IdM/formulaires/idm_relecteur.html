@@ -7,10 +7,11 @@
 
     [(#GET{step}|=={display}|oui)
     <div class='cadre_padding'>
+      Cat&eacute;gorie : #CATEGORIE <br />
       E-mail : <a href="mailto:#EMAIL*">#EMAIL</a> <br />
       Nombre de relectures (lues / affect&eacute;es) : #LUS / #COMBIEN <br />
       Date de la derni&egrave;re relecture : #QUAND <br />
-      <fieldset><legend>&nbsp;Description&nbsp;</legend>[(#ENV{math}|propre)]</fieldset>
+      <fieldset><legend>&nbsp;Description&nbsp;</legend>[(#MATH|propre)]</fieldset>
       <fieldset><legend>&nbsp;Commentaires&nbsp;</legend>[(#COMMENT|propre)]</fieldset>
     </div>
     <div class="formulaire_spip">
@@ -25,8 +26,15 @@
     [(#GET{step}|=={edit}|oui)
     <div class="formulaire_spip">
       <ul>
-        <li class="editer_math"><label for="math">Description</label><textarea name="math" id="math" rows="5">#ENV{math}</textarea></li>
-        <li class="editer_comment"><label for="comment">Commentaires</label><textarea name="comment" id="comment" rows="5">#ENV{comment}</textarea></li>
+        <li><label for="math">Description</label><textarea name="math" id="math" rows="5">#ENV{math}</textarea></li>
+        <li><label for="comment">Commentaires</label><textarea name="comment" id="comment" rows="5">#ENV{comment}</textarea></li>
+        <li><label for="categorie">Cat&eacute;gorie</label><select name="categorie" id="categorie" value="#ENV{categorie}">
+          <option value="nouveau"    [(#ENV{categorie}|=={nouveau}|oui)    selected="yes"]>Nouveau</option>
+          <option value="chercheur"  [(#ENV{categorie}|=={chercheur}|oui)  selected="yes"]>Chercheur</option>
+          <option value="enseignant" [(#ENV{categorie}|=={enseignant}|oui) selected="yes"]>Enseignant</option>
+          <option value="etudiant"   [(#ENV{categorie}|=={etudiant}|oui)   selected="yes"]>&Eacute;tudiant</option>
+          <option value="autre"      [(#ENV{categorie}|=={autre}|oui)      selected="yes"]>Autre / Inconnu</option>
+        </select></li>
       </ul>
       <input type="hidden" name="step" value="display" />
       <p class="boutons">

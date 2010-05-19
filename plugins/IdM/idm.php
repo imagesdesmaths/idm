@@ -29,7 +29,8 @@ $tables_principales['spip_idm_relecteurs'] = array (
     'combien'     => "INT NOT NULL DEFAULT 0",
     'lus'         => "INT NOT NULL DEFAULT 0",
     'quand'       => "TIMESTAMP NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP",
-    'comment'     => "TEXT NOT NULL"),
+    'comment'     => "TEXT NOT NULL",
+    'categorie'   => "ENUM ('nouveau', 'chercheur', 'enseignant', 'etudiant', 'autre') NOT NULL DEFAULT 'nouveau'"),
   'key' => array(
     'PRIMARY KEY' => "id_auteur"));
 
@@ -50,7 +51,7 @@ function idm_install ($action) {
   switch ($action) {
   case 'test':
     $desc = sql_showtable ('spip_idm_relecteurs');
-    if ($desc AND $desc['field']['comment']) return true; else return false;
+    if ($desc AND $desc['field']['categorie']) return true; else return false;
     break;
 
   case 'install':

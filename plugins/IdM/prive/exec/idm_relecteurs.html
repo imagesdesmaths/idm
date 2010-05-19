@@ -3,8 +3,9 @@
 
 #FORMULAIRE_RELECTEURS_GESTION
 
+<BOUCLE_cat(POUR) {tableau #ARRAY{1,nouveau,2,chercheur,3,etudiant}}>
 <B_relecteurs>
-<h3>Modifier ou supprimer les #TOTAL_BOUCLE relecteurs déjà inscrits ...</h3>
+<h4>Cat&eacute;gorie : #VALEUR (#TOTAL_BOUCLE)</h4>
 <div class="formulaire_spip">
   <table id="lesrelecteurs2" class="sortable">
     <thead>
@@ -15,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <BOUCLE_relecteurs(IDM_RELECTEURS spip_auteurs) {role = relecteur}>
+      <BOUCLE_relecteurs(IDM_RELECTEURS spip_auteurs) {role = relecteur} {categorie = #VALEUR}>
       <tr>
         <td><span style="display:none">#NOM*</span>
           #BLOC_TITRE
@@ -32,6 +33,7 @@
   </table>
 </div>
 </B_relecteurs>
+</BOUCLE_cat>
 
 <script type="text/javascript" src="#CHEMIN{javascript/jquery.tablesorter.min.js}"></script>
 <script type="text/javascript">
