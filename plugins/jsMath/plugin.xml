@@ -1,7 +1,7 @@
 <plugin>
   <nom>jsMath</nom>
   <auteur>[Vincent Beffara->vbeffara@ens-lyon.fr]</auteur>
-  <version>3.6c-1</version>
+  <version>3.6e-1</version>
   <etat>stable</etat>
   <description>
     Inclusion de fonctionnalit&eacute;s permettant l'utilisation de 
