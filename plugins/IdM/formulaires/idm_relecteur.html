@@ -34,6 +34,7 @@
           <option value="enseignant" [(#ENV{categorie}|=={enseignant}|oui) selected="yes"]>Enseignant</option>
           <option value="etudiant"   [(#ENV{categorie}|=={etudiant}|oui)   selected="yes"]>&Eacute;tudiant</option>
           <option value="autre"      [(#ENV{categorie}|=={autre}|oui)      selected="yes"]>Autre / Inconnu</option>
+          <option value="non_classe" [(#ENV{categorie}|=={non_classe}|oui) selected="yes"]>Non class&eacute;</option>
         </select></li>
       </ul>
       <input type="hidden" name="step" value="display" />
