@@ -239,5 +239,7 @@ div.mp3 { text-align : center; margin : 0.5ex 0em; }
 
 div.citer { border : 1px solid #e20000; background : #eeeeee; padding : .5ex 1ex; text-size : small; }
 
+p.copyright { text-size : small; font-style : italic; }
+
 /* vim: ft=css
  */

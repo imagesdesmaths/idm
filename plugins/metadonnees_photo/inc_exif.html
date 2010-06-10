@@ -1,0 +1,102 @@
+[	<div style='background-color: #b5ca77; padding: 5px; -webkit-border-radius: 10px;-moz-border-radius: 10px;'>
+	
+
+	
+	<table cellspacing='2' cellpadding='0' style='width: 100%;  font-family: verdana; border: 0px;'>
+	
+	[(#SET{logo,#CHEMIN{appareils/#ENV{fichier}|lire_exif{logoAppareil}}})]
+	[<!--(#ENV{fichier}|lire_exif{logoAppareil})-->]
+	<tr>
+		<td rowspan="2" style='width: 50%; font-size: 90%; color: #4d6110; text-align: right; padding-right: 5px;'>
+			[(#GET{logo}|image_reduire{36}|sinon{Appareil})]
+		</td>
+		<td>
+		(#ENV{fichier}|lire_exif{make})
+		</td>
+	</tr>
+
+	[<tr>
+		<td>
+		(#ENV{fichier}|lire_exif{model})
+		</td>
+	</tr>]
+
+	[<tr>
+		<td style='width: 50%; font-size: 90%; color: #4d6110; text-align: right; padding-right: 5px;'>
+			Sensibilité
+		</td>
+		<td >
+		[<img src="(#CHEMIN{imgs_photo/iso-16.png})" alt="ISO" align="top" />]
+		(#ENV{fichier}|lire_exif{isoEquiv})
+		</td>
+	</tr>]
+	
+	[<tr>
+		<td style='width: 50%; font-size: 90%; color: #4d6110; text-align: right; padding-right: 5px;'>
+			Vitesse
+		</td>
+		<td >
+		(#ENV{fichier}|lire_exif{exposureTime}) s
+		</td>
+	</tr>]
+	
+	[<tr>
+		<td style='width: 50%; font-size: 90%; color: #4d6110; text-align: right; padding-right: 5px;'>
+			Ouverture
+		</td>
+		<td >
+		[<img src="(#CHEMIN{imgs_photo/ouverture-16.png})" alt="ISO" align="top" />]
+		<i>f</i>/(#ENV{fichier}|lire_exif{fnumber})
+		</td>
+	</tr>]
+	
+	[<tr>
+		<td style='width: 50%; font-size: 90%; color: #4d6110; text-align: right; padding-right: 5px;'>
+			Focale
+		</td>
+		<td >
+		(#ENV{fichier}|lire_exif{focalLength})&nbsp;mm
+		</td>
+	</tr>]
+	
+	[<tr>
+		<td style='width: 50%; font-size: 90%; color: #4d6110; text-align: right; padding-right: 5px;'>
+			Focale éq.&nbsp;35&nbsp;mm
+		</td>
+		<td >
+		(#ENV{fichier}|lire_exif{focalLength35mm})&nbsp;mm
+		</td>
+	</tr>]
+	
+	[<tr>
+		<td style='width: 50%; font-size: 90%; color: #4d6110; text-align: right; padding-right: 5px;'>
+			Flash
+		</td>
+		<td >
+		[<img src="(#CHEMIN{imgs_photo/flash-[(#ENV{fichier}|lire_exif{flashUsed})]-16.png})" alt="ISO" align="top" />]
+		(#ENV{fichier}|lire_exif{flashUsed})
+		</td>
+	</tr>]
+	
+	[<tr>
+		<td style='width: 50%; font-size: 90%; color: #4d6110; text-align: right; padding-right: 5px;'>
+			Distance
+		</td>
+		<td >
+		(#ENV{fichier}|lire_exif{focusDistance})[(#ENV{fichier}|lire_exif{focusDistance}|=={infini}|?{'','&nbsp;m'})]
+		</td>
+	</tr>]
+
+	[<tr>
+		<td style='width: 50%; font-size: 90%; color: #4d6110; text-align: right; padding-right: 5px;'>
+			Ouverture max.
+		</td>
+		<td >
+		[<img src="(#CHEMIN{imgs_photo/ouverture-max-16.png})" alt="ISO" align="top" />]
+		<i>f</i>/(#ENV{fichier}|lire_exif{maxAperture})
+		</td>
+	</tr>]
+	
+	</table>
+	</div>
+]
