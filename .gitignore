@@ -21,3 +21,4 @@ plugins/jsMath/jsMath/fonts
 .log
 /media
 /plugins/MathJax/MathJax/fonts
+/extensions
