@@ -40,13 +40,11 @@ END;
     $auteurs = sql_select ('*', 'spip_auteurs_articles', "id_article = $id_article");
     while ($r = sql_fetch($auteurs)) {
       $id = $r['id_auteur'];
-      if ($id != $id_auteur) {
-        if (!in_array($id, $id_recipients)) $id_recipients[] = $id;
-      }
+      if (!in_array($id, $id_recipients)) $id_recipients[] = $id;
     }
 
     $relecteurs = sql_select ('*', 'spip_relecteurs_articles', "id_article = $id_article");
-    while ($r = sql_fetch($auteurs)) {
+    while ($r = sql_fetch($relecteurs)) {
       $id = $r['id_auteur'];
       if (!in_array($id, $id_recipients)) $id_recipients[] = $id;
     }
