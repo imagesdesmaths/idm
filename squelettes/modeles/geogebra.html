@@ -1,0 +1,25 @@
+[(#REM)
+/******************************************************************
+***  Ce plugin eva_geometrie, créé par Olivier Gautier          ***
+*** 		est mis à disposition sous un                   ***
+*** contrat GNU/GPL consultable à l'adresse                     ***
+***      http://www.april.org/gnu/gpl_french.html	        ***
+******************************************************************/
+]
+<BOUCLE_freeminddoc(DOCUMENTS){id_document=#ENV{id}}{mode=document}{extension==ggb}{tout}>
+	<applet name="ggbApplet" code="geogebra.GeoGebraApplet" codebase="./"
+	[(#ENV**{dev}|?{'archive="http://www.geogebra.org/webstart/dev/geogebra.jar"','archive="http://www.geogebra.org/webstart/geogebra.jar"'})]
+	width="[(#ENV**{largeur}|?{#ENV**{largeur},"100%"})]"
+	height="[(#ENV**{hauteur}|?{#ENV**{hauteur},"500"})]">
+	<param name="filename" value="#URL_DOCUMENT">
+	<param name="framePossible" value="[(#ENV**{fenetre_externe}|?{'true','false'})]">
+	<param name="showResetIcon" value="[(#ENV**{reinitialiser}|?{'true','false'})]">
+	<param name="enableRightClick" value="[(#ENV**{clic_droit}|?{'true','false'})]">
+	<param name="showMenuBar" value="[(#ENV**{barre_menu}|?{'true','false'})]">
+	<param name="showToolBar" value="[(#ENV**{barre_outils}|?{'true','false'})]">
+	<param name="showToolBarHelp" value="[(#ENV**{barre_aide}|?{'true','false'})]">
+	<param name="showAlgebraInput" value="[(#ENV**{barre_algebre}|?{'true','false'})]">
+D&eacute;sol&eacute;, l'activit&eacute; GeoGebra ne peut pas d&eacute;marrer. Assurez-vous que Java 1.4.2 (ou version sup&eacute;rieure) est install&eacute;e et active&eacute;e sur votre navigateur (<a href="http://java.sun.com/getjava">Cliquez ici pour installer Java maintenant !</a>)
+</applet>
+<br /><span style="font-size:small">Cr&eacute;&eacute; avec <a href="http://www.geogebra.org" target="_blank" >GeoGebra</a></span><br />
+</BOUCLE_freeminddoc>
