@@ -38,7 +38,8 @@ function notify_user ($id_auteur, $id_article) {
     "-- \n" .
     "Le comité de rédaction de \"Images des Mathématiques\".";
 
-  inc_envoyer_mail_dist ($email, $subject, utf8_encode($texte));
+  $envoyer_mail = charger_fonction ('envoyer_mail', 'inc');
+  $envoyer_mail ($email, $subject, utf8_encode($texte));
 }
 
 function nettoie () {

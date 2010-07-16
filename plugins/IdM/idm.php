@@ -129,7 +129,8 @@ function idm_notify ($id, $message, $subject = "Un message du site \"Images des 
   $email   = sql_getfetsel ("email", "spip_auteurs", "id_auteur = $id");
   $message = "Bonjour !\n\n" . $message . "\n\n-- \nLe robot du site http://images.math.cnrs.fr/\n";
 
-  inc_envoyer_mail_dist ($email, $subject, $message);
+  $envoyer_mail = charger_fonction ('envoyer_mail', 'inc');
+  $envoyer_mail ($email, $subject, $message);
 }
 
 ?>

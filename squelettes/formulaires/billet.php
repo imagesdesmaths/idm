@@ -43,8 +43,9 @@ function notify_comite ($id_auteur, $id_article, $titre, $date) {
     "-- \n" .
     "Le comité de rédaction de \"Images des Mathématiques\".";
 
-  inc_envoyer_mail_dist ($email, $subject, utf8_encode($texte));
-  inc_envoyer_mail_dist ($gars,  $subject, utf8_encode($texte));
+  $envoyer_mail = charger_fonction ('envoyer_mail', 'inc');
+  $envoyer_mail ($email, $subject, utf8_encode($texte));
+  $envoyer_mail ($gars,  $subject, utf8_encode($texte));
 }
 
 function formulaires_billet_charger () {
