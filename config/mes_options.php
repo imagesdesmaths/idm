@@ -116,11 +116,8 @@ function inc_envoyer_mail ($email, $sujet, $texte, $from = "", $headers = "") {
   // les 'cliquer ici' etc sont a eviter;  voir:
   // http://mta.org.ua/spamassassin-2.55/stuff/wiki.CustomRulesets/20050914/rules/french_rules.cf
 
-  spip_log ('--MARK--','mails');
   $texte = nettoyer_caracteres_mail($texte);
-  spip_log ('--MARK--','mails');
   $sujet = nettoyer_caracteres_mail($sujet);
-  spip_log ('--MARK--','mails');
 
   // encoder le sujet si possible selon la RFC
   if (init_mb_string()) {
@@ -131,8 +128,7 @@ function inc_envoyer_mail ($email, $sujet, $texte, $from = "", $headers = "") {
     mb_internal_encoding('utf-8');
   }
 
-  spip_log ('--MARK--','mails');
-  spip_log("mail mes_options $email\n$sujet\n$headers",'mails');
+  spip_log("mail (override) $email\n$sujet\n$headers",'mails');
 
   // Ajouter le \n final
   if ($headers = trim($headers)) $headers .= "\n";
