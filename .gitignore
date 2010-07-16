@@ -4,12 +4,16 @@
 .dbdump
 .log
 .svn
+/CHANGELOG.txt
+/COPYING.txt
 /IMG
+/INSTALL.txt
 /config/connect*
 /ecrire
 /extensions
 /files
 /forum
+/htaccess.txt
 /index.php
 /local
 /media
@@ -21,4 +25,5 @@
 /rien.gif
 /spip.php
 /squelettes-dist
+/svn.revision
 /tmp
