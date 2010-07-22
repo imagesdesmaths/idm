@@ -1,24 +1,38 @@
 #CACHE{3600}
 <INCLURE{fond=inc/head}>
 
-<BOUCLE_nospecial(ARTICLES) {id_secteur = 18} {doublons}>
-</BOUCLE_nospecial>
+<div id="actu">
+  <h2>Actualit&eacute;s</h2>
 
-<BOUCLE_nodouble(ARTICLES) {titre_mot=double} {doublons}>
-</BOUCLE_nodouble>
+  <h3>Revues de presse :</h3>
+  <ul>
+    <BOUCLE_rdpall(ARTICLES) {id_rubrique=26} {par date} {inverse} {0,3}>
+    <li><a href="#URL_ARTICLE">[(#DATE|affdate)]</a></li>
+    </BOUCLE_rdpall>
+    <li class="archives"><a href="#URL_RUBRIQUE{26}">Archives</a></li>
+  </ul>
 
-<BOUCLE_rdp(ARTICLES) {id_rubrique=26} {age < 8} {par date} {inverse} {0,1}>
-<h2 class="rdp"><a href="#URL_ARTICLE">La revue de presse du [(#DATE|affdate)]</a></h2>
-</BOUCLE_rdp>
+  <h3>Quelques br&egrave;ves :</h3>
+  <ul>
+    <BOUCLE_actu(BREVES) {id_rubrique=26} {age>=0} {par date} {inverse} {0,3}>
+    <li>[(#DATE|affdate)] - <a href="#URL_BREVE" class="plain">#TITRE</a></li>
+    </BOUCLE_actu>
+    <li class="archives"><a href="[(#URL_PAGE{breves,id_rubrique=26})]">Archives</a></li>
+  </ul>
+</div>
 
-<BOUCLE_edito(ARTICLES) {titre_mot=editorial} {par date} {inverse} {age<14} {0,1} {doublons}>
+<div id="top">
+  <BOUCLE_nospecial(ARTICLES) {id_secteur = 18} {doublons}> </BOUCLE_nospecial>
+  <BOUCLE_nodouble(ARTICLES) {titre_mot=double} {doublons}> </BOUCLE_nodouble>
+
+  <BOUCLE_edito(ARTICLES) {titre_mot=editorial} {par date} {inverse} {age<14} {0,1} {doublons}>
   <div id="edito" style="display:none;"><div class="article">
       <div class="titre"><h2>#TITRE</h2></div>
 
       <BOUCLE_auteur(AUTEURS) {id_article}>[(#SET{uniqueauteur,#ID_AUTEUR})]</BOUCLE_auteur>
       <BOUCLE_auteurs(AUTEURS) {id_article} {1,1}>[(#SET{uniqueauteur,0})]</BOUCLE_auteurs>
       <BOUCLE_unique(AUTEURS) {id_auteur=#GET{uniqueauteur}}>
-        [<h3 class="bio">(#BIO*) [(<a href="(#URL_SITE)">page web</a>)]</h3>]
+      [<h3 class="bio">(#BIO*) [(<a href="(#URL_SITE)">page web</a>)]</h3>]
       </BOUCLE_unique>
 
       #TEXTE
@@ -26,19 +40,20 @@
       [<h3 class="auteur">Le [(#DATE|affdate)], par (#LESAUTEURS)</h3>]
   </div></div>
   <div id="editolink">&Eacute;ditorial : <a class="thickbox" href="#[(#REM)]TB_inline?width=700&amp;height=500&amp;inlineId=edito">#TITRE</a></div>
-</BOUCLE_edito>
+  </BOUCLE_edito>
 
-<div id="une">
-  <BOUCLE_une(ARTICLES) {id_rubrique !IN 2,3,6,18,19,23,25,28,29} {par date} {inverse} {0,1} {doublons}>
+  <div id="une">
+    <BOUCLE_une(ARTICLES) {id_rubrique !IN 2,3,6,18,19,23,25,28,29} {par date} {inverse} {0,1} {doublons}>
     [(#INCLURE{fond=inc/resume_une}{id_article})]
-  </BOUCLE_une>
-</div>
+    </BOUCLE_une>
+  </div>
 
-<BOUCLE_featured(ARTICLES) {titre_mot=featured} {par date} {inverse} {age<7} {doublons}>
+  <BOUCLE_featured(ARTICLES) {titre_mot=featured} {par date} {inverse} {age<7} {doublons}>
   <div id="featured">
     [(#INCLURE{fond=inc/resume}{id_article})]
   </div>
-</BOUCLE_featured>
+  </BOUCLE_featured>
+</div>
 
 <div class="nettoyeur"></div>
 

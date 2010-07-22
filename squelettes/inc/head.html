@@ -46,21 +46,18 @@
 
     <div id="lisiere"></div>
     <div id="left">
-      <ul style="text-align:center">
-        <li><a href="#URL_SITE_SPIP/">Page d'accueil</a></li>
-        <li><a href="#URL_ARTICLE{63}">Présentation</a> / <a href="#URL_PAGE{plan}">Plan du site</a></li>
-        <li><a href="#URL_RUBRIQUE{19}">Documentation</a> / <a href="#URL_PAGE{lexique}">Lexique</a></li>
-        [<li style="margin-top : 1ex;">(#MODELE{special}{mot=ours})</li>]
-        <li><a href="mailto:#EMAIL_WEBMASTER">Nous contacter</a></li>
-        <li><a href="javascript:unfold_and_print();">Imprimer cette page</a></li>
-      </ul>
-
       <INCLURE{fond=inc/idj}>
 
       [(#FORMULAIRE_RECHERCHE)]
 
+      <ul style="text-align:center">
+        <li><a href="#URL_PAGE{recherche,avancee=1}">Recherche avanc&eacute;e</a></li>
+        <li><a href="#URL_RUBRIQUE{19}">Documentation</a> / <a href="#URL_PAGE{lexique}">Lexique</a></li>
+        <li><a href="#URL_ARTICLE{63}">Présentation su site</a></li>
+      </ul>
+
       <div id="navleft">
-        #BLOC_TITRE
+        #BLOC_TITRE{visible}
         <h2>Les rubriques</h2>
         #BLOC_DEBUT
         <ul><BOUCLE_secteurs(RUBRIQUES) {racine} {par num titre} {id_rubrique != 18} {id_rubrique != 26}>
@@ -87,24 +84,15 @@
         <INCLURE{fond=inc/ident}>
       </div>
 
-      <div class="actu">
-        <h2>Revues de presse</h2>
+      <ul style="text-align:center;display:none;">
+        <li><a href="#URL_ARTICLE{63}">Présentation</a> / <a href="#URL_PAGE{plan}">Plan du site</a></li>
+        <li><a href="#URL_SITE_SPIP/">Page d'accueil</a></li>
+        [<li style="margin-top : 1ex;">(#MODELE{special}{mot=ours})</li>]
+        <li><a href="mailto:#EMAIL_WEBMASTER">Nous contacter</a></li>
+        <li><a href="javascript:unfold_and_print();">Imprimer cette page</a></li>
+      </ul>
 
-        <BOUCLE_rdpall(ARTICLES) {id_rubrique=26} {par date} {inverse} {0,3}>
-          <h3 style="margin : 0px;"><a href="#URL_ARTICLE">[(#DATE|affdate)]</a></h3>
-        </BOUCLE_rdpall>
-        <h3 style="margin-top : .5ex;"><a href="#URL_RUBRIQUE{26}">Archives</a></h3>
-
-        <h2>Quelques br&egrave;ves</h2>
-
-        <BOUCLE_actu(BREVES) {id_rubrique=26} {age>=0} {par date} {inverse} {0,3}>
-        <h3>- [(#DATE|affdate)] -</h3>
-        <a href="#URL_BREVE" class="plain">#TITRE</a>
-        </BOUCLE_actu>
-
-        <h3><a href="[(#URL_PAGE{breves,id_rubrique=26})]">Archives</a></h3>
-      </div>
-
+      <img src="#CHEMIN{img/buttons.png}" style="max-width:100%">
       <ul style="text-align : center;">
         <li>ISSN : 2105-1003</li>
         <li><a href="#URL_PAGE{backend}"><img src="#CHEMIN{img/rss.jpg}" alt="RSS" /> Syndication (RSS)</a></li>
