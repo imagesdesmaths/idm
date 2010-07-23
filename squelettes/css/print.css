@@ -1,0 +1,14 @@
+
+html { font-family : Times, serif; }
+
+#head    { display : none; }
+#logo    { display : none; }
+#left    { display : none; }
+#main    { top : 0; }
+#main_in { margin : 0; padding : 1ex 1em; }
+#une     { padding : 1ex 1em; margin : 3ex -1em 0ex; }
+
+h3.discuter          { display : none; }
+div.notation         { display : none; }
+div.relies           { display : none; }
+div.spip-admin-float { display : none; }
