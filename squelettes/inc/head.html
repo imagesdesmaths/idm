@@ -47,12 +47,18 @@
     <div id="left">
       <INCLURE{fond=inc/idj}>
 
+      <ul>
+        <li><a href="#URL_SITE_SPIP/">Page d'accueil</a></li>
+        <li><a href="#URL_ARTICLE{63}">Présentation</a> / <a href="#URL_PAGE{plan}">Plan du site</a></li>
+        <li><a href="#URL_RUBRIQUE{19}">Documentation</a> / <a href="#URL_PAGE{lexique}">Lexique</a></li>
+        [<li>(#MODELE{special}{mot=ours})</li>]
+        <li><a href="mailto:#EMAIL_WEBMASTER">Nous contacter</a></li>
+      </ul>
+
       [(#FORMULAIRE_RECHERCHE)]
 
-      <ul style="text-align:center">
+      <ul>
         <li><a href="#URL_PAGE{recherche,avancee=1}">Recherche avanc&eacute;e</a></li>
-        <li><a href="#URL_RUBRIQUE{19}">Documentation</a> / <a href="#URL_PAGE{lexique}">Lexique</a></li>
-        <li><a href="#URL_ARTICLE{63}">Présentation su site</a></li>
       </ul>
 
       <div id="navleft">
@@ -83,19 +89,11 @@
         <INCLURE{fond=inc/ident}>
       </div>
 
-      <ul style="text-align:center;display:none;">
-        <li><a href="#URL_ARTICLE{63}">Présentation</a> / <a href="#URL_PAGE{plan}">Plan du site</a></li>
-        <li><a href="#URL_SITE_SPIP/">Page d'accueil</a></li>
-        [<li style="margin-top : 1ex;">(#MODELE{special}{mot=ours})</li>]
-        <li><a href="mailto:#EMAIL_WEBMASTER">Nous contacter</a></li>
-        <li><a href="javascript:unfold_and_print();">Imprimer cette page</a></li>
-      </ul>
-
-      <img src="#CHEMIN{img/buttons.png}" style="max-width:100%">
-      <ul style="text-align : center;">
+      <ul style="margin-top:4ex;">
         <li>ISSN : 2105-1003</li>
         <li><a href="#URL_PAGE{backend}"><img src="#CHEMIN{img/rss.jpg}" alt="RSS" /> Syndication (RSS)</a></li>
         <li style="margin-top:.5ex;"><a href="http://www.spip.net/">Site sous SPIP 2.1 <img src="#CHEMIN{img/spip.jpg}" alt="SPIP" /></a></li>
+        <li><a href="javascript:unfold_and_print();">Imprimer cette page</a></li>
       </ul>
 
       <div id="nojsfont" style="display:none;" class="jsmathwarning">

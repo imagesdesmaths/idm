@@ -8,7 +8,6 @@ body { padding : 0px; margin : 0px; background : white; }
     #head h1 { margin-left : 6.5em; }
   #logo  { position : absolute; width : 12em; top : 0px; color : white; background : transparent; z-index : 4; text-align : center; }
   #lisiere { width : 12em; height : 100%; position : fixed; top : 0px; background : #550000; z-index : 1; }
-  #left  { width : 11em; position : absolute; z-index : 5; top : 75px; text-align : left; z-index : 2; }
   #main  { position : absolute; top : 75px; width : 100%; z-index : 0; }
   #main_in { margin-left : 12em; padding : 1ex 1em 2ex; }
     #front { position : relative; }
@@ -94,7 +93,7 @@ ul.forum { padding : 0px; list-style-type : none; }
 
 /************************************************************************/
 
-div#left { padding : 0ex .5em 1ex; text-align : left; color : white; background : #550000; }
+div#left { width : 11em; position : absolute; z-index : 5; top : 75px; text-align : center; z-index : 2; padding : 0ex .5em 1ex; color : white; background : #550000; }
 div#left a { font-weight : normal; color : white; text-decoration : none; }
 div#left a.active { color : #e20000; }
 div#left a:hover { text-decoration : underline; }
@@ -111,18 +110,18 @@ div#left ul { margin : 0px; padding-left : 0em; font-size : small; list-style-ty
 
 div#left div.jsmathwarning { font-size : x-small; margin : 4ex .5em 1ex; padding : .5ex 1ex 1ex; color : #550000; background : #994444; }
 div#left div.jsmathwarning h2 { font-size : medium; margin : 0px; border : none; }
-div#left div.jsmathwarning h3 { font-size : small; margin : .5ex 0px 0px; border : none; text-align : center;}
+div#left div.jsmathwarning h3 { font-size : small; margin : .5ex 0px 0px; border : none; }
 div#left div.jsmathwarning p { margin : 0px; text-align : justify; }
 div#left div.jsmathwarning a { color : #550000; font-weight : bold; text-decoration : underline; }
 
 div#left .blocs_titre { padding : 0px; background : transparent; }
 
-div#imagedujour { width : 12em; margin : 0ex 0px 1ex -.5em; text-align : center; }
+div#imagedujour { width : 12em; margin : 0ex 0px 1ex -.5em; }
 div#imagedujour img { max-width : 100%; }
 
 div#actu { width : 20%; float : right; font-size : small; border : 1px solid #cccccc; padding : 1ex 1em; margin : 0; }
 div#actu h2 { font-size : large; margin : 0; }
-div#actu h3 { font-size : normal; text-align : left; margin : 1ex 0; }
+div#actu h3 { font-size : normal; margin : 1ex 0; }
 div#actu ul { padding : 0; list-style-type : none; }
 div#actu li.archives { margin-top : .5ex; font-style : italic; }
 
