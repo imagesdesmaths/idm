@@ -4,16 +4,16 @@
 <div id="actu">
   <h2>Actualit&eacute;s</h2>
 
-  <h3>Revues de presse :</h3>
+  <h3>Quelques br&egrave;ves :</h3>
   <ul>
-    <BOUCLE_rdpall(ARTICLES) {id_rubrique=26} {par date} {inverse} {0,3}>
-    <li><a href="#URL_ARTICLE">[(#DATE|affdate)]</a></li>
-    </BOUCLE_rdpall>
-    <li class="archives"><a href="#URL_RUBRIQUE{26}">Archives</a></li>
+    <BOUCLE_actu(BREVES) {id_rubrique=26} {age>=0} {par date} {inverse} {0,3}>
+    <li>[(#DATE|affdate)] - <a href="#URL_BREVE" class="plain">#TITRE</a></li>
+    </BOUCLE_actu>
+    <li class="archives"><a href="[(#URL_PAGE{breves,id_rubrique=26})]">Archives</a></li>
   </ul>
 
   <B_evts>
-  <h3>&Eacute;v&eacute;nements :</h3>
+  <h3>&Eacute;v&eacute;nements &agrave; venir :</h3>
   <ul>
     <BOUCLE_evts(BREVES) {id_rubrique=33} {age<0} {par date}>
     <li><a href="#URL_BREVE" class="plain">#TITRE</a></li>
@@ -22,12 +22,12 @@
   </ul>
   </B_evts>
 
-  <h3>Quelques br&egrave;ves :</h3>
+  <h3>Revues de presse :</h3>
   <ul>
-    <BOUCLE_actu(BREVES) {id_rubrique=26} {age>=0} {par date} {inverse} {0,3}>
-    <li>[(#DATE|affdate)] - <a href="#URL_BREVE" class="plain">#TITRE</a></li>
-    </BOUCLE_actu>
-    <li class="archives"><a href="[(#URL_PAGE{breves,id_rubrique=26})]">Archives</a></li>
+    <BOUCLE_rdpall(ARTICLES) {id_rubrique=26} {par date} {inverse} {0,3}>
+    <li><a href="#URL_ARTICLE">[(#DATE|affdate)]</a></li>
+    </BOUCLE_rdpall>
+    <li class="archives"><a href="#URL_RUBRIQUE{26}">Archives</a></li>
   </ul>
 </div>
 
