@@ -120,7 +120,7 @@ div#imagedujour { width : 12em; margin : 0ex 0px 1ex -.5em; }
 div#imagedujour img { max-width : 100%; }
 
 div#actu { width : 20%; float : right; font-size : small; border : 1px solid #cccccc; padding : 1ex 1em; margin : 0; }
-div#actu h2 { font-size : large; margin : 0; }
+div#actu h2 { font-size : large; margin : 0; border-bottom : 1px solid #e20000; }
 div#actu h3 { font-size : normal; margin : 1ex 0; }
 div#actu ul { padding : 0; list-style-type : none; }
 div#actu li.archives { margin-top : .5ex; font-style : italic; }
