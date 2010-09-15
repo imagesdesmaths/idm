@@ -1,0 +1,17 @@
+<plugin>
+  <nom>MathJax</nom>
+  <auteur>[Vincent Beffara->vbeffara@ens-lyon.fr]</auteur>
+  <version>1.0.1a-1</version>
+  <etat>dev</etat>
+  <description>MathJax dans SPIP.</description>
+  <prefix>mj</prefix>
+  <fonctions>MathJax.php</fonctions>
+
+  <pipeline><nom>pre_typo</nom></pipeline>
+  <pipeline><nom>insert_head</nom></pipeline>
+
+  <pipeline>
+    <nom>header_prive</nom>
+    <inclure>MathJax.php</inclure>
+  </pipeline>
+</plugin>
