@@ -27,6 +27,11 @@
     <inclure>idm_pipelines.php</inclure>
   </pipeline>
 
+  <pipeline>
+    <nom>pre_typo</nom>
+    <inclure>idm_pipelines.php</inclure>
+  </pipeline>
+
   <bouton id="idm">
     <titre>IdM</titre>
     <icone>img/IdM_gestion_48.png</icone>
