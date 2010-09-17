@@ -53,7 +53,7 @@
   </BOUCLE_edito>
 
   <div id="une">
-    <BOUCLE_une(ARTICLES) {id_rubrique !IN 2,3,6,18,19,23,25,28,29} {par date} {inverse} {0,1} {doublons}>
+    <BOUCLE_une(ARTICLES) {id_rubrique !IN 2,3,6,18,19,23,25,28,29,34} {par date} {inverse} {0,1} {doublons}>
     [(#INCLURE{fond=inc/resume_une}{id_article})]
     </BOUCLE_une>
   </div>
@@ -78,7 +78,7 @@
 
   <div id="recents">
     <h2>Quelques articles r&eacute;cents</h2>
-    <BOUCLE_old(ARTICLES) {id_rubrique !IN 2,3,6,18,19,23,25,28,29} {par date} {inverse} {0,5} {doublons}>
+    <BOUCLE_old(ARTICLES) {id_rubrique !IN 2,3,6,18,19,23,25,28,29,34} {par date} {inverse} {0,5} {doublons}>
       [(#INCLURE{fond=inc/resume}{id_article})]
     </BOUCLE_old>
   </div>
