@@ -3,9 +3,9 @@
 #DEBUT_SURLIGNE
   [(#LOGO_ARTICLE|right||image_reduire{200,200})]
   [(#LOGO_ARTICLE|fichier|non) <INCLURE{fond=inc/auteur}{id_article=#ID_ARTICLE}{taille=200}>]
-  [<h2 class="#EDIT{surtitre} surtitre">(#SURTITRE)</h2>]
-  [<h1 class="#EDIT{titre} titre">(#TITRE)</h1>]
-  [<h2 class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</h2>]
+  [<h2 class="surtitre">(#SURTITRE)</h2>]
+  [<h1 class="titre">(#TITRE)</h1>]
+  [<h2 class="soustitre">(#SOUSTITRE)</h2>]
 
   [<h3 class="auteur">Le [(#DATE_REDAC|sinon{#DATE}|affdate)], par (#LESAUTEURS)</h3>]
 
@@ -15,9 +15,9 @@
     [<h3 class="bio">(#BIO*) [(<a href="(#URL_SITE)">page web</a>)]</h3>]
   </BOUCLE_unique>
 
-  [<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
-  [<div class="#EDIT{texte} texte">(#TEXTE|lettrine)</div>]
-  [<div class="#EDIT{ps} ps"><span class="ps">P.S. :</span> (#PS)</div>]
+  [<div class="chapo">(#CHAPO)</div>]
+  [<div class="texte">(#TEXTE|lettrine)</div>]
+  [<div class="ps"><span class="ps">P.S. :</span> (#PS)</div>]
   [<div class="notes"><h3>Notes</h3>(#NOTES)</div>]
 
   <BOUCLE_affiliation(AUTEURS) {id_auteur=#GET{uniqueauteur}}>

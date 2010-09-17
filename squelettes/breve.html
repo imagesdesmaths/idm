@@ -2,10 +2,10 @@
 <INCLURE{fond=inc/head}{title=#TITRE}>
 
 #DEBUT_SURLIGNE
-  [<h1 class="#EDIT{titre} titre">(#TITRE)</h1>]
+  [<h1 class="titre">(#TITRE)</h1>]
   <h3 class="auteur">Le [(#DATE|affdate)].</h3>
 
-  [<div class="#EDIT{texte} texte">(#TEXTE|lettrine)</div>]
+  [<div class="texte">(#TEXTE|lettrine)</div>]
 
   [<p><a href="(#URL_SITE)">[(#NOM_SITE*|sinon{"Pour en savoir plus ..."})]</a></p>]
 #FIN_SURLIGNE
