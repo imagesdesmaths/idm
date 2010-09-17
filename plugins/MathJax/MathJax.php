@@ -36,7 +36,7 @@ function mj_insert_head ($texte) {
   $mj_insert = <<<END
     <script type="text/javascript" src="$mj_file">
       MathJax.Hub.Config({
-        extensions: ["tex2jax.js", "TeX/noErrors.js"],
+        extensions: ["tex2jax.js", "jsMath2jax.js", "TeX/noErrors.js"],
         jax:        ["input/TeX",  "output/HTML-CSS"],
         tex2jax: {
           inlineMath:          [ ['$','$'],   ["\\\\(","\\\\)"] ],
