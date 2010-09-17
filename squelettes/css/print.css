@@ -3,9 +3,10 @@ html { font-family : Times, serif; }
 
 #head    { display : none; }
 #logo    { display : none; }
+#lisiere { display : none; }
 #left    { display : none; }
 #main    { top : 0; }
-#main_in { margin : 0; padding : 1ex 1em; }
+#main_in { margin : 0; padding : 1ex 0em; }
 #une     { padding : 1ex 1em; margin : 3ex -1em 0ex; }
 
 h3.discuter          { display : none; }
