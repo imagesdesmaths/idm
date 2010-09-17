@@ -15,7 +15,7 @@
 
 [(#LOGO_RUBRIQUE|right||image_reduire{200,200})]
 <h1><BOUCLE_parent(RUBRIQUES){id_rubrique=#ID_PARENT}{id_rubrique != 18}>
-  <a href="#URL_RUBRIQUE">#TITRE</a> :</BOUCLE_parent> #TITRE</h1>
+  <a href="#URL_RUBRIQUE">#TITRE</a> :</BOUCLE_parent> <span[ class="script"(#ID_RUBRIQUE|=={34}|oui)]>#TITRE</span></h1>
 
 [<div class="texte">(#TEXTE)</div>]
 

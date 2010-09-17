@@ -1,5 +1,5 @@
 <BOUCLE_article(ARTICLES) {id_article = #ENV{id_article}} {statut == .}>
-<div class="article">
+<div class="[script(#ID_RUBRIQUE|=={34}|oui)]article">
 #DEBUT_SURLIGNE
   [(#LOGO_ARTICLE|right||image_reduire{200,200})]
   [(#LOGO_ARTICLE|fichier|non) <INCLURE{fond=inc/auteur}{id_article=#ID_ARTICLE}{taille=200}>]

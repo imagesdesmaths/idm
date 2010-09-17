@@ -18,7 +18,7 @@ body { padding : 0px; margin : 0px; background : white; }
 
 /**************************************************/
 
-.script { font-family : "Reenie Beanie"; font-size : 150%; }
+.script { font-family : "Reenie Beanie"; font-size : 180%; }
 
 .invisible { display : none; }
 .nettoyeur { clear : both; }
@@ -244,7 +244,7 @@ div.texte div.preuve { margin-left : 4em; font-size : small; font-style : italic
 div.texte h4 { text-align : center; font-style : italic; font-weight : bold; text-decoration : underline; padding-top : .5ex; font-size : 110%; }
 div.texte h5 { text-align : left; font-style : italic; font-weight : bold; text-decoration : none; padding : .5ex 2em; margin : 0px; font-size : 110%; }
 div.texte li { margin-top : 1ex; }
-div.texte p.lettrine span.lettrine span.lettrine_first { font-family : "Arial Black", sans-serif; color : #500; float : left; font-size : 440%; font-weight : bold; margin : -.4ex .1em -.4ex 0px; }
+div.texte p.lettrine span.lettrine span.lettrine_first { color : #500; float : left; font-size : 440%; font-weight : bold; margin : -.4ex .1em -.4ex 0px; }
 div.texte p.lettrine span.lettrine { text-transform : uppercase; }
 div.texte p.lettrine { text-indent : 0px; }
 div.texte pre { padding-left : 1em; margin-left : 1em; border-left : 1px solid #e20000; }

@@ -15,7 +15,7 @@
       )] } )] } )]
 
 
-      <h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+      <h3 class="titre"><a href="#URL_ARTICLE"[ class="script"(#ID_RUBRIQUE|=={34}|oui)]>#TITRE</a></h3>
       [<h4 class="auteur[(#ID_SECTEUR|=={18}|?{' invisible'})]">Le [(#DATE_REDAC|sinon{#DATE}|affdate)], par (#LESAUTEURS)</h4>]
 
       <div class="rubrique">
@@ -33,7 +33,7 @@
         <//B_rep>
       </div>
 
-      [<div class="introduction"><a class="plain" href="#URL_ARTICLE">(#DESCRIPTIF|sinon{[(#INTRODUCTION|textebrut)]}|PtoBR)</a></div>]
+      [<div class="[script(#ID_RUBRIQUE|=={34}|oui)]introduction"><a class="plain" href="#URL_ARTICLE">(#DESCRIPTIF|sinon{[(#INTRODUCTION|textebrut)]}|PtoBR)</a></div>]
       #FIN_SURLIGNE
     </div>
     <div class="nettoyeur"></div>
