@@ -28,22 +28,28 @@
   </pipeline>
 
   <bouton id="idm">
-    <icone>img/IdM_gestion_48.png</icone>
     <titre>IdM</titre>
+    <icone>img/IdM_gestion_48.png</icone>
   </bouton>
+
   <bouton id="idm_projets" parent="idm">
     <titre>Planification</titre>
+    <icone>img/IdM_gestion_24.png</icone>
   </bouton>
   <bouton id="idm_relecteurs" parent="idm">
     <titre>Relecteurs</titre>
+    <icone>img/IdM_gestion_24.png</icone>
   </bouton>
   <bouton id="idm_relecture" parent="idm">
     <titre>Relecture</titre>
+    <icone>img/IdM_gestion_24.png</icone>
   </bouton>
   <bouton id="idm_moderation" parent="idm">
     <titre>Mod&eacute;ration</titre>
+    <icone>img/IdM_gestion_24.png</icone>
   </bouton>
   <bouton id="idm_billettistes" parent="idm">
     <titre>Billettistes</titre>
+    <icone>img/IdM_gestion_24.png</icone>
   </bouton>
 </plugin>
