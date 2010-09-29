@@ -93,69 +93,75 @@ ul.forum { padding : 0px; list-style-type : none; }
 
 /************************************************************************/
 
-div#left { width : 11em; position : absolute; z-index : 5; top : 75px; text-align : center; z-index : 2; padding : 0ex .5em 1ex; color : white; background : #550000; }
-div#left a { font-weight : normal; color : white; text-decoration : none; }
-div#left a.active { color : #e20000; }
-div#left a:hover { text-decoration : underline; }
-div#left div.bottom { position : fixed; bottom : .2ex; }
-div#left form input { width : 80%; font-weight : bold; background : white url(../img/rechercher.gif) no-repeat right center; }
-div#left form input.submit { display : none; }
-div#left form label { display : none; }
-div#left form { margin-top : 1ex; }
-div#left h2 { margin : 1ex 0px 1ex; font-size : medium; padding : .2ex 0px .2ex; border : 1px solid #e20000; border-width : 1px 0px; }
-div#left h3 { margin : 1ex 0px .5ex; font-size : medium; }
-div#left ul ul ul { padding-left : 1em; }
-div#left ul ul { padding-left : 2em; }
-div#left ul { margin : 0px; padding-left : 0em; font-size : small; list-style-type : none; }
+#left { width : 11em; position : absolute; z-index : 5; top : 75px; text-align : center; z-index : 2; padding : 0ex .5em 1ex; color : white; background : #550000; }
+#left a { font-weight : normal; color : white; text-decoration : none; }
+#left a.active { color : #e20000; }
+#left a:hover { text-decoration : underline; }
+#left div.bottom { position : fixed; bottom : .2ex; }
+#left form input { width : 80%; font-weight : bold; background : white url(../img/rechercher.gif) no-repeat right center; }
+#left form input.submit { display : none; }
+#left form label { display : none; }
+#left form { margin-top : 1ex; }
+#left h3 { margin : 1ex 0px .5ex; font-size : medium; }
+#left ul ul ul { padding-left : 1em; }
+#left ul ul { padding-left : 2em; }
+#left ul { margin : 0px; padding-left : 0em; font-size : small; list-style-type : none; }
 
-div#left div.jsmathwarning { font-size : x-small; margin : 4ex .5em 1ex; padding : .5ex 1ex 1ex; color : #550000; background : #994444; }
-div#left div.jsmathwarning h2 { font-size : medium; margin : 0px; border : none; }
-div#left div.jsmathwarning h3 { font-size : small; margin : .5ex 0px 0px; border : none; }
-div#left div.jsmathwarning p { margin : 0px; text-align : justify; }
-div#left div.jsmathwarning a { color : #550000; font-weight : bold; text-decoration : underline; }
+#left div.cs_blocs h4 { margin : 1ex 0px 1ex; text-align : center; font-size : medium; font-weight : bold; font-style : italic; padding : .2ex 0px .2ex; border : 1px solid #e20000; border-width : 1px 0px; }
+#left div.cs_blocs h4 a { font-weight : bold; }
+#left div.cs_blocs h4 a:hover { cursor : pointer; text-decoration : underline; }
+#left div.cs_blocs h4.blocs_replie { background : none; }
+#left div.cs_blocs { margin : 1ex 0em; }
+#left div.cs_blocs div.blocs_destination { margin-left : 0em; padding-left : 0em; border : none; font-size : normal; font-style : normal; }
 
-div#left .blocs_titre { padding : 0px; background : transparent; }
+#left div.jsmathwarning { font-size : x-small; margin : 4ex .5em 1ex; padding : .5ex 1ex 1ex; color : #550000; background : #994444; }
+#left div.jsmathwarning h2 { font-size : medium; margin : 0px; border : none; }
+#left div.jsmathwarning h3 { font-size : small; margin : .5ex 0px 0px; border : none; }
+#left div.jsmathwarning p { margin : 0px; text-align : justify; }
+#left div.jsmathwarning a { color : #550000; font-weight : bold; text-decoration : underline; }
 
-div#imagedujour { width : 12em; margin : 0ex 0px 1ex -.5em; }
-div#imagedujour img { max-width : 100%; }
+#left .blocs_titre { padding : 0px; background : transparent; }
 
-div#actu { width : 20%; float : right; font-size : small; border : 1px solid #cccccc; padding : 1ex 1em; margin : 0; }
-div#actu h2 { font-size : large; margin : 0; border-bottom : 1px solid #e20000; }
-div#actu h3 { font-size : normal; margin : 1ex 0; }
-div#actu ul { padding : 0; list-style-type : none; }
-div#actu li.archives { margin-top : .5ex; font-style : italic; }
+#imagedujour { width : 12em; margin : 0ex 0px 1ex -.5em; }
+#imagedujour img { max-width : 100%; }
 
-div#top { width : 80%; }
+#actu { width : 20%; float : right; font-size : small; border : 1px solid #cccccc; padding : 1ex 1em; margin : 0; }
+#actu h2 { font-size : large; margin : 0; border-bottom : 1px solid #e20000; }
+#actu h3 { font-size : normal; margin : 1ex 0; }
+#actu ul { padding : 0; list-style-type : none; }
+#actu li.archives { margin-top : .5ex; font-style : italic; }
 
-div#featured { padding : 1ex 0em 0ex; margin : 1ex 2em 0ex; }
-div#featured div.resume_out { margin-top : 1ex; }
-div#featured div.resume div.introduction { font-size : 95%; margin : 1ex 0px; }
-div#featured div.resume div.introduction a { color : black; }
-div#featured div.resume h4.auteur { font-size : 100%; }
-div#featured div.titre { margin-top : -2.5ex; text-align : center; }
-div#featured h2 { display : inline; padding : .3ex 1em .1ex; background-color : white; }
-div#featured h3.titre { margin-top : -.5ex; }
+#top { width : 80%; }
 
-div#une { margin : 0 3em 0 1em; padding : 0ex 1em; border : 1px solid #ffcccc; background : #ffcccc; }
-div#une div.resume_out { margin-top : 1ex; }
-div#une h2 { margin : 0px; font-size : x-large; border-bottom : 2px solid #e20000; }
-div#une h2 a:hover { color : #e20000; }
-div#une h3 { text-align : center; font-weight : normal; font-size : 100%; margin : 0px; }
-div#une div.resume div.introduction { font-size : 100%; margin : 1ex 0px; font-style : normal; }
-div#une div.resume div.introduction a { color : black; }
-div#une div.unelogo { margin : 1ex 0em 0ex; text-align : center; }
-div#une img { padding : 0px; margin : 1ex 0em 0ex; }
+#featured { padding : 1ex 0em 0ex; margin : 1ex 2em 0ex; }
+#featured div.resume_out { margin-top : 1ex; }
+#featured div.resume div.introduction { font-size : 95%; margin : 1ex 0px; }
+#featured div.resume div.introduction a { color : black; }
+#featured div.resume h4.auteur { font-size : 100%; }
+#featured div.titre { margin-top : -2.5ex; text-align : center; }
+#featured h2 { display : inline; padding : .3ex 1em .1ex; background-color : white; }
+#featured h3.titre { margin-top : -.5ex; }
 
-div#editolink { text-align : center; font-size : 180%; font-weight : bold; margin : .5ex 0em 2.5ex; font-variant : small-caps; }
-div#editolink a:hover { text-decoration : underline; }
+#une { margin : 0 3em 0 1em; padding : 0ex 1em; border : 1px solid #ffcccc; background : #ffcccc; }
+#une div.resume_out { margin-top : 1ex; }
+#une h2 { margin : 0px; font-size : x-large; border-bottom : 2px solid #e20000; }
+#une h2 a:hover { color : #e20000; }
+#une h3 { text-align : center; font-weight : normal; font-size : 100%; margin : 0px; }
+#une div.resume div.introduction { font-size : 100%; margin : 1ex 0px; font-style : normal; }
+#une div.resume div.introduction a { color : black; }
+#une div.unelogo { margin : 1ex 0em 0ex; text-align : center; }
+#une img { padding : 0px; margin : 1ex 0em 0ex; }
+
+#editolink { text-align : center; font-size : 180%; font-weight : bold; margin : .5ex 0em 2.5ex; font-variant : small-caps; }
+#editolink a:hover { text-decoration : underline; }
 
 div.chapo { margin : 1ex 4em; font-weight : bold; font-style : italic; }
 
-div#main div.cs_blocs h4 { text-align : left; font-style : normal; background : transparent url(../img/triangle-bas.gif) no-repeat scroll left center; font-size : 100%; font-weight : normal; padding:0pt 0pt 0pt 20px; }
-div#main div.cs_blocs h4.blocs_replie { background : transparent url(../img/triangle.gif) no-repeat scroll left center; }
-div#main div.cs_blocs h4:hover { cursor : pointer; text-decoration : underline; }
-div#main div.cs_blocs { margin : 1ex 0em; }
-div#main div.cs_blocs div.blocs_destination { margin-left : 1em; padding-left : 1em; border-left : 2px solid #e20000; font-size : small; font-style : italic; }
+div.cs_blocs h4 { text-align : left; font-style : normal; background : transparent url(../img/triangle-bas.gif) no-repeat scroll left center; font-size : 100%; font-weight : normal; padding:0pt 0pt 0pt 20px; }
+div.cs_blocs h4.blocs_replie { background : transparent url(../img/triangle.gif) no-repeat scroll left center; }
+div.cs_blocs h4:hover { cursor : pointer; text-decoration : underline; }
+div.cs_blocs { margin : 1ex 0em; }
+div.cs_blocs div.blocs_destination { margin-left : 1em; padding-left : 1em; border-left : 2px solid #e20000; font-size : small; font-style : italic; }
 
 div.figure div.legende p { font-size : 90%; font-style : italic; margin-top : 0px; }
 div.figure div.legende { width : 80%; margin : 0px auto; text-align : justify; }

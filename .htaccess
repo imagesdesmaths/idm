@@ -136,7 +136,7 @@ ExpiresActive On
 ExpiresDefault A0
  
 <FilesMatch "\.(gif|png|jpg|css|js|ico)$">
-  ExpiresDefault "access plus 1 month"
+  ExpiresDefault "access plus 1 week"
   Header append Cache-Control "public"
 </FilesMatch>
 

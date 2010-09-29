@@ -62,24 +62,21 @@
       </ul>
 
       <div id="navleft">
-        #BLOC_TITRE
-        <h2>Les rubriques</h2>
+        #BLOC_TITRE Les rubriques
         #BLOC_DEBUT
         <ul><BOUCLE_secteurs(RUBRIQUES) {racine} {par num titre} {id_rubrique != 18} {id_rubrique != 26} {id_rubrique != 34}>
           <li><a href="#URL_RUBRIQUE" [(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{class="active"})]>#TITRE</a></li>
         </BOUCLE_secteurs></ul>
         #BLOC_FIN
 
-        #BLOC_TITRE
-        <h2>Les dossiers</h2>
+        #BLOC_TITRE Les dossiers
         #BLOC_DEBUT
         <ul><BOUCLE_dossiers(MOTS) {id_groupe=3}>
           <li><a href="#URL_MOT">#TITRE</a></li>
         </BOUCLE_dossiers></ul></B_dossiers>
         #BLOC_FIN
 
-        #BLOC_TITRE
-        <h2>Les liens</h2>
+        #BLOC_TITRE Les liens
         #BLOC_DEBUT
         <ul><BOUCLE_liens(ARTICLES) {id_rubrique = 25} {par num titre, titre}>
           <li><a href="#URL_ARTICLE">#TITRE</a></li>
@@ -90,10 +87,10 @@
       </div>
 
       <ul style="margin-top:4ex;">
-        <li>ISSN : 2105-1003</li>
-        <li><a href="#URL_PAGE{backend}"><img src="#CHEMIN{img/rss.jpg}" alt="RSS" /> Syndication (RSS)</a></li>
-        <li style="margin-top:.5ex;"><a href="http://www.spip.net/">Site sous SPIP 2.1 <img src="#CHEMIN{img/spip.jpg}" alt="SPIP" /></a></li>
         <li><a href="javascript:unfold_and_print();">Imprimer cette page</a></li>
+        <li>ISSN : 2105-1003</li>
+        <li><a href="#URL_PAGE{backend}">Syndication (RSS)</a></li>
+        <li><a href="http://www.spip.net/">SPIP #SPIP_VERSION</a></li>
       </ul>
 
       <div id="nojsfont" style="display:none;" class="jsmathwarning">
