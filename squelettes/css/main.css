@@ -151,6 +151,7 @@ ul.forum { padding : 0px; list-style-type : none; }
 #une div.resume div.introduction a { color : black; }
 #une div.unelogo { margin : 1ex 0em 0ex; text-align : center; }
 #une img { padding : 0px; margin : 1ex 0em 0ex; }
+#une img.spip_logos { float : none; }
 
 #editolink { text-align : center; font-size : 180%; font-weight : bold; margin : .5ex 0em 2.5ex; font-variant : small-caps; }
 #editolink a:hover { text-decoration : underline; }
@@ -221,7 +222,7 @@ div.resume h4.auteur { font-size : 90%; text-align : right; }
 div.resume h4.auteur a:hover { color : #e20000; }
 div.resume div.introduction a { font-weight : normal; color : #777777; }
 div.resume div.introduction { margin : .5ex 0px 0px 2em; font-size : small; font-style : italic; }
-div.resume img.spip_logos { padding : 0px 0px 0px 1em; background : white; }
+div.resume img.spip_logos { padding : 0px 0px 0px 1em; background : white; float : right; }
 div.resume a { color : black; text-decoration : none; }
 
 span.piste a.piste_20 { color : #009900; }
