@@ -116,6 +116,8 @@ function inc_envoyer_mail ($email, $sujet, $texte, $from = "", $headers = "") {
   // les 'cliquer ici' etc sont a eviter;  voir:
   // http://mta.org.ua/spamassassin-2.55/stuff/wiki.CustomRulesets/20050914/rules/french_rules.cf
 
+  include_spip ('inc/envoyer_mail');
+
   $texte = nettoyer_caracteres_mail($texte);
   $sujet = nettoyer_caracteres_mail($sujet);
 

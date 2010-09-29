@@ -1,9 +1,9 @@
 *.swp
 *experimental*
 .DS_Store
-.dbdump
-.log
-.svn
+/.dbdump
+/.httpd_log
+/.rprox_log
 /CHANGELOG.txt
 /COPYING.txt
 /IMG
@@ -19,6 +19,7 @@
 /media
 /pdf2004
 /pdf2006
+/plugins/MathJax
 /plugins/auto
 /plugins/cextras/
 /plugins/iextras/
@@ -31,4 +32,3 @@
 /squelettes-dist
 /svn.revision
 /tmp
-/plugins/MathJax
