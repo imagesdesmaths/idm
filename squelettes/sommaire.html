@@ -1,6 +1,11 @@
 #CACHE{3600}
 <INCLURE{fond=inc/head}>
 
+<BOUCLE_rdp(ARTICLES) {id_rubrique=26} {age < 8} {par date} {inverse} {0,1}>
+<h2 class="rdp"><a href="#URL_ARTICLE">La revue de presse du [(#DATE|affdate)]</a></h2>
+<div class="nettoyeur"></div>
+</BOUCLE_rdp>
+
 <div id="actu">
   <h2>Actualit&eacute;s</h2>
 
