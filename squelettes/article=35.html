@@ -1,0 +1,26 @@
+#CACHE{0}
+<BOUCLE_article(ARTICLES){id_article}>
+<INCLURE{fond=inc/head}{title=#TITRE}{id_article=#ID_ARTICLE}{id_rubrique=#ID_RUBRIQUE}>
+
+<BOUCLE_aarticle(ARTICLES) {id_article = #ENV{id_article}} {statut == .}>
+<div class="article">
+  [(#LOGO_ARTICLE|right||image_reduire{200,200})]
+  [(#LOGO_ARTICLE|fichier|non) <INCLURE{fond=inc/auteur}{id_article=#ID_ARTICLE}{taille=200}>]
+  [<h2 class="surtitre">(#SURTITRE)</h2>]
+  [<h1 class="titre">(#TITRE)</h1>]
+  [<h2 class="soustitre">(#SOUSTITRE)</h2>]
+
+  [<div class="texte">(#CHAPO|lettrine)</div>]
+
+  <BOUCLE_feinte(ARTICLES){0,1}>[(#ENV{ajout_reponse}|?{' ',''})]</BOUCLE_feinte>
+
+  [<div class="texte">(#TEXTE)</div>]
+</B_feinte>
+
+</div>
+</BOUCLE_aarticle>
+
+#INCLURE{fond=inc/foot}
+</BOUCLE_article>
+<INCLURE{fond=sommaire}>
+<//B_article>
