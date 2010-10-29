@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Reenie+Beanie);
+@import url(http://fonts.googleapis.com/css?family=Tangerine:regular,bold&subset=latin);
 
 html { padding : 0px; margin : 0px; font-family : Arial, sans-serif; text-align : justify; color : black; background : white; line-height : 1.2; }
 body { padding : 0px; margin : 0px; background : white; }
@@ -18,7 +18,7 @@ body { padding : 0px; margin : 0px; background : white; }
 
 /**************************************************/
 
-.script { font-family : "Reenie Beanie"; font-size : 180%; }
+.script { font-family : "Tangerine"; font-size : 200%; }
 
 .invisible { display : none; }
 .nettoyeur { clear : both; }

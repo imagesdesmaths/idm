@@ -16,7 +16,8 @@
   </BOUCLE_unique>
 
   [<div class="chapo">(#CHAPO)</div>]
-  [<div class="texte">(#TEXTE|lettrine)</div>]
+  [(#ID_RUBRIQUE|=={34}|non)<div class="texte">[(#TEXTE|lettrine)]</div>]
+  [(#ID_RUBRIQUE|=={34}|oui)<div class="texte">#TEXTE</div>]
   [<div class="ps"><span class="ps">P.S. :</span> (#PS)</div>]
   [<div class="notes"><h3>Notes</h3>(#NOTES)</div>]
 
