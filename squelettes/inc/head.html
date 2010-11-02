@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET"/>
 
   <link rel="stylesheet" type="text/css" media="all"   href="#CHEMIN{css/main.css}"/>
-  <link rel="stylesheet" type="text/css" media="all"   href="#CHEMIN{css/tag_20101029.css}"/>
+  <link rel="stylesheet" type="text/css" media="all"   href="#CHEMIN{css/tag_20101102.css}"/>
   <link rel="stylesheet" type="text/css" media="print" href="#CHEMIN{css/print.css}"/>
   <?php
     $agent = $_SERVER['HTTP_USER_AGENT'];
@@ -63,6 +63,10 @@
       </ul>
 
       <div id="navleft">
+	<BOUCLE_courrier(RUBRIQUES){id_rubrique=34}>
+	  <h4><a href="#URL_RUBRIQUE">#TITRE</a></h4>
+	</BOUCLE_courrier>
+
         #BLOC_TITRE Les rubriques
         #BLOC_DEBUT
         <ul><BOUCLE_secteurs(RUBRIQUES) {racine} {par num titre} {id_rubrique != 18} {id_rubrique != 26} {id_rubrique != 34}>
