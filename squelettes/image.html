@@ -1,18 +1,15 @@
 <BOUCLE_img(DOCUMENTS){id_document=#ENV{id_document}}{tous}>
-[(#SET{titre,[(#FICHIER|lire_iptc{headline}|utf8_encode|sinon{#TITRE})]})]
-<INCLURE{fond=inc/head}{title=#GET{titre}}>
+<INCLURE{fond=inc/head}{title=#TITRE}>
 
-[<h1>(#GET{titre})</h1>]
+[<h1>(#TITRE)</h1>]
 
 <div class="figure">
-  <a href="#URL_DOCUMENT"><img src="#URL_DOCUMENT"[ alt="(#GET{titre})" title="#GET{titre}"]></a>
+  <a href="#URL_DOCUMENT"><img src="#URL_DOCUMENT"[ alt="(#TITRE)" title="#TITRE"]></a>
 </div>
-
-[<p>(#FICHIER|lire_iptc{caption}|utf8_encode)</p>]
 
 [(#DESCRIPTIF)]
 
-[<p class="copyright">Copyright : (#FICHIER|lire_iptc{copyright}|utf8_encode)</p>]
+[<p class="copyright">Cr&eacute;dits : (#CREDITS)</p>]
 
 #INCLURE{fond=inc/foot}
 </BOUCLE_img>
