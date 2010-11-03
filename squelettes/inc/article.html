@@ -25,7 +25,7 @@
   #BLOC_DEBUT
   [<a href="IMG/#LOGO_ARTICLE**">Image &agrave; la une</a> &mdash; (#CREDITS_LOGO|PtoBR)<br/>]
   <BOUCLE_img(DOCUMENTS) {id_article} {credits == .}>
-    <a href="#URL_DOCUMENT">[(#TITRE|sinon{img_#ID_DOCUMENT})]</a> &mdash; #CREDITS<br/>
+    <a href="#URL_DOCUMENT">[(#TITRE|sinon{img_#ID_DOCUMENT})]</a> &mdash; [(#CREDITS|propre|PtoBR)]<br/>
   </BOUCLE_img>
   #BLOC_FIN
 
