@@ -1,0 +1,14 @@
+<BOUCLE_img(DOCUMENTS) {id_document = #ENV{id}} {tous}>
+  <hr/>
+  <div class='spip_document_#ID_DOCUMENT spip_documents spip_documents_center'>
+    <!--[if IE]>
+        <object src="#URL_DOCUMENT" classid="image/svg+xml" width="#LARGEUR" height="HAUTEUR" id="SVG_#ID_DOCUMENT"></object>
+    <![endif]-->
+    <!--[if !IE]>-->
+    <object data="#URL_DOCUMENT" type="image/svg+xml" width="#LARGEUR" height="#HAUTEUR" id="SVG_#ID_DOCUMENT"></object>
+    <!--<![endif]-->
+    [<p class="titre">(#TITRE)</p>]
+    [<div class="legende">(#DESCRIPTIF)</div>]
+  </div>
+  <hr/>
+</BOUCLE_img>

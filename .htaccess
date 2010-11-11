@@ -145,3 +145,5 @@ ExpiresDefault A0
 </FilesMatch>
 
 FileETag none
+
+AddType text/x-component htc
