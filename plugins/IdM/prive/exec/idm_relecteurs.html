@@ -1,43 +1,35 @@
 <BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
-<h1>Gestion des relecteurs</h1>
-
-#FORMULAIRE_RELECTEURS_GESTION
-
-<BOUCLE_cat(POUR) {tableau #ARRAY{1,nouveau,2,chercheur,3,enseignant,4,etudiant,5,autre,6,non_classe}}>
-<B_relecteurs>
-<h4>Cat&eacute;gorie : #VALEUR (#TOTAL_BOUCLE)</h4>
-<div class="formulaire_spip">
-  <table id="lesrelecteurs2" class="sortable">
-    <thead>
-      <tr>
-        <th>Signature / Pseudo</th>
-        <th>Nb</th>
-        <th>lus</th>
-      </tr>
-    </thead>
-    <tbody>
-      <BOUCLE_relecteurs(IDM_RELECTEURS spip_auteurs) {role = relecteur} {categorie = #VALEUR}>
-      <tr>
-        <td><span style="display:none">#NOM*</span>
-          #BLOC_TITRE
-          #NOM*
-          #BLOC_DEBUT
-          <div class="ajax">#FORMULAIRE_IDM_RELECTEUR{#ID_AUTEUR}</div>
-          #BLOC_FIN
-        </td>
-        <td>#COMBIEN</td>
-        <td>#LUS</td>
-      </tr>
-      </BOUCLE_relecteurs>
-    </tbody>
-  </table>
-</div>
-</B_relecteurs>
-</BOUCLE_cat>
-
-<script type="text/javascript" src="#CHEMIN{javascript/jquery.tablesorter.min.js}"></script>
-<script type="text/javascript">
-  $("#lesrelecteurs2").tablesorter( {sortList : [[0,0]]} );
-</script>
-
+  <h1>Gestion des relecteurs</h1>
+  
+  #FORMULAIRE_RELECTEURS_GESTION
+  
+  <div class="formulaire_spip">
+    <table id="lesrelecteurs2" class="sortable">
+      <thead>
+        <tr>
+          <th>Signature / Pseudo</th>
+          <th>Cat&eacute;gorie</th>
+          <th>E-mail</th>
+          <th>Nb</th>
+          <th>lus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <BOUCLE_relecteurs(IDM_RELECTEURS spip_auteurs) {role = relecteur}>
+          <tr>
+            <td><span style="display:none">#NOM*</span><a href="?exec=idm_relecteur&id_auteur=#ID_AUTEUR">#NOM*</a></td>
+            <td>#CATEGORIE</td>
+            <td><a href="mailto:#EMAIL*">#EMAIL</a></td>
+            <td>#COMBIEN</td>
+            <td>#LUS</td>
+          </tr>
+        </BOUCLE_relecteurs>
+      </tbody>
+    </table>
+  </div>
+  
+  <script type="text/javascript" src="#CHEMIN{javascript/jquery.tablesorter.min.js}"></script>
+  <script type="text/javascript">
+    $("#lesrelecteurs2").tablesorter( {sortList : [[0,0]]} );
+  </script>  
 </BOUCLE_securite>
