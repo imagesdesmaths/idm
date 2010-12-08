@@ -37,6 +37,11 @@ function formulaires_forum_relecture_traiter ($id_article, $id_parent) {
     'statut'     => 'relmod'
   ));
 
+  if (sql_countsel ('spip_forum', "id_auteur=$id_auteur AND id_article=$id_article") == 1) {
+    $comments = intval ( sql_getfetsel ('comments', 'spip_idm_relecteurs', "id_auteur=$id_auteur") );
+    sql_updateq ('spip_idm_relecteurs', array('comments'=>$comments + 1), "id_auteur=$id_auteur");
+  }
+  
   $subject = "Un nouveau message de relecture soumis sur IdM";
   $message = <<< END
 Un nouveau commentaire a été posté dans un forum de relecture du site
