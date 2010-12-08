@@ -10,6 +10,7 @@ function formulaires_relecteurs_vote_charger ($id_article) {
  
   if ($status == 'pas_vu') {
     sql_updateq ('spip_relecteurs_articles', array('status'=>'vu'), "id_auteur=$id_auteur AND id_article=$id_article");
+    sql_updateq ('spip_idm_relecteurs', array('lus'=>'lus + 1'), "id_auteur=$id_auteur");
     $status = "vu";
   }
 
