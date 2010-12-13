@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Tangerine:regular,bold&subset=latin);
+@import url(http://fonts.googleapis.com/css?family=Just+Me+Again+Down+Here:regular,bold);
 
 html { padding : 0px; margin : 0px; font-family : Arial, sans-serif; text-align : justify; color : black; background : white; line-height : 1.2; }
 body { padding : 0px; margin : 0px; background : white; }
@@ -18,7 +18,8 @@ body { padding : 0px; margin : 0px; background : white; }
 
 /**************************************************/
 
-.script { font-family : "Tangerine"; font-size : 200%; }
+.script { font-family : 'Just Me Again Down Here'; font-size : 200%; letter-spacing : -0.01em; line-height : 1.0em; }
+.script h1 { line-height : .8em; }
 
 .invisible { display : none; }
 .nettoyeur { clear : both; }
