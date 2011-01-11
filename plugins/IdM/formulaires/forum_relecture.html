@@ -9,7 +9,7 @@
     [(#ENV**{erreurs}|table_valeur{preview}|=={preview}|oui)
       <fieldset class="previsu">
         <legend>Pr&eacute;visualisation &mdash; #ENV{titre}</legend>
-        #ENV{texte}
+        [(#ENV{texte}|propre)]
       </fieldset>
     ]
 
