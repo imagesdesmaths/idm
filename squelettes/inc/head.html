@@ -70,7 +70,7 @@
 
         #BLOC_TITRE Les rubriques
         #BLOC_DEBUT
-        <ul><BOUCLE_secteurs(RUBRIQUES) {racine} {par num titre} {id_rubrique != 18} {id_rubrique != 26} {id_rubrique != 34}>
+        <ul><BOUCLE_secteurs(RUBRIQUES) {racine} {par num titre} {id_rubrique != 18} {id_rubrique != 26} {id_rubrique != 33} {id_rubrique != 34}>
           <li><a href="#URL_RUBRIQUE" [(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{class="active"})]>#TITRE</a></li>
         </BOUCLE_secteurs></ul>
         #BLOC_FIN
