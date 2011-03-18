@@ -1,0 +1,31 @@
+#CACHE{0}
+
+<div class="formulaire_spip">
+  <form action="#ENV{action}" method="post">
+    #ACTION_FORMULAIRE{#ENV{action}}
+
+    [(#SAISIE{recherche, recherche, label=Rechercher : })]
+
+    [(#SAISIE{checkbox, sujet, label=Th&egrave;me, datas=#ENV{sujets}})]
+
+    [(#SAISIE{checkbox, piste, label=Difficult&eacute; :, datas=#ENV{pistes}})]
+
+    [(#SAISIE{selection, auteur, label=Auteur : , datas=#ENV{auteurs}})]
+
+    [(#SAISIE{selection, depuis, label=Publi&eacute; il y a moins de : ,
+    datas=#ARRAY{30, un mois, 90, trois mois, 365, un an}})]
+
+    <p class="boutons">
+      <input type="submit" class="submit" name="submit" value="Chercher" />
+    </p>
+  </form>
+
+  [(#SET{suj, [(#ENV{sujet}|sinon{#ENV{sujets}|array_flip})]})]
+
+  <ul>
+    <BOUCLE_art(ARTICLES) {par date} {inverse} {0,20} {recherche?}
+    {id_mot IN #GET{suj}}>
+      <li><a href="#URL_ARTICLE">#TITRE</a></li>
+    </BOUCLE_art>
+  </ul>
+</div>
