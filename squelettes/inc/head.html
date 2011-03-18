@@ -49,64 +49,53 @@
     <div id="left">
       <INCLURE{fond=inc/idj}>
 
+      <h4><a href="#URL_SITE_SPIP/">Page d'accueil</a></h4>
+
+      <hr/>
+
+      <h4><a href="#URL_ARTICLE{63}">Présentation du site</a></h4>
+
       <ul>
-        <li><a href="#URL_SITE_SPIP/">Page d'accueil</a></li>
-        <li><a href="#URL_ARTICLE{63}">Présentation</a> / <a href="#URL_PAGE{plan}">Plan du site</a></li>
-        <li><a href="#URL_RUBRIQUE{19}">Documentation</a> / <a href="#URL_PAGE{lexique}">Lexique</a></li>
-        [<li>(#MODELE{special}{mot=ours})</li>]
-        <li><a href="mailto:#EMAIL_WEBMASTER">Nous contacter</a></li>
+        <li><a href="#URL_ARTICLE{17}">Fonctionnement</a></li>
+        <li><a href="#URL_RUBRIQUE{19}">Documentation</a></li>
       </ul>
+
+      <hr/>
 
       [(#FORMULAIRE_RECHERCHE)]
 
-      <ul>
-        <li><a href="#URL_PAGE{recherche,avancee=1}">Recherche avanc&eacute;e</a></li>
-      </ul>
+      <h4><a href="#URL_PAGE{recherche,avancee=1}">Recherche avanc&eacute;e</a></h4>
+      <h4><a href="#URL_PAGE{plan}">Navigation</a></h4>
+
+      <hr/>
 
       <div id="navleft">
-	<BOUCLE_courrier(RUBRIQUES){id_rubrique=34}>
-	  <h4><a href="#URL_RUBRIQUE">#TITRE</a></h4>
-	</BOUCLE_courrier>
-
-        #BLOC_TITRE Les rubriques
-        #BLOC_DEBUT
-        <ul><BOUCLE_secteurs(RUBRIQUES) {racine} {par num titre} {id_rubrique != 18} {id_rubrique != 26} {id_rubrique != 33} {id_rubrique != 34}>
-          <li><a href="#URL_RUBRIQUE" [(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{class="active"})]>#TITRE</a></li>
-        </BOUCLE_secteurs></ul>
-        #BLOC_FIN
-
-        #BLOC_TITRE Les dossiers
-        #BLOC_DEBUT
-        <ul><BOUCLE_dossiers(MOTS) {id_groupe=3}>
-          <li><a href="#URL_MOT">#TITRE</a></li>
-        </BOUCLE_dossiers></ul></B_dossiers>
-        #BLOC_FIN
-
-        #BLOC_TITRE Les liens
+        #BLOC_TITRE Liens
         #BLOC_DEBUT
         <ul><BOUCLE_liens(ARTICLES) {id_rubrique = 25} {par num titre, titre}>
           <li><a href="#URL_ARTICLE">#TITRE</a></li>
         </BOUCLE_liens></ul>
         #BLOC_FIN
-
-        <INCLURE{fond=inc/ident}>
       </div>
 
+      <hr/>
+
+      <INCLURE{fond=inc/ident}>
+
       <ul style="margin-top:4ex;">
-        <li><a href="javascript:unfold_and_print();">Imprimer cette page</a></li>
-        <li>ISSN : 2105-1003</li>
+        [<li>(#MODELE{special}{mot=ours})</li>]
         <li><a href="#URL_PAGE{backend}">Syndication (RSS)</a></li>
-        <li><a href="http://www.spip.net/">SPIP #SPIP_VERSION</a></li>
+        <li><a href="mailto:#EMAIL_WEBMASTER">Nous contacter</a></li>
       </ul>
 
       <div id="nojsfont" style="display:none;" class="jsmathwarning">
         <h2>Polices de maths</h2>
 
-        <p>Ce site utilise un système appelé <a 
-          href="http://www.math.union.edu/~dpvc/jsMath/">jsMath</a> pour 
-        la typographie des formules mathématiques. Leur affichage sera 
-        bien meilleur (et plus rapide) si vous installez les polices 
-        True Type associées ! <a href="#URL_ARTICLE{9}">Tout est 
+        <p>Ce site utilise un système appelé <a
+          href="http://www.math.union.edu/~dpvc/jsMath/">jsMath</a> pour
+        la typographie des formules mathématiques. Leur affichage sera
+        bien meilleur (et plus rapide) si vous installez les polices
+        True Type associées ! <a href="#URL_ARTICLE{9}">Tout est
           expliqué ici.</a> Lien direct :</p>
 
         <h3><a href="#CHEMIN{files/TeX-fonts-15.zip}">Mac</a>
