@@ -9,21 +9,13 @@
   <link rel="stylesheet" type="text/css" media="all"   href="#CHEMIN{css/main.css}"/>
   <link rel="stylesheet" type="text/css" media="all"   href="#CHEMIN{css/tag_20110321.css}"/>
   <link rel="stylesheet" type="text/css" media="print" href="#CHEMIN{css/print.css}"/>
-  <?php
-    $agent = $_SERVER['HTTP_USER_AGENT'];
-    if (preg_match('/MSIE ([0-9.]*)/', $agent, $matches)) {
-      $version = $matches[1];
-      print "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\"    href=\"squelettes/css/iehacks-$version.css\"/>\n";
-    } else if (preg_match('/AppleWebKit.[1-4]/', $agent, $matches)) {
-      print "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\"    href=\"squelettes/css/oldsafarihack.css\"/>\n";
-    }
-    print "<!-- $agent -->\n";
-  ?>
 
-  <link rel="home" title="Page principale" href="#URL_SITE_SPIP/"/>
+  <link rel="alternate"  type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}"/>
+
+  <link rel="home"  title="Page principale" href="#URL_SITE_SPIP/"/>
   <link rel="start" title="Page principale" href="#URL_SITE_SPIP/"/>
   <link rel="index" title="Page principale" href="#URL_SITE_SPIP/"/>
-  <link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}"/>
+
   [<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
 
   <script src="#CHEMIN{svgweb/svg.js}" data-path="#CHEMIN{svgweb}"></script>
