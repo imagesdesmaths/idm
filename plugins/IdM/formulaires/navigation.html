@@ -1,14 +1,15 @@
 #CACHE{0}
 
-<div class="formulaire_spip">
+<div class="formulaire_spip idm_recherche">
+  <h2>Crit&egrave;res de tri :</h2>
   <form action="#ENV{action}" method="post">
     #ACTION_FORMULAIRE{#ENV{action}}
 
-    [(#SAISIE{recherche, recherche, label=Rechercher : })]
+    [(#SAISIE{recherche, recherche, label=Contenant les mots : })]
 
     [(#SAISIE{checkbox, sujet, label=Th&egrave;me, datas=#ENV{sujets}})]
 
-    [(#SAISIE{checkbox, piste, label=Difficult&eacute; :, datas=#ENV{pistes}})]
+    <!-- SAISIE{checkbox, piste, label=Difficult&eacute; :, datas=#ENV{pistes}})] -->
 
     [(#SAISIE{selection, auteur, label=Auteur : , datas=#ENV{auteurs}})]
 
@@ -16,16 +17,33 @@
     datas=#ARRAY{30, un mois, 90, trois mois, 365, un an}})]
 
     <p class="boutons">
-      <input type="submit" class="submit" name="submit" value="Chercher" />
+      <input type="submit" class="submit" name="submit" value="Filtrer" />
     </p>
   </form>
+</div>
 
-  [(#SET{suj, [(#ENV{sujet}|sinon{#ENV{sujets}|array_flip})]})]
-
-  <ul>
-    <BOUCLE_art(ARTICLES) {par date} {inverse} {0,20} {recherche?}
-    {id_mot IN #GET{suj}}>
+<div class="idm_results">
+  <BOUCLE_suj(CONDITION) {SI #ENV{sujet}}>
+    <B_art_suj>
+      <h3>#GRAND_TOTAL article(s) correspondant aux crit&egrave;res :</h3>
+      <ul>
+    <BOUCLE_art_suj(ARTICLES) {par date} {inverse} {recherche?} {id_mot IN #ENV{sujet}}>
       <li><a href="#URL_ARTICLE">#TITRE</a></li>
-    </BOUCLE_art>
-  </ul>
+    </BOUCLE_art_suj>
+      </ul>
+    </B_art_suj>
+      <h3>Auncun article correspondant aux crit&egrave;res !</h3>
+    <//B_art_suj>
+  </BOUCLE_suj>
+    <B_art_nosuj>
+      <h3>#GRAND_TOTAL article(s) correspondant aux crit&egrave;res :</h3>
+      <ul>
+    <BOUCLE_art_nosuj(ARTICLES) {par date} {inverse} {recherche?}>
+      <li><a href="#URL_ARTICLE">#TITRE</a></li>
+    </BOUCLE_art_nosuj>
+      </ul>
+    </B_art_nosuj>
+      <h3>Auncun article correspondant aux crit&egrave;res !</h3>
+    <//B_art_nosuj>
+  <//B_suj>
 </div>
