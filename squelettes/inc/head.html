@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET"/>
 
   <link rel="stylesheet" type="text/css" media="all"   href="#CHEMIN{css/main.css}"/>
-  <link rel="stylesheet" type="text/css" media="all"   href="#CHEMIN{css/tag_20101213.css}"/>
+  <link rel="stylesheet" type="text/css" media="all"   href="#CHEMIN{css/tag_20110321.css}"/>
   <link rel="stylesheet" type="text/css" media="print" href="#CHEMIN{css/print.css}"/>
   <?php
     $agent = $_SERVER['HTTP_USER_AGENT'];
@@ -40,7 +40,7 @@
   <div id="outer">
     <div id="logo"><a href="http://www.cnrs.fr/"><img src="#CHEMIN{img/CNRS.jpg}" alt="CNRS" /></a></div>
     <div id="head">
-      <h1><a href="#URL_SITE_SPIP/">
+      <h1><a href="/">
           <img src="#CHEMIN{img/Logo_IDM_blanc_e00000.gif}" alt="#NOM_SITE_SPIP" />
       </a></h1>
     </div>
@@ -49,7 +49,7 @@
     <div id="left">
       <INCLURE{fond=inc/idj}>
 
-      <h4><a href="#URL_SITE_SPIP/">Page d'accueil</a></h4>
+      <h4><a href="/">Page d'accueil</a></h4>
 
       <hr/>
 
@@ -64,8 +64,12 @@
 
       [(#FORMULAIRE_RECHERCHE)]
 
-      <h4><a href="#URL_PAGE{recherche,avancee=1}">Recherche avanc&eacute;e</a></h4>
-      <h4><a href="#URL_PAGE{plan}">Navigation</a></h4>
+      <h4><a href="#URL_PAGE{plan}">Plan du site</a></h4>
+
+      <ul>
+        <li><a href="#URL_PAGE{recherche,avancee=1}">Recherche avanc&eacute;e</a></li>
+        <!-- <li><a href="#URL_PAGE{navigation}">Navigation (en travaux)</a></li> -->
+      </ul>
 
       <hr/>
 
