@@ -24,7 +24,7 @@ function formulaires_navigation_charger () {
   return array("recherche" => "",
                "sujet"     => "", "sujets"    => $sujets,
                "piste"     => "", "pistes"    => $pistes,
-               "auteur"    => "", "auteurs"   => $auteurs,
+               "id_auteur" => "", "auteurs"   => $auteurs,
                "depuis"    => "");
 }
 

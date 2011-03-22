@@ -3,16 +3,16 @@
   <form action="#ENV{action}" method="post">
     #ACTION_FORMULAIRE{#ENV{action}}
 
-    [(#SAISIE{recherche, recherche, label=Contenant les mots : })]
+    [(#SAISIE{recherche, recherche, label=Contenant le(s) mots :<br/>})]
 
-    [(#SAISIE{checkbox, sujet, label=Th&egrave;me, datas=#ENV{sujets}})]
+    [(#SAISIE{checkbox, sujet, label=Dans le(s) th&egrave;me(s) :, datas=#ENV{sujets}})]
 
-    <!-- SAISIE{checkbox, piste, label=Difficult&eacute; :, datas=#ENV{pistes}})] -->
-
-    [(#SAISIE{selection, auteur, label=Auteur : , datas=#ENV{auteurs}})]
+    [(#SAISIE{checkbox, piste, label=Difficult&eacute; :, datas=#ENV{pistes}})]
 
     [(#SAISIE{selection, depuis, label=Publi&eacute; il y a moins de : ,
     datas=#ARRAY{30, un mois, 90, trois mois, 365, un an}})]
+
+    [(#SAISIE{selection, id_auteur, label=Auteur : , datas=#ENV{auteurs}})]
 
     <p class="boutons">
       <input type="submit" class="submit" name="submit" value="Filtrer" />
@@ -20,28 +20,37 @@
   </form>
 </div>
 
+<BOUCLE_depuis(CONDITION) {SI #ENV{depuis}}>
+  <BOUCLE_depuis_good(ARTICLES) {age < #ENV{depuis}} {doublons depuis}>
+  </BOUCLE_depuis_good>
+  <BOUCLE_depuis_bad(ARTICLES) {doublons depuis} {doublons}>
+  </BOUCLE_depuis_bad>
+</BOUCLE_depuis>
+
+<BOUCLE_sujet(CONDITION) {SI #ENV{sujet}}>
+  <BOUCLE_sujet_good(ARTICLES) {id_mot IN #ENV{sujet}} {doublons sujet}>
+  </BOUCLE_sujet_good>
+  <BOUCLE_sujet_bad(ARTICLES) {doublons sujet} {doublons}>
+  </BOUCLE_sujet_bad>
+</BOUCLE_sujet>
+
+<BOUCLE_piste(CONDITION) {SI #ENV{piste}}>
+  <BOUCLE_piste_good(ARTICLES) {id_mot IN #ENV{piste}} {doublons piste}>
+  </BOUCLE_piste_good>
+  <BOUCLE_piste_bad(ARTICLES) {doublons piste} {doublons}>
+  </BOUCLE_piste_bad>
+</BOUCLE_piste>
+
 <div class="idm_results">
-  <BOUCLE_suj(CONDITION) {SI #ENV{sujet}}>
-    <B_art_suj>
-      <h3>#GRAND_TOTAL article(s) correspondant aux crit&egrave;res :</h3>
-      <ul>
-    <BOUCLE_art_suj(ARTICLES) {par date} {inverse} {recherche?} {id_mot IN #ENV{sujet}}>
+  <B_art_suj>
+    <h3>#GRAND_TOTAL article[(#GRAND_TOTAL|>{1}|?{s,})] correspondant
+    aux crit&egrave;res (tri&eacute;s depuis le plus r&eacute;cent) :</h3>
+    <ul>
+  <BOUCLE_art_suj(ARTICLES) {par date} {inverse} {recherche?} {id_auteur?} {doublons}>
       <li><a href="#URL_ARTICLE">#TITRE</a></li>
-    </BOUCLE_art_suj>
-      </ul>
-    </B_art_suj>
-      <h3>Auncun article correspondant aux crit&egrave;res !</h3>
-    <//B_art_suj>
-  </BOUCLE_suj>
-    <B_art_nosuj>
-      <h3>#GRAND_TOTAL article(s) correspondant aux crit&egrave;res :</h3>
-      <ul>
-    <BOUCLE_art_nosuj(ARTICLES) {par date} {inverse} {recherche?}>
-      <li><a href="#URL_ARTICLE">#TITRE</a></li>
-    </BOUCLE_art_nosuj>
-      </ul>
-    </B_art_nosuj>
-      <h3>Auncun article correspondant aux crit&egrave;res !</h3>
-    <//B_art_nosuj>
-  <//B_suj>
+  </BOUCLE_art_suj>
+    </ul>
+  </B_art_suj>
+    <h3>Aucun article correspondant aux crit&egrave;res !</h3>
+  <//B_art_suj>
 </div>
