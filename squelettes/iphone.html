@@ -1,0 +1,41 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Images des Maths</title>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+    <link rel="apple-touch-icon" href="../iui/iui-logo-touch-icon.png" />
+    <meta name="apple-touch-fullscreen" content="YES" />
+    <style type="text/css" media="screen">@import "#CHEMIN{iui/iui.css}";</style>
+    <script type="application/x-javascript" src="#CHEMIN{iui/iui.js}"></script>
+  </head>
+
+  <body>
+
+    <div class="toolbar">
+      <h1 id="pageTitle"></h1>
+      <a id="backButton" class="button" href="#"></a>
+      <!-- <a class="button" href="#searchForm">Search</a> -->
+    </div>
+
+    <ul id="home" title="IdM" selected="true">
+      <li class="group">À la une</li>
+      <BOUCLE_une(ARTICLES) {id_rubrique !IN 2,3,6,18,19,23,25,28,29,34} {par date} {inverse} {0,1} {doublons}>
+        <li><a target="_blank" href="#URL_PAGE{iphone_article,id_article=#ID_ARTICLE}">#TITRE</a></li>
+      </BOUCLE_une>
+
+      <li class="group">Les billets des habitu&eacute;s</li>
+      <BOUCLE_billets(ARTICLES) {id_rubrique = 6} {par date} {age>=0} {inverse} {0,3} {doublons}>
+        <li><a target="_blank" href="#URL_PAGE{iphone_article,id_article=#ID_ARTICLE}">#TITRE</a></li>
+      </BOUCLE_billets>
+
+      <li class="group">Quelques articles r&eacute;cents</li>
+      <BOUCLE_old(ARTICLES) {id_rubrique !IN 2,3,6,18,19,23,25,28,29,34} {par date} {inverse} {0,3} {doublons}>
+        <li><a target="_blank" href="#URL_PAGE{iphone_article,id_article=#ID_ARTICLE}">#TITRE</a></li>
+      </BOUCLE_old>
+
+      <li class="group">Le reste du site</li>
+    </ul>
+  </body>
+</html>
