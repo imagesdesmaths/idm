@@ -22,17 +22,17 @@
     <ul id="home" title="IdM" selected="true">
       <li class="group">À la une</li>
       <BOUCLE_une(ARTICLES) {id_rubrique !IN 2,3,6,18,19,23,25,28,29,34} {par date} {inverse} {0,1} {doublons}>
-        <li><a target="_blank" href="#URL_PAGE{iphone_article,id_article=#ID_ARTICLE}">#TITRE</a></li>
+        <li><a target="_blank" href="#URL_ARTICLE">#TITRE</a></li>
       </BOUCLE_une>
 
       <li class="group">Les billets des habitu&eacute;s</li>
       <BOUCLE_billets(ARTICLES) {id_rubrique = 6} {par date} {age>=0} {inverse} {0,3} {doublons}>
-        <li><a target="_blank" href="#URL_PAGE{iphone_article,id_article=#ID_ARTICLE}">#TITRE</a></li>
+        <li><a target="_blank" href="#URL_ARTICLE">#TITRE</a></li>
       </BOUCLE_billets>
 
       <li class="group">Quelques articles r&eacute;cents</li>
       <BOUCLE_old(ARTICLES) {id_rubrique !IN 2,3,6,18,19,23,25,28,29,34} {par date} {inverse} {0,3} {doublons}>
-        <li><a target="_blank" href="#URL_PAGE{iphone_article,id_article=#ID_ARTICLE}">#TITRE</a></li>
+        <li><a target="_blank" href="#URL_ARTICLE">#TITRE</a></li>
       </BOUCLE_old>
 
       <li class="group">Le reste du site</li>
