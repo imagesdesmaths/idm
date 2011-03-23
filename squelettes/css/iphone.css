@@ -1,0 +1,20 @@
+
+html { font-size : 150%; }
+
+#logo    { display : none; }
+#head    { background : white; }
+#head h1 { margin : 0; }
+#head img { width : 100%; }
+#lisiere { display : none; }
+#left    { display : none; }
+#actu    { display : none; }
+#main    { padding : 0; margin-top : 60px; }
+#main_in { margin : 0; }
+#top     { width : 100%; margin : 0; }
+#une     { margin : 1ex 1em; }
+
+h3.discuter          { display : none; }
+div.notation         { display : none; }
+div.relies           { display : none; }
+div.spip-admin-float { display : none; }
+div.article img.spip_logos { display : none; }
