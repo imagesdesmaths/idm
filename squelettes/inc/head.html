@@ -5,16 +5,12 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET"/>
 
+  <title>[(#ENV*{title}|textebrut) - ]#NOM_SITE_SPIP</title>
+
   <link rel="stylesheet" type="text/css" media="all"   href="#CHEMIN{css/main.css}"/>
   <link rel="stylesheet" type="text/css" media="all"   href="#CHEMIN{css/tag_20110322.css}"/>
   <link rel="stylesheet" type="text/css" media="print" href="#CHEMIN{css/print.css}"/>
-
-  <?php if (ereg("iPod|iPhone|Aspen", $_SERVER["HTTP_USER_AGENT"])) { ?>
-  <link rel="stylesheet" type="text/css" media="screen" href="#CHEMIN{css/iphone.css}"/>
-  <title>[(#ENV*{title}|textebrut)]</title>
-  <?php } else { ?>
-  <title>#NOM_SITE_SPIP[ - (#ENV*{title}|textebrut)]</title>
-  <?php } ?>
+  <link rel="stylesheet" type="text/css" media="all and (max-device-width: 500px)" href="#CHEMIN{css/iphone.css}"/>
 
   <link rel="alternate"  type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}"/>
 
