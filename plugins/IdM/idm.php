@@ -134,4 +134,10 @@ function idm_notify ($id, $message, $subject = "Un message du site \"Images des 
   $envoyer_mail ($email, $subject, $message);
 }
 
+function idm_jquery_plugins ($scripts) {
+  $scripts[] = 'javascript/jquery-ui.min.js';
+  $scripts[] = 'javascript/jquery.checkboxtree.js';
+  return $scripts;
+}
+
 ?>

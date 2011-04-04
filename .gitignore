@@ -1,5 +1,4 @@
 *.swp
-*experimental*
 .DS_Store
 /.dbdump
 /.httpd_log
