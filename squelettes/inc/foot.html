@@ -6,10 +6,9 @@
 
     <script type="text/javascript">
       $(document).ready(function() {
-          $(".sortable").tablesorter( {sortList : [[0,0]]} );
           if (!jsMath_Font_Detector()) $("#nojsfont").show();
       } );
-      
+
       function unfold_and_print () {
         $(".blocs_invisible").show();
         window.print();

@@ -137,6 +137,7 @@ function idm_notify ($id, $message, $subject = "Un message du site \"Images des 
 function idm_jquery_plugins ($scripts) {
   $scripts[] = 'javascript/jquery-ui.min.js';
   $scripts[] = 'javascript/jquery.checkboxtree.js';
+  $scripts[] = 'javascript/jquery.tablesorter.min.js';
   return $scripts;
 }
 
