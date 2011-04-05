@@ -7,11 +7,6 @@
     ul.checkboxTree li span { cursor: default; position: absolute; top: 2px; left: -16px; }
   </style>
 
-  <!--
-   !-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-   !-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-    -->
-
   <form action="toto.html" method="get">
     <ul id="myTree">
       <li><input type="checkbox" name="root">Analysis</input>
@@ -31,8 +26,6 @@
         collapsed:      true,
         collapseImage: '#CHEMIN{img/minus.png}',
         expandImage:   '#CHEMIN{img/plus.png}',
-        onCheck:      { ancestors: 'check', descendants: '', node: 'expand' },
-        onUncheck:    { ancestors: '',      descendants: 'uncheck', node: '' },
       });
     });
   </script>
