@@ -1,28 +1,25 @@
 #CACHE{0}
 <INCLURE{fond=inc/head}{title=EXPERIMENTAL}>
 
+  <form id="sujets" method="get">
+    <B_sujets><ul><BOUCLE_sujets(IDM_SUJETS) {id_parent}>
+          <li><input type="checkbox" name="sujet_#ID_SUJET">#INTITULE</input>
+            <BOUCLE_sujets_fils(boucle_sujets) {id_parent}></BOUCLE_sujets_fils>
+          </li>
+    </BOUCLE_sujets></ul></B_sujets>
+
+    <input type="submit" value="Submit">
+  </form>
+
   <style type="text/css">
     ul.checkboxTree { padding-left: 20px; }
     ul.checkboxTree li { list-style-type: none; position: relative; }
     ul.checkboxTree li span { cursor: default; position: absolute; top: 2px; left: -16px; }
   </style>
 
-  <form action="toto.html" method="get">
-    <ul id="myTree">
-      <li><input type="checkbox" name="root">Analysis</input>
-        <ul>
-          <li><input type="checkbox" name="child_1">Real analysis</input></li>
-          <li><input type="checkbox" name="child_2">Complex analysis</input></li>
-        </ul>
-      </li>
-    </ul>
-
-    <input type="submit" value="Submit">
-  </form>
-
   <script type="text/javascript">
     $(document).ready(function() {
-      $('#myTree').checkboxTree({
+      $('#sujets > ul').checkboxTree({
         collapsed:      true,
         collapseImage: '#CHEMIN{img/minus.png}',
         expandImage:   '#CHEMIN{img/plus.png}',
