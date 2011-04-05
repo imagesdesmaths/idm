@@ -1,9 +1,8 @@
 #CACHE{0}
 <INCLURE{fond=inc/head}{title=EXPERIMENTAL}>
-
   <form id="sujets" method="get">
     <B_sujets><ul><BOUCLE_sujets(IDM_SUJETS) {id_parent}>
-          <li><input type="checkbox" name="sujet_#ID_SUJET">#INTITULE</input>
+          <li><input type="checkbox" name="sujet_#ID_SUJET">[(#INTITULE|utf8_encode)]</input>
             <BOUCLE_sujets_fils(boucle_sujets) {id_parent}></BOUCLE_sujets_fils>
           </li>
     </BOUCLE_sujets></ul></B_sujets>
@@ -26,5 +25,4 @@
       });
     });
   </script>
-
 <INCLURE{fond=inc/foot}{stat=no}>
