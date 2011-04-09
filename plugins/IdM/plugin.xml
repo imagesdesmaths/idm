@@ -5,22 +5,16 @@
   <version>0.2</version>
   <etat>dev</etat>
   <prefix>idm</prefix>
-  <necessite id="SPIP" version="[2.0.0;]" />
+  <necessite id="SPIP" version="[2.1.0;]" />
 
   <description>Fonctionnalit&eacute;s utiles au fonctionnement du site [Images des Maths->http://images.math.cnrs.fr]</description>
 
   <fonctions>idm.php</fonctions>
   <install>idm.php</install>
 
-  <pipeline>
-    <nom>boite_infos</nom>
-    <inclure>idm.php</inclure>
-  </pipeline>
-
-  <pipeline>
-    <nom>autoriser</nom>
-    <inclure>idm.php</inclure>
-  </pipeline>
+  <pipeline><nom>boite_infos</nom></pipeline>
+  <pipeline><nom>autoriser</nom></pipeline>
+  <pipeline><nom>jquery_plugins</nom></pipeline>
 
   <pipeline>
     <nom>pre_edition</nom>

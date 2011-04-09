@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Images des Maths</title>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="#CHEMIN{iui/iui.css}" />
+    <script type="application/x-javascript" src="#CHEMIN{iui/iui.js}"></script>
+
+    <style type="text/css">
+      .toolbar > h1 { left : 0%; width : 100%; margin : 1px 0 0; }
+    </style>
+  </head>
+
+  <body>
+    <div class="toolbar">
+      <h1 id="pageTitle">IdM</h1>
+    </div>
+
+    <ul id="home" title="IdM" selected="true">
+      <li class="group">À la une</li>
+      <BOUCLE_une(ARTICLES) {id_rubrique !IN 2,3,6,18,19,23,25,28,29,34} {par date} {inverse} {0,1} {doublons}>
+        <li><a target="_blank" href="#URL_ARTICLE">#TITRE</a></li>
+      </BOUCLE_une>
+
+      <li class="group">Les billets des habitu&eacute;s</li>
+      <BOUCLE_billets(ARTICLES) {id_rubrique = 6} {par date} {age>=0} {inverse} {0,3} {doublons}>
+        <li><a target="_blank" href="#URL_ARTICLE">#TITRE</a></li>
+      </BOUCLE_billets>
+
+      <li class="group">Quelques articles r&eacute;cents</li>
+      <BOUCLE_old(ARTICLES) {id_rubrique !IN 2,3,6,18,19,23,25,28,29,34} {par date} {inverse} {0,3} {doublons}>
+        <li><a target="_blank" href="#URL_ARTICLE">#TITRE</a></li>
+      </BOUCLE_old>
+
+      <li class="group">Le reste du site</li>
+      <li><a href="#par_rubrique">Par rubrique</a></li>
+      <li><a href="#par_theme">Par th&egrave;me</a></li>
+      <li><a href="#par_auteur">Par auteur</a></li>
+    </ul>
+
+    <ul id="par_rubrique" title="Par rubrique">
+      <BOUCLE_rub(RUBRIQUES) {id_rubrique IN 1,4,6,20,21,24,26,27,32} {par titre}>
+        <li><a href="#rub_#ID_RUBRIQUE">#TITRE</a></li>
+      </BOUCLE_rub>
+    </ul>
+
+    [(#SET{initiale,' '})]
+    <ul id="par_auteur" title="Par auteur">
+      <BOUCLE_aut(AUTEURS) {par nom}>
+        [(#SET{newinitiale,[(#NOM*|initiale)]})]
+        [(#GET{initiale}|!={#GET{newinitiale}}|oui)
+        <li class="group">&mdash;&nbsp;#GET{newinitiale}&nbsp;&mdash;</li>]
+        [(#SET{initiale,#GET{newinitiale}})]
+        <li><a href="#aut_#ID_AUTEUR">#NOM</a></li>
+      </BOUCLE_aut>
+    </ul>
+
+    <ul id="par_theme" title="Par th&egrave;me">
+      <BOUCLE_mot(MOTS) {id_groupe = 1} {par titre}>
+        <li><a href="#mot_#ID_MOT">#TITRE</a></li>
+      </BOUCLE_mot>
+    </ul>
+
+    <BOUCLE_rubs(RUBRIQUES)>
+      <ul id="rub_#ID_RUBRIQUE" title="#TITRE">
+        <BOUCLE_art(ARTICLES) {id_rubrique} {par date} {inverse}>
+          <li><a target="_blank" href="#URL_ARTICLE">#TITRE</a></li>
+        </BOUCLE_art>
+      </ul>
+    </BOUCLE_rubs>
+
+    <BOUCLE_auts(AUTEURS)>
+      <ul id="aut_#ID_AUTEUR" title="#NOM">
+        <BOUCLE_artaut(ARTICLES) {id_auteur} {par titre}>
+          <li><a target="_blank" href="#URL_ARTICLE">#TITRE</a></li>
+        </BOUCLE_artaut>
+      </ul>
+    </BOUCLE_auts>
+
+    <BOUCLE_mots(MOTS) {id_groupe = 1}>
+      <ul id="mot_#ID_MOT" title="#TITRE">
+        <BOUCLE_artmot(ARTICLES) {id_mot} {par titre}>
+          <li><a target="_blank" href="#URL_ARTICLE">#TITRE</a></li>
+        </BOUCLE_artmot>
+      </ul>
+    </BOUCLE_mots>
+  </body>
+</html>

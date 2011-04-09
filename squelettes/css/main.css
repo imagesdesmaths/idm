@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Tangerine:regular,bold&subset=latin);
+@import url(http://fonts.googleapis.com/css?family=Just+Me+Again+Down+Here:regular,bold);
 
 html { padding : 0px; margin : 0px; font-family : Arial, sans-serif; text-align : justify; color : black; background : white; line-height : 1.2; }
 body { padding : 0px; margin : 0px; background : white; }
@@ -11,14 +11,15 @@ body { padding : 0px; margin : 0px; background : white; }
   #main  { position : absolute; top : 75px; width : 100%; z-index : 0; }
   #main_in { margin-left : 12em; padding : 1ex 1em 2ex; }
     #front { position : relative; }
-      #billets { position : absolute; width : 50%; padding-bottom : 1ex; }
-        #billets .resume { margin-right : 1em; }
-      #recents { position : absolute; width : 50%; margin-left : 50%; padding-bottom : 1ex; }
-        #recents .resume { margin-left : 1em; }
+      #recents { position : absolute; width : 50%; padding-bottom : 1ex; border-right : 1px dotted #a20000; }
+        #recents .resume { margin-right : 1em; }
+      #billets { position : absolute; width : 50%; margin-left : 50%; padding-bottom : 1ex; border-left : 1px dotted #a20000; }
+        #billets .resume { margin-left : 1em; }
 
 /**************************************************/
 
-.script { font-family : "Tangerine"; font-size : 200%; }
+.script { font-family : 'Just Me Again Down Here'; font-size : 200%; letter-spacing : -0.01em; line-height : 1.0em; }
+.script h1 { line-height : .8em; }
 
 .invisible { display : none; }
 .nettoyeur { clear : both; }
@@ -105,8 +106,9 @@ ul.forum { padding : 0px; list-style-type : none; }
 #left ul ul ul { padding-left : 1em; }
 #left ul ul { padding-left : 2em; }
 #left ul { margin : 0px; padding-left : 0em; font-size : small; list-style-type : none; }
+#left hr { border : 1px solid #e20000; border-width : 1px 0px 0px; }
 
-#left h4 { margin : 1ex 0px 1ex; text-align : center; font-size : medium; font-weight : bold; font-style : italic; padding : 0px; border : 1px solid #e20000; border-width : 1px 0px; }
+#left h4 { margin : 1ex 0px 0px; text-align : center; font-size : medium; font-weight : bold; font-style : italic; padding : 0px; }
 #left h4 a { font-weight : bold; }
 #left h4 a:hover { cursor : pointer; text-decoration : underline; }
 
@@ -270,3 +272,12 @@ div.mp3 { text-align : center; margin : 0.5ex 0em; }
 div.citer { border : 1px solid #e20000; background : #eeeeee; padding : .5ex 1ex; text-size : small; }
 
 p.copyright { text-size : small; font-style : italic; }
+
+div.idm_recherche { float : right; background : #eeeeee; font-size : small;  border : 1px dotted #a20000; padding : 1ex 1em 1ex 2em; margin-left : 1em; }
+div.idm_recherche h2 { margin : 0ex 0px 1ex; }
+div.idm_recherche li { margin-top : 1ex; }
+div.idm_recherche p.boutons { text-align : right; padding-top : 2ex; }
+
+ul.checkboxTree { padding-left: 20px; }
+ul.checkboxTree li { list-style-type: none; position: relative; }
+ul.checkboxTree li span { cursor: default; position: absolute; top: 2px; left: -16px; }

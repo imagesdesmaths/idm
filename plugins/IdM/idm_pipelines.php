@@ -1,6 +1,11 @@
 <?php
-/**
- * Complete the automated treatment by NoSPAM to kill non-spam messages 
+/*
+ * These pipelines are only used in special cases, so this file does not
+ * have to be included all the time. Not sure this is worth it.
+ */
+
+/*
+ * Complete the automated treatment by NoSPAM to kill non-spam messages
  * by cranks and the like.
  *
  * @param array $flux

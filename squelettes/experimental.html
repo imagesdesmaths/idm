@@ -1,0 +1,22 @@
+#CACHE{0}
+<INCLURE{fond=inc/head}{title=EXPERIMENTAL}>
+  <form id="sujets" method="get">
+    <B_sujets><ul><BOUCLE_sujets(IDM_SUJETS) {id_parent}>
+          <li><input type="checkbox" name="sujet_#ID_SUJET">#INTITULE ([(#ID_SUJET|idm_dewey)])</input>
+            <BOUCLE_sujets_fils(boucle_sujets) {id_parent}></BOUCLE_sujets_fils>
+          </li>
+    </BOUCLE_sujets></ul></B_sujets>
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#sujets > ul').checkboxTree({
+        collapsed:      true,
+        collapseImage: '#CHEMIN{img/minus.png}',
+        expandImage:   '#CHEMIN{img/plus.png}',
+      });
+    });
+  </script>
+<INCLURE{fond=inc/foot}{stat=no}>

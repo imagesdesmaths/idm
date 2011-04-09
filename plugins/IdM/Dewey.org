@@ -1,0 +1,151 @@
+#+TITLE: Classification Dewey pour Images des Mathématiques
+
+Source : [[http://catalogue.bnf.fr/jsp/frameAssistantCoteLA.jsp?host=catalogue]]
+
+| Cote   | Parent | Intitulé                                                   |
+| <l>    | <l>    |                                                            |
+|--------+--------+------------------------------------------------------------|
+| 51     |        | Mathématiques                                              |
+|--------+--------+------------------------------------------------------------|
+| 510    | 51     | Généralités                                                |
+| 5102   | 510    | Informatique pour les mathématiques                        |
+| 5103   | 510    | Dictionnaires et encyclopédies                             |
+| 5104   | 510    | Jeux mathématiques et logiques                             |
+| 5105   | 510    | Congrès et séries                                          |
+| 5106   | 510    | Organismes                                                 |
+| 5107   | 510    | Enseignement, recherche                                    |
+| 5109   | 510    | Histoire                                                   |
+| 51092  | 5109   | Mathématiciens (oeuvres complètes)                         |
+|--------+--------+------------------------------------------------------------|
+| 511    | 51     | Fondements des mathématiques                               |
+| 5113   | 511    | Logique mathématique                                       |
+| 5114   | 511    | Approximations et développements en série                  |
+| 5115   | 511    | Théorie des graphes                                        |
+| 5116   | 511    | Analyse combinatoire                                       |
+| 5118   | 511    | Modèles mathématiques et algorithmes                       |
+|--------+--------+------------------------------------------------------------|
+| 512    | 51     | Algèbre et théorie des nombres                             |
+| 5121   | 512    | Algèbre et géométrie analytique                            |
+| 5122   | 512    | Théorie des groupes                                        |
+| 5123   | 512    | Théorie des corps                                          |
+| 5124   | 512    | Anneaux et idéaux                                          |
+| 5125   | 512    | Algèbre linéaire et multilinéaire                          |
+| 51252  | 5125   | Espaces vectoriels                                         |
+| 51253  | 5125   | Algèbres définies par la dimension de l'espace             |
+| 51255  | 5125   | Algèbre topologique                                        |
+| 51256  | 5125   | Algèbre différentielle                                     |
+| 51257  | 5125   | Facteurs                                                   |
+| 5127   | 512    | Théorie des nombres                                        |
+| 51272  | 5127   | Arithmétique                                               |
+| 51273  | 5127   | Théorie analytique des nombres                             |
+| 51274  | 5127   | Théorie algébrique des nombres                             |
+| 5129   | 512    | Algèbre - Principes de base                                |
+| 51292  | 5129   | Fonctions exponentielles et logarithmes                    |
+| 51294  | 5129   | Équations (algèbre)                                        |
+| 51297  | 5129   | Inégalités (algèbre)                                       |
+|--------+--------+------------------------------------------------------------|
+| 514    | 51     | Topologie                                                  |
+| 5142   | 514    | Topologie algébrique                                       |
+| 51422  | 5142   | Topologie combinatoire                                     |
+| 51423  | 5142   | Homologie et co-homologie                                  |
+| 51424  | 5142   | Homotopie                                                  |
+| 5143   | 514    | Espaces topologiques                                       |
+| 5147   | 514    | Topologie analytique et différentielle                     |
+| 51474  | 5147   | Analyse globale et fractales                               |
+|--------+--------+------------------------------------------------------------|
+| 515    | 51     | Analyse mathématique                                       |
+| 51522  | 515    | Fonctions - Propriétés                                     |
+| 51524  | 515    | Suites et séries                                           |
+| 51525  | 515    | Équations (Analyse mathématique)                           |
+| 51526  | 515    | Inéquations                                                |
+| 5153   | 515    | Calcul et équations différentielles                        |
+| 51533  | 5153   | Calcul différentiel                                        |
+| 51535  | 5153   | Équations différentielles                                  |
+| 515352 | 51535  | Équations différentielles ordinaires                       |
+| 515353 | 51535  | Équations aux dérivées partielles                          |
+| 515354 | 51535  | Équations différentielles linéaires                        |
+| 515355 | 51535  | Équations différentielles non-linéaires                    |
+| 5154   | 515    | Calcul intégral et équations intégrales                    |
+| 51542  | 5154   | Théorie de la mesure et intégration                        |
+| 51543  | 5154   | Calcul intégral                                            |
+| 51545  | 5154   | Équations intégrales                                       |
+| 5155   | 515    | Fonctions spéciales                                        |
+| 51553  | 5155   | Fonctions harmoniques                                      |
+| 51555  | 5155   | Polynômes orthogonaux                                      |
+| 5156   | 515    | Autres méthodes analytiques                                |
+| 51562  | 5156   | Problèmes aux limites                                      |
+| 51563  | 5156   | Analyse vectorielle                                        |
+| 51564  | 5156   | Calcul des variations et théorie de la commande            |
+| 5157   | 515    | Analyse fonctionnelle                                      |
+| 51572  | 5157   | Calcul opérationnel                                        |
+| 515723 | 51572  | Opérateurs intégraux                                       |
+| 515724 | 51572  | Théorie des opérateurs                                     |
+| 51573  | 5157   | Espaces vectoriels topologiques                            |
+| 515732 | 51573  | Espaces de Banach                                          |
+| 515733 | 51573  | Espaces de Hilbert                                         |
+| 5158   | 515    | Fonctions de variables réelles                             |
+| 5159   | 515    | Fonctions de variables complexes                           |
+| 51593  | 5159   | Fonctions d'une variable complexe                          |
+| 51594  | 5159   | Fonctions de plusieurs variables complexes                 |
+| 51598  | 5159   | Fonctions entières et fonctions pseudo-analytiques         |
+| 515982 | 51598  | Fonctions méromorphes                                      |
+| 515983 | 51598  | Fonctions elliptiques                                      |
+| 515984 | 51598  | Fonctions thêta                                            |
+|--------+--------+------------------------------------------------------------|
+| 516    | 51     | Géométrie                                                  |
+| 51607  | 516    | Variétés (Mathématiques)                                   |
+| 51608  | 516    | Ensembles convexes                                         |
+| 51613  | 516    | Géométries combinatoire et constructive                    |
+| 51615  | 516    | Mesures et formes géométriques                             |
+| 5162   | 516    | Géométrie euclidienne                                      |
+| 5163   | 516    | Géométrie analytique                                       |
+| 51635  | 5163   | Géométrie algébrique                                       |
+| 516352 | 51635  | Géométrie algébrique - Courbes et surfaces                 |
+| 51636  | 5163   | Géométries différentielle et intégrale                     |
+| 516362 | 51636  | Géométrie intégrale                                        |
+| 51637  | 5163   | Géométries différentielles métriques                       |
+| 516373 | 51637  | Géométrie riemannienne                                     |
+| 5165   | 516    | Géométrie affine, projective et descriptive                |
+| 5169   | 516    | Géométries non-euclidiennes                                |
+|--------+--------+------------------------------------------------------------|
+| 519    | 51     | Probabilités et mathématiques appliquées                   |
+| 5192   | 519    | Probabilités                                               |
+| 51923  | 5192   | Processus probabilistiques                                 |
+| 519233 | 51923  | Processus de Markov                                        |
+| 519234 | 51923  | Processus stochastiques                                    |
+| 51924  | 5192   | Distribution (probabilités)                                |
+| 519287 | 5192   | Théorie de l'estimation                                    |
+| 5193   | 519    | Théorie des jeux, optimisation                             |
+| 5194   | 519    | Analyse numérique                                          |
+| 5195   | 519    | Statistiques mathématiques                                 |
+| 51952  | 5195   | Échantillonnage                                            |
+| 51953  | 5195   | Statistique descriptive                                    |
+| 519535 | 51953  | Analyse multivariée                                        |
+| 519536 | 51953  | Analyse de la régression                                   |
+| 51954  | 5195   | Inférence                                                  |
+| 519542 | 51954  | Théorie de la décision                                     |
+| 519544 | 51954  | Théorie de l'estimation                                    |
+| 51955  | 5195   | Séries chronologiques (statistiques)                       |
+| 51956  | 5195   | Tests d'hypothèses                                         |
+| 5197   | 519    | Programmation mathématique                                 |
+| 51982  | 519    | Théorie des files d'attente                                |
+|--------+--------+------------------------------------------------------------|
+| 52     |        | Astronomie, Astrophysique, Géodésie                        |
+| 521    | 52     | Mécanique céleste                                          |
+| 526    | 52     | Géodésie, Topographie, Cartographie                        |
+| 528    | 52     | Éphémérides                                                |
+| 529    | 52     | Chronologie, Calendriers                                   |
+|--------+--------+------------------------------------------------------------|
+| 53     |        | Physique                                                   |
+| 530    | 53     | Physique théorique, Physique mathématique                  |
+| 531    | 53     | Mécanique générale, Mécanique des corps solides et rigides |
+| 532    | 53     | Mécaniques des fluides                                     |
+| 534    | 53     | Acoustique, Vibration                                      |
+| 535    | 53     | Lumière, Optique                                           |
+| 536    | 53     | Thermodynamique, Chaleur                                   |
+| 537    | 53     | Electricité, Electronique, Electromagnétisme               |
+| 539    | 53     | Nature physique de la matière, Physique moderne            |
+|--------+--------+------------------------------------------------------------|
+| 54     |        | Chimie, Cristallographie, Minéralogie                      |
+| 55     |        | Sciences de la terre, Géologie, Météorologie               |
+| 57     |        | Sciences de la vie, Biologie                               |

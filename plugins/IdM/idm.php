@@ -35,6 +35,12 @@ $tables_principales['spip_idm_relecteurs'] = array (
   'key' => array(
     'PRIMARY KEY' => "id_auteur"));
 
+$tables_principales['spip_idm_sujets'] = array ('field' => array ('id_sujet' => "BIGINT(21) NOT NULL",
+                                                                  'id_parent' => "BIGINT(21) NOT NULL DEFAULT 0",
+                                                                  'intitule' => "TINYTEXT NOT NULL",
+                                                                  'description' => "TEXT NOT NULL"),
+                                                'key' => array ('PRIMARY KEY' => "id_sujet"));
+
 $tables_auxiliaires['spip_relecteurs_articles'] = array (
   'field' => array (
     'id_article'  => 'BIGINT(21) NOT NULL',
@@ -44,21 +50,31 @@ $tables_auxiliaires['spip_relecteurs_articles'] = array (
     'avis'        => "TINYTEXT"),
   'key' => array());
 
+$tables_auxiliaires['spip_idm_sujets_articles'] = array ('field' => array ('id_sujet' => "BIGINT(21) NOT NULL",
+                                                                           'id_article' => "BIGINT(21) NOT NULL"),
+                                                         'key' => array ());
+
 $table_des_tables['idm_projets']         = 'idm_projets';
 $table_des_tables['idm_relecteurs']      = 'idm_relecteurs';
+$table_des_tables['idm_sujets']          = 'idm_sujets';
 $table_des_tables['relecteurs_articles'] = 'relecteurs_articles';
+$table_des_tables['idm_sujets_articles'] = 'idm_sujets_articles';
 
 function idm_install ($action) {
   switch ($action) {
   case 'test':
-    $desc = sql_showtable ('spip_idm_relecteurs');
-    if ($desc AND $desc['field']['comments']) return true; else return false;
+    $desc = sql_showtable ('spip_idm_sujets');
+    if ($desc AND $desc['field']['description']) return true; else return false;
     break;
 
   case 'install':
     include_spip ('base/create');
     creer_base();
-    maj_tables(array('spip_idm_projets','spip_idm_relecteurs','spip_relecteurs_articles'));
+    maj_tables(array('spip_idm_projets',
+                     'spip_idm_relecteurs',
+                     'spip_idm_sujets',
+                     'spip_relecteurs_articles',
+                     'spip_idm_sujets_articles'));
     break;
 
   case 'uninstall':
@@ -132,6 +148,30 @@ function idm_notify ($id, $message, $subject = "Un message du site \"Images des 
 
   $envoyer_mail = charger_fonction ('envoyer_mail', 'inc');
   $envoyer_mail ($email, $subject, $message);
+}
+
+function idm_jquery_plugins ($scripts) {
+  $scripts[] = 'javascript/jquery-ui.min.js';
+  $scripts[] = 'javascript/jquery.checkboxtree.js';
+  $scripts[] = 'javascript/jquery.tablesorter.min.js';
+  return $scripts;
+}
+
+function idm_import_sujets () {
+  $raw = file_get_contents(find_in_path("Dewey.org"));
+
+  preg_match_all ('/\| ([0-9\.]*) *\| ([0-9\.]*) *\| ([^\|]*[^ ]) *\|/',
+                  $raw, $out, PREG_SET_ORDER);
+
+  foreach ($out as $r)
+    sql_insertq ("spip_idm_sujets",
+                 array("id_sujet" => $r[1],
+                       "id_parent" => $r[2],
+                       "intitule" => $r[3]));
+}
+
+function idm_dewey ($cote) {
+  return preg_replace ('/([0-9][0-9][0-9])([0-9]+)/', '$1.$2', $cote);
 }
 
 ?>

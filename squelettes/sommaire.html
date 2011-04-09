@@ -16,7 +16,7 @@
 
   <h3>Quelques br&egrave;ves :</h3>
   <ul>
-    <BOUCLE_actu(BREVES) {id_rubrique=26} {age>=0} {par date} {inverse} {0,3}>
+    <BOUCLE_actu(BREVES) {id_rubrique=26} {age>=0} {par date} {inverse} {0,2}>
     <li>[(#DATE|affdate)] - <a href="#URL_BREVE" class="plain">#TITRE</a></li>
     </BOUCLE_actu>
     <li class="archives"><a href="[(#URL_PAGE{breves,id_rubrique=26})]">Archives</a></li>
@@ -34,10 +34,18 @@
 
   <h3>Revues de presse :</h3>
   <ul>
-    <BOUCLE_rdpall(ARTICLES) {id_rubrique=26} {par date} {inverse} {0,3}>
+    <BOUCLE_rdpall(ARTICLES) {id_rubrique=26} {par date} {inverse} {0,2}>
     <li><a href="#URL_ARTICLE">[(#DATE|affdate)]</a></li>
     </BOUCLE_rdpall>
     <li class="archives"><a href="#URL_RUBRIQUE{26}">Archives</a></li>
+  </ul>
+
+  <h3 style="margin-top:1ex;">Courrier des lecteurs :</h3>
+  <ul>
+    <BOUCLE_courrier(ARTICLES) {id_rubrique=34} {age>=0} {par date} {inverse} {0,2}>
+    <li>[(#DATE|affdate)] - <a href="#URL_ARTICLE">#TITRE</a></li>
+    </BOUCLE_courrier>
+    <li class="archives"><a href="#URL_RUBRIQUE{34}">Archives</a></li>
   </ul>
 </div>
 
@@ -83,7 +91,6 @@
     <BOUCLE_billets(ARTICLES) {id_rubrique = 6} {par date} {age>=0} {inverse} {0,5} {doublons}>
       [(#INCLURE{fond=inc/resume}{id_article})]
     </BOUCLE_billets>
-    <h2><a href="#URL_RUBRIQUE{6}">tous les billets du site</a></h2>
   </div>
 
   <div id="recents">

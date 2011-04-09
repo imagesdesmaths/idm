@@ -1,6 +1,5 @@
 <BOUCLE_article(ARTICLES) {id_article = #ENV{id_article}} {statut == .}>
 <div class="[script(#ID_RUBRIQUE|=={34}|oui)]article">
-#DEBUT_SURLIGNE
   [(#LOGO_ARTICLE|right||image_reduire{200,200})]
   [(#LOGO_ARTICLE|fichier|non) <INCLURE{fond=inc/auteur}{id_article=#ID_ARTICLE}{taille=200}>]
   [<h2 class="surtitre">(#SURTITRE)</h2>]
@@ -32,6 +31,5 @@
   <BOUCLE_affiliation(AUTEURS) {id_auteur=#GET{uniqueauteur}}>
     [<div class="notes"><h3>Affiliation de l'auteur</h3>(#AFFILIATION)</div>]
   </BOUCLE_affiliation>
-#FIN_SURLIGNE
 </div>
 </BOUCLE_article>

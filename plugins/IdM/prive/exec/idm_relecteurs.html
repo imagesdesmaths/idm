@@ -3,35 +3,40 @@
   
   #FORMULAIRE_RELECTEURS_GESTION
   
-  <div class="formulaire_spip">
-    <table id="lesrelecteurs2" class="sortable">
-      <thead>
-        <tr>
-          <th>Signature / Pseudo</th>
-          <th>Cat&eacute;gorie</th>
-          <th>E-mail</th>
-          <th>Nb</th>
-          <th>Lus</th>
-          <th>Faits</th>
-        </tr>
-      </thead>
-      <tbody>
-        <BOUCLE_relecteurs(IDM_RELECTEURS spip_auteurs) {role = relecteur}>
-          <tr>
-            <td><span style="display:none">#NOM*</span><a href="?exec=idm_relecteur&id_auteur=#ID_AUTEUR">#NOM*</a></td>
-            <td>#CATEGORIE</td>
-            <td><a href="mailto:#EMAIL*">#EMAIL</a></td>
-            <td>#COMBIEN</td>
-            <td>#LUS</td>
-            <td>#COMMENTS</td>
-          </tr>
-        </BOUCLE_relecteurs>
-      </tbody>
-    </table>
-  </div>
-  
-  <script type="text/javascript" src="#CHEMIN{javascript/jquery.tablesorter.min.js}"></script>
-  <script type="text/javascript">
-    $("#lesrelecteurs2").tablesorter( {sortList : [[0,0]]} );
-  </script>  
+  <BOUCLE_cat(POUR) {tableau #ARRAY{1,nouveau,2,chercheur,3,enseignant,4,etudiant,5,autre,6,non_classe}}>
+
+    <B_relecteurs>
+      <h2>Catégorie "#VALEUR" :</h2>
+
+      <div class="formulaire_spip">
+        <table id="lesrelecteurs2_#VALEUR" class="sortable">
+          <thead>
+            <tr>
+              <th>Signature / Pseudo</th>
+              <th>E-mail</th>
+              <th>Nb</th>
+              <th>Lus</th>
+              <th>Faits</th>
+            </tr>
+          </thead>
+          <tbody>
+            <BOUCLE_relecteurs(IDM_RELECTEURS spip_auteurs) {role = relecteur} {categorie = #VALEUR}>
+              <tr>
+                <td><span style="display:none">#NOM*</span><a href="?exec=idm_relecteur&id_auteur=#ID_AUTEUR">#NOM*</a></td>
+                <td><a href="mailto:#EMAIL*">#EMAIL</a></td>
+                <td>#COMBIEN</td>
+                <td>#LUS</td>
+                <td>#COMMENTS</td>
+              </tr>
+            </BOUCLE_relecteurs>
+          </tbody>
+        </table>
+      </div>
+    </B_relecteurs>
+
+    <script type="text/javascript">
+      $("#lesrelecteurs2_#VALEUR").tablesorter( {sortList : [[0,0]]} );
+    </script>
+
+  </BOUCLE_cat>
 </BOUCLE_securite>

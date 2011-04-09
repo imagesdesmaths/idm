@@ -3,44 +3,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 
 <head>
-  <title>#NOM_SITE_SPIP[ - (#ENV*{title}|textebrut)]</title>
   <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET"/>
 
-  <link rel="stylesheet" type="text/css" media="all"   href="#CHEMIN{css/main.css}"/>
-  <link rel="stylesheet" type="text/css" media="all"   href="#CHEMIN{css/tag_20101102.css}"/>
-  <link rel="stylesheet" type="text/css" media="print" href="#CHEMIN{css/print.css}"/>
-  <?php
-    $agent = $_SERVER['HTTP_USER_AGENT'];
-    if (preg_match('/MSIE ([0-9.]*)/', $agent, $matches)) {
-      $version = $matches[1];
-      print "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\"    href=\"squelettes/css/iehacks-$version.css\"/>\n";
-    } else if (preg_match('/AppleWebKit.[1-4]/', $agent, $matches)) {
-      print "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\"    href=\"squelettes/css/oldsafarihack.css\"/>\n";
-    }
-    print "<!-- $agent -->\n";
-  ?>
+  <title>[(#ENV*{title}|textebrut) - ]#NOM_SITE_SPIP</title>
 
-  <link rel="home" title="Page principale" href="#URL_SITE_SPIP/"/>
+  <link rel="stylesheet" type="text/css" media="all"   href="#CHEMIN{css/main.css}"/>
+  <link rel="stylesheet" type="text/css" media="all"   href="#CHEMIN{css/tag_20110322.css}"/>
+  <link rel="stylesheet" type="text/css" media="print" href="#CHEMIN{css/print.css}"/>
+  <link rel="stylesheet" type="text/css" media="all and (max-device-width: 500px)" href="#CHEMIN{css/iphone.css}"/>
+
+  <link rel="alternate"  type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}"/>
+
+  <link rel="home"  title="Page principale" href="#URL_SITE_SPIP/"/>
   <link rel="start" title="Page principale" href="#URL_SITE_SPIP/"/>
   <link rel="index" title="Page principale" href="#URL_SITE_SPIP/"/>
-  <link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}"/>
+
   [<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
 
   <script src="#CHEMIN{svgweb/svg.js}" data-path="#CHEMIN{svgweb}"></script>
   #INSERT_HEAD
-
-  <script type="text/javascript" src="#CHEMIN{javascript/jquery.tablesorter.min.js}"></script>
-  <script type="text/javascript" src="#CHEMIN{javascript/jquery.easing.js}"></script>
-  <script type="text/javascript" src="#CHEMIN{javascript/jquery.dimensions.js}"></script>
-  <script type="text/javascript" src="#CHEMIN{javascript/jquery.accordion.js}"></script>
-  <script type="text/javascript" src="#CHEMIN{javascript/jquery.cookie.js}"></script>
 </head>
 
 <body>
   <div id="outer">
     <div id="logo"><a href="http://www.cnrs.fr/"><img src="#CHEMIN{img/CNRS.jpg}" alt="CNRS" /></a></div>
     <div id="head">
-      <h1><a href="#URL_SITE_SPIP/">
+      <h1><a href="/">
           <img src="#CHEMIN{img/Logo_IDM_blanc_e00000.gif}" alt="#NOM_SITE_SPIP" />
       </a></h1>
     </div>
@@ -49,54 +37,43 @@
     <div id="left">
       <INCLURE{fond=inc/idj}>
 
+      <h4><a href="/">Page d'accueil</a></h4>
+
+      <h4><a href="#URL_ARTICLE{63}">Pr&eacute;sentation du site</a></h4>
+
       <ul>
-        <li><a href="#URL_SITE_SPIP/">Page d'accueil</a></li>
-        <li><a href="#URL_ARTICLE{63}">Présentation</a> / <a href="#URL_PAGE{plan}">Plan du site</a></li>
-        <li><a href="#URL_RUBRIQUE{19}">Documentation</a> / <a href="#URL_PAGE{lexique}">Lexique</a></li>
-        [<li>(#MODELE{special}{mot=ours})</li>]
-        <li><a href="mailto:#EMAIL_WEBMASTER">Nous contacter</a></li>
+        <li><a href="#URL_ARTICLE{17}">Fonctionnement</a></li>
+        <li><a href="#URL_RUBRIQUE{19}">Documentation</a></li>
       </ul>
+
+      <hr/>
 
       [(#FORMULAIRE_RECHERCHE)]
 
+      <h4><a href="#URL_PAGE{navigation}">Recherche avanc&eacute;e</a></h4>
+
       <ul>
-        <li><a href="#URL_PAGE{recherche,avancee=1}">Recherche avanc&eacute;e</a></li>
+        <li><a href="#URL_PAGE{plan}">Plan du site</a></li>
       </ul>
 
+      <hr/>
+
       <div id="navleft">
-	<BOUCLE_courrier(RUBRIQUES){id_rubrique=34}>
-	  <h4><a href="#URL_RUBRIQUE">#TITRE</a></h4>
-	</BOUCLE_courrier>
-
-        #BLOC_TITRE Les rubriques
-        #BLOC_DEBUT
-        <ul><BOUCLE_secteurs(RUBRIQUES) {racine} {par num titre} {id_rubrique != 18} {id_rubrique != 26} {id_rubrique != 34}>
-          <li><a href="#URL_RUBRIQUE" [(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{class="active"})]>#TITRE</a></li>
-        </BOUCLE_secteurs></ul>
-        #BLOC_FIN
-
-        #BLOC_TITRE Les dossiers
-        #BLOC_DEBUT
-        <ul><BOUCLE_dossiers(MOTS) {id_groupe=3}>
-          <li><a href="#URL_MOT">#TITRE</a></li>
-        </BOUCLE_dossiers></ul></B_dossiers>
-        #BLOC_FIN
-
-        #BLOC_TITRE Les liens
+        #BLOC_TITRE{0} Liens
         #BLOC_DEBUT
         <ul><BOUCLE_liens(ARTICLES) {id_rubrique = 25} {par num titre, titre}>
           <li><a href="#URL_ARTICLE">#TITRE</a></li>
         </BOUCLE_liens></ul>
         #BLOC_FIN
-
-        <INCLURE{fond=inc/ident}>
       </div>
+
+      <INCLURE{fond=inc/ident}>
 
       <ul style="margin-top:4ex;">
         <li><a href="javascript:unfold_and_print();">Imprimer cette page</a></li>
-        <li>ISSN : 2105-1003</li>
+        [<li>(#MODELE{special}{mot=ours})</li>]
         <li><a href="#URL_PAGE{backend}">Syndication (RSS)</a></li>
-        <li><a href="http://www.spip.net/">SPIP #SPIP_VERSION</a></li>
+        <li><a href="mailto:#EMAIL_WEBMASTER">Nous contacter</a></li>
       </ul>
     </div>
 
