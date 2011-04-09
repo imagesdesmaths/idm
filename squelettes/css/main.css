@@ -277,3 +277,7 @@ div.idm_recherche { float : right; background : #eeeeee; font-size : small;  bor
 div.idm_recherche h2 { margin : 0ex 0px 1ex; }
 div.idm_recherche li { margin-top : 1ex; }
 div.idm_recherche p.boutons { text-align : right; padding-top : 2ex; }
+
+ul.checkboxTree { padding-left: 20px; }
+ul.checkboxTree li { list-style-type: none; position: relative; }
+ul.checkboxTree li span { cursor: default; position: absolute; top: 2px; left: -16px; }
