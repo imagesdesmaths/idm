@@ -157,4 +157,19 @@ function idm_jquery_plugins ($scripts) {
   return $scripts;
 }
 
+function idm_import_sujets () {
+  $raw = file_get_contents(find_in_path("Dewey.org"));
+  $raw = preg_replace ('/\| ([0-9\.]*) *\| ([0-9\.]*) *\| ([^\|]*[^ ]) *\|/',
+                       'sql_insertq ("spip_idm_sujets", array(' .
+                       '"id_sujet" => "$1", ' .
+                       '"id_parent" => "$2",' .
+                       '"intitule" => "$3"));', $raw);
+  $raw = preg_replace ('/.*[^;]\n/', '', $raw);
+  eval($raw);
+}
+
+function idm_dewey ($cote) {
+  return preg_replace ('/([0-9][0-9][0-9])([0-9]+)/', '$1.$2', $cote);
+}
+
 ?>
