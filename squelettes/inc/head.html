@@ -4,6 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET"/>
+  <meta name="svg.config.data-path" content="#CHEMIN{svgweb}" />
 
   <title>[(#ENV*{title}|textebrut) - ]#NOM_SITE_SPIP</title>
 
@@ -20,7 +21,7 @@
 
   [<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
 
-  <script src="#CHEMIN{svgweb/svg.js}" data-path="#CHEMIN{svgweb}"></script>
+  <script type="text/javascript" src="#CHEMIN{svgweb/svg.js}"></script>
   #INSERT_HEAD
   <script type="text/javascript" src="#CHEMIN{javascript/jsMath_Font_Detector.js}"></script>
 </head>
