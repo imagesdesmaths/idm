@@ -39,8 +39,7 @@ RewriteBase /
 ################ REGLAGES PERSONNALISES ######################
 # Inscrivez ci-dessous vos reglages supplementaires
 
-
-
+RewriteRule ^spip/(.*)$ $1 [R=301,L]
 
 ################ GESTIONS DES URLS SPIP #######################
 
