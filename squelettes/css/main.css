@@ -281,3 +281,6 @@ div.idm_recherche p.boutons { text-align : right; padding-top : 2ex; }
 ul.checkboxTree { padding-left: 20px; }
 ul.checkboxTree li { list-style-type: none; position: relative; }
 ul.checkboxTree li span { cursor: default; position: absolute; top: 2px; left: -16px; }
+
+div.mjlabel_top { color: #e20000; text-align: right; margin-bottom: -4.5ex; font-weight: bold; }
+div.mjlabel_bot { color: #e20000; text-align: right; margin-top: -4.5ex; margin-bottom: 2ex; font-weight: bold; }

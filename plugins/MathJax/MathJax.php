@@ -1,5 +1,18 @@
 <?php
 
+function mj_labelref ($texte) {
+  $texte = preg_replace ('/\$\$\\\\label\{([^\}]*)\}/',
+                         '<div class="mjlabel_top" id="eq_\1">(\1)</div>$$',
+                         $texte);
+  $texte = preg_replace ('/\\\\label\{([^\}]*)\}\\s*\$\$/',
+                         '$$<div class="mjlabel_bot" id="eq_\1">(\1)</div>',
+                         $texte);
+  $texte = preg_replace ('/\$*\\\\ref\{([^\}]*)\}\$*/',
+                         '<a href="#eq_\1">(\1)</a>',
+                         $texte);
+  return $texte;
+}
+
 function mj_protect_TeX ($texte) {
   $texte = echappe_html ($texte); // To make example code easier.
 
@@ -17,15 +30,11 @@ function mj_protect_TeX ($texte) {
     $texte = preg_replace ('/(<html>[$]+[^$]+)</s', '\1&lt;', $texte);
   }
 
-  //$texte = str_replace ('<html>$$', '<html><div class="math">', $texte);
-  //$texte = str_replace ('$$</html>', '</div></html>', $texte);
-  //$texte = str_replace ('<html>$', '<html><span class="math">', $texte);
-  //$texte = str_replace ('$</html>', '</span></html>', $texte);
-
   return echappe_html ($texte);
 }
 
 function mj_pre_typo ($texte) {
+  $texte = mj_labelref ($texte);
   $texte = mj_protect_TeX ($texte);
 
   return $texte;

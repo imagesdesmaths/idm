@@ -11,9 +11,9 @@
 *** Translation encouragement
 *** Unify the permissions
 *** Use custom color
-*** Use mathjax [0%]
+*** Use mathjax [50%]
 - [ ] Port the dynamic parts (forum previews)
-- [ ] Create a \label/\ref replacement
+- [X] Create a \label/\ref replacement
 
 *** Various SPIP features to try out some day [0/4]
 - [ ] In a loop, #_parent:TITRE
