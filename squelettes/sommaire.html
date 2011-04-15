@@ -76,11 +76,13 @@
     </BOUCLE_une>
   </div>
 
-  <BOUCLE_featured(ARTICLES) {titre_mot=featured} {par date} {inverse} {age<7} {doublons}>
+  <B_featured>
   <div id="featured">
+    <BOUCLE_featured(ARTICLES) {titre_mot=featured} {par date} {inverse} {age<7} {doublons}>
     [(#INCLURE{fond=inc/resume}{id_article})]
+    </BOUCLE_featured>
   </div>
-  </BOUCLE_featured>
+  </B_featured>
 </div>
 
 <div class="nettoyeur"></div>

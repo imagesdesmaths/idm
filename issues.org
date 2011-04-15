@@ -1,0 +1,28 @@
+* Unsorted
+*** Buttons to write to groups of people
+*** CC per article
+*** Filter display by color
+*** Loop videos
+*** Make the billets visually different
+*** Make things more spip-correct
+*** Overhaul of the search engine
+*** Planification
+*** Relecteur occasionnel
+*** Translation encouragement
+*** Unify the permissions
+*** Use custom color
+*** Use mathjax [0%]
+- [ ] Port the dynamic parts (forum previews)
+- [ ] Create a \label/\ref replacement
+
+*** Various SPIP features to try out some day [0/4]
+- [ ] In a loop, #_parent:TITRE
+- [ ] pipeline jquery_plugins : function XXX_jquery_plugins($scripts) {
+  $scripts[] = "js/bla.js"; return $scripts; }
+- [ ] pipeline taches_generales_cron : function
+  XXX_taches_generales_cron ($taches) { $taches['toto'] = 24*3600; // en
+  secondes } fichier genie/toto.php, genie_toto_dist(), retour : =0 :
+  rien à faire >0 : fait <0 : il en reste, revenir dans |.| secondes
+- [ ] plugin spip-bonux : #INFO_TITRE{article,324}
+
+*** iPhone version
