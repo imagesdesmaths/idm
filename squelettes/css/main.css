@@ -116,12 +116,6 @@ ul.forum { padding : 0px; list-style-type : none; }
 #left div.cs_blocs { margin : 1ex 0em; }
 #left div.cs_blocs div.blocs_destination { margin-left : 0em; padding-left : 0em; border : none; font-size : normal; font-style : normal; }
 
-#left div.jsmathwarning { font-size : x-small; margin : 4ex .5em 1ex; padding : .5ex 1ex 1ex; color : #550000; background : #994444; }
-#left div.jsmathwarning h2 { font-size : medium; margin : 0px; border : none; }
-#left div.jsmathwarning h3 { font-size : small; margin : .5ex 0px 0px; border : none; }
-#left div.jsmathwarning p { margin : 0px; text-align : justify; }
-#left div.jsmathwarning a { color : #550000; font-weight : bold; text-decoration : underline; }
-
 #left .blocs_titre { padding : 0px; background : transparent; }
 
 #imagedujour { width : 12em; margin : 0ex 0px 1ex -.5em; }
