@@ -1,4 +1,4 @@
-* Unsorted
+* In process
 *** Buttons to write to groups of people
 *** CC per article
 *** Filter display by color
@@ -11,10 +11,6 @@
 *** Translation encouragement
 *** Unify the permissions
 *** Use custom color
-*** Use mathjax [50%]
-- [ ] Port the dynamic parts (forum previews)
-- [X] Create a \label/\ref replacement
-
 *** Various SPIP features to try out some day [0/4]
 - [ ] In a loop, #_parent:TITRE
 - [ ] pipeline jquery_plugins : function XXX_jquery_plugins($scripts) {
@@ -26,3 +22,8 @@
 - [ ] plugin spip-bonux : #INFO_TITRE{article,324}
 
 *** iPhone version
+* Planned
+* Done
+*** Use mathjax [100%]
+- [X] Port the dynamic parts (forum previews)
+- [X] Create a \label/\ref replacement
