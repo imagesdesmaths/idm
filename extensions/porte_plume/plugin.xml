@@ -1,0 +1,80 @@
+<plugin>
+	<nom><multi>[fr]Porte plume[en]Quill[ar]&#1575;&#1604;&#1585;&#1610;&#1588;&#1577;[de]Federhalter</multi></nom>
+	<auteur>Matthieu Marcillaud</auteur>
+	<licence>GNU/GPL</licence>
+	<version>1.7.7</version>
+	<description>
+	<multi>[fr]Une barre d'outil pour bien &#233;crire
+_ Porte plume est une barre d'outil extensible pour SPIP qui
+	utilise la librairie javascript [MarkItUp->http://markitup.jaysalvat.com/home/]
+
+	Les icones proviennent de la librairie [FamFamFam->http://www.famfamfam.com/]
+	[en]A toolbar to enhance your texts
+_ The Quill is a SPIP extensible toolbar which uses the javascript library 
+	[MarkItUp->http://markitup.jaysalvat.com/home/]
+	
+	Icons are courtesy of the library [FamFamFam->http://www.famfamfam.com/]
+	[ar]&#1588;&#1585;&#1610;&#1591; &#1571;&#1583;&#1608;&#1575;&#1578; &#1604;&#1578;&#1581;&#1587;&#1610;&#1606; &#1575;&#1604;&#1603;&#1578;&#1575;&#1576;&#1577;
+_ &#1575;&#1604;&#1585;&#1610;&#1588;&#1577; &#1607;&#1610; &#1588;&#1585;&#1610;&#1591; &#1571;&#1583;&#1608;&#1575;&#1578; &#1605;&#1608;&#1587;&#1593; &#1604;&#1606;&#1592;&#1575;&#1605; SPIP &#1610;&#1587;&#1578;&#1582;&#1583;&#1605; &#1605;&#1603;&#1578;&#1576;&#1577; &#1580;&#1575;&#1601;&#1575;&#1587;&#1603;&#1585;&#1610;&#1576;&#1578; [MarkItUp->http://markitup.jaysalvat.com/home/]
+
+&#1575;&#1604;&#1571;&#1610;&#1602;&#1608;&#1606;&#1575;&#1578; &#1578;&#1571;&#1578;&#1610; &#1605;&#1606; &#1605;&#1603;&#1578;&#1576;&#1577; [FamFamFam->http://www.famfamfam.com/]
+[de]Eine Me&#252;leiste zum Versch&#246;nern der Texte.
+_ Der Federhalter ist eine erweiterbare Werkzeugleiste f&#252;r SPIP auf Grundlage der Javascript-Bibiliothek [MarkItUp->http://markitup.jaysalvat.com/home/]
+
+	Die Icons stammen aus der Sammlung [FamFamFam->http://www.famfamfam.com/].</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/Porte-plume,3117</lien> <!-- URI de documentation -->
+	<etat>stable</etat>
+	<prefix>porte_plume</prefix>
+
+	<!-- Icone de http://icons.mysitemyway.com/free-clipart-icons/1/traditional-ink-bottle-pen-icon-id/83350/style-id/614/high-resolution-dark-blue-denim-jeans-icons/business/ -->
+	<icon>images/porte-plume-128.png</icon>
+
+	<fonctions>inc/barre_outils.php</fonctions>
+
+ 	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>porte_plume_pipelines.php</inclure>
+	</pipeline>
+
+ 	<pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head_public</action>
+		<inclure>porte_plume_pipelines.php</inclure>
+	</pipeline>
+ 	<pipeline>
+		<nom>insert_head_css</nom>
+		<action>insert_head_css</action>
+		<inclure>porte_plume_pipelines.php</inclure>
+	</pipeline>
+ 	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head_prive</action>
+		<inclure>porte_plume_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>porte_plume_barre_pre_charger</nom>
+		<inclure>porte_plume_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_barre_charger</nom>
+		<inclure>porte_plume_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_lien_classe_vers_icone</nom>
+		<inclure>porte_plume_pipelines.php</inclure>
+	</pipeline>
+
+	<!-- Pour formulaire de configuration -->
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>porte_plume_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>configurer_liste_metas</nom>
+		<inclure>porte_plume_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0.2;]" />
+	<categorie>edition</categorie>
+</plugin>

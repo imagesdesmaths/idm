@@ -1,0 +1,13 @@
+<plugin>
+	<nom>SafeHTML</nom>
+	<auteur>pixel-apes</auteur>
+	<icon>images/safehtml-32.png</icon>
+	<version>1.3.7</version>
+	<licence>GPL</licence>
+	<etat>stable</etat>
+	<description>Protection des forums contre les attaques de type cross-site scripting</description>
+	<prefix>safehtml</prefix>
+	<lien>http://www.ohloh.net/p/safehtml</lien>
+	<necessite id="SPIP" version="[2.1.0 dev;)" />
+	<categorie>outil</categorie>
+</plugin>

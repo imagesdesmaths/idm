@@ -1,0 +1,51 @@
+#FILTRE{compacte_head}
+[(#REM)
+	Eviter les boutons d'admin sur la page de login
+]
+#HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+<meta name="robots" content="none" />
+<meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
+[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
+<link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" />
+<link rel="stylesheet" href="[(#CHEMIN{minipres.css}|direction_css)]" type="text/css" />
+[(#REM|f_jQuery)]
+<script type='text/javascript'><!--
+jQuery(function(){ jQuery('input#var_login').focus();
+jQuery('a#spip_pass').click(function(){window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;});
+});
+// --></script>
+</head>
+<body class="page_login" >
+
+<div id="minipres">
+
+	<h1>#NOM_SITE_SPIP</h1>
+	
+	[(#REM)
+		Est-ce qu'on se connecte a l'espace prive ou pas ?
+	]
+	[(#ENV{url}|=={''}|?{#SET{prive,' '}})]
+	[(#ENV{url}|match{^#EVAL{_DIR_RESTREINT_ABS}}|?{#SET{prive,' '}})]
+	[(#GET{prive}) <h3 class="spip"><:login_acces_prive:></h3>]
+	
+	
+	#MENU_LANG_ECRIRE
+	
+	[(#FORMULAIRE_LOGIN{#ENV{url}|sinon{#URL_ECRIRE{accueil}}})]
+	<p class="retour">
+		[&#91;<a href="#URL_PAGE{identifiants,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config{1comite})" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=400'); return false;"><:login_sinscrire:></a>&#93;]
+		&#91;<a href="#URL_SITE_SPIP/"><:login_retoursitepublic:></a>&#93;
+	</p>
+	<p class="retour">
+		<a href="http://www.spip.net/" title="<:site_realise_avec_spip:>"><img src="#CHEMIN{spip.png}" alt="SPIP" width="48" height="16" /></a>
+	</p>
+	
+</div><!--#minipres-->
+
+</body>
+</html>

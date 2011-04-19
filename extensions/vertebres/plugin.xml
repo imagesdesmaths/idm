@@ -1,0 +1,21 @@
+<plugin>
+	<nom>Vertebres, lecteur de tables</nom>
+	<auteur>Collectif SPIP</auteur>
+	<licence>GNU/GPL</licence>
+	<version>1.0</version>
+	<description>
+	Vertebres propose un moyen de lire une table SQL en indiquant
+	comme argument de page la table &agrave; lire, pr&eacute;c&eacute;d&eacute;
+	de &quot;table:&quot;, par exemple : spip.php?page=table:articles
+	</description>	
+	<etat>stable</etat>
+	<prefix>vertebres</prefix>
+  	<!-- Icone de http://www.fatcow.com/free-icons/ -->
+  	<icon>images/vertebres-32.png</icon>
+ 	<pipeline>
+		<nom>styliser</nom>
+		<inclure>vertebres_pipelines.php</inclure>
+	</pipeline>
+	<categorie>outil</categorie>
+	<necessite id="SPIP" version="[2.1 dev;]" />
+</plugin>

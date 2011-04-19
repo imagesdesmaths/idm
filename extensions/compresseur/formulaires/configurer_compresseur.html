@@ -1,0 +1,63 @@
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_compresseur' id='formulaire_configurer_compresseur'>
+	<h3 class='titrem'>[(#CHEMIN{images/compresseur-24.png}|balise_img{'',cadre-icone})]<:info_compresseur_titre:></h3>
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form action="#ENV{action}#formulaire_configurer_compresseur" method="post" enctype='multipart/form-data'><div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		<ul>
+			[(#ENV{_editer_auto_compress_http}|oui)
+			<li class='fieldset'>
+				<fieldset>
+					<legend><:titre_compresser_flux_http:></legend>
+					<ul>
+						<li class='configurer_auto_compress_http[ (#ENV**{erreurs}|table_valeur{auto_compress_http}|oui)erreur]'>
+							<label><:info_question_activer_compresseur:></label>
+							<div class='explication'><p><:texte_compresseur_page:></p>
+							<small>[(#VAL{info_compresseur_gzip}|_T{#ARRAY{testgzip,#VAL{http://redbot.org/}|parametre_url{uri,#URL_SITE_SPIP}|propre}})]</small>
+							</div>
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{auto_compress_http})</span>]
+							<div class='choix'>
+								<input class='checkbox' type="checkbox" name="auto_compress_http" value='oui' [checked="(#ENV{auto_compress_http}|=={oui}|?{checked})"] id="auto_compress_http"/>
+								<label for="auto_compress_http"><:item_compresseur:></label>
+							</div>
+						</li>			
+					</ul>
+				</fieldset>
+			</li>
+			]
+			<li class='fieldset'>
+				<fieldset>
+					<legend><:titre_compacter_script_css:></legend>
+					<div class='explication'><:texte_compacter_script_css:></div>
+					<ul>
+						<li class='configurer_auto_compress_js[ (#ENV**{erreurs}|table_valeur{auto_compress_js}|oui)erreur]'>
+							<label><:info_question_activer_compactage_js:></label>
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{auto_compress_js})</span>]
+							<div class='choix'>
+								<input class='checkbox' type="checkbox" name="auto_compress_js" value='oui' [checked="(#ENV{auto_compress_js}|=={oui}|?{checked})"] id="auto_compress_js"/>
+								<label for="auto_compress_js"><:item_compresseur:></label>
+							</div>
+							<div class='choix'>
+								<input class='checkbox' type="checkbox" name="auto_compress_closure" value='oui' [checked="(#ENV{auto_compress_closure}|=={oui}|?{checked})"] id="auto_compress_closure"/>
+								<label for="auto_compress_closure">[(#REM)<:item_compresseur_closure:>]Utiliser Google Closure Compiler [exp&#233;rimental]</label>
+							</div>
+						</li>
+						<li class='configurer_auto_compress_css[ (#ENV**{erreurs}|table_valeur{auto_compress_css}|oui)erreur]'>
+							<label><:info_question_activer_compactage_css:></label>
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{auto_compress_css})</span>]
+							<div class='choix'>
+								<input class='checkbox' type="checkbox" name="auto_compress_css" value='oui' [checked="(#ENV{auto_compress_css}|=={oui}|?{checked})"] id="auto_compress_http"/>
+								<label for="auto_compress_css"><:item_compresseur:></label>
+							</div>
+						</li>
+					</ul>
+					<p class='explication'><em><:texte_compacter_avertissement:></em></p>
+				</fieldset>
+			</li>
+		</ul>
+		<p class='boutons'><input class='submit' type="submit" name="ok" value="<:bouton_enregistrer:>"/></p>
+	</div></form>
+
+</div>

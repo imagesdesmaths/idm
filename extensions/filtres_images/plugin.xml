@@ -1,0 +1,13 @@
+<plugin>
+	<nom>Filtres Images et Couleurs</nom>
+	<auteur>Collectif SPIP</auteur>
+	<icon>images/image_filtre-32.png</icon>
+	<licence>GPL</licence>
+	<version>1.0.1</version>
+	<etat>stable</etat>
+	<description>Filtres de transformation d'image et de couleurs</description>
+	<prefix>images</prefix>
+	<fonctions>images_fonctions.php</fonctions>
+	<categorie>multimedia</categorie>
+	<necessite id="SPIP" version="[2.1.0-dev;)" />
+</plugin>

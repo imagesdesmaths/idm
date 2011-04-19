@@ -1,0 +1,28 @@
+<plugin>
+	<nom>Compresseur</nom>
+	<auteur>Collectif SPIP 2009</auteur>
+	<icon>images/compresseur-32.png</icon>
+	<licence>GPL</licence>
+	<version>1.0.1</version>
+	<etat>stable</etat>
+	<description>Compression des css et javascript
+_ dans l'entete des pages html de <code>ecrire/</code> et/ou du site public</description>
+	<prefix>compresseur</prefix>
+	<fonctions>filtres/compresseur.php</fonctions>
+	<options>compresseur_http.php</options>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>compresseur_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>compresseur_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>configurer_liste_metas</nom>
+		<inclure>compresseur_pipeline.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.1.0 dev;)" />
+	<utilise id="porte_plume" version="[1.6.3;]" />
+	<categorie>performance</categorie>
+</plugin>

@@ -1,0 +1,46 @@
+<plugin>
+	<nom><multi>Support vieux navigateurs[de]Unterst&uuml;tzung &auml;lterer Webbrowser</multi></nom>
+	<auteur>
+	SPIP, Kush M. (jquery.ifixpng.js), Dean Edwards (IE7.js)
+	</auteur>
+	<version>1.0</version>
+	<etat>stable</etat>
+	<description>
+		<multi>
+Permet de s&eacute;lectionner diff&eacute;rentes m&eacute;thodes 
+-* pour assurer l'affichage des fichiers PNG transparents sous MSIE~6 
+-* et/ou activer certains s&eacute;lecteurs CSS dans MSIE~6 et~7.
+[en]
+Offers different javascript methods to add support for:
+-* transparent PNG files to MSIE~6 
+-* and/or various CSS selectors to MSIE~6 and~7.
+[de]
+Bietet verschiedene Methoden f&uuml;r:
+-* transparente PNG Dateien unter MSIE~6 
+-* und /oder diverse CSS Selektoren f&uuml;r MSIE~6 und~7.
+		</multi>
+	</description>
+	<icon>imgs/browser-32.png</icon>
+	<licence>GPL, MIT</licence>
+
+	<prefix>msie_compat</prefix>
+
+	<pipeline>
+		<nom>configurer_liste_metas</nom>
+		<inclure>msie_compat.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>msie_compat.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>msie_compat.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[2.1.0-dev;)" />
+	<categorie>outil</categorie>
+</plugin>

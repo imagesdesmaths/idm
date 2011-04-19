@@ -1,0 +1,23 @@
+<BOUCLE_auteur(AUTEURS){id_auteur=#ENV{id}}{statut?}{!lang_select}>
+<div class='infos'>
+<div class='numero'><:titre_cadre_numero_auteur:><p>#ID_AUTEUR</p></div>
+<div class='nb_elements'>
+<BOUCLE_arts(ARTICLES){id_auteur}{statut!=poubelle}> </BOUCLE_arts>
+[(#STATUT|<>{'6forum'}|?{' ', ''})[<div>(#TOTAL_BOUCLE|singulier_ou_pluriel{info_articles_un,info_articles_nb})</div>]]
+</B_arts>
+[(#STATUT|<>{'6forum'}|?{' ', ''})<div class="noinfo">#TOTAL_BOUCLE <:info_article:></div>]
+<//B_arts>
+<BOUCLE_forum(FORUMS){id_auteur}{statut!=poubelle}> </BOUCLE_forum>
+[<div>(#TOTAL_BOUCLE|singulier_ou_pluriel{info_messages_un,info_messages_nb})</div>]
+</B_forum>
+<div class="noinfo">#TOTAL_BOUCLE <:info_message_2|strtolower:></div>
+<//B_forum>
+</div>
+</div>
+
+[(#REM)
+
+	Bouton voir en ligne
+
+][(#VAL{auteur}|voir_en_ligne{#ID_AUTEUR,#STATUT,racine-24.gif,0,0})]
+</BOUCLE_auteur>
