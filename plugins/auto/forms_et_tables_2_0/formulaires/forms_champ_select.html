@@ -1,0 +1,24 @@
+<BOUCLE_f(FORMS){id_form}>
+<BOUCLE_champs(FORMS_CHAMPS){id_form}{tout}{champ}>
+<B_choix>
+[(#EXTRA_INFO|=={liste}|?{' ',''})
+<select name='#ENV{name,#CHAMP}' id='input-#ID_FORM-#CHAMP' 
+	class='[(#ENV{crayon_active,''}) ][(#OBLIGATOIRE|=={oui}|?{fondl,fondo})]'>
+	<option value=''>#ENV{titre_select,''}</option>]
+[(#EXTRA_INFO|=={liste}|?{'',' '})<ul class='spip_form_choix_unique[ (#ENV{crayon_active,''})]'>]
+	<BOUCLE_choix(FORMS_CHAMPS_CHOIX){id_form}{champ}{par rang}>
+[(#EXTRA_INFO|=={liste}|?{' ',''})
+	<option value='#CHOIX' [(#CHOIX|=={[(#ENV**{valeur}|forms_valeur{#CHAMP})]}|?{'selected="selected"',''})]>
+		&nbsp;&nbsp;&nbsp;[(#TITRE|supprimer_numero)]
+	</option>
+]
+[(#EXTRA_INFO|=={liste}|?{'',' '})<li>
+	&nbsp; <input type='radio' name='#ENV{name,#CHAMP}' value='#CHOIX' id='input-#ID_FORM-#CHOIX'
+	[(#CHOIX|=={[(#ENV**{valeur}|forms_valeur{#CHAMP})]}|?{'checked="checked"',''})] />
+	<label for='input-#ID_FORM-#CHOIX'>[(#TITRE|supprimer_numero)]</label>
+	</li>]
+	</BOUCLE_choix>
+[(#EXTRA_INFO|=={liste}|?{'</select>','</ul>'})]
+</B_choix>
+</BOUCLE_champs>
+</BOUCLE_f>

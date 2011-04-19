@@ -1,0 +1,20 @@
+	<B_arts>
+	<input type='hidden' name='#ENV{name,#CHAMP}[]' id='art-#ID_FORM-#ID_ARTICLE' value='' />
+	<ul class="choix_articles[ (#ENV{crayon_active,''})]">
+		<BOUCLE_arts(ARTICLES){id_mot} {par titre} {1/2}><li>
+			<input type="[(#ENV{unseul}|choixsiegal{oui,radio,checkbox})]" name="#ENV{name,#ENV{champ}}[]" id="art-#ID_FORM-#ID_ARTICLE" value="#ID_ARTICLE" 
+			[(#ID_ARTICLE|in_any{[(#ENV**{valeur}|forms_valeur{#ENV{champ}})], ''}|?{'checked="checked"',''})] />
+			[<label for="art-#ID_FORM-#ID_ARTICLE">(#TITRE|supprimer_numero)</label>]</li>
+	    </BOUCLE_arts>
+	</ul>
+	</B_arts>
+	<B_arts_suite>
+	<ul class="choix_arts[ (#ENV{crayon_active,''})]">
+		<BOUCLE_arts_suite(ARTICLES){id_mot} {par titre} {2/2}><li>
+			<input type="[(#ENV{unseul}|choixsiegal{oui,radio,checkbox})]" name="#ENV{name,#ENV{champ}}[]" id="art-#ID_FORM-#ID_ARTICLE" value="#ID_ARTICLE" 
+			[(#ID_ARTICLE|in_any{[(#ENV**{valeur}|forms_valeur{#ENV{champ}})], ''}|?{'checked="checked"',''})] />
+			[<label for="art-#ID_FORM-#ID_ARTICLE">(#TITRE|supprimer_numero)</label>]</li>
+	    </BOUCLE_arts_suite>
+	</ul>
+	</B_arts_suite>
+<br class="nettoyeur" />

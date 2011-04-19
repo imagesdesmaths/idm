@@ -1,0 +1,60 @@
+<B_annonces>
+<div class="annonces">
+	<h3 class="menu-titre"><:ap:bientot:></h3>
+	<BOUCLE_annonces(ANNONCES){par date}{inverse}{a_venir}{"<hr />"}>
+	<div class="vevent">
+		<h4 class="summary">#TITRE</h4>
+		<p style="display: block; float: left; height: 0; overflow: auto; width: 0;">
+			[<:ap:du:> <abbr class="dtstart"[ title="(#DATE|date_iso)"]>(#DATE|affdate)</abbr>]
+			[<:ap:au:> <abbr class="dtend"[ title="(#DATE_FIN|date_iso)"]>(#DATE_FIN|affdate)</abbr>]
+		</p>
+		<p>
+			[(#DATE|jolies_dates{#DATE_FIN})]
+		</p>
+		[<p class="location">(#LIEU)</p>]
+		[<div class="description">(#TEXTE)</div>]
+	</div>	
+	</BOUCLE_annonces>
+</div>
+</B_annonces>
+
+<B_annonces2>
+<div class="annonces">
+	<h3 class="menu-titre"><:ap:en_ce_momment:></h3>
+	<BOUCLE_annonces2(ANNONCES){par date}{inverse}{en_cours}{"<hr />"}>
+	<div class="vevent">
+		<h4 class="summary">#TITRE</h4>
+		<p style="display: block; float: left; height: 0; overflow: auto; width: 0;">
+			[<:ap:du:> <abbr class="dtstart"[ title="(#DATE|date_iso)"]>(#DATE|affdate)</abbr>]
+			[<:ap:au:> <abbr class="dtend"[ title="(#DATE_FIN|date_iso)"]>(#DATE_FIN|affdate)</abbr>]
+		</p>
+		<p>
+			[(#DATE|jolies_dates{#DATE_FIN})]
+		</p>
+		[<p class="location">(#LIEU)</p>]
+		[<div class="description">(#TEXTE)</div>]
+		<BOUCLE_cal(RUBRIQUES){id_rubrique}><div><:ap:calendrier_pub:>#TITRE</div></BOUCLE_cal>
+	</div>	
+	</BOUCLE_annonces2>
+</div>
+</B_annonces2>
+
+<B_annonces3>
+<div class="annonces">
+	<h3 class="menu-titre"><:ap:revolus:></h3>
+	<BOUCLE_annonces3(ANNONCES){par date}{inverse}{revolus}{"<hr />"}>
+	<div class="vevent">
+		<h4 class="summary">#TITRE</h4>
+		<p style="display: block; float: left; height: 0; overflow: auto; width: 0;">
+			[<:ap:du:> <abbr class="dtstart"[ title="(#DATE|date_iso)"]>(#DATE|affdate)</abbr>]
+			[<:ap:au:> <abbr class="dtend"[ title="(#DATE_FIN|date_iso)"]>(#DATE_FIN|affdate)</abbr>]
+		</p>
+		<p>
+			[(#DATE|jolies_dates{#DATE_FIN})]
+		</p>
+		[<p class="location">(#LIEU)</p>]
+		[<div class="description">(#TEXTE)</div>]
+	</div>	
+	</BOUCLE_annonces3>
+</div>
+</B_annonces3>

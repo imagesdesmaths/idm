@@ -1,0 +1,15 @@
+[(#REM)
+/******************************************************************
+***  Ce plugin eva_geometrie, créé par Olivier Gautier  ***
+*** 		est mis à disposition sous un ***
+*** contrat GNU/GPL consultable à l'adresse                    ***
+***      http://www.april.org/gnu/gpl_french.html		     ***
+******************************************************************/
+]
+<BOUCLE_geolabodoc(DOCUMENTS){id_document=#ENV**{doc}}{mode=document}{extension==glb}>
+	<applet code="geolabo.geoweb.class" codebase="." archive="#EVAL{_DIR_PLUGIN_EVA_GEOMETRIE}scripts/geoweb.jar" 
+	width="[(#ENV**{largeur}|?{#ENV**{largeur},"100%"})]"
+	height="[(#ENV**{hauteur}|?{#ENV**{hauteur},"500"})]">
+	<param name="figure" value="#URL_DOCUMENT">
+	</applet>
+</BOUCLE_geolabodoc>

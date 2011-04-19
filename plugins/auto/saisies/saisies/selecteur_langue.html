@@ -1,0 +1,12 @@
+[(#REM) 
+	
+  Parametres :
+  - class : classe(s) css ajoutes au select
+  
+  Exemple d'appel :
+	[(#SAISIE{selecteur_langue,lang,
+		label=<:plugin:info_langue:>})] 
+]
+<select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
+[(#VAL{changer_lang}|liste_options_langues{[(#ENV{valeur,''})]})]
+</select>

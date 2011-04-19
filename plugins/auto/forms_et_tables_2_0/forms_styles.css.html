@@ -1,0 +1,11 @@
+[(#REM)
+
+	Charger les css de forms
+
+]#CACHE{7*24*3600,cache-client}
+#HTTP_HEADER{'Content-Type: text/css'}
+[(#INCLURE{spip_forms.css}|forms_ajoute_styles|compacte_css)]
+[(#INCLURE{#CHEMIN{donnee_voir.css}|url_absolue_css}|compacte_css)]
+[(#INCLURE{#CHEMIN{donnees_tous.css}|url_absolue_css}|compacte_css)]
+[(#INCLURE{#CHEMIN{img_pack/date_picker.css}|url_absolue_css}|compacte_css)]
+[(#INCLURE{#CHEMIN{img_pack/jtip.css}|url_absolue_css}|compacte_css)]

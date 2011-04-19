@@ -1,0 +1,16 @@
+<B_sites>
+[<h2>(#GRAND_TOTAL|corbeille_affiche_un_ou_plusieurs{corbeille:sites_corbeille_un,corbeille:sites_corbeille_tous})</h2>]
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class='liste_items sites checkables'>
+<BOUCLE_sites(SYNDIC){statut}{pagination 5}{!par date}{recherche ?}>
+<li class='item'>
+<label for='site-#ID_SYNDIC'><:corbeille:selectionner:></label><input type='checkbox' name='elements[]' value='#ID_SYNDIC'[ (#ID_SYNDIC|in_any{#ENV{elements}}|oui)checked='checked']/>
+<h3>[##ID_SYNDIC - (#NOM_SITE|sinon{<:info_sans_titre:>})]</h3>
+<small>[(#DATE|affdate)][ (#DATE|heures)]:[(#DATE|minutes)]</small>
+- #INTRODUCTION
+<p class='actions'>[<a href='#URL_ECRIRE{sites,id_syndic=#ID_SYNDIC}'><:corbeille:voir:></a>]</p>
+</li>
+</BOUCLE_sites>
+</ul>
+[<p class='pagination'>(#PAGINATION)</p>]
+</B_sites>

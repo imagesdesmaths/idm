@@ -1,0 +1,29 @@
+#CACHE{0}
+#SET{test, #ENV{ar_message}|spam_filtre_de_test}
+#SET{test_ip, #ENV{ar_message}|spam_filtre_de_test_ip{1}}
+<div style='text-align:center; padding:0.4em;'>
+	<fieldset><legend>1. <:couteau:test_manuel:> </legend>
+	<p style='text-align:left;'><:couteauprive:spam_tester_label:></p>
+	<div>
+		<textarea name="ar_message" id="ar_message" style="width:100%;">#ENV{ar_message}</textarea>
+		<input name="test_bd" type="hidden" value="1" />
+		<input name="submit" class='fondo' type='submit' value="<:couteau:lancer_test:>" />
+	</div>
+	</fieldset>
+	[<div style="color:#22BB22; font-weight:bold;">(#GET{test}|=={ok}|oui)<:couteauprive:spam_test_ok:></div>]
+	[<div style="color:darkRed; font-weight:bold;">(#GET{test}|=={ko}|oui)<:couteauprive:spam_test_ko:></div>]
+	[<div style="color:blue; font-weight:bold;">(#GET{test_ip})</div>]
+</div>
+
+[(#REM) Ce separateur va permettre de commencer ici une deuxieme <form/> Ajax )]
+@@CS_FORM@@
+
+<div style='text-align:center; padding:0.4em;'>
+	<fieldset><legend>2. <:couteau:base_donnees:> </legend>
+	<p style='text-align:left;'><:couteauprive:spam_tester_bd:></p>
+	<div style='text-align:left;'><label><input name="statut" class="checkbox" type="checkbox" value="publie" [ checked="(#ENV*{statut}|=={publie}|?{checked})"]/><:couteau:msg_publies:></label></div>
+	<div><input name="submit" class="fondo" type="submit" value="<:couteau:lancer_test:>" /></div>
+	<input id="debut_msg" name="debut_msg" type="hidden" value="0" />
+	</fieldset>
+	[(#ENV{test_bd}|oui)[(#INCLURE{fond=fonds/test_spam_bd}{statut}{debut_msg})]]
+</div>

@@ -1,0 +1,20 @@
+CESTINO SPIP   I
+_______________I
+
+Puoi cancellare i seguenti documenti:
+- brevi rifiutate
+- articoli nel cestino
+- messaggi del forum cancellati
+- autori nel cestino
+- firme delle petizioni giudicate non ricevibili.
+
+La cancellazione elimina il documenti dalla base dati,
+ma non dalla cache sul disco, né dall'indicizzazione effettuata dal motore di ricerca.
+Assicuratevi di cancellare la cache del server e reindicizzate il vostro sito ogni tanto (ogni mese, 2 o 6 mesi ad esempio).
+
+prossime aggiunte : a voi le proposte
+
+Matthieu ONFRAY
+email : silicium@japanim.net
+site : www.japanim.net
+

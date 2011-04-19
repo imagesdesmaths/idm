@@ -1,0 +1,19 @@
+#SET{niveau,0}
+#SET{bgch,0}
+#SET{bdte,100000000}
+<BOUCLE_parent(FORMS_DONNEES){id_donnee=#ENV{id_parent,0}}{id_form}>
+#SET{niveau,#NIVEAU|plus{1}} #SET{bgch,#BGCH} #SET{bdte,#BDTE}
+</BOUCLE_parent>
+#SET{pagination,#ENV{id_parent,0}}
+[(#ENV{id_parent,0}|?{'',' '})<div class='liste verdana2'>]
+<B_enfants>
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul><li>
+<BOUCLE_enfants(FORMS_DONNEES){niveau=#GET{niveau}}{bgch>#GET{bgch}}{bdte<#GET{bdte}}{par bgch}{pagination 20 #GET{pagination}}{'</li><li>'}>
+#ID_DONNEE:
+<BOUCLE_champs(FORMS_CHAMPS){id_form}{specifiant=oui}{par rang}{', '}>#LESVALEURS{' '}</BOUCLE_champs>
+<INCLURE{fond=fonds/donnees_tous_arbo}{id_parent=#ID_DONNEE}{id_form}>
+</BOUCLE_enfants>
+</li></ul>
+</B_enfants>
+[(#ENV{id_parent,0}|?{'',' '})</div>]

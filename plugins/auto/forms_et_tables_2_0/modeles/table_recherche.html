@@ -1,0 +1,43 @@
+<INCLURE{fond=formulaires/forms_recherche}{id_form=#ENV{id_table}}{self=#SELF|parametre_url{debut_donnees,0}|parametre_url{id_donnee,0}}>
+#MODELE{donnee,id_donnee=#EVAL{$_GET['id_donnee']}}
+#SET{recherche,#ENV{recherche,#EVAL{_request("recherche")}}}
+#SET{testtri,#ENV{tri,#EVAL{_request("tri")}}}
+#SET{tri,#GET{testtri}|?{#GET{testtri},rang}}
+#SET{collation,#GET{testtri}|?{utf8_polish_ci,''}}
+#SET{senstri,#ENV{senstri,#EVAL{_request("senstri")}}}
+<B_donnees>
+[<p class='pagination'>(#PAGINATION{page})</p>]
+<table class="spip donnees" id='donnees-#ENV{id_table}'>
+<BOUCLE_caption(FORMS){id_form=#ENV{id_table}}><caption>#TITRE</caption></BOUCLE_caption>
+<thead><tr class='row_first'>
+	<th class='neutre'>id</th>
+	<BOUCLE_head(FORMS_CHAMPS){id_form=#ENV{id_table}}{par rang}{listable=oui}>
+		[(#SPECIFIANT|=={oui}|?{'',' '})<th class="neutre">#TITRE</th>]
+		[(#SPECIFIANT|=={oui}|?{' ',''})<th class="[(#GET{tri}|=={#CHAMP}|?{#GET{senstri}|?{headerSortUp,headerSortDown},'header'})]">
+		<a href='[(#SELF|parametre_url{tri,#CHAMP}|parametre_url{senstri,#GET{tri}|=={#CHAMP}?{ #REM|sinon{1}|moins{#GET{senstri}},'0'}})]'>
+		#TITRE</a></th>]
+	</BOUCLE_head>
+</tr></thead>
+<tbody>
+<BOUCLE_donnees(FORMS_DONNEES){id_form=#ENV{id_table}}{id_mot?}{tri_donnee #GET{tri}}{collecte #GET{collation}}{inverse #GET{senstri}}{filtre}{recherche_donnee #GET{recherche}}{pagination 20}>
+	<tr class='[(#_donnees:COMPTEUR_BOUCLE|alterner{row_even,row_odd})]' onmouseover="$(this).activeCrayons()">
+		<td><a href='[(#SELF|parametre_url{id_donnee,#ID_DONNEE}|ancre_url{donnee-#ID_DONNEE})]'><img src='#CHEMIN{img_pack/loupe.png}' alt='#ID_DONNEE' width='16' height='16' /></a></td>
+		<BOUCLE_body(FORMS_CHAMPS){id_form}{par rang}{listable=oui}>
+		<td ><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS{'<br />'}</span></td>
+		</BOUCLE_body>
+	</tr>
+</BOUCLE_donnees>
+</tbody>
+</table>
+<script type="text/javascript"><!--
+var crayons_init_dynamique = true;
+jQuery.fn.activeCrayons = function(){
+	if (typeof cQuery != 'undefined'){
+		cQuery(this).initcrayons();
+	}
+	return this.unbind('mouseover');
+}
+$('.donnee-champ').activeCrayons();
+// -->
+</script>
+</B_donnees>

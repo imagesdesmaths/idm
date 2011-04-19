@@ -1,0 +1,8 @@
+<div class="#ENV{champ_extra}">
+	<strong>#ENV{label_extra}</strong>
+	<BOUCLE_a(AUTEURS){tous}{id_auteur IN (#ENV{valeur_extra}|explode{","})}{", "}>
+	#NOM
+	</BOUCLE_a>
+	(<:cextras:pas_auteur:>)
+	<//B_a>
+</div>

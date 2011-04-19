@@ -1,0 +1,122 @@
+<BOUCLE_form(FORMS){id_form=#ENV{id_form}}>
+<div [style='(#ENV{style,''})']>
+#SET{fieldset,#ENV{champ,''}|?{0,1}} #SET{need_fieldset,1} #SET{date-picker,0}
+[(#ENV{affiche_sondage})
+<fieldset><legend>#TITRE</legend>
+<:forms:sondage_deja_repondu:>
+[(#PUBLIC|=={oui}|?{' '})#RESULTATS_SONDAGE]
+</fieldset>
+]
+<BOUCLE_champs(FORMS_CHAMPS){id_form}{champ?}{tout}{type!=joint}{saisie!=non}{par rang}>
+[(#ENV{affiche_sondage}|?{'',' '})
+	[(#GET{fieldset}|?{' '})
+		[[(#GET{need_fieldset}|?{'','</fieldset>'})]<fieldset class='#CHAMP'><legend>(#TYPE|=={separateur}|?{#TITRE,''})</legend> #SET{need_fieldset,0}]
+		[(#GET{need_fieldset}|?{' '})<fieldset><legend>#_form:TITRE</legend> #SET{need_fieldset,0}]
+	]
+	[(#TYPE|=={separateur}|?{'',' '})
+		<div class='spip_form_champ #CHAMP'>
+			[(#TYPE|=={textestatique}|?{#TITRE,''})]
+			[(#TYPE|=={textestatique}|?{'',' '})
+				#SET{afficher,1}
+				<span class='spip_form_label'>
+					[(#TYPE|match{^(select|multiple|mot)}|?{'',' '})<label for="input-#ID_FORM-#CHAMP">#TITRE</label>]
+					[(#TYPE|match{^(select|multiple|mot)}|?{' ',''})<span class='label'>#TITRE</span>]
+					[<span class='spip_form_label_obligatoire[(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''})obligatoire_oublie]'>
+						(#OBLIGATOIRE|=={oui}|?{<:forms:info_obligatoire_02:>,''})</span>]
+					[(#TITRE|strlen|?{':'})]
+				</span>
+				[<span class="formInfo"><a href="#URL_PAGE{forms_tip,id_form=#ID_FORM&champ=#CHAMP&width=200}" class="jTip" id='aide-#ID_FORM-#CHAMP'>(#AIDE|?{'?'})</a></span>]
+				[<span class='spip_form_label_details'>(#TYPE|forms_label_details)</span>]
+				#SET{type,text}
+				#SET{class,''}
+				[(#TYPE|=={date}|?{' ',''}) #SET{class,date-picker} #SET{date-picker,1}]
+				[(#TYPE|=={password}|?{' ',''}) #SET{type,password} #SET{afficher,0}]
+				[(#TYPE|=={texte}|?{' ',''}) #SET{afficher,0}
+					[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|forms_textarea{10,80,#ENV{name_#CHAMP,#CHAMP},input-#ID_FORM-#CHAMP,[(#OBLIGATOIRE|=={oui}|?{forml,formo}|concat{' ',#ENV{crayon_active,''},' ',#ENV**{erreur}|forms_valeur{#CHAMP}|?{champ_obli_oubli}})],'',#EXTRA_INFO})]
+				]
+				[(#TYPE|=={fichier}|?{' ',''}) #SET{afficher,0}
+					<input type='file' name='#ENV{name_#CHAMP,#CHAMP}' id='input-#ID_FORM-#CHAMP'
+						class='[(#ENV{crayon_active,''})] [(#TYPE) ][(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
+						size='40' />
+					[(#ENV**{valeurs}|forms_valeur{#CHAMP,''})]
+				]
+				[(#TYPE|=={select}|?{' ',''}) #SET{afficher,0}
+					<INCLURE{fond=formulaires/forms_champ_select}{id_form}{champ}{valeur=#ENV**{valeurs}}{name=#ENV{name_#CHAMP,#CHAMP}}{crayon_active=#ENV{crayon_active,''}}>
+				]
+				[(#TYPE|=={multiple}|?{' ',''}) #SET{afficher,0}
+					<INCLURE{fond=formulaires/forms_champ_multiple}{id_form}{champ}{valeur=#ENV**{valeurs}}{name=#ENV{name_#CHAMP,#CHAMP}}{crayon_active=#ENV{crayon_active,''}}>
+				]
+				[(#TYPE|=={mot}|?{' ',''}) #SET{afficher,0}
+					<INCLURE{fond=formulaires/forms_select_mot}{id_form}{id_groupe=#EXTRA_INFO}{champ}{valeur=#ENV**{valeurs}}{name=#ENV{name_#CHAMP,#CHAMP}}{crayon_active=#ENV{crayon_active,''}}>
+				]
+				[(#TYPE|=={articles_mot}|?{' ',''}) #SET{afficher,0}
+					<INCLURE{fond=formulaires/forms_select_article_mot}{id_form}{id_mot=#EXTRA_INFO}{champ}{valeur=#ENV**{valeurs}}{name=#ENV{name_#CHAMP,#CHAMP}}{crayon_active=#ENV{crayon_active,''}}>
+				]
+				[(#REM) tous les autres types sont affiches ici]
+				[(#GET{afficher}|?{' ',''})
+				[(#SET{input,
+					<input type="[(#GET{type})]" name='[(#ENV{name_#CHAMP,#CHAMP})]' id='input-#ID_FORM-#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
+						class='[(#GET{class})] [(#ENV{crayon_active,''})] [(#TYPE) ][(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
+						size='40' />
+				})]
+				[(#GET{input}|forms_input_champs{#ID_FORM,#TYPE,#CHAMP,#EXTRA_INFO,#OBLIGATOIRE,#ENV**})]
+				]
+				[(#TYPE|=={password}|?{' ',''})
+					<input type="[(#GET{type})]" name='[(#ENV{name_#CHAMP,#CHAMP})]' id='input-#ID_FORM-#CHAMP' value=""
+						class='[(#GET{class})] [(#ENV{crayon_active,''})] [(#TYPE) ][(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
+						size='40' />
+					[(#EXTRA_INFO|strlen|?{' '})
+					<span class='nettoyeur'> </span></div><div class='spip_form_champ #CHAMP'>
+					<span class='spip_form_label'>[(#EXTRA_INFO|typo)]
+						[<span class='spip_form_label_obligatoire[(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''})obligatoire_oublie]'>
+						(#OBLIGATOIRE|=={oui}|?{<:forms:info_obligatoire_02:>,''})</span>] :
+					</span>
+					<input type="[(#GET{type})]" name='[(#ENV{name_#CHAMP,#CHAMP})]_confirm' id='input-#ID_FORM-#CHAMP-confirm' value="" 
+							class='[(#GET{class})] [(#ENV{crayon_active,''})] [(#TYPE) ][(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
+							size='40' />
+					]
+				]
+
+				[<span class='erreur'>(#ENV**{erreur}|forms_valeur{#CHAMP})</span>]
+				<span class='nettoyeur'> </span>
+			]
+		</div>
+	]
+]
+</BOUCLE_champs>
+[(#GET{fieldset}|?{' '})
+	[(#GET{need_fieldset}|?{'','</fieldset>'})]
+]
+[(#ENV{champ,''}|?{'',' '})
+[(#ENV{affiche_sondage}|?{'',' '})
+	[(#REM) Piege a robots spammeurs ]
+	<p style='display:none;'><label for="nobotnobot-#ID_FORM"><:antispam_champ_vide:></label>
+	<input type="text" name="nobotnobot" id="nobotnobot-#ID_FORM" value="#ENV{nobotnobot}" size="10" /></p>
+	
+	[(#ENV{affiche_bouton,1}|?{' ',''})
+		<div style='text-align:#LANG_RIGHT' class='spip_bouton'>[<input
+		 (#CONFIG{forms_et_tables}|table_valeur{bouton_image}|?{'',' '}) type="submit" name='Valider' 
+		 value="<:bouton_valider:>" />][<input (#CONFIG{forms_et_tables}|table_valeur{bouton_image}|?{' '}) 
+		 type="image" src='[(#CHEMIN{img_pack/bt-forms_bouton_valider.gif}|sinon{#CHEMIN{img_pack/bt-forms_bouton_valider.png}})]' alt="<:bouton_valider:>" />]
+		</div>
+	]
+]
+]
+<script src="[(#CHEMIN{javascript/jtip.js}|url_absolue)]" type="text/javascript"></script>
+[(#GET{date-picker}|?{' '})
+<script src="[(#CHEMIN{javascript/jquery-dom.js}|url_absolue)]" type="text/javascript"></script>
+<script src="[(#CHEMIN{javascript/datePicker.js}|url_absolue)]" type="text/javascript"></script>
+]
+<script type="text/javascript"><!--
+jQuery('div.spip_forms input.formo').bind('focus',function(){jQuery(this).addClass('formo-focus');});
+jQuery('div.spip_forms input.formo').bind('blur',function(){jQuery(this).removeClass('formo-focus');});
+jQuery('div.spip_forms input.forml').bind('focus',function(){jQuery(this).addClass('forml-focus');});
+jQuery('div.spip_forms input.forml').bind('blur',function(){jQuery(this).removeClass('forml-focus');});
+[(#GET{date-picker}|?{' '})
+	$.datePicker.setDateFormat('dmy','/');
+	[(#INCLURE{fond=formulaires/date_picker_init}|charset2unicode{html}|unicode2charset)]
+	$('input.date-picker').datePicker({startDate:'01/01/1900'});
+]
+//--></script>
+</div>
+</BOUCLE_form>

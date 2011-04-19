@@ -1,0 +1,16 @@
+<B_auteurs>
+[<h2>(#GRAND_TOTAL|corbeille_affiche_un_ou_plusieurs{corbeille:auteurs_corbeille_un,corbeille:auteurs_corbeille_tous})</h2>]
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class='liste_items auteurs checkables'>
+<BOUCLE_auteurs(AUTEURS){statut}{pagination 5}{!par maj}{tout}{recherche ?}>
+<li class='item'>
+<label for='auteur-#ID_AUTEUR'><:corbeille:selectionner:></label><input type='checkbox' name='elements[]' value='#ID_AUTEUR'[ (#ID_AUTEUR|in_any{#ENV{elements}}|oui)checked='checked']/>
+<h3>[##ID_AUTEUR - (#NOM|sinon{<:info_sans_titre:>})]</h3>
+<small>[(#DATE|affdate)][ (#DATE|heures)]:[(#DATE|minutes)]</small>
+- #BIO
+<p class='actions'>[<a href='#URL_ECRIRE{auteur_infos,id_auteur=#ID_AUTEUR}'><:corbeille:voir:></a>]</p>
+</li>
+</BOUCLE_auteurs>
+</ul>
+[<p class='pagination'>(#PAGINATION)</p>]
+</B_auteurs>

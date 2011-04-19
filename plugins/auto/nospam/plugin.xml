@@ -1,0 +1,35 @@
+<plugin>
+<nom>NoSPAM</nom>
+<auteur>Cedric Morin pour [Yterium->www.yterium.net] + Superyms (Traduction)</auteur>
+<icon>img_pack/nospam.png</icon>
+<licence>(c) 2008 GPL</licence>
+<version>0.8.3</version>
+<etat>stable</etat>
+<description><multi>
+[fr]Halte au spam ! Filtrez les spams dans les messages, sans nuisance pour les utilisateurs honn&ecirc;tes.
+[en]Stop spam! Filter spam in messages, without nuisance to honest users.
+[es]Detenga el spam! Filtro de spam en los mensajes, sin molestias a los usuarios honestos.
+[ar]&#1578;&#1608;&#1602;&#1601; &#1575;&#1604;&#1605;&#1578;&#1591;&#1601;&#1604;&#33; &#1601;&#1604;&#1578;&#1585; &#1575;&#1604;&#1576;&#1585;&#1610;&#1583; &#1575;&#1604;&#1605;&#1586;&#1593;&#1580; &#1601;&#1610; &#1575;&#1604;&#1585;&#1587;&#1575;&#1574;&#1604; &#1548; &#1583;&#1608;&#1606; &#1575;&#1586;&#1593;&#1575;&#1580; &#1604;&#1605;&#1587;&#1578;&#1582;&#1583;&#1605; &#1589;&#1575;&#1583;&#1602;.
+[de]SPAM stoppen&#33; Ein Filter ohne Nebenwirkungen f&#252;r ehrliche Nutzer.
+</multi></description>
+<lien>http://www.spip-contrib.net/?rubrique1165</lien>
+<prefix>nospam</prefix>
+<pipeline>
+	<nom>pre_edition</nom>
+	<inclure>nospam_pipelines.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>recuperer_fond</nom>
+	<inclure>nospam_pipelines.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>formulaire_charger</nom>
+	<inclure>nospam_pipelines.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>formulaire_verifier</nom>
+	<inclure>nospam_pipelines.php</inclure>
+</pipeline>
+<categorie>performance</categorie>
+<necessite id="SPIP" version="[2.0.0;]" />
+</plugin>

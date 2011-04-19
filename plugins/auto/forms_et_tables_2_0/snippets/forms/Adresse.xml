@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<forms>
+<form>
+	<id_form>37</id_form>
+	<titre>Adresse</titre>
+	<descriptif><p class="spip">Bloc Adresse France</p></descriptif>
+	<type_form></type_form>
+	<email>a:1:{s:6:"defaut";s:0:"";}</email>
+	<champconfirm></champconfirm>
+	<texte></texte>
+	<moderation>priori</moderation>
+	<public>non</public>
+	<fields>
+		<field>
+			<champ>separateur_1</champ>
+			<rang></rang>
+			<titre>Adresse</titre>
+			<type>separateur</type>
+			<obligatoire></obligatoire>
+			<extra_info></extra_info>
+			<specifiant></specifiant>
+			<public></public>
+			<aide></aide>
+			<html_wrap></html_wrap>
+		</field>
+		<field>
+			<champ>ligne_1</champ>
+			<rang></rang>
+			<titre>Adresse</titre>
+			<type>ligne</type>
+			<obligatoire>oui</obligatoire>
+			<extra_info></extra_info>
+			<specifiant>non</specifiant>
+			<public>non</public>
+			<aide>Nom et numéro de la rue</aide>
+			<html_wrap></html_wrap>
+		</field>
+		<field>
+			<champ>ligne_2</champ>
+			<rang></rang>
+			<titre>Complément d&#8217;adresse</titre>
+			<type>ligne</type>
+			<obligatoire></obligatoire>
+			<extra_info></extra_info>
+			<specifiant>non</specifiant>
+			<public>non</public>
+			<aide></aide>
+			<html_wrap></html_wrap>
+		</field>
+		<field>
+			<champ>code_postal_1</champ>
+			<rang></rang>
+			<titre>Code Postal</titre>
+			<type>code_postal</type>
+			<obligatoire>oui</obligatoire>
+			<extra_info></extra_info>
+			<specifiant></specifiant>
+			<public>oui</public>
+			<aide>Code Postal</aide>
+			<html_wrap></html_wrap>
+		</field>
+		<field>
+			<champ>ligne_3</champ>
+			<rang></rang>
+			<titre>Commune</titre>
+			<type>ligne</type>
+			<obligatoire>oui</obligatoire>
+			<extra_info></extra_info>
+			<specifiant>oui</specifiant>
+			<public>oui</public>
+			<aide>Commune</aide>
+			<html_wrap></html_wrap>
+		</field>
+	</fields>
+</form>
+</forms>

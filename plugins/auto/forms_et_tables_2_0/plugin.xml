@@ -1,0 +1,116 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	<multi>[ar]&#1575;&#1604;&#1575;&#1587;&#1578;&#1605;&#1575;&#1585;&#1575;&#1578;[en]Forms[de]Formulare und Tabellen[fr]Formulaires&amp;Tables[it] Forms[es] Formularios</multi> (SPIP 2.0+)
+	</nom>
+	<icon>img_pack/form-24.png</icon>
+	<auteur>	<!-- Auteur du plugin -->
+		<multi>[ar]&#1575;&#1606;&#1591;&#1608;&#1575;&#1606; &#1576;&#1578;&#1585;&#1608;&#1548; &#1587;&#1610;&#1583;&#1585;&#1610;&#1603; &#1605;&#1608;&#1585;&#1575;&#1606;&#1548; &#1585;&#1610;&#1606;&#1575;&#1578;&#1608;
+		[fr]Antoine Pitrou, Cedric Morin, Renato Formato, Jerome Escoffier (adaptation à SPIP2)
+		[it]Antoine Pitrou, Cedric Morin, Renato Formato, Jerome Escoffier (adaptation à SPIP2)
+		[de]Antoine Pitrou, Cedric Morin, Renato Formato, Jerome Escoffier (Anpassung f&uuml;r SPIP2)
+	       [es]Antoine Pitrou, Cedric Morin, Renato Formato, Jerome Escoffier (adaptation à SPIP2)
+		</multi>
+	</auteur>
+	<version>
+	0.306
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	<multi>
+	[ar]&#1573;&#1583;&#1575;&#1585;&#1577; &#1575;&#1604;&#1575;&#1587;&#1578;&#1605;&#1575;&#1585;&#1575;&#1578; &#1608;&#1578;&#1581;&#1585;&#1610;&#1585;&#1607;&#1575;.
+&#1610;&#1578;&#1610;&#1581; &#1607;&#1584;&#1575; &#1575;&#1604;&#1605;&#1604;&#1581;&#1602; &#1571;&#1610;&#1590;&#1575;&#1611; &#1606;&#1588;&#1585; &#1575;&#1604;&#1575;&#1587;&#1578;&#1591;&#1604;&#1575;&#1593;&#1575;&#1578; &#1608;&#1575;&#1604;&#1578;&#1581;&#1602;&#1610;&#1602;&#1575;&#1578; &#1608;&#1581;&#1601;&#1592; &#1575;&#1604;&#1585;&#1583;&#1608;&#1583; &#1593;&#1604;&#1610;&#1607;&#1575; &#1601;&#1610; &#1602;&#1575;&#1593;&#1585;&#1583; &#1575;&#1604;&#1576;&#1610;&#1575;&#1606;&#1575;&#1578; &#1608;&#1578;&#1581;&#1605;&#1610;&#1604;&#1607;&#1575; &#1576;&#1578;&#1606;&#1587;&#1610;&#1602; CSV
+	[en]editable forms management an administration.
+	This plugin can also publish polls and surveys, store the replies in the database and upload them in CSV format
+      [fr]Gestion et administration de formulaires &#233;ditables.
+	Ce plugin permet &#233;galement la publication de sondages et enqu&#232;tes, la collecte des reponses
+	dans la base de donn&#233;es et le t&#233;l&#233;chargement au format csv. 
+<br /><br />Adaptation SPIP2 :
+<br /><br />Quelques remarques concernant cette adaptation :
+<br /><br />1-champ de type monetaire : 
+<br /><br />l'unite saisie en administration est exploitee uniquement dans le tableau des reponses.
+	Il serait interessant de voir si on ne peut pas laisser un choix a la saisie
+	(soit au moment de la construction du formulaire soit au moment de la saisie par l'utilisateur).
+	Il serait ensuite interessant d'exploiter cette donnee ailleurs (export, suivi des reponses).
+<br /><br />To do : faire ces modifications pour utiliser la donnee monetaire.
+<br /><br />	
+2- nous avons reactive le tableau des resultats (nous ne le voyons pas en SPIP 1.9+ ): 
+<br /><br />Par contre, dans ce tableau les tris sur ‘id’ et ‘date’ marchent. Ca ne marche pas sur les autres champs.
+<br /><br />To do : generaliser le tri sur les autres champs
+<br /><br />	
+3- probleme confirmation d'une reponse a un sondage (a voir)
+<br /><br />la fonction de confirmation d'une reponse dans un sondage est pour l'instant by passee,
+	la reponse est automatiquement valide sans passage par confirmation = attente. Cette fonction
+	doit servir a traiter des  multiple via des robots ou quelque chose comme ça.
+<br /><br />To do : faire marcher cette fonction de confirmation de la reponse, sur SPIP2, et enlever
+	le by pass decrit ci-dessus.
+<br /><br /><a href="http://zone.spip.org/trac/spip-zone/wiki/SpipForms" target="_new">documentation</a> 
+	[it]Gestione ed amministrazione di form modificabili.
+	Questo plugin consente anche la publicazione di sondaggi ed inchieste, la raccolta delle risposte all'interno della base dati e le mette a disposizione per lo scaricamento in formato csv
+      [es]Gesti&oacute;n y administraci&oacute;n de formularios editables.
+	Este plugin tambi&#233;n permite la publicaci&oacute;n de sondeos y encuestas, la colecta de las respuestas en la base de datos y su descarga en formato CSV (Comma Sepparated Variables).
+	[de]Verwaltung und Konfiguration editierbarer Eingabeformulare.
+	Mit diesem Plugin k&ouml;nnen auch Befragungen und Abstimmungen realisiert werden. Die Ergebnisse werden in der Datenbank
+	erfa&szlig;t und k&ouml;nnen als CSV-Datei oder Excel-Datei heruntergeladen werden.
+	</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/Forms-Tables-2-0</lien> <!-- URI de documentation -->
+	<options> <!-- fichier charge a chaque hit -->
+	forms_options.php
+	</options>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	forms_fonctions.php
+	</fonctions>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	public/forms_boucles.php
+	</fonctions>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	public/forms_balises.php
+	</fonctions>
+	<prefix>
+	Forms
+	</prefix>
+	<install>base/forms_upgrade.php</install>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>definir_session</nom>
+	</pipeline>
+	<pipeline>
+		<nom>pre_propre</nom>
+		<action>forms_avant_propre</action>
+		<inclure>forms_filtres.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_propre</nom>
+		<action>forms_apres_propre</action>
+		<inclure>forms_filtres.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>forms_filtres.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>forms_filtres.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<action>affiche_droite</action>
+		<inclure>forms_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>forms_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>forms_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>forms_pipeline.php</inclure>
+	</pipeline>
+	<chemin dir='' />
+	<categorie>communication</categorie>
+</plugin>

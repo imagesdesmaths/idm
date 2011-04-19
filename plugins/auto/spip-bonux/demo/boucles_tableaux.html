@@ -1,0 +1,117 @@
+[(#REM) Attention #ENV est un tableau serialize, et echappe, donc inutilisable
+Preferer #ENV* ]
+<BOUCLE_test10(POUR){tableau #ENV*}>
+#CLE=>#VALEUR<br />
+</BOUCLE_test10>
+<hr />
+
+<BOUCLE_test101(POUR){tableau #ENV*}>
+#CLE=>#VALEUR<br />
+</BOUCLE_test101>
+<hr />
+
+<BOUCLE_test11(POUR){tableau #EVAL{$GLOBALS['_ENV']}}>
+#CLE=>#VALEUR<br />
+</BOUCLE_test11>
+<hr />
+
+<BOUCLE_test12(POUR){tableau #ENV*}{par cle}>
+#CLE=>#VALEUR<br />
+</BOUCLE_test12>
+<hr />
+
+<BOUCLE_test13(POUR){tableau #ENV*}{!par cle}>
+#CLE=>#VALEUR<br />
+</BOUCLE_test13>
+<hr />
+
+<BOUCLE_test14(POUR){tableau #ENV*}{par valeur}>
+#CLE=>#VALEUR<br />
+</BOUCLE_test14>
+<hr />
+
+<BOUCLE_test15(POUR){tableau #ENV*}{!par valeur}>
+#CLE=>#VALEUR<br />
+</BOUCLE_test15>
+<hr />
+
+<B_test16>
+<p>#PAGINATION</p>
+<ul>
+<BOUCLE_test16(POUR){tableau #EVAL{$GLOBALS}}{pagination}{par cle}>
+<li>#CLE=>#VALEUR</li>
+</BOUCLE_test16>
+</ul>
+</B_test16>
+<hr />
+
+
+<BOUCLE_test20(POUR){tableau #EVAL{$GLOBALS['_ENV']}}{cle=PATH}>
+#CLE=>[(#VALEUR|var_export{1})]<br />
+</BOUCLE_test20>
+<hr />
+
+<BOUCLE_test21(POUR){tableau #EVAL{$GLOBALS['_ENV']}}{cle==PATH}>
+#CLE=>[(#VALEUR|var_export{1})]<br />
+</BOUCLE_test21>
+<hr />
+
+<BOUCLE_test22(POUR){tableau #EVAL{$GLOBALS['_ENV']}}{cle IN (PATH,truc)}>
+#CLE=>[(#VALEUR|var_export{1})]<br />
+</BOUCLE_test22>
+<hr />
+<BOUCLE_test24(POUR){tableau #EVAL{$GLOBALS['_ENV']}}{valeur>a}>
+#CLE=>[(#VALEUR|var_export{1})]<br />
+</BOUCLE_test24>
+<hr />
+
+<B_test23>
+<ul><li>
+<BOUCLE_test23(POUR){tableau #EVAL{$GLOBALS}}>
+#CLE=><B_test231><ul>
+<BOUCLE_test231(POUR){tableau #VALEUR}><li>#CLE=><BOUCLE_test232(boucle_test231)></BOUCLE_test232></li></BOUCLE_test231>
+</ul>
+</B_test231>
+#VALEUR</li><//B_test231>
+</BOUCLE_test23>
+</ul>
+</B_test23>
+<hr />
+
+<h2>Tableau GET</h2>
+#SET{test,#ARRAY{1,2,5,6,3,4}}
+<BOUCLE_test30(POUR){tableau #GET{test}}>
+#CLE=>#VALEUR<br />
+</BOUCLE_test30>
+<hr />
+<h3>Par cle</h3>
+<BOUCLE_test31(POUR){tableau #GET{test}}{par cle}>
+#CLE=>#VALEUR<br />
+</BOUCLE_test31>
+<hr />
+<h3>!Par cle</h3>
+<BOUCLE_test32(POUR){tableau #GET{test}}{!par cle}>
+#CLE=>#VALEUR<br />
+</BOUCLE_test32>
+<hr />
+<h3>Par valeur</h3>
+<BOUCLE_test33(POUR){tableau #GET{test}}{par valeur}>
+#CLE=>#VALEUR<br />
+</BOUCLE_test33>
+<hr />
+<h3>!Par valeur</h3>
+<BOUCLE_test34(POUR){tableau #GET{test}}{!par valeur}>
+#CLE=>#VALEUR<br />
+</BOUCLE_test34>
+
+
+<hr />
+Pagination
+#SET{test,#ARRAY{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30}}
+<B_test40>
+	<p class="pagination">#PAGINATION</p>
+<BOUCLE_test40(POUR){tableau #GET{test}}{pagination 5}>
+#CLE=>#VALEUR<br />
+</BOUCLE_test40>
+[#TOTAL_BOUCLE/#GRAND_TOTAL]
+</B_test40>

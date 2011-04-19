@@ -1,0 +1,15 @@
+[(#REM)
+/******************************************************************
+***  Ce plugin eva_geometrie, créé par Olivier Gautier  ***
+*** 		est mis à disposition sous un ***
+*** contrat GNU/GPL consultable à l'adresse                    ***
+***      http://www.april.org/gnu/gpl_french.html		     ***
+******************************************************************/
+]
+<BOUCLE_carzuldoc(DOCUMENTS){id_document=#ENV**{doc}}{mode=document}{extension==zir}>
+<applet archive="#EVAL{_DIR_PLUGIN_EVA_GEOMETRIE}scripts/zirkel.jar" code="rene.zirkel.ZirkelApplet.class"
+width="[(#ENV**{largeur}|?{#ENV**{largeur},"100%"})]"
+height="[(#ENV**{hauteur}|?{#ENV**{hauteur},"500"})]">
+<param name="file" VALUE="#URL_DOCUMENT">
+</applet>
+</BOUCLE_carzuldoc>

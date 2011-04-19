@@ -1,0 +1,29 @@
+ul.sortable {
+	list-style: none;
+	margin: 4px 0 0 0;
+	padding: 2px;
+}
+ul.sortable li
+{
+	margin: 2px;
+	padding: 4px;
+	border: 1px solid #666;
+	clear:both;
+}
+ul.sortable li a {display:block;float:right;}
+ul.sortable li.selected{background: #ccc;	color: #666;border-color:#ccc;}
+ul.sortableactive
+{
+	border: 1px dashed #006600;
+	/*background-color: #003300;*/
+}
+ul.sortablehover
+{
+	border: 1px solid #550000;
+	/*background-color: #330000;*/
+}
+.sorthelper
+{
+	list-style: none;
+	border: 1px dotted #ccc;
+}

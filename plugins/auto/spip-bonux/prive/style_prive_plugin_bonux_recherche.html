@@ -1,0 +1,23 @@
+[(#REM)
+
+	Ce squelette definit les styles pour le formulaire de recherche
+
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+
+/* formulaire_recherche_ecrire */
+
+.formulaire_recherche { margin: 0; padding: 0; background: none; text-align:#GET{right};border:0; }
+.formulaire_recherche * { display: inline; vertical-align: middle; }
+.formulaire_recherche label {display:none;}
+.formulaire_recherche input.text { width: 17em;color:#fff;border:1px solid #fff;background:#GET{foncee};padding:3px;}
+.formulaire_recherche input.image {}
+.formulaire_recherche img {padding:0 0 3px;}

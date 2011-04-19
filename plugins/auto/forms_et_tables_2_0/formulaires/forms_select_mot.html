@@ -1,0 +1,36 @@
+<BOUCLE_G(GROUPES_MOTS){id_groupe=#ENV{id_groupe}}{unseul!=oui}>
+	<B_mots>
+	<input type='hidden' name='#ENV{name,#CHAMP}[]' id='mot-#ID_FORM-0' value='' />
+	<ul class="choix_mots[ (#ENV{crayon_active,''})]">
+		<BOUCLE_mots(MOTS){id_groupe} {par titre} {1/2}><li>
+			<input type="[(#ENV{unseul}|choixsiegal{oui,radio,checkbox})]" name="#ENV{name,#ENV{champ}}[]" id="mot-#ID_FORM-#ID_MOT" value="#ID_MOT" 
+			[(#ID_MOT|in_any{[(#ENV**{valeur}|forms_valeur{#ENV{champ}})], ''}|?{'checked="checked"',''})] />
+			[<label for="mot-#ID_FORM-#ID_MOT">(#TITRE|supprimer_numero)</label>]</li>
+	    </BOUCLE_mots>
+	</ul>
+	</B_mots>
+	<B_mots_suite>
+	<ul class="choix_mots[ (#ENV{crayon_active,''})]">
+		<BOUCLE_mots_suite(MOTS){id_groupe} {par titre} {2/2}><li>
+			<input type="[(#ENV{unseul}|choixsiegal{oui,radio,checkbox})]" name="#ENV{name,#ENV{champ}}[]" id="mot-#ID_FORM-#ID_MOT" value="#ID_MOT" 
+			[(#ID_MOT|in_any{[(#ENV**{valeur}|forms_valeur{#ENV{champ}})], ''}|?{'checked="checked"',''})] />
+			[<label for="mot-#ID_FORM-#ID_MOT">(#TITRE|supprimer_numero)</label>]</li>
+	    </BOUCLE_mots_suite>
+	</ul>
+	</B_mots_suite>
+</BOUCLE_G>
+	<BOUCLE_G2(GROUPES_MOTS){id_groupe=#ENV{id_groupe}}>
+		<B_mots2>
+		<select name='#ENV{name,#ENV{champ}}' id='mot-#ID_FORM-#ENV{champ}' 
+			class='[(#OBLIGATOIRE|=={oui}|?{fondl,fondo})][ (#ENV{crayon_active,''})]'>
+			<option value=''>[(#_G2:TITRE|supprimer_numero)]</option>
+			<BOUCLE_mots2(MOTS){id_groupe} {par titre}>
+			<option value='#ID_MOT' [(#ID_MOT|=={[(#ENV**{valeur}|forms_valeur{#ENV{champ}})]}|?{'selected="selected"',''})]>
+				&nbsp;&nbsp;&nbsp;[(#TITRE|supprimer_numero)]
+			</option>
+	    </BOUCLE_mots2>
+		</select>
+		</B_mots2>
+	</BOUCLE_G2>
+<//B_G>
+<br class="nettoyeur" />

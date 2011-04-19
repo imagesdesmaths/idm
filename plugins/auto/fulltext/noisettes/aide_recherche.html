@@ -1,0 +1,48 @@
+<div id="aide_recherche">
+	<style>#aide_recherche input.text {max-width:100%;}</style>
+	<h2 class="h2"><:fulltext:fonctionnement_recherche:></h2>
+	<div class="texte">
+		<p><:fulltext:casse_indifferente:></p>
+		<p><:fulltext:accents_pas_pris:></p>
+		<p><:fulltext:utiliser_operateurs_logiques:></p>
+	</div>
+
+	<h3 class="h3"><:fulltext:exemples:></h3>
+		<div class="texte">
+			<p>
+				<input type="text" class="text" value="<:fulltext:enfant:> <:fulltext:etranger:>" size=35 /><br />
+				<:fulltext:retourne:>
+				<ul class="spip">
+					<li> <:fulltext:premier_soit:> &laquo;&nbsp;<:fulltext:enfant:>&nbsp;&raquo;,</li>
+					<li><:fulltext:soit:> &laquo;&nbsp;<:fulltext:etranger:>&nbsp;&raquo;,</li>
+					<li><:fulltext:soit:> &laquo;&nbsp;<:fulltext:enfant:>&nbsp;&raquo; <:fulltext:et:> &laquo;&nbsp;<:fulltext:etranger:>&nbsp;&raquo;.</li>
+				</ul>
+			</p>
+			<p>
+				<input type="text" class="text" value="<:fulltext:enfan:>*" size=35 /><br />
+				<:fulltext:retourne:> &laquo;&nbsp;<:fulltext:enfant:>&nbsp;&raquo;, &laquo;&nbsp;<:fulltext:enfants:>&nbsp;&raquo;, &laquo;&nbsp;<:fulltext:enfance:>&nbsp;&raquo;, &laquo;&nbsp;<:fulltext:enfanter:>&nbsp;&raquo;, &laquo;&nbsp;<:fulltext:enfantillage:>&nbsp;&raquo;.... (&laquo;&nbsp;*<:fulltext:fant:>&nbsp;&raquo; <:fulltext:asterisque_terminale:>.)
+			</p>
+			<p>
+				<input type="text" class="text" value="+<:fulltext:enfant:> +<:fulltext:etranger:>" size=35 /><br />
+				<:fulltext:retourne:> &laquo;&nbsp;<:fulltext:enfant:>&nbsp;&raquo; <:fulltext:et:> &laquo;&nbsp;<:fulltext:etranger:>&nbsp;&raquo;.
+			</p>
+			<p>
+				<input type="text" class="text" value="+<:fulltext:enfant:> <:fulltext:etranger:>" size=35 /><br />
+				<:fulltext:retourne:> &laquo;&nbsp;<:fulltext:enfant:>&nbsp;&raquo;
+				<:fulltext:textes_premier:> <:fulltext:aussi:> &laquo;&nbsp;<:fulltext:etranger:>&nbsp;&raquo;.
+			</p>
+			<p>
+				<input type="text" class="text" value="+<:fulltext:enfant:> -<:fulltext:etranger:>" size=35 /><br />
+				<:fulltext:retourne:> &laquo;&nbsp;<:fulltext:enfant:>&nbsp;&raquo; <:fulltext:mais_pas:> &laquo;&nbsp;<:fulltext:etranger:>&nbsp;&raquo;.
+			</p>
+			<p>
+				<input type="text" class="text" value="+<:fulltext:enfant:> +(><:fulltext:etranger:> <<:fulltext:asie:>)" size=35 /><br />
+				<:fulltext:retourne:> &laquo;&nbsp;<:fulltext:enfant:>&nbsp;&raquo; <:fulltext:et:> &laquo;&nbsp;<:fulltext:etranger:>&nbsp;&raquo;
+				<:fulltext:ou_bien:> &laquo;&nbsp;<:fulltext:enfant:>&nbsp;&raquo; <:fulltext:et:> &laquo;&nbsp;<:fulltext:asie:>&nbsp;&raquo; <:fulltext:textes_premier:> &laquo;&nbsp;<:fulltext:enfant:>&nbsp;&raquo; <:fulltext:et:> &laquo;&nbsp;<:fulltext:etranger:>&nbsp;&raquo;
+			</p>
+			<p>
+				<input type="text" class="text" value="&quot;<:fulltext:enfant:> <:fulltext:etranger:>&quot;" size=35 /><br />
+				<:fulltext:retourne:> <:fulltext:sequence_exacte:> &laquo;&nbsp;<:fulltext:enfant:> <:fulltext:etranger:>&nbsp;&raquo;.
+			</p>
+		</div>
+</div>

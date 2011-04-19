@@ -1,0 +1,16 @@
+<div class='document_utilisations'>
+<B_liens>
+		<h3>[(#TOTAL_BOUCLE|affiche_un_ou_plusieurs{medias:une_utilisation,medias:des_utilisations})]</h3>
+		<ul class='liste_items'>
+			<BOUCLE_liens(documents_liens){id_document}>
+			<li class='item #OBJET'>[(#CHEMIN{images/#OBJET|concat{-12.png}}|tag_img) ][(#ID_OBJET|lien_objet{#OBJET})]
+			[(#VU|=={oui}|oui)
+			[<span class='vu'>(#CHEMIN{images/document-vu-24.png}|tag_img|inserer_attribut{title,<:medias:document_vu:>}|inserer_attribut{alt,<:medias:document_vu:>})</span>]
+			]
+			</li>
+			</BOUCLE_liens>
+		</ul>
+</B_liens>
+<h3><:medias:aucune_utilisation:></h3>
+<//B_liens>
+</div>

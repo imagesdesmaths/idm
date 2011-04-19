@@ -1,0 +1,16 @@
+<B_articles>
+[<h2>(#GRAND_TOTAL|corbeille_affiche_un_ou_plusieurs{corbeille:articles_corbeille_un,corbeille:articles_corbeille_tous})</h2>]
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class='liste_items articles checkables'>
+<BOUCLE_articles(ARTICLES){statut}{pagination 5}{!par date}{recherche ?}>
+<li class='item'>
+<label for='article-#ID_ARTICLE'><:corbeille:selectionner:></label><input type='checkbox' name='elements[]' value='#ID_ARTICLE'[ (#ID_ARTICLE|in_any{#ENV{elements}}|oui)checked='checked']/>
+<h3>[##ID_ARTICLE - (#TITRE|sinon{<:info_sans_titre:>})]</h3>
+<small>[(#DATE|affdate)][ (#DATE|heures)]:[(#DATE|minutes)]</small>
+- #INTRODUCTION
+<p class='actions'>[<a href='#URL_ECRIRE{articles,id_article=#ID_ARTICLE}'><:corbeille:voir:></a>]</p>
+</li>
+</BOUCLE_articles>
+</ul>
+[<p class='pagination'>(#PAGINATION)</p>]
+</B_articles>

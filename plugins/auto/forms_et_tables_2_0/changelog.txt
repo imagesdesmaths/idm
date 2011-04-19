@@ -1,0 +1,34 @@
+- suppression du champ structure de la table spip_forms et gestion directe des tables spip_forms_champs et spip_forms_champs_choix pour l'implementation de la structure du formulaire
+- champ sondage de spip_forms (qui valait 'non','public',ou 'prot') devient type ('', 'sondage-public','sondage-prot' ...)
+- ajout du champ 'moderation' a spip_forms
+- renomage des tables spip_reponses en spip_forms_donnees et spip_reponses_champs en spip_forms_donnees_champs ; id_reponse devient id_donnee
+
+- ajout de la table spip_forms_donnees_articles permettant de lier toute donnee a un article
+
+- ajout des champs sur la table spip_forms_champs
+	'specifiant' => oui/non permet de definir un champ d'une table comme signifiant pour un tri ou un filtre dans l'affichage public
+	'public' => oui/non permet de definir qu'un champ sera visible ou non dans l'affichage de la table dans l'espac epublic
+	'aide' => aide contextuelle lors de la saisie du formulaire
+	'html_wrap' => wrapper du champ lors de son affichage dans l'espace public (utilisable manuellement ou surtout avec les 'formettes'
+
+- le champ statut de FORMS_DONNEES est renomme en 'confirmation' (attente/valide), il sert a confirmer un sondage pour eviter le spam par exemple
+- un champ statut de FORMS_DONNEES est ajoute, qui prend les valeurs propose/publie, pour gerer la moderation des reponses
+
+- la boucle FORMS_DONNEES ne retourne par defaut que les donnees confirmee (confirmation=valide) et publiee (statut=publie) sauf si le critere {tout} est utilise
+- la boucle FORMS_CHAMPS_DONNEES ne retourne par defaut que les donnees des champs public, sauf si le critere {tout} est utilise
+
+- la chaine de langue 'sondage' disparait et est remplacee par 'type_form'
+- ajout des chaines de langue publication_donnees,moderation_donnees, champ_specifiant, champ_public, aide_contextuelle,html_wrapper
+- les chaines de langue sondage_pub et sondage_prot disparaissent et sont remplacees par sondage_oui, donnees_pub et donnees_prot
+
+- ajout de types de champs personalises par etc/forms_types_champs.xml
+- export xml des formulaires
+- import xml d'un formulaire en tant que nouveau formulaire
+- ajout de la chaine de langue importer_form
+- modif de la chaine de langue boite_info
+
+- ajaxisation de toute la saisie des formulaires
+- ajout des chaines de langue format_liste_ou_radio, format_liste, format_radio, date_invalide
+- presentation des choix liste/radio configurable
+- ajout des chaines de langue afficher,editer,exporter,vider,supprimer, toutes_tables,icone_creer_table
+- Cédric Despres (07/02/2007): différenciation des modeles de mails envoyés à l'admin et en mail de confirmation 

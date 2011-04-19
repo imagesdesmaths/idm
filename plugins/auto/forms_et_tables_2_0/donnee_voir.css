@@ -1,0 +1,27 @@
+span.donnees{
+	display: block;
+	border-left: 5px solid #999;
+	padding-left: 1em;
+	padding-top: 1em;
+	border-bottom: 1px dashed #666;
+	padding-bottom: 0.4em;
+	overflow:hidden;	
+}
+
+span.donnee-champ {
+	display: block;
+	clear: left;
+}
+span.donnee-champ-label {
+	width: 150px;
+	display: block;
+	float: left;
+}
+
+span.donnee-champ-data {
+	display: block;
+	margin-left: 160px;
+}
+span.nettoyeur{
+	clear: both;
+}

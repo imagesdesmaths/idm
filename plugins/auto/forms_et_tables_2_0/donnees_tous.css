@@ -1,0 +1,88 @@
+div.liste { clear:both;width:auto; }
+.highlight {
+	background-color: #3D3D3D;
+	font-weight: bold;
+}
+.donnees th {
+	vertical-align:middle;
+	background-repeat: no-repeat;
+	border-left: 1px solid #FFF;
+	border-right: 1px solid #000;
+	border-top: 1px solid #FFF;
+	height: auto;
+	padding:0px;
+	margin:0px;
+	height:34px;
+}
+.donnees th.neutre {padding-left: 0px;background: url(img_pack/header.png) repeat-x left bottom;	}
+.donnees th.header {padding-left: 15px;background: url(img_pack/header-bg.png) no-repeat left bottom;	}
+.donnees th.headerSortUp {padding-left: 15px;background: url(img_pack/header-asc.png) no-repeat left bottom;	}
+.donnees th.headerSortDown {padding-left: 15px;background: url(img_pack/header-desc.png) no-repeat left bottom;}
+
+.donnees td .numerique {width:100%; text-align:right;display:block;}
+#sorting div {
+	font-weight: bold;
+}
+#filter {
+	text-align: left;
+	width: auto;
+	padding: 5px;
+	background-color: transparent;
+	border: 1px solid #888;
+	display: none;
+	float: right;
+}
+#filter input {
+}
+#filter p {
+	text-align: left;
+	padding: 5px;
+	margin:0px;
+	float: left;
+}
+#filter div {
+	text-align: center;
+	float: left;
+}
+
+.filterIcon {
+	width: 20px;
+	height: 16px;
+	text-align: center;
+	background: url(filter.gif) no-repeat center left; 
+	float: right;
+	cursor: pointer;
+}
+.sorter {
+	padding-right: 10px;
+	text-decoration: underline;
+	cursor: pointer;
+	float:left;	
+}
+
+
+div.puce_forms_donnee {
+	position: relative; 
+	height: 11px; 
+	width: 11px;
+}
+
+div.puce_forms_donnee_fixe {
+	position: absolute;
+}
+
+div.puce_forms_donnee_popup {
+	position: absolute;
+	visibility: hidden;
+	margin-top: -1px; top: 0; 
+	border: 1px solid #666; 
+	background-color: #ccc; z-index: 10; 
+}
+div.puce_forms_donnee_popup img {
+	padding: 1px;
+	border: none;
+}
+
+div.puce_forms_donnee_popup {
+	width: 45px; 
+}

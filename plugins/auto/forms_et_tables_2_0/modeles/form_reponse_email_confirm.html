@@ -1,0 +1,8 @@
+<BOUCLE_reponses(FORMS_DONNEES){id_donnee}{tout}>
+<BOUCLE_form(FORMS){id_form}>[(#TEXTE|supprimer_tags)]
+<:forms:reponse_envoyee:> [(#DATE|affdate)]
+<:forms:reponse_depuis:> [(#URL|url_absolue)]
+<BOUCLE_champs(FORMS_CHAMPS){tout}{id_form}{par rang}>
+[(#TITRE|supprimer_tags)] : [(#LESVALEURS{','}|supprimer_tags)] </BOUCLE_champs>
+</BOUCLE_form>
+</BOUCLE_reponses>

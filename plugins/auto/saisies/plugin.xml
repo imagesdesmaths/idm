@@ -1,0 +1,51 @@
+<plugin>
+    <nom><multi>[fr]Saisies pour formulaires[en]Entries for forms</multi></nom>
+    <auteur>Matthieu Marcillaud - RastaPopoulos - Joseph</auteur>
+    <licence>&#169; 2009 GNU/GPL</licence>
+    <version>1.8.13</version>
+    <etat>test</etat>
+    <categorie>outil</categorie>
+    
+    <description>
+	<multi>
+	[fr]
+    Ce plugin permet de faciliter l'&eacute;criture de champs de formulaires en proposant une
+    balise #SAISIE. Le HTML g&eacute;n&eacute;r&eacute; est compatible avec la nomenclature des formulaires
+    propos&eacute; par SPIP 2.0 et avec le plugin de configuration CFG.
+    
+    Un certain nombre de saisies utilisent pour fonctionner d'autres extensions. 
+    SPIP Bonux est ainsi indispensable pour les s&eacute;lecteurs ou les listes d'&eacute;l&eacute;ments
+	[en]
+	This plugin makes it easier to write form fields by providing a #SAISIE tag. 
+	The generated HTML is compatible with the classification of forms
+    proposed by SPIP 2.0 and with the configuration plugin CFG.
+    
+    A number of enteries/writings to operate need to use other extensions.
+    SPIP Bonux is therefore essential for the selectors or lists of elements
+	</multi>
+    </description>
+    
+    <lien></lien>
+    <prefix>saisies</prefix>
+    <icon>images/logo_saisie_48.png</icon>
+    
+    <fonctions>balise/saisie.php</fonctions>
+    <fonctions>inc/saisies.php</fonctions>
+
+    <pipeline>
+    	<nom>header_prive</nom>
+    	<inclure>saisies_pipelines.php</inclure>
+    </pipeline>
+    <pipeline>
+    	<nom>affichage_final</nom>
+    	<inclure>saisies_pipelines.php</inclure>
+    </pipeline>
+		<pipeline>
+			<nom>saisies_autonomes</nom>
+			<inclure>saisies_pipelines.php</inclure>
+		</pipeline>
+    
+	<necessite id="SPIP" version="[2.0;]" />
+	<utilise id="verifier" />
+	<salvatore module="saisies" reference="fr" />
+</plugin>

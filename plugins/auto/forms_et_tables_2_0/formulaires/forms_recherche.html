@@ -1,0 +1,21 @@
+#SET{valeurs,#EVAL{$_REQUEST}|serialize}#SET{url,#ENV{self,#SELF}|parametre_url{recherche,''}|parametre_url{submit,''}}
+<form action='#SELF' method='get'>
+<fieldset class='recherche spip_forms'><legend><:info_rechercher:></legend>
+<label for="recherche"><:info_rechercher:></label>
+<input type="text" class="forml" name="recherche" id="recherche" value="[(#ENV{recherche,#EVAL{_request("recherche")}}|sinon{''})]" />
+<B_filtre>
+<br />
+[(#GET{url}|form_hidden)]
+<BOUCLE_filtre(FORMS_CHAMPS){id_form}{par rang}{specifiant=oui}{type IN (select,multiple,mot)}>
+[(#INCLURE{fond=formulaires/forms_structure}{id_form}{champ}{valeurs=#GET{valeurs}})]
+#SET{url,#GET{url}|parametre_url{#CHAMP,''}}
+#SET{url,#GET{url}|parametre_url{(#CHAMP|concat{ #EVAL{chr(91)},#EVAL{chr(93)}}),''}}
+</BOUCLE_filtre>
+[(#GET{url}|parametre_url{submit,''}|form_hidden)]
+<//B_filtre>
+<div style='text-align:#LANG_RIGHT' class='spip_bouton'><input type="submit" name='submit' value="<:info_rechercher:>" /></div>
+<p>
+<a href='#GET{url}'><:info_tout_afficher:></a>
+</p>
+</fieldset>
+</form>

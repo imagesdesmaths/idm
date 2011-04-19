@@ -1,0 +1,28 @@
+#apercu_gauche {
+	margin-top:0.5em;
+	font-size:xx-small;
+}
+#apercu_gauche .spip_barre{display:none;}
+#apercu_gauche textarea{height:4em;}
+
+#apercu .descriptif,
+#apercu .champconfirm,
+#apercu .email,
+#apercu .texte,
+ {
+	border: 1px dashed #aaaaaa;
+}
+.sortChampsHelper{
+min-height:5em;
+margin:15px;
+border : 1px dashed grey;
+background:white;
+}
+.sortChoixHelper{
+min-height:2em;
+margin:15px;
+border : 1px dashed grey;
+}
+.forms_edit .cadre-formulaire .titrem {
+margin-left:24px;
+}

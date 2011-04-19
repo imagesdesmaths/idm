@@ -1,0 +1,35 @@
+#CACHE{0}
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.formulaire_editer_corbeille {background:none;border:none;}
+.formulaire_editer_corbeille ul.checkables li {padding-#GET{left}:30px;}
+.formulaire_editer_corbeille ul.checkables li label {position:absolute;top:-10000px;left:-2000px;float:none;margin:0;padding:0;}
+.formulaire_editer_corbeille ul.checkables li input {margin-#GET{left}:-30px;float:#GET{left};position:relative;display:inline;}
+
+#liste-articles .formulaire_editer_corbeille h2 {padding:5px;padding-#GET{left}:30px;background:url(#CHEMIN{#EVAL{_DIR_IMG_PACK}|concat{article-24.gif}}) no-repeat center left;}
+#liste-auteurs .formulaire_editer_corbeille h2 {padding:5px;padding-#GET{left}:30px;background:url(#CHEMIN{#EVAL{_DIR_IMG_PACK}|concat{auteur-24.gif}}) no-repeat center left;}
+#liste-breves .formulaire_editer_corbeille h2 {padding:5px;padding-#GET{left}:30px;background:url(#CHEMIN{#EVAL{_DIR_IMG_PACK}|concat{breve-24.gif}}) no-repeat center left;}
+#liste-messages .formulaire_editer_corbeille h2 {padding:5px;padding-#GET{left}:30px;background:url(#CHEMIN{#EVAL{_DIR_IMG_PACK}|concat{messagerie-24.gif}}) no-repeat center left;}
+#liste-forums_publics .formulaire_editer_corbeille h2 {padding:5px;padding-#GET{left}:30px;background:url(#CHEMIN{#EVAL{_DIR_IMG_PACK}|concat{forum-public-24.gif}}) no-repeat center left;}
+#liste-forums_prives .formulaire_editer_corbeille h2 {padding:5px;padding-#GET{left}:30px;background:url(#CHEMIN{#EVAL{_DIR_IMG_PACK}|concat{forum-interne-24.gif}}) no-repeat center left;}
+#liste-sites .formulaire_editer_corbeille h2 {padding:5px;padding-#GET{left}:30px;background:url(#CHEMIN{#EVAL{_DIR_IMG_PACK}|concat{site-24.gif}}) no-repeat center left;}
+#liste-signatures .formulaire_editer_corbeille h2 {padding:5px;padding-#GET{left}:30px;background:url(#CHEMIN{#EVAL{_DIR_IMG_PACK}|concat{suivi-petition-24.gif}}) no-repeat center left;}

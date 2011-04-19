@@ -1,0 +1,93 @@
+#CACHE{0}
+<BOUCLE_form(FORMS){id_form}>#SET{documents,#DOCUMENTS|=={oui}|?{' '}}#SET{type_form,#ENV{type_form,#TYPE_FORM}}</BOUCLE_form>
+
+[(#REM) definir un id unique foncion de id_form et des status affiches]
+#SET{id,#ENV*{statuts}|serialize|md5|concat{_,#ID_FORM}}
+[(#ENV{colonne_extra_titre,''}|?{' '})
+	#SET{colonne_extra_titre,#ENV*{colonne_extra_titre}|supprimer_tags|attribut_html|trim}
+	[(#GET{colonne_extra_titre}|?{'',' '})#SET{colonne_extra_titre,#ENV*{colonne_extra_titre}|extraire_attribut{alt}}]
+]
+[(#GET{type_form}|match{^sondage|$}|?{#SET{tri,#ENV{tri,rang}},#SET{tri,#ENV{tri,date}}})]
+#SET{senstri,#ENV{senstri,0}}
+<B_donnees>
+	<link rel="stylesheet" type="text/css" href="[(#EVAL{_DIR_PLUGIN_FORMS}|concat{donnees_tous.css}|url_absolue)]" />
+	<script type="text/javascript" src="#EVAL{_DIR_PLUGIN_FORMS}javascript/jquery.tablesorter.dev.js"></script>
+<div class='liste'>
+<div style='position: relative;'>
+	<div style='position: absolute; top: -12px; left: 3px;'><img src='#CHEMIN{img_pack/#GET{type_form}|concat{-24.png}}' alt="" /></div>
+	<div style='background-color: #ENV{couleur_claire}; color: black; padding: 3px; padding-left: 30px; border-bottom: 1px solid #444444;' class='verdana2'>
+	<b>#ENV*{titre_liste}</b>
+	<div class='pagination' >#PAGINATION</div>
+	</div>
+</div>
+<table class="arial11 donnees" id='donnees_#GET{id}' width='100%' cellpadding='5' cellspacing='0' border='0'>
+<thead>
+	<tr>
+		<th class='neutre' style='width:12px'></th>
+		<th class="[(#GET{tri}|=={id_donnee}|?{#GET{senstri}|?{headerSortUp,headerSortDown},'header'})]">
+		<a href='[(#SELF|parametre_url{tri,id_donnee}|parametre_url{senstri,#GET{tri}|=={id_donnee}?{ #REM|sinon{1}|moins{#GET{senstri}},'0'}})]'>
+		id</a></th>
+		[(#ENV{affiche_rang,1}|?{' '})<th class="[(#GET{tri}|=={rang}|?{#GET{senstri}|?{headerSortUp,headerSortDown},'header'})]">
+		<a href='[(#SELF|parametre_url{tri,rang}|parametre_url{senstri,#GET{tri}|=={rang}?{ #REM|sinon{1}|moins{#GET{senstri}},'0'}})]'>
+		Rang</a></th>]
+		[(#ENV{affiche_date,1}|?{' '})<th class="[(#GET{tri}|=={date}|?{#GET{senstri}|?{headerSortUp,headerSortDown},'header'})]">
+		<a href='[(#SELF|parametre_url{tri,date}|parametre_url{senstri,#GET{tri}|=={date}?{ #REM|sinon{1}|moins{#GET{senstri}},'0'}})]'>
+		Date</a></th>]
+		[(#ENV{affiche_de,1}|?{' '})<th class='neutre'>De</th>]
+		<BOUCLE_head(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{listable_admin=oui}{tout}{par rang}>
+		[(#SPECIFIANT|=={oui}|?{'',' '})<th class="neutre">#TITRE</th>]		
+		[(#SPECIFIANT|=={oui}|?{' ',''})<th class="[(#GET{tri}|=={#CHAMP}|?{#GET{senstri}|?{headerSortUp,headerSortDown},'header'})]">
+		<a href='[(#SELF|parametre_url{tri,#CHAMP}|parametre_url{senstri,#GET{tri}|=={#CHAMP}?{ #REM|sinon{1}|moins{#GET{senstri}},'0'}})]'>
+		#TITRE</a></th>]
+		</BOUCLE_head>
+		[(#GET{documents})<th class='neutre'>&nbsp;</th>]
+		[(#ENV{colonne_extra_titre,''}|?{' '})
+		<th class='neutre'>&nbsp;</th>]
+		</B_head>
+	</tr>
+</thead>
+<tbody>
+<BOUCLE_donnees(FORMS_DONNEES){statut IN #ENV*{statuts}}{id_form}{tri_donnee #GET{tri}}{inverse #ENV{senstri,0}}{recherche_donnee}{pagination 20}{fusion id_donnee}>
+#SET{lien_supp,#URL_ACTION_AUTEUR{forms_donnee_supprime,#ID_FORM:#ID_DONNEE,#EVAL{_DIR_RESTREINT_ABS}|concat{#SELF}|urlencode}}
+#SET{lien_edit,''}
+[(#REM|?{'','modifier'}|autoriser{'donnee',#ID_DONNEE}|?{' '})
+#SET{lien_edit,#ENV{lien_edit,#URL_ECRIRE{donnees_edit,id_form=#ID_FORM}}|parametre_url{id_donnee,#ID_DONNEE}|parametre_url{retour,#SELF} }
+]
+	<tr class='tr_liste' onmouseover='$(this).activeCrayons();'>
+		<td>[(#ID_DONNEE|forms_puce_statut_donnee{#STATUT,#ID_FORM})]</td>
+		<td>[<a href='(#GET{lien_edit})'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/loupe.png' alt='' width='16' height='16' style='vertical-align:middle' /></a><a href='#GET{lien_edit}'>]#ID_DONNEE[(#GET{lien_edit}|?{' '})</a>]</td>
+		[(#ENV{affiche_rang,1}|?{' '})<td>#RANG</td>]
+		[(#ENV{affiche_date,1}|?{' '})<td>#DATE</td>]
+		<BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}>[(#ENV{affiche_de,1}|?{' '})<td>#NOM</td>]</BOUCLE_auteur>[(#ENV{affiche_de,1}|?{' '})<td>#ID_AUTEUR:#IP</td>]<//B_auteur>
+		<BOUCLE_body(FORMS_CHAMPS){id_form}{tout}{type !IN (separateur,textestatique)}{listable_admin=oui}{par rang}>
+		<td><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS{'<br />'}</span></td>
+		</BOUCLE_body>
+		[(#GET{documents})<td>]
+		<BOUCLE_docs(DOCUMENTS){id_donnee}{0,1}>
+		[(#GET{documents}|?{'',' '})<td>]
+		<a href='#GET{lien_edit}'>#SET{src,#EVAL{_DIR_IMG_PACK}|concat{attachment.gif}}<img src='#GET{src}' largeur='' hauteur='' alt='<:titre_documents_joints:>' /></a>
+		[(#GET{documents}|?{'',' '})</td>]
+		</BOUCLE_docs>
+		[(#GET{documents})</td>]
+		[(#ENV{colonne_extra_titre,''}|?{' '})
+		<td><a href='[(#ENV{colonne_extra_url}|parametre_url{id_donnee,#ID_DONNEE})]' title='#GET{colonne_extra_titre}'>#ENV*{colonne_extra_titre}</a></td>]
+	</tr>
+</BOUCLE_donnees>
+</tbody>
+</table>
+</div>
+	<script type="text/javascript"><!--
+	var crayons_init_dynamique = true;
+	jQuery.fn.activeCrayons = function(){
+		if (typeof cQuery != 'undefined'){
+			cQuery(this).initcrayons();
+		}
+		return this.unbind('mouseover');
+	}
+	// -->
+	</script>	
+</B_donnees>
+<div class='verdana2' style='text-align:center;'>
+#ENV*{aucune_reponse}
+</div>
+<//B_donnees>

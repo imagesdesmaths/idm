@@ -1,0 +1,12 @@
+<BOUCLE_reponses(FORMS_DONNEES){id_donnee}{tout}>
+<BOUCLE_form(FORMS){id_form}>[(#TEXTE|supprimer_tags)]
+[(#ENV{mail_admin}|=={'oui'}|?{' ',''})
+<:forms:formulaire:> #TITRE
+<:forms:reponse_retrovez:> #URL_ECRIRE{forms_reponses,id_form=#ID_FORM}
+]
+<:forms:reponse_envoyee:> [(#DATE|affdate)]
+<:forms:reponse_depuis:> [(#URL|url_absolue)]
+<BOUCLE_champs(FORMS_CHAMPS){tout}{id_form}{par rang}>
+[(#TITRE|supprimer_tags)] : [(#LESVALEURS{','}|supprimer_tags)] [(#TYPE|=={fichier}|?{' '})	[(#ENV{mail_admin}|=={'oui'}|?{' ',''}) #URL_ECRIRE{forms_telecharger,id_donnee=#ID_DONNEE&champ=#CHAMP} ] ]</BOUCLE_champs>
+</BOUCLE_form>
+</BOUCLE_reponses>

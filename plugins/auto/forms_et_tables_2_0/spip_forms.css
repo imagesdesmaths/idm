@@ -1,0 +1,242 @@
+.spip_forms form label {
+	float:none;
+}
+.spip_forms h2 {
+	margin:.2em;
+	color:#543E29;
+}
+.spip_forms {
+	color: black;
+	margin: 0px;
+	margin-bottom: 16px;
+	padding: 6px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	border-left: 3px solid #963;
+}
+.spip_forms form {
+	border:0;
+	margin:0;
+	padding:.5em 0 0 0;
+}
+.spip_forms div.spip_descriptif {
+	border:0;
+	margin:0;
+	clear:both;
+}
+.spip_forms h3 {
+	float:none;text-align:left;
+}
+.spip_forms legend {
+	font-size:1.15em;
+	padding:5px;
+}
+.spip_forms .spip_form_champ {
+	margin-bottom: 0;
+	display: block;
+	clear: both;
+	margin-top: 1em;
+}
+.spip_forms .spip_form_label {
+  	font-weight: bold;
+  	text-align:left;
+  	color:#494949;
+	display: block;
+}
+.spip_forms .spip_form_label label,
+.spip_forms .spip_form_label .label {
+	text-align:left;
+  	font-weight: bold;
+  	color:#494949;
+}
+.spip_forms .spip_form_label_obligatoire {
+	font-weight: normal;
+	font-style:italic;
+	font-size:.9em;
+}
+.spip_forms .obligatoire_oublie {
+	color:red;
+}
+.spip_forms .spip_form_label_details{
+	display:block;
+	font-style:italic;
+	text-align:left;
+}
+
+.spip_forms .spip_form_choix_multiple {
+	display:block;
+}
+
+.spip_forms .spip_form_choix_unique input, .spip_forms .spip_form_choix_unique input.fondo, .spip_forms .spip_form_choix_unique input.fondl {
+	width:auto;
+}
+
+.spip_forms .spip_form_choix_unique label {
+	margin:0 0 5px 0;
+}
+
+.spip_forms .spip_form_choix_multiple input, .spip_forms .spip_form_choix_multiple input.fondo, .spip_forms .spip_form_choix_multiple input.fondl, ul.choix_mots li input {
+	width:auto;
+	margin:0 5px 0 0;
+}
+.spip_forms ul.choix_mots,.spip_forms ul.spip_form_choix_multiple,.spip_forms ul.spip_form_choix_unique{
+list-style:none;float:left;padding-left:5px;width:45%;
+}
+
+.spip_forms .spip_sondage {
+	margin: auto;
+}
+
+.spip_forms .spip_form_erreur {
+	font-weight:bold;
+	color:red;
+}
+.spip_forms .spip_form_ok {
+	font-weight: bold;
+	background:#262626;
+	color:#F1F1F1;
+	margin: 1em 0 0 0;
+	padding: .6em;
+}
+.spip_forms .spip_form_ok a {
+	color:#FFF9E2;
+}
+.spip_forms .spip_form_ok a:hover {
+	color:#DEB55E;
+}
+.spip_forms .spip_form_ok_confirmation{
+	display:block;
+}
+.spip_forms .spip_sondage strong {
+	display:block;
+	clear:both;
+	margin-left:5px;
+	color:#494949;
+}
+.spip_forms .spip_sondage .ligne_nom {
+	width:19%;
+	text-align:right;
+	padding-right:1%;
+}
+.spip_forms .spip_sondage .ligne_nom:after {
+	content:" :";
+}
+.spip_forms .spip_sondage .ligne.chiffres {
+	color:#525252;
+}
+.spip_forms .spip_sondage .ligne_barre {
+	height: 16px;
+	background: url(ligne.gif) repeat-x;
+	border: 1px solid black;
+	width:80%;
+}
+.spip_forms .spip_sondage .sondage_table {
+	display: table;
+	width:100%;
+}
+.spip_forms .spip_sondage .sondage_ligne {
+	display: table-row;
+}
+.spip_forms .spip_sondage .sondage_ligne > div {
+	display: table-cell;
+	vertical-align: middle;
+	padding: 2px;
+	white-space: nowrap;
+}
+.spip_forms .forml, .spip_forms .formo {
+	width:85%;
+	border-bottom:solid 1px #E2CEC1;
+	border-right:solid 1px #E2CEC1;
+	border-top:1px solid #AF896F;
+	border-left:1px solid #AF896F;
+	font-size:1em;
+	padding:.25em;
+}
+.spip_forms .forml, .spip_forms .fondl {
+	background: #FFFDE7;
+	color:#4A4336;
+	width:85%;
+}
+.spip_forms .formo, .spip_forms .fondo {
+	background-color: white;
+	color:#4A4336;
+	width:85%;
+}
+.spip_forms .champ_obli_oubli {
+	border:2px solid red;
+}
+.spip_forms form .forml-focus, .spip_forms form input.forml-focus:focus, .spip_forms form textarea.forml-focus:focus, .forml-focus {
+	border-bottom:solid 1px #C9AB97;
+	border-right:solid 1px #C9AB97;
+	border-top:1px solid #81593E;
+	border-left:1px solid #81593E;
+	background: #FFF2C8;
+	color:#433817;
+	font-weight:normal;
+	font-size:1em;
+	padding:.25em;
+	width:85%;
+}
+.spip_forms form .formo-focus, .spip_forms form input.formo-focus:focus, .spip_forms form textarea.formo-focus:focus, .spip_forms .formo-focus {
+	border-bottom:solid 1px #C9AB97;
+	border-right:solid 1px #C9AB97;
+	border-top:1px solid #81593E;
+	border-left:1px solid #81593E;
+	background:#FFF9EE ;
+	color:#433817;
+	font-weight:normal;
+	font-size:1em;
+	padding:.25em;
+	width:85%;
+}
+.spip_forms form .champ_obli_oubli-focus, form input.champ_obli_oubli-focus:focus, form textarea.champ_obli_oubli-focus:focus {
+	border-top:solid 2px #980F1B;
+	border-left:solid 2px #980F1B;
+	border-bottom:2px solid #F3192B;
+	border-right:2px solid #F3192B;
+	background: #FFF2C8;
+	color:#4D161B;
+	font-weight:normal;
+	font-size:1em;
+	padding:.25em;
+}
+.spip_forms .spip_bouton input {
+	border: 1px solid #563033;
+	cursor:pointer;
+	padding:.4em;
+	background:#F0E6DC;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	font-size:1em;
+	width:100px ;
+	color:#4A4336;
+}
+.spip_forms fieldset {
+	border: 1px none #8F8181;
+	padding: .4em .4em .4em 1em;
+	margin:.5em 0 .5em 0;
+	border-top-style: dashed;
+	border-left: 6px solid #c96;
+	border-top-color: #c96;
+}
+.spip_forms a.resultats_sondage {
+	display:block;
+	float:right;
+	background:#FFFBED;
+	color:#444040;
+	padding:.2em;
+	border:1px solid #A07D7A;
+	text-decoration:none;
+}
+.spip_forms a.resultats_sondage:hover {
+	background:#444040;
+	color:#F8F5EC;
+	text-decoration:none;
+}
+.spip_forms p.spip_form_ok, .spip_forms p.spip_form_erreur, .spip_forms form {
+	clear:both;
+}
+span.nettoyeur{
+	clear:both;line-height:1px;font-size:1px;display:block;
+}
+span.erreur { display:block;}

@@ -1,0 +1,72 @@
+<!-- titre=Forms&amp;tables-->
+<!-- icone=img_pack/form-24.gif-->
+<!-- descriptif=Configurez quelques parametres-->
+#CACHE{0}
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+[(#REM) ------------------------ Boites de lien xx-donnees ------------------------ ]
+<fieldset>
+<legend>
+	<:forms:cfg_associer_donnees:>
+</legend>
+<p><:forms:cfg_associer_donnees_articles:><br />
+<input type="radio" name="associer_donnees_articles" value="1" [checked="(#ENV{associer_donnees_articles}?{checked,''})"] id="associer_donnees_articles_1" />
+<label for='associer_donnees_articles_1'><:forms:cfg_activer:></label><br/>
+<input type="radio" name="associer_donnees_articles" value="0" [checked="(#ENV{associer_donnees_articles}?{'',checked})"] id="associer_donnees_articles_0" />
+<label for='associer_donnees_articles_0'><:forms:cfg_desactiver:></label>
+</p>
+<p><:forms:cfg_associer_donnees_rubriques:><br />
+<input type="radio" name="associer_donnees_rubriques" value="1" [checked="(#ENV{associer_donnees_rubriques}?{checked,''})"] id="associer_donnees_rubriques_1" />
+<label for='associer_donnees_rubriques_1'><:forms:cfg_activer:></label><br/>
+<input type="radio" name="associer_donnees_rubriques" value="0" [checked="(#ENV{associer_donnees_rubriques}?{'',checked})"] id="associer_donnees_rubriques_0" />
+<label for='associer_donnees_rubriques_0'><:forms:cfg_desactiver:></label>
+</p>
+<p><:forms:cfg_associer_donnees_auteurs:><br />
+<input type="radio" name="associer_donnees_auteurs" value="1" [checked="(#ENV{associer_donnees_auteurs}?{checked,''})"] id="associer_donnees_auteurs_1" />
+<label for='associer_donnees_auteurs_1'><:forms:cfg_activer:></label><br/>
+<input type="radio" name="associer_donnees_auteurs" value="0" [checked="(#ENV{associer_donnees_auteurs}?{'',checked})"] id="associer_donnees_auteurs_0" />
+<label for='associer_donnees_auteurs_0'><:forms:cfg_desactiver:></label>
+<br/>
+</p>
+
+</fieldset>
+
+[(#REM) ------------------------ type de bouton : submit ou image ? ------------------------ ]
+<fieldset>
+<legend>
+	<:forms:cfg_bouton_valider:>
+</legend>
+<p><:forms:cfg_bouton_valider_texte:></p>
+<div>
+<input type="radio" name="bouton_image" value="1" [checked="(#ENV{bouton_image,0}?{checked,''})"] id="bouton_image_1" />
+<label for='bouton_image_1'><:forms:cfg_bouton_type_image:></label><br/>
+<input type="radio" name="bouton_image" value="0" [checked="(#ENV{bouton_image,0}?{'',checked})"] id="bouton_image_0" />
+<label for='bouton_image_0'><:forms:cfg_bouton_type_texte:></label>
+</div>
+</fieldset>
+
+[(#REM) ------------------------ insertion dans le head ------------------------ ]
+<fieldset>
+<legend>
+	<:forms:cfg_inserer_head:>
+</legend>
+<p><:forms:cfg_inserer_head_texte:></p>
+<div>
+<ul>
+<li>#CHEMIN{spip_forms.css}</li>
+<li>#CHEMIN{donnee_voir.css}</li>
+<li>#CHEMIN{donnees_tous.css}</li>
+<li>#EVAL{_DIR_PLUGIN_FORMS}img_pack/date_picker.css</li>
+<li>#EVAL{_DIR_PLUGIN_FORMS}img_pack/jtip.css</li>
+</ul>
+<input type="radio" name="inserer_head" value="1" [checked="(#ENV{inserer_head,1}?{checked,''})"] id="inserer_head_1" />
+<label for='inserer_head_1'><:forms:cfg_activer:></label><br/>
+<input type="radio" name="inserer_head" value="0" [checked="(#ENV{inserer_head,1}?{'',checked})"] id="inserer_head_0" />
+<label for='inserer_head_0'><:forms:cfg_desactiver:></label>
+</div>
+</fieldset>
+[(#REM) ------------------------ BOUTON OK ------------------------ ]
+<div>
+<input style="float:#LANG_RIGHT;" type="submit" name="_cfg_ok" value="<:OK:>" class="fondo" />
+</div>
+</form>

@@ -1,0 +1,20 @@
+CORBEILLE SPIP I
+_______________I
+
+vous pouvez supprimer les documents suivants :
+- brèves refusées
+- articles à la poubelle
+- messages supprimés du forum
+- auteurs à la corbeille
+- signatures des petitions jugées irrecevables.
+
+la suppression supprime le document de la base de donnée,
+mais ne nettoie PAS le cache sur le disque, NI l'indexation dans la base par le moteur de recherche.
+pensez à vider le cache du serveur et réindexez votre site de temps en temps (tous les mois, 2 mois, ou 6 mois par exemple).
+
+prochains ajouts : à vous de proposer
+
+Matthieu ONFRAY
+email : silicium@japanim.net
+site : www.japanim.net
+

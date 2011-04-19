@@ -1,0 +1,45 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]Interface pour Champs Extras
+			[en]Interface for Extra fields
+			[it]Interfaccia per i Campi Extra
+		</multi>
+	</nom>
+	<auteur>Matthieu Marcillaud, Fil</auteur>
+	<licence>GNU/GPL</licence>
+	<version>1.2.2</version>
+	<icon>images/iextras-64.png</icon>
+	<description>
+		<multi>
+			[fr]Offre une interface pour g&#233;rer des champs extras.
+			[en]Interface to manage the extra fields on SPIP objects
+			[it]Interfaccia per gestire i campi extra.
+		</multi>
+	</description>
+	<etat>dev</etat>
+	<prefix>iextras</prefix>
+	<necessite id="cextras" version="[1.4.5;]" />
+	<necessite id="spip_bonux" version="[1.2;]" />
+	<necessite id="saisies" version="[1.6.1;]" />
+	
+	<pipeline>
+		<nom>declarer_champs_extras</nom>
+		<inclure>base/iextras.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/iextras_autoriser.php</inclure>
+	</pipeline>
+	
+	<onglet id='iextras' parent='configuration'>
+		<icone>images/iextras-24.png</icone>
+		<titre>iextras:champs_extras</titre>
+	</onglet>
+	
+	<bouton id='iextras' parent='bando_configuration'>
+		<icone>images/iextras-16.png</icone>
+		<titre>iextras:champs_extras</titre>
+	</bouton>
+	<categorie>outil</categorie>
+</plugin>

@@ -1,0 +1,49 @@
+<plugin>
+	<nom>
+	Fulltext
+	</nom>
+	<auteur>Fil</auteur>
+	<version>0.5.1</version>
+	<version_base>0.2</version_base>
+	<etat>
+	dev
+	</etat>
+	<licence>&#169; 2009-2011 - GNU/GPL</licence>
+	<description>
+Indexation FULLTEXT du contenu pour acc&#233;l&#233;rer le moteur de recherche
+-* exploite le mode FULLTEXT SEARCH IN BOOLEAN MODE de MySQL, cf. [->http://dev.mysql.com/doc/refman/5.0/fr/fulltext-boolean.html]
+Pour un fonctionnement optimal, il faut installer des programmes compl&eacute;mentaires et param&eacute;trer leur utilisation dans <code>mes_options.php</code> :
+-* Pour les {{PDF}} :
+-** Installer [Xpdf->http://www.foolabs.com/xpdf/]
+-*** Sur [Ubuntu->http://packages.ubuntu.com/fr/hardy/xpdf-utils],
+-*** Sur Mac OS X via [MacPorts->http://xpdf.darwinports.com/] ou avec cette [version compilée->http://users.phg-online.de/tk/MOSXS/xpdf-tools-3.dmg],
+-*** Sur d'[autres OS->http://www.foolabs.com/xpdf/download.html]
+-** Définir ces constantes :
+-*** <code>_FULLTEXT_PDF_EXE</code> (par exemple <code>/usr/bin/pdftotext</code>) : Chemin vers l'ex&eacute;cutable <code>pdftotext</code> de [Xdpf->http://www.foolabs.com/xpdf/] afin de transformer les fichiers PDF en texte brut
+-*** <code>_FULLTEXT_PDF_CMD_OPTIONS</code> (par exemple <code>-enc UTF-8</code>) : Options d'appel de l'ex&eacute;cutable
+-*<code>_FULLTEXT_TAILLE</code> : Taille maximum conserv&eacute;e pour la version texte des fichiers (50000 par d&eacute;faut)
+	</description>
+	<lien>http://www.spip-contrib.net/Fulltext</lien> <!-- URI de documentation -->
+	<prefix>
+	Fulltext
+	</prefix>
+  <fonctions>fulltext_fonctions.php</fonctions>
+	<icon>fulltext.png</icon>
+	<install>base/fulltext.php</install>
+	<chemin dir='' />
+	<necessite id="SPIP" version="[2.0.0;]" />
+	<onglet id="fulltext" parent="configuration">
+		<icone>fulltext-22.png</icone>
+		<titre>Fulltext</titre>
+	</onglet>
+	<pipeline>
+    	<nom>declarer_tables_principales</nom>
+    	<inclure>base/fulltext.php</inclure>
+  	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>fulltext_pipelines.php</inclure>
+	</pipeline>
+	<categorie>navigation</categorie>
+	<salvatore module="fulltext" reference="fr" />
+</plugin>

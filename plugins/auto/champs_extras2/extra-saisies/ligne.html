@@ -1,0 +1,6 @@
+<li class="editer_[(#ENV{champ_extra})][ (#ENV{obligatoire_extra})][ (#ENV{erreur_extra}|oui)erreur]">
+	<label for="#ENV{champ_extra}">#ENV{label_extra}</label>
+		[<span class='erreur_message'>(#ENV**{erreur_extra})</span>]
+		[<p class="explication">(#ENV{precisions_extra})</p>]
+		<input type='text' class='text[ (#ENV{class_extra})]' name='#ENV{champ_extra}' id='#ENV{champ_extra}' value="#ENV{valeur_extra}" />
+</li>

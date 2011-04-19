@@ -1,0 +1,12 @@
+<li class="editer editer_[(#ENV{nom})][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]" [(#ENV{tout_afficher}|!={oui}|?{style="display:none;"})]>
+	#ENV*{inserer_debut}
+	[(#ENV{tout_afficher}|!={oui}|oui)
+	<input type="hidden" name="#ENV{nom}" id="champ_#ENV{nom}" value="#ENV{valeur,#ENV{defaut}}" />
+	]
+	[(#ENV{tout_afficher}|!={oui}|non)
+	[<label for="champ_#ENV{nom}">(#ENV*{label})[<span class='obligatoire'>(#ENV{obligatoire}|oui)[(#ENV*{info_obligatoire}|is_null|?{<:info_obligatoire_02:>,#ENV*{info_obligatoire}})]</span>]</label>]
+	<input type="text" name="#ENV{nom}" id="champ_#ENV{nom}" value="#ENV{valeur,#ENV{defaut}}" readonly="readonly" />
+	]
+	
+	#ENV*{inserer_fin}
+</li>

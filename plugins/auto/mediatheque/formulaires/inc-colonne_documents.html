@@ -1,0 +1,29 @@
+[(#REM)
+
+  Squelette
+  (c) xxx
+  Distribue sous licence GPL
+
+]
+<div class="liste_items documents" id="documents_joints">
+<BOUCLE_docslies(documents_liens){id_objet}{objet}>
+	#MODELE{document_case,id_document=#ID_DOCUMENT,id_objet,objet,ajax}
+</BOUCLE_docslies>
+</div>
+<script type="text/javascript">
+function editbox_init(){
+	jQuery('a.editbox:not(.nobox)')
+	.attr("onclick","").addClass('nobox').click(function(){
+		var casedoc = jQuery(this).parents('div.item.document,div.item.image').eq(0);
+		jQuery(casedoc).animeajax();
+		jQuery.modalboxload(jQuery(this).attr('href'),{
+			onClose: function (dialog) {var a = jQuery(casedoc).find('a.refresh');if (a.length) a.click();}
+		});
+		return false;
+	});
+}
+if (window.jQuery)
+(function($){if(typeof onAjaxLoad == "function") onAjaxLoad(editbox_init);
+	$(editbox_init);
+ })(jQuery);
+</script>

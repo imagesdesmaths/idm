@@ -1,0 +1,21 @@
+<?php if (!isset($GLOBALS['auteur_session']) OR $GLOBALS['auteur_session']['statut']!=='0minirezo') exit; ?>
+<BOUCLE_reponses(FORMS_DONNEES){id_donnee}>
+	<BOUCLE_form2(FORMS){id_form=2}>
+	Reponse No #ID_DONNEE<br/>
+	du #DATE<br/>
+	par #IP <BOUCLE_nom(AUTEURS){id_auteur}>(#NOM)</BOUCLE_nom> <br/>
+	confirmation #CONFIRMATION<br/>
+	<ul>
+		<li>
+		<BOUCLE_repchamps(FORMS_DONNEES_CHAMPS){id_donnee}{'</li><li>'}>
+				<BOUCLE_champsnom(FORMS_CHAMPS){id_form}{champ}>
+				[(#TITRE|unique):]
+				[<ul>
+					<li>(#LESVALEURS{'</li><li>'})</li>
+				</ul>]
+				</BOUCLE_champsnom>
+		</BOUCLE_repchamps>
+		</li>
+	</ul>
+	</BOUCLE_form2>
+</BOUCLE_reponses>

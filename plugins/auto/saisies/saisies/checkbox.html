@@ -1,0 +1,37 @@
+[(#REM) 
+
+  ### /!\ boucle POUR (spip Bonux) ###
+  
+  Parametres :
+  - ** datas : tableau de donnees cle=>valeur
+  
+  Exemple d'appel :
+	[(#SAISIE{checkbox, criteres,
+		label=<:plugin:choisir_criteres:>,
+		defaut=#ARRAY{0,cle1,1,cle3}, 
+		defaut=cle2,
+		datas=#ARRAY{
+			cle1,valeur1,
+			cle2,valeur2,
+			cle3,valeur3}})]
+]
+
+[(#REM) datas peut être une chaine qu'on sait décomposer ]
+#SET{datas, #ENV*{datas}}
+#SET{datas, #GET{datas}|is_string|?{(#GET{datas}|saisies_chaine2tableau), #GET{datas}}}
+
+[(#REM) defaut peut être une chaine (plusieurs valeurs ou pas) qu'on sait décomposer ]
+#SET{defaut, #ENV{defaut}}
+#SET{defaut, #GET{defaut}|is_string|?{(#GET{defaut}|saisies_chaine2tableau), (#GET{defaut}|sinon{#ARRAY})}}
+
+#SET{disabled,#ENV{disable}}
+[(#GET{disabled}|is_string|oui)
+	#SET{disabled,#ARRAY|push{#GET{disabled}}}
+]
+
+<BOUCLE_checkbox(POUR){tableau #GET{datas}}>
+<div class="#ENV{choix,choix}">
+	<input type="checkbox" name="#ENV{nom}[]" class="checkbox" id="champ_#ENV{nom}_#COMPTEUR_BOUCLE"[ (#CLE|in_array{#ENV{valeur,#GET{defaut}}}|oui)checked="checked"] value="#CLE"[(#CLE|in_array{#GET{disabled}}|oui) disabled="disabled"] />
+	<label for="champ_#ENV{nom}_#COMPTEUR_BOUCLE">#VALEUR</label>
+</div>
+</BOUCLE_checkbox>

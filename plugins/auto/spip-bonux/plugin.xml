@@ -1,0 +1,53 @@
+<plugin>
+  <nom>SPIP Bonux</nom>
+  <auteur>Cedric Morin, Matthieu Marcillaud, romy.tetue.net</auteur>
+  <icon>img_pack/spip-bonux.png</icon>
+  <licence>(c) 2008-2010 GPL</licence>
+  <version>2.2.17</version>
+  <etat>stable</etat>
+  <description>Le plugin qui lave plus SPIP que SPIP, avec des chouettes cadeaux dedans ! Interface douce, boucles POUR et CONDITION, tableaux, compteur, etc.</description>
+  <lien>http://www.spip-contrib.net/SPIP-Bonux</lien>
+  <fonctions>public/spip_bonux_criteres.php</fonctions>
+  <fonctions>public/spip_bonux_balises.php</fonctions>
+  <fonctions>spip_bonux_fonctions.php</fonctions>
+  <options>spip_bonux_options.php</options>
+  <prefix>spip_bonux</prefix>
+  <necessite id='SPIP' version='[2.0.0;]' />
+	<chemin dir='' />
+	<chemin dir='spip20/' />
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>configurer/pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>configurer/pipelines.php</inclure>
+	</pipeline>
+  <fonctions>configurer/pipelines.php</fonctions>
+  <categorie>outil</categorie>
+</plugin>
+<plugin spip='[2.1.0-beta;]'>
+  <nom>SPIP Bonux</nom>
+  <auteur>Cedric Morin, Matthieu Marcillaud, romy.tetue.net</auteur>
+  <icon>img_pack/spip-bonux.png</icon>
+  <licence>(c) 2008-2010 GPL</licence>
+  <version>2.2.17</version>
+  <etat>stable</etat>
+  <description>Le plugin qui lave plus SPIP que SPIP, avec des chouettes cadeaux dedans ! Interface douce, boucles POUR et CONDITION, tableaux, compteur, etc.</description>
+  <lien>http://www.spip-contrib.net/SPIP-Bonux</lien>
+  <fonctions>public/spip_bonux_criteres.php</fonctions>
+  <fonctions>public/spip_bonux_balises.php</fonctions>
+  <fonctions>spip_bonux_fonctions.php</fonctions>
+  <options>spip_bonux_options.php</options>
+  <prefix>spip_bonux</prefix>
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>configurer/pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>configurer/pipelines.php</inclure>
+	</pipeline>
+  <fonctions>configurer/pipelines.php</fonctions>
+  <categorie>outil</categorie>
+</plugin>

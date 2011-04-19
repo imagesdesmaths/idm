@@ -1,0 +1,51 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+/*
+ * SimpleModal Basic Modal Dialog
+ * http://www.ericmmartin.com/projects/simplemodal/
+ * http://code.google.com/p/simplemodal/
+ *
+ * Copyright (c) 2009 Eric Martin - http://ericmmartin.com
+ *
+ * Licensed under the MIT license:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *
+ * Revision: $Id: basic.css 185 2009-02-09 21:51:12Z emartin24 $
+ *
+ */
+
+
+/* Overlay */
+#simplemodal-overlay {background-color:#000; cursor:wait;}
+
+/* Container */
+#simplemodal-container {min-height:500px; min-width:600px; background-color:#[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; border:10px solid #[(#GET{claire}|couleur_eclaircir)];}
+.simplemodal-wrap {overflow:auto;}
+#simplemodal-container a.modalCloseImg {background:url(#CHEMIN{modalbox/modal_closebox.png}) no-repeat; width:30px; height:30px; display:inline; z-index:3200; position:absolute; top:-12px; #GET{right}:-15px; cursor:pointer;}
+#simplemodal-container #basicModalContent {padding:8px;}
+
+#simplemodal-data .formulaire_spip {border:0;}
+#simplemodal-data .entete-formulaire {border:0;}
+
+
+[(#REM)</style>]

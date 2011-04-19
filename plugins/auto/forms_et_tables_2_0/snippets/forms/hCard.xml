@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<forms>
+<form>
+	<id_form>48</id_form>
+	<titre>hCard</titre>
+	<descriptif></descriptif>
+	<type_form>table</type_form>
+	<email>a:1:{s:6:"defaut";s:0:"";}</email>
+	<champconfirm></champconfirm>
+	<texte></texte>
+	<moderation>posteriori</moderation>
+	<public>oui</public>
+	<fields>
+		<field>
+			<champ>ligne_1</champ>
+			<rang></rang>
+			<titre>Nom</titre>
+			<type>ligne</type>
+			<obligatoire>oui</obligatoire>
+			<extra_info></extra_info>
+			<specifiant>oui</specifiant>
+			<public>oui</public>
+			<aide>Entrez votre nom</aide>
+			<html_wrap><span class="family-name">$1</span></html_wrap>
+		</field>
+		<field>
+			<champ>ligne_2</champ>
+			<rang></rang>
+			<titre>Prénom</titre>
+			<type>ligne</type>
+			<obligatoire></obligatoire>
+			<extra_info></extra_info>
+			<specifiant>oui</specifiant>
+			<public>oui</public>
+			<aide>Entrez votre prénom</aide>
+			<html_wrap><span class="given-name">$1</span></html_wrap>
+		</field>
+		<field>
+			<champ>ligne_3</champ>
+			<rang></rang>
+			<titre>Organisation</titre>
+			<type>ligne</type>
+			<obligatoire></obligatoire>
+			<extra_info></extra_info>
+			<specifiant>oui</specifiant>
+			<public>oui</public>
+			<aide>Entrez le nom de votre entreprise ou de l'organisme auquel vous appartenez</aide>
+			<html_wrap><div class="org">$1</div></html_wrap>
+		</field>
+		<field>
+			<champ>separateur_1</champ>
+			<rang></rang>
+			<titre>Adresse</titre>
+			<type>separateur</type>
+			<obligatoire></obligatoire>
+			<extra_info></extra_info>
+			<specifiant></specifiant>
+			<public>oui</public>
+			<aide></aide>
+			<html_wrap><div class="adr"></div></html_wrap>
+		</field>
+		<field>
+			<champ>ligne_4</champ>
+			<rang></rang>
+			<titre>Adresse</titre>
+			<type>ligne</type>
+			<obligatoire></obligatoire>
+			<extra_info></extra_info>
+			<specifiant></specifiant>
+			<public>oui</public>
+			<aide>Entrez le nom de la rue</aide>
+			<html_wrap><div class="street-address">$1</div></html_wrap>
+		</field>
+		<field>
+			<champ>ligne_5</champ>
+			<rang></rang>
+			<titre>Ville</titre>
+			<type>ligne</type>
+			<obligatoire></obligatoire>
+			<extra_info></extra_info>
+			<specifiant></specifiant>
+			<public>oui</public>
+			<aide></aide>
+			<html_wrap><span class="locality">$1</span></html_wrap>
+		</field>
+		<field>
+			<champ>code_postal_1</champ>
+			<rang></rang>
+			<titre>Code Postal</titre>
+			<type>code_postal</type>
+			<obligatoire></obligatoire>
+			<extra_info></extra_info>
+			<specifiant></specifiant>
+			<public>oui</public>
+			<aide></aide>
+			<html_wrap><span class="postal-code">$1</span></html_wrap>
+		</field>
+		<field>
+			<champ>ligne_6</champ>
+			<rang></rang>
+			<titre>Pays</titre>
+			<type>ligne</type>
+			<obligatoire></obligatoire>
+			<extra_info></extra_info>
+			<specifiant></specifiant>
+			<public>oui</public>
+			<aide></aide>
+			<html_wrap><span class="country-name">$1</span></html_wrap>
+		</field>
+		<field>
+			<champ>separateur_2</champ>
+			<rang></rang>
+			<titre>Vous joindre</titre>
+			<type>separateur</type>
+			<obligatoire></obligatoire>
+			<extra_info></extra_info>
+			<specifiant></specifiant>
+			<public>oui</public>
+			<aide></aide>
+			<html_wrap></html_wrap>
+		</field>
+		<field>
+			<champ>telephone_1</champ>
+			<rang></rang>
+			<titre>Numéro de téléphone</titre>
+			<type>telephone</type>
+			<obligatoire></obligatoire>
+			<extra_info></extra_info>
+			<specifiant></specifiant>
+			<public>oui</public>
+			<aide></aide>
+			<html_wrap><div class="tel">$1</div></html_wrap>
+		</field>
+		<field>
+			<champ>email_1</champ>
+			<rang></rang>
+			<titre>mel</titre>
+			<type>email</type>
+			<obligatoire></obligatoire>
+			<extra_info></extra_info>
+			<specifiant></specifiant>
+			<public>oui</public>
+			<aide></aide>
+			<html_wrap><a class="email" href="mailto:$1">$1</a></html_wrap>
+		</field>
+		<field>
+			<champ>url_1</champ>
+			<rang></rang>
+			<titre>Url</titre>
+			<type>url</type>
+			<obligatoire></obligatoire>
+			<extra_info></extra_info>
+			<specifiant></specifiant>
+			<public>oui</public>
+			<aide></aide>
+			<html_wrap><a class="url" href="$1">$1</a></html_wrap>
+		</field>
+	</fields>
+</form>
+</forms>

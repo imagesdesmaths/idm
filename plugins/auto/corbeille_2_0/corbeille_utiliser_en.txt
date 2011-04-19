@@ -1,0 +1,20 @@
+SPIP'S RUBBISH BIN I
+___________________I
+
+You can delete the following documents:
+- rejected news items
+- articles in the dustbin
+- deleted messages in the forum
+- authors in the dustbin
+- rejected petition signatures.
+
+Deletion will remove the document from the database,
+but doesn't clean the cache on the hard drive, NOR the search engine indexing in the database.
+Remember to empty the cache on the server and reinitialise the indexing of your site now and again (every month, two months or 6 months for instance).
+
+Next addition: you suggest
+
+Matthieu ONFRAY
+email : silicium@japanim.net
+site : www.japanim.net
+

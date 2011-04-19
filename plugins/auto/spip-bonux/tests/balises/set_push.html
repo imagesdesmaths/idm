@@ -1,0 +1,25 @@
+[(#REM)
+
+	la balise SET_PUSH sert a ajouter des valeurs dans un tableau #SET
+
+]
+
+[(#REM) 
+	SET GET|push = SET PUSH 
+]
+	#SET{A,#ARRAY}
+	#SET{B,#ARRAY}
+	[(#SET{A,[(#GET{A}|push{abc})]})]
+	#SET_PUSH{B,abc}
+	[(#GET{A}|!=={#GET{B}}|oui)[(#SET{err,"A et B sont différents"})]]
+
+
+[(#REM) 
+	SET_PUSH peut être fait sans declarer un SET prealable
+]
+	#SET_PUSH{C,abc}
+	[(#GET{A}|!=={#GET{C}}|oui)[(#SET{err,"A et C sont différents"})]]
+
+
+
+[(#GET{err}|?{ERREUR,OK}) #GET{err} ]

@@ -1,0 +1,29 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Int&eacute;gration d'activit&eacute;s GeoGebra, GeoNext, GeoLabo, C.a.r.Z.u.l. et CarMetal dans SPIP
+	</nom>
+	<auteur>
+	Olivier Gautier, &eacute;quipe de d&eacute;veloppement EVA-web.<br />
+	<a rel="eva-web" class="spip_out" href="http://www.eva-web.edres74.ac-grenoble.fr/">http://www.eva-web.edres74.ac-grenoble.fr/</a><br/>
+	Cette r&eacute;alisation est mise &agrave; disposition sous licence GNU GPL.
+	<br />&nbsp;<br /><div style="text-align:center;"><a rel="licence" class="spip_out" href="http://www.april.org/gnu/gpl_french.html"><img alt="Licence GNU GPL" style="border-width:0" width="80" height="100" src="http://www.fsf.org/graphics/philosophical-gnu-sm.jpg"/></a></div>
+	</auteur>
+	<version>
+	1.0
+	</version>
+	<etat>
+	stable
+	</etat>
+    <description>
+    Permet d'ins&eacute;rer des applet <a href="http://www.geogebra.org" class="spip_out">Geogebra</a> (format ggb),  <a href="http://www.bibmath.net/geolabo/" class="spip_out">Geolabo</a> (format glb),  <a href="http://geonext.uni-bayreuth.de/" class="spip_out">GeoNext</a> (format glb),  <a href="http://mathsrv.ku-eichstaett.de/MGF/homes/grothman/java/zirkel/" class="spip_out">C.a.r.Z.u.l.</a> (format zir) et <a href="http://db-maths.nuxit.net/CaRMetal/" class="spip_out">CarMetal</a> (format zir) gr&acirc;ce &agrave; un mod&egrave;le.
+    </description>
+    <lien>
+    [Documentation sur le site eva-web.edres74.ac-grenoble.fr->http://www.eva-web.edres74.ac-grenoble.fr/spip.php?article72]
+    </lien>
+    <prefix>
+    eva_geometrie
+    </prefix>
+    <install>eva_geometrie_install.php</install>
+    <categorie>divers</categorie>
+    <necessite id="SPIP" version="[2.0.0;]" />
+</plugin>

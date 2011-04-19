@@ -1,4 +1,5 @@
 *.swp
+.ok
 .DS_Store
 /.dbdump
 /.httpd_log
@@ -12,5 +13,4 @@
 /pdf2004
 /pdf2006
 /plugins/MathJax/MathJax/fonts/HTML-CSS/TeX/png
-/plugins/auto
 /tmp

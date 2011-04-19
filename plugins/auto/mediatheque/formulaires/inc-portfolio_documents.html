@@ -1,0 +1,62 @@
+[(#REM)
+
+  Squelette
+  (c) xxx
+  Distribue sous licence GPL
+
+]
+<div id="portfolios">
+[(#REM) D'abord les images illustration]
+<B_illustrations>
+<h3><span class="image_loading"></span><:medias:info_illustrations:></h3>
+<div class="liste_items documents" id="illustrations">
+[<p class="pagination">(#PAGINATION)</p>]
+<BOUCLE_illustrations(DOCUMENTS documents_liens types_documents){inclus=image}{mode=image}{id_objet}{objet}{par num titre,date,id_document}{pagination 50}{statut?}>
+	#MODELE{document_desc,id_document,id_objet,objet}
+</BOUCLE_illustrations>
+[(#BOUTON_ACTION{<:medias:lien_tout_enlever:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-I/image,#SELF|ancre_url{illustrations}},'ajax tout_supprimer'})]
+</div>
+</B_illustrations>
+
+[(#REM) puis les images du portfolio]
+<B_portfolio>
+<h3><:info_portfolio:></h3>
+<div class="liste_items documents" id="portfolio">
+[<p class="pagination">(#PAGINATION)</p>]
+<BOUCLE_portfolio(DOCUMENTS documents_liens types_documents){inclus=image}{mode=document}{id_objet}{objet}{par num titre,date,id_document}{pagination 50}{statut?}>
+	#MODELE{document_desc,id_document,id_objet,objet}
+</BOUCLE_portfolio>
+[(#BOUTON_ACTION{<:medias:lien_tout_enlever:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-I/document,#SELF|ancre_url{portfolio}},'ajax tout_supprimer'})]
+</div>
+</B_portfolio>
+
+[(#REM) puis les documents]
+<B_documents>
+<h3><:info_documents:></h3>
+<div class="liste_items documents" id="documents">
+[<p class="pagination">(#PAGINATION)</p>]
+<BOUCLE_documents(DOCUMENTS documents_liens types_documents){inclus!=image}{mode!=vignette}{id_objet}{objet}{par num titre,date,id_document}{pagination 50}{statut?}>
+	#MODELE{document_desc,id_document,id_objet,objet}
+</BOUCLE_documents>
+[(#BOUTON_ACTION{<:medias:lien_tout_enlever:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-D/document,#SELF|ancre_url{documents}},'ajax tout_supprimer'})]
+</div>
+</B_documents>
+
+<script type="text/javascript">
+function editbox_init(){
+	jQuery('a.editbox:not(.nobox)')
+	.attr("onclick","").addClass('nobox').click(function(){
+		var casedoc = jQuery(this).parents('div.item').eq(0);
+		jQuery(casedoc).animeajax();
+		jQuery.modalboxload(jQuery(this).attr('href'),{
+			onClose: function (dialog) {var a = jQuery(casedoc).find('a.refresh');if (a.length) a.click();}
+		});
+		return false;
+	});
+}
+if (window.jQuery)
+(function($){if(typeof onAjaxLoad == "function") onAjaxLoad(editbox_init);
+	$(editbox_init);
+ })(jQuery);
+</script>
+</div>

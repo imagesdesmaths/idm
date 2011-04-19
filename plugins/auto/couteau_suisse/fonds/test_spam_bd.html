@@ -1,0 +1,31 @@
+#CACHE{0}
+#SET{tab, #ARRAY}
+<BOUCLE_m(FORUMS){statut?=#ENV*{statut}}{plat}{par date}{inverse}>
+	#SET{test, #TEXTE*|concat{" ",#TITRE*," ",#AUTEUR*," ",#EMAIL_AUTEUR*}|spam_filtre_de_test|=={ko}}
+	[(#GET{test}|non)#SET{test, #IP|spam_filtre_de_test_ip|=={ko}}]
+	[(#GET{test}|oui)#SET{tab, #GET{tab}|push{#ID_FORUM}}]
+</BOUCLE_m>
+<B_msg>
+<div style="color:darkRed; font-weight:bold;">
+<BOUCLE_msg(FORUMS){statut?=#ENV*{statut}}{plat}{par date}{inverse}{id_forum IN #GET{tab}}{pagination 10}>
+[(#EVAL{defined('_SPIP19300')}|non)
+	<a href="#URL_ECRIRE{controle_forum,debut_id_forum=#ID_FORUM}" style="color:darkRed;" target="_blank">]
+[(#EVAL{defined('_SPIP19300')}|oui)
+	<a href="[(#ID_FORUM|generer_url_entite{forum,'',forum#ID_FORUM})]" style="color:darkRed;" target="_blank">]
+#ID_FORUM. #TITRE</a>[ (#STATUT|!={publie}|oui)&#40;#STATUT&#41;]<br />
+</BOUCLE_msg>
+#PAGINATION
+<script language="JavaScript" type="text/javascript">
+if (window.jQuery) jQuery(function(){
+	// forcer la pagination a rester en ajax
+	jQuery("#cs_action_rapide a.lien_pagination").click(function() {
+		jQuery("#debut_msg").val(jQuery(this).text());
+		jQuery(this).parents('form').eq(0).submit();
+		return false;
+	});
+});
+</script>
+</div>
+</B_msg>
+<div style="color:#22BB22; font-weight:bold;">Aucun message identifi&eacute;</div>
+<//B_msg>

@@ -1,0 +1,57 @@
+#CACHE{0}
+#SET{snippet_present,#EVAL{defined('_DIR_PLUGIN_SNIPPETS')}}
+<B_forms>
+<div class='liste'>
+<div style='position: relative;'>
+	<div style='position: absolute; top: -12px; left: 3px;'><img src='#CHEMIN{img_pack/(#ENV{type_form,form}|concat{-24.png})}' alt="" /></div>
+	<div style='background-color: #ENV{couleur_claire}; color: black; padding: 3px; padding-left: 30px; border-bottom: 1px solid #444444;' class='verdana2'>
+	<b>[(#ENV{titre_liste,''}|?{'',' '})<:forms:tous_formulaires:>]#ENV*{titre_liste,''}</b>
+	</div>
+</div>
+<table width='100%' cellpadding='5' cellspacing='0' border='0'>
+[<tr style='background-color: #dddddd;'>
+<td class="arial1" style='border-bottom: 1px solid #444444;' colspan="[(#GET{snippet_present}|?{11,10})]">
+<div class='pagination'>(#PAGINATION)</div>
+</td>
+</tr>]
+<BOUCLE_forms(FORMS){type_form=#ENV{type_form,''}}{pagination 10 #ENV{type_form,form}}>
+<BOUCLE_rep(FORMS_DONNEES){id_form}{statut IN (prepa,prop,publie)}></BOUCLE_rep>#SET{donnees,#TOTAL_BOUCLE}<//B_rep>
+#SET{lien_edite,''}
+[(#REM|sinon{structurer}|autoriser{form,#ID_FORM}|?{' '}) #SET{lien_edite,#URL_ECRIRE{forms_edit,id_form=#ID_FORM}|parametre_url{retour,#SELF|urlencode}} ]
+#SET{lien_affiche,(#URL_ECRIRE{donnees_tous,id_form=#ID_FORM}|parametre_url{retour,#SELF|urlencode})}
+[(#GET{donnees}|?{'',' '})
+	[(#TYPE_FORM|match{(^$|^sondage$)}|?{' ',''}) #SET{lien_affiche,''}]
+	[(#TYPE_FORM|match{(^$|^sondage$)}|?{'',' '})
+		#SET{lien_affiche,#URL_ECRIRE{donnees_edit,id_form=#ID_FORM}|parametre_url{retour,#SELF|urlencode} }
+	]
+]
+#SET{lien_duplique,#URL_ACTION_AUTEUR{forms_duplique,#ID_FORM,#EVAL{_DIR_RESTREINT}|concat{#SELF}|urlencode}}
+[(#GET{snippet_present}|?{' '}) #SET{lien_exporte,#URL_ACTION_AUTEUR{snippet_exporte,forms:#ID_FORM}}]
+#SET{lien_vider,''}
+[(#REM|sinon{vidanger}|autoriser{form,#ID_FORM}|?{' '}) #SET{lien_vider,#URL_ACTION_AUTEUR{forms_donnees_vide,#ID_FORM,#EVAL{_DIR_RESTREINT}|concat{#SELF}|urlencode}} ]
+#SET{lien_supprimer,''}
+[(#REM|sinon{supprimer}|autoriser{form,#ID_FORM}|?{' '}) #SET{lien_supprimer,#URL_ECRIRE{forms_edit,supp_form=#ID_FORM}|parametre_url{type_form,#ENV{type_form,''}}|parametre_url{retour,#SELF|urlencode}|ancre_url{'resume'}} ]
+#SET{message,#REM|sinon{forms:confirm_vider_table}|_T{#ARRAY{table,#TITRE*}}|html2unicode|addslashes|unicode_to_javascript}
+<tr class='tr_liste'>
+<td class="arial11">
+<img src='#EVAL{_DIR_IMG_PACK}puce-[(#GET{donnees}|?{'verte','orange'})]-breve.gif' width='7' height='7' alt='puce' />&nbsp;&nbsp;
+</td>
+<td class="arial11">
+	<span class='#EDIT{titre}'>#TITRE</span>
+</td>
+<td class="arial1">&nbsp;
+</td>
+<td class="arial1">[<a href='(#GET{lien_affiche})' title='<:forms:afficher:>'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/donnees-24.png' width='24' height='24' alt='<:forms:afficher:>' /></a>]</td>
+<td class="arial1">[(#GET{donnees}|=={0}|?{#ENV{prefix,'form'}|concat{':aucune_reponse'}}|_T)][(#GET{donnees}|=={1}|?{#ENV{prefix,'form'}|concat{':une_reponse'}}|_T)]
+[(#GET{donnees}|>{1}|?{' '})  [(#EVAL{ _T("[(#ENV{prefix,'form'})]:nombre_reponses",array("nombre"=>[(#GET{donnees})])) })]  ]</td>
+<td class="arial1">[<a href='(#GET{lien_edite})' title='<:forms:editer:>'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/editer-24.png' width='24' height='24' alt='<:forms:editer:>' /></a>]</td>
+<td class="arial1"><a href='#GET{lien_duplique}' title='<:forms:dupliquer:>'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/dupliquer-24.png' width='24' height='24' alt='<:forms:dupliquer:>' /></a></td>
+[<td class="arial1"><a href='(#GET{lien_exporte})' title='<:forms:exporter:>'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/exporter-form-24.png' width='24' height='24' alt='<:forms:exporter:>' /></a></td>]
+<td>&nbsp;</td>
+<td class="arial1">[(#GET{donnees}|?{' '})[<a href='(#GET{lien_vider})' title='<:forms:vider:>' onclick="return confirm('[(#GET{message})]')" ><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/vider-24.png' width='24' height='24' alt='<:forms:vider:>' /></a>]]</td>
+<td class="arial1">[<a href='(#GET{lien_supprimer})' title='<:forms:supprimer:>'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/supprimer-24.png' width='24' height='24' alt='<:forms:supprimer:>' /></a>]</td>
+</tr>
+</BOUCLE_forms>
+</table></div>
+</B_forms>
+&nbsp;<br/>

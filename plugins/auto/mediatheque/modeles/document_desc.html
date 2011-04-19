@@ -1,0 +1,45 @@
+[(#REM)
+
+  Squelette
+  (c) xxx
+  Distribue sous licence GPL
+
+]
+#CACHE{3600*100}
+<BOUCLE_docslies(DOCUMENTS documents_liens types_documents){id_document}{id_objet}{objet}{statut?}>
+	<div class="item #MODE vu_#VU statut_#STATUT[(#DISTANT|=={oui}|oui)distant]" id="doc#ID_DOCUMENT">
+		[(#EXTENSION|match{gif|png|jpg}|oui) #SET{id,#ID_VIGNETTE|?{#ID_VIGNETTE,#ID_DOCUMENT}}
+		<div class="tourner">
+			[(#BOUTON_ACTION{[(#CHEMIN{img_pack/tourner-gauche.gif}|balise_img{<:medias:tourner_90L:>})],#URL_ACTION_AUTEUR{tourner,#GET{id}|concat{',-90'},#SELF},ajax})]
+			[(#BOUTON_ACTION{[(#CHEMIN{img_pack/tourner-droite.gif}|balise_img{<:medias:tourner_90R:>})],#URL_ACTION_AUTEUR{tourner,#GET{id}|concat{',90'},#SELF},ajax})]
+			[(#BOUTON_ACTION{[(#CHEMIN{img_pack/tourner-180.gif}|balise_img{<:medias:tourner_180:>})],#URL_ACTION_AUTEUR{tourner,#GET{id}|concat{',180'},#SELF},ajax})]
+		</div>]
+		[(#LOGO_DOCUMENT{#URL_DOCUMENT,60,60})]
+		<h4 class="titrem">
+			[(#VU|=={oui}|oui)<img src='#CHEMIN{images/vu-16-10.png}' width='16' height='10' alt='<:medias:document_vu:>' title='<:medias:document_vu:>'/> ]
+			[<span class="fichier">(#FICHIER*|basename)</span>]
+			[<span class="#EDIT{titre} titre">(#TITRE|sinon{<i class="sanstitre"><:info_sans_titre:></i>})</span>]
+			<span class="image_loading"></span>
+		</h4>
+		<div class="infos">
+		[(#DISTANT|=={oui}|oui)<img src='#CHEMIN{img_pack/distant-16.png}' width='16' height='16' alt='<:medias:fichier_distant:>' title='<:medias:fichier_distant:>'/> ]<:info_numero_abbreviation:>#ID_DOCUMENT - #EXTENSION - [(#TAILLE|taille_en_octets)]
+		</div>
+		[<div class="mode">(#INCLUS|=={image}|et{#EVAL{_BOUTON_MODE_IMAGE}}|oui)
+			[(#MODE|=={image}|oui)
+			[(#BOUTON_ACTION{<:medias:upload_info_mode_document:>,#URL_ACTION_AUTEUR{changer_mode_document,#ID_DOCUMENT-document,#SELF},ajax})]
+			][(#MODE|=={image}|non)
+			[(#BOUTON_ACTION{<:medias:upload_info_mode_image:>,#URL_ACTION_AUTEUR{changer_mode_document,#ID_DOCUMENT-image,#SELF},ajax})]
+			]
+		</div>]
+		<div class="actions">
+			<a href="[(#SELF|parametre_url{timestamp,#REM|time})]" class="refresh none ajax"><:medias:bouton_refresh_document:></a>
+			<BOUCLE_compte(documents_liens){id_document}{0,2} />
+			[(#TOTAL_BOUCLE|=={1}|et{#AUTORISER{modifier,#OBJET,#ID_OBJET}})[(#BOUTON_ACTION{<:medias:bouton_enlever_supprimer_document:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-#ID_DOCUMENT-suppr-safe,#SELF},ajax,<:medias:bouton_enlever_supprimer_document_confirmation:>})]<span>|</span>]
+			[(#AUTORISER{modifier,#OBJET,#ID_OBJET})[(#BOUTON_ACTION{<:medias:bouton_enlever_document:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-#ID_DOCUMENT--safe,#SELF},ajax})]<span>|</span>]
+			<a href="#URL_ECRIRE{documents_edit,id_document=#ID_DOCUMENT}" target="_blank" class="editbox"><:medias:bouton_modifier_document:></a>
+			<//B_compte>
+			[(#PIPELINE{document_desc_actions,#ARRAY{args,#ARRAY{id_document,#ID_DOCUMENT,position,document_desc},data,''}})]
+		</div>
+		<div class="nettoyeur"></div>
+	</div>
+</BOUCLE_docslies>

@@ -1,0 +1,20 @@
+<BOUCLE_repchamps(FORMS_DONNEES_CHAMPS){id_donnee}{champ}>[
+	(#REM) Regarder si le champ est du type select ou multiple, car dans ce cas il faut
+	decoder la reponse avec la structure du formulaire
+	]
+	<BOUCLE_champsselectmulti(FORMS_CHAMPS){id_form}{champ}{type IN select,multiple}>
+		<BOUCLE_champschoix(FORMS_CHAMPS_CHOIX){id_form}{champ}{choix=#VALEUR*}>
+		#TITRE
+		</BOUCLE_champschoix>
+	</BOUCLE_champsselectmulti>[
+		(#REM) Regarder si le champ est du type mot cle, car dans ce cas il faut
+		recuperer le titre du mot cle au lieu de l'id
+		]
+		<BOUCLE_champsmot(FORMS_CHAMPS){id_form}{champ}{type=mot}>
+			<BOUCLE_champstitre(MOTS){id_mot=#VALEUR*}>#TITRE</BOUCLE_champstitre>
+		</BOUCLE_champsmot>[
+			(#REM) C'est finalement un champ normal
+			]#VALEUR*
+		<//B_champsmot>
+	<//B_champsselectmulti>
+</BOUCLE_repchamps>

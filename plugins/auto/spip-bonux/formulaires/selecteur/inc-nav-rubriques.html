@@ -1,0 +1,9 @@
+#SET{p,pr_#ID_RUBRIQUE}<B_enfants>
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class='items'>
+<BOUCLE_enfants(RUBRIQUES){id_parent}{statut?}{lang==^(#ENV{filtrer_langue_rubrique}|trim|sinon{.*})$}{tri #ENV{tri,id_rubrique}}{pagination 10 #GET{p}}>
+<li class='rubrique'>[(#ENV{rubriques,0}|oui)<a href='#' onclick="jQuery(this).item_pick('rubrique|#ID_RUBRIQUE','#ENV{name,id_item}','[(#TITRE*|extraire_multi|attribut_html|texte_script|replace{'&#39;',#VAL{'\\'}|concat{#EVAL{chr(39)}}})]','rubrique');return false;"
+><img class='add' src='#CHEMIN{img_pack/item-add.png}' alt='' /></a>#TITRE]<BOUCLE_rubs_filles(RUBRIQUES){id_parent}{tout}{0,1}><a class='ajax' href='[(#SELF|parametre_url{id_r,#_enfants:ID_RUBRIQUE})]'>[#_enfants:TITRE(#ENV{rubriques,0}|non)]<img class='ouvrir' src='#CHEMIN{img_pack/deplier-droite.png}' alt='' /></a></BOUCLE_rubs_filles><BOUCLE_articles_fils(ARTICLES){id_rubrique}{statut IN #ENV{statut,#ARRAY{0,prop,1,publie,2,prepa}}}{0,1}>[(#ENV{articles,0}|oui)<a class='ajax' href='[(#SELF|parametre_url{id_r,#_enfants:ID_RUBRIQUE})]'>[#_enfants:TITRE(#ENV{rubriques,0}|non)]<img class='ouvrir' src='#CHEMIN{img_pack/deplier-droite.png}' alt='' /></a>]</BOUCLE_articles_fils><//B_rubs_filles></li>
+</BOUCLE_enfants>
+</ul>
+</B_enfants>

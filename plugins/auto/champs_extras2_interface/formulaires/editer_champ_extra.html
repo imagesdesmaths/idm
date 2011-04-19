@@ -1,0 +1,102 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<BOUCLE_si_editable(CONDITION){si #ENV{editable}}>
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='extra_id' value='#ENV{extra_id}' />
+
+		#SET{disable,#ENV{new}|?{'',oui}}
+		<fieldset>
+			<h3 class='legend'><:iextras:legend_declaration:></h3>
+			<ul>
+			[(#SAISIE{input,champ,
+				label=<:iextras:label_champ:>,
+				explication=<:iextras:caracteres_autorises_champ:>,
+				obligatoire=oui,
+				disable_avec_post=#GET{disable}})]
+
+			[(#SAISIE{selection,table,
+				label=<:iextras:label_table:>,
+				obligatoire=oui,
+				disable_avec_post=#GET{disable},
+				datas=[(#VAL|cextras_objets_valides_boucle_pour)]})]
+
+			[(#SAISIE{input,label,
+				label=<:iextras:label_label:>,
+				explication=<:iextras:precisions_pour_label:>,
+				obligatoire=oui})]
+			[(#SAISIE{selection_par_groupe,type,
+				label=<:iextras:label_type:>,
+				obligatoire=oui,
+				explication=<:iextras:precisions_pour_type:>,
+				datas=[(#VAL|cextras_types_formulaires)]})]
+				
+			#SET{defaut,",-vide-
+1,valeur 1
+2,valeur 2"}
+			[(#SAISIE{textarea,enum,
+				label=<:iextras:label_enum:>,
+				explication=<:iextras:precisions_pour_enum:>,
+				rows=3,
+				defaut=#GET{defaut}})]
+
+			</ul>
+		</fieldset>
+		
+		<fieldset>
+			<h3 class='legend'><:iextras:legend_options_techniques:></h3>	
+			<ul>
+			[(#SAISIE{oui_non,obligatoire,
+				label=<:iextras:label_obligatoire:>,
+				obligatoire=oui})]
+				
+			[(#SAISIE{oui_non,rechercher,
+				label=<:iextras:label_rechercher:>,
+				explication=<:iextras:precisions_pour_rechercher:>})]
+
+			[(#SAISIE{input,sql,
+				label=<:iextras:label_sql:>,
+				obligatoire=oui,
+				disable_avec_post=#GET{disable}})]
+
+			[(#SAISIE{radio,traitements,
+				label=<:iextras:label_traitements:>,
+				explication=<:iextras:precisions_pour_traitements:>,
+				datas=#ARRAY{
+					'',<:iextras:radio_traitements_aucun:>,
+					'_TRAITEMENT_TYPO',<:iextras:radio_traitements_typo:>,
+					'_TRAITEMENT_RACCOURCIS',<:iextras:radio_traitements_raccourcis:>}})]
+			
+			</ul>
+		</fieldset>
+		
+		<fieldset>
+			<h3 class='legend'><:iextras:legend_options_saisies:></h3>	
+			<ul>
+			[(#SAISIE{input,explication,
+				label=<:iextras:label_explication:>,
+				explication=<:iextras:precisions_pour_explication:>})]
+
+[(#VAL{_CHAMPS_EXTRAS_SAISIES_EXTERNES}|defined|et{#EVAL{_CHAMPS_EXTRAS_SAISIES_EXTERNES}})
+			[(#SAISIE{input,attention,
+				label=<:iextras:label_attention:>,
+				explication=<:iextras:precisions_pour_attention:>})]
+				
+			[(#SAISIE{input,li_class,
+				label=<:iextras:label_li_class:>,
+				explication=<:iextras:precisions_pour_li_class:>})]
+]
+
+			[(#SAISIE{input,class,
+				label=<:iextras:label_class:>,
+				explication=<:iextras:precisions_pour_class:>})]
+
+			</ul>
+		</fieldset>	
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><input type='submit' class='submit' value='[(#ENV{new}|?{<:bouton_ajouter:>,<:bouton_modifier:>})]' /></p>
+	</div></form>
+	</BOUCLE_si_editable>
+</div>

@@ -1,0 +1,48 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Thickbox v2
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Thickbox (version 2) par [Cody Lindley->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all]
+_ Mis en plugin par Fil, Izo, BoOz
+	</auteur>
+	<version>
+	0.3
+	</version>
+	<icon>thickbox.png</icon>
+	<etat>
+	test
+	</etat>
+	<description>
+	Ajoute un effet [thickbox->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all] sur les liens de type image (<code><a href="#URL_DOCUMENT" type="#MIME_TYPE">...</a></code>) ou de class="thickbox"
+
+_ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>
+_ Il n&#233;cessite le plugin {{jQuery}} pour les versions de SPIP &lt; 1.9.2
+	</description>
+	<lien>http://spip-zone.info/spip.php?article31</lien>
+	<prefix>
+	ThickBox1
+	</prefix>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+	<pipeline>
+	 <nom>insert_js</nom>
+	 <inclure>head.php</inclure>
+	</pipeline>
+	<pipeline>
+	 <nom>verifie_js_necessaire</nom>
+	 <inclure>head.php</inclure>
+	</pipeline>	
+	<necessite id="SPIP" version="[1.9.0;]" />
+	<categorie>multimedia</categorie>
+</plugin>

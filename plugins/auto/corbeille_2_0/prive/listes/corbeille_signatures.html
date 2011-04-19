@@ -1,0 +1,16 @@
+<B_signatures>
+[<h2>(#GRAND_TOTAL|corbeille_affiche_un_ou_plusieurs{corbeille:signatures_corbeille_un,corbeille:signatures_corbeille_tous})</h2>]
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class='liste_items signatures checkables'>
+<BOUCLE_signatures(SIGNATURES){statut}{pagination 5}{!par date}{recherche ?}>
+<li class='item'>
+<label for='signature-#ID_SIGNATURE'><:corbeille:selectionner:></label><input type='checkbox' name='elements[]' value='#ID_SIGNATURE'[ (#ID_SIGNATURE|in_any{#ENV{elements}}|oui)checked='checked']/>
+<h3>[##ID_SIGNATURE - (#NOM_EMAIL|sinon{<:info_sans_titre:>})]</h3>
+<small>#AD_EMAIL [(#DATE|affdate)][ (#DATE|heures)]:[(#DATE|minutes)]</small>
+- #MESSAGE
+<p class='actions'>[<a href='#URL_ECRIRE{controle_petition,id_signature=#ID_SIGNATURE}'><:corbeille:voir:></a>]</p>
+</li>
+</BOUCLE_signatures>
+</ul>
+[<p class='pagination'>(#PAGINATION)</p>]
+</B_signatures>

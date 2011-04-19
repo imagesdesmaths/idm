@@ -1,0 +1,57 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
+<?php echo '<' ?>?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<forms>
+<BOUCLE_form(FORMS){id_form=#ENV{id}}>
+<form>
+	<id_form>#ID_FORM</id_form>
+	<titre>#TITRE**</titre>
+	<descriptif>#DESCRIPTIF**</descriptif>
+	<type_form>#TYPE_FORM**</type_form>
+	<modifiable>#MODIFIABLE**</modifiable>
+	<multiple>#MULTIPLE**</multiple>
+	<email>#EMAIL**</email>
+	<champconfirm>#CHAMCONFIRM**</champconfirm>
+	<texte>#TEXTE**</texte>
+	<moderation>#MODERATION**</moderation>
+	<public>#PUBLIC**</public>
+	<linkable>#LINKABLE**</linkable>
+	<documents>#DOCUMENTS**</documents>
+	<arborescent>#ARBORESCENT**</arborescent>
+	<html_wrap>#HTML_WRAP**</html_wrap>
+	<B_champs>
+	<fields>
+		<BOUCLE_champs(FORMS_CHAMPS){id_form}{tout}{par rang}>
+		<field>
+			<champ>#CHAMP**</champ>
+			<rang>#RANG**</rang>
+			<titre>#TITRE**</titre>
+			<type>#TYPE**</type>
+			<taille>#TAILLE**</taille>
+			<obligatoire>#OBLIGATOIRE**</obligatoire>
+			<extra_info>#EXTRA_INFO**</extra_info>
+			<specifiant>#SPECIFIANT**</specifiant>
+			<listable_admin>#LISTABLE_ADMIN**</listable_admin>
+			<listable>#LISTABLE**</listable>
+			<public>#PUBLIC**</public>
+			<saisie>#SAISIE**</saisie>
+			<aide>#AIDE**</aide>
+			<html_wrap>#HTML_WRAP**</html_wrap>
+			<B_choix>
+			<les_choix>
+				<BOUCLE_choix(FORMS_CHAMPS_CHOIX){id_form}{champ}{par rang}>
+				<un_choix>
+					<choix>#CHOIX**</choix>
+					<titre>#TITRE**</titre>
+					<rang>#RANG**</rang>
+				</un_choix>
+				</BOUCLE_choix>
+			</les_choix>
+			</B_choix>
+		</field>
+		</BOUCLE_champs>
+	</fields>
+	</B_champs>
+</form>
+</BOUCLE_form>
+</forms>

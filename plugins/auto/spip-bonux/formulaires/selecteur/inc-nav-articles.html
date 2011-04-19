@@ -1,0 +1,9 @@
+#SET{p,pa_#ID_RUBRIQUE}<B_articles>
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul>
+<BOUCLE_articles(ARTICLES){id_rubrique}{lang==^(#ENV{filtrer_langue_article}|trim|sinon{.*})$}{statut?}{pagination 10 #GET{p}}>
+<li class='article[ (#EXPOSE)]'>[(#ENV{picker_article,1}|oui)<a href='#' onclick="jQuery(this).item_pick('article|#ID_ARTICLE','#ENV{name,id_item}','[(#TITRE*|attribut_html|texte_script|replace{'&#39;',#VAL{'\\'}|concat{#EVAL{chr(39)}}})]','article');return false;"
+><img class='add' src='#CHEMIN{img_pack/item-add.png}' alt='' />][(#ENV{picker_article,1}|non)<a href='[(#ID_ARTICLE|generer_url_entite{article})]'>]#TITRE</a></li>
+</BOUCLE_articles>
+</ul>
+</B_articles>

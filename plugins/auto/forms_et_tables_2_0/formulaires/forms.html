@@ -1,0 +1,50 @@
+<BOUCLE_form(FORMS){id_form=#ENV{id_form}}>
+<a name='form#ID_FORM'></a>
+<div class='spip_forms form_#ID_FORM'>
+<div class='spip_descriptif'>#DESCRIPTIF</div>
+[(#TYPE_FORM|=={sondage}|?{' ',''}) [(#PUBLIC|=={oui}|?{' '})
+		<a href='[(#URL_PAGE{sondage}|parametre_url{id_form,#ID_FORM})]' class='spip_in resultats_sondage'
+		 target="spip_sondage" onclick="javascript:window.open(this.href, 'spip_sondage', 'scrollbars=yes, resizable=yes, width=450, height=300'); return false;"
+		 onkeypress="javascript:window.open(this.href, 'spip_sondage', 'scrollbars=yes,resizable=yes, width=450, height=300'); return false;"><:forms:voir_resultats:></a>
+]]
+[<p class='spip_form_ok'>(#ENV*{formok})
+	[(#TYPE_FORM|=={sondage}|?{' ',''})	<a href='[(#ENV{self}|parametre_url{'resultats',#ID_FORM}|ancre_url{form#ID_FORM})]'><:forms:voir_resultats:></a>]
+	[<span class='spip_form_ok_confirmation'>(#ENV{reponse})</span>]
+</p>
+#ENV*{message_complementaire}]
+[<p class='spip_form_erreur'>(#ENV*{erreur_message})</p>]
+[<div style='background:url((#ENV**{url_validation}));width:1px; height=1px'></div>]
+[(#ENV{formvisible}|?{' '})
+	[(#ENV{formactif})
+	<form method='post' action='#ENV{self}#form#ID_FORM'
+		enctype='multipart/form-data'>
+	]
+		<div>
+		[(#ENV{self}|form_hidden)]
+		<input type='hidden' name='ajout_reponse' value='#ID_FORM' />
+		[<input type='hidden' name='id_donnee' value='(#ENV{id_donnee})' />]
+
+		<input type='hidden' name='retour_form' value='#ENV{url_retour}' />
+		[(#ENV{pose_cookie}|?{' '})<input type='hidden' name='ajout_cookie_form' value='oui' />]
+		</div>
+			<INCLURE{fond=#ENV{class}}{id_form}{affiche_sondage}{erreur}{valeurs=#ENV**{valeurs}}>
+	[(#ENV{formactif})
+	</form>
+	]
+	[(#REM) [(#ID_DONNEE|afficher_documents_colonne{donnee,donnees_edit})]]
+	[<div class='spip_form_notes'>(#NOTES)</div>]
+]
+<B_joint>
+<div id='forms_lier_donnees'>
+<BOUCLE_joint(FORMS_CHAMPS){id_form}{tout}{type=joint}{par rang}>
+[(#ENV{formvisible}|?{' '})
+	[(#ENV{formactif})
+		[<span class='spip_form_label'><div class='spip_form_champ'><span class='label'>#TITRE</span></span>
+		(#ENV{id_donnee}|forms_boite_jointure{#CHAMP,#ID_FORM})</div>]
+	]
+]
+</BOUCLE_joint>
+</div>
+</B_joint>
+</div>
+</BOUCLE_form>

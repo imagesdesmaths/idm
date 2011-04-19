@@ -1,0 +1,13 @@
+[(#REM) datas peut être une chaine qu'on sait décomposer ]
+#SET{datas, #ENV{datas}}
+#SET{datas, #GET{datas}|is_string|?{(#GET{datas}|saisies_chaine2tableau), #GET{datas}}}
+
+<B_choix>
+<ul>
+	<BOUCLE_choix(POUR){tableau #ENV*{valeur}}>
+	<li class="choix">[(#GET{datas}|table_valeur{#VALEUR})]</li>
+	</BOUCLE_choix>
+</ul>
+</B_choix>
+<p>#ENV{sans_reponse}</p>
+<//B_choix>
