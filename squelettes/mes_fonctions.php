@@ -10,7 +10,7 @@ function lettrine ($texte) {
       $lettrine = $matches[1] . '<p class="spip lettrine">' . $matches[2] . '<span class="lettrine"><span class="lettrine_first">' . $matches[3] . '</span>' . $matches[6] . '</span>' . $matches[7];
       $lines[$i] = str_replace ($matches[0], $lettrine, $lines[$i]);
       break;
-    } 
+    }
   }
   return implode ("\n", $lines);
 }
