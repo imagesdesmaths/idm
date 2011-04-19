@@ -14,8 +14,6 @@ function mj_labelref ($texte) {
 }
 
 function mj_protect_TeX ($texte) {
-  $texte = echappe_html ($texte); // To make example code easier.
-
   $texte = str_replace ('\[', '$$', $texte);
   $texte = str_replace ('\]', '$$', $texte);
   $texte = str_replace ('\(', '$', $texte);

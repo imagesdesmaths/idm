@@ -23,7 +23,7 @@ function prenom_nom ($texte) {
   return $texte;
 }
 
-$table_des_traitements['TITRE'][]= 'supprimer_numero(typo(%s))';
+$table_des_traitements['TITRE'][]= 'supprimer_numero(%s)';
 $table_des_traitements['NOM'][]= 'prenom_nom(%s)';
 
 function action_logout()
