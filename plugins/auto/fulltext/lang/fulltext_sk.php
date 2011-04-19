@@ -3,78 +3,78 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accents_pas_pris' => 'Pr&iacute;zvuky sa neber&uacute; do &uacute;vahu ("&#269;l&aacute;nok" alebo "clanok", d&aacute; rovnak&yacute; v&yacute;sledok, to ist&eacute; "&#269;l&aacute;nok", "&#269;lanok", "cl&aacute;nok"...)',
-	'asie' => '&Aacute;zia',
-	'asterisque_terminale' => 'nevyh&#318;ad&aacute; &#382;iadne v&yacute;sledky: hviezdi&#269;ka mus&iacute; by&#357; na konci',
-	'aussi' => 'tie&#382;',
+	'accents_pas_pris' => 'Prízvuky sa neberú do úvahu ("článok" alebo "clanok", dá rovnaký výsledok, to isté "článok", "članok", "clánok"...)',
+	'asie' => 'Ázia',
+	'asterisque_terminale' => 'nevyhľadá žiadne výsledky: hviezdička musí byť na konci',
+	'aussi' => 'tiež',
 
 	// C
-	'casse_indifferente' => 'Sp&ocirc;sob p&iacute;sania p&iacute;smen v slove (mal&eacute; p&iacute;smen&aacute;/ve&#318;k&eacute; p&iacute;smen&aacute;) nem&aacute; vplyv.',
-	'convertir_myisam' => 'Konvertova&#357; do MyISAM',
-	'convertir_toutes' => 'Konvertova&#357; v&#353;etky tabu&#318;ky do MyISAM',
-	'convertir_utf8' => 'obnovi&#357; koherenciu konverziou do UTF-8 ',
-	'creer_tous' => 'Vytvori&#357; v&#353;etky navrhovan&eacute; FULLTEXTov&eacute; indexy ',
+	'casse_indifferente' => 'Spôsob písania písmen v slove (malé písmená/veľké písmená) nemá vplyv.',
+	'convertir_myisam' => 'Konvertovať do MyISAM',
+	'convertir_toutes' => 'Konvertovať všetky tabuľky do MyISAM',
+	'convertir_utf8' => 'obnoviť koherenciu konverziou do UTF-8 ',
+	'creer_tous' => 'Vytvoriť všetky navrhované FULLTEXTové indexy ',
 
 	// E
 	'enfan' => 'cudz',
 	'enfance' => 'detstvo',
-	'enfant' => 'die&#357;a',
-	'enfanter' => 'die&#357;a',
-	'enfantillage' => 'detskos&#357;',
+	'enfant' => 'dieťa',
+	'enfanter' => 'dieťa',
+	'enfantillage' => 'detskosť',
 	'enfants' => 'deti',
 	'et' => 'A',
 	'etranger' => 'cudzinec',
-	'exemples' => 'Pr&iacute;klady pou&#382;itia',
+	'exemples' => 'Príklady použitia',
 
 	// F
 	'fant' => 'udz',
-	'fonctionnement_recherche' => 'Ako funguje vyh&#318;ad&aacute;vac&iacute; syst&eacute;m na tejto str&aacute;nke ',
-	'fulltext_cree' => 'FULLTEXT vytvoren&yacute;',
+	'fonctionnement_recherche' => 'Ako funguje vyhľadávací systém na tejto stránke ',
+	'fulltext_cree' => 'FULLTEXT vytvorený',
 
 	// I
-	'il_faut_myisam' => 'Vy&#382;aduje sa MyISAM',
-	'incoherence_charset' => 'Sada znakov na va&#353;ej str&aacute;nke je nezl&uacute;&#269;ite&#318;n&aacute; s tou v datab&aacute;ze. To m&ocirc;&#382;e vies&#357; k nespr&aacute;vnemu v&yacute;sledku vo vyh&#318;ad&aacute;van&iacute; v pr&iacute;pade, &#382;e pou&#382;&iacute;vate znaky s diakritikou:',
-	'index_regenere' => 'tabu&#318;ka indexov bola obnoven&aacute;',
-	'index_reinitialise' => 'Boli reinicializovan&eacute; dokumenty, ktor&eacute; zaznamenali chybu ',
-	'index_supprime' => 'index bol zmazan&yacute;',
+	'il_faut_myisam' => 'Vyžaduje sa MyISAM',
+	'incoherence_charset' => 'Sada znakov na vašej stránke je nezlúčiteľná s tou v databáze. To môže viesť k nesprávnemu výsledku vo vyhľadávaní v prípade, že používate znaky s diakritikou:',
+	'index_regenere' => 'tabuľka indexov bola obnovená',
+	'index_reinitialise' => 'Boli reinicializované dokumenty, ktoré zaznamenali chybu ',
+	'index_supprime' => 'index bol zmazaný',
 
 	// L
-	'liste_tables_connues' => 'Tu je zoznam tabuliek, ktor&eacute; vyh&#318;ad&aacute;vanie zoh&#318;ad&#328;uje. M&ocirc;&#382;ete vlo&#382;i&#357; viacer&eacute; prvky FULLTEXTu -- pozri dokument&aacute;ciu v',
+	'liste_tables_connues' => 'Tu je zoznam tabuliek, ktoré vyhľadávanie zohľadňuje. Môžete vložiť viaceré prvky FULLTEXTu -- pozri dokumentáciu v',
 
 	// M
 	'mais_pas' => 'ale NIE',
 
 	// O
-	'ou_bien' => 'alebo tie&#382;',
+	'ou_bien' => 'alebo tiež',
 
 	// P
-	'pas_index' => 'Ch&yacute;ba index FULLTEXTu',
-	'premier_soit' => 'BU&#270;',
+	'pas_index' => 'Chýba index FULLTEXTu',
+	'premier_soit' => 'BUĎ',
 
 	// R
-	'regenerer_tous' => 'Obnovi&#357; v&#353;etky FULLTEXTov&eacute; indexy ',
-	'reinitialise_index_doc' => 'Znovu spusti&#357; index&aacute;ciu dokumentov, ktor&eacute; zaznamenali chybu ',
-	'reserve_webmestres' => 'T&aacute;to str&aacute;nka je pr&iacute;stupn&aacute; len spr&aacute;vcovi webov&yacute;ch str&aacute;nok',
-	'retourne' => 'Vyh&#318;ad&aacute; text obsahuj&uacute;ci',
+	'regenerer_tous' => 'Obnoviť všetky FULLTEXTové indexy ',
+	'reinitialise_index_doc' => 'Znovu spustiť indexáciu dokumentov, ktoré zaznamenali chybu ',
+	'reserve_webmestres' => 'Táto stránka je prístupná len správcovi webových stránok',
+	'retourne' => 'Vyhľadá text obsahujúci',
 
 	// S
-	'sequence_exacte' => 'presn&yacute; v&yacute;raz',
+	'sequence_exacte' => 'presný výraz',
 	'soit' => 'ALEBO',
-	'supprimer' => 'Zmaza&#357;',
+	'supprimer' => 'Zmazať',
 
 	// T
-	'table_convertie' => 'Tabu&#318;ka bola konvertovan&aacute; do MyISAM',
-	'table_format' => 'Form&aacute;t tejto tabu&#318;ky je',
-	'table_non_reconnue' => 'obsah tabu&#318;ky je nezn&aacute;my',
-	'textes_premier' => 'ale zobrazuje najsk&ocirc;r texty, ktor&eacute; obsahuj&uacute;',
+	'table_convertie' => 'Tabuľka bola konvertovaná do MyISAM',
+	'table_format' => 'Formát tejto tabuľky je',
+	'table_non_reconnue' => 'obsah tabuľky je neznámy',
+	'textes_premier' => 'ale zobrazuje najskôr texty, ktoré obsahujú',
 
 	// U
-	'utiliser_operateurs_logiques' => 'Vyh&#318;ad&aacute;vanie pou&#382;&iacute;va &#353;tandardn&eacute; logick&eacute; oper&aacute;tory '
+	'utiliser_operateurs_logiques' => 'Vyhľadávanie používa štandardné logické operátory '
 );
 
 ?>

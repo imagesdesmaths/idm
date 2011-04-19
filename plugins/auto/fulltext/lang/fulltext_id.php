@@ -3,12 +3,12 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accents_pas_pris' => 'Aksen dalam kata tidak akan diperhitungkan ("d&eacute;j&agrave;" atau "deja", hasilnya akan sama saja, demikian pula dengan "d&eacute;j&agrave;", "dej&agrave;", "d&eacute;ja"...)',
+	'accents_pas_pris' => 'Aksen dalam kata tidak akan diperhitungkan ("déjà" atau "deja", hasilnya akan sama saja, demikian pula dengan "déjà", "dejà", "déja"...)',
 	'asie' => 'asia',
 	'asterisque_terminale' => 'tidak akan menghasilkan apa-apa: tanda bintang harus berada di akhir kata',
 	'aussi' => 'juga',

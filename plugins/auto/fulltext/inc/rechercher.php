@@ -18,6 +18,25 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // avec un poids pour le score
 // http://doc.spip.org/@liste_des_champs
 function liste_des_champs() {
+	global $spip_version_branche;
+	if($spip_version_branche >= '2.3.0'){
+		static $liste=null;
+		if (is_null($liste)) {
+			$liste = array();
+			// recuperer les tables_objets_sql declarees
+			include_spip('base/objets');
+			$tables_objets = lister_tables_objets_sql();
+			foreach($tables_objets as $t=>$infos){
+				if ($infos['rechercher_champs']){
+					$liste[$infos['type']] = $infos['rechercher_champs'];
+				}
+			}
+			// puis passer dans le pipeline
+			$liste = pipeline('rechercher_liste_des_champs', $liste);
+		}
+		return $liste;
+	}
+	else
 	return
 	pipeline('rechercher_liste_des_champs',
 		array(

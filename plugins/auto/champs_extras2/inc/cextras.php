@@ -80,6 +80,11 @@ class ChampExtra{
 		$extra['extra_id'] = $this->get_id();
 		return $extra;
 	}
+
+	// affichage si on fait un echo...
+	function __toString() {
+		return "<pre>" . print_r($this, true) . "</pre>";
+	}
 }
 
 

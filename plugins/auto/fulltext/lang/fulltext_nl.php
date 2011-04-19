@@ -3,13 +3,13 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accents_pas_pris' => 'Met accenten wordt geen rekening gehouden ("d&eacute;j&agrave;" of "deja" geven beiden o.a. de volgende resultaten: "d&eacute;j&agrave;", "dej&agrave;", "d&eacute;ja"...).',
-	'asie' => 'Azi&euml;',
+	'accents_pas_pris' => 'Met accenten wordt geen rekening gehouden ("déjà" of "deja" geven beiden o.a. de volgende resultaten: "déjà", "dejà", "déja"...).',
+	'asie' => 'Azië',
 	'asterisque_terminale' => 'levert geen resultaten op: het sterretje moet het laaste teken zijn',
 	'aussi' => 'ook',
 
@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'il_faut_myisam' => 'MyISAM is verplicht',
 	'incoherence_charset' => 'Jouw site en de site van de database komen niet geheel overeen. Dit kan tot verkeerde resultaten leiden bij zoekopdrachten die letters met accenten bevatten:',
 	'index_regenere' => 'tekstveld opnieuw aangamaakt',
-	'index_reinitialise' => 'De documenten met een foutmelding zijn opnieuw ge&iuml;nitialiseerd',
+	'index_reinitialise' => 'De documenten met een foutmelding zijn opnieuw geïnitialiseerd',
 	'index_supprime' => 'index verwijderd',
 
 	// L

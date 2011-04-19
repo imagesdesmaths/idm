@@ -130,7 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'une_utilisation'=>'1 Verwendung',
 	'upload_info_mode_document' => 'Im Portfolio ablegen',
 	'upload_info_mode_image' => 'Aus dem Portfolio entfernen',
-	
+	'upload_zip_mode_document' => 'Alle Bilder im Portfolio ablegen',	
 	//
 	'verifier_documents_brises' => 'Fehlende Dateien pr&uuml;fen',
 	'vignette_supprimee' => 'Das MIniaturbild wurde gel&ouml;scht.',

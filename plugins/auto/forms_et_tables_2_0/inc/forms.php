@@ -238,11 +238,12 @@
 	function Forms_nommer_fichier_form($orig, $dir) {
 		include_spip("inc/charsets");
 		include_spip("inc/filtres");
-		if (ereg("^(.*)\.([^.]+)$", $orig, $match)) {
+		if (preg_match(",^(.*)\.([^.]+)$,", $orig, $match)) {
 			$ext = strtolower($match[2]);
 			$orig = $match[1];
 		}
-		$base = ereg_replace("[^.a-zA-Z0-9_=-]+", "_",
+		// pas de . dans le nom du fichier pour eviter .php.txt
+		$base = preg_replace(",[^a-zA-Z0-9_=-]+,", "_",
 			translitteration(supprimer_tags(basename($orig))));
 		$n = 0;
 		$fichier = $base.'.'.$ext;
@@ -253,7 +254,7 @@
 	}
 
 	function Forms_type_fichier_autorise($nom_fichier) {
-		if (ereg("\.([^.]+)$", $nom_fichier, $match)) {
+		if (preg_match(",\.([^.]+)$,", $nom_fichier, $match)) {
 			$ext = addslashes(strtolower($match[1]));
 			switch ($ext) {
 			case 'htm':
@@ -266,7 +267,7 @@
 				$ext = 'tif';
 				break;
 			}
-			$query = "SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'";
+			$query = "SELECT * FROM spip_types_documents WHERE extension='".addslashes($ext)."' AND upload='oui'";
 			$result = spip_query($query);
 			/*return (spip_num_rows($result) > 0);*/
 			return (sql_count($result) > 0);
@@ -443,7 +444,7 @@
 				$dir = sous_repertoire($dir, "form".$id_form);
 				$source = $val['tmp_name'];
 				$dest = $dir.Forms_nommer_fichier_form($val['name'], $dir);
-				if (!Forms_deplacer_fichier_form($source, $dest)) {
+				if (!Forms_type_fichier_autorise($dest) OR !Forms_deplacer_fichier_form($source, $dest)) {
 					$erreur[$champ] = _T("forms:probleme_technique_upload");
 					$ok = false;
 				}

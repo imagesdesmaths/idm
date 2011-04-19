@@ -180,9 +180,12 @@ function sommaire_d_article_balise($texte) {
 
 // si on veut la balise #CS_SOMMAIRE
 if (defined('_sommaire_BALISE')) {
+	// fonction traitant la balise
 	function balise_CS_SOMMAIRE_dist($p) {
-		if ($p->type_requete == 'articles') {
-			$p->code = 'cs_supprime_notes('.champ_sql('texte', $p).')';
+		// id de l'article a trouver pour retourner son texte
+		$texte = ($v = interprete_argument_balise(1,$p))!==NULL ? 'cs_champ_sql('.$v.')' : champ_sql('texte', $p);
+		if ($p->type_requete == 'articles' || $v!==NULL) {
+			$p->code = 'cs_supprime_notes('.$texte.')';
 		} else {
 			$p->code = "''";
 		}

@@ -233,8 +233,10 @@ function artpage_debut($t=false) {
 // si on veut la balise #CS_DECOUPE (pagination uniquement)
 if (defined('_decoupe_BALISE')) {
 	function balise_CS_DECOUPE_dist($p) {
-		if ($p->type_requete == 'articles') {
-			$p->code = 'cs_decoupe(propre(cs_onglets(cs_supprime_notes('.champ_sql('texte', $p).'))), true)';
+		// id de l'article a trouver pour retourner son texte
+		$texte = ($v = interprete_argument_balise(1,$p))!==NULL ? 'cs_champ_sql('.$v.')' : champ_sql('texte', $p);
+		if ($p->type_requete == 'articles' || $v!==NULL) {
+			$p->code = 'cs_decoupe(propre(cs_onglets(cs_supprime_notes('.$texte.'))), true)';
 		} else {
 			$p->code = "''";
 		}

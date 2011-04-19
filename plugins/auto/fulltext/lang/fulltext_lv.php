@@ -3,78 +3,78 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accents_pas_pris' => 'M&#299;kstin&#257;juma z&#299;mes un akcenti netiks &#326;emti v&#275;r&#257; (mekl&#275;jot "s&#257;&#316;&#353;" vai "sals", rezult&#257;ti b&#363;s tie pa&#353;i: "s&#257;&#316;&#353;", "sals", "s&#257;ls"...)',
-	'asie' => '&#257;zija',
-	'asterisque_terminale' => 'nesniegs rezult&#257;tus: zvaigzn&#299;tei j&#257;b&#363;t nosl&#275;dzo&#353;ai',
-	'aussi' => 'ar&#299;',
+	'accents_pas_pris' => 'Mīkstinājuma zīmes un akcenti netiks ņemti vērā (meklējot "sāļš" vai "sals", rezultāti būs tie paši: "sāļš", "sals", "sāls"...)',
+	'asie' => 'āzija',
+	'asterisque_terminale' => 'nesniegs rezultātus: zvaigznītei jābūt noslēdzošai',
+	'aussi' => 'arī',
 
 	// C
-	'casse_indifferente' => 'Burtu lielums v&#257;rdos (lielie/mazie burti) nav noz&#299;m&#299;gs.',
-	'convertir_myisam' => 'P&#257;rveidot uz MyISAM',
-	'convertir_toutes' => 'P&#257;rveidot visu uz MyISAM',
-	'convertir_utf8' => 'p&#257;rveidot uz UTF-8 lai atjaunotu saska&#326;ot&#299;bu',
-	'creer_tous' => 'Rad&#299;t visus ieteiktos FULLTEXT r&#257;d&#299;t&#257;jus',
+	'casse_indifferente' => 'Burtu lielums vārdos (lielie/mazie burti) nav nozīmīgs.',
+	'convertir_myisam' => 'Pārveidot uz MyISAM',
+	'convertir_toutes' => 'Pārveidot visu uz MyISAM',
+	'convertir_utf8' => 'pārveidot uz UTF-8 lai atjaunotu saskaņotību',
+	'creer_tous' => 'Radīt visus ieteiktos FULLTEXT rādītājus',
 
 	// E
-	'enfan' => 'b&#275;rn',
-	'enfance' => 'b&#275;rn&#299;ba',
-	'enfant' => 'b&#275;rns',
-	'enfanter' => 'b&#275;rns',
-	'enfantillage' => 'b&#275;rni&#353;&#311;&#299;ba',
-	'enfants' => 'b&#275;rni',
+	'enfan' => 'bērn',
+	'enfance' => 'bērnība',
+	'enfant' => 'bērns',
+	'enfanter' => 'bērns',
+	'enfantillage' => 'bērnišķība',
+	'enfants' => 'bērni',
 	'et' => 'UN',
-	'etranger' => 'sve&#353;inieks',
-	'exemples' => 'Lietojuma piem&#275;ri',
+	'etranger' => 'svešinieks',
+	'exemples' => 'Lietojuma piemēri',
 
 	// F
 	'fant' => 'rns',
-	'fonctionnement_recherche' => 'K&#257; mekl&#275;t&#257;js darbojas &#353;aj&#257; m&#257;jaslap&#257;',
-	'fulltext_cree' => 'rad&#299;ts FULLTEXT',
+	'fonctionnement_recherche' => 'Kā meklētājs darbojas šajā mājaslapā',
+	'fulltext_cree' => 'radīts FULLTEXT',
 
 	// I
-	'il_faut_myisam' => 'nepiecie&#353;ams MyISAM',
-	'incoherence_charset' => 'Nov&#275;rota neatbilst&#299;ba rakstz&#299;m&#275;s starp j&#363;su lapu un datub&#257;zi. Tas var novest pie nepiln&#299;giem rezult&#257;tiem mekl&#275;jumos, kas ietver m&#299;kstin&#257;juma z&#299;mes:',
-	'index_regenere' => 'tabulas r&#257;d&#299;t&#257;js atjaunots',
-	'index_reinitialise' => 'Les documents en erreur ont &#233;t&#233; r&#233;initialis&#233;s', # NEW
-	'index_supprime' => 'r&#257;d&#299;t&#257;js izdz&#275;sts',
+	'il_faut_myisam' => 'nepieciešams MyISAM',
+	'incoherence_charset' => 'Novērota neatbilstība rakstzīmēs starp jūsu lapu un datubāzi. Tas var novest pie nepilnīgiem rezultātiem meklējumos, kas ietver mīkstinājuma zīmes:',
+	'index_regenere' => 'tabulas rādītājs atjaunots',
+	'index_reinitialise' => 'Les documents en erreur ont été réinitialisés', # NEW
+	'index_supprime' => 'rādītājs izdzēsts',
 
 	// L
-	'liste_tables_connues' => '&#352;eit ir tabulu saraksts, kas tiek &#326;emts v&#275;r&#257;, izmantojot mekl&#275;t&#257;ju. J&#363;s varat pievienot papildus FULLTEXT elementus -- skat&#299;t dokument&#257;ciju',
+	'liste_tables_connues' => 'Šeit ir tabulu saraksts, kas tiek ņemts vērā, izmantojot meklētāju. Jūs varat pievienot papildus FULLTEXT elementus -- skatīt dokumentāciju',
 
 	// M
 	'mais_pas' => 'bet NE',
 
 	// O
-	'ou_bien' => 'vai ar&#299;',
+	'ou_bien' => 'vai arī',
 
 	// P
-	'pas_index' => 'Nav FULLTEXT r&#257;d&#299;t&#257;ja',
+	'pas_index' => 'Nav FULLTEXT rādītāja',
 	'premier_soit' => 'VAI NU',
 
 	// R
-	'regenerer_tous' => 'Atjaunot visus FULLTEXT r&#257;d&#299;t&#257;jus',
-	'reinitialise_index_doc' => 'R&#233;initialiser l\'indexation des documents en erreur', # NEW
-	'reserve_webmestres' => 'Tikai t&#299;mek&#316;a p&#257;rzinis dr&#299;kst lieto &#353;o lapu',
-	'retourne' => 'Atgrie&#382; tekstus, kas sev&#299; ietver',
+	'regenerer_tous' => 'Atjaunot visus FULLTEXT rādītājus',
+	'reinitialise_index_doc' => 'Réinitialiser l\'indexation des documents en erreur', # NEW
+	'reserve_webmestres' => 'Tikai tīmekļa pārzinis drīkst lieto šo lapu',
+	'retourne' => 'Atgriež tekstus, kas sevī ietver',
 
 	// S
-	'sequence_exacte' => 'prec&#299;z&#257; fr&#257;ze',
+	'sequence_exacte' => 'precīzā frāze',
 	'soit' => 'VAI',
-	'supprimer' => 'Izdz&#275;st',
+	'supprimer' => 'Izdzēst',
 
 	// T
-	'table_convertie' => 'tabula p&#257;rveidota uz MyISAM',
-	'table_format' => '&#352;&#299;s tabulas form&#257;ts ir',
-	'table_non_reconnue' => 'neatpaz&#299;ta tabula',
-	'textes_premier' => 'bet r&#257;da tos tekstus pirmos, kas sev&#299; ietver',
+	'table_convertie' => 'tabula pārveidota uz MyISAM',
+	'table_format' => 'Šīs tabulas formāts ir',
+	'table_non_reconnue' => 'neatpazīta tabula',
+	'textes_premier' => 'bet rāda tos tekstus pirmos, kas sevī ietver',
 
 	// U
-	'utiliser_operateurs_logiques' => '&#352;is mekl&#275;t&#257;js izmanto standarta lo&#291;iskos operatorus.'
+	'utiliser_operateurs_logiques' => 'Šis meklētājs izmanto standarta loģiskos operatorus.'
 );
 
 ?>

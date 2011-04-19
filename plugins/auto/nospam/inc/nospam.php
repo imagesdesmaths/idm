@@ -119,7 +119,7 @@ function analyser_spams($texte) {
 	$infos['caracteres_utiles'] = compter_caracteres_utiles($texte, false);
 
 	// nombre de liens
-	$liens = extraire_balises($texte,'a');
+	$liens = array_filter(extraire_balises($texte,'a'),'pas_lien_ancre');
 	$infos['nombre_liens'] = count($liens);
 
 	// taille du titre de lien minimum
@@ -134,6 +134,16 @@ function analyser_spams($texte) {
 	return $infos;
 }
 
-
+/**
+ * Vérifier si un lien est *n'est pas* une ancre : dans ce cas, ne pas le compte (ici, fonction de filtre de tableau)
+ * Cette analyse concerne principalement des statistiques sur les liens
+ *
+ * @param string $texte lien
+ * @return boolean : true -> 
+ */
+function pas_lien_ancre($texte){
+	return substr(extraire_attribut($texte,'href'),0,1) == '#' ? false : true;
+		
+}
 
 ?>

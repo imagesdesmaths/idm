@@ -10,9 +10,11 @@ include_spip('inc/presentation');
 define('_MAJ_SVN_FILE', 'file:///home/svn/repository/spip-zone/');
 define('_MAJ_SVN_DEBUT', 'svn://zone.spip.org/spip-zone/');
 define('_MAJ_SVN_TRAC', 'svn://trac.rezo.net/spip-zone/'); // ancienne URL
-define('_MAJ_LOG_DEBUT', 'http://zone.spip.org/trac/spip-zone/log/');
+define('_MAJ_ZONE', 'http://zone.spip.org/trac/spip-zone/');
+define('_MAJ_LOG_DEBUT', _MAJ_ZONE.'log/');
 define('_MAJ_LOG_FIN', '?format=changelog');
 define('_MAJ_ZIP', 'http://files.spip.org/spip-zone/');
+define('_MAJ_ECRAN_SECU', _MAJ_ZONE.'browser/_core_/securite/ecran_securite.php?format=txt');
 
 // Pour SPIP = 2.0.X
 if(!function_exists('info_maj_spip')) {
@@ -73,6 +75,15 @@ function maj_auto_action_rapide() {
 		?"<fieldset><legend $style>"._T('couteauprive:help2', array('version'=>'SPIP '.$spip_version_affichee)).'</legend>'.propre("\n|{{{$html1}}}|")
 			.(preg_match(",$m1\.$m2\.\d+,",$html1)?'<p>'._T('couteau:maj_spip').'</p>':'').'</fieldset>'
 		:'';
+	// verification de l'ecran de securite
+	if(defined('_ECRAN_SECURITE')) {
+		$maj = maj_auto_rev_distante(_MAJ_ECRAN_SECU,false,",(\d+\.\d+(\.\d+)?),",0,true);
+		if($maj{0}!="-" && _ECRAN_SECURITE!=$maj) {
+			include_spip('inc/description_outil');
+			$html1 .= "\n<fieldset><legend $style>"._T('couteauprive:help2', array('version'=>_T('couteauprive:ecran_securite:nom').' '._ECRAN_SECURITE)).'</legend>'
+				. description_outil_liens(_T("couteauprive:ecran_maj_ko2", array("n"=>"<span style=\"color:red; font-weight:bold;\">$maj</span>"))).'</fieldset>';
+		}
+	}
 	// verification des plugins
 	include_spip('inc/plugin');
 	$plugins_actifs = array_values(liste_chemin_plugin_actifs());

@@ -16,6 +16,7 @@ function spip_bonux_formulaire_charger($flux){
 	if ($form = $flux['args']['form']
 	  AND strncmp($form,'configurer_',11)==0 // un #FORMULAIRE_CONFIGURER_XXX
 		AND !charger_fonction("charger","formulaires/$form/",true) // sans fonction charger()
+		#AND !$flux['data'] // ne pas ecraser ce que des plugins on peut etre deja remplis (tq _saisies)
 		) {
 
 		$flux['data'] = spip_bonux_formulaires_configurer_recense($form);

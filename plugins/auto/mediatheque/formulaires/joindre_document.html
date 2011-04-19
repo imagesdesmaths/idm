@@ -1,10 +1,10 @@
 [(#ENV{editable})
 <div class='formulaire_spip formulaire_joindre formulaire_joindre_document' id='formulaire_joindre_document-#ENV{id,new}'>
-	[(#ENV{mode}|=={image}|oui)
+	[(#ENV{mode_document}|=={image}|oui)
 	<h3 class='titrem'>[(#CHEMIN{images/image-24.gif}|balise_img{'',cadre-icone})][(#ENV{id,new}|intval|?{<:medias:bouton_remplacer_image:>,<:bouton_ajouter_image:>}) #AIDER{ins_img}]</h3>
-	][(#ENV{mode}|=={document}|oui)
+	][(#ENV{mode_document}|=={document}|oui)
 	<h3 class='titrem'>[(#CHEMIN{images/doc-24.gif}|balise_img{'',cadre-icone})][(#ENV{id,new}|intval|?{<:medias:bouton_remplacer_document:>,<:bouton_ajouter_document:>}) #AIDER{ins_doc}]</h3>
-	][(#ENV{mode}|=={choix}|oui)
+	][(#ENV{mode_document}|=={choix}|oui)
 	<h3 class='titrem'>[(#CHEMIN{images/doc-24.gif}|balise_img{'',cadre-icone})][(#ENV{id,new}|intval|?{<:medias:bouton_remplacer_image_document:>,<:bouton_ajouter_image_document:>}) #AIDER{ins_doc}]</h3>
 	]
 	<span class="image_loading"></span>

@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -11,137 +11,138 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts' => '@objet@:',
 
 	// A
-	'attente_confirmation' => '&#1602;&#1610;&#1583; &#1575;&#1604;&#1605;&#1589;&#1575;&#1583;&#1602;&#1577;',
+	'attente_confirmation' => 'قيد المصادقة',
 
 	// B
-	'base_donnees' => 'Base de donn&eacute;es', # NEW
-	'bloc_deplier' => 'D&eacute;plier', # NEW
+	'base_donnees' => 'Base de données', # NEW
+	'bloc_deplier' => 'Déplier', # NEW
 	'bloc_replier' => 'Replier', # NEW
 
 	// C
 	'colorer_fond' => 'Colorer le fond', # NEW
 	'colorer_texte' => 'Colorer le texte', # NEW
-	'configurer' => '&#1573;&#1593;&#1583;&#1575;&#1583; &#1587;&#1603;&#1610;&#1606; &#1575;&#1604;&#1580;&#1610;&#1576;',
-	'connections' => '&#1575;&#1604;&#1575;&#1578;&#1589;&#1575;&#1604;&#1575;&#1578;', # MODIF
+	'configurer' => 'إعداد سكين الجيب',
+	'connections' => 'الاتصالات', # MODIF
 
 	// D
 	'date_court' => '@jour@\\@mois@\\@annee@',
-	'derniers_connectes' => '&#1570;&#1582;&#1600;&#1585; &#1586;&#1575;&#1574;&#1585;:',
+	'derniers_connectes' => 'آخـر زائر:',
 
 	// E
-	'email_forum' => '&#1575;&#1604;&#1585;&#1580;&#1575;&#1569; &#1573;&#1583;&#1582;&#1575;&#1604; &#1575;&#1604;&#1576;&#1585;&#1610;&#1583; &#1575;&#1604;&#1575;&#1604;&#1603;&#1578;&#1585;&#1608;&#1606;&#1610;',
-	'explique_spam' => '&#1578;&#1581;&#1584;&#1610;&#1585;: &#1604;&#1602;&#1583; &#1575;&#1587;&#1578;&#1582;&#1583;&#1605;&#1578; &#1593;&#1604;&#1575;&#1605;&#1575;&#1578; &#1575;&#1608; &#1581;&#1585;&#1608;&#1601; &#1575;&#1608; &#1603;&#1604;&#1605;&#1575;&#1578;  &#1605;&#1605;&#1606;&#1608;&#1593;&#1577;. <br /><br /> &#1575;&#1604;&#1585;&#1580;&#1575;&#1569; &#1575;&#1604;&#1593;&#1608;&#1583;&#1577;!',
+	'email_forum' => 'الرجاء إدخال البريد الالكتروني',
+	'explique_spam' => 'تحذير: لقد استخدمت علامات او حروف او كلمات  ممنوعة. <br /><br /> الرجاء العودة!',
 
 	// L
 	'lancer_test' => 'Lancer le test !', # NEW
-	'lutte_spam' => '&#1605;&#1603;&#1575;&#1601;&#1581;&#1577; &#1575;&#1604;&#1582;&#1606;&#1586;&#1585;&#1577;',
+	'lutte_spam' => 'مكافحة الخنزرة',
 
 	// M
 	'maj_actu' => 'Forcer l\'actualisation distante', # NEW
-	'maj_liste' => 'Liste des plugins d&eacute;tect&eacute;s :', # NEW
-	'maj_maj' => 'Mettre &agrave; jour le plugin s&eacute;lectionn&eacute;', # NEW
-	'maj_ok' => 'Ce [plugin->@zip@] semble [&agrave; jour->@url@].', # NEW
-	'maj_rev' => 'R&eacute;v.&nbsp;@revision@', # NEW
-	'maj_rev_ko' => 'La [r&eacute;vision distante->@url@] n\'a pas pu &ecirc;tre trouv&eacute;e.', # NEW
-	'maj_rev_ok' => 'La r&eacute;vision [@revision@->@url@] est [disponible->@zip@].', # NEW
-	'maj_spip' => 'Apr&egrave;s avoir mis &agrave; jour tous vos plugins avec pr&eacute;caution, il est vivement conseill&eacute; de mettre &agrave; jour SPIP lui-m&ecirc;me en cliquant sur le lien ci-dessus et en suivant les instructions propos&eacute;es.', # NEW
-	'maj_svn' => 'Ce plugin SVN semble [&agrave; jour->@url@].', # NEW
-	'maj_verif' => 'V&eacute;rifiez pr&eacute;alablement l\'archive qui vous convient :', # NEW
-	'maj_verif2' => 'Attention : apr&egrave;s avoir cliqu&eacute; sur le bouton ci-dessus, v&eacute;rifiez bien que l\'archive t&eacute;l&eacute;charg&eacute;e correspond au plugin qu\'il vous faut mettre &agrave; jour.', # NEW
-	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.', # NEW
-	'msg_publies' => 'Uniquement les messages publi&eacute;s', # NEW
+	'maj_liste' => 'Liste des plugins détectés :', # NEW
+	'maj_maj' => 'Mettre à jour le plugin sélectionné', # NEW
+	'maj_ok' => 'Ce [plugin->@zip@] semble [à jour->@url@].', # NEW
+	'maj_rev' => 'Rév. @revision@', # NEW
+	'maj_rev_ko' => 'La [révision distante->@url@] n\'a pas pu être trouvée.', # NEW
+	'maj_rev_ok' => 'La révision [@revision@->@url@] est [disponible->@zip@].', # NEW
+	'maj_spip' => 'Après avoir mis à jour tous vos plugins avec précaution, il est vivement conseillé de mettre à jour SPIP lui-même en cliquant sur le lien ci-dessus et en suivant les instructions proposées.', # NEW
+	'maj_svn' => 'Ce plugin SVN semble [à jour->@url@].', # NEW
+	'maj_verif' => 'Vérifiez préalablement l\'archive qui vous convient :', # NEW
+	'maj_verif2' => 'Attention : après avoir cliqué sur le bouton ci-dessus, vérifiez bien que l\'archive téléchargée correspond au plugin qu\'il vous faut mettre à jour.', # NEW
+	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu être identifié.', # NEW
+	'msg_publies' => 'Uniquement les messages publiés', # NEW
 
 	// N
-	'nom_email_forum' => '&#1575;&#1604;&#1585;&#1580;&#1575;&#1569; &#1573;&#1583;&#1582;&#1575;&#1604; &#1575;&#1604;&#1575;&#1587;&#1605; &#1575;&#1608; &#1575;&#1604;&#1576;&#1585;&#1610;&#1583; &#1575;&#1604;&#1575;&#1604;&#1603;&#1578;&#1585;&#1608;&#1606;&#1610;!',
-	'nom_forum' => '&#1575;&#1604;&#1583;&#1575;&#1569; &#1575;&#1583;&#1582;&#1575;&#1604; &#1575;&#1604;&#1575;&#1587;&#1605;!',
-	'non_confirmes' => '&#1594;&#1610;&#1585; &#1605;&#1589;&#1575;&#1583;&#1602; &#1593;&#1604;&#1610;&#1607;&#1575;:',
+	'nom_email_forum' => 'الرجاء إدخال الاسم او البريد الالكتروني!',
+	'nom_forum' => 'الداء ادخال الاسم!',
+	'non_confirmes' => 'غير مصادق عليها:',
 
 	// O
-	'objet_article' => '&#1605;&#1602;&#1575;&#1604;',
-	'objet_articles' => '&#1605;&#1602;&#1575;&#1604;&#1575;&#1578;',
-	'objet_auteur' => '&#1605;&#1572;&#1604;&#1601;',
-	'objet_auteurs' => '&#1605;&#1572;&#1604;&#1601;&#1608;&#1606;',
-	'objet_breve' => '&#1582;&#1576;&#1585;',
-	'objet_breves' => '&#1571;&#1582;&#1576;&#1575;&#1585;',
-	'objet_mot' => '&#1605;&#1601;&#1578;&#1575;&#1581;',
-	'objet_mots' => '&#1605;&#1601;&#1575;&#1578;&#1610;&#1581;',
-	'objet_petition' => '&#1593;&#1585;&#1610;&#1590;&#1577;',
-	'objet_petitions' => '&#1593;&#1585;&#1575;&#1574;&#1590;',
-	'objet_rubrique' => '&#1602;&#1587;&#1605;',
-	'objet_rubriques' => '&#1571;&#1602;&#1587;&#1575;&#1605;',
-	'objet_syndic' => '&#1605;&#1608;&#1602;&#1593;',
-	'objet_syndics' => '&#1605;&#1608;&#1575;&#1602;&#1593;',
+	'objet_article' => 'مقال',
+	'objet_articles' => 'مقالات',
+	'objet_auteur' => 'مؤلف',
+	'objet_auteurs' => 'مؤلفون',
+	'objet_breve' => 'خبر',
+	'objet_breves' => 'أخبار',
+	'objet_mot' => 'مفتاح',
+	'objet_mots' => 'مفاتيح',
+	'objet_petition' => 'عريضة',
+	'objet_petitions' => 'عرائض',
+	'objet_rubrique' => 'قسم',
+	'objet_rubriques' => 'أقسام',
+	'objet_syndic' => 'موقع',
+	'objet_syndics' => 'مواقع',
 
 	// P
-	'page_debut' => '&#1575;&#1604;&#1589;&#1601;&#1581;&#1577; &#1575;&#1604;&#1571;&#1608;&#1604;&#1609;',
-	'page_fin' => '&#1575;&#1604;&#1589;&#1601;&#1581;&#1577; &#1575;&#1604;&#1571;&#1582;&#1610;&#1585;&#1577;',
-	'page_lien' => '&#1589;&#1601;&#1581;&#1577; @page@: @title@',
-	'page_precedente' => '&#1575;&#1604;&#1589;&#1601;&#1581;&#1577; &#1575;&#1604;&#1587;&#1575;&#1576;&#1602;&#1577;',
-	'page_suivante' => '&#1575;&#1604;&#1589;&#1601;&#1581;&#1577; &#1575;&#1604;&#1578;&#1575;&#1604;&#1610;&#1577;',
+	'page_debut' => 'الصفحة الأولى',
+	'page_fin' => 'الصفحة الأخيرة',
+	'page_lien' => 'صفحة @page@: @title@',
+	'page_precedente' => 'الصفحة السابقة',
+	'page_suivante' => 'الصفحة التالية',
 	'plug_actifs' => 'Plugins actifs', # NEW
 	'plug_inactifs' => 'Plugins inactifs', # NEW
-	'plugin_xml' => '&#1610;&#1580;&#1605;&#1593; &#1601;&#1610; &#1605;&#1604;&#1581;&#1602; &#1608;&#1575;&#1581;&#1583; &#1608;&#1592;&#1575;&#1574;&#1601; &#1580;&#1583;&#1610;&#1583;&#1577; &#1608;&#1605;&#1601;&#1610;&#1583;&#1577; &#1578;&#1607;&#1583;&#1601; &#1575;&#1604;&#1609; &#1578;&#1581;&#1587;&#1610;&#1606; &#1575;&#1583;&#1575;&#1585;&#1577; &#1575;&#1604;&#1605;&#1608;&#1602;&#1593;.
+	'plugin_xml' => 'يجمع في ملحق واحد وظائف جديدة ومفيدة تهدف الى تحسين ادارة الموقع.
 
-&#1608;&#1610;&#1605;&#1603;&#1606; &#1578;&#1601;&#1593;&#1610;&#1604; &#1575;&#1610; &#1605;&#1606; &#1607;&#1584;&#1607; &#1575;&#1604;&#1608;&#1592;&#1575;&#1574;&#1601; &#1575;&#1608; &#1575;&#1610;&#1602;&#1575;&#1601;&#1607;&#1575; &#1601;&#1610; [&#1589;&#1601;&#1581;&#1577; &#1575;&#1583;&#1575;&#1585;&#1577; &#1575;&#1604;&#1605;&#1604;&#1581;&#1602; ->  ./?exec=admin_couteau_suisse] &#1608;&#1575;&#1604;&#1578;&#1581;&#1603;&#1605; &#1576;&#1593;&#1583;&#1583; &#1605;&#1606; &#1575;&#1604;&#1605;&#1578;&#1594;&#1610;&#1585;&#1575;&#1578;: &#1575;&#1606;&#1602;&#1585; &#1593;&#1604;&#1609; {{&#1573;&#1593;&#1583;&#1575;&#1583; &#1575;&#1604;&#1605;&#1608;&#1602;&#1593;}} &#1579;&#1605; &#1575;&#1582;&#1578;&#1585; &#1585;&#1575;&#1576;&#1591; {{&#1587;&#1603;&#1610;&#1606; &#1575;&#1604;&#1580;&#1610;&#1576;}}.
+ويمكن تفعيل اي من هذه الوظائف او ايقافها في [صفحة ادارة الملحق ->  ./?exec=admin_couteau_suisse] والتحكم بعدد من المتغيرات: انقر على {{إعداد الموقع}} ثم اختر رابط {{سكين الجيب}}.
 
-&#1575;&#1589;&#1606;&#1575;&#1601; &#1575;&#1604;&#1608;&#1592;&#1575;&#1574;&#1601; &#1575;&#1604;&#1605;&#1578;&#1608;&#1575;&#1601;&#1585;&#1577; &#1607;&#1610;: &#1575;&#1604;&#1575;&#1583;&#1575;&#1585;&#1577;&#1548; &#1578;&#1581;&#1587;&#1610;&#1606; &#1575;&#1604;&#1603;&#1578;&#1575;&#1576;&#1577;&#1548; &#1575;&#1582;&#1578;&#1589;&#1575;&#1585;&#1575;&#1578; &#1575;&#1604;&#1603;&#1578;&#1575;&#1576;&#1577;&#1548; &#1593;&#1585;&#1590; &#1575;&#1604;&#1605;&#1608;&#1602;&#1593; &#1575;&#1604;&#1593;&#1605;&#1608;&#1605;&#1610;&#1548; &#1575;&#1604;&#1593;&#1604;&#1575;&#1605;&#1575;&#1578;&#1548; &#1575;&#1604;&#1605;&#1585;&#1588;&#1581;&#1575;&#1578;&#1548; &#1575;&#1604;&#1605;&#1593;&#1575;&#1610;&#1610;&#1585;.
+اصناف الوظائف المتوافرة هي: الادارة، تحسين الكتابة، اختصارات الكتابة، عرض الموقع العمومي، العلامات، المرشحات، المعايير.
 
-&#1601;&#1610; &#1607;&#1584;&#1575; &#1575;&#1604;&#1605;&#1604;&#1581;&#1602; &#1610;&#1605;&#1603;&#1606;&#1603; &#1575;&#1582;&#1578;&#1610;&#1575;&#1585; &#1575;&#1583;&#1608;&#1575;&#1578;&#1603; &#1575;&#1604;&#1605;&#1601;&#1590;&#1604;&#1577;: {{&#1578;&#1606;&#1587;&#1610;&#1602; &#1593;&#1606;&#1575;&#1608;&#1610;&#1606; URL}}&#1548; {{&#1575;&#1604;&#1575;&#1587;}}&#1548; {{&#1593;&#1604;&#1575;&#1605;&#1575;&#1578; &#1575;&#1604;&#1575;&#1602;&#1578;&#1576;&#1575;&#1587;}}&#1548; {{&#1604;&#1575;&#1574;&#1581;&#1577; &#1605;&#1581;&#1578;&#1608;&#1610;&#1575;&#1578; &#1575;&#1604;&#1605;&#1602;&#1575;&#1604;&#1575;&#1578;}}&#1548; {{&#1575;&#1586;&#1575;&#1604;&#1577; &#1575;&#1585;&#1602;&#1575;&#1605; &#1575;&#1604;&#1593;&#1606;&#1575;&#1589;&#1585;}}&#1548; {{SPIP &#1608;&#1575;&#1604;&#1585;&#1608;&#1575;&#1576;&#1591; &#1575;&#1604;&#1582;&#1575;&#1585;&#1580;&#1610;&#1577;}}&#1548; {{&#1578;&#1602;&#1587;&#1610;&#1605; &#1575;&#1604;&#1609; &#1589;&#1601;&#1581;&#1575;&#1578;}}&#1548; {{&#1593;&#1606;&#1575;&#1608;&#1610;&#1606; URL &#1575;&#1604;&#1606;&#1592;&#1610;&#1601;&#1577;}}&#1548; {{&#1605;&#1606;&#1593; &#1575;&#1604;&#1605;&#1588;&#1575;&#1585;&#1603;&#1575;&#1578; &#1575;&#1604;&#1605;&#1594;&#1601;&#1604;&#1577;}}&#1548; &#1575;&#1604;&#1582;.
+في هذا الملحق يمكنك اختيار ادواتك المفضلة: {{تنسيق عناوين URL}}، {{الاس}}، {{علامات الاقتباس}}، {{لائحة محتويات المقالات}}، {{ازالة ارقام العناصر}}، {{SPIP والروابط الخارجية}}، {{تقسيم الى صفحات}}، {{عناوين URL النظيفة}}، {{منع المشاركات المغفلة}}، الخ.
 
-&#1604;&#1575; &#1578;&#1578;&#1585;&#1583;&#1583; &#1601;&#1610; &#1602;&#1585;&#1575;&#1569;&#1577; &#1605;&#1602;&#1575;&#1604;&#1575;&#1578; &#1578;&#1608;&#1579;&#1610;&#1602; &#1607;&#1584;&#1575; &#1575;&#1604;&#1605;&#1604;&#1581;&#1602; &#1593;&#1604;&#1609; &#1575;&#1604;&#1593;&#1606;&#1608;&#1575;&#1606;:[spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+لا تتردد في قراءة مقالات توثيق هذا الملحق على العنوان:[spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-&#1610;&#1578;&#1608;&#1575;&#1601;&#1602; &#1605;&#1593; SPIP &#1601;&#1610; &#1575;&#1589;&#1583;&#1575;&#1585;&#1610; 1.92x &#1608;2.0x', # MODIF
-	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
-	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
-	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW
-	'pp_chatons_inserer_drop' => 'Ins&eacute;rer un chaton dans votre texte', # NEW
+يتوافق مع SPIP في اصداري 1.92x و2.0x', # MODIF
+	'pp_autobr' => 'Insérer un bloc où les retours à la ligne sont automatiques', # NEW
+	'pp_blocs_bloc' => 'Insérer un bloc replié', # NEW
+	'pp_blocs_visible' => 'Insérer un bloc déplié', # NEW
+	'pp_chatons_inserer' => 'Insérer le chaton « @chaton@ »', # NEW
+	'pp_chatons_inserer_drop' => 'Insérer un chaton dans votre texte', # NEW
 	'pp_couleur_fond' => 'Fond @couleur@', # NEW
 	'pp_couleur_icone_fond' => 'F', # NEW
 	'pp_couleur_icone_texte' => 'T', # NEW
 	'pp_couleur_texte' => 'Texte @couleur@', # NEW
 	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse', # NEW
-	'pp_decoration_inserer' => 'D&eacute;coration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;', # NEW
-	'pp_decoration_inserer_drop' => 'Appliquer au texte une &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personnalis&eacute;e', # NEW
-	'pp_decoupe_onglets' => 'Ins&eacute;rer un syst&egrave;me d\'onglet', # NEW
-	'pp_decoupe_separateur' => 'Ins&eacute;rer un s&eacute;parateur de page ou d\'onglet', # NEW
-	'pp_filets_inserer' => 'Ins&eacute;rer un filet de style &laquo;&nbsp;@filet@&nbsp;&raquo;', # NEW
-	'pp_filets_inserer_drop' => 'Ins&eacute;rer un filet de s&eacute;paration', # NEW
-	'pp_smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@', # NEW
+	'pp_decoration_inserer' => 'Décoration « @balise@.@racc@ »', # NEW
+	'pp_decoration_inserer_drop' => 'Appliquer au texte une « décoration » personnalisée', # NEW
+	'pp_decoupe_onglets' => 'Insérer un système d\'onglet', # NEW
+	'pp_decoupe_separateur' => 'Insérer un séparateur de page ou d\'onglet', # NEW
+	'pp_filets_inserer' => 'Insérer un filet de style « @filet@ »', # NEW
+	'pp_filets_inserer_drop' => 'Insérer un filet de séparation', # NEW
+	'pp_smileys_inserer' => 'Insérer une frimousse @smiley@', # NEW
 	'pp_un_titre' => 'Un titre', # NEW
 	'pp_votre_texte' => 'Placez votre texte ici', # NEW
 	'pp_votre_titre' => 'Titre @nb@', # NEW
 
 	// S
-	'smileys_dispos' => '&#1585;&#1605;&#1608;&#1586; &#1605;&#1578;&#1608;&#1575;&#1601;&#1585;&#1577;:',
-	'sommaire_page' => '&#1548; &#1589;&#1601;&#1581;&#1577; @page@',
-	'sommaire_page_long' => '&#1548;&nbsp;&#1589;&#1601;&#1581;&#1577;&nbsp;@page@',
-	'sommaire_titre' => '&#1575;&#1604;&#1605;&#1581;&#1578;&#1608;&#1610;&#1575;&#1578;',
-	'stats_auteur' => '@icon@ @nom@&#1548; &#1601;&#1610; @date@',
-	'stats_date' => '@&#1610;&#1608;&#1605;@/@&#1588;&#1607;&#1585;@/@&#1587;&#1606;&#1577;@&nbsp;&#1593;&#1604;&#1609; &#1575;&#1604;&#1587;&#1575;&#1593;&#1577;&nbsp;@&#1587;@&#1583;@&#1579;@',
+	'smileys_dispos' => 'رموز متوافرة:',
+	'sommaire_page' => '، صفحة @page@',
+	'sommaire_page_long' => '، صفحة @page@',
+	'sommaire_titre' => 'المحتويات',
+	'stats_auteur' => '@icon@ @nom@، في @date@',
+	'stats_date' => '@يوم@/@شهر@/@سنة@ على الساعة @س@د@ث@',
 
 	// T
-	'test_base' => 'Test de la base de donn&eacute;es', # NEW
+	'test_base' => 'Test de la base de données', # NEW
 	'test_manuel' => 'Test manuel', # NEW
-	'texte_formatspip' => '&#1575;&#1604;&#1606;&#1589; &#1575;&#1604;&#1571;&#1589;&#1604;&#1610; &#1576;&#1578;&#1606;&#1587;&#1610;&#1602; SPIP',
-	'textes_formatspip' => '&#1575;&#1604;&#1606;&#1589;&#1608;&#1589; &#1575;&#1604;&#1571;&#1589;&#1604;&#1610;&#1577; &#1576;&#1578;&#1606;&#1587;&#1610;&#1602; SPIP',
-	'titre' => '&#1587;&#1603;&#1610;&#1606; &#1575;&#1604;&#1580;&#1610;&#1576;',
-	'tri_auteurs' => '&#1578;&#1585;&#1578;&#1610;&#1576; &#1575;&#1604;&#1605;&#1572;&#1604;&#1601;&#1610;&#1606;',
-	'tri_descendre' => '&#1607;&#1584;&#1575; &#1575;&#1604;&#1605;&#1572;&#1604;&#1601; &#1575;&#1604;&#1609; &#1575;&#1604;&#1571;&#1587;&#1601;&#1604;',
-	'tri_monter' => '&#1607;&#1584;&#1575; &#1575;&#1604;&#1605;&#1572;&#1604;&#1601; &#1575;&#1604;&#1609; &#1575;&#1604;&#1571;&#1593;&#1604;&#1609;',
+	'texte_formatspip' => 'النص الأصلي بتنسيق SPIP',
+	'textes_formatspip' => 'النصوص الأصلية بتنسيق SPIP',
+	'titre' => 'سكين الجيب',
+	'tri_auteurs' => 'ترتيب المؤلفين',
+	'tri_descendre' => 'هذا المؤلف الى الأسفل',
+	'tri_monter' => 'هذا المؤلف الى الأعلى',
 
 	// U
-	'urls_propres_erreur' => '&#1607;&#1584;&#1575; &#1575;&#1604;&#1578;&#1606;&#1587;&#1610;&#1602; &#1610;&#1578;&#1580;&#1575;&#1607;&#1604; &#1593;&#1606;&#1575;&#1608;&#1610;&#1606; URL &#1575;&#1604;&#1606;&#1592;&#1610;&#1601;&#1577; &#1575;&#1604;&#1592;&#1575;&#1607;&#1585;&#1577; &#1571;&#1583;&#1606;&#1575;&#1607;.',
-	'urls_propres_format' => '&#1575;&#1604;&#1578;&#1606;&#1587;&#1610;&#1602; &#1575;&#1604;&#1581;&#1575;&#1604;&#1610; &#1604;&#1593;&#1606;&#1575;&#1608;&#1610;&#1606; URL &#1607;&#1608;:{{&laquo;@format@&raquo;}}. [<span>[&#1573;&#1593;&#1583;&#1575;&#1583;->@url@]</span>]',
-	'urls_propres_lien' => '&#1585;&#1575;&#1576;&#1591; &#1575;&#1604;&#1608;&#1589;&#1608;&#1604; &#1575;&#1604;&#1593;&#1605;&#1608;&#1605;&#1610;',
-	'urls_propres_objet' => '&#1578;&#1592;&#1607;&#1585; &#1607;&#1606;&#1575; &#1593;&#1606;&#1575;&#1608;&#1610;&#1606; URL &#1575;&#1604;&#1606;&#1592;&#1610;&#1601;&#1577; &#1575;&#1604;&#1605;&#1582;&#1586;&#1606;&#1577; &#1601;&#1610; &#1602;&#1575;&#1593;&#1583;&#1577; &#1575;&#1604;&#1576;&#1610;&#1575;&#1606;&#1575;&#1578; &#1608;&#1575;&#1604;&#1578;&#1610; &#1610;&#1578;&#1605;&#1603;&#1606; &#1575;&#1604;&#1586;&#1608;&#1575;&#1585; &#1605;&#1606; &#1582;&#1604;&#1575;&#1604;&#1607;&#1575; &#1605;&#1606; &#1578;&#1589;&#1601;&#1581; &#1575;&#1604;&#1605;&#1608;&#1602;&#1593;.',
-	'urls_propres_titre' => '&#1593;&#1606;&#1575;&#1608;&#1610;&#1606; URL &#1575;&#1604;&#1606;&#1592;&#1610;&#1601;&#1577;',
+	'urls_propres_erreur' => 'هذا التنسيق يتجاهل عناوين URL النظيفة الظاهرة أدناه.',
+	'urls_propres_format' => 'التنسيق الحالي لعناوين URL هو:{{«@format@»}}. [<span>[إعداد->@url@]</span>]',
+	'urls_propres_lien' => 'رابط الوصول العمومي',
+	'urls_propres_objet' => 'تظهر هنا عناوين URL النظيفة المخزنة في قاعدة البيانات والتي يتمكن الزوار من خلالها من تصفح الموقع.',
+	'urls_propres_titre' => 'عناوين URL النظيفة',
 
 	// V
-	'variable_vide' => '&#1601;&#1585;&#1575;&#1594;',
-	'visiteurs_connectes' => '&#1575;&#1604;&#1586;&#1608;&#1575;&#1585; &#1575;&#1604;&#1605;&#1578;&#1589;&#1604;&#1608;&#1606; &#1581;&#1575;&#1604;&#1610;&#1575;&#1611;: @nb@',
+	'variable_vide' => 'فراغ',
+	'visiteurs_connectes' => 'الزوار المتصلون حالياً: @nb@',
 
 	// W
-	'webmestres' => '&#1605;&#1587;&#1572;&#1608;&#1604;&#1608; &#1575;&#1604;&#1605;&#1608;&#1602;&#1593; &#1581;&#1587;&#1576; SPIP'
+	'webmestres' => 'مسؤولو الموقع حسب SPIP'
 );
 
 ?>

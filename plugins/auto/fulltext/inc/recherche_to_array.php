@@ -46,6 +46,12 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 	$serveur = $options['serveur'];
 
 	include_spip('inc/rechercher');
+
+	// s'il n'y a qu'un mot mais <= 3 lettres, il faut le chercher avec une *
+	// ex: RFC => RFC* ; car mysql fulltext n'indexe pas ces mots
+	if (preg_match('/^\w{1,3}$/', $recherche))
+		$recherche .= '*';
+
 	list($methode, $q, $preg) = expression_recherche($recherche, $options);
 
 	$l = liste_des_champs();

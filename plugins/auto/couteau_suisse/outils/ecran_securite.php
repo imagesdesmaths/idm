@@ -13,7 +13,7 @@ function ecran_securite_pre_description_outil($flux) {
 		$vers = _ECRAN_SECURITE;
 		// recherche de la version du fichier distant
 		include_spip("outils/maj_auto_action_rapide");
-		$maj = maj_auto_rev_distante("http://zone.spip.org/trac/spip-zone/browser/_core_/securite/ecran_securite.php?format=txt",false,",(\d+\.\d+(\.\d+)?),",0,true);
+		$maj = maj_auto_rev_distante(_MAJ_ECRAN_SECU,false,",(\d+\.\d+(\.\d+)?),",0,true);
 		if($maj{0} != "-") 
 			$tmp = "\n".(_ECRAN_SECURITE!=$maj?"- "._T("couteauprive:ecran_maj_ko", array("n"=>"<span style=\"color: red;\">$maj</span>")):_T("couteauprive:ecran_maj_ok"));
 	} else $vers=_T("couteauprive:ecran_ko");

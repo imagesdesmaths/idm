@@ -3,48 +3,48 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accents_pas_pris' => 'Accentele nu sunt luate &icirc;n considerare (&laquo;&nbsp;&icirc;n&#355;elegere&nbsp;&raquo; sau &laquo;&nbsp;intelegere&nbsp;&raquo;, vor avea ca rezultat: &laquo;&nbsp;&icirc;n&#355;elegere&nbsp;&raquo;, &laquo;&nbsp;in&#355;elegere&nbsp;&raquo;, &laquo;&nbsp;&icirc;ntelegere&nbsp;&raquo;...)',
+	'accents_pas_pris' => 'Accentele nu sunt luate în considerare (« înţelegere » sau « intelegere », vor avea ca rezultat: « înţelegere », « inţelegere », « întelegere »...)',
 	'asie' => 'asia',
-	'asterisque_terminale' => 'nu va &icirc;ntoarce nimic: asteriscul * trebuie s&#259; fie la final',
+	'asterisque_terminale' => 'nu va întoarce nimic: asteriscul * trebuie să fie la final',
 	'aussi' => 'de asemenea',
 
 	// C
 	'casse_indifferente' => 'Minuscul/majuscul este nerelevant.',
-	'convertir_myisam' => 'Converti&#355;i &icirc;n MyISAM',
-	'convertir_toutes' => 'Converti&#355;i toate tabelele &icirc;n MyISAM',
-	'convertir_utf8' => 'converti&#355;i &icirc;n UTF-8 pentru a restaura coeren&#355;a',
-	'creer_tous' => 'Crea&#355;i to&#355;i indec&#351;ii FULLTEXT sugera&#355;i',
+	'convertir_myisam' => 'Convertiţi în MyISAM',
+	'convertir_toutes' => 'Convertiţi toate tabelele în MyISAM',
+	'convertir_utf8' => 'convertiţi în UTF-8 pentru a restaura coerenţa',
+	'creer_tous' => 'Creaţi toţi indecşii FULLTEXT sugeraţi',
 
 	// E
 	'enfan' => 'cop',
-	'enfance' => 'copil&#259;rie',
+	'enfance' => 'copilărie',
 	'enfant' => 'copil',
 	'enfanter' => 'copiii',
-	'enfantillage' => 'copil&#259;resc',
+	'enfantillage' => 'copilăresc',
 	'enfants' => 'copii',
-	'et' => '&#350;I',
-	'etranger' => 'str&#259;in',
+	'et' => 'ŞI',
+	'etranger' => 'străin',
 	'exemples' => 'Exemple de utilizare',
 
 	// F
 	'fant' => 'pil',
-	'fonctionnement_recherche' => 'Func&#355;ionarea motorului de c&#259;utare a acestui site',
+	'fonctionnement_recherche' => 'Funcţionarea motorului de căutare a acestui site',
 	'fulltext_cree' => 'FULLTEXT creat',
 
 	// I
 	'il_faut_myisam' => 'trebuie MyISAM',
-	'incoherence_charset' => 'O incoeren&#355;&#259; intre charset-ul site-ului &#351;i cel al tabelelor din baza de date risc&#259; s&#259; dea rezultate de c&#259;utare false &icirc;n cazul caracterelor accentuate:',
+	'incoherence_charset' => 'O incoerenţă intre charset-ul site-ului şi cel al tabelelor din baza de date riscă să dea rezultate de căutare false în cazul caracterelor accentuate:',
 	'index_regenere' => 'index-ul tabelei regenerat',
-	'index_reinitialise' => 'Documentele &icirc;n eroare au fost resetate',
-	'index_supprime' => 'index &#351;ters',
+	'index_reinitialise' => 'Documentele în eroare au fost resetate',
+	'index_supprime' => 'index şters',
 
 	// L
-	'liste_tables_connues' => 'Iat&#259; lista tabelelor cunoscute pentru c&#259;utare. Pute&#355;i s&#259; ad&#259;uga&#355;i elemente FULLTEXT, conform documenta&#355;iei de la adresa',
+	'liste_tables_connues' => 'Iată lista tabelelor cunoscute pentru căutare. Puteţi să adăugaţi elemente FULLTEXT, conform documentaţiei de la adresa',
 
 	// M
 	'mais_pas' => 'dar NU',
@@ -53,28 +53,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ou_bien' => 'sau ',
 
 	// P
-	'pas_index' => 'F&#259;r&#259; index FULLTEXT',
+	'pas_index' => 'Fără index FULLTEXT',
 	'premier_soit' => 'FIE',
 
 	// R
-	'regenerer_tous' => 'Regenera&#355;i to&#355;i indec&#351;ii FULLTEXT',
-	'reinitialise_index_doc' => 'Reseta&#355;i indexarea documentelor &icirc;n eroare',
-	'reserve_webmestres' => 'Pagin&#259; rezervat&#259; webmaster-ilor',
-	'retourne' => '&Icirc;ntoarce textele care con&#355;in',
+	'regenerer_tous' => 'Regeneraţi toţi indecşii FULLTEXT',
+	'reinitialise_index_doc' => 'Resetaţi indexarea documentelor în eroare',
+	'reserve_webmestres' => 'Pagină rezervată webmaster-ilor',
+	'retourne' => 'Întoarce textele care conţin',
 
 	// S
-	'sequence_exacte' => 'exact secven&#355;a de cuvinte',
+	'sequence_exacte' => 'exact secvenţa de cuvinte',
 	'soit' => 'SAU',
-	'supprimer' => '&#350;terge&#355;i',
+	'supprimer' => 'Ştergeţi',
 
 	// T
-	'table_convertie' => 'tabel&#259; convertit&#259; &icirc;n MyISAM',
-	'table_format' => 'Aceast&#259; tabel&#259; este &icirc;n formatul',
-	'table_non_reconnue' => 'tabel&#259; nerecunoscut&#259;',
-	'textes_premier' => 'dar prezint&#259; mai &icirc;nt&acirc;i textele care con&#355;in',
+	'table_convertie' => 'tabelă convertită în MyISAM',
+	'table_format' => 'Această tabelă este în formatul',
+	'table_non_reconnue' => 'tabelă nerecunoscută',
+	'textes_premier' => 'dar prezintă mai întâi textele care conţin',
 
 	// U
-	'utiliser_operateurs_logiques' => 'C&#259;utarea utilizeaz&#259; operatorii logici cei mai curen&#355;i.'
+	'utiliser_operateurs_logiques' => 'Căutarea utilizează operatorii logici cei mai curenţi.'
 );
 
 ?>

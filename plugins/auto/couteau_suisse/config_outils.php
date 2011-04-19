@@ -26,28 +26,33 @@ add_outil( array(
 */
 
 
-add_variable( array(
+add_variables( array(
 	'nom' => 'alinea',
-	'format' => _format_NOMBRE,
-	'radio' => array(1 => 'couteauprive:autobr_oui', 0 => 'couteauprive:autobr_non'),
+	'check' => 'couteauprive:autobr_oui',
 	'defaut' => 1,
-	'radio/ligne' => 1,
-	'code:!%s' => "define('_CS_AUTOBR_RACC', 1);",
+	'code:%s' => "define('_CS_AUTOBR_TRAIT', 1);",
+) ,array(
+	'nom' => 'alinea2',
+	'check' => 'couteauprive:autobr_non',
+	'defaut' => 0,
+	'code:%s' => "define('_CS_AUTOBR_RACC', 1);",
 ));
 add_outil( array(
 	'id' => 'autobr',
-	'code:options' => '%%alinea%%',
+	'code:options' => '%%alinea%%%%alinea2%%',
 	'categorie' => 'typo-corr',
 	// traitement automatique des TEXTE/articles, et TEXTE/forums (standard pour SPIP>=2.1)
 	'traitement:TEXTE/articles:pre_propre'
 	 .(!defined('_SPIP20100')?',traitement:TEXTE/forums:pre_propre':'') => 'autobr_pre_propre',
-	'pipelinecode:pre_typo' => 'if(!%%alinea%%) { include_spip(\'outils/autobr\'); $flux = autobr_alinea($flux); }',
+	'pipelinecode:pre_typo' => 'if(%%alinea2%%) { include_spip(\'outils/autobr\'); $flux = autobr_alinea($flux); }',
 	'pipeline:nettoyer_raccourcis_typo' => 'autobr_nettoyer_raccourcis',
 	'pipeline:porte_plume_cs_pre_charger' => 'autobr_CS_pre_charger',
 	'pipeline:porte_plume_lien_classe_vers_icone' => 'autobr_PP_icones',
 	'code:fonctions' => "// pour le traitement TEXTE/articles et la balise #INTRODUCTION
 include_spip('outils/autobr');
 \$GLOBALS['cs_introduire'][] = 'autobr_nettoyer_raccourcis';",
+	'pipelinecode:pre_description_outil' => 'if($id=="autobr")
+		$texte=str_replace("@BALISES@",cs_balises_traitees("autobr"),$texte);',
 ));
 
 // ici on a besoin d'une case input. La variable est : dossier_squelettes
@@ -932,8 +937,19 @@ add_variables( array(
 	'defaut' => 0,
 	'code' => '$GLOBALS["liens_orphelins"]=%s;',
 		// empeche SPIP de convertir les URLs orphelines (URLs brutes)
-	'code:%s<>-2' => defined('_SPIP19300')?"\n\$GLOBALS['spip_pipeline']['pre_liens']=str_replace('|traiter_raccourci_liens','',\$GLOBALS['spip_pipeline']['pre_liens']);
+	'code:%s<>-2' => defined('_SPIP19300')?"\n// Pas de traitement automatique des liens orphelins :\n\$GLOBALS['spip_pipeline']['pre_liens']=str_replace('|traiter_raccourci_liens','',\$GLOBALS['spip_pipeline']['pre_liens']);
 @define('_EXTRAIRE_LIENS',',^\$,');":'',
+), array(
+	'nom' => 'long_url',
+	'format' => _format_NOMBRE,
+	'defaut' => 40,
+	'code:%s' => "define('_MAX_LONG_URL', %s);",
+), array(
+	'nom' => 'coupe_url',
+	'format' => _format_NOMBRE,
+	'defaut' => 35,
+	'code:%s' => "define('_MAX_COUPE_URL', %s);",
+), array(
 ));
 // attention : liens_orphelins doit etre place avant mailcrypt ou liens_en_clair
 add_outil( array(
@@ -941,11 +957,12 @@ add_outil( array(
 	'categorie'	 => 'typo-corr',
 	'contrib'	=> 2443,
 	'code:options' => '%%liens_interrogation%%',
-	'code:spip_options' => '%%liens_orphelins%%',
+	'code:spip_options' => '%%liens_orphelins%%%%long_url%%%%coupe_url%%',
 	'pipeline:pre_propre' => 'liens_orphelins_pipeline',
 	'traitement:EMAIL' => 'expanser_liens(liens_orphelins',
  	'pipeline:pre_typo'   => 'interro_pre_typo',
  	'pipeline:post_propre'   => 'interro_post_propre',
+	'description' => defined('_SPIP19300')?'<:liens_orphelins::><liens_orphelins valeur="0/1/-2"><:liens_orphelins:1:></liens_orphelins>':'<:liens_orphelins::>',
 ));
 
 add_outil( array(

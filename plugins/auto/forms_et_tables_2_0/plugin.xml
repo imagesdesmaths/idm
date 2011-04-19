@@ -5,14 +5,14 @@
 	<icon>img_pack/form-24.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
 		<multi>[ar]&#1575;&#1606;&#1591;&#1608;&#1575;&#1606; &#1576;&#1578;&#1585;&#1608;&#1548; &#1587;&#1610;&#1583;&#1585;&#1610;&#1603; &#1605;&#1608;&#1585;&#1575;&#1606;&#1548; &#1585;&#1610;&#1606;&#1575;&#1578;&#1608;
-		[fr]Antoine Pitrou, Cedric Morin, Renato Formato, Jerome Escoffier (adaptation à SPIP2)
-		[it]Antoine Pitrou, Cedric Morin, Renato Formato, Jerome Escoffier (adaptation à SPIP2)
+		[fr]Antoine Pitrou, Cedric Morin, Renato Formato, Jerome Escoffier (adaptation Ã  SPIP2)
+		[it]Antoine Pitrou, Cedric Morin, Renato Formato, Jerome Escoffier (adaptation Ã  SPIP2)
 		[de]Antoine Pitrou, Cedric Morin, Renato Formato, Jerome Escoffier (Anpassung f&uuml;r SPIP2)
-	       [es]Antoine Pitrou, Cedric Morin, Renato Formato, Jerome Escoffier (adaptation à SPIP2)
+	       [es]Antoine Pitrou, Cedric Morin, Renato Formato, Jerome Escoffier (adaptation Ã  SPIP2)
 		</multi>
 	</auteur>
 	<version>
-	0.306
+	0.400
 	</version>
 	<etat>
 	test
@@ -33,17 +33,17 @@
 	Il serait interessant de voir si on ne peut pas laisser un choix a la saisie
 	(soit au moment de la construction du formulaire soit au moment de la saisie par l'utilisateur).
 	Il serait ensuite interessant d'exploiter cette donnee ailleurs (export, suivi des reponses).
-<br /><br />To do : faire ces modifications pour utiliser la donnee monetaire.
+<br /><br />To doÂ : faire ces modifications pour utiliser la donnee monetaire.
 <br /><br />	
 2- nous avons reactive le tableau des resultats (nous ne le voyons pas en SPIP 1.9+ ): 
-<br /><br />Par contre, dans ce tableau les tris sur ‘id’ et ‘date’ marchent. Ca ne marche pas sur les autres champs.
+<br /><br />Par contre, dans ce tableau les tris sur "id" et "date" marchent. Ca ne marche pas sur les autres champs.
 <br /><br />To do : generaliser le tri sur les autres champs
 <br /><br />	
 3- probleme confirmation d'une reponse a un sondage (a voir)
 <br /><br />la fonction de confirmation d'une reponse dans un sondage est pour l'instant by passee,
 	la reponse est automatiquement valide sans passage par confirmation = attente. Cette fonction
-	doit servir a traiter des  multiple via des robots ou quelque chose comme ça.
-<br /><br />To do : faire marcher cette fonction de confirmation de la reponse, sur SPIP2, et enlever
+	doit servir a traiter des  multiple via des robots ou quelque chose comme Ã§a.
+<br /><br />To doÂ : faire marcher cette fonction de confirmation de la reponse, sur SPIP2, et enlever
 	le by pass decrit ci-dessus.
 <br /><br /><a href="http://zone.spip.org/trac/spip-zone/wiki/SpipForms" target="_new">documentation</a> 
 	[it]Gestione ed amministrazione di form modificabili.

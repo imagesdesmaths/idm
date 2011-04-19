@@ -3,19 +3,19 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// 2
-	'2pts' => '@objet@:', # MODIF
+	'2pts' => '@objet@:',
 
 	// A
 	'attente_confirmation' => 'Waiting for confirmation', # MODIF
 
 	// B
-	'base_donnees' => 'Base de donn&eacute;es', # NEW
-	'bloc_deplier' => 'D&eacute;plier', # NEW
+	'base_donnees' => 'Base de données', # NEW
+	'bloc_deplier' => 'Déplier', # NEW
 	'bloc_replier' => 'Replier', # NEW
 
 	// C
@@ -26,11 +26,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'date_court' => '@jour@/@mois@/@annee@', # MODIF
-	'derniers_connectes' => 'Last connected:', # MODIF
+	'derniers_connectes' => 'Last connected:',
 
 	// E
-	'email_forum' => 'Please give your email address!', # MODIF
-	'explique_spam' => 'Warning : you have used forbidden tags, characters or words. <br /><br />Start again!', # MODIF
+	'email_forum' => 'Please give your email address!',
+	'explique_spam' => 'Warning : you have used forbidden tags, characters or words. <br /><br />Start again!',
 
 	// L
 	'lancer_test' => 'Lancer le test !', # NEW
@@ -38,45 +38,45 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'maj_actu' => '<MODIF>Force update', # MODIF
-	'maj_liste' => 'List of detected plugins:', # MODIF
-	'maj_maj' => 'Update the selected plugin', # MODIF
-	'maj_ok' => 'This [plugin->@zip@] appears to be [up-to-date->@url@].', # MODIF
-	'maj_rev' => 'Ver.&nbsp;@revision@', # MODIF
-	'maj_rev_ko' => 'The [remote version->@url@] could not be found.', # MODIF
-	'maj_rev_ok' => 'Version [@revision@->@url@] is [available->@zip@].', # MODIF
-	'maj_spip' => 'Apr&egrave;s avoir mis &agrave; jour tous vos plugins avec pr&eacute;caution, il est vivement conseill&eacute; de mettre &agrave; jour SPIP lui-m&ecirc;me en cliquant sur le lien ci-dessus et en suivant les instructions propos&eacute;es.', # NEW
-	'maj_svn' => 'This SVN plugin appears to be [up-to-date->@url@].', # MODIF
-	'maj_verif' => 'First check which file is right for you:', # MODIF
-	'maj_verif2' => 'N.B. After clicking on the button above, make sure that the file you downloaded corresponds to the plugin you wish to update.', # MODIF
-	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.',
-	'msg_publies' => 'Uniquement les messages publi&eacute;s', # NEW
+	'maj_liste' => 'List of detected plugins:',
+	'maj_maj' => 'Update the selected plugin',
+	'maj_ok' => 'This [plugin->@zip@] appears to be [up-to-date->@url@].',
+	'maj_rev' => 'Ver. @revision@',
+	'maj_rev_ko' => 'The [remote version->@url@] could not be found.',
+	'maj_rev_ok' => 'Version [@revision@->@url@] is [available->@zip@].',
+	'maj_spip' => 'Après avoir mis à jour tous vos plugins avec précaution, il est vivement conseillé de mettre à jour SPIP lui-même en cliquant sur le lien ci-dessus et en suivant les instructions proposées.', # NEW
+	'maj_svn' => 'This SVN plugin appears to be [up-to-date->@url@].',
+	'maj_verif' => 'First check which file is right for you:',
+	'maj_verif2' => 'N.B. After clicking on the button above, make sure that the file you downloaded corresponds to the plugin you wish to update.',
+	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu être identifié.',
+	'msg_publies' => 'Uniquement les messages publiés', # NEW
 
 	// N
-	'nom_email_forum' => 'Please give your name or email address!', # MODIF
-	'nom_forum' => 'Please give your name!', # MODIF
-	'non_confirmes' => 'Unconfirmed:', # MODIF
+	'nom_email_forum' => 'Please give your name or email address!',
+	'nom_forum' => 'Please give your name!',
+	'non_confirmes' => 'Unconfirmed:',
 
 	// O
 	'objet_article' => 'Article', # MODIF
 	'objet_articles' => 'Articles', # MODIF
 	'objet_auteur' => 'Author', # MODIF
 	'objet_auteurs' => 'Authors', # MODIF
-	'objet_breve' => 'News item', # MODIF
-	'objet_breves' => 'News items', # MODIF
+	'objet_breve' => 'News item',
+	'objet_breves' => 'News items',
 	'objet_mot' => 'Keyword', # MODIF
 	'objet_mots' => 'Keywords', # MODIF
-	'objet_petition' => 'Petition', # MODIF
-	'objet_petitions' => 'Petitions', # MODIF
+	'objet_petition' => 'Petition',
+	'objet_petitions' => 'Petitions',
 	'objet_rubrique' => 'Section', # MODIF
 	'objet_rubriques' => 'Sections', # MODIF
 	'objet_syndic' => 'Site', # MODIF
 	'objet_syndics' => 'Sites', # MODIF
 
 	// P
-	'page_debut' => 'First page', # MODIF
-	'page_fin' => 'Last page', # MODIF
+	'page_debut' => 'First page',
+	'page_fin' => 'Last page',
 	'page_lien' => 'Page @page@: @title@', # MODIF
-	'page_precedente' => 'Previous page', # MODIF
+	'page_precedente' => 'Previous page',
 	'page_suivante' => 'Next page', # MODIF
 	'plug_actifs' => 'Active plugins', # MODIF
 	'plug_inactifs' => 'Inactive plugins', # MODIF
@@ -91,36 +91,37 @@ Find your favourite tools in this plugin: {Delete the number}, {URL formats},{Su
 See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Compatibility: SPIP 1.92x and v2.0.x', # MODIF
-	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
-	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
-	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW
-	'pp_chatons_inserer_drop' => 'Ins&eacute;rer un chaton dans votre texte', # NEW
+	'pp_autobr' => 'Insérer un bloc où les retours à la ligne sont automatiques', # NEW
+	'pp_blocs_bloc' => 'Insérer un bloc replié', # NEW
+	'pp_blocs_visible' => 'Insérer un bloc déplié', # NEW
+	'pp_chatons_inserer' => 'Insérer le chaton « @chaton@ »', # NEW
+	'pp_chatons_inserer_drop' => 'Insérer un chaton dans votre texte', # NEW
 	'pp_couleur_fond' => 'Fond @couleur@', # NEW
 	'pp_couleur_icone_fond' => 'F', # NEW
 	'pp_couleur_icone_texte' => 'T', # NEW
 	'pp_couleur_texte' => 'Texte @couleur@', # NEW
 	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse', # NEW
-	'pp_decoration_inserer' => 'D&eacute;coration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;', # NEW
-	'pp_decoration_inserer_drop' => 'Appliquer au texte une &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personnalis&eacute;e', # NEW
-	'pp_decoupe_onglets' => 'Ins&eacute;rer un syst&egrave;me d\'onglet',
-	'pp_decoupe_separateur' => 'Ins&eacute;rer un s&eacute;parateur de page ou d\'onglet',
-	'pp_filets_inserer' => 'Ins&eacute;rer un filet de style &laquo;&nbsp;@filet@&nbsp;&raquo;', # NEW
-	'pp_filets_inserer_drop' => 'Ins&eacute;rer un filet de s&eacute;paration', # NEW
-	'pp_smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@', # NEW
+	'pp_decoration_inserer' => 'Décoration « @balise@.@racc@ »', # NEW
+	'pp_decoration_inserer_drop' => 'Appliquer au texte une « décoration » personnalisée', # NEW
+	'pp_decoupe_onglets' => 'Insérer un système d\'onglet',
+	'pp_decoupe_separateur' => 'Insérer un séparateur de page ou d\'onglet',
+	'pp_filets_inserer' => 'Insérer un filet de style « @filet@ »', # NEW
+	'pp_filets_inserer_drop' => 'Insérer un filet de séparation', # NEW
+	'pp_smileys_inserer' => 'Insérer une frimousse @smiley@', # NEW
 	'pp_un_titre' => 'Un titre', # NEW
 	'pp_votre_texte' => 'Placez votre texte ici', # NEW
 	'pp_votre_titre' => 'Titre @nb@', # NEW
 
 	// S
 	'smileys_dispos' => 'Available smileys:', # MODIF
-	'sommaire_page' => ',&nbsp;p@page@', # MODIF
-	'sommaire_page_long' => ',&nbsp;page&nbsp;@page@', # MODIF
+	'sommaire_page' => ', p@page@',
+	'sommaire_page_long' => ', page @page@',
 	'sommaire_titre' => 'Table of contents', # MODIF
-	'stats_auteur' => '@icon@ @nom@, @date@', # MODIF
-	'stats_date' => '@jour@/@mois@/@annee@&nbsp;at&nbsp;@h@:@m@', # MODIF
+	'stats_auteur' => '@icon@ @nom@, @date@',
+	'stats_date' => '@jour@/@mois@/@annee@ at @h@:@m@',
 
 	// T
-	'test_base' => 'Test de la base de donn&eacute;es', # NEW
+	'test_base' => 'Test de la base de données', # NEW
 	'test_manuel' => 'Test manuel', # NEW
 	'texte_formatspip' => 'ORIGINAL TEXT IN SPIP FORMAT', # MODIF
 	'textes_formatspip' => 'ORIGINAL TEXTS IN SPIP FORMAT', # MODIF
@@ -130,18 +131,18 @@ Compatibility: SPIP 1.92x and v2.0.x', # MODIF
 	'tri_monter' => 'Move this author up', # MODIF
 
 	// U
-	'urls_propres_erreur' => 'This format does not take into account the URLs listed below own', # MODIF
-	'urls_propres_format' => 'Thecurrent format of URLs is: {{&laquo;&nbsp;@format@&nbsp;&raquo;}}. [<span>[Configuration->@url@]</span>]', # MODIF
-	'urls_propres_lien' => 'Public access link', # MODIF
-	'urls_propres_objet' => 'Here is the list of the clean URLs stored in the database which visitors can use to explore your site.', # MODIF
+	'urls_propres_erreur' => 'This format does not take into account the URLs listed below own',
+	'urls_propres_format' => 'Thecurrent format of URLs is: {{« @format@ »}}. [<span>[Configuration->@url@]</span>]',
+	'urls_propres_lien' => 'Public access link',
+	'urls_propres_objet' => 'Here is the list of the clean URLs stored in the database which visitors can use to explore your site.',
 	'urls_propres_titre' => 'URLs OWN', # MODIF
 
 	// V
 	'variable_vide' => '(Empty)', # MODIF
-	'visiteurs_connectes' => 'Logged in visitors: @nb@', # MODIF
+	'visiteurs_connectes' => 'Logged in visitors: @nb@',
 
 	// W
-	'webmestres' => 'SPIP webmasters', # MODI
+	'webmestres' => 'SPIP webmasters' # MODIF
 );
 
 ?>

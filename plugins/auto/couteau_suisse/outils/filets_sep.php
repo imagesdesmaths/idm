@@ -14,28 +14,41 @@
 @define('_FILETS_SEP_BALISE_DEBUT', '<p');
 @define('_FILETS_SEP_BALISE_FIN', '></p>');
 @define('_FILETS_SEP_MAX_CSS', 7);
+@define('_FILETS_REG_DEBUT', '#(?:\s*[\n\r]\s*)__(');
+@define('_FILETS_REG_FIN', ')__(?=\s*[\n\r]\s*)#iU');
 @define('_FILETS_REG_EXT', '\.(?:png|gif|jpg)');
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
 function filets_sep_installe() {
 //cs_log('filets_sep_installe()');
 	include_spip('inc/texte');
-	$filets = array();
+	// Tester si on echappe en span ou en div
+	$mode = preg_match(',<('._BALISES_BLOCS.'|p)(\W|$),iS', _FILETS_SEP_BALISE_DEBUT)?'div':'span';
 	$bt = defined('_DIR_PLUGIN_PORTE_PLUME');
+	$filets = array();
+	// filets numeriques
+	for($i=0; $i<=_FILETS_SEP_MAX_CSS; $i++) {
+		$filets[6][] = $i;
+		$filets[1]["$i"] = cs_code_echappement(_FILETS_SEP_BALISE_DEBUT." class='filet_sep filet_sep_$i'"._FILETS_SEP_BALISE_FIN, '', $mode);
+	}
+	// filets image	
 	$path = find_in_path('img/filets');
 	$dossier = opendir($path);
 	if($path) while ($image = readdir($dossier)) {
 		if (preg_match(',^(([a-z0-9_-]+)'._FILETS_REG_EXT.'),', $image, $reg)) {
 			$filets[0][] = '__'.$reg[1].'__';
+			$filets[6][] = preg_quote($reg[1]);
 			$filets[2][] = $reg[2];
 			list(,$haut) = @getimagesize($path.'/'.$reg[1]);
 			if ($haut) $haut="height:{$haut}px;";
 			$f = url_absolue($path).'/'.$reg[1];
-			$filets[1][] = code_echappement(_FILETS_SEP_BALISE_DEBUT." class=\"filet_sep filet_sep_image\" style=\"$haut background-image: url($f);\""._FILETS_SEP_BALISE_FIN);
+			$filets[1][$reg[1]] = cs_code_echappement(_FILETS_SEP_BALISE_DEBUT." class=\"filet_sep filet_sep_image\" style=\"$haut background-image: url($f);\""._FILETS_SEP_BALISE_FIN, '', $mode);
 			if($bt)
 				$filets[4]['filet_'.str_replace('.','_',$reg[1])] = $reg[1];
 		}
 	}
+	// RegExpr finale
+	$filets[6] = _FILETS_REG_DEBUT . join('|', $filets[6]) . _FILETS_REG_FIN;
 	if($bt) for($i=0; $i<=_FILETS_SEP_MAX_CSS; $i++)
 		$filets[5]['filet_'.$i] = $i;
 	return array('filets_sep' => $filets);
@@ -49,25 +62,26 @@ function filets_sep_raccourcis() {
 		array('liste' => '<b>'.join('</b>, <b>', $filets[0]).'</b>', 'max'=>_FILETS_SEP_MAX_CSS));
 }
 
+function filets_sep_callback($matches) {
+	global $filets_tmp;
+	return $filets_tmp[1][$matches[1]];
+}
+
 // Fonction pour generer des filets de separation selon les balises presentes dans le texte fourni.
 // Cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script
 function filets_sep_rempl($texte) {
 	if (strpos($texte, '__')===false) return $texte;
 
-	// On memorise les modeles d'expression rationnelle a utiliser pour chercher les balises numeriques.
-	$modele_nombre = "#(?:\s*[\n\r]\s*)__(\d+)__(?=\s*[\n\r]\s*)#iU";
+	global $filets_tmp;
+	$filets_tmp = cs_lire_data_outil('filets_sep');
 
-	// On remplace les balises filets numeriques dans le texte par le code HTML correspondant
-	// le resultat est protege pour eviter que la typo de SPIP y touche
-	while (preg_match($modele_nombre, $texte))
-		$texte = preg_replace_callback($modele_nombre, 
-			create_function('$matches', 'return code_echappement("'._FILETS_SEP_BALISE_DEBUT.' class=\'filet_sep filet_sep_$matches[1]\''._FILETS_SEP_BALISE_FIN.'");'), $texte); 
-	if (strpos($texte, '__')===false) return $texte;
-
-	// On remplace les balises filets images dans le texte par le code HTML correspondant.
-	// le resultat est protege pour eviter que la typo de SPIP y touche
-	$filets = cs_lire_data_outil('filets_sep');
-	return str_replace($filets[0], $filets[1], $texte);
+	// On remplace les balises filets dans le texte par le code HTML correspondant
+	// le resultat a ete protege pour eviter que la typo de SPIP y touche
+	$texte = preg_replace_callback($filets_tmp[6], 'filets_sep_callback', $texte); 
+	
+	// Nettoyage et retour
+	unset($filets_tmp);	
+	return $texte;
 }
 
 // fonction pipeline pre_typo

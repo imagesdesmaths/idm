@@ -33,6 +33,18 @@ define('_format_NOMBRE', 20);
 function add_outil($tableau) {
 	global $outils;
 	static $index; $index = isset($index)?$index + 10:0;
+	if(!isset($tableau['id'])) { $tableau['id']='erreur'.count($outils); $tableau['nom'] = _T('couteauprive:erreur_id'); }
+	$tableau['index'] = $index;
+	// surcharges perso. Ex : $GLOBALS['mes_outils']['supprimer_numero_perso']
+	$perso = $tableau['id'] . '_perso';
+	if(isset($GLOBALS['mes_outils'][$perso]) && is_array($GLOBALS['mes_outils'][$perso])) {
+		$tableau = array_merge($tableau, $GLOBALS['mes_outils'][$perso]);
+		unset($GLOBALS['mes_outils'][$perso]);
+		$tableau['surcharge'] = 1;
+	}
+	// desactiver l'outil si les fichiers distants ne sont pas permis
+	if(defined('_CS_PAS_D_OUTIL_DISTANT') && isset($tableau['fichiers_distants']))
+		$tableau['version-max'] = '0';
 	foreach($tableau as $i=>$v) {
 		// parametres multiples separes par des virgules
 		if(strpos($i,',')!==false) {
@@ -43,14 +55,7 @@ function add_outil($tableau) {
 		// liste des fichiers distants eventuels
 		if(strncmp('distant', $i, 7)==0) $tableau['fichiers_distants'][] = $i;
 	}
-	if(!isset($tableau['id'])) { $tableau['id']='erreur'.count($outils); $tableau['nom'] = _T('couteauprive:erreur_id'); }
-	$tableau['index'] = $index;
-	$perso = $tableau['id'] . '_perso';
-	$outils[$tableau['id']] = isset($GLOBALS['mes_outils'][$perso]) && is_array($GLOBALS['mes_outils'][$perso])
-		?array_merge($tableau, $GLOBALS['mes_outils'][$perso])
-		:$tableau;
-	if(defined('_CS_PAS_D_OUTIL_DISTANT') && isset($tableau['fichiers_distants']))
-		$outils[$tableau['id']]['version-max'] = '0';
+	$outils[$tableau['id']] = $tableau;
 }
 
 // ajoute une variable a $cs_variables et fabrique une liste des chaines et des nombres

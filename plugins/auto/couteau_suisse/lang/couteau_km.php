@@ -3,33 +3,33 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// 2
-	'2pts' => '@objet@&nbsp;&#6102;',
+	'2pts' => '@objet@ ៖',
 
 	// A
-	'attente_confirmation' => '&#6042;&#6020;&#6091;&#6021;&#6070;&#6086; &#6047;&#6086;&#6042;&#6070;&#6036;&#6091; &#6016;&#6070;&#6042;&#6036;&#6025;&#6098;&#6023;&#6070;&#6016;&#6091;&#6033;&#6033;&#6077;&#6043;&#6047;&#6098;&#6018;&#6070;&#6043;&#6091;',
+	'attente_confirmation' => 'រង់ចាំ សំរាប់ ការបញ្ជាក់ទទួលស្គាល់',
 
 	// B
-	'base_donnees' => 'Base de donn&eacute;es', # NEW
-	'bloc_deplier' => 'D&eacute;plier', # NEW
+	'base_donnees' => 'Base de données', # NEW
+	'bloc_deplier' => 'Déplier', # NEW
 	'bloc_replier' => 'Replier', # NEW
 
 	// C
 	'colorer_fond' => 'Colorer le fond', # NEW
 	'colorer_texte' => 'Colorer le texte', # NEW
 	'configurer' => 'Configure the Penknife', # NEW
-	'connections' => '&#6036;&#6025;&#6098;&#6023;&#6070;&#6036;&#6091;',
+	'connections' => 'បញ្ជាប់',
 
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',
-	'derniers_connectes' => '&#6016;&#6070;&#6042;&#6039;&#6098;&#6023;&#6070;&#6036;&#6091;&#6021;&#6075;&#6020;&#6016;&#6098;&#6042;&#6084;&#6041;&#6102;',
+	'derniers_connectes' => 'ការភ្ជាប់ចុងក្រោយ៖',
 
 	// E
-	'email_forum' => '&#6047;&#6076;&#6040;&#6037;&#6098;&#6031;&#6043;&#6091; &#6050;&#6070;&#6047;&#6041;&#6026;&#6098;&#6027;&#6070;&#6035;&#6050;&#6090;&#6072;&#6040;&#6082;&#6044;&#6043;&#6093; &#6042;&#6036;&#6047;&#6091;&#6050;&#6098;&#6035;&#6016;!',
+	'email_forum' => 'សូមផ្តល់ អាសយដ្ឋានអ៊ីមែវល៍ របស់អ្នក!',
 	'explique_spam' => 'Warning : you have used forbidden tags, characters or words. <br /><br />Start again!', # NEW
 
 	// L
@@ -38,46 +38,46 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'maj_actu' => '<NEW>Forcer l\'actualisation', # MODIF
-	'maj_liste' => '<NEW>Liste des plugins d&eacute;tect&eacute;s :', # NEW
-	'maj_maj' => '<NEW>Mettre &agrave; jour le plugin s&eacute;lectionn&eacute;', # NEW
-	'maj_ok' => '<NEW>Ce [plugin->@zip@] semble [&agrave; jour->@url@].', # NEW
-	'maj_rev' => '<NEW>R&eacute;v.&nbsp;@revision@', # NEW
-	'maj_rev_ko' => '<NEW>La [r&eacute;vision distante->@url@] n\'a pas pu &ecirc;tre trouv&eacute;e.', # NEW
-	'maj_rev_ok' => '<NEW>La r&eacute;vision [@revision@->@url@] est [disponible->@zip@].', # NEW
-	'maj_spip' => 'Apr&egrave;s avoir mis &agrave; jour tous vos plugins avec pr&eacute;caution, il est vivement conseill&eacute; de mettre &agrave; jour SPIP lui-m&ecirc;me en cliquant sur le lien ci-dessus et en suivant les instructions propos&eacute;es.', # NEW
-	'maj_svn' => '<NEW>Ce plugin SVN semble [&agrave; jour->@url@].', # NEW
-	'maj_verif' => '<NEW>V&eacute;rifiez pr&eacute;alablement l\'archive qui vous convient :', # NEW
-	'maj_verif2' => '<NEW>Attention : apr&egrave;s avoir cliqu&eacute; sur le bouton ci-dessus, v&eacute;rifiez bien que l\'archive t&eacute;l&eacute;charg&eacute;e correspond au plugin qu\'il vous faut mettre &agrave; jour.', # NEW
-	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.', # NEW
-	'msg_publies' => 'Uniquement les messages publi&eacute;s', # NEW
+	'maj_liste' => '<NEW>Liste des plugins détectés :', # NEW
+	'maj_maj' => '<NEW>Mettre à jour le plugin sélectionné', # NEW
+	'maj_ok' => '<NEW>Ce [plugin->@zip@] semble [à jour->@url@].', # NEW
+	'maj_rev' => '<NEW>Rév. @revision@', # NEW
+	'maj_rev_ko' => '<NEW>La [révision distante->@url@] n\'a pas pu être trouvée.', # NEW
+	'maj_rev_ok' => '<NEW>La révision [@revision@->@url@] est [disponible->@zip@].', # NEW
+	'maj_spip' => 'Après avoir mis à jour tous vos plugins avec précaution, il est vivement conseillé de mettre à jour SPIP lui-même en cliquant sur le lien ci-dessus et en suivant les instructions proposées.', # NEW
+	'maj_svn' => '<NEW>Ce plugin SVN semble [à jour->@url@].', # NEW
+	'maj_verif' => '<NEW>Vérifiez préalablement l\'archive qui vous convient :', # NEW
+	'maj_verif2' => '<NEW>Attention : après avoir cliqué sur le bouton ci-dessus, vérifiez bien que l\'archive téléchargée correspond au plugin qu\'il vous faut mettre à jour.', # NEW
+	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu être identifié.', # NEW
+	'msg_publies' => 'Uniquement les messages publiés', # NEW
 
 	// N
-	'nom_email_forum' => '&#6047;&#6076;&#6040;&#6037;&#6098;&#6031;&#6043;&#6091;&#6024;&#6098;&#6040;&#6084;&#6087; &#6060;&#6050;&#6070;&#6047;&#6041;&#6026;&#6098;&#6027;&#6070;&#6035;&#6050;&#6090;&#6072;&#6040;&#6082;&#6044;&#6043;&#6093; &#6042;&#6036;&#6047;&#6091;&#6050;&#6098;&#6035;&#6016;!',
-	'nom_forum' => '&#6047;&#6076;&#6040;&#6037;&#6098;&#6031;&#6043;&#6091;&#6024;&#6098;&#6040;&#6084;&#6087; &#6042;&#6036;&#6047;&#6091;&#6050;&#6098;&#6035;&#6016;!',
-	'non_confirmes' => '&#6018;&#6098;&#6040;&#6070;&#6035;&#6036;&#6070;&#6035;&#6036;&#6025;&#6098;&#6023;&#6070;&#6016;&#6091;&#6033;&#6033;&#6077;&#6043;&#6047;&#6098;&#6018;&#6070;&#6043;&#6091;&#6102;',
+	'nom_email_forum' => 'សូមផ្តល់ឈ្មោះ ឬអាសយដ្ឋានអ៊ីមែវល៍ របស់អ្នក!',
+	'nom_forum' => 'សូមផ្តល់ឈ្មោះ របស់អ្នក!',
+	'non_confirmes' => 'គ្មានបានបញ្ជាក់ទទួលស្គាល់៖',
 
 	// O
-	'objet_article' => '&#6050;&#6031;&#6098;&#6032;&#6036;&#6033;',
-	'objet_articles' => '&#6050;&#6031;&#6098;&#6032;&#6036;&#6033;',
-	'objet_auteur' => '&#6050;&#6098;&#6035;&#6016;&#6035;&#6071;&#6038;&#6035;&#6098;&#6034;',
-	'objet_auteurs' => '&#6050;&#6098;&#6035;&#6016;&#6035;&#6071;&#6038;&#6035;&#6098;&#6034;',
+	'objet_article' => 'អត្ថបទ',
+	'objet_articles' => 'អត្ថបទ',
+	'objet_auteur' => 'អ្នកនិពន្ធ',
+	'objet_auteurs' => 'អ្នកនិពន្ធ',
 	'objet_breve' => 'News item', # NEW
 	'objet_breves' => 'News items', # NEW
-	'objet_mot' => '&#6038;&#6070;&#6016;&#6098;&#6041;&#6018;&#6035;&#6098;&#6043;&#6073;&#6087;',
-	'objet_mots' => '&#6038;&#6070;&#6016;&#6098;&#6041;&#6018;&#6035;&#6098;&#6043;&#6073;&#6087;',
+	'objet_mot' => 'ពាក្យគន្លឹះ',
+	'objet_mots' => 'ពាក្យគន្លឹះ',
 	'objet_petition' => 'Petition', # NEW
 	'objet_petitions' => 'Petitions', # NEW
-	'objet_rubrique' => '&#6037;&#6098;&#6035;&#6082;&#6016;',
-	'objet_rubriques' => '&#6037;&#6098;&#6035;&#6082;&#6016;',
-	'objet_syndic' => '&#6047;&#6083;&#6032;&#6093;',
-	'objet_syndics' => '&#6047;&#6083;&#6032;&#6093;',
+	'objet_rubrique' => 'ផ្នែក',
+	'objet_rubriques' => 'ផ្នែក',
+	'objet_syndic' => 'សៃថ៍',
+	'objet_syndics' => 'សៃថ៍',
 
 	// P
-	'page_debut' => '&#6033;&#6086;&#6038;&#6096;&#6042;&#6026;&#6086;&#6036;&#6076;&#6020;',
-	'page_fin' => '&#6033;&#6086;&#6038;&#6096;&#6042;&#6021;&#6075;&#6020;&#6016;&#6098;&#6042;&#6084;&#6041;',
-	'page_lien' => '&#6033;&#6086;&#6038;&#6096;&#6042; @page@&#6102; @title@',
-	'page_precedente' => '&#6033;&#6086;&#6038;&#6096;&#6042;&#6040;&#6075;&#6035;',
-	'page_suivante' => '&#6033;&#6086;&#6038;&#6096;&#6042;&#6036;&#6035;&#6098;&#6033;&#6070;&#6036;&#6091;',
+	'page_debut' => 'ទំព័រដំបូង',
+	'page_fin' => 'ទំព័រចុងក្រោយ',
+	'page_lien' => 'ទំព័រ @page@៖ @title@',
+	'page_precedente' => 'ទំព័រមុន',
+	'page_suivante' => 'ទំព័របន្ទាប់',
 	'plug_actifs' => '<NEW>Plugins actifs', # NEW
 	'plug_inactifs' => '<NEW>Plugins inactifs', # NEW
 	'plugin_xml' => '<MODIF>Gathers together in one plugin a list of small, useful tools to improve the management of your SPIP site.
@@ -91,36 +91,37 @@ Find your favourite tools in this plugin: {Delete the number}, {URL formats},{Su
 See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Compatibility: SPIP 1.92x and v2.0.x', # MODIF
-	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
-	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
-	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW
-	'pp_chatons_inserer_drop' => 'Ins&eacute;rer un chaton dans votre texte', # NEW
+	'pp_autobr' => 'Insérer un bloc où les retours à la ligne sont automatiques', # NEW
+	'pp_blocs_bloc' => 'Insérer un bloc replié', # NEW
+	'pp_blocs_visible' => 'Insérer un bloc déplié', # NEW
+	'pp_chatons_inserer' => 'Insérer le chaton « @chaton@ »', # NEW
+	'pp_chatons_inserer_drop' => 'Insérer un chaton dans votre texte', # NEW
 	'pp_couleur_fond' => 'Fond @couleur@', # NEW
 	'pp_couleur_icone_fond' => 'F', # NEW
 	'pp_couleur_icone_texte' => 'T', # NEW
 	'pp_couleur_texte' => 'Texte @couleur@', # NEW
 	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse', # NEW
-	'pp_decoration_inserer' => 'D&eacute;coration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;', # NEW
-	'pp_decoration_inserer_drop' => 'Appliquer au texte une &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personnalis&eacute;e', # NEW
-	'pp_decoupe_onglets' => 'Ins&eacute;rer un syst&egrave;me d\'onglet', # NEW
-	'pp_decoupe_separateur' => 'Ins&eacute;rer un s&eacute;parateur de page ou d\'onglet', # NEW
-	'pp_filets_inserer' => 'Ins&eacute;rer un filet de style &laquo;&nbsp;@filet@&nbsp;&raquo;', # NEW
-	'pp_filets_inserer_drop' => 'Ins&eacute;rer un filet de s&eacute;paration', # NEW
-	'pp_smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@', # NEW
+	'pp_decoration_inserer' => 'Décoration « @balise@.@racc@ »', # NEW
+	'pp_decoration_inserer_drop' => 'Appliquer au texte une « décoration » personnalisée', # NEW
+	'pp_decoupe_onglets' => 'Insérer un système d\'onglet', # NEW
+	'pp_decoupe_separateur' => 'Insérer un séparateur de page ou d\'onglet', # NEW
+	'pp_filets_inserer' => 'Insérer un filet de style « @filet@ »', # NEW
+	'pp_filets_inserer_drop' => 'Insérer un filet de séparation', # NEW
+	'pp_smileys_inserer' => 'Insérer une frimousse @smiley@', # NEW
 	'pp_un_titre' => 'Un titre', # NEW
 	'pp_votre_texte' => 'Placez votre texte ici', # NEW
 	'pp_votre_titre' => 'Titre @nb@', # NEW
 
 	// S
 	'smileys_dispos' => 'Available smileys:', # NEW
-	'sommaire_page' => '&nbsp;p@page@',
-	'sommaire_page_long' => '&nbsp;page&nbsp;@page@',
-	'sommaire_titre' => '&#6031;&#6070;&#6042;&#6070;&#6020; &#6035;&#6083;&#6050;&#6031;&#6098;&#6032;&#6036;&#6033;',
+	'sommaire_page' => ' p@page@',
+	'sommaire_page_long' => ' page @page@',
+	'sommaire_titre' => 'តារាង នៃអត្ថបទ',
 	'stats_auteur' => '@icon@ @nom@, @date@',
-	'stats_date' => '@jour@/@mois@/@annee@&nbsp; &nbsp;@h@:@m@',
+	'stats_date' => '@jour@/@mois@/@annee@   @h@:@m@',
 
 	// T
-	'test_base' => 'Test de la base de donn&eacute;es', # NEW
+	'test_base' => 'Test de la base de données', # NEW
 	'test_manuel' => 'Test manuel', # NEW
 	'texte_formatspip' => 'ORIGINAL TEXT IN SPIP FORMAT', # NEW
 	'textes_formatspip' => 'ORIGINAL TEXTS IN SPIP FORMAT', # NEW
@@ -131,17 +132,17 @@ Compatibility: SPIP 1.92x and v2.0.x', # MODIF
 
 	// U
 	'urls_propres_erreur' => 'This format does not take into account the URLs listed below own', # NEW
-	'urls_propres_format' => 'Thecurrent format of URLs is: {{&laquo;&nbsp;@format@&nbsp;&raquo;}}. [<span>[Configuration->@url@]</span>]', # NEW
+	'urls_propres_format' => 'Thecurrent format of URLs is: {{« @format@ »}}. [<span>[Configuration->@url@]</span>]', # NEW
 	'urls_propres_lien' => 'Public access link', # NEW
 	'urls_propres_objet' => 'Here is the list of the clean URLs stored in the database which visitors can use to explore your site.', # NEW
 	'urls_propres_titre' => 'URLs OWN', # NEW
 
 	// V
-	'variable_vide' => '(&#6033;&#6033;&#6081;)',
+	'variable_vide' => '(ទទេ)',
 	'visiteurs_connectes' => 'Logged in visitors: @nb@', # NEW
 
 	// W
-	'webmestres' => '&#6050;&#6098;&#6035;&#6016;&#6023;&#6086;&#6035;&#6070;&#6025;&#6044;&#6089;&#6082;&#6036; SPIP'
+	'webmestres' => 'អ្នកជំនាញវ៉ែប SPIP'
 );
 
 ?>

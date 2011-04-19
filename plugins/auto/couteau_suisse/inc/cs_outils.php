@@ -99,8 +99,8 @@ cs_log(" -- appel de charger_fonction('description_outil', 'inc') et de descript
 	$s .= propre($descrip);
 	$serial = serialize(array_keys($outil));
 	$p = '';
-	if(preg_match_all(',traitement:([A-Z_]+),', $serial, $regs, PREG_PATTERN_ORDER))
-		$p .=  '<p>' . _T('couteauprive:detail_balise_etoilee', array('bal' => '#'.join('*, #', array_unique($regs[1])).'*')) . '</p>';
+	if($b=cs_balises_traitees($outil_id, '*, #'))
+		$p .=  '<p>' . _T('couteauprive:detail_balise_etoilee', array('bal' => $b.'*')) . '</p>';
 	if($actif && isset($outil['code:spip_options']) && strlen($outil['code:spip_options']) && ($outil_id<>'cs_comportement'))
 		$p .= '<p>' . _T('couteauprive:detail_spip_options'.(defined('_CS_SPIP_OPTIONS_OK')?'_ok':''), array('lien'=>description_outil_liens_callback(array(1=>'cs_comportement')))) . '</p>';
 	if(isset($outil['jquery']) && $outil['jquery']=='oui')
@@ -193,19 +193,25 @@ function detail_outil($outil_id) {
 	foreach(array('.php', '_options.php', '_fonctions.php', '.js', '.js.html', '.css', '.css.html') as $ext)
 		if(find_in_path('outils/'.($temp=$outil_id.$ext))) $a[] = $temp;
 	if(count($a)) $details[] = _T('couteauprive:detail_fichiers') . ' ' . join(', ', $a);
-	$serial = serialize(array_keys($outil));
-	if(preg_match_all(',traitement:([A-Z_]+),', $serial, $regs, PREG_PATTERN_ORDER))
-		$details[] =  _T('couteauprive:detail_traitements') . ' #' . join(', #', array_unique($regs[1]));	
+	if($b=cs_balises_traitees($outil_id)) $details[] = _T('couteauprive:detail_traitements') . $b;
 	$serkeys = serialize(array_keys($outil));
 	if(preg_match_all(',(pipeline|pipelinecode):([a-z_]+),', $serkeys, $regs, PREG_PATTERN_ORDER))
 		$details[] = _T('couteauprive:detail_pipelines') . ' ' . join(', ', array_unique($regs[2]));
 	if($outil['nb_disabled']) $details[] = _T('couteauprive:detail_disabled') . ' ' . $outil['nb_disabled'];
+	if($outil['surcharge']) $details[] = _T('couteauprive:detail_surcharge') . ' ' . _T('item_oui');
 	if(isset($outil['fichiers_distants'])) {
 		$a = array();
 		foreach($outil['fichiers_distants'] as $i) $a[] = basename($outil[$i]);
 		$details[] = _T('couteauprive:detail_fichiers_distant') . ' ' . join(', ', $a);
 	}
 	if(count($details)) return $div . join('<br />', $details) . '</div>';
+	return '';
+}
+
+function cs_balises_traitees($outil_id, $join=', #') {
+	global $outils;
+	if(preg_match_all(',traitement:([A-Z_]+),', serialize(array_keys($outils[$outil_id])), $regs, PREG_PATTERN_ORDER))
+		return  ' #' . join($join, array_unique($regs[1]));
 	return '';
 }
 

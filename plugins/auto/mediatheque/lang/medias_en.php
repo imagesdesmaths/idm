@@ -128,6 +128,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//
 	'verifier_documents_brises' => 'Check missing files',
 	'vignette_supprimee' => 'The thumbnail has been deleted',
+	'voir_descriptif' => 'Show the description',
 
 	
 /*	'affichage' => 'Affichage :',

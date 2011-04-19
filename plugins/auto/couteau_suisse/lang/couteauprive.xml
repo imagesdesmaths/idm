@@ -1,0 +1,19 @@
+<traduction module="couteauprive" gestionnaire="salvatore" reference="fr">
+	<langue code="ar" />
+	<langue code="ast" />
+	<langue code="ca">
+		<traducteur nom="merce" />
+	</langue>
+	<langue code="en">
+		<traducteur nom="mark_baber" />
+		<traducteur nom="merce" />
+	</langue>
+	<langue code="es" />
+	<langue code="fr_tu">
+		<traducteur nom="beatnick" />
+	</langue>
+	<langue code="gl" />
+	<langue code="nl" />
+	<langue code="sk" />
+	<langue code="tr" />
+</traduction>

@@ -2,7 +2,7 @@
     <nom><multi>[fr]Saisies pour formulaires[en]Entries for forms</multi></nom>
     <auteur>Matthieu Marcillaud - RastaPopoulos - Joseph</auteur>
     <licence>&#169; 2009 GNU/GPL</licence>
-    <version>1.8.13</version>
+    <version>1.9.8</version>
     <etat>test</etat>
     <categorie>outil</categorie>
     
@@ -40,12 +40,29 @@
     	<nom>affichage_final</nom>
     	<inclure>saisies_pipelines.php</inclure>
     </pipeline>
-		<pipeline>
-			<nom>saisies_autonomes</nom>
-			<inclure>saisies_pipelines.php</inclure>
-		</pipeline>
+	<pipeline>
+		<nom>saisies_autonomes</nom>
+		<inclure>saisies_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_saisies</nom>
+		<inclure>saisies_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>saisies_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>saisies_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>styliser</nom>
+		<inclure>saisies_pipelines.php</inclure>
+	</pipeline>
     
 	<necessite id="SPIP" version="[2.0;]" />
 	<utilise id="verifier" />
-	<salvatore module="saisies" reference="fr" />
+	<utilise id="spip_bonux" />
+	<traduire gestionnaire="salvatore" module="saisies" reference="fr" />
 </plugin>

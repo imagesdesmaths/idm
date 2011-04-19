@@ -3,33 +3,33 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accents_pas_pris' => 'Els accents no es tenen en compte (&laquo;&nbsp;d&eacute;j&agrave;&nbsp;&raquo; o &laquo;&nbsp;deja&nbsp;&raquo;, ens retornaran el mateix &laquo;&nbsp;d&eacute;j&agrave;&nbsp;&raquo;, &laquo;&nbsp;dej&agrave;&nbsp;&raquo;, &laquo;&nbsp;d&eacute;ja&nbsp;&raquo;...)',
-	'asie' => '&agrave;sia ',
-	'asterisque_terminale' => 'no retornar&agrave; res: l\'asterisc* ha de ser terminal',
-	'aussi' => 'tamb&eacute;',
+	'accents_pas_pris' => 'Els accents no es tenen en compte (« déjà » o « deja », ens retornaran el mateix « déjà », « dejà », « déja »...)',
+	'asie' => 'àsia ',
+	'asterisque_terminale' => 'no retornarà res: l\'asterisc* ha de ser terminal',
+	'aussi' => 'també',
 
 	// C
-	'casse_indifferente' => 'La caixa (min&uacute;scula/maj&uacute;scula) de les paraules cercades &eacute;s indiferent.',
+	'casse_indifferente' => 'La caixa (minúscula/majúscula) de les paraules cercades és indiferent.',
 	'convertir_myisam' => 'Convertir en MyISAM',
 	'convertir_toutes' => 'Convertir totes les taules en MyISAM',
-	'convertir_utf8' => 'convertir en UTF-8 per restaurar la coher&egrave;ncia',
-	'creer_tous' => 'Crear tots els &iacute;ndexs FULLTEXT suggerits',
+	'convertir_utf8' => 'convertir en UTF-8 per restaurar la coherència',
+	'creer_tous' => 'Crear tots els índexs FULLTEXT suggerits',
 
 	// E
 	'enfan' => 'infan',
-	'enfance' => 'inf&agrave;ncia',
+	'enfance' => 'infància',
 	'enfant' => 'infant',
 	'enfanter' => 'infantar',
 	'enfantillage' => 'criaturada',
 	'enfants' => 'infants',
 	'et' => 'I',
 	'etranger' => 'estranger',
-	'exemples' => 'Exemples d\'&uacute;s',
+	'exemples' => 'Exemples d\'ús',
 
 	// F
 	'fant' => 'fant',
@@ -38,43 +38,43 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'il_faut_myisam' => 'cal MyISAM',
-	'incoherence_charset' => 'Una incoher&egrave;ncia entre el joc de car&agrave;cters del vostre lloc i el de les taules de la vostra base de dades pot falsejar les cerques amb car&agrave;cters accentuats:',
-	'index_regenere' => '&iacute;ndex de la taula reconstru&iuml;da',
+	'incoherence_charset' => 'Una incoherència entre el joc de caràcters del vostre lloc i el de les taules de la vostra base de dades pot falsejar les cerques amb caràcters accentuats:',
+	'index_regenere' => 'índex de la taula reconstruïda',
 	'index_reinitialise' => 'Els documents amb error s\'han reinicialitzat',
-	'index_supprime' => '&iacute;ndex suprimit',
+	'index_supprime' => 'índex suprimit',
 
 	// L
-	'liste_tables_connues' => 'Heus ac&iacute; la llista de les taules conegudes de la cerca. Podeu afegir-hi elements FULLTEXT, segons la documentaci&oacute;, a l\'adre&ccedil;a',
+	'liste_tables_connues' => 'Heus ací la llista de les taules conegudes de la cerca. Podeu afegir-hi elements FULLTEXT, segons la documentació, a l\'adreça',
 
 	// M
-	'mais_pas' => 'per&ograve; NO',
+	'mais_pas' => 'però NO',
 
 	// O
-	'ou_bien' => 'o b&eacute;',
+	'ou_bien' => 'o bé',
 
 	// P
-	'pas_index' => 'Cap &iacute;ndex FULLTEXT',
+	'pas_index' => 'Cap índex FULLTEXT',
 	'premier_soit' => 'O',
 
 	// R
-	'regenerer_tous' => 'Renovar tots els &iacute;ndex FULLTEXT',
-	'reinitialise_index_doc' => 'Tornar a iniciar la indexaci&oacute; dels documents amb errors',
-	'reserve_webmestres' => 'P&agrave;gina reservada als webmestres',
+	'regenerer_tous' => 'Renovar tots els índex FULLTEXT',
+	'reinitialise_index_doc' => 'Tornar a iniciar la indexació dels documents amb errors',
+	'reserve_webmestres' => 'Pàgina reservada als webmestres',
 	'retourne' => 'Retorna els texts que contenen',
 
 	// S
-	'sequence_exacte' => 'exactament la seq&uuml;&egrave;ncia de paraules',
+	'sequence_exacte' => 'exactament la seqüència de paraules',
 	'soit' => 'O',
 	'supprimer' => 'Suprimir',
 
 	// T
 	'table_convertie' => 'taula convertida en MyISAM',
-	'table_format' => 'Aquesta taula est&agrave; en format',
+	'table_format' => 'Aquesta taula està en format',
 	'table_non_reconnue' => 'taula no reconeguda',
-	'textes_premier' => 'per&ograve; presenta primer els texts que contenen',
+	'textes_premier' => 'però presenta primer els texts que contenen',
 
 	// U
-	'utiliser_operateurs_logiques' => 'La cerca utilitza els operadors l&ograve;gics m&eacute;s corrents.'
+	'utiliser_operateurs_logiques' => 'La cerca utilitza els operadors lògics més corrents.'
 );
 
 ?>

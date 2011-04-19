@@ -18,11 +18,11 @@
 		<h4 class="titrem">
 			[(#VU|=={oui}|oui)<img src='#CHEMIN{images/vu-16-10.png}' width='16' height='10' alt='<:medias:document_vu:>' title='<:medias:document_vu:>'/> ]
 			[<span class="fichier">(#FICHIER*|basename)</span>]
-			[<span class="#EDIT{titre} titre">(#TITRE|sinon{<i class="sanstitre"><:info_sans_titre:></i>})</span>]
+			[<span class="#EDIT{titre} titre">[<span class="rang">(#RANG).</span> ](#TITRE|sinon{<i class="sanstitre"><:info_sans_titre:></i>})</span>]
 			<span class="image_loading"></span>
 		</h4>
 		<div class="infos">
-		[(#DISTANT|=={oui}|oui)<img src='#CHEMIN{img_pack/distant-16.png}' width='16' height='16' alt='<:medias:fichier_distant:>' title='<:medias:fichier_distant:>'/> ]<:info_numero_abbreviation:>#ID_DOCUMENT - #EXTENSION - [(#TAILLE|taille_en_octets)]
+		[(#DISTANT|=={oui}|oui)<img src='#CHEMIN{img_pack/distant-16.png}' width='16' height='16' alt='<:medias:fichier_distant:>' title='<:medias:fichier_distant:>'/> ]<:info_numero_abbreviation:>#ID_DOCUMENT - #EXTENSION - [(#TAILLE|taille_en_octets)][&#91;<a href='#' onclick='jQuery("#descriptif_doc_#ID_DOCUMENT").toggle("fast");return false;'><:medias:voir_descriptif:></a>&#93;<div id="descriptif_doc_#ID_DOCUMENT" class="#EDIT{descriptif} descriptif" style='display:none;'>(#DESCRIPTIF)</div>]
 		</div>
 		[<div class="mode">(#INCLUS|=={image}|et{#EVAL{_BOUTON_MODE_IMAGE}}|oui)
 			[(#MODE|=={image}|oui)

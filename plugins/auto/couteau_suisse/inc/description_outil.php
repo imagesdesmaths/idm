@@ -141,6 +141,12 @@ function cs_input_variable_callback($matches) {
 	return "<div class='groupe_{$matches[1]} $a$tmp'>";
 }
 
+// remplacement des liens vers un autre outil
+function description_outil_liens($res) {
+	return strpos($res,'[.->')===false?$res
+		:preg_replace_callback(',\[\.->([a-zA-Z_][a-zA-Z0-9_-]*)\],', 'description_outil_liens_callback', $res);
+}
+
 // renvoie la description de $outil_ : toutes les %variables% ont ete remplacees par le code adequat
 function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	global $outils, $cs_variables, $metas_vars;
@@ -257,8 +263,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 		$res = preg_replace_callback(',@(_CS_[a-zA-Z0-9_]+)@,', 
 			create_function('$matches','return defined($matches[1])?constant($matches[1]):(\' (\'._T(\'couteauprive:outil_inactif\').\')\');'), $res);
 	// remplacement des liens vers un autre outil
-	if(strpos($res,'[.->')!==false) 
-		$res = preg_replace_callback(',\[\.->([a-zA-Z_][a-zA-Z0-9_-]*)\],', 'description_outil_liens_callback', $res);
+	$res = description_outil_liens($res);
 
 	// envoi de la description finale en pipeline
 #	list(,$res) = pipeline('post_description_outil', array($outil_, $res));

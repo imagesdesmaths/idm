@@ -38,7 +38,10 @@ function cs_liens_echappe_callback($matches)
 
 function cs_liens_raccourcis_callback($matches) {
 	if($GLOBALS["liens_interrogation"]) {
-		if(strlen($texte = retour_interro_amp($matches[0]))>40) $texte = substr($texte,0,35).'...';
+		// TODO (SPIP>=2.1) : utiliser $lien_court = charger_fonction('lien_court', 'inc');
+		$long_url = defined('_MAX_LONG_URL') ? _MAX_LONG_URL : 40;
+		$coupe_url = defined('_MAX_COUPE_URL') ? _MAX_COUPE_URL : 35;
+		if(strlen($texte = retour_interro_amp($matches[0]))>$long_url) $texte = substr($texte,0,$coupe_url).'...';
 		$texte = expanser_liens('['.echappe_interro_amp($texte).'->'.echappe_interro_amp($matches[0]).']');
 	} else
 		$texte = expanser_liens('[->'.$matches[0].']');

@@ -5,8 +5,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/cextras');
 
 
-// Creer les item d'un select a partir des enum
-function cextras_enum($enum, $val='', $type='valeur', $name='', $class='') {
+// recuperer un tableau des indications fournies pour des selections (enum, radio...)
+function cextras_enum_array($enum) {
 	$enums = array();
 	// 2 possibilites : enum deja un tableau (vient certainement d'un plugin),
 	// sinon texte a decouper (vient certainement de interfaces pour champs extra).
@@ -18,6 +18,14 @@ function cextras_enum($enum, $val='', $type='valeur', $name='', $class='') {
 			$enums[$cle] = _T($desc);
 		}
 	}
+	return $enums;	
+}
+
+// Creer les item d'un select a partir des enum
+function cextras_enum($enum, $val='', $type='valeur', $name='', $class='') {
+
+	// transformer la saisie utilisateur en tableau
+	$enums = cextras_enum_array($enum);
 
 	$val_t = explode(',', $val);
 	$class = $class ? " class='$class'" : '';
@@ -123,6 +131,10 @@ function ce_calculer_saisie_externe($c, $contexte, $prefixe='') {
 	if (isset($contexte[$nom_champ]) and $contexte[$nom_champ]) {
 		$contexte['valeur'] = $contexte[$nom_champ];
 	}
+	// enum -> data
+	if ($c->enum) {
+		$contexte['datas'] = cextras_enum_array($c->enum);
+	}
 
 	$params = $c->saisie_parametres;
 
@@ -140,6 +152,12 @@ function ce_calculer_saisie_externe($c, $contexte, $prefixe='') {
 
 	// tout inserer le reste des champs
 	$contexte = array_merge($contexte, $params);
+
+	// lorsqu'on a 'datas', c'est qu'on est dans une liste de choix.
+	// Champs Extra les stocke separes par des virgule.
+	if ($contexte['datas']) {
+		$contexte['valeur'] = explode(',', $contexte['valeur']);
+	}
 
 	return array('saisies/_base', $contexte);
 }
@@ -168,22 +186,45 @@ function cextra_quete_valeurs_extras($extras, $type, $id){
 }
 
 // recuperer tous les extras qui verifient le critere demande :
-// l'objet sur lequel s'applique l'extra est comparee a $nom
-function cextras_get_extras_match($nom) {
+// l'objet sur lequel s'applique l'extra est comparee a $type
+function cextras_get_extras_match($type) {
+	static $champs = false;
+	if ($champs === false) {
+		$champs = pipeline('declarer_champs_extras', array());
+	}
+	
 	$extras = array();
-	if ($champs = pipeline('declarer_champs_extras', array())) {
-		$nom = objet_type(table_objet($nom));
+	if ($champs) {
+		$type = objet_type(table_objet($type));
 		foreach ($champs as $c) {
 			// attention aux cas compliques site->syndic !
-			if ($nom == $c->_type and $c->champ and $c->sql) {
+			if ($type == $c->_type and $c->champ and $c->sql) {
 				$extras[] = $c;
 			}
 		}
 	}
+	
 	return $extras;
 }
 
 
+/**
+ * Retourne la description (classe ChampExtra) d'un champ extra d'un objet donné.
+ *
+ * @param $type : type d'objet (article)
+ * @param $champ : nom du champ (puissance)
+ * 
+ * @return ChampExtra|false
+**/
+function cextras_get_extra($type, $champ) {
+	$extras = cextras_get_extras_match($type);
+	foreach ($extras as $c) {
+		if ($c->champ == $champ) {
+			return $c;
+		}
+	}
+	return false;
+}
 
 
 // ---------- pipelines -----------
@@ -305,8 +346,19 @@ function cextras_afficher_contenu_objet($flux){
 				if($c->saisie_externe && find_in_path(
 				($f = 'saisies-vues/'.$c->type).'.html')){
 					$contexte['valeur'] = $contexte[$c->champ];
-					if (isset($c->saisie_parametres['datas']) and $c->saisie_parametres['datas'])
+					// ajouter les listes d'éléments possibles
+					if (isset($c->saisie_parametres['datas']) and $c->saisie_parametres['datas']) {
 						$contexte['datas'] = $c->saisie_parametres['datas'];
+					// sinon peut provenir du plugin d'interface, directement dans enum.
+					} elseif ($c->enum) {
+						$contexte['datas'] = cextras_enum_array($c->enum);
+					}
+
+					// lorsqu'on a 'datas', c'est qu'on est dans une liste de choix.
+					// Champs Extra les stocke separes par des virgule.
+					if ($contexte['datas']) {
+						$contexte['valeur'] = explode(',', $contexte['valeur']);
+					}
 						
 					$saisie_externe = true;
 				}

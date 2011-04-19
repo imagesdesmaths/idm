@@ -1,0 +1,13 @@
+<traduction module="saisies" gestionnaire="salvatore" reference="fr">
+	<langue code="ca" />
+	<langue code="de" />
+	<langue code="en" />
+	<langue code="es" />
+	<langue code="fa">
+		<traducteur nom="davood" />
+	</langue>
+	<langue code="fr_tu">
+		<traducteur nom="beatnick" />
+	</langue>
+	<langue code="sk" />
+</traduction>

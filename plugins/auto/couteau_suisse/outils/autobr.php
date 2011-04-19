@@ -1,6 +1,6 @@
 <?php
 
-// pipeline pre_typo, appel si defined('_CS_AUTOBR_RACC')
+// pipeline pre_typo, appel automatique si defined('_CS_AUTOBR_RACC')
 function autobr_alinea($flux) {
 	while ($fin = strpos($flux, '</alinea>')) {
 		$zone = substr($flux, 0, $fin);
@@ -13,10 +13,12 @@ function autobr_alinea($flux) {
 	return $flux;
 }
 
-// traitement #TEXTE/article
+// traitements sur la balise #TEXTE
 function autobr_pre_propre($flux) {
 	// post_autobr() est une fonction de traitement qui possede son propre systeme d'echappement
-	if(!defined('_CS_AUTOBR_RACC'))	$flux = post_autobr($flux, '<br />');
+	// on traite, sauf si la balise alinea est detectee
+	if(defined('_CS_AUTOBR_TRAIT') && (!defined('_CS_AUTOBR_RACC') || strpos($flux, '<alinea>')===false))
+		$flux = post_autobr($flux, '<br />');
 	return $flux;
 }
 

@@ -30,7 +30,7 @@ function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=
 	$mode = joindre_determiner_mode($mode,$id_document,$objet);
 	
 	$valeurs['id'] = $id_document;
-	$valeurs['mode'] = $mode;
+	$valeurs['mode_document'] = $mode;
 	
 	$valeurs['url'] = 'http://';
 	$valeurs['fichier_upload'] = '';

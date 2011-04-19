@@ -29,11 +29,11 @@ if (!function_exists('stripos')) {
 // Creer un bloc base64 correspondant a $rempl ; au besoin en marquant
 // une $source differente ; optimisation du code spip !
 // echappe_retour() permet de revenir en arriere
-function cs_code_echappement($rempl, $source='') {
+function cs_code_echappement($rempl, $source='', $mode='span') {
 	// Convertir en base64
 	$base64 = base64_encode($rempl);
 	// guillemets simples dans la balise pour simplifier l'outil 'guillemets'
-	return "<span class='base64$source' title='$base64'></span>";
+	return "<$mode class='base64$source' title='$base64'></$mode>";
 }
 
 function cs_preg_quote(&$item) {

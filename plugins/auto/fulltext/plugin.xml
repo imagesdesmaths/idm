@@ -3,7 +3,7 @@
 	Fulltext
 	</nom>
 	<auteur>Fil</auteur>
-	<version>0.5.1</version>
+	<version>0.6.0</version>
 	<version_base>0.2</version_base>
 	<etat>
 	dev
@@ -27,7 +27,7 @@ Pour un fonctionnement optimal, il faut installer des programmes compl&eacute;me
 	<prefix>
 	Fulltext
 	</prefix>
-  <fonctions>fulltext_fonctions.php</fonctions>
+	<fonctions>fulltext_fonctions.php</fonctions>
 	<icon>fulltext.png</icon>
 	<install>base/fulltext.php</install>
 	<chemin dir='' />
@@ -36,14 +36,22 @@ Pour un fonctionnement optimal, il faut installer des programmes compl&eacute;me
 		<icone>fulltext-22.png</icone>
 		<titre>Fulltext</titre>
 	</onglet>
+	<bouton id='fulltext' parent='bando_configuration'>
+		<titre>Fulltext</titre>
+		<icone>images/fulltext-22.png</icone>
+	</bouton>
 	<pipeline>
     	<nom>declarer_tables_principales</nom>
     	<inclure>base/fulltext.php</inclure>
+  	</pipeline>
+	<pipeline>
+    	<nom>autoriser</nom>
+    	<inclure>fulltext_autoriser.php</inclure>
   	</pipeline>
 	<pipeline>
 		<nom>taches_generales_cron</nom>
 		<inclure>fulltext_pipelines.php</inclure>
 	</pipeline>
 	<categorie>navigation</categorie>
-	<salvatore module="fulltext" reference="fr" />
+	<traduire gestionnaire="salvatore" module="fulltext" reference="fr" />
 </plugin>

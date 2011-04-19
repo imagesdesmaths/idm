@@ -16,7 +16,8 @@ function editbox_init(){
 	.attr("onclick","").addClass('nobox').click(function(){
 		var casedoc = jQuery(this).parents('div.item.document,div.item.image').eq(0);
 		jQuery(casedoc).animeajax();
-		jQuery.modalboxload(jQuery(this).attr('href'),{
+		var d = new Date();
+		jQuery.modalboxload(jQuery(this).attr('href')+'&var_t='+d.getTime(),{
 			onClose: function (dialog) {var a = jQuery(casedoc).find('a.refresh');if (a.length) a.click();}
 		});
 		return false;

@@ -114,6 +114,8 @@ function medias_check_type_media(){
 	sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type='application/ogg' OR mime_type='application/x-shockwave-flash'");
 	sql_updateq('spip_types_documents',array('media'=>'image'),"mime_type='application/illustrator'");
 	sql_updateq('spip_types_documents',array('media'=>'video'),"mime_type='application/mp4'");
+	// le plugin Vidéo(s) et toutes ses vidéos "distantes" sont des medias de type video
+	sql_updateq('spip_types_documents',array('media'=>'video'),"extension REGEXP '^dist_'");
 }
 function medias_check_statuts(){
 	$trouver_table = charger_fonction('trouver_table','base');

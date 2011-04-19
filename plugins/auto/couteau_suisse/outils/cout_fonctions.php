@@ -98,4 +98,21 @@ function cs_traitements($texte, $nom_champ='NULL', $type_objet='NULL', $exclusio
 }
 function cs_noop($t='',$a=NULL,$b=NULL,$c=NULL) { return $t; }
 
+// renvoie un champ d'un objet en base
+function cs_champ_sql($id, $champ='texte', $objet='article') {
+	// Utiliser la bonne requete en fonction de la version de SPIP
+	if(function_exists('sql_getfetsel')) {
+		// SPIP 2.0
+		// TODO : fonctions SPIP pour trouver la table et l'id_objet
+		if($r = sql_getfetsel($champ, 'spip_'.$objet.'s', 'id_'.$objet.'='.intval($id)))
+			return $r;
+	} else {
+		if($r = spip_query('SELECT '.$champ.' FROM spip_'.$objet.'s WHERE id_'.$objet.'='.intval($id)))
+			// s'il existe un champ, on le retourne
+			if($row = spip_fetch_array($r)) return $row[$champ];
+	}
+	// sinon rien !
+	return '';
+}
+
 ?>

@@ -136,6 +136,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//
 	'verifier_documents_brises' => 'V&eacute;rifier les fichiers manquants',
 	'vignette_supprimee' => 'La vignette a &eacute;t&eacute; supprim&eacute;e',
+	'voir_descriptif' => 'Voir le descriptif',
 
 	
 /*	'affichage' => 'Affichage :',

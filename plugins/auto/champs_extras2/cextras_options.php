@@ -1,7 +1,9 @@
 <?php
 	// definir ce pipeline, sans ecraser sa valeur s'il existe
-	$GLOBALS['spip_pipeline']['declarer_champs_extras'] .= '';
-	$GLOBALS['spip_pipeline']['objets_extensibles'] .= '';
+  if(!isset($GLOBALS['spip_pipeline']['declarer_champs_extras']))
+    $GLOBALS['spip_pipeline']['declarer_champs_extras'] = "";
+  if(!isset($GLOBALS['spip_pipeline']['objets_extensibles']))
+    $GLOBALS['spip_pipeline']['objets_extensibles'] = "";
 	
 	// utiliser ce pipeline a part
 	// afin d'etre certain d'arriver apres les autres plugins

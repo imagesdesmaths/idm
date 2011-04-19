@@ -4,7 +4,7 @@
 <li class="fieldset[ fieldset_(#ENV{nom})][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})][ (#GET{pliable})[ (#GET{plie})]]">
 	#ENV*{inserer_debut}
 	<fieldset>
-		[<h3 class="legend">[(#ENV{icone}|oui)[<img src="(#ENV{icone}|chemin|image_reduire{#ENV{taille_icone}|sinon{16}}|extraire_attribut{src})" alt="#ENV*{label}" /> ]]<span>(#ENV*{label})</span></h3>]
+		[<h3 class="legend">[(#ENV{icone}|oui)[<img src="(#CHEMIN{#ENV{icone}}|image_reduire{#ENV{taille_icone}|sinon{16}}|extraire_attribut{src})" alt="#ENV*{label}" /> ]]<span>(#ENV*{label})</span></h3>]
 		[(#ENV{saisies}|is_array|oui)
 		<ul>
 			#INCLURE{fond=#ENV{fond_generer,"inclure/generer_saisies"}, env, saisies=#ENV{saisies}, from_fieldset='on'}

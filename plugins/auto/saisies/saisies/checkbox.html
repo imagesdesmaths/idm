@@ -24,9 +24,14 @@
 #SET{defaut, #ENV{defaut}}
 #SET{defaut, #GET{defaut}|is_string|?{(#GET{defaut}|saisies_chaine2tableau), (#GET{defaut}|sinon{#ARRAY})}}
 
+[(#REM) lorsque qu'on donne un 'disabled' qui est une chaine,
+	il faut la transformer en tableau. Ce tableau est vide si la chaine valait ''
+	sinon une clé 0 serait considérée disabled à tord
+]
 #SET{disabled,#ENV{disable}}
 [(#GET{disabled}|is_string|oui)
-	#SET{disabled,#ARRAY|push{#GET{disabled}}}
+	[(#GET{disabled}|strlen|non) #SET{disabled,#ARRAY} ]
+	[(#GET{disabled}|oui) #SET{disabled,#ARRAY|push{#GET{disabled}}} ]
 ]
 
 <BOUCLE_checkbox(POUR){tableau #GET{datas}}>

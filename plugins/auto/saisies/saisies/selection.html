@@ -20,10 +20,10 @@
 [(#REM) datas peut être une chaine qu'on sait décomposer ]
 #SET{datas, #ENV*{datas}}
 #SET{datas, #GET{datas}|is_string|?{(#GET{datas}|saisies_chaine2tableau), #GET{datas}}}
-
+#SET{valeur,#ENV{valeur}|is_null|?{#ENV{defaut},#ENV{valeur}}}
 <select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 <BOUCLE_selection(POUR){tableau #GET{datas}}>
-	<option value="#CLE" [(#CLE|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>#VALEUR</option>
+	<option value="#CLE"[(#CLE|=={#GET{valeur}}|oui)selected="selected"]>#VALEUR</option>
 </BOUCLE_selection>
 </select>

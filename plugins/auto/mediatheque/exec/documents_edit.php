@@ -70,7 +70,7 @@ function documents_edit_ok($row, $id_document, $parent, $new)
 
 	if ($new != 'oui') {
 		$id_document=$row['id_document'];
-		$titre=$row['titre']?$row['titre']:$row['fichier'];
+		$titre=$row['titre']?$row['titre']:basename($row['fichier']);
 		$statut=$row['statut'];
 	}
 	else {

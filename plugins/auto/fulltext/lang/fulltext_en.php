@@ -3,12 +3,12 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accents_pas_pris' => 'Accents are not taken into account ("d&eacute;j&agrave;" or "deja", will return the same results, including "d&eacute;j&agrave;", "dej&agrave;", "d&eacute;ja"...)',
+	'accents_pas_pris' => 'Accents are not taken into account ("déjà" or "deja", will return the same results, including "déjà", "dejà", "déja"...)',
 	'asie' => 'asia',
 	'asterisque_terminale' => 'will return no results: the asterisk must be final',
 	'aussi' => 'also',

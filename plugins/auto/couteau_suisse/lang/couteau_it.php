@@ -3,19 +3,19 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// 2
-	'2pts' => '@objet@&nbsp;:',
+	'2pts' => '@objet@ :',
 
 	// A
 	'attente_confirmation' => 'In attesa di conferma',
 
 	// B
-	'base_donnees' => 'Base de donn&eacute;es', # NEW
-	'bloc_deplier' => 'D&eacute;plier', # NEW
+	'base_donnees' => 'Base de données', # NEW
+	'bloc_deplier' => 'Déplier', # NEW
 	'bloc_replier' => 'Replier', # NEW
 
 	// C
@@ -41,15 +41,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_liste' => 'Elenco dei plugin rilevati:',
 	'maj_maj' => 'Aggiorna il plugin selezionato',
 	'maj_ok' => 'Questo [plugin->@zip@] sembra [aggiornato->@url@].',
-	'maj_rev' => 'Rev.&nbsp;@revision@',
-	'maj_rev_ko' => 'La [revisione remota->@url@] non &egrave; stata trovata.',
-	'maj_rev_ok' => 'La revisione [@revision@->@url@] &egrave; [disponibile->@zip@].',
-	'maj_spip' => 'Apr&egrave;s avoir mis &agrave; jour tous vos plugins avec pr&eacute;caution, il est vivement conseill&eacute; de mettre &agrave; jour SPIP lui-m&ecirc;me en cliquant sur le lien ci-dessus et en suivant les instructions propos&eacute;es.', # NEW
+	'maj_rev' => 'Rev. @revision@',
+	'maj_rev_ko' => 'La [revisione remota->@url@] non è stata trovata.',
+	'maj_rev_ok' => 'La revisione [@revision@->@url@] è [disponibile->@zip@].',
+	'maj_spip' => 'Après avoir mis à jour tous vos plugins avec précaution, il est vivement conseillé de mettre à jour SPIP lui-même en cliquant sur le lien ci-dessus et en suivant les instructions proposées.', # NEW
 	'maj_svn' => 'Questo plugin SVN sembra [aggiornato->@url@].',
 	'maj_verif' => 'Verifica prima l\'archivio:',
 	'maj_verif2' => 'Attenzione: dopo aver cliccato sul tasto qui in basso, verifica attentamente che l\'archivio scaricato corrisponda al plugin da aggiornare.',
-	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.', # NEW
-	'msg_publies' => 'Uniquement les messages publi&eacute;s', # NEW
+	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu être identifié.', # NEW
+	'msg_publies' => 'Uniquement les messages publiés', # NEW
 
 	// N
 	'nom_email_forum' => 'Si prega di inserire il nome o l\'indirizzo email!',
@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plug_inactifs' => 'Plugins non attivi',
 	'plugin_xml' => 'Raccoglie in un solo plugin una serie di piccole funzioni nuove ed utili a migliorare la gestione del tuo sito SPIP.
 
-Ciascuna di queste funzioni pu&ograve; essere attivata o meno dall\'utente sulla [pagina di amministrazione dei plugin->./?exec=admin_couteau_suisse] ed impostata con un certo numero di variabili: clicca su {{Configurazione}}, poi scegli la scheda {{Coltellino Svizzero}}.
+Ciascuna di queste funzioni può essere attivata o meno dall\'utente sulla [pagina di amministrazione dei plugin->./?exec=admin_couteau_suisse] ed impostata con un certo numero di variabili: clicca su {{Configurazione}}, poi scegli la scheda {{Coltellino Svizzero}}.
 
 Le categorie disponibili sono:Amministrazione, Miglioramenti tipografici, Scorciatoie tipografiche, Visualizzazione del sito pubblico, Segnaposti, filtri, criteri.
 
@@ -90,37 +90,38 @@ Scopri in questo plugin le tue funzioni preferite: {Sopprimi il numero}, {Format
 
 Non esitare a leggere gli articoli di documentazione del plugin pubblicati su: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilit&agrave; : SPIP v1.92x e v2.0.x', # MODIF
-	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
-	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
-	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW
-	'pp_chatons_inserer_drop' => 'Ins&eacute;rer un chaton dans votre texte', # NEW
+Compatibilità : SPIP v1.92x e v2.0.x', # MODIF
+	'pp_autobr' => 'Insérer un bloc où les retours à la ligne sont automatiques', # NEW
+	'pp_blocs_bloc' => 'Insérer un bloc replié', # NEW
+	'pp_blocs_visible' => 'Insérer un bloc déplié', # NEW
+	'pp_chatons_inserer' => 'Insérer le chaton « @chaton@ »', # NEW
+	'pp_chatons_inserer_drop' => 'Insérer un chaton dans votre texte', # NEW
 	'pp_couleur_fond' => 'Fond @couleur@', # NEW
 	'pp_couleur_icone_fond' => 'F', # NEW
 	'pp_couleur_icone_texte' => 'T', # NEW
 	'pp_couleur_texte' => 'Texte @couleur@', # NEW
 	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse', # NEW
-	'pp_decoration_inserer' => 'D&eacute;coration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;', # NEW
-	'pp_decoration_inserer_drop' => 'Appliquer au texte une &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personnalis&eacute;e', # NEW
-	'pp_decoupe_onglets' => 'Ins&eacute;rer un syst&egrave;me d\'onglet', # NEW
-	'pp_decoupe_separateur' => 'Ins&eacute;rer un s&eacute;parateur de page ou d\'onglet', # NEW
-	'pp_filets_inserer' => 'Ins&eacute;rer un filet de style &laquo;&nbsp;@filet@&nbsp;&raquo;', # NEW
-	'pp_filets_inserer_drop' => 'Ins&eacute;rer un filet de s&eacute;paration', # NEW
-	'pp_smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@', # NEW
+	'pp_decoration_inserer' => 'Décoration « @balise@.@racc@ »', # NEW
+	'pp_decoration_inserer_drop' => 'Appliquer au texte une « décoration » personnalisée', # NEW
+	'pp_decoupe_onglets' => 'Insérer un système d\'onglet', # NEW
+	'pp_decoupe_separateur' => 'Insérer un séparateur de page ou d\'onglet', # NEW
+	'pp_filets_inserer' => 'Insérer un filet de style « @filet@ »', # NEW
+	'pp_filets_inserer_drop' => 'Insérer un filet de séparation', # NEW
+	'pp_smileys_inserer' => 'Insérer une frimousse @smiley@', # NEW
 	'pp_un_titre' => 'Un titre', # NEW
 	'pp_votre_texte' => 'Placez votre texte ici', # NEW
 	'pp_votre_titre' => 'Titre @nb@', # NEW
 
 	// S
 	'smileys_dispos' => 'Smiley disponibili:',
-	'sommaire_page' => ',&nbsp;p@page@',
-	'sommaire_page_long' => '&nbsp;page&nbsp;@page@',
+	'sommaire_page' => ', p@page@',
+	'sommaire_page_long' => ' page @page@',
 	'sommaire_titre' => 'Sommario',
-	'stats_auteur' => '@icon@ @nom@, l&igrave;&nbsp;@date@',
-	'stats_date' => '@jour@/@mois@/@annee@&nbsp;alle&nbsp;@h@h@m@',
+	'stats_auteur' => '@icon@ @nom@, lì @date@',
+	'stats_date' => '@jour@/@mois@/@annee@ alle @h@h@m@',
 
 	// T
-	'test_base' => 'Test de la base de donn&eacute;es', # NEW
+	'test_base' => 'Test de la base de données', # NEW
 	'test_manuel' => 'Test manuel', # NEW
 	'texte_formatspip' => 'TESTO ORIGINALE NEL FORMATO SPIP',
 	'textes_formatspip' => 'TESTI ORIGINALI NEL FORMATO SPIP',
@@ -131,7 +132,7 @@ Compatibilit&agrave; : SPIP v1.92x e v2.0.x', # MODIF
 
 	// U
 	'urls_propres_erreur' => 'Questo formato non tiene conto delle URL "propres" elencate qui sotto.',
-	'urls_propres_format' => 'il formato attuale delle URL &egrave;: {{&laquo;&nbsp;@format@&nbsp;&raquo;}}. [<span>[Configruazione->@url@]</span>]',
+	'urls_propres_format' => 'il formato attuale delle URL è: {{« @format@ »}}. [<span>[Configruazione->@url@]</span>]',
 	'urls_propres_lien' => 'Link pubblico di accesso',
 	'urls_propres_objet' => 'Qui sono elencate le URL proprie memorizzate in database grazie alle quali i visitatori possono navigare sul tuo sito.',
 	'urls_propres_titre' => 'Url proprie',

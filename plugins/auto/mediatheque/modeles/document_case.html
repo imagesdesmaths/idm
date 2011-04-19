@@ -20,7 +20,7 @@
 				[(#BOUTON_ACTION{[(#CHEMIN{img_pack/tourner-droite.gif}|balise_img{<:medias:tourner_90R:>})],#URL_ACTION_AUTEUR{tourner,#GET{id}|concat{',90'},#SELF},ajax})]
 				[(#BOUTON_ACTION{[(#CHEMIN{img_pack/tourner-180.gif}|balise_img{<:medias:tourner_180:>})],#URL_ACTION_AUTEUR{tourner,#GET{id}|concat{',180'},#SELF},ajax})]
 			</div>]
-			[(#LOGO_DOCUMENT{#URL_DOCUMENT})]
+			[(#LOGO_DOCUMENT{#URL_DOCUMENT}|image_reduire{150,150})]
 			<BOUCLE_type_doc(TYPES_DOCUMENTS){extension}>
 			[(#MODE|=={document}|oui)<div class="type">
 			[(#TITRE|sinon{#VAL{<:info_document:>}|concat{' ',#EXTENSION|majuscules}})]

@@ -164,6 +164,13 @@ function _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, $_id
 	if (!$id_cible) {
 		// on essaie aussi dans le contexte d'appel de la page
 		$id_cible = _request($_id_cible);
+		
+		// on tente en cas de id_secteur de s'appuyer sur un eventuel id_rubrique
+		if (!$id_cible and $_id_cible == 'id_secteur') {
+			if ($i = _request('id_rubrique')) {
+				$id_cible = sql_getfetsel('id_secteur', 'spip_rubriques', 'id_rubrique='.sql_quote($i));
+			}
+		}
 	}
 
 	if (!$id_cible) {

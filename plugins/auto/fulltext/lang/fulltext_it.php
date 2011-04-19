@@ -3,18 +3,18 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accents_pas_pris' => 'Non si tiene conto degli accenti (&laquo;&nbsp;perch&eacute;&nbsp;&raquo; o &laquo;&nbsp;perche&nbsp;&raquo;, daranno lo stesso &laquo;&nbsp;perch&eacute;&nbsp;&raquo;, &laquo;&nbsp;perch&egrave;&nbsp;&raquo;, &laquo;&nbsp;perche&nbsp;&raquo;...)',
+	'accents_pas_pris' => 'Non si tiene conto degli accenti (« perché » o « perche », daranno lo stesso « perché », « perchè », « perche »...)',
 	'asie' => 'asia',
-	'asterisque_terminale' => 'non dar&agrave; niente: l\'asterisco * dev\'essere alla fine',
+	'asterisque_terminale' => 'non darà niente: l\'asterisco * dev\'essere alla fine',
 	'aussi' => 'anche',
 
 	// C
-	'casse_indifferente' => 'La cassa (minuscolo/maiuscolo) delle parole ricercate &egrave; indifferente.',
+	'casse_indifferente' => 'La cassa (minuscolo/maiuscolo) delle parole ricercate è indifferente.',
 	'convertir_myisam' => 'Convertire a MyISAM',
 	'convertir_toutes' => 'Convertire tutte le tavole a MyISAM',
 	'convertir_utf8' => 'convertire a UTF-8 per ristorare la coerenza',
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'index_supprime' => 'indice cancellato',
 
 	// L
-	'liste_tables_connues' => 'Ecco l\'elenco delle tabelle prese in considerazione per le ricerche. &Egrave; possibile aggiungere pi&ugrave; elementi FULLTEXT - vedere la documentazione in',
+	'liste_tables_connues' => 'Ecco l\'elenco delle tabelle prese in considerazione per le ricerche. È possibile aggiungere più elementi FULLTEXT - vedere la documentazione in',
 
 	// M
 	'mais_pas' => 'ma NON',
@@ -69,12 +69,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'table_convertie' => 'Tavola convertita a MyISAM',
-	'table_format' => 'Questa tavola &egrave; al formato',
+	'table_format' => 'Questa tavola è al formato',
 	'table_non_reconnue' => 'tavola non riconosciuta',
 	'textes_premier' => 'ma presenta primo i testi che contengono',
 
 	// U
-	'utiliser_operateurs_logiques' => 'La ricerca utilizza gli operatori logici i pi&ugrave; conosciuti'
+	'utiliser_operateurs_logiques' => 'La ricerca utilizza gli operatori logici i più conosciuti'
 );
 
 ?>

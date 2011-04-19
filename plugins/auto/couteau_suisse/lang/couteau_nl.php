@@ -3,19 +3,19 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// 2
-	'2pts' => '@objet@&nbsp;:',
+	'2pts' => '@objet@ :',
 
 	// A
 	'attente_confirmation' => 'In wachten van bevestiging',
 
 	// B
-	'base_donnees' => 'Base de donn&eacute;es', # NEW
-	'bloc_deplier' => 'D&eacute;plier', # NEW
+	'base_donnees' => 'Base de données', # NEW
+	'bloc_deplier' => 'Déplier', # NEW
 	'bloc_replier' => 'Replier', # NEW
 
 	// C
@@ -41,15 +41,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_liste' => 'Lijst van ontdekte plugins :',
 	'maj_maj' => 'Geselecteerde plugin bijwerken',
 	'maj_ok' => 'Dit [plugin->@zip@] lijkt [aan dag->@url@].',
-	'maj_rev' => 'Rev.&nbsp;@revision@',
+	'maj_rev' => 'Rev. @revision@',
 	'maj_rev_ko' => '[Verwijderde revisie->@url@] kon niet gevonden worden.',
 	'maj_rev_ok' => 'De revisie [@revisie@->@url@] is [beschikbaar->@zip@].',
-	'maj_spip' => 'Apr&egrave;s avoir mis &agrave; jour tous vos plugins avec pr&eacute;caution, il est vivement conseill&eacute; de mettre &agrave; jour SPIP lui-m&ecirc;me en cliquant sur le lien ci-dessus et en suivant les instructions propos&eacute;es.', # NEW
+	'maj_spip' => 'Après avoir mis à jour tous vos plugins avec précaution, il est vivement conseillé de mettre à jour SPIP lui-même en cliquant sur le lien ci-dessus et en suivant les instructions proposées.', # NEW
 	'maj_svn' => 'Dit plugin SVN lijkt [aan dag->@url@].',
 	'maj_verif' => 'Controleert van te voren het archief dat u past :',
 	'maj_verif2' => 'Opgelet: na op de knoop geklikt te hebben hierboven, controleert goed dat het gedownloade archief met plugin overeenstemt die hij u nodig is bij te werken.',
-	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu &ecirc;tre identifi&eacute;.', # NEW
-	'msg_publies' => 'Uniquement les messages publi&eacute;s', # NEW
+	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu être identifié.', # NEW
+	'msg_publies' => 'Uniquement les messages publiés', # NEW
 
 	// N
 	'nom_email_forum' => 'Bedankt om uw naam of uw e-mail te specificeren !',
@@ -91,36 +91,37 @@ Ontdekt in dit plugin uw lievelingswerktuigen: {Typografische Inzenders}, {typog
 Aarzelt niet om de gepubliceerde artikelen van documentatie van plugin over te raadplegen : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Verenigbaarheid: SPIP 1.92x en v2.0.x', # MODIF
-	'pp_blocs_bloc' => 'Ins&eacute;rer un bloc repli&eacute;', # NEW
-	'pp_blocs_visible' => 'Ins&eacute;rer un bloc d&eacute;pli&eacute;', # NEW
-	'pp_chatons_inserer' => 'Ins&eacute;rer le chaton &laquo;&nbsp;@chaton@&nbsp;&raquo;', # NEW
-	'pp_chatons_inserer_drop' => 'Ins&eacute;rer un chaton dans votre texte', # NEW
+	'pp_autobr' => 'Insérer un bloc où les retours à la ligne sont automatiques', # NEW
+	'pp_blocs_bloc' => 'Insérer un bloc replié', # NEW
+	'pp_blocs_visible' => 'Insérer un bloc déplié', # NEW
+	'pp_chatons_inserer' => 'Insérer le chaton « @chaton@ »', # NEW
+	'pp_chatons_inserer_drop' => 'Insérer un chaton dans votre texte', # NEW
 	'pp_couleur_fond' => 'Fond @couleur@', # NEW
 	'pp_couleur_icone_fond' => 'F', # NEW
 	'pp_couleur_icone_texte' => 'T', # NEW
 	'pp_couleur_texte' => 'Texte @couleur@', # NEW
 	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse', # NEW
-	'pp_decoration_inserer' => 'D&eacute;coration &laquo;&nbsp;@balise@.@racc@&nbsp;&raquo;', # NEW
-	'pp_decoration_inserer_drop' => 'Appliquer au texte une &laquo;&nbsp;d&eacute;coration&nbsp;&raquo; personnalis&eacute;e', # NEW
-	'pp_decoupe_onglets' => 'Ins&eacute;rer un syst&egrave;me d\'onglet', # NEW
-	'pp_decoupe_separateur' => 'Ins&eacute;rer un s&eacute;parateur de page ou d\'onglet', # NEW
-	'pp_filets_inserer' => 'Ins&eacute;rer un filet de style &laquo;&nbsp;@filet@&nbsp;&raquo;', # NEW
-	'pp_filets_inserer_drop' => 'Ins&eacute;rer un filet de s&eacute;paration', # NEW
-	'pp_smileys_inserer' => 'Ins&eacute;rer une frimousse @smiley@', # NEW
+	'pp_decoration_inserer' => 'Décoration « @balise@.@racc@ »', # NEW
+	'pp_decoration_inserer_drop' => 'Appliquer au texte une « décoration » personnalisée', # NEW
+	'pp_decoupe_onglets' => 'Insérer un système d\'onglet', # NEW
+	'pp_decoupe_separateur' => 'Insérer un séparateur de page ou d\'onglet', # NEW
+	'pp_filets_inserer' => 'Insérer un filet de style « @filet@ »', # NEW
+	'pp_filets_inserer_drop' => 'Insérer un filet de séparation', # NEW
+	'pp_smileys_inserer' => 'Insérer une frimousse @smiley@', # NEW
 	'pp_un_titre' => 'Un titre', # NEW
 	'pp_votre_texte' => 'Placez votre texte ici', # NEW
 	'pp_votre_titre' => 'Titre @nb@', # NEW
 
 	// S
 	'smileys_dispos' => 'Beschikbare smylies :',
-	'sommaire_page' => ',&nbsp;p@page@',
-	'sommaire_page_long' => ',&nbsp;page&nbsp;@page@',
+	'sommaire_page' => ', p@page@',
+	'sommaire_page_long' => ', page @page@',
 	'sommaire_titre' => 'Overzicht',
-	'stats_auteur' => '@icon@ @nom@, het&nbsp;@date@',
-	'stats_date' => '@jour@/@mois@/@annee@&nbsp;om&nbsp;@h@h@m@',
+	'stats_auteur' => '@icon@ @nom@, het @date@',
+	'stats_date' => '@jour@/@mois@/@annee@ om @h@h@m@',
 
 	// T
-	'test_base' => 'Test de la base de donn&eacute;es', # NEW
+	'test_base' => 'Test de la base de données', # NEW
 	'test_manuel' => 'Test manuel', # NEW
 	'texte_formatspip' => 'ORIGINELE TEKST AAN HET SPIP FORMAAT',
 	'textes_formatspip' => 'ORIGINELE TEKSTEN AAN HET SPIP FORMAAT',
@@ -131,7 +132,7 @@ Verenigbaarheid: SPIP 1.92x en v2.0.x', # MODIF
 
 	// U
 	'urls_propres_erreur' => 'Dit formaat neemt geen rekening van URL eigen hieronder op een lijst gezet.',
-	'urls_propres_format' => 'Het huidige formaat van URLs is: {{&laquo;&nbsp;@format@&nbsp;&raquo;}}. [<span>[Configuratie->@url@]</span>]',
+	'urls_propres_format' => 'Het huidige formaat van URLs is: {{« @format@ »}}. [<span>[Configuratie->@url@]</span>]',
 	'urls_propres_lien' => 'Openbare toegang link',
 	'urls_propres_objet' => 'Hier URLs eigen opgeslagen baseert erover op een lijst worden gezet waardoor de bezoekers zullen kunnen varen op uw siten.',
 	'urls_propres_titre' => 'URLS EIGEN',
