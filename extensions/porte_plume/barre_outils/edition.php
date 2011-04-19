@@ -19,7 +19,8 @@ function barre_outils_edition(){
 		'onCtrlEnter'       => array('keepDefault'=>false, 'replaceWith'=>"\n\n"),
 		// garder les listes si on appuie sur entree
 		'onEnter'           => array('keepDefault'=>false, 'selectionType'=>'return', 'replaceWith'=>"\n"),
-		'onTab'             => array('keepDefault'=>false, 'replaceWith'=>"\t"),
+		// Utile quand on saisi du code, mais pas accessible !
+		#'onTab'             => array('keepDefault'=>false, 'replaceWith'=>"\t"),
 		'markupSet'         => array(
 			// H1 - {{{
 			array(

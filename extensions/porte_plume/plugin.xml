@@ -2,7 +2,7 @@
 	<nom><multi>[fr]Porte plume[en]Quill[ar]&#1575;&#1604;&#1585;&#1610;&#1588;&#1577;[de]Federhalter</multi></nom>
 	<auteur>Matthieu Marcillaud</auteur>
 	<licence>GNU/GPL</licence>
-	<version>1.7.7</version>
+	<version>1.7.8</version>
 	<description>
 	<multi>[fr]Une barre d'outil pour bien &#233;crire
 _ Porte plume est une barre d'outil extensible pour SPIP qui
