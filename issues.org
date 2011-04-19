@@ -1,16 +1,19 @@
-* In process
-*** Buttons to write to groups of people
+* Urgent
+*** "Call to the people" button
+* In progress
+*** Overhaul of the search engine
+*** iPhone version
+* Next
 *** CC per article
-*** Filter display by color
 *** Loop videos
 *** Make the billets visually different
-*** Make things more spip-correct
-*** Overhaul of the search engine
+* Backburner
+*** Buttons to write to groups of people
+*** Filter display by color
 *** Planification
 *** Relecteur occasionnel
 *** Translation encouragement
 *** Unify the permissions
-*** Use custom color
 *** Various SPIP features to try out some day [0/4]
 - [ ] In a loop, #_parent:TITRE
 - [ ] pipeline jquery_plugins : function XXX_jquery_plugins($scripts) {
@@ -21,8 +24,6 @@
   rien à faire >0 : fait <0 : il en reste, revenir dans |.| secondes
 - [ ] plugin spip-bonux : #INFO_TITRE{article,324}
 
-*** iPhone version
-* Planned
 * Done
 *** Use mathjax [100%]
 - [X] Port the dynamic parts (forum previews)

@@ -236,7 +236,6 @@ div.spip-admin-bloc { margin-top : 2ex; }
 div.article { clear : both; }
 #TB_window div.article { font-size : 130%; line-height : 1.3; text-align : justify; padding : 1ex 2em; }
 
-div.texte .jsMath_number { right : 0px; }
 div.texte a { color : inherit; }
 div.texte a:link, div.texte a:visited { color : #e20000; }
 div.texte blockquote { color : black; background : #ffeeee; padding : .5ex 1em; border : 1px dashed #e20000; }
