@@ -2,7 +2,7 @@
   <nom>Images des Maths</nom>
   <auteur>[Vincent Beffara->vbeffara@ens-lyon.fr]</auteur>
   <licence>GPL v3 - &copy; 2010</licence>
-  <version>0.2</version>
+  <version>0.3</version>
   <etat>dev</etat>
   <prefix>idm</prefix>
   <necessite id="SPIP" version="[2.1.0;]" />
@@ -12,19 +12,11 @@
   <fonctions>idm.php</fonctions>
   <install>idm.php</install>
 
-  <pipeline><nom>boite_infos</nom></pipeline>
   <pipeline><nom>autoriser</nom></pipeline>
+  <pipeline><nom>boite_infos</nom></pipeline>
   <pipeline><nom>jquery_plugins</nom></pipeline>
-
-  <pipeline>
-    <nom>pre_edition</nom>
-    <inclure>idm_pipelines.php</inclure>
-  </pipeline>
-
-  <pipeline>
-    <nom>pre_typo</nom>
-    <inclure>idm_pipelines.php</inclure>
-  </pipeline>
+  <pipeline><nom>pre_edition</nom></pipeline>
+  <pipeline><nom>pre_typo</nom></pipeline>
 
   <bouton id="idm">
     <titre>IdM</titre>
