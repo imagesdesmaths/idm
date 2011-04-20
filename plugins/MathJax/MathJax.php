@@ -1,7 +1,7 @@
 <?php
 
 function mj_labelref ($texte) {
-  $texte = preg_replace ('/\$\$\\\\label\{([^\}]*)\}/',
+  $texte = preg_replace ('/\$\$\\s*\\\\label\{([^\}]*)\}/',
                          '<div class="mjlabel_top" id="eq_\1">(\1)</div>$$',
                          $texte);
   $texte = preg_replace ('/\\\\label\{([^\}]*)\}\\s*\$\$/',
