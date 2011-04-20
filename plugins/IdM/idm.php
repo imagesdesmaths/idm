@@ -207,7 +207,7 @@ function idm_pre_edition ($flux) {
   return $flux;
 }
 
-function idm_pre_typo ($texte) {
+function idm_clean_TeX ($texte) {
   $acc_tex = array(); $acc_html = array();
 
   $acc_tex[] = '\`a'; $acc_html[] = '&agrave;';
@@ -291,6 +291,65 @@ function idm_pre_typo ($texte) {
   $texte = str_replace ('\it',       '',    $texte);
 
   return $texte;
+}
+
+function idm_labelref ($texte) {
+  $texte = preg_replace ('/\$\$\\s*\\\\label\{([^\}]*)\}/',
+                         '<div class="mjlabel_top" id="eq_\1">(\1)</div>$$',
+                         $texte);
+  $texte = preg_replace ('/\\\\label\{([^\}]*)\}\\s*\$\$/',
+                         '$$<div class="mjlabel_bot" id="eq_\1">(\1)</div>',
+                         $texte);
+  $texte = preg_replace ('/\$*\\\\ref\{([^\}]*)\}\$*/',
+                         '<a href="#eq_\1">(\1)</a>',
+                         $texte);
+  return $texte;
+}
+
+function idm_protect_TeX ($texte) {
+  $texte = str_replace ('\[', '$$', $texte);
+  $texte = str_replace ('\]', '$$', $texte);
+  $texte = str_replace ('\(', '$', $texte);
+  $texte = str_replace ('\)', '$', $texte);
+
+  $texte = preg_replace ('/\$\$([^$]+)\$\$/s', '<html>\[\1\]</html>', $texte);
+  $texte = preg_replace ('/\$([^$]+)\$/s', '<html>$\1$</html>', $texte);
+  $texte = str_replace ('\[', '$$', $texte);
+  $texte = str_replace ('\]', '$$', $texte);
+
+  while (preg_match ('/<html>[$]+[^$]+</s', $texte)) {
+    $texte = preg_replace ('/(<html>[$]+[^$]+)</s', '\1&lt;', $texte);
+  }
+
+  return echappe_html ($texte);
+}
+
+function idm_pre_typo ($texte) {
+  $texte = idm_labelref ($texte);
+  $texte = idm_protect_TeX ($texte);
+  $texte = idm_clean_TeX ($texte);
+
+  return $texte;
+}
+
+function idm_insert_head ($texte) {
+  $mj_insert = <<<END
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js", "jsMath2jax.js", "TeX/noErrors.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+        jax:        ["input/TeX",  "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath:          [ ['$','$'],   ["\\\\(","\\\\)"] ],
+          processEnvironments: false,
+        }
+      });
+    </script>
+END;
+  return $texte . $mj_insert;
+}
+
+function idm_header_prive ($texte) {
+  return idm_insert_head ($texte);
 }
 
 ?>

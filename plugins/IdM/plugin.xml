@@ -14,6 +14,8 @@
 
   <pipeline><nom>autoriser</nom></pipeline>
   <pipeline><nom>boite_infos</nom></pipeline>
+  <pipeline><nom>header_prive</nom></pipeline>
+  <pipeline><nom>insert_head</nom></pipeline>
   <pipeline><nom>jquery_plugins</nom></pipeline>
   <pipeline><nom>pre_edition</nom></pipeline>
   <pipeline><nom>pre_typo</nom></pipeline>
