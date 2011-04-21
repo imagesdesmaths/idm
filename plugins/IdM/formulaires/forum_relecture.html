@@ -6,13 +6,15 @@
     <p><label for="titre">Titre :</label><input type="text" name="titre" size="60" value="#ENV{titre}" /></p>  [<p class="erreur">(#ENV**{erreurs}|table_valeur{titre})</p>]
     <p><textarea name="texte" cols="75" rows="20">#ENV{texte}</textarea></p>                                   [<p class="erreur">(#ENV**{erreurs}|table_valeur{texte})</p>]
 
+    <div id="previsu">
     [(#ENV**{erreurs}|table_valeur{preview}|=={preview}|oui)
       <fieldset class="previsu">
         <legend>Pr&eacute;visualisation &mdash; #ENV{titre}</legend>
         [(#ENV{texte}|propre)]
       </fieldset>
-      <script>MathJax.Hub.Typeset();</script>
+      <script>MathJax.Hub.Queue(new Array("Typeset",MathJax.Hub,"previsu"));</script>
     ]
+    </div>
 
     <p>
       <input type="submit" name="preview" value="[(#ENV**{erreurs}|table_valeur{preview}|?{Mettre &agrave; jour,Pr&eacute;visualiser})]" />
@@ -21,6 +23,6 @@
   </form>
 ]
 
-[(#ENV{message_ok}|oui)<p>Merci pour votre message ! Il doit maintenant 
-subir une validation de forme avant de pouvoir apparaitre dans le 
+[(#ENV{message_ok}|oui)<p>Merci pour votre message ! Il doit maintenant
+subir une validation de forme avant de pouvoir apparaitre dans le
 forum.</p>]
