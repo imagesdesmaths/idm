@@ -10,6 +10,7 @@
 * Backburner
 *** Buttons to write to groups of people
 *** Filter display by color
+*** Floating picture
 *** Planification
 *** Relecteur occasionnel
 *** Translation encouragement
