@@ -73,7 +73,7 @@
   </BOUCLE_edito>
 
   <div id="une">
-    <BOUCLE_une(ARTICLES) {id_rubrique !IN 2,3,6,18,19,23,25,28,29,34} {par date} {inverse} {0,1} {doublons}>
+    <BOUCLE_une(ARTICLES) {id_secteur = 37} {par date} {inverse} {0,1} {doublons}>
     [(#INCLURE{fond=inc/resume_une}{id_article})]
     </BOUCLE_une>
   </div>
@@ -91,17 +91,19 @@
 
 <div id="front">
   <div id="billets">
-    <h2>Les billets des habitu&eacute;s</h2>
+    <h2 class="button"><a href="#URL_RUBRIQUE{6}">Les billets des habitu&eacute;s</a></h2>
     <BOUCLE_billets(ARTICLES) {id_rubrique = 6} {par date} {age>=0} {inverse} {0,5} {doublons}>
       [(#INCLURE{fond=inc/resume}{id_article})]
     </BOUCLE_billets>
+    <h2 class="button"><a href="#URL_RUBRIQUE{6}">Tous les billets</a></h2>
   </div>
 
   <div id="recents">
-    <h2>Quelques articles r&eacute;cents</h2>
-    <BOUCLE_old(ARTICLES) {id_rubrique !IN 2,3,6,18,19,23,25,28,29,34} {par date} {inverse} {0,5} {doublons}>
+    <h2 class="button"><a href="#URL_RUBRIQUE{37}">Quelques articles r&eacute;cents</a></h2>
+    <BOUCLE_old(ARTICLES) {id_secteur = 37} {par date} {inverse} {0,5} {doublons}>
       [(#INCLURE{fond=inc/resume}{id_article})]
     </BOUCLE_old>
+    <h2 class="button"><a href="#URL_RUBRIQUE{37}">Tous les articles</a></h2>
   </div>
 </div>
 

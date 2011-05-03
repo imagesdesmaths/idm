@@ -10,10 +10,10 @@ body { padding : 0px; margin : 0px; background : white; }
   #lisiere { width : 12em; height : 100%; position : fixed; top : 0px; background : #550000; z-index : 1; }
   #main  { position : absolute; top : 75px; width : 100%; z-index : 0; }
   #main_in { margin-left : 12em; padding : 1ex 1em 2ex; }
-    #front { position : relative; }
-      #recents { position : absolute; width : 50%; padding-bottom : 1ex; border-right : 1px dotted #a20000; }
+    #front { position : relative; margin-top : 2ex; border-top : 1px solid #e20000; }
+      #recents { position : absolute; width : 50%; padding-bottom : 1ex; border-right : 1px solid #e20000; }
         #recents .resume { margin-right : 1em; }
-      #billets { position : absolute; width : 50%; margin-left : 50%; padding-bottom : 1ex; border-left : 1px dotted #a20000; }
+      #billets { position : absolute; width : 50%; margin-left : 50%; padding-bottom : 1ex; border-left : 1px solid #e20000; }
         #billets .resume { margin-left : 1em; }
 
 /**************************************************/
@@ -60,6 +60,9 @@ h2.surtitre { text-align : left; font-weight : normal; font-size : large; margin
 h2.rdp { margin : 0ex 0px 1ex; text-align : right; }
 h2.rdp a { color : black; border-bottom : 2px solid #e20000; }
 h2.rdp a:hover { color : #e20000; }
+
+h2.button a { color : black; }
+h2.button a:hover { color : #e20000; }
 
 h3 { text-align : left; }
 h3.auteur { text-align : right; font-weight : normal; }
