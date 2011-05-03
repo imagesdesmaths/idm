@@ -41,6 +41,7 @@ a { color : #e20000; font-weight : bold; text-decoration : none; outline : none;
 a.article { font-weight : normal; }
 a.lexique { font-weight : normal; border-bottom : 1px dotted; }
 
+form { margin : 1ex 1em; }
 form h2 { margin : 0px; }
 form p { margin : .5ex 0px; }
 form p.erreur { color : #e20000; font-weight : bold; }
@@ -102,7 +103,7 @@ ul.forum { padding : 0px; list-style-type : none; }
 #left form input { width : 80%; font-weight : bold; background : white url(../img/rechercher.gif) no-repeat right center; }
 #left form input.submit { display : none; }
 #left form label { display : none; }
-#left form { margin-top : 1ex; }
+#left form { margin : 1ex 0em; }
 #left h3 { margin : 1ex 0px .5ex; font-size : medium; }
 #left hr { border : 1px solid #e20000; border-width : 1px 0px 0px; }
 
@@ -170,12 +171,12 @@ div.figure img { max-width : 100%; }
 div.figure p.titre { font-weight : bold; margin : 1ex; }
 div.figure { width : 95%; text-align : center; margin : 1ex auto; }
 
+div.forum-message { margin : 1ex 1em; }
 div.forum-message div.forum-texte { margin : 1ex 0px; font-size : medium; }
 div.forum-message h3 { margin : 0px; font-size : medium; border-bottom : 1px solid #e20000; }
 div.forum-message h4 { margin : 3px 0px; text-align : right; font-size : small ; font-style : italic; }
 div.forum-message h4.repondre { margin-top : 1ex; }
 div.forum-message p { margin : .5ex 0px; }
-div.forum-message { }
 div.forum-message-delauteur { background-color : #ffcccc; padding : 1ex; margin : 0ex -1ex 1ex; }
 
 div.forum-notes { border-top : 1px solid #e20000; margin-top : 2ex; padding-top : .5ex; }

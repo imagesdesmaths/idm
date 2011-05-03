@@ -16,16 +16,16 @@
 
 [(#SESSION{id_auteur}|oui)#FORMULAIRE_FORUM{#URL_PAGE{forum,id_article=#ID_ARTICLE}}
 
-<p>Le comit&eacute; de r&eacute;daction se r&eacute;serve le droit de 
-mod&eacute;rer votre commentaire (par exemple s'il estime qu'il n'a 
-qu'un lien tr&egrave;s &eacute;loign&eacute; avec l'article auquel il 
-est attach&eacute;, ou si le ton employ&eacute; n'est pas adapt&eacute; 
-&agrave; un d&eacute;bat serein).</p>]
+<div class="citer">Le comit&eacute; de r&eacute;daction se
+r&eacute;serve le droit de mod&eacute;rer votre commentaire (par exemple
+s'il estime qu'il n'a qu'un lien tr&egrave;s &eacute;loign&eacute; avec
+l'article auquel il est attach&eacute;, ou si le ton employ&eacute;
+n'est pas adapt&eacute; &agrave; un d&eacute;bat serein).</div>]
 
 [(#SESSION{id_auteur}|non)
-<p>Pour participer &agrave; la discussion merci de <a 
-  href="#URL_PAGE{perso}">vous identifier</a> (ou de <a 
-  href="#URL_PAGE{inscription}">vous inscrire</a> si vous ne l'avez pas 
+<p>Pour participer &agrave; la discussion merci de <a
+  href="#URL_PAGE{perso}">vous identifier</a> (ou de <a
+  href="#URL_PAGE{inscription}">vous inscrire</a> si vous ne l'avez pas
   encore fait).</p>
 ]
 
@@ -33,4 +33,3 @@ est attach&eacute;, ou si le ton employ&eacute; n'est pas adapt&eacute;
 </BOUCLE_article>
 <INCLURE{fond=sommaire}>
 <//B_article>
-
