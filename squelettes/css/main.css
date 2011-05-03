@@ -9,12 +9,10 @@ body { padding : 0px; margin : 0px; background : white; }
   #logo  { position : absolute; width : 12em; top : 0px; color : white; background : transparent; z-index : 4; text-align : center; }
   #lisiere { width : 12em; height : 100%; position : fixed; top : 0px; background : #550000; z-index : 1; }
   #main  { position : absolute; top : 75px; width : 100%; z-index : 0; }
-  #main_in { margin-left : 12em; padding : 1ex 0em; }
+  #main_in { margin-left : 12em; padding : 1ex 0em 0ex; }
     #front { position : relative; margin-top : 2ex; border-top : 1px solid #e20000; }
       #recents { position : absolute; width : 50%; border-right : 1px solid #e20000; }
-        #recents .resume { margin : 1em; }
       #billets { position : absolute; width : 49.9%; margin-left : 50%; border-left : 1px solid #e20000; }
-        #billets .resume { margin : 1em; }
 
 /**************************************************/
 
@@ -67,7 +65,7 @@ h2.button a:hover { color : #e20000; }
 h3 { text-align : left; }
 h3.auteur { text-align : right; font-weight : normal; }
 h3.bio { text-align : right; font-weight : normal; font-size : medium; margin-top : -2ex; }
-h3.discuter { text-align : right; font-style : italic; }
+h3.discuter { text-align : right; font-style : italic; margin-right : 2em; }
 h3.spip { text-align : center; padding : 1ex; border-top : 2px solid #e20000; border-bottom : 2px solid #e20000; clear : both; }
 h3.titre { margin : 0px; border-bottom : 2px solid #e20000; }
 
@@ -141,7 +139,7 @@ ul.forum { padding : 0px; list-style-type : none; }
 #featured h2 { display : inline; padding : .3ex 1em .1ex; background-color : white; }
 #featured h3.titre { margin-top : -.5ex; }
 
-#une { margin : 0 3em 0 1em; padding : 0ex 1em; border : 1px solid #ffcccc; background : #ffcccc; }
+#une { margin : 0 3em 0 1em; border : 1px solid #ffcccc; background : #ffcccc; }
 #une div.resume_out { margin-top : 1ex; }
 #une h2 { margin : 0px; font-size : x-large; border-bottom : 2px solid #e20000; }
 #une h2 a:hover { color : #e20000; }
@@ -207,7 +205,7 @@ div.notation span.note { color : black; }
 div.notation span.note:before { content : '('; }
 div.notation span.note:after { content : ')'; }
 
-div.relies { float : right; margin : -.8ex -.6em 2ex 0px; font-size : 90%; }
+div.relies { float : right; margin : -.8ex .3em 2ex 0px; font-size : 90%; }
 div.relies p { margin : 0px; }
 div.relies a.piste_20 { color : #009900; }
 div.relies a.piste_21 { color : #3333ff; }
@@ -215,7 +213,7 @@ div.relies a.piste_22 { color : #e20000; }
 div.relies a.piste_23 { color : #000000; }
 div.relies a.piste_24 { color : #888888; }
 
-div.resume_out { margin : 3ex 0px 0px; }
+div.resume_out { margin : 3ex 1em 0px; }
 div.resume h3.titre a:hover { color : #e20000; }
 div.resume div.rubrique { font-size : 90%; text-align : right; margin : .2ex .5em 0px 0px; }
 div.resume div.rubrique a:hover { color : #e20000; }
@@ -236,7 +234,7 @@ div.spip-admin-bloc a { display : block; color : white; background : #550000; bo
 div.spip-admin-bloc a:hover { background : #550000; text-decoration : none; border : 1px solid #e20000; }
 div.spip-admin-bloc { margin-top : 2ex; }
 
-div.article { clear : both; }
+div.article { clear : both; margin : 0ex 1em; }
 #TB_window div.article { font-size : 130%; line-height : 1.3; text-align : justify; padding : 1ex 2em; }
 
 div.texte a { color : inherit; }
@@ -265,7 +263,7 @@ div.thm li { margin-top : .2ex; padding-left : 0px; }
 
 div.mp3 { text-align : center; margin : 0.5ex 0em; }
 
-div.citer { border : 1px solid #e20000; background : #eeeeee; padding : .5ex 1ex; text-size : small; }
+div.citer { border-top : 1px solid #e20000; background : #aaaaaa; padding : .5ex 1ex; text-size : small; }
 
 p.copyright { text-size : small; font-style : italic; }
 
