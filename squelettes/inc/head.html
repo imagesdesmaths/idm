@@ -9,7 +9,7 @@
   <title>[(#ENV*{title}|textebrut) - ]#NOM_SITE_SPIP</title>
 
   <link rel="stylesheet" type="text/css" media="all"   href="#CHEMIN{css/main.css}"/>
-  <link rel="stylesheet" type="text/css" media="all"   href="#CHEMIN{css/tag_20110322.css}"/>
+  <link rel="stylesheet" type="text/css" media="all"   href="#CHEMIN{css/tag_20110503.css}"/>
   <link rel="stylesheet" type="text/css" media="print" href="#CHEMIN{css/print.css}"/>
   <link rel="stylesheet" type="text/css" media="all and (max-device-width: 500px)" href="#CHEMIN{css/iphone.css}"/>
 
@@ -35,26 +35,27 @@
     </div>
 
     <div id="lisiere"></div>
+
     <div id="left">
       <INCLURE{fond=inc/idj}>
 
-      <h4><a href="/">Page d'accueil</a></h4>
-
-      <h4><a href="#URL_ARTICLE{63}">Pr&eacute;sentation du site</a></h4>
-
       <ul>
-        <li><a href="#URL_ARTICLE{17}">Fonctionnement</a></li>
-        <li><a href="#URL_RUBRIQUE{19}">Documentation</a></li>
-      </ul>
+        <li><a href="/">Page d'accueil</a></li>
+        <li><a href="#URL_ARTICLE{63}">Pr&eacute;sentation du site</a>
+          <ul>
+            <li><a href="#URL_ARTICLE{17}">Fonctionnement</a></li>
+            <li><a href="#URL_RUBRIQUE{19}">Documentation</a></li>
+          </ul>
+        </li>
 
-      <hr/>
+        <hr/>
 
-      [(#FORMULAIRE_RECHERCHE)]
-
-      <h4><a href="#URL_PAGE{navigation}">Recherche avanc&eacute;e</a></h4>
-
-      <ul>
-        <li><a href="#URL_PAGE{plan}">Plan du site</a></li>
+        <li>[(#FORMULAIRE_RECHERCHE)]</li>
+        <li><a href="#URL_PAGE{navigation}">Recherche avanc&eacute;e</a>
+          <ul>
+            <li><a href="#URL_PAGE{plan}">Plan du site</a></li>
+          </ul>
+        </li>
       </ul>
 
       <hr/>
@@ -72,12 +73,12 @@
 
       <hr/>
 
-      <ul>
+      <ul><li><ul>
         <li><a href="javascript:unfold_and_print();">Imprimer cette page</a></li>
         [<li>(#MODELE{special}{mot=ours})</li>]
         <li><a href="#URL_PAGE{backend}">Syndication (RSS)</a></li>
         <li><a href="mailto:#EMAIL_WEBMASTER">Nous contacter</a></li>
-      </ul>
+      </ul></li></ul>
     </div>
 
     <div id="main">
