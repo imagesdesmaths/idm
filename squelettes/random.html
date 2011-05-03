@@ -1,10 +1,4 @@
-#HTTP_HEADER{Content-Type: text/html}
 #CACHE{0}
-<html>
-  <head>
-    <title>HTTP 302</title>
-    <BOUCLE_random(ARTICLES) {id_secteur IN 6,37} {par hasard} {0,1}>
-      <meta http-equiv="Refresh" content = "0; url=#URL_ARTICLE">
-    </BOUCLE_random>
-  </head>
-</html>
+<BOUCLE_random(ARTICLES) {id_secteur IN 6,37} {par hasard} {0,1}>
+#HTTP_HEADER{Location: #URL_ARTICLE}
+</BOUCLE_random>
