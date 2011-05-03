@@ -7,8 +7,6 @@
 <BOUCLE_article(ARTICLES) {id_article} {recherche ?}>
   <div class="resume_out resume_out_rubrique_#ID_RUBRIQUE resume_out_secteur_#ID_SECTEUR[ piste_(#GET{piste_id})]">
     <div class="resume resume_rubrique_#ID_RUBRIQUE resume_secteur_#ID_SECTEUR">
-      #DEBUT_SURLIGNE
-
       [(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{150,150}|image_recadre{150,150}
       | sinon { [(#INCLURE{fond=inc/auteur}{id_article=#ID_ARTICLE}{taille=150}|image_recadre{150,150}
       | sinon { [(#LOGO_RUBRIQUE|right|#URL_ARTICLE|image_reduire{150,150}|image_recadre{150,150}
@@ -25,16 +23,7 @@
         </span>
       </div>
 
-      <div class="rubrique">
-        <BOUCLE_rep(FORUMS){id_article}{tout}></BOUCLE_rep>
-        [(#TOTAL_BOUCLE|>{0}|oui) <a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">
-          #TOTAL_BOUCLE réponse[(#TOTAL_BOUCLE|>{1}|?{s})]
-        </a>]
-        <//B_rep>
-      </div>
-
       [<div class="introduction"><a class="plain" href="#URL_ARTICLE">(#DESCRIPTIF|sinon{[(#INTRODUCTION|textebrut)]}|PtoBR)</a></div>]
-      #FIN_SURLIGNE
     </div>
     <div class="nettoyeur"></div>
   </div>
