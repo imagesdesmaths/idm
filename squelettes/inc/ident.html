@@ -4,7 +4,7 @@
 [(#SESSION{id_auteur}|oui)Mon IdM]
 [(#SESSION{id_auteur}|non)Identification]
 #BLOC_DEBUT
-<ul>
+<ul><li><ul>
   [(#SESSION{id_auteur}|non)<li><a href="#URL_PAGE{perso}">S'identifier</a></li>]
   [(#SESSION{id_auteur}|non)<li><a href="#URL_PAGE{inscription}">S'inscrire</a></li>]
   [(#SESSION{id_auteur}|oui)<li><a href="#URL_PAGE{perso}">Espace personnel</a></li>]
@@ -13,5 +13,5 @@
   [(#SESSION{statut}|=={0minirezo}|oui)<li><a href="#URL_SITE_SPIP/ecrire/">Espace priv&eacute;</a></li>]
   [(#SESSION{statut}|=={1comite}|oui)<li><a href="#URL_SITE_SPIP/ecrire/">Espace de r&eacute;daction</a></li>]
   [(#SESSION{id_auteur}|oui)<li><a href="#URL_LOGOUT{#URL_SITE_SPIP}">Se d&eacute;connecter</a></li>]
-</ul>
+</ul></li></ul>
 #BLOC_FIN
