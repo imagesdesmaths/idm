@@ -2,11 +2,22 @@
 *** "Call to the people" button
 * In progress
 *** Overhaul of the search engine
-*** iPhone version
+*** iPhone version [%]
+- [X] Basic iphone.html
+- [X] Specific style for small screens
+- [ ] Automatic suggestion
+- [ ] Find a way to make login etc. possible
+*** One year ago on IdM [50%]
+- [X] Create the page, basic functionality
+- [ ] Merge it with sommaire.html for maintainability
+- [ ] Merge the system with the color filtering ?
 * Next
 *** CC per article
 *** Loop videos
 *** Make the billets visually different
+*** Upgrade Mathjax [0%]
+- [ ] Wait for label/ref to be in mainline mathjax
+- [ ] Remove the previous hack
 * Backburner
 *** Buttons to write to groups of people
 *** Filter display by color
