@@ -2,9 +2,10 @@
 *** "Call to the people" button
 * In progress
 *** Overhaul of the search engine
-*** iPhone version [%]
+*** iPhone version [25%]
 - [X] Basic iphone.html
-- [X] Specific style for small screens
+- [ ] Specific style for small screens (it used to work using max-width,
+  but apparently that breaks older browsers ...)
 - [ ] Automatic suggestion
 - [ ] Find a way to make login etc. possible
 *** One year ago on IdM [50%]
@@ -17,6 +18,7 @@
 *** Make the billets visually different
 *** Upgrade Mathjax [0%]
 - [ ] Wait for label/ref to be in mainline mathjax
+- [ ] Wait for it to be in a stable release
 - [ ] Remove the previous hack
 * Backburner
 *** Buttons to write to groups of people
@@ -26,16 +28,27 @@
 *** Relecteur occasionnel
 *** Translation encouragement
 *** Unify the permissions
-*** Various SPIP features to try out some day [0/4]
-- [ ] In a loop, #_parent:TITRE
-- [ ] pipeline jquery_plugins : function XXX_jquery_plugins($scripts) {
-  $scripts[] = "js/bla.js"; return $scripts; }
-- [ ] pipeline taches_generales_cron : function
-  XXX_taches_generales_cron ($taches) { $taches['toto'] = 24*3600; // en
-  secondes } fichier genie/toto.php, genie_toto_dist(), retour : =0 :
-  rien à faire >0 : fait <0 : il en reste, revenir dans |.| secondes
-- [ ] plugin spip-bonux : #INFO_TITRE{article,324}
-
+* Geekeries and SPIPeries
+*** In a loop, #_parent:TITRE
+*** pipeline jquery_plugins
+#+begin_src php
+  function XXX_jquery_plugins($scripts) {
+    $scripts[] = "js/bla.js";
+    return $scripts;
+  }
+#+end_src
+*** pipeline taches_generales_cron
+#+begin_src php
+  function XXX_taches_generales_cron ($taches) {
+    $taches['toto'] = 24*3600;
+  }
+#+end_src
+fichier genie/toto.php, genie_toto_dist(), retour :
+- =0 : rien à faire
+- >0 : fait
+- <0 : il en reste, revenir dans |.| secondes
+*** plugin spip-bonux
+- [ ] #INFO_TITRE{article,324}
 * Done
 *** Use mathjax [100%]
 - [X] Port the dynamic parts (forum previews)
