@@ -2,78 +2,52 @@
 <INCLURE{fond=inc/head}{title=Page exp&eacute;rimentale}>
 
   <style>
-    #centeredmenu { float : left; width : 100%; z-index : 1000; background:#ddd; margin-top : -1ex; }
-    #centeredmenu ul { margin : 0; padding:0;
-    list-style:none;
-    float:right;
-    position:relative;
-    right:50%;
-    }
+    #menu { float:left; width : 100%;
+      background : #550000; color: white; }
+    #menu ul { margin : 0; padding:0; list-style:none; float:right; position:relative; right:50%; }
+    #menu ul li { float : left; position : relative; left : 50%; background :
+      #730000; font-size : 90%; border-bottom : 1px solid #e20000; }
+    #menu ul li a { display : block; margin:0; padding : .3em 1em;
+      background : #550000; color : white; font-weight : normal; }
+    #menu ul li a:hover,
+    #menu ul li:hover a { background : #830000; }
+    #menu ul ul { display : none; position : absolute; right : auto;
+      width : 14em; border-top : 1px solid #e20000; z-index : 1000; }
+    #menu ul ul li { left : auto; clear : left; width : 100%; border-bottom :
+      1px solid #e20000; }
+    #menu ul li:hover ul li a { background:#830000; }
+    #menu ul li ul li a:hover { background:#e20000; }
+    #menu ul li:hover ul { display:block; }
+    #menu ul ul.left { left : auto; right : 0; text-align : right; }
 
-    #centeredmenu ul li {
-    float:left;
-    position:relative;
-    left:50%;
-    }
+    #menu form label { display : none; }
+    #menu form input { width : 95%; font-weight : bold; background :
+      white url(#CHEMIN{img/rechercher.gif}) no-repeat right center; }
+    #menu form input.submit { display : none; }
 
-    #centeredmenu ul li a {
-    display:block;
-    margin:0;
-    padding:.3em 1em;
-    background:#ddd;
-    }
+    /* Tweaks to test the alternative layout */
 
-    #centeredmenu ul li a:hover {
-    background:#36f;
-    }
-
-    #centeredmenu ul li:hover a {
-    background:#36f; /* Top menu items background colour */
-    }
-
-    #centeredmenu ul ul {
-    display:none;
-    position:absolute;
-    right:auto;
-    width:10em;
-    }
-
-    #centeredmenu ul ul li {
-    left:auto;
-    clear:left;
-    width:100%;
-    }
-
-    #centeredmenu ul ul li a,
-    #centeredmenu ul li.active li a,
-    #centeredmenu ul li:hover ul li a {
-    background:#eee;
-    }
-
-    #centeredmenu ul ul li a:hover,
-    #centeredmenu ul li.active ul li a:hover,
-    #centeredmenu ul li:hover ul li a:hover {
-    background:#36f;
-    }
-
-    #centeredmenu ul ul.last { left:auto; right:0; }
-    #centeredmenu ul li:hover ul { display:block; }
+    #head h1 { margin-left : 0; }
+    #left, #lisiere { display : none; }
+    #main_in { margin-left : 0em; padding : 0ex; }
   </style>
 
-  <div id="centeredmenu">
+  <div id="menu">
     <ul>
-      <li><a href="/">Page d'accueil</a></li>
-      <li><a href="#URL_ARTICLE{63}">Pr&eacute;sentation du site</a>
+      <li><a href="#">Navigation</a>
         <ul>
+          <li><a href="/">Page d'accueil</a></li>
+          <li><a href="#URL_ARTICLE{63}">Pr&eacute;sentation du site</a></li>
           <li><a href="#URL_ARTICLE{17}">Fonctionnement</a></li>
           <li><a href="#URL_RUBRIQUE{19}">Documentation</a></li>
-        </ul>
-      </li>
-      <li>[(#FORMULAIRE_RECHERCHE)]</li>
-      <li><a href="#URL_PAGE{navigation}">Recherche avanc&eacute;e</a>
-        <ul>
           <li><a href="#URL_PAGE{random}">Un article au hasard</a></li>
           <li><a href="#URL_PAGE{lastyear}">Il y a un an sur IdM</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Recherche</a>
+        <ul>
+          <li>[(#FORMULAIRE_RECHERCHE)]</li>
+          <li><a href="#URL_PAGE{navigation}">Recherche avanc&eacute;e</a></li>
           <li><a href="#URL_PAGE{plan}">Plan du site</a></li>
         </ul>
       </li>
@@ -82,10 +56,17 @@
             <li><a href="#URL_ARTICLE">#TITRE</a></li>
         </BOUCLE_liens></ul>
       </li>
+      <li><a href="#">Misc</a>
+        <ul class="left">
+          <li><a href="javascript:unfold_and_print();">Imprimer cette page</a></li>
+          [<li>(#MODELE{special}{mot=ours})</li>]
+          <li><a href="#URL_PAGE{backend}">Syndication (RSS)</a></li>
+          <li><a href="mailto:#EMAIL_WEBMASTER">Nous contacter</a></li>
+        </ul>
+      </li>
       <li><a href="#">
-          [(#SESSION{id_auteur}|oui)Mon IdM]
-          [(#SESSION{id_auteur}|non)Identification]
-        </a><ul>
+          [(#SESSION{id_auteur}|?{Mon IdM,Identification})]
+        </a><ul class="left">
           [(#SESSION{id_auteur}|non)<li><a href="#URL_PAGE{perso}">S'identifier</a></li>]
           [(#SESSION{id_auteur}|non)<li><a href="#URL_PAGE{inscription}">S'inscrire</a></li>]
           [(#SESSION{id_auteur}|oui)<li><a href="#URL_PAGE{perso}">Espace personnel</a></li>]
@@ -94,14 +75,6 @@
           [(#SESSION{statut}|=={0minirezo}|oui)<li><a href="#URL_SITE_SPIP/ecrire/">Espace priv&eacute;</a></li>]
           [(#SESSION{statut}|=={1comite}|oui)<li><a href="#URL_SITE_SPIP/ecrire/">Espace de r&eacute;daction</a></li>]
           [(#SESSION{id_auteur}|oui)<li><a href="#URL_LOGOUT{#URL_SITE_SPIP}">Se d&eacute;connecter</a></li>]
-        </ul>
-      </li>
-      <li><a href="#">Misc</a>
-        <ul class="last">
-          <li><a href="javascript:unfold_and_print();">Imprimer cette page</a></li>
-          [<li>(#MODELE{special}{mot=ours})</li>]
-          <li><a href="#URL_PAGE{backend}">Syndication (RSS)</a></li>
-          <li><a href="mailto:#EMAIL_WEBMASTER">Nous contacter</a></li>
         </ul>
       </li>
     </ul>
