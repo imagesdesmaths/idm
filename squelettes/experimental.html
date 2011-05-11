@@ -1,9 +1,114 @@
 #CACHE{0}
-<html>
-  <head>
-    <title>HTTP 302</title>
-    <BOUCLE_random(ARTICLES) {id_secteur IN 6,37} {par hasard} {0,1}>
-      <meta http-equiv="Refresh" content = "0; url=#URL_ARTICLE">
-    </BOUCLE_random>
-  </head>
-</html>
+<INCLURE{fond=inc/head}{title=Page exp&eacute;rimentale}>
+
+  <style>
+    #centeredmenu { float : left; width : 100%; z-index : 1000; background:#ddd; margin-top : -1ex; }
+    #centeredmenu ul { margin : 0; padding:0;
+    list-style:none;
+    float:right;
+    position:relative;
+    right:50%;
+    }
+
+    #centeredmenu ul li {
+    float:left;
+    position:relative;
+    left:50%;
+    }
+
+    #centeredmenu ul li a {
+    display:block;
+    margin:0;
+    padding:.3em 1em;
+    background:#ddd;
+    }
+
+    #centeredmenu ul li a:hover {
+    background:#36f;
+    }
+
+    #centeredmenu ul li:hover a {
+    background:#36f; /* Top menu items background colour */
+    }
+
+    #centeredmenu ul ul {
+    display:none;
+    position:absolute;
+    right:auto;
+    width:10em;
+    }
+
+    #centeredmenu ul ul li {
+    left:auto;
+    clear:left;
+    width:100%;
+    }
+
+    #centeredmenu ul ul li a,
+    #centeredmenu ul li.active li a,
+    #centeredmenu ul li:hover ul li a {
+    background:#eee;
+    }
+
+    #centeredmenu ul ul li a:hover,
+    #centeredmenu ul li.active ul li a:hover,
+    #centeredmenu ul li:hover ul li a:hover {
+    background:#36f;
+    }
+
+    #centeredmenu ul ul.last { left:auto; right:0; }
+    #centeredmenu ul li:hover ul { display:block; }
+  </style>
+
+  <div id="centeredmenu">
+    <ul>
+      <li><a href="#">Tab one</a>
+        <ul>
+          <li><a href="#">Link one</a></li>
+          <li><a href="#">Link two</a></li>
+          <li><a href="#">Link three</a></li>
+          <li><a href="#">Link four</a></li>
+          <li><a href="#">Link five</a></li>
+        </ul>
+      </li>
+      <li class="active"><a href="#" class="active">Tab two</a>
+        <ul>
+          <li><a href="#">Link one</a></li>
+          <li><a href="#">Link two</a></li>
+          <li><a href="#">Link three</a></li>
+          <li><a href="#">Link four</a></li>
+          <li><a href="#">Link five is a long link that wraps</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Long tab three</a>
+        <ul>
+          <li><a href="#">Link one</a></li>
+          <li><a href="#">Link two</a></li>
+          <li><a href="#">Link three</a></li>
+          <li><a href="#">Link four</a></li>
+          <li><a href="#">Link five</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Tab four</a>
+        <ul class="last">
+          <li><a href="#">Link one</a></li>
+          <li><a href="#">Link two</a></li>
+          <li><a href="#">Link three</a></li>
+          <li><a href="#">Link four</a></li>
+          <li><a href="#">Link five</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  &nbsp;
+
+  <h1>Le Titre de la Page</h1>
+
+  <p>lksdfj lksdj flksjd flks jdlsdlkj sdlk jsdlk jsldkjf slkdj flsdkj
+    flskj lskd jlskdj flskdj lskd jlskd lk jlksd kl jlsk djflsk djlfks
+    djlk fjslk js ldksdlk flskd fjkl dkl jlskd lksd jlks jflksj flksj
+    lksdj lksj lksj lks lks jlks dklsd jflks dlksjdfl ksdlkf slkd jflksj
+    dflkjs ldkjf lskdj lksjdf lksj lk dklf sjd flsk djflskdjf.</p>
+
+<INCLURE{fond=inc/foot}{stats=no}>
