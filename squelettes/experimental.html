@@ -2,8 +2,7 @@
 <INCLURE{fond=inc/head}{title=Page exp&eacute;rimentale}>
 
   <style>
-    #menu { float:left; width : 100%;
-      background : #550000; color: white; }
+    #menu { float:left; width : 100%; background : #550000; color: white; }
     #menu ul { margin : 0; padding:0; list-style:none; float:right; position:relative; right:50%; }
     #menu ul li { float : left; position : relative; left : 50%; background :
       #730000; font-size : 90%; border-bottom : 1px solid #e20000; }
@@ -30,6 +29,15 @@
     #head h1 { margin-left : 0; }
     #left, #lisiere { display : none; }
     #main_in { margin-left : 0em; padding : 0ex; }
+    #main { background : #807070; }
+
+    div.article { margin : 1ex 8em; padding : 3ex 4em 2ex; border : 2px
+    solid #555; background : white; }
+    div.article h1 { margin-top : 2ex; }
+    div.article h3.auteur { clear : right; }
+
+    div.resume_out { background : white; padding : 1ex 1em .5ex; margin :
+    2ex auto; border : 2px solid #555; width : 45%; }
   </style>
 
   <div id="menu">
@@ -80,14 +88,10 @@
     </ul>
   </div>
 
-  &nbsp;
+  <div class="nettoyeur"></div>
 
-  <h1>Le Titre de la Page</h1>
+  [(#INCLURE{fond=inc/article}{id_article=903})]
 
-  <p>lksdfj lksdj flksjd flks jdlsdlkj sdlk jsdlk jsldkjf slkdj flsdkj
-    flskj lskd jlskdj flskdj lskd jlskd lk jlksd kl jlsk djflsk djlfks
-    djlk fjslk js ldksdlk flskd fjkl dkl jlskd lksd jlks jflksj flksj
-    lksdj lksj lksj lks lks jlks dklsd jflks dlksjdfl ksdlkf slkd jflksj
-    dflkjs ldkjf lskdj lksjdf lksj lk dklf sjd flsk djflskdjf.</p>
+  [(#INCLURE{fond=inc/resume}{id_article=903})]
 
 <INCLURE{fond=inc/foot}{stats=no}>
