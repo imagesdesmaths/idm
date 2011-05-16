@@ -25,60 +25,13 @@
 </head>
 
 <body>
-  <div id="outer">
+  <div id="head">
     <div id="logo"><a href="http://www.cnrs.fr/"><img src="#CHEMIN{img/CNRS.jpg}" alt="CNRS" /></a></div>
-    <div id="head">
-      <h1><a href="/">
-          <img src="#CHEMIN{img/Logo_IDM_blanc_e00000.gif}" alt="#NOM_SITE_SPIP" />
-      </a></h1>
-    </div>
+    <h1><a href="/">
+        <img src="#CHEMIN{img/Logo_IDM_blanc_e00000.gif}" alt="#NOM_SITE_SPIP" />
+    </a></h1>
+  </div>
 
-    <div id="lisiere"></div>
+  <INCLURE{fond=inc/menu}>
 
-    <div id="left">
-      <INCLURE{fond=inc/idj}>
-
-      <ul>
-        <li><a href="/">Page d'accueil</a></li>
-        <li><a href="#URL_ARTICLE{63}">Pr&eacute;sentation du site</a>
-          <ul>
-            <li><a href="#URL_ARTICLE{17}">Fonctionnement</a></li>
-            <li><a href="#URL_RUBRIQUE{19}">Documentation</a></li>
-          </ul>
-          <hr/>
-        </li>
-        <li>[(#FORMULAIRE_RECHERCHE)]</li>
-        <li><a href="#URL_PAGE{navigation}">Recherche avanc&eacute;e</a>
-          <ul>
-            <li><a href="#URL_PAGE{random}">Un article au hasard</a></li>
-            <li><a href="#URL_PAGE{lastyear}">Il y a un an sur IdM</a></li>
-            <li><a href="#URL_PAGE{plan}">Plan du site</a></li>
-          </ul>
-        </li>
-      </ul>
-
-      <hr/>
-
-      <div id="navleft">
-        #BLOC_TITRE{0} Liens
-        #BLOC_DEBUT
-        <ul><li><ul><BOUCLE_liens(ARTICLES) {id_rubrique = 25} {par num titre, titre}>
-          <li><a href="#URL_ARTICLE">#TITRE</a></li>
-        </BOUCLE_liens></ul></li></ul>
-        #BLOC_FIN
-      </div>
-
-      <INCLURE{fond=inc/ident}>
-
-      <hr/>
-
-      <ul><li><ul>
-        <li><a href="javascript:unfold_and_print();">Imprimer cette page</a></li>
-        [<li>(#MODELE{special}{mot=ours})</li>]
-        <li><a href="#URL_PAGE{backend}">Syndication (RSS)</a></li>
-        <li><a href="mailto:#EMAIL_WEBMASTER">Nous contacter</a></li>
-      </ul></li></ul>
-    </div>
-
-    <div id="main">
-      <div id="main_in">
+  <div id="main">

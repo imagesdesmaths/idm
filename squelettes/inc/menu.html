@@ -1,0 +1,53 @@
+#CACHE{0}
+
+<div id="menu">
+  <ul>
+    <li><a href="#">Navigation</a>
+      <ul>
+        <li><a href="/">Page d'accueil</a></li>
+        <li><a href="#URL_ARTICLE{63}">Pr&eacute;sentation du site</a></li>
+        <li><a href="#URL_ARTICLE{17}">Fonctionnement</a></li>
+        <li><a href="#URL_RUBRIQUE{19}">Documentation</a></li>
+        <li><a href="#URL_PAGE{random}">Un article au hasard</a></li>
+        <li><a href="#URL_PAGE{lastyear}">Il y a un an sur IdM</a></li>
+      </ul>
+    </li>
+
+    <li><a href="#">Recherche</a>
+      <ul>
+        <li>[(#FORMULAIRE_RECHERCHE)]</li>
+        <li><a href="#URL_PAGE{navigation}">Recherche avanc&eacute;e</a></li>
+        <li><a href="#URL_PAGE{plan}">Plan du site</a></li>
+      </ul>
+    </li>
+
+    <li><a href="#">Liens</a>
+      <ul><BOUCLE_liens(ARTICLES) {id_rubrique = 25} {par num titre, titre}>
+          <li><a href="#URL_ARTICLE">#TITRE</a></li>
+      </BOUCLE_liens></ul>
+    </li>
+
+    <li><a href="#">Misc</a>
+      <ul class="left">
+        <li><a href="javascript:unfold_and_print();">Imprimer cette page</a></li>
+        [<li>(#MODELE{special}{mot=ours})</li>]
+        <li><a href="#URL_PAGE{backend}">Syndication (RSS)</a></li>
+        <li><a href="mailto:#EMAIL_WEBMASTER">Nous contacter</a></li>
+      </ul>
+    </li>
+
+    <li><a href="#">
+        [(#SESSION{id_auteur}|?{Mon IdM,Identification})]
+      </a><ul class="left">
+        [(#SESSION{id_auteur}|non)<li><a href="#URL_PAGE{perso}">S'identifier</a></li>]
+        [(#SESSION{id_auteur}|non)<li><a href="#URL_PAGE{inscription}">S'inscrire</a></li>]
+        [(#SESSION{id_auteur}|oui)<li><a href="#URL_PAGE{perso}">Espace personnel</a></li>]
+        <BOUCLE_moi(AUTEURS) {tous} {id_auteur=#SESSION{id_auteur}} {billettiste=oui}> <li><a href="#URL_PAGE{billet}">&Eacute;crire un nouveau billet</a></li></BOUCLE_moi>
+        <BOUCLE_relecteurs(spip_relecteurs_articles) {id_auteur=#SESSION{id_auteur}}> <li><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">Un article &agrave; relire !</a></li></BOUCLE_relecteurs>
+        [(#SESSION{statut}|=={0minirezo}|oui)<li><a href="#URL_SITE_SPIP/ecrire/">Espace priv&eacute;</a></li>]
+        [(#SESSION{statut}|=={1comite}|oui)<li><a href="#URL_SITE_SPIP/ecrire/">Espace de r&eacute;daction</a></li>]
+        [(#SESSION{id_auteur}|oui)<li><a href="#URL_LOGOUT{#URL_SITE_SPIP}">Se d&eacute;connecter</a></li>]
+      </ul>
+    </li>
+  </ul>
+</div>
