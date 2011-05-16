@@ -5,7 +5,7 @@
 </BOUCLE_prediff>
 
 <BOUCLE_article(ARTICLES) {id_article} {recherche ?}>
-  <div class="resume_out resume_out_rubrique_#ID_RUBRIQUE resume_out_secteur_#ID_SECTEUR[ piste_(#GET{piste_id})]">
+  <div class="resume_out resume_out_rubrique_#ID_RUBRIQUE resume_out_secteur_#ID_SECTEUR[ piste_(#GET{piste_id})] shadow">
     <div class="resume resume_rubrique_#ID_RUBRIQUE resume_secteur_#ID_SECTEUR">
       [(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{150,150}|image_recadre{150,150}
       | sinon { [(#INCLURE{fond=inc/auteur}{id_article=#ID_ARTICLE}{taille=150}|image_recadre{150,150}

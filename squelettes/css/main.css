@@ -5,10 +5,9 @@ html,body { padding : 0px; margin : 0px; font-family : Arial, sans-serif; text-a
 #head        { width : 100%; height : 75px; color : white; background : #e20000; }
   #logo      { position : absolute; width : 12em; top : 0px; text-align : center; }
 #menu        { float : left;  width : 100%; background : #550000; color: white; }
-#main        { width : 100%; margin-top : 5ex; }
-  #front     { position : relative; margin-top : 2ex; border-top : 1px solid #e20000; }
-    #recents { position : absolute; width : 50%; border-right : 1px solid #e20000; }
-    #billets { position : absolute; width : 49.9%; margin-left : 50%; border-left : 1px solid #e20000; }
+#main        { width : 100%; margin-top : 2ex; }
+  #recents   { position : absolute; width : 50%; }
+  #billets   { position : absolute; width : 50%; left : 50%; }
 
 /**************************************************/
 
@@ -96,8 +95,8 @@ ul.forum { padding : 0px; list-style-type : none; }
 
 /************************************************************************/
 
-#actu { width : 20%; float : right; font-size : small; border : 1px solid #cccccc; padding : 1ex 1em; margin : 0ex .5em 0ex 0em; }
-#actu h2 { font-size : large; margin : 0; border-bottom : 1px solid #e20000; }
+#actu { width : 20%; float : right; font-size : small; border : 1px solid black; padding : 1ex 1em; margin : 0ex 1em 0ex 0em; background : white; }
+#actu h2 { font-size : large; margin : 0; border-bottom : 2px solid #e20000; }
 #actu h3 { font-size : normal; margin : 1ex 0; }
 #actu ul { padding : 0; list-style-type : none; }
 #actu li.archives { margin-top : .5ex; font-style : italic; }
@@ -113,12 +112,12 @@ ul.forum { padding : 0px; list-style-type : none; }
 #featured h2 { display : inline; padding : .3ex 1em .1ex; background-color : white; }
 #featured h3.titre { margin-top : -.5ex; }
 
-#une { margin : 0 3em 0 1em; border : 1px solid #ffcccc; background : #ffcccc; }
+#une { width : 75%; margin : 0; padding : 0 1em; }
 #une div.resume_out { margin-top : 1ex; }
 #une h2 { margin : 0px; font-size : x-large; border-bottom : 2px solid #e20000; }
 #une h2 a:hover { color : #e20000; }
 #une h3 { text-align : center; font-weight : normal; font-size : 100%; margin : 0px; }
-#une div.resume div.introduction { font-size : 100%; margin : 1ex 0px; font-style : normal; }
+#une div.resume div.introduction { font-size : 100%; margin : 1ex 1em; font-style : normal; }
 #une div.resume div.introduction a { color : black; }
 #une div.unelogo { margin : 1ex 0em 0ex; text-align : center; }
 #une img { padding : 0px; margin : 1ex 0em 0ex; }
@@ -187,7 +186,7 @@ div.relies a.piste_22 { color : #e20000; }
 div.relies a.piste_23 { color : #000000; }
 div.relies a.piste_24 { color : #888888; }
 
-div.resume_out { margin : 3ex 1em 0px; }
+div.resume_out { margin : 3ex 1em 0px; background : white; padding : .5ex .5em; border : 1px solid black; }
 div.resume h3.titre a:hover { color : #e20000; }
 div.resume div.rubrique { font-size : 90%; text-align : right; margin : .2ex .5em 0px 0px; }
 div.resume div.rubrique a:hover { color : #e20000; }

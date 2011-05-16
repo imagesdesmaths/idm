@@ -51,41 +51,38 @@
   <h3><a href="#URL_RUBRIQUE{34}">Voulez-vous nous &eacute;crire ?</a></h3>
 </div>
 
-<div id="top">
-  <BOUCLE_nospecial(ARTICLES) {id_secteur = 18} {doublons}> </BOUCLE_nospecial>
-  <BOUCLE_nodouble(ARTICLES) {titre_mot=double} {doublons}> </BOUCLE_nodouble>
+<BOUCLE_nospecial(ARTICLES) {id_secteur = 18} {doublons}> </BOUCLE_nospecial>
+<BOUCLE_nodouble(ARTICLES) {titre_mot=double} {doublons}> </BOUCLE_nodouble>
 
-  <BOUCLE_edito(ARTICLES) {titre_mot=editorial} {par date} {inverse} {age<14} {0,1} {doublons}>
-  <div id="edito" style="display:none;"><div class="article">
-      <div class="titre"><h2>#TITRE</h2></div>
-
-      <BOUCLE_auteur(AUTEURS) {id_article}>[(#SET{uniqueauteur,#ID_AUTEUR})]</BOUCLE_auteur>
-      <BOUCLE_auteurs(AUTEURS) {id_article} {1,1}>[(#SET{uniqueauteur,0})]</BOUCLE_auteurs>
-      <BOUCLE_unique(AUTEURS) {id_auteur=#GET{uniqueauteur}}>
+<BOUCLE_edito(ARTICLES) {titre_mot=editorial} {par date} {inverse} {age<14} {0,1} {doublons}>
+<div id="edito" style="display:none;"><div class="article">
+    <div class="titre"><h2>#TITRE</h2></div>
+    <BOUCLE_auteur(AUTEURS) {id_article}>[(#SET{uniqueauteur,#ID_AUTEUR})]</BOUCLE_auteur>
+    <BOUCLE_auteurs(AUTEURS) {id_article} {1,1}>[(#SET{uniqueauteur,0})]</BOUCLE_auteurs>
+    <BOUCLE_unique(AUTEURS) {id_auteur=#GET{uniqueauteur}}>
       [<h3 class="bio">(#BIO*) [(<a href="(#URL_SITE)">page web</a>)]</h3>]
-      </BOUCLE_unique>
+    </BOUCLE_unique>
 
-      #TEXTE
+    #TEXTE
 
-      [<h3 class="auteur">Le [(#DATE|affdate)], par (#LESAUTEURS)</h3>]
-  </div></div>
-  <div id="editolink">&Eacute;ditorial : <a class="thickbox" href="#[(#REM)]TB_inline?width=700&amp;height=500&amp;inlineId=edito">#TITRE</a></div>
-  </BOUCLE_edito>
+    [<h3 class="auteur">Le [(#DATE|affdate)], par (#LESAUTEURS)</h3>]
+</div></div>
+<div id="editolink">&Eacute;ditorial : <a class="thickbox" href="#[(#REM)]TB_inline?width=700&amp;height=500&amp;inlineId=edito">#TITRE</a></div>
+</BOUCLE_edito>
 
-  <div id="une">
-    <BOUCLE_une(ARTICLES) {id_secteur = 37} {par date} {inverse} {0,1} {doublons}>
+<div id="une">
+  <BOUCLE_une(ARTICLES) {id_secteur = 37} {par date} {inverse} {0,1} {doublons}>
     [(#INCLURE{fond=inc/resume_une}{id_article})]
-    </BOUCLE_une>
-  </div>
+  </BOUCLE_une>
+</div>
 
-  <B_featured>
+<B_featured>
   <div id="featured">
     <BOUCLE_featured(ARTICLES) {titre_mot=featured} {par date} {inverse} {age<7} {doublons}>
     [(#INCLURE{fond=inc/resume}{id_article})]
     </BOUCLE_featured>
   </div>
-  </B_featured>
-</div>
+</B_featured>
 
 <div class="nettoyeur"></div>
 
