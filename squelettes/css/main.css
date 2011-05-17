@@ -58,7 +58,7 @@ form p.erreur { color : #e20000; font-weight : bold; }
 form fieldset.previsu { text-align : justify; }
 form fieldset.previsu ul { list-style-type : none; }
 
-h1 { text-align : center; margin : 0px; }
+h1 { text-align : center; margin : 0px; padding : 0px; }
 
 .page h1 { margin-top : .5ex; }
 
@@ -188,7 +188,7 @@ div.notation span.note { color : black; }
 div.notation span.note:before { content : '('; }
 div.notation span.note:after { content : ')'; }
 
-div.relies { font-size : 90%; text-align : right; padding : .1ex .2em; }
+div.relies { font-size : 90%; text-align : right; margin : -1ex -1em 0 0; }
 div.relies p { margin : 0px; }
 div.relies a.piste_20 { color : #009900; }
 div.relies a.piste_21 { color : #3333ff; }
@@ -263,10 +263,10 @@ div.mjlabel_bot { color: #e20000; text-align: right; margin-top: -4.5ex; margin-
 
 /************************* NEW STYLE ***********************/
 
-#menu ul { margin : 0; padding:0; list-style:none; float:right; position:relative; right:50%; }
+#menu ul { margin : 0; padding : 0; list-style : none; float : right; position : relative; right : 50%; }
 #menu ul li { float : left; position : relative; left : 50%; background :
               #730000; font-size : 90%; border-bottom : 1px solid #e20000; }
-#menu ul li a { display : block; margin:0; padding : .3em 1em;
+#menu ul li a { display : block; margin : 0; padding : .3ex 1em;
                 background : #660000; color : white; font-weight : normal; }
 #menu ul li a:hover,
 #menu ul li:hover a { background : #830000; }
