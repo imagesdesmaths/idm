@@ -32,12 +32,6 @@ html,body { padding : 0px; margin : 0px; font-family : Arial, sans-serif; text-a
 
 .script h1 { line-height : .8em; }
 
-.relecteurs_vote_pas_vu { background-color : #cccccc; }
-.relecteurs_vote_vu     { background-color : #ffffff; }
-.relecteurs_vote_non    { background-color : #e20000; }
-.relecteurs_vote_moyen  { background-color : #ffd700; }
-.relecteurs_vote_oui    { background-color : #00ff00; }
-
 .spip_doc_descriptif { clear : both; font-size : small; margin-left : auto; margin-right : auto; }
 .spip_doc_titre { font-weight : bold; font-size : small; margin : 1ex auto; }
 .spip_documents { text-align : center; }
