@@ -12,6 +12,7 @@
 </BOUCLE_auteur2>
 </BOUCLE_auteur>
 
+<div class="page shadow">
 <INCLURE{fond=inc/forum}{id_article}{id_forum}{auteur_article=#GET{auteur_article}}>
 
 [(#SESSION{id_auteur}|oui)#FORMULAIRE_FORUM{#URL_PAGE{forum,id_article=#ID_ARTICLE}}
@@ -28,6 +29,7 @@ n'est pas adapt&eacute; &agrave; un d&eacute;bat serein).</div>]
   href="#URL_PAGE{inscription}">vous inscrire</a> si vous ne l'avez pas
   encore fait).</p>
 ]
+</div>
 
 <INCLURE{fond=inc/foot}{stats=no}>
 </BOUCLE_article>

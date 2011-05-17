@@ -59,7 +59,8 @@ form fieldset.previsu ul { list-style-type : none; }
 
 h1 { text-align : center; margin : 0px; }
 
-.page h1 { padding-top : 2ex; margin-top : .5ex; }
+.page h1 { padding-top : 1ex; margin-top : .5ex; }
+.page > p { padding : 0 1em; }
 
 h2 { text-align : center; }
 h2.bio { margin-top : 0px; }
@@ -75,8 +76,8 @@ h2.button a { color : black; text-shadow : 0px 0px 15px white; }
 h2.button a:hover { color : black; text-shadow : 0px 0px 15px red; }
 
 h3 { text-align : left; }
-h3.auteur { text-align : right; font-weight : normal; }
-h3.bio { text-align : right; font-weight : normal; font-size : medium; margin-top : -2ex; }
+h3.auteur { text-align : right; font-weight : normal; margin-right : 1em; }
+h3.bio { text-align : right; font-weight : normal; font-size : medium; margin-top : -2ex; margin-right : 1em; }
 h3.discuter { text-align : right; font-style : italic; margin : .5ex 1em 1ex; }
 h3.spip { text-align : center; padding : 1ex; border-top : 2px solid #e20000; border-bottom : 2px solid #e20000; clear : both; }
 h3.titre { margin : 0px; border-bottom : 2px solid #e20000; }
@@ -149,13 +150,13 @@ div.figure img { max-width : 100%; }
 div.figure p.titre { font-weight : bold; margin : 1ex; }
 div.figure { width : 95%; text-align : center; margin : 1ex auto; }
 
-div.forum-message { margin : 1ex 1em; }
+div.forum-message { margin : .5ex .5em; padding : .5ex .5em; }
 div.forum-message div.forum-texte { margin : 1ex 0px; font-size : medium; }
 div.forum-message h3 { margin : 0px; font-size : medium; border-bottom : 1px solid #e20000; }
 div.forum-message h4 { margin : 3px 0px; text-align : right; font-size : small ; font-style : italic; }
 div.forum-message h4.repondre { margin-top : 1ex; }
 div.forum-message p { margin : .5ex 0px; }
-div.forum-message-delauteur { background-color : #ffcccc; padding : 1ex; margin : 0ex -1ex 1ex; }
+div.forum-message-delauteur { background-color : #ffcccc; }
 
 div.forum-notes { border-top : 1px solid #e20000; margin-top : 2ex; padding-top : .5ex; }
 
