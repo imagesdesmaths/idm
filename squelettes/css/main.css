@@ -2,9 +2,9 @@
 
 html,body { padding : 0px; margin : 0px; font-family : Arial, sans-serif; text-align : justify; color : black; background : #807070; line-height : 1.2; }
 
-#head        { width : 100%; height : 75px; color : white; background : #e20000; }
-  #logo      { position : absolute; width : 12em; top : 0px; text-align : center; }
-#menu        { float : left;  width : 100%; background : #550000; color: white; }
+#head        { width : 100%; color : white; background : #e20000; }
+  #logo      { position : absolute; top : 0px; left : 2em; }
+  #menu      { float : left;  width : 100%; background : #550000; color: white; }
 #main        { width : 100%; margin-top : 2ex; }
   #recents   { position : absolute; width : 50%; }
   #billets   { position : absolute; width : 50%; left : 50%; }
@@ -49,6 +49,8 @@ form fieldset.previsu { text-align : justify; }
 form fieldset.previsu ul { list-style-type : none; }
 
 h1 { text-align : center; margin : 0px; }
+
+.page h1 { padding-top : 2ex; margin-top : .5ex; }
 
 h2 { text-align : center; }
 h2.bio { margin-top : 0px; }
@@ -236,7 +238,7 @@ div.thm li { margin-top : .2ex; padding-left : 0px; }
 
 div.mp3 { text-align : center; margin : 0.5ex 0em; }
 
-div.citer { border-top : 1px solid #e20000; background : #aaaaaa; padding : .5ex 1ex; text-size : small; }
+div.citer { background : #aaa; padding : .5ex 1ex; text-size : small; }
 
 p.copyright { text-size : small; font-style : italic; }
 
@@ -275,5 +277,4 @@ div.mjlabel_bot { color: #e20000; text-align: right; margin-top: -4.5ex; margin-
                    white url(#CHEMIN{img/rechercher.gif}) no-repeat right center; }
 #menu form input.submit { display : none; }
 
-div.article h1 { margin-top : 2ex; }
 div.article h3.auteur { clear : right; }
