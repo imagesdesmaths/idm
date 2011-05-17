@@ -4,7 +4,7 @@ html,body { padding : 0px; margin : 0px; font-family : Arial, sans-serif; text-a
 
 #head        { width : 100%; color : white; background : #e20000; }
   #logo      { position : absolute; top : 0px; left : 2em; }
-  #menu      { float : left;  width : 100%; background : #550000; color: white; }
+  #menu      { float : left;  width : 100%; background : #660000; color: white; }
 #main        { width : 100%; margin-top : 2ex; }
   #recents   { position : absolute; width : 50%; }
   #billets   { position : absolute; width : 50%; left : 50%; }
@@ -12,6 +12,9 @@ html,body { padding : 0px; margin : 0px; font-family : Arial, sans-serif; text-a
 /**************************************************/
 
 .page { clear : both; margin : 2ex auto; width : 80%; border : 1px solid black; background : white; }
+
+.frame { border : 1px solid black; margin : 0ex 1em; padding : 1ex 1em; background : white; }
+
 .shadow { -moz-box-shadow: 5px 5px 15px black;
           -webkit-box-shadow: 5px 5px 15px black;
           box-shadow: 5px 5px 15px black; }
@@ -97,13 +100,13 @@ ul.forum { padding : 0px; list-style-type : none; }
 
 /************************************************************************/
 
-#actu { width : 20%; float : right; font-size : small; border : 1px solid black; padding : 1ex 1em; margin : 0ex 1em 0ex 0em; background : white; }
+#actu { width : 30%; float : right; font-size : small; }
 #actu h2 { font-size : large; margin : 0; border-bottom : 2px solid #e20000; }
 #actu h3 { font-size : normal; margin : 1ex 0; }
 #actu ul { padding : 0; list-style-type : none; }
 #actu li.archives { margin-top : .5ex; font-style : italic; }
 
-#top { width : 80%; }
+#top { width : 70%; }
 
 #featured { padding : 1ex 0em 0ex; margin : 1ex 3em 0ex 1em; }
 #featured div.resume_out { margin : 1ex 0px; }
@@ -114,8 +117,6 @@ ul.forum { padding : 0px; list-style-type : none; }
 #featured h2 { display : inline; padding : .3ex 1em .1ex; background-color : white; }
 #featured h3.titre { margin-top : -.5ex; }
 
-#une { width : 75%; margin : 0; padding : 0 1em; }
-#une div.resume_out { margin-top : 1ex; }
 #une h2 { margin : 0px; font-size : x-large; border-bottom : 2px solid #e20000; }
 #une h2 a:hover { color : #e20000; }
 #une h3 { text-align : center; font-weight : normal; font-size : 100%; margin : 0px; }
@@ -205,8 +206,8 @@ span.piste a.piste_22 { color : #e20000; }
 span.piste a.piste_23 { color : #000000; }
 span.piste a.piste_24 { color : #888888; }
 
-div.spip-admin-bloc a { display : block; color : white; background : #550000; border : 1px solid #e20000; margin : -1px 0px 0px; }
-div.spip-admin-bloc a:hover { background : #550000; text-decoration : none; border : 1px solid #e20000; }
+div.spip-admin-bloc a { display : block; color : white; background : #660000; border : 1px solid #e20000; margin : -1px 0px 0px; }
+div.spip-admin-bloc a:hover { background : #660000; text-decoration : none; border : 1px solid #e20000; }
 div.spip-admin-bloc { margin-top : 2ex; }
 
 div.article { clear : both; margin : 0ex 4em; }
@@ -260,7 +261,7 @@ div.mjlabel_bot { color: #e20000; text-align: right; margin-top: -4.5ex; margin-
 #menu ul li { float : left; position : relative; left : 50%; background :
               #730000; font-size : 90%; border-bottom : 1px solid #e20000; }
 #menu ul li a { display : block; margin:0; padding : .3em 1em;
-                background : #550000; color : white; font-weight : normal; }
+                background : #660000; color : white; font-weight : normal; }
 #menu ul li a:hover,
 #menu ul li:hover a { background : #830000; }
 #menu ul ul { display : none; position : absolute; right : auto;
