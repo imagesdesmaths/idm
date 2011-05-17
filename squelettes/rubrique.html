@@ -2,11 +2,13 @@
 <BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
 <INCLURE{fond=inc/head}{title=#TITRE}{id_rubrique=#ID_RUBRIQUE}>
 
+<div class="page shadow">
 [(#LOGO_RUBRIQUE|right||image_reduire{200,200})]
 <h1><BOUCLE_parent(RUBRIQUES){id_rubrique=#ID_PARENT}{id_rubrique != 18}>
   <a href="#URL_RUBRIQUE">#TITRE</a> :</BOUCLE_parent> <span[ class="script"(#ID_RUBRIQUE|=={34}|oui)]>#TITRE</span></h1>
 
 [<div class="texte">(#TEXTE)</div>]
+</div>
 
 <B_articles>#PAGINATION{idm}
 <BOUCLE_articles(ARTICLES) {id_rubrique} {par num titre} {!par date} {pagination 20}>
