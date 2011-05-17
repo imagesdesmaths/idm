@@ -1,7 +1,8 @@
 <BOUCLE_auteur(AUTEURS){id_auteur}>
 [(#SET{nom,[(#NOM|prenom_nom)]})]
-<INCLURE{fond=inc/head}{title=#GET{nom}}>
+<INCLURE{fond=inc/head}{title=#GET{nom}}{page=no}>
 
+<div class="page shadow">
 [(#LOGO_AUTEUR|right)]
 
 <h1>[(#NOM|prenom_nom)]</h1>
@@ -10,6 +11,7 @@
 [<p><strong>Affiliation :</strong> (#AFFILIATION)</p>]
 
 #FORMULAIRE_ECRIRE_AUTEUR
+</div>
 
 <B_articles>
 <h2>Tous ses articles :</h2>

@@ -1,14 +1,12 @@
 <BOUCLE_breve(BREVES){id_breve}>
 <INCLURE{fond=inc/head}{title=#TITRE}>
 
-<div class="page shadow">
-  [<h1 class="titre">(#TITRE)</h1>]
-  <h3 class="auteur">Le [(#DATE|affdate)].</h3>
+[<h1 class="titre">(#TITRE)</h1>]
+<h3 class="auteur">Le [(#DATE|affdate)].</h3>
 
-  [<div class="texte">(#TEXTE|lettrine)</div>]
+[<div class="texte">(#TEXTE|lettrine)</div>]
 
-  [<p><a href="(#URL_SITE)">[(#NOM_SITE*|sinon{"Pour en savoir plus ..."})]</a></p>]
-</div>
+[<p><a href="(#URL_SITE)">[(#NOM_SITE*|sinon{"Pour en savoir plus ..."})]</a></p>]
 
 #INCLURE{fond=inc/foot}
 </BOUCLE_breve>

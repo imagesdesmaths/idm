@@ -1,7 +1,7 @@
 #CACHE{0}
 <BOUCLE_article(ARTICLES) {statut=prop} {id_article}>
   <BOUCLE_securite(CONDITION) {SI #AUTORISER{relire,article,#ID_ARTICLE}}>
-    <INCLURE{fond=inc/head}{title=#TITRE - En cours de relecture}{id_rubrique=#ID_RUBRIQUE}{id_article=#ID_ARTICLE}>
+    <INCLURE{fond=inc/head}{title=#TITRE - En cours de relecture}{id_rubrique=#ID_RUBRIQUE}{id_article=#ID_ARTICLE}{page=no}>
   <div class="page shadow">
     <h1>Article en cours de relecture</h1>
     <h2 style="margin-top : 0ex;">dans la rubrique : <BOUCLE_rub(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rub></h2>

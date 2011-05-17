@@ -3,7 +3,6 @@
 
 <?php $nb = sql_countsel ('spip_forum', "id_article=#ID_ARTICLE AND statut='publie'"); ?>
 
-<div class="page shadow">
   <div class="relies"><p>
       <BOUCLE_rub(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rub>
 
@@ -35,7 +34,6 @@
     <a href="#URL_ARTICLE"><tt>#URL_SITE_SPIP/#URL_ARTICLE</tt></a></div>
 
   #INCLURE{fond=inc/foot}
-</div>
 </BOUCLE_article>
 <INCLURE{fond=sommaire}>
 <//B_article>

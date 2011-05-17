@@ -7,13 +7,14 @@ html,body { padding : 0px; margin : 0px; font-family : Arial, sans-serif; text-a
 #head        { width : 100%; color : white; background : #e20000; }
   #logo      { position : absolute; top : 0px; left : 2em; }
   #menu      { float : left;  width : 100%; background : #660000; color: white; }
-#main        { width : 100%; margin-top : 2ex; }
-  #recents   { position : absolute; width : 50%; }
+#main        { width : 100%; margin-top : 2ex;}
+  #recents   { position : absolute; width : 50%; margin-left : -1em; }
   #billets   { position : absolute; width : 50%; left : 50%; }
 
 /* Utility styles */
 
-.page { clear : both; margin : 2ex auto; width : 80%; border : 1px solid black; background : white; }
+.page { clear : both; margin : 2ex auto; padding : 1ex 1em; width : 80%; border : 1px solid black; background : white; }
+.nopage { padding : 0 1em 1ex; }
 
 .frame { border : 1px solid black; margin : 0ex 1em; padding : 1ex 1em; background : white; }
 
@@ -59,8 +60,7 @@ form fieldset.previsu ul { list-style-type : none; }
 
 h1 { text-align : center; margin : 0px; }
 
-.page h1 { padding-top : 1ex; margin-top : .5ex; }
-.page > p { padding : 0 1em; }
+.page h1 { margin-top : .5ex; }
 
 h2 { text-align : center; }
 h2.bio { margin-top : 0px; }
@@ -236,7 +236,6 @@ div.texte p.lettrine span.lettrine span.lettrine_first { color : #500; float : l
 div.texte p.lettrine span.lettrine { text-transform : uppercase; }
 div.texte p.lettrine { text-indent : 0px; }
 div.texte pre { padding-left : 1em; margin-left : 1em; border-left : 1px solid #e20000; }
-div.texte { padding : 2ex 1em 1ex; }
 
 div.thm { border-left : 2px solid #e20000; margin : 1ex 0em 1ex 1.5em; padding-left : 1em; font-style : italic; }
 div.thm span.titre { font-weight : bold; font-style : normal; margin-left : -2.5em; background : white; border-bottom : 2px solid #e20000; border-top : 1px solid white; }
@@ -246,7 +245,7 @@ div.thm li { margin-top : .2ex; padding-left : 0px; }
 
 div.mp3 { text-align : center; margin : 0.5ex 0em; }
 
-div.citer { background : #aaa; padding : .5ex 1ex; text-size : small; }
+div.citer { background : #aaa; padding : .5ex 1ex; text-size : small; margin : 0 -1em -1ex; }
 
 p.copyright { text-size : small; font-style : italic; }
 

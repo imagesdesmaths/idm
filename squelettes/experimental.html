@@ -1,10 +1,6 @@
 #CACHE{0}
-<INCLURE{fond=inc/head}{title=Page exp&eacute;rimentale}>
+[(#SET{title,Page exp&eacute;rimentale})]
 
-  <div class="nettoyeur"></div>
-
-  [(#INCLURE{fond=inc/article}{id_article=903})]
-
-  [(#INCLURE{fond=inc/resume}{id_article=903})]
-
+<INCLURE{fond=inc/head, title=Page exp&eacute;rimentale, page=no}>
+sdf
 <INCLURE{fond=inc/foot}{stats=no}>
