@@ -1,5 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Just+Me+Again+Down+Here:regular,bold);
 
+/* Layout */
+
 html,body { padding : 0px; margin : 0px; font-family : Arial, sans-serif; text-align : justify; color : black; background : #787070; line-height : 1.2; }
 
 #head        { width : 100%; color : white; background : #e20000; }

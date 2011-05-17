@@ -1,13 +1,12 @@
 
-html { font-family : Times, serif; }
+html,body { font-family : Times, serif; font-size : 95%; }
 
-#head    { display : none; }
-#logo    { display : none; }
-#lisiere { display : none; }
-#left    { display : none; }
-#main    { top : 0; }
-#main_in { margin : 0; padding : 1ex 0em; }
-#une     { padding : 1ex 1em; margin : 3ex -1em 0ex; }
+#head { display : none; }
+#main { margin-top : 0; }
+
+.shadow { box-shadow : none; -moz-box-shadow : none; -webkit-box-shadow : none; }
+.page { width : 100%; border : none; margin : 0; }
+div.article { margin : 0; }
 
 h3.discuter          { display : none; }
 div.notation         { display : none; }
