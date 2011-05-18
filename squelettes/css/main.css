@@ -54,7 +54,7 @@ img { border : none; }
 #menu ul ul.left { left : auto; right : 0; text-align : right; }
 
 #menu form label { display : none; }
-#menu form input { width : 95%; font-weight : bold; background : white url(#CHEMIN{img/rechercher.gif}) no-repeat right center; }
+#menu form input { width : 95%; font-weight : bold; background : white; }
 #menu form input.submit { display : none; }
 
 /* SPIP stuff */
