@@ -1,19 +1,22 @@
 <BOUCLE_article(ARTICLES) {id_article} {recherche ?}>
-  <div class="resume_out resume_out_rubrique_#ID_RUBRIQUE resume_out_secteur_#ID_SECTEUR shadow">
-    <div class="resume resume_rubrique_#ID_RUBRIQUE resume_secteur_#ID_SECTEUR">
-      <h2><a href="#URL_ARTICLE">À la une : #TITRE</a></h2>
-      <h3>
-          Le [(#DATE_REDAC|sinon{#DATE}|affdate)], par #LESAUTEURS
+  <div class="resume resume_rubrique_#ID_RUBRIQUE resume_secteur_#ID_SECTEUR shadow">
+    <h2><a href="#URL_ARTICLE">&Agrave; la une : #TITRE</a></h2>
+    <h3>
+      Le [(#DATE_REDAC|sinon{#DATE}|affdate)], par #LESAUTEURS
 
-          <BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {id_rubrique != 6}>&mdash; <a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rubrique>
-          <B_diff>&mdash;
-          <span class="piste">
-            <BOUCLE_diff(MOTS) {id_groupe=5} {id_article}><a class="piste_#ID_MOT" href="#URL_MOT">#TITRE</a></BOUCLE_diff>
-          </span>
-      </h3>
+      <BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {id_rubrique != 6}>
+        &mdash; <a href="#URL_RUBRIQUE">#TITRE</a>
+      </BOUCLE_rubrique>
 
-      [<div class="unelogo">(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{600,300})</div>]
-      [<div class="introduction"><a class="plain" href="#URL_ARTICLE">(#DESCRIPTIF|sinon{[(#INTRODUCTION|textebrut)]}|PtoBR)</a></div>]
-    </div>
+      <B_diff>&mdash;
+      <span class="piste">
+        <BOUCLE_diff(MOTS) {id_groupe=5} {id_article}>
+          <a class="piste_#ID_MOT" href="#URL_MOT">#TITRE</a>
+        </BOUCLE_diff>
+      </span>
+    </h3>
+
+    [<div class="unelogo">(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{600,300})</div>]
+    [<div class="introduction"><a class="plain" href="#URL_ARTICLE">(#DESCRIPTIF|sinon{[(#INTRODUCTION|textebrut)]}|PtoBR)</a></div>]
   </div>
-  </BOUCLE_article>
+</BOUCLE_article>

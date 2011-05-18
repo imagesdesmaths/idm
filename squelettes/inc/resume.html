@@ -5,26 +5,26 @@
 </BOUCLE_prediff>
 
 <BOUCLE_article(ARTICLES) {id_article} {recherche ?}>
-  <div class="resume_out resume_out_rubrique_#ID_RUBRIQUE resume_out_secteur_#ID_SECTEUR[ piste_(#GET{piste_id})] shadow">
-    <div class="resume resume_rubrique_#ID_RUBRIQUE resume_secteur_#ID_SECTEUR">
+  <div class="resume resume_rubrique_#ID_RUBRIQUE resume_secteur_#ID_SECTEUR[ resume_piste_(#GET{piste_id})] shadow">
       [(#LOGO_ARTICLE|#URL_ARTICLE|image_reduire{150,150}|image_recadre{150,150}
       | sinon { [(#INCLURE{fond=inc/auteur}{id_article=#ID_ARTICLE}{taille=150}|image_recadre{150,150}
       | sinon { [(#LOGO_RUBRIQUE|right|#URL_ARTICLE|image_reduire{150,150}|image_recadre{150,150}
       )] } )] } )]
 
 
-      <h3 class="titre"><a href="#URL_ARTICLE"[ class="script"(#ID_RUBRIQUE|=={34}|oui)]>#TITRE</a></h3>
+      <h3 class="titre"><a href="#URL_ARTICLE" class="[script(#ID_RUBRIQUE|=={34}|oui)]plain">#TITRE</a></h3>
       [<h4 class="auteur[(#ID_SECTEUR|=={18}|?{' invisible'})]">Le [(#DATE_REDAC|sinon{#DATE}|affdate)], par (#LESAUTEURS)</h4>]
 
       <div class="rubrique">
-        <BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {id_rubrique != 6}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rubrique>
+        <BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {id_rubrique != 6}>
+          <a class="plain" href="#URL_RUBRIQUE">#TITRE</a>
+        </BOUCLE_rubrique>
         <span class="piste">
           <BOUCLE_diff(MOTS) {id_groupe=5} {id_article}> &mdash; <a class="piste_#ID_MOT" href="#URL_MOT">#TITRE</a></BOUCLE_diff>
         </span>
       </div>
 
       [<div class="introduction"><a class="plain" href="#URL_ARTICLE">(#DESCRIPTIF|sinon{[(#INTRODUCTION|textebrut)]}|PtoBR)</a></div>]
-    </div>
     <div class="nettoyeur"></div>
   </div>
 </BOUCLE_article>

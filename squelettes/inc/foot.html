@@ -1,22 +1,23 @@
-      </div>
-    </div>
-    <div class="nettoyeur"></div>
+  </div>
 
-    #SPIP_CRON
+  <div class="nettoyeur"></div>
 
-    <script type="text/javascript">
-      function unfold_and_print () {
-        $(".blocs_invisible").show();
-        window.print();
-      }
-    </script>
+  #SPIP_CRON
 
-    [(#ENV{stats}|=={'no'}|non)
-    <script type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
-    <script type="text/javascript">
-      var pageTracker = _gat._getTracker("UA-4259270-1");
-      pageTracker._initData();
-      pageTracker._trackPageview();
-    </script>]
-  </body>
+  <script type="text/javascript">
+    function unfold_and_print () {
+    $(".blocs_invisible").show();
+    window.print();
+    }
+  </script>
+
+  [(#ENV{stats}|=={'no'}|non)
+  <script type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+  <script type="text/javascript">
+    var pageTracker = _gat._getTracker("UA-4259270-1");
+    pageTracker._initData();
+    pageTracker._trackPageview();
+  </script>]
+</body>
+
 </html>

@@ -27,12 +27,8 @@
 <body>
   <div id="head">
     <div id="logo"><a href="http://www.cnrs.fr/"><img src="#CHEMIN{img/CNRS.jpg}" alt="CNRS" /></a></div>
-    <h1>
-      <a href="/"><img src="#CHEMIN{img/Logo_IDM_blanc_e00000.gif}" alt="#NOM_SITE_SPIP" /></a>
-    </h1>
-
+    <h1><a href="/"><img src="#CHEMIN{img/Logo_IDM_blanc_e00000.gif}" alt="#NOM_SITE_SPIP" /></a></h1>
     <INCLURE{fond=inc/menu}>
   </div>
 
-  <div id="main">
-    <div class="[(#ENV{page}|=={'no'}|?{nopage,page shadow})"]>
+  <div class="[(#ENV{page}|=={'no'}|?{nopage,page shadow})"]>
