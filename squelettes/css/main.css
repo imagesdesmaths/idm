@@ -263,3 +263,17 @@ ul.checkboxTree li span { cursor: default; position: absolute; top: 2px; left: -
 
 div.mjlabel_top { color: #e20000; text-align: right; margin-bottom: -4.5ex; font-weight: bold; }
 div.mjlabel_bot { color: #e20000; text-align: right; margin-top: -4.5ex; margin-bottom: 2ex; font-weight: bold; }
+
+/* Custom style for printing */
+
+@media print {
+    html,body { font-family : Times, serif; }
+
+    .noprint, div.spip-admin-float { display : none; }
+
+    div.page { width : 100%; border : none; margin : 0; padding : 0; }
+    div.shadow { box-shadow : none; -moz-box-shadow : none; -webkit-box-shadow : none; }
+    div.article { margin : 0; }
+    div.article .spip_logos { margin : 0 0 1ex; }
+    div.citer { padding : 1ex 0 0; margin : 2ex 0 0; border-top : 1px solid #e20000; }
+}

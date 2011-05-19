@@ -9,8 +9,7 @@
   <title>[(#ENV*{title}|textebrut) - ]#NOM_SITE_SPIP</title>
 
   <link rel="stylesheet" type="text/css" media="all"   href="#CHEMIN{css/main.css}"/>
-  <link rel="stylesheet" type="text/css" media="all"   href="#CHEMIN{css/tag_20110519.css}"/>
-  <link rel="stylesheet" type="text/css" media="print" href="#CHEMIN{css/print.css}"/>
+  <link rel="stylesheet" type="text/css" media="all"   href="#CHEMIN{css/tag_20110520.css}"/>
 
   <link rel="alternate"  type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}"/>
 
@@ -25,7 +24,7 @@
 </head>
 
 <body>
-  <div id="head">
+  <div id="head" class="noprint">
     <div id="logo"><a href="http://www.cnrs.fr/"><img src="#CHEMIN{img/CNRS.jpg}" alt="CNRS" /></a></div>
     <h1><a href="/"><img src="#CHEMIN{img/Logo_IDM_blanc_e00000.gif}" alt="#NOM_SITE_SPIP" /></a></h1>
     <INCLURE{fond=inc/menu}>
