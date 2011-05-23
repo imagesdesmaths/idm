@@ -4,33 +4,37 @@
 <BOUCLE_moi(AUTEURS) {tous} {id_auteur=#SESSION{id_auteur}}>
   <h1>Bonjour, [(#NOM|prenom_nom)]&nbsp;!</h1>
 
-  <p>Bienvenue dans votre espace personnel sur Images des Mathématiques. 
-  C'est à partir de cette page que vous pouvez gérer votre participation 
-  au site et accéder à vos informations personnelles.</p>
+  <p>Bienvenue dans votre espace personnel sur Images des
+  Math&eacute;matiques.  C'est &agrave; partir de cette page que vous
+  pouvez g&eacute;rer votre participation au site et acc&eacute;der
+  &agrave; vos informations personnelles.</p>
 
-  [(#BILLETTISTE|=={oui}|oui) <h3>Vous êtes billettiste.</h3>
+  [(#BILLETTISTE|=={oui}|oui) <h3>Vous &ecirc;tes billettiste.</h3>
 
-  <p>Pour écrire un billet, il vous suffit de cliquer ici :
-  <a href="#URL_PAGE{billet}">écrire un nouveau billet</a> (ou sur le lien 
-  de même titre dans la colonne de gauche).  Votre billet sera publié 
-  aussitôt que vous l'aurez validé. Si toutefois nous constations que trop 
-  de billets sont soumis le même jour, il se peut que nous le retirions 
-  ensuite de la page d'accueil pour l'y remettre quelques jours plus tard, 
-  afin de réguler le flot de nouveautés ; ne vous inquiétez donc pas si 
-  votre contribution disparaît, elle n'est pas perdue !</p>]
+  <p>Pour &eacute;crire un billet, il vous suffit de cliquer ici
+  : <a href="#URL_PAGE{billet}">&eacute;crire un nouveau billet</a> (ou
+  sur le lien de m&ecirc;me titre dans le menu &quot;Mon IdM&quot;
+  ci-dessus).  Votre billet sera publi&eacute; aussit&ocirc;t que vous
+  l'aurez valid&eacute;. Si toutefois nous constations que trop de
+  billets sont soumis le m&ecirc;me jour, il se peut que nous le
+  retirions ensuite de la page d'accueil pour l'y remettre quelques
+  jours plus tard, afin de r&eacute;guler le flot de nouveaut&eacute;s ;
+  ne vous inqui&eacute;tez donc pas si votre contribution
+  dispara&icirc;t, elle n'est pas perdue !</p>]
 
-  [(#STATUT|=={1comite}|oui) <h3>Vous êtes rédacteur.</h3>
+  [(#STATUT|=={1comite}|oui) <h3>Vous &ecirc;tes r&eacute;dacteur.</h3>
 
-  <p>Vous pouvez accéder à la partie privée du site (où vous pourrez 
-  écrire puis suivre le devenir de votre article) en suivant le lien 
-  intitulé "espace de rédaction" dans la colonne de gauche. Une fois votre 
-  article soumis, vous aurez également la possibilité de dialoguer avec 
-  ses relecteurs.</p>]
+  <p>Vous pouvez acc&eacute;der &agrave; la partie priv&eacute;e du site
+  (o&ugrave; vous pourrez &eacute;crire puis suivre le devenir de votre
+  article) en suivant le lien intitul&eacute; &quot;espace de
+  r&eacute;daction&quot; dans le menu &quot;Mon IdM&quot; ci-dessus. Une
+  fois votre article soumis, vous aurez &eacute;galement la
+  possibilit&eacute; de dialoguer avec ses relecteurs.</p>]
 
   <div class="ajax">#FORMULAIRE_RELECTEURS_PERSO</div>
 
   <BOUCLE_relecteurs(relecteurs_articles articles) {id_auteur=#SESSION{id_auteur}}>
-      <h3>Vous avez un article à relire : <a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">#TITRE</a></h3>
+      <h3>Vous avez un article &agrave; relire : <a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">#TITRE</a></h3>
   </BOUCLE_relecteurs>
 </BOUCLE_moi>
   <h1>Merci de vous identifier</h1>
