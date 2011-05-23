@@ -6,10 +6,10 @@
 	Doc : http://www.spip-contrib.net/?article2427
 */
 
-// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
-function decoration_installe() {
+// cette fonction appelee automatiquement a chaque affichage de la page privee du Couteau Suisse renvoie un tableau
+function decoration_installe_dist() {
 	if(!defined('_decoration_BALISES')) return NULL;
-cs_log("decoration_installe()");
+cs_log("decoration_installe_dist()");
 	// on decode les balises entrees dans la config
 	$deco_balises = preg_split("/[\r\n]+/", trim(_decoration_BALISES));
 	$aide = $trouve = $remplace = $alias = $auto_balises = $auto_remplace = $BT = array();
@@ -71,7 +71,7 @@ cs_log("decoration_installe()");
 	// protection $auto_balises pour la future regExpr
 	array_walk($auto_balises, 'cs_preg_quote');
 	// renvoi des donnees compilees
-	return array( 'decoration'=> array(
+	return array( array(
 		// balises fixes a trouver
 		$trouve, 
 		// remplacement des balises fixes
@@ -82,15 +82,15 @@ cs_log("decoration_installe()");
 		$auto_remplace,
 		// balises disponibles
 		$BT),
-		// aide
-		'decoration_racc' => $aide,
+		// casier special pour l'aide
+		'racc' => $aide,
 	);
 }
 
 // liste des nouveaux raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('couteauprive:un_outil:aide');
 function decoration_raccourcis() {
-	$racc = cs_lire_data_outil('decoration', 'decoration_racc');
+	$racc = cs_lire_data_outil('decoration', 'racc');
 	return _T('couteauprive:decoration:aide', array('liste' => '<b>'.join('</b>, <b>', $racc).'</b>'));
 }
 

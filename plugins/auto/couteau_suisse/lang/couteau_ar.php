@@ -131,6 +131,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tri_monter' => 'هذا المؤلف الى الأعلى',
 
 	// U
+	'url_verrouillee' => 'URL verrouillée', # NEW
 	'urls_propres_erreur' => 'هذا التنسيق يتجاهل عناوين URL النظيفة الظاهرة أدناه.',
 	'urls_propres_format' => 'التنسيق الحالي لعناوين URL هو:{{«@format@»}}. [<span>[إعداد->@url@]</span>]',
 	'urls_propres_lien' => 'رابط الوصول العمومي',

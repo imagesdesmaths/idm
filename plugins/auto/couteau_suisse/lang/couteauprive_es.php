@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => ' : sí',
 
 	// S
-	'SPIP_liens:description' => '@puce@ Todos los enlaces del sitio se abren, por omisión, en la ventana actual del navegador. Pero puede ser útil abrir los enlaces externos en una nueva ventana de navegación -- esto se reduce a añadir {target=\\"_blank\\"} en todas las balizas &lt;a&gt; a las que SPIP asigna las clases {spip_out}, {spip_url} o {spip_glossaire}. A veces hace falta añadir una de estas clases a los enlaces del esqueleto del sitio (archivos html) para extender al máximo esta característica.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '@puce@ Todos los enlaces del sitio se abren, por omisión, en la ventana actual del navegador. Pero puede ser útil abrir los enlaces externos en una nueva ventana de navegación -- esto se reduce a añadir {target="_blank"} en todas las balizas &lt;a&gt; a las que SPIP asigna las clases {spip_out}, {spip_url} o {spip_glossaire}. A veces hace falta añadir una de estas clases a los enlaces del esqueleto del sitio (archivos html) para extender al máximo esta característica.[[%radio_target_blank3%]]
 
 @puce@ SPIP permite enlazar palabras con su definición gracias al atajo tipográfico <code>[?palabra]</code>. Por omisión (o si dejas en blanco este cuadro), el glosario externo reenvía hacia la enciclopedia libre wikipedia.org. Aquí puedes elegir la dirección que se utilizará. <br />Enlace de prueba: [?SPIP][[%url_glossaire_externe2%]]', # MODIF
 	'SPIP_liens:description1' => '@puce@ SPIP a prévu un style CSS pour les liens «~mailto:~» : une petite enveloppe devrait apparaître devant chaque lien lié à un courriel; mais puisque tous les navigateurs ne peuvent pas l\'afficher (notamment IE6, IE7 et SAF3), à vous de voir s\'il faut conserver cet ajout.
@@ -146,7 +146,7 @@ SPIP ha elegido usar la baliza &lt;strong> para transcribir las negritas. Pero &
 
 SPIP ha elegido usar la baliza &lt;i> para transcribir las itálicas. Pero &lt;em> también podría ser conveniente, con o sin estilo. A tu elección:[[%racc_i1%]][[->%racc_i2%]]
 
-@puce@ {{Los estilos por omisión de SPIP}}. Hasta la versión 1.92 de SPIP, los atajos tipográficos producían balizas con el estilo \\"spip\\" asignado siempre. Por ejemplo: <code><p class=\\"spip\\"></code>. Aquí puedes definir el estilo de estas balizas en función de tus hojas de estilo. Un cuadro vacío significa que no se aplica ningún estilo en particular.
+@puce@ {{Los estilos por omisión de SPIP}}. Hasta la versión 1.92 de SPIP, los atajos tipográficos producían balizas con el estilo "spip" asignado siempre. Por ejemplo: <code><p class="spip"></code>. Aquí puedes definir el estilo de estas balizas en función de tus hojas de estilo. Un cuadro vacío significa que no se aplica ningún estilo en particular.
 {Atención: si ciertos atajos (linea horizontal, intertítulo, itálica, negrita) se han modificado más abajo, los estilos siguientes no se aplicarán.}
 
 <q1>
@@ -289,7 +289,7 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 	'en_travaux:description' => 'Permite mostrar un mensaje personalizable durante una fase de mantenimiento en todas las páginas públicas y, eventualmente, en el espacio privado.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]', # MODIF
 	'en_travaux:nom' => 'Sitio en mantenimiento',
-	'erreur:bt' => '<span style=\\"color:red;\\">Atención:</span> la barra de tipografías (version @version@) parece antigua.<br />La Navaja Suiza es compatible con una versión superior o igual a @mini@.',
+	'erreur:bt' => '<span style="color:red;">Atención:</span> la barra de tipografías (version @version@) parece antigua.<br />La Navaja Suiza es compatible con una versión superior o igual a @mini@.',
 	'erreur:description' => '¡falta la id en la definición de la herramienta!',
 	'erreur:distant' => 'el servidor externo',
 	'erreur:jquery' => '{{Nota}}: la biblioteca {jQuery} parece estar inactiva para esta página. Consulta [aquí->http://www.spip-contrib.net//La-navaja-suiza] el párrafo sobre las dependencias del plugin, o recarga esta página.',
@@ -727,7 +727,7 @@ Cet outil est compatible avec : « [.->sommaire] ».', # NEW
 
 Consulta [aquí ->http://www.spip.net/es_article2247.html] la documentación de SPIP sobre el tema.
 
-Esta herramienta también acepta argumentos introducidos por SPIP 2.0. Por ejemplo, el atajo <code><:cadena{nombre=José García, edad=37}:></code> permite pasar dos parámetros en la cadena siguiente: <code>\'cadena\'=>"Hola, soy @nombre@ y tengo @edad@ años\\"</code>.
+Esta herramienta también acepta argumentos introducidos por SPIP 2.0. Por ejemplo, el atajo <code><:cadena{nombre=José García, edad=37}:></code> permite pasar dos parámetros en la cadena siguiente: <code>\'cadena\'=>"Hola, soy @nombre@ y tengo @edad@ años"</code>.
 
 La función de SPIP utilizada en PHP es  <code>_T(\'cadena\')</code> sin argumentos, y <code>_T(\'cadena, array(\'arg1\'=>\'un texto\', \'arg2\'=>\'otro texto\'))</code> con argumentos.
 
@@ -826,6 +826,7 @@ Aquí puedes escoger escribir como superíndices otras abreviaturas suplementari
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'standard',
+	'url_verouillee' => 'URL verrouillée', # NEW
 	'urls_3_chiffres' => 'Imposer un minimum de 3 chiffres', # NEW
 	'urls_avec_id' => 'Id sistematicamente como sufijo', # MODIF
 	'urls_avec_id2' => 'Id sistemáticamente como prefijo', # MODIF
@@ -836,7 +837,7 @@ Aquí puedes escoger escribir como superíndices otras abreviaturas suplementari
 	'urls_enregistrer' => 'Grabar esta URL en la base',
 	'urls_id_sauf_rubriques' => 'Exclure les objets suivants (séparés par « : ») :', # NEW
 	'urls_minuscules' => 'Letras minúsculas',
-	'urls_nouvelle' => 'Editar la URL «propres» (propia):',
+	'urls_nouvelle' => 'Editar la URL «propres» (propia):', # MODIF
 	'urls_num_objet' => 'Número:',
 	'urls_purger' => 'Vaciar todo',
 	'urls_purger_tables' => 'Vaciar las tablas seleccionadas',
@@ -845,8 +846,9 @@ Aquí puedes escoger escribir como superíndices otras abreviaturas suplementari
 	'urls_titre_objet' => 'Título grabado:',
 	'urls_type_objet' => 'Objeto:',
 	'urls_url_calculee' => 'URL pública « @type@ »:',
-	'urls_url_objet' => 'URL «propres» (propia) grabada:',
-	'urls_valeur_vide' => '(Un valor vacío implica recalcular la URL)',
+	'urls_url_objet' => 'URL «propres» (propia) grabada:', # MODIF
+	'urls_valeur_vide' => '(Un valor vacío implica recalcular la URL)', # MODIF
+	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d\'un clic sur « @voir@ » ou d\'un changement du titre de l\'objet.', # NEW
 
 	// V
 	'validez_page' => 'Para acceder a las modificaciones:',

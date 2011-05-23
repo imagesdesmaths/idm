@@ -131,6 +131,7 @@ Kenglotus gant : SPIP v1.92x ha v2.0.x', # MODIF
 	'tri_monter' => 'Pignat an aozer-mañ',
 
 	// U
+	'url_verrouillee' => 'URL verrouillée', # NEW
 	'urls_propres_erreur' => 'Ne gemer ket ar furmad-mañ e kont an URLoù prop rollet a-is.',
 	'urls_propres_format' => 'Seut furmad degemer an URLoù : {{« @format@ »}}. [<span>[Kefluniañ->@url@]</span>]',
 	'urls_propres_lien' => 'Liamm foran ar moned',

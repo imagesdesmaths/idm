@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_rev' => 'Rev. @revision@',
 	'maj_rev_ko' => 'Die [Revision->@url@] konnte nicht gefunden werden.',
 	'maj_rev_ok' => 'Die Revision [@revision@->@url@] ist [verfügbar->@zip@].',
-	'maj_spip' => 'Après avoir mis à jour tous vos plugins avec précaution, il est vivement conseillé de mettre à jour SPIP lui-même en cliquant sur le lien ci-dessus et en suivant les instructions proposées.', # NEW
+	'maj_spip' => 'Wenn sie alle Plugins mit Bedacht auf den neuesten Stand gebracht haben, sollten sie SPIP selber ebenfalls updaten, indem sie auf den untenstehenden Link klicken und den Anweisungen folgen.',
 	'maj_svn' => 'Dieses SVN Plugin scheint [aktuell->@url@] zu sein.',
 	'maj_verif' => 'Prüfen sie vorab, welche Archiv sie verwenden möchten:',
 	'maj_verif2' => 'Achtng: Nachdem sie auf diese Schaltfläche geklickt haben, prüfen sie bitte genau, ob das Archiv, das geladen werden soll, auch dem Plugin entspricht, das sie updaten wollen.',
@@ -80,18 +80,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_suivante' => 'Nächste Seite',
 	'plug_actifs' => 'Aktive Plugins',
 	'plug_inactifs' => 'Inaktive Plugins',
-	'plugin_xml' => 'Fasst einige neue Zusatzfunktionen zusammen, mit der sie ihre SPIP-Website besser steuern können.
+	'plugin_xml' => 'Fasst einige neue Zusatzfunktionen zusammen, mit der sie ihre SPIP-Website besser verwalten können.
 
-Jedes dieser Werkzeuge kann vom Administrator auf der |Seite zur Verwaltung des Plugins->./?exec=admin_couteau_suisse] aktiviert oder abgeschaltet und konfiguriert werden: Klicken Sie auf {{Konfiguration}}, und wählen Sie dann {{Schweizer Taschenmesser}}.
+Jedes dieser Werkzeuge kann vom Administrator auf der |Seite zur Verwaltung des Plugins->./?exec=admin_couteau_suisse] aktiviert oder abgeschaltet und konfiguriert werden: Klicken Sie auf {{Konfiguration}}, und wählen Sie dann den Reiter {{Schweizer Taschenmesser}}.
 
-Sie können folgende Einstellungen vornehmen: Verwaltung, typografische Verbesserungen, typografische Kürzel, Anzeigeoptionen der Website, SPIP-Tags, Filter, Kriterien.
+Sie können folgende Einstellungen vornehmen: Verwaltung, typografische Verbesserungen, typografische Kürzel, Anzeigeoptionen, SPIP-Tags, Filter, Kriterien.
 
-Wählen Sie die für Sie wichtigsten Funktionen: {Ziffern entfernen}, {Typ der URLs}, {typografische Hochstellungen}, {typografische Anführungszeichen}, {schöne Listen-Punkte}, {SPAM Bekämpfung}, {MailCrypt}, {ästhetische URLs},  {SPIP und externe Links}, {Smileys}, {Inhaltsverzeichnis für Artikel},  {Aufteilung in Seiten und Reiter}, etc. pp.
+Wählen Sie die für Sie wichtigsten Funktionen: {Ziffern entfernen}, {Format der URLs}, {typografische Hochstellungen}, {typografische Anführungszeichen}, {schöne Listen-Punkte}, {SPAM Bekämpfung}, {MailCrypt}, {ästhetische URLs},  {SPIP und externe Links}, {Smileys}, {Inhaltsverzeichnis für Artikel},  {Aufteilung in Seiten und Reiter}, etc. pp.
 
 Bitte lesen Sie auch die Artikel auf : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Kompatibil mit SPIP v1.92x, v2.0.x und v2.1.xKompatibel mit: SPIP 1.9x und v2.0', # MODIF
-	'pp_autobr' => 'Insérer un bloc où les retours à la ligne sont automatiques', # NEW
+Kompatibil mit SPIP v1.92x, v2.0.x und v2.1.x',
+	'pp_autobr' => 'Block mit automatischen Zeilenumbrüchen einfügen',
 	'pp_blocs_bloc' => 'Eingeklappten Block einfügen',
 	'pp_blocs_visible' => 'Geöffneten Block einfügen',
 	'pp_chatons_inserer' => 'Smiley « @chaton@ » einfügen',
@@ -131,6 +131,7 @@ Kompatibil mit SPIP v1.92x, v2.0.x und v2.1.xKompatibel mit: SPIP 1.9x und v2.0'
 	'tri_monter' => 'Autor nach oben',
 
 	// U
+	'url_verrouillee' => 'URL verrouillée', # NEW
 	'urls_propres_erreur' => 'Dieses Format berücksichtigt die angepassten URLs weiter unten nicht.',
 	'urls_propres_format' => 'Das Format der URLs ist: {{« @format@ »}}. [<span>[Konfiguration->@url@]</span>]',
 	'urls_propres_lien' => 'Öffentlicher Zugangslink',

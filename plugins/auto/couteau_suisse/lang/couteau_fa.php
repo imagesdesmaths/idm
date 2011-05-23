@@ -133,6 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tri_monter' => 'بالا بردن اين نويسنده',
 
 	// U
+	'url_verrouillee' => 'URL verrouillée', # NEW
 	'urls_propres_erreur' => 'اين فرمت URLهاي فهرست شده در زير را به حساب نمي‌آورد.',
 	'urls_propres_format' => '<فرمت هاي URL‌هاي جاري عبارتند از:{{« @. format@ »}}[<span>[Configuration->@url@]</span>][Configuration->@url@]</span>]',
 	'urls_propres_lien' => 'پيوند در دسترس همگاني ',

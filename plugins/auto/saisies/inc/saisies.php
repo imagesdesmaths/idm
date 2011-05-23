@@ -1021,7 +1021,11 @@ function saisies_afficher_si($saisies) {
  * @return array Un tableau de saisies
  */
 
-function saisies_verifier_afficher_si($saisies,$env) {
+function saisies_verifier_afficher_si($saisies, $env) {
+	// eviter une erreur par maladresse d'appel :)
+	if (!is_array($saisies)) {
+		return array();
+	}
 	foreach ($saisies as $cle => $saisie) {
 		if (isset($saisie['options']['afficher_si'])) {
 			$condition = $saisie['options']['afficher_si'];

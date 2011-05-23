@@ -27,19 +27,25 @@ function cs_init_plugins() {
 function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 	global $outils, $metas_outils;
 	$outil = &$outils[$outil_];
-	if(!isset($outil['categorie'])) $outil['categorie'] = 'divers';
-	if(!isset($outil['nom'])) $outil['nom'] = _T('couteauprive:'.$outil['id'].':nom');
-	if(isset($outil['perso'])) $outil['nom'] = '<i>'.$outil['nom'].'</i>';
-	if(isset($outil['code:jq'])) $outil['jquery']='oui';
-	$outil['actif'] = isset($metas_outils[$outil['id']])?@$metas_outils[$outil['id']]['actif']:0;
-	// Si Spip est trop ancien ou trop recent...
-	if(cs_version_erreur($outil)) { $metas_outils[$outil['id']]['actif'] = $outil['actif'] = 0; }
-	// au cas ou des variables sont presentes dans le code
-	$outil['variables'] = array(); $outil['nb_variables'] = 0;
-	// ces 2 lignes peuvent initialiser des variables dans $metas_vars ou $metas_vars_code
-	if(isset($outil['code:spip_options'])) $outil['code:spip_options'] = cs_parse_code_php($outil['code:spip_options']);
-	if(isset($outil['code:options'])) $outil['code:options'] = cs_parse_code_php($outil['code:options']);
-	if(isset($outil['code:fonctions'])) $outil['code:fonctions'] = cs_parse_code_php($outil['code:fonctions']);
+	if(!isset($outil['init_ok'])) {
+		$outil['init_ok'] = 1;
+		if(!isset($outil['categorie'])) $outil['categorie'] = 'divers';
+		if(!isset($outil['nom'])) $outil['nom'] = _T('couteauprive:'.$outil['id'].':nom');
+		if(strpos($outil['nom'], '<:')!==false)
+			$outil['nom'] = preg_replace(',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $outil['nom']);
+		if(isset($outil['surcharge']) || function_exists($outil_.'_installe')) $outil['nom'] = $outil['nom'].' *';
+		if(isset($outil['perso'])) $outil['nom'] = '<i>'.$outil['nom'].'</i>';
+		if(isset($outil['code:jq'])) $outil['jquery']='oui';
+		$outil['actif'] = isset($metas_outils[$outil['id']])?@$metas_outils[$outil['id']]['actif']:0;
+		// si SPIP est trop ancien ou trop recent...
+		if(cs_version_erreur($outil)) { $metas_outils[$outil['id']]['actif'] = $outil['actif'] = 0; }
+		// au cas ou des variables sont presentes dans le code
+		$outil['variables'] = array(); $outil['nb_variables'] = 0;
+		// ces 2 lignes peuvent initialiser des variables dans $metas_vars ou $metas_vars_code
+		if(isset($outil['code:spip_options'])) $outil['code:spip_options'] = cs_parse_code_php($outil['code:spip_options']);
+		if(isset($outil['code:options'])) $outil['code:options'] = cs_parse_code_php($outil['code:options']);
+		if(isset($outil['code:fonctions'])) $outil['code:fonctions'] = cs_parse_code_php($outil['code:fonctions']);
+	}
 	// cette ligne peut utiliser des variables dans $metas_vars ou $metas_vars_code
 	return $description_outil($outil_, 'admin_couteau_suisse', $modif);
 }

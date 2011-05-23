@@ -365,7 +365,7 @@ When making an official update, update the associated remote file (click above o
 
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1">%avertir_travaux%</admin_travaux>]][[%prive_travaux%]]', # MODIF
 	'en_travaux:nom' => 'Site in maintenance mode',
-	'erreur:bt' => '<span style=\\"color:red;\\">Warning:</span> the typographical bar appears to be an old version (@version@).<br />The Penknife is compatible only with version @mini@ or newer.',
+	'erreur:bt' => '<span style="color:red;">Warning:</span> the typographical bar appears to be an old version (@version@).<br />The Penknife is compatible only with version @mini@ or newer.',
 	'erreur:description' => 'missing id in the tool\'s definition!',
 	'erreur:distant' => 'The distant server',
 	'erreur:jquery' => '{{N.B.}} : {jQuery} does not appear to be active for this page. Please consult the paragraph about the plugin\'s required libraries [in this article->http://www.spip-contrib.net/?article2166] or reload this page.',
@@ -800,7 +800,7 @@ N.B. In order to work, this tool needs to be used in "DOCTYPE XHTML" pages (not 
 
 
 
-For information purposes, the \\" [.->class_spip] \\" tool is used to select the &lt;hN> tag used for the SPIP sub-titles.
+For information purposes, the " [.->class_spip] " tool is used to select the &lt;hN> tag used for the SPIP sub-titles.
 
 
 
@@ -834,7 +834,7 @@ _ • Only for articles containing the <code>@_CS_AVEC_SOMMAIRE@</code> tag.
 
 
 
-The summary can be used in conjunction with: \\"{[.->decoupe]}\\" and \\" [.->titres_typo] \\".', # MODIF
+The summary can be used in conjunction with: "{[.->decoupe]}" and " [.->titres_typo] ".', # MODIF
 	'sommaire:nom' => 'Automatic T.O.C.',
 	'sommaire_ancres' => 'Selected anchors: <b><html>{{{My Title<my_anchor>}}}</html></b>',
 	'sommaire_avec' => 'An article with summary: <b>@_CS_AVEC_SOMMAIRE@</b>',
@@ -852,17 +852,17 @@ _ • To specify a whole word, place it in parentheses. For example: {(asses)}.
 
 _ • To use a regular expression, first check the syntax, then place it between slashes and quotation marks.
 
-_ Example:~{<html>\\"/@test.(com|en)/\\"</html>}.
+_ Example:~{<html>"/@test.(com|en)/"</html>}.
 
-_ • To use a regular expression that works on HTML characters, place the text between \\"&#\\" and \\";\\".
+_ • To use a regular expression that works on HTML characters, place the text between "&#" and ";".
 
-_ Example:~{<html>\\"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/\\"</html>}.</q1>
+_ Example:~{<html>"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/"</html>}.</q1>
 
 
 
 @puce@ Certain IP addresses can also be blocked at their source. But remember that behind these addresses (often variable in nature) there may be a multitude of individual users or even an entire network.[[%spam_ips%]]
 
-<q1>• Use the \\"*\\" character to match several unknown characters, \\"?\\" for any single character, and brackets for classes of characters.</q1>', # MODIF
+<q1>• Use the "*" character to match several unknown characters, "?" for any single character, and brackets for classes of characters.</q1>', # MODIF
 	'spam:nom' => 'Fight against SPAM',
 	'spam_ip' => 'IP blocking of @ip@:',
 	'spam_test_ko' => 'This message would be blocked by the anti-SPAM filter!',
@@ -1112,6 +1112,7 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'standard',
+	'url_verouillee' => 'URL verrouillée', # NEW
 	'urls_3_chiffres' => 'Require a minum of 3 digits',
 	'urls_avec_id' => 'Place as a suffix',
 	'urls_avec_id2' => 'Place as a prefix',
@@ -1122,7 +1123,7 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'urls_enregistrer' => 'Write this URL to the database',
 	'urls_id_sauf_rubriques' => 'Exclude the following objects (separated by " : "):',
 	'urls_minuscules' => 'Lower-case letters',
-	'urls_nouvelle' => 'Edit the "clean" URL',
+	'urls_nouvelle' => 'Edit the "clean" URL', # MODIF
 	'urls_num_objet' => 'Number:',
 	'urls_purger' => 'Empty all',
 	'urls_purger_tables' => 'empty tables selected',
@@ -1131,8 +1132,9 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'urls_titre_objet' => 'Saved title:',
 	'urls_type_objet' => '<MODF>Order:',
 	'urls_url_calculee' => 'URL PUBLIC  « @type@ »:',
-	'urls_url_objet' => 'Saved "clean" URL:',
-	'urls_valeur_vide' => '(An empty value triggers the recalculation of the URL)',
+	'urls_url_objet' => 'Saved "clean" URL:', # MODIF
+	'urls_valeur_vide' => '(An empty value triggers the recalculation of the URL)', # MODIF
+	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d\'un clic sur « @voir@ » ou d\'un changement du titre de l\'objet.', # NEW
 
 	// V
 	'validez_page' => 'To access modifications:',

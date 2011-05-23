@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => ' : evet',
 
 	// S
-	'SPIP_liens:description' => '@puce@ Sitedeki tüm bağlar aktüel sayfada açılır. Ama dış bağları yeni pencerede açmak kullanışlı olabilir -- cela revient à ajouter {target=\\"_blank\\"} à toutes les balises &lt;a&gt; dotées par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois nécessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'étendre au maximum cette fonctionnalité.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '@puce@ Sitedeki tüm bağlar aktüel sayfada açılır. Ama dış bağları yeni pencerede açmak kullanışlı olabilir -- cela revient à ajouter {target="_blank"} à toutes les balises &lt;a&gt; dotées par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois nécessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'étendre au maximum cette fonctionnalité.[[%radio_target_blank3%]]
 
 @puce@ SPIP permet de relier des mots à leur définition grâce au raccourci typographique <code>[?mot]</code>. Par défaut (ou si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l’encyclopédie libre wikipedia.org. À vous de choisir l\'adresse à utiliser. <br />Lien de test : [?SPIP][[%url_glossaire_externe2%]]', # MODIF
 	'SPIP_liens:description1' => '@puce@ SPIP «~mailto:~» bağlantıları için bir CSS stil öngördü : e-posta bağlantılarının önünde küçük bir zarf görünecek; ama tüm gezginler bunu görüntüleyemeyeceği için (bjğllşmlğ IE6, IE7 et SAF3) bunu kullanıp kullanmamak size kalmış.
@@ -136,7 +136,7 @@ SPIP italik için &lt;i> komutunu kullanmayı tercih etmiştir. Ama &lt;em> komu
 
  Dipnotlar için komut açan ve kapatan kodları da siz belirleyebilirsiniz. (Dikkat ! Değişiklikler yalnız kamusal alanda görünür.) : [[%ouvre_ref%]][[->%ferme_ref%]]
  
-@puce@ {{Varsayılan SPIP stilleri}}. 1.92 sürümüne kadar, tipografik kısayollar hep \\"spip\\" tipinde komutlar üretiyordu. Örneğin: <code><p class=\\"spip\\"></code>. Burada komut stillerini stil sayfalarınıza göre tanımlayabilirsiniz. Boş bir kutu hiçbir stil uygulanmayacağını gösterir.
+@puce@ {{Varsayılan SPIP stilleri}}. 1.92 sürümüne kadar, tipografik kısayollar hep "spip" tipinde komutlar üretiyordu. Örneğin: <code><p class="spip"></code>. Burada komut stillerini stil sayfalarınıza göre tanımlayabilirsiniz. Boş bir kutu hiçbir stil uygulanmayacağını gösterir.
 
 {Dikkat : eğer yukarıda (yatay çizgi, ara başlık, italik, koyu) gibi kısayollar değiştirilirse aşağıda stiller uygulanmayacaktır.}
 
@@ -794,6 +794,7 @@ Böylece Fransızca\'da: <html>Dr, Pr, Mgr, St, Bx, m2, m3, Mn, Md, Sté, Éts, 
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'standart',
+	'url_verouillee' => 'URL verrouillée', # NEW
 	'urls_3_chiffres' => 'Minimum 3 rakam iste',
 	'urls_avec_id' => 'Son ek olarak ekle',
 	'urls_avec_id2' => 'Ön ek olarak ekle',
@@ -804,7 +805,7 @@ Böylece Fransızca\'da: <html>Dr, Pr, Mgr, St, Bx, m2, m3, Mn, Md, Sté, Éts, 
 	'urls_enregistrer' => 'Bu URL\'yi veritabanına ekle',
 	'urls_id_sauf_rubriques' => 'Başlıkları çıkart', # MODIF
 	'urls_minuscules' => 'Küçük harfler',
-	'urls_nouvelle' => 'URL « propre »\'u düzenle :',
+	'urls_nouvelle' => 'URL « propre »\'u düzenle :', # MODIF
 	'urls_num_objet' => 'Numara :',
 	'urls_purger' => 'Hepsini boşalt',
 	'urls_purger_tables' => 'Seçilen tabloları boşalt',
@@ -813,8 +814,9 @@ Böylece Fransızca\'da: <html>Dr, Pr, Mgr, St, Bx, m2, m3, Mn, Md, Sté, Éts, 
 	'urls_titre_objet' => 'Kayıtlı başlık  :',
 	'urls_type_objet' => 'Nesne :',
 	'urls_url_calculee' => 'Kamusal URL « @type@ » :',
-	'urls_url_objet' => 'Kaydedilmiş « kişisel » URLler :',
-	'urls_valeur_vide' => '(Boş bir değer URL\'nin yeniden hesaplanmasına yol açar)',
+	'urls_url_objet' => 'Kaydedilmiş « kişisel » URLler :', # MODIF
+	'urls_valeur_vide' => '(Boş bir değer URL\'nin yeniden hesaplanmasına yol açar)', # MODIF
+	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d\'un clic sur « @voir@ » ou d\'un changement du titre de l\'objet.', # NEW
 
 	// V
 	'validez_page' => 'Değişikliklere erişmek için :',

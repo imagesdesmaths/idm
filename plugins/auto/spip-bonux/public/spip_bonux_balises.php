@@ -393,17 +393,15 @@ function balise_INFO__dist($p){
 	if ($info === 'INFO_' or !$type_objet or !$id_objet) {
 		$msg = _T('zbug_balise_sans_argument', array('balise' => ' INFO_'));
 		erreur_squelette($msg, $p);
-		$p->interdire_scripts = false;
+		$p->interdire_scripts = true;
 		return $p;
-	} elseif ($f = charger_fonction($nom, 'balise', true)) {
-		return $f($p);
 	}else {
-		$p->code = champ_sql($info, $p);
+		$p->code = champ_sql($info, $p, false);
 		if (strpos($p->code, '@$Pile[0]') !== false) {
 			$info = strtolower(substr($info,5));
-			$p->code = "generer_info_entite($id_objet, $type_objet, '$info')";
+			$p->code = "generer_info_entite($id_objet, $type_objet, '$info'".($p->etoile?","._q($p->etoile):"").")";
 		}
-		$p->interdire_scripts = false;
+		$p->interdire_scripts = true;
 		return $p;
 	}
 }
@@ -487,8 +485,13 @@ function spip_bonux_sauter(&$res, &$pos, $nb, $total){
 }
 
 /**
- * #SAUTER{n} permet de sauter n resultats dans une boucle
- * n>0
+ * #SAUTER{n} permet de sauter en avant n resultats dans une boucle
+ * La balise modifie le compteur courant de la boucle, mais pas les autres
+ * champs
+ *
+ * L'argument n doit etre superieur a zero sinon la balise ne fait rien
+ * Lorsque sql_seek est disponible, il est utilise,
+ * sinon le saut est realise par n sql_fetch
  *
  * @param <type> $p
  * @return <type>
@@ -507,7 +510,9 @@ function balise_SAUTER_dist($p){
  * Produire un fichier statique a partir d'un squelette dynamique
  * Permet ensuite a apache de le servir en statique sans repasser
  * par spip.php a chaque hit sur le fichier
- * le format css ou js doit etre passe dans options['format']
+ * si le format (css ou js) est passe dans contexte['format'], on l'utilise
+ * sinon on regarde si le fond finit par .css ou .js
+ * sinon on utilie "html"
  *
  * @param string $fond
  * @param array $contexte
@@ -516,15 +521,25 @@ function balise_SAUTER_dist($p){
  * @return string
  */
 function produire_fond_statique($fond, $contexte=array(), $options = array(), $connect=''){
-	// recuperer le code CSS produit par le squelette
+	if (isset($contexte['format'])){
+		$extension = $contexte['format'];
+		unset($contexte['format']);
+	}
+	else {
+		$extension = "html";
+		if (preg_match(',[.](css|js)$,',$fond,$m))
+			$extension = $m[1];
+	}
+	// recuperer le contenu produit par le squelette
 	$options['raw'] = true;
 	$cache = recuperer_fond($fond,$contexte,$options,$connect);
-  $extension = $options['format'];
 
   // calculer le nom de la css
 	$dir_var = sous_repertoire (_DIR_VAR, 'cache-'.$extension);
 	$filename = $dir_var . $extension."dyn-".md5($fond.serialize($contexte).$connect) .".$extension";
 
+	// mettre a jour le fichier si il n'existe pas
+	// ou trop ancien
   if (!file_exists($filename)
 	  OR filemtime($filename)<$cache['lastmodified']){
 
@@ -533,10 +548,10 @@ function produire_fond_statique($fond, $contexte=array(), $options = array(), $c
 	  if ($extension=="css")
 	    $contenu = urls_absolues_css($contenu, generer_url_public($fond));
 
-    $comment = "/*\n * #PRODUIRE_".strtoupper($extension)."_FOND{fond=$fond";
+    $comment = "/* #PRODUIRE{fond=$fond";
     foreach($contexte as $k=>$v)
 	    $comment .= ",$k=$v";
-    $comment .="}\n * le ".date("Y-m-d H:i:s")."\n */\n";
+    $comment .="} le ".date("Y-m-d H:i:s")." */\n";
 	  // et ecrire le fichier
     ecrire_fichier($filename,$comment.$contenu);
   }
@@ -545,11 +560,11 @@ function produire_fond_statique($fond, $contexte=array(), $options = array(), $c
 }
 
 function produire_css_fond($fond, $contexte=array(), $options = array(), $connect=''){
-	$options['format'] = "css";
+	$contexte['format'] = "css";
   return produire_fond_statique($fond, $contexte, $options, $connect);
 }
 function produire_js_fond($fond, $contexte=array(), $options = array(), $connect=''){
-	$options['format'] = "js";
+	$contexte['format'] = "js";
   return produire_fond_statique($fond, $contexte, $options, $connect);
 }
 
@@ -567,9 +582,7 @@ function produire_js_fond($fond, $contexte=array(), $options = array(), $connect
 function balise_PRODUIRE_CSS_FOND_dist($p){
 	$balise_inclure = charger_fonction('INCLURE','balise');
 	$p = $balise_inclure($p);
-
 	$p->code = str_replace('recuperer_fond(','produire_css_fond(',$p->code);
-
 	return $p;
 }
 /**
@@ -586,10 +599,30 @@ function balise_PRODUIRE_CSS_FOND_dist($p){
 function balise_PRODUIRE_JS_FOND_dist($p){
 	$balise_inclure = charger_fonction('INCLURE','balise');
 	$p = $balise_inclure($p);
-
 	$p->code = str_replace('recuperer_fond(','produire_js_fond(',$p->code);
+	return $p;
+}
+/**
+ * #PRODUIRE
+ * generer un fichier statique a partir d'un squelette SPIP
+ *
+ * Le format du fichier sera extrait de la preextension du squelette (typo.css.html, messcripts.js.html)
+ * ou par l'argument format=css ou format=js passe en argument.
+ *
+ * Si pas de format detectable, on utilise .html, comme pour les squelettes
+ *
+ * <link rel="stylesheet" type="text/css" href="#PRODUIRE{fond=css/macss.css,couleur=ffffff}" />
+ * la syntaxe de la balise est la meme que celle de #INCLURE
+ *
+ * @param object $p
+ * @return object
+ */
+function balise_PRODUIRE_dist($p){
+	$balise_inclure = charger_fonction('INCLURE','balise');
+	$p = $balise_inclure($p);
+
+	$p->code = str_replace('recuperer_fond(','produire_fond_statique(',$p->code);
 
 	return $p;
 }
-
 ?>

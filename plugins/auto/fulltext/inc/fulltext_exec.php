@@ -18,6 +18,8 @@ function Fulltext_index($table, $champs, $nom=null) {
 	foreach ($champs as $i=>$f) {
 		if (preg_match(',^(tiny|long|medium)?text\s,i', $desc['field'][$f]))
 			$champs[$i] = "`$f`";
+		else if (preg_match(',^varchar.*\s,i', $desc['field'][$f]))
+			$champs[$i] = "`$f`";
 		else
 			unset($champs[$i]);
 	}

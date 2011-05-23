@@ -16,7 +16,7 @@
 	#SET{height,#HAUTEUR}
 	#SET{url,#ENV{lien}}
 ]
-[(#MODE|=={image}|oui)
+[(#MODE|=={image}|non)
 	[(#SET{fichier,[(#LOGO_DOCUMENT||extraire_attribut{src})]})]
 	[(#SET{width,[(#LOGO_DOCUMENT||extraire_attribut{width})]})]
 	[(#SET{height,[(#LOGO_DOCUMENT||extraire_attribut{height})]})]

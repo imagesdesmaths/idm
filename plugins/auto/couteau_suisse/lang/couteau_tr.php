@@ -131,6 +131,7 @@ Uyumluluk : SPIP 1.9x ve 2.0 ', # MODIF
 	'tri_monter' => 'Bu yazarı yukarı çıkart',
 
 	// U
+	'url_verrouillee' => 'URL verrouillée', # NEW
 	'urls_propres_erreur' => 'Bu format aşağıda belirtilen özel URL\'leri dikkate almaz.',
 	'urls_propres_format' => 'URL\'lerin şu anki formatı : {{« @format@ »}}. [<span>[Configuration->@url@]</span>]',
 	'urls_propres_lien' => 'Kamusal erişim bağı',

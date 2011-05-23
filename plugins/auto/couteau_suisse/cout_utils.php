@@ -32,14 +32,21 @@ define('_format_NOMBRE', 20);
 // ajoute un outil a $outils;
 function add_outil($tableau) {
 	global $outils;
+	// sert encore a qqchose ?
 	static $index; $index = isset($index)?$index + 10:0;
-	if(!isset($tableau['id'])) { $tableau['id']='erreur'.count($outils); $tableau['nom'] = _T('couteauprive:erreur_id'); }
 	$tableau['index'] = $index;
+	// grave erreur si pas d'id
+	if(!isset($tableau['id'])) { $tableau['id']='erreur'.count($outils); $tableau['nom'] = _T('couteauprive:erreur_id'); }
 	// surcharges perso. Ex : $GLOBALS['mes_outils']['supprimer_numero_perso']
-	$perso = $tableau['id'] . '_perso';
-	if(isset($GLOBALS['mes_outils'][$perso]) && is_array($GLOBALS['mes_outils'][$perso])) {
+	// (methode par variable globale depreciee)
+	if(isset($GLOBALS['mes_outils'][$perso = $tableau['id'].'_perso']) && is_array($GLOBALS['mes_outils'][$perso])) {
+		// ici pour compatibilite anterieure
 		$tableau = array_merge($tableau, $GLOBALS['mes_outils'][$perso]);
 		unset($GLOBALS['mes_outils'][$perso]);
+		$tableau['surcharge'] = 1;
+	// surcharges perso. Ex : function supprimer_numero_surcharger_outil($tab) { return $tab; }
+	} elseif(function_exists($perso = $tableau['id'].'_surcharger_outil')) {
+		if(is_array($perso = $perso($tableau))) $tableau = $perso;
 		$tableau['surcharge'] = 1;
 	}
 	// desactiver l'outil si les fichiers distants ne sont pas permis
@@ -62,6 +69,10 @@ function add_outil($tableau) {
 function add_variable($tableau) {
 	global $cs_variables;
 	$nom = $tableau['nom'];
+	if(isset($cs_variables[$nom])) {
+		cs_log("Variable $nom dupliquee ??");
+		return;
+	}
 	if(isset($tableau['check'])) $tableau['format'] = _format_NOMBRE;
 	// code '%s' par defaut si aucun code n'est defini
 	$test=isset($tableau['code']); 
@@ -677,9 +688,11 @@ function cs_installe_outils() {
 	$datas = array();
 	foreach($metas_outils as $nom=>$o) if(isset($o['actif']) && $o['actif']) {
 		include_spip('outils/'.$nom);
-		if(function_exists($f = $nom.'_installe')) {
-			if(($tmp=$f())!==NULL) foreach($tmp as $i=>$v)
-				$datas[$i] = "function cs_data_$i() { return " . var_export($v, true) . ";\n}";
+		if(function_exists($f = $nom.'_installe') || function_exists($f = $f.'_dist')) {
+			if(is_array($tmp=$f())) foreach($tmp as $i=>$v) {
+				$j=($i && $i!==$nom)?$nom.'_'.$i:$nom;
+				$datas[$j] = "function cs_data_$j() { return " . var_export($v, true) . ';}';
+			}
 if(defined('_LOG_CS')) cs_log(" -- $f() : OK !");
 		}
 	}

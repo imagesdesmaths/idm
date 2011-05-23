@@ -182,8 +182,6 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 		// chaines de langue personnalisees
 		$descrip = preg_replace(',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $descrip);
 	}
-	if (strpos($outil['nom'], '<:')!==false)
-		$outil['nom'] = preg_replace(',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $outil['nom']);
 	// envoi de la description en pipeline
 #	list(,$descrip) = pipeline('init_description_outil', array($outil_, $descrip));
 	// globale pour la callback description_outil_input2_callback

@@ -118,7 +118,7 @@ function picker_identifie_id_rapide($ref,$rubriques=0,$articles=0){
  * @param string $info
  * @return string
  */
-function generer_info_entite($id_objet, $type_objet, $info){
+function generer_info_entite($id_objet, $type_objet, $info, $etoile=''){
 	// On verifie qu'on a tout ce qu'il faut
 	$id_objet = intval($id_objet);
 	if (!($id_objet and $type_objet and $info))
@@ -166,7 +166,7 @@ function generer_info_entite($id_objet, $type_objet, $info){
 	$traitement = $table_des_traitements[$maj];
 	$table_objet = table_objet($type_objet);
 	
-	if (is_array($traitement)){
+	if (!$etoile and is_array($traitement)){
 		$traitement = $traitement[isset($traitement[$table_objet]) ? $table_objet : 0];
 		$traitement = str_replace('%s', '"'.str_replace('"', '\\"', $info_generee).'"', $traitement);
 		eval("\$info_generee = $traitement;");

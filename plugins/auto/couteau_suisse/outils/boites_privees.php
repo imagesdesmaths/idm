@@ -132,8 +132,10 @@ function cs_urls_propres($type, $id) {
 	if(defined('_SPIP19300')) {
 		$url = generer_url_entite_absolue($id, $type, '', '', true);
 		$lien_public = "\n[<span>[". _T('couteau:urls_propres_lien'). "|{$url}->{$url}]</span>]\n\n";
-		$s = sql_select("url", "spip_urls", "id_objet=$id AND type='$type'", '', 'date DESC');
-		while ($t = sql_fetch($s)) $res .= ($res?'<br />':'')."&bull;&nbsp;$t[url]\n";
+		$s = sql_select("url, date", "spip_urls", "id_objet=$id AND type='$type'", '', 'date DESC');
+		$now = date('Y-m-d H:i:s');
+		$info = ' ('._T('couteau:url_verrouillee').')';
+		while ($t = sql_fetch($s)) $res .= ($res?'<br />':'').'&bull;&nbsp;'.$t['url'].($t[date]>$now?$info:'')."\n";
 	// SPIP < 2.0
 	} else {
 		// impossible de calculer l'url publique d'ici.

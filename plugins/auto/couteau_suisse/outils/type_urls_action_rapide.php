@@ -46,18 +46,25 @@ function type_urls_URL_objet_exec() {
 
 	// chercher dans la table des URLS
 	include_spip('base/abstract_sql');
-	//  Recuperer une URL propre correspondant a l'objet.
-	$row = sql_fetsel("U.url, O.$champ_titre", "$table AS O LEFT JOIN spip_urls AS U ON (U.type='$type' AND U.id_objet=O.$col_id)", "O.$col_id=$id_objet", '', 'U.date DESC', 1);
-	if (!$row) return false; # Quand $id_objet n'est pas un numero connu
+	//  Recuperer les URLs propre correspondant a l'objet.
+	$rows = sql_allfetsel("U.url, U.date, O.$champ_titre", "$table AS O LEFT JOIN spip_urls AS U ON (U.type='$type' AND U.id_objet=O.$col_id)", "O.$col_id=$id_objet", '', 'U.date DESC');
+	if (!$rows[0]) return false; # Quand $id_objet n'est pas un numero connu
 	// Calcul de l'URL complete
 	$url = str_replace('.././','../',generer_url_entite($id_objet, $type, '', '', true));
-	$row2 = !strlen($url2 = $row['url'])
-		// si l'URL n'etait pas presente en base, maintenant elle l'est !
-		?sql_fetsel("url", "spip_urls", "id_objet=$id_objet AND type='$type'", '', 'date DESC', 1)
-		:array('url'=>$url2);
+	$row2 = !strlen($url2 = $rows[0]['url'])
+		// si l'URL n'etait pas presente en base, maintenant elle l'est ! (non verrouillee du coup...)
+		?sql_fetsel("url, date", "spip_urls", "id_objet=$id_objet AND type='$type'", '', 'date DESC', 1)
+		:array('url'=>$url2, 'date'=>$rows[0]['date']);
+	// URL verrouilee par sa date ?
+	$now = date('Y-m-d H:i:s');
+	$verrou = $row2['date']>$now;
 	include_spip('inc/charsets');
-	//  titre || url complete || type d'URLs || URL recalculee || url propre en base
-	echo charset2unicode($row['titre']).'||'.$url.'||'.$type_urls.'||'.$row2['url'].'||'.$url2;
+	$titre = charset2unicode($rows[0]['titre']);
+	$info = ' ('._T('couteau:url_verrouillee').')';
+	array_shift($rows); $toutes=$url2.($verrou?$info:'');
+	foreach($rows as $r) $toutes .= '<br/>'.$r['url'].($r['date']>$now?$info:'');
+	//  titre || URL complete || type d'URLs || URL recalculee || URL propre en base || verrou || toutes les URLs trouvees en base
+	echo $titre.'||'.$url.'||'.$type_urls.'||'.$row2['url'].'||'.$url2.'||'.($verrou?'oui':'non').'||'.$toutes;
 }
 
 // Fonction {$outil}_{$arg}_exec() appelee par exec/action_rapide : ?exec=action_rapide&arg=type_urls|URL_objet_191 (pipe obligatoire)
@@ -101,7 +108,7 @@ function type_urls_liste_urls_exec() {
 	include_spip('inc/presentation');
 	include_spip('public/assembler');
 	echo '<html><head>'.f_jQuery(envoi_link(_T('couteau:urls_propres_titre')))
-		.'</head><body style="text-align:center">'
+		.'<meta http-equiv="Content-Type" content="text/html; charset='.$GLOBALS['meta']['charset'].'" /></head><body style="text-align:center">'
 		.propre(recuperer_fond('fonds/type_urls_liste', array('type'=>_request('type'))))
 		.'</body></html>';
 ;
@@ -142,13 +149,15 @@ function type_urls_edit_urls2_1_action() {
 		sql_delete('spip_urls', $where);
 		spip_log("L'URL $type#$id est supprimee");
 	} else {
-		$row = sql_fetsel("id_objet", "spip_urls", $where);
+		// pour verrouiller une url, on fixe sa date dans le futur, dans 10 ans
+		$verrou = _request('ar_verrouiller')=='oui'?10*365.25*24*3600:0;		
+		$row = sql_fetsel("id_objet, url", "spip_urls", $where, '', 'date DESC', 1);
 		if($row) {
-			sql_updateq('spip_urls', array('date'=>date('Y-m-d H:i:s'), 'url'=>$url), $where);
-			spip_log("L'URL $type#$id est remplacee par : $url");
+			sql_updateq('spip_urls', array('date'=>date('Y-m-d H:i:s',time()+$verrou), 'url'=>$url), $where . ' AND url=' . sql_quote($row['url']));
+			spip_log("L'URL $type#$id est remplacee par : $url".($verrou?' puis verrouilee':''));
 		} else {
-			sql_insertq('spip_urls', array('date'=>date('Y-m-d H:i:s'), 'url'=>$url, 'id_objet'=>$id, 'type'=>$type));
-			spip_log("L'URL $type#$id a ete cree : $url");
+			sql_insertq('spip_urls', array('date'=>date('Y-m-d H:i:s',time()+$verrou), 'url'=>$url, 'id_objet'=>$id, 'type'=>$type));
+			spip_log("L'URL $type#$id a ete cree : $url".($verrou?' puis verrouilee':''));
 		}
 	}
 	redirige_vers_exec(array('ar_num_objet' => _request('ar_num_objet'), 'ar_type_objet' => _request('ar_type_objet')));

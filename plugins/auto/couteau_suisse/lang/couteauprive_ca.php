@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => ' : si',
 
 	// S
-	'SPIP_liens:description' => '>@puce@ Tots els enllaços del lloc s\'obren, per defecte, a la mateixa finestra de navegació en la que esteu. Però pot ser útil obrir els enllaços externs al lloc en una nova finestra -- això es pot aconseguir afegint {target=\\"_blank\\"} a totes les etiquetes <a> dotades per SPIP del tipus {spip_out}, {spip_url} o {spip_glossaire}. A vegades pot ser necessari afegir una d\'aquestes classes als enllaços de l\'esquelet del lloc (fitxers html) per tal d\'ampliar al màxim aquesta funcionalitat.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '>@puce@ Tots els enllaços del lloc s\'obren, per defecte, a la mateixa finestra de navegació en la que esteu. Però pot ser útil obrir els enllaços externs al lloc en una nova finestra -- això es pot aconseguir afegint {target="_blank"} a totes les etiquetes <a> dotades per SPIP del tipus {spip_out}, {spip_url} o {spip_glossaire}. A vegades pot ser necessari afegir una d\'aquestes classes als enllaços de l\'esquelet del lloc (fitxers html) per tal d\'ampliar al màxim aquesta funcionalitat.[[%radio_target_blank3%]]
 
 @puce@ SPIP permet lligar paraules amb la seva definició gràcies a la drecera tipogràfica <code>[?mot]</code>. Per defecte (o si deixeu buida la casella de més avall), el glossari extern us reenvia cap a l\'enciclopèdia lliure wikipedia.org. Us toca a vosaltres escollir quina adreça voleu utilitzar. <br />Enllaç de prova: [?SPIP][[%url_glossaire_externe2%]]',
 	'SPIP_liens:description1' => '@puce@ SPIP ha previst un estil CSS pels enllaços «~mailto:~»: un petit sobre hauria d\'aparèixer al davant de cada enllaç lligat a un correu electrònic; però com que no tots els navegadors el poden mostrar (sobretot IE6, IE7 i SAF3), heu de veure si voleu conservar aquest afegit.
@@ -99,7 +99,7 @@ Exemples: <code>#SET{x,1}#SET_PLUS{x,2}</code> o <code>#SET{x,avions}#SET_REPLAC
 
 @puce@ El Ganivet Suís utilitza, per defecte, l\'etiqueta HTML <h4> pel títol dels blocs desplegables. Escolliu aquí una altra etiqueta <hN> :[[%bloc_h4%]]
 
-@puce@ Per tal d\'obtenir un efecte més agradable al moment del clic, els vostres blocs desplegables es poden animar com si \\"llisquessin\\".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]',
+@puce@ Per tal d\'obtenir un efecte més agradable al moment del clic, els vostres blocs desplegables es poden animar com si "llisquessin".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]',
 	'blocs:nom' => 'Blocs Desplegables',
 	'boites_privees:description' => 'Tots els quadres descrits més avall apareixen aquí o a la part privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Les revisions del Ganivet Suís}}: un quadre a la pàgina actual de configuració, indicant les últimes modificacions aportades al codi del plugin ([Source->@_CS_RSS_SOURCE@]).
@@ -159,7 +159,7 @@ SPIP ha escollit utilitzar l\'etiqueta <i> per transcriure les itàliques. Però
 
  Podeu definir el codi obrint i tancant per les notes de peu de pàgina: [[%ouvre_note%]][[->%ferme_note%]]
 
-@puce@ {{Els estils d\'SPIP per defecte}}. Fins a la versió 1.92 d\'SPIP, les dreceres tipogràfiques produïen sistemàticament etiquetes vestides de l\'estil \\"spip\\". Per exemple: <code><p class=\\"spip\\"></code>. Aquí podeu definir l\'estil d\'aquestes etiquetes en funció dels vostres fulls d\'estil. Una caixa buida significa que no s\'aplicarà cap estil en particular.
+@puce@ {{Els estils d\'SPIP per defecte}}. Fins a la versió 1.92 d\'SPIP, les dreceres tipogràfiques produïen sistemàticament etiquetes vestides de l\'estil "spip". Per exemple: <code><p class="spip"></code>. Aquí podeu definir l\'estil d\'aquestes etiquetes en funció dels vostres fulls d\'estil. Una caixa buida significa que no s\'aplicarà cap estil en particular.
 
 {Atenció: si algunes dreceres (línia horitzontal, subtítol, itàlica, negreta) s\'han modificat més amunt, els estils posteriors no s\'aplicaran.}
 
@@ -307,7 +307,7 @@ En cas d\'actualització oficial, actualitzeu el fitxer distant associat (clique
 
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1">%avertir_travaux%</admin_travaux>]][[%prive_travaux%]]',
 	'en_travaux:nom' => 'Lloc en manteniment',
-	'erreur:bt' => '<span style=\\"color:red;\\">Atenció:</span> la barra tipogràfica (version @version@) semble ancienne.<br />El Ganivet Suís és compatible amb una versió superior o igual a @mini@.',
+	'erreur:bt' => '<span style="color:red;">Atenció:</span> la barra tipogràfica (version @version@) semble ancienne.<br />El Ganivet Suís és compatible amb una versió superior o igual a @mini@.',
 	'erreur:description' => 'id absent en la definició de l\'eina!',
 	'erreur:distant' => 'servidor distant',
 	'erreur:jquery' => '{{Nota}}: la llibreria {jQuery} sembla inactiva en aquesta pàgina. Consulteu [aquí->http://www.spip-contrib.net/?article2166] el paràgraf sobre les dependències del plugin o recarregar aquesta pàgina.',
@@ -786,11 +786,11 @@ _ • Per especificar una paraula sencera, poseu-la entre parèntesi. Exemple~:~
 
 _ • Per una expressió regular, verifiqueu bé la sintaxi i poseu-la entre barres inclinades i entre cometes.
 
-_ Exemple~:~{<html>\\"/@test.(com|fr)/\\"</html>}.
+_ Exemple~:~{<html>"/@test.(com|fr)/"</html>}.
 
 _ • Per una expressió regular que tingui efecte sobre els caràcters HTML, situeue el test entre «&#» et «;».
 
-_ Exemple~:~{<html>\\"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/\\"</html>}.</q1>
+_ Exemple~:~{<html>"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/"</html>}.</q1>
 
 
 
@@ -1054,6 +1054,7 @@ Podeu escollir aquí de posar en exponent algunes dreceres suplementàries, malg
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'estàndard',
+	'url_verouillee' => 'URL verrouillée', # NEW
 	'urls_3_chiffres' => 'Imposar un mínim de 3 xifres',
 	'urls_avec_id' => 'Posar-la en sufix ',
 	'urls_avec_id2' => 'Posar-la en prefix',
@@ -1064,7 +1065,7 @@ Podeu escollir aquí de posar en exponent algunes dreceres suplementàries, malg
 	'urls_enregistrer' => 'Enregistrar aquest URL a la base',
 	'urls_id_sauf_rubriques' => 'Excloure els següents objectes (separats per « : »):',
 	'urls_minuscules' => 'Lletres minúscules',
-	'urls_nouvelle' => 'Editar el URL «propis»:',
+	'urls_nouvelle' => 'Editar el URL «propis»:', # MODIF
 	'urls_num_objet' => 'Número:',
 	'urls_purger' => 'Buidar-ho tot',
 	'urls_purger_tables' => 'Buidar les taules seleccionades',
@@ -1073,8 +1074,9 @@ Podeu escollir aquí de posar en exponent algunes dreceres suplementàries, malg
 	'urls_titre_objet' => 'Títol enregistrat:',
 	'urls_type_objet' => 'Objecte:',
 	'urls_url_calculee' => 'URL pública « @type@ » :',
-	'urls_url_objet' => 'URL «propis» enregistrat:',
-	'urls_valeur_vide' => '(Un valor buit provoca que es torni a calcular l\'URL)',
+	'urls_url_objet' => 'URL «propis» enregistrat:', # MODIF
+	'urls_valeur_vide' => '(Un valor buit provoca que es torni a calcular l\'URL)', # MODIF
+	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d\'un clic sur « @voir@ » ou d\'un changement du titre de l\'objet.', # NEW
 
 	// V
 	'validez_page' => 'Per accedir a les modificacions:',

@@ -235,21 +235,22 @@ function cs_lire_meta_outil($outil, $meta='', $unserialize=true) {
 }
 
 // renvoie les donnees precompilees d'un outil
-function cs_lire_data_outil($outil, $casier='') {
+function cs_lire_data_outil($outil, $casier_=false) {
 	static $datas = array();
-	if(!$casier) $casier = $outil;
-	if(!isset($datas[$casier])) {
-		// recherche dans le fichier cache
-		if(!$GLOBALS['cs_outils']) include_once(_DIR_CS_TMP . 'mes_outils.php');
-		if(function_exists($f='cs_data_'.$casier)) 
-			$datas[$casier] = $f();
-		else {
-			// installation de l'outil
-			include_spip('outils/'.$outil);
-			$datas[$casier] = function_exists($f=$outil.'_installe')?$f():NULL;
-		}
-	}
-	return $datas[$casier];
+	$casier = ($casier_ && $casier_!==$outil)?$outil.'_'.$casier_:$outil;
+	if(isset($datas[$casier])) 
+		return $datas[$casier];
+	// recherche dans le fichier cache
+	if(!$GLOBALS['cs_outils']) include_once(_DIR_CS_TMP . 'mes_outils.php');
+	if(function_exists($f='cs_data_'.$casier)) 
+		return $datas[$casier] = $f();
+	// installation de l'outil
+	include_spip('outils/'.$outil);
+	if( (function_exists($f = $outil.'_installe') || function_exists($f = $f.'_dist'))
+		&& ($tmp=$f())
+		&& (isset($tmp[$ok=$casier]) || (!$casier_ && (isset($tmp[$ok=0]) || isset($tmp[$ok=$outil])))))
+			return $datas[$ok] = $tmp[$ok];
+	return NULL;
 }
 
 function rep_icones_barre(&$icones_barre) {

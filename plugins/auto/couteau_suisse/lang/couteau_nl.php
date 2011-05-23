@@ -131,6 +131,7 @@ Verenigbaarheid: SPIP 1.92x en v2.0.x', # MODIF
 	'tri_monter' => 'Deze auteur stijgen',
 
 	// U
+	'url_verrouillee' => 'URL verrouillée', # NEW
 	'urls_propres_erreur' => 'Dit formaat neemt geen rekening van URL eigen hieronder op een lijst gezet.',
 	'urls_propres_format' => 'Het huidige formaat van URLs is: {{« @format@ »}}. [<span>[Configuratie->@url@]</span>]',
 	'urls_propres_lien' => 'Openbare toegang link',

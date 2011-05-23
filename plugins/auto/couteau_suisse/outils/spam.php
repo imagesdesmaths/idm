@@ -4,8 +4,8 @@
 //	1. une liste de mots interdits est consultee
 //	2. si le mot existe dans un des textes d'un formulaire, on avertit !
 
-// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
-function spam_installe() {
+// cette fonction appelee automatiquement a chaque affichage de la page privee du Couteau Suisse renvoie un tableau
+function spam_installe_dist() {
 	// tableau des mots interdits
 	$t = array(
 		// des liens en dur ou simili...
@@ -27,7 +27,7 @@ function spam_installe() {
 	$spam_mots = defined('_spam_IPS')?spam_liste_mots(_spam_IPS):array();
 	array_walk($spam_mots, 'spam_walk');
 	$t[3] = count($spam_mots)?'/^(?:' . join('|', $spam_mots) . ')$/':'';
-	return array('spam' => $t);
+	return array($t);
 }
 
 function spam_walk(&$item) {

@@ -4,10 +4,10 @@
 	http://fr.wikipedia.org/wiki/Wikip%C3%A9dia:AutoWikiBrowser/Typos/Aide
 */
 
-// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
-function insertions_installe() {
+// cette fonction appelee automatiquement a chaque affichage de la page privee du Couteau Suisse renvoie un tableau
+function insertions_installe_dist() {
 	if(!defined('_insertions_LISTE')) return NULL;
-cs_log("insertions_installe()");
+cs_log("insertions_installe_dist()");
 	// on decode la liste entree dans la config
 	$liste = preg_split("/[\r\n]+/", trim(_insertions_LISTE));
 	$str = $preg = array(array(), array());
@@ -27,7 +27,7 @@ cs_log("insertions_installe()");
 			$str[0][] = $a; $str[1][] = $b;
 		}
 	}
-	return array('insertions' => array($str, $preg));
+	return array(array($str, $preg));
 }
 
 ?>

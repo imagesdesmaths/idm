@@ -1,6 +1,8 @@
 <?php
-function jcorner_installe() {
-cs_log("jcorner_installe()");
+
+// cette fonction appelee automatiquement a chaque affichage de la page privee du Couteau Suisse renvoie un tableau
+function jcorner_installe_dist() {
+cs_log("jcorner_installe_dist()");
 	if(!defined('_jcorner_CLASSES')) return NULL;
 
 	// on decode les balises entrees dans la config
@@ -21,7 +23,7 @@ cs_log("jcorner_installe()");
 		}
 	}
 	// en retour : le code jQuery
-	return array('jcorner' => join("\n\t", $code));
+	return array(join("\n\t", $code));
 }
 
 

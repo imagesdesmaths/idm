@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[en]Swiss Knife[fr]Le Couteau Suisse[ca]El Ganivet Su&#237;s[ar]&#1587;&#1603;&#1610;&#1606; &#1575;&#1604;&#1580;&#1610;&#1576;[nl]Het Zwitserland Mes[gl]A navalla su&#237;za[es]La Navaja Suiza[de]Schweizer Taschenmesser[tr]&#304;svi&#231;re &#199;ak&#305;s&#305;[br]Ar Gontell Suis[pt_br]Canivete Su&#237;&#231;o[ast]La Navaya Suiza[gl]A navalla su&#237;za[ro]Cu&#355;itul Elve&#355;ian[it]Coltellino Svizzero</multi></nom>
 	<icon>img/couteau-50.gif</icon>
-	<version>1.8.38.00</version>
+	<version>1.8.40.03</version>
 	<version_base>1.0</version_base>
 	<auteur>Patrice Vanneufville
 _ &#169; 2007-2009 - Distribu&#233; sous licence GPL

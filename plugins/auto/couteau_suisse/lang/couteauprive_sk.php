@@ -290,7 +290,7 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 	'en_travaux:description' => '<MODIF>Makes it possible to display a customised message on the public site and also in the editing area during maintenance work.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]', # MODIF
 	'en_travaux:nom' => 'Site in maintenance mode', # MODIF
-	'erreur:bt' => '<span style=\\"color:red;\\">Warning:</span> the typographical bar appears to be an old version (@version@).<br />The Penknife is compatible only with version @mini@ or newer.',
+	'erreur:bt' => '<span style="color:red;">Warning:</span> the typographical bar appears to be an old version (@version@).<br />The Penknife is compatible only with version @mini@ or newer.',
 	'erreur:description' => 'missing id in the tool\'s definition!',
 	'erreur:distant' => 'The distant server', # MODIF
 	'erreur:jquery' => '{{N.B.}} : {jQuery} does not appear to be active for this page. Please consult the paragraph about the plugin\'s required libraries [in this article->http://www.spip-contrib.net/?article2166] or reload this page.',
@@ -673,9 +673,9 @@ The summary can be used in conjunction with : {[.->decoupe]}.', # MODIF
 <q1>• Expressions containing spaces should be placed within inverted commas.
 _ • To specify a whole word, place it in brackets. For example: {(asses)}.
 _ • To use a regular expression, first check the syntax, then place it between slashes and inverted commas.
-_ Example:~{<html>\\"/@test.(com|en)/\\"</html>}.
+_ Example:~{<html>"/@test.(com|en)/"</html>}.
 _ • Pour une expression régulière devant agir sur des caractères HTML, placez le test entre «&#» et «;».
-_ Example:~{<html>\\"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/\\"</html>}.</q1>
+_ Example:~{<html>"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/"</html>}.</q1>
 
 @puce@ Certaines adresses IP peuvent également être bloquées à la source. Sachez toutefois que derrière ces adresses (souvent variables), il peut y avoir plusieurs utilisateurs, voire un réseau entier.[[%spam_ips%]]
 <q1>• Utilisez le caractère «*» pour plusieurs chiffres, «?» pour un seul et les crochets pour des classes de chiffres.</q1>', # MODIF
@@ -831,6 +831,7 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'url_propres2' => 'propres2@_CS_ASTER@', # MODIF
 	'url_propres_qs' => 'propres_qs', # MODIF
 	'url_standard' => 'standard', # MODIF
+	'url_verouillee' => 'URL verrouillée', # NEW
 	'urls_3_chiffres' => 'Require a minum of 3 digits', # MODIF
 	'urls_avec_id' => 'Place as a suffix', # MODIF
 	'urls_avec_id2' => 'Place as a prefix',
@@ -841,7 +842,7 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'urls_enregistrer' => 'Write this URL to the database', # MODIF
 	'urls_id_sauf_rubriques' => '<MODIF>Exclude the sections',
 	'urls_minuscules' => 'Lower-case letters', # MODIF
-	'urls_nouvelle' => 'Edit the "clean" URL',
+	'urls_nouvelle' => 'Edit the "clean" URL', # MODIF
 	'urls_num_objet' => 'Number:',
 	'urls_purger' => 'Empty all', # MODIF
 	'urls_purger_tables' => 'empty tables selected',
@@ -850,8 +851,9 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'urls_titre_objet' => 'Saved title:',
 	'urls_type_objet' => '<MODF>Order:',
 	'urls_url_calculee' => 'URL PUBLIC  « @type@ »:',
-	'urls_url_objet' => 'Saved "clean" URL:',
+	'urls_url_objet' => 'Saved "clean" URL:', # MODIF
 	'urls_valeur_vide' => '(An empty value triggers the recalculation of the URL)', # MODIF
+	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d\'un clic sur « @voir@ » ou d\'un changement du titre de l\'objet.', # NEW
 
 	// V
 	'validez_page' => 'To access modifications:',

@@ -131,6 +131,7 @@ Compatibilidá: SPIP v1.9x y v2.0', # MODIF
 	'tri_monter' => 'Xubir esti autor',
 
 	// U
+	'url_verrouillee' => 'URL verrouillée', # NEW
 	'urls_propres_erreur' => 'Esti formatu nun tien en cuenta les URLs propies llistáes embaxo.',
 	'urls_propres_format' => 'El formatu actual de les URLs ye: {{« @format@ »}}. [<span>[Axuste->@url@]</span>]',
 	'urls_propres_lien' => 'Enllaz públicu d\'accesu',

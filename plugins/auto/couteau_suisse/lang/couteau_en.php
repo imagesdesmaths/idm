@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'colorer_fond' => 'Colour the background',
 	'colorer_texte' => 'Colour the text',
-	'configurer' => 'Configure the Penknife',
+	'configurer' => 'Configure the Suiss Army Knife',
 	'connections' => 'Connections',
 
 	// D
@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plug_inactifs' => 'Inactive plugins',
 	'plugin_xml' => 'Gathers together a collection of small, useful tools in one plugin for facilitating the management of your SPIP site.
 
-Each tool can be activated/deactivated individually from the [plugin\'s admin page->./?exec=admin_couteau_suisse]. To set numerous site options, click on {{Configuration}}, then choose the {{Swiss Knife}} tab.
+Each tool can be activated/deactivated individually from the [plugin\'s admin page->./?exec=admin_couteau_suisse]. To set numerous site options, click on {{Configuration}}, then choose the {{Swiss Army Knife}} tab.
 
 Available categories are: Administration, Typographical improvements, Typographical shortcuts, Public site display options, Tags, Filters, Criteria.
 
@@ -91,7 +91,7 @@ Some of your already familiar favourite tools are included in this plugin: {Dele
 See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Compatibility: SPIP 1.92x, v2.0.x and v2.1.x',
-	'pp_autobr' => 'Insert a block with automatic line returns', # MODIF
+	'pp_autobr' => 'Insert a text block with automatic line returns',
 	'pp_blocs_bloc' => 'Insert a collapsed block',
 	'pp_blocs_visible' => 'Insert an expanded block',
 	'pp_chatons_inserer' => 'Insert the " @chaton@ " emoticon/smiley',
@@ -100,7 +100,7 @@ Compatibility: SPIP 1.92x, v2.0.x and v2.1.x',
 	'pp_couleur_icone_fond' => 'B',
 	'pp_couleur_icone_texte' => 'T',
 	'pp_couleur_texte' => '@couleur@ text',
-	'pp_couteau_suisse_drop' => 'Use a Swiss Knife tool',
+	'pp_couteau_suisse_drop' => 'Use a Swiss Army Knife tool',
 	'pp_decoration_inserer' => '" @balise@.@racc@ " decoration',
 	'pp_decoration_inserer_drop' => 'Apply a customised "decoration" to the text',
 	'pp_decoupe_onglets' => 'Insert a tab mechanism',
@@ -125,12 +125,13 @@ Compatibility: SPIP 1.92x, v2.0.x and v2.1.x',
 	'test_manuel' => 'Manual test',
 	'texte_formatspip' => 'ORIGINAL TEXT IN SPIP FORMAT',
 	'textes_formatspip' => 'ORIGINAL TEXTS IN SPIP FORMAT',
-	'titre' => 'Penknife',
+	'titre' => 'Suiss Army Knife',
 	'tri_auteurs' => 'ORDER OF AUTHORS',
 	'tri_descendre' => 'Move this author down',
 	'tri_monter' => 'Move this author up',
 
 	// U
+	'url_verrouillee' => 'URL verrouillée', # NEW
 	'urls_propres_erreur' => 'This format does not take into account the URLs listed below own',
 	'urls_propres_format' => 'Thecurrent format of URLs is: {{« @format@ »}}. [<span>[Configuration->@url@]</span>]',
 	'urls_propres_lien' => 'Public access link',

@@ -5,8 +5,11 @@
 	<langue code="ca">
 		<traducteur nom="merce" />
 	</langue>
-	<langue code="de" />
+	<langue code="de">
+		<traducteur nom="klaus" />
+	</langue>
 	<langue code="en">
+		<traducteur nom="kandalaft" />
 		<traducteur nom="mark_baber" />
 	</langue>
 	<langue code="es" />

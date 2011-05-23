@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => ': نعم',
 
 	// S
-	'SPIP_liens:description' => '@puce@ كل روابط الموقع تفتح افتراضياً في النافذة الحالية. ولكن قد نحتاج الى فتح الروابط الخارجية في نافذة جديدة مما يتطلب اضافة {target=\\"_blank\\"} الى كل علامات &lt;a&gt; المزودة بخصائص {spip_out} او {spip_url} او {spip_glossaire}. من الضروري احياناً اضافة احدى تلك الخصائص الى روابط صفحات الموقع النموذجية (اي ملفات html) للاستفادة الى اقصى حد من هذه الوظيفة.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '@puce@ كل روابط الموقع تفتح افتراضياً في النافذة الحالية. ولكن قد نحتاج الى فتح الروابط الخارجية في نافذة جديدة مما يتطلب اضافة {target="_blank"} الى كل علامات &lt;a&gt; المزودة بخصائص {spip_out} او {spip_url} او {spip_glossaire}. من الضروري احياناً اضافة احدى تلك الخصائص الى روابط صفحات الموقع النموذجية (اي ملفات html) للاستفادة الى اقصى حد من هذه الوظيفة.[[%radio_target_blank3%]]
 
 @puce@ يتيح SPIP ربط كلمات بتفسيراتها بفضل اختصار <code>[?كلمة]</code>. افتراضياً (او اذا ابقيت على الخانة ادناه فارغة)، يأخذ الفهرس الخارجي الى موسوعة ويكيبيديا. ويعود اليك اختيار عنوان آخر.<br />رابط للاختبار:[?SPIP][[%url_glossaire_externe2%]]', # MODIF
 	'SPIP_liens:description1' => '@puce@ يوفر SPIP نمط في اوراق الأنماط للتعامل مع روابط من نوع «:mailto»: يظهر ظرف صغير أمام أي رابط يدل على عنوان بريد الكتروني. ولكن بما ان بعض برامج التصفح لا تتمكن من عرضه (خاصة انترنت اكسبلورر ٦ وانترنت اكسبلورر ٧ وسافاري ٣)، يعود الأمر اليك لتقرر اذا كنت تريد هذه الإضافة أم لا.
@@ -97,7 +97,7 @@ BLOC_FIN#</code></quote>
 @puce@ اذا اخترت «نعم» أدناه، سيتم تخزين وضعية الكتل المرقمة في كعكة مدتها تساوي مدة الزيارة وذلك للحفاظ على شكل الصفحة لدى العودة اليها.[[%blocs_cookie%]]
 
 @puce@ يستخدم سكين الجيب افتراضياً علامة HTML للعناوين &lt;h4&gt; لعناوين الكتل التي يمكن بسطها. اختر من هنا علامة اخرى &lt;hN&gt;:[[%bloc_h4%]]
-@puce@ للحصول على مؤثر ناعم عند النقر، يمكن للكتل التي تطوى ان تتحرك على شكل \\"انزلاق\\".[[%blocs_slide%]][[->%blocs_millisec% الف من الثانية]]', # MODIF
+@puce@ للحصول على مؤثر ناعم عند النقر، يمكن للكتل التي تطوى ان تتحرك على شكل "انزلاق".[[%blocs_slide%]][[->%blocs_millisec% الف من الثانية]]', # MODIF
 	'blocs:nom' => 'كتل قابلة للبسط',
 	'boites_privees:description' => 'كل المربعات المذكورة ادناه تظهر في المجال الخاص.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{تعديلات سكين الجيب}}: اطار في الصفحة الحالية من الاعدادات، يعرض آخر التعديلات التي دخلت على برمجة الملحق ([المصدر->@_CS_RSS_SOURCE@]).
@@ -157,7 +157,7 @@ _ تستبدل هذه الاداة الاختصارات بالصور التي ت
  
 يمكن تحديد علامتي الفتح والاقفال للحواشي: [[%ouvre_note%]][[->%ferme_note%]]
 
-@puce@ {{أنماط SPIP الافتراضية}}. حتى الاصدار 1.9.2 من SPIP، كانت اختصارات الكتابة تنتج علامات تخضع دائماً لنمط \\"spip\\". مثلاً: <code><p class=\\"spip\\"></code>. يمكنك هنا تحديد نمط هذه العلامات بالاعتماد على اوراق انماطك. وترك خانة فارغة يعني انه لن يتم استخدام اي نمط معين.
+@puce@ {{أنماط SPIP الافتراضية}}. حتى الاصدار 1.9.2 من SPIP، كانت اختصارات الكتابة تنتج علامات تخضع دائماً لنمط "spip". مثلاً: <code><p class="spip"></code>. يمكنك هنا تحديد نمط هذه العلامات بالاعتماد على اوراق انماطك. وترك خانة فارغة يعني انه لن يتم استخدام اي نمط معين.
 
 {{تنبيه: اذا تم تعديل بعض العلامات (الخط الأفقي او عنوان الفقرة او المائل او الأسود) أعلاه، لن يتم تطبيق الأنماط أدناه.}}
 <q1>
@@ -302,7 +302,7 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 	'en_travaux:description' => 'خلال فترة الصيانة، تتيح عرض رسالة يمكن تخصيصها في كل صفحات الموقع واذا اقتضت الحاجة في المجال الخاص.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1">%avertir_travaux%</admin_travaux>]][[%prive_travaux%]]', # MODIF
 	'en_travaux:nom' => 'موقع قيد التصميم',
-	'erreur:bt' => '<span style=\\"color:red;\\">تنبيه:</span> يبدو ان شريط ادوات الكتابة (الإصدار @version@) قديم.<br />يتوافق سكين الجيب مع الإصدار @mini@ أو أحدث. ',
+	'erreur:bt' => '<span style="color:red;">تنبيه:</span> يبدو ان شريط ادوات الكتابة (الإصدار @version@) قديم.<br />يتوافق سكين الجيب مع الإصدار @mini@ أو أحدث. ',
 	'erreur:description' => 'رقم متسلسل غير موجود في تعريف الاداة!',
 	'erreur:distant' => 'الخادم البعيد',
 	'erreur:jquery' => '{{ملاحظة}}: يبدو ان مكتبة {jQuery} غير نشطة في هذه الصفحة. الرجاء مراجعة الفقرة حول علاقات الملحق [هنا->http://www.spip-contrib.net/?article2166] او اعادة تحديث الصفحة.',
@@ -809,6 +809,7 @@ _ Les abréviations obtenues sont conformes à celles de l\'Imprimerie nationale
 	'url_propres2' => 'propres2@_CS_ASTER@', # NEW
 	'url_propres_qs' => 'نظيفة_qs',
 	'url_standard' => 'قياسية',
+	'url_verouillee' => 'URL verrouillée', # NEW
 	'urls_3_chiffres' => 'فرض ثلاثة أرقام كحد أدنى',
 	'urls_avec_id' => 'وضعه في اللاحقة',
 	'urls_avec_id2' => 'وضعه في السابقة',
@@ -819,7 +820,7 @@ _ Les abréviations obtenues sont conformes à celles de l\'Imprimerie nationale
 	'urls_enregistrer' => 'Enregistrer cette URL en base', # NEW
 	'urls_id_sauf_rubriques' => 'Exclure les objets suivants (séparés par « : ») :', # NEW
 	'urls_minuscules' => 'Lettres minuscules', # NEW
-	'urls_nouvelle' => 'Éditer l\'URL « propres » :', # NEW
+	'urls_nouvelle' => 'Éditer l\'URL « propres » principale :', # NEW
 	'urls_num_objet' => 'Numéro :', # NEW
 	'urls_purger' => 'Tout vider', # NEW
 	'urls_purger_tables' => 'Vider les tables sélectionnées', # NEW
@@ -828,8 +829,9 @@ _ Les abréviations obtenues sont conformes à celles de l\'Imprimerie nationale
 	'urls_titre_objet' => 'Titre enregistré  :', # NEW
 	'urls_type_objet' => 'Objet :', # NEW
 	'urls_url_calculee' => 'URL publique « @type@ » :', # NEW
-	'urls_url_objet' => 'URL « propres » enregistrée :', # NEW
-	'urls_valeur_vide' => '(Une valeur vide entraine le recalcul de l\'URL)', # NEW
+	'urls_url_objet' => 'URL(s) « propres » enregistrée(s) :', # NEW
+	'urls_valeur_vide' => 'Note : Une valeur vide entraine la suppression des URL(s) « propres » enregistrée(s) puis un nouveau calcul de l\'URL principale sans verrouillage.', # NEW
+	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d\'un clic sur « @voir@ » ou d\'un changement du titre de l\'objet.', # NEW
 
 	// V
 	'validez_page' => 'Pour accéder aux modifications :', # NEW

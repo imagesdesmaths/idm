@@ -87,13 +87,16 @@ function maj_auto_action_rapide() {
 	// verification des plugins
 	include_spip('inc/plugin');
 	$plugins_actifs = array_values(liste_chemin_plugin_actifs());
+	// liste des extensions dispo sous SPIP 2.1
+	$plugins_extensions = defined('_SPIP20100')?array_values(liste_chemin_plugin_actifs(_DIR_EXTENSIONS)):array();
 	// tous, mais les actifs d'abord...
-	$plugins = array_unique(array_merge($plugins_actifs, liste_plugin_files()));
-	$html_actifs = $html_inactifs = array();
+	$plugins = array_unique(array_merge($plugins_actifs, $plugins_extensions, liste_plugin_files()));
+	$html_actifs = $html_inactifs = $html_extensions = array();
 	foreach ($plugins as $p) /*if(preg_match(',^auto/,', $p))*/ {
 		$actif = in_array($p, $plugins_actifs, true);
+		$extension = in_array($p, $plugins_extensions, true);
 		$auto = preg_match(',^auto/,', $p);
-		$infos = plugin_get_infos_maj($p, $stop=time()-$time>$timeout);
+		$infos = plugin_get_infos_maj($p, $stop=time()-$time>$timeout, $extension?_DIR_EXTENSIONS:_DIR_PLUGINS);
 		$maj_lib = $checked = '';
 		if($stop)
 			$maj_lib = '<span class="cs_relancer">'.'Temps serveur &eacute;coul&eacute; : [poursuivre->#].'.'</span>';
@@ -127,13 +130,14 @@ function maj_auto_action_rapide() {
 				$nom .= "\n_ "._T('couteau:maj_verif') . "\n_ $zip_log\n_ {$bouton}[->$infos[zip_trac]]<label>";
 			$bouton = '&nbsp;';
 		}
-		${$actif?'html_actifs':'html_inactifs'}[] = "|$bouton|$nom|$rev|";
+		${$actif?'html_actifs':($extension?'html_extensions':'html_inactifs')}[] = "|$bouton|$nom|$rev|";
 	}
 	
 	$html1 = "\n<div $style id='maj_auto_div'>$html1<fieldset><legend $style>"
 		. _T('couteau:maj_liste').'</legend>'
 		. propre(
 			(count($html_actifs)? "\n|{{" . _T('couteau:plug_actifs') . "}}|<|<|\n" . join("\n",$html_actifs) . "\n" : '')
+			. (count($html_extensions)? "\n|{{" . _T('plugins_liste_extensions') . "}}|<|<|\n" . join("\n",$html_extensions) . "\n" : '')
 			. (count($html_inactifs)? "\n|{{" . _T('couteau:plug_inactifs') . "}}|<|<|\n" . join("\n",$html_inactifs) . "\n" : '')
 		  )
 		. "<div style='text-align: right;'><input class='fondo' type='submit' value=\""
@@ -190,11 +194,13 @@ function maj_auto_rev_distante($url, $timeout=false, $pattern=NULL, $lastmodifie
 	return $distant;
 }
 
-function plugin_get_infos_maj($p, $timeout=false) {
-	$get_infos = defined('_SPIP20100')?charger_fonction('get_infos','plugins'):'plugin_get_infos';
-	$infos = $get_infos($p);
+function plugin_get_infos_maj($p, $timeout=false, $DIR_PLUGINS=_DIR_PLUGINS) {
+	if(defined('_SPIP20100')) {
+		$get_infos = charger_fonction('get_infos','plugins');
+		$infos = $get_infos($p, false, $DIR_PLUGINS);
+	} else $infos = plugin_get_infos($p);
 	// fichier svn.revision
-	$ok = lire_fichier($svn_rev = _DIR_PLUGINS.$p.'/svn.revision', $svn);
+	$ok = lire_fichier($svn_rev = $DIR_PLUGINS.$p.'/svn.revision', $svn);
 	$lastmodified = @file_exists($svn_rev)?@filemtime($svn_rev):0;
 	if($ok && preg_match(',<origine>(.+)</origine>,', $svn, $regs)) {
 		$url_origine = str_replace(array(_MAJ_SVN_FILE, _MAJ_SVN_DEBUT), _MAJ_LOG_DEBUT, $regs[1]);
@@ -203,10 +209,10 @@ function plugin_get_infos_maj($p, $timeout=false) {
 	} else $url_origine = '';
 	$infos['commit'] = ($ok && preg_match(',<commit>(.+)</commit>,', $svn, $regs))?$regs[1]:'';
 	$rev_local = (strlen($svn) && preg_match(',<revision>(.+)</revision>,', $svn, $regs))
-		?intval($regs[1]):version_svn_courante(_DIR_PLUGINS.$p);
+		?intval($regs[1]):version_svn_courante($DIR_PLUGINS.$p);
 	if($infos['svn'] = $rev_local<0) { 
 		// fichier SVN
-		if (lire_fichier(_DIR_PLUGINS.$p.'/.svn/entries', $svn) 
+		if (lire_fichier($DIR_PLUGINS.$p.'/.svn/entries', $svn) 
 				&& preg_match(',(?:'.preg_quote(_MAJ_SVN_TRAC).'|'.preg_quote(_MAJ_SVN_DEBUT).')[^\n\r]+,ms', $svn, $regs)) {
 			$url_origine = str_replace(array(_MAJ_SVN_TRAC,_MAJ_SVN_DEBUT), _MAJ_LOG_DEBUT, $regs[0]);
 			// prise en compte du recent demenagement de la Zone...

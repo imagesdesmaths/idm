@@ -131,6 +131,7 @@ Compatibilitate : SPIP 1.9x şi v2.0', # MODIF
 	'tri_monter' => 'Urcaţi acest autor',
 
 	// U
+	'url_verrouillee' => 'URL verrouillée', # NEW
 	'urls_propres_erreur' => 'Acest format nu ţine seama de URL-urile curate listate mai jos.',
 	'urls_propres_format' => 'Formatul curent al URL-urilor este : {{« @format@ »}}. [<span>[Configuration->@url@]</span>]',
 	'urls_propres_lien' => 'Legătura publică de acces',

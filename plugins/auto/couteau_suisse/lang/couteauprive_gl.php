@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => ' : si',
 
 	// S
-	'SPIP_liens:description' => '@puce@ Todas as ligazóns do web se abren predeterminadamente na mesma ventá de navegación en curso. Mais pode ser útil abril ligazóns externas ao web nunha nova ventá exterior -- iso implica engadir {target=\\"_blank\\"} a todas as balizas &lt;a&gt; dotadas por  SPIP de clases {spip_out}, {spip_url} ou {spip_glossaire}. Se cadra é necesario engadir unha destas clases nas ligazóns do esqueleto do web (ficheiros html) co fin de estender ao máximo esta funcionalidade.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '@puce@ Todas as ligazóns do web se abren predeterminadamente na mesma ventá de navegación en curso. Mais pode ser útil abril ligazóns externas ao web nunha nova ventá exterior -- iso implica engadir {target="_blank"} a todas as balizas &lt;a&gt; dotadas por  SPIP de clases {spip_out}, {spip_url} ou {spip_glossaire}. Se cadra é necesario engadir unha destas clases nas ligazóns do esqueleto do web (ficheiros html) co fin de estender ao máximo esta funcionalidade.[[%radio_target_blank3%]]
 
 @puce@ SPIP permite ligar palabras á súa definición mercé ao atallo tipográfico <code>[?mot]</code>. Predeterminadamente (ou se vostede  deixa baleira a caixa seguinte), o glosario externo reenvía sobre a enciclopedia libre wikipedia.org. Pode escoller o enderezo que se vaia utilizar. <br />Ligazón de test : [?SPIP][[%url_glossaire_externe2%]]', # MODIF
 	'SPIP_liens:description1' => '@puce@ SPIP prevé un estilo CSS para as ligazóns «~mailto:~» : un pequeno cadro debería aparecer para cada ligazón relacionada cun enderezo de correo; mais para que todos os navegadores non o poidan mostrar (nomeadamente IE6, IE7 e SAF3), decida se cómpre conservar este engadido.
@@ -97,7 +97,7 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 @puce@ Marcando «si», o estado dos bloques numerados gardarase nunha cookie durante o tempo da sesión, co fin de conservar o aspecto da páxina en caso de retorno.[[%blocs_cookie%]]
 
 @puce@ A Navalla Suíza utiliza de modo predeterminado a baliza HTML &lt;h4&gt; para o título dos bloques despregables. Escolla aquí outra baliza &lt;hN&gt; :[[%bloc_h4%]]
-@puce@ Co fin de obter un efecto máis doce no momento do clic, os bloques despregables poden animarse á maneira dun \\"esvaramento\\".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]', # MODIF
+@puce@ Co fin de obter un efecto máis doce no momento do clic, os bloques despregables poden animarse á maneira dun "esvaramento".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]', # MODIF
 	'blocs:nom' => 'Bloques despregables',
 	'boites_privees:description' => 'Todas as funcionalidades abaixo descritas aparecen aquí ou na parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]]
 [[->%bp_tri_auteurs%]]
@@ -152,7 +152,7 @@ Tamén pode definir o código de apertura e cerre para as chamadas á notas a p�
  
 Tamén pode definir o código de apertura e cerre para as notas a pe de páxina : [[%ouvre_note%]][[->%ferme_note%]]
 
-@puce@ {{Os estilos de SPIP predeterminados}}. Ata a versión 1.92 de SPIP, os atallos tipográficos producían balizas sistematicamente  nomeadas co patrón \\"spip\\". Por exemplo: <code><p class=\\"spip\\"></code>. Pode definir o estilo destas balizas en función das súas follas de estilo. Un caso baleiro significa que ningún estilo en particular lle será aplicado.
+@puce@ {{Os estilos de SPIP predeterminados}}. Ata a versión 1.92 de SPIP, os atallos tipográficos producían balizas sistematicamente  nomeadas co patrón "spip". Por exemplo: <code><p class="spip"></code>. Pode definir o estilo destas balizas en función das súas follas de estilo. Un caso baleiro significa que ningún estilo en particular lle será aplicado.
 
 {Ollo : se algúns recursos (liña horizontal, intertítulo, cursiva, grosa) se modificaren, os estilos seguintes xa non se poderán aplicar.}
 
@@ -296,7 +296,7 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 	'en_travaux:description' => 'Permite mostrar unha mensaxe personalizable durante unha fase de mantemento sobre todo o web público, e mesmo sobre a parte privada.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1">%avertir_travaux%</admin_travaux>]][[%prive_travaux%]]', # MODIF
 	'en_travaux:nom' => 'Web en obras',
-	'erreur:bt' => '<span style=\\"color:red;\\">Aviso:</span> a barra tipográfica (version @version@) parece antiga.<br />A Navalla Suíza é  compatible cunha versión superior ou igual a @mini@.',
+	'erreur:bt' => '<span style="color:red;">Aviso:</span> a barra tipográfica (version @version@) parece antiga.<br />A Navalla Suíza é  compatible cunha versión superior ou igual a @mini@.',
 	'erreur:description' => 'Falta o id na definición da ferramenta!',
 	'erreur:distant' => 'O servidor remoto',
 	'erreur:jquery' => '{{Nota}} : a libraría {jQuery} parece inactiva nesta páxina. Consulte [aquí->http://www.spip-contrib.net/?article2166] o parágrafo verbo das dependencias do plugin ou recargar esta páxina.',
@@ -675,7 +675,7 @@ Este sumario pode ser aparellado con : « [.->decoupe] ».', # MODIF
 Liste aquí, separándoas por espazos, as secuencias prohibidas [[%spam_mots%]]
 • Para unha expresión con espazos, sitúea entre parénteses. Exemplo:~{(asses)}.
 _ • Para especificar unha palabra enteira, situéa ente parénteses. Exemplo~:~{(asses)}.
-_ • Para unha expresión regular, comprobe ben a sintaxe e sitúea entre barras e comas. Exemplos:~{<html>\\"/@test\\.(com|fr)/\\"</html>}.', # MODIF
+_ • Para unha expresión regular, comprobe ben a sintaxe e sitúea entre barras e comas. Exemplos:~{<html>"/@test\\.(com|fr)/"</html>}.', # MODIF
 	'spam:nom' => 'Loita contra o SPAM',
 	'spam_ip' => 'Blocage IP de @ip@ :', # NEW
 	'spam_test_ko' => 'Esta mensaxe será bloqueada polo filtro antispam!',
@@ -733,7 +733,7 @@ Cet outil est compatible avec : « [.->sommaire] ».', # NEW
 
 Consulte [aqui->http://www.spip.net/fr_article2128.html] a documentación de SPIP sobre este asunto.
 
-Esta ferramenta acepta igualmente os argumentos introducidos por SPIP 2.0. Por exemplo, o atallo <code><:miña_cadea{nome=Carlos Martín, idade=37}:>/code> permite pasar dous parámetros á cadea seguinte: <code>\'miña_cadea\'=>"Bos días, eu son @nome@ e teño @idade@ anos\\"</code>.
+Esta ferramenta acepta igualmente os argumentos introducidos por SPIP 2.0. Por exemplo, o atallo <code><:miña_cadea{nome=Carlos Martín, idade=37}:>/code> permite pasar dous parámetros á cadea seguinte: <code>\'miña_cadea\'=>"Bos días, eu son @nome@ e teño @idade@ anos"</code>.
 
 A función SPIP usada en PHP é : <code>_T(\'chaine\')</code>. sen argumento, e <code>_T(\'chaine\', array(\'arg1\'=>\'un texto\', \'arg2\'=>\'un outro texto\'))</code> con argumentos.
 
@@ -831,6 +831,7 @@ Escolla aquí se quere poñer en superíndice certos atallos suplementarios, mal
 	'url_propres2' => 'propias2@_CS_ASTER@',
 	'url_propres_qs' => 'propias_qs',
 	'url_standard' => 'estándar',
+	'url_verouillee' => 'URL verrouillée', # NEW
 	'urls_3_chiffres' => 'Impoñer un mínimo de 3 cifras',
 	'urls_avec_id' => 'Poñelo en sufixo',
 	'urls_avec_id2' => 'Poñer o Id en prefixo',
@@ -841,7 +842,7 @@ Escolla aquí se quere poñer en superíndice certos atallos suplementarios, mal
 	'urls_enregistrer' => 'Rexistrar esta URL na base',
 	'urls_id_sauf_rubriques' => 'Excluír as seccións', # MODIF
 	'urls_minuscules' => 'Letras minúsculas',
-	'urls_nouvelle' => 'Editar o URL « propias » :',
+	'urls_nouvelle' => 'Editar o URL « propias » :', # MODIF
 	'urls_num_objet' => 'Número :',
 	'urls_purger' => 'Baleirar todo',
 	'urls_purger_tables' => 'Baleirar as táboas seleccionadas',
@@ -850,8 +851,9 @@ Escolla aquí se quere poñer en superíndice certos atallos suplementarios, mal
 	'urls_titre_objet' => 'Título rexistrado :',
 	'urls_type_objet' => 'Obxecto :',
 	'urls_url_calculee' => 'URL público « @type@ » :',
-	'urls_url_objet' => 'URL « propias » rexistrado :',
-	'urls_valeur_vide' => '(Un valor baleiro provoca o recálculo do URL)',
+	'urls_url_objet' => 'URL « propias » rexistrado :', # MODIF
+	'urls_valeur_vide' => '(Un valor baleiro provoca o recálculo do URL)', # MODIF
+	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d\'un clic sur « @voir@ » ou d\'un changement du titre de l\'objet.', # NEW
 
 	// V
 	'validez_page' => 'Para acceder ás modificacións :',

@@ -4,62 +4,62 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
   
-  'articles_corbeille_tous' => "@nb@ Artikel im M&uuml;lleimer",
-  'articles_corbeille_un' => "1 Artikel im M&uuml;lleimer",
+  'articles_corbeille_tous' => "@nb@ Artikel im Papierkorb",
+  'articles_corbeille_un' => "1 Artikel im Papierkorb",
 
- 	'aucun_element_supprime' => 'Es wurde nicht aus dem M&uuml;lleimer entfernt',
+  'aucun_element_supprime' => 'Es wurde nicht aus dem Papierkorb entfernt',
 
- 	'aucun' => "Aucun",
-  'auteurs_corbeille_tous' => "@nb@ Autoren im M&uuml;lleimer",
-  'auteurs_corbeille_un' => "1 Autor im M&uuml;lleimer",
+  'aucun' => "Nichts",
+  'auteurs_corbeille_tous' => "@nb@ Autoren im Papierkorb",
+  'auteurs_corbeille_un' => "1 Autor im Papierkorb",
 
 	// B
-  'breves_corbeille_tous' => "@nb@ Kurzmittteilungen im M&uuml;lleimer",
-  'breves_corbeille_un' => "1 Kurzmittteilung im M&uuml;lleimer",
+  'breves_corbeille_tous' => "@nb@ Kurzmittteilungen im Papierkorb",
+  'breves_corbeille_un' => "1 Kurzmittteilung im Papierkorb",
 	
 	// C
-  'corbeille'=>'M&uuml;lleimer',
-  'choix_doc'=>'W&auml;hlen sie das anzuzeigende Dateiformat', 
+  'corbeille'=>'Papierkorb',
+  'choix_doc'=>'Wählen sie das anzuzeigende Dateiformat', 
 
   // D
-  'doc_effaces' => 'Gel&ouml;schte Dokumente:',
+  'doc_effaces' => 'Gelöschte Dokumente:',
 
   // E
  	'ecrit' => " schrieb:",
-	'effacer' => "Auswahl l&ouml;schen",
-	'effacer_tout' => 'Alles l&ouml;schen',
+	'effacer' => "Auswahl löschen",
+	'effacer_tout' => 'Alles löschen',
  	'erreur' => " : Fehler !",
- 	'elements_supprimes' => '@ids@ wurden aus dem M&uuml;lleimer gel&ouml;scht',
- 	'element_supprime' => '@ids@ wurde aus dem M&uuml;lleimer gel&ouml;scht',
+ 	'elements_supprimes' => '@ids@ wurden aus dem Papierkorb gel&ouml;scht',
+ 	'element_supprime' => '@ids@ wurde aus dem Papierkorb gelöscht',
 
  	// F
-  'forums_publics_corbeille_tous' => "@nb@ Forumsbeitr&auml;ge im M&uuml;lleimer",
-  'forums_publics_corbeille_un' => "1 Forumsbeitrag im M&uuml;lleimer",
-  'forums_prives_corbeille_tous' => "@nb@ Forumsbeitr&auml;ge im M&uuml;lleimer",
-  'forums_prives_corbeille_un' => "1 Forumsbeitrag im M&uuml;lleimer",
+  'forums_publics_corbeille_tous' => "@nb@ Forumsbeiträge im Papierkorb",
+  'forums_publics_corbeille_un' => "1 Forumsbeitrag im Papierkorb",
+  'forums_prives_corbeille_tous' => "@nb@ Forumsbeiträge im Papierkorb",
+  'forums_prives_corbeille_un' => "1 Forumsbeitrag im Papierkorb",
 
   // I
 	'icone_syndic' => "Syndizierte Webseiten",
 	
   //M
-	'messages_tous_pri' => "Alle Administrationsforumsbeitr&auml;ge in den M&uuml;lleimer:", 
- 	'messages_tous_pub' => "Alle Forumsbeitr&auml;ge in den M&uuml;lleimer:",
+	'messages_tous_pri' => "Alle Administrationsforumsbeiträge in den Papierkorb:", 
+ 	'messages_tous_pub' => "Alle Forumsbeiträge in den Papierkorb:",
 
   //P
  	'parution' => "Erscheinungsdatum",
  	'petition' => "Die Petition:",
-	'petitions_toutes' => "Alle Petitionen in den M&uuml;lleimer:",
+	'petitions_toutes' => "Alle Petitionen in den Papierkorb:",
   
   // readme
-  'readme' => 'Hier k&ouml;nnen Elemente, die in den M&uuml;ll geworfen wurden {{definitiv gel&ouml;scht}} werden. Sie k&uuml;nnen ein Element im M&uuml;lleimer lassen solange sie wollen. Ein endgueltig gel&ouml;schtes Element kann nicht wieder hergestellt werden. Seien sie daher vorsichtig.',
+  'readme' => 'Hier können Elemente, die in denPapierkorb geworfen wurden {{endgültig gelöscht}} werden. Sie können ein Element im Papierkorb lassen solange sie wollen. Ein endgültig gelöschtes Element kann nicht wieder hergestellt werden. Seien sie daher vorsichtig.',
 
   // S
   'signe' => " unterzeichnet mit:",
   'souci' => "Fatales Problem !",
-  'sites_corbeille_tous' => "@nb@ Webseiten im M&uuml;lleimer",
-  'sites_corbeille_un' => "1 Webseite im M&uuml;lleimer",
-  'signatures_corbeille_tous' => "@nb@ Unterschriften im M&uuml;lleimer",
-  'signatures_corbeille_un' => "1 Unterschrift im M&uuml;lleimer",
+  'sites_corbeille_tous' => "@nb@ Webseiten im Papierkorb",
+  'sites_corbeille_un' => "1 Webseite im Papierkorb",
+  'signatures_corbeille_tous' => "@nb@ Unterschriften im Papierkorb",
+  'signatures_corbeille_un' => "1 Unterschrift im Papierkorb",
   
   'titre' => "Titel",
   

@@ -26,6 +26,12 @@ Par défaut ne liste que ceux des rubriques à la racine (secteurs)
 		[(#ENV{multiple}|non)
 		<option value="#ID_ARTICLE"[(#ID_ARTICLE|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>#TITRE</option>]
 		</BOUCLE_articles_originaux_racine>
+	<BOUCLE_articles_page(ARTICLES){id_secteur<1}{origine_traduction}>
+	[(#ENV{multiple}|oui)
+		<option value="#ID_ARTICLE"[(#ID_ARTICLE|in_array{#ENV{valeur,#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#TITRE</option>]
+		[(#ENV{multiple}|non)
+		<option value="#ID_ARTICLE"[(#ID_ARTICLE|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>#TITRE</option>]
+	</BOUCLE_articles_page>
 	<BOUCLE_secteurs(RUBRIQUES){id_parent = #ENV{id_rubrique,0}}{par num titre, titre}{tout}>
 	<optgroup label="#TITRE">
 		<B_articles_originaux>

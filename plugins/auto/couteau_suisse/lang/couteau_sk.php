@@ -131,6 +131,7 @@ Compatibility: SPIP 1.92x and v2.0.x', # MODIF
 	'tri_monter' => 'Move this author up', # MODIF
 
 	// U
+	'url_verrouillee' => 'URL verrouillée', # NEW
 	'urls_propres_erreur' => 'This format does not take into account the URLs listed below own',
 	'urls_propres_format' => 'Thecurrent format of URLs is: {{« @format@ »}}. [<span>[Configuration->@url@]</span>]',
 	'urls_propres_lien' => 'Public access link',

@@ -6,7 +6,7 @@
 	[es]Papelera
 	[it]Cestino
 	[en]Recycle bin
-	[de]M&uuml;lleimer
+	[de]Papierkorb
 </multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin --><multi>[fr]contribution originale par [Matthieu Onfray (Japanim)->http://www.japanim.net/] &#169; 2002
@@ -18,7 +18,7 @@ _ <multi>
 	[es]&#169; 2005-2008 - Distribuido bajo licencia GPL
 	[it]&#169; 2005-2008 - Distribuito sotto licenza GPL
 	[en]&#169; 2005-2008 - distributed under the GPL license
-	[de]&#169; 2005-2008 - unter GPL Lizens herausgegeben
+	[de]&#169; 2005-2008 - Veröffentlicht unter der GPL Lizenz
 </multi>
 	</auteur>
 	<version>
@@ -30,11 +30,11 @@ _ <multi>
 	<description>
 	<multi>
 	[ar]	&#1573;&#1583;&#1575;&#1585;&#1577; &#1575;&#1604;&#1605;&#1587;&#1578;&#1606;&#1583;&#1575;&#1578; &#1575;&#1604;&#1605;&#1608;&#1580;&#1608;&#1583;&#1577; &#1601;&#1610; &#1587;&#1604;&#1577; &#1575;&#1604;&#1605;&#1607;&#1605;&#1604;&#1575;&#1578;
-	[fr] 	Gestion des documents mis &#224; la corbeille
-	[es]  Gesti&oacute;n de los documentos enviados a la papelera.
-	[it]	Gestione dei documenti nel cestino.
-	[en]	Managing documents chucked in the recycle bin.
-	[de]  Verwaltung der Elemente im M&uuml;lleimer
+	[fr] Gestion des documents mis &#224; la corbeille
+	[es] Gesti&oacute;n de los documentos enviados a la papelera.
+	[it] Gestione dei documenti nel cestino.
+	[en] Managing documents chucked in the recycle bin.
+	[de] Verwaltung der Elemente im Papierkorb
 	</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Corbeille</lien> <!-- URI de documentation -->

@@ -8,7 +8,8 @@
 function cs_rempl_chatons($texte) {
 	if (strpos($texte, ':')===false) return $texte;
 	$chatons = cs_lire_data_outil('chatons');
-	return str_replace($chatons[0], $chatons[1], $texte);
+	return count($chatons[2])?preg_replace($chatons[2], $chatons[1], $texte):$texte;
+//	return str_replace($chatons[0], $chatons[1], $texte);
 }
 
 function chatons_pre_typo($texte) {
@@ -16,21 +17,22 @@ function chatons_pre_typo($texte) {
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'cs_rempl_chatons', $texte);
 }
 
-// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
-function chatons_installe() {
-	$chatons = array();
+// cette fonction appelee automatiquement a chaque affichage de la page privee du Couteau Suisse renvoie un tableau
+function chatons_installe_dist() {
+	$chatons = array(array(), array(), array(), array(), array());
 	$path = find_in_path('img/chatons');
 	$dossier = opendir($path);
 	$bt = defined('_DIR_PLUGIN_PORTE_PLUME');
 	if($path) while ($image = readdir($dossier)) {
 		if (preg_match(',^([a-z][a-z0-9_-]*)\.(png|gif|jpg),', $image, $reg)) { 
 			$chatons[0][] = ':'.$reg[1];
+			$chatons[2][] = ',:'.preg_quote($reg[1],',').'\\b,';
 			list(,,,$size) = @getimagesize("$path/$reg[1].$reg[2]");
 			$chatons[1][] = "<img class=\"no_image_filtrer\" alt=\"$reg[1]\" title=\"$reg[1]\" src=\"".url_absolue($path)."/$reg[1].$reg[2]\" $size/>";
 			if($bt)	$chatons[4]['chaton_'.$reg[1]] = $reg[1].'.'.$reg[2];
 		}
 	}
-	return array('chatons' => $chatons);
+	return array($chatons);
 }
 
 // liste des nouveaux raccourcis ajoutes par l'outil

@@ -8,7 +8,7 @@ function genie_fulltext_index_document_dist($t) {
 		while($nb_docs-- AND $row = sql_fetch($docLists)) {
 			$extension = $row['extension'];
 			$doc = $row['fichier'];
-      spip_log('Indexation de '.$doc, 'extract');
+      		spip_log('Indexation de '.$doc, 'extract');
 			global $extracteur;
 			if (include_spip('extract/'.$extension)
 				AND function_exists($lire = $extracteur[$extension])) {
@@ -24,7 +24,7 @@ function genie_fulltext_index_document_dist($t) {
 				$contenu = $lire(_DIR_RACINE.$fichier, $charset);
 				if (!$contenu) {
 					spip_log('Echec de l\'extraction de '.$fichier, 'extract');
-          sql_updateq("spip_documents", array('contenu' => '', 'extrait' => 'err'), "id_document=".intval($row['id_document']));
+					sql_updateq("spip_documents", array('contenu' => '', 'extrait' => 'err'), "id_document=".intval($row['id_document']));
 				} else {
 					$contenu = substr($contenu, 0, _FULLTEXT_TAILLE);
 					// importer le charset

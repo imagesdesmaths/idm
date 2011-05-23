@@ -18,9 +18,9 @@
 @define('_FILETS_REG_FIN', ')__(?=\s*[\n\r]\s*)#iU');
 @define('_FILETS_REG_EXT', '\.(?:png|gif|jpg)');
 
-// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
-function filets_sep_installe() {
-//cs_log('filets_sep_installe()');
+// cette fonction appelee automatiquement a chaque affichage de la page privee du Couteau Suisse renvoie un tableau
+function filets_sep_installe_dist() {
+//cs_log('filets_sep_installe_dist()');
 	include_spip('inc/texte');
 	// Tester si on echappe en span ou en div
 	$mode = preg_match(',<('._BALISES_BLOCS.'|p)(\W|$),iS', _FILETS_SEP_BALISE_DEBUT)?'div':'span';
@@ -51,7 +51,7 @@ function filets_sep_installe() {
 	$filets[6] = _FILETS_REG_DEBUT . join('|', $filets[6]) . _FILETS_REG_FIN;
 	if($bt) for($i=0; $i<=_FILETS_SEP_MAX_CSS; $i++)
 		$filets[5]['filet_'.$i] = $i;
-	return array('filets_sep' => $filets);
+	return array($filets);
 }
 
 // liste des nouveaux raccourcis ajoutes par l'outil
