@@ -11,13 +11,13 @@ html, body { padding: 0px; margin: 0px; font-family: Arial, sans-serif; text-ali
 #menu ul li { float: left; position: relative; left: 50%; background: #730000; font-size: 90%; border-bottom: 1px solid #e20000; }
 #menu ul li a { display: block; margin: 0; padding: .3ex 1em; background: #660000; color: white; font-weight: normal; }
 #menu ul li a:hover { background: #830000; }
-#menu ul li:hover ul { display: block; }
-#menu ul li:hover ul li a { background: #830000; }
-#menu ul li ul li a:hover { background: #e20000; }
-#menu ul li:hover a { background: #830000; }
 #menu ul li ul { display: none; position: absolute; right: auto; width: 14em; border-top: 1px solid #e20000; z-index: 1000; }
 #menu ul li ul li { left: auto; clear: left; width: 100%; border-bottom: 1px solid #e20000; }
+#menu ul li ul li a:hover { background: #e20000; }
 #menu ul li ul.left { left: auto; right: 0; text-align: right; }
+#menu ul li:hover ul { display: block; }
+#menu ul li:hover ul li a { background: #830000; }
+#menu ul li:hover a { background: #830000; }
 #menu form label { display: none; }
 #menu form input { width: 95%; font-weight: bold; background: white; }
 #menu form input.submit { display: none; }

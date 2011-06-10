@@ -19,15 +19,18 @@ html, body { padding : 0px; margin : 0px; font-family : Arial, sans-serif; text-
                   a { display : block; margin : 0; padding : .3ex 1em; background : $dark; color : white; font-weight : normal;
                       &:hover { background : $light; }
                   }
-                  &:hover ul { display : block;
-                               li a { background : $light; }
-                  }
-                  ul li a:hover { background : $red; }
-                  &:hover a { background : $light; }
                   ul { display : none; position : absolute; right : auto; width : 14em; border-top : 1px solid $red; z-index : 1000;
-                       li { left : auto; clear : left; width : 100%; border-bottom : 1px solid $red; }
+                       li { left : auto; clear : left; width : 100%; border-bottom : 1px solid $red;
+                            a:hover { background : $red; }
+                          }
                        &.left { left : auto; right : 0; text-align : right; }
                      }
+                  &:hover {
+                      ul { display : block;
+                           li a { background : $light; }
+                         }
+                      a { background : $light; }
+                  }
                 }
            }
         form {
