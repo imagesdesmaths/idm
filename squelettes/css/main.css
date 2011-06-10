@@ -16,7 +16,6 @@ html, body { padding: 0px; margin: 0px; font-family: Arial, sans-serif; text-ali
 #menu ul li ul li a:hover { background: #e20000; }
 #menu ul li ul.left { left: auto; right: 0; text-align: right; }
 #menu ul li:hover ul { display: block; }
-#menu ul li:hover ul li a { background: #830000; }
 #menu ul li:hover a { background: #830000; }
 #menu form label { display: none; }
 #menu form input { width: 95%; font-weight: bold; background: white; }
@@ -141,12 +140,10 @@ div.figure div.legende p { font-size: 90%; font-style: italic; margin-top: 0px; 
 
 div.citer { background: #ccc; padding: .5ex 1ex; text-size: small; margin: 0 -1em -1ex; }
 
-/* Various styles and fixes */
 a.article { font-weight: normal; }
 
 a.lexique { font-weight: normal; border-bottom: 1px dotted; }
 
-/* Still unsorted ... */
 form { margin: 1ex 1em; }
 form h2 { margin: 0px; }
 form p { margin: .5ex 0px; }
@@ -157,10 +154,8 @@ form fieldset.previsu ul { list-style-type: none; }
 hr.huge { margin: 2ex 0px; height: 20px; color: #e20000; background-color: #e20000; border: 0px; }
 
 table { margin: 0px auto; text-align: center; border: 1px solid #e20000; border-collapse: collapse; }
-
-td { border: 1px solid #e20000; padding: 1px .5em; }
-
-th { font-weight: bold; border: 1px solid #e20000; padding: 1px .5em; }
+table td { border: 1px solid #e20000; padding: 1px .5em; }
+table th { font-weight: bold; border: 1px solid #e20000; padding: 1px .5em; }
 
 div.plaintables table * { border-color: white; }
 

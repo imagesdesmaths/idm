@@ -26,9 +26,7 @@ html, body { padding : 0px; margin : 0px; font-family : Arial, sans-serif; text-
                        &.left { left : auto; right : 0; text-align : right; }
                      }
                   &:hover {
-                      ul { display : block;
-                           li a { background : $light; }
-                         }
+                      ul { display : block; }
                       a { background : $light; }
                   }
                 }
@@ -169,12 +167,8 @@ div.figure { width : 95%; text-align : center; margin : 1ex auto;
 
 div.citer { background : #ccc; padding : .5ex 1ex; text-size : small; margin : 0 -1em -1ex; }
 
-/* Various styles and fixes */
-
 a.article { font-weight : normal; }
 a.lexique { font-weight : normal; border-bottom : 1px dotted; }
-
-/* Still unsorted ... */
 
 form { margin : 1ex 1em;
        h2 { margin : 0px; }
@@ -188,9 +182,10 @@ form { margin : 1ex 1em;
 
 hr.huge { margin : 2ex 0px; height : 20px; color : $red; background-color : $red; border : 0px; }
 
-table { margin: 0px auto; text-align: center; border : 1px solid $red; border-collapse: collapse; }
-td { border : 1px solid $red; padding : 1px .5em; }
-th { font-weight : bold; border : 1px solid $red; padding : 1px .5em; }
+table { margin: 0px auto; text-align: center; border : 1px solid $red; border-collapse: collapse;
+        td { border : 1px solid $red; padding : 1px .5em; }
+        th { font-weight : bold; border : 1px solid $red; padding : 1px .5em; }
+      }
 
 div.plaintables table * { border-color:white; }
 
