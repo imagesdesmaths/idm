@@ -104,8 +104,6 @@ h1 { text-align : center; margin : 0px; padding : 0px; }
 
 h2 { text-align : center;
      &.bio { margin-top : 0px; }
-     &.soustitre { font-weight : normal; font-style : italic; font-size : large; margin : .5ex; }
-     &.surtitre { text-align : left; font-weight : normal; font-size : large; margin : .5ex 0ex; }
      &.plan { border : 2px solid $red; border-width : 0px 0px 2px; }
      &.rdp { margin : 0ex .5em 1ex; text-align : right;
              a { color : black; border-bottom : 2px solid $red;
@@ -154,7 +152,9 @@ div.relies { margin : -1ex -1em 0; background : #ccc;
 
 div.article { margin : 0ex 4em;
               .spip_logos { margin : 0 -5em 1ex 0; float : right;  }
+              h2.surtitre { text-align : left; font-weight : normal; font-size : large; margin : .5ex 0ex; }
               h1 { padding-top : 3ex; }
+              h2.soustitre { font-weight : normal; font-style : italic; font-size : large; margin : .5ex; }
             }
 
 div.figure { width : 95%; text-align : center; margin : 1ex auto;

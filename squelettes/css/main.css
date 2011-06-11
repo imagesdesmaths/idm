@@ -85,8 +85,6 @@ h1 { text-align: center; margin: 0px; padding: 0px; }
 
 h2 { text-align: center; }
 h2.bio { margin-top: 0px; }
-h2.soustitre { font-weight: normal; font-style: italic; font-size: large; margin: .5ex; }
-h2.surtitre { text-align: left; font-weight: normal; font-size: large; margin: .5ex 0ex; }
 h2.plan { border: 2px solid #e20000; border-width: 0px 0px 2px; }
 h2.rdp { margin: 0ex .5em 1ex; text-align: right; }
 h2.rdp a { color: black; border-bottom: 2px solid #e20000; }
@@ -130,7 +128,9 @@ div.relies p { font-size: 90%; padding: .3ex .5em; margin: 0; }
 
 div.article { margin: 0ex 4em; }
 div.article .spip_logos { margin: 0 -5em 1ex 0; float: right; }
+div.article h2.surtitre { text-align: left; font-weight: normal; font-size: large; margin: .5ex 0ex; }
 div.article h1 { padding-top: 3ex; }
+div.article h2.soustitre { font-weight: normal; font-style: italic; font-size: large; margin: .5ex; }
 
 div.figure { width: 95%; text-align: center; margin: 1ex auto; }
 div.figure img { max-width: 100%; }
