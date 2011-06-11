@@ -2,9 +2,9 @@
 <div class="[script(#ID_RUBRIQUE|=={34}|oui)]article">
   [(#LOGO_ARTICLE|right||image_reduire{300,300})]
   [(#LOGO_ARTICLE|fichier|non) <INCLURE{fond=inc/auteur}{id_article=#ID_ARTICLE}{taille=300}>]
-  [<h2 class="surtitre">(#SURTITRE)</h2>]
+  [<h2 class="surtitre">(#SURTITRE|echappe_retour)</h2>]
   [<h1 class="titre">(#TITRE)</h1>]
-  [<h2 class="soustitre">(#SOUSTITRE)</h2>]
+  [<h2 class="soustitre">(#SOUSTITRE|echappe_retour)</h2>]
 
   [<h3 class="auteur">Le [(#DATE_REDAC|sinon{#DATE}|affdate)], par (#LESAUTEURS)</h3>]
 
