@@ -4,8 +4,9 @@ $red:    #e20000;
 $dark:   #660000;
 $medium: #730000;
 $light:  #830000;
+$bg:     #908080;
 
-html, body { padding : 0px; margin : 0px; font-family : Arial, sans-serif; text-align : justify; color : black; background : #787070; line-height : 1.2; }
+html, body { padding : 0px; margin : 0px; font-family : Arial, sans-serif; text-align : justify; color : black; background : $bg; line-height : 1.2; }
 
 #head { background : $red; color : white;
         h1 img { vertical-align : top; padding : 2px; }
@@ -15,7 +16,7 @@ html, body { padding : 0px; margin : 0px; font-family : Arial, sans-serif; text-
 
 #menu { float : left;  width : 100%; background : $dark; color: white;
         ul { margin : 0; padding : 0; list-style : none; float : right; position : relative; right : 50%;
-             li { float : left; position : relative; left : 50%; background : $medium; font-size : 90%; border-bottom : 1px solid $red;
+             li { float : left; position : relative; left : 50%; background : $medium; font-size : 90%;
                   a { display : block; margin : 0; padding : .3ex 1em; background : $dark; color : white; font-weight : normal;
                       &:hover { background : $light; }
                   }
@@ -46,13 +47,13 @@ html, body { padding : 0px; margin : 0px; font-family : Arial, sans-serif; text-
         li.archives { margin-top : .5ex; font-style : italic; }
       }
 
-#top { width : 70%; }
+#top { }
 
 #recents { position : absolute; width : 50%; margin-left : -1em; }
 
 #billets { position : absolute; width : 50%; left : 50%; }
 
-#featured { padding : 1ex 0em 0ex; margin : 1ex 3em 0ex 1em;
+#featured { padding : 1ex 0em 0ex; margin : 1ex 1em; clear : both;
             div.resume { margin : 1ex 0px;
                          div.introduction { font-size : 95%; margin : 1ex 0px;
                                             a { color : black; }
@@ -64,7 +65,7 @@ html, body { padding : 0px; margin : 0px; font-family : Arial, sans-serif; text-
             h3.titre { margin-top : -.5ex; }
           }
 
-#une {
+#une { width : 70%;
     h2 { margin : 0px; font-size : x-large; border-bottom : 2px solid $red;
          a { color : black;
              &:hover { color : $red; }
@@ -322,4 +323,9 @@ div.mjlabel_bot { color: $red; text-align: right; margin-top: -4.5ex; margin-bot
     div.article { margin : 0; }
     div.article .spip_logos { margin : 0 0 1ex; }
     div.citer { padding : 1ex 0 0; margin : 2ex 0 0; border-top : 1px solid $red; }
+}
+
+@media screen and (max-width: 700px) {
+    #actu { float : none; padding : 2ex 0em; width : 100%; }
+    #une { width : 100%; }
 }

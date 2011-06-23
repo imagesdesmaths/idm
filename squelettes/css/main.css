@@ -1,5 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Just+Me+Again+Down+Here:regular,bold);
-html, body { padding: 0px; margin: 0px; font-family: Arial, sans-serif; text-align: justify; color: black; background: #787070; line-height: 1.2; }
+html, body { padding: 0px; margin: 0px; font-family: Arial, sans-serif; text-align: justify; color: black; background: #908080; line-height: 1.2; }
 
 #head { background: #e20000; color: white; }
 #head h1 img { vertical-align: top; padding: 2px; }
@@ -8,7 +8,7 @@ html, body { padding: 0px; margin: 0px; font-family: Arial, sans-serif; text-ali
 
 #menu { float: left; width: 100%; background: #660000; color: white; }
 #menu ul { margin: 0; padding: 0; list-style: none; float: right; position: relative; right: 50%; }
-#menu ul li { float: left; position: relative; left: 50%; background: #730000; font-size: 90%; border-bottom: 1px solid #e20000; }
+#menu ul li { float: left; position: relative; left: 50%; background: #730000; font-size: 90%; }
 #menu ul li a { display: block; margin: 0; padding: .3ex 1em; background: #660000; color: white; font-weight: normal; }
 #menu ul li a:hover { background: #830000; }
 #menu ul li ul { display: none; position: absolute; right: auto; width: 14em; border-top: 1px solid #e20000; z-index: 1000; }
@@ -27,13 +27,11 @@ html, body { padding: 0px; margin: 0px; font-family: Arial, sans-serif; text-ali
 #actu ul { padding: 0; list-style-type: none; }
 #actu li.archives { margin-top: .5ex; font-style: italic; }
 
-#top { width: 70%; }
-
 #recents { position: absolute; width: 50%; margin-left: -1em; }
 
 #billets { position: absolute; width: 50%; left: 50%; }
 
-#featured { padding: 1ex 0em 0ex; margin: 1ex 3em 0ex 1em; }
+#featured { padding: 1ex 0em 0ex; margin: 1ex 1em; clear: both; }
 #featured div.resume { margin: 1ex 0px; }
 #featured div.resume div.introduction { font-size: 95%; margin: 1ex 0px; }
 #featured div.resume div.introduction a { color: black; }
@@ -42,6 +40,7 @@ html, body { padding: 0px; margin: 0px; font-family: Arial, sans-serif; text-ali
 #featured h2 { display: inline; padding: .3ex 1em .1ex; background-color: white; }
 #featured h3.titre { margin-top: -0.5ex; }
 
+#une { width: 70%; }
 #une h2 { margin: 0px; font-size: x-large; border-bottom: 2px solid #e20000; }
 #une h2 a { color: black; }
 #une h2 a:hover { color: #e20000; }
@@ -269,3 +268,5 @@ div.mjlabel_bot { color: #e20000; text-align: right; margin-top: -4.5ex; margin-
   div.article { margin: 0; }
   div.article .spip_logos { margin: 0 0 1ex; }
   div.citer { padding: 1ex 0 0; margin: 2ex 0 0; border-top: 1px solid #e20000; } }
+@media screen and (max-width: 700px) { #actu { float: none; padding: 2ex 0em; width: 100%; }
+  #une { width: 100%; } }
