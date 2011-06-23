@@ -1,279 +1,272 @@
 @import url(http://fonts.googleapis.com/css?family=Just+Me+Again+Down+Here:regular,bold);
+html, body { padding: 0px; margin: 0px; font-family: Arial, sans-serif; text-align: justify; color: black; background: #908080; line-height: 1.2; }
 
-/* Layout */
+#head { background: #e20000; color: white; }
+#head h1 img { vertical-align: top; padding: 2px; }
 
-html, body { padding : 0px; margin : 0px; font-family : Arial, sans-serif; text-align : justify; color : black; background : #787070; line-height : 1.2; }
+#logo { position: absolute; top: 0px; left: 2em; }
 
-#head    { background : #e20000; color : white; }
-  #logo  { position : absolute; top : 0px; left : 2em; }
-  #menu  { float : left;  width : 100%; background : #660000; color: white; }
-#actu    { width : 30%; float : right; font-size : small; }
-#top     { width : 70%; }
-#recents { position : absolute; width : 50%; margin-left : -1em; }
-#billets { position : absolute; width : 50%; left : 50%; }
+#menu { float: left; width: 100%; background: #660000; color: white; }
+#menu ul { margin: 0; padding: 0; list-style: none; float: right; position: relative; right: 50%; }
+#menu ul li { float: left; position: relative; left: 50%; background: #730000; font-size: 90%; }
+#menu ul li a { display: block; margin: 0; padding: .3ex 1em; background: #660000; color: white; font-weight: normal; }
+#menu ul li a:hover { background: #830000; }
+#menu ul li ul { display: none; position: absolute; right: auto; width: 14em; border-top: 1px solid #e20000; z-index: 1000; }
+#menu ul li ul li { left: auto; clear: left; width: 100%; border-bottom: 1px solid #e20000; }
+#menu ul li ul li a:hover { background: #e20000; }
+#menu ul li ul.left { left: auto; right: 0; text-align: right; }
+#menu ul li:hover ul { display: block; }
+#menu ul li:hover a { background: #830000; }
+#menu form label { display: none; }
+#menu form input { width: 95%; font-weight: bold; background: white; }
+#menu form input.submit { display: none; }
 
-/* Utility styles */
+#actu { width: 30%; float: right; font-size: small; }
+#actu h2 { font-size: large; margin: 0; border-bottom: 2px solid #e20000; }
+#actu h3 { font-size: normal; margin: 1ex 0; }
+#actu ul { padding: 0; list-style-type: none; }
+#actu li.archives { margin-top: .5ex; font-style: italic; }
 
-.page      { clear : both; margin : 2ex auto; padding : 1ex 1em; width : 80%; border : 1px solid black; background : white; }
-.nopage    { padding : 0 1em 1ex; }
-.frame     { border : 1px solid black; margin : 0ex 1em; padding : 1ex 1em; background : white; }
-.shadow    { -moz-box-shadow: 5px 5px 15px black; -webkit-box-shadow: 5px 5px 15px black; box-shadow: 5px 5px 15px black; }
-.script    { font-family : 'Just Me Again Down Here'; font-size : 200%; letter-spacing : -0.01em; line-height : 1.0em; }
-.invisible { display : none; }
-.nettoyeur { clear : both; }
-.plain     { color : black; text-decoration : none; }
+#recents { position: absolute; width: 50%; margin-left: -1em; }
 
-.piste_20 { color : #009900; }
-.piste_21 { color : #3333ff; }
-.piste_22 { color : #e20000; }
-.piste_23 { color : #000000; }
-.piste_24 { color : #888888; }
+#billets { position: absolute; width: 50%; left: 50%; }
 
-/* General style */
+#featured { padding: 1ex 0em 0ex; margin: 1ex 1em; clear: both; }
+#featured div.resume { margin: 1ex 0px; }
+#featured div.resume div.introduction { font-size: 95%; margin: 1ex 0px; }
+#featured div.resume div.introduction a { color: black; }
+#featured div.resume h4.auteur { font-size: 100%; }
+#featured div.titre { margin-top: -2.5ex; text-align: center; }
+#featured h2 { display: inline; padding: .3ex 1em .1ex; background-color: white; }
+#featured h3.titre { margin-top: -0.5ex; }
 
-h1 { text-align : center; margin : 0px; padding : 0px; }
-h2 { text-align : center; }
-h3 { text-align : left; }
-h4 { text-align : center; font-style : italic; font-weight : bold; }
+#une { width: 70%; }
+#une h2 { margin: 0px; font-size: x-large; border-bottom: 2px solid #e20000; }
+#une h2 a { color: black; }
+#une h2 a:hover { color: #e20000; }
+#une h3 { text-align: center; font-weight: normal; font-size: 100%; margin: 0 0 1ex; }
+#une div.introduction { font-size: 100%; font-style: normal; margin: 1ex 1em 0; }
+#une div.introduction a { color: black; }
+#une div.unelogo { text-align: center; }
+#une img.spip_logos { float: none; }
 
-a { color : #e20000; font-weight : bold; text-decoration : none; outline : none; }
+#editolink { text-align: center; font-size: 180%; font-weight: bold; margin: .5ex 0em 2.5ex; font-variant: small-caps; }
+#editolink a:hover { text-decoration: underline; }
 
-img { border : none; }
+.page { clear: both; margin: 2ex auto; padding: 1ex 1em; width: 80%; border: 1px solid black; background: white; }
 
-/* Drop-down menu */
+.nopage { padding: 0 1em 1ex; }
 
-#menu ul { margin : 0; padding : 0; list-style : none; float : right; position : relative; right : 50%; }
-#menu ul li { float : left; position : relative; left : 50%; background : #730000; font-size : 90%; border-bottom : 1px solid #e20000; }
-#menu ul li a { display : block; margin : 0; padding : .3ex 1em; background : #660000; color : white; font-weight : normal; }
-#menu ul li a:hover, #menu ul li:hover a { background : #830000; }
-#menu ul ul { display : none; position : absolute; right : auto; width : 14em; border-top : 1px solid #e20000; z-index : 1000; }
-#menu ul ul li { left : auto; clear : left; width : 100%; border-bottom : 1px solid #e20000; }
-#menu ul li:hover ul li a { background : #830000; }
-#menu ul li ul li a:hover { background : #e20000; }
-#menu ul li:hover ul { display : block; }
-#menu ul ul.left { left : auto; right : 0; text-align : right; }
+.frame { border: 1px solid black; margin: 0ex 1em; padding: 1ex 1em; background: white; }
 
-#menu form label { display : none; }
-#menu form input { width : 95%; font-weight : bold; background : white; }
-#menu form input.submit { display : none; }
+.shadow { -moz-box-shadow: 5px 5px 15px black; -webkit-box-shadow: 5px 5px 15px black; box-shadow: 5px 5px 15px black; }
 
-/* SPIP stuff */
+.invisible { display: none; }
 
-img.spip_logos { padding : 0px 0px 1ex 2em; }
+.nettoyeur { clear: both; }
 
-.spip_doc_descriptif { clear : both; font-size : small; margin-left : auto; margin-right : auto; }
-.spip_doc_titre { font-weight : bold; font-size : small; margin : 1ex auto; }
-.spip_documents { text-align : center; }
-.spip_documents_center { width : 100%; margin : auto; }
-.spip_documents_left { float : left; margin-right : 2em; margin-bottom : 1ex; }
-.spip_documents_right { float : right; margin-left : 2em; margin-bottom : 1ex; }
+.plain { color: black; text-decoration: none; }
 
-span.spip_documents_center { display : block; margin-top : 1em; }
+.script { font-family: 'Just Me Again Down Here'; font-size: 200%; letter-spacing: -0.01em; line-height: 1.0em; }
+.script h1 { line-height: .8em; }
 
-.spip_surligne { color : black; background : yellow; }
+.piste_20 { color: #009900; }
 
-/* Home page */
+.piste_21 { color: #3333ff; }
 
-#actu h2 { font-size : large; margin : 0; border-bottom : 2px solid #e20000; }
-#actu h3 { font-size : normal; margin : 1ex 0; }
-#actu ul { padding : 0; list-style-type : none; }
-#actu li.archives { margin-top : .5ex; font-style : italic; }
+.piste_22 { color: #e20000; }
 
-#featured { padding : 1ex 0em 0ex; margin : 1ex 3em 0ex 1em; }
-#featured div.resume { margin : 1ex 0px; }
-#featured div.resume div.introduction { font-size : 95%; margin : 1ex 0px; }
-#featured div.resume div.introduction a { color : black; }
-#featured div.resume h4.auteur { font-size : 100%; }
-#featured div.titre { margin-top : -2.5ex; text-align : center; }
-#featured h2 { display : inline; padding : .3ex 1em .1ex; background-color : white; }
-#featured h3.titre { margin-top : -.5ex; }
+.piste_23 { color: #000000; }
 
-#une h2 { margin : 0px; font-size : x-large; border-bottom : 2px solid #e20000; }
-#une h2 a { color : black; }
-#une h2 a:hover { color : #e20000; }
-#une h3 { text-align : center; font-weight : normal; font-size : 100%; margin : 0 0 1ex; }
-#une div.introduction { font-size : 100%; font-style : normal; margin : 1ex 1em 0; }
-#une div.introduction a { color : black; }
-#une div.unelogo { text-align : center; }
-#une img.spip_logos { float : none; }
+.piste_24 { color: #888888; }
 
-#editolink { text-align : center; font-size : 180%; font-weight : bold; margin : .5ex 0em 2.5ex; font-variant : small-caps; }
-#editolink a:hover { text-decoration : underline; }
+h1 { text-align: center; margin: 0px; padding: 0px; }
 
-/* Articles */
+h2 { text-align: center; }
+h2.bio { margin-top: 0px; }
+h2.plan { border: 2px solid #e20000; border-width: 0px 0px 2px; }
+h2.rdp { margin: 0ex .5em 1ex; text-align: right; }
+h2.rdp a { color: black; border-bottom: 2px solid #e20000; }
+h2.rdp a:hover { color: #e20000; }
+h2.button a { color: black; text-shadow: 0px 0px 15px white; }
+h2.button a:hover { color: black; text-shadow: 0px 0px 15px red; }
 
-div.relies { margin : -1ex -1em 0; background : #ccc; }
-div.relies p { font-size : 90%; padding : .3ex .5em; margin : 0; }
+h3 { text-align: left; }
+h3.discuter { text-align: right; font-style: italic; margin: .5ex 1em 1ex; }
+h3.spip { text-align: center; padding: 1ex; border-top: 2px solid #e20000; border-bottom: 2px solid #e20000; clear: both; }
+h3.titre { margin: 0px; border-bottom: 2px solid #e20000; }
+h3.auteur { text-align: right; font-weight: normal; }
+h3.bio { text-align: right; font-weight: normal; font-size: medium; margin-top: -2ex; }
 
-div.article { margin : 0ex 4em; }
-div.article .spip_logos { margin : 0 -5em 1ex 0; float : right;  }
-div.article h1 { padding-top : 3ex; }
+h4 { text-align: center; font-style: italic; font-weight: bold; }
+h4.auteur { font-style: normal; text-align: right; font-weight: normal; margin: .2ex 0px 0px; padding: 0px; }
 
-h2.bio { margin-top : 0px; }
-h2.soustitre { font-weight : normal; font-style : italic; font-size : large; margin : .5ex; }
-h2.surtitre { text-align : left; font-weight : normal; font-size : large; margin : .5ex 0ex; }
+a { color: #e20000; font-weight: bold; text-decoration: none; outline: none; }
 
-h3.auteur { text-align : right; font-weight : normal; }
-h3.bio { text-align : right; font-weight : normal; font-size : medium; margin-top : -2ex; }
+img { border: none; }
+img.spip_logos { padding: 0px 0px 1ex 2em; }
 
-div.figure { width : 95%; text-align : center; margin : 1ex auto; }
-div.figure img { max-width : 100%; }
-div.figure p.titre { font-weight : bold; margin : 1ex; }
-div.figure div.legende p { font-size : 90%; font-style : italic; margin-top : 0px; }
-div.figure div.legende { width : 80%; margin : 0px auto; text-align : justify; }
+.spip_doc_descriptif { clear: both; font-size: small; margin-left: auto; margin-right: auto; }
 
-div.citer { background : #ccc; padding : .5ex 1ex; text-size : small; margin : 0 -1em -1ex; }
+.spip_doc_titre { font-weight: bold; font-size: small; margin: 1ex auto; }
 
-/* Various styles and fixes */
+.spip_documents { text-align: center; }
 
-#head h1 img { vertical-align : top; padding : 2px; }
-.script h1 { line-height : .8em; }
-a.article { font-weight : normal; }
-a.lexique { font-weight : normal; border-bottom : 1px dotted; }
+.spip_documents_center { width: 100%; margin: auto; }
 
-/* Still unsorted ... */
+.spip_documents_left { float: left; margin-right: 2em; margin-bottom: 1ex; }
 
-form { margin : 1ex 1em; }
-form h2 { margin : 0px; }
-form p { margin : .5ex 0px; }
-form p.erreur { color : #e20000; font-weight : bold; }
-form fieldset.previsu { text-align : justify; }
-form fieldset.previsu ul { list-style-type : none; }
+.spip_documents_right { float: right; margin-left: 2em; margin-bottom: 1ex; }
 
-h2.plan { border : 2px solid #e20000; border-width : 0px 0px 2px; }
+span.spip_documents_center { display: block; margin-top: 1em; }
 
-h2.rdp { margin : 0ex .5em 1ex; text-align : right; }
-h2.rdp a { color : black; border-bottom : 2px solid #e20000; }
-h2.rdp a:hover { color : #e20000; }
+.spip_surligne { color: black; background: yellow; }
 
-h2.button a { color : black; text-shadow : 0px 0px 15px white; }
-h2.button a:hover { color : black; text-shadow : 0px 0px 15px red; }
+div.relies { margin: -1ex -1em 0; background: #ccc; }
+div.relies p { font-size: 90%; padding: .3ex .5em; margin: 0; }
 
-h3.discuter { text-align : right; font-style : italic; margin : .5ex 1em 1ex; }
-h3.spip { text-align : center; padding : 1ex; border-top : 2px solid #e20000; border-bottom : 2px solid #e20000; clear : both; }
-h3.titre { margin : 0px; border-bottom : 2px solid #e20000; }
+div.article { margin: 0ex 4em; }
+div.article .spip_logos { margin: 0 -5em 1ex 0; float: right; }
+div.article h2.surtitre { text-align: left; font-weight: normal; font-size: large; margin: .5ex 0ex; }
+div.article h1 { padding-top: 3ex; }
+div.article h2.soustitre { font-weight: normal; font-style: italic; font-size: large; margin: .5ex; }
 
-h4.auteur { font-style : normal; text-align : right; font-weight : normal; margin : .2ex 0px 0px; padding : 0px; }
+div.figure { width: 95%; text-align: center; margin: 1ex auto; }
+div.figure img { max-width: 100%; }
+div.figure p.titre { font-weight: bold; margin: 1ex; }
+div.figure div.legende { width: 80%; margin: 0px auto; text-align: justify; }
+div.figure div.legende p { font-size: 90%; font-style: italic; margin-top: 0px; }
 
-hr.huge { margin : 2ex 0px; height : 20px; color : #e20000; background-color : #e20000; border : 0px; }
+div.citer { background: #ccc; padding: .5ex 1ex; text-size: small; margin: 0 -1em -1ex; }
 
-table { margin: 0px auto; text-align: center; border : 1px solid #e20000; border-collapse: collapse; }
-td { border : 1px solid #e20000; padding : 1px .5em; }
-th { font-weight : bold; border : 1px solid #e20000; padding : 1px .5em; }
+a.article { font-weight: normal; }
 
-div.plaintables table * { border-color:white; }
+a.lexique { font-weight: normal; border-bottom: 1px dotted; }
 
-ul { margin : 0px; }
+form { margin: 1ex 1em; }
+form h2 { margin: 0px; }
+form p { margin: .5ex 0px; }
+form p.erreur { color: #e20000; font-weight: bold; }
+form fieldset.previsu { text-align: justify; }
+form fieldset.previsu ul { list-style-type: none; }
 
-ul.forum li { padding : 1ex 0px 0px 0em; }
-ul.forum ul ul ul ul { padding-left : 0px; }
-ul.forum ul { padding : 0ex 0px 0px 2em; list-style-type : none; }
-ul.forum { padding : 0px; list-style-type : none; }
+hr.huge { margin: 2ex 0px; height: 20px; color: #e20000; background-color: #e20000; border: 0px; }
 
-div.chapo { margin : 1ex 4em; font-weight : bold; font-style : italic; clear : both; }
+table { margin: 0px auto; text-align: center; border: 1px solid #e20000; border-collapse: collapse; }
+table td { border: 1px solid #e20000; padding: 1px .5em; }
+table th { font-weight: bold; border: 1px solid #e20000; padding: 1px .5em; }
 
-div.cs_blocs h4 { text-align : left; font-style : normal; background : transparent url(../img/triangle-bas.gif) no-repeat scroll left center; font-size : 100%; font-weight : normal; padding:0pt 0pt 0pt 20px; }
-div.cs_blocs h4.blocs_replie { background : transparent url(../img/triangle.gif) no-repeat scroll left center; }
-div.cs_blocs h4 a:hover { cursor : pointer; text-decoration : underline; }
-div.cs_blocs { margin : 1ex 0em; }
-div.cs_blocs div.blocs_destination { margin-left : 1em; padding-left : 1em; border-left : 2px solid #e20000; font-size : small; font-style : italic; }
+div.plaintables table * { border-color: white; }
 
-div.forum-message { margin : .5ex .5em; padding : .5ex .5em; }
-div.forum-message div.forum-texte { margin : 1ex 0px; font-size : medium; }
-div.forum-message h3 { margin : 0px; font-size : medium; border-bottom : 1px solid #e20000; }
-div.forum-message h4 { margin : 3px 0px; text-align : right; font-size : small ; font-style : italic; }
-div.forum-message h4.repondre { margin-top : 1ex; }
-div.forum-message p { margin : .5ex 0px; }
-div.forum-message-delauteur { background-color : #ffcccc; }
+ul { margin: 0px; }
 
-div.forum-notes { border-top : 1px solid #e20000; margin-top : 2ex; padding-top : .5ex; }
+ul.forum { padding: 0px; list-style-type: none; }
+ul.forum li { padding: 1ex 0px 0px 0em; }
+ul.forum ul { padding: 0ex 0px 0px 2em; list-style-type: none; }
+ul.forum ul ul ul ul { padding-left: 0px; }
 
-div.lexique span.mot { font-size : 110%; font-weight : bold; }
-div.lexique span.descriptif { font-style : italic; }
-div.lexique span.heading { display : block; text-align : center; font-size : x-large; font-weight : bold; border-bottom : 2px solid #e20000; margin : 1ex 0px; }
-div.lexique ul ul p { padding-left : 2em; }
-div.lexique ul ul ul { padding-left : 2em; }
-div.lexique ul { padding-left : 0em; list-style-type : none; }
+div.chapo { margin: 1ex 4em; font-weight: bold; font-style: italic; clear: both; }
 
-div.plan a { color : black; }
-div.plan a.article { font-weight : normal; }
-div.plan a:hover { color : #e20000; }
-div.plan div.onglets_bloc .onglets_contenu { display : none; border : none; padding : 0px; }
-div.plan div.onglets_bloc .onglets_contenu.selected { display : block; }
-div.plan div.onglets_bloc h2.onglets_titre { background-color : #dddddd; position : relative; display : inline; float : left; padding : 2px 1em; border : 1px solid #e20000; }
-div.plan div.onglets_bloc h2.onglets_titre.selected { background-color : white; top : -1px; padding-bottom : 0px; }
-div.plan span.heading { display : block; text-align : center; font-size : x-large; font-weight : bold; border-bottom : 2px solid #e20000; margin : 1ex 0px; }
-div.plan ul ul ul { padding-left : 2em; }
-div.plan ul { padding-left : 0em; list-style-type : none; }
+div.cs_blocs { margin: 1ex 0em; }
+div.cs_blocs h4 { text-align: left; font-style: normal; background: transparent url(../img/triangle-bas.gif) no-repeat scroll left center; font-size: 100%; font-weight: normal; padding: 0pt 0pt 0pt 20px; }
+div.cs_blocs h4.blocs_replie { background: transparent url(../img/triangle.gif) no-repeat scroll left center; }
+div.cs_blocs h4 a:hover { cursor: pointer; text-decoration: underline; }
+div.cs_blocs div.blocs_destination { margin-left: 1em; padding-left: 1em; border-left: 2px solid #e20000; font-size: small; font-style: italic; }
 
-div.ps span.ps { font-weight : bold; }
-div.ps { margin-top : 1ex; padding-top : 1ex; border-top : 1px solid #e20000; font-style : italic; }
+div.forum-message { margin: .5ex .5em; padding: .5ex .5em; }
+div.forum-message div.forum-texte { margin: 1ex 0px; font-size: medium; }
+div.forum-message h3 { margin: 0px; font-size: medium; border-bottom: 1px solid #e20000; }
+div.forum-message h4 { margin: 3px 0px; text-align: right; font-size: small; font-style: italic; }
+div.forum-message h4.repondre { margin-top: 1ex; }
+div.forum-message p { margin: .5ex 0px; }
 
-div.notes a.spip_note { padding-left : 14px; background : url('/squelettes/img/up.png') no-repeat left; }
+div.forum-message-delauteur { background-color: #ffcccc; }
 
-div.resume { margin : 2ex 1em; background : white; padding : 1ex; border : 1px solid black; }
-div.resume h3.titre a:hover { color : #e20000; }
-div.resume div.rubrique { font-size : 90%; text-align : right; margin : .2ex .5em 0px 0px; }
-div.resume div.rubrique a:hover { color : #e20000; }
-div.resume h4.auteur { font-size : 90%; text-align : right; }
-div.resume h4.auteur a:hover { color : #e20000; }
-div.resume h4.auteur a { color : black; }
-div.resume div.introduction a { font-weight : normal; color : #777777; }
-div.resume div.introduction { margin-top : 1ex; font-size : small; font-style : italic; }
-div.resume img.spip_logos { padding : 0px 0px 0px 1em; background : white; float : right; }
+div.forum-notes { border-top: 1px solid #e20000; margin-top: 2ex; padding-top: .5ex; }
 
-#TB_window div.article { font-size : 130%; line-height : 1.3; text-align : justify; padding : 1ex 2em; }
+div.lexique span.mot { font-size: 110%; font-weight: bold; }
+div.lexique span.descriptif { font-style: italic; }
+div.lexique span.heading { display: block; text-align: center; font-size: x-large; font-weight: bold; border-bottom: 2px solid #e20000; margin: 1ex 0px; }
+div.lexique ul { padding-left: 0em; list-style-type: none; }
+div.lexique ul ul p { padding-left: 2em; }
+div.lexique ul ul ul { padding-left: 2em; }
 
-div.texte { clear : both; }
-div.texte a { color : inherit; }
-div.texte a:link, div.texte a:visited { color : #e20000; }
-div.texte blockquote { color : black; background : #ffeeee; padding : .5ex 1em; border : 1px dashed #e20000; }
-div.texte div.onglets_bloc .onglets_contenu { display : none; border : solid #e20000; border-width : 0px 0px 1px 1px; z-index : 10; padding : 35px 0px 1ex 2ex; }
-div.texte div.onglets_bloc .onglets_contenu.selected { display : block; }
-div.texte div.onglets_bloc h2.onglets_titre a { text-decoration : none; }
-div.texte div.onglets_bloc h2.onglets_titre { background-color : #eeeeee; height : 20px; position : relative; display : inline; float : left; margin : 1px -1px 0px 0px; padding : 3px 1em 0px; border : solid #e20000; border-width : 1px 1px 1px; z-index : 11; white-space : nowrap; text-align : center; font-size : 90%; top : -1px; }
-div.texte div.onglets_bloc h2.onglets_titre.selected { background-color : white; border-width : 3px 1px 0px; z-index : 11; top : -3px; }
-div.texte div.preuve { margin-left : 4em; font-size : small; font-style : italic; }
-div.texte h4 { text-align : center; font-style : italic; font-weight : bold; text-decoration : underline; padding-top : .5ex; font-size : 110%; }
-div.texte h5 { text-align : left; font-style : italic; font-weight : bold; text-decoration : none; padding : .5ex 2em; margin : 0px; font-size : 110%; }
-div.texte li { margin-top : 1ex; }
-div.texte p.lettrine span.lettrine span.lettrine_first { color : #500; float : left; font-size : 440%; font-weight : bold; margin : -.4ex .1em -.4ex 0px; }
-div.texte p.lettrine span.lettrine { text-transform : uppercase; }
-div.texte p.lettrine { text-indent : 0px; }
-div.texte pre { padding-left : 1em; margin-left : 1em; border-left : 1px solid #e20000; }
+div.plan a { color: black; }
+div.plan a.article { font-weight: normal; }
+div.plan a:hover { color: #e20000; }
+div.plan div.onglets_bloc .onglets_contenu { display: none; border: none; padding: 0px; }
+div.plan div.onglets_bloc .onglets_contenu.selected { display: block; }
+div.plan div.onglets_bloc h2.onglets_titre { background-color: #dddddd; position: relative; display: inline; float: left; padding: 2px 1em; border: 1px solid #e20000; }
+div.plan div.onglets_bloc h2.onglets_titre.selected { background-color: white; top: -1px; padding-bottom: 0px; }
+div.plan span.heading { display: block; text-align: center; font-size: x-large; font-weight: bold; border-bottom: 2px solid #e20000; margin: 1ex 0px; }
+div.plan ul { padding-left: 0em; list-style-type: none; }
+div.plan ul ul ul { padding-left: 2em; }
 
-div.thm { border-left : 2px solid #e20000; margin : 1ex 0em 1ex 1.5em; padding-left : 1em; font-style : italic; }
-div.thm span.titre { font-weight : bold; font-style : normal; margin-left : -2.5em; background : white; border-bottom : 2px solid #e20000; border-top : 1px solid white; }
-div.thm ol { margin : 0ex; list-style-type : lower-roman; padding-left : 1em; list-style : lower-roman; }
-div.thm ul { margin : 0ex; }
-div.thm li { margin-top : .2ex; padding-left : 0px; }
+div.ps { margin-top: 1ex; padding-top: 1ex; border-top: 1px solid #e20000; font-style: italic; }
+div.ps span.ps { font-weight: bold; }
 
-div.mp3 { text-align : center; margin : 0.5ex 0em; }
+div.notes a.spip_note { padding-left: 14px; background: url("/squelettes/img/up.png") no-repeat left; }
 
-p.copyright { text-size : small; font-style : italic; }
+div.resume { margin: 2ex 1em; background: white; padding: 1ex; border: 1px solid black; }
+div.resume h3.titre a:hover { color: #e20000; }
+div.resume h4.auteur { font-size: 90%; text-align: right; }
+div.resume h4.auteur a:hover { color: #e20000; }
+div.resume h4.auteur a { color: black; }
+div.resume div.rubrique { font-size: 90%; text-align: right; margin: .2ex .5em 0px 0px; }
+div.resume div.rubrique a:hover { color: #e20000; }
+div.resume div.introduction { margin-top: 1ex; font-size: small; font-style: italic; }
+div.resume div.introduction a { font-weight: normal; color: #777777; }
+div.resume img.spip_logos { padding: 0px 0px 0px 1em; background: white; float: right; }
 
-div.idm_recherche { float : right; background : #eeeeee; font-size : small;  border : 1px dotted #a20000; padding : 1ex 1em 1ex 2em; margin-left : 1em; }
-div.idm_recherche h2 { margin : 0ex 0px 1ex; }
-div.idm_recherche li { margin-top : 1ex; }
-div.idm_recherche p.boutons { text-align : right; padding-top : 2ex; }
+#TB_window div.article { font-size: 130%; line-height: 1.3; text-align: justify; padding: 1ex 2em; }
+
+div.texte { clear: both; }
+div.texte a { color: inherit; }
+div.texte a:link, div.texte a:visited { color: #e20000; }
+div.texte blockquote { color: black; background: #ffeeee; padding: .5ex 1em; border: 1px dashed #e20000; }
+div.texte div.onglets_bloc .onglets_contenu { display: none; border: solid #e20000; border-width: 0px 0px 1px 1px; z-index: 10; padding: 35px 0px 1ex 2ex; }
+div.texte div.onglets_bloc .onglets_contenu.selected { display: block; }
+div.texte div.onglets_bloc h2.onglets_titre a { text-decoration: none; }
+div.texte div.onglets_bloc h2.onglets_titre { background-color: #eeeeee; height: 20px; position: relative; display: inline; float: left; margin: 1px -1px 0px 0px; padding: 3px 1em 0px; border: solid #e20000; border-width: 1px 1px 1px; z-index: 11; white-space: nowrap; text-align: center; font-size: 90%; top: -1px; }
+div.texte div.onglets_bloc h2.onglets_titre.selected { background-color: white; border-width: 3px 1px 0px; z-index: 11; top: -3px; }
+div.texte div.preuve { margin-left: 4em; font-size: small; font-style: italic; }
+div.texte h4 { text-align: center; font-style: italic; font-weight: bold; text-decoration: underline; padding-top: .5ex; font-size: 110%; }
+div.texte h5 { text-align: left; font-style: italic; font-weight: bold; text-decoration: none; padding: .5ex 2em; margin: 0px; font-size: 110%; }
+div.texte li { margin-top: 1ex; }
+div.texte p.lettrine { text-indent: 0px; }
+div.texte p.lettrine span.lettrine span.lettrine_first { color: #500; float: left; font-size: 440%; font-weight: bold; margin: -0.4ex 0.1em -0.4ex 0px; }
+div.texte p.lettrine span.lettrine { text-transform: uppercase; }
+div.texte pre { padding-left: 1em; margin-left: 1em; border-left: 1px solid #e20000; }
+
+div.thm { border-left: 2px solid #e20000; margin: 1ex 0em 1ex 1.5em; padding-left: 1em; font-style: italic; }
+div.thm span.titre { font-weight: bold; font-style: normal; margin-left: -2.5em; background: white; border-bottom: 2px solid #e20000; border-top: 1px solid white; }
+div.thm ol { margin: 0ex; list-style-type: lower-roman; padding-left: 1em; list-style: lower-roman; }
+div.thm ul { margin: 0ex; }
+div.thm li { margin-top: .2ex; padding-left: 0px; }
+
+div.mp3 { text-align: center; margin: 0.5ex 0em; }
+
+p.copyright { text-size: small; font-style: italic; }
+
+div.idm_recherche { float: right; background: #eeeeee; font-size: small; border: 1px dotted #a20000; padding: 1ex 1em 1ex 2em; margin-left: 1em; }
+div.idm_recherche h2 { margin: 0ex 0px 1ex; }
+div.idm_recherche li { margin-top: 1ex; }
+div.idm_recherche p.boutons { text-align: right; padding-top: 2ex; }
 
 ul.checkboxTree { padding-left: 20px; }
 ul.checkboxTree li { list-style-type: none; position: relative; }
 ul.checkboxTree li span { cursor: default; position: absolute; top: 2px; left: -16px; }
 
 div.mjlabel_top { color: #e20000; text-align: right; margin-bottom: -4.5ex; font-weight: bold; }
+
 div.mjlabel_bot { color: #e20000; text-align: right; margin-top: -4.5ex; margin-bottom: 2ex; font-weight: bold; }
 
-/* Custom style for printing */
-
-@media print {
-    html,body { font-family : Times, serif; }
-
-    .noprint, div.spip-admin-float { display : none; }
-
-    div.page { width : 100%; border : none; margin : 0; padding : 0; }
-    div.shadow { box-shadow : none; -moz-box-shadow : none; -webkit-box-shadow : none; }
-    div.article { margin : 0; }
-    div.article .spip_logos { margin : 0 0 1ex; }
-    div.citer { padding : 1ex 0 0; margin : 2ex 0 0; border-top : 1px solid #e20000; }
-}
+@media print { html, body { font-family: Times, serif; }
+  .noprint, div.spip-admin-float { display: none; }
+  div.page { width: 100%; border: none; margin: 0; padding: 0; }
+  div.shadow { box-shadow: none; -moz-box-shadow: none; -webkit-box-shadow: none; }
+  div.article { margin: 0; }
+  div.article .spip_logos { margin: 0 0 1ex; }
+  div.citer { padding: 1ex 0 0; margin: 2ex 0 0; border-top: 1px solid #e20000; } }
+@media screen and (max-width: 700px) { #actu { float: none; padding: 2ex 0em; width: 100%; }
+  #une { width: 100%; } }
