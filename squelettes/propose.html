@@ -44,7 +44,7 @@
       [(#INCLURE{fond=inc/forum-relecture}{id_article}{id_forum})]
       <div class="ajax">#FORMULAIRE_FORUM_RELECTURE{#ID_ARTICLE,#ID_FORUM}</div>
     </BOUCLE_cetarticle>
-    <INCLURE{fond=inc/foot}{stats=no}>
+    <INCLURE{fond=inc/foot}>
   </BOUCLE_securite>
     <INCLURE{fond=inc/head}{title=Acc&egrave;s refus&eacute;}>
     <h1>Acc&egrave;s refus&eacute; !</h1>
@@ -57,7 +57,7 @@
     <p>Avez-vous pens&eacute; &agrave; vous <a href="#URL_PAGE{perso}">identifier</a>
     ?</p>]
   </div>
-    <INCLURE{fond=inc/foot}{stats=no}>
+    <INCLURE{fond=inc/foot}>
   <//B_securite>
 </BOUCLE_article>
   <INCLURE{fond=inc/head}{title=Acc&egrave;s refus&eacute;}>
@@ -67,5 +67,5 @@
   <p>L'article intitul&eacute; <a href="#URL_ARTICLE">#TITRE</a> a 
   &eacute;t&eacute; accept&eacute; ...</p>
   </BOUCLE_reel>
-  <INCLURE{fond=inc/foot}{stats=no}>
+  <INCLURE{fond=inc/foot}>
 <//B_article>
