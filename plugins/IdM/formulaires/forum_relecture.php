@@ -50,7 +50,7 @@ Un nouveau commentaire a été posté dans un forum de relecture du site
   http://images.math.cnrs.fr/ecrire/?exec=idm_moderation
 END;
 
-  $id_recipients = array ( 327, 637 ); // Christine and Julien
+  $id_recipients = array ( 327, 633, 637 ); // Christine and Julien
 
   foreach ($id_recipients as $id)
     idm_notify ($id, utf8_encode($message), $subject);

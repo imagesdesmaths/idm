@@ -13,6 +13,7 @@ function notify_franz ($id_auteur) {
            "  $qui";
 
   idm_notify (327, $texte, $subject); // Christine Noot-Huyghe
+  idm_notify (633, $texte, $subject); // Clement Caubel
   idm_notify (637, $texte, $subject); // Julien Melleray
 }
 

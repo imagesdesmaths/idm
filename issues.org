@@ -49,6 +49,9 @@ fichier genie/toto.php, genie_toto_dist(), retour :
 - <0 : il en reste, revenir dans |.| secondes
 *** plugin spip-bonux
 - [ ] #INFO_TITRE{article,324}
+*** Refactor uses of idm_notify [0%]
+- [ ] Accept an array as recipient
+- [ ] Call it with an array when possible
 * Done
 *** Use mathjax [100%]
 - [X] Port the dynamic parts (forum previews)
