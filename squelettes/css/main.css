@@ -269,6 +269,7 @@ div.fb-like { float: left; padding-top: 1ex; }
   div.shadow { box-shadow: none; -moz-box-shadow: none; -webkit-box-shadow: none; }
   div.article { margin: 0; }
   div.article .spip_logos { margin: 0 0 1ex; }
-  div.citer { padding: 1ex 0 0; margin: 2ex 0 0; border-top: 1px solid #e20000; } }
+  div.citer { padding: 1ex 0 0; margin: 2ex 0 0; border-top: 1px solid #e20000; }
+  div.fb-like { display: none; } }
 @media screen and (max-width: 700px) { #actu { float: none; padding: 2ex 0em; width: 100%; }
   #une { width: 100%; } }
