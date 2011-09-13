@@ -1,10 +1,8 @@
 <?php
 
 include_spip('base/abstract_sql');
-include_spip('inc/envoyer_mail');
 
 function notify_user ($id_auteur, $id_article) {
-  $email = sql_getfetsel ("email", "spip_auteurs", "id_auteur = $id_auteur");
   $titre = sql_getfetsel ("titre", "spip_articles", "id_article = $id_article");
   $titre = utf8_decode ($titre);
 
@@ -38,8 +36,7 @@ function notify_user ($id_auteur, $id_article) {
     "-- \n" .
     "Le comité de rédaction de \"Images des Mathématiques\".";
 
-  $envoyer_mail = charger_fonction ('envoyer_mail', 'inc');
-  $envoyer_mail ($email, $subject, utf8_encode($texte));
+  idm_notify ($id_auteur, utf8_encode($texte), $subject);
 }
 
 function nettoie () {
