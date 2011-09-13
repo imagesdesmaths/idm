@@ -142,12 +142,13 @@ function autoriser_idm_billettistes_bouton_dist ($faire, $type, $id, $qui, $opt)
   return autoriser_idm_bouton_dist ($faire, $type, $id, $qui, $opt);
 }
 
-function idm_notify ($id, $message, $subject = "Un message du site \"Images des Maths\"") {
-  $email   = sql_getfetsel ("email", "spip_auteurs", "id_auteur = $id");
+function idm_notify ($ids, $message, $subject = "Un message du site \"Images des Maths\"") {
   $message = "Bonjour !\n\n" . $message . "\n\n-- \nLe robot du site http://images.math.cnrs.fr/\n";
-
   $envoyer_mail = charger_fonction ('envoyer_mail', 'inc');
-  $envoyer_mail ($email, $subject, $message);
+  foreach ((array)$ids as $id) {
+    $email = sql_getfetsel ("email", "spip_auteurs", "id_auteur = $id");
+    $envoyer_mail ($email, $subject, $message);
+  }
 }
 
 function idm_jquery_plugins ($scripts) {
