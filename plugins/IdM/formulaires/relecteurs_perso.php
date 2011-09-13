@@ -2,7 +2,7 @@
 
 include_spip('idm');
 
-function notify_franz ($id_auteur) {
+function notify_relecteurs_team ($id_auteur) {
   $qui = sql_getfetsel ("nom", "spip_auteurs", "id_auteur = $id_auteur");
 
   $subject = "Un nouveau relecteur pour Images des Maths";
@@ -12,9 +12,7 @@ function notify_franz ($id_auteur) {
            "\n" .
            "  $qui";
 
-  idm_notify (327, $texte, $subject); // Christine Noot-Huyghe
-  idm_notify (633, $texte, $subject); // Clement Caubel
-  idm_notify (637, $texte, $subject); // Julien Melleray
+  idm_notify (array(327,633,637), $texte, $subject);
 }
 
 function formulaires_relecteurs_perso_charger () {
@@ -41,7 +39,7 @@ function formulaires_relecteurs_perso_traiter () {
     sql_updateq ('spip_idm_relecteurs',
       array ('role' => 'candidat', 'math' => supprimer_tags(_request('qui'))),
       "id_auteur = $id_auteur");
-    notify_franz ($id_auteur);
+    notify_relecteurs_team ($id_auteur);
   } else {
     sql_updateq ('spip_idm_relecteurs',
       array ('role' => 'visiteur', 'math' => ''),

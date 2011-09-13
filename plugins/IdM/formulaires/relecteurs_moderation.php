@@ -49,7 +49,7 @@ END;
       if (!in_array($id, $id_recipients)) $id_recipients[] = $id;
     }
 
-    foreach ($id_recipients as $id) idm_notify ($id, utf8_encode($text), $subject);
+    idm_notify ($id_recipients, utf8_encode($text), $subject);
   }
 
   return array ('message_ok' => "done");
