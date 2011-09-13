@@ -12,7 +12,7 @@ function notify_relecteurs_team ($id_auteur) {
            "\n" .
            "  $qui";
 
-  idm_notify (array(327,633,637), $texte, $subject);
+  idm_notify ($idm_team_relecture, $texte, $subject);
 }
 
 function formulaires_relecteurs_perso_charger () {

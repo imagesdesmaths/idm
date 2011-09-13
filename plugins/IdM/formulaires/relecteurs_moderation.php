@@ -35,7 +35,7 @@ forum de relecture de cet article à cette adresse :
   http://images.math.cnrs.fr/spip.php?page=propose&amp;id_article=$id_article
 END;
 
-    $id_recipients = array ( 327, 633, 637 ); // Christine, Clement and Julien
+    $id_recipients = $idm_team_relecture;
 
     $auteurs = sql_select ('*', 'spip_auteurs_articles', "id_article = $id_article");
     while ($r = sql_fetch($auteurs)) {

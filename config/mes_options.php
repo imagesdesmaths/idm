@@ -1,5 +1,9 @@
 <?php
 
+// Stuff related to te inner workings of the editorial committee:
+
+$idm_team_relecture = array(327,633,637);
+
 // Super-administrateur :
 
 define ('_ID_WEBMESTRES', '1');
