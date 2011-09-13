@@ -7,8 +7,6 @@ function notify_comite ($id_auteur, $id_article, $titre, $date) {
   $today = floor(time()/(24*3600)) % count($idm_team_billets);
   $gars = $idm_team_billets [$today];
 
-  $email = "comite@images.math.cnrs.fr";
-
   $qui = sql_getfetsel ("nom", "spip_auteurs", "id_auteur = $id_auteur");
   $qui = utf8_decode ($qui);
   $titre = utf8_decode ($titre);
@@ -30,10 +28,7 @@ function notify_comite ($id_auteur, $id_article, $titre, $date) {
     "\n" .
     "  http://images.math.cnrs.fr/ecrire/?exec=articles&action=redirect&type=article&id=$id_article&var_mode=preview";
 
-  $envoyer_mail = charger_fonction ('envoyer_mail', 'inc');
-  $envoyer_mail ($email, $subject, utf8_encode($texte));
-
-  idm_notify ($gars, utf8_encode($texte), $subject);
+  idm_notify (array(0,$gars), utf8_encode($texte), $subject);
 }
 
 function formulaires_billet_charger () {
