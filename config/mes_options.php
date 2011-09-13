@@ -2,7 +2,8 @@
 
 // Stuff related to te inner workings of the editorial committee:
 
-$idm_team_relecture = array(327,633,637);
+$idm_team_relecture = array (327,633,637);
+$idm_team_billets   = array (63,285,286,7,50);
 
 // Super-administrateur :
 
