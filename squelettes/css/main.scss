@@ -315,6 +315,8 @@ ul.checkboxTree { padding-left: 20px;
 div.mjlabel_top { color: $red; text-align: right; margin-bottom: -4.5ex; font-weight: bold; }
 div.mjlabel_bot { color: $red; text-align: right; margin-top: -4.5ex; margin-bottom: 2ex; font-weight: bold; }
 
+div.fb-like { float: left; padding-top : 1ex; }
+
 @media print {
     html,body { font-family : Times, serif; }
     .noprint, div.spip-admin-float { display : none; }

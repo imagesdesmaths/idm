@@ -3,7 +3,8 @@
 
 <?php $nb = sql_countsel ('spip_forum', "id_article=#ID_ARTICLE AND statut='publie'"); ?>
 
-  <div class="relies noprint"><p>
+  <div class="relies noprint">
+    <p>
       <BOUCLE_rub(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE">#TITRE</a></BOUCLE_rub>
 
       <BOUCLE_diff(MOTS) {id_groupe=5} {id_article}> &mdash; <a class="piste_#ID_MOT" href="#URL_MOT">#TITRE</a></BOUCLE_diff>
@@ -19,6 +20,15 @@
         else             print "0 commentaire"; ?></a>
     </p>
   </div>
+
+  <div id="fb-root"></div>
+  <script>(function(d){
+    var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/fr_FR/all.js#appId=152460711490894&xfbml=1";
+    d.getElementsByTagName('head')[0].appendChild(js);
+    }(document));</script>
+  <div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="arial"></div>
 
   [(#INCLURE{fond=inc/article}{id_article})]
 
