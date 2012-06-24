@@ -1,0 +1,107 @@
+#+TITLE: IdM --- technical documentation
+
+This documents the /squelette/ of the website at
+http://images.math.cnrs.fr/ and complements the documentation there
+(which is mainly addressed at article authors and editors --- this one
+is full of SPIP and PHP and geek stuff).
+
+* Features added to SPIP
+
+** Visible
+
+*** Refereeing support
+
+*** Billettistes
+
+*** Planning
+
+*** MathJax
+
+*** Video and sound
+
+** In the background
+
+*** E-mail notification of teams
+
+*** LaTeX export
+
+* Code management
+
+This is done in Git, and there are 4 branches to keep track of (plus
+temporary ones for experimental features, if needed). That can change if
+we end up working in a team but so far:
+- =spip3= is tracking the SVN version of the SPIP core (without
+  extensions). This is not expected to work, because the extensions
+  are not part of that tree and so far the bare SPIP core is not self
+  sufficient.
+- =upstream= incorporates the extensions, and merges =spip3=
+  periodically (meaning whenever a bug is fixed there). It should do both
+  at the same time, meaning that a =spip3/upstream= merge is an
+  "official" SPIP snapshot.
+- =idm= is the current status of the website, with the IdM template,
+  and merges =upstream= when needed
+- =test= is for development of new but "easy" features, and is typically
+  merged into =idm= the same day
+
+* Issues
+
+** Urgent
+
+- Allow for several articles per referee [0%]
+  - [ ] Do not free a referee completely when an article is published
+
+** In progress
+
+- Podcasts
+- Merge =div.plan= and =div.lexique=
+- Overhaul of the search engine [33%]
+  - [X] Accents, this is done by SPIP3
+  - [ ] Sort, classify etc by theme
+  - [ ] Automatic article suggestion
+- iPhone version [33%]
+  - [X] Basic iphone.html
+  - [ ] Specific style for small screens (it used to work using
+    =max-width=, but apparently that breaks older browsers ...)
+  - [ ] Find a way to make login etc. possible
+- Fix SVG display on Internet Explorer
+- Warn authors when their articles are published
+
+** Next
+
+- CC per article
+- Loop videos
+- Choose the member in the billets team differently
+- =squelettes/propose.html=
+  - Add an anchor to the forum messages for linking
+- =squelettes/navigation.html=
+  - should be re-done completely
+- re-install =forms_et_tables= (3.0, doesn't work yet)
+
+** Back-burner
+
+- Make teams into editorial objects?
+- Buttons to write to groups of people
+- Filter display by color, possibly merge with ?date=-1year
+- Article validator to test various things [0%]
+  - [ ] Accents
+  - [ ] Links
+  - [ ] Divs
+- Floating picture
+- Relecteur occasionnel
+- Translation encouragement
+- Unify the permissions
+- Put =#SPIP_CRON= on specific pages but not on =sommaire.html=
+- Use =#HTTP_HEADER= rather than php in =inc/head.php=
+- In =formulaires/relecteurs_vote.php=, the SQL update code should be
+  elsewhere, the rest should go
+
+** Geekeries and SPIPeries
+
+- In a loop, =#_parent:TITRE=
+- Files which are patched versions of upstream (store as a patch for upgrades)
+  - =.htaccess= (from =htaccess.txt=)
+  - =formulaires/inc-forum_previsu.html=
+- Use the =|unique= filter instead of doing it by hand
+  - =squelettes/iphone.html=
+  - =squelettes/lexique.html=
+- Use language strings as much as possible (transfer in passing)

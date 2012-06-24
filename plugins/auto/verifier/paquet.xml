@@ -1,0 +1,23 @@
+<paquet
+	prefix="verifier"
+	categorie="outil"
+	version="0.1.11"
+	etat="test"
+	compatibilite="[2.0.10;3.0.99]"
+	logo="images/verifier-128.png"
+	documentation="http://www.spip-contrib.net/Verifier,1505"
+>
+
+	<nom>API de v&#233;rification</nom>
+	<!-- Une API générique pour vérifier une valeur -->
+
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<traduire module="verifier" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="verifier" action="verifier_verifier" inclure="verifier_pipelines.php" />
+
+	<utilise nom="yaml" />
+</paquet>

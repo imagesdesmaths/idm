@@ -1,0 +1,12 @@
++------------------------------------------------------------------------+
+|  THICKBOX_V3 , plugin pour SPIP 2.0                                    |
+|                                                                        |
+|  Copyright (c) 2009 | CreaDesign, P. Cassat                            |
++------------------------------------------------------------------------+
+
+29/05/2010 - change 002
+Mise a jour pour SPIP 2.1 : retrait des '@' dans les fonctions javascript. Ils ne sont plus reconnus par jQuery 1.4.2
+
+16/04/2010 - change 001
+- Modif de la récupération de l'image choisie en CFG pour fermer la fenêtre (correction erreur ...)
+- Nouvelle fonctionnalité sur CFG : inclure ou non le CSS par défaut ...

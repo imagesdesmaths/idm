@@ -1,0 +1,31 @@
+#CACHE{0}
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+.formulaire_editer_corbeille {background:none;border:none;}
+.formulaire_editer_corbeille ul.checkables h4 {margin-bottom:0;}
+.formulaire_editer_corbeille ul.checkables li {padding-#ENV{left}:30px;}
+.formulaire_editer_corbeille ul.checkables li label {position:absolute;top:-10000px;left:-2000px;float:none;margin:0;padding:0;}
+.formulaire_editer_corbeille ul.checkables li input {margin-#ENV{left}:-30px;float:#ENV{left};position:relative;display:inline;}
+
+.liste.corbeille-articles >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{article-16}) no-repeat center left;}
+.liste.corbeille-auteurs >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{auteur-16}) no-repeat center left;}
+.liste.corbeille-breves >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{breve-16}) no-repeat center left;}
+.liste.corbeille-messages >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{message-16}) no-repeat center left;}
+.liste.corbeille-forum >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{forum-16}) no-repeat center left;}
+.liste.corbeille-forum >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{forum-16}) no-repeat center left;}
+.liste.corbeille-sites >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{site-16}) no-repeat center left;}
+.liste.corbeille-signatures >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{signature-16}) no-repeat center left;}

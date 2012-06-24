@@ -1,0 +1,20 @@
+<BOUCLE_a (ARTICLES) {statut?} {id_article}>
+<form action="#ENV{action}" method="post">
+  #ACTION_FORMULAIRE{#ENV{action}}
+
+  #BOITE_OUVRIR{#TITRE, info, titrem}
+  <h3>Auteur(s) : #LESAUTEURS</h3>
+
+  <ul>
+    #SAISIE{selection, id_editeur,   label=Éditeur en charge : , datas=#ENV{editeurs}}
+    #SAISIE{selection, prevu,        label=Afficher dans le planning ? , datas=#ENV{ouinon}}
+    #SAISIE{date,      date_prevue,  label=Date de publication prévue : }
+    #SAISIE{textarea,  commentaires, label=Commentaires : , rows=10}
+  </ul>
+
+  #BOITE_PIED
+  [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+  <input type="submit" class="submit" name="submit" value="Appliquer" />
+  #BOITE_FERMER
+</form>
+</BOUCLE_a>

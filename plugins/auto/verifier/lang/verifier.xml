@@ -1,0 +1,27 @@
+<traduction module="verifier" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/verifier/lang/" reference="fr">
+	<langue code="ca" />
+	<langue code="de">
+		<traducteur nom="klaus" />
+	</langue>
+	<langue code="en">
+		<traducteur nom="RastaPopoulos" />
+		<traducteur nom="mark_baber" />
+	</langue>
+	<langue code="es" />
+	<langue code="fa">
+		<traducteur nom="davood" />
+	</langue>
+	<langue code="fr_tu">
+		<traducteur nom="beatnick" />
+		<traducteur nom="stefdn" />
+	</langue>
+	<langue code="it">
+		<traducteur nom="renatoformato" />
+	</langue>
+	<langue code="pt_br">
+		<traducteur nom="rporto" />
+	</langue>
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
+</traduction>

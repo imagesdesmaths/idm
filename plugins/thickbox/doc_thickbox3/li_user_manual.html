@@ -1,0 +1,290 @@
+		<a name="top"></a>
+	<div id="entete">
+			<a rel="start home" href="#URL_SITE_SPIP/" title="<:accueil_site:>" class="accueil">[(#LOGO_SITE_SPIP||image_reduire{300,100}) ]<strong id="nom_site_spip">#NOM_SITE_SPIP</strong></a>
+			#MENU_LANG
+        <div style="float: right; font-size: 0.9em;">
+								[ <a href="[(#SELF|parametre_url{doc,ric_LICENSE})]">LICENSE</a> ]
+					[&nbsp;|&nbsp;(#AUTORISER{configurer}) 
+	&#91; <b><a href="[(#SELF|parametre_url{doc,index_dev})]"><:phpdoc:dev_docbook:></a></b> &#93;
+]
+		</div>
+	</div>
+
+
+    <div class="hfeed" id="conteneur" style="width: 100%">
+	    <div class="hentry" id="contenu">
+
+			<div class="cartouche">
+			
+<div class='pres_spip'><table><tr>
+	<td style='margin: 0; padding: 0.4em 1em;'><a href='[(#SELF|parametre_url{doc,index})]' title='<:phpdoc:accueil_doc:>'>[(#CHEMIN{images/thickbox.png}||image_reduire{150,100})]</a></td>
+	<td style='padding: 0.4em 1em;'><b>Thickbox v3<br /></b><small>|&nbsp;<i><img src='http://cdc.spiplocal:8888/squelettes-dist/spip.png' alt=' ' width='48' height='16' align='absmiddle' hspace='3' />&nbsp;<:phpdoc:plugin_spip:>&nbsp;-&nbsp;version [2.0.0;]</i>&nbsp;|<br />by <ul class='spip'><li> Thickbox (version 3.1) par <a href='http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all' class='spip_out' rel='external'>Cody Lindley</a></li><li> Mis en plugin par Fil, Izo, BoOz</li><li> Am&eacute;lior&eacute; par <a href='http://www.spip-contrib.net/PieroWbmstr' class='spip_out' rel='external'>Piero Wbmstr</a></li></ul><br /><i>Version 3 (stable)  - (c) 2009 GNU GPL v3</i></small></td>
+</tr></table></div>
+
+						<div class="spip_menu_manual"><small>|&nbsp;
+									&nbsp;<a href="[(#SELF|parametre_url{doc,user_manual/tutorial_user_manual.pkg})]">Documentation du plugin Thickbox_v3</a>&nbsp;|
+		
+						</small></div>
+						</div>
+<br style="clear: both;" />
+<div class="spip_tuto"><a name=""></a><div class="cartouche"><h1 class="entry-title">Documentation du plugin Thickbox_v3</h1>
+		<p class="soustitre">| Int&eacute;gration &agrave; SPIP du plugin jQuery 'Thickbox 3.1' | by <a href = "#credits">CODY LINDLEY</a></p></div>
+	<div class="menu"><small><ul><li><:phpdoc:by:>&nbsp;<strong>il, Izo, BoOz, PieroWbmstr
+			[&nbsp;<a href="http://www.spip-contrib.net/Thickbox">http://www.spip-contrib.net/Thickbox</a>&nbsp;]</strong></li>
+		<li><:phpdoc:license:>&nbsp;<strong><a href="http://www.opensource.org/licenses/gpl-3.0.html">GNU GPL v3</a></strong></li></ul></small></div>
+	<table width="100%"><tr>
+<td width="10%"></td>
+<td>
+<div class="menu">
+<h3><:phpdoc:toc:></h3>
+<ul>
+	
+									<li>
+		
+		<a href="[(#SELF|parametre_url{doc,user_manual/tutorial_user_manual.pkg})]#install">Installation</a>
+				
+			</li>						<li>
+		
+		<a href="[(#SELF|parametre_url{doc,user_manual/tutorial_user_manual.pkg})]#jquery">Fonctionnement du plugin 'Thickbox' pour jQuery</a>
+				
+			</li>						<li>
+		
+		<a href="[(#SELF|parametre_url{doc,user_manual/tutorial_user_manual.pkg})]#samples">Exemples</a>
+				
+			</li>						<li>
+		
+		<a href="[(#SELF|parametre_url{doc,user_manual/tutorial_user_manual.pkg})]#options">Quelques options</a>
+				
+			</li>						<li>
+		
+		<a href="[(#SELF|parametre_url{doc,user_manual/tutorial_user_manual.pkg})]#functions">Balise / Fonctions</a>
+				
+				<ul>						<li>
+		
+		<a href="[(#SELF|parametre_url{doc,user_manual/tutorial_user_manual.pkg})]#functions.balise">Balise '# THICKBOX'</a>
+			
+						</li>				<li>
+		
+		<a href="[(#SELF|parametre_url{doc,user_manual/tutorial_user_manual.pkg})]#functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples">Exemples</a>
+			
+				
+				
+				
+				
+				
+				
+				
+				
+				
+						</li>				<li>
+		
+		<a href="[(#SELF|parametre_url{doc,user_manual/tutorial_user_manual.pkg})]#functions.fonction">Fonction 'dialogbox_links'</a>
+			
+						</li>				<li>
+		
+		<a href="[(#SELF|parametre_url{doc,user_manual/tutorial_user_manual.pkg})]#functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele">Mod&egrave;le de 'dialogbox'</a>
+			
+				
+				
+				
+				
+				
+				
+				
+				
+				
+					</li></ul></li>				<li>
+		
+		<a href="[(#SELF|parametre_url{doc,user_manual/tutorial_user_manual.pkg})]#config">Configuration</a>
+				
+			</li>						<li>
+		
+		<a href="[(#SELF|parametre_url{doc,user_manual/tutorial_user_manual.pkg})]#credits">Cr&eacute;dits</a>
+			</ul>
+</div>
+</td>
+<td width="10%"></td>
+</tr></table>
+
+	<div class="texte entry-content"><a name="install"></a><h3>Installation</h3><p>Le plugin Thickbox_v3 s'installe de la m&ecirc;me mani&egrave;re que l'ensemble des plugins SPIP (<em><a href = "http://www.spip.net/fr_article3396.html">article d&eacute;di&eacute; sur 'spip.net'</a></em>).</p><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div></div><hr><br />
+	<div class="texte entry-content"><a name="jquery"></a><h3>Fonctionnement du plugin 'Thickbox' pour jQuery</h3><p><div id = "plugin_tb"><p>Le plugin 'Thickbox', de la biblioth&egrave;que javascript 'jQuery', d&eacute;velopp&eacute; par <strong>Cody Lindley</strong> (<em><a href = "http://jquery.com/demo/thickbox/">site du plugin</a></em>), offre la possibilit&eacute; d'ouvrir une fen&ecirc;tre javascript directement dans la page du navigateur, sans ouvrir de r&eacute;elle nouvelle fen&ecirc;tre.</p></div></p>
+		<p>Par exemple #THICKBOX{link,'',Fen&ecirc;tre javascript,comme ceci,250,200,inline,plugin_tb}.</p>
+			<p>Cette fen&ecirc;tre peut &ecirc;tre utilis&eacute;e pour pr&eacute;senter ce que vous voulez : un texte de la page en cours, un texte d'une page secondaire, une image, un formulaire etc.
+				<br/>La pr&eacute;sentation de la thickbox se fait en utilisant les attributs du lien ouvrant, notamment :
+				<ul><li><strong>attribut 'href' pour un lien ou 'alt' pour un bouton</strong> :<br/>l'adresse de la page qui sera charg&eacute;e ainsi que les dimensions souhait&eacute;es pour la thickbox et ses options de pr&eacute;sentation ;</li>
+					<li><strong>attribut 'titre'</strong> :<br/>le titre apparaissant dans la thickbox ;</li>
+					<li><strong>attribut 'class'</strong> :<br/>d&egrave;s lors qu'il vaut '<strong>thickbox</strong>', son url s'ouvrira dans une thickbox ...</li>
+					<li><strong>attribut 'rel'</strong> :<br/>d&eacute;finit notamment le nom de la galerie d'images pr&eacute;sent&eacute;e dans la thickbox.</li></ul></p><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div></div><hr><br />
+	<div class="texte entry-content"><a name="samples"></a><h3>Exemples</h3><ul><li>Lien type :</li></ul>
+			<p><table width = "100%"><tr><td>#THICKBOX{link,#URL_SITE_SPIP/?page=texte_ajax,N'oubliez pas d'indiquer la taille de la fenetre ...,voir l'exemple,400,300}</td>
+			<td><pre><strong>&lt;a 
+	href=&quot;URL_VOULUE?page=page_voulue&amp;height=300&amp;width=400&quot; 
+	title=&quot;titre de la fen&ecirc;tre&quot; 
+	class=&quot;thickbox&quot;
+&gt;texte du lien&lt;/a&gt;</strong></pre></td></tr></table></p>
+				<ul><li>Champ 'input' de formulaire (ou bouton) :</li></ul>
+			<p><table width = "100%"><tr><td>#THICKBOX{input,#URL_SITE_SPIP/?page=texte_ajax,N'oubliez pas d'indiquer la taille de la fenetre ...,ouvrir la page,400,300}</td>
+			<td><pre><strong>&lt;input type=&quot;button&quot; 
+	alt=&quot;URL_VOULUE?page=page_voulue&amp;height=300&amp;width=400&quot; 
+	title=&quot;titre de la fen&ecirc;tre&quot; 
+	class=&quot;thickbox&quot;
+	value=&quot;texte du bouton&quot; /&gt;</strong></pre></td></tr></table></p>
+				<ul><li>Sur une image seule :</li></ul>
+			<p><table width = "100%"><tr><td>#THICKBOX{image,#CHEMIN{images/single.jpg},Test thickbox image,'',100,75}</td>
+			<td><pre><strong>&lt;a 
+	href=&quot;URL_DE_L_IMAGE&quot; 
+	title=&quot;Titre de l'image&quot; 
+	type=&quot;image/type_mime&quot;
+&gt;&lt;img src=&quot;...&quot; /&gt;&lt;/a&gt;</strong></pre></td></tr></table>
+			Il n'est pas n&eacute;cessaire ici de pr&eacute;ciser la classe 'thickbox'. En effet, le plugin est programm&eacute; pour ouvrir tous les liens portant un '<strong>type_mime</strong>' image dans une thickbox.</p>
+			<br/>
+			<ul><li>Pour une galerie d'images :</li></ul>
+			<p><table width = "100%"><tr><td>#THICKBOX{gallery,#CHEMIN{images/plant1.jpg},Test thickbox gallery}
+				#THICKBOX{gallery,#CHEMIN{images/plant2.jpg},Test thickbox gallery}
+				#THICKBOX{gallery,#CHEMIN{images/plant3.jpg},Test thickbox gallery}</td>
+			<td><pre><strong>&lt;a 
+	href=&quot;URL_DE_L_IMAGE&quot; 
+	title=&quot;Titre de l'image&quot; 
+	type=&quot;image/type_mime&quot;
+	rel=&quot;gallery-xx&quot;
+&gt;&lt;img src=&quot;...&quot; /&gt;&lt;/a&gt;</strong></pre></td></tr></table>
+			Il suffit pour cr&eacute;er une galerie d'indiquer sur tous les liens images &agrave; int&eacute;grer dans celle-ci le m&ecirc;me attribut '<strong>rel</strong>'.</p><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div></div><hr><br />
+	<div class="texte entry-content"><a name="options"></a><h3>Quelques options</h3><p>Plusieurs options sont disponibles directement via le plugin 'Thickbox' jQuery. Ces options s'utilisent en indiquant leur valeur en param&egrave;tre de l'url appel&eacute;e.
+				<br/>Le pr&eacute;sent plugin propose &eacute;galement des options, notamment la d&eacute;finition de valeurs par d&eacute;faut pour l'ensemble des variables importantes du plugin. Ces valeurs sont &eacute;ditables sur la <a href = "#config">page de configuration</a> du plugin.
+				<br/><br/>Options :
+			<ul><li><strong>attribut modal=true</strong> : 
+					<br/>Exemple : #THICKBOX{link,#URL_SITE_SPIP/?page=texte_ajax,N'oubliez pas d'indiquer la taille de la fenetre ...,thickbox sans la barre de titre,400,300,modal}
+					<br/>Dans ce cas, n'oubliez pas de mettre &agrave; disposition un bouton de fermeture de la fen&ecirc;tre, le bouton par d&eacute;faut n'&eacute;tant pas pr&eacute;sent&eacute;. Le bouton ajout&eacute; devra effectuer la fonction javascript : '<strong>tb_remove()</strong>'.
+					<br/>
+					<br/></li>
+				<li><strong>contenu dans une frame (attributs KeepThis=true&amp;TB_iframe=true)</strong> : 
+					<br/>Exemple : #THICKBOX{link,#URL_SITE_SPIP/?page=texte_frame,Contenu dans une frame : nouveau CSS,thickbox en frame,400,300,frame}
+					<br/>Vous pouvez d&egrave;s lors y charger une nouvelle mise en page, de nouvelles fonctions javascript etc. Cette option est cumulable avec le 'modal=true' ci-dessus.
+					<br/>
+					<br/></li>
+				<li><strong>update du contenu</strong> :
+					<br/>Exemple : #THICKBOX{link,#URL_SITE_SPIP/?page=texte_ajax_2,N'oubliez pas d'indiquer la taille de la fenetre ...,thickbox avec rechargement en ajax,400,300}
+					<br/>Il suffit pour cela d'&eacute;crire un lien thickbox dans la thickbox ...
+					<br/>
+					<br/></li>
+				<li><strong>ajout de l'attribut 'title'</strong> :
+					<br/>Exemple : #THICKBOX{link,#URL_SITE_SPIP/?page=texte_ajax,'',lien thickbox sans 'titre=',400,300}
+					<br/>Si vous n'indiquez pas d'attribut 'title' pour le lien thickbox, le titre par d&eacute;faut du <a href = "#config">panel de configuration</a> du plugin sera ajout&eacute;.
+					<br/>
+					<br/></li>
+				<li><strong>omission des attributs de dimension</strong> :
+					<br/>Exemple : #THICKBOX{link,#URL_SITE_SPIP/?page=texte_ajax,Taille non contr&ocirc;l&eacute;e,lien sans dimensions}
+					<br/>Si vous ne pr&eacute;cisez pas les dimensions de la thickbox, elle s'ouvrira par d&eacute;faut en adaptant sa taille au contenu. Il est conseill&eacute;, pour simplifier, d'utiliser la <a href = "#functions">balise d'appel du plugin</a> pour pallier &agrave; ce d&eacute;faut.
+					<br/>
+					<br/></li>
+				<li><strong>attribut inlinId=</strong> :
+					<br/>Exemple : #THICKBOX{link,'',Contenu du paragraphe 'test_ici',lien thickbox avec 'inlineId',400,300,inline,test_ici}
+					<br/>Cette option charge dans la thickbox le contenu des paragraphes de la div de la page portant l'identifiant transmis.
+					<br/>
+					<br/></li></ul></p><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div></div><hr><br />
+	<div class="texte entry-content"><a name="functions"></a><h3>Balise / Fonctions</h3><div><a name="functions.balise"></a><div class="menu"><br /><ul><li>Balise '# THICKBOX'</li></ul></div><p>Le plugin vous propose une nouvelle balise utilisable dans vos squelettes ou vos boucles SPIP : <center><strong>la balise '# THICKBOX{...}'</strong></center>
+				<br/>Celle-ci va g&eacute;n&eacute;rer le code complet d'un lien, d'un bouton ou d'une image selon les param&egrave;tres que vous lui indiquez. Ces param&egrave;tres &eacute;tant nombreux, prenez garde &agrave; les indiquer dans l'ordre pr&eacute;&ccedil;is du code ci-dessous :
+<pre><strong># THICKBOX{ type , url , titre , texte , width , height , option , id }</strong></pre>
+			Pour indiquer une valeur vide, inscrivez simplement '' ; avec :
+			<ul><li><strong>type</strong> : le type de lien thickbox souhait&eacute; ; si laiss&eacute; vide, il s'agira du type 'link' : 
+				<ul><li><strong>link</strong> : cr&eacute;ation du code complet d'un lien ouvrant une thickbox,</li>
+					<li><strong>image</strong> : cr&eacute;ation du lien et de la vignette d'une image,</li>
+					<li><strong>input</strong> : cr&eacute;ation d'un bouton ouvrant sur une thickbox,</li>
+					<li><strong>gallery</strong> : cr&eacute;ation du code d'une image int&eacute;gr&eacute;e &agrave; une galerie.</li></ul>
+				<br/></li>
+				<li><strong>url</strong> : l'adresse url de l'objet &agrave; afficher dans la thickbox ; si vous n'indiquez pas une url absolue, une url renvoyant sur une page du site sera charg&eacute;e (par exemple, si vous indiquez 'image.jpg', l'url renvoy&eacute;e sera 'http://www.adresse_du_site.com/image.jpg') ; le point d'interrogation pour les pages SPIP est optionnel.
+					<br/><small>NOTE : une url ouvrant une page d'un site distant devra obligatoirement &ecirc;tre charg&eacute;e dans une frame (restriction javascript).</small>
+				<br/><br/></li>
+				<li><strong>titre</strong> : le texte du titre de la thickbox ; si laiss&eacute; vide, le titre par d&eacute;faut sera charg&eacute; ; n'oubliez pas d'indiquer des cha&icirc;nes format&eacute;es javascript (<a href = "http://www.asciitable.com/">asciitable.com</a>).
+				<br/><br/></li>
+				<li><strong>texte</strong> : le texte sera appliqu&eacute; :
+				<ul><li>au texte du lien lui-m&ecirc;me pour les liens</li>
+					<li>au texte du bouton pour les boutons</li>
+					<li>au nom de la galerie pour les galeries d'images.</li></ul>
+				<br/></li>
+				<li><strong>width</strong> et <strong>height</strong> : les dimensions respectives de la thickbox ou de la vignette dans le cas des images ; si laiss&eacute;es vides, les valeurs par d&eacute;faut seront charg&eacute;es.
+				<br/><br/></li>
+				<li><strong>option</strong> : les options &agrave; ajouter &agrave; l'url d'appel de la thickbox :
+				<ul><li>modal : pour une thickbox sans barre de titre</li>
+					<li>frame : pour un contenu de thickbox int&eacute;gr&eacute; dans une frame</li>
+					<li>inline : pour pr&eacute;senter le texte d'une div de la page dans une thickbox.</li></ul>
+				<br/></li>
+				<li><strong>id</strong> : l'identifiant de la div dans le cas de l'option 'inline' ci-dessus.</li></ul></p>
+				<br/></div>
+		<div><a name="functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples"></a><div class="menu"><br /><ul><li>Exemples</li></ul></div><p><table border = "functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples"><tr><td border = "functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples">lien :: <br/># THICKBOX{link,page=texte_frame,un titre,texte du lien,500,400,frame}</td>
+				<td border = "functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples">[(#THICKBOX{link,page=texte_frame,un titre,texte du lien,500,400,frame})]</td></tr><tr><td border = "functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples">input :: <br/># THICKBOX{input,page=texte_ajax,'',texte de l&amp;#039;input,500,400,modal}</td>
+				<td border = "functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples">[(#THICKBOX{input,page=texte_ajax,'',texte de linput,500,400,modal})]</td></tr><tr><td border = "functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples">image :: <br/># THICKBOX{image,#CHEMIN{images/your-picture.gif},'','',120,120}</td>
+				<td border = "functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples">[(#THICKBOX{image,#CHEMIN{images/your-picture.gif},'','',120,120})]</td></tr><tr><td border = "functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples">galerie d'images :: 
+					<br/># THICKBOX{gallery,#CHEMIN{images/plant1.jpg}}
+						<br/># THICKBOX{gallery,#CHEMIN{images/plant2.jpg}}
+						<br/># THICKBOX{gallery,#CHEMIN{images/plant3.jpg}}</td>
+				<td border = "functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples.functions.balise_samples">[(#THICKBOX{gallery,#CHEMIN{images/plant1.jpg}})]
+					[(#THICKBOX{gallery,#CHEMIN{images/plant2.jpg}})]
+					[(#THICKBOX{gallery,#CHEMIN{images/plant3.jpg}})]</td></tr></table></p>
+				<br/>
+			<div class="src-code"><strong>Exemple d'une boucle documents de SPIP</strong><br /><pre>&lt;BOUCLE_doc(DOCUMENTS) {id_document=4}&gt;
+	[(# THICKBOX{image,# URL_DOCUMENT,# TITRE})]
+&lt;/BOUCLE_doc&gt;</pre></div></div>
+		<div><a name="functions.fonction"></a><div class="menu"><br /><ul><li>Fonction 'dialogbox_links'</li></ul></div><p>Une nouvelle fonction vous est propos&eacute;e pour ajouter la classe 'thickbox' &agrave; tous les liens du contenu de la thickbox, de fa&ccedil;on &agrave; avoir un suivi d'actions dans la fen&ecirc;tre. Pour appeler cette fonction, indiquez dans vos squelettes :
+<pre>(# TEXTE|dialogbox_links)</pre></p></div>
+		<div><a name="functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele"></a><div class="menu"><br /><ul><li>Mod&egrave;le de 'dialogbox'</li></ul></div><p>Le plugin int&egrave;gre un mod&egrave;le de squelette type 'bo&icirc;te de dialogue' (cf. fichier '<strong>dialogbox.html</strong>'). Il s'agit d'une page de squelettes adapt&eacute;e qui sera par d&eacute;faut charg&eacute;e dans une frame (vous pouvez cependant pr&eacute;ciser l'option 'noframe' dans la balise). La barre de titre de la thickbox est &eacute;galement retir&eacute;e par d&eacute;faut (vous pouvez la remettre en indiquant 'nomodal' dans l'option de la balise).
+			<br/><br/>Ce type de lien s'appelle en utilisant la balise '<strong># DIALOGBOX</strong>' suivante (attention &agrave; l'ordre des arguments) :
+<pre><strong># DIALOGBOX{ url , texte , option , titre , width , height }</strong></pre>
+				<br/><table border = "functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele"><tr><td style = "functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele">dialogbox standard :: <br/># DIALOGBOX{id_article=1,mon texte}</td>
+				<td style = "functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele">#DIALOGBOX{id_article=1,mon texte}</td></tr><tr><td style = "functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele">dialogbox sans frame :: <br/># DIALOGBOX{id_article=1,mon texte,noframe}</td>
+				<td style = "functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele">#DIALOGBOX{id_article=1,mon texte,noframe}</td></tr><tr><td style = "functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele">dialogbox avec barre de titre :: <br/># DIALOGBOX{id_article=1,mon texte,nomodal,mon titre}</td>
+				<td style = "functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele">#DIALOGBOX{id_article=1,mon texte,nomodal,mon titre}</td></tr><tr><td style = "functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele">dialogbox avec taille personnelle :: <br/># DIALOGBOX{id_article=1,mon texte,'','',200,200}</td>
+				<td style = "functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele.functions.modele">#DIALOGBOX{id_article=1,mon texte,'','',200,200}</td></tr></table></p></div><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div></div><hr><br />
+	<div class="texte entry-content"><a name="config"></a><h3>Configuration</h3><p>Ce plugin est configurable dans la partie priv&eacute;e de SPIP gr&acirc;ce au plugin 'CFG' (<em><a href = "http://www.spip-contrib.net/Config-cfg">plugin 'config' sur spip-contrib</a></em>) &agrave; l'adresse : '<strong><a href = "[(#URL_ECRIRE{cfg}|parametre_url{cfg,thickbox})]">/?exec=cfg&amp;cfg=thickbox</a></strong>'.
+			<center>#THICKBOX{image,#CHEMIN{images/screenshot_cfg.png},Panneau de configuration de la partie prive}</center></p><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div></div><hr><br />
+	<div class="texte entry-content"><a name="credits"></a><h3>Cr&eacute;dits</h3><p>Ce plugin est d&eacute;velopp&eacute; par <strong>CreaDesign</strong>.
+			<br/>Il est prot&eacute;g&eacute; sous licence <strong>GNU GENERAL PUBLIC LICENSE Version 3</strong>  (cf.fichier LICENSE) : 
+			<small>[&nbsp;<a href = "http://www.opensource.org/licenses/gpl-3.0.html">(c) 2009 GNU GPL v3</a>&nbsp;]</small></p>
+		<p><a href = "http://creadesignweb.free.fr"><img src = "#CHEMIN{images/CD_logo.png}"/></a>
+			<small>&nbsp;
+			[&nbsp;<a href = "http://creadesignweb.free.fr">web</a>&nbsp;]
+			&nbsp;
+			[&nbsp;<a href = "mailto:creadesignweb@free.fr">contact</a>&nbsp;]</small></p>
+		<p>Le plugin 'Thickbox' pour la biblioth&egrave;que 'jQuery' est d&eacute;velopp&eacute; par <strong>Cody Lindley</strong>. Il est prot&eacute;g&eacute; sous licence <strong>MIT LICENSE/GNU LICENSE</strong> : 
+			<small>[&nbsp;<a href = "http://www.opensource.org/licenses/mit-license.php">MIT</a>&nbsp;]
+			&nbsp;
+			[&nbsp;<a href = "http://www.gnu.org/licenses/gpl.html">GNU</a>&nbsp;]</small></p>
+		<p><a href = "http://www.codylindley.com/"><img src = "#CHEMIN{images/codylindley_logo.gif}"/></a>
+			<small>&nbsp;
+			[&nbsp;<a href = "http://www.codylindley.com">web</a>&nbsp;]
+			&nbsp;
+			[&nbsp;<a href = "mailto:contact@codylindley.com">contact</a>&nbsp;]
+			&nbsp;
+			[&nbsp;<a href = "http://jquery.com/demo/thickbox/">web de Thickbox</a>&nbsp;]</small></p><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div></div><hr><br />
+	<div><div class="menu"><br /><ul><li>Div portant l'id 'test_ici' pour l'exemple</li></ul></div><p><div id = "test_ici"><p>Nunc in ipsum. Mauris id ante. Fusce lacinia. Nullam laoreet ligula in pede. Vestibulum nunc purus, venenatis quis, blandit eget, congue at, risus. Sed orci. Nulla facilisi. Vestibulum vitae sem. Integer dignissim tortor vitae sem. Donec quis sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas nonummy semper felis.</p>
+			<p>Nunc non nibh. Suspendisse potenti. Mauris elementum interdum nunc. Donec sit amet tortor. Morbi vehicula mauris at odio. Maecenas commodo ultricies orci. Vivamus varius quam. Aenean auctor lorem sit amet magna. Fusce quis tellus. Vestibulum placerat vulputate lorem. Nulla elementum mattis nisi. Integer nunc mauris, fringilla id, semper eget, sollicitudin ac, sapien.</p></div></p></div></div>
+
+				<br />
+		</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+	<div id="pied">
+	<table cellspacing="1em"><tr>
+	<td width="20%"></td>
+	<td width="30%">
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href="http://www.phpdoc.org"><img src='#CHEMIN{doc_thickbox3/media/phpdoc_logo_50.png}' border='0' alt='PhpDoc' /> phpDocumentor 1.4.1</a>
+		<br />| <:phpdoc:date_generation:> 
+		<br />| Mon, 28 Feb 2011 12:54:16 +0100
+		</p>
+	</td>
+	<td width="30%">
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href='http://creadesignweb.free.fr' target='_blank' title='CreaDesign :: Vous avez un projet web ? R&eacute;alisons-le ensemble ...'><img src='#CHEMIN{doc_thickbox3/media/CD_mini_logo.png}' border='0' alt='CreaDesign' />&nbsp;<b>Crea Design</b></a><br />&nbsp;|&nbsp;PhpDocumentor plugin pour SPIP<br />&nbsp;|&nbsp;version 1.0.09 (c) 08/2009
+		</p>
+	</td>
+	<td width="20%"></td>
+	</tr></table>
+	<a href="http://www.spip.net/" title="<:site_realise_avec_spip:>"><img src="#CHEMIN{spip.png}" alt="SPIP" width="48" height="16" /></a> | 
+	<a href="#ENV{skel}" title="<:voir_squelette:>" rel="nofollow"><:squelette:></a>[
+	(#SESSION{id_auteur}|?{' '})| <a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a>
+	][(#SESSION{id_auteur}|?{'',' '})| <a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]" rel="nofollow" class='login_modal'><:lien_connecter:></a>][
+	(#AUTORISER{ecrire})| <a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a>] | 
+	<a rel="contents" href="#URL_PAGE{plan}"><:plan_site:></a> | 
+	<a href="#URL_PAGE{backend}" rel="alternate" title="<:syndiquer_site:>"><img src="#CHEMIN{feed.png}" alt="<:icone_suivi_activite:>" width="16" height="16" />&nbsp;RSS&nbsp;2.0</a>
+	</div>

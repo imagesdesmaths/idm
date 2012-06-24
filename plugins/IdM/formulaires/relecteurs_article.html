@@ -1,0 +1,71 @@
+<BOUCLE_article(ARTICLES) {statut = prop} {id_article}>
+<div class='formulaire_spip'>
+  <h3 class='titrem'><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">#TITRE</a></h3>
+  <strong>par #LESAUTEURS, proposé le [(#DATE|affdate)]</strong>
+
+  <form action="#ENV{action}" method="post">
+    #ACTION_FORMULAIRE{#ENV{action}}
+
+    <B_relecteurs>
+      <table id="assigned_#ID_ARTICLE" class="sortable">
+        <thead>
+          <tr>
+            <th>Signature / Pseudo</th>
+            <th>Qui est-ce ?</th>
+            <th>Avis</th>
+            <th>Supprimer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <BOUCLE_relecteurs(RELECTEURS_ARTICLES spip_idm_relecteurs spip_auteurs) {id_article}>
+          <tr>
+            <td><a href="mailto:#EMAIL*">#NOM</a></td>
+            <td>#MATH</td>
+            <td>#STATUS</td>
+            <td><input type="checkbox" name="unassign_#ID_AUTEUR" /></td>
+          </tr>
+          </BOUCLE_relecteurs>
+        </tbody>
+      </table>
+    </B_relecteurs>
+
+    <div class='cs_blocs'>
+      <h4 class='blocs_titre blocs_replie blocs_click'>
+        <a href='javascript:;'>Affecter des relecteurs &agrave; cet article ...</a>
+      </h4>
+      <div class='blocs_destination blocs_invisible'>
+        <B_gars>
+          <table id="unassigned_#ID_ARTICLE" class="sortable">
+            <thead>
+              <tr>
+                <th>Signature / Pseudo</th>
+                <th>Qui est-ce ?</th>
+                <th>Combien ?</th>
+                <th>Dernière relecture</th>
+                <th>Affecter</th>
+              </tr>
+            </thead>
+            <tbody>
+              <BOUCLE_gars(IDM_RELECTEURS spip_auteurs) {role = relecteur}>
+              <tr>
+                <td>#NOM</td>
+                <td>#MATH</td>
+                <td>#COMBIEN</td>
+                <td>#QUAND</td>
+                <td><input type="checkbox" name="assign_#ID_AUTEUR"/></td>
+              </tr>
+              </BOUCLE_gars>
+            </tbody>
+          </table>
+          </B_gars>
+        </div>
+      </div>
+      <p class="boutons"><input type="submit" name="go" value="Allons-y !"/></p>
+  </form>
+</div>
+</BOUCLE_article>
+
+<script type="text/javascript">
+  $("#assigned_#ID_ARTICLE").tablesorter( {sortList : [[0,0]]} );
+  $("#unassigned_#ID_ARTICLE").tablesorter( {sortList : [[0,0]]} );
+</script>

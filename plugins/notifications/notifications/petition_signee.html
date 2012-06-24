@@ -1,0 +1,26 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 SPIP
+  Distribue sous licence GPL
+
+][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+<BOUCLE_sign(SIGNATURES){id_signature}{tout}>
+<BOUCLE_art(ARTICLES){id_article}{statut==.*}{tout}>
+Nouvelle signature pour la petition [ (#TITRE|nettoyer_titre_email)]
+
+** [(#URL_ARTICLE|url_absolue)]
+
+Nom: #NOM_EMAIL
+email: #AD_EMAIL
+message: #MESSAGE
+nom_site: #_sign:NOM_SITE
+url_site: #_sign:URL_SITE
+
+Cette signature n'a pas encore ete validee
+si vous souhaitez la supprimer directement :
+[(#URL_ARTICLE|parametre_url{var_confirm,#ID_SIGNATURE}|parametre_url{refus,#ENV{cle},'&'}|ancre_url{sp#ID_ARTICLE}|url_absolue)]
+
+</BOUCLE_art>
+</BOUCLE_sign>
+#FILTRE{supprimer_tags|filtrer_entites|trim}

@@ -1,0 +1,14 @@
+[(#REM) 
+	
+  Parametres :
+  - class : classe(s) css ajoutes au select
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+  
+  Exemple d'appel :
+	[(#SAISIE{selecteur_langue,lang,
+		label=<:plugin:info_langue:>})] 
+]
+<select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"]>
+[(#VAL{changer_lang}|liste_options_langues{[(#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,''}})]})]
+</select>

@@ -1,0 +1,46 @@
+<plugin>
+	<nom>Thickbox v3</nom>
+	<auteur>
+-* Thickbox (version 3.1) par [Cody Lindley->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all]
+-* Mis en plugin par Fil, Izo, BoOz
+-* Am&eacute;lior&eacute; par [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]
+	</auteur>
+	<version>3.1</version>
+	<licence>GNU GPL v3</licence>
+	<icon>images/thickbox.png</icon>
+	<etat>stable</etat>
+	<description>
+{{Thickbox_v3 :: fen&ecirc;tres popup javascript}}
+
+Ce plugin ajoute un effet [thickbox->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all] sur les liens de type image (<code><a href="#URL_DOCUMENT" type="#MIME_TYPE">...</a></code>) ou de class="thickbox".
+Il fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>.
+
+Il ajoute de nouvelles balises ainsi qu'un panel de configuration dans l'espace priv&eacute; (cf. documentation).
+	</description>
+	<lien>
+	[Configuration->.?exec=cfg&amp;cfg=thickbox]
+	[Documentation->/?page=doc_thickbox_v3]
+	</lien>
+	<options>thickbox_options.php</options>
+	<fonctions>inc/thickbox_functions.php</fonctions>
+	<install>inc/thickbox_install.php</install>
+	<prefix>thickbox</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>inc/thickbox_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>inc/thickbox_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_js</nom>
+		<inclure>inc/thickbox_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>verifie_js_necessaire</nom>
+		<inclure>inc/thickbox_pipelines.php</inclure>
+	</pipeline>	
+	<necessite id='SPIP' version='[2.0.0;]' />
+	<categorie>multimedia</categorie>
+</plugin>

@@ -1,0 +1,48 @@
+[(#SET{step,#ENV{step}})] [(#ENV{message_erreur}|oui)#SET{step,edit}]
+
+<BOUCLE_gars(AUTEURS) {tous} {id_auteur=#ENV{id_auteur}}>
+  <BOUCLE_relecteur(IDM_RELECTEURS) {id_auteur}>
+    <div class='formulaire_spip'>
+      <form action="#ENV{action}" method="post">
+        #ACTION_FORMULAIRE{#ENV{action}}
+        
+        <div class='cadre_padding'>
+          Cat&eacute;gorie : #CATEGORIE <br />
+          Nombre de relectures (affect&eacute;es / lues / comment&eacute;es) :
+          #COMBIEN / #LUS / #COMMENTS<br />
+          Date de la derni&egrave;re relecture : #QUAND <br />
+          <fieldset><legend>&nbsp;Description&nbsp;</legend>[(#MATH|propre)]</fieldset>
+          <fieldset><legend>&nbsp;Commentaires&nbsp;</legend>[(#COMMENT|propre)]</fieldset>
+        </div>
+
+        [(#GET{step}|=={display}|oui)
+        <input type="hidden" name="step" value="edit" />
+        <p class="boutons">
+          <input type="submit" class="submit" name="submit" value="Modifier" />
+        </p>
+        [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+        ]
+        
+        [(#GET{step}|=={edit}|oui)
+        <ul>
+          #SAISIE{textarea, math, label=Description, rows=3}
+          #SAISIE{textarea, comment, label=Commentaires, rows=3}
+          #SAISIE{selection, categorie, label=Cat&eacute;gorie, cacher_option_intro=oui,
+            datas=#ARRAY{nouveau,    Nouveau,
+                         chercheur,  Chercheur,
+                         enseignant, Enseignant,
+                         etudiant,   &Eacute;tudiant,
+                         autre,      Autre / Inconnu,
+                         non_classe, Non class&eacute;}}
+        </ul>
+        <input type="hidden" name="step" value="display" />
+        <p class="boutons">
+          <input type="submit" class="submit" name="submit" value="Appliquer" />
+          <input type="submit" class="submit" name="submit" value="Desinscrire" />
+        </p>
+        [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+        ]
+      </form>
+    </div>
+  </BOUCLE_relecteur>
+</BOUCLE_gars>

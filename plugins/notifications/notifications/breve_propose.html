@@ -1,0 +1,22 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 SPIP
+  Distribue sous licence GPL
+
+][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+<BOUCLE_breve(BREVES){id_breve}{statut?}{tout}>
+[(#VAL{notifications:breve_propose_sujet}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE}}|nettoyer_titre_email)]
+
+<:notifications:breve_propose_titre:>
+
+[(#VAL{notifications:breve_propose_detail}|_T{#ARRAY{titre,#TITRE}})][ (#VAL{date_fmt_nomjour_date}|_T{[(#ARRAY{'nomjour',[(#DATE|nom_jour)],'date',[(#DATE|affdate)]})]}).]
+
+<:notifications:breve_propose_url:>
+[(#ID_BREVE|generer_url_entite{breve,'','',0})]
+
+[** (#TITRE) **]
+
+[(#TEXTE|couper{700}|textebrut)]
+</BOUCLE_breve>
+#FILTRE{supprimer_tags|filtrer_entites|trim}

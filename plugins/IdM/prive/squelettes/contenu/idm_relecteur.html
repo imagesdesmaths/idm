@@ -1,0 +1,8 @@
+<BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
+  <BOUCLE_gars(AUTEURS) {id_auteur=#ENV{id_auteur}} {tout}>
+    <BOUCLE_relecteurs(IDM_RELECTEURS spip_auteurs) {role = relecteur} {id_auteur}>
+      <h1>Fiche de relecteur : #NOM</h1>
+      <div class="ajax">#FORMULAIRE_IDM_RELECTEUR{#ID_AUTEUR}</div>
+    </BOUCLE_relecteurs>
+  </BOUCLE_gars>
+</BOUCLE_securite>

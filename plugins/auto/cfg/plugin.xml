@@ -1,0 +1,78 @@
+<plugin>
+    <nom>CFG</nom>
+    <auteur>bertrand Gugger, Matthieu Marcillaud</auteur>
+    <licence>&#169; 2009 GNU/LGPL</licence>
+    <version>
+    1.16.0
+    </version>
+    <etat>
+    stable
+    </etat>
+    <slogan>
+		<multi>
+		[fr]Moteur de configuration
+		[en]Configuration tool
+		[de]Konfigurationsmodul
+		</multi>
+    </slogan>
+    <description>
+		<multi>
+		[fr]Ce plugin permet de g&#233;rer tr&#232;s simplement des interfaces de configuration pour diff&#233;rents modules.
+		
+		Il est utilis&#233; par de nombreux plugins, mais il peut aussi avoir d'autres usages comme le param&#233;trage de squelettes.
+		[en]This plugin manage some configuration graphic user interfaces for some modules.
+		[de]Dieses Plugin stellt die Konfigurationsschnittstelle f&#252;r zahlreiche Plugins bereit.
+		Es kann auch f&#252; die Konfiguration von Skeletten verwendet werden.
+		</multi>
+    </description>
+    <lien>http://www.spip-contrib.net/?rubrique575</lien>
+    <prefix>
+    cfg
+    </prefix>
+    <icon>
+    cfg.png
+    </icon>
+    <chemin dir='' />
+    <options>cfg_options.php</options>
+    <fonctions>cfg_fonctions.php</fonctions>
+
+    <pipeline>
+        <nom>ajouter_boutons</nom>
+        <inclure>cfg_pipeline.php</inclure>
+    </pipeline>
+    <pipeline>
+        <nom>affiche_gauche</nom>
+        <inclure>cfg_pipeline.php</inclure>
+    </pipeline>
+    <pipeline>
+        <nom>header_prive</nom>
+        <inclure>cfg_pipeline.php</inclure>
+    </pipeline>
+    <pipeline>
+        <nom>insert_head</nom>
+        <inclure>cfg_pipeline.php</inclure>
+    </pipeline>
+    <pipeline>
+        <nom>insert_head_css</nom>
+        <inclure>cfg_pipeline.php</inclure>
+    </pipeline>
+     <pipeline>
+        <nom>formulaire_charger</nom>
+        <inclure>cfg_pipeline.php</inclure>
+    </pipeline>
+     <pipeline>
+        <nom>formulaire_verifier</nom>
+        <inclure>cfg_pipeline.php</inclure>
+    </pipeline>
+    <pipeline>
+        <nom>formulaire_traiter</nom>
+        <inclure>cfg_pipeline.php</inclure>
+    </pipeline>
+    <pipeline>
+        <nom>editer_contenu_formulaire_cfg</nom>
+        <inclure>cfg_pipeline.php</inclure>
+    </pipeline>
+	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
+	<categorie>outil</categorie>
+	<traduire gestionnaire="salvatore" module="cfg" reference="fr" />
+</plugin>

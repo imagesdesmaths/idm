@@ -1,0 +1,361 @@
+v1.15.0 (17 04 2010)
+  * filtre |cle : #TABLEAU|cle{a/b/c, valeur par defaut}
+  * (experimental) #FORMULAIRE_CONFIGURER{xx} cree un formulaire pour CFG
+    en chargeant le contenu de "configurer/form_xx.html". Ce fichier peut
+    contenir uniquement les parametres du CFG et des saisies.
+
+v1.14.0 (26 07 2009)
+  * (experimental) balise #EDIT_CONFIG{ma/config} pour permettre des 
+    editions de config avec le plugin Crayons
+
+v1.13.0 (16 07 2009)
+  * Suppression de #SAISIE et des saisies de CFG
+  * Deplacement de celles ci dans le plugin "saisies"
+
+v1.12.5 (27 05 2009)
+  * (en test) introduction d'une saisie : 'checkbox' 
+
+v1.12.4 (19 05 2009)
+  * (en test) introduction d'une saisie : 'groupe_mots' 
+  
+v1.12.3 (04 05 2009)
+  * (en test) introduction de deux nouvelles saisies : 'selection' et 'radio'
+
+v1.12.1 (26 04 2009)
+  * (en test) introduction d'une syntaxe raccourcie pour #SAISIE :
+  #SAISIE{type,name,obligatoire} ce qui donne :
+  #SAISIE{input,ville} ou
+  #SAISIE{input,ville,oui}. Ce dernier est equivalent a :
+  #SAISIE{input}{nom=ville}{obligatoire=oui}, lui meme equivalent a
+  #INCLURE{fond=saisies/_base}{type_saisie=input}{erreurs}{nom=ville}{valeur=#ENV{ville}}
+  
+v1.12 (25 04 2009)
+  * (en test) les saisies/ sont modifies, elles passent toutes par le fichier saisies/_base
+  et sont appelees par #SAISIE{input}{nom=ville} qui passe automatiquement les
+  parametre : {erreurs}, {valeur=#ENV{ville}}, {fond=saisies/_base} et {type_saisie=input}
+  puis charge la balise #INCLURE
+
+v1.11 (15 04 2009)
+  * (en test) Ajout d'un dossier saisies/ pour faciliter l'ajout de champ
+  facon SPIP 2.0 dans CFG. Les inclusions disposent de parametres pour les utiliser
+  qui sont expliques dans leurs fichiers respectifs.
+
+  Note d'avenir :
+  * La future version majeure de CFG (CFG 2.0) ne fonctionnera par defaut qu'avec l'ecriture
+  de formulaires facon SPIP 2.0, c'est a dire utilisant l'ecriture HTML des formulaires CVT/SPIP
+  et s'appuyant sur les points d'entrees de CVT pour fonctionner. Il est donc fortement conseille
+  d'ecrire ou de migrer ses formulaires CFG en respectant cela. 
+
+  Cela correspond avec cette version de CFG à ecrire ses formulaires dans formulaires/config_xxx.html
+  et de ne mettre dans fonds/cfg_xxx.html qu'un appel à ce formulaire par <div class="ajax">#FORMULAIRE_CONFIG_XXX</div>
+  
+
+
+v1.10.5 (09 12 2008)
+  * ajout des filtres et, ou, xou, non, oui pour compat 1.9.2
+  * ajout du filtre push pour compat 1.9.2
+  
+v1.10.3 (14 09 2008)
+  * ne pas prendre le traiter() de CFG si c'est un formulaire CVT normal !
+
+v1.10.2 (02 09 2008)
+- petites simplifications :
+
+  * lire,ecrire,effacer_config() ne peuvent plus etre surchargees 
+    (suppression de inc_lire_config_dist et consoeurs)
+    
+  * les types de validation des champs de formulaires passes par css
+    recoivent le même argument que les autres classes css 
+    (nom du champ + instance de la classe cfg_formulaire) et introduction
+    d'une fonction ajouter_erreur($champ,$message) dans la classe cfg_formulaire
+    pour faciliter cela.
+    
+  * permettre des fonctions d'extension pour toutes les actions pour
+    un formulaire particulier, et pas uniquement verifier et post_traiter.
+    function cfg_{nom_fichier/vue}_{action}(&$cfg){... actions ...}
+    
+    Au passage, changement d'api pour le test de verifier, qui comme
+    les autres maintenant recoit l'instance de la classe cfg_formulaire :
+    function cfg_{nom_fichier/vue}_{action}(&$cfg), mais son retour
+    doit sauvegarder les valeurs d'erreurs dans cfg (et non les retourner)
+    en utilisant la fonction $cfg->ajouter_erreurs($erreurs); 
+    (compatibilité ascendente assurée cependant quelques temps)
+    
+  * CFG/CVT : transmission de l'instance de classe cfg_formulaire entre la
+    fonction verifier() et traiter() du CVT pour eviter les recalculs des 
+    parametres et une reverification dans traiter().
+
+v1.10.1
+- un echo de debug trainait
+
+v1.10.0
+- corrections pour palette, changement de version pour marquer le changement de compat (necessite Palette pour les couleurs)
+
+v1.9.8 (01 08 2008)
+- usage du plugin Palette pour permettre la mutualisation de la librairie farbtastic entre plugins
+
+v1.9.7 (30 07 2008)
+- si on ne trouve pas de fichier au nom du fond, on n'essaie pas de le compiler...
+
+v1.9.6 (23 07 2008)
+- Suivre la svn de SPIP : le formulaire CVT charger() change la signature de son retour.
+
+v1.9.5 (23 07 2008)
+- On introduit <!-- inline= --> (sert notamment au selecteur de couleur, pour l'avoir aussi en cvt.)
+- On introduit la possibilite de faire des actions 'post_traiter' simplement depuis un nom de formulaire :
+si un formulaire cfg possede une fonction 'cfg_{nom}_post_traiter(&$cfg)', elle sera appelee apres le traitement par CFG,
+en lui transmettant la classe php $cfg.
+- Ne pas utiliser le parseur CFG sur les formulaires dynamiques qui ont une fonction _stat() (et non une fonction _charger()
+
+v1.9.4 (17 07 2008)
+- ajout de compat 1.9.2 pour sql_allfetsel()
+
+v1.9.3 (16 07 2008)
+- Permettre d'ajouter des #FORMULAIRE_XX dans des fonds/cfg_yy.html
+- introduction d'un parametre interpreter. Si <!-- interpreter=non -->
+alors le fonds/cfg_yy.html ne cherche pas a recuperer les champs du formulaire
+en scannant le code compile. Ainsi, il est possible de creer des fonds de configuration
+cfg en appelant des #FORMULAIRE_XX. Le fond ne prendra pas à tord des parametres
+du/des #FORMULAIRE inclus. Par contre, un tel fond ne peut pas avoir de formulaire
+CFG classique en même temps (on ne peut melanger) ;Mais un fond de ce type
+peut appeler plusieurs #FORMULAIRE differents.
+Les parametres <!-- param=valeurs --> continuent d'etre lus, ce qui permet d'indiquer
+des liens, des autorisations ou autre parametre comme le font normalement les fonds CFG.
+
+v1.9.2 (14 07 2008)
+- Corrections depots tablepack et table qui testaient leurs parametres un peu trop tot,
+ce qui effacait parfois les valeurs par defaut, apres coup.
+
+v1.9.1 (14 07 2008)
+- Correction depot tablepack qui oubliait de prendre en compte le nom du formulaire dans
+l'enregistrement depuis v1.8.2.
+
+v1.9.0 (14 07 2008)
+- Lorsqu'un formulaire SPIP 2 / CVT n'a pas de fonction charger(), ce sont les
+fonctions Charger, Verifier et Traiter de CFG qui sont utilisees pour ce formulaire.
+Cela permet des #FORMULAIRE_XX ou XX est un formulaire CFG/CVT formulaires/xx.html.
+Il peut ainsi y avoir des formulaires CFG public/prive, ajax ou non (et qui fonctionnent !).
+Differences entre un fonds/cfg_xx.html et formulaires/xx.html :
+	* les fonds/ s'affichent dans ?exec=cfg, pas les formulaires/
+	* les fonds/ ont [(#ENV{_cfg_}|form_hidden)], pas les formulaires/
+	* en revanche, les formulaires ont #ACTION_FORMULAIRE{#SELF}, pas les fonds/
+- Correction du preg_files() sur les fonds/ pour ne prendre reellement
+que des fichiers commencant par 'cfg_' (et non aussi le contenu d'un dossier
+commencant par cfg_)
+- Deplacements des exemples de fonds cfg dans le plugin cfg_exemples
+- la syntaxe #FORMULAIRE_CFG{xx} disparait au profit de #FORMULAIRE_XX
+- si le parametre <!-- autoriser=oui --> alors, on autorise.
+S'il est egal a non, alors on n'autorise pas. Permet d'ecrire :
+<!-- autoriser=[(#AUTORISER{modifier,auteur,#ID_AUTEUR}|?{oui,non})]-->
+les syntaxes <!-- autoriser=webmestre --> continuent de fonctionner.
+
+v1.8.2 (07 07 2008)
+- Corection d'un bug sur le depot tablepack avec effacer_config().
+- tests unitaires pour le depot tablepack
+
+v1.8.1 (06 07 2008)
+- Correction bug introduit en 1.8.0 d'erreur de lecture si aucune valeur
+n'etait encore enregistrees dans une depot metapack ou php.
+
+v1.8.0 (04 07 2008)
+- Simplifier *_config() en se passant de la classe cfg_params()
+- les fonctions des balises sont chargées au calcul et non en permanence et sont deplacees dans cfg_fonctions.php
+- suppression de cfg_charger_classe() : la surchage, c'est simplement le fichier, on se passe de _dist
+- déplacemeent de la classe cfg_depot dans inc/cfg_config
+- tests unitaires pour les fonctions lire_config, ecrire_config et effacer_config pour les dépots meta, metapack et php
+- lire_config metapack et php ne renvoyaient pas NULL si la méta ou le fichier php etait absent
+- CFG ne supporte plus l'écriture (hack) #CONFIG{expression,'',''}, à remplacer par #CONFIG{expression,#ARRAY}
+
+v1.7.6 (27 06 2008)
+- Correction bug avec ecrire_config(php::...)
+
+v1.7.5 (26 05 2008)
+- Corrections de la librairie sql_* pour 1.9.2
+
+v1.7.4 (08 05 2008)
+- Ne pas lister tous les formulaires cfg dans la page de gestion de plugin, mais seulement ceux avec l'onglet sur "oui"
+
+v1.7.3 (23 04 2008)
+- correction compat sql_showtable() sur 1.9.2 (fil)
+- suivi svn pour les formulaires dynamiques (necessitent 'action')
+(les formululaires #FORMULAIRE_CFG fonctionnent maintenant aussi dans le prive)
+
+v1.7.2 (16 04 2008)
+- mettre sql_count() et sql_selectdb() dans les fonctions de compatibilite
+ceci pour d'autres plugins souhaitant eventuellement les utiliser en 1.9.2
+
+v1.7.1 (07 04 2008)
+- correction bug sur effacer_config(metapack::xx)
+
+v1.7.0 (05 04 2008)
+- installation de librairies via la page ?exec=cfg_install_libs, presque automatique en 1.9.3
+- les librairies installables sont definies dans une globale $cfg_libs (cf. cfg_options.php)
+- internationalisation types et installation de libs
+
+v1.6.5 (05 04 2008)
+- effectivement passer dans l'environnement 'message_erreur', 'message_ok' et 'erreurs'
+- eviter que #ACTION_FORMULAIRE affiche son contenu en 1.9.2
+
+v1.6.4 (05 04 2008)
+- les classes css des champs sont toutes analysees. Elles doivent etre placees juste apres name="...".
+- si une classe css 'cfg_couleur' est presente et si la librairie 'farbtastic' est installee,
+une pipette sera proposee pour selectionner la couleur. exemple :
+<input type="text" name="liens" class="fondl cfg_couleur" value="[(#ENV{liens}|sinon{#467AA7})]" size="7" />
+
+v1.6.3 (04 04 2008)
+- utiliser les points d'entrees de cfg pour definir des actions sur les parametres
+et application avec le parametre 'rediriger'
+
+v1.6.2 (04 04 2008)
+- eviter double INSERT HEAD sous 1.9.2
+
+v1.6.1 (02 04 2008)
+- retrouver le fonctionnement d'avant v1.4.10 sur #CONFIG{meta} ET lire_config{meta}.
+Cette derniere deserialise une meta de spip par defaut, contrairement a la premiere.
+
+v1.6.0 (02 04 2008)
+- introduire la prise en compte des <input type='file'...
+qui met automatiquement un type 'cfg_fichier' sur le champ.
+Celui-ci va stocker le fichier dans IMG/config/{vue}/{champ}.ext,
+et son adresse peut etre appelee par #CFG_CHEMIN{nom/champ}
+
+v1.5.2 (31 03 2008)
+- sur les verifications des champs, en plus de verifier les champs de type 'cfg_xx' ou 'type_xx',
+chercher une fonction 'cfg_{vue}_verifier()' fonctionnant exactement pareil que la fonction homologue
+sur la nouvelle api des formulaires dynamiques de spip. Cette fonction peut etre placee dans un fichier
+fonds/cfg_{vue}_fonctions.php
+
+v1.5.1 (31 03 2008)
+- premiers jets d'api pour les verifications de types de champs
+- corrections bugs sur #ENV{cfg_id} dans les parametres <!-- param=valeur --> mal raffraichis
+
+v1.5.0 (30 03 2008)
+- nettoyages, suppression de la gestion de l'ancienne api des depots
+- retour du fonctionnement en php4 casse pendant la migration des depots
+- correction petit bug si $GLOBALS['meta']['nom'] est un array()
+
+v1.4.12 (30 03 2008)
+- depot 'table', c'etait le dernier...
+- corrections bugs sur #cfg_arbo, #config et sur la fonction $this->monter_arbre()
+
+v1.4.11 (30 03 2008)
+- corrections bugs sur 'cfg_id' modifie parfois a tord par new_id,
+- rangements dans les classes depots, et retour de messages depuis les depots possible
+- depot 'tablepack' en nouvelle api
+
+v1.4.10 (29 03 2008)
+- corrections bugs sur : #CONFIG et |in_array{#CONFIG{nom,'',''}} (preferer #CONFIG{nom/,#ARRAY})
+- ecrire_config() n'a plus le parametre 'serialize',
+par defaut : ecrire_config('nom',$valeur) ne serialise pas (comme une meta classique)
+alors que : ecrire_config('nom/',$valeur) ou ecrire_config('nom/champ',$valeur) va serialiser dans spip_meta
+- si l'on passe le nom du depot, c'est lui qui gere la serialisation ou non des donnees :
+ecrire_config('meta::nom',$valeur) ne serialise pas
+ecrire_config('metapack::nom',$valeur) serialise (pas besoin du /)
+
+
+v1.4.9 (28 03 2008)
+- depot 'metapack' en nouvelle api
+
+v1.4.8 (27 03 2008)
+- depot 'php' en nouvelle api (on commence par le plus simple !)
+- suivi svn pour api formulaires : charger/verifier/traiter
+
+v1.4.7 (26 03 2008)
+- corrections bugs sur les champs multiples et les tables
+- renommages de variables et doc
+- retour de 'cfg_id' dans #ENV
+
+v1.4.6 (26 03 2008)
+- deplacement des affichages dans l'exec plutot que dans la classe cfg (fin)
+- correction bug sur le chargement des depots dans les fonctions lire_config qui transformaient un array en "array"
+- API pour les fichiers de depots lire(), ecrire() et effacer() qui retournent array($ok, array("nom"=>"val"))
+(ancienne api toujours fonctionnelle [lire() et modifier($supprimer)], les depots autres que 'meta' seront portes vers la nouvelle api)
+
+v1.4.5 (25 03 2008)
+- deplacement des affichages dans l'exec plutot que dans la classe cfg
+- correction bug en 1.9.2 (il ne faut pas passer "editable" dans le contexte d'un recuperer_fond() !)
+
+v1.4.4 (24 03 2008)
+- naissance de l'indépendance du depot 'meta'
+- lire/ecrire/effacer_config utilisent le depot meta
+
+v1.4.3 (23 03 2008)
+- permettre la surcharge de lire_config, ecrire_config et effacer_config (a travers les fonctions inc_lire_config_dist())
+- permettre la surcharge des classes 'cfg','cfg_formulaire','cfg_params','cfg_depot'.
+- uniformiser un peu les messages d'erreur entre cfg et les formulaires dynamiques
+
+v1.4.2 (23 03 2008)
+- deplacement des storage cfg (maintenant appeles 'depot') dans inc/depot/nom.php
+- renommage du depot 'classic' en 'meta', suppression du depot 'extrapack' au profit de tablepack + colonne
+
+v1.4.1 (23 03 2008)
+- deplacement des parametres de cfg dans une seule entree $this->param
+
+v1.4.0 (22 03 2008)
+- #FORMULAIRE_CFG{nom_du_cfg} fonctionnant avec la nouvelle API des formulaires dynamiques (1.9.3dev)
+- quelques changements dans les noms de fonctions, suppression des anciens #formulaire_cfg
+- théoriquement pas de rupture de compatibilité
+- déplacement de l'icone cfg dans le sous menu 'configuration' (et non dans l'onglet du meme nom)
+
+v1.3.8 (25.02.2008)
+- correction bug introduit en 1.3.7 (doublement des liens)
+
+v1.3.7 (24.02.2008)
+- nouvelle option <!-- head= --> qui permet d'ajouter du contenu dans le
+head de l'espace privé lorsque le fond en question est actif.
+- bien supprimer les parametres CFG du code html rendu
+
+v1.3.6 (24.02.2008)
+- les onglets s'enrichissent d'une nouvelle syntaxe.
+Il existait <!-- onglet=non --> qui n'affichait pas l'onglet, il y a maintenant
+<!-- onglet=fond_cfg_parent --> qui n'affiche pas l'onglet, mais va "exposer"
+le fond choisi si le fond courant est actif. (Il faut que le fond choisi
+ait son onglet visible par contre - ie: onglet=oui ou non renseigne)
+- Dans un fond cfg, si un lien pointe sur le fond en cours, la balise <a> ne sera pas mise
+
+v1.3.5 (24.02.2008)
+- les liens s'enrichissent d'une nouvelle syntaxe <!-- liens*=prefixe_plugin:fond_cfg -->
+permettant de mettre des chaines de langue sur les liens directement avec celles du plugin
+dans /lang/prefixe_plugin_fr.php
+
+v1.3.4
+- oubli qui empechaient les liens de fonctionner
+
+v1.3.3 (07.02.2008) :
+- Si un lien est demande dans le fond <!-- liens*=toto -->
+mais que fonds/cfg_toto.html n'existe pas, le lien n'est pas propose
+
+v1.3.2 (02.02.2008) :
+- correction de bug sur storage table : l'insertions de nouvelles entrees
+était impossible sous SQLite. Test Ok en mysql, pg, sqlite3
+
+v1.3.1 :
+- correction coquille
+- introduction d'un paramètres à CFG pour lui dire de ne pas
+afficher les messages renvoyés par CFG habituellement <!-- afficher_messages=0 -->
+
+v1.3 :
+- introduction de liens_multi
+- correction d'un bug avec les liens multis qui ne sont plus
+définis automatiquement par le parametre liens, mais par
+un parametre specifique : liens_multi
+
+v1.2 :
+- corrections bugs sur #FORMULAIRE_CFG
+- homogeneise le passage de paramètres à CFG depuis un fond en
+utilisant uniquement <!-- param=valeur -->
+(l'autre écriture [(#REM) param=valeur] est decpeciee.
+- fourni des fonctions pour écrire et modifier les contenus arborescents
+generes par CFG (storage meta et extra uniquement) : ecrire_config() et effacer_config().
+- toutes les chaînes de langues sont maintenant
+regroupées dans le fichier lang/cfg_fr.php et attendent des traductions/traducteurs.
+
+v1.1 :
+- fourni une balise #FORMULAIRE_CFG pour l’affichage d’un formulaire
+CFG dans un squelette (nécessite SPIP > 1.9.2)
+
+v1.0.10 :
+- ajout de #CFG_ARBO
+
+v1 :
+- storages meta, extra, table, classic, php

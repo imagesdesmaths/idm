@@ -1,0 +1,33 @@
+<paquet
+    prefix        = "idm"
+    categorie     = "edition"
+    version       = "1.0.1"
+    etat          = "stable"
+    compatibilite = "[3.0.0-alpha2;3.0.*]"
+    logo          = "prive/themes/spip/images/idm-logo-60.png"
+    schema        = "201112062116"
+    >
+  <nom>IdM</nom>
+
+  <auteur mail="vbeffara@ens-lyon.fr">Vincent Beffara</auteur>
+  <licence>GPLv3</licence>
+
+  <menu nom="idm"              titre="idm:menu"         icone="images/idm-48.png" parent=""/>
+  <menu nom="idm_tableau"      titre="idm:tableau"      icone="images/idm-24.png" parent="idm"/>
+  <menu nom="idm_billettistes" titre="idm:billettistes" icone="images/idm-24.png" parent="idm"/>
+  <menu nom="idm_relecteurs"   titre="idm:relecteurs"   icone="images/idm-24.png" parent="idm"/>
+  <menu nom="idm_relecture"    titre="idm:relecture"    icone="images/idm-24.png" parent="idm"/>
+  <menu nom="idm_moderation"   titre="idm:moderation"   icone="images/idm-24.png" parent="idm"/>
+  <menu nom="idm_teams"        titre="idm:teams"        icone="images/idm-24.png" parent="idm"/>
+
+  <pipeline nom="declarer_tables_interfaces"  inclure="base/idm.php" />
+  <pipeline nom="declarer_tables_objets_sql"  inclure="base/idm.php" />
+  <pipeline nom="declarer_tables_auxiliaires" inclure="base/idm.php" />
+
+  <pipeline nom="autoriser"      inclure="idm_fonctions.php" />
+  <pipeline nom="boite_infos"    inclure="idm_fonctions.php" />
+  <pipeline nom="insert_head"    inclure="idm_fonctions.php" />
+  <pipeline nom="header_prive"   inclure="idm_fonctions.php" />
+  <pipeline nom="pre_typo"       inclure="idm_fonctions.php" />
+  <pipeline nom="jquery_plugins" inclure="idm_fonctions.php" />
+</paquet>

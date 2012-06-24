@@ -1,0 +1,87 @@
+[(#REM)
+	Informations Open Graph de Facebook en en-tete
+	! necessite de transmettre l'environnement !
+	
+	Les balises 'title', 'type', 'url' et 'image' sont necessaires
+	Les emails ne sont pas inseres, sauf si vous precisez {email=oui}
+	
+	Documentation OpenGraph officielle : http://developers.facebook.com/docs/opengraph/
+
+]#SET{og_ok,''}
+[
+    <meta property="og:site_name" content="(#NOM_SITE_SPIP|propre|supprimer_tags|textebrut)" />]
+<BOUCLE_breve_og(BREVES){id_breve=#ENV{id_breve}}>#SET{og_ok,oui}
+[    <meta property="og:title" content="(#TITRE|supprimer_tags|textebrut)" />]
+    <meta property="og:type" content="article" />
+[    <meta property="og:url" content="(#URL_BREVE|url_absolue)" />]
+[    <meta property="og:image" content="(#LOGO_BREVE||sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|url_absolue)" />]
+[    <meta property="og:description" content="(#INTRODUCTION|propre|supprimer_tags|textebrut)" />]
+</BOUCLE_breve_og>
+<BOUCLE_artcile_og(ARTICLES){id_article=#ENV{id_article}}>#SET{og_ok,oui}
+[    <meta property="og:title" content="(#TITRE|supprimer_tags|textebrut)" />]
+    <meta property="og:type" content="article" />
+[    <meta property="og:url" content="(#URL_ARTICLE|url_absolue)" />]
+[    <meta property="og:image" content="(#LOGO_ARTICLE_RUBRIQUE||sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|url_absolue)" />]
+[    <meta property="og:description" content="(#INTRODUCTION|propre|supprimer_tags|textebrut)" />]
+</BOUCLE_artcile_og>
+<BOUCLE_auteur_og(AUTEURS){id_auteur=#ENV{id_auteur}}>#SET{og_ok,oui}
+[    <meta property="og:title" content="(#NOM|supprimer_tags|textebrut)" />]
+    <meta property="og:type" content="author" />
+[    <meta property="og:url" content="(#URL_AUTEUR|url_absolue)" />]
+[(#ENV{email}|=={oui}|oui)[
+    <meta property="og:email" content="(#EMAIL)" />]]
+[    <meta property="og:image" content="(#LOGO_AUTEUR||sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|url_absolue)" />]
+[    <meta property="og:description" content="(#BIO|propre|supprimer_tags|textebrut)" />]
+</BOUCLE_auteur_og>
+<BOUCLE_site_og(SITES){id_syndic=#ENV{id_syndic}}>#SET{og_ok,oui}
+[    <meta property="og:title" content="(#NOM_SITE|supprimer_tags|textebrut)" />]
+    <meta property="og:type" content="website" />
+[    <meta property="og:url" content="(#URL_SITE|url_absolue)" />]
+[    <meta property="og:image" content="(#LOGO_SITE||sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|url_absolue)" />]
+[    <meta property="og:description" content="(#DESCRIPTIF|propre|supprimer_tags|textebrut)" />]
+</BOUCLE_site_og>
+<BOUCLE_mot_og(MOTS){id_mot=#ENV{id_mot}}>#SET{og_ok,oui}
+[    <meta property="og:title" content="(#TITRE|supprimer_tags|textebrut)" />]
+    <meta property="og:type" content="article" />
+[    <meta property="og:url" content="(#URL_MOT|url_absolue)" />]
+[    <meta property="og:image" content="(#LOGO_MOT||sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|url_absolue)" />]
+[    <meta property="og:description" content="(#TEXTE|propre|couper{260}|supprimer_tags|textebrut)" />]
+</BOUCLE_mot_og>
+<BOUCLE_rubrique_og(RUBRIQUES){id_rubrique=#ENV{id_rubrique}}>#SET{og_ok,oui}
+[    <meta property="og:title" content="(#TITRE|supprimer_tags|textebrut)" />]
+    <meta property="og:type" content="article" />
+[    <meta property="og:url" content="(#URL_RUBRIQUE|url_absolue)" />]
+[    <meta property="og:image" content="(#LOGO_RUBRIQUE||sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|url_absolue)" />]
+[    <meta property="og:description" content="(#INTRODUCTION|propre|supprimer_tags|textebrut)" />]
+</BOUCLE_rubrique_og>
+<BOUCLE_documents_og_audio(DOCUMENTS){id_document=#ENV{id_document}}{extension IN mp3,wav,aiff,aif}>#SET{og_ok,oui}
+[    <meta property="og:audio" content="(#URL_DOCUMENT|url_absolue)" />]
+[    <meta property="og:audio:title" content="(#TITRE|sinon{<:info_document:>}|supprimer_tags|textebrut)" />]
+[    <meta property="og:audio:type" content="(#MIME_TYPE)" />]
+[    <meta property="og:audio:description" content="(#DESCRIPTIF|propre|supprimer_tags|textebrut)" />]
+</BOUCLE_documents_og_audio>
+<BOUCLE_documents_og_video(DOCUMENTS){id_document=#ENV{id_document}}{extension IN flv,mov,f4v,avi}>#SET{og_ok,oui}
+[    <meta property="og:video" content="(#URL_DOCUMENT|url_absolue)" />]
+[    <meta property="og:video:title" content="(#TITRE|sinon{<:info_document:>}|supprimer_tags|textebrut)" />]
+[    <meta property="og:video:height" content="(#HAUTEUR)" />]
+[    <meta property="og:video:width" content="(#LARGEUR)" />]
+[    <meta property="og:video:type" content="(#MIME_TYPE)" />]
+[    <meta property="og:video:description" content="(#DESCRIPTIF|propre|supprimer_tags|textebrut)" />]
+</BOUCLE_documents_og_video>
+<BOUCLE_documents_og_image(DOCUMENTS){id_document=#ENV{id_document}}{extension IN gif,jpg,png}>#SET{og_ok,oui}
+[    <meta property="og:image" content="(#URL_DOCUMENT|url_absolue)" />]
+[    <meta property="og:image:title" content="(#TITRE|sinon{<:info_document:>}|supprimer_tags|textebrut)" />]
+[    <meta property="og:image:height" content="(#HAUTEUR)" />]
+[    <meta property="og:image:width" content="(#LARGEUR)" />]
+[    <meta property="og:image:type" content="(#MIME_TYPE)" />]
+[    <meta property="og:image:description" content="(#DESCRIPTIF|propre|supprimer_tags|textebrut)" />]
+</BOUCLE_documents_og_image>
+[(#GET{og_ok}|=={''}|oui)
+[    <meta property="og:title" content="(#NOM_SITE_SPIP|supprimer_tags|textebrut)" />]
+    <meta property="og:type" content="website" />
+[    <meta property="og:url" content="(#URL_SITE_SPIP|url_absolue)" />]
+[(#ENV{email}|=={oui}|oui)[
+    <meta property="og:email" content="(#EMAIL_WEBMASTER)" />]]
+[    <meta property="og:image" content="(#LOGO_SITE_SPIP||extraire_attribut{src}|url_absolue)" />]
+[    <meta property="og:description" content="(#DESCRIPTIF_SITE_SPIP|propre|supprimer_tags|textebrut)" />]
+]

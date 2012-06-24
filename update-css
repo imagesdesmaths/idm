@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+OLD=$(ls squelettes/css/tag* | sed -e 's/[^0-9]//g')
+NEW=$(date +"%Y%m%d%H%M%S")
+
+perl -pi -e "s/$OLD/$NEW/" squelettes/inc/head.html
+
+git add squelettes/inc/head.html
+git mv squelettes/css/tag_$OLD.css squelettes/css/tag_$NEW.css

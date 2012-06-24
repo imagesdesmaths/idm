@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title><:notifications:notifications:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+<INCLURE{fond=inc-head}>
+<meta name="robots" content="none" />
+</head>
+
+<body class="page_forum">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Contenu : poster un message dans le forum ]
+    <div id="wrapper">
+    <div id="contenu">
+    
+        [(#REM) Fil d'Ariane ]
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+            &gt; <strong class="on"><:notifications:notifications:></strong>
+
+        </div><!--#hierarchie-->
+
+        <div class="cartouche">
+            <h1><:notifications:notifications:></h1>
+
+			<div class="chapo">
+			<p><:notifications:suivis_public_votre_page:></p>
+			
+			<p><:notifications:suivis_public_description:></p>
+
+			</div>
+
+			<BOUCLE_perso(AUTEURS){id_auteur=#SESSION{id_auteur}}{tous}>
+
+
+			<dl>
+			<dt>
+			<div style="float:#LANG_RIGHT;" class="#EDIT{logo}">[(#LOGO_AUTEUR||image_reduire{64}|sinon{charger un logo})]</div>
+			<dt><:info_nom:></dt>
+			<dd class="#EDIT{nom}"> #NOM</dd>
+			<dt><:notifications:suivis_public_info_email:></dt>
+			<dd class="#EDIT{email}"> #EMAIL</dd>
+			</dl>
+
+			</BOUCLE_perso>
+
+        </div>
+
+        <div class="menu articles">
+            <h2>Options :</h2>
+
+			<p><:notifications:suivis_public_notif_desactiver:></p>
+			<p><:notifications:suivis_public_article_thread:></p>
+			<p><:notifications:suivis_public_changer_email:></p>
+
+			#SESSION{nom}
+
+			<B_forums>
+			#ANCRE_PAGINATION
+            <h2><:notifications:suivis_public_vos_forums:></h2>
+			[<p class="pagination">(#PAGINATION)</p>]
+			<ul>
+            <BOUCLE_forums(FORUMS) {id_auteur=#SESSION{id_auteur}}
+            {!par date_heure} {plat} {pagination}
+            {statut?}
+            >
+            <li>[(#DATE|affdate_court) &ndash; ]
+            [(#STATUT|=={publie}|?{
+	            <a href="#URL_FORUM"[
+	            title="(#TITRE|couper{80}|texte_backend)"]>[(#TEXTE|couper{80})]</a>
+			,
+				[(#TEXTE|couper{80})]
+			})]
+
+			[(#REM) todo: une couleur pour les statuts autres que 'publie',
+			attention aussi aux messages de l'espace prive ; doivent-ils
+			etre mentionnes sur cette page ?]
+            <small>(#STATUT)</small>
+
+            </li>
+            </BOUCLE_forums>
+            </ul>
+			[<p class="pagination">(#PAGINATION)</p>]
+			</B_forums>
+
+        </div>
+
+	</div><!--#contenu-->
+	</div><!--#wrapper-->
+
+    [(#REM) Menu de navigation laterale ]
+    <div id="navigation">
+
+        [(#REM) Menu de navigation par rubriques ]
+        <INCLURE{fond=inc-rubriques}>
+
+        [(#REM) Timeline des forums ]
+        <INCLURE{fond=suivi_forums_date}>
+
+    </div><!--#navigation-->
+    
+    [(#REM) Menu de navigation laterale ]
+    <div id="extra">
+	&nbsp;
+    </div><!--#extra-->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!--#page-->
+</body>
+</html>

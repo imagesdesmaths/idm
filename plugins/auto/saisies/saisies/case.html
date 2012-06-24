@@ -1,0 +1,20 @@
+[(#REM) 
+
+  Action :
+    - Rempli "on" si oui, "" si non.
+  
+  Parametres :
+    - label_case : pour un label a cote de la case (defaut:"")
+	- defaut : valeur par defaut si pas présente dans l'environnement
+    - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+  
+  Exemple d'appel :
+	[(#SAISIE{case, afficher_liste,
+		label=<:plugin:afficher_liste:>,
+		label_case=<:plugin:activer:>,
+		explication=<:plugin:explication_afficher_liste:>})]
+]#SET{valeur,#ENV{valeur_forcee,#ENV{valeur}}|is_null|?{#ENV{defaut},#ENV{valeur_forcee,#ENV{valeur}}}}
+<div class="choix">
+	<input type="checkbox" name="#ENV{nom}" class="checkbox" id='champ_#ENV{nom}'[ (#GET{valeur}|oui)checked='checked'] value='on' [ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]/>
+	[<label for="champ_#ENV{nom}">(#ENV*{label_case})</label>]
+</div>

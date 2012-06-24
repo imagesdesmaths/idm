@@ -1,0 +1,10 @@
+[(#REM)
+
+	champs disponibles : page, artpage, title_page, derniere_page, self
+	parametre_url($self,'artpage',"{$i}-$num_pages")
+	le filtre #ENV*{page}|decoupe_type_pagination{artpage, derniere_page, rayon=4, nb_extremes=2} renvoie :
+		1 si le nombre doit etre affiche
+		2 si le nombre ne doit pas etre affiche
+		3 s'il faut afficher '...'
+
+]#SET{type,#ENV*{page}|decoupe_type_pagination{#ENV*{artpage},#ENV*{derniere_page}}}#SET{separateur,'&nbsp;'}[(#GET{type}|=={3}|oui)...#GET{separateur}][(#GET{type}|=={1}|oui)[(#ENV*{page}|=={#ENV*{artpage}}|oui)[<span class="cs_pagination_off">(#ENV*{page})</span>]][(#ENV*{page}|=={#ENV*{artpage}}|non)[<a title="#ENV*{title_page}" href="[(#ENV*{self}|decoupe_url{#ENV*{page},#ENV*{derniere_page}})]" class="decoupe_page">(#ENV*{page})</a>]][(#ENV*{page}|<{#ENV*{derniere_page}}|?{#GET{separateur},''})]]

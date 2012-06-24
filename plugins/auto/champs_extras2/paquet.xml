@@ -1,0 +1,34 @@
+<paquet
+	prefix="cextras"
+	categorie="outil"
+	version="2.1.0"
+	etat="test"
+	compatibilite="[3.0.0-beta;3.0.*]"
+	logo="images/cextras-64.png"
+	documentation="http://www.spip-contrib.net/Champs-Extras-2"
+>
+
+	<nom>Champs Extras</nom>
+
+	<auteur>Matthieu Marcillaud</auteur>
+	<auteur>Fil</auteur>
+	<licence>GNU/GPL</licence>
+
+	<!--
+	<traduire module="cextras" reference="fr" gestionnaire="salvatore" />
+	-->
+	
+	<pipeline nom="declarer_champs_extras" action="" />
+
+	<pipeline nom="autoriser" inclure="inc/cextras_autoriser.php" />
+	<pipeline nom="editer_contenu_objet" inclure="cextras_pipelines.php" />
+	<pipeline nom="afficher_contenu_objet" inclure="cextras_pipelines.php" />
+	<pipeline nom="pre_edition" inclure="cextras_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="cextras_pipelines.php" />
+	<!--
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/cextras.php" />
+	-->
+
+	<necessite nom="saisies" compatibilite="[1.10.0;]" />
+
+</paquet>

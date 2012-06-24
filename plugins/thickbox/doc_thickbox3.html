@@ -1,0 +1,31 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+<meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
+<meta name="generator" content="<:phpdoc:and_cd:>[ (#CD_PHPDOC_VERSION)]" />
+[<link rel="shortcut icon" href="(#ENV*{favicon}|sinon{#CHEMIN{favicon.ico}}|sinon{#LOGO_SITE_SPIP}|image_passe_partout{32,32}|image_recadre{32,32,center}|image_format{ico}|extraire_attribut{src}|sinon{#CHEMIN{spip.ico}})" type="image/x-icon" />]
+	<title><:phpdoc:title_doc:>Thickbox v3 - [(#NOM_SITE_SPIP|textebrut)]</title>
+	#INSERT_HEAD
+	<link rel="stylesheet" type="text/css" href="[(#CHEMIN{/doc_thickbox3/media/spip_style.css})]" media="screen" />
+	<link rel="stylesheet" type="text/css" href="[(#CHEMIN{/doc_thickbox3/media/spip_formulaires.css})]" media="all" />
+	<link rel="stylesheet" type="text/css" href="[(#CHEMIN{/doc_thickbox3/media/habillage.css})]" media="all" />
+	<link rel="stylesheet" type="text/css" href="[(#CHEMIN{/doc_thickbox3/media/impression.css})]" media="print" />
+	<link rel="stylesheet" type="text/css" href="[(#CHEMIN{/doc_thickbox3/media/phpdoc_style.css})]" media="all" />
+</head>
+<body class="page_article">
+<balise id="c_top" />
+<div id="page">
+
+[(#ENV{doc}|oui)
+		<INCLURE{fond=doc_thickbox3/#ENV{doc}}>
+]
+[(#ENV{doc}|non)
+		<INCLURE{fond=doc_thickbox3/index}>
+]
+
+</div><!--#page-->
+<balise id="c_foot" />
+</body>
+</html>

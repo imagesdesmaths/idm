@@ -1,0 +1,25 @@
+<paquet
+	prefix="notifications"
+	categorie="communication"
+	version="2.0.0"
+	etat="test"
+	compatibilite="[3.0.0-alpha2;3.0.*]"
+	logo="notifications-32.png"
+	documentation="http://www.spip-contrib.net/Notifications,2360"
+>
+	<nom>Notifications</nom>
+
+	<auteur>fil@rezo.net</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<traduire gestionnaire="salvatore" module="crayons" reference="fr" />
+
+	<pipeline nom="taches_generales_cron" inclure="notifications_pipelines.php" />
+	<pipeline nom="post_edition" inclure="notifications_pipelines.php"/>
+	<pipeline nom="notifications_destinataires" inclure="notifications_pipelines.php"/>
+	<pipeline nom="notifications_envoyer_mails" inclure="notifications_pipelines.php"/>
+
+	<pipeline nom="notifications" inclure="notifications_pipelines.php" action="" />
+
+</paquet>

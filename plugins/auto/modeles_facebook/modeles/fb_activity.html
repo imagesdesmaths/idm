@@ -1,0 +1,70 @@
+[(#REM)
+	"Activity" plugin : bloc d'activite mode RSS
+	Doc officielle : http://developers.facebook.com/docs/reference/plugins/activity/
+	
+	Arguments d'environnement a passer :
+		- site : URL du site concerne (defaut URL_SITE_SPIP)
+		- header : montrer l'en-tete du bloc (oui/non - defaut 'oui')
+		- border_color : couleur de la bordure (hexadecimale AVEC le diese initial - defaut '#dddddd')
+		- recommendations : montrer les recommandations (oui/non - defaut 'oui')
+		- filter : un filtre que devront matcher les URLs montrees (defaut vide - cf. doc)
+		- width : largeur totale de l'outil (defaut 226px)
+		- height : hauteur totale de l'outil (utilise en iframe - defaut 300px)
+		- font : la police utilisee ('arial' 'lucida grande' 'segoe ui' 'tahoma' 'trebuchet ms' 'verdana' - defaut 'lucida grande' - cf. doc)
+		- colorscheme : couleur generale du bouton (light/dark - defaut 'light')
+
+		- ref (todo)
+
+]
+#SET{site,#ENV{site,#URL_SITE_SPIP}}
+#SET{header,#ENV{header,oui}}
+#SET{recommendations,#ENV{recommendations,oui}}
+#SET{border_color,#ENV{border_color,#FBMOD{border_color_def}}}
+#SET{filter,#ENV{filter,''}}
+#SET{width,#ENV{width,226}}
+#SET{height,#ENV{height,300}}
+#SET{font,#ENV{font,#FBMOD{font_def}}}
+[(#FBMOD{font_stds}|find{#GET{font}}|non)
+	#SET{font,#FBMOD{font_def}}
+]
+#SET{colorscheme,#ENV{colorscheme,#FBMOD{colorscheme_def}}}
+[(#FBMOD{colorscheme_stds}|find{#GET{colorscheme}}|non)
+	#SET{colorscheme,#FBMOD{colorscheme_def}}
+]
+
+<div class="fb_modeles fb_activity">
+
+[(#REM) Version XFBML ]
+[(#FBMOD{xfbml}|=={oui}|oui)
+<div id="fb-root"></div>
+<script src="http://connect.facebook.net/#FBMOD{fb_lang}/all.js#xfbml=1"></script>
+<fb:activity 
+	[site="(#GET{site})" ]
+	[width="(#GET{width})" ] 
+	[height="(#GET{height})" ] 
+	[font="(#GET{font})" ]
+	[filter="(#GET{filter})" ]
+	[colorscheme="(#GET{colorscheme})" ]
+	[header="(#GET{header}|fb_modeles_bool)" ]
+	[border_color="(#GET{border_color})" ]
+	[recommendations="(#GET{recommendations}|fb_modeles_bool)" ]
+></fb:activity>]
+
+[(#REM) Version accessible sans javascript ni XFBML ]
+[(#FBMOD{xfbml}|=={oui}|oui)<noscript>
+<div class="fb_modeles fb_messagejsabsent"><:fbmodeles:javascript_inactif:></div>
+]
+<iframe src="[(#FBMOD{activity_url}
+	|parametre_url{locale,#FBMOD{fb_lang}}
+	|parametre_url{site,#GET{site}}
+	|parametre_url{width,#GET{width}}
+	|parametre_url{height,#GET{height}}
+	|parametre_url{header,#GET{header}|fb_modeles_bool}
+	|parametre_url{border_color,#GET{border_color}}
+	|parametre_url{recommendations,#GET{recommendations}|fb_modeles_bool}
+	|parametre_url{font,#GET{font}}
+	|parametre_url{filter,#GET{filter}}
+	|parametre_url{colorscheme,#GET{colorscheme}})]" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:#GET{width}px; height:#GET{height}px;" allowTransparency="true"></iframe>
+[(#FBMOD{xfbml}|=={oui}|oui)</noscript>]
+
+</div>

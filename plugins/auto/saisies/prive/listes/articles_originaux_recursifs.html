@@ -1,0 +1,14 @@
+[(#SET{iteration,#ENV{iteration,1}})]
+[(#SET{separateur,[(#ENV{separateur}|concat{&nbsp;&rsaquo;&nbsp;})]})]
+<BOUCLE_rubriques(RUBRIQUES){id_parent}{tout}>
+	<optgroup label="#GET{separateur}#TITRE">
+		<BOUCLE_articles_originaux(ARTICLES){id_rubrique}{origine_traduction}>
+		[(#ENV{multiple}|oui)
+		<option value="#ID_ARTICLE"[(#ID_ARTICLE|in_array{#ENV{valeur,#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#GET{separateur}#TITRE</option>]
+		[(#ENV{multiple}|non)
+		<option value="#ID_ARTICLE"[(#ID_ARTICLE|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>#GET{separateur}#TITRE</option>]
+		<INCLURE{fond=prive/listes/articles_originaux_recursifs}{valeur=#ENV{valeur}}{id_rubrique=#ID_RUBRIQUE}{iteration=(#GET{iteration}|plus{1})}{separateur=#GET{separateur}}{_multiple}{defaut} />
+		</BOUCLE_articles_originaux>
+		<BOUCLE_ssrubriques(BOUCLE_rubriques)> </BOUCLE_ssrubriques>
+	</optgroup>
+</BOUCLE_rubriques>

@@ -1,0 +1,17 @@
+[(#REM) 
+	champs disponibles : 
+		id_mot (pour une boucle MOTS eventuellement)
+		titre (multi ready)
+		texte (safehtml)
+		descriptif (safehtml)
+	les spans indispensables : 
+		.gl_dl : enveloppe
+		.gl_dt : titre
+		.gl_dd : definition
+	par defaut : la definition affichee est le texte du mot si le descriptif est vide
+	dans la definition, les balises <a></a> sont retirees
+]
+<span class="gl_dl">
+	<span class="gl_dt">[(#ENV*{titre})]</span>
+	<span class="gl_dd">[(#ENV*{descriptif}|?{#ENV*{descriptif},#ENV*{texte}}|replace{'<a .*?>(.*?)</a>','$1'})]</span>
+</span>

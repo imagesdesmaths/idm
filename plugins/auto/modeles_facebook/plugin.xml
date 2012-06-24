@@ -1,0 +1,30 @@
+<plugin>
+	<nom><multi>Facebook Models[fr]Mod&#232;les Facebook</multi></nom>
+	<slogan>Un ensemble de mod&#232;les pour inclure les modules sociaux Facebook</slogan>
+	<version>0.16.0</version>
+	<etat>test</etat>
+	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
+	<licence>GNU/GPL 3</licence>
+ 	<prefix>fb_modeles</prefix>
+	<chemin dir='' />
+	<lien>http://www.spip-contrib.net/?article3872</lien>
+	<description>Ce plugin propose un ensemble de mod&#232;les SPIP pour int&#233;grer simplement et rapidement les modules sociaux du site Facebook :
+-*  {{send}} : le bouton &#171; Envoyer &#187; classique (avec commentaire)
+-*  {{like}} : le bouton &#171; J'aime &#187; classique (avec commentaire)
+-*  {{like box}} : liste des commentaires des utilisateurs qui ont &#171; aim&#233; &#187;
+-*  {{activity}} : liste des activit&#233;s r&#233;centes d'une page ou d'un profil
+-*  {{comments}} : liste des commentaires et bouton permettant d'en &#233;crire un
+-*  {{live stream}} (exp&#233;rimental) : bo&#238;te de discussion type &#171; chat &#187;
+	</description>
+ 	<icon>img/facebook-icon.png</icon>
+	<options>fb_modeles_options.php</options>
+	<fonctions>fb_modeles_fonctions.php</fonctions>
+	<categorie>navigation</categorie>
+    <pipeline>
+        <nom>insert_head</nom>
+        <inclure>fb_modeles_pipelines.php</inclure>
+    </pipeline>
+	<traduire gestionnaire="salvatore" module="fbmodeles" reference="fr" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<utilise id='z' version='[1.0.0;]' />
+</plugin>

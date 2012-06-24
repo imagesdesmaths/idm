@@ -1,0 +1,64 @@
+#CACHE{0}
+<BOUCLE_article(ARTICLES) {statut=prop} {id_article}>
+  <BOUCLE_securite(CONDITION) {SI #AUTORISER{relire,article,#ID_ARTICLE}}>
+    <INCLURE{fond=inc/head}{title=#TITRE - En cours de relecture}{id_rubrique}{id_article}>
+    <h1>Article en cours de relecture</h1>
+    <h2 style="margin-top : 0ex;">dans la rubrique &laquo; #INFO_TITRE{rubrique,#ID_RUBRIQUE}&nbsp;&raquo;</h2>
+
+    <p>Bienvenue dans l'espace de relecture collaborative de Images des
+    Math&eacute;matiques. C'est ici que vous pourrez participer au
+    processus &eacute;ditorial de la revue. Le but n'est pas de
+    d&eacute;cider du sort de ce texte (la d&eacute;cision finale
+    revient au comit&eacute; de r&eacute;daction !) mais bien de
+    collaborer avec l'auteur afin de rendre son article le plus lisible
+    possible.</p>
+
+    <p>Concr&egrave;tement, que faut-il faire ? D'abord lire
+    attentivement l'article. Ensuite, indiquez &agrave; l'auteur si
+    l'article est compr&eacute;hensible. &Eacute;ventuellement, signalez
+    pr&eacute;cis&eacute;ment les points que vous ne comprenez pas.
+    Enfin, vous pouvez aussi adresser &agrave; l'auteur quelques
+    suggestions d'am&eacute;lioration.</p>
+
+    <p>Techniquement, un forum, dispos&eacute; en bas de cette page, vous
+    permet de dialoguer avec l'auteur et avec les autres relecteurs.
+    Utilisez-le pour faire vos commentaires sur l'article.</p>
+
+    <!--<div class="ajax">#FORMULAIRE_RELECTEURS_VOTE{#ID_ARTICLE}</div>-->
+
+    <p>Voici le texte de l'article, pr&eacute;sent&eacute; tel qu'il le
+    serait sur la partie publique du site s'il &eacute;tait
+    publi&eacute; en l'&eacute;tat. Bonne lecture !</p>
+
+    </div><div class="page">
+    [(#INCLURE{fond=inc/article}{id_article})]
+    </div><div class="page">
+
+    <BOUCLE_auteur(AUTEURS){id_article}>[(#SET{auteur_article,#NOM})]</BOUCLE_auteur>
+    [(#INCLURE{fond=inc/forum-relecture}{id_article}{id_forum}{auteur_article=#GET{auteur_article}})]
+    <div class="ajax">#FORMULAIRE_FORUM_RELECTURE{#ID_ARTICLE,#ID_FORUM}</div>
+
+    <INCLURE{fond=inc/foot}>
+  </BOUCLE_securite>
+    <INCLURE{fond=inc/head}{title=Acc&egrave;s refus&eacute;}>
+    <h1>Acc&egrave;s refus&eacute; !</h1>
+
+    [(#SESSION{id_auteur}|oui)
+    <p>Vous ne faites pas partie des relecteurs de cet article. Vous
+    pourrez le lire quand il sera publi&eacute; !</p>]
+
+    [(#SESSION{id_auteur}|non)
+    <p>Avez-vous pens&eacute; &agrave; vous <a href="#URL_PAGE{perso}">identifier</a>
+    ?</p>]
+    <INCLURE{fond=inc/foot}>
+  <//B_securite>
+</BOUCLE_article>
+  <INCLURE{fond=inc/head}{title=Acc&egrave;s refus&eacute;}>
+  <h1>Cet article n'est pas/plus propos&eacute; &agrave; la publication !</h1>
+
+  <BOUCLE_reel(ARTICLES) {id_article=#ENV{id_article}}>
+  <p>L'article intitul&eacute; <a href="#URL_ARTICLE">#TITRE</a> a
+  &eacute;t&eacute; accept&eacute; ...</p>
+  </BOUCLE_reel>
+  <INCLURE{fond=inc/foot}>
+<//B_article>

@@ -1,0 +1,19 @@
+<paquet
+	prefix="YAML"
+	categorie="outil"
+	version="1.5.0"
+	etat="stable"
+	compatibilite="[2.1.0;3.0.99]"
+	logo="yaml.png"
+	documentation="http://www.spip-contrib.net/Le-plugin-YAML"
+>
+
+	<nom>YAML</nom>
+	<!-- Un format de fichier simple pour éditer des listes de données -->
+
+	<credit lien="http://yaml.org/">yaml.org</credit>
+	<credit lien="http://code.google.com/p/spyc/">Spyc</credit>
+	<credit lien="http://components.symfony-project.org/yaml/">Symfony YAML - Fabien Potencier</credit>
+
+	<licence lien="http://opensource.org/licenses/mit-license.php">MIT</licence>
+</paquet>

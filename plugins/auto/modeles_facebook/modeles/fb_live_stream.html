@@ -1,0 +1,65 @@
+[(#REM)
+	"Live-stream" plugin : un chat Facebook (une discussion)
+	Doc officielle : http://developers.facebook.com/docs/reference/plugins/live-stream/
+
+	Requiere d'utiliser une application specifique a votre site (cf. page de config)
+	
+	Arguments d'environnement a passer :
+		- event_app_id : l'ID de l'application concernee (defaut celle de config)
+		- via_url : URL de redirection (defaut URL courante)
+		- xid : un ID unique pour la discussion (utile si plusieurs discussions dans une meme page)
+		- always_post_to_friends : poster les messages aux amis (oui/non - defaut 'non')
+		- width : largeur totale de l'outil (defaut 490px)
+		- height : hauteur totale de l'outil (utilise en iframe - defaut 400px)
+		- font : la police utilisee ('arial' 'lucida grande' 'segoe ui' 'tahoma' 'trebuchet ms' 'verdana' - defaut 'lucida grande' - cf. doc)
+		- colorscheme : couleur generale du bouton (light/dark - defaut 'light')
+
+]
+#SET{event_app_id,#ENV{event_app_id,#FBMOD{appid}}}
+#SET{via_url,#ENV{via_url,#SELF|url_absolue}}
+#SET{xid,#ENV{xid,''}}
+#SET{always_post_to_friends,#ENV{always_post_to_friends,non}}
+#SET{width,#ENV{width,490}}
+#SET{height,#ENV{height,400}}
+#SET{font,#ENV{font,#FBMOD{font_def}}}
+[(#FBMOD{font_stds}|find{#GET{font}}|non)
+	#SET{font,#FBMOD{font_def}}
+]
+#SET{colorscheme,#ENV{colorscheme,#FBMOD{colorscheme_def}}}
+[(#FBMOD{colorscheme_stds}|find{#GET{colorscheme}}|non)
+	#SET{colorscheme,#FBMOD{colorscheme_def}}
+]
+<div class="fb_modeles fb_live_stream">
+
+[(#REM) Version XFBML ]
+[(#FBMOD{xfbml}|=={oui}|oui)
+<div id="fb-root"></div>
+<script src="http://connect.facebook.net/[(#FBMOD{fb_lang})]/all.js#xfbml=1"></script>
+<fb:live-stream 
+	[event_app_id="(#GET{event_app_id})" ]
+	[via_url="(#GET{via_url})" ]
+	[xid="(#GET{xid})" ]
+	[width="(#GET{width})" ] 
+	[height="(#GET{height})" ] 
+	[always_post_to_friends="(#GET{always_post_to_friends}|fb_modeles_bool)" ]
+	[font="(#GET{font})" ]
+	[colorscheme="(#GET{colorscheme})" ]
+></fb:live-stream>]
+
+[(#REM) Version accessible sans javascript ou XFBML ]
+[(#FBMOD{xfbml}|=={oui}|oui)<noscript>
+<div class="fb_modeles fb_messagejsabsent"><:fbmodeles:javascript_inactif:></div>
+]
+<iframe src="[(#FBMOD{live_stream_url}
+	|parametre_url{locale,#FBMOD{fb_lang}}
+	|parametre_url{via_url,#GET{via_url}|urlencode}
+	|parametre_url{width,#GET{width}}
+	|parametre_url{height,#GET{height}}
+	|parametre_url{event_app_id,#GET{event_app_id}}
+	|parametre_url{xid,#GET{xid}}
+	|parametre_url{always_post_to_friends,#GET{always_post_to_friends}|fb_modeles_bool}
+	|parametre_url{font,#GET{font}}
+	|parametre_url{colorscheme,#GET{colorscheme}})]" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:#GET{width}px; height:#GET{height}px;" allowTransparency="true"></iframe>
+[(#FBMOD{xfbml}|=={oui}|oui)</noscript>]
+
+</div>

@@ -1,0 +1,7 @@
+#CACHE{#ENV*{cache,60}}
+[(#VAL{_CS_visiteurs_connectes}|defined|oui)
+#SET{nb,#VAL{cs_compter_visiteurs}|filtrer|cs_span{class='cs_nb_visiteurs'}}
+#SET{ch,couteau:visiteurs_connectes}
+[(#VAL{visiteurs_connectes}|_T|=={visiteurs connectes}|non)#SET{ch,visiteurs_connectes}]
+[[(#ENV*{p,1}|oui)<p class='cs_visiteurs'>](#GET{ch}|_T{#ARRAY{nb,#GET{nb}}})[(#ENV*{p,1}|oui)</p>]]
+]

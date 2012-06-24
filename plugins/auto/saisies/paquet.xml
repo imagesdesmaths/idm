@@ -1,0 +1,28 @@
+<paquet
+	prefix="saisies"
+	categorie="outil"
+	version="1.18.1"
+	etat="test"
+	compatibilite="[2.0.0;3.0.*]"
+	logo="images/logo_saisie_48.png"
+	documentation="http://www.spip-contrib.net/Saisies,1347"
+>
+	<nom>Saisies</nom>
+	<auteur>Matthieu Marcillaud</auteur>
+	<auteur>RastaPopoulos</auteur>
+	<auteur>Joseph</auteur>
+	<licence>GNU/GPL</licence>
+	
+	<traduire module="saisies" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="header_prive" inclure="saisies_pipelines.php" />
+	<pipeline nom="affichage_final" inclure="saisies_pipelines.php" />
+	<pipeline nom="saisies_autonomes" inclure="saisies_pipelines.php" />
+	<pipeline nom="formulaire_saisies" inclure="saisies_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="saisies_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="saisies_pipelines.php" />
+	<pipeline nom="styliser" inclure="saisies_pipelines.php" />
+
+	<utilise nom="verifier" />
+	<utilise nom="spip_bonux" />
+</paquet>

@@ -1,0 +1,83 @@
+		<a name="top"></a>
+	<div id="entete">
+		
+<table><tr>
+	<td style='padding: 0.4em 1em;'><a rel='start home' href='#URL_SITE_SPIP/' title='<:accueil_site:>' class='accueil'>[(#LOGO_SITE_SPIP||image_reduire{150,100}) ]<br /><strong id='nom_site_spip'>#NOM_SITE_SPIP</strong></a></td>
+	<td style='border-left: 2px solid #8B6F92; margin: 0; padding: 0.4em 1em;'><a href='[(#SELF|parametre_url{doc,index})]' title='<:phpdoc:accueil_doc:>'>[(#CHEMIN{images/thickbox.png}||image_reduire{150,100})]</a></td>
+	<td style='padding: 0.4em 1em;'><b>Thickbox v3<br /></b><small>by <ul class='spip'><li> Thickbox (version 3.1) par <a href='http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all' class='spip_out' rel='external'>Cody Lindley</a></li><li> Mis en plugin par Fil, Izo, BoOz</li><li> Am&eacute;lior&eacute; par <a href='http://www.spip-contrib.net/PieroWbmstr' class='spip_out' rel='external'>Piero Wbmstr</a></li></ul><br /><i>Version 3 (stable)  - (c) 2009 GNU GPL v3</i></small></td>
+</tr></table>
+
+        
+                                    
+                            <div style="float: right; font-size: 0.9em;">
+		        	        [ <b>thickbox</b> :
+	        	<a href="[(#SELF|parametre_url{doc,classtrees_thickbox})]"><:phpdoc:map:></a> | 
+            	<a href="[(#SELF|parametre_url{doc,elementindex_thickbox})]"><:phpdoc:index:></a> 
+            ]
+        				&nbsp;|&nbsp;[ <b><a href="[(#SELF|parametre_url{doc,index})]"><:phpdoc:user_docbook:></a></b> ]		</div>
+	</div>
+
+    <div class="hfeed" id="conteneur">
+	    <div class="hentry" id="contenu">
+
+		
+	        <div class="cartouche">
+		        <div class="surlignable">
+	    					</div>
+			</div>
+
+	<div class="cartouche">
+	<h1>Thickbox v3 - Documentation utilisateur</h1>
+	<br />
+	<p>
+{{Thickbox_v3 :: fen&ecirc;tres popup javascript}}
+<p><br />
+Ce plugin ajoute un effet [thickbox->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all] sur les liens de type image (<code><a href='#URL_DOCUMENT' type='#MIME_TYPE'>...</a></code>) ou de class='thickbox'.
+Il fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>.
+<br /><br />Il ajoute de nouvelles balises ainsi qu'un panel de configuration dans l'espace priv&eacute; (cf. documentation).
+</p>
+	</p>
+</div>			</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+    <div id="navigation">
+        <div class="menu">
+		<h2><:phpdoc:content:></h2>
+        <ul>
+						</ul>
+		</div>
+		    </div><!--#navigation-->
+    
+    <div id="extra">
+        <div class="menu">
+				<h2><:phpdoc:files:></h2>
+			<ul>
+		  <div class="package">
+						<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,thickbox/_inc---thickbox_functions.php})]">Fonctions</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,thickbox/_inc---thickbox_install.php})]">Installation</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,thickbox/_thickbox_options.php})]">Options</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,thickbox/_inc---thickbox_pipelines.php})]">Pipelines</a></span><br />
+			  </div>
+  <div class="package">
+	<strong>Balises--</strong><br />					<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,thickbox/Balises--/_balise---thickbox.php})]">Balise generale</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,thickbox/Balises--/_balise---dialogbox.php})]">Bialogbox</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,thickbox/Balises--/_balise---thickbox_gallery.php})]">Gallerie</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,thickbox/Balises--/_balise---thickbox_img.php})]">Image</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,thickbox/Balises--/_balise---thickbox_input.php})]">Input</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,thickbox/Balises--/_balise---thickbox_a.php})]">Lien</a></span><br />
+			  </div>
+			</ul>
+					</div>
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href="http://www.phpdoc.org"><img src='#CHEMIN{doc_thickbox3/media/phpdoc_logo_50.png}' border='0' alt='PhpDoc' /> phpDocumentor 1.4.1</a>
+		<br />| <:phpdoc:date_generation:>
+		<br />| Mon, 28 Feb 2011 12:54:16 +0100
+		</p>
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href='http://creadesignweb.free.fr' target='_blank' title='CreaDesign :: Vous avez un projet web ? R&eacute;alisons-le ensemble ...'><img src='#CHEMIN{doc_thickbox3/media/CD_mini_logo.png}' border='0' alt='CreaDesign' />&nbsp;<b>Crea Design</b></a><br />&nbsp;|&nbsp;PhpDocumentor plugin pour SPIP<br />&nbsp;|&nbsp;version 1.0.09 (c) 08/2009
+		</p>
+	</div>
+
+	<div id="pied">
+		| <a href='http://www.spip.net/' title='<:site_realise_avec_spip:>'><img src='http://cdc.spiplocal:8888/squelettes-dist/spip.png' alt='SPIP' width='48' height='16' /></a> | <a rel='contents' href='http://cdc.spiplocal:8888'><:accueil_site:></a> | <a href='http://cdc.spiplocal:8888/ecrire/'><:espace_prive:></a> | <a href='[(#SELF|parametre_url{doc,index})]' title='<:phpdoc:retour_doc:>'><:phpdoc:accueil_doc:> <i>Thickbox v3</i></a> |
+	</div>

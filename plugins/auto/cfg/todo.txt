@@ -1,0 +1,32 @@
+Todo ou idées :
+
+- rupture de compatibilité pour simplifier l'API de CFG et 
+  réduire son domaine d'action (essayer en même temps de faire un plugin 
+  'cfg_etendu' afin de limiter la casse)
+  
+- Supprimer (?) tout ce qui permet de créer/actionner des paramètres, 
+  ainsi que les actions en fonction de css particulières sur les champs.
+  Mettre cela (?) dans un plugin CFG_etendu.
+  Ca concerne :
+  * les paramètres 'rediriger' et 'selecteur_couleur' (ce dernier 
+  est réglé avec le plugin palette)
+  * les classes 'cfg_couleur' (réglé), 'cfg_fichier' (upload de fichier)
+  et 'cfg_id'
+  * les types pour mettre des erreurs standard 
+  
+  - 'redigiriger' n'est employé que par autorité...
+  - 'cfg_fichier' et 'cfg_id' sont problématiques.
+  
+- ne plus utiliser 'head' qui pompe de la mémoire à cfg pour mettre un header :
+  demander à utiliser les pipelines de SPIP pour cela, car ça ne fonctionne
+  pas avec les formulaires CFG en CVT.
+  C'est un vaste problème, plus général dans SPIP d'ailleurs, de ne pouvoir ajouter
+  facilement depuis un squelette quelque chose dans le head
+  
+  La solution actuelle pour CFG fonctionne (sauf en CVT), mais compile 2
+  fois le formulaire (1 fois dans le pipeline insert_head, une fois lors de
+  l'execution...). C'est donc une fois de trop.
+  
+- les types d'erreurs type_xx : Ces type_xx sont utilisés dans certains plugins, 
+  mais est-ce nécessaire de faire un fichier par type ? avec des find_in_path qui echouent ?
+  

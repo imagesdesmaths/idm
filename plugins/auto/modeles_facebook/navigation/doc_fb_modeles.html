@@ -1,0 +1,11 @@
+	[(#ENV{docmode}|=={brut}|non)<INCLURE{fond=inc-rubriques}>]
+
+	<div id="likebox_frame">
+	[(#MODELE{fb_like_box}{href=#CONFIG{#EVAL{FB_MODELS_CFGMETA}/url_page}|sinon{http://www.facebook.com/platform}})]
+	</div>
+
+	<p>&nbsp;</p>	
+
+	<div id="activity_frame">
+	[(#MODELE{fb_activity}{site=#CONFIG{#EVAL{FB_MODELS_CFGMETA}/url_page}|sinon{http://www.example.com/}})]
+	</div>

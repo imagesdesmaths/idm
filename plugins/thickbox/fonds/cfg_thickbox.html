@@ -1,0 +1,104 @@
+<!-- titre=<:thickbox:thickbox:>-->
+<!-- icone=images/thickbox_26.png-->
+[(#SET{logo,
+<img src="#DOSSIER_SQUELETTE/../images/thickbox_32.png" width="32" height="32" alt="Logo <:thickbox:thickbox:>" style="float:#LANG_RIGHT;" />
+})]
+<!-- descriptif=
+#GET{logo}
+<h4><:thickbox:titre_descr_cfg:></h4>
+<p><:thickbox:descr_cfg:></p>
+<br />
+<table class='cellule-h-table' cellpadding='0' style='vertical-align: middle'>
+<tr><td>
+<a href='#URL_SITE_SPIP/?page=doc_thickbox3' class='cellule-h'>
+	<span class='cell-i'>
+		<img src='#CHEMIN{images/article-24.gif}' alt="<:thickbox:see_doc:>"  style='background: url(#CHEMIN{images/article-24.gif}) center center no-repeat;' />
+	</span>
+</a>
+</td>
+<td class='cellule-h-lien'>
+	<a href='#URL_SITE_SPIP/?page=doc_thickbox3' class='cellule-h'><:thickbox:see_doc:></a>
+</td></tr></table>
+[<a href='#URL_SITE_SPIP/?page=doc_thickbox3' target='_blank' title='<:thickbox:see_doc_in_new_window:>'><:thickbox:new_window:></a>]
+<br />
+-->
+<!-- boite=<:thickbox:titre_descr_cfg:>-->
+#CACHE{0}
+
+<form method="post" action="#SELF" id="top_tb_form"><div>
+	<div>[(#ENV{_cfg_}|form_hidden)]</div>
+	<fieldset><legend>&nbsp;<b><:thickbox:legend_cfg:></b>&nbsp;:</legend>
+	<div style="padding:0.2em; padding-right: 1.2em"><p class="forml">
+		<label for="include_css"><strong><:thickbox:cfgform_titre_include_css:>&nbsp;:</strong></label>
+		<br />
+		<input type="radio" name="include_css" value="oui"[(#ENV{include_css}|=={oui}|?{" checked="checked""})] />&nbsp;<:thickbox:oui:>
+		&nbsp;&nbsp;<strong>|</strong>&nbsp;&nbsp;
+		<input type="radio" name="include_css" value="non"[(#ENV{include_css}|=={non}|?{" checked="checked""})] />&nbsp;<:thickbox:non_merci:>
+	</p></div>
+	<div style="padding:0.2em; padding-right: 1.2em"><p class="forml">
+		<label for="option_width"><strong><:thickbox:cfgform_titre_dimensions:>&nbsp;:</strong></label>
+		<br />
+		<:thickbox:width:>&nbsp;:&nbsp;<input type="text" name="option_width" id="option_width" class="text" value="[(#ENV{option_width})]" style="width:80px" />
+		&nbsp;|&nbsp;
+		<:thickbox:height:>&nbsp;:&nbsp;<input type="text" name="option_height" id="option_height" class="text" value="[(#ENV{option_height})]" style="width:80px" />
+		&nbsp;<:thickbox:en_pixels:>
+	</p></div>
+	<div style="padding:0.2em; padding-right: 1.2em"><p class="forml">
+		<label for="option_onclick"><strong><:thickbox:cfgform_titre_option_onclick:>&nbsp;:</strong></label>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="radio" name="option_onclick" value="oui"[(#ENV{option_onclick}|=={oui}|?{" checked="checked""})] />&nbsp;<:thickbox:activer:>
+			&nbsp;&nbsp;<strong>|</strong>&nbsp;&nbsp;
+			<input type="radio" name="option_onclick" value="non"[(#ENV{option_onclick}|=={non}|?{" checked="checked""})] />&nbsp;<:thickbox:desactiver:>
+		<br />
+		<br /><span class="comment">=>&nbsp;<:thickbox:cfgform_comment_option_onclick:></span>
+	</p></div>
+	<div style="padding:0.2em; padding-right: 1.2em"><p class="forml">
+		<label for="titre_default"><strong><:thickbox:cfgform_titre_titre:>&nbsp;:</strong></label>
+		<br />
+		<input type="text" name="titre_default" id="titre_default" value="#ENV{titre_default}" size="50" />
+		<br />
+		<br /><span class="comment">=>&nbsp;<:thickbox:cfgform_comment_blank_titre:></span>
+		<br /><span class="comment">=>&nbsp;<:thickbox:cfgform_comment_titre:></span>
+	</p></div>
+	<div style="padding:0.2em; padding-right: 1.2em"><p class="forml">
+		<label for="option_width"><strong><:thickbox:cfgform_titre_dim_img:>&nbsp;:</strong></label>
+		<br />
+		<:thickbox:width:>&nbsp;:&nbsp;<input type="text" name="option_width_img" id="option_width_img" class="text" value="[(#ENV{option_width_img})]" style="width:80px" />
+		&nbsp;|&nbsp;
+		<:thickbox:height:>&nbsp;:&nbsp;<input type="text" name="option_height_img" id="option_height_img" class="text" value="[(#ENV{option_height_img})]" style="width:80px" />
+		&nbsp;<:thickbox:en_pixels:>
+		<br />
+		<br /><span class="comment">=>&nbsp;<:thickbox:cfgform_comment_dim_img:></span>
+	</p></div>
+	<div style="padding:0.2em; padding-right: 1.2em"><p class="forml">
+		<label for="img_closer"><strong><:thickbox:cfgform_titre_closer:>&nbsp;:</strong></label>
+		<br />
+		<input type="text" name="img_closer" id="img_closer" value="#ENV{img_closer}" size="50" />
+		&nbsp;<span style='background-color: #fff; padding: 0.4em; border: 1px solid #404040'><img src="[(#CHEMIN{ #ENV{img_closer} })]" width='16px' style='vertical-align: middle;' /></span>
+		<br />
+		<br /><span class="comment">=>&nbsp;<:thickbox:cfgform_comment_closer:></span>
+	</p></div>
+	<div style="padding:0.2em; padding-right: 1.2em"><p class="forml">
+		<label><strong><:thickbox:cfgform_titre_dialogbox:>&nbsp;:</strong></label>
+		<br /><span class="comment">=>&nbsp;<:thickbox:cfgform_comment_dialogbox:></span>
+		<br />
+		<br />
+		<label for="dialogbox_url"><strong><:thickbox:cfgform_titre_url_dialogbox:>&nbsp;:</strong></label>
+		<br />
+		<input type="text" name="dialogbox_url" id="dialogbox_url" value="#ENV{dialogbox_url,dialogbox.html}" size="50" />
+		<br />
+		<br />
+		<label for="option_width"><strong><:thickbox:cfgform_titre_dim_dialogbox:>&nbsp;:</strong></label>
+		<br />
+		<:thickbox:width:>&nbsp;:&nbsp;<input type="text" name="option_width_db" id="option_width_db" class="text" value="[(#ENV{option_width_db,500})]" style="width:80px" />
+		&nbsp;|&nbsp;
+		<:thickbox:height:>&nbsp;:&nbsp;<input type="text" name="option_height_db" id="option_height_db" class="text" value="[(#ENV{option_height_db,400})]" style="width:80px" />
+		&nbsp;<:thickbox:en_pixels:>
+		<br />
+	</p></div>
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="fondo" />
+		<input onClick="window.location.href=window.location.href+'#top_tb_form';" type="reset" name="_cfg_delete" value="<:thickbox:bouton_reset:>" class="fondo" />
+	</p>
+</fieldset>
+</div></form>

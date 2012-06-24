@@ -1,0 +1,74 @@
+<div class="formulaire_spip formulaire_configurer formulaire_configurer_fb_modeles">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+	<fieldset>
+		<legend><:fbmodeles:cfg_identifiants:></legend>
+		<:fbmodeles:cfg_comment_identifiants|propre:>
+		<p class="forml" style="width:98%">
+			<label for="appid"><strong><:fbmodeles:cfg_label_appid:>&nbsp;:</strong></label>
+			<input type="text" name="appid" id="appid" value="[(#ENV{appid}|sinon{#FBMOD{appid}})]" size="50" />
+			<br /><span style="font-size:.8em"><:fbmodeles:cfg_comment_appid:></span>
+		</p>
+		<p class="forml" style="width:98%">
+			<label for="pageid"><strong><:fbmodeles:cfg_label_pageid:>&nbsp;:</strong></label>
+			<input type="text" name="pageid" id="pageid" value="[(#ENV{pageid}|sinon{#FBMOD{pageid}})]" size="50" />
+			<br /><span style="font-size:.8em"><:fbmodeles:cfg_comment_pageid:></span>
+		</p>
+		<p class="forml" style="width:98%">
+			<label for="userid"><strong><:fbmodeles:cfg_label_userid:>&nbsp;:</strong></label>
+			<input type="text" name="userid" id="userid" value="[(#ENV{userid}|sinon{#FBMOD{userid}})]" size="50" />
+			<br /><span style="font-size:.8em"><:fbmodeles:cfg_comment_userid:></span>
+		</p>
+		<p class="forml" style="width:98%">
+			<label for="url_page"><strong><:fbmodeles:cfg_label_url_page:>&nbsp;:</strong></label>
+			<input type="text" name="url_page" id="url_page" value="[(#ENV{url_page}|sinon{#FBMOD{url_page}})]" size="50" />
+			<br /><span style="font-size:.8em"><:fbmodeles:cfg_comment_url_page:></span>
+		</p>
+	</fieldset>
+
+	<fieldset>
+		<legend><:fbmodeles:cfg_reglages:></legend>
+		<:fbmodeles:cfg_comment_reglages|propre:>
+		<p class="forml" style="width:98%">
+			<label for="xfbml"><strong><:fbmodeles:cfg_label_xfbml:></strong>&nbsp;:</label>
+			<label><input type="radio" name="xfbml" id="xfbml" value="oui"[(#ENV{xfbml}|sinon{#FBMOD{xfbml}}|=={oui}|oui) checked="checked"] /><:fbmodeles:oui:></label>
+			<label><input type="radio" name="xfbml" id="xfbml" value="non"[(#ENV{xfbml}|sinon{#FBMOD{xfbml}}|=={non}|oui) checked="checked"] /><:fbmodeles:non:></label>
+			<br /><span style="font-size:.8em"><:fbmodeles:cfg_comment_xfbml:></span>
+		</p>
+		<p class="forml" style="width:98%">
+			<label for="border_color_def"><strong><:fbmodeles:cfg_label_border_color:>&nbsp;:</strong></label>
+			<input type="text" name="border_color_def" id="border_color_def" value="[(#ENV{border_color_def}|sinon{#FBMOD{border_color_def}})]" size="50" />
+			<br /><span style="font-size:.8em"><:fbmodeles:cfg_comment_border_color:></span>
+		</p>
+		<p class="forml" style="width:98%">
+			<label for="font_def"><strong><:fbmodeles:cfg_label_font:>&nbsp;:</strong></label>
+			<select name="font_def" id="font_def" class="forml" style="width:200px">
+				<option value=""[(#ENV{font_def}|sinon{#FBMOD{font_def}}|=={''}|oui) selected="selected"]><:fbmodeles:defaut:></option>
+				[(#FBMOD{font_stds}|foreach{cfg/cfg_options})]
+			</select>
+			<span style="font-size:.8em"><:fbmodeles:cfg_comment_font:></span>
+		</p>
+		<p class="forml" style="width:98%">
+			<label for="colorscheme_def"><strong><:fbmodeles:cfg_label_colorscheme:>&nbsp;:</strong></label>
+			<select name="colorscheme_def" id="colorscheme_def" class="forml" style="width:200px">
+				<option value=""[(#ENV{colorscheme_def}|sinon{#FBMOD{colorscheme_def}}|=={''}|oui) selected="selected"]><:fbmodeles:defaut:></option>
+				[(#FBMOD{colorscheme_stds}|foreach{cfg/cfg_options})]
+			</select>
+			<span style="font-size:.8em"><:fbmodeles:cfg_comment_colorscheme:></span>
+		</p>
+	</fieldset>
+
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="fondo" title="<:fbmodeles:enregistrer_les_modifications:>" />
+		<input type="reset" value="<:fbmodeles:bouton_reset:>" class="fondo" title="<:fbmodeles:effacer_les_modifications:>" />
+		<input type="submit" name="_cfg_delete" value="<:fbmodeles:bouton_effacer:>" class="fondo" title="<:fbmodeles:effacer_config_courante:>" />
+	</p>
+
+</div></form>
+#CFG_ARBO{#EVAL{FB_MODELS_CFGMETA}}
+</div>

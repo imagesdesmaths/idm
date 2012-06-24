@@ -1,0 +1,65 @@
+<h1><:idm:tableau:></h1>
+
+<h2><:idm:planning:></h2>
+
+<table id="planning">
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Auteur(s)</th>
+      <th>Rubrique</th>
+      <th>Date</th>
+      <th>Éditeur</th>
+      <th>Modifier</th>
+    </tr>
+  </thead>
+<BOUCLE_deja(ARTICLES) {statut = publie} {id_secteur !IN 18} {age<0} {par date}>
+  <tr>
+    <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
+    <td>#LESAUTEURS</td>
+    <td>#INFO_TITRE{rubrique,#ID_RUBRIQUE}</td>
+    <td>[(#DATE|affdate{Y.m.d})] (publié)</td>
+    <td>[<a href="(#ID_EDITEUR|generer_url_entite{auteur})">[(#INFO_TITRE{auteur,#ID_EDITEUR}|idm_prenom_nom)]</a>]</td>
+    <td>[<a href="(#VAL{idm_gerer}|generer_url_ecrire{id_article=#ID_ARTICLE})">Modifier</a>]</td>
+  </tr>
+</BOUCLE_deja>
+<BOUCLE_prevus(ARTICLES) {statut = prop} {prevu = oui} {par date_prevue}>
+  <tr>
+    <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
+    <td>#LESAUTEURS</td>
+    <td>#INFO_TITRE{rubrique,#ID_RUBRIQUE}</td>
+    <td>[(#DATE_PREVUE|affdate{Y.m.d})]</td>
+    <td>[<a href="(#ID_EDITEUR|generer_url_entite{auteur})">[(#INFO_TITRE{auteur,#ID_EDITEUR}|idm_prenom_nom)]</a>]</td>
+    <td>[<a href="(#VAL{idm_gerer}|generer_url_ecrire{id_article=#ID_ARTICLE})">Modifier</a>]</td>
+  </tr>
+</BOUCLE_prevus>
+</table>
+
+<B_article2>
+<h2><:idm:non_plan:></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Auteur(s)</th>
+      <th>Rubrique</th>
+      <th>Éditeur</th>
+      <th>Modifier</th>
+    </tr>
+  </thead>
+<BOUCLE_article2(ARTICLES) {statut = prop} {prevu != oui} {par titre}>
+  <tr>
+    <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
+    <td>#LESAUTEURS</td>
+    <td>#INFO_TITRE{rubrique,#ID_RUBRIQUE}</td>
+    <td>[<a href="(#ID_EDITEUR|generer_url_entite{auteur})">[(#INFO_TITRE{auteur,#ID_EDITEUR}|idm_prenom_nom)]</a>]</td>
+    <td>[<a href="(#VAL{idm_gerer}|generer_url_ecrire{id_article=#ID_ARTICLE})">Modifier</a>]</td>
+  </tr>
+</BOUCLE_article2>
+</table>
+</B_article2>
+
+<script type="text/javascript">
+  $("#planning").tablesorter( {sortList : [[3,0]]} );
+</script>

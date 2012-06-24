@@ -1,0 +1,23 @@
+#SET{i,0}
+<B_a>
+<textarea readonly cols="55" rows="30" class="formo" style="width:100%; font-size:90%;" name="texte_formatspip"
+><BOUCLE_a(ARTICLES){id_article=#ENV*{id_article}}{tout}>
+[#SET{i,#GET{i}|plus{1}}
+===== <:texte_descriptif_rapide:> =====
+(#DESCRIPTIF*)
+
+][#SET{i,#GET{i}|plus{1}}
+===== <:info_chapeau:> =====
+(#CHAPO*)
+
+][#SET{i,#GET{i}|plus{1}}
+===== <:info_texte:> =====
+(#TEXTE*)
+
+][#SET{i,#GET{i}|plus{1}}
+===== <:info_post_scriptum:> =====
+(#PS*)]
+</BOUCLE_a></textarea>
+[(#REM) le titre du bloc ]
+@TITRE@=[(#GET{i}|>{1}|?{couteau:textes_formatspip,couteau:texte_formatspip}|_T)]
+</B_a>

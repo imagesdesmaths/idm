@@ -1,0 +1,15 @@
+#CACHE{0}
+
+<BOUCLE_forum (FORUMS) {id_forum = #ENV{id_forum}} {statut IN relmod,relref}>
+<form action="#SELF" method="post" class="billet">
+  #ACTION_FORMULAIRE{#ENV{action}}
+  #BOITE_OUVRIR{#TITRE, simple, titrem}
+  <h4>Auteur du commentaire : [(#AUTEUR|idm_prenom_nom)]</h4>
+  [(#STATUT|=={relref}|oui)<span style="color:#e20000;font-weight:bold;">MESSAGE REFUS&Eacute;</span>]
+  #TEXTE
+#BOITE_PIED
+  <input type="submit" name="accept" value="Accepter" />
+  <input type="submit" name="refuse" value="Refuser" />
+#BOITE_FERMER
+</form>
+</BOUCLE_forum>

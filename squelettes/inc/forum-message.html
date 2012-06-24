@@ -1,0 +1,10 @@
+<BOUCLE_message(FORUMS) {id_forum} {statut IN publie,prive,rel}>
+  <div class="forum-message[ (#NOM|=={#ENV{auteur_article}}?{forum-message-delauteur})]">
+    <h3>#TITRE</h3>
+    <h4>[le&nbsp;(#DATE|affdate_jourcourt)][&nbsp;&agrave&nbsp;(#DATE|heures)][:(#DATE|minutes)][,
+    par (#NOM)]</h4>
+    [<div class="forum-texte">(#TEXTE)</div>]
+    [<div class="forum-notes">(#NOTES)</div>]
+    [<h4 class="repondre"><a href="(#SELF|parametre_url{id_forum,#ID_FORUM})">R&eacute;pondre &agrave; ce message</a></h4>]
+  </div>
+</BOUCLE_message>

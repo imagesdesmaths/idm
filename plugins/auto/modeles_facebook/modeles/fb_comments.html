@@ -1,0 +1,56 @@
+[(#REM)
+	"Comments" plugin : bloc de commentaires
+	Doc officielle : http://developers.facebook.com/docs/reference/plugins/comments/
+	
+	Arguments d'environnement a passer :
+		- href : URL qui sera "aimee" (defaut URL courante)
+		- num_posts : nombre de posts montres (defaut 2)
+		- width : largeur totale de l'outil (defaut 490px)
+		- height : hauteur totale de l'outil (utilise en iframe - defaut 450px)
+		- font : la police utilisee ('arial' 'lucida grande' 'segoe ui' 'tahoma' 'trebuchet ms' 'verdana' - defaut 'lucida grande' - cf. doc)
+		- colorscheme : couleur generale du bouton (light/dark - defaut 'light')
+
+]
+#SET{href,#ENV{href,#FBMOD{url_page,#SELF|url_absolue}}}
+#SET{width,#ENV{width,490}}
+#SET{height,#ENV{height,450}}
+#SET{num_posts,#ENV{num_posts,2}}
+#SET{font,#ENV{font,#FBMOD{font_def}}}
+[(#FBMOD{font_stds}|find{#GET{font}}|non)
+	#SET{font,#FBMOD{font_def}}
+]
+#SET{colorscheme,#ENV{colorscheme,#FBMOD{colorscheme_def}}}
+[(#FBMOD{colorscheme_stds}|find{#GET{colorscheme}}|non)
+	#SET{colorscheme,#FBMOD{colorscheme_def}}
+]
+
+<div class="fb_modeles fb_comments">
+
+[(#REM) Version XFBML ]
+[(#FBMOD{xfbml}|=={oui}|oui)
+<div id="fb-root"></div>
+<script src="http://connect.facebook.net/#FBMOD{fb_lang}/all.js#xfbml=1"></script>
+<fb:comments 
+	[href="(#GET{href})" ]
+	[width="(#GET{width})" ] 
+	[height="(#GET{height})" ] 
+	[num_posts="(#GET{num_posts})" ] 
+	[font="(#GET{font})" ]
+	[colorscheme="(#GET{colorscheme})" ]
+></fb:comments>]
+
+[(#REM) Version accessible sans javascript ni XFBML ]
+[(#FBMOD{xfbml}|=={oui}|oui)<noscript>
+<div class="fb_modeles fb_messagejsabsent"><:fbmodeles:javascript_inactif:></div>
+]
+<iframe src="[(#FBMOD{comments_url}
+	|parametre_url{locale,#FBMOD{fb_lang}}
+	|parametre_url{href,#GET{href}|urlencode}
+	|parametre_url{width,#GET{width}}
+	|parametre_url{height,#GET{height}}
+	|parametre_url{num_posts,#GET{num_posts}}
+	|parametre_url{font,#GET{font}}
+	|parametre_url{colorscheme,#GET{colorscheme}})]" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:#GET{width}px; height:#GET{height}px;" allowTransparency="true"></iframe>
+[(#FBMOD{xfbml}|=={oui}|oui)</noscript>]
+
+</div>

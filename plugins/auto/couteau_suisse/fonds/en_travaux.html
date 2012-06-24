@@ -1,0 +1,70 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html lang='#LANG' dir='#LANG_DIR'>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+<head>
+	<title>[(#ENV*{titre})]</title>
+<style type="text/css">
+<!--
+	body { font-family: Trebuchet Ms,Verdana, Geneva, Sans, sans-serif; font-size: 0.9em; color: #2e3436; background: #babdb6 url(images/minipres-gris.png) no-repeat scroll 97% 100px;
+	}
+	h1 { margin: 1em 0 1em 0; font-size: 1.3em; font-weigth: bold; color: #5c3566; }
+	h2 { margin: 0.8em 0 0.8em 0; font-size: 1.2em; font-weigth: normal; }
+	img { border: 0; }
+	ul { text-align: justify; list-style-type: none; }
+	fieldset, .fieldset { text-align: left; padding: 0; border: 0; margin-top: 1em; font-size: 0.9em; }
+	legend { font-weight: bold; font-size: 1.1em; color: #000; }
+	label {}
+	#minipres { width: 30em; background: #FFF repeat; margin: 1em auto; padding: 1em; border: 1px solid #888; text-align: center; }
+	.pass #minipres { width: 90%; }
+
+	.formulaire_spip { text-align: #LANG_LEFT; font-size: 0.8em; }
+	.formulaire_spip fieldset {border: 1px solid #BABDB6; padding:10px;font-size: 1em;}
+	.formulaire_menu_lang { float: #LANG_RIGHT; }
+	.formulaire_menu_lang label { display: none; }
+	.formulaire_login { clear: both; }
+	.spip_logos { float: right; padding-left: 10px; }
+	.forml,input { font-size: 1.0em;}
+	p .forml { width:20em; font-family: inherit; }
+	.spip_bouton input { float: #LANG_RIGHT; }
+	.reponse_formulaire { font-weight: bold; color: red; }
+	a { color: #e86519; text-decoration: none; }
+-->
+</style>
+[(#REM) Balise permettant aux plugins d'inserer des appels javascript ou css ;
+        C'est ici que SPIP va inserer l'appel de la librairie jQuery
+        Et appeler a la fin compacte_head pour agreger et compacter tout le head dans des fichiers statiques
+        si l'option est cochee dans Configuration
+]
+#INSERT_HEAD
+</head>
+<body onLoad="javascript:if(document.getElementById('le_formulaire')) if(document.getElementById('le_formulaire').textContent=='') document.getElementById('se_deconnecter').style.display='block';">
+[(#REM)
+<br />Admins seuls en prive : #EVAL{_en_travaux_PRIVE}
+<br />Admins admins en public : #EVAL{_en_travaux_ADMIN}
+<br />#SESSION{id_auteur}. #SESSION{nom}
+<br/>form_login : #ENV*{form_login}
+<br/>espace prive : #ENV*{prive} - #URL_ECRIRE
+]
+
+<div id='minipres'>
+	<h1>[(#ENV*{titre})]</h1>
+	<div id='en_travaux'>
+		[(#EVAL{_en_travaux_MESSAGE}|propre)]
+		[(#ENV*{prive}|=={non}|oui)[(#ENV*{form_login}|=={non}|oui)
+			<div style="text-align:right"><a href="./ecrire" class="spip_out"><:espace_prive:></a></div>
+		]]
+		[(#REM) Cas SPIP 2.0 permettant d'acceder a l'espace prive ]
+		[(#ENV*{prive}|=={oui}|oui)[(#SESSION{id_auteur}|non)
+			<div style="text-align:right"><a href="../?page=login" class="spip_out"><:lien_connecter:></a></div>
+		][(#SESSION{id_auteur}|oui)
+			<div style="text-align:right"><a href="../?action=logout&logout=prive" class="spip_out"><:icone_deconnecter:></a></div>
+		]]
+	</div>
+	<div id="se_deconnecter" style="text-align:right; display:none;"><br /><a href="[(#ENV*{prive}|=={oui}|?{'../?action=logout&logout=prive','?action=logout&logout=public'})][(#ENV*{prive}|=={non}|?{'&url=',''})#SELF]" class="spip_out"><:icone_deconnecter:></a></div>
+	[(#ENV*{form_login}|=={oui}|oui)
+		<div id="le_formulaire" class="formulaire_spip">#LOGIN_PUBLIC</div>
+	]
+</div>
+</body>
+</html>

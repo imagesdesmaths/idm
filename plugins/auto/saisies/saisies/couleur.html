@@ -1,0 +1,12 @@
+[(#REM)
+
+    ### /!\ En Couleur si plugin Palette ###
+	
+	Memes parametres que saisies/input, mais redefinit
+	size et class.
+]
+[(#INCLURE{fond=saisies/input,
+			env,
+            type=#HTML5|?{color,text},
+            size=7,
+            class=[(#ENV{readonly}|?{[(#ENV{class}) ]text,[(#ENV{class}) ]palette})]})]

@@ -1,0 +1,79 @@
+	<a name="top"></a>
+	<div id="entete">
+		<strong id="nom_site_spip">
+		
+<table><tr>
+	<td style='padding: 0.4em 1em;'><a rel='start home' href='#URL_SITE_SPIP/' title='<:accueil_site:>' class='accueil'>[(#LOGO_SITE_SPIP||image_reduire{150,100}) ]<br /><strong id='nom_site_spip'>#NOM_SITE_SPIP</strong></a></td>
+	<td style='border-left: 2px solid #8B6F92; margin: 0; padding: 0.4em 1em;'><a href='[(#SELF|parametre_url{doc,index})]' title='<:phpdoc:accueil_doc:>'>[(#CHEMIN{images/thickbox.png}||image_reduire{150,100})]</a></td>
+	<td style='padding: 0.4em 1em;'><b>Thickbox v3<br /></b><small>by <ul class='spip'><li> Thickbox (version 3.1) par <a href='http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all' class='spip_out' rel='external'>Cody Lindley</a></li><li> Mis en plugin par Fil, Izo, BoOz</li><li> Am&eacute;lior&eacute; par <a href='http://www.spip-contrib.net/PieroWbmstr' class='spip_out' rel='external'>Piero Wbmstr</a></li></ul><br /><i>Version 3 (stable)  - (c) 2009 GNU GPL v3</i></small></td>
+</tr></table>
+
+		</strong>
+        
+                                    
+                            <div style="float: right; font-size: 0.9em;">
+		        	        [ <b>thickbox</b> :
+	        	<a href="[(#SELF|parametre_url{doc,classtrees_thickbox})]"><:phpdoc:map:></a> | 
+            	<a href="[(#SELF|parametre_url{doc,elementindex_thickbox})]"><:phpdoc:index:></a> 
+            ]
+        						</div>
+	</div>
+
+
+    <div class="hfeed" id="conteneur" style="width: 100%">
+	    <div class="hentry" id="contenu"><h1 align="center"><:phpdoc:source_file_for:>&nbsp;'<i>Gallerie</i>'</h1>
+<p><img src="[(#CHEMIN{doc_thickbox3//media/left.gif})]" alt=" " />&nbsp;<:phpdoc:back_to_doc:>&nbsp;:&nbsp;<a href="[(#SELF|parametre_url{doc,thickbox/Balises--/_balise---thickbox_gallery.php})]">Gallerie</a></p>
+<div class="src-code"><span class="php">
+<code><ol><li><div class="src-line"><a name="a1"></a><span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line"><a name="a2"></a><span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><a name="a3"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@name</span><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gallerie</span></div></li>
+<li><div class="src-line"><a name="a4"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@author</span><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Piero&nbsp;Wbmstr&nbsp;&lt;@link&nbsp;piero.wbmstr@gmail.com&gt;</span></div></li>
+<li><div class="src-line"><a name="a5"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@copyright</span><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CreaDesign&nbsp;2009&nbsp;</span><span class="src-doc-inlinetag">{@link&nbsp;http://creadesignweb.free.fr/}</span></div></li>
+<li><div class="src-line"><a name="a6"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@license</span><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://opensource.org/licenses/gpl-license.php&nbsp;GNU&nbsp;Public&nbsp;License</span></div></li>
+<li><div class="src-line"><a name="a7"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@version</span><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.2&nbsp;(06/2009)</span></div></li>
+<li><div class="src-line"><a name="a8"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@package</span><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;thickbox</span></div></li>
+<li><div class="src-line"><a name="a9"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@subpackage</span><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;Balises</span></div></li>
+<li><div class="src-line"><a name="a10"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a11"></a><span class="src-doc">&nbsp;*&nbsp;&nbsp;BASED&nbsp;ON&nbsp;:</span></div></li>
+<li><div class="src-line"><a name="a12"></a><span class="src-doc">&nbsp;*&nbsp;&nbsp;-&nbsp;Thickbox&nbsp;3.1&nbsp;-&nbsp;One&nbsp;Box&nbsp;To&nbsp;Rule&nbsp;Them&nbsp;All.</span></div></li>
+<li><div class="src-line"><a name="a13"></a><span class="src-doc">&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;By&nbsp;Cody&nbsp;Lindley&nbsp;(http://www.codylindley.com)</span></div></li>
+<li><div class="src-line"><a name="a14"></a><span class="src-doc">&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;Copyright&nbsp;(c)&nbsp;2007&nbsp;cody&nbsp;lindley&nbsp;-&nbsp;MIT&nbsp;License</span></div></li>
+<li><div class="src-line"><a name="a15"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a16"></a><span class="src-doc">&nbsp;*&nbsp;&nbsp;-&nbsp;plugin&nbsp;SPIP&nbsp;'Thickbox&nbsp;2'</span></div></li>
+<li><div class="src-line"><a name="a17"></a><span class="src-doc">&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;By&nbsp;Fil,&nbsp;Izo,&nbsp;BoOz&nbsp;(http://spip-zone.info/spip.php?article31)</span></div></li>
+<li><div class="src-line"><a name="a18"></a><span class="src-doc">&nbsp;*/</span></div></li>
+<li><div class="src-line"><a name="a19"></a><span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-sym">!</span><a href="http://www.php.net/defined">defined</a><span class="src-sym">(</span><span class="src-str">&quot;_ECRIRE_INC_VERSION&quot;</span><span class="src-sym">))&nbsp;</span><span class="src-key">return</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a20"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a21"></a><span class="src-key">function&nbsp;</span><a href="[(#SELF|parametre_url{doc,thickbox/Balises--/_balise---thickbox_gallery.php})]#functionbalise_THICKBOX_GALLERY">balise_THICKBOX_GALLERY</a><span class="src-sym">(</span><span class="src-var">$p</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a22"></a>&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-id">calculer_balise_dynamique</span><span class="src-sym">(</span><span class="src-var">$p</span><span class="src-sym">,&nbsp;</span><span class="src-id">THICKBOX_IMG</span><span class="src-sym">,&nbsp;</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a23"></a><span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a24"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a25"></a><span class="src-key">function&nbsp;</span><a href="[(#SELF|parametre_url{doc,thickbox/Balises--/_balise---thickbox_gallery.php})]#functionbalise_THICKBOX_GALLERY_dyn">balise_THICKBOX_GALLERY_dyn</a><span class="src-sym">(</span><span class="src-var">$text</span><span class="src-sym">,&nbsp;</span><span class="src-var">$url</span><span class="src-sym">,&nbsp;</span><span class="src-var">$title</span>=<span class="src-str">''</span><span class="src-sym">,&nbsp;</span><span class="src-var">$text</span><span class="src-sym">,&nbsp;</span><span class="src-var">$_width</span>=<span class="src-id">false</span><span class="src-sym">,&nbsp;</span><span class="src-var">$_height</span>=<span class="src-id">false</span><span class="src-sym">,&nbsp;</span><span class="src-var">$mode</span>=<span class="src-str">''</span><span class="src-sym">,&nbsp;</span><span class="src-var">$id</span>=<span class="src-str">''</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a26"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><a href="[(#SELF|parametre_url{doc,thickbox/Balises--/_balise---thickbox.php})]#functionbalise_thickbox_dyn">balise_thickbox_dyn</a><span class="src-sym">(</span><span class="src-str">'gallery'</span><span class="src-sym">,&nbsp;</span><span class="src-var">$_url</span><span class="src-sym">,&nbsp;</span><span class="src-var">$title</span><span class="src-sym">,&nbsp;</span><span class="src-var">$text</span><span class="src-sym">,&nbsp;</span><span class="src-var">$_width</span><span class="src-sym">,&nbsp;</span><span class="src-var">$_height</span><span class="src-sym">,&nbsp;</span><span class="src-var">$mode</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a27"></a><span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a28"></a><span class="src-php">?&gt;</span></div></li>
+</ol></code>
+</span></div>
+			<br />
+		</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+	<div id="pied">
+	<table cellspacing="1em"><tr>
+	<td width="20%"></td>
+	<td width="30%">
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href="http://www.phpdoc.org"><img src='#CHEMIN{doc_thickbox3/media/phpdoc_logo_50.png}' border='0' alt='PhpDoc' /> phpDocumentor 1.4.1</a>
+		<br />| <:phpdoc:date_generation:> 
+		<br />| Mon, 28 Feb 2011 12:54:18 +0100
+		</p>
+	</td>
+	<td width="30%">
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href='http://creadesignweb.free.fr' target='_blank' title='CreaDesign :: Vous avez un projet web ? R&eacute;alisons-le ensemble ...'><img src='#CHEMIN{doc_thickbox3/media/CD_mini_logo.png}' border='0' alt='CreaDesign' />&nbsp;<b>Crea Design</b></a><br />&nbsp;|&nbsp;PhpDocumentor plugin pour SPIP<br />&nbsp;|&nbsp;version 1.0.09 (c) 08/2009
+		</p>
+	</td>
+	<td width="20%"></td>
+	</tr></table>
+		| <a href='http://www.spip.net/' title='<:site_realise_avec_spip:>'><img src='http://cdc.spiplocal:8888/squelettes-dist/spip.png' alt='SPIP' width='48' height='16' /></a> | <a rel='contents' href='http://cdc.spiplocal:8888'><:accueil_site:></a> | <a href='http://cdc.spiplocal:8888/ecrire/'><:espace_prive:></a> | <a href='[(#SELF|parametre_url{doc,index})]' title='<:phpdoc:retour_doc:>'><:phpdoc:accueil_doc:> <i>Thickbox v3</i></a> |
+	</div>

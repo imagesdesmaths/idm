@@ -1,0 +1,129 @@
+	<a name="top"></a>
+	<div id="entete">
+		<strong id="nom_site_spip">
+		
+<table><tr>
+	<td style='padding: 0.4em 1em;'><a rel='start home' href='#URL_SITE_SPIP/' title='<:accueil_site:>' class='accueil'>[(#LOGO_SITE_SPIP||image_reduire{150,100}) ]<br /><strong id='nom_site_spip'>#NOM_SITE_SPIP</strong></a></td>
+	<td style='border-left: 2px solid #8B6F92; margin: 0; padding: 0.4em 1em;'><a href='[(#SELF|parametre_url{doc,index})]' title='<:phpdoc:accueil_doc:>'>[(#CHEMIN{images/thickbox.png}||image_reduire{150,100})]</a></td>
+	<td style='padding: 0.4em 1em;'><b>Thickbox v3<br /></b><small>by <ul class='spip'><li> Thickbox (version 3.1) par <a href='http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all' class='spip_out' rel='external'>Cody Lindley</a></li><li> Mis en plugin par Fil, Izo, BoOz</li><li> Am&eacute;lior&eacute; par <a href='http://www.spip-contrib.net/PieroWbmstr' class='spip_out' rel='external'>Piero Wbmstr</a></li></ul><br /><i>Version 3 (stable)  - (c) 2009 GNU GPL v3</i></small></td>
+</tr></table>
+
+		</strong>
+        
+                                    
+                            <div style="float: right; font-size: 0.9em;">
+		        	        [ <b>thickbox</b> :
+	        	<a href="[(#SELF|parametre_url{doc,classtrees_thickbox})]"><:phpdoc:map:></a> | 
+            	<a href="[(#SELF|parametre_url{doc,elementindex_thickbox})]"><:phpdoc:index:></a> 
+            ]
+        						</div>
+	</div>
+
+
+    <div class="hfeed" id="conteneur" style="width: 100%">
+	    <div class="hentry" id="contenu"><h1 align="center"><:phpdoc:source_file_for:>&nbsp;'<i>Options</i>'</h1>
+<p><img src="[(#CHEMIN{doc_thickbox3//media/left.gif})]" alt=" " />&nbsp;<:phpdoc:back_to_doc:>&nbsp;:&nbsp;<a href="[(#SELF|parametre_url{doc,thickbox/_thickbox_options.php})]">Options</a></p>
+<div class="src-code"><span class="php">
+<code><ol><li><div class="src-line"><a name="a1"></a><span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line"><a name="a2"></a><span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><a name="a3"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@name</span><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Options</span></div></li>
+<li><div class="src-line"><a name="a4"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@author</span><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Piero&nbsp;Wbmstr&nbsp;&lt;@link&nbsp;piero.wbmstr@gmail.com&gt;</span></div></li>
+<li><div class="src-line"><a name="a5"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@copyright</span><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CreaDesign&nbsp;2009&nbsp;</span><span class="src-doc-inlinetag">{@link&nbsp;http://creadesignweb.free.fr/}</span></div></li>
+<li><div class="src-line"><a name="a6"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@license</span><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://opensource.org/licenses/gpl-license.php&nbsp;GNU&nbsp;Public&nbsp;License</span></div></li>
+<li><div class="src-line"><a name="a7"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@version</span><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.2&nbsp;(06/2009)</span></div></li>
+<li><div class="src-line"><a name="a8"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@package</span><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;thickbox</span></div></li>
+<li><div class="src-line"><a name="a9"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a10"></a><span class="src-doc">&nbsp;*&nbsp;&nbsp;BASED&nbsp;ON&nbsp;:</span></div></li>
+<li><div class="src-line"><a name="a11"></a><span class="src-doc">&nbsp;*&nbsp;&nbsp;-&nbsp;Thickbox&nbsp;3.1&nbsp;-&nbsp;One&nbsp;Box&nbsp;To&nbsp;Rule&nbsp;Them&nbsp;All.</span></div></li>
+<li><div class="src-line"><a name="a12"></a><span class="src-doc">&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;By&nbsp;Cody&nbsp;Lindley&nbsp;(http://www.codylindley.com)</span></div></li>
+<li><div class="src-line"><a name="a13"></a><span class="src-doc">&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;Copyright&nbsp;(c)&nbsp;2007&nbsp;cody&nbsp;lindley&nbsp;-&nbsp;MIT&nbsp;License</span></div></li>
+<li><div class="src-line"><a name="a14"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a15"></a><span class="src-doc">&nbsp;*&nbsp;&nbsp;-&nbsp;plugin&nbsp;SPIP&nbsp;'Thickbox&nbsp;2'</span></div></li>
+<li><div class="src-line"><a name="a16"></a><span class="src-doc">&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;By&nbsp;Fil,&nbsp;Izo,&nbsp;BoOz&nbsp;(http://spip-zone.info/spip.php?article31)</span></div></li>
+<li><div class="src-line"><a name="a17"></a><span class="src-doc">&nbsp;*/</span></div></li>
+<li><div class="src-line"><a name="a18"></a><span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-sym">!</span><a href="http://www.php.net/defined">defined</a><span class="src-sym">(</span><span class="src-str">&quot;_ECRIRE_INC_VERSION&quot;</span><span class="src-sym">))&nbsp;</span><span class="src-key">return</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a19"></a>&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a20"></a><span class="src-var">$p</span>=<a href="http://www.php.net/explode">explode</a><span class="src-sym">(</span><a href="http://www.php.net/basename">basename</a><span class="src-sym">(</span><span class="src-id">_DIR_PLUGINS</span><span class="src-sym">)</span>.<span class="src-str">&quot;/&quot;</span><span class="src-sym">,</span><a href="http://www.php.net/str_replace">str_replace</a><span class="src-sym">(</span><span class="src-str">'\\'</span><span class="src-sym">,</span><span class="src-str">'/'</span><span class="src-sym">,</span><a href="http://www.php.net/realpath">realpath</a><span class="src-sym">(</span><a href="http://www.php.net/dirname">dirname</a><span class="src-sym">(</span>__FILE__<span class="src-sym">))))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a21"></a><a href="http://www.php.net/define">define</a><span class="src-sym">(</span><span class="src-str">'_DIR_THICKBOX'</span><span class="src-sym">,</span><span class="src-sym">(</span><span class="src-id">_DIR_PLUGINS</span>.<span class="src-id">end</span><span class="src-sym">(</span><span class="src-var">$p</span><span class="src-sym">)))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a22"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a23"></a><span class="src-comm">//&nbsp;-------------------------------------------------------------</span></div></li>
+<li><div class="src-line"><a name="a24"></a><span class="src-comm">//&nbsp;Globales</span></div></li>
+<li><div class="src-line"><a name="a25"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a26"></a><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'THICKBOX_TEST_IMAGE'</span><span class="src-sym">]&nbsp;</span>=&nbsp;<span class="src-id"><a href="[(#SELF|parametre_url{doc,thickbox/_thickbox_options.php})]#define_DIR_THICKBOX">_DIR_THICKBOX</a></span>.<span class="src-str">'/images/single.jpg'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a27"></a><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'THICKBOX_LOGO'</span><span class="src-sym">]&nbsp;</span>=&nbsp;<span class="src-id"><a href="[(#SELF|parametre_url{doc,thickbox/_thickbox_options.php})]#define_DIR_THICKBOX">_DIR_THICKBOX</a></span>.<span class="src-str">'/images/thickbox.png'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a28"></a><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'THICKBOX_DEFAULTS'</span><span class="src-sym">]&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span></div></li>
+<li><div class="src-line"><a name="a29"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'include_css'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;<span class="src-str">'oui'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line"><a name="a30"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'option_modal'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;<span class="src-str">'non'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line"><a name="a31"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'titre_default'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;<span class="src-str">''</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line"><a name="a32"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'option_onclick'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;<span class="src-str">'oui'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line"><a name="a33"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'option_width'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;<span class="src-num">300</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line"><a name="a34"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'option_height'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;<span class="src-num">400</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line"><a name="a35"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'option_width_img'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;<span class="src-num">100</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line"><a name="a36"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'option_height_img'&nbsp;</span>=&gt;&nbsp;<span class="src-num">100</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line"><a name="a37"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'dialogbox_url'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;<span class="src-str">'dialogbox.html'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line"><a name="a38"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'option_width_db'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;<span class="src-num">500</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line"><a name="a39"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'option_height_db'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;<span class="src-num">400</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line"><a name="a40"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'img_closer'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&gt;&nbsp;<span class="src-str">'images/close.gif'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line"><a name="a41"></a><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a42"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a43"></a><span class="src-comm">//&nbsp;-------------------------------------------------------------</span></div></li>
+<li><div class="src-line"><a name="a44"></a><span class="src-comm">//&nbsp;Fonctions</span></div></li>
+<li><div class="src-line"><a name="a45"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a46"></a><span class="src-key">function&nbsp;</span><a href="[(#SELF|parametre_url{doc,thickbox/_thickbox_options.php})]#functionthickbox_config">thickbox_config</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a47"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$config&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a48"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$a&nbsp;</span>=&nbsp;<a href="http://www.php.net/unserialize">unserialize</a><span class="src-sym">(</span><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'meta'</span><span class="src-sym">]</span><span class="src-sym">[</span><span class="src-str">'thickbox'</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a49"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(</span><span class="src-var">$a&nbsp;</span>==&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">))&nbsp;</span><span class="src-var">$a&nbsp;</span>=&nbsp;<span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'THICKBOX_DEFAULTS'</span><span class="src-sym">]</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a50"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">foreach</span><span class="src-sym">(</span><span class="src-var">$a&nbsp;</span><span class="src-key">as&nbsp;</span><span class="src-var">$key</span>=&gt;<span class="src-var">$val</span><span class="src-sym">)</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a51"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$config</span><span class="src-sym">[</span><span class="src-var">$key</span><span class="src-sym">]&nbsp;</span>=&nbsp;<span class="src-var">$val</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a52"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a53"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-var">$config</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a54"></a><span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a55"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a56"></a><span class="src-key">function&nbsp;</span><a href="[(#SELF|parametre_url{doc,thickbox/_thickbox_options.php})]#functiontb_cut_filename">tb_cut_filename</a><span class="src-sym">(</span><span class="src-var">$_f</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a57"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$f&nbsp;</span>=&nbsp;<a href="http://www.php.net/substr">substr</a><span class="src-sym">(</span><a href="http://www.php.net/strrchr">strrchr</a><span class="src-sym">(</span><span class="src-var">$_f</span><span class="src-sym">,&nbsp;</span><span class="src-str">'/'</span><span class="src-sym">)</span><span class="src-sym">,&nbsp;</span><span class="src-num">1</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a58"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$file_s&nbsp;</span>=&nbsp;<a href="http://www.php.net/getimagesize">getimagesize</a><span class="src-sym">(</span><span class="src-var">$_f</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a59"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$file&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a60"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(</span><span class="src-var">$f&nbsp;</span>!=&nbsp;<span class="src-str">'.'</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a61"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$file</span><span class="src-sym">[</span><span class="src-str">'name'</span><span class="src-sym">]&nbsp;</span>=&nbsp;<a href="http://www.php.net/substr">substr</a><span class="src-sym">(</span><span class="src-var">$f</span><span class="src-sym">,&nbsp;</span><span class="src-num">0</span><span class="src-sym">,&nbsp;</span><a href="http://www.php.net/strrpos">strrpos</a><span class="src-sym">(</span><span class="src-var">$f</span><span class="src-sym">,&nbsp;</span><span class="src-str">'.'</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a62"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$file</span><span class="src-sym">[</span><span class="src-str">'ext'</span><span class="src-sym">]&nbsp;</span>=&nbsp;<a href="http://www.php.net/strtolower">strtolower</a><span class="src-sym">(</span><a href="http://www.php.net/substr">substr</a><span class="src-sym">(</span><a href="http://www.php.net/strrchr">strrchr</a><span class="src-sym">(</span><span class="src-var">$f</span><span class="src-sym">,&nbsp;</span><span class="src-str">'.'</span><span class="src-sym">)</span><span class="src-sym">,&nbsp;</span><span class="src-num">1</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a63"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$file</span><span class="src-sym">[</span><span class="src-str">'width'</span><span class="src-sym">]&nbsp;</span>=&nbsp;<span class="src-var">$file_s</span><span class="src-sym">[</span><span class="src-num">0</span><span class="src-sym">]</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a64"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$file</span><span class="src-sym">[</span><span class="src-str">'height'</span><span class="src-sym">]&nbsp;</span>=&nbsp;<span class="src-var">$file_s</span><span class="src-sym">[</span><span class="src-num">1</span><span class="src-sym">]</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a65"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$file</span><span class="src-sym">[</span><span class="src-str">'mime'</span><span class="src-sym">]&nbsp;</span>=&nbsp;<span class="src-var">$file_s</span><span class="src-sym">[</span><span class="src-str">'mime'</span><span class="src-sym">]</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a66"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a67"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-sym">(</span><span class="src-var">$file</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a68"></a><span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a69"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a70"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a71"></a><span class="src-comm">//&nbsp;-------------------------------------------------------------</span></div></li>
+<li><div class="src-line"><a name="a72"></a><span class="src-comm">//&nbsp;Info&nbsp;_CDC&nbsp;(privé&nbsp;...)</span></div></li>
+<li><div class="src-line"><a name="a73"></a><span class="src-key">if</span><span class="src-sym">(</span>isset<span class="src-sym">(</span><span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_CDC_PLUGINS'</span><span class="src-sym">]</span><span class="src-sym">))&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a74"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_CDC_PLUGINS'</span><span class="src-sym">]</span><span class="src-sym">[</span><span class="src-str">'plugins'</span><span class="src-sym">]</span><span class="src-sym">[</span><span class="src-sym">]&nbsp;</span>=&nbsp;<span class="src-str">'thickbox'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a75"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_CDC_PLUGINS'</span><span class="src-sym">]</span><span class="src-sym">[</span><span class="src-str">'set'</span><span class="src-sym">]</span><span class="src-sym">[</span><span class="src-str">'thickbox'</span><span class="src-sym">]&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'texte'&nbsp;</span>=&gt;&nbsp;<span class="src-id">_T</span><span class="src-sym">(</span><span class="src-str">'thickbox:thickbox'</span><span class="src-sym">)</span><span class="src-sym">,</span><span class="src-str">'fond'&nbsp;</span>=&gt;&nbsp;<span class="src-id">find_in_path</span><span class="src-sym">(</span><span class="src-str">&quot;images/thickbox.png&quot;</span><span class="src-sym">)</span><span class="src-sym">,</span><span class="src-str">'lien'&nbsp;</span>=&gt;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;cfg&quot;</span><span class="src-sym">,</span><span class="src-str">&quot;cfg=thickbox&quot;</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a76"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'_CDC_PLUGINS'</span><span class="src-sym">]</span><span class="src-sym">[</span><span class="src-str">'comment'</span><span class="src-sym">]</span><span class="src-sym">[</span><span class="src-str">'thickbox'</span><span class="src-sym">]&nbsp;</span>=&nbsp;<span class="src-str">&quot;TODO&nbsp;:&nbsp;tester&nbsp;les&nbsp;navigateurs&nbsp;(FF&nbsp;ok&nbsp;-)&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a77"></a><span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a78"></a><span class="src-php">?&gt;</span></div></li>
+</ol></code>
+</span></div>
+			<br />
+		</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+	<div id="pied">
+	<table cellspacing="1em"><tr>
+	<td width="20%"></td>
+	<td width="30%">
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href="http://www.phpdoc.org"><img src='#CHEMIN{doc_thickbox3/media/phpdoc_logo_50.png}' border='0' alt='PhpDoc' /> phpDocumentor 1.4.1</a>
+		<br />| <:phpdoc:date_generation:> 
+		<br />| Mon, 28 Feb 2011 12:54:19 +0100
+		</p>
+	</td>
+	<td width="30%">
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href='http://creadesignweb.free.fr' target='_blank' title='CreaDesign :: Vous avez un projet web ? R&eacute;alisons-le ensemble ...'><img src='#CHEMIN{doc_thickbox3/media/CD_mini_logo.png}' border='0' alt='CreaDesign' />&nbsp;<b>Crea Design</b></a><br />&nbsp;|&nbsp;PhpDocumentor plugin pour SPIP<br />&nbsp;|&nbsp;version 1.0.09 (c) 08/2009
+		</p>
+	</td>
+	<td width="20%"></td>
+	</tr></table>
+		| <a href='http://www.spip.net/' title='<:site_realise_avec_spip:>'><img src='http://cdc.spiplocal:8888/squelettes-dist/spip.png' alt='SPIP' width='48' height='16' /></a> | <a rel='contents' href='http://cdc.spiplocal:8888'><:accueil_site:></a> | <a href='http://cdc.spiplocal:8888/ecrire/'><:espace_prive:></a> | <a href='[(#SELF|parametre_url{doc,index})]' title='<:phpdoc:retour_doc:>'><:phpdoc:accueil_doc:> <i>Thickbox v3</i></a> |
+	</div>

@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<INCLURE{fond=inc-head-dialogbox}>
+[(#SET{id_article,
+<script type="text/javascript">
+if(str) document.write(str);
+</script>
+})]
+</head>
+<body class="dialogbox">
+
+<B_dialogbox>
+<BOUCLE_dialogbox(ARTICLES){id_article}>
+	[<h1>#TITRE</h1>
+	<div class="#EDIT{texte} texte entry-content">(#TEXTE|image_reduire{200,0}|dialogbox_links)</div>]
+</BOUCLE_dialogbox>
+</B_dialogbox>
+<p><:thickbox:no_texte:></p>
+<//B_dialogbox>
+
+		#FORMULAIRE_PUBBAN_EDITER_PUB{#ENV{new},#ENV{id_pub}}
+
+<INCLURE{fond=inc-pied-dialogbox}>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<div style="border:1px solid red;margin:.2em;padding:.4em;font-weight:bold;text-align:center;"><:fbmodeles:info_doc{link=#info_doc}|propre:></div>
+
+[(#REM) Fil d'Ariane ]
+<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:fbmodeles:doc_titre_court:></strong></div>
+
+<div class="cartouche">
+	<h1 class="entry-title"><:fbmodeles:doc_titre_page:></h1>
+</div>
+		
+<div class="chapo"><:fbmodeles:doc_chapo|propre:></div>
+
+<div class="texte entry-content">
+	<:fbmodeles:exemple|propre:>
+	
+        <div class="cartouche">
+        	<h2>1_ Send</h2>
+            <p><small><code>
+            &#035;MODELE&#123;fb_send&#125;
+            </code></small></p>
+        </div>
+		<div class="texte entry-content">
+
+			#MODELE{fb_send}
+
+		</div>
+		<br class="nettoyeur" style="line-height:30px" />
+
+        <div class="cartouche">
+        	<h2>2_ Like</h2>
+            <p><small><code>
+            &#035;MODELE&#123;fb_like&#125;
+            </code></small></p>
+        </div>
+		<div class="texte entry-content">
+		
+			#MODELE{fb_like}
+
+		</div>
+		<br class="nettoyeur" style="line-height:30px" />
+
+        <div class="cartouche">
+        	<h2>3_ Like box</h2>
+            <p><small><code>
+            &#035;MODELE&#123;fb_like_box&#125;
+            </code></small></p>
+        </div>
+		<div class="texte entry-content"><:fbmodeles:cf_navigation{url=#likebox_frame}|propre:></div>
+		<br class="nettoyeur" style="line-height:30px" />
+
+        <div class="cartouche">
+        	<h2>4_ Activity</h2>
+            <p><small><code>
+            &#035;MODELE&#123;fb_activity&#125;
+            </code></small></p>
+        </div>
+		<div class="texte entry-content"><:fbmodeles:cf_navigation{url=#activity_frame}|propre:></div>
+		<br class="nettoyeur" style="line-height:30px" />
+
+        <div class="cartouche">
+        	<h2>5_ Comments</h2>
+            <p><small><code>
+            &#035;MODELE&#123;fb_comments&#125;
+            </code></small></p>
+        </div>
+		<div class="texte entry-content">
+		
+			[(#MODELE{fb_comments}{href=#CONFIG{#EVAL{FB_MODELS_CFGMETA}/url_page}|sinon{http://www.example.com/}})]
+			
+		</div>
+		<br class="nettoyeur" style="line-height:30px" />
+
+        <div class="cartouche">
+        	<h2>6_ Live stream</h2>
+            <p><small><code>
+            &#035;MODELE&#123;fb_live_stream&#125;
+            </code></small></p>
+        </div>
+		<div class="texte entry-content">
+		
+			[(#MODELE{fb_live_stream}{event_app_id=243059592386301}{via_url=#CONFIG{#EVAL{FB_MODELS_CFGMETA}/url_page}|sinon{http://www.example.com/}})]
+
+		</div>
+		<br class="nettoyeur" style="line-height:30px" />
+
+	<:fbmodeles:documentation|propre:>
+[(#SET{url_cfg,[(#EVAL{function_exists('lire_config')}|=={1}|?{<a href="[(#URL_ECRIRE{cfg,cfg=fb_modeles})]"><:fbmodeles:cfg_page:></a>,<small><:fbmodeles:cfg_pas_installe:></small>})]})]
+	<:fbmodeles:configuration{bloc_cfg=#GET{url_cfg}}|propre:>
+	<:fbmodeles:personnalisation|propre:>
+	<:fbmodeles:sep|propre:>
+</div>
+
+[<div class="notes"><h2 class="pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
+
+<div id="bloc_licence" class="cartouche" style="border:1px solid #404040;margin:.2em;padding:.8em;line-height:1.4em;">
+	<img class='spip_logos' alt="" src="#CHEMIN{img/facebook-icon.png}" width='60' height='60' style='height:60px;width:60px;' />
+	<p class="soustitre"><:fbmodeles:titre_original:></p>
+	<p><small><:fbmodeles:licence|propre:></small></p>
+</div>
+
+<div id="info_doc" style="background:#eee;color:#000;margin:.2em;padding:.4em;border:1px solid red;font-size:96%;">
+[(#SET{urldocbrut,[(#URL_PAGE{#EVAL{FB_MODELS_DOC}}|parametre_url{docmode,brut})]})]
+[(#SET{urldoczpip,[(#URL_PAGE{#EVAL{FB_MODELS_DOC}}|parametre_url{docmode,zpip})]})]
+[(#SET{urldocspip,[(#URL_PAGE{#EVAL{FB_MODELS_DOC}}|parametre_url{docmode,spip})]})]
+<h3><:fbmodeles:info_doc_titre:></h3>
+<:fbmodeles:info_skel_doc{mode_brut=#GET{urldocbrut},mode_zpip=#GET{urldoczpip},mode_spip=#GET{urldocspip}}|propre:>
+<:fbmodeles:info_skel_contrib|propre:>
+</div>

@@ -1,0 +1,41 @@
+<!-- titre=<:fbmodeles:fb_modeles:> -->
+<!-- icone=img/fb-btn-16.png -->
+[(#SET{logo,
+<img src="#DOSSIER_SQUELETTE/../img/facebook-icon.png" width="48" height="48" alt="Logo <:fbmodeles:fb_modeles:>" style="width:48px; height:48px; float:#LANG_RIGHT;" />
+})]
+<!-- descriptif=
+#GET{logo}
+<h3><:fbmodeles:cfg_descr_titre:></h3>
+<p><:fbmodeles:cfg_descr|propre:></p>
+<br />
+<table class='cellule-h-table' cellpadding='0' style='vertical-align: middle'>
+<tr><td>
+<a href='#EVAL{FB_MODELS_DOC_CONTRIB}' class='cellule-h'>
+	<span class='cell-i'>
+		<img src='#CHEMIN{img/spip_contrib-24.gif}' alt="Contrib"  style='background: url(#CHEMIN{img/spip_contrib-24.gif}) center center no-repeat;' />
+	</span>
+</a>
+</td>
+<td class='cellule-h-lien'>
+	<a href='#EVAL{FB_MODELS_DOC_CONTRIB}' class='cellule-h'><:fbmodeles:doc_en_ligne:></a>
+</td></tr>
+<tr><td>
+<a href='#URL_PAGE{#EVAL{FB_MODELS_DOC}}' class='cellule-h'>
+	<span class='cell-i'>
+		<img src='#CHEMIN{images/article-24.gif}' alt="Test"  style='background: url(#CHEMIN{images/article-24.gif}) center center no-repeat;' />
+	</span>
+</a>
+</td>
+<td class='cellule-h-lien'>
+	<a href='#URL_PAGE{#EVAL{FB_MODELS_DOC}}' class='cellule-h'><:fbmodeles:page_test:></a>
+</td></tr>
+</table>
+[<a href='#URL_PAGE{#EVAL{FB_MODELS_DOC}}' target='_blank' title='<:fbmodeles:page_test_in_new_window:>'><:fbmodeles:new_window:></a>]
+<br />
+-->
+<!-- boite=<:fbmodeles:cfg_label_titre:> -->
+#CACHE{0}
+
+<div class="ajax">
+#FORMULAIRE_CONFIG_FB_MODELES
+</div>

@@ -1,0 +1,32 @@
+#CACHE{0}
+[(#ENV{docmode}|=={zpip}|oui)
+<INCLURE{fond=structure}{env}{type=doc_fb_modeles}{composition=#ENV{composition,#ENV{page}}}>
+][(#ENV{docmode}|=={zpip}|non)
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title><:fbmodeles:doc_titre_court:>[ - (#NOM_SITE_SPIP|textebrut)]</title>
+[(#ENV{docmode}|=={brut}|non)<INCLURE{fond=inc-head}>]
+[(#ENV{docmode}|=={brut}|oui)#INSERT_HEAD]
+<INCLURE{fond=head/doc_fb_modeles}{env}>
+<meta name="robots" content="none" />
+</head>
+<body class="page_sommaire">
+<div id="page">
+	[(#ENV{docmode}|=={brut}|non)<INCLURE{fond=inc-entete}>]
+	<div class="hfeed" id="conteneur">
+	<div id="contenu">
+		<INCLURE{fond=contenu/doc_fb_modeles}{env}{skel=#SQUELETTE}>
+	</div><!--#contenu-->
+	</div><!--#conteneur-->
+	[(#REM) Menu de navigation laterale ]
+	<div id="navigation">
+		<INCLURE{fond=navigation/doc_fb_modeles}{env}>
+    </div><!--#navigation-->
+	<div id="extra">
+	</div><!--#extra-->
+	[(#ENV{docmode}|=={brut}|non)<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>]
+
+</div><!--#page-->
+</body>
+</html>]

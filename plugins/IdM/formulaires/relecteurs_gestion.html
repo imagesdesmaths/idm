@@ -1,0 +1,39 @@
+<B_candidats>
+<div class="formulaire_spip">
+  <form action="#ENV{action}" method="post">
+    #ACTION_FORMULAIRE{#ENV{action}}
+    <h3>Il y a #TOTAL_BOUCLE candidat(s) à être relecteurs ...</h3>
+    <table id="lescandidats" class="sortable">
+      <thead>
+        <tr>
+          <th>Signature / Pseudo</th>
+          <th>ID</th>
+          <th>E-Mail</th>
+          <th>Qui est-ce ?</th>
+          <th>Décision</th>
+        </tr>
+      </thead>
+      <tbody>
+        <BOUCLE_candidats(IDM_RELECTEURS spip_auteurs) {role = candidat}>
+        <tr>
+          <td>#NOM</td>
+          <td>#ID_AUTEUR</td>
+          <td>#EMAIL</td>
+          <td><input type="text" name="math_#ID_AUTEUR" value="#ENV{math_#ID_AUTEUR}" size=20 /></td>
+          <td><select name="decision_#ID_AUTEUR">
+              <option value="rien">Décider plus tard</option>
+              <option value="oui">Accepter</option>
+              <option value="non">Refuser</option>
+          </select></td>
+        </tr>
+        </BOUCLE_candidats>
+      </tbody>
+    </table>
+    <p style="text-align : center;"><input type="submit" value="Modifier les statuts indiqu&eacute;s" name="go" /></p>
+  </form>
+</div>
+
+<script type="text/javascript">
+  $("#lescandidats").tablesorter( {sortList : [[0,0]]} );
+</script>
+</B_candidats>

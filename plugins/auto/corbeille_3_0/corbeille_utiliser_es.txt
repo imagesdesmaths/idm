@@ -1,0 +1,20 @@
+CORBEILLE SPIP I
+_______________I
+
+Se pueden suprimir los siguientes tipos de documentos:
+- breves rechazados
+- artículos en la papelera
+- mensajes suprimidos de los foros
+- autores eliminados
+- firmas de petición rechazadas
+
+La eliminación suprime el documento de la base de datos,
+pero NO limpia el caché en disco duro NI la indexación en la base de datos creada por el motor de búsqueda.
+Es recomendable vaciar el caché del servidor y reindexar el sitio periódicamente (cada mes, cada 2 meses o 6 meses por ejemplo)
+
+Pendiente de añadir: se admiten sugerencias
+
+Matthieu ONFRAY
+email : silicium@japanim.net
+sitio : www.japanim.net
+

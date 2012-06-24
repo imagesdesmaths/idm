@@ -1,0 +1,13 @@
+<h1><:idm:teams:></h1>
+
+<BOUCLE_eq(IDM_TEAMS) {par team}>
+  <B_gars>
+    [(#BOITE_OUVRIR{<:idm:equipe{nom=#TEAM}:>, simple, titrem})]
+      <ul>
+  <BOUCLE_gars(IDM_TEAMS) {team} {doublons}>
+        <li>#INFO_NOM{auteur,#ID_AUTEUR}</li>
+  </BOUCLE_gars>
+      </ul>
+    #BOITE_FERMER
+  </B_gars>
+</BOUCLE_eq>

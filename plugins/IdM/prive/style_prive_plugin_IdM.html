@@ -1,0 +1,14 @@
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=utf-8}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+/* Plugin IdM */
+
+  /* Hide the non-administrator article submission button */
+
+div.proposer p { margin : 0; padding-top : 1ex; }
+div.proposer form { display : none ; }
+
+  /* Hide the refereeing forums from the activity monitor */
+
+li.statut_rel, li.statut_relmod, li.statut_relref { display : none; }

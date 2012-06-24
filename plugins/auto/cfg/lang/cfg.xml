@@ -1,0 +1,37 @@
+<traduction module="cfg" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/cfg/branches/v1/lang/" reference="fr">
+	<langue code="ar" />
+	<langue code="ast">
+		<traducteur nom="xuacu" />
+	</langue>
+	<langue code="br" />
+	<langue code="ca" />
+	<langue code="cs" />
+	<langue code="de" />
+	<langue code="en">
+		<traducteur nom="squonk" />
+	</langue>
+	<langue code="es">
+		<traducteur nom="filou" />
+	</langue>
+	<langue code="fa">
+		<traducteur nom="davood" />
+	</langue>
+	<langue code="fr_tu">
+		<traducteur nom="beatnick" />
+	</langue>
+	<langue code="gl" />
+	<langue code="it" />
+	<langue code="nl">
+		<traducteur nom="michelpossoz" />
+	</langue>
+	<langue code="pt_br">
+		<traducteur nom="rporto" />
+	</langue>
+	<langue code="ro" />
+	<langue code="ru" />
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
+	<langue code="sv" />
+	<langue code="tr" />
+</traduction>
