@@ -289,7 +289,7 @@ function actualiser_sessions($auteur) {
 	$sauve = $GLOBALS['visiteur_session'];
 
 	// .. mettre a jour les sessions de l'auteur cible
-	foreach(preg_files(_DIR_SESSIONS, '/'.$id_auteur.'_.*\.php') as $session) {
+	foreach(preg_files(_DIR_SESSIONS, '/'.$id_auteur.'_.*\.php$') as $session) {
 		$GLOBALS['visiteur_session'] = array();
 		include $session; # $GLOBALS['visiteur_session'] est alors l'auteur cible
 
