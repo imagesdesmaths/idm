@@ -1,0 +1,9 @@
+<BOUCLE_nav(GROUPES_MOTS){id_groupe}>
+#BOITE_OUVRIR{'','info'}
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','groupe_mots','id',#ENV{id_groupe}}}}
+#BOITE_FERMER
+
+<div class="ajax">
+#FORMULAIRE_EDITER_LOGO{groupe_mots,#ID_GROUPE,'',#ENV**}
+</div>
+</BOUCLE_nav>

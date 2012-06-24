@@ -1,0 +1,21 @@
+<BOUCLE_doc(DOCUMENTS){id_document=#ENV{id}}{statut?}>
+<div class='infos'>
+<div class='numero'><:medias:info_gauche_numero_document:><p>#ID_DOCUMENT</p></div>
+
+[(#REM)
+
+	Bloc de changement de statut
+
+]
+[(#STATUT|=={publie}|oui)
+<ul class='instituer'>
+	<li><:medias:info_statut_document:>
+		<ul>
+			<li class='publie selected'><:texte_statut_publie:></li>
+		</ul>
+	</li>
+</ul>
+]
+
+</div>
+</BOUCLE_doc>

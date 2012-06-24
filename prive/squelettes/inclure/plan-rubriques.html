@@ -1,0 +1,25 @@
+#SET{nomp,rubrub#ID_RUBRIQUE}
+#SET{nb,50}
+<B_rubriques>
+	[<p class="pagination">[<em>(#VAL{rubrique}|objet_info{texte_objets}|_T)</em>](#PAGINATION{prive})</p>]
+	<ul class="menu-items rubriques">
+		<BOUCLE_rubriques(RUBRIQUES) {id_parent}{id_rubrique?} {par num titre,titre}{statut==.*}{pagination #GET{nb} #GET{nomp}}>
+			<li class="item">
+				<a href="[(#SELF|parametre_url{id_rubrique,#ID_RUBRIQUE})]"
+				title="[(#VAL{rubrique}|objet_info{texte_objet}|_T) #ID_RUBRIQUE]"
+				onclick="jQuery('#reloadmain').attr('href',this.href).followLink();return false;"
+				><strong>[(#STATUT|puce_statut{rubrique}) ][(#TITRE|couper{100}|sinon{<:info_sans_titre:>})]</strong></a>
+
+				<BOUCLE_objets(DATA){source table,#REM|lister_tables_objets_sql}{cle!=spip_rubriques}>
+				[(#VALEUR{field}|table_valeur{id_rubrique}|oui)
+					#SET{fond,#VAL{prive/squelettes/inclure/plan-}|concat{#VALEUR{table_objet}}}
+					[(#GET{fond}|trouver_fond|oui)
+						<INCLURE{fond=#GET{fond},id_rubrique=#_rubriques:ID_RUBRIQUE,env,ajax}>
+					]
+				]</BOUCLE_objets>
+				<INCLURE{fond=prive/squelettes/inclure/plan-rubriques,id_parent=#ID_RUBRIQUE,id_rubrique='',env,ajax}>
+			</li>
+		</BOUCLE_rubriques>
+	</ul>
+	[<p class="pagination">[<em>(#VAL{rubrique}|objet_info{texte_objets}|_T)</em>](#PAGINATION{prive})</p>]
+</B_rubriques>
