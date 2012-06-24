@@ -39,8 +39,23 @@ RewriteBase /
 ################ REGLAGES PERSONNALISES ######################
 # Inscrivez ci-dessous vos reglages supplementaires
 
+RewriteRule ^spip/(.*)$ $1 [R=301,L]
 
+ExpiresActive On
+ExpiresDefault A0
 
+<FilesMatch "\.(gif|png|jpg|css|js|ico)$">
+  ExpiresDefault "access plus 1 week"
+  Header append Cache-Control "public"
+</FilesMatch>
+
+<FilesMatch "\.(html|php|js|css)$">
+  SetOutputFilter DEFLATE
+</FilesMatch>
+
+FileETag none
+
+AddType text/x-component htc
 
 ################ GESTIONS DES URLS SPIP #######################
 
