@@ -5,12 +5,12 @@
  * @license		GNU/GPLv3 (http://www.opensource.org/licenses/gpl-3.0.html)
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
-//ini_set('display_errors','1'); error_reporting(E_ALL);
+//ini_set('display_errors','1'); error_reporting(E_ALL ^ E_NOTICE);
 
 /**
  * Nom du meta CFG de configuration
  */
-define('FB_MODELS_CFGMETA', 'config_fb_modeles');
+define('FB_MODELS_CFGMETA', 'fb_modeles');
 
 /**
  * Nom de la page de documentation interne pour generation des liens

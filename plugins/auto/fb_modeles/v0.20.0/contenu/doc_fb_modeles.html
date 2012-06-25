@@ -1,7 +1,7 @@
 <div style="border:1px solid red;margin:.2em;padding:.4em;font-weight:bold;text-align:center;"><:fbmodeles:info_doc{link=#info_doc}|propre:></div>
 
 [(#REM) Fil d'Ariane ]
-<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:fbmodeles:doc_titre_court:></strong></div>
+<p class="arbo"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:fbmodeles:doc_titre_court:></strong></p>
 
 <div class="cartouche">
 	<h1 class="entry-title"><:fbmodeles:doc_titre_page:></h1>
@@ -83,8 +83,6 @@
 		<br class="nettoyeur" style="line-height:30px" />
 
 	<:fbmodeles:documentation|propre:>
-[(#SET{url_cfg,[(#EVAL{function_exists('lire_config')}|=={1}|?{<a href="[(#URL_ECRIRE{cfg,cfg=fb_modeles})]"><:fbmodeles:cfg_page:></a>,<small><:fbmodeles:cfg_pas_installe:></small>})]})]
-	<:fbmodeles:configuration{bloc_cfg=#GET{url_cfg}}|propre:>
 	<:fbmodeles:personnalisation|propre:>
 	<:fbmodeles:sep|propre:>
 </div>
@@ -92,7 +90,7 @@
 [<div class="notes"><h2 class="pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
 
 <div id="bloc_licence" class="cartouche" style="border:1px solid #404040;margin:.2em;padding:.8em;line-height:1.4em;">
-	<img class='spip_logos' alt="" src="#CHEMIN{img/facebook-icon.png}" width='60' height='60' style='height:60px;width:60px;' />
+	<img class='spip_logos' alt="" src="#CHEMIN{prive/themes/spip/images/facebook-icon.png}" width='60' height='60' style='height:60px;width:60px;' />
 	<p class="soustitre"><:fbmodeles:titre_original:></p>
 	<p><small><:fbmodeles:licence|propre:></small></p>
 </div>

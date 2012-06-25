@@ -1,0 +1,88 @@
+[(#REM)
+	"Like" plugin : fameux bouton "J'aime"
+	Doc officielle : http://developers.facebook.com/docs/reference/plugins/like/
+	
+	Arguments d'environnement a passer :
+		- href : URL qui sera "aimee" (defaut URL courante)
+		- send : montrer le bouton 'send' (oui/non - defaut 'oui')
+		- layout : standard/button_count/box_count (defaut 'standard' - cf. doc)
+		- show_faces : montrer les visages de ceux qui ont aime (oui/non - defaut 'oui')
+		- width : largeur totale de l'outil (defaut 490px)
+		- height : hauteur totale de l'outil (utilise en iframe - defaut 80px)
+		- action : texte du bouton (like/recommend - defaut 'like')
+		- font : la police utilisee ('arial' 'lucida grande' 'segoe ui' 'tahoma' 'trebuchet ms' 'verdana' - defaut 'lucida grande' - cf. doc)
+		- colorscheme : couleur generale du bouton (light/dark - defaut 'light')
+
+		- ref (todo)
+
+]
+#SET{href,#ENV{href,#FBMOD{url_page,#SELF|url_absolue}}}
+#SET{send,#ENV{send,oui}}
+#SET{layout,#ENV{layout,standard}}
+#SET{layout_stds,#ARRAY{0,standard,1,button_count,2,box_count}}
+[(#GET{layout_stds}|find{#GET{layout}}|non)
+	#SET{layout,standard}
+]
+#SET{show_faces,#ENV{show_faces,oui}}
+#SET{width,#ENV{width,490}}
+#SET{height,#ENV{height,80}}
+#SET{action,#ENV{action,like}}
+#SET{action_stds,#ARRAY{0,like,1,recommend}}
+[(#GET{action_stds}|find{#GET{action}}|non)
+	#SET{action,like}
+]
+#SET{font,#ENV{font,#FBMOD{font_def}}}
+[(#FBMOD{font_stds}|find{#GET{font}}|non)
+	#SET{font,#FBMOD{font_def}}
+]
+#SET{colorscheme,#ENV{colorscheme,#FBMOD{colorscheme_def}}}
+[(#FBMOD{colorscheme_stds}|find{#GET{colorscheme}}|non)
+	#SET{colorscheme,#FBMOD{colorscheme_def}}
+]
+
+[(#REM) On recupere les ID Objects spip if so ... ]
+<BOUCLE_article_fb(ARTICLES){id_article}>[(#SET{href,#URL_ARTICLE|url_absolue})]</BOUCLE_article_fb>
+<BOUCLE_breve_fb(BREVES){id_breve}>[(#SET{href,#URL_BREVE|url_absolue})]</BOUCLE_breve_fb>
+<BOUCLE_rubrique_fb(RUBRIQUES){id_rubrique}>[(#SET{href,#URL_RUBRIQUE|url_absolue})]</BOUCLE_rubrique_fb>
+<BOUCLE_auteur_fb(AUTEURS){id_auteur}>[(#SET{href,#URL_AUTEUR|url_absolue})]</BOUCLE_auteur_fb>
+<BOUCLE_site_fb(SITES){id_syndic}>[(#SET{href,#URL_SITE|url_absolue})]</BOUCLE_site_fb>
+<BOUCLE_mot_fb(MOTS){id_mot}>[(#SET{href,#URL_MOT|url_absolue})]</BOUCLE_mot_fb>
+<BOUCLE_document_fb(DOCUMENTS){id_document}>[(#SET{href,#URL_DOCUMENT|url_absolue})]</BOUCLE_document_fb>
+
+[(#REM) Affichage du plugin FB ... ]
+<div class="fb_modeles fb_like">
+
+[(#REM) Version XFBML ]
+[(#FBMOD{xfbml}|=={oui}|oui)
+<div id="fb-root"></div>
+<script src="http://connect.facebook.net/#FBMOD{fb_lang}/all.js#xfbml=1"></script>
+<fb:like 
+	[href="(#GET{href})" ]
+	[send="(#GET{send}|fb_modeles_bool)" ] 
+	[layout="(#GET{layout})" ]
+	[width="(#GET{width})" ] 
+	[height="(#GET{height})" ] 
+	[show_faces="(#GET{show_faces}|fb_modeles_bool)" ]
+	[action="(#GET{action})" ]
+	[font="(#GET{font})" ]
+	[colorscheme="(#GET{colorscheme})" ]
+></fb:like>]
+
+[(#REM) Version accessible sans javascript ni XFBML ]
+[(#FBMOD{xfbml}|=={oui}|oui)<noscript>
+<div class="fb_modeles fb_messagejsabsent"><:fbmodeles:javascript_inactif:></div>
+]
+<iframe src="[(#FBMOD{like_url}
+	|parametre_url{locale,#FBMOD{fb_lang}}
+	|parametre_url{href,#GET{href}|urlencode}
+	|parametre_url{send,#GET{send}|fb_modeles_bool}
+	|parametre_url{layout,#GET{layout}}
+	|parametre_url{width,#GET{width}}
+	|parametre_url{height,#GET{height}}
+	|parametre_url{show_faces,#GET{show_faces}|fb_modeles_bool}
+	|parametre_url{action,#GET{action}}
+	|parametre_url{font,#GET{font}}
+	|parametre_url{colorscheme,#GET{colorscheme}})]" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:#GET{width}px; height:#GET{height}px;" allowTransparency="true"></iframe>
+[(#FBMOD{xfbml}|=={oui}|oui)</noscript>]
+
+</div>

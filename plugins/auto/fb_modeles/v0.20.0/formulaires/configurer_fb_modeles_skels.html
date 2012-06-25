@@ -1,0 +1,61 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+<h3 class="titrem"><:fbmodeles:cfg_reglages:></h3>
+
+<:fbmodeles:cfg_comment_reglages|propre:>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+
+<ul>
+
+	#SET{name,xfbml}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="xfbml"><:fbmodeles:cfg_label_xfbml:></label>
+		<div class="explication"><:fbmodeles:cfg_comment_xfbml:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="radio" class="radio" name="xfbml" id="xfbml" value="oui"[(#ENV{xfbml,#FBMOD{xfbml}}|=={oui}|oui) checked="checked"] /><:fbmodeles:oui:>
+		<input type="radio" class="radio" name="xfbml" id="xfbml" value="non"[(#ENV{xfbml,#FBMOD{xfbml}}|=={non}|oui) checked="checked"] /><:fbmodeles:non:>
+	</li>	
+
+	#SET{name,border_color_def}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="border_color_def"><:fbmodeles:cfg_label_border_color:></label>
+		<div class="explication"><:fbmodeles:cfg_comment_border_color:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="text" name="border_color_def" id="border_color_def" class="text" value="[(#ENV{border_color_def,#FBMOD{border_color_def}})]" />
+	</li>	
+
+	#SET{name,font_def}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="font_def"><:fbmodeles:cfg_label_font:></label>
+		<div class="explication"><:fbmodeles:cfg_comment_font:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<select name="font_def" id="font_def" class="forml verdana1">
+				<option value=""[(#ENV{font_def,#FBMOD{font_def}}|=={''}|oui) selected="selected"]><:fbmodeles:defaut:></option>
+				[(#FBMOD{font_stds}|foreach{cfg/cfg_options})]
+			</select>
+	</li>	
+
+	#SET{name,colorscheme_def}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="colorscheme_def"><:fbmodeles:cfg_label_colorscheme:></label>
+		<div class="explication"><:fbmodeles:cfg_comment_colorscheme:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<select name="colorscheme_def" id="colorscheme_def" class="forml verdana1">
+				<option value=""[(#ENV{colorscheme_def,#FBMOD{colorscheme_def}}|=={''}|oui) selected="selected"]><:fbmodeles:defaut:></option>
+				[(#FBMOD{colorscheme_stds}|foreach{cfg/cfg_options})]
+			</select>
+	</li>	
+
+</ul>
+
+<input type="hidden" name="_meta_casier" value="#EVAL{FB_MODELS_CFGMETA}" />
+<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+
+</div>
+</form>
+</div>

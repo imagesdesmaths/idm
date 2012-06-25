@@ -1,0 +1,13 @@
+[(#AUTORISER{configurer}|sinon_interdire_acces)]
+
+#BOITE_OUVRIR{'',info}
+<img src="#CHEMIN_IMAGE{facebook-icon.png}" width="48" height="48" alt="Logo <:fbmodeles:fb_modeles:>" style="width:48px; height:48px; float:#LANG_RIGHT;" />
+<h3><:fbmodeles:cfg_descr_titre:></h3>
+<:fbmodeles:cfg_descr|propre:>
+#BOITE_FERMER
+
+#BOITE_OUVRIR{'',raccourcis}
+[(#EVAL{FB_MODELS_DOC_CONTRIB}|icone_horizontale{<:fbmodeles:doc_en_ligne:>,spip_contrib-24})]
+[(#URL_PAGE{#EVAL{FB_MODELS_DOC}}|icone_horizontale{<:fbmodeles:page_test:>,article-24})]
+<small>[<a href='#URL_PAGE{#EVAL{FB_MODELS_DOC}}' target='_blank' title='<:fbmodeles:page_test_in_new_window:>'><:fbmodeles:new_window:></a>]</small>
+#BOITE_FERMER

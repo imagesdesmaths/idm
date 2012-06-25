@@ -1,0 +1,54 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+<h3 class="titrem"><:fbmodeles:cfg_identifiants:></h3>
+
+<:fbmodeles:cfg_comment_identifiants|propre:>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+
+<ul>
+
+	#SET{name,appid}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="appid"><:fbmodeles:cfg_label_appid:></label>
+		<div class="explication"><:fbmodeles:cfg_comment_appid:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="text" name="appid" id="appid" class="text" value="#ENV{appid,#FBMOD{appid}}" />
+	</li>	
+
+	#SET{name,pageid}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="pageid"><:fbmodeles:cfg_label_pageid:></label>
+		<div class="explication"><:fbmodeles:cfg_comment_pageid:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="text" name="pageid" id="pageid" class="text" value="#ENV{pageid,#FBMOD{pageid}}" />
+	</li>	
+
+	#SET{name,userid}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="userid"><:fbmodeles:cfg_label_userid:></label>
+		<div class="explication"><:fbmodeles:cfg_comment_userid:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="text" name="userid" id="userid" class="text" value="#ENV{userid,#FBMOD{userid}}" />
+	</li>	
+
+	#SET{name,url_page}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+	<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+		<label for="url_page"><:fbmodeles:cfg_label_url_page:></label>
+		<div class="explication"><:fbmodeles:cfg_comment_url_page:></div>
+		[<span class='erreur_message'>(#GET{erreurs})</span>
+		]<input type="text" name="url_page" id="url_page" class="text" value="#ENV{url_page,#FBMOD{url_page}}" />
+	</li>	
+
+</ul>
+
+<input type="hidden" name="_meta_casier" value="#EVAL{FB_MODELS_CFGMETA}" />
+<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+
+</div>
+</form>
+</div>
