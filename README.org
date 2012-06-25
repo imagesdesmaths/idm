@@ -76,6 +76,7 @@ we end up working in a team but so far:
 - =squelettes/navigation.html=
   - should be re-done completely
 - re-install =forms_et_tables= (3.0, doesn't work yet)
+- Maybe remove CFG, it seems to be mostly useless now
 
 ** Back-burner
 

@@ -1,0 +1,124 @@
+
+
+QUE FAIT CE PLUGIN CFG ?
+------------------------
+Ce plugin enrichi SPIP 3.x de méthodes de stockage des configurations
+
+
+PRÉFÉRER DE NE PAS L'UTILISER !
+-------------------------------
+Il est préférable d'utiliser à la place de ce plugin
+ler mécanismes de configuration fournis par défaut
+dans SPIP 3, à savoir :
+- prive/squelettes/contenu/xx.html (squelette appelant le formulaire #CONFIGURER_XX)
+- formulaires/configurer_xx.html (squelette du formulaire CVT)
+- formulaires/configurer_xx.php (chargement / vérification, traitement du formulaire CVT)
+- privé/squelettes/navigation/xx.html (Éventuellement pour une navigation latérale)
+- des stockage des données dans spip_meta ou spip_xx_meta
+
+
+POURQUOI ALORS L'UTILISER... MALGRÉ TOUT ?
+------------------------------------------
+Cela dit, ce plugin sera utile dans les cas suivants :
+- migration de formulaires CFG d'ancienne version utilisant
+  un stockage en dehors de spip_meta ou spip_xx_meta,
+  tel que dans des fichiers php.
+
+QUE FOURNIT CE PLUGN ?
+----------------------
+- Une méthode de stockage supplémentaire :
+	php : stocke des informations dans des fichiers PHP
+
+
+COMMENT MIGRER D'UNE ANCIENNE VERSION DE CFG À SPIP 3 ?
+--------------------------------------------------------
+
+Il faut d'une part expliquer comment fonctionne SPIP 3
+et les choix qui ont été fait, et d'autre part
+comment fonctionnait le plugin CFG avant SPIP 3
+
+EN SPIP 3
+---------
+SPIP 3 a choisit 2 moyens distinct et qui peuvent se cumuler
+pour accéder à une page de configuration d'un plugin donné.
+#1 : l'accès depuis la page d'admin des plugins (via une icone)
+#2 : l'accès depuis le menu de l'espace privé.
+
+Pour #1, si le prefixe de notre plugin est xxx, la présence d'un squelette
+dans ce plugin "prive/squelettes/contenu/configurer_xxx.html" affichera l'icone,
+qui pointera sur la page ?exec=configurer_xxx qui charge le contenu de cette page.
+
+Pour #2, il suffit de déclarer son lien dans le menu depuis le paquet.xml
+avec par exemple :
+<menu nom="configurer_xxx" titre="xxx:configuration_xxx" parent="menu_configuration" icone="images/xxx-16.png" />
+
+Dans ces deux cas, le squelette "prive/squelettes/contenu/configurer_xxx.html" doit
+gérer l'affichage des formulaires de configuration qu'il souhaite, avec des appels
+un ou plusieurs #FORMULAIRE_CONFIGURER_XXX
+
+Il est également possible de donner une page "prive/squelettes/navigation/configurer_xxx.html"
+fournissant un menu de navigation pour le plugin à configurer.
+
+Les formulaires de configuration sont à placer dans un répertoire formulaires/configurer_xxx.html
+Ce sont des formulaires CVT qui acceptent de ne pas avoir de fonctions PHP de chargement, vérification ou traitement.
+En leur absence, le chargement, vérification ou traitement est effectué automatiquement par SPIP
+d'après les informations qu'il connait du formulaire.
+Il peut extraire notamment du formulaire, via un champ hidden, le lieu de stockage désiré des informations.
+
+CFG avant SPIP 3
+----------------
+
+Il fournissait, tout à fait à l'origine, un moyen de déclarer des formulaires
+de configuration en mettant le code du formulaire dans un répertoire fonds/
+Les plus vieux plugins ont cela.
+
+Il a ensuite fourni une méthode pour utiliser également les formulaires CVT de SPIP
+qu'il appelait depuis le même fichier dans fonds/, mais ces fichiers n'avaient donc
+que l'appel #FORMULAIRE_xx (et non le contenu) du formulaire, permettant uentre
+autre de traiter les formulaires en ajax et de s'approcher un peu plus des mécanismes de SPIP.
+
+On peut donc se retrouver avec 2 cas :
+%1) Les vieux CFG avec uniquement fonds/cfg_xx.html
+%2) Les CFG récents (>1.10) avec fonds/cfg_xx.html et formulaires/xx.html
+
+Migrer
+------
+Migrer vers SPIP 3 consiste à passer son ancien CFG,
+d'une part de %1 à %2, puis de %2 à #1 / #2
+
+Le fichier fonds/cfg_xx.html, est à déplacer dans
+prive/squelettes/contenu/configurer_xx.html
+et est élagué des <!-- param=nom -->
+ou des encore plus vieux [(#REM) param=nom ]
+qu'il contenait, au profit d'appels directs
+aux chaines de langue par exemple <h1><:xxx:configurer_xxx:></h1>
+
+Le fichier formulaires/xx.html sera renommé formulaires/configurer_xx.html
+et pareillement élagué des paramètres <!-- param=nom --> .
+S'il y avait une autorisation, elle doit se faire par #AUTORISER
+dans le squelette appelant le formulaire.
+
+Le parametre 'nom' passe en input hidden, si sa valeur est
+différente de xx dans formulaires/configurer_xx.html :
+<input type="hidden" name="_meta_casier" value="xx" />
+
+Le paramètre 'casier' complète le nom s'il était présent,
+par exemple s'il avait la valeur yy :
+<input type="hidden" name="_meta_casier" value="xx/yy" />
+
+Si le stockage était «metapack» (n clés dans spip_metas)
+<input type="hidden" name="_meta_casier" value="" />
+
+Stockage Php
+------------
+Si le stockage se faisait en php (le casier est identique) :
+<input type="hidden" name="_meta_stockage" value="php" />
+<input type="hidden" name="_meta_table" value="" />
+
+S'il y avait un fichier spécifique de déclaré, le mettre dans le casier :
+<input type="hidden" name="_meta_casier" value="adresse/fichier.php:nom/casier/champ" />
+
+Autres stockages (table, tablepack)
+----------------
+Ils ne sont actuellement pas pris en compte par ce plugin.
+Si quelqu'un veut les recoder, qu'il se lance :)

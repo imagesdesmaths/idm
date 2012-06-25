@@ -1,0 +1,20 @@
+<paquet
+	prefix="cfg"
+	categorie="maintenance"
+	version="3.0.0"
+	etat="stable"
+	compatibilite="[3.0.0-beta;3.0.*]"
+	logo="prive/themes/spip/images/cfg-128.png"
+	documentation=""
+>	
+
+	<nom>CFG</nom>
+	<!-- Plugin de configuration -->
+
+	<auteur>Bertrand Gugger</auteur>
+	<auteur>Matthieu Marcillaud</auteur>
+
+	<copyright>2008-2011</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+</paquet>
