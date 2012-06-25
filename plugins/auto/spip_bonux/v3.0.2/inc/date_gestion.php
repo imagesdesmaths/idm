@@ -6,6 +6,7 @@
  * Licence GPL
  */
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Recuperer les champs date_xx et heure_xx, verifier leur coherence et les reformater

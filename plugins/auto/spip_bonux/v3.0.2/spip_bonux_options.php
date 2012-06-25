@@ -7,6 +7,8 @@
  * 
  */
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
  /**
  * une fonction qui regarde si $texte est une chaine de langue
  * de la forme <:qqch:>

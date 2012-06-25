@@ -7,8 +7,7 @@
  * 
  */
 
-
-
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * http://www.spip-contrib.net/Classer-les-articles-par-nombre-de#forum409210

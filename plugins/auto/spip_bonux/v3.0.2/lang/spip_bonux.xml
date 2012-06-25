@@ -1,0 +1,8 @@
+<traduction module="spip_bonux" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_plugins_/spip-bonux-3/lang/" reference="fr">
+	<langue code="ar" />
+	<langue code="en" />
+	<langue code="fr" />
+	<langue code="sk" url="http://trad.spip.org/tradlang_module/spip_bonux?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />
+	</langue>
+</traduction>

@@ -7,6 +7,7 @@
  *
  */
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Empile un element dans un tableau declare par #SET{tableau,#ARRAY}
