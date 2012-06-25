@@ -28,15 +28,16 @@ function champs_extras_objet($table) {
 **/
 function champs_extras_autorisation($faire, $quoi='', $saisies=array(), $args=array()) {
 	if (!$saisies) return array();
+
 	foreach ($saisies as $cle=>$saisie) {
 		$id = isset($args['id']) ? $args['id'] : $args['id_objet'];
-		$autoriser_quoi = $quoi . _SEPARATEUR_CEXTRAS_AUTORISER . $saisie['options']['nom'];
-		if (!autoriser($faire . 'extra', $autoriser_quoi, $id, '', array(
+		if (!autoriser($faire . 'extra', $quoi, $id, '', array(
 			'type' => $quoi,
 			'id_objet' => $id,
 			'contexte' => $args['contexte'],
 			'table' => table_objet_sql($quoi),
-			'saisie' => $saisie
+			'saisie' => $saisie,
+			'champ' => $saisie['options']['nom'],
 		))) {
 			// on n'est pas autorise
 			unset($saisies[$cle]);
@@ -178,12 +179,14 @@ function cextras_formulaire_verifier($flux){
 		include_spip('inc/autoriser');
 		include_spip('inc/saisies');
 
-		$verifier = charger_fonction('verifier', 'inc', true);
-		$saisies = saisies_lister_avec_sql($saisies);
+		$verifier   = charger_fonction('verifier', 'inc', true);
+		$saisies    = saisies_lister_avec_sql($saisies);
 
 		// restreindre la vue selon les autorisations
 		$id_objet = $flux['args']['args'][0]; // ? vraiment toujours ?
-		$saisies = champs_extras_autorisation('modifier', $objet, $saisies, array_merge($flux['args'], array('id' => $id_objet)));
+		$saisies = champs_extras_autorisation('modifier', $objet, $saisies, array_merge($flux['args'], array(
+			'id' => $id_objet,
+			'contexte' => array()))); // nous ne connaissons pas le contexte dans ce pipeline
 
 		foreach ($saisies as $saisie) {
 			// verifier obligatoire
@@ -192,10 +195,16 @@ function cextras_formulaire_verifier($flux){
 			and !_request($nom))
 			{
 				$flux['data'][$nom] = _T('info_obligatoire');
-			// verifier (api)
+			
+			// verifier (api) + normalisation
 			} elseif ($verifier AND isset($saisie['verifier']) and $verif = $saisie['verifier']['type']) {
-				if ($erreur = $verifier(_request($nom), $verif, $saisie['verifier']['options'])) {
+				$options = isset($saisie['verifier']['options']) ? $saisie['verifier']['options'] : array();
+				$normaliser = null;
+				if ($erreur = $verifier(_request($nom), $verif, $options, $normaliser)) {
 					$flux['data'][$nom] = $erreur;
+				// si une valeur de normalisation a ete transmis, la prendre.
+				} elseif (!is_null($normaliser)) {
+					set_request($nom, $normaliser);
 				}
 			}
 		}

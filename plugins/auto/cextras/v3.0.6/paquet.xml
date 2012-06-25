@@ -1,11 +1,11 @@
 <paquet
 	prefix="cextras"
 	categorie="outil"
-	version="2.1.0"
+	version="3.0.6"
 	etat="test"
-	compatibilite="[3.0.0-beta;3.0.*]"
+	compatibilite="[3.0.0-beta2;3.0.*]"
 	logo="images/cextras-64.png"
-	documentation="http://www.spip-contrib.net/Champs-Extras-2"
+	documentation="http://www.spip-contrib.net/?article4028"
 >
 
 	<nom>Champs Extras</nom>
@@ -25,10 +25,8 @@
 	<pipeline nom="afficher_contenu_objet" inclure="cextras_pipelines.php" />
 	<pipeline nom="pre_edition" inclure="cextras_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="cextras_pipelines.php" />
-	<!--
-	<pipeline nom="declarer_tables_objets_sql" inclure="base/cextras.php" />
-	-->
 
-	<necessite nom="saisies" compatibilite="[1.10.0;]" />
+	<necessite nom="saisies" compatibilite="[1.21.0;]" />
+	<utilise nom="verifier" compatibilite="[0.1.12;]" />
 
 </paquet>

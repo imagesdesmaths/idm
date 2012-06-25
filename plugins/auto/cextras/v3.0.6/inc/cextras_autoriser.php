@@ -7,8 +7,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function cextras_autoriser(){}
 
 
-define('_SEPARATEUR_CEXTRAS_AUTORISER', '0');
-
 /**
  * Retourne si une saisie peut s'afficher ou non 
  *
@@ -88,11 +86,19 @@ function champs_extras_restrictions($saisie, $action, $table, $id, $qui, $opt) {
 
 /**
   * Autorisation de voir un champ extra
-  * autoriser('voirextra','auteur_prenom', $id_auteur);
-  * -> autoriser_auteur_prenom_voirextra_dist() ...
+  * autoriser('voirextra','auteur', $id_auteur,'',array('champ'=>'prenom', 'saisie'=>$saisie, ...));
+  *
+  * -> autoriser_auteur_voirextra_prenom_dist() ...
   */
 function autoriser_voirextra_dist($faire, $type, $id, $qui, $opt){
 	if (isset($opt['saisie'])) {
+		// tester des fonctions d'autorisations plus precises declarees
+		if ($opt['champ']) {
+			$f = 'autoriser_' . $opt['table'] . '_voirextra_' . $opt['champ'];
+			if (function_exists($f) OR function_exists($f .= '_dist')) {
+				return $f($faire, $type, $id, $qui, $opt);
+			}
+		}
 		return champs_extras_restrictions($opt['saisie'], substr($faire, 0, -5), $opt['table'], $id, $qui, $opt);
 	}
 	return true;
@@ -100,11 +106,19 @@ function autoriser_voirextra_dist($faire, $type, $id, $qui, $opt){
 
 /**
   * Autorisation de modifier un champ extra
-  * autoriser('modifierextra','auteur_prenom', $id_auteur);
-  * -> autoriser_auteur_prenom_modifierextra_dist() ...
+  * autoriser('modifierextra','auteur', $id_auteur,'',array('champ'=>'prenom', 'saisie'=>$saisie, ...));
+  * 
+  * -> autoriser_auteur_modifierextra_prenom_dist()
   */
 function autoriser_modifierextra_dist($faire, $type, $id, $qui, $opt){
 	if (isset($opt['saisie'])) {
+		// tester des fonctions d'autorisations plus precises declarees
+		if ($opt['champ']) {
+			$f = 'autoriser_' . $opt['table'] . '_modifierextra_' . $opt['champ'];
+			if (function_exists($f) OR function_exists($f .= '_dist')) {
+				return $f($faire, $type, $id, $qui, $opt);
+			}
+		}
 		return champs_extras_restrictions($opt['saisie'], substr($faire, 0, -5), $opt['table'], $id, $qui, $opt);
 	}
 	return true;
@@ -142,19 +156,18 @@ function restreindre_extras($objet, $noms=array(), $ids=array(), $cible='rubriqu
 	$ids = var_export($ids, true);
 	$recursif = var_export($recursif, true);
 
-	$m = '_modifierextra_dist';
-	$v = '_voirextra_dist';
 	foreach ($noms as $nom) {
-		$nom = str_replace('_', '', $nom);
-		$f = "autoriser_$objet" . _SEPARATEUR_CEXTRAS_AUTORISER . "$nom";
+		$m = "autoriser_" . $objet . "_modifierextra_" . $nom . "_dist";
+		$v = "autoriser_" . $objet . "_voirextra_" . $nom . "_dist";
+
 		$code = "
-			if (!function_exists('$f$m')) {
-				function $f$m(\$faire, \$quoi, \$id, \$qui, \$opt) {
+			if (!function_exists('$m')) {
+				function $m(\$faire, \$quoi, \$id, \$qui, \$opt) {
 					return _restreindre_extras_objet('$objet', \$id, \$opt, $ids, '$cible', $recursif);
 				}
 			}
-			if (!function_exists('$f$v')) {
-				function $f$v(\$faire, \$quoi, \$id, \$qui, \$opt) {
+			if (!function_exists('$v')) {
+				function $v(\$faire, \$quoi, \$id, \$qui, \$opt) {
 					return autoriser('modifierextra', \$quoi, \$id, \$qui, \$opt);
 				}
 			}
@@ -229,7 +242,7 @@ function _restreindre_extras_objet($objet, $id_objet, $opt, $ids, $cible='rubriq
  */
 function _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, $_id_cible) {
 
-    $id_cible = $opt['contexte'][$_id_cible];
+    $id_cible = intval($opt['contexte'][$_id_cible]);
   
     if (!$id_cible) {
 		// on tente de le trouver dans la table de l'objet
@@ -292,9 +305,20 @@ function inc_restreindre_extras_objet_sur_rubrique_dist($objet, $id_objet, $opt,
 	if ($ok) {
 		return true;
 	}
+
+	if (!$recursif) {
+		return false;
+	}
+
+	// tester si un parent proche existe lorsqu'on ne connait pas la rubrique.
+	if (!$id_rubrique AND $id_rubrique = _request('id_parent')) {
+		if (in_array($id_rubrique, $ids)) {
+			return true;
+		}
+	}
 	
 	// on teste si l'objet est dans une sous rubrique de celles mentionnee...
-	if ($id_rubrique and $recursif) {
+	if ($id_rubrique) {
 		$id_parent = $id_rubrique;
 		while ($id_parent = sql_getfetsel("id_parent", "spip_rubriques", "id_rubrique=" . sql_quote($id_parent))) {
 			if (in_array($id_parent, $ids)) {

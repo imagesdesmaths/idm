@@ -2,7 +2,7 @@
 
 
 /**
- * Retourne la classe ChampExtra du champ demande
+ * Retourne la description de la saisie du champ demande
  * permettant ainsi d'exploiter ses donnees.
  *
  * <BOUCLE_x(TABLE)>

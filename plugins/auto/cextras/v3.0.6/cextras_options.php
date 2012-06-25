@@ -4,6 +4,14 @@
 	// afin d'etre certain d'arriver apres les autres plugins
 	// sinon toutes les tables ne sont pas declarees
 	// et les champs supplementaires ne peuvent pas se declarer comme il faut
+
+	if (!isset($GLOBALS['spip_pipeline']['declarer_tables_objets_sql'])) {
+		$GLOBALS['spip_pipeline']['declarer_tables_objets_sql'] = '';
+	}
+	if (!isset($GLOBALS['spip_pipeline']['declarer_tables_interfaces'])) {
+		$GLOBALS['spip_pipeline']['declarer_tables_interfaces'] = '';
+	}
+
 	$GLOBALS['spip_pipeline']['declarer_tables_objets_sql'] .= '||cextras_declarer_champs_apres_les_autres';
 	function cextras_declarer_champs_apres_les_autres($tables) {
 		include_spip('base/cextras');
