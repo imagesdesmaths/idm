@@ -314,12 +314,4 @@ function idm_validate_billet ($id_auteur, $id_article) {
   idm_notify (array(0,$gars), $texte, $subject);
 }
 
-// VB: patches for notifications.
-
-function email_notification_objet($id_objet, $type_objet, $modele) {
-  $envoyer_mail = charger_fonction('envoyer_mail','inc'); // pour nettoyer_titre_email
-  $id_type = id_table_objet($type_objet);
-  return recuperer_fond($modele,array($id_type=>$id_objet,"id"=>$id_objet));
-}
-
 ?>
