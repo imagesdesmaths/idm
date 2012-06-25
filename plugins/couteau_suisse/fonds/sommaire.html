@@ -1,0 +1,27 @@
+[(#REM)
+	Ce fond est surchargeable dans vos squelettes.
+	Utilisation d'un cookie pour stocker l'etat du sommaire au moment de quitter la page.
+ 
+	Champs disponibles : 
+		fond_css : 'avec' ou 'sans'
+		sommaire : les liens du sommaire en <li></li>
+        id_<objet> si disponible en contexte : id_article, id_rubrique, etc.
+
+	Indispensable pour le repliement : 
+		<div.cs_sommaire_titre_XXX> et <div.cs_sommaire_corps> places a la suite l'un de l'autre
+
+	Par defaut : sommaire deplie
+	Pour un sommaire replie a la premiere visite de la page :
+		- ajouter la classe 'cs_sommaire_replie' a : <div class="cs_sommaire_titre_XXX">
+		- ajouter la classe 'cs_sommaire_invisible' a : <div class="cs_sommaire_corps">
+
+]<div class="cs_sommaire cs_sommaire_[(#ENV*{fond_css})]_fond" id="outil_sommaire">
+  <div class="cs_sommaire_inner">
+    <div class="cs_sommaire_titre_[(#ENV*{fond_css})]_fond">&nbsp; <:couteau:sommaire_titre:> &nbsp;</div>
+    <div class="cs_sommaire_corps">
+    <ul>
+      [(#ENV*{sommaire})]
+    </ul>
+   </div>
+  </div>
+</div>

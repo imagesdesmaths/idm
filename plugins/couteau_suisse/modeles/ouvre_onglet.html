@@ -1,0 +1,13 @@
+[(#REM)
+
+	Modele de controle d'ouverture d'onglets
+	#ENV{id} : base zero
+	<ouvre_onglet2> : ouvre le 3e onglet de la page au moment de la construction des onglets
+	<ouvre_onglet3|ready=1> : ouvre le 4e onglet une fois que la page est chargee
+
+]<script type="text/javascript">/*<![CDATA[*/
+	// ouverture du [(#ENV{id}|plus{1})]e onglet
+[(#ENV*{ready}|=={1}|non)	var onglet_actif = onglet_actif?onglet_actif+',#ENV{id}':'#ENV{id}';]
+[(#ENV*{ready}|=={1}|oui)	// des que le DOM est pret...
+	if (window.jQuery) jQuery(document).ready(function(){ clic_onglet('#ENV{id}'); });]
+/*]]>*/</script>
