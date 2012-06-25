@@ -85,6 +85,8 @@ html, body { padding: 0px; margin: 0px; font-family: Arial, sans-serif; text-ali
 
 .piste_24 { color: #888888; }
 
+br.autobr { display: none; }
+
 h1 { text-align: center; margin: 0px; padding: 0px; }
 
 h2 { text-align: center; }
