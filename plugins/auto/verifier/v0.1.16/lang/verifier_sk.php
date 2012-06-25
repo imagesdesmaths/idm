@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org
+// extrait automatiquement de http://trad.spip.org/tradlang_module/verifier?lang_cible=sk
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_comparaison_grand_egal' => 'Hodnota musí byť väčšia alebo rovná poľu "@nom_champ@"',
 	'erreur_comparaison_petit' => 'Hodnota musí byť menšia ako pole "@nom_champ@"',
 	'erreur_comparaison_petit_egal' => 'Hodnota musí byť menšia alebo rovná ako "@nom_champ@"',
+	'erreur_couleur' => 'Kód farby nie je platný.',
 	'erreur_date' => 'Tento dátum je neplatný.',
 	'erreur_date_format' => 'Formát dátumu je neplatný.',
 	'erreur_decimal' => 'Hodnota musí byť desatinné číslo.',
@@ -31,16 +32,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_regex' => 'Reťazec pravidelného výrazu má nesprávny formát.',
 	'erreur_siren' => 'IČO je neplatné.',
 	'erreur_siret' => 'Obchodné meno s IČOm je neplatné.',
-	'erreur_taille_egal' => 'Údaj musí mať presne @egal@ znakov.',
-	'erreur_taille_entre' => 'Údaj musí mať medzi @min@ a @max@ znakov.',
-	'erreur_taille_max' => 'Údaj nesmie mať menej ako @max@ znakov.',
-	'erreur_taille_min' => 'Údaj nesmie mať menej ako @min@ znakov.',
+	'erreur_taille_egal' => 'Údaj musí mať presne @egal@ znakov (teraz má @nb@).',
+	'erreur_taille_entre' => 'Údaj musí mať medzi @min@ a @max@ znakov (teraz má @nb@). ',
+	'erreur_taille_max' => 'Údaj nesmie mať menej ako @max@ znakov (teraz má @nb@).',
+	'erreur_taille_min' => 'Údaj nesmie mať menej ako @min@ znakov (teraz má @nb@).',
 	'erreur_telephone' => 'Telefónne číslo je neplatné.',
 	'erreur_url' => 'Internetová adresa <em>@url@</em> je neplatná.',
 	'erreur_url_protocole' => 'Zadaná adresa <em>(@url@)</em> sa musí začínať s @protocole@',
 	'erreur_url_protocole_exact' => 'Zadaná adresa <em>(@url@)</em> sa nezačína s platným protokolom (napr. http://)',
 
+	// N
+	'normaliser_option_date' => 'Štandardizovať dátum?',
+	'normaliser_option_date_aucune' => 'Nie',
+	'normaliser_option_date_en_datetime' => 'Vo formáte "Dátum a čas" (pre SQL)',
+
 	// O
+	'option_couleur_normaliser_label' => 'Štandardizovať kód farby?',
+	'option_couleur_type_hexa' => 'Kód farby v hexadecimálnom (šetnástkovom) formáte',
+	'option_couleur_type_label' => 'Typ overenia, ktorý sa má použiť',
 	'option_decimal_nb_decimales_label' => 'Počet desatinných miest',
 	'option_email_disponible_label' => 'Dostupná adresa',
 	'option_email_disponible_label_case' => 'Skontrolujte, či túto adresu už nepoužíva iný používateľ',
@@ -69,6 +78,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_url_type_protocole_web' => 'Internetové protokoly: HTTP alebo HTTPS',
 
 	// T
+	'type_couleur' => 'Farba',
+	'type_couleur_description' => 'Skontroluje, či je hodnota zadaný kód farby.',
 	'type_date' => 'Dátum',
 	'type_date_description' => 'Skontrolujte, či je dátum vo formáte DD/MM/RRRR. Oddeľovacím znakom môže byť čokoľvek (napr. ".", "/").',
 	'type_decimal' => 'Desatinné číslo',

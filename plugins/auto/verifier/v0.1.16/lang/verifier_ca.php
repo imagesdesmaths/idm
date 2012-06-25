@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org
+// extrait automatiquement de http://trad.spip.org/tradlang_module/verifier?lang_cible=ca
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_comparaison_grand_egal' => 'La valeur doit être supérieure ou égale au champ "@nom_champ@"', # NEW
 	'erreur_comparaison_petit' => 'La valeur doit être inférieure au champ "@nom_champ@"', # NEW
 	'erreur_comparaison_petit_egal' => 'La valeur doit être inférieure ou égale au champ "@nom_champ@"', # NEW
+	'erreur_couleur' => 'Le code couleur n\'est pas valide.', # NEW
 	'erreur_date' => 'El format de la data no és correcte.',
 	'erreur_date_format' => 'Le format de la date n\'est pas accepté.', # NEW
 	'erreur_decimal' => 'La valeur doit être un nombre décimal.', # NEW
@@ -31,16 +32,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_regex' => 'El format de la cadena no és vàlida.',
 	'erreur_siren' => 'Número SIREN no vàlid.',
 	'erreur_siret' => 'Número SIRET no vàlid.',
-	'erreur_taille_egal' => 'El valor ha de tenir exactament @egal@ caràcters.',
-	'erreur_taille_entre' => 'El valor ha d\'estar comprès entre @min@ i @max@ caràcters.',
-	'erreur_taille_max' => 'El valor ha de comprendre com a molt @max@ caràcters.',
-	'erreur_taille_min' => 'El valor ha de tenir com a mínim @min@ caràcters.',
+	'erreur_taille_egal' => 'El valor ha de tenir exactament @egal@ caràcters.', # MODIF
+	'erreur_taille_entre' => 'El valor ha d\'estar comprès entre @min@ i @max@ caràcters.', # MODIF
+	'erreur_taille_max' => 'El valor ha de comprendre com a molt @max@ caràcters.', # MODIF
+	'erreur_taille_min' => 'El valor ha de tenir com a mínim @min@ caràcters.', # MODIF
 	'erreur_telephone' => 'El número no és vàlid.',
 	'erreur_url' => 'L\'adreça no és vàlida.', # MODIF
 	'erreur_url_protocole' => 'L\'adresse saisie <em>(@url@)</em> doit commencer par @protocole@', # NEW
 	'erreur_url_protocole_exact' => 'L\'adresse saisie <em>(@url@)</em> ne commence pas par un protocole valide (http:// par exemple)', # NEW
 
+	// N
+	'normaliser_option_date' => 'Normaliser la date ?', # NEW
+	'normaliser_option_date_aucune' => 'Non', # NEW
+	'normaliser_option_date_en_datetime' => 'Au format «Datetime» (pour SQL)', # NEW
+
 	// O
+	'option_couleur_normaliser_label' => 'Normaliser le code couleur ?', # NEW
+	'option_couleur_type_hexa' => 'Code couleur au format héxadécimal', # NEW
+	'option_couleur_type_label' => 'Type de vérification à effectuer', # NEW
 	'option_decimal_nb_decimales_label' => 'Nombre de décimales après la virgule', # NEW
 	'option_email_disponible_label' => 'Adreça disponible',
 	'option_email_disponible_label_case' => 'Verificar que l\'adreça no l\'utilitzi ja un altre usuari',
@@ -69,6 +78,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_url_type_protocole_web' => 'Protocoles web : http ou https', # NEW
 
 	// T
+	'type_couleur' => 'Couleur', # NEW
+	'type_couleur_description' => 'Vérifie que la valeur est un code couleur.', # NEW
 	'type_date' => 'Data',
 	'type_date_description' => 'Verifica que el valor és una data en format JJ/MM/AAAA. El separador és lliure (".", "/", etc.).',
 	'type_decimal' => 'Nombre décimal', # NEW

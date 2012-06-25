@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org
+// extrait automatiquement de http://trad.spip.org/tradlang_module/verifier?lang_cible=fa
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_comparaison_grand_egal' => 'اين مقدار بايد از مقدار ميدانِ "@nom_champ@"بالاتر يا مساوي باشد',
 	'erreur_comparaison_petit' => 'اين مقدار بايد از مقدار ميدان"@nom_champ@"  پائين‌تر باشد',
 	'erreur_comparaison_petit_egal' => 'اين مقدار بايد از مقدار ميدان "@nom_champ@"پائين‌تر يا با آن مساوي باشد',
+	'erreur_couleur' => 'كد رنگ معتبر نيست.',
 	'erreur_date' => 'تاريخ معتبر نيست.',
 	'erreur_date_format' => 'فرمت تاريخ قبول نيست.',
 	'erreur_decimal' => 'مقدار بايد يك عدد اعشاري باشد.',
@@ -26,21 +27,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_entier_max' => 'مقدار بايد كم‌تر از @max@ باشد.',
 	'erreur_entier_min' => 'مقدار بايد بيشتر از @min@ باشد.',
 	'erreur_id_document' => 'اين شناسه‌ي سند معتبر نيست.',
-	'erreur_inconnue_generique' => 'Le format n\'est pas correct.', # NEW
+	'erreur_inconnue_generique' => 'فرمت صحيح نيست',
 	'erreur_numerique' => 'فرمت عدد معتبر نيست.',
 	'erreur_regex' => 'فرمت رشته معتبر نيست.',
 	'erreur_siren' => 'فرمت SIREN معتبر نيست.',
 	'erreur_siret' => 'شماره SIRET معتبر نيست. ',
-	'erreur_taille_egal' => 'مقدار بايد دقيقاً كاراكتر‌هاي @egal@ داشته باشد.',
-	'erreur_taille_entre' => 'مقدار بايد بين @min@ و @max@ كاراكتر داشته باشد. ',
-	'erreur_taille_max' => 'مقدار نبايد بيش از @max@ كاراكتر داشته باشد.',
-	'erreur_taille_min' => 'اين مقدار نبايد كم‌تر از @min@ كارآكتر داشته باشد.',
+	'erreur_taille_egal' => 'مقدار بايد دقيقاً كاراكتر‌هاي @egal@ داشته باشد.', # MODIF
+	'erreur_taille_entre' => 'مقدار بايد بين @min@ و @max@ كاراكتر داشته باشد. ', # MODIF
+	'erreur_taille_max' => 'مقدار نبايد بيش از @max@ كاراكتر داشته باشد.', # MODIF
+	'erreur_taille_min' => 'اين مقدار نبايد كم‌تر از @min@ كارآكتر داشته باشد.', # MODIF
 	'erreur_telephone' => 'اين شماره معتبر نيست.',
 	'erreur_url' => 'نشاني <em>@url@</em> معتبر نيست',
 	'erreur_url_protocole' => 'نشاني وارد شده <em>(@url@)</em> doit بايد با @protocole@ آغاز شود. ',
 	'erreur_url_protocole_exact' => 'نشاني وارد شده <em>(@url@)</em> با يك پروتكل معتبر (http:// مانند)شروع نمي‌شود',
 
+	// N
+	'normaliser_option_date' => 'عادي‌سازي داده‌؟',
+	'normaliser_option_date_aucune' => 'خير',
+	'normaliser_option_date_en_datetime' => 'با فرمت «تاريخ‌زمان» (براي اس‌كيو‌ال)',
+
 	// O
+	'option_couleur_normaliser_label' => 'عادي سازي كد رنگ؟',
+	'option_couleur_type_hexa' => 'كد رنگ با فرمت هگزادسيمال',
+	'option_couleur_type_label' => 'نوع تأييد براي اجرا',
 	'option_decimal_nb_decimales_label' => 'تعداد اعشارها بعد از مميز',
 	'option_email_disponible_label' => 'نشاني در دسترس',
 	'option_email_disponible_label_case' => 'چك كنيد كه كاربر ديگر اين نشاني را استفاده نكرده باشد',
@@ -69,6 +78,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_url_type_protocole_web' => 'پروتكل‌هاي وب: http يا https',
 
 	// T
+	'type_couleur' => 'رنگ',
+	'type_couleur_description' => 'تأييد مقداري كه يك كد رنگ است ',
 	'type_date' => 'تاريخ',
 	'type_date_description' => 'چك كنيد كه فرمت تاريخ اين باشد: س‌س‌س‌س/م‌م/رر. مميز آزاد است («.»، «/»، و غيره).',
 	'type_decimal' => 'شماره‌ي اعشاري',

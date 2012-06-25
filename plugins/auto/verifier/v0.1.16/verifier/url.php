@@ -58,11 +58,11 @@ function verifier_url_dist($valeur, $options=array()){
  */
 function verifier_url_protocole($url,$type_protocole,$protocole){
 
-	$urlregex = array('tous' => "^([a-z0-9]*)\:\/\/.*$",
-						 'web' => "^(https?)\:\/\/.*$",
-						 'ftp' => "^(s?ftp)\:\/\/.*$",
-						 'mail' => "^(pop3|smtp|imap)\:\/\/.*$",
-						 'exact' => "^(".$protocole.")\:\/\/.*$");
+	$urlregex = array('tous' => "#^([a-z0-9]*)\:\/\/.*$# i",
+						 'web' => "#^(https?)\:\/\/.*$# i",
+						 'ftp' => "#^(s?ftp)\:\/\/.*$# i",
+						 'mail' => "#^(pop3|smtp|imap)\:\/\/.*$# i",
+						 'exact' => "#^(".$protocole.")\:\/\/.*$# i");
 	
 	$msg_erreur = array('tous' => "",
 							 'web' => "http://, https://",
@@ -71,7 +71,7 @@ function verifier_url_protocole($url,$type_protocole,$protocole){
 							 'exact' => $protocole."://" );
 	
 
-	if (!eregi($urlregex[$type_protocole], $url)) {
+	if (!preg_match($urlregex[$type_protocole], $url)) {
 		if($type_protocole=="tous") {
 			return _T('verifier:erreur_url_protocole_exact', array('url' => echapper_tags($url)));
 		} else {
@@ -113,7 +113,7 @@ function verifier_url_complet($url,$type_protocole,$protocole){
 		return $msg;
 	}
 	// SCHEME
-	$urlregex = "^(.*)\:\/\/";
+	$urlregex = "#^(.*)\:\/\/";
 	
 	// USER AND PASS (optional)
 	$urlregex .= "([a-z0-9+!*(),;?&=\$_.-]+(\:[a-z0-9+!*(),;?&=\$_.-]+)?@)?";
@@ -131,9 +131,9 @@ function verifier_url_complet($url,$type_protocole,$protocole){
 	// GET Query (optional)
 	$urlregex .= "(\?[a-z+&\$_.-][a-z0-9;:@/&%=+\$_.-]*)?";
 	// ANCHOR (optional)
-	$urlregex .= "(#[a-z_.-][a-z0-9+\$_.-]*)?\$";
+	$urlregex .= "(\#[a-z_.-][a-z0-9+\$_.-]*)?\$# i";
 	
-	if (!eregi($urlregex, $url))
+	if (!preg_match($urlregex, $url))
 		return _T('verifier:erreur_url', array('url' => echapper_tags($valeur)));
 	return '';
 }

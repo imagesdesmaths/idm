@@ -18,7 +18,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function verifier_entier_dist($valeur, $options=array()){
 	$erreur = _T('verifier:erreur_entier');
-	
+
 	// Pas de tableau ni d'objet
 	if (is_numeric($valeur) and $valeur == intval($valeur)){
 		// Si c'est une chaine on convertit en entier

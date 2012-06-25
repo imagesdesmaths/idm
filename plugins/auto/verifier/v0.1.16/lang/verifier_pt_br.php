@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org
+// extrait automatiquement de http://trad.spip.org/tradlang_module/verifier?lang_cible=pt_br
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_comparaison_grand_egal' => 'La valeur doit être supérieure ou égale au champ "@nom_champ@"', # NEW
 	'erreur_comparaison_petit' => 'La valeur doit être inférieure au champ "@nom_champ@"', # NEW
 	'erreur_comparaison_petit_egal' => 'La valeur doit être inférieure ou égale au champ "@nom_champ@"', # NEW
+	'erreur_couleur' => 'Le code couleur n\'est pas valide.', # NEW
 	'erreur_date' => 'A data não é válida.',
 	'erreur_date_format' => 'O formato da data não é aceitável.',
 	'erreur_decimal' => 'O valor deve ser um número decimal.',
@@ -31,16 +32,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_regex' => 'O formato da expressão não é válido.',
 	'erreur_siren' => 'O número SIREN não é válido.',
 	'erreur_siret' => 'O número SIRET não é válido.',
-	'erreur_taille_egal' => 'O valor deve ter exatamente @egal@ caracteres.',
-	'erreur_taille_entre' => 'O valor deve ter entre @min@ e @max@ caracteres.',
-	'erreur_taille_max' => 'O valor deve ter no máximo @max@ caracteres.',
-	'erreur_taille_min' => 'O valor deve ter no mínimo @min@ caracteres.',
+	'erreur_taille_egal' => 'O valor deve ter exatamente @egal@ caracteres.', # MODIF
+	'erreur_taille_entre' => 'O valor deve ter entre @min@ e @max@ caracteres.', # MODIF
+	'erreur_taille_max' => 'O valor deve ter no máximo @max@ caracteres.', # MODIF
+	'erreur_taille_min' => 'O valor deve ter no mínimo @min@ caracteres.', # MODIF
 	'erreur_telephone' => 'O número não é válido.',
 	'erreur_url' => 'O endereço <em>@url@</em> não é válido.',
 	'erreur_url_protocole' => 'O endereço informado <em>(@url@)</em> deve começar com @protocole@',
 	'erreur_url_protocole_exact' => 'O endereço informado <em>(@url@)</em> não começa com um protocolo válido (http:// por exemplo)',
 
+	// N
+	'normaliser_option_date' => 'Normaliser la date ?', # NEW
+	'normaliser_option_date_aucune' => 'Non', # NEW
+	'normaliser_option_date_en_datetime' => 'Au format «Datetime» (pour SQL)', # NEW
+
 	// O
+	'option_couleur_normaliser_label' => 'Normaliser le code couleur ?', # NEW
+	'option_couleur_type_hexa' => 'Code couleur au format héxadécimal', # NEW
+	'option_couleur_type_label' => 'Type de vérification à effectuer', # NEW
 	'option_decimal_nb_decimales_label' => 'Número de décimais depois da vírgula',
 	'option_email_disponible_label' => 'Endereço disponível',
 	'option_email_disponible_label_case' => 'Verificar se o endereço já não está sendo utilizado por um usuário',
@@ -69,6 +78,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_url_type_protocole_web' => 'Protocolos web: http ou https',
 
 	// T
+	'type_couleur' => 'Couleur', # NEW
+	'type_couleur_description' => 'Vérifie que la valeur est un code couleur.', # NEW
 	'type_date' => 'Data',
 	'type_date_description' => 'Verifica se o valor é uma data no formato DD/MM/AAAA. O separador é livre (".", "/" etc).',
 	'type_decimal' => 'Número decimal',

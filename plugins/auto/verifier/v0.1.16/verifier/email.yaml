@@ -10,7 +10,7 @@ options:
       datas:
         normal: '<:verifier:option_email_mode_normal:>'
         strict: '<:verifier:option_email_mode_strict:>'
-        rfc5322: '<:verifier:option_email_mode_rfc5322:>'
+        rfc5322: '<:verifier:option_email_mode_5322:>'
       defaut: 'normal'
   -
     saisie: 'case'

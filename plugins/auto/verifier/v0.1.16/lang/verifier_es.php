@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org
+// extrait automatiquement de http://trad.spip.org/tradlang_module/verifier?lang_cible=es
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_comparaison_grand_egal' => 'La valeur doit être supérieure ou égale au champ "@nom_champ@"', # NEW
 	'erreur_comparaison_petit' => 'La valeur doit être inférieure au champ "@nom_champ@"', # NEW
 	'erreur_comparaison_petit_egal' => 'La valeur doit être inférieure ou égale au champ "@nom_champ@"', # NEW
+	'erreur_couleur' => 'Le code couleur n\'est pas valide.', # NEW
 	'erreur_date' => 'La fecha es inválida',
 	'erreur_date_format' => 'No se acepta este formato de fecha.',
 	'erreur_decimal' => 'La valeur doit être un nombre décimal.', # NEW
@@ -31,16 +32,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_regex' => 'El formato de la cadena es inválido.',
 	'erreur_siren' => 'Este número de SIREN es inválido.',
 	'erreur_siret' => 'El número de SIRET es inválido.',
-	'erreur_taille_egal' => 'El valor debe tener exactamente @egal@ carácteres.',
-	'erreur_taille_entre' => 'El valor debe tener entre @min@ y @max@ carácteres.',
-	'erreur_taille_max' => 'El valor debe tener como máximo @max@ carácteres.',
-	'erreur_taille_min' => 'El valor debe tener al mínimo @min@ carácteres.',
+	'erreur_taille_egal' => 'El valor debe tener exactamente @egal@ carácteres.', # MODIF
+	'erreur_taille_entre' => 'El valor debe tener entre @min@ y @max@ carácteres.', # MODIF
+	'erreur_taille_max' => 'El valor debe tener como máximo @max@ carácteres.', # MODIF
+	'erreur_taille_min' => 'El valor debe tener al mínimo @min@ carácteres.', # MODIF
 	'erreur_telephone' => 'El número es inválido.',
 	'erreur_url' => 'La dirección es inválida.', # MODIF
 	'erreur_url_protocole' => 'L\'adresse saisie <em>(@url@)</em> doit commencer par @protocole@', # NEW
 	'erreur_url_protocole_exact' => 'L\'adresse saisie <em>(@url@)</em> ne commence pas par un protocole valide (http:// par exemple)', # NEW
 
+	// N
+	'normaliser_option_date' => 'Normaliser la date ?', # NEW
+	'normaliser_option_date_aucune' => 'Non', # NEW
+	'normaliser_option_date_en_datetime' => 'Au format «Datetime» (pour SQL)', # NEW
+
 	// O
+	'option_couleur_normaliser_label' => 'Normaliser le code couleur ?', # NEW
+	'option_couleur_type_hexa' => 'Code couleur au format héxadécimal', # NEW
+	'option_couleur_type_label' => 'Type de vérification à effectuer', # NEW
 	'option_decimal_nb_decimales_label' => 'Nombre de décimales après la virgule', # NEW
 	'option_email_disponible_label' => 'Dirección disponible',
 	'option_email_disponible_label_case' => 'Verifique que la dirección no sea usada por otra persona.',
@@ -69,6 +78,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_url_type_protocole_web' => 'Protocoles web : http ou https', # NEW
 
 	// T
+	'type_couleur' => 'Couleur', # NEW
+	'type_couleur_description' => 'Vérifie que la valeur est un code couleur.', # NEW
 	'type_date' => 'Fecha',
 	'type_date_description' => 'Comprueba que el valor es una fecha con el formato JJ/MM/AAAA. El separador no importa (".", "/", etc).',
 	'type_decimal' => 'Nombre décimal', # NEW
