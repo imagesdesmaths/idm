@@ -44,9 +44,10 @@ function yaml_encode($struct, $opt = array()) {
 /*
  * Decode un texte yaml, renvoie la structure
  * @param string $input
+ *        boolean $show_error  true: arrete le parsing et retourne erreur en cas d'echec  - false: retourne un simple false en cas d'erreur de parsing
  */
 if (!function_exists('yaml_decode')) {
-function yaml_decode($input) {
+function yaml_decode($input,$show_error=true) {
 	// Si PHP4
 	if (_LIB_YAML == 'spyc-php4') {
 		require_once _DIR_PLUGIN_YAML.'spyc/spyc-php4.php';
@@ -59,13 +60,13 @@ function yaml_decode($input) {
 	}
 
 	require_once _DIR_PLUGIN_YAML.'inc/yaml_sfyaml.php';
-	return yaml_sfyaml_decode($input);
+	return yaml_sfyaml_decode($input,$show_error);
 }
 }
 
 /*
  * Decode un fichier en utilisant yaml_decode
- * @param string $fichier
+ * @param string $fichier 
  */
 function yaml_decode_file($fichier){
 	$yaml = '';

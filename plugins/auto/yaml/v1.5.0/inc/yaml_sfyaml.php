@@ -12,7 +12,7 @@ function yaml_sfyaml_encode($struct, $opt = array()) {
 	return $yaml->dump($struct, $opt['inline']);
 }
 
-function yaml_sfyaml_decode($input) {
+function yaml_sfyaml_decode($input,$show_error=true) {
 	require_once _DIR_PLUGIN_YAML.'sfyaml/sfYaml.php';
 	require_once _DIR_PLUGIN_YAML.'sfyaml/sfYamlParser.php';
 
@@ -24,7 +24,10 @@ function yaml_sfyaml_decode($input) {
 	}
 	catch (Exception $e)
 	{
-		throw new InvalidArgumentException(sprintf('Unable to parse string: %s', $e->getMessage()));
+		if ($show_error) 
+              throw new InvalidArgumentException(sprintf('Unable to parse string: %s', $e->getMessage()));
+          else
+              return false;       
 	}
 
 	return $ret;

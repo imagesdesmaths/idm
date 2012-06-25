@@ -1,9 +1,9 @@
 <paquet
-	prefix="YAML"
+	prefix="yaml"
 	categorie="outil"
 	version="1.5.0"
 	etat="stable"
-	compatibilite="[2.1.0;3.0.99]"
+	compatibilite="[2.1.0;3.0.*]"
 	logo="yaml.png"
 	documentation="http://www.spip-contrib.net/Le-plugin-YAML"
 >
