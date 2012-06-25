@@ -1,0 +1,12 @@
+[(#AUTORISER{configurer,champs_extras}|sinon_interdire_acces)]
+
+<h1><:iextras:titre_iextras:></h1>
+
+<div class='cadre-formulaire-editer'>
+#SET{retour,#ENV{redirect}|sinon{#URL_ECRIRE{champs_extras}}}
+<div class="entete-formulaire">
+	[(#GET{retour}|icone_verticale{<:icone_retour:>,iextras-24,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	<h1><:iextras:champs_extras_de{objet=#ENV{objet}}:></h1>
+</div>
+#FORMULAIRE_EDITER_CHAMPS_EXTRAS{#ENV{objet}, #GET{retour}}
+</div>
