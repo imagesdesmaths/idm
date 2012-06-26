@@ -1,0 +1,21 @@
+<paquet
+	prefix="facteur"
+	categorie="communication"
+	version="2.2.1"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/facteur-32.png"
+	schema="1.1"
+	documentation="http://www.spip-contrib.net/Facteur"
+>	
+	
+	<nom>Facteur</nom>
+	<!-- Il distribue votre courrier -->
+	
+	<auteur>Collectif SPIP</auteur>
+	
+	<pipeline nom="facteur_pre_envoi" action="" />
+	<pipeline nom="ieconfig_metas" inclure="facteur_ieconfig_metas.php" />
+	
+	<menu nom="configurer_facteur" titre="facteur:configuration_facteur" parent="menu_configuration" icone="images/facteur-16.png" />
+</paquet>

@@ -1,0 +1,197 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{tester,''}|oui)
+	<iframe style='width:95%;height:500px;margin:10px;' src='#URL_PAGE{emails/test_email_html,var_mode=calcul}'></iframe>
+	]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:facteur:configuration_adresse_envoi:></legend>
+					<ul>
+						<li class="editer editer_facteur_adresse_envoi [ (#ENV**{erreurs}|table_valeur{facteur_adresse_envoi}|oui)erreur]">
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_adresse_envoi})</span>]
+							<div class="choix">
+								<input type="radio" name="facteur_adresse_envoi" class="radio" value="non" id="facteur_adresse_envoi_non"[(#ENV{facteur_adresse_envoi,'non'}|=={non}|oui)checked="checked"]/>
+								<label for="facteur_adresse_envoi_non"><:facteur:utiliser_reglages_site:></label>
+							</div>
+							<div class="choix">
+								<input type="radio" name="facteur_adresse_envoi" class="radio" value="oui" id="facteur_adresse_envoi_oui"[(#ENV{facteur_adresse_envoi,'non'}|=={oui}|oui)checked="checked"]/>
+								<label for="facteur_adresse_envoi_oui"><:facteur:personnaliser:></label>
+							</div>
+						</li>
+						<li class="editer editer_facteur_adresse_envoi_perso editer_facteur_adresse_envoi_nom [ (#ENV**{erreurs}|table_valeur{facteur_adresse_envoi_nom}|oui)erreur]"[(#ENV{facteur_adresse_envoi,'non'}|=={non}|oui)style='display:none;']>
+							<label for="facteur_adresse_envoi_nom"><:facteur:facteur_adresse_envoi_nom:></label>[
+							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_adresse_envoi_nom})</span>]
+							<input type="text" name="facteur_adresse_envoi_nom" class="text" value="#ENV**{facteur_adresse_envoi_nom}" id="facteur_adresse_envoi_nom" />
+						</li>
+						<li class="editer editer_facteur_adresse_envoi_perso editer_facteur_adresse_envoi_email [ (#ENV**{erreurs}|table_valeur{facteur_adresse_envoi_email}|oui)erreur]"[(#ENV{facteur_adresse_envoi,'non'}|=={non}|oui)style='display:none;']>
+							<label for="facteur_adresse_envoi_email"><:facteur:facteur_adresse_envoi_email:></label>[
+							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_adresse_envoi_email})</span>]
+							<input type="text" name="facteur_adresse_envoi_email" class="text" value="#ENV**{facteur_adresse_envoi_email}" id="facteur_adresse_envoi_email" />
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:facteur:configuration_mailer:></legend>
+					<ul>
+						<li class="editer editer_facteur_smtp [ (#ENV**{erreurs}|table_valeur{facteur_smtp}|oui)erreur]">
+							<label><:facteur:configuration_smtp:></label>
+							<p class="explication"><:facteur:configuration_smtp_descriptif:></p>
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_smtp})</span>]
+							<div class="choix">
+								<input type="radio" name="facteur_smtp" class="radio" value="non" id="facteur_smtp_non"[(#ENV{facteur_smtp,'non'}|=={non}|oui)checked="checked"]/>
+								<label for="facteur_smtp_non"><:facteur:utiliser_mail:></label>
+							</div>
+							<div class="choix">
+								<input type="radio" name="facteur_smtp" class="radio" value="oui" id="facteur_smtp_oui"[(#ENV{facteur_smtp,'non'}|=={oui}|oui)checked="checked"]/>
+								<label for="facteur_smtp_oui"><:facteur:utiliser_smtp:></label>
+							</div>
+						</li>
+						<li class="editer editer_facteur_smtp_param editer_facteur_smtp_host [ (#ENV**{erreurs}|table_valeur{facteur_smtp_host}|oui)erreur]"[(#ENV{facteur_smtp,'non'}|=={non}|oui)style='display:none;']>
+							<label for="facteur_smtp_host"><:facteur:facteur_smtp_host:></label>[
+							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_smtp_host})</span>]
+							<input type="text" name="facteur_smtp_host" class="text" value="#ENV**{facteur_smtp_host}" id="facteur_smtp_host" />
+						</li>
+						<li class="editer editer_facteur_smtp_param editer_facteur_smtp_port [ (#ENV**{erreurs}|table_valeur{facteur_smtp_port}|oui)erreur]"[(#ENV{facteur_smtp,'non'}|=={non}|oui)style='display:none;']>
+							<label for="facteur_smtp_port"><:facteur:facteur_smtp_port:></label>[
+							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_smtp_port})</span>]
+							<input type="text" name="facteur_smtp_port" class="text" value="#ENV**{facteur_smtp_port}" id="facteur_smtp_port" />
+						</li>
+						<li class="editer editer_facteur_smtp_param editer_facteur_smtp_auth [ (#ENV**{erreurs}|table_valeur{facteur_smtp_auth}|oui)erreur]"[(#ENV{facteur_smtp,'non'}|=={non}|oui)style='display:none;']>
+							<label><:facteur:facteur_smtp_auth:></label>
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_smtp_auth})</span>]
+							<div class="choix">
+								<input type="radio" name="facteur_smtp_auth" class="radio" value="non" id="facteur_smtp_auth_non"[(#ENV{facteur_smtp_auth,'non'}|=={non}|oui)checked="checked"]/>
+								<label for="facteur_smtp_auth_non"><:facteur:facteur_smtp_auth_non:></label>
+							</div>
+							<div class="choix">
+								<input type="radio" name="facteur_smtp_auth" class="radio" value="oui" id="facteur_smtp_auth_oui"[(#ENV{facteur_smtp_auth,'non'}|=={oui}|oui)checked="checked"]/>
+								<label for="facteur_smtp_auth_oui"><:facteur:facteur_smtp_auth_oui:></label>
+							</div>
+							<ul id="smtp-auth"[(#ENV{facteur_smtp_auth,'non'}|=={non}|oui)style='display:none;']>
+								<li class="editer_facteur_smtp_username [ (#ENV**{erreurs}|table_valeur{facteur_smtp_username}|oui)erreur]">
+									<label for="facteur_smtp_username"><:facteur:facteur_smtp_username:></label>[
+									<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_smtp_username})</span>]
+									<input type="text" name="facteur_smtp_username" class="text" value="#ENV**{facteur_smtp_username}" id="facteur_smtp_username" />
+								</li>
+								<li class="editer_facteur_smtp_password [ (#ENV**{erreurs}|table_valeur{facteur_smtp_password}|oui)erreur]">
+									<label for="facteur_smtp_password"><:facteur:facteur_smtp_password:></label>[
+									<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_smtp_password})</span>]
+									<input type="password" name="facteur_smtp_password" class="text" value="#ENV**{facteur_smtp_password}" id="facteur_smtp_password" />
+								</li>
+							</ul>
+						</li>
+						[(#ENV{_enable_smtp_secure}|oui)
+						<li class="editer editer_facteur_smtp_param editer_facteur_smtp_secure [ (#ENV**{erreurs}|table_valeur{facteur_smtp_secure}|oui)erreur]"[(#ENV{facteur_smtp,'non'}|=={non}|oui)style='display:none;']>
+							<label><:facteur:facteur_smtp_secure:></label>
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_smtp_secure})</span>]
+							<div class="choix">
+								<input type="radio" name="facteur_smtp_secure" class="radio" value="non" id="facteur_smtp_secure_non"[(#ENV{facteur_smtp_secure,'non'}|=={non}|oui)checked="checked"]/>
+								<label for="facteur_smtp_secure_non"><:facteur:facteur_smtp_secure_non:></label>
+							</div>
+							<div class="choix">
+								<input type="radio" name="facteur_smtp_secure" class="radio" value="ssl" id="facteur_smtp_secure_ssl"[(#ENV{facteur_smtp_secure,'non'}|=={ssl}|oui)checked="checked"]/>
+								<label for="facteur_smtp_secure_ssl"><:facteur:facteur_smtp_secure_ssl:></label>
+							</div>
+							<div class="choix">
+								<input type="radio" name="facteur_smtp_secure" class="radio" value="tls" id="facteur_smtp_secure_tls"[(#ENV{facteur_smtp_secure,'non'}|=={tls}|oui)checked="checked"]/>
+								<label for="facteur_smtp_secure_tls"><:facteur:facteur_smtp_secure_tls:></label>
+							</div>
+						</li>]
+						<li class="editer editer_facteur_smtp_sender [ (#ENV**{erreurs}|table_valeur{facteur_smtp_sender}|oui)erreur]">
+							<label for="facteur_smtp_sender"><:facteur:facteur_smtp_sender:></label>[
+							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_smtp_sender})</span>]
+							<p class="explication"><:facteur:facteur_smtp_sender_descriptif:></p>
+							<input type="text" name="facteur_smtp_sender" class="text" value="#ENV**{facteur_smtp_sender}" id="facteur_smtp_sender" />
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:facteur:facteur_filtres:></legend>
+					<ul>
+						<li class="editer editer_facteur_filtres[ (#ENV**{erreurs}|table_valeur{facteur_filtres}|oui)erreur]">
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_smtp_secure})</span>]
+							<p class="explication"><:facteur:facteur_filtres_descriptif:></p>
+							<div class="choix">
+								<input type="checkbox" name="facteur_filtre_images" class="checkbox" value="1" id="facteur_filtre_images"[(#ENV{facteur_filtre_images,''}|=={1}|oui)checked="checked"]/>
+								<label for="facteur_filtre_images"><:facteur:facteur_filtre_images:></label>
+							</div>
+							<div class="choix">
+								<input type="checkbox" name="facteur_filtre_iso_8859" class="checkbox" value="1" id="facteur_filtre_iso_8859"[(#ENV{facteur_filtre_iso_8859,''}|=={1}|oui)checked="checked"]/>
+								<label for="facteur_filtre_iso_8859"><:facteur:facteur_filtre_iso_8859:></label>
+							</div>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:facteur:facteur_copies:></legend>
+					<ul>
+						<li class="editer editer_facteur_copies editer_facteur_desc">
+							<p class="explication"><:facteur:facteur_copies_descriptif:></p>
+						</li>
+						<li class="editer editer_facteur_copies editer_facteur_cc [ (#ENV**{erreurs}|table_valeur{facteur_cc}|oui)erreur]">
+							<label for="facteur_cc"><:facteur:facteur_cc:></label>
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_cc})</span>]
+							<input type="text" name="facteur_cc" class="text" value="#ENV**{facteur_cc}" id="facteur_cc" />
+						</li>
+						<li class="editer editer_facteur_copies editer_facteur_bcc [ (#ENV**{erreurs}|table_valeur{facteur_bcc}|oui)erreur]">
+							<label for="facteur_bcc"><:facteur:facteur_bcc:></label>
+							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_bcc})</span>]
+							<input type="text" name="facteur_bcc" class="text" value="#ENV**{facteur_bcc}" id="facteur_bcc" />
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="valider" class="submit" value="<:bouton_valider:>" />
+		</p>
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+					<h3 class="legend"><:facteur:tester_la_configuration:></h3>
+					<ul>
+						<li>
+						<p class="explication"><:facteur:note_test_configuration:></p>	
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="tester" class="submit" value="<:facteur:tester:>" />
+		</p>
+	</div></form>
+</div>
+<script type="text/javascript">
+jQuery(function(){
+	jQuery('input[name=facteur_adresse_envoi]').change(function(){
+			if (jQuery(this).attr('value')=='oui')
+				jQuery('.editer_facteur_adresse_envoi_perso').show('fast');
+			else
+				jQuery('.editer_facteur_adresse_envoi_perso').hide('fast');
+	});
+	jQuery('input[name=facteur_smtp]').change(function(){
+			if (jQuery(this).attr('value')=='oui')
+				jQuery('.editer_facteur_smtp_param').show('fast');
+			else
+				jQuery('.editer_facteur_smtp_param').hide('fast');
+	});
+	jQuery('input[name=facteur_smtp_auth]').change(function(){
+			if (jQuery(this).attr('value')=='oui')
+				jQuery('#smtp-auth').show('fast');
+			else
+				jQuery('#smtp-auth').hide('fast');
+	});
+})
+</script>

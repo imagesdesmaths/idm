@@ -1,0 +1,28 @@
+#HTTP_HEADER{Content-Type:text/html}
+#INCLURE{fond=emails/inc-haut}
+
+<h2><:facteur:corps_email_de_test:></h2>
+
+<p><:facteur:version_html:></p>
+
+<BOUCLE_art(ARTICLES){texte==<img}{0,1}>
+		[(#TEXTE|image_reduire{550,0})]
+		<hr />
+		[(#NOTES|image_reduire{550,0})]
+</BOUCLE_art>
+	<BOUCLE_art2(ARTICLES){0,1}>
+		[(#TEXTE|image_reduire{550,0})]
+		<hr />
+		[(#NOTES|image_reduire{550,0})]
+	</BOUCLE_art2>
+<//B_art>
+
+<BOUCLE_image(DOCUMENTS){extension IN jpg,png,gif}{0,1}>
+	[(#MODELE{img}|image_reduire{550,0})]
+</BOUCLE_image>
+
+<BOUCLE_pdf(DOCUMENTS){extension=pdf}{0,1}>
+	[(#MODELE{doc}|image_reduire{550,0})]
+</BOUCLE_pdf>
+
+#INCLURE{fond=emails/inc-bas}
