@@ -1,0 +1,17 @@
+<BOUCLE_formulaires_reponse(FORMULAIRES_REPONSES){tout}{id_formulaires_reponse}>
+<BOUCLE_autoriser(CONDITION){si #AUTORISER{voir, formulaires_reponse, #ID_FORMULAIRES_REPONSE}}>
+[(#BOITE_OUVRIR{'','info'})]
+	[(#URL_ECRIRE{formulaires_reponses}|parametre_url{id_formulaire,#ID_FORMULAIRE}|icone_verticale{<:retour:>,formulaire,formulaire-reponses-24,left})]
+	
+	[(#SET{auteur,[(#ID_AUTEUR|>{0}|?{<a href="[(#INFO_URL{auteur,#ID_AUTEUR})]">[(#INFO_TITRE{auteur,#ID_AUTEUR})]</a>,<:formidable:reponses_anonyme:>})]})]
+	[(#SET{formulaire,<a href="[(#URL_ECRIRE{formulaires_voir,id_formulaire=#ID_FORMULAIRE})]">[(#INFO_TITRE{formulaire,#ID_FORMULAIRE})]</a>})]
+	[(#SET{date,#DATE|affdate_jourcourt|concat{#DATE|affdate{", H:i"}}})]
+	<h1><:formidable:reponse_intro{auteur=#GET{auteur}, formulaire=#GET{formulaire}}:></h1>
+	<strong>#GET{date}</strong>
+#BOITE_FERMER
+
+[(#BOITE_OUVRIR{'','simple'})]
+#INCLURE{fond=modeles/formulaires_reponse,id_formulaires_reponse}
+#BOITE_FERMER
+</BOUCLE_autoriser>
+</BOUCLE_formulaires_reponse>

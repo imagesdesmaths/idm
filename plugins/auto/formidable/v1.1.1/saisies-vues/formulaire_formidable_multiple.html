@@ -1,0 +1,9 @@
+<B_formulaire>
+<ul>
+	<BOUCLE_formulaire(FORMULAIRES){identifiant IN #ENV**{valeur}}>
+	<li class="choix">[(#TITRE|typo)] (#IDENTIFIANT)</li>
+	</BOUCLE_formulaire>
+</ul>
+</B_formulaire>
+<p><:saisies:vue_sans_reponse:></p>
+<//B_formulaire>

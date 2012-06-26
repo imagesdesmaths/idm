@@ -1,0 +1,36 @@
+<BOUCLE_formulaire(FORMULAIRES){id_formulaire}>
+[(#BOITE_OUVRIR{
+	[(#AUTORISER{editer, formulaire, #ID_FORMULAIRE}|oui)
+			[(#URL_ECRIRE{formulaires_editer,id_formulaire=#ID_FORMULAIRE}|icone_verticale{<:formidable:editer_modifier_formulaire:>,formulaire,formulaire-editer-24,right})]
+	]
+	[<h1>(#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{formulaire-24.png}|balise_img{formulaire,cadre-icone})]</h1>]
+})]
+<div id="wysiwyg">
+<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+<div class='label'><:info_descriptif:></div>
+<div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>[(#DESCRIPTIF|image_reduire{500,0})]</div>
+</div>
+</div>
+	
+	#SET{traitements_disponibles, #VAL|traitements_lister_disponibles}
+	[(#BOITE_OUVRIR{#CHEMIN_IMAGE{formulaire-config-traitements-24.png}|balise_img{'',cadre-icone}|concat{<:formidable:voir_traitements:>},'simple','titrem'})]
+	<B_traitements>
+		<div class="cadre_padding">
+			<BOUCLE_traitements(POUR){tableau #TRAITEMENTS|unserialize|sinon{#ARRAY}}>
+			[(#GET{traitements_disponibles}|table_valeur{#CLE}|table_valeur{titre})]<br/>
+			</BOUCLE_traitements>
+		</div>
+		[(#AUTORISER{editer, formulaire, #ID_FORMULAIRE}|oui)
+		<div class="boutons_formulaire">
+			<a href="[(#URL_ECRIRE{formulaires_editer, id_formulaire=#ID_FORMULAIRE}|parametre_url{configurer,traitements})]"><:formidable:editer_menu_traitements:></a>
+		</div>
+		<div class="nettoyeur"></div>
+		]
+	</B_traitements>
+	
+	#BOITE_FERMER
+	
+	#FORMULAIRE_FORMIDABLE{#ID_FORMULAIRE}
+
+#BOITE_FERMER
+</BOUCLE_formulaire>

@@ -1,0 +1,44 @@
+<BOUCLE_formulaires_reponse(FORMULAIRES_REPONSES){tout}{id_formulaires_reponse}>
+<BOUCLE_autoriser(CONDITION){si #AUTORISER{voir, formulaires_reponse, #ID_FORMULAIRES_REPONSE}}>
+[(#BOITE_OUVRIR{'','info'})]
+
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','formulaires_reponse','id',#ENV{id_formulaires_reponse}}}}
+
+#FORMULAIRE_INSTITUER_OBJET{formulaires_reponses,#ID_FORMULAIRES_REPONSE}
+
+
+	<ul class="instituer instituer_formulaires_reponse">
+		<li><:formidable:reponse_statut:>
+			<ul>
+				<li class="prop[ (#STATUT|=={prop}|oui)selected]">
+					[(#STATUT|=={prop}|non)<a onclick="javascript:return confirm(confirm_changer_statut);" href="#URL_ACTION_AUTEUR{instituer_formulaires_reponse, #ID_FORMULAIRES_REPONSE-prop, #SELF}">]
+						<img width="9" height="9" alt="" src="#CHEMIN{images/puce-orange.gif}">
+						<:texte_statut_propose_evaluation:>
+					[(#STATUT|=={prop}|non)</a>]
+				</li>
+				<li class="publie[ (#STATUT|=={publie}|oui)selected]">
+					[(#STATUT|=={publie}|non)<a onclick="javascript:return confirm(confirm_changer_statut);" href="#URL_ACTION_AUTEUR{instituer_formulaires_reponse, #ID_FORMULAIRES_REPONSE-publie, #SELF}">]
+						<img width="9" height="9" alt="" src="#CHEMIN{images/puce-verte.gif}">
+						<:texte_statut_publie:>
+					[(#STATUT|=={publie}|non)</a>]
+				</li>
+				<li class="poubelle[ (#STATUT|=={poubelle}|oui)selected]">
+					[(#STATUT|=={poubelle}|non)<a onclick="javascript:return confirm(confirm_changer_statut);" href="#URL_ACTION_AUTEUR{instituer_formulaires_reponse, #ID_FORMULAIRES_REPONSE-poubelle, #SELF}">]
+						<img width="9" height="9" alt="" src="#CHEMIN{images/puce-poubelle.gif}">
+						<:texte_statut_poubelle:>
+					[(#STATUT|=={poubelle}|non)</a>]
+				</li>
+			</ul>
+		</li>
+	</ul>
+	[(#URL_ECRIRE{formulaires_analyse}|parametre_url{id_formulaire,#ID_FORMULAIRE}|icone_horizontale{<:formidable:reponses_analyse:>,formulaire,formulaire-analyse-24,center})]
+	[(#REM) Si le statut "poubelle" marche bien, on supprimera totalement cette option
+	[(#AUTORISER{supprimer, formulaires_reponse, #ID_FORMULAIRES_REPONSE}|oui)
+		[(#URL_ACTION_AUTEUR{supprimer_formulaires_reponse,#ID_FORMULAIRES_REPONSE
+		|icone_horizontale{<:formidable:reponse_supprimer:>,formulaires_reponse,formulaire-reponse-supprimer-24,center}})]
+	]
+	]
+#BOITE_FERMER
+
+</BOUCLE_autoriser>
+</BOUCLE_formulaires_reponse>

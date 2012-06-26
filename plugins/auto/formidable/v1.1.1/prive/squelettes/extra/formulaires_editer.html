@@ -1,0 +1,9 @@
+<BOUCLE_formulaire(FORMULAIRES) {id_formulaire}>
+<!--#extra-->
+[(#ENV{configurer}|=={traitements}|oui)
+[(#BOITE_OUVRIR{'','info'})]
+	#INCLURE{fond=modeles/formulaire_aide_memoire, id_formulaire=#ID_FORMULAIRE}
+#BOITE_FERMER
+]
+<!--/#extra-->
+</BOUCLE_formulaire>

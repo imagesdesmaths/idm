@@ -1,0 +1,48 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,-1,
+	titre,1,
+	id_formulaires_reponse,1
+}})
+]<B_reponses>
+[(#BOITE_OUVRIR{'','simple'})]
+#ANCRE_PAGINATION
+<div class="cadre cadre-liste liste-elements formulaires_reponses">
+<table class="liste" cellspacing="0" cellpadding="2" border="0" style="width:100%;">
+[<caption class="titrem"><strong class="caption">(#ENV*{titre})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="statut">[(#TRI{statut,<span>#</span>,ajax})]</th>
+			<th class="date">[(#TRI{date,<:date:>,ajax})]</th>
+			<th class="auteur">[(#TRI{id_auteur,<:formidable:reponses_auteur:>,ajax})]</th>
+			<th class="ip">[(#TRI{ip,<:formidable:reponses_ip:>,ajax})]</th>
+			<th class="titre"></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire}{id_auteur?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="tr_liste [(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="statut">[(#ID_FORMULAIRES_REPONSE|puce_changement_statut{#STATUT, #ID_FORMULAIRE, formulaires_reponse, true})]</td>
+			<td class="date arial1">[(#DATE|affdate_jourcourt|concat{#DATE|affdate{", H:i"}})]</td>
+			<td class="auteur arial1">
+				<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+				<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a>
+				</BOUCLE_auteur>
+				<:formidable:reponses_anonyme:>
+				<//B_auteur>
+			</td>
+			<td class="ip arial1">#IP</td>			
+			<td class="titre arial2">
+				<a href="[(#URL_ECRIRE{formulaires_reponse}|parametre_url{id_formulaires_reponse,#ID_FORMULAIRES_REPONSE})]" title="<:formidable:reponses_voir_detail:>">
+					<img src="#CHEMIN{images/formulaire-reponse-24.png}" alt="<:formidable:reponses_voir_detail:>" />
+				</a>
+			</td>
+		</tr>
+	</BOUCLE_reponses>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+#BOITE_FERMER
+</B_reponses>[
+<div class="liste-elements formulaires_reponses"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_reponses>

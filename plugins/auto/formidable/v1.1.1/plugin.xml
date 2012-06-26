@@ -1,0 +1,62 @@
+<plugin>
+	<nom>Formidable</nom>
+	<slogan>G&#233;n&#233;rateur de formulaires</slogan>
+	<auteur>RastaPopoulos, [Les Développements Durables->http://www.ldd.fr]</auteur>
+	<licence>GPL v3</licence>
+	<version>1.1.1</version>
+	<version_base>0.5.1</version_base>
+	<etat>dev</etat>
+	<description>Cr&#233;ation de formulaires avec une interface graphique et configuration des traitements associ&#233;s (envoyer par courriel, enregistrer les r&#233;ponses, etc).</description>
+	<lien>http://www.spip-contrib.net/Formidable-le-generateur-de</lien>
+	<icon>images/formidable-64.png</icon>
+	
+	<prefix>formidable</prefix>
+	
+	<install>base/formidable_installation.php</install>
+	<options>formidable_options.php</options>
+	<fonctions>inc/formidable.php</fonctions>
+   <fonctions>public/formidable_criteres.php</fonctions>
+	
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/formidable_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/formidable_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/formidable_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/formidable_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>rechercher_liste_des_champs</nom>
+		<inclure>base/formidable_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_boucle</nom>
+		<inclure>formidable_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>optimiser_base_disparus</nom>
+		<inclure>formidable_pipelines.php</inclure>
+	</pipeline>
+	
+	<bouton id='formulaires21' parent='menu_edition'>
+		<titre>formidable:bouton_formulaires</titre>
+		<icone>images/formulaire-16.png</icone>
+		<url>formulaires_tous</url>
+	</bouton>
+	<necessite id="SPIP" version="[3.0.0-dev;3.0.99]" />
+	<necessite id="spip_bonux" version="[1.9.3;]" />
+	<necessite id="saisies" version="[1.10.1;]" />
+	<necessite id="verifier" version="[0.1;]" />
+	<necessite id="yaml" version="[1.1;]" />
+	<necessite id="facteur" version="[1.5.3;]" />
+	<categorie>communication</categorie>
+</plugin>
+

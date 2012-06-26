@@ -1,0 +1,22 @@
+<BOUCLE_formulaire(FORMULAIRES){id_formulaire}>
+
+[(#REM) On fait un tableau qui contient toutes les réponses, classées par champ ]
+#SET{valeurs,#ARRAY}
+<BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire}>
+<BOUCLE_champs(FORMULAIRES_REPONSES_CHAMPS){id_formulaires_reponse}>
+#SET{test_array, #VALEUR|unserialize}
+#SET{valeur, #GET{test_array}|is_array|?{#GET{test_array},#VALEUR}}
+#SET_MERGE{liste_valeurs, #GET{valeurs}|table_valeur{#NOM}|sinon{#ARRAY}, #ARRAY{0, #GET{valeur}}}
+#SET_MERGE{valeurs, #ARRAY{#NOM,#GET{liste_valeurs}}}
+</BOUCLE_champs>
+</BOUCLE_reponses>
+#SET{reponses_total,#TOTAL_BOUCLE}
+</B_reponses>
+
+<BOUCLE_saisies(POUR){tableau #SAISIES|unserialize|saisies_lister_par_nom}>
+[(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
+	[(#VALEUR|formidable_analyser_saisie{#GET{valeurs}, #GET{reponses_total}})]
+]
+</BOUCLE_saisies>
+
+</BOUCLE_formulaire>
