@@ -1,7 +1,7 @@
 <paquet
     prefix        = "idm"
     categorie     = "edition"
-    version       = "1.0.1"
+    version       = "1.0.2"
     etat          = "stable"
     compatibilite = "[3.0.0-alpha2;3.0.*]"
     logo          = "prive/themes/spip/images/idm-logo-60.png"
@@ -30,4 +30,5 @@
   <pipeline nom="header_prive"   inclure="idm_fonctions.php" />
   <pipeline nom="pre_typo"       inclure="idm_fonctions.php" />
   <pipeline nom="jquery_plugins" inclure="idm_fonctions.php" />
+  <pipeline nom="pre_edition"    inclure="idm_fonctions.php" />
 </paquet>

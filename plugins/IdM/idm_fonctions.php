@@ -314,4 +314,24 @@ function idm_validate_billet ($id_auteur, $id_article) {
   idm_notify (array(0,$gars), $texte, $subject);
 }
 
+// Additional filtering of forums (but we do not install NoSPAM for
+// now, we are not looking for spam but rather for annoying
+// contributors ...)
+
+function idm_pre_edition ($flux) {
+  if ($flux['args']['table']  != 'spip_forum') return $flux;
+  if ($flux['args']['action'] != 'instituer')  return $flux;
+  if ($flux['data']['statut'] != 'publie')     return $flux;
+
+  $id_auteur = intval($GLOBALS['visiteur_session']['id_auteur']);
+  $nb_spams  = sql_countsel ('spip_forum', "statut='spam' AND id_auteur=$id_auteur");
+
+  if ($nb_spams>0) {
+    spip_log ("[IdM] There are $nb_spams spam(s) by author $id_auteur, moderating.");
+    $flux['data']['statut'] = 'prop';
+  }
+
+  return $flux;
+}
+
 ?>

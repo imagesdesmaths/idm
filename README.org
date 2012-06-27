@@ -75,8 +75,8 @@ we end up working in a team but so far:
   - Add an anchor to the forum messages for linking
 - =squelettes/navigation.html=
   - should be re-done completely
-- re-install =forms_et_tables= (3.0, doesn't work yet)
 - Maybe remove CFG, it seems to be mostly useless now
+- Warn a team when a forum message is moderated
 
 ** Back-burner
 
