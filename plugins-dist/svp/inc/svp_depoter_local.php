@@ -252,29 +252,10 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 				$le_paquet['attente'] = $attente;
 
 				// on recherche d'eventuelle mises a jour existantes
-				if ($res = sql_allfetsel(
-					array('pl.id_plugin', 'pa.version'),
-					array('spip_plugins AS pl', 'spip_paquets AS pa'),
-					array(
-						'pl.id_plugin = pa.id_plugin',
-						'pa.id_depot>' . sql_quote(0),
-						'pl.prefixe=' . sql_quote($prefixe),
-						'pa.etatnum>=' . sql_quote($le_paquet['etatnum']))))
-					{
-
-					foreach ($res as $paquet_distant) {
-						// si version superieure et etat identique ou meilleur,
-						// c'est que c'est une mise a jour possible !
-						if (spip_version_compare($paquet_distant['version'],$le_paquet['version'],'>')) {
-							if (!strlen($le_paquet['maj_version']) or spip_version_compare($paquet_distant['version'], $le_paquet['maj_version'], '>')) {
-								$le_paquet['maj_version'] = $paquet_distant['version'];
-							}
-							# a voir si on utilisera...
-							# "superieur"		=> "varchar(3) DEFAULT 'non' NOT NULL",
-							# // superieur : version plus recente disponible (distant) d'un plugin (actif?) existant
-						}
-					}
+				if ($maj_version = svp_rechercher_maj_version($prefixe, $le_paquet['version'], $le_paquet['etatnum'])) {
+					$le_paquet['maj_version'] = $maj_version;
 				}
+
 				$insert_paquets[] = $le_paquet;
 			}
 		}
@@ -559,5 +540,87 @@ function svp_supprimer_plugins_orphelins($plugins) {
 	}
 }
 
+
+/**
+ * Cherche dans les dépots distant
+ * un plugin qui serait plus à jour que le prefixe, version et état que l'on transmet 
+ *
+ * @param string $prefixe
+ * 		Préfixe du plugin
+ * @param string $version
+ * 		Version du paquet a comparer
+ * @param int $etatnum
+ * 		État du paquet numérique
+ * @return string
+ * 		Version plus a jour, sinon rien
+**/
+function svp_rechercher_maj_version($prefixe, $version, $etatnum) {
+
+	$maj_version = "";
+
+	if ($res = sql_allfetsel(
+		array('pl.id_plugin', 'pa.version'),
+		array('spip_plugins AS pl', 'spip_paquets AS pa'),
+		array(
+			'pl.id_plugin = pa.id_plugin',
+			'pa.id_depot>' . sql_quote(0),
+			'pl.prefixe=' . sql_quote($prefixe),
+			'pa.etatnum>=' . sql_quote($etatnum))))
+		{
+
+		foreach ($res as $paquet_distant) {
+			// si version superieure et etat identique ou meilleur,
+			// c'est que c'est une mise a jour possible !
+			if (spip_version_compare($paquet_distant['version'],$version,'>')) {
+				if (!strlen($maj_version) or spip_version_compare($paquet_distant['version'], $maj_version, '>')) {
+					$maj_version = $paquet_distant['version'];
+				}
+				# a voir si on utilisera...
+				# "superieur"		=> "varchar(3) DEFAULT 'non' NOT NULL",
+				# // superieur : version plus recente disponible (distant) d'un plugin (actif?) existant
+			}
+		}
+	}
+
+	return $maj_version;
+}
+
+
+
+
+/**
+ * Actualise maj_version pour tous les paquets locaux
+ * 
+**/
+function svp_actualiser_maj_version() {
+	$update = array();
+	// tous les paquets locaux
+	if ($locaux = sql_allfetsel(
+		array('id_paquet', 'prefixe', 'version', 'maj_version', 'etatnum'),
+		array('spip_paquets'),
+		array('pa.id_depot=' . sql_quote(0))))
+	{
+		foreach ($locaux as $paquet) {
+			$new_maj_version = svp_rechercher_maj_version($paquet['prefixe'], $paquet['version'], $paquet['etatnum']);
+			if ($new_maj_version != $paquet['maj_version']) {
+				$update[$paquet['id_paquet']] = array('maj_version' => $new_maj_version);
+			}
+		}
+	}
+	if ($update) {
+		// On insere, en encapsulant pour sqlite...
+		if (sql_preferer_transaction()) {
+			sql_demarrer_transaction();
+		}
+
+		foreach ($update as $id_paquet => $data) {
+			sql_updateq('spip_paquets', $data, 'id_paquet=' . intval($id_paquet));
+		}
+
+		if (sql_preferer_transaction()) {
+			sql_terminer_transaction();
+		}
+	}
+}
 
 ?>

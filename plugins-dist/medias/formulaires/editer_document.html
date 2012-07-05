@@ -69,6 +69,7 @@
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
 				]<textarea name='descriptif' id='descriptif'[ lang='(#LANGUE)'] rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
 	    </li>
+	    [(#ENV{_editer_date})
 	    <li class="editer editer_date[ (#ENV**{erreurs}|table_valeur{saisie_date}|oui)erreur][ (#ENV**{erreurs}|table_valeur{saisie_heure}|oui)erreur]">
 				<label for="saisie_date" class='date'><:date:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{saisie_date})</span>
@@ -79,6 +80,7 @@
 					<input type='text' class='text heure' name='saisie_heure' id='heure' size="5" maxlength="5" value="[(#ENV{saisie_heure})]" />
 				</span>
 	    </li>
+	    ]
 	    <li class="editer editer_credits[ (#ENV**{erreurs}|table_valeur{credits}|oui)erreur]">
 		    <label for="credits"><:medias:label_credits:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{credits})</span>

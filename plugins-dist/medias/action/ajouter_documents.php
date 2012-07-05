@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2012                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -59,7 +59,7 @@ function action_ajouter_documents_dist($id_document, $files, $objet, $id_objet, 
  *   0 ou 'new' pour une insertion
  * @param array $file
  *   proprietes au format $_FILE etendu :
- *     strin tmp_name : source sur le serveur
+ *     string tmp_name : source sur le serveur
  *     string name : nom du fichier envoye
  *     bool titrer : donner ou non un titre a partir du nom du fichier
  *     bool distant : pour utiliser une source distante sur internet
@@ -196,6 +196,7 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 
 	// permettre aux plugins de faire des modifs a l'ajout initial
 	// ex EXIF qui tourne les images si necessaire
+	// Ce plugin ferait quand même mieux de se placer dans metadata/jpg.php
 	pipeline('post_edition',
 		array(
 			'args' => array(
@@ -279,8 +280,10 @@ function verifier_upload_autorise($source, $mode=''){
 		}
 	}
 
-	if (!$res OR is_string($res));
+	if (!$res OR is_string($res)) {
 		spip_log("Upload $source interdit ($res)",_LOG_INFO_IMPORTANTE);
+	}
+
 	return $res;
 }
 
@@ -386,7 +389,7 @@ function verifier_taille_document_acceptable($infos){
 				));
 	}
 
-  // verifier en fonction du mode si une fonction est proposee
+	// verifier en fonction du mode si une fonction est proposee
 	if ($verifier_document_mode = charger_fonction("verifier_document_mode_".$infos['mode'],"inc",true))
 		return $verifier_document_mode($infos);
 

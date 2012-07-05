@@ -225,6 +225,11 @@ function svp_actualiser_depot($id){
 		$ok = svp_actualiser_paquets($depot['id_depot'], $infos['paquets'],
 									$nb_paquets, $nb_plugins, $nb_autres);
 
+		// apres la mise a jour des paquets d'un depot, on actualise les informations des paquets locaux
+		// principalement l'info "maj_version" indiquant s'il existe un paquet plus recent
+		include_spip('inc/svp_depoter_local');
+		svp_actualiser_maj_version();
+
 		if ($ok) {
 			// On met à jour :
 			// -- les infos ne pouvant pas etre editees par le formulaire d'edition d'un depot et extraites du xml

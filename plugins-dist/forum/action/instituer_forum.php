@@ -13,10 +13,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@action_instituer_forum_dist
-function action_instituer_forum_dist() {
+function action_instituer_forum_dist($arg=null) {
 
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+	if (is_null($arg)){
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+	}
 
 	list($id_forum, $statut) = preg_split('/\W/', $arg);
 	$id_forum = intval($id_forum);

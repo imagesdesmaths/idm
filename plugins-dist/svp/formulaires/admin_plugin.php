@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function formulaires_admin_plugin_charger_dist($voir='actif', $verrouille='non', $id_paquet=''){
+function formulaires_admin_plugin_charger_dist($voir='actif', $verrouille='non', $id_paquet='',$redirect=''){
 	$valeurs = array();
 
 	// actualiser la liste des paquets locaux systematiquement
@@ -30,7 +30,7 @@ function formulaires_admin_plugin_charger_dist($voir='actif', $verrouille='non',
 	return $valeurs;
 }
 
-function formulaires_admin_plugin_verifier_dist($voir='actif', $verrouille='non', $id_paquet=''){
+function formulaires_admin_plugin_verifier_dist($voir='actif', $verrouille='non', $id_paquet='',$redirect=''){
 
 	$erreurs = array();
 
@@ -79,7 +79,7 @@ function formulaires_admin_plugin_verifier_dist($voir='actif', $verrouille='non'
 	return $erreurs;
 }
 
-function formulaires_admin_plugin_traiter_dist($voir='actif', $verrouille='non', $id_paquet=''){
+function formulaires_admin_plugin_traiter_dist($voir='actif', $verrouille='non', $id_paquet='',$redirect=''){
 	
 	$retour = array();
 
@@ -90,16 +90,12 @@ function formulaires_admin_plugin_traiter_dist($voir='actif', $verrouille='non',
 		// lors de l'appel de action/actionner 
 		$actions = unserialize(_request('_todo'));
 		include_spip('inc/svp_actionner');
-		svp_actionner_traiter_actions_demandees($actions, $retour);
+		svp_actionner_traiter_actions_demandees($actions, $retour,$redirect);
 	}
 		
 	$retour['editable'] = true;
-
 	return $retour;
 }
-
-
-
 
 /**
  * Filtre pour simplifier la creation des actions du formulaire

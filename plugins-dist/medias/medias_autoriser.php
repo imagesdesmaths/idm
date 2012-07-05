@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2012                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -112,9 +112,10 @@ function autoriser_document_modifier($faire, $type, $id, $qui, $opt){
 	static $m = array();
 
 	$q=$qui['id_auteur'];
-  if (isset($m[$q][$id]))
-	  return $m[$q][$id];
-  $s = sql_getfetsel("statut", "spip_documents", "id_document=".intval($id));
+	if (isset($m[$q][$id]))
+		return $m[$q][$id];
+	
+	$s = sql_getfetsel("statut", "spip_documents", "id_document=".intval($id));
 	// les admins ont le droit de modifier tous les documents existants
 	if ($qui['statut'] == '0minirezo'
 	AND !$qui['restreint'])
@@ -171,7 +172,7 @@ function autoriser_document_supprimer($faire, $type, $id, $qui, $opt){
 		$id_document = sql_getfetsel('id_document','spip_documents','id_vignette='.intval($id));
 		return !$id_document OR autoriser('modifier','document',$id_document);
 	}
-  // si c'est un document annexe, se ramener a l'autorisation de son parent
+	// si c'est un document annexe, se ramener a l'autorisation de son parent
 	if ($id_document=sql_getfetsel('id_objet','spip_documents_liens',"objet='document' AND id_document=".intval($id))){
 		return autoriser('modifier','document',$id_document);
 	}
