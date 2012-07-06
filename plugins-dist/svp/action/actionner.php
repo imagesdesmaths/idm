@@ -43,7 +43,7 @@ function action_actionner_dist() {
 			echo minipres( _T('svp:installation_en_cours'), $pres . '<br /><br />' . $btn . $styles);
 			die();
 		}
-		
+
 		redirige_par_entete(str_replace('&amp;','&', $url));
 	}
 	
@@ -52,6 +52,8 @@ function action_actionner_dist() {
 
 	if (!_request('redirect'))
 		$GLOBALS['redirect'] = generer_url_ecrire('admin_plugin');
+	else
+		$GLOBALS['redirect'] = str_replace('&amp;','&', _request('redirect'));
 
 }
 

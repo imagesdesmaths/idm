@@ -17,12 +17,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  * @param array $t
  * @param string $email
+ * @param array $contexte
  * @return string
  */
-function inc_email_notification_forum_dist ($t, $email) {
-	static $contexte = array();
+function inc_email_notification_forum_dist ($t, $email, $contexte=array()) {
+	static $contextes_store = array();
 
-	if(!isset($contexte[$t['id_forum']])){
+	if(!isset($contextes_store[$t['id_forum']])){
 		$url = '';
 		$id_forum = $t['id_forum'];
 
@@ -68,10 +69,15 @@ function inc_email_notification_forum_dist ($t, $email) {
 		$links = implode("\n",$links);
 		$t['liens'] = $links;
 
-		$contexte[$t['id_forum']] = $t;
+		$contextes_store[$t['id_forum']] = $t;
 	}
 
-	$t = $contexte[$t['id_forum']];
+	$fond = "notifications/forum_poste";
+	if (isset($contexte['fond'])){
+		$fond = $contexte['fond'];
+		unset($contexte['fond']);
+	}
+	$t = array_merge($contextes_store[$t['id_forum']],$contexte);
 		// Rechercher eventuellement la langue du destinataire
 	if (NULL !== ($l = sql_getfetsel('lang', 'spip_auteurs', "email=" . sql_quote($email))))
 		$l = lang_select($l);
@@ -91,7 +97,7 @@ function inc_email_notification_forum_dist ($t, $email) {
 	$t['par_auteur'] = $forum_poste_par;
 
 	$envoyer_mail = charger_fonction('envoyer_mail','inc'); // pour nettoyer_titre_email
-	$corps = recuperer_fond("notifications/forum_poste",$t);
+	$corps = recuperer_fond($fond,$t);
 
 	if ($l)
 		lang_select();

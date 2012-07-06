@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 include_spip('inc/editer');
 include_spip('inc/documents');
+include_spip('inc/config');
 
 function formulaires_editer_document_charger_dist($id_document='new', $id_parent='', $retour='', $lier_trad=0, $config_fonc='documents_edit_config', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('document',$id_document,$id_parent,$lier_trad,$retour,$config_fonc,$row,$hidden);
@@ -30,8 +31,15 @@ function formulaires_editer_document_charger_dist($id_document='new', $id_parent
 			$valeurs['_hidden'] .= "<input type='hidden' name='parents[]' value='".$p['objet'].'|'.$p['id_objet']."' />";
 	}
 
-	$valeurs['saisie_date'] = affdate($valeurs['date'],'d/m/Y');
-	$valeurs['saisie_heure'] = affdate($valeurs['date'],'H:i');
+	// en fonction de la config du site on a le droit ou pas de modifier la date
+	if ($valeurs['_editer_date'] = (lire_config('documents_date') == 'oui' ? ' ' : '')){
+		$valeurs['saisie_date'] = affdate($valeurs['date'],'d/m/Y');
+		$valeurs['saisie_heure'] = affdate($valeurs['date'],'H:i');
+	}
+	elseif (isset($valeurs['date'])){
+		unset($valeurs['date']);
+	}
+	
 	// en fonction du format
 	$valeurs['_editer_dimension'] = autoriser('tailler','document',$id_document)?' ':'';
 
@@ -97,14 +105,17 @@ function formulaires_editer_document_verifier_dist($id_document='new', $id_paren
 			$erreurs = array_merge($erreurs,$verifier($id_document));
 		}
 	}
-
-	if (!$date = recup_date(_request('saisie_date').' '._request('saisie_heure').':00')
-	  OR !($date = mktime($date[3],$date[4],0,$date[1],$date[2],$date[0])))
-	  $erreurs['saisie_date'] = _T('medias:format_date_incorrect');
-	else {
-		set_request('saisie_date',date('d/m/Y',$date));
-		set_request('saisie_heure',date('H:i',$date));
-		set_request('date',date("Y-m-d H:i:s",$date));
+	
+	// On ne vérifie la date que si on avait le droit de la modifier
+	if (lire_config('documents_date') == 'oui'){
+		if (!$date = recup_date(_request('saisie_date').' '._request('saisie_heure').':00')
+		  OR !($date = mktime($date[3],$date[4],0,$date[1],$date[2],$date[0])))
+		  $erreurs['saisie_date'] = _T('medias:format_date_incorrect');
+		else {
+			set_request('saisie_date',date('d/m/Y',$date));
+			set_request('saisie_heure',date('H:i',$date));
+			set_request('date',date("Y-m-d H:i:s",$date));
+		}
 	}
 
 	return $erreurs;

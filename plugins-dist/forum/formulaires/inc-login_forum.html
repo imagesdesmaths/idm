@@ -7,11 +7,11 @@
 ]
 <fieldset class="qui[ (#SESSION{auth}|?{session_qui,saisie_qui})]">
 <legend><:forum:forum_qui_etes_vous:></legend>
-[(#SESSION{auth}|?{' '})
+[(#SESSION{auth}|oui)
 	[<p class='explication'><:forum:forum_votre_nom:> <strong>(#SESSION{nom}|typo)</strong> <span class="details"><a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a></span></p>]
 	
 ]
-[(#SESSION{auth}|?{'',' '})
+[(#SESSION{auth}|non)
 	<ul>
 		<li class='editer saisie_session_nom'>
 			<label for="session_nom"><:forum:forum_votre_nom:></label>
@@ -25,7 +25,7 @@
 			<input type="text" class="text" name="session_email" id="session_email" value="[(#SESSION**{email}|sinon{#SESSION**{session_email}}|entites_html)]" size="40" autocapitalize="off" autocorrect="off" />
 		</li>
 [(#CONFIG{forums_urlref}|!={non}|?{
-        <li class='saisie_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]'>
+        <li class='editer saisie_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]'>
             <label for="url_site"><:forum:forum_url:></label>
             [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>]
             <input type="text" class="text" name="url_site" id="url_site" style="text-align: left;" dir="ltr" size="40" value="[(#ENV{url_site})]" autocapitalize="off" autocorrect="off" />

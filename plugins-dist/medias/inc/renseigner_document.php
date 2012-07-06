@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2012                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -69,11 +69,11 @@ function renseigner_taille_dimension_image($fichier,$ext){
 	
 	// Quelques infos sur le fichier
 	if (
-	    !$fichier
-	 OR !@file_exists($fichier)
-	 OR !$infos['taille'] = @intval(filesize($fichier))) {
-		spip_log ("Echec copie du fichier $fichier");
-		return _T('medias:erreur_copie_fichier',array('nom'=> $fichier));
+		!$fichier
+		OR !@file_exists($fichier)
+		OR !$infos['taille'] = @intval(filesize($fichier))) {
+			spip_log ("Echec copie du fichier $fichier");
+			return _T('medias:erreur_copie_fichier',array('nom'=> $fichier));
 	}
 	
 	// chercher une fonction de description
@@ -81,15 +81,17 @@ function renseigner_taille_dimension_image($fichier,$ext){
 	if ($metadata = charger_fonction($ext,"metadata",true)){
 		$meta = $metadata($fichier);
 	}
-  else {
-	  $media = sql_getfetsel('media_defaut','spip_types_documents','extension='.sql_quote($ext));
-	  if ($metadata = charger_fonction($media,"metadata",true)){
-		  $meta = $metadata($fichier);
-	  }
-  }
-  foreach($meta as $m=>$v)
-	  if (in_array($m,array('largeur','hauteur','type_image'/*,'duree'*/)))
-		  $infos[$m] = $v;
+	else {
+		$media = sql_getfetsel('media_defaut','spip_types_documents','extension='.sql_quote($ext));
+		if ($metadata = charger_fonction($media,"metadata",true)){
+			$meta = $metadata($fichier);
+		}
+	}
+	
+	include_spip('inc/filtres'); # pour objet_info()
+	foreach($meta as $m=>$v)
+		if (in_array($m,objet_info('document','champs_editables')))
+			$infos[$m] = $v;
 
 	return $infos;
 }

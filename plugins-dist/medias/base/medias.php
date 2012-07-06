@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2012                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -109,7 +109,7 @@ function medias_declarer_tables_objets_sql($tables){
 	$tables['spip_articles']['champs_versionnes'][] = 'jointure_documents';
 	$tables['spip_documents'] = array(
 		'table_objet_surnoms'=>array('doc','img','emb'),
-	  'type_surnoms' => array(),
+		'type_surnoms' => array(),
 		'url_voir' => 'document_edit',
 		'url_edit' => 'document_edit',
 		'page'=>'',
@@ -166,6 +166,7 @@ function medias_declarer_tables_objets_sql($tables){
 		'rechercher_champs' => array(
 			'titre' => 3, 'descriptif' => 1, 'fichier' => 1, 'credits' => 1,
 		),
+		'champs_editables' => array('titre', 'descriptif', 'date', 'taille', 'largeur','hauteur','mode','credits','fichier','distant','extension', 'id_vignette', 'media'),
 		'champs_versionnes' => array('id_vignette', 'titre', 'descriptif', 'hauteur', 'largeur', 'mode','distant'),
 		'modeles' => array('document','doc','img','emb','image','video','text','audio','application'),
 	);

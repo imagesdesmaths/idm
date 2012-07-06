@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2012                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -47,12 +47,12 @@ function action_supprimer_document_dist($id_document=0) {
 	// Si c'est un document ayant des documents annexes (sous-titre, ...)
 	// les supprimer aussi
 	$annexes = array_map('reset',sql_allfetsel("id_document","spip_documents_liens","objet='document' AND id_objet=".intval($id_document)));
-  foreach($annexes as $id){
-	  action_supprimer_document_dist($id);
-  }
+	foreach($annexes as $id){
+		action_supprimer_document_dist($id);
+	}
 
 	// dereferencer dans la base
-  objet_dissocier(array('document'=>$id_document),'*');
+	objet_dissocier(array('document'=>$id_document),'*');
 	sql_delete('spip_documents', 'id_document='.intval($id_document));
 
 
@@ -77,7 +77,7 @@ function action_supprimer_document_dist($id_document=0) {
 			'data' => null
 		)
 	);
-  return true;
+	return true;
 }
 
 ?>
