@@ -1060,15 +1060,17 @@ class Actionneur {
  *
  * @param array $actions la liste des actions a faire (id_paquet => action)
  * @param array $retour le tableau de retour du CVT dans la partie traiter
+ * @param string $redirect l'url de retour
  * @return bool Action ok.
 **/
-function svp_actionner_traiter_actions_demandees($actions, &$retour) {
+function svp_actionner_traiter_actions_demandees($actions, &$retour,$redirect=null) {
 		$actionneur = new Actionneur();
 		$actionneur->ajouter_actions($actions);
 		$actionneur->verrouiller();
 		$actionneur->sauver_actions();
-
-		$retour['redirect'] = generer_url_action('actionner', 'redirect='. generer_url_ecrire('admin_plugin'));
+		
+		$redirect = $redirect ? $redirect : generer_url_ecrire('admin_plugin');
+		$retour['redirect'] = generer_url_action('actionner', 'redirect='.urlencode($redirect));
 		set_request('_todo', '');
 		$retour['message_ok'] = _T("svp:action_patienter");
 }
