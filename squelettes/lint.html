@@ -1,0 +1,70 @@
+#CACHE{0}
+
+<style>
+  .bad { background : pink; }
+  .good { background : lightgreen; }
+</style>
+
+
+<?php
+
+function foo ($all, $url) {
+  $i = preg_replace ('/^[+-]*(.*?)[+-]*\\.html$/', '\1', $url);
+  $art = sql_fetsel ("*", "spip_urls", "url=\"$i\"");
+  
+  if (!$art) $return = str_replace ('http://images.math.cnrs.fr/', '/', $all);
+  
+  if ($art['type'] == "article")  $return = preg_replace ("%http:.*]$%", $art['id_objet'] . "]", $all);
+  if ($art['type'] == "mot")      $return = preg_replace ("%http:.*]$%", "mot"   . $art['id_objet'] . "]", $all);
+  if ($art['type'] == "breve")    $return = preg_replace ("%http:.*]$%", "breve" . $art['id_objet'] . "]", $all);
+  if ($art['type'] == "rubrique") $return = preg_replace ("%http:.*]$%", "rub"   . $art['id_objet'] . "]", $all);
+
+  return $return;
+}
+
+if ($_POST["submit"] == "Corriger !") {
+  $texte = sql_getfetsel ("texte", "spip_articles", "id_article=" . $_POST["id_article"]);
+  $texte = str_replace (base64_decode($_POST['in']), base64_decode($_POST['out']), $texte);
+  sql_updateq ("spip_articles", array('texte'=>$texte), "id_article=" . $_POST["id_article"]);
+}
+
+$bugs = array();
+$bugs[] = array ('Explicit link',    '|<a href="(.*)".*>(.*)</a>|iU',                     '[\2->\1]',         0);
+$bugs[] = array ('Wrong inner link', '|\\[[^[]*->http://images.math.cnrs.fr/([^]]*)]|Ue', 'foo("\\0","\\1")', 0);
+$bugs[] = array ('LaTeX accent',     '|\\\\[\'`^"][aeiou]|ie',                            'idm_clean_TeX("\0")',  1);
+
+$all = sql_select ('id_article,titre,texte', 'spip_articles', 'id_article>0');
+
+while ($art = sql_fetch($all)) {
+  $bad = 0;
+  foreach ($bugs as $bug) {
+    $thisbug = 0;
+    preg_match_all ($bug[1], $art['texte'], $matches, PREG_OFFSET_CAPTURE);
+    foreach ($matches[0] as $m) {
+      if ($bad == 0) {
+	print "<h3>({$art['id_article']}) <a href=\"/article{$art['id_article']}\">{$art['titre']}</a></h3>\n";
+	$bad = 1;
+      }
+      
+      if ($thisbug == 0) {
+	$in = $m[0]; $out = stripslashes (preg_replace ($bug[1], $bug[2], $in));
+	print "$bug[0] &agrave; la position $m[1] : <tt class=\"bad\">" . htmlentities($in) . "</tt><br>\n";
+	print "Remplacement propos&eacute; : <tt class=\"good\">" . htmlentities($out) . "</tt><br>\n";
+	print "Interpr&eacute;t&eacute; par SPIP : " . expanser_liens($out) . "<br>\n";
+?>
+	<form method="post">
+	   <input type="hidden" name="id_article" value="<?php echo $art['id_article'] ?>" />
+	   <input type="hidden" name="in"         value="<?php echo base64_encode($in); ?>" />
+	   <input type="hidden" name="out"        value="<?php echo base64_encode($out); ?>" />
+	   <input type="submit" name="submit"     value="Corriger !"/>
+	</form>
+
+	<hr>
+<?php
+      }
+      
+      $thisbug = $bug[3];
+    }
+  }
+}
+?>
