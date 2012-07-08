@@ -64,9 +64,30 @@ function notifications_forumposte_dist($quoi, $id_forum, $options) {
 	//
 	// Envoyer les emails
 	//
+
+	// preparer le calcul des liens de moderation
+	$moderations = array();
+	foreach(array('publie','spam','off') as $statut){
+		if ($statut!==$t['statut']){
+			$moderations["url_moderer_$statut"] = "$id_forum-$statut-".$t['statut'];
+		}
+	}
+	include_spip("inc/securiser_action");
+	$action = 'instituer_forum_paremail';
+	$pass = secret_du_site();
+
+
 	$email_notification_forum = charger_fonction('email_notification_forum','inc');
 	foreach ($destinataires as $email) {
-		$texte = $email_notification_forum($t, $email);
+		// ajouter les liens de moderation par statut
+		$contexte = array();
+		foreach($moderations as $k=>$arg){
+			$arg = "$arg-$email";
+			$hash = _action_auteur("$action-$arg", '', $pass, 'alea_ephemere');
+			$contexte[$k] = generer_url_action($action, "arg=$arg&hash=$hash", true, true);
+		}
+
+		$texte = $email_notification_forum($t, $email, $contexte);
 		notifications_envoyer_mails($email, $texte);
 	}
 

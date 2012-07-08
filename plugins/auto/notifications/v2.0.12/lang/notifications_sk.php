@@ -56,6 +56,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forums_public_thread' => '<strong>Téma:</strong> diskutujúci v rovnakom vlákne dostávajú oznamy z (verejných) diskusných fór.',
 
 	// I
+	'info_lien_publier_commentaire' => 'Publikovať tento komentár',
+	'info_lien_signaler_spam_commentaire' => 'Nahlásiť ako SPAM',
+	'info_lien_supprimer_commentaire' => 'Odstrániť tento komentár',
+	'info_moderation_confirmee_off' => 'Príspevok #@id_forum@ bol vymazaný',
+	'info_moderation_confirmee_publie' => 'Príspevok #@id_forum@ bol publikovaný',
+	'info_moderation_confirmee_spam' => 'Príspevok #@id_forum@ bol nahlásený ako SPAM',
+	'info_moderation_deja_faite' => 'Príspevok #@id_forum@ už bol skontrolovaný v "@statut@".<br />Ak ho chcete upraviť, prihláste sa do súkromnej zóny.',
+	'info_moderation_interdite' => 'Na kontrolu tohto príspevku nemáte dostatočné práva',
 	'inscription' => 'Prihlásenie redaktorov',
 	'inscription_admins' => 'Administrátori',
 	'inscription_explication' => 'Ktorí autori dostanú oznamy pri zaregistrovaní nových redaktorov?',
@@ -67,6 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_documentation' => '<a href="http://www.spip-contrib.net/Notifications" class="spip_out">Porov. s dokumentáciou</a>',
 
 	// M
+	'message_a_valider' => 'Príspevok na potvrdenie: ',
 	'message_voir_configuration' => 'Zobraziť nastavenia oznamov',
 	'messagerie_interne' => 'Súkromný odkazovač',
 	'messagerie_interne_signaler' => '<strong>Označiť nové súkromné správy:</strong> aktivujte túto možnosť, ak chcete, aby stránka poslala oznam redaktorovi, v prípade, že si neprečítal novú správu vo svojej schránke. Systém počká 20 minút, predtým ako upozorní redaktora, a tak nespamuje redaktora, ktorý je už online v súkromnej zóne.',

@@ -56,6 +56,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forums_public_thread' => '<strong>Fil de discussion</strong> : les participants au même fil de discussion reçoivent les notifications des forums (publics).',
 
 	// I
+	'info_lien_publier_commentaire' => 'Publier ce commentaire',
+	'info_lien_signaler_spam_commentaire' => 'Signaler comme SPAM',
+	'info_lien_supprimer_commentaire' => 'Supprimer ce commentaire',
+	'info_moderation_confirmee_off' => 'Le message #@id_forum@ a bien été supprimé',
+	'info_moderation_confirmee_publie' => 'Le message #@id_forum@ a bien été publié',
+	'info_moderation_confirmee_spam' => 'Le message #@id_forum@ a bien été signalé en SPAM',
+	'info_moderation_deja_faite' => 'Le message #@id_forum@ a déjà été modéré en "@statut@".<br />Connectez-vous dans l\'espace privé pour le modifier.',
+	'info_moderation_interdite' => 'Vous n\'avez pas le droit de moderer ce message',
 	'inscription' => 'Inscription des rédacteurs',
 	'inscription_admins' => 'Administrateurs',
 	'inscription_explication' => 'Quels auteurs reçoivent les notifications lors de l\'inscription de nouveaux rédacteurs ?',
@@ -67,6 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_documentation' => '<a href="http://www.spip-contrib.net/Notifications" class="spip_out">Cf. documentation</a>',
 
 	// M
+	'message_a_valider' => 'Message à valider : ',
 	'message_voir_configuration' => 'Voir la configuration des notifications',
 	'messagerie_interne' => 'Messagerie interne',
 	'messagerie_interne_signaler' => '<strong>Signaler les nouveaux messages privés</strong> : activer cette option pour que le site envoie une notification lorsqu\'un rédacteur n\'a pas vu un nouveau message dans sa messagerie. Le système attend 20 minutes avant de notifier le rédacteur, de manière à ne pas spammer un rédacteur déjà en ligne dans l\'espace privé.',

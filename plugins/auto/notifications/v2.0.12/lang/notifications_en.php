@@ -10,10 +10,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'alt_logo_conf' => 'Notifications plugin logo',
 	'article_prive' => 'Articles publishing',
-	'article_prive_admins_restreints' => '<strong>Administrators</strong> : Administrators get notified when article(s) is(are) proposed in their section',
-	'article_prive_auteurs' => '<strong>Authors</strong> : Authors get notified when their article(s) is(are) published',
+	'article_prive_admins_restreints' => '<strong>Administrators</strong>: Administrators get notified when article(s) is(are) proposed in their section',
+	'article_prive_auteurs' => '<strong>Authors</strong>: Authors get notified when their article(s) is(are) published',
 	'article_propose_detail' => 'The article "@titre@" is submitted for publication.',
-	'article_propose_sujet' => '[@nom_site_spip@] Submitted : @titre@',
+	'article_propose_sujet' => '[@nom_site_spip@] Submitted: @titre@',
 	'article_propose_titre' => 'Article submitted
 	---------------',
 	'article_propose_url' => 'You are invited to review it and to give your opinion
@@ -24,20 +24,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	--------------',
 	'article_valide_date' => 'Without change, this article will be published',
 	'article_valide_detail' => 'The article "@titre@" is validated by @connect_nom@.',
-	'article_valide_sujet' => '[@nom_site_spip@] VALIDATED : @titre@',
+	'article_valide_sujet' => '[@nom_site_spip@] VALIDATED: @titre@',
 	'article_valide_titre' => 'Article validated
 	--------------',
 	'article_valide_url' => 'Meanwhile, it is visible at this temporary address :',
 
 	// B
 	'breve_propose_detail' => 'The news item "@titre@" is proposed for publication since',
-	'breve_propose_sujet' => '[@nom_site_spip@] Proposed : @titre@',
+	'breve_propose_sujet' => '[@nom_site_spip@] Proposed: @titre@',
 	'breve_propose_titre' => 'Proposed news item
 	---------------',
 	'breve_propose_url' => 'You are invited to view it and give your opinion
 	in the forum attached to it. It is available at:',
 	'breve_publie_detail' => 'The news item "@titre@" has just been published by @connect_nom@.',
-	'breve_publie_sujet' => '[@nom_site_spip@] PUBLISHED : @titre@',
+	'breve_publie_sujet' => '[@nom_site_spip@] PUBLISHED: @titre@',
 	'breve_publie_titre' => 'News item published
 	--------------',
 
@@ -45,17 +45,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_notification' => 'Following events may generate email notifications.',
 
 	// F
-	'forum_prives_auteur' => '<strong>Authors</strong> : Authors get notified when comments are posted to their article(s) or comment(s) on the private area.',
+	'forum_prives_auteur' => '<strong>Authors</strong>: Authors get notified when comments are posted to their article(s) or comment(s) on the private area.',
 	'forum_prives_moderateur' => 'Please write here moderators\' email adress for private forums, coma separated.',
-	'forum_prives_thread' => '<strong>Forum thread</strong> : Posters to the same thread get notified when a new comment is posted to the (private) thread.',
+	'forum_prives_thread' => '<strong>Forum thread</strong>: Posters to the same thread get notified when a new comment is posted to the (private) thread.',
 	'forums_prives' => 'Forums in private area',
 	'forums_public' => 'Public forums',
-	'forums_public_a_noter' => 'Note : if forums are awaiting validation from moderators before publication, only authors with rights to validate forums get notified when the comment is posted ; other recipients get notified only when moderators validate the comment.',
-	'forums_public_auteurs' => '<strong>Authors</strong> : Authors get notified when new comments are posted to their article(s) on the public area.',
+	'forums_public_a_noter' => 'Note: if forums are awaiting validation from moderators before publication, only authors with rights to validate forums get notified when the comment is posted ; other recipients get notified only when moderators validate the comment.',
+	'forums_public_auteurs' => '<strong>Authors</strong>: Authors get notified when new comments are posted to their article(s) on the public area.',
 	'forums_public_moderateur' => 'Please write here moderators\' email adress for public forums, coma separated.',
-	'forums_public_thread' => '<strong>Forum thread</strong> : Posters to the same thread get notified when a new comment is posted to the (public) thread.',
+	'forums_public_thread' => '<strong>Forum thread</strong>: Posters to the same thread get notified when a new comment is posted to the (public) thread.',
 
 	// I
+	'info_lien_publier_commentaire' => 'Publish this comment online',
+	'info_lien_signaler_spam_commentaire' => 'Report as SPAM',
+	'info_lien_supprimer_commentaire' => 'Delete this comment',
+	'info_moderation_confirmee_off' => 'Message #@id_forum@ has been deleted',
+	'info_moderation_confirmee_publie' => 'Message #@id_forum@ has been published online',
+	'info_moderation_confirmee_spam' => 'Message #@id_forum@ has been reported as SPAM',
+	'info_moderation_deja_faite' => 'Message #@id_forum@ has already been moderated as "@statut@".<br />Log into the private area to edit it.',
+	'info_moderation_interdite' => 'You are not allowed to moderate this message',
 	'inscription' => 'Editors registration',
 	'inscription_admins' => 'Administrators',
 	'inscription_explication' => 'Which authors receive notifications when registering new editors?',
@@ -67,9 +75,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_documentation' => '<a href="http://www.spip-contrib.net/Notifications" class="spip_out">View documentation</a>',
 
 	// M
+	'message_a_valider' => 'Message to confirm:',
 	'message_voir_configuration' => 'Look at the notification setup',
 	'messagerie_interne' => 'Private messages',
-	'messagerie_interne_signaler' => '<strong>Notify new private messages</strong> : activate this to get redactors notified when they haven\'t seen a Private Message had been sent to them. Redactors get notified 20 minutes after the Private Message is sent, in order to avoid spam, when the redactor is connected to the private area.',
+	'messagerie_interne_signaler' => '<strong>Notify new private messages</strong>: activate this to get redactors notified when they haven\'t seen a Private Message had been sent to them. Redactors get notified 20 minutes after the Private Message is sent, in order to avoid spam, when the redactor is connected to the private area.',
 	'moderateur' => '<strong>Moderator</strong>',
 
 	// N

@@ -2,6 +2,9 @@
 	<langue code="en" url="http://trad.spip.org/tradlang_module/paquet-notifications?lang_cible=en">
 		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
 	</langue>
+	<langue code="fa" url="http://trad.spip.org/tradlang_module/paquet-notifications?lang_cible=fa">
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />
+	</langue>
 	<langue code="fr" />
 	<langue code="sk" url="http://trad.spip.org/tradlang_module/paquet-notifications?lang_cible=sk">
 		<traducteur nom="jaro" lien="http://trad.spip.org/auteur/jaro" />

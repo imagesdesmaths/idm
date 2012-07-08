@@ -75,8 +75,9 @@ function notifications_forumprive_dist($quoi, $id_forum, $options) {
 	//
 	// Envoyer les emails
 	//
+	$email_notification_forum = charger_fonction('email_notification_forum','inc');
 	foreach ($destinataires as $email) {
-		$texte = email_notification_forum($t, $email);
+		$texte = $email_notification_forum($t, $email);
 		notifications_envoyer_mails($email, $texte);
 	}
 }
