@@ -6,6 +6,4 @@ define ('_ID_WEBMESTRES', '1');
 
 // ini_set('display_errors', '1');
 
-$type_urls = "propres2";
-
 ?>
