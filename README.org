@@ -30,18 +30,20 @@ is full of SPIP and PHP and geek stuff).
 This is done in Git, and there are 4 branches to keep track of (plus
 temporary ones for experimental features, if needed). That can change if
 we end up working in a team but so far:
-- =spip3= is tracking the SVN version of the SPIP core (without
-  extensions). This is not expected to work, because the extensions
-  are not part of that tree and so far the bare SPIP core is not self
-  sufficient.
-- =upstream= incorporates the extensions, and merges =spip3=
-  periodically (meaning whenever a bug is fixed there). It should do both
-  at the same time, meaning that a =spip3/upstream= merge is an
-  "official" SPIP snapshot.
-- =idm= is the current status of the website, with the IdM template,
-  and merges =upstream= when needed
-- =test= is for development of new but "easy" features, and is typically
-  merged into =idm= the same day
+- =release= is tracking the =zip= files containing the official
+  releases of SPIP (including extensions). One commit per version,
+  nothing added, nothing removed.
+- =spip= is following =release= very closely, merging it whenever it
+  is updated, and just contains various tweaks and adaptations for
+  easier updates; mostly patches on top of the core system when
+  needed, and =.gitignore= configuration.
+- =idm= corresponds to the current live code on the website. It merges
+  =spip= when a new release appears, or when a bugfix is
+  implemented. In principle no file is modified between =spip= and
+  =idm=, just new stuff is added (=/squelettes=, =/plugins= etc.).
+- =idm_prev= contains a previous development tree, from where the
+  version of SPIP used on the site was still unreleased. Kept for
+  reference purposes, but not updated anymore.
 
 * Issues
 
