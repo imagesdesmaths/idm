@@ -3,7 +3,6 @@
 /pdf2006
 /pdf2004
 /media
-/mathjax
 /local
 /files
 /applets
@@ -11,3 +10,4 @@
 .ok
 /.dbdump
 /config/connect*
+/mathjax/fonts/HTML-CSS/TeX/png
