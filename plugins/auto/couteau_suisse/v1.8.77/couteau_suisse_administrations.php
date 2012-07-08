@@ -94,8 +94,8 @@ if(defined('_LOG_CS')) cs_log("cout_upgrade : $nom_meta_base_version => $version
 			cs_maj_forcee(array('previsualisation','maj_auto'));
 			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
 		}
-		if (cs_le_test($current_version, $tmp, '1.3')){
-			cs_maj_forcee(array('masquer'));
+		if (cs_le_test($current_version, $tmp, '1.4')){
+			cs_maj_forcee(array('masquer', 'jcorner'));
 			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
 		}
 		ecrire_metas(); # Pour SPIP 1.92

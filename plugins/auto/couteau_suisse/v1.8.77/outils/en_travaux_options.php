@@ -54,10 +54,10 @@ if (!$tr_acces) {
 unset($tr_acces, $tr_prive, $tr_message);
 
 function action_cs_travaux($prive=false){
+	include_spip('inc/texte'); # pour typo()
 	include_spip('public/assembler');
-//	echo recuperer_fond('fonds/en_travaux'.(defined('_SPIP19300')?'2':''), array(
 	echo recuperer_fond('fonds/en_travaux', array(
-		'titre'=>defined('_en_travaux_TITRE')?_T('info_travaux_titre'):$GLOBALS['meta']['nom_site'],
+		'titre'=>defined('_en_travaux_TITRE')?_T('info_travaux_titre'):typo($GLOBALS['meta']['nom_site']),
 		// SPIP 2.0 : suppression pour l'instant de la possibilite de se logger directement pour un admin
 		// car les redacteurs pourraient acceder qd meme au site (1 seule page, mais 1 page de trop)
 		// 'login'=>defined('_en_travaux_ADMIN')?'oui':'',

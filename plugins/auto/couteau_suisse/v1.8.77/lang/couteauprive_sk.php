@@ -62,7 +62,7 @@ _ Les balises <code><multi/></code> sont recommandées en cas de site multilingu
 [[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]',
 	'auteurs:nom' => 'Stránka autorov',
 	'autobr:description' => 'Používa sa na spracovanie určitého textu v SPIPe filtrom {|post_autobr}, ktorý všetky nové prázdne riadky nahradí jediným zlomom riadka v HTML &lt;br />.',
-	'autobr:description1' => 'Rompant avec une tradition historique, SPIP 3 tient désormais compte par défaut des alinéas (retours de ligne simples) dans ses contenus. Vous pouvez ici désactiver ce comportement et revenir à l\'ancien système où le retour de ligne simple n\'est pas reconnu -- à l\'instar du langage HTML.', # NEW
+	'autobr:description1' => 'V rozpore s historickou tradíciou SPIP 3 berie v predvolených nastaveniach do úvahy nové riadky (jednoduché zlomy riadkov) v texte. Tu môžete toto správanie deaktivovať a vrátiť sa k starému spôsobu, pri ktorom jednoduchý zlom riadka (Enterom) program nerozoznáva – ako jazyk HTML.',
 	'autobr:description2' => 'Objekty s týmto tagom (nie celý zoznam):
 - Články: @ARTICLES@.
 - Rubriky: @RUBRIQUES@.
@@ -855,7 +855,7 @@ _ Example : <code>article.php3?id_article=123</code>
 <q1>• skontrolovať, či je celá internetová adresa zapísaná {{malými písmenami.}}</q1>[[%urls_minuscules%]]
 <q1>• systematicky pridávať {{ID objektu}} k internetovej adrese (ako príponu, predponu, atď.).
 _ (Príklady: <code>/Nadpis-mojho-clanku,457</code> alebo <code>/457-Nadpis-mojho-clanku</code>)</q1>',
-	'type_urls:description2' => '{Note} : un changement dans ce paragraphe peut nécessiter de vider la table des URLs afin de permettre à SPIP de tenir compte des nouveaux paramètres.', # NEW
+	'type_urls:description2' => '{Poznámka:} zmena v tomto odseku si môže vyžadovať vyprázdnenie tabuľky internetových adries (URL), aby SPIP mohol zohľadniť nové nastavenia.',
 	'type_urls:nom' => 'Formát www adries',
 	'typo_exposants:description' => '{{Text vo francúzštine:}} vylepšuje typografické spracovanie bežných skratiek pridaním horného indexu tam, kde je to potrebné (takto sa z {<acronym>Mme</acronym>} stane {M<sup>me</sup>}). Opravuje bežné chyby:  (z {<acronym>2ème</acronym>} a  {<acronym>2me</acronym>,} sa napríklad stane {2<sup>e</sup>,} jediná správna skratka).
 

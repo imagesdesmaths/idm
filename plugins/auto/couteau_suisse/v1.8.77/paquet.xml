@@ -1,11 +1,11 @@
 <paquet
 	prefix="couteau_suisse"
 	categorie="maintenance"
-	version="1.8.76"
+	version="1.8.77"
 	etat="stable"
 	compatibilite="[1.9.2;3.0.99]"
 	logo="img/couteau-50.gif"
-	schema="1.3"
+	schema="1.4"
 	documentation="http://www.spip-contrib.net/Le-Couteau-Suisse"
 >	
 	<nom>&lt;multi>[en]Swiss Knife[fr]Le Couteau Suisse[ca]El Ganivet Su&#237;s[ar]&#1587;&#1603;&#1610;&#1606; &#1575;&#1604;&#1580;&#1610;&#1576;[nl]Het Zwitserland Mes[gl]A navalla su&#237;za[es]La Navaja Suiza[de]Schweizer Taschenmesser[tr]&#304;svi&#231;re &#199;ak&#305;s&#305;[br]Ar Gontell Suis[pt_br]Canivete Su&#237;&#231;o[ast]La Navaya Suiza[gl]A navalla su&#237;za[ro]Cu&#355;itul Elve&#355;ian[it]Coltellino Svizzero&lt;/multi></nom>
