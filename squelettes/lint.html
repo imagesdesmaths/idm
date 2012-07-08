@@ -1,10 +1,14 @@
 #CACHE{0}
 
+<?php if ($GLOBALS['visiteur_session']['statut'] != '0minirezo') {
+  echo "<h1>Erreur !</h1>\n";
+  die ("Catte page est r&eacute;serv&eacute;e aux administrateurs.");
+} ?>
+
 <style>
   .bad { background : pink; }
   .good { background : lightgreen; }
 </style>
-
 
 <?php
 
