@@ -1,7 +1,7 @@
 <paquet
 	prefix="saisies"
 	categorie="outil"
-	version="1.25.12"
+	version="1.25.13"
 	etat="test"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="images/logo_saisie_48.png"
