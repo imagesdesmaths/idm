@@ -16,7 +16,7 @@ function foo ($all, $url) {
   $i = preg_replace ('/^[+-]*(.*?)[+-]*\\.html$/', '\1', $url);
   $art = sql_fetsel ("*", "spip_urls", "url=\"$i\"");
   
-  if (!$art) $return = str_replace ('http://images.math.cnrs.fr/', '/', $all);
+  if (!$art) $return = str_replace ('->http://images.math.cnrs.fr/', '->/', $all);
   
   if ($art['type'] == "article")  $return = preg_replace ("%http:.*]$%", $art['id_objet'] . "]", $all);
   if ($art['type'] == "mot")      $return = preg_replace ("%http:.*]$%", "mot"   . $art['id_objet'] . "]", $all);
