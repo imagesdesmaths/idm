@@ -2,7 +2,7 @@
 
 <?php if ($GLOBALS['visiteur_session']['statut'] != '0minirezo') {
   echo "<h1>Erreur !</h1>\n";
-  die ("Catte page est r&eacute;serv&eacute;e aux administrateurs.");
+  die ("Cette page est r&eacute;serv&eacute;e aux administrateurs.");
 } ?>
 
 <style>
@@ -32,13 +32,23 @@ if ($_POST["submit"] == "Corriger !") {
   sql_updateq ("spip_articles", array('texte'=>$texte), "id_article=" . $_POST["id_article"]);
 }
 
+/* List of known and automatically correctable author mistakes.
+ *
+ * Fields: 0 -> name of the bug
+ *         1 -> regexp to match the bug
+ *         2 -> replacement regext
+ *         3 -> limit to one error display if set to 1
+ *         4 -> strip slashes after replacement ?
+ */
+
 $bugs = array();
-$bugs[] = array ('Explicit link',         '|<a href="(.*)".*>(.*)</a>|iU',                     '[\2->\1]',            0);
-$bugs[] = array ('Wrong inner link',      '|\\[[^[]*->http://images.math.cnrs.fr/([^]]*)]|Ue', 'foo("\\0","\\1")',    0);
-$bugs[] = array ('LaTeX accent',          '|\\\\[\'`^"][aeiou]|ie',                            'idm_clean_TeX("\0")', 1);
-$bugs[] = array ('Wrong guillemets (v1)', '|``([^\']*)\'\'|',                                  '&laquo;\1&raquo;',    0);
-$bugs[] = array ('Wrong guillemets (v2)', '|``([^\']*)\'\'|',                                  '&ldquo;\1&rdquo;',    0);
-$bugs[] = array ('Wrong guillemets (v3)', '|``([^\']*)\'\'|',                                  '"\1"',                0);
+$bugs[] = array ('Explicit link',         '|<a href="(.*)".*>(.*)</a>|iU',                     '[\2->\1]',                               0, 0);
+$bugs[] = array ('Wrong inner link',      '|\\[[^[]*->http://images.math.cnrs.fr/([^]]*)]|Ue', 'foo("\\0","\\1")',                       0, 1);
+$bugs[] = array ('LaTeX accent',          '|\\\\[\'`^"][aeiou]|ie',                            'idm_clean_TeX("\0")',                    1, 1);
+$bugs[] = array ('Wrong guillemets (v1)', '|``([^\']*)\'\'|',                                  '&laquo;\1&raquo;',                       0, 0);
+$bugs[] = array ('Wrong guillemets (v2)', '|``([^\']*)\'\'|',                                  '&ldquo;\1&rdquo;',                       0, 0);
+$bugs[] = array ('Wrong guillemets (v3)', '|``([^\']*)\'\'|',                                  '"\1"',                                   0, 0);
+$bugs[] = array ('Possible wrong \label', '|\$\$ *([^$]*\\\\label{[^}]*}[^$]*)\$\$|',          '$$\\begin{equation}\1\\end{equation}$$', 0, 0);
 
 if ($id = $_GET["id_article"]) $cond="id_article=$id"; else $cond="id_article != 54";
 $all = sql_select ('id_article,titre,texte', 'spip_articles', $cond);
@@ -55,11 +65,12 @@ while ($art = sql_fetch($all)) {
       }
 
       if ($thisbug == 0) {
-        $in = $m[0]; $out = stripslashes (preg_replace ($bug[1], $bug[2], $in));
+        $in = $m[0]; $out = preg_replace ($bug[1], $bug[2], $in);
+        if ($bug[4]==1) $out = stripslashes($out);
         print "$bug[0] &agrave; la position $m[1] : <tt class=\"bad\">" . htmlentities($in) . "</tt><br>\n";
-        print "Interpr&eacute;t&eacute; par SPIP : <span class=\"bad\">" . expanser_liens($in) . "</span><br>\n";
+        print "Interpr&eacute;t&eacute; par SPIP : <span class=\"bad\">" . PtoBR(propre($in)) . "</span><br>\n";
         print "Remplacement propos&eacute; : <tt class=\"good\">" . htmlentities($out) . "</tt><br>\n";
-        print "Interpr&eacute;t&eacute; par SPIP : <span class=\"good\">" . expanser_liens($out) . "</span><br>\n";
+        print "Interpr&eacute;t&eacute; par SPIP : <span class=\"good\">" . PtoBR(propre($out)) . "</span><br>\n";
 ?>
         <form method="post">
            <input type="hidden" name="id_article" value="<?php echo $art['id_article'] ?>" />
