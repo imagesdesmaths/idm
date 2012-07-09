@@ -39,16 +39,18 @@ if ($_POST["submit"] == "Corriger !") {
  *         2 -> replacement regext
  *         3 -> limit to one error display if set to 1
  *         4 -> strip slashes after replacement ?
+ *         5 -> redeemer regexp (if matches, it is not a mistake)
  */
 
 $bugs = array();
-$bugs[] = array ('Explicit link',         '|<a href="(.*)".*>(.*)</a>|iU',                     '[\2->\1]',                               0, 0);
-$bugs[] = array ('Wrong inner link',      '|\\[[^[]*->http://images.math.cnrs.fr/([^]]*)]|Ue', 'foo("\\0","\\1")',                       0, 1);
-$bugs[] = array ('LaTeX accent',          '|\\\\[\'`^"][aeiou]|ie',                            'idm_clean_TeX("\0")',                    1, 1);
-$bugs[] = array ('Wrong guillemets (v1)', '|``([^\']*)\'\'|',                                  '&laquo;\1&raquo;',                       0, 0);
-$bugs[] = array ('Wrong guillemets (v2)', '|``([^\']*)\'\'|',                                  '&ldquo;\1&rdquo;',                       0, 0);
-$bugs[] = array ('Wrong guillemets (v3)', '|``([^\']*)\'\'|',                                  '"\1"',                                   0, 0);
-$bugs[] = array ('Possible wrong \label', '|\$\$ *([^$]*\\\\label{[^}]*}[^$]*)\$\$|',          '$$\\begin{equation}\1\\end{equation}$$', 0, 0);
+$bugs[] = array ('Explicit link',             '|<a href="(.*)".*>(.*)</a>|iU',                     '[\2->\1]',                               0, 0, '');
+$bugs[] = array ('Wrong inner link',          '|\\[[^[]*->http://images.math.cnrs.fr/([^]]*)]|Ue', 'foo("\\0","\\1")',                       0, 1, '');
+$bugs[] = array ('LaTeX accent',              '|\\\\[\'`^"][aeiou]|ie',                            'idm_clean_TeX("\0")',                    1, 1, '');
+$bugs[] = array ('Wrong guillemets (v1)',     '|``([^\']*)\'\'|',                                  '&laquo;\1&raquo;',                       0, 0, '');
+$bugs[] = array ('Wrong guillemets (v2)',     '|``([^\']*)\'\'|',                                  '&ldquo;\1&rdquo;',                       0, 0, '');
+$bugs[] = array ('Wrong guillemets (v3)',     '|``([^\']*)\'\'|',                                  '"\1"',                                   0, 0, '');
+$bugs[] = array ('\label outside {equation}', '|\$\$ *([^$]*\\\\label{[^}]*}[^$]*)\$\$|',          '$$\\begin{equation}\1\\end{equation}$$', 0, 0, '|\\\\begin{equation}|');
+$bugs[] = array ('Numerical \label/\ref',     '/\\\\(label|ref){([0-9]*)}/', '\\\\\1{equation_\2}', 0, 0, '');
 
 if ($id = $_GET["id_article"]) $cond="id_article=$id"; else $cond="id_article != 54";
 $all = sql_select ('id_article,titre,texte', 'spip_articles', $cond);
@@ -59,6 +61,8 @@ while ($art = sql_fetch($all)) {
     $thisbug = 0;
     preg_match_all ($bug[1], $art['texte'], $matches, PREG_OFFSET_CAPTURE);
     foreach ($matches[0] as $m) {
+      if (($bug[5] != '') && (preg_match($bug[5],$m[0])==1)) continue;
+
       if ($bad == 0) {
         print "<h3>({$art['id_article']}) <a href=\"/article{$art['id_article']}\">{$art['titre']}</a></h3>\n";
         $bad = 1;
