@@ -55,8 +55,10 @@ $bugs[] = array ('Old-style math div',        '|<div class="math">(.*)</div>|Us'
 $bugs[] = array ('Old-style math span',       '|<span class="math">(.*)</span>|Us',                '$\1$',                                   0, 0, '');
 $bugs[] = array ('Useless html tag',          '|<html>(.*)</html>|Us',                             '\1',                                     0, 0, '');
 
-if ($id = $_GET["id_article"]) $cond="id_article=$id"; else $cond="id_article != 54";
-$all = sql_select ('id_article,titre,texte', 'spip_articles', $cond);
+if ($id = $_GET["id_article"]) $cond="id_article=$id";
+else $cond="(id_article != 54) AND (statut IN ('prepa','prop','publie'))";
+
+$all = sql_select ('id_article,titre,texte', 'spip_articles', $cond, '', 'id_article');
 
 while ($art = sql_fetch($all)) {
   $bad = 0;
