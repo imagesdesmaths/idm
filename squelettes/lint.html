@@ -69,7 +69,11 @@ while ($art = sql_fetch($all)) {
       if (($bug[5] != '') && (preg_match($bug[5],$m[0])==1)) continue;
 
       if ($bad == 0) {
-        print "<h3>({$art['id_article']}) <a href=\"/article{$art['id_article']}\">{$art['titre']}</a></h3>\n";
+        print "<h3>";
+        if (!$id) print "<a href=\"#SELF&id_article={$art['id_article']}\">";
+        print "({$art['id_article']})";
+        if (!$id) print "</a>";
+        print " <a href=\"/article{$art['id_article']}\">{$art['titre']}</a></h3>\n";
         $bad = 1;
       }
 
