@@ -85,7 +85,6 @@ function idm_notify ($ids, $message, $subject = "Un message du site \"Images des
 }
 
 function idm_jquery_plugins ($scripts) {
-  $scripts[] = 'javascript/jquery-ui.min.js';
   $scripts[] = 'javascript/jquery.tablesorter.min.js';
   $scripts[] = 'mediaelement/mediaelement-and-player.min.js';
   return $scripts;
