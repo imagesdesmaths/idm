@@ -29,6 +29,12 @@ function idm_boite_infos (&$flux) {
         $flux['data'] .= icone_horizontale ($message, $url, "billet-24.png");
       }
     }
+
+    if (($statut == "prepa") || ($statut == "prop") || ($statut == "publie")) {
+      $message = _T("idm:lint");
+      $url = generer_url_ecrire ("idm_lint", "id_article=$id_article");
+      $flux['data'] .= icone_horizontale ($message, $url, "relecteurs-24.png");
+    }
   }
 
   return $flux;

@@ -94,9 +94,8 @@ while ($art = sql_fetch($all)) {
       if ($bad == 0) {
         print "<h2>";
         if (!$id) print "<a href=\"#SELF&id_article={$art['id_article']}\">";
-        print "Article {$art['id_article']} : &laquo; {$art['titre']} &raquo";
-        if (!$id) print "</a>";
-        print "</h2>\n";
+        else print "<a href=\"/ecrire/?exec=article&id_article={$art['id_article']}\">";
+        print "Article {$art['id_article']} : &laquo; {$art['titre']} &raquo</a></h2>\n";
         $bad = 1;
       }
 
@@ -123,6 +122,8 @@ while ($art = sql_fetch($all)) {
     }
   }
 
-  if (($bad==0) && $_GET['id_article']) print "<h2>Article {$art['id_article']} : &laquo; {$art['titre']} &raquo is all good!</h2>\n";
+  if (($bad==0) && $_GET['id_article'])
+    print "<a href=\"/ecrire/?exec=article&id_article={$art['id_article']}\">" .
+      "<h2>Article {$art['id_article']} : &laquo; {$art['titre']} &raquo is all good!</h2></a>\n";
 }
 ?>
