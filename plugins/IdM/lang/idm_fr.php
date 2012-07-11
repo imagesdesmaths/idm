@@ -10,6 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     'equipe'             => "Équipe “@nom@” :",
 
+    'lint'               => "Vérificateur d'articles",
+
     'non_plan'           => "Articles proposés et non planifiés",
 
     'planning'           => "Planning de publication",

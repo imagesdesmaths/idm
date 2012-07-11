@@ -10,6 +10,8 @@
   .good { background : lightgreen; }
 </style>
 
+$\def\label#1{}$
+
 <?php
 
 function foo ($all, $url) {
@@ -80,9 +82,9 @@ while ($art = sql_fetch($all)) {
       if ($thisbug == 0) {
         $in = $m[0]; $out = preg_replace ($bug[1], $bug[2], $in);
         if ($bug[4]==1) $out = stripslashes($out);
-        print "$bug[0] &agrave; la position $m[1] : <tt class=\"bad\">" . htmlentities($in) . "</tt><br>\n";
+        print "$bug[0] &agrave; la position $m[1] : <tt class=\"bad tex2jax_ignore\">" . htmlentities($in) . "</tt><br>\n";
         print "Interpr&eacute;t&eacute; par SPIP : <span class=\"bad\">" . PtoBR(propre($in)) . "</span><br>\n";
-        print "Remplacement propos&eacute; : <tt class=\"good\">" . htmlentities($out) . "</tt><br>\n";
+        print "Remplacement propos&eacute; : <tt class=\"good tex2jax_ignore\">" . htmlentities($out) . "</tt><br>\n";
         print "Interpr&eacute;t&eacute; par SPIP : <span class=\"good\">" . PtoBR(propre($out)) . "</span><br>\n";
 ?>
         <form method="post">
