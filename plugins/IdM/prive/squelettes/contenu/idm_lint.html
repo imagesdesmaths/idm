@@ -28,12 +28,6 @@ function foo ($all, $url) {
   return $return;
 }
 
-if ($_POST["submit"] == "Corriger !") {
-  $texte = sql_getfetsel ("texte", "spip_articles", "id_article=" . $_POST["id_article"]);
-  $texte = str_replace (base64_decode($_POST['in']), base64_decode($_POST['out']), $texte);
-  sql_updateq ("spip_articles", array('texte'=>$texte), "id_article=" . $_POST["id_article"]);
-}
-
 /* List of known and automatically correctable author mistakes.
  *
  * Fields: 0 -> name of the bug
@@ -55,7 +49,31 @@ $bugs[] = array ('\label outside {equation}', '|\$\$ *([^$]*\\\\label{[^}]*}[^$]
 $bugs[] = array ('Numerical \label/\ref',     '/\\\\(label|ref){([0-9]*)}/',                       '\\\\\1{equation_\2}',                    0, 0, '');
 $bugs[] = array ('Old-style math div',        '|<div class="math">(.*)</div>|Us',                  '$$\1$$',                                 0, 0, '');
 $bugs[] = array ('Old-style math span',       '|<span class="math">(.*)</span>|Us',                '$\1$',                                   0, 0, '');
-$bugs[] = array ('Useless html tag',          '|<html>(.*)</html>|Us',                             '\1',                                     0, 0, '|<pre>|');
+$bugs[] = array ('Useless html tag',          '|<html>(.*)</html>|Us',                             '\1',                                     0, 0, '/<\/?(div|pre|p|span)>/');
+
+$nbugs = count($bugs);
+
+if ($_POST["submit"] == "Corriger !") {
+  $texte = sql_getfetsel ("texte", "spip_articles", "id_article=" . $_POST["id_article"]);
+
+  if ($_POST['correct_all']) {
+    echo "Fixing all instances of bug {$_POST['id_bug']} in article {$_POST['id_article']}...";
+    $bug = $bugs[$_POST['id_bug']]; $n=0;
+    preg_match_all ($bug[1], $texte, $matches, PREG_OFFSET_CAPTURE);
+    foreach ($matches[0] as $m) {
+      if (($bug[5] != '') && (preg_match($bug[5],$m[0])==1)) continue;
+      $in = $m[0]; $out = preg_replace ($bug[1], $bug[2], $in);
+      if ($bug[4]==1) $out = stripslashes($out);
+      $texte = str_replace ($in, $out, $texte);
+      $n++;
+    }
+    echo " done ($n instances).\n";
+  } else {
+    $texte = str_replace (base64_decode($_POST['in']), base64_decode($_POST['out']), $texte);
+  }
+
+  sql_updateq ("spip_articles", array('texte'=>$texte), "id_article=" . $_POST["id_article"]);
+}
 
 if ($id = $_GET["id_article"]) $cond="id_article=$id";
 else $cond="(id_article != 54) AND (statut IN ('prepa','prop','publie'))";
@@ -64,7 +82,8 @@ $all = sql_select ('id_article,titre,texte', 'spip_articles', $cond, '', 'id_art
 
 while ($art = sql_fetch($all)) {
   $bad = 0;
-  foreach ($bugs as $bug) {
+  for ($i = 0; $i < $nbugs; $i++) {
+    $bug = $bugs[$i];
     $thisbug = 0;
     preg_match_all ($bug[1], $art['texte'], $matches, PREG_OFFSET_CAPTURE);
     foreach ($matches[0] as $m) {
@@ -82,16 +101,18 @@ while ($art = sql_fetch($all)) {
       if ($thisbug == 0) {
         $in = $m[0]; $out = preg_replace ($bug[1], $bug[2], $in);
         if ($bug[4]==1) $out = stripslashes($out);
-        print "$bug[0] &agrave; la position $m[1] : <tt class=\"bad tex2jax_ignore\">" . htmlentities($in) . "</tt><br>\n";
+        print "$bug[0] ($i) &agrave; la position $m[1] : <tt class=\"bad tex2jax_ignore\">" . htmlentities($in) . "</tt><br>\n";
         print "Interpr&eacute;t&eacute; par SPIP : <span class=\"bad\">" . PtoBR(propre($in)) . "</span><br>\n";
         print "Remplacement propos&eacute; : <tt class=\"good tex2jax_ignore\">" . htmlentities($out) . "</tt><br>\n";
         print "Interpr&eacute;t&eacute; par SPIP : <span class=\"good\">" . PtoBR(propre($out)) . "</span><br>\n";
 ?>
         <form method="post">
-           <input type="hidden" name="id_article" value="<?php echo $art['id_article'] ?>" />
-           <input type="hidden" name="in"         value="<?php echo base64_encode($in); ?>" />
-           <input type="hidden" name="out"        value="<?php echo base64_encode($out); ?>" />
-           <input type="submit" name="submit"     value="Corriger !"/>
+           <input type="hidden" name="id_article"  value="<?php echo $art['id_article'] ?>" />
+           <input type="hidden" name="in"          value="<?php echo base64_encode($in); ?>" />
+           <input type="hidden" name="out"         value="<?php echo base64_encode($out); ?>" />
+           <input type="hidden" name="id_bug"      value="<?php echo $i; ?>" />
+           <input type="submit" name="submit"      value="Corriger !"/>
+           ... ainsi que les autres bugs de ce type : <input type="checkbox" name="correct_all" />
         </form>
 
         <hr>
