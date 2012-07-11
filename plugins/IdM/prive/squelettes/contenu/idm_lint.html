@@ -1,5 +1,7 @@
 #CACHE{0}
 
+<h1><:idm:lint:></h1>
+
 <?php if ($GLOBALS['visiteur_session']['statut'] != '0minirezo') {
   echo "<h1>Erreur !</h1>\n";
   die ("Cette page est r&eacute;serv&eacute;e aux administrateurs.");
@@ -32,7 +34,7 @@ function idm_lint_url ($all, $url) {
  *
  * Fields: 0 -> name of the bug
  *         1 -> regexp to match the bug
- *         2 -> replacement regext
+ *         2 -> replacement regexp
  *         3 -> limit to one error display if set to 1
  *         4 -> strip slashes after replacement ?
  *         5 -> redeemer regexp (if matches, it is not a mistake)
@@ -45,11 +47,11 @@ $bugs[] = array ('LaTeX accent',              '|\\\\[\'`^"][aeiou]|ie',         
 $bugs[] = array ('Wrong guillemets (v1)',     '|``([^\']*)\'\'|Us',                                '&laquo;\1&raquo;',                       0, 0, '');
 $bugs[] = array ('Wrong guillemets (v2)',     '|``([^\']*)\'\'|Us',                                '&ldquo;\1&rdquo;',                       0, 0, '');
 $bugs[] = array ('Wrong guillemets (v3)',     '|``([^\']*)\'\'|Us',                                '"\1"',                                   0, 0, '');
-$bugs[] = array ('\label outside {equation}', '|\$\$ *([^$]*\\\\label{[^}]*}[^$]*)\$\$|s',         '$$\\begin{equation}\1\\end{equation}$$', 0, 0, '|\\\\begin{equation}|');
 $bugs[] = array ('Numerical \label/\ref',     '/\\\\(label|ref){([0-9]*)}/',                       '\\\\\1{equation_\2}',                    0, 0, '');
 $bugs[] = array ('Old-style math div',        '|<div class="math">(.*)</div>|Us',                  '$$\1$$',                                 0, 0, '');
 $bugs[] = array ('Old-style math span',       '|<span class="math">(.*)</span>|Us',                '$\1$',                                   0, 0, '');
 $bugs[] = array ('Useless html tag',          '|<html>(.*)</html>|Us',                             '\1',                                     0, 0, '/<\/?(div|pre|p|span)>/');
+$bugs[] = array ('\label outside {equation}', '|\$\$ *([^$]*\\\\label{[^}]*}[^$]*)\$\$|s',         '$$\\begin{equation}\1\\end{equation}$$', 0, 0, '|\\\\begin{equation}|');
 
 function idm_lint_bug ($bug, $texte) {
   $list = array();
@@ -90,15 +92,15 @@ while ($art = sql_fetch($all)) {
 
     if ($list = idm_lint_bug ($bug, $art['texte'])) {
       if ($bad == 0) {
-        print "<h3>";
+        print "<h2>";
         if (!$id) print "<a href=\"#SELF&id_article={$art['id_article']}\">";
         print "Article {$art['id_article']} : &laquo; {$art['titre']} &raquo";
         if (!$id) print "</a>";
-        print "</h3>\n";
+        print "</h2>\n";
         $bad = 1;
       }
 
-      echo "<h4>Bug: {$bug[0]}</h4>\n";
+      echo "<h3>Bug: {$bug[0]}</h3>\n";
 
       foreach ($list as $in => $out) {
         print "Texte erron&eacute; : <tt class=\"bad tex2jax_ignore\">" . htmlentities($in) . "</tt><br>\n";
@@ -120,5 +122,7 @@ while ($art = sql_fetch($all)) {
       }
     }
   }
+
+  if (($bad==0) && $_GET['id_article']) print "<h2>Article {$art['id_article']} : &laquo; {$art['titre']} &raquo is all good!</h2>\n";
 }
 ?>
