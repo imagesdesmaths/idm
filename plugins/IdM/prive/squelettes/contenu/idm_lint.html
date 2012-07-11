@@ -14,7 +14,7 @@
 
 <?php
 
-function foo ($all, $url) {
+function idm_lint_url ($all, $url) {
   $i = preg_replace ('/^[+-]*(.*?)[+-]*\\.html$/', '\1', $url);
   $art = sql_fetsel ("*", "spip_urls", "url=\"$i\"");
 
@@ -40,7 +40,7 @@ function foo ($all, $url) {
 
 $bugs = array();
 $bugs[] = array ('Explicit link',             '|<a href="(.*)".*>(.*)</a>|iU',                     '[\2->\1]',                               0, 0, '');
-$bugs[] = array ('Wrong inner link',          '|\\[[^[]*->http://images.math.cnrs.fr/([^]]*)]|Ue', 'foo("\\0","\\1")',                       0, 1, '');
+$bugs[] = array ('Wrong inner link',          '|\\[[^[]*->http://images.math.cnrs.fr/([^]]*)]|Ue', 'idm_lint_url("\\0","\\1")',              0, 1, '');
 $bugs[] = array ('LaTeX accent',              '|\\\\[\'`^"][aeiou]|ie',                            'idm_clean_TeX("\0")',                    1, 1, '');
 $bugs[] = array ('Wrong guillemets (v1)',     '|``([^\']*)\'\'|Us',                                '&laquo;\1&raquo;',                       0, 0, '');
 $bugs[] = array ('Wrong guillemets (v2)',     '|``([^\']*)\'\'|Us',                                '&ldquo;\1&rdquo;',                       0, 0, '');
