@@ -10,7 +10,7 @@
   .good { background : lightgreen; }
 </style>
 
-$\def\label#1{}$
+<span class="invisible">$\def\label#1{}$</span>
 
 <?php
 
@@ -55,7 +55,7 @@ $bugs[] = array ('\label outside {equation}', '|\$\$ *([^$]*\\\\label{[^}]*}[^$]
 $bugs[] = array ('Numerical \label/\ref',     '/\\\\(label|ref){([0-9]*)}/',                       '\\\\\1{equation_\2}',                    0, 0, '');
 $bugs[] = array ('Old-style math div',        '|<div class="math">(.*)</div>|Us',                  '$$\1$$',                                 0, 0, '');
 $bugs[] = array ('Old-style math span',       '|<span class="math">(.*)</span>|Us',                '$\1$',                                   0, 0, '');
-$bugs[] = array ('Useless html tag',          '|<html>(.*)</html>|Us',                             '\1',                                     0, 0, '');
+$bugs[] = array ('Useless html tag',          '|<html>(.*)</html>|Us',                             '\1',                                     0, 0, '|<pre>|');
 
 if ($id = $_GET["id_article"]) $cond="id_article=$id";
 else $cond="(id_article != 54) AND (statut IN ('prepa','prop','publie'))";
