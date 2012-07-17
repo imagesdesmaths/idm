@@ -54,6 +54,8 @@ $bugs[] = array ('Useless html tag',          '|<html>(.*)</html>|Us',          
                  '/(<\/?(div|pre|p|span)>|<html>.<\/html>)/');
 $bugs[] = array ('\label outside {equation}', '|\$\$ *([^$]*\\\\label{[^}]*}[^$]*)\$\$|s',         '$$\\begin{equation}\1\\end{equation}$$', 0, 0,
                  '|\\\\begin{equation}|');
+$bugs[] = array ('HTML entity',               '/&[a-z]*;/ie',                                      'html_entity_decode("\0",ENT_COMPAT | ENT_HTML401,"UTF-8")',            1, 1,
+                 '/&(lt|gt);/');
 
 function idm_lint_bug ($bug, $texte) {
   $list = array();
@@ -104,9 +106,9 @@ while ($art = sql_fetch($all)) {
       echo "<h3>Bug: {$bug[0]}</h3>\n";
 
       foreach ($list as $in => $out) {
-        print "Texte erron&eacute; : <tt class=\"bad tex2jax_ignore\">" . htmlentities($in) . "</tt><br>\n";
+        print "Texte erron&eacute; : <tt class=\"bad tex2jax_ignore\">" . htmlentities($in) . "</tt> (" . strlen($in) . ")<br>\n";
         print "Interpr&eacute;t&eacute; par SPIP : <span class=\"bad\">" . PtoBR(propre($in)) . "</span><br>\n";
-        print "Remplacement propos&eacute; : <tt class=\"good tex2jax_ignore\">" . htmlentities($out) . "</tt><br>\n";
+        print "Remplacement propos&eacute; : <tt class=\"good tex2jax_ignore\">" . htmlentities($out) . "</tt> (" . strlen($out) . ")<br>\n";
         print "Interpr&eacute;t&eacute; par SPIP : <span class=\"good\">" . PtoBR(propre($out)) . "</span><br>\n";
         ?>
         <form method="post">
