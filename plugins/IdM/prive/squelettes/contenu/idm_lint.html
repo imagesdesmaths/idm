@@ -30,6 +30,14 @@ function idm_lint_url ($all, $url) {
   return $return;
 }
 
+function idm_lint_utf8 ($txt) {
+  return html_entity_decode($txt, ENT_COMPAT | ENT_HTML401, "UTF-8");
+}
+
+function idm_lint_TeX ($txt) {
+  return idm_lint_utf8 (idm_clean_TeX ($txt));
+}
+
 /* List of known and automatically correctable author mistakes.
  *
  * Fields: 0 -> name of the bug
@@ -43,7 +51,7 @@ function idm_lint_url ($all, $url) {
 $bugs = array();
 $bugs[] = array ('Explicit link',             '|<a href="(.*)".*>(.*)</a>|iU',                     '[\2->\1]',                               0, 0, '');
 $bugs[] = array ('Wrong inner link',          '|\\[[^[]*->http://images.math.cnrs.fr/([^]]*)]|Ue', 'idm_lint_url("\\0","\\1")',              0, 1, '');
-$bugs[] = array ('LaTeX accent',              '|\\\\[\'`^"][aeiou]|ie',                            'idm_clean_TeX("\0")',                    1, 1, '');
+$bugs[] = array ('LaTeX accent',              '|\\\\[\'`^"][aeiou]|ie',                            'idm_lint_TeX("\0")',                     1, 1, '');
 $bugs[] = array ('Wrong guillemets (v1)',     '|``([^\']*)\'\'|Us',                                '&laquo;\1&raquo;',                       0, 0, '');
 $bugs[] = array ('Wrong guillemets (v2)',     '|``([^\']*)\'\'|Us',                                '&ldquo;\1&rdquo;',                       0, 0, '');
 $bugs[] = array ('Wrong guillemets (v3)',     '|``([^\']*)\'\'|Us',                                '"\1"',                                   0, 0, '');
@@ -54,7 +62,7 @@ $bugs[] = array ('Useless html tag',          '|<html>(.*)</html>|Us',          
                  '/(<\/?(div|pre|p|span)>|<html>.<\/html>)/');
 $bugs[] = array ('\label outside {equation}', '|\$\$ *([^$]*\\\\label{[^}]*}[^$]*)\$\$|s',         '$$\\begin{equation}\1\\end{equation}$$', 0, 0,
                  '|\\\\begin{equation}|');
-$bugs[] = array ('HTML entity',               '/&[a-z]*;/ie',                                      'html_entity_decode("\0",ENT_COMPAT | ENT_HTML401,"UTF-8")',            1, 1,
+$bugs[] = array ('HTML entity',               '/&[a-z]*;/ie',                                      'idm_lint_utf8("\0")',                    1, 1,
                  '/&(lt|gt);/');
 
 function idm_lint_bug ($bug, $texte) {
@@ -108,7 +116,7 @@ while ($art = sql_fetch($all)) {
       foreach ($list as $in => $out) {
         print "Texte erron&eacute; : <tt class=\"bad tex2jax_ignore\">" . htmlentities($in) . "</tt> (" . strlen($in) . ")<br>\n";
         print "Interpr&eacute;t&eacute; par SPIP : <span class=\"bad\">" . PtoBR(propre($in)) . "</span><br>\n";
-        print "Remplacement propos&eacute; : <tt class=\"good tex2jax_ignore\">" . htmlentities($out) . "</tt> (" . strlen($out) . ")<br>\n";
+        print "Remplacement propos&eacute; : <tt class=\"good tex2jax_ignore\">" . htmlentities($out, ENT_COMPAT | ENT_HTML401, "UTF-8") . "</tt> (" . strlen($out) . ")<br>\n";
         print "Interpr&eacute;t&eacute; par SPIP : <span class=\"good\">" . PtoBR(propre($out)) . "</span><br>\n";
         ?>
         <form method="post">
