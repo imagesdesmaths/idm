@@ -1,7 +1,7 @@
 <paquet
 	prefix="porte_plume"
 	categorie="edition"
-	version="1.11.5"
+	version="1.11.6"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/porte-plume-32.png"

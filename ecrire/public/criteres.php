@@ -10,21 +10,40 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-//
-// Definition des {criteres} d'une boucle
-//
-
-// Une Regexp reperant une chaine produite par le compilateur,
-// souvent utilisee pour faire de la concatenation lors de la compilation
-// plutot qu'a l'execution, i.e. pour remplacer 'x'.'y' par 'xy'
-
-define('_CODE_QUOTE', ",^(\n//[^\n]*\n)? *'(.*)' *$,");
+/**
+ * Définition des {criteres} d'une boucle
+ *
+ * @package SPIP\Compilateur\Criteres
+**/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// {racine}
-// http://www.spip.net/@racine
-// http://doc.spip.org/@critere_racine_dist
+/**
+ * Une Regexp repérant une chaine produite par le compilateur,
+ * souvent utilisée pour faire de la concaténation lors de la compilation
+ * plutôt qu'à l'exécution, i.e. pour remplacer 'x'.'y' par 'xy'
+**/
+define('_CODE_QUOTE', ",^(\n//[^\n]*\n)? *'(.*)' *$,");
+
+
+
+/**
+ * Compile le critère {racine}
+ *
+ * Ce critère sélectionne les éléments à la racine d'une hiérarchie,
+ * c'est à dire ayant id_parent=0
+ *
+ * @link http://www.spip.net/@racine
+ * 
+ * @param string $idb
+ *     Identifiant de la boucle
+ * @param array $boucles
+ *     AST du squelette
+ * @param array $crit
+ *     Paramètres du critère dans cette boucle
+ * @return
+ *     AST complété de la gestion du critère
+**/
 function critere_racine_dist($idb, &$boucles, $crit){
 	global $exceptions_des_tables;
 	$not = $crit->not;
@@ -37,9 +56,23 @@ function critere_racine_dist($idb, &$boucles, $crit){
 	$boucle->where[] = ($crit->not ? array("'NOT'", $c) : $c);
 }
 
-// {exclus}
-// http://www.spip.net/@exclus
-// http://doc.spip.org/@critere_exclus_dist
+
+/**
+ * Compile le critère {exclus}
+ *
+ * Exclut du résultat l’élément dans lequel on se trouve déjà
+ * 
+ * @link http://www.spip.net/@exclus
+ *
+ * @param string $idb
+ *     Identifiant de la boucle
+ * @param array $boucles
+ *     AST du squelette
+ * @param array $crit
+ *     Paramètres du critère dans cette boucle
+ * @return
+ *     AST complété de la gestion du critère
+**/
 function critere_exclus_dist($idb, &$boucles, $crit){
 	$not = $crit->not;
 	$boucle = &$boucles[$idb];
@@ -51,45 +84,86 @@ function critere_exclus_dist($idb, &$boucles, $crit){
 	$boucle->where[] = array("'!='", "'$boucle->id_table."."$id'", $arg);
 }
 
-// {doublons} ou {unique}
-// http://www.spip.net/@doublons
-// attention: boucle->doublons designe une variable qu'on affecte
-// http://doc.spip.org/@critere_doublons_dist
+
+/**
+ * Compile le critère {doublons} ou {unique}
+ *
+ * Ce critères enlève de la boucle les éléments déjà sauvegardés
+ * dans un précédent critère {doublon} sur une boucle de même table.
+ *
+ * Il est possible de spécifier un nom au doublon tel que {doublons sommaire}
+ * 
+ * @link http://www.spip.net/@doublons
+ * 
+ * @param string $idb
+ * 		Identifiant de la boucle
+ * @param array $boucles
+ * 		AST du squelette
+ * @param array $crit
+ * 		Paramètres du critère dans cette boucle
+ * @return
+ * 		AST complété de la gestion du critère
+**/
 function critere_doublons_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
 	$primary = $boucle->primary;
 
+	// la table nécessite une clé primaire, non composée
 	if (!$primary OR strpos($primary, ',')){
 		return (array('zbug_doublon_sur_table_sans_cle_primaire'));
 	}
 
 	$not = ($crit->not ? '' : 'NOT');
 
-	$nom = !isset($crit->param[0]) ? "''" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
-	// mettre un tableau pour que ce ne soit pas vu comme une constante
+	// le doublon s'applique sur un type de boucle (article)
+	$nom = "'" . $boucle->type_requete. "'";
 
-	$nom = "'".
-	       $boucle->type_requete.
-	       "'".
-	       ($nom=="''" ? '' : " . $nom");
+	// compléter le nom avec un nom précisé {doublons nom}
+	// on obtient $nom = "'article' . 'nom'"
+	if (isset($crit->param[0])) {
+		$nom .= "." . calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	}
 
-	$debutdoub = '$doublons['
-	             .(!$not ? '' : ($boucle->doublons."[]= "));
+	// code qui déclarera l'index du stockage de nos doublons (pour éviter une notice PHP)
+	$init_comment = "\n\n\t// Initialise le(s) critère(s) doublons\n";
+	$init_code = "\tif (!isset(\$doublons[\$d = $nom])) { \$doublons[\$d] = ''; }\n";
 
-	$findoub = "($nom)]";
+	// on crée un sql_in avec la clé primaire de la table
+	// et la collection des doublons déjà emmagasinés dans le tableau
+	// $doublons et son index, ici $nom
 
-	$debin = "sql_in('".$boucle->id_table.'.'.$primary."', ";
+	// debut du code "sql_in('articles.id_article', "
+	$debut_in = "sql_in('".$boucle->id_table.'.'.$primary."', ";
+	// lecture des données du doublon "$doublons[$doublon_index[] = "
+	// Attention : boucle->doublons désigne une variable qu'on affecte
+	$debut_doub = '$doublons[' . (!$not ? '' : ($boucle->doublons."[]= "));
 
-	$suitin = $debin.$debutdoub;
+	// le debut complet du code des doublons
+	$debut_doub = $debut_in . $debut_doub;
 
-	// si autre critere doublon, fusionner pour avoir un seul In
-	foreach ($boucle->where as $k => $w){
-		if (strpos($w[0], $suitin)===0){
-			$boucle->where[$k][0] = $debin.$debutdoub.$findoub.' . '.substr($w[0], strlen($debin));
+	// nom du doublon "('article' . 'nom')]"
+	$fin_doub = "($nom)]";
+
+	// si on trouve un autre critère doublon,
+	// on fusionne pour avoir un seul IN, et on s'en va !
+	foreach ($boucle->where as $k => $w) {
+		if (strpos($w[0], $debut_doub)===0) {
+			// fusionner le sql_in (du where)
+			$boucle->where[$k][0] = $debut_doub . $fin_doub.' . '.substr($w[0], strlen($debut_in));
+			// fusionner l'initialisation (du hash) pour faire plus joli
+			$x = strpos($boucle->hash, $init_comment);
+			$len = strlen($init_comment);
+			$boucle->hash =
+				substr($boucle->hash, 0, $x + $len) . $init_code . substr($boucle->hash, $x + $len);
 			return;
 		}
 	}
-	$boucle->where[] = array($suitin.$findoub.", '".$not."')");
+
+	// mettre l'ensemble dans un tableau pour que ce ne soit pas vu comme une constante
+	$boucle->where[] = array($debut_doub . $fin_doub.", '".$not."')");
+
+	// déclarer le doublon s'il n'existe pas encore
+	$boucle->hash .= $init_comment . $init_code;
 
 
 	# la ligne suivante avait l'intention d'eviter une collecte deja faite
@@ -99,11 +173,29 @@ function critere_doublons_dist($idb, &$boucles, $crit){
 	#	if ($crit->not) $boucle->doublons = "";
 }
 
-// {lang_select}
-// http://www.spip.net/@lang_select
-// http://doc.spip.org/@critere_lang_select_dist
+
+/**
+ * Compile le critère {lang_select}
+ *
+ * Permet de restreindre ou non une boucle en affichant uniquement
+ * les éléments dans la langue en cours. Certaines boucles
+ * tel que articles et rubriques restreignent par défaut sur la langue
+ * en cours.
+ * 
+ * Sans définir de valeur au critère, celui-ci utilise 'oui' comme
+ * valeur par défaut.
+ * 
+ * @param string $idb
+ *     Identifiant de la boucle
+ * @param array $boucles
+ *     AST du squelette
+ * @param array $crit
+ *     Paramètres du critère dans cette boucle
+ * @return
+ *     AST complété de la gestion du critère
+**/
 function critere_lang_select_dist($idb, &$boucles, $crit){
-	if (!($param = $crit->param[1][0]->texte)) $param = 'oui';
+	if (!isset($crit->param[1][0]) OR !($param = $crit->param[1][0]->texte)) $param = 'oui';
 	if ($crit->not) $param = ($param=='oui') ? 'non' : 'oui';
 	$boucle = &$boucles[$idb];
 	$boucle->lang_select = $param;
@@ -160,7 +252,7 @@ function critere_pagination_dist($idb, &$boucles, $crit){
 		."\t".'$debut_boucle = intval($debut_boucle)';
 
 	$boucle->hash .= '
-	$command[\'pagination\'] = array($Pile[0]['.$debut.'], ' . $pas . ');';
+	$command[\'pagination\'] = array((isset($Pile[0]['.$debut.']) ? $Pile[0]['.$debut.'] : null), ' . $pas . ');';
 
 	$boucle->total_parties = $pas;
 	calculer_parties($boucles, $idb, $partie, 'p+');
@@ -280,9 +372,26 @@ function critere_meme_parent_dist($idb, &$boucles, $crit){
 	}
 }
 
-// {branche ?}
-// http://www.spip.net/@branche
-// http://doc.spip.org/@critere_branche_dist
+
+/**
+ * Sélectionne dans une boucle les éléments appartenant à une branche d'une rubrique
+ * 
+ * Calcule une branche d'une rubrique et conditionne la boucle avec.
+ * Cherche l'identifiant de la rubrique dans les boucles parentes ou par jointure
+ * et calcule la liste des identifiants de rubrique de toute la branche
+ *
+ * @link http://www.spip.net/@branche
+ * 
+ * @param string $idb
+ * 		Identifiant de la boucle
+ * @param array $boucles
+ * 		AST du squelette
+ * @param array $crit
+ * 		Paramètres du critère dans cette boucle
+ * @return
+ * 		AST complété de la condition where au niveau de la boucle,
+ * 		restreignant celle ci aux rubriques de la branche
+**/
 function critere_branche_dist($idb, &$boucles, $crit){
 
 	$not = $crit->not;
@@ -627,10 +736,10 @@ function critere_agenda_dist($idb, &$boucles, $crit){
 		$boucle->where[] = array("'AND'",
 		                         array("'>='",
 		                               "'DATE_FORMAT($date, \'%Y%m%d\')'",
-		                               ("date_debut_semaine($annee, $mois, $jour$quote_end)")),
+		                               ("date_debut_semaine($annee, $mois, $jour)")),
 		                         array("'<='",
 		                               "'DATE_FORMAT($date, \'%Y%m%d\')'",
-		                               ("date_fin_semaine($annee, $mois, $jour$quote_end)")));
+		                               ("date_fin_semaine($annee, $mois, $jour)")));
 	elseif (count($crit->param)>2)
 		$boucle->where[] = array("'AND'",
 		                         array("'>='",
@@ -678,7 +787,7 @@ function calculer_parties(&$boucles, $id_boucle, $debut, $mode){
 	$total_parties = $boucles[$id_boucle]->total_parties;
 
 	preg_match(",([+-/p])([+-/])?,", $mode, $regs);
-	list(, $op1, $op2) = $regs;
+	list(, $op1, $op2) = array_pad($regs, 3, null);
 	$nombre_boucle = "\$Numrows['$id_boucle']['total']";
 	// {1/3}
 	if ($op1=='/'){
@@ -748,13 +857,29 @@ function calculer_critere_parties_aux($idb, &$boucles, $param){
 	}
 }
 
-//
-// La fonction d'aiguillage sur le nom du critere dans leur liste
-// Si l'une au moins des fonctions associees retourne une erreur 
-// (i.e. un tableau), on propage l'information
-// Sinon, ne retourne rien (affectation directe dans l'arbre)
 
-// http://doc.spip.org/@calculer_criteres
+/**
+ * Compile les critères d'une boucle
+ * 
+ * Cette fonction d'aiguillage cherche des fonctions spécifiques déclarées
+ * pour chaque critère demandé, dans l'ordre ci-dessous :
+ * 
+ * - critere_{serveur}_{table}_{critere}, sinon avec _dist
+ * - critere_{serveur}_{critere}, sinon avec _dist
+ * - critere_{table}_{critere}, sinon avec _dist
+ * - critere_{critere}, sinon avec _dist
+ * - critere_defaut, sinon avec _dist
+ *
+ * Émet une erreur de squelette si un critère retourne une erreur.
+ * 
+ * @param string $idb
+ *     Identifiant de la boucle
+ * @param array $boucles
+ *     AST du squelette
+ * @return string|array
+ *     string : Chaine vide sans erreur
+ *     array : Erreur sur un des critères
+**/
 function calculer_criteres($idb, &$boucles){
 	$msg = '';
 	$boucle = $boucles[$idb];
@@ -764,6 +889,7 @@ function calculer_criteres($idb, &$boucles){
 	$defaut = charger_fonction('DEFAUT', 'calculer_critere');
 	// s'il y avait une erreur de syntaxe, propager cette info
 	if (!is_array($boucle->criteres)) return array();
+
 	foreach ($boucle->criteres as $crit){
 		$critere = $crit->op;
 		// critere personnalise ?
@@ -1136,9 +1262,9 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 		// sql_quote(truc,'','varchar')
 		elseif (preg_match('/\Asql_quote[(](.*?)(,[^)]*?)?(,[^)]*(?:\(\d+\)[^)]*)?)?[)]\s*\z/ms', $val[0], $r)
 			// si pas deja un type
-		  AND !$r[3]) {
+		  AND (!isset($r[3]) OR !$r[3])) {
 			$r = $r[1]
-				.($r[2] ? $r[2] : ",''")
+				.((isset($r[2]) AND $r[2]) ? $r[2] : ",''")
 				.",'".(isset($desc['field'][$col_vraie])?addslashes($desc['field'][$col_vraie]):'int NOT NULL')."'";
 			$val[0] = "sql_quote($r)";
 		}
@@ -1180,7 +1306,8 @@ function calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_
 	// gestion par les plugins des jointures tordues 
 	// pas automatiques mais necessaires
 	$table_sql = table_objet_sql($table);
-	if (is_array($exceptions_des_jointures[$table_sql])
+	if (isset($exceptions_des_jointures[$table_sql])
+	  AND is_array($exceptions_des_jointures[$table_sql])
 	  AND
 			(
 			isset($exceptions_des_jointures[$table_sql][$col])
@@ -1448,9 +1575,10 @@ function calculer_vieux_in($params){
 	$last = $params[$k];
 	$j = count($last)-1;
 	$last = $last[$j];
-	$n = strlen($last->texte);
+	$n = isset($last->texte) ? strlen($last->texte) : 0;
 
-	if (!(($deb->texte[0]=='(') && ($last->texte[$n-1]==')')))
+	if (!((isset($deb->texte[0])     AND $deb->texte[0]=='(')
+	   && (isset($last->texte[$n-1]) AND $last->texte[$n-1]==')')))
 		return $params;
 	$params[0][0]->texte = substr($deb->texte, 1);
 	// attention, on peut avoir k=0,j=0 ==> recalculer

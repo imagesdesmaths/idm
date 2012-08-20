@@ -14,21 +14,33 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Evaluer la page produite par un squelette
- * pour la transformer en texte statique
+ * 
+ * Évalue une page pour la transformer en texte statique
  * Elle peut contenir un < ?xml a securiser avant eval
  * ou du php d'origine inconnue
  *
- * Attention cette partie eval() doit imperativement
- * etre declenchee dans l'espace des globales (donc pas
+ * Attention cette partie eval() doit impérativement
+ * être déclenchée dans l'espace des globales (donc pas
  * dans une fonction).
  *
  * @param array $page
  * @return bool
  */
-
 $res = true;
+
 // Cas d'une page contenant du PHP :
 if ($page['process_ins'] != 'html') {
+
+	/**
+	 * Teste si on a déjà évalué du PHP
+	 * 
+	 * Inclure inc/lang la première fois pour définir spip_lang
+	 * si ça n'a pas encore été fait.
+	 */
+	if (!defined('_EVALUER_PAGE_PHP')) {
+		define('_EVALUER_PAGE_PHP', true);
+		include_spip('inc/lang');
+	}
 
 	// restaurer l'etat des notes avant calcul
 	if (isset($page['notes'])

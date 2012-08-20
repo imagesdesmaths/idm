@@ -30,13 +30,13 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $depot, $versio
 		if ($resultats) {
 			// -- On convertit les id de plugins en id de paquets
 			$ids = array();
-			if ($resultats['plugin']) {
+			if (isset($resultats['plugin']) and $resultats['plugin']) {
 				$ids_plugin = array_keys($resultats['plugin']);
 				$where[] = sql_in('id_plugin', $ids_plugin);
 				$ids = sql_allfetsel('id_paquet, id_plugin', 'spip_paquets', $where);
 			}
 			// -- On prepare les listes des id de paquet et des scores de ces memes paquets
-			if ($resultats['paquet']) {
+			if (isset($resultats['paquet']) and $resultats['paquet']) {
 				$ids_paquets = array_keys($resultats['paquet']);
 				foreach ($resultats['paquet'] as $_id => $_score) {
 					$scores[$_id] = intval($resultats['paquet'][$_id]['score']);
@@ -122,7 +122,8 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $depot, $versio
 						// ajout 
 						// - si pas encore trouve 
 						// - ou si sa version est inferieure (on garde que la derniere version)
-						if (!$plugins[$prefixe]
+						if (!isset($plugins[$prefixe])
+						OR !$plugins[$prefixe]
 						OR ($plugins[$prefixe] AND spip_version_compare($plugins[$prefixe]['version'], $version, '<'))) {
 							$plugins[$prefixe] = $paquets;
 						}
@@ -177,7 +178,7 @@ function svp_lister_plugins_installes(){
 function svp_verifier_compatibilite_spip($intervalle, $version_spip = '') {
 	if (!$version_spip)
 		$version_spip = $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'];
-	return plugin_version_compatible($intervalle, $version_spip);
+	return plugin_version_compatible($intervalle, $version_spip,'spip');
 }
 
 

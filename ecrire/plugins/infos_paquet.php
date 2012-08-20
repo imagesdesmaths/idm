@@ -55,7 +55,7 @@ function plugins_infos_paquet($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
 			$vspip = $GLOBALS['spip_version_branche'];
 			foreach ($vxml->versions as $_compatibilite => $_version) {
 				if (($_version['balise'] == 'spip')
-				AND (plugin_version_compatible($_compatibilite, $vspip))) {
+				AND (plugin_version_compatible($_compatibilite, $vspip,'spip'))) {
 					// on merge les sous-balises de la balise spip compatible avec celles de la
 					// balise paquet
 					foreach ($_version as $_index => $_balise) {
@@ -163,10 +163,13 @@ function paquet_finElement($phraseur, $name) {
 	if ($phraseur->err) return;
 	$n = $phraseur->contenu['compatible'];
 
-	if (is_array($phraseur->versions[$n][$name][0])){
+	if (isset($phraseur->versions[$n][$name][0]) AND is_array($phraseur->versions[$n][$name][0])){
 		$attrs = $phraseur->versions[$n][$name][0];
 		unset($phraseur->versions[$n][$name][0]);
+	} else {
+		$attrs = array();
 	}
+
 	$texte = $phraseur->versions[$n][''];
 	$phraseur->versions[$n][''] = '';
 
@@ -176,6 +179,7 @@ function paquet_finElement($phraseur, $name) {
 	elseif (!$attrs)
 		$phraseur->versions[$n][$name] = $texte;
 	else {
+		// Traitement generique. Si $attrs['nom'] n'existe pas, ce n'est pas normal ici
 		$phraseur->versions[$n][$name][$attrs['nom']] = $attrs;
 		#	  echo("<br>pour $name $n " . $attrs['nom']); var_dump($phraseur->versions[$n]);
 	}
@@ -290,6 +294,19 @@ function info_paquet_paquet($phraseur, $attrs, $texte) {
 	$n = 0;
 	$phraseur->versions[$n]['dtd'] = "paquet";
 	$phraseur->versions[$n]['balise'] = "paquet";
+}
+
+/**
+ * Cas particulier sur la balise traduire :
+ * Elle n'a pas de 'nom' 
+ *
+ * @param object $phraseur
+ * @param array $attrs
+ * @param string $texte
+**/
+function info_paquet_traduire($phraseur, $attrs, $texte) {
+	$n = $phraseur->contenu['compatible'];
+	$phraseur->versions[$n]['traduire'][] = $attrs;
 }
 
 /**

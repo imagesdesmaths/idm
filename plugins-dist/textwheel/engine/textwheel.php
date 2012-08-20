@@ -26,6 +26,8 @@ class TextWheel {
 	protected $ruleset;
 	protected static $subwheel = array();
 
+	protected $compiled = array();
+
 	/**
 	 * Constructor
 	 * @param TextWheelRuleSet $ruleset
@@ -78,6 +80,7 @@ class TextWheel {
 			$rule->name = $name;
 			$this->initRule($rule);
 			if (is_string($rule->replace)
+			AND isset($this->compiled[$rule->replace])
 			AND $fun = $this->compiled[$rule->replace]) {
 				$pre[] = "\n###\n## $name\n###\n" . $fun;
 				preg_match(',function (\w+),', $fun, $r);
@@ -143,7 +146,8 @@ class TextWheel {
 	 * @return TextWheel
 	 */
 	protected function &createSubWheel(&$rules){
-		return new TextWheel($rules);
+		$tw = new TextWheel($rules);
+		return $tw;
 	}
 
 	/**

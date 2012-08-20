@@ -9,16 +9,27 @@ function plugins_preparer_sql_paquet($plugin)
 	$champs = array();
 	if (!$plugin)
 		return $champs;
-	
+
 	// On initialise les champs ne necessitant aucune transformation
-	$champs['categorie'] = $plugin['categorie'] ? $plugin['categorie'] : '';
-	$champs['etat'] = $plugin['etat'] ? $plugin['etat'] : '';
-	$champs['version'] = $plugin['version'] ? normaliser_version($plugin['version']) : '';
-	$champs['version_base'] = $plugin['schema'] ? $plugin['schema'] : '';
-	$champs['logo'] = $plugin['logo'] ? $plugin['logo'] : '';
-	$champs['lien_doc'] = $plugin['documentation'] ? $plugin['documentation'] : '';
-	$champs['lien_demo'] = $plugin['demonstration'] ? $plugin['demonstration'] : '';
-	$champs['lien_dev'] = $plugin['developpement'] ? $plugin['developpement'] : '';
+	foreach (array(
+		'categorie'     => 'categorie',
+		'etat'          => 'etat',
+		'version_base'  => 'schema',
+		'logo'          => 'logo',
+		'lien_doc'      => 'documentation',
+		'lien_demo'     => 'demonstration',
+		'lien_dev'      => 'developpement'
+		) as $cle_champ => $cle_plugin)
+	{
+		 $champs[$cle_champ] = (isset($plugin[$cle_plugin]) and $plugin[$cle_plugin])
+			? $plugin[$cle_plugin]
+			: '';
+	}
+
+	// on normalise la version 1.3.12 => 001.003.012
+	$champs['version'] = (isset($plugin['version']) AND $plugin['version'])
+			? normaliser_version($plugin['version'])
+			: '';
 
 	// On passe le prefixe en lettres majuscules comme ce qui est fait dans SPIP
 	// Ainsi les valeurs dans la table spip_plugins coincideront avec celles de la meta plugin
@@ -28,29 +39,48 @@ function plugins_preparer_sql_paquet($plugin)
 	static $num = array('stable'=>4, 'test'=>3, 'dev'=>2, 'experimental'=>1);
 	$champs['etatnum'] = isset($num[$plugin['etat']]) ? $num[$plugin['etat']] : 0;
 
-	// Tags : liste de mots-cles
-	$champs['tags'] = ($plugin['tags']) ? serialize($plugin['tags']) : '';
-	
+
 	// On passe en utf-8 avec le bon charset les champs pouvant contenir des entites html
-	$champs['nom'] = entite2charset($plugin['nom']);
-	$champs['description'] = entite2charset($plugin['description']);
-	$champs['slogan'] = $plugin['slogan'] ? entite2charset($plugin['slogan']) : '';
-	
+	foreach (array(
+		'nom'         => 'nom',
+		'description' => 'description',
+		'slogan'      => 'slogan'
+		) as $cle_champ => $cle_plugin)
+	{
+		 $champs[$cle_champ] = (isset($plugin[$cle_plugin]) and $plugin[$cle_plugin])
+			? entite2charset($plugin[$cle_plugin])
+			: '';
+	}
+
+	// Cles necessitant d'etre serialisees
+	// Tags : liste de mots-cles
 	// Traitement des auteurs, credits, licences et copyright
-	$champs['auteur'] = ($plugin['auteur']) ? serialize($plugin['auteur']) : '';
-	$champs['credit'] = ($plugin['credit']) ? serialize($plugin['credit']) : '';
-	$champs['licence'] = ($plugin['licence']) ? serialize($plugin['licence']) : '';
-	$champs['copyright'] = ($plugin['copyright']) ? serialize($plugin['copyright']) : '';
-	
+	foreach (array(
+		'tags'       => 'tags',
+		'auteur'     => 'auteur',
+		'credit'     => 'credit',
+		'licence'    => 'licence',
+		'copyright'  => 'copyright',
+		) as $cle_champ => $cle_plugin)
+	{
+		 $champs[$cle_champ] = (isset($plugin[$cle_plugin]) and $plugin[$cle_plugin])
+			? serialize($plugin[$cle_plugin])
+			: '';
+	}
+
 	// Extraction de la compatibilite SPIP et construction de la liste des branches spip supportees
-	$champs['compatibilite_spip'] = ($plugin['compatibilite']) ? $plugin['compatibilite'] : '';
-	$champs['branches_spip'] = ($plugin['compatibilite']) ? compiler_branches_spip($plugin['compatibilite']) : '';
+	$champs['compatibilite_spip'] = (isset($plugin['compatibilite']) AND $plugin['compatibilite'])
+			? $plugin['compatibilite']
+			: '';
+	$champs['branches_spip']      = (isset($plugin['compatibilite']) AND $plugin['compatibilite'])
+			? compiler_branches_spip($plugin['compatibilite'])
+			: '';
 	
 	// Construction du tableau des dependances necessite, lib et utilise
 	$dependances['necessite'] = $plugin['necessite'];
 	$dependances['librairie'] = $plugin['lib'];
-	$dependances['utilise'] = $plugin['utilise'];
-	$champs['dependances'] = serialize($dependances);
+	$dependances['utilise']   = $plugin['utilise'];
+	$champs['dependances']    = serialize($dependances);
 
 	return $champs;
 }

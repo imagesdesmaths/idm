@@ -313,6 +313,7 @@ function recuperer_lapage($url, $trans = false, $get = 'GET', $taille_max = 1048
 function recuperer_body($f, $taille_max = 1048576, $fichier = ''){
 	$taille = 0;
 	$result = '';
+	$fp = false;
 	if ($fichier){
 		$fp = spip_fopen_lock($fichier, 'w', LOCK_EX);
 		if (!$fp)
@@ -571,7 +572,7 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 
 	// Fichier swf, si on n'a pas la taille, on va mettre 425x350 par defaut
 	// ce sera mieux que 0x0
-	if ($a['extension']=='swf'
+	if ($a AND $a['extension']=='swf'
 		AND !$a['largeur']
 	){
 		$a['largeur'] = 425;

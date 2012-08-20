@@ -61,7 +61,7 @@ function compagnonage($flux, $pipeline) {
 		}
 
 		// si c'est ok, mais que l'auteur a deja lu ca. On s'arrete.
-		if ($ok and is_array($deja_vus) and $deja_vus[$aide['id']]) {
+		if ($ok and is_array($deja_vus) and isset($deja_vus[$aide['id']]) and $deja_vus[$aide['id']]) {
 			$ok = false;
 		}
 

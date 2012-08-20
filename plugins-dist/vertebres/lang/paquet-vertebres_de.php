@@ -8,8 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// V
-	'vertebres_description' => 'Wirbel ermöglichen SQL Tabellen zu lesen, indem einer Seite der Parameter &quot;table:&quot; vorangestellt wird: <code>spip.php?page=table:articles</code>', # MODIF
-	'vertebres_nom' => 'Wirbel',
+	'vertebres_description' => 'Das Plugin Wirbelsäule ermöglicht SQL Tabellen zu lesen, indem im URL der Parameter &quot;table:&quot; angegeben wird. Beispiel: <code>ecrire/?exec=vertebres&table=spip_articles</code>',
+	'vertebres_nom' => 'Wirbelsäule',
 	'vertebres_slogan' => 'SQL Tabellen lesen'
 );
 

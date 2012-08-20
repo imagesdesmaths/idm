@@ -11,15 +11,17 @@
 \***************************************************************************/
 
 
-//
-// Fichier principal du compilateur de squelettes
-//
+/**
+ * Fichier principal du compilateur de squelettes
+ *
+ * @package SPIP\Compilateur\Compilation
+**/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// reperer un code ne calculant rien, meme avec commentaire
+/** Repérer un code ne calculant rien, meme avec commentaire */
 define('CODE_MONOTONE', ",^(\n//[^\n]*\n)?\(?'([^'])*'\)?$,");
-// s'il faut commenter le code produit
+/** Indique s'il faut commenter le code produit */
 define('CODE_COMMENTE', true);
 
 // definition des structures de donnees
@@ -113,12 +115,25 @@ function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, 
 	return $l;
 }
 
-//
-// Calculer un <INCLURE()>
-// code pour un squelette (aussi pour #INCLURE, #MODELE #LES_AUTEURS)
+/**
+ * Code d'appel à un <INCLURE()>
+ *
+ * Code PHP pour un squelette (aussi pour #INCLURE, #MODELE #LES_AUTEURS)
+ */
 define('CODE_RECUPERER_FOND', 'recuperer_fond(%s, %s, array(%s), %s)');
 
-// http://doc.spip.org/@calculer_inclure
+/**
+ * Compile une inclusion <INCLURE> ou #INCLURE
+ *
+ * @param Inclure $p
+ *     Description de l'inclusion (AST au niveau de l'inclure)
+ * @param array $boucles
+ *     AST du squelette
+ * @param string $id_boucle
+ *     Identifiant de la boucle contenant l'inclure
+ * @return string
+ *     Code PHP appelant l'inclusion
+**/
 function calculer_inclure($p, &$boucles, $id_boucle) {
 
 	$_contexte = argumenter_inclure($p->param, false, $p, $boucles, $id_boucle, true, '', true);
@@ -182,8 +197,18 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 }
 
 
+/**
+ * Gérer les statuts declarés pour cette table
+ *
+ * S'il existe des statuts sur cette table, déclarés dans la description
+ * d'un objet éditorial, applique leurs contraintes
+ *
+ * @param Boucle $boucle
+ *     Descrition de la boucle
+ * @param bool $echapper
+ *     true pour échapper le code créé
+ */
 function instituer_boucle(&$boucle, $echapper=true){
-	// gerer les statuts si declares pour cette table
 	/*
 	$show['statut'][] = array(
 		'champ'=>'statut',  // champ de la table sur lequel porte le filtrage par le statut
@@ -207,8 +232,7 @@ function instituer_boucle(&$boucle, $echapper=true){
 
 	champstatut est alors le champ statut sur la tablen
 	dans les jointures, clen peut etre un tableau pour une jointure complexe : array('id_objet','id_article','objet','article')
-	*/
-
+*/
 	$id_table = $boucle->id_table;
 	$show = $boucle->show;
 	if (isset($show['statut']) AND $show['statut']){
@@ -256,9 +280,9 @@ function instituer_boucle(&$boucle, $echapper=true){
 					$date = $id.'.'.preg_replace(',\W,','',$s['post_date']); // securite
 					array_unshift($boucle->where,
 						$echapper ?
-							"\nquete_condition_postdates('$date',"._q($boucle->serveur).")"
+							"\nquete_condition_postdates('$date',"._q($boucle->sql_serveur).")"
 						:
-							quete_condition_postdates($date,$boucle->serveur)
+							quete_condition_postdates($date,$boucle->sql_serveur)
 					);
 				}
 				array_unshift($boucle->where,
@@ -266,9 +290,9 @@ function instituer_boucle(&$boucle, $echapper=true){
 						"\nquete_condition_statut('$mstatut',"
 							. _q($s['previsu']).","
 							._q($s['publie']).","
-							._q($boucle->serveur).")"
+							._q($boucle->sql_serveur).")"
 					:
-						quete_condition_statut($mstatut,$s['previsu'],$s['publie'],$boucle->serveur)
+						quete_condition_statut($mstatut,$s['previsu'],$s['publie'],$boucle->sql_serveur)
 				);
 			}
 		}
@@ -276,22 +300,23 @@ function instituer_boucle(&$boucle, $echapper=true){
 }
 
 /**
- * calculer_boucle() produit le corps PHP d'une boucle Spip.
- * ce corps remplit une variable $t0 retournee en valeur.
- * Ici on distingue boucles recursives et boucle a requete SQL
- * et on insere le code d'envoi au debusqueur du resultat de la fonction.
+ * Produit le corps PHP d'une boucle Spip.
+ * 
+ * Ce corps remplit une variable $t0 retournée en valeur.
+ * Ici on distingue boucles recursives et boucle à requête SQL
+ * et on insère le code d'envoi au debusqueur du resultat de la fonction.
  *
- * http://doc.spip.org/@calculer_boucle
- *
- * @param  $id_boucle
- * @param  $boucles
+ * @param string $id_boucle
+ * 		Identifiant de la boucle
+ * @param array $boucles
+ * 		AST du squelette
  * @return string
+ * 		Code PHP compilé de la boucle
  */
 function calculer_boucle($id_boucle, &$boucles) {
 
 	$boucle = &$boucles[$id_boucle];
 	instituer_boucle($boucle);
-
 	$boucles[$id_boucle] = pipeline('post_boucle', $boucles[$id_boucle]);
 
 	// en mode debug memoriser les premiers passages dans la boucle,
@@ -308,31 +333,49 @@ function calculer_boucle($id_boucle, &$boucles) {
 	: calculer_boucle_nonrec($id_boucle, $boucles, $trace);
 }
 
-// compil d'une boucle recursive. 
-// il suffit (ET IL FAUT) sauvegarder les valeurs des arguments passes par
-// reference, car par definition un tel passage ne les sauvegarde pas
 
-// http://doc.spip.org/@calculer_boucle_rec
+/**
+ * Compilation d'une boucle recursive. 
+ *
+ * @internal
+ * 		Il suffit (ET IL FAUT) sauvegarder les valeurs des arguments passes par
+ * 		reference, car par definition un tel passage ne les sauvegarde pas
+ * 
+ * @param string $id_boucle
+ * 		Identifiant de la boucle
+ * @param array $boucles
+ * 		AST du squelette
+ * @param string $trace
+ * 		Code PHP (en mode debug uniquement) servant à conserver une
+ * 		trace des premières valeurs de la boucle afin de pouvoir
+ * 		les afficher dans le débugueur ultérieurement
+ * @return string
+ * 		Code PHP compilé de la boucle récursive
+**/
 function calculer_boucle_rec($id_boucle, &$boucles, $trace) {
 	$nom = $boucles[$id_boucle]->param[0];
-	return "\n\t\$save_numrows = (\$Numrows['$nom']);"
+	return
+	  // Numrows[$nom] peut ne pas être encore defini
+	  "\n\t\$save_numrows = (isset(\$Numrows['$nom']) ? \$Numrows['$nom'] : array());"
 	. "\n\t\$t0 = " . $boucles[$id_boucle]->return . ";"
 	. "\n\t\$Numrows['$nom'] = (\$save_numrows);"
 	. $trace
 	. "\n\treturn \$t0;";
 }
 
-// Compilation d'une boucle non recursive. 
-// Ci-dessous la constante donnant le cadre systematique du code:
-// %s1: initialisation des arguments de calculer_select
-// %s2: appel de calculer_select en donnant un contexte pour les cas d'erreur
-// %s3: initialisation du sous-tableau Numrows[id_boucle]
-// %s4: sauvegarde de la langue et calcul des invariants de boucle sur elle
-// %s5: boucle while sql_fetch ou str_repeat si corps monotone
-// %s6: restauration de la langue
-// %s7: liberation de la ressource, en tenant compte du serveur SQL 
-// %s8: code de trace eventuel avant le retour
-
+/**
+ * Compilation d'une boucle non recursive.
+ * 
+ * La constante donne le cadre systématique du code:
+ * %s1: initialisation des arguments de calculer_select
+ * %s2: appel de calculer_select en donnant un contexte pour les cas d'erreur
+ * %s3: initialisation du sous-tableau Numrows[id_boucle]
+ * %s4: sauvegarde de la langue et calcul des invariants de boucle sur elle
+ * %s5: boucle while sql_fetch ou str_repeat si corps monotone
+ * %s6: restauration de la langue
+ * %s7: liberation de la ressource, en tenant compte du serveur SQL 
+ * %s8: code de trace eventuel avant le retour
+**/
 define('CODE_CORPS_BOUCLE', '%s
 	$t0 = "";
 	// REQUETE
@@ -350,7 +393,20 @@ define('CODE_CORPS_BOUCLE', '%s
 	return $t0;'
 );
 
-// http://doc.spip.org/@calculer_boucle_nonrec
+/**
+ * Compilation d'une boucle (non recursive). 
+ *
+ * @param string $id_boucle
+ * 		Identifiant de la boucle
+ * @param array $boucles
+ * 		AST du squelette
+ * @param string $trace
+ * 		Code PHP (en mode debug uniquement) servant à conserver une
+ * 		trace des premières valeurs de la boucle afin de pouvoir
+ * 		les afficher dans le débugueur ultérieurement
+ * @return string
+ * 		Code PHP compilé de la boucle récursive
+**/
 function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 
 	$boucle = &$boucles[$id_boucle];
@@ -455,7 +511,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 
 	$count = '';
 	if (!$boucle->select) {
-		if (!$boucle->numrows OR $boucle->limit OR $boucle_mode_partie OR $boucle->group)
+		if (!$boucle->numrows OR $boucle->limit OR $boucle->mode_partie OR $boucle->group)
 			$count = '1';
 		else $count = 'count(*)';
 		$boucles[$id_boucle]->select[]= $count; 
@@ -498,7 +554,17 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 }
 
 
-// http://doc.spip.org/@calculer_requete_sql
+/**
+ * Calcule le code PHP d'une boucle contenant les informations qui produiront une requête SQL
+ *
+ * Le code produit est un tableau associatif $command contenant les informations
+ * pour que la boucle produise ensuite sa requête, tel que $command['from'] = 'spip_articles';
+ *
+ * @param Boucle $boucle
+ * 		AST de la boucle 
+ * @return string
+ * 		Code PHP compilé définissant les informations de requête
+**/
 function calculer_requete_sql($boucle)
 {
 	$init = array();
@@ -522,8 +588,8 @@ function calculer_requete_sql($boucle)
 	foreach ($init as $i){
 		if (reset($i))
 			$s .= "\n\t\t".end($i);
-	  else
-		  $d .= "\n\t".end($i);
+		else
+			$d .= "\n\t".end($i);
 	}
 
 	return ($boucle->hierarchie ? "\n\t$boucle->hierarchie" : '')
@@ -535,6 +601,20 @@ function calculer_requete_sql($boucle)
 		. $d;
 }
 
+/**
+ * Retourne une chaîne des informations du contexte de compilation
+ *
+ * Retourne la source, le nom, l'identifiant de boucle, la ligne, la langue
+ * de l'élément dans une chaîne.
+ *
+ * @see reconstruire_contexte_compil()
+ * 
+ * @param Object $p
+ *     Objet de l'AST dont on mémorise le contexte
+ * @return string
+ *     Informations du contexte séparés par des virgules,
+ *     qui peut être utilisé pour la production d'un tableau array()
+**/
 function memoriser_contexte_compil($p) {
 	return join(',', array(
 		_q($p->descr['sourcefile']),
@@ -544,6 +624,20 @@ function memoriser_contexte_compil($p) {
 		'$GLOBALS[\'spip_lang\']'));
 }
 
+/**
+ * Reconstruit un contexte de compilation 
+ *
+ * Pour un tableau d'information de contexte donné,
+ * retourne un objet Contexte (objet générique de l'AST)
+ * avec ces informations
+ *
+ * @see memoriser_contexte_compil()
+ * 
+ * @param array $context_compil
+ *     Tableau des informations du contexte
+ * @return Contexte
+ *     Objet Contexte
+**/
 function reconstruire_contexte_compil($context_compil)
 {
 	if (!is_array($context_compil)) return $context_compil;
@@ -897,6 +991,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	$squelette = transcoder_page($squelette);
 
 	// rendre inertes les echappements de #[](){}<>
+	$i = 0;
 	while(false !== strpos($squelette, $inerte = '-INERTE'.$i)) $i++;
 	$squelette = preg_replace_callback(',\\\\([#[()\]{}<>]),',
 		create_function('$a', "return '$inerte-'.ord(\$a[1]).'-';"), $squelette, -1, $esc);
@@ -912,8 +1007,8 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	$f = charger_fonction('phraser_' . $gram, 'public');
 
 	$squelette = $f($squelette, '', $boucles, $descr);
-
 	$boucles = compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $connect);
+
 	// restituer les echappements
 	if ($esc)
 		foreach($boucles as $i=>$boucle) {
@@ -1043,7 +1138,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 
 	// Commencer par reperer les boucles appelees explicitement 
 	// car elles indexent les arguments de maniere derogatoire
-	foreach($boucles as $id => $boucle) { 
+	foreach($boucles as $id => $boucle) {
 		if ($boucle->type_requete == TYPE_RECURSIF AND $boucle->param) {
 			$boucles[$id]->descr = &$descr;
 			$rec = &$boucles[$boucle->param[0]];
@@ -1067,7 +1162,9 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 		$id = strval($id); // attention au type dans index_pile
 		$type = $boucle->type_requete;
 		if ($type AND $type != TYPE_RECURSIF) {
+			$res = '';
 			if ($boucle->param) {
+				// retourne un tableau en cas d'erreur
 				$res = calculer_criteres($id, $boucles);
 			}
 			$descr['id_mere'] = $id;
@@ -1079,8 +1176,9 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			// Si les criteres se sont mal compiles
 			// ne pas tenter d'assembler le code final
 			// (mais compiler le corps pour detection d'erreurs)
-			if (is_array($res))
+			if (is_array($res)) {
 				$boucles[$id]->type_requete = false;
+			}
 		}
 	}
 

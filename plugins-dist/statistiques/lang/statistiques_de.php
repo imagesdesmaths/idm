@@ -8,11 +8,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_effacer_referers' => 'Effacer seulement les liens entrants', # NEW
-	'bouton_effacer_statistiques' => 'Statistiken löschen', # MODIF
+	'bouton_effacer_referers' => 'Nur eingehende Links löschen',
+	'bouton_effacer_statistiques' => 'Alle Statistiken löschen',
 
 	// C
-	'csv' => 'csv', # NEW
+	'csv' => 'CSV',
 
 	// I
 	'icone_evolution_visites' => 'Besuchsentwicklung<br />@visites@ Abrufe',
@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_visites' => 'Besuche:',
 	'info_visites_plus_populaires' => 'Seitenabrufe für die <b>beliebtesten Artikel</b> und die <b>letzten veröffentlichten Artikel:</b>',
 	'info_zoom' => 'Zoom',
-	'item_gerer_statistiques' => 'Statistiken verwalten', # MODIF
+	'item_gerer_statistiques' => 'Besucherstatistiken verwalten',
 
 	// O
 	'onglet_origine_visites' => 'Ursprung der Besuche',
@@ -39,11 +39,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'onglet_repartition_lang' => 'nach Sprachen',
 
 	// R
-	'resume' => 'Resume', # MODIF
+	'resume' => 'Zusammenfassung',
 
 	// T
 	'texte_admin_effacer_stats' => 'Dieser Befehl löscht alle Daten der Besucherstatistiken, auch die zur Popularität der Artikel.',
-	'texte_admin_effacer_toutes_stats' => 'Le premier bouton supprime toutes les statistiques : visites, popularité des articles et liens entrants.', # NEW
+	'texte_admin_effacer_toutes_stats' => 'Die erste Schaltfläche löscht alle Statistiken: Besuche, Beliebtheit der Artikel und eingehende Links.',
 	'texte_comment_lire_tableau' => 'Die Position eines Artikels wird durch einen Balken angezeigt. Seine Popularität (eine Schätzung der täglichen Besucher im Fall, dass die Zugriffe konstant bleiben) und die Anzahl der Besuche von Anfang an werden angezeigt, wenn der Mauszeiger über den Titel bewegt wird.',
 	'texte_signification' => 'Die roten Balken stellen die Summe der Einträge dar (Summe der Unterrubriken), die hellen Balken symbolisieren die Anzahl der Seitenabrufe pro Rubrik.',
 	'titre_evolution_visite' => 'Entwicklung der Seitenabrufe',

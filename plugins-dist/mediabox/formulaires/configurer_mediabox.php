@@ -43,7 +43,7 @@ function box_choisir_skin($skins,$selected,$name='skin'){
 	if (!is_array($skins) OR !count($skins))
 		return $out;
 	foreach($skins as $k=>$skin){
-		$id = "$name_".preg_replace(",[^a-z0-9_],i", "_", $k);
+		$id = "${name}_".preg_replace(",[^a-z0-9_],i", "_", $k);
 		$sel = ($selected=="$k" ?" checked='checked'":'');
 		$balise_img = chercher_filtre('balise_img');
 		$label = isset($skin['img'])?

@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_acces_refuse' => 'អ្នក​គ្មានអាចទៀត ចូលទៅ វេទិកា​ទាំងនេះ។',
 	'forum_attention_dix_caracteres' => '<b>​ប្រយ័ត្ន  !</b> សារ ​របស់​អ្នក ត្រូវtE​មាន​ប្រវែង​យ៉ាងតិច ១០ អក្សរ។',
 	'forum_attention_message_non_poste' => 'Attention, vous n\'avez pas posté votre message !', # NEW
+	'forum_attention_nb_caracteres_mini' => '<b>Attention !</b> votre message doit contenir au moins @min@ caractères.', # NEW
 	'forum_attention_trois_caracteres' => '<b>​ប្រយ័ត្ន !</b> ចំណងជើង ​របស់​អ្នក ត្រូវ​តែមាន​ប្រវែង​យ៉ាងតិច ៣ អក្សរ។',
 	'forum_attention_trop_caracteres' => '<b>​ប្រយ័ត្ន​ !</b> សារ​របស់​អ្នក ​វែង​ពេក (@compte@ ​អក្សរ​) ៖ ដើម្បី​អាចត្រូវបាន​រក្សា​វា​ទុក, វាមិនត្រូវ លើសពី @max@ អក្សរ​។', # MODIF
 	'forum_avez_selectionne' => 'អ្នក​បាន ​ជ្រើសយក ៖',
@@ -96,6 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_pas_de_forum' => 'គ្មាន​វេទិកា',
 	'info_question_visiteur_ajout_document_forum' => 'Si vous souhaitez autoriser les visiteurs à joindre des documents (images, sons...) à leurs messages de forum, indiquer ci-dessous la liste des extensions de documents autorisés pour les forums (ex: gif, jpg, png, mp3).', # MODIF
 	'info_question_visiteur_ajout_document_forum_format' => 'Si vous souhaitez autoriser tous les types de documents considérés comme fiables par SPIP, mettre une étoile. Pour ne rien autoriser, ne rien indiquer.', # MODIF
+	'info_selectionner_message' => 'Sélectionner les messages :', # NEW
 	'interface_formulaire' => 'Interface formulaire', # NEW
 	'interface_onglets' => 'Interface avec onglets', # NEW
 	'item_activer_forum_administrateur' => 'សកម្ម វេទិកា នៃអ្នកអភិបាល',
@@ -106,11 +108,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_non_config_forums_prive_objets' => 'ធ្វើអោយអសកម្ម ទីប្រជុំមតិទាំងនេះ',
 
 	// L
+	'label_selectionner' => 'Sélectionner :', # NEW
 	'lien_reponse_article' => 'ចំលើយ ទៅ​អត្ថបទ',
 	'lien_reponse_breve_2' => 'ចំលើយ ទៅ​ពត៌មានខ្លី',
 	'lien_reponse_message' => 'Réponse au message', # NEW
 	'lien_reponse_rubrique' => 'ចំលើយ ទៅផ្នែក',
 	'lien_reponse_site_reference' => 'ចំលើយ ទៅវ៉ែបសៃថ៍យោង៖', # MODIF
+	'lien_vider_selection' => 'Vider la selection', # NEW
 
 	// M
 	'messages_aucun' => 'Aucun', # NEW

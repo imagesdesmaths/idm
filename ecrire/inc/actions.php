@@ -12,8 +12,24 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-
-// http://doc.spip.org/@generer_action_auteur
+/**
+ * retourne une URL ou un formulaire securises
+ *
+ * http://doc.spip.org/@generer_action_auteur
+ *
+ * @param string $action
+ * @param string $arg
+ * @param string $redirect
+ * @param bool|int|string $mode
+ *   -1 : renvoyer action, arg et hash sous forme de array()
+ *   true ou false : renvoyer une url, avec &amp; (false) ou & (true)
+ *   string : renvoyer un formulaire
+ * @param string|int $att
+ *   id_auteur pour lequel generer l'action en mode url ou array()
+ *   atributs du formulaire en mode formulaire
+ * @param bool $public
+ * @return array|string
+ */
 function generer_action_auteur($action, $arg, $redirect = "", $mode = false, $att = '', $public = false){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	return $securiser_action($action, $arg, $redirect, $mode, $att, $public);
@@ -42,7 +58,7 @@ function redirige_action_post($action, $arg, $ret, $gra, $corps, $att = ''){
  * @param string $corps
  * @param string $content_type
  *   permet de definir le type de contenu renvoye.
- *   Si rien de précisé, ou si true c'est "text/html" avec un entete xml en plus.
+ *   Si rien de prÃ©cisÃ©, ou si true c'est "text/html" avec un entete xml en plus.
  *   La valeur speciale false fournit text/html sans entete xml. Elle equivaut a
  *   passer "text/html" comme $content_type
  */
@@ -60,7 +76,7 @@ function ajax_retour($corps, $content_type = null){
 	if (isset($_COOKIE['spip_admin'])
 	    AND ((_request('var_mode')=='debug') OR !empty($GLOBALS['tableau_des_temps'])))
 		$e = erreur_squelette();
-	if (isset($GLOBALS['transformer_xml']) OR $GLOBALS['exec']=='valider_xml'){
+	if (isset($GLOBALS['transformer_xml']) OR (isset($GLOBALS['exec']) AND $GLOBALS['exec']=='valider_xml')){
 		$debut = _DOCTYPE_ECRIRE
 		         ."<html><head><title>Debug Spip Ajax</title></head>"
 		         ."<body><div>\n\n"
@@ -72,6 +88,7 @@ function ajax_retour($corps, $content_type = null){
 		$c = $GLOBALS['meta']["charset"];
 		header('Content-Type: '.$content_type.'; charset='.$c);
 		$debut = (($xml AND strlen(trim($corps))) ? '<'."?xml version='1.0' encoding='".$c."'?".">\n" : '');
+		$fin = "";
 	}
 	echo $debut, $corps, $fin, $e;
 }

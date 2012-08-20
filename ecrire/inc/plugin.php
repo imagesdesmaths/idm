@@ -115,17 +115,44 @@ function is_plugin_dir($dir,$dir_plugins = null){
 	return '';
 }
 
-// Regexp d'extraction des informations d'un inetervalle de compatibilite
+// Regexp d'extraction des informations d'un intervalle de compatibilité
 define('_EXTRAIRE_INTERVALLE', ',^[\[\(\]]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-\*]*)[\]\)\[]$,');
 
-// http://doc.spip.org/@plugin_version_compatible
-function plugin_version_compatible($intervalle,$version){
+/**
+ * Teste si le numéro de version d'un plugin est dans un intervalle donné.
+ *
+ * Cette fonction peut être volontairement trompée (phase de développement) :
+ * voir commentaire infra sur l'utilisation de la constante _DEV_PLUGINS
+ *
+ * @param string $intervalle
+ * 		Un intervalle entre 2 versions. ex: [2.0.0-dev;2.1.*]
+ * @param string $version
+ * 		Un numéro de version. ex: 3.1.99]
+ * @param string $avec_quoi
+ * 		Ce avec quoi est testée la compatibilité. par défaut ('')
+ * 		avec un plugin (cas des 'necessite'), parfois ('spip')
+ * 		avec SPIP.
+ * @return bool
+ * 		True si dans l'intervalle, false sinon.
+**/
+function plugin_version_compatible($intervalle, $version, $avec_quoi = '') {
+
 	if (!strlen($intervalle)) return true;
 	if (!preg_match(_EXTRAIRE_INTERVALLE,$intervalle,$regs)) return false;
 	// Extraction des bornes et traitement de * pour la borne sup :
 	// -- on autorise uniquement les ecritures 3.0.*, 3.*
 	$minimum = $regs[1];
 	$maximum = $regs[2];
+
+	//  si une borne de compatibilité supérieure a été définie (dans
+	//  mes_options.php, sous la forme : define('_DEV_PLUGINS', '3.1.99');
+	//  on l'utilise (phase de dev, de test...) mais *que* en cas de comparaison
+	//  avec la version de SPIP (ne nuit donc pas aux tests de necessite
+	//  entre plugins)
+	if (defined('_DEV_PLUGINS') && $avec_quoi == 'spip') {
+		$maximum = _DEV_PLUGINS.']';
+	}
+
 	$minimum_inc = $intervalle{0}=="[";
 	$maximum_inc = substr($intervalle,-1)=="]";
 
@@ -203,7 +230,7 @@ function plugin_valide_resume(&$liste, $plug, $infos, $dir)
 	$i = $infos[$dir][$plug];
 	if (isset($i['erreur']) AND $i['erreur'])
 		return;
-	if (!plugin_version_compatible($i['compatibilite'], $GLOBALS['spip_version_branche']))
+	if (!plugin_version_compatible($i['compatibilite'], $GLOBALS['spip_version_branche'],'spip'))
 		return;
 	$p = strtoupper($i['prefix']);
 	if (!isset($liste[$p]) 
@@ -281,7 +308,7 @@ function plugin_trier($infos, $liste_non_classee)
 			      $info1 = false;
 			      break;
 			  }
-			}		    
+			}
 			if (!$info1) continue;
 			// idem si des plugins sont utiles,
 			// sauf si ils sont de toute facon absents de la liste
@@ -290,7 +317,7 @@ function plugin_trier($infos, $liste_non_classee)
 			  $compat = isset($need['compatibilite']) ? $need['compatibilite'] : '';
 			  if (isset($toute_la_liste[$nom])) {
 			    if (!isset($liste[$nom]) OR 
-				!plugin_version_compatible($compat,$liste[$nom]['version'])) {
+				!plugin_version_compatible($compat, $liste[$nom]['version'])) {
 			      $info1 = false;
 			      break;
 			    }
@@ -305,7 +332,7 @@ function plugin_trier($infos, $liste_non_classee)
 	}
 	return array($liste, $ordre, $liste_non_classee);
 }
-		
+
 // Collecte les erreurs dans la meta 
 
 function plugins_erreurs($liste_non_classee, $liste, $infos, $msg=array())
@@ -471,7 +498,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	if (isset($GLOBALS['meta']['message_crash_plugins']))
 		effacer_meta('message_crash_plugins');
 	ecrire_meta('plugin',serialize($plugin_valides));
-	$liste = array_diff_assoc($liste,$plugin_valides);
+	$liste = array_diff_key($liste,$plugin_valides);
 	ecrire_meta('plugin_attente',serialize($liste));
 	ecrire_meta('plugin_header',substr(strtolower(implode(",",$header)),0,900));
 	// generer charger_plugins_chemin.php
@@ -495,9 +522,11 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 
 function plugins_precompile_chemin($plugin_valides, $ordre)
 {
-	if (defined('_DIR_PLUGINS_SUPPL'))
+	$dir_plugins_suppl = "";
+	if (defined('_DIR_PLUGINS_SUPPL')) {
 		$dir_plugins_suppl = ":" . implode(array_filter(explode(':',_DIR_PLUGINS_SUPPL)),'|') . ":";
-	
+	}
+
 	$chemins = array();
 	$contenu = "";
 	foreach($ordre as $p => $info){
@@ -508,16 +537,16 @@ function plugins_precompile_chemin($plugin_valides, $ordre)
 			// definir le plugin, donc le path avant l'include du fichier options
 			// permet de faire des include_spip pour attraper un inc_ du plugin
 
-			if($dir_plugins_suppl && preg_match($dir_plugins_suppl,$plug)){
+			if ($dir_plugins_suppl && preg_match($dir_plugins_suppl,$plug)){
 				$dir = "_DIR_RACINE.'".str_replace(_DIR_RACINE,'',$plug)."/'";
-			}else{
+			} else {
 				$dir = $dir_type.".'" . $plug ."/'";
 			}
 			$prefix = strtoupper(preg_replace(',\W,','_',$info['prefix']));
 			if ($prefix!=="SPIP"){
 				$contenu .= "define('_DIR_PLUGIN_$prefix',$dir);\n";
 				foreach($info['chemin'] as $chemin){
-					if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'])){
+					if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'],'spip')){
 						$dir = $chemin['path'];
 						if (strlen($dir) AND $dir{0}=="/") $dir = substr($dir,1);
 						if (strlen($dir) AND $dir=="./") $dir = '';

@@ -1,10 +1,10 @@
 <traduction module="svp" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_core_/plugins/svp/lang/" reference="fr">
 	<langue code="ar" url="http://trad.spip.org/tradlang_module/svp?lang_cible=ar">
-		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
+		<traducteur nom="&lt;span lang=&#039;fr&#039;&gt;George&lt;/span&gt;" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
 	</langue>
 	<langue code="en" url="http://trad.spip.org/tradlang_module/svp?lang_cible=en">
 		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
-		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
+		<traducteur nom="&lt;span lang=&#039;fr&#039;&gt;George&lt;/span&gt;" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
 		<traducteur nom="Paolo" lien="http://trad.spip.org/auteur/paolo" />
 	</langue>
 	<langue code="es" url="http://trad.spip.org/tradlang_module/svp?lang_cible=es">

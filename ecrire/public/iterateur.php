@@ -35,7 +35,7 @@ class IterFactory{
 		}
 
 		// chercher un iterateur PHP existant (par exemple dans SPL)
-		// (il faudrait passer l'argument ->serveur
+		// (il faudrait passer l'argument ->sql_serveur
 		// pour etre certain qu'on est sur un "php:")
 		if (class_exists($iterateur)) {
 			$a = isset($command['args']) ? $command['args'] : array() ;
@@ -117,6 +117,13 @@ class IterDecorator extends FilterIterator {
 	protected $fetched=0;
 
 	/**
+	 * Y a t'il une erreur ?
+	 * 
+	 * @var bool
+	**/
+	protected $err = false;
+
+	/**
 	 * Drapeau a activer en cas d'echec
 	 * (select SQL errone, non chargement des DATA, etc)
 	 */
@@ -146,7 +153,10 @@ class IterDecorator extends FilterIterator {
 			$this->calculer_filtres();
 		}
 
-		$this->err = $this->iter->err;
+		// emptyIterator critere {si} faux n'a pas d'erreur !
+		if (isset($this->iter->err)) {
+			$this->err = $this->iter->err;
+		}
 
 		// pas d'init a priori, le calcul ne sera fait qu'en cas de besoin (provoque une double requete souvent inutile en sqlite)
 		//$this->total = $this->count();
@@ -202,7 +212,7 @@ class IterDecorator extends FilterIterator {
 	private function calculer_filtres() {
 		
 		// Issu de calculer_select() de public/composer L.519
-		// [todo] externaliser...
+		// TODO: externaliser...
 		//
 		// retirer les criteres vides:
 		// {X ?} avec X absent de l'URL
@@ -255,7 +265,7 @@ class IterDecorator extends FilterIterator {
 		}
 
 		// critere {2,7}
-		if ($this->command['limit']) {
+		if (isset($this->command['limit']) AND $this->command['limit']) {
 			$limit = explode(',',$this->command['limit']);
 			$this->offset = $limit[0];
 			$this->limit = $limit[1];
@@ -275,7 +285,7 @@ class IterDecorator extends FilterIterator {
 				return;
 			}
 		}
-		# [todo ?] analyser le filtre pour refuser ce qu'on ne sait pas traiter ?
+		// TODO: analyser le filtre pour refuser ce qu'on ne sait pas traiter ?
 		# mais c'est normalement deja opere par calculer_critere_infixe()
 		# qui regarde la description 'desc' (en casse reelle d'ailleurs : {isDir=1}
 		# ne sera pas vu si l'on a defini desc['field']['isdir'] pour que #ISDIR soit present.

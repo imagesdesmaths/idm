@@ -198,7 +198,7 @@ function joindre_verifier_zip($files){
 	 AND !isset($files[0]['distant'])
 	 AND 
 	  (preg_match('/\.zip$/i', $files[0]['name']) 
-	   OR ($files[0]['type'] == 'application/zip'))
+	   OR (isset($files[0]['type']) AND $files[0]['type'] == 'application/zip'))
 	  ){
 	
 	  // on pose le fichier dans le repertoire zip 

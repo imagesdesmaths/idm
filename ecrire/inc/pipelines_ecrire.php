@@ -10,10 +10,29 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Fonctions déclarées dans des pipelines (espace privé)
+ *
+ * @package SPIP\Pipelines
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// Inserer jQuery pour ecrire/
-// http://doc.spip.org/@f_jQuery
+
+/**
+ * Inserer jQuery et ses plugins pour l'espace privé
+ *
+ * La fonction ajoute les balises scripts dans le texte qui appelent
+ * les scripts jQuery ainsi que certains de ses plugins. La liste
+ * des js chargée peut être complété par le pipeline 'jquery_plugins'
+ *
+ * Cette fonction est appelée par le pipeline header_prive
+ *
+ * @see f_jQuery()
+ * @link http://doc.spip.org/@f_jQuery
+ * 
+ * @param string $texte    Contenu qui sera inséré dans le head HTML
+ * @return string          Contenu complété des scripts javascripts, dont jQuery
+**/
 function f_jQuery_prive ($texte) {
 	$x = '';
 	$jquery_plugins = pipeline('jquery_plugins',
@@ -42,8 +61,9 @@ function f_jQuery_prive ($texte) {
 
 
 /**
- * Ajout automatique du title dans les pages du prive en squelette
- * appelle dans le pipeline affichage_final_prive
+ * Ajout automatique du title dans les pages du privé en squelette
+ * 
+ * Appellé dans le pipeline affichage_final_prive
  *
  * @param string $texte
  * @return string
@@ -110,7 +130,9 @@ function f_afficher_blocs_ecrire($flux) {
 			$flux['data']['texte'] = pipeline('affiche_droite',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte'])).liste_objets_bloques($exec,$flux['args']['contexte']);
 		}
 		elseif ($fond=="prive/squelettes/hierarchie/$exec" AND $o[$exec]) {
-			$flux['data']['texte'] = pipeline('affiche_hierarchie',array('args'=>array('objet'=>$o[$exec]['type'],'id_objet'=>intval($flux['args']['contexte'][$o[$exec]['id_table_objet']])),'data'=>$flux['data']['texte']));
+			// id non defini sur les formulaire de nouveaux objets
+			$id = isset($flux['args']['contexte'][$o[$exec]['id_table_objet']]) ? intval($flux['args']['contexte'][$o[$exec]['id_table_objet']]) : 0;
+			$flux['data']['texte'] = pipeline('affiche_hierarchie',array('args'=>array('objet'=>$o[$exec]['type'],'id_objet'=>$id),'data'=>$flux['data']['texte']));
 		}
 		elseif ($fond=="prive/squelettes/contenu/$exec"){
 			if (!strpos($flux['data']['texte'],"<!--affiche_milieu-->"))
@@ -134,9 +156,12 @@ function f_afficher_blocs_ecrire($flux) {
 			$flux['data']['texte'] = pipeline('affiche_pied',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte']));
 		}
 		elseif (strncmp($fond,"prive/objets/contenu/",21)==0
-		  AND $objet=basename($fond)
-			AND $objet==substr($fond,21)){
-			$flux['data']['texte'] = pipeline('afficher_contenu_objet',array('args'=>array('type'=>$objet,'id_objet'=>$flux['args']['contexte']['id'],'contexte'=>$flux['args']['contexte']),'data'=>$flux['data']['texte']));
+			AND $objet=basename($fond)
+			AND $objet==substr($fond,21)
+			AND isset($o[$objet]) 
+			AND $o[$objet]) {
+				$id = intval($flux['args']['contexte'][$o[$exec]['id_table_objet']]);
+				$flux['data']['texte'] = pipeline('afficher_contenu_objet',array('args'=>array('type'=>$objet,'id_objet'=>$id,'contexte'=>$flux['args']['contexte']),'data'=>$flux['data']['texte']));
 		}
 	}
 

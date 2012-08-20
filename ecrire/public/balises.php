@@ -176,10 +176,10 @@ function balise_SPIP_VERSION_dist($p) {
  * 			<a href="#URL_SITE">#NOM_SITE</a>
  * 		</code>
  *
- * @param array $p
+ * @param Champ $p
  * 		Pile au niveau de la balise
- * @return array
- * 		Pile complete par le code a generer
+ * @return Champ
+ * 		Pile complétée par le code à générer
 **/
 function balise_NOM_SITE_dist($p) {
 	if (!$p->etoile) {
@@ -574,7 +574,7 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	$modif = ($type[0]!=="'") ? "'debut'.$type"
 	  : ("'debut" .substr($type,1));
 
-	$p->code = sprintf(CODE_PAGINATION, $f_pagination,$b, $type, $modif, $pas, $liste, ($__modele ? $__modele : "''"), _q($connect), $code_contexte);
+	$p->code = sprintf(CODE_PAGINATION, $f_pagination, $b, $type, $modif, $pas, $liste, ((isset($__modele) and $__modele) ? $__modele : "''"), _q($connect), $code_contexte);
 
 	$p->boucles[$b]->numrows = true;
 	$p->interdire_scripts = false;
@@ -676,14 +676,14 @@ function balise_CHEMIN_IMAGE_dist($p) {
  * anti-javascript, par exemple en filtrant avec |safehtml : [(#ENV*{toto}|safehtml)]
  * 
  *
- * @param array $p
+ * @param Champ $p
  * 		Pile ; arbre de syntaxe abstrait positionne au niveau de la balise.
  *
  * @param array $src
  * 		Tableau dans lequel chercher la cle demandee en parametre de la balise.
  * 		Par defaut prend dans le contexte du squelette.
  *  
- * @return array $p
+ * @return Champ $p
  * 		Pile completee du code PHP d'execution de la balise
 **/
 function balise_ENV_dist($p, $src = NULL) {
@@ -1145,14 +1145,21 @@ function balise_GET_dist($p) {
 }
 
 
-// #DOUBLONS{mots} ou #DOUBLONS{mots,famille}
-// donne l'etat des doublons (MOTS) a cet endroit
-// sous forme de tableau d'id_mot  array(1,2,3,...)
-// #DOUBLONS tout seul donne la liste brute de tous les doublons
-// #DOUBLONS*{mots} donne la chaine brute ",1,2,3,..."
-// (changera si la gestion des doublons evolue)
-//
-// http://doc.spip.org/@balise_DOUBLONS_dist
+/**
+ * Compile la balise #DOUBLONS
+ * 
+ * #DOUBLONS{mots} ou #DOUBLONS{mots,famille}
+ * donne l'etat des doublons (MOTS) a cet endroit
+ * sous forme de tableau d'id_mot  array(1,2,3,...)
+ * #DOUBLONS tout seul donne la liste brute de tous les doublons
+ * #DOUBLONS*{mots} donne la chaine brute ",1,2,3,..."
+ * (changera si la gestion des doublons evolue)
+ * 
+ * @param Champ $p
+ * 		Pile au niveau de la balise
+ * @return Champ
+ * 		Pile complétée par le code à générer
+**/
 function balise_DOUBLONS_dist($p) {
 	if ($type = interprete_argument_balise(1,$p)) {
 		if ($famille = interprete_argument_balise(2,$p))
@@ -1524,7 +1531,7 @@ function balise_PRODUIRE_dist($p){
 function balise_LARGEUR_ECRAN_dist($p){
 	$_class = interprete_argument_balise(1,$p);
 	if (!$_class) $_class='null';
-	$p->code = "(is_string($_class)?vide(\$GLOBALS['largeur_ecran']=$_class):\$GLOBALS['largeur_ecran'])";
+	$p->code = "(is_string($_class)?vide(\$GLOBALS['largeur_ecran']=$_class):(isset(\$GLOBALS['largeur_ecran'])?\$GLOBALS['largeur_ecran']:''))";
 	return $p;
 }
 ?>

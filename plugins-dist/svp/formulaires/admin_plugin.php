@@ -7,7 +7,9 @@ function formulaires_admin_plugin_charger_dist($voir='actif', $verrouille='non',
 
 	// actualiser la liste des paquets locaux systematiquement
 	include_spip('inc/svp_depoter_local');
-	svp_actualiser_paquets_locaux();
+	// sans forcer tout le recalcul en base, mais en récupérant les erreurs XML
+	$valeurs['erreurs_xml'] = array();
+	svp_actualiser_paquets_locaux(false, $valeurs['erreurs_xml']);
 
 	$valeurs['actif'] = 'oui';
 	if ($voir == 'inactif')
@@ -38,8 +40,10 @@ function formulaires_admin_plugin_verifier_dist($voir='actif', $verrouille='non'
 		// Requete : Annulation des actions d'installation en cours
 		// -- On vide la liste d'actions en cours
 		set_request('_todo', '');
+		// -- vider les paquets coches s'il y en a
+		set_request('ids_paquet', array());
 	} elseif (_request('valider_actions')) {
-		// ...
+		// ... 
 	} else {
 		$a_actionner = array();
 		

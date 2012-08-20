@@ -24,9 +24,11 @@ function req_sqlite2_dist($addr, $port, $login, $pass, $db='', $prefixe='') {
 
 // http://doc.spip.org/@spip_sqlite2_constantes
 function spip_sqlite2_constantes(){
-	define('SPIP_SQLITE2_ASSOC', SQLITE_ASSOC);
-	define('SPIP_SQLITE2_NUM', SQLITE_NUM);
-	define('SPIP_SQLITE2_BOTH', SQLITE_BOTH);
+	if (!defined('SPIP_SQLITE2_ASSOC')) {
+		define('SPIP_SQLITE2_ASSOC', SQLITE_ASSOC);
+		define('SPIP_SQLITE2_NUM',   SQLITE_NUM);
+		define('SPIP_SQLITE2_BOTH',  SQLITE_BOTH);
+	}
 }
 
 function spip_versions_sqlite2()

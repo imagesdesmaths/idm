@@ -53,6 +53,7 @@ function afficher_para_modifies ($texte, $court = false) {
 	if ($court) $max = 200;
 	else $max = 2000;
 
+	$texte_ret = "";
 	$paras = explode ("\n",$texte);
 	for ($i = 0; $i < count($paras) AND strlen($texte_ret) < $max; $i++) {
 		if (strpos($paras[$i], '"diff-')) $texte_ret .= $paras[$i]."\n\n";

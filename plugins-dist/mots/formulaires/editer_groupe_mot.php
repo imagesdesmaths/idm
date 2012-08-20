@@ -35,7 +35,7 @@ function formulaires_editer_groupe_mot_charger_dist($id_groupe='new',$retour='',
  * ne representent pas l'objet edite
  */
 function formulaires_editer_groupe_mot_identifier_dist($id_groupe='new',$retour='', $config_fonc='groupes_mots_edit_config', $row=array(), $hidden=''){
-	return serialize(array($id_groupe));
+	return serialize(array(intval($id_groupe)));
 }
 
 // Choix par defaut des options de presentation

@@ -102,6 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_teleporter_format_archive_non_supporte' => 'Premiestňovací program nepodporuje formát @extension@',
 	'erreur_teleporter_methode_inconue' => 'Premiestňovací program nepozná metódu @methode@',
 	'erreur_teleporter_type_fichier_inconnu' => 'Neznámy typ súboru pre zdroj @source@',
+	'erreurs_xml' => 'Niektoré popisy XML sa nedajú prečítať',
 	'explication_destination' => 'Ak nevyplníte umiestnenie, určí sa podľa názvu archívu.',
 
 	// F

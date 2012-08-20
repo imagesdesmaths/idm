@@ -1,6 +1,6 @@
 <traduction module="petitions" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_core_/plugins/petitions/lang/" reference="fr">
 	<langue code="ar" url="http://trad.spip.org/tradlang_module/petitions?lang_cible=ar">
-		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
+		<traducteur nom="&lt;span lang=&#039;fr&#039;&gt;George&lt;/span&gt;" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
 	</langue>
 	<langue code="de" url="http://trad.spip.org/tradlang_module/petitions?lang_cible=de">
 		<traducteur nom="klaus++" lien="http://trad.spip.org/auteur/klaus" />
@@ -8,7 +8,7 @@
 	<langue code="en" url="http://trad.spip.org/tradlang_module/petitions?lang_cible=en">
 		<traducteur nom="sQuonk" lien="http://trad.spip.org/auteur/squonk" />
 		<traducteur nom="kent1" lien="http://trad.spip.org/auteur/kent1" />
-		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
+		<traducteur nom="&lt;span lang=&#039;fr&#039;&gt;George&lt;/span&gt;" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
 	</langue>
 	<langue code="fa" url="http://trad.spip.org/tradlang_module/petitions?lang_cible=fa">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.org/auteur/davood-hossein" />

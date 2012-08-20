@@ -159,6 +159,10 @@ function ajouter_session($auteur) {
 			time() + $duree
 			);
 		spip_log("ajoute session $fichier_session cookie $duree");
+
+		# on en profite pour purger les vieilles sessions abandonnees
+		supprimer_sessions(0, true, false);
+
 		return $_COOKIE['spip_session'];
 	}
 }
@@ -251,7 +255,7 @@ function verifier_session($change=false) {
  * @return mixed
  */
 function session_get($nom) {
-	return $GLOBALS['visiteur_session'][$nom];
+	return isset($GLOBALS['visiteur_session'][$nom]) ? $GLOBALS['visiteur_session'][$nom] : null;
 }
 
 

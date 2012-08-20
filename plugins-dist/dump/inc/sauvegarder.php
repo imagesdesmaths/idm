@@ -19,7 +19,7 @@ function inc_sauvegarder_dist($status_file, $redirect='') {
 	if (!lire_fichier($status_file, $status)
 		OR !$status = unserialize($status)) {
 	}
-	else {		
+	else {
 		$timeout = ini_get('max_execution_time');
 		// valeur conservatrice si on a pas reussi a lire le max_execution_time
 		if (!$timeout) $timeout=30; // parions sur une valeur tellement courante ...
@@ -40,6 +40,7 @@ function inc_sauvegarder_dist($status_file, $redirect='') {
 		spip_connect('dump');
 
 		// au premier coup on ne fait rien sauf afficher l'ecran de sauvegarde
+		$res = false;
 		if (_request('step')) {
 			$options = array(
 				'callback_progression' => 'dump_afficher_progres',

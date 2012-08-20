@@ -175,7 +175,7 @@ function xml_sax_dist($page, $apply=false, $phraseur=NULL, $doctype='', $charset
 			  . preg_replace(_REGEXP_DOCTYPE, '', $page);
 			$r =  analyser_doctype($page);
 		}
-		list($entete, $avail, $grammaire, $rotlvl) = $r;
+		list($entete, $avail, $grammaire, $rotlvl) = array_pad($r, 4, null);
 		$page = substr($page,strlen($entete));
 	} else {
 		$avail = 'SYSTEM';
@@ -211,7 +211,9 @@ function xml_sax_dist($page, $apply=false, $phraseur=NULL, $doctype='', $charset
 	xml_parser_set_option($xml_parser, XML_OPTION_CASE_FOLDING, false);
 
 	$phraseur->sax = $xml_parser;
-	$phraseur->entete = $entete;
+	if (isset($entete)) {
+		$phraseur->entete = $entete;
+	}
 	$phraseur->page = $page;
 	$phraseur->dtc = $dtc;
 	$phraseur->phraserTout($xml_parser, $page);

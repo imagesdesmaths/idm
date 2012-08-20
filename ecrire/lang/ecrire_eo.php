@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_effacer_tout' => 'Forviŝi ĈION',
 	'bouton_envoi_message_02' => 'SENDI MESAĜON',
 	'bouton_envoyer_message' => 'Definitiva mesaĝo: sendi',
-	'bouton_fermer' => 'Fermer', # NEW
+	'bouton_fermer' => 'Fermi',
 	'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 	'bouton_modifier' => 'Modifi',
 	'bouton_pense_bete' => 'PROPRA MEMORIGILO',
@@ -138,7 +138,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
 	'entree_informations_connexion_ldap' => 'En tiun formularon, bonvolu entajpi informojn por konekti al via LDAP-dosierujilo. Tiujn informojn disponigu al vi la sistema aŭ reta mastrumanto.',
 	'entree_infos_perso' => 'Kiu vi estas ?',
-	'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
+	'entree_infos_perso_2' => 'Kiu estas la aŭtoro ?',
 	'entree_interieur_rubrique' => 'En la rubriko :',
 	'entree_liens_sites' => '<b>Hiperligilo</b> (referenco, vizitinda retejo...)',
 	'entree_login' => 'Via salutnomo',
@@ -228,7 +228,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_article' => '1 artikolo',
 	'info_1_article_syndique' => '1 article syndiqué', # NEW
 	'info_1_auteur' => '1 auteur', # NEW
-	'info_1_message' => '1 message', # NEW
+	'info_1_message' => '1 mesaĝo',
 	'info_1_mot_cle' => '1 mot-clé', # NEW
 	'info_1_rubrique' => '1 rubrique', # NEW
 	'info_1_site' => '1 retejo',
@@ -864,7 +864,7 @@ SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
   je ĝia defaŭlta valoro (neniu dosier-kreo).
 ', # MODIF
 	'texte_informations_personnelles_1' => 'La sistemo kreos por vi nun personan alireblon al la retejo.',
-	'texte_informations_personnelles_2' => '(Noto: se temas pri reinstalo kaj se via aliro daŭre funkcias, vi povas',
+	'texte_informations_personnelles_2' => '(Noto: se temas pri reinstalo kaj se via aliro daŭre funkcias, vi povas', # MODIF
 	'texte_introductif_article' => '(Enkonduka teksto al la artikolo.)',
 	'texte_jeu_caractere' => 'Ni konsilas al vi uzi, en via retejo, universalan alfabeton (<tt>utf-8</tt>) : tio ebligas afiŝadon de tekstoj en ĉiuj lingvoj kaj solvas problemojn de kongrueco se vi uzas modernajn retumilojn.',
 	'texte_jeu_caractere_2' => 'Atentu : tiu agordo ne konvertas tekstojn jam registritajn en la datenbazo.',

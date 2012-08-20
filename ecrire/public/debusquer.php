@@ -57,7 +57,7 @@ function public_debusquer_dist($message = '', $lieu = ''){
 		set_request('var_mode', 'debug');
 		$GLOBALS['bouton_admin_debug'] = true;
 		// Permettre a la compil de continuer
-		if (is_object($lieu) AND !$lieu->code)
+		if (is_object($lieu) AND (!isset($lieu->code) OR !$lieu->code))
 			$lieu->code = "''";
 		// forcer l'appel au debusqueur en cas de boucles infernales
 		$urgence = (_DEBUG_MAX_SQUELETTE_ERREURS AND count($tableau_des_erreurs)>_DEBUG_MAX_SQUELETTE_ERREURS);
@@ -116,15 +116,22 @@ function public_debusquer_dist($message = '', $lieu = ''){
 
 function debusquer_compose_message($msg){
 	if (is_array($msg)){
-		// sqlite renvoit des erreurs alpha num
-		if (!is_numeric($msg[0]) AND count($msg)==2)
+		// si c'est un texte, c'est une traduction a faire, mais
+		// sqlite renvoit aussi des erreurs alpha num (mais avec 3 arguments)
+		if (!is_numeric($msg[0]) AND count($msg)==2) {
 			// message avec argument: instancier
 			$msg = _T($msg[0], $msg[1], 'spip-debug-arg');
-		else
+		} else {
 			// message SQL: interpreter
 			$msg = debusquer_requete($msg);
+		}
 	}
-	spip_log("Debug: " . $msg . " (" . $GLOBALS['fond'] . ")");
+	// FIXME: le fond n'est pas la si on n'est pas dans un squelette
+	// cela dit, ca serait bien d'indiquer tout de meme d'ou vient l'erreur
+	$fond = isset($GLOBALS['fond']) ? $GLOBALS['fond']  : "";
+	// une erreur critique sort $message en array
+	$debug = is_array($msg) ? $msg[1] : $msg;
+	spip_log("Debug: " . $debug . " (" . $fond . ")");
 	return $msg;
 }
 
@@ -224,24 +231,38 @@ function debusquer_navigation($tableau, $caption = '', $id = 'debug-nav'){
 		. "</table>";
 }
 
-//
-// Si une boucle cree des soucis, on peut afficher la requete fautive
-// avec son code d'erreur
-//
 
+/**
+ * Retourne le texte d'un message d'erreur de requête 
+ *
+ * Si une boucle cree des soucis, on peut afficher la requete fautive
+ * avec son code d'erreur
+ *
+ * @param array $message
+ * 		Description du message en 3 éléments :
+ * 		- numéro d'erreur
+ * 		- texte de l'erreur
+ * 		- requête en erreur
+ * @return string|array
+ * 		Retourne le texte de l'erreur a afficher
+ * 		ou un tableau si l'erreur est critique
+**/
 function debusquer_requete($message){
 	list($errno, $msg, $query) = $message;
+
+	// FIXME: ces écritures mélangent divers syntaxe des moteurs SQL
+	// il serait plus prudent certainement d'avoir une fonction d'analyse par moteur
 	if (preg_match(',err(no|code):?[[:space:]]*([0-9]+),i', $msg, $regs)){
 		$errno = $regs[2];
-
 	}
-	elseif (($errno==1030 OR $errno<=1026)
+	elseif (is_numeric($errno) and ($errno==1030 OR $errno<=1026)
 		AND preg_match(',[^[:alnum:]]([0-9]+)[^[:alnum:]],', $msg, $regs)
-	)
+	) {
 		$errno = $regs[1];
+	}
 
 	// Erreur systeme
-	if ($errno>0 AND $errno<200){
+	if (is_numeric($errno) and $errno>0 AND $errno<200){
 		$retour = "<tt><br /><br /><blink>"
 			. _T('info_erreur_systeme', array('errsys' => $errno))
 			. "</blink><br />\n<b>"
@@ -251,8 +272,8 @@ function debusquer_requete($message){
 		spip_log("Erreur systeme $errno");
 		return array($retour, '');
 	}
-	// Requete erronee
 
+	// Requete erronee
 	$err = "<b>" . _T('avis_erreur_mysql') . " $errno</b><br /><tt>\n"
 		. htmlspecialchars($msg)
 		. "\n<br /><span style='color: red'><b>"
@@ -262,6 +283,8 @@ function debusquer_requete($message){
 
 	return $err;
 }
+
+
 
 // http://doc.spip.org/@trouve_boucle_debug
 function trouve_boucle_debug($n, $nom, $debut = 0, $boucle = ""){
@@ -400,7 +423,7 @@ function ancre_texte($texte, $fautifs = array(), $nocpt = false){
 		. "\$(this).parent().find('a').toggle();"
 		. '" title="'
 		. _T('masquer_colonne')
-		. '" >'
+		. '" style="cursor: pointer;">'
 		. ($nocpt ? '' : _T('info_numero_abbreviation'))
 		. "</div>
 	" . $res . "</div>\n";
@@ -412,7 +435,7 @@ function debusquer_squelette($fonc, $mode, $self){
 	global $debug_objets;
 
 	if ($mode!=='validation'){
-		if ($debug_objets['sourcefile']){
+		if (isset($debug_objets['sourcefile']) and $debug_objets['sourcefile']){
 			$res = "<div id='spip-boucles'>\n"
 				. debusquer_navigation_squelettes($self)
 				. "</div>";
@@ -455,9 +478,9 @@ function debusquer_squelette($fonc, $mode, $self){
 	return !trim($texte) ? '' : (
 		"<div id='spip-debug'>$res"
 			. "<div id='debug_boucle'><fieldset$id><legend>"
-			. "<a href='".$self."#f_".substr($fonc, 0, 37)."'> &#8593; </a>"
-			. $legend
-			. "</legend>"
+			. "<a href='".$self."#f_".substr($fonc, 0, 37)."'> &#8593; "
+			. ($legend ? $legend : $mode)
+			. "</a></legend>"
 			. $texte
 			. "</fieldset></div>"
 			. "</div>");
@@ -467,9 +490,9 @@ function debusquer_squelette($fonc, $mode, $self){
 // http://doc.spip.org/@emboite_texte
 function emboite_texte($res, $fonc = '', $self = ''){
 	$errs = $res->err;
-	$texte = $res->entete . ($errs ? $errs : $res->page);
+	$texte = $res->entete . ($errs ? '' : $res->page);
 
-	if (!$texte)
+	if (!$texte and !$errs)
 		return array(ancre_texte('', array('', '')), false);
 	if (!$errs)
 		return array(ancre_texte($texte, array('', '')), true);
@@ -567,11 +590,11 @@ function debusquer_navigation_squelettes($self){
 			. $t_skel
 			. ' '
 			. $sourcefile
-			. "&nbsp;:\n<a href='$self2&amp;var_mode_affiche=squelette#$nom'>"
+			. "&nbsp;:\n<a href='$self2&amp;var_mode_affiche=squelette#f_$nom'>"
 			. $t_skel
-			. "</a>\n<a href='$self2&amp;var_mode_affiche=resultat#$nom'>"
+			. "</a>\n<a href='$self2&amp;var_mode_affiche=resultat#f_$nom'>"
 			. _T('zbug_resultat')
-			. "</a>\n<a href='$self2&amp;var_mode_affiche=code#$nom'>"
+			. "</a>\n<a href='$self2&amp;var_mode_affiche=code#f_$nom'>"
 			. _T('zbug_code')
 			. "</a>\n<a href='"
 			. str_replace('var_mode=debug', 'var_profile=1&amp;var_mode=recalcul', $self)
@@ -605,15 +628,15 @@ function debusquer_navigation_boucles($boucles, $nom_skel, $self, $nom_source){
 				"'><td  align='right'>$i</td><td>\n" .
 				"<a  class='debug_link_boucle' href='" .
 				$self2 .
-				"&amp;var_mode_affiche=boucle#$nom_skel$nom'>" .
+				"&amp;var_mode_affiche=boucle#f_$nom_skel'>" .
 				_T('zbug_boucle') .
 				"</a></td><td>\n<a class='debug_link_boucle' href='" .
 				$self2 .
-				"&amp;var_mode_affiche=resultat#$nom_skel$nom'>" .
+				"&amp;var_mode_affiche=resultat#f_$nom_skel'>" .
 				_T('zbug_resultat') .
 				"</a></td><td>\n<a class='debug_link_resultat' href='" .
 				$self2 .
-				"&amp;var_mode_affiche=code#$nom_skel$nom'>" .
+				"&amp;var_mode_affiche=code#f_$nom_skel'>" .
 				_T('zbug_code') .
 				"</a></td><td>\n<a class='debug_link_resultat' href='" .
 				str_replace('var_mode=', 'var_profile=', $self2) .

@@ -73,6 +73,7 @@ function concatener_fichiers($files,$format='js', $callbacks = array()){
 				}
 				else {
 					// c'est un squelette
+					if (!isset($file[1])) $file[1] = '';
 					$comm = _SPIP_PAGE . "=$file[0]"
 						. (strlen($file[1])?"($file[1])":'');
 					parse_str($file[1],$contexte);

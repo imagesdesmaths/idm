@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_acces_refuse' => 'لم تعد تتمتع بحق الدخول إلى هذه المنتديات.',
 	'forum_attention_dix_caracteres' => '<b>تحذير!</b> يجب أن تحتوي رسالتك على عشرة حروف على الأقل.',
 	'forum_attention_message_non_poste' => 'تحذير، لم تقم ببعث رسالتك!',
+	'forum_attention_nb_caracteres_mini' => '<b>Attention !</b> votre message doit contenir au moins @min@ caractères.', # NEW
 	'forum_attention_trois_caracteres' => '<b>تحذير!</b> يجب أن يحتوي موضوعك على ثلاثة حروف على الأقل.',
 	'forum_attention_trop_caracteres' => '<b>تحذير!</b> رسالتك طويلة جداً (@compte@ حرف): لكي يتم تسجيلها، لا يجب ان تتعدى @max@ حرف.',
 	'forum_avez_selectionne' => 'لقد حددت:',
@@ -108,6 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_pas_de_forum' => 'بدون منتديات',
 	'info_question_visiteur_ajout_document_forum' => 'اذا اردت السماح للزوار بإرفاق مستندات (صور، اصوات،...) بمشاركاتهم في المنتدى، حدد هنا لائحة لواحق المستندات المسموح بها في المنتديات (مثلاً: gif او jpg او png او mp3).',
 	'info_question_visiteur_ajout_document_forum_format' => 'اذا اردت السماح بكل انواع المستندات التي يعتبرها SPIP آمنة، ضع نجمة (*).اما اذا اردت عدم السماح بأي نوع، فلا تدخل أي شيء.',
+	'info_selectionner_message' => 'تحديد الرسائل:',
 	'interface_formulaire' => 'واجهة الاستمارة',
 	'interface_onglets' => 'واجهة مقسّمة',
 	'item_activer_forum_administrateur' => 'تفعيل منتدى المدراء',
@@ -118,11 +120,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_non_config_forums_prive_objets' => 'تعطيل هذه المنتديات',
 
 	// L
+	'label_selectionner' => 'تحديد:',
 	'lien_reponse_article' => 'الرد على المقال',
 	'lien_reponse_breve_2' => 'الرد على الخبر',
 	'lien_reponse_message' => 'الرد على المشاركة',
 	'lien_reponse_rubrique' => 'الرد على القسم',
 	'lien_reponse_site_reference' => 'الرد على الموقع المبوب',
+	'lien_vider_selection' => 'تفريغ التحديد',
 
 	// M
 	'messages_aucun' => 'غير موجود',

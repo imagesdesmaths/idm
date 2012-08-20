@@ -9,15 +9,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return: $plugins
  */
 function jqueryui_jquery_plugins($plugins){
-	
-	// gestion des dépendances suivant les modules demandés par le pipeline jqueryui_plugins
-	$jqueryui_plugins = sinon(jqueryui_dependances(sinon(pipeline('jqueryui_plugins'),array())),array());
-	
+
+	// Modules demandés par le pipeline jqueryui_plugins
+	is_array($jqueryui_plugins = pipeline('jqueryui_plugins', array())) || $jqueryui_plugins = array();
+	// gestion des dépendances des modules demandés
+	is_array($jqueryui_plugins = jqueryui_dependances($jqueryui_plugins)) || $jqueryui_plugins = array();
+
 	// insérer les scripts nécessaires
 	foreach ($jqueryui_plugins as $val) {
 		$plugins[] = "javascript/ui/".$val.".js";
 	}
-	
+
 	return $plugins;
 }
 
@@ -30,14 +32,14 @@ function jqueryui_jquery_plugins($plugins){
 function jqueryui_insert_head_css($flux) {
 
 	// Modules demandés par le pipeline jqueryui_plugins
-	is_array($jqueryui_plugins = pipeline('jqueryui_plugins')) || $jqueryui_plugins = array();
+	is_array($jqueryui_plugins = pipeline('jqueryui_plugins', array())) || $jqueryui_plugins = array();
 	// gestion des dépendances des modules demandés
 	is_array($jqueryui_plugins = jqueryui_dependances($jqueryui_plugins)) || $jqueryui_plugins = array();
 
 	// ajouter le thème si nécessaire
 	if ($jqueryui_plugins AND !in_array('jquery.ui.theme', $jqueryui_plugins))
 		$jqueryui_plugins[] = 'jquery.ui.theme';
-	
+
 	// les css correspondantes aux plugins
 	$styles = array(
 						'jquery.ui.accordion',

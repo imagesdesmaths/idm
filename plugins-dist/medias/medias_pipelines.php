@@ -80,6 +80,8 @@ function medias_configurer_liste_metas($config){
 
 
 function medias_post_edition($flux){
+	// le serveur n'est pas toujours la
+	$serveur = (isset($flux['args']['serveur']) ? $flux['args']['serveur'] : '');
 	// si on ajoute un document, mettre son statut a jour
 	if($flux['args']['action']=='ajouter_document'){
 		include_spip('action/editer_document');
@@ -92,9 +94,9 @@ function medias_post_edition($flux){
 		// verifier d'abord les doublons !
 		include_spip('inc/autoriser');
 		if (autoriser('autoassocierdocument',$type,$flux['args']['id_objet'])){
-			$table_objet = isset($flux['args']['table_objet'])?$flux['args']['table_objet']:table_objet($flux['args']['table'],$flux['args']['serveur']);
+			$table_objet = isset($flux['args']['table_objet'])?$flux['args']['table_objet']:table_objet($flux['args']['table'],$serveur);
 			$marquer_doublons_doc = charger_fonction('marquer_doublons_doc','inc');
-			$marquer_doublons_doc($flux['data'],$flux['args']['id_objet'],$type,id_table_objet($type, $flux['args']['serveur']),$table_objet,$flux['args']['table'], '', $flux['args']['serveur']);
+			$marquer_doublons_doc($flux['data'],$flux['args']['id_objet'],$type,id_table_objet($type, $serveur),$table_objet,$flux['args']['table'], '', $serveur);
 		}
 
 		if($flux['args']['action']=='instituer' OR isset($flux['data']['statut'])){
@@ -111,7 +113,7 @@ function medias_post_edition($flux){
 		if ($flux['args']['table']!=='spip_documents'){
 			// verifier les doublons !
 			$marquer_doublons_doc = charger_fonction('marquer_doublons_doc','inc');
-			$marquer_doublons_doc($flux['data'],$flux['args']['id_objet'],$flux['args']['type'],id_table_objet($flux['args']['type'], $flux['args']['serveur']),$flux['args']['table_objet'],$flux['args']['spip_table_objet'], '', $flux['args']['serveur']);
+			$marquer_doublons_doc($flux['data'],$flux['args']['id_objet'],$flux['args']['type'],id_table_objet($flux['args']['type'], $serveur),$flux['args']['table_objet'],$flux['args']['spip_table_objet'], '', $serveur);
 		}
 	}
 	return $flux;
@@ -153,7 +155,10 @@ function medias_affiche_gauche($flux){
 		AND $en_cours['edition']!==false // page edition uniquement
 		AND $type = $en_cours['type']
 		AND $id_table_objet = $en_cours['id_table_objet']
-		AND ($id = intval($flux['args'][$id_table_objet]) OR $id = 0-$GLOBALS['visiteur_session']['id_auteur'])
+		// id non defini sur les formulaires de nouveaux objets
+		AND (isset($flux['args'][$id_table_objet]) and $id = intval($flux['args'][$id_table_objet])
+			// et justement dans ce cas, on met un identifiant negatif
+		    OR $id = 0-$GLOBALS['visiteur_session']['id_auteur'])
 	  AND autoriser('joindredocument',$type,$id)){
 		$flux['data'] .= recuperer_fond('prive/objets/editer/colonne_document',array('objet'=>$type,'id_objet'=>$id));
 	}

@@ -43,8 +43,12 @@ function balise_FORMULAIRE_FORUM_PRIVE ($p) {
 	 * Enfin, on pourra aussi forcer objet et id_objet depuis l'appel du formulaire
 	 */
 	$i_boucle  = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
-	$_id_objet = $p->boucles[$i_boucle]->primary;
-	$_type     = $p->boucles[$i_boucle]->id_table;
+	if (isset($p->boucles[$i_boucle])) {
+		$_id_objet = $p->boucles[$i_boucle]->primary;
+		$_type     = $p->boucles[$i_boucle]->id_table;
+	} else {
+		$_id_objet = $_type = '';
+	}
 
 	/**
 	 * On essaye de trouver les forums en fonction de l'environnement
@@ -59,6 +63,7 @@ function balise_FORMULAIRE_FORUM_PRIVE ($p) {
 		'afficher_texte',
 		'statut',
 	);
+
 
 	if ($ids) {
 		$obtenir = array_merge($obtenir, $ids);
@@ -81,8 +86,6 @@ function balise_FORMULAIRE_FORUM_PRIVE ($p) {
  * @return array|bool
  */
 function balise_FORMULAIRE_FORUM_PRIVE_stat($args, $context_compil) {
-
-
 	// un arg peut contenir l'url sur lequel faire le retour
 	// exemple dans un squelette article.html : [(#FORMULAIRE_FORUM_PRIVE{#SELF})]
 	// recuperer les donnees du forum auquel on repond.

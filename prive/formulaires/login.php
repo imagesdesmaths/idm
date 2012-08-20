@@ -47,10 +47,10 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null)
 	$valeurs = array(
 		'var_login' => $login,
 		'editable' => !$row,
-		'cnx' => $row['cnx'],
+		'cnx' => isset($row['cnx']) ? $row['cnx'] : '',
 		'auth_http' => login_auth_http(),
 		'rester_connecte' => ((_RENOUVELLE_ALEA < 12*3600)? '' : ' '),
-		'_logo' => $row['logo'],
+		'_logo' => isset($row['logo']) ? $row['logo'] : '',
 		'_alea_actuel' => isset($row['alea_actuel'])?$row['alea_actuel']:'',
 		'_alea_futur' => isset($row['alea_futur'])?$row['alea_futur']:'',
 		'_pipeline' => 'affiche_formulaire_login', // faire passer le formulaire dans un pipe dedie pour les methodes auth
@@ -73,7 +73,7 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null)
 		$res = $traiter($cible, $login, $prive);
 		$valeurs = array_merge($valeurs,$res);
 
-		if ($res['redirect']){
+		if (isset($res['redirect']) and $res['redirect']){
 			include_spip('inc/headers');
 			# preparer un lien pour quand redirige_formulaire ne fonctionne pas
 			$valeurs['_deja_loge'] = inserer_attribut(
@@ -207,7 +207,7 @@ function formulaires_login_traiter_dist($cible="",$login="",$prive=null){
 			include_spip('inc/headers');
 			$res['redirect'] = $cible;
 		} else {
-			$res['message_ok'] .= inserer_attribut(
+			$res['message_ok'] = inserer_attribut(
 				"<a>" . _T('login_par_ici') . "</a>",
 				'href', $cible
 			);
