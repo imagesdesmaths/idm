@@ -62,14 +62,17 @@ function formulaires_editer_objet_verifier($type,$id='new', $oblis = array()){
 	if (intval($id)) {
 		$conflits = controler_contenu($type,$id);
 		if ($conflits AND count($conflits)) {
-			foreach($conflits as $champ=>$conflit){
+			foreach($conflits as $champ=>$conflit) {
+				if (!isset($erreurs[$champ])) { $erreurs[$champ] = ''; }
 				$erreurs[$champ] .= _T("alerte_modif_info_concourante")."<br /><textarea readonly='readonly' class='forml'>".$conflit['base']."</textarea>";
 			}
 		}
 	}
-	foreach($oblis as $obli){
-		if (!_request($obli))
+	foreach($oblis as $obli) {
+		if (!_request($obli)) {
+			if (!isset($erreurs[$obli])) { $erreurs[$obli] = ''; }
 			$erreurs[$obli] .= _T("info_obligatoire");
+		}
 	}
 	return $erreurs;
 }
@@ -124,6 +127,7 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 
 	if ($config_fonc)
 		$contexte['config'] = $config = $config_fonc($contexte);
+	if (!isset($config['lignes'])) $config['lignes'] = 0;
 	$att_text = " class='textarea' "
 	. " rows='"
 	. ($config['lignes'] +15)
@@ -148,7 +152,7 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 		  $config['langue'] .
 		  "' />"))
 		  . $hidden
-		  . $md5;
+		  . (isset($md5) ? $md5 : '');
 
 
 	if (isset($contexte['extra']))
@@ -320,7 +324,7 @@ function controler_contenu($type, $id, $options=array(), $c=false, $serveur='') 
 				'spip_table_objet' => $spip_table_objet,
 				'type' =>$type,
 				'id_objet' => $id,
-				'champs' => isset($options['champs'])?$options['champs']:array(),
+				'champs' => isset($options['champs'])?$options['champs']:array(), // [doc] c'est quoi ?
 				'action' => 'controler'
 			),
 			'data' => $champs
@@ -347,7 +351,7 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctr_') {
 	// On elimine les donnees non modifiees par le formulaire (mais
 	// potentiellement modifiees entre temps par un autre utilisateur)
 	foreach ($champs as $key => $val) {
-		if ($m = $ctr[$prefix.$key]) {
+		if (isset($ctr[$prefix.$key]) AND $m = $ctr[$prefix.$key]) {
 			if ($m == md5($val))
 				unset ($champs[$key]);
 		}
@@ -370,7 +374,7 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctr_') {
 	// de conflit.
 	$ctrh = $ctrq = $conflits = array();
 	foreach (array_keys($champs) as $key) {
-		if ($m = $ctr[$prefix.$key]) {
+		if (isset($ctr[$prefix.$key]) AND $m = $ctr[$prefix.$key]) {
 			$ctrh[$key] = $m;
 			$ctrq[] = $key;
 		}

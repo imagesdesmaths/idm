@@ -83,13 +83,13 @@ function exec_admin_plugin_dist() {
 
 	echo debut_droite('plugin', true);
 
-	echo gros_titre(_T('icone_admin_plugin'),'',false);
+	//  alerte si mode de compatibilité forcée
+	$mode_compat = defined('_DEV_PLUGINS') ?
+		'<span class="notice">'. _T('svp:alerte_compatibilite') .'</span>' : '';
+	
+	echo gros_titre(_T('icone_admin_plugin') . $mode_compat, '', false);
 
 	// message d'erreur au retour d'une operation
-	if ($erreur){
-		include_spip('inc/filtres_boites');
-		echo "<div class='svp_retour'>" . boite_ouvrir(_T('svp:actions_en_erreur'), 'error') . $erreur . boite_fermer() . "</div>";
-	}
 	if ($erreur_activation){
 		include_spip('inc/filtres_boites');
 		echo "<div class='svp_retour'>" . boite_ouvrir(_T('svp:actions_en_erreur'), 'error') . $erreur_activation . boite_fermer() . "</div>";

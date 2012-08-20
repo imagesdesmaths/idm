@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_acces_refuse' => 'Dagoeneko ezin zara foro hauetan sartu.',
 	'forum_attention_dix_caracteres' => '<b>Adi!</b> zure mezuak hamar karaktere baino gutxiago ditu',
 	'forum_attention_message_non_poste' => 'Attention, vous n\'avez pas posté votre message !', # NEW
+	'forum_attention_nb_caracteres_mini' => '<b>Attention !</b> votre message doit contenir au moins @min@ caractères.', # NEW
 	'forum_attention_trois_caracteres' => '<b>Adi!</b> zure izenburuak hiru karaktere baino gutxiago ditu.',
 	'forum_attention_trop_caracteres' => '<b>kontuz !</b> zure mezua luzeegi da (@compte@ caractères) : grabatua izateko, ez ditu @max@ karaktero baino gehiago izan behar.', # MODIF
 	'forum_avez_selectionne' => 'Aukeratu egin duzu:',
@@ -99,6 +100,7 @@ Inskribaturik ez bazaude, aurretik inskribatu behar duzu.',
 	'info_pas_de_forum' => 'fororik ez',
 	'info_question_visiteur_ajout_document_forum' => 'Si vous souhaitez autoriser les visiteurs à joindre des documents (images, sons...) à leurs messages de forum, indiquer ci-dessous la liste des extensions de documents autorisés pour les forums (ex: gif, jpg, png, mp3).', # MODIF
 	'info_question_visiteur_ajout_document_forum_format' => 'Le cas échéant, indiquer ci-dessous la liste des extensions de documents autorisés pour les forums (ex: gif, jpg, png, mp3).', # MODIF
+	'info_selectionner_message' => 'Sélectionner les messages :', # NEW
 	'interface_formulaire' => 'Interface formulaire', # NEW
 	'interface_onglets' => 'Interface avec onglets', # NEW
 	'item_activer_forum_administrateur' => 'Administrazio-taldearen foroa aktibatu.',
@@ -109,11 +111,13 @@ Inskribaturik ez bazaude, aurretik inskribatu behar duzu.',
 	'item_non_config_forums_prive_objets' => 'Foro hauek desaktibatu',
 
 	// L
+	'label_selectionner' => 'Sélectionner :', # NEW
 	'lien_reponse_article' => 'Artikuluari erantzuna',
 	'lien_reponse_breve_2' => 'Atalari erantzuna',
 	'lien_reponse_message' => 'Réponse au message', # NEW
 	'lien_reponse_rubrique' => 'Atalari erantzuna',
 	'lien_reponse_site_reference' => 'Aipatutako lekuari erantzuna', # MODIF
+	'lien_vider_selection' => 'Vider la selection', # NEW
 
 	// M
 	'messages_aucun' => 'Aucun', # NEW

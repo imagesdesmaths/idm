@@ -11,24 +11,24 @@ function plugins_preparer_sql_plugin($plugin)
 		return $champs;
 	
 	// On initialise les champs ne necessitant aucune transformation
-	$champs['categorie'] = $plugin['categorie'] ? $plugin['categorie'] : '';
-	$champs['etat'] = $plugin['etat'] ? $plugin['etat'] : '';
+	$champs['categorie'] = (isset($plugin['categorie']) and $plugin['categorie']) ? $plugin['categorie'] : '';
+	$champs['etat'] = (isset($plugin['etat']) and $plugin['etat']) ? $plugin['etat'] : '';
 	$champs['version'] = $plugin['version'] ? normaliser_version($plugin['version']) : '';
-	$champs['version_base'] = $plugin['schema'] ? $plugin['schema'] : '';
+	$champs['version_base'] = (isset($plugin['schema']) and $plugin['schema']) ? $plugin['schema'] : '';
 
 	// Renommage de certains champs
-	$champs['logo'] = $plugin['logo'] ? $plugin['logo'] : '';
-	$champs['lien_doc'] = $plugin['documentation'] ? normaliser_lien($plugin['documentation']) : '';
+	$champs['logo'] = (isset($plugin['logo']) and $plugin['logo']) ? $plugin['logo'] : '';
+	$champs['lien_doc'] = (isset($plugin['documentation']) and $plugin['documentation']) ? normaliser_lien($plugin['documentation']) : '';
 	// On passe le prefixe en lettres majuscules comme ce qui est fait dans SPIP
 	// Ainsi les valeurs dans la table spip_plugins coincideront avec celles de la meta plugin
 	$champs['prefixe'] = strtoupper($plugin['prefix']);
 
 	// Indicateurs d'etat numerique (pour simplifier la recherche des maj de STP)
 	static $num = array('stable'=>4, 'test'=>3, 'dev'=>2, 'experimental'=>1);
-	$champs['etatnum'] = isset($num[$plugin['etat']]) ? $num[$plugin['etat']] : 0;
+	$champs['etatnum'] = (isset($plugin['etat']) and isset($num[$plugin['etat']])) ? $num[$plugin['etat']] : 0;
 
 	// Tags : liste de mots-cles
-	$champs['tags'] = ($plugin['tags']) ? serialize($plugin['tags']) : '';
+	$champs['tags'] = (isset($plugin['tags']) and $plugin['tags']) ? serialize($plugin['tags']) : '';
 	
 	// On passe en utf-8 avec le bon charset les champs pouvant contenir des entites html
 	$champs['description'] = entite2charset($plugin['description']);
@@ -39,7 +39,7 @@ function plugins_preparer_sql_plugin($plugin)
 	//    contient toujours qu'un seul index
 	$balise_auteur = entite2charset($plugin['auteur'][0]);
 	$auteurs = normaliser_auteur_licence($balise_auteur, 'auteur');
-	$balise_licence = entite2charset($plugin['licence'][0]);
+	$balise_licence = isset($plugin['licence'][0]) ? entite2charset($plugin['licence'][0]) : '';
 	$licences = normaliser_auteur_licence($balise_licence, 'licence');
 	// -- on merge les tableaux recuperes dans auteur et licence
 	$champs['auteur'] = $champs['licence'] = $champs['copyright'] = '';

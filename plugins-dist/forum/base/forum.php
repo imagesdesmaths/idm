@@ -3,20 +3,20 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2012                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Interfaces de la table forum pour le compilateur
  *
  * @param array $interfaces
- * @return array
+ * @return array $interfaces
  */
 function forum_declarer_tables_interfaces($interfaces){
 
@@ -50,15 +50,20 @@ function forum_declarer_tables_interfaces($interfaces){
 	return $interfaces;
 }
 
-
+/**
+ * Déclaration de la table spip_forum et de l'objet forum
+ *
+ * @param array $tables Tableau des objets déclarés
+ * @return array $tables Tableau des objets complété
+ */
 function forum_declarer_tables_objets_sql($tables){
 	$tables['spip_forum'] = array(
 		'table_objet'=>'forums', # ??? hum hum redevient spip_forum par table_objet_sql mais casse par un bete "spip_".table_objet()
 		'type'=>'forum',
-	  'url_voir'=>'controler_forum',
-	  'url_edit'=>'controler_forum',
-	  'editable'=>'non',
-	  'principale' => 'oui',
+		'url_voir'=>'controler_forum',
+		'url_edit'=>'controler_forum',
+		'editable'=>'non',
+		'principale' => 'oui',
 		'page'=>'', // pas de page editoriale pour un forum
 
 		'texte_retour' => 'icone_retour',
@@ -104,7 +109,7 @@ function forum_declarer_tables_objets_sql($tables){
 			"id_auteur"=>"id_auteur",
 		),
 		'rechercher_champs' => array(
-	    'titre' => 3, 'texte' => 1, 'auteur' => 2, 'email_auteur' => 2, 'nom_site' => 1, 'url_site' => 1
+	    	'titre' => 3, 'texte' => 1, 'auteur' => 2, 'email_auteur' => 2, 'nom_site' => 1, 'url_site' => 1
 		),
 	);
 

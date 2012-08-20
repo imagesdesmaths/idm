@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_acces_refuse' => 'Ya nun ties accesu a estos foros.',
 	'forum_attention_dix_caracteres' => '<b>¡Atención!</b> el mensaxe tien que tener polo menos diez carauteres.',
 	'forum_attention_message_non_poste' => 'Attention, vous n\'avez pas posté votre message !', # NEW
+	'forum_attention_nb_caracteres_mini' => '<b>Attention !</b> votre message doit contenir au moins @min@ caractères.', # NEW
 	'forum_attention_trois_caracteres' => '<b>¡Atención!</b> el títulu tien que tener polo menos tres carauteres.',
 	'forum_attention_trop_caracteres' => '<b>¡Atención!</b> esti mensaxe ye enforma llargu (@compte@ carauteres): pa que pueda rexistrase, nun tien que pasar de @max@ carauteres.', # MODIF
 	'forum_avez_selectionne' => 'Seleicionasti:',
@@ -108,6 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_pas_de_forum' => 'ensin foru',
 	'info_question_visiteur_ajout_document_forum' => 'Si quiés autorizar que los visitantes amesten documentos (imáxenes, sones...) nos sos mensaxes del foru, indica embaxo la llista d\'estensiones de documentu permitíes nos foros (p. ex: gif, jpg, png, mp3).', # MODIF
 	'info_question_visiteur_ajout_document_forum_format' => 'Si quiés autorizar tolos tipos de documentu que SPIP considera fiables, pon un asteriscu. Pa nun autorizar na, déxalo en blancu,', # MODIF
+	'info_selectionner_message' => 'Sélectionner les messages :', # NEW
 	'interface_formulaire' => 'Interface formulaire', # NEW
 	'interface_onglets' => 'Interface avec onglets', # NEW
 	'item_activer_forum_administrateur' => 'Activar el foru de los alministradores',
@@ -118,11 +120,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_non_config_forums_prive_objets' => 'Desactivar estos foros',
 
 	// L
+	'label_selectionner' => 'Sélectionner :', # NEW
 	'lien_reponse_article' => 'Respuesta a l\'artículu',
 	'lien_reponse_breve_2' => 'Respuesta a la breve',
 	'lien_reponse_message' => 'Réponse au message', # NEW
 	'lien_reponse_rubrique' => 'Respuesta a la estaya',
 	'lien_reponse_site_reference' => 'Respuesta al sitiu referenciáu:', # MODIF
+	'lien_vider_selection' => 'Vider la selection', # NEW
 
 	// M
 	'messages_aucun' => 'Aucun', # NEW

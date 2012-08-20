@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_acces_refuse' => 'Вы больше не имеете доступа к этим форумам.',
 	'forum_attention_dix_caracteres' => '<b>Внимание!</b> Сообщение должно быть не менее десяти символов.',
 	'forum_attention_message_non_poste' => 'Внимание, ваш комментарий не опубликован на сайте.',
+	'forum_attention_nb_caracteres_mini' => '<b>Attention !</b> votre message doit contenir au moins @min@ caractères.', # NEW
 	'forum_attention_trois_caracteres' => '<b>Внимание!</b> Заголовок должен быть не менее трех символов.',
 	'forum_attention_trop_caracteres' => '<b>Внимание!</b> Ваше сообщение содержит @compte@ символов, мы можем добавить ваш комментарий только если его размер не превышает @max@ символов.',
 	'forum_avez_selectionne' => 'Вы выбрали:',
@@ -97,6 +98,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_question_visiteur_ajout_document_forum' => 'Если Вы хотите разрешить посетителям добавлять  файлы к комментариям - укажите список расширений файлов, которые можно добавлять (gif, jpg, png, mp3 и т.д.).',
 	'info_question_visiteur_ajout_document_forum_format' => 'Если вы хотите разрешить загрузку всех типов файлов - поставьте звездочку. Что бы запретить загрузку файлов - оставьте поле пустым.
 ',
+	'info_selectionner_message' => 'Sélectionner les messages :', # NEW
 	'interface_formulaire' => 'Interface formulaire', # NEW
 	'interface_onglets' => 'Interface avec onglets', # NEW
 	'item_activer_forum_administrateur' => 'Включить форум администраторов',
@@ -107,11 +109,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_non_config_forums_prive_objets' => 'отключить эти форумы',
 
 	// L
+	'label_selectionner' => 'Sélectionner :', # NEW
 	'lien_reponse_article' => 'Комментарий к статье',
 	'lien_reponse_breve_2' => 'Комментарий к новости',
 	'lien_reponse_message' => 'Ответить на сообщение',
 	'lien_reponse_rubrique' => 'Комментарий к разделу',
 	'lien_reponse_site_reference' => 'Комментарий к сайту',
+	'lien_vider_selection' => 'Vider la selection', # NEW
 
 	// M
 	'messages_aucun' => 'Нет',

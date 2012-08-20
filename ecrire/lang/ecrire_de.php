@@ -346,7 +346,7 @@ französischen SPIP-Dokumentation</a>.',
 	'info_gauche_admin_vider' => '<b>Diese Seite ist nur für den Verantwortlichen der Website zugänglich.</b><p>Sie erlaubt bestimmte technische Wartungsvorgänge auszulösen. Für manche Funktionen ist die Authentifizierung per FTP Voraussetzung.',
 	'info_gauche_auteurs' => 'Hier sehen Sie alle Autoren der Website.
 Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Administrator = grün). ',
-	'info_gauche_auteurs_exterieurs' => 'Externe Autoren ohne Zugang zum Redaktionssystem werden mit einem blauen Symbol gekennzeichnet, gelöschte Autoren haben eine Mülltonne als Symbol.', # MODIF
+	'info_gauche_auteurs_exterieurs' => 'Externe Autoren ohne Zugang zum Redaktionssystem werden mit einem blauen Symbol gekennzeichnet, gelöschte Autoren haben eine Mülltonne als Symbol.',
 	'info_gauche_messagerie' => 'Nachrichtensystem: SPIP ermöglicht den Austausch von Nachrichten zwischen Redakteuren, persönliche Merkzettel und Ankündigungen im privaten Arbeitsbereich der Redakteure (nur Administratoren können diese verschicken).',
 	'info_gauche_numero_auteur' => 'AUTOR NUMMER',
 	'info_gauche_statistiques_referers' => 'Diese Seite zeigt Ihnen <i>REFERER</i>, d.h. Webadressen mit Links zu Ihrer Website. Angezeigt werden nur Links von gestern und heute, diese Liste wird alle 24 Stunden auf Null gesetzt.',
@@ -842,7 +842,7 @@ in einer Farbe, die den Status anzeigt :',
 	'texte_fichier_authent' => '<b>Soll SPIP die Dateien <tt>.htpasswd</tt> und <tt>.htpasswd-admin</tt> im Verzeichnis @dossier@ anlegen?</b><p>
  Mit diesen Dateien können Sie den Zugang zu anderen Bereichen Ihrer Website (z.B. externe Logfile-Auswertungen) auf Redakteure und Administratoren beschränken.</p><p>Wenn Sie diese Möglickeit nicht nutzen, könnn Sie hier die Grundeinstellung (Dateien werden nicht angelegt) beibehalten.</p>',
 	'texte_informations_personnelles_1' => 'Das System nun persönliche Zugangsdaten für Sie anlegen.',
-	'texte_informations_personnelles_2' => '(Wenn Sie die Site erneut installieren, und Ihre Zugangsdaten funktionieren, können Sie',
+	'texte_informations_personnelles_2' => '(Hinweis: Wenn Sie die Site erneut installieren, und Ihre Zugangsdaten funktionieren, können Sie',
 	'texte_introductif_article' => '(Einleitender Text des Artikels.)',
 	'texte_jeu_caractere' => 'Es empfiehlt sich, das Universalalphabet (<tt>utf-8</tt>) für ihre Website zu verwenden. Es ermöglicht die Darstellung der Zeichen aller Sprachen und wird nunmehr von allen modernen Webbrowsern unterstützt.',
 	'texte_jeu_caractere_2' => 'Achtung: Diese Einstellung bewirkt keine Konvertierung der bereits gespeicherten Texte.',
@@ -858,8 +858,8 @@ in einer Farbe, die den Status anzeigt :',
 	'texte_modifier_article' => 'Artikel bearbeiten:',
 	'texte_moteur_recherche_active' => '<b>Die integrierte Suchmaschine ist eingeschaltet.</b> Damit können Sie eine erneute Erfassung aller Seiten erzwingen, wenn Sie z.B. wesentliche Änderungen am Inhalt und Layout Ihrer Site gemacht haben oder eine Sicherungskopie eingespielt haben. Dokumente, die im SPIP Redaktionssystem eingegeben werden, erfasst die Suchmaschine automatisch. Sie benötigen diese Funktion deshalb nur in Ausnahmefällen.',
 	'texte_moteur_recherche_non_active' => 'Suchmaschine ist abgeschaltet.',
-	'texte_multilinguisme' => 'Wenn Sie Artikel in mehreren Sprachen mit entsprecher komplexer Navigation verwalten möchten, können Sie den Rubriken und/oder den Artikeln ein Menü zur Sprachauswahl hinzufügen. Diese Funktion ist abhängig von der Struktur Ihrer Website.', # MODIF
-	'texte_multilinguisme_trad' => 'Sie können auch ein System zur automatischen Verlinkung der verschiedenen Sprachversionen eines Artikels aktivieren.', # MODIF
+	'texte_multilinguisme' => 'Wenn Sie Artikel in mehreren Sprachen mit entsprecher komplexer Navigation verwalten möchten, können Sie den Rubriken und/oder den Artikeln ein Menü zur Sprachauswahl hinzufügen. Diese Funktion ist abhängig von der Struktur Ihrer Website.',
+	'texte_multilinguisme_trad' => 'Sie können ein System zur automatischen Verlinkung der verschiedenen Sprachversionen von Objekten aktivieren.',
 	'texte_non_compresse' => '<i>unkomprimiert</i> (ihr Server unterstützt diese Funktion nicht)',
 	'texte_nouveau_message' => 'Neue Nachricht',
 	'texte_nouvelle_version_spip_1' => 'Sie haben eine neue Version von SPIP installiert.',

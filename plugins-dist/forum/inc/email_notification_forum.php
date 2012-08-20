@@ -62,9 +62,23 @@ function inc_email_notification_forum_dist ($t, $email, $contexte=array()) {
 
 		// detecter les url des liens du forum
 		// pour la moderation (permet de reperer les SPAMS avec des liens caches)
+		// il faut appliquer le traitement de raccourci car sinon on rate des liens sous forme [->..] utilises par les spammeurs !
+		include_spip("public/interfaces");
+		$table_objet = "forum";
+
 		$links = array();
-		foreach ($t as $champ)
-			$links = $links + extraire_balises($champ,'a');
+		foreach ($t as $champ=>$v){
+			$champ = strtoupper($champ);
+			$traitement = (isset($GLOBALS['table_des_traitements'][$champ])?$GLOBALS['table_des_traitements'][$champ]:null);
+			if (is_array($traitement)
+			  AND (isset($traitement[$table_objet]) OR isset($traitement[0]))){
+				$traitement = $traitement[isset($traitement[$table_objet]) ? $table_objet : 0];
+				$traitement = str_replace('%s', "'".texte_script($v)."'", $traitement);
+				eval("\$v = $traitement;");
+			}
+
+			$links = $links + extraire_balises($v,'a');
+		}
 		$links = extraire_attribut($links,'href');
 		$links = implode("\n",$links);
 		$t['liens'] = $links;

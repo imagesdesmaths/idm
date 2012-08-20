@@ -38,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_acces_refuse' => 'K týmto diskusným fóram už viac nemáte prístup.',
 	'forum_attention_dix_caracteres' => '<b>Upozornenie!</b> Váš príspevok musí mať aspoň 10 znakok.',
 	'forum_attention_message_non_poste' => 'Pozor, neodoslali ste svoj príspevok!',
+	'forum_attention_nb_caracteres_mini' => '<b>Pozor!</b> Váš príspevok musí mať aspoň @min@ znakov.',
 	'forum_attention_trois_caracteres' => '<b>Upozornenie!</b> Názov musí mať aspoň 3 znaky.',
 	'forum_attention_trop_caracteres' => '<b>Pozor!</b> váš príspevok je pridlhý (@compte@ znamkov): aby ste ho mohli uložiť, príspevok nesmie mať viac ako @max@ znakov.',
 	'forum_avez_selectionne' => 'Vybrali ste:',
@@ -105,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_pas_de_forum' => 'žiadne diskusné fórum',
 	'info_question_visiteur_ajout_document_forum' => 'Ak chcete povoliť návštevníkom pripájať súbory (obrázky, zvuky a i.) k diskusným príspevkom, určte, ktoré prípony súborov budú akceptované (napr. gif, jpg, png, mp3).',
 	'info_question_visiteur_ajout_document_forum_format' => 'Ak chcete povoliť všetky typy súborov, ktoré SPIP považuje za bezpečné, použite hviezdičku. Ak nechcete povoliť žiadne, nerobte nič.',
+	'info_selectionner_message' => 'Vybrať príspevky:',
 	'interface_formulaire' => 'Rozhranie formulára',
 	'interface_onglets' => 'Rozhranie s tabulátormi',
 	'item_activer_forum_administrateur' => 'Povoliť diskusné fórum administrátorov',
@@ -115,11 +117,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_non_config_forums_prive_objets' => 'Deaktivovať tieto diskusné fóra',
 
 	// L
+	'label_selectionner' => 'Vybrať:',
 	'lien_reponse_article' => 'Komentovať tento článok',
 	'lien_reponse_breve_2' => 'Komentovať túto novinku',
 	'lien_reponse_message' => 'Reagovať na príspevok',
 	'lien_reponse_rubrique' => 'Komentovať túto rubriku',
 	'lien_reponse_site_reference' => 'Reakcia na odkazovanú stránku',
+	'lien_vider_selection' => 'Zrušiť výber',
 
 	// M
 	'messages_aucun' => 'Žiadne',

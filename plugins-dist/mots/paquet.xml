@@ -1,7 +1,7 @@
 <paquet
 	prefix="mots"
 	categorie="edition"
-	version="2.4.6"
+	version="2.4.8"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/mot-32.png"
@@ -27,5 +27,5 @@
 	<pipeline nom="ieconfig_metas" inclure="mots_ieconfig.php" />
 
 	<menu nom="mots" titre="mots:icone_mots_cles" parent="menu_edition" icone="images/mot-16.png" action="mots" />
-	<menu nom="mot_creer" titre="mots:icone_creation_mots_cles" parent="outils_rapides" icone="images/mot-new-16.png" action="mot_edit" parametres="new=oui" />
+	<menu nom="mot_creer" titre="mots:icone_creation_mots_cles" parent="outils_rapides" icone="images/mot-new-16.png" action="mot_edit" parametres="new=oui&amp;id_groupe=@id_groupe@" />
 </paquet>

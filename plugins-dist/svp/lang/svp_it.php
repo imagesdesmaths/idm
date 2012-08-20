@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'actions_non_traitees' => 'Azioni non eseguite',
 	'actions_realises' => 'Azioni eseguite',
 	'afficher_les_plugins_incompatibles' => 'Mostra i plugin incompatibili',
-	'alerte_compatibilite' => 'Compatibilité forcée', # NEW
+	'alerte_compatibilite' => 'Compatibilità forzata',
 
 	// B
 	'bouton_activer' => 'Attiva',
@@ -88,6 +88,7 @@ Devi confermare questa azione.',
 	'erreur_teleporter_format_archive_non_supporte' => 'Il formato @extension@ non è supportato',
 	'erreur_teleporter_methode_inconue' => 'Metodo @methode@ sconosciuto',
 	'erreur_teleporter_type_fichier_inconnu' => 'Tipo di file sconosciuto per la sorgente @source@',
+	'erreurs_xml' => 'Impossibile leggere alcune descrizioni XML',
 	'explication_destination' => 'Il percorso calcolato dal nome delle archivio se non viene compilato.
 ',
 

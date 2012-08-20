@@ -116,6 +116,10 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='', $defaut=null) {
  * @return string
  */
 function index_compose($conditionnel,$defaut){
+	// si on passe defaut = '', ne pas générer d'erreur de compilation.
+	if (!$defaut and !strlen($defaut)) {
+		$defaut = "''";
+	}
 	while ($c = array_pop($conditionnel))
 		$defaut = "($c:($defaut))";
 	return $defaut;
@@ -367,10 +371,17 @@ function collecter_balise_dynamique($l, &$p, $nom) {
 
 
 
-// recuperer le nom du serveur,
-// mais pas si c'est un serveur specifique derogatoire
-// @param array $p, AST positionne sur la balise
-// @return string nom de la connexion
+
+/**
+ * Récuperer le nom du serveur
+ * 
+ * Mais pas si c'est un serveur specifique derogatoire
+ * 
+ * @param Champ $p
+ *     AST positionné sur la balise
+ * @return string
+ *     Nom de la connexion
+**/
 function trouver_nom_serveur_distant($p) {
 	$nom = $p->id_boucle;
 	if ($nom
@@ -385,12 +396,25 @@ function trouver_nom_serveur_distant($p) {
 	return "";
 }
 
-// il faudrait savoir traiter les formulaires en local
-// tout en appelant le serveur SQL distant.
-// En attendant, cette fonction permet de refuser une authentification
-// sur qqch qui n'a rien a voir.
 
-// http://doc.spip.org/@balise_distante_interdite
+/**
+ * Teste si une balise est appliquée sur une base distante
+ *
+ * La fonction loge une erreur si la balise est utilisée sur une
+ * base distante et retourne false dans ce cas.
+ * 
+ * Note :
+ * Il faudrait savoir traiter les formulaires en local
+ * tout en appelant le serveur SQL distant.
+ * En attendant, cette fonction permet de refuser une authentification
+ * sur qqch qui n'a rien a voir.
+ * 
+ * @param Champ $p
+ *     AST positionné sur la balise
+ * @return bool
+ *     - true : La balise est autorisée
+ *     - false : La balise est interdite car le serveur est distant
+**/
 function balise_distante_interdite($p) {
 	$nom = $p->id_boucle;
 
@@ -423,16 +447,17 @@ function champs_traitements ($p) {
 	}
 
 	if (is_array($ps)) {
-	  // Recuperer le type de boucle (articles, DATA) et la table SQL sur laquelle elle porte
+		// Recuperer le type de boucle (articles, DATA) et la table SQL sur laquelle elle porte
 		$idb = index_boucle($p);
-		$type_requete = $p->boucles[$idb]->type_requete;
+		// mais on peut aussi etre hors boucle. Se mefier.
+		$type_requete = isset($p->boucles[$idb]->type_requete) ? $p->boucles[$idb]->type_requete : false;
 		$table_sql = isset($p->boucles[$idb]->show['table_sql'])?$p->boucles[$idb]->show['table_sql']:false;
 
 		// le traitement peut n'etre defini que pour une table en particulier "spip_articles"
 		if ($table_sql AND isset($ps[$table_sql]))
 			$ps = $ps[$table_sql];
 		// ou pour une boucle en particulier "DATA","articles"
-		elseif (isset($ps[$type_requete]))
+		elseif ($type_requete AND isset($ps[$type_requete]))
 			$ps = $ps[$type_requete];
 		// ou pour indiferrement quelle que soit la boucle
 		elseif(isset($ps[0]))

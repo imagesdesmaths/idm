@@ -178,13 +178,26 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	return "";
 }
 
-//
-// Affiche le raccourci <doc123|left>
-// et l'insere quand on le clique
-//
-// http://doc.spip.org/@affiche_raccourci_doc
+
+/**
+ * Affiche le code d'un raccourcis de document, tel que <doc123|left>
+ *
+ * Affiche un code de raccourcis de document, et l'insère
+ * dans le textarea principal de l'objet (champ 'texte') sur un double-clic 
+ *
+ * @param string $doc
+ * 		Type de raccourcis : doc,img,emb...
+ * @param int $id
+ * 		Identifiant du document
+ * @param string $align
+ * 		Alignement du document : left,center,right
+ * 
+ * @return string
+ * 		Texte du raccourcis
+**/
 function affiche_raccourci_doc($doc, $id, $align) {
 	static $num = 0;
+	$pipe = $onclick = "";
 
 	if ($align) {
 		$pipe = "|$align";

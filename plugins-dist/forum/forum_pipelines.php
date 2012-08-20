@@ -171,7 +171,9 @@ function forum_afficher_message_statut_objet($flux){
 function forum_boite_infos($flux){
 	if ($flux['args']['type']=='rubrique'
 	  AND $id_rubrique = $flux['args']['id']){
-		if (autoriser('publierdans','rubrique',$id_rubrique) AND !$flux['args']['row']['id_parent']) {
+		if (autoriser('publierdans','rubrique',$id_rubrique)
+		// [doc] d'ou il vient ce row ?
+		AND (!isset($flux['args']['row']['id_parent']) OR !$flux['args']['row']['id_parent'])) {
 			include_spip('inc/forum');
 			list($from, $where) = critere_statut_controle_forum('prop', $id_rubrique);
 			$n_forums = sql_countsel($from, $where);

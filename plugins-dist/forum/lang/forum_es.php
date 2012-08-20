@@ -35,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_acces_refuse' => 'Ya no tienes acceso a estos foros.',
 	'forum_attention_dix_caracteres' => '<b>¡Atención!</b> tu mensaje debe tener al menos diez caracteres.',
 	'forum_attention_message_non_poste' => '¡Atención! Aún no has publicado tu mensaje',
+	'forum_attention_nb_caracteres_mini' => '<b>Attention !</b> votre message doit contenir au moins @min@ caractères.', # NEW
 	'forum_attention_trois_caracteres' => '<b>¡Atención!</b> el título debe tener al menos tres caracteres.',
 	'forum_attention_trop_caracteres' => '<b>¡Atención!</b> el mensaje es demasiado largo (@compte@ caracteres) para poder guardarlo, no debe sobrepasar los @max@ caracteres.',
 	'forum_avez_selectionne' => 'Has seleccionado:',
@@ -100,6 +101,7 @@ suministrado. Si no estás inscrito/a, debes',
 	'info_pas_de_forum' => 'sin foro',
 	'info_question_visiteur_ajout_document_forum' => 'Para que los visitantes puedan depositar documentos (imágenes, sonidos...) al participar en los foros, indica aquí  la lista de extensiones de documentos autorizados en los foros (por ejemplo: gif, jpg, png, mp3).',
 	'info_question_visiteur_ajout_document_forum_format' => 'Para autorizar todos los tipos de documentos considerados como fiables por SPIP, marca un asterisco. Para no autorizar ninguno, no indiques nada.',
+	'info_selectionner_message' => 'Sélectionner les messages :', # NEW
 	'interface_formulaire' => 'Interface formulaire', # NEW
 	'interface_onglets' => 'Interface avec onglets', # NEW
 	'item_activer_forum_administrateur' => 'Activar el foro del equipo de administración.',
@@ -110,11 +112,13 @@ suministrado. Si no estás inscrito/a, debes',
 	'item_non_config_forums_prive_objets' => 'Desactivar estos foros',
 
 	// L
+	'label_selectionner' => 'Sélectionner :', # NEW
 	'lien_reponse_article' => 'Respuesta al artículo',
 	'lien_reponse_breve_2' => 'Respuesta a la breve',
 	'lien_reponse_message' => 'Réponse au message', # NEW
 	'lien_reponse_rubrique' => 'Respuesta a la sección',
 	'lien_reponse_site_reference' => 'Respuesta al sitio referenciado',
+	'lien_vider_selection' => 'Vider la selection', # NEW
 
 	// M
 	'messages_aucun' => 'Aucun', # NEW
@@ -155,7 +159,7 @@ suministrado. Si no estás inscrito/a, debes',
 	'titre_cadre_forum_administrateur' => 'Foro administradores',
 	'titre_cadre_forum_interne' => 'Foro interno',
 	'titre_config_forums_prive' => 'Foros del espacio privado',
-	'titre_forum' => 'Foro interno',
+	'titre_forum' => 'Foros',
 	'titre_forum_suivi' => 'Gestión de los foros',
 	'titre_page_forum_suivi' => 'Seguimiento de los foros',
 	'titre_selection_action' => 'Sélection', # NEW

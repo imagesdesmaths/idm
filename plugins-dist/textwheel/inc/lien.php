@@ -77,8 +77,10 @@ function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='
 
 	$lang = ($hlang ? " hreflang='$hlang'" : '');
 
-	if ($title) $title = ' title="'.attribut_html($title).'"';
-
+	if ($title)
+		$title = ' title="'.attribut_html($title).'"';
+	else
+		$title = ''; // $title peut etre 'false'
 	// rel=external pour les liens externes
 	if ((strncmp($lien,'http://',7)==0 OR strncmp($lien,'https://',8)==0)
 	  AND strncmp("$lien/", $u ,strlen($u))!=0)
@@ -89,7 +91,7 @@ function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='
 	// les rares cas de lien qui encapsule un modele passe en dessous, c'est plus lent
 	if (traiter_modeles($texte, false, '', $connect, null, $env)==$texte){
 		$texte = typo($texte, true, $connect, $env);
-		$lien = "<a href=\"".str_replace('"', '&quot;', $lien)."\" class='$class'$lang$title$rel$mime>$texte</a>";
+		$lien = "<a href=\"".str_replace('"', '&quot;', $lien)."\" class='$class'$lang$title$rel".(isset($mime)?$mime:'').">$texte</a>";
 		return $lien;
 	}
 	# ceci s'execute heureusement avant les tableaux et leur "|".
@@ -236,7 +238,7 @@ define('_RACCOURCI_ATTRIBUTS', '/^((?:[^[]*?(?:\[[^]]*\])?)*?)([|]([^<>]*?))?([{
 // http://doc.spip.org/@traiter_raccourci_lien_atts
 function traiter_raccourci_lien_atts($texte) {
 
-	$bulle = $hlang = '';
+	$bulle = $hlang = false;
 	// title et hreflang donnes par le raccourci ?
 	if (strpbrk($texte, "|{") !== false AND
 	  preg_match(_RACCOURCI_ATTRIBUTS, $texte, $m)) {
@@ -391,6 +393,7 @@ function traiter_lien_implicite ($ref, $texte='', $pour='url', $connect='')
 	@list($type,,$id,,$args,,$ancre) = $match;
 # attention dans le cas des sites le lien doit pointer non pas sur
 # la page locale du site, mais directement sur le site lui-meme
+	$url = '';
 	if ($f = charger_fonction("implicite_$type","liens",true))
 		$url = $f($texte,$id,$type,$args,$ancre,$connect);
 	if (!$url)
@@ -491,7 +494,7 @@ function traiter_modeles($texte, $doublons=false, $echap='', $connect='', $liens
 			$a = strpos($texte,$match[0]);
 			preg_match(_RACCOURCI_MODELE_DEBUT,
 			substr($texte, $a), $regs);
-			$regs[]=""; // s'assurer qu'il y a toujours un 5e arg, eventuellement vide
+			while(count($regs) < 6) $regs[] = ""; // s'assurer qu'il y a toujours un 5e arg, eventuellement vide
 			list(,$mod, $type, $id, $params, $fin) = $regs;
 			if ($fin AND
 			preg_match('/<a\s[^<>]*>\s*$/i',
@@ -603,6 +606,7 @@ function traiter_raccourci_glossaire($texte)
 			$gloss = $m[1] ? ('#' . $m[1]) : '';
 			$t = $r[1] . $r[2] . $r[5];
 			list($t, $bulle, $hlang) = traiter_raccourci_lien_atts($t);
+			if ($bulle===false) $bulle = $m[1];
 			$t = unicode2charset(charset2unicode($t), 'utf-8');
 			$ref = $lien("glose$_n$gloss", $t, 'spip_glossaire', $bulle, $hlang);
 			$texte = str_replace($regs[0], $ref, $texte);

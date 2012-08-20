@@ -35,6 +35,7 @@ forviŝi ilin poste).',
 	'forum_acces_refuse' => 'Vi ne plu havas alir-rajton al tiuj ĉi forumoj.',
 	'forum_attention_dix_caracteres' => '<b>Atentu !</b> via mesaĝo devas enhavi almenaŭ dek signojn.',
 	'forum_attention_message_non_poste' => 'Attention, vous n\'avez pas posté votre message !', # NEW
+	'forum_attention_nb_caracteres_mini' => '<b>Attention !</b> votre message doit contenir au moins @min@ caractères.', # NEW
 	'forum_attention_trois_caracteres' => '<b>Atentu !</b> via titolo devas enhavi almenaŭ tri signojn.',
 	'forum_attention_trop_caracteres' => '<b>Atentu !</b> via mesaĝo estas tro longa (@compte@ signoj) : por esti registrita, ĝi ne preteratingu @max@ signojn.', # MODIF
 	'forum_avez_selectionne' => 'Vi selektis :',
@@ -105,6 +106,7 @@ La publikaj forumoj estos laŭkaze unu post la alia permesitaj
 	'info_pas_de_forum' => 'neniu forumo',
 	'info_question_visiteur_ajout_document_forum' => 'Ĉu vi permesas al vizitantoj kunsendi dokumentojn (bildojn, sonaĵojn...) al siaj forumaj mesaĝoj ?', # MODIF
 	'info_question_visiteur_ajout_document_forum_format' => 'Laŭkaze, bonvolu indiki ĉi-sube la liston de dosiernomaj sufiksoj permesitaj por la forumoj (ekz: gif, jpg, png, mp3).', # MODIF
+	'info_selectionner_message' => 'Sélectionner les messages :', # NEW
 	'interface_formulaire' => 'Interface formulaire', # NEW
 	'interface_onglets' => 'Interface avec onglets', # NEW
 	'item_activer_forum_administrateur' => 'Aktivigi la forumon de la mastrumantoj',
@@ -115,11 +117,13 @@ La publikaj forumoj estos laŭkaze unu post la alia permesitaj
 	'item_non_config_forums_prive_objets' => 'Malaktivigi tiujn ĉi forumojn',
 
 	// L
+	'label_selectionner' => 'Sélectionner :', # NEW
 	'lien_reponse_article' => 'Respondo al la artikolo',
 	'lien_reponse_breve_2' => 'Respondo al la fulm-informo',
 	'lien_reponse_message' => 'Réponse au message', # NEW
 	'lien_reponse_rubrique' => 'Respondo al la rubriko',
 	'lien_reponse_site_reference' => 'Respondo al la referencigita retejo:', # MODIF
+	'lien_vider_selection' => 'Vider la selection', # NEW
 
 	// M
 	'messages_aucun' => 'Aucun', # NEW

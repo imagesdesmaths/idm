@@ -353,7 +353,7 @@ class Actionneur {
 
 		if (count($this->done)) {
 			$oks = true;
-			$done .= "<ul>";
+			$done = "<ul>";
 			foreach ($this->done as $i) {
 				$ok = ($i['done'] ? true : false);
 				$oks = &$ok;
@@ -373,7 +373,7 @@ class Actionneur {
 		}
 
 		if (count($this->end)) {
-			$todo .= "<ul>";
+			$todo = "<ul>";
 			foreach ($this->end as $i) {
 				$todo .= "\t<li>"._T('svp:message_action_'.$i['todo'],array(
 					'plugin'=>$i['n'],
@@ -421,7 +421,7 @@ class Actionneur {
 		return ($this->lock['id_auteur'] == $id_auteur);
 	}
 
-	
+
 	function verrouiller() {
 		$this->lock = array(
 			'id_auteur' => $GLOBALS['visiteur_session']['id_auteur'],

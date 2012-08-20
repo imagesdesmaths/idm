@@ -89,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_teleporter_format_archive_non_supporte' => 'الناقل البعيد لا يدعم التنسيق @extension@',
 	'erreur_teleporter_methode_inconue' => 'اسلوب @methode@ غير معروف للنقل البعيد',
 	'erreur_teleporter_type_fichier_inconnu' => 'نوع ملفات غير معروف للمصدر @source@',
+	'erreurs_xml' => 'لا يمكن قراءة عدد من أوصاف XML',
 	'explication_destination' => 'سيتم حساب المسار من اسم الأرشيف اذا لم تدخله.',
 
 	// F

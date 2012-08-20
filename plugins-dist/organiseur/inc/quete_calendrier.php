@@ -80,7 +80,10 @@ function quete_calendrier_interval_articles($avant, $apres, &$evenements) {
 
   $result=sql_select('id_article, titre, date, descriptif, chapo,  lang', 'spip_articles', "statut='publie' AND date >= $avant AND date < $apres", '', "date");
 
-	if ($GLOBALS['meta']['multi_articles'] == 'oui') {
+	// tables traduites
+	$objets = explode(',', $GLOBALS['meta']['multi_objets']);
+
+	if (in_array('spip_articles', $objets)) {
 	  include_spip('inc/lang_liste');
 	  $langues = $GLOBALS['codes_langues'];
 	} else $langues = array();

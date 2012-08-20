@@ -105,7 +105,7 @@ function groupemots_modifier($id_groupe, $set=null) {
 		if (isset($c[$champ]))
 			$c[$champ] = ($c[$champ]=='oui'?'oui':'non');
 
-	if (is_array($c['tables_liees']))
+	if (isset($c['tables_liees']) AND is_array($c['tables_liees']))
 		$c['tables_liees'] = implode(',',array_diff($c['tables_liees'],array('')));
 
 	$err = objet_modifier_champs('groupe_mot', $id_groupe,

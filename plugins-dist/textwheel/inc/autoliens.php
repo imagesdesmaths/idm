@@ -9,6 +9,10 @@ function tw_autoliens($t) {
 
 	$t = preg_replace_callback(_EXTRAIRE_LIENS, 'tw_traiter_autoliens', $t);
 
+	include_spip('inc/ressource');
+	if (defined('_EXTRAIRE_RESSOURCES'))
+	$t = preg_replace_callback(_EXTRAIRE_RESSOURCES, 'traiter_ressources', $t);
+
 	// echapper les autoliens eventuellement inseres (en une seule fois)
 	if (strpos($t,"<html>")!==false)
 		$t = echappe_html($t);

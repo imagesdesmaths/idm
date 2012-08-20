@@ -73,7 +73,7 @@ function creer_repertoire_documents($ext) {
 
 	// Cette variable de configuration peut etre posee par un plugin
 	// par exemple acces_restreint
-	if ($GLOBALS['meta']["creer_htaccess"] == 'oui') {
+	if (isset($GLOBALS['meta']["creer_htaccess"]) AND $GLOBALS['meta']["creer_htaccess"] == 'oui') {
 		include_spip('inc/acces');
 		verifier_htaccess($rep);
 	}
@@ -245,7 +245,7 @@ function check_upload_error($error, $msg='') {
 	  exit;
 	}
 
-	include_spip("inc/minipres");
+	include_spip('inc/minipres');
 	echo minipres($msg,
 		      "<div style='text-align: $spip_lang_right'><a href='"  . rawurldecode($GLOBALS['redirect']) . "'><button type='button'>" . _T('ecrire:bouton_suivant') . "</button></a></div>");
 	exit;

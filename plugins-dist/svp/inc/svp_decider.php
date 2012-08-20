@@ -188,7 +188,9 @@ class Decideur {
 	/* liste des erreurs */
 	function erreur($id, $texte = '') {
 		$this->log("erreur: $id -> $texte");
-		if (!is_array($this->err[$id])) $this->err[$id] = array();
+		if (!isset($this->err[$id]) OR !is_array($this->err[$id])) {
+			$this->err[$id] = array();
+		}
 		$this->err[$id][] = $texte;
 		$this->ok = false;
 	}
@@ -222,7 +224,7 @@ class Decideur {
 			'pl.prefixe=' . sql_quote($prefixe),
 			'pa.obsolete=' . sql_quote('non'),
 			'pa.id_depot='.sql_quote(0)), true);
-		if ($locaux and count($locaux['p'][$prefixe]) > 0) {
+		if ($locaux and isset($locaux['p'][$prefixe]) and count($locaux['p'][$prefixe]) > 0) {
 			foreach ($locaux['p'][$prefixe] as $new) {
 				if (plugin_version_compatible($version, $new['v'])
 				and svp_verifier_compatibilite_spip($new['compatibilite_spip']) ){
@@ -236,7 +238,7 @@ class Decideur {
 			'pl.prefixe=' . sql_quote($prefixe),
 			'pa.obsolete=' . sql_quote('non'),
 			'pa.id_depot>'.sql_quote(0)), true);
-		if ($distants and count($distants['p'][$prefixe]) > 0) {
+		if ($distants and isset($distants['p'][$prefixe]) and count($distants['p'][$prefixe]) > 0) {
 			foreach ($distants['p'][$prefixe] as $new) {
 				if (plugin_version_compatible($version, $new['v'])
 				and svp_verifier_compatibilite_spip($new['compatibilite_spip']) ){
@@ -326,8 +328,21 @@ class Decideur {
 
 	// retirer un plugin des actifs
 	function remove($info) {
-		$i = $this->end['p'][$info['p']]; // aucazou ce ne soit pas les memes ids
-		unset($this->end['i'][$info['i']], $this->end['p'][$info['p']], $this->end['i'][$i['i']]);
+		// aucazou ce ne soit pas les memes ids entre la demande et la bdd,
+		// on efface aussi avec l'id donne par le prefixe.
+		// Lorsqu'on desactive un plugin en "attente", il n'est pas actif !
+		// on teste tout de meme donc qu'il est la ce prefixe !
+		$i = false;
+		if (isset($this->end['p'][$info['p']])) {
+			$i = $this->end['p'][$info['p']];
+		}
+		// on enleve les cles par id indique et par prefixe
+		unset($this->end['i'][$info['i']], $this->end['p'][$info['p']]);
+		// ainsi que l'id aucazou du prefixe
+		if ($i) {
+			unset($this->end['i'][$i['i']]);
+		}
+
 	}
 
 	// invalider un plugin...
@@ -524,7 +539,7 @@ class Decideur {
 	function verifier_dependances_plugin($info, $prof=0) {
 		$this->log("- [$prof] verifier dependances " . $info['p']);
 		$id = $info['i'];
-
+		$err = false; // variable receptionnant parfois des erreurs
 		$cache = array(); // cache des actions realisees dans ce tour
 
 		// 1
@@ -537,10 +552,10 @@ class Decideur {
 			return false;
 		}
 
+
 		// 2
 		// ajouter les librairies necessaires a notre paquet
 		if (is_array($info['dl']) and count($info['dl'])) {
-			$err = false;
 			foreach ($info['dl'] as $l) {
 				// $l = array('nom' => 'x', 'lien' => 'url')
 				$lib = $l['nom'];
@@ -588,7 +603,7 @@ class Decideur {
 
 				// le core procure le paquet que l'on demande !
 				elseif ((array_key_exists($p, $this->procure))
-				  and (plugin_version_compatible($v, $this->procure[$p]))) {
+				  and (plugin_version_compatible($v, $this->procure[$p], 'spip'))) {
 					// rien a faire...
 					$this->log("-- est procure par le core ($p)");
 

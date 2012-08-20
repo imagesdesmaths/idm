@@ -39,6 +39,7 @@ cancellarli successivamente).',
 	'forum_acces_refuse' => 'Non hai accesso a questi forum.',
 	'forum_attention_dix_caracteres' => '<b>Attenzione!</b> il messaggio deve contenere almeno dieci caratteri.',
 	'forum_attention_message_non_poste' => 'Attention, vous n\'avez pas posté votre message !', # NEW
+	'forum_attention_nb_caracteres_mini' => '<b>Attention !</b> votre message doit contenir au moins @min@ caractères.', # NEW
 	'forum_attention_trois_caracteres' => '<b>Attenzione!</b> il titolo deve contenere almeno tre caratteri.',
 	'forum_attention_trop_caracteres' => '<b>Attenzione!</b> il messaggio è troppo lungo (@compte@ caratteri): per poter essere registrato esso non deve essere più lungo di @max@ caratteri.', # MODIF
 	'forum_avez_selectionne' => 'Hai selezionato:',
@@ -109,6 +110,7 @@ avvertite via email. Per ogni tipo di forum, indica se desideri utilizzare quest
 	'info_pas_de_forum' => 'nessun forum',
 	'info_question_visiteur_ajout_document_forum' => 'Se si desidera autorizzare i visitatori ad allegare dei documenti (immagini, musiche, ecc.) ai propri messaggi nel forum, indicare qui sotto l\'elenco delle estensioni dei documenti autorizzati per i forum (per es.: gif, jpg, png, mp3).', # MODIF
 	'info_question_visiteur_ajout_document_forum_format' => 'Se si desidera autorizzare tutti i tipi di documenti considerati affidabili da SPIP, mettere un asterisco. Per non autorizzare nulla, non indicare nulla.', # MODIF
+	'info_selectionner_message' => 'Sélectionner les messages :', # NEW
 	'interface_formulaire' => 'Interface formulaire', # NEW
 	'interface_onglets' => 'Interface avec onglets', # NEW
 	'item_activer_forum_administrateur' => 'Attiva il forum delle amministratrici',
@@ -119,11 +121,13 @@ avvertite via email. Per ogni tipo di forum, indica se desideri utilizzare quest
 	'item_non_config_forums_prive_objets' => 'Disattiva questi forum',
 
 	// L
+	'label_selectionner' => 'Sélectionner :', # NEW
 	'lien_reponse_article' => 'Risposta all\'articolo',
 	'lien_reponse_breve_2' => 'Risposta alla breve',
 	'lien_reponse_message' => 'Réponse au message', # NEW
 	'lien_reponse_rubrique' => 'Risposta alla rubrica',
 	'lien_reponse_site_reference' => 'Risposta al sito repertoriato:', # MODIF
+	'lien_vider_selection' => 'Vider la selection', # NEW
 
 	// M
 	'messages_aucun' => 'Aucun', # NEW

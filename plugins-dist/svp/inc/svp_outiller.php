@@ -11,7 +11,7 @@ if (!defined('_SVP_VERSION_SPIP_MIN')) {
 
 // -- Pour l'instant on ne connait pas la borne sup exacte
 if (!defined('_SVP_VERSION_SPIP_MAX')) {
-	define('_SVP_VERSION_SPIP_MAX', '3.0.99');
+	define('_SVP_VERSION_SPIP_MAX', '3.1.99');
 }
 
 // Liste des branches significatives de SPIP et de leurs bornes (versions min et max)
@@ -21,7 +21,8 @@ $GLOBALS['infos_branches_spip'] = array(
 	'1.9' => array(_SVP_VERSION_SPIP_MIN,'1.9.2'),
 	'2.0' => array('2.0.0','2.0.99'),
 	'2.1' => array('2.1.0','2.1.99'),
-	'3.0' => array('3.0.0',_SVP_VERSION_SPIP_MAX) 
+	'3.0' => array('3.0.0','3.0.99'),
+	'3.1' => array('3.1.0',_SVP_VERSION_SPIP_MAX)
 );
 
 // Liste des licences de plugin
@@ -105,7 +106,7 @@ function fusionner_intervalles($intervalle_a, $intervalle_b) {
 	else
 		$bornes_fusionnees['max'] = $borne_a['max'];
 
-	return contruire_intervalle($bornes_fusionnees);
+	return construire_intervalle($bornes_fusionnees);
 }
 
 
@@ -135,7 +136,7 @@ function extraire_bornes($intervalle, $initialiser=false) {
 	return $bornes;
 }
 
-function contruire_intervalle($bornes, $dtd='paquet') {
+function construire_intervalle($bornes, $dtd='paquet') {
 	return ($bornes['min']['incluse'] ? '[' : ($dtd=='paquet' ? ']' : '('))
 			. $bornes['min']['valeur'] . ';' . $bornes['max']['valeur']
 			. ($bornes['max']['incluse'] ? ']' : ($dtd=='paquet' ? '[' : ')'));
@@ -180,7 +181,7 @@ function compiler_branches_spip($intervalle) {
 	if (!in_array($branche_inf, $liste_branches_spip))
 		return '';
 	// -- on complete la borne inf de l'intervalle de x.y en x.y.z et on determine la vraie branche
-	if (!$t[2]) {
+	if (!isset($t[2]) or !$t[2]) {
 		if ($bornes['min']['incluse'])
 			$borne_inf = $infos_branches_spip[$branche_inf][0];
 		else {
@@ -191,7 +192,9 @@ function compiler_branches_spip($intervalle) {
 	
 	// -- on initialise la branche sup de l'intervalle que l'on va preciser ensuite
 	$t = explode('.', $borne_sup);
-	$branche_sup = $t[0] . '.' . $t[1];
+	// des gens mettent juste * (pas glop)
+	$branche_sup = $t[0] . (isset($t[1]) ? '.' . $t[1] : '');
+
 	// -- pour eviter toutes erreur fatale on verifie que la branche est bien dans la liste des possibles
 	// -- -> si non, on renvoie vide
 	if (!in_array($branche_sup, $liste_branches_spip))
@@ -317,13 +320,13 @@ function normaliser_version($version='') {
 	$version_normalisee = '';
 
 	if (preg_match(',([0-9.]+)[\s-.]?(dev|alpha|a|beta|b|rc|pl|p)?,i', $version, $matches)) {
-		if ($matches[1]) {
+		if (isset($matches[1]) and $matches[1]) {
 			$v = explode('.', $matches[1]);
 			foreach($v as $_nombre) {
 				$vn[] = str_pad($_nombre, 3, '0', STR_PAD_LEFT);
 			}
 			$version_normalisee = implode('.', $vn);
-			if ($matches[2])
+			if (isset($matches[2]) and $matches[2])
 				$version_normalisee =  $version_normalisee . '-' . $matches[2];
 		}
 	}

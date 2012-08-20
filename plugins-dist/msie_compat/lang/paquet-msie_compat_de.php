@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 -* und /oder diverse CSS Selektoren für MSIE~6 und~7.',
 	'msie_compat_nom' => 'Unterstützung älterer Webbrowser',
-	'msie_compat_slogan' => 'PNG et sélecteurs CSS pour les vieux navigateurs' # NEW
+	'msie_compat_slogan' => 'PNG und CSS-Selektoren für alte Browser'
 );
 
 ?>

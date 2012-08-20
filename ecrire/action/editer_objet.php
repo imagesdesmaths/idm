@@ -116,6 +116,8 @@ function objet_modifier($objet, $id, $set=null) {
 		return $err;
 
 	// Modification de statut, changement de rubrique ?
+	// FIXME: Ici lorsqu'un $set est passé, la fonction collecter_requests() retourne tout
+	//         le tableau $set hors black liste, mais du coup on a possiblement des champs en trop. 
 	$c = collecter_requests(array($champ_date, 'statut', 'id_parent'),array(),$set);
 	$err = objet_instituer($objet, $id, $c);
 
@@ -178,7 +180,7 @@ function objet_inserer($objet, $id_parent=null) {
 	if (isset($desc['field']['statut']))
 		$champs['statut'] = 'prepa';
 
-	if ((isset($desc['date']) AND $d=$desc['date']) OR $desc['field'][$d='date'])
+	if ((isset($desc['date']) AND $d=$desc['date']) OR isset($desc['field'][$d='date']))
 		$champs[$d] = date('Y-m-d H:i:s');
 
 	// Envoyer aux plugins
@@ -254,8 +256,8 @@ function objet_instituer($objet, $id, $c, $calcul_rub=true) {
 		$champ_date = $desc['date'];
 	elseif (isset($desc['field']['date']))
 		$champ_date = 'date';
-	if ($champ_date)
-		$sel[] = ($champ_date?"$champ_date as date":"'' as date");
+
+	$sel[] = ($champ_date ? "$champ_date as date" : "'' as date");
 	$sel[] = (isset($desc['field']['id_rubrique'])?'id_rubrique':"0 as id_rubrique");
 
 	$row = sql_fetsel($sel, $table_sql, id_table_objet($objet).'='.intval($id));

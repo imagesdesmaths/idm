@@ -66,7 +66,7 @@ abstract class TextWheelDataSet {
 		  OR !$file = $this->findFile($file,$default_path))
 			return array();
 
-		define('_YAML_EVAL_PHP', false);
+		defined('_YAML_EVAL_PHP') || define('_YAML_EVAL_PHP', false);
 		if (!function_exists('yaml_decode')) {
 			if (function_exists('include_spip'))
 				include_spip('inc/yaml-mini');

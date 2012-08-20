@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_acces_refuse' => 'Már nincs hozzáférése ezekhez a fórumokhoz.',
 	'forum_attention_dix_caracteres' => '<b>Vigyázat !</b> Az üzenetének legalább 10 karaktert kell tartalmaznia.',
 	'forum_attention_message_non_poste' => 'Attention, vous n\'avez pas posté votre message !', # NEW
+	'forum_attention_nb_caracteres_mini' => '<b>Attention !</b> votre message doit contenir au moins @min@ caractères.', # NEW
 	'forum_attention_trois_caracteres' => '<b>Vigyázat !</b> A címnek legalább három karaktert kell tartalmaznia.',
 	'forum_attention_trop_caracteres' => '<b>Figyelem !</b> az üzenete túl hosszú (@compte@ karakter) : legfeljebb @max@ karakterből állhat.', # MODIF
 	'forum_avez_selectionne' => 'Kijelölt :',
@@ -107,6 +108,7 @@ amit kapott. Amennyiben nincs regisztrálva, akkor',
 	'info_pas_de_forum' => 'Nincs fórum',
 	'info_question_visiteur_ajout_document_forum' => 'Souhaitez-vous autoriser les visiteurs à joindre des documents (images, sons...) à leurs messages de forums ?', # MODIF
 	'info_question_visiteur_ajout_document_forum_format' => 'Le cas échéant, indiquer ci-dessous la liste des extensions de documents autorisés pour les forums (ex: gif, jpg, png, mp3).', # MODIF
+	'info_selectionner_message' => 'Sélectionner les messages :', # NEW
 	'interface_formulaire' => 'Interface formulaire', # NEW
 	'interface_onglets' => 'Interface avec onglets', # NEW
 	'item_activer_forum_administrateur' => 'Admninisztrátori fórum aktiválása',
@@ -117,11 +119,13 @@ amit kapott. Amennyiben nincs regisztrálva, akkor',
 	'item_non_config_forums_prive_objets' => 'Désactiver ces forums', # NEW
 
 	// L
+	'label_selectionner' => 'Sélectionner :', # NEW
 	'lien_reponse_article' => 'Hozzászólás a cikkről',
 	'lien_reponse_breve_2' => 'Hozzászólás a hírhez',
 	'lien_reponse_message' => 'Réponse au message', # NEW
 	'lien_reponse_rubrique' => 'Hozzászólás a rubrikához',
 	'lien_reponse_site_reference' => 'Hozzászólás a felvett honlaphoz :', # MODIF
+	'lien_vider_selection' => 'Vider la selection', # NEW
 
 	// M
 	'messages_aucun' => 'Aucun', # NEW

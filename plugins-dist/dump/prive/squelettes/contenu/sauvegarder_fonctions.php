@@ -37,7 +37,7 @@ function dump_afficher_tables_sauvegardees($status_file) {
 	}
 
 	$n = floor(count($tables)/2);
-	$corps .= "<div style='width:49%;float:left;'><ul class='spip'><li class='spip'>" . join("</li><li class='spip'>", array_slice($tables,0,$n)) . "</li></ul></div>"
+	$corps = "<div style='width:49%;float:left;'><ul class='spip'><li class='spip'>" . join("</li><li class='spip'>", array_slice($tables,0,$n)) . "</li></ul></div>"
 		. "<div style='width:49%;float:left;'><ul class='spip'><li>" . join("</li><li class='spip'>", array_slice($tables,$n)) . "</li></ul></div>"
 		. "<div class='nettoyeur'></div>";
 	return $corps;
