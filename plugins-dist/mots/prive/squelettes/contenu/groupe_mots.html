@@ -28,7 +28,7 @@
 
 #PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,groupemots,id,#ID_GROUPE},data,'<div class="nettoyeur"></div>'}}
 [(#EVAL{_AJAX}|oui)
-	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#chemin');/*\]\]>*/</script>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
 ]
 </BOUCLE_groupemots>
 [(#ENV**{exec}|=={groupe_mots_edit}|?{#INCLURE{fond=prive/squelettes/contenu/groupe_mots_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]

@@ -26,7 +26,7 @@ function plugins_fusion_paquet($plugins) {
 		if ($_paquet_spip['balise'] == 'paquet') {
 			// Deplacement du contenu de chaque balise technique commune si elle est non vide
 			foreach ($balises_techniques as $_btech) {
-				if ($fusion[$_btech]) {
+				if (isset($fusion[$_btech]) and $fusion[$_btech]) {
 					$balise = $fusion[$_btech];
 					unset($fusion[$_btech]);
 					$fusion[$_btech][0] = $balise;

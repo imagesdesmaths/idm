@@ -59,6 +59,11 @@ function base_restaurer_dist($titre='', $reprise=false) {
 			#die();
 			$res = base_copier_tables($status_file, $status['tables'], 'dump', '', $options);
 		}
+		else {
+			// mais on en profite pour reparer les version base pour etre sur de ne pas les perdre
+			sql_updateq("spip_meta",array('impt'=>'oui'),"nom='version_installee'",'','dump');
+			sql_updateq("spip_meta",array('impt'=>'oui'),"nom LIKE '%_base_version'",'','dump');
+		}
 		
 		echo ( "</div>\n");
 

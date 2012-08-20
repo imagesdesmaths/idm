@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_acces_refuse' => 'Dir hutt keen Zougang méi zu dëse Forum\'en.',
 	'forum_attention_dix_caracteres' => '<b>Opgepasst!</b> Äre Message muss op manst 10 Buchstawen hun.',
 	'forum_attention_message_non_poste' => 'Attention, vous n\'avez pas posté votre message !', # NEW
+	'forum_attention_nb_caracteres_mini' => '<b>Attention !</b> votre message doit contenir au moins @min@ caractères.', # NEW
 	'forum_attention_trois_caracteres' => '<b>Opgepasst!</b> Ären Titel muss op manst 3 Buchstawen hun.',
 	'forum_attention_trop_caracteres' => '<b>Opgepasst!</b> Äre Message ass ze laang (@compte@ Buchstawen): fir enregistréiert ze ginn därf hien nët méi wéi @max@ Buchstawen hun.', # MODIF
 	'forum_avez_selectionne' => 'Dir hutt gewielt:',
@@ -96,6 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_pas_de_forum' => 'keen Forum',
 	'info_question_visiteur_ajout_document_forum' => 'Wann dir de Visiteuren erlaabt Dokumenter (Biller, Toun...) bäi e Forum-Message ze setzen, da gitt hei un wéi eng Extensiounen am Forum erlaabt sin (z.B.: gif, jpg, png, mp3).', # MODIF
 	'info_question_visiteur_ajout_document_forum_format' => 'Wann dir all Dokument-Formater als sëcher ukuckt, dann gitt e Stär an. Fir näischt ze erlaaben, gitt näischt an.', # MODIF
+	'info_selectionner_message' => 'Sélectionner les messages :', # NEW
 	'interface_formulaire' => 'Interface formulaire', # NEW
 	'interface_onglets' => 'Interface avec onglets', # NEW
 	'item_activer_forum_administrateur' => 'De Forum vun den Adminstrateuren aschalten',
@@ -106,11 +108,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_non_config_forums_prive_objets' => 'Forumen ausschalten',
 
 	// L
+	'label_selectionner' => 'Sélectionner :', # NEW
 	'lien_reponse_article' => 'Äntwert op den Artikel',
 	'lien_reponse_breve_2' => 'Äntwert op d\'Kuerzmeldung',
 	'lien_reponse_message' => 'Réponse au message', # NEW
 	'lien_reponse_rubrique' => 'Äntwert op d\'Rubrik',
 	'lien_reponse_site_reference' => 'Äntwert op de referenzéierten Site:', # MODIF
+	'lien_vider_selection' => 'Vider la selection', # NEW
 
 	// M
 	'messages_aucun' => 'Aucun', # NEW

@@ -19,7 +19,7 @@ function plugins_fusion_plugin($plugins) {
 		// Balise plugin unique : on ne traite que les balises techniques
 		$fusion = $plugins[0];
 		foreach ($balises_techniques as $_btech) {
-			if ($fusion[$_btech]) {
+			if (isset($fusion[$_btech]) and $fusion[$_btech]) {
 				$balise = $fusion[$_btech];
 				unset($fusion[$_btech]);
 				$fusion[$_btech][0] = $balise;
@@ -57,7 +57,7 @@ function plugins_fusion_plugin($plugins) {
 		$cle_min_min = ($cle_min_max==0) ? 1 : 0;
 		if (!$fusion['categorie'] AND $plugins[$cle_min_min]['categorie'])
 			$fusion['categorie'] = $plugins[$cle_min_min]['categorie'];
-		if (!$fusion['logo'] AND $plugins[$cle_min_min]['logo'])
+		if ((!isset($fusion['logo']) OR !$fusion['logo']) AND $plugins[$cle_min_min]['logo'])
 			$fusion['logo'] = $plugins[$cle_min_min]['logo'];
 		$fusion['compatibilite'] = fusionner_intervalles($fusion['compatibilite'], $plugins[$cle_min_min]['compatibilite']);
 

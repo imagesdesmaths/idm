@@ -10,16 +10,32 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+
+/**
+ * Autorisations du plugin révisions
+ *
+ * @package Revisions\Autorisations
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-/* fonction pour le pipeline d'autorisation */
+/** Chargement pour le pipeline d'autorisation */
 function revisions_autoriser(){}
 
 /**
- * Voir les revisions ?
- * = revisions definies pour cet objet
- * + l'objet existe
- * + autorise a voir l'objet
+ * Autorisation de voir les revisions ?
+ * 
+ * Il faut :
+ * - des revisions définies pour cet objet
+ * - que l'objet existe
+ * - que l'on soit autorisé à voir l'objet
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
  */
 function autoriser_voirrevisions_dist($faire, $type, $id, $qui, $opt) {
 	$table = table_objet_sql($type);
@@ -36,7 +52,19 @@ function autoriser_voirrevisions_dist($faire, $type, $id, $qui, $opt) {
 		autoriser('voir', $type, $id, $qui, $opt);
 }
 
-// tout le monde peut voir le bouton de suivi des revisions
+
+/**
+ * Autorisation de voir le menu révisions
+ * 
+ * Il faut des révisions activées et présentes.
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+ */
 function autoriser_revisions_menu_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
 	// SI pas de revisions sur un objet quelconque.
 	// ET pas de version... pas de bouton, c'est inutile...

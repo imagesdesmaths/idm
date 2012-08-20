@@ -86,6 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_teleporter_format_archive_non_supporte' => 'Le format @extension@ n\'est pas supporté par le téléporteur', # NEW
 	'erreur_teleporter_methode_inconue' => 'Méthode @methode@ inconnue pour téléporter', # NEW
 	'erreur_teleporter_type_fichier_inconnu' => 'Tipo de archivo desconocido para  @source@',
+	'erreurs_xml' => 'Impossible de lire certaines descriptions XML', # NEW
 	'explication_destination' => 'Le chemin sera calculé depuis le nom de l\'archive si vous ne le remplissez pas.', # NEW
 
 	// F

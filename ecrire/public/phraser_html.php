@@ -298,13 +298,13 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 				while ($next=='{') {
 					phraser_arg($rec, $sep, array(), $champ);
 					$args = ltrim($rec) ;
-					$next = $args[0];
+					$next = isset($args[0]) ? $args[0] : '';
 				}
 				while ($next=='|') {
 					phraser_args($rec, $par, $sep, array(), $champ);
 					$args = $champ->apres ;
 					$champ->apres = '';
-					$next = $args[0];
+					$next = isset($args[0]) ? $args[0] : '';
 				}
 				// Si erreur de syntaxe dans un sous-argument, propager.
 				if ($champ->param === false)
@@ -315,7 +315,7 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 				$result[] = $champ;
 			}
 		}
-		if ($args[0] == ',') {
+		if (isset($args[0]) AND $args[0] == ',') {
 			$args = ltrim(substr($args,1));
 			if ($collecte) {$res[] = $collecte; $collecte = array();}
 		}
@@ -438,9 +438,29 @@ function phraser_vieux(&$champ)
 	}
 }
 
-// analyse des criteres de boucle, 
 
-// http://doc.spip.org/@phraser_criteres
+/**
+ * Analyse les critères de boucle 
+ *
+ * Chaque paramètre de la boucle (tel que {id_article>3}) est analysé
+ * pour construire un critère (objet Critere) de boucle.
+ * 
+ * Un critère a une description plus fine que le paramètre original
+ * car on en extrait certaines informations tel que la n'égation et l'opérateur
+ * utilisé s'il y a.
+ * 
+ * La fonction en profite pour déclarer des modificateurs de boucles
+ * en présence de certains critères (tout, plat) ou initialiser des
+ * variables de compilation (doublons)...
+ * 
+ * @param array $params
+ *     Tableau de description des paramètres passés à la boucle.
+ *     Chaque paramètre deviendra un critère
+ * @param Boucle $result
+ *     Description de la boucle
+ *     Elle sera complété de la liste de ses critères
+ * @return void
+**/
 function phraser_criteres($params, &$result) {
 
 	$err_ci = ''; // indiquera s'il y a eu une erreur

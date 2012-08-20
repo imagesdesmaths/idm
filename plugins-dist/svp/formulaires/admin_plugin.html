@@ -1,3 +1,15 @@
+<B_erreurs_xml>
+<div class='svp_retour'>
+	[(#BOITE_OUVRIR{<:svp:actions_en_erreur:>, error})]
+	<:svp:erreurs_xml:>
+	<ul>
+<BOUCLE_erreurs_xml(DATA){source tableau,#ENV{erreurs_xml}}>
+	<li>#VALEUR</li>
+</BOUCLE_erreurs_xml>
+	</ul>
+	#BOITE_FERMER
+</div>
+</B_erreurs_xml>
 <div class="formulaire_spip formulaire_admin_plugin" id="formulaire_admin_plugin">
 	<h3 class="titrem">[(#CHEMIN_IMAGE{plugin-24.png}|balise_img{icone plugin-24,cadre-icone})]<:plugins_liste:></h3>
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]

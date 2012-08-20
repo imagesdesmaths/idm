@@ -63,7 +63,7 @@ function boucle_DOCUMENTS($id_boucle, &$boucles) {
 	if (!isset($boucle->modificateur['criteres']['mode'])
 	AND !isset($boucle->modificateur['criteres']['tout'])) {
 		$modes = pipeline('medias_documents_visibles',array('image','document'));
-		$f = sql_serveur('quote', $serveur, true);
+		$f = sql_serveur('quote', $boucle->sql_serveur, true);
 		$modes = addslashes(join(',', array_map($f, array_unique($modes))));
 		array_unshift($boucle->where,array("'IN'", "'$id_table.mode'", "'($modes)'"));
 	}
@@ -75,7 +75,9 @@ function boucle_DOCUMENTS($id_boucle, &$boucles) {
 function lien_objet($id,$type,$longueur=80,$connect=NULL){
 	include_spip('inc/liens');
 	$titre = traiter_raccourci_titre($id, $type, $connect);
-	$titre = typo($titre['titre']);
+	// lorsque l'objet n'est plus declare (plugin desactive par exemple)
+	// le raccourcis n'est plus valide
+	$titre = isset($titre['titre']) ? typo($titre['titre']) : '';
 	if (!strlen($titre))
 		$titre = _T('info_sans_titre');
 	$url = generer_url_entite($id,$type);

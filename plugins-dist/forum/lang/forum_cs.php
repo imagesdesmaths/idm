@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_acces_refuse' => 'K těmto diskusním skupinám již nemáte přístup.',
 	'forum_attention_dix_caracteres' => '<b>Varování!</b> Zpráva musí obsahovat minimálně deset znaků.',
 	'forum_attention_message_non_poste' => 'Attention, vous n\'avez pas posté votre message !', # NEW
+	'forum_attention_nb_caracteres_mini' => '<b>Attention !</b> votre message doit contenir au moins @min@ caractères.', # NEW
 	'forum_attention_trois_caracteres' => '<b>Varování!</b> Název musí obsahovat minimálně deset znaků.',
 	'forum_attention_trop_caracteres' => '<b>Varování !</b> vaše zpráva je příliš dlouhá(@compte@ znaků) : aby jí bylo možné uložit, nesmí obsahovat více než  @max@ znaků.', # MODIF
 	'forum_avez_selectionne' => 'Zvolili jste:',
@@ -110,6 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_pas_de_forum' => 'bez diskusní skupiny',
 	'info_question_visiteur_ajout_document_forum' => 'If you wish to allow visitors to attach documents (images, sound files, ...) to their forum messages, indicate below the list of file extensions which are authorised (e.g. gif, jpg, png, mp3).', # MODIF
 	'info_question_visiteur_ajout_document_forum_format' => 'If you wish to authorise all document types which SPIP allows, then put an asterisk. To allow no file-types, leave empty.', # MODIF
+	'info_selectionner_message' => 'Sélectionner les messages :', # NEW
 	'interface_formulaire' => 'Interface formulaire', # NEW
 	'interface_onglets' => 'Interface avec onglets', # NEW
 	'item_activer_forum_administrateur' => 'Zapnout diskusní skupinu správců',
@@ -120,11 +122,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_non_config_forums_prive_objets' => 'Deactivate these forums', # NEW
 
 	// L
+	'label_selectionner' => 'Sélectionner :', # NEW
 	'lien_reponse_article' => 'Odpověď na článek',
 	'lien_reponse_breve_2' => 'Odpověď na novinku',
 	'lien_reponse_message' => 'Réponse au message', # NEW
 	'lien_reponse_rubrique' => 'Odpověď na sekci',
 	'lien_reponse_site_reference' => 'Odpověď na web, na nějž vede odkaz:', # MODIF
+	'lien_vider_selection' => 'Vider la selection', # NEW
 
 	// M
 	'messages_aucun' => 'Aucun', # NEW

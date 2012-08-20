@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_acces_refuse' => 'Você não tem mais acesso a estes fóruns.',
 	'forum_attention_dix_caracteres' => '<b>Atenção!</b> Sua mensagem precisa ter pelo menos dez caracteres.',
 	'forum_attention_message_non_poste' => 'Atenção, você não postou a sua mensagem!',
+	'forum_attention_nb_caracteres_mini' => '<b>Attention !</b> votre message doit contenir au moins @min@ caractères.', # NEW
 	'forum_attention_trois_caracteres' => '<b>Atenção!</b> Seu título precisa ter pelo menos três caracteres.',
 	'forum_attention_trop_caracteres' => '<b>Atenção!</b> sua mensagem é muito longa (@compte@ caracteres): para que ela seja gravada, ela não pode ultrapassar @max@ caracteres.',
 	'forum_avez_selectionne' => 'Você selecionou:',
@@ -97,6 +98,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_pas_de_forum' => 'sem fórum',
 	'info_question_visiteur_ajout_document_forum' => 'Se você deseja autorizar os visitantes a anexarem documentos (imagens, áudios...) às suas mensagens em fóruns, indique abaixo a lista das extensões de arquivos permitidos para os fóruns (ex.: gif, jpg, png, mp3).',
 	'info_question_visiteur_ajout_document_forum_format' => 'Se você deseja permitir todos os tipos de documentos considerados como seguros pelo SPIP, digite * (asterisco). Para não permitir nenhum, deixe em branco.',
+	'info_selectionner_message' => 'Sélectionner les messages :', # NEW
 	'interface_formulaire' => 'Interface de formulário',
 	'interface_onglets' => 'Interface com abas',
 	'item_activer_forum_administrateur' => 'Ativar o fórum dos administradores',
@@ -107,11 +109,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_non_config_forums_prive_objets' => 'Desativar estes fóruns',
 
 	// L
+	'label_selectionner' => 'Sélectionner :', # NEW
 	'lien_reponse_article' => 'Resposta à matéria',
 	'lien_reponse_breve_2' => 'Resposta à nota',
 	'lien_reponse_message' => 'Resposta à mensagem',
 	'lien_reponse_rubrique' => 'Resposta à seção',
 	'lien_reponse_site_reference' => 'resposta ao site referenciado',
+	'lien_vider_selection' => 'Vider la selection', # NEW
 
 	// M
 	'messages_aucun' => 'Nenhuma',

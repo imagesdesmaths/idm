@@ -10,10 +10,16 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Installation du plugin révisions
+ *
+ * @package Revisions\Installation
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Installation/maj des tables revision
+ * Installation/maj des tables révisions
  *
  * @param string $nom_meta_base_version
  * @param string $version_cible

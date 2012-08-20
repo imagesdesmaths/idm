@@ -67,6 +67,7 @@ function code_echappement($rempl, $source='', $no_transform=false, $mode=NULL) {
 
 	// Decouper en morceaux, base64 a des probleme selon la taille de la pile
 	$taille = 30000;
+	$return = "";
 	for($i = 0; $i < strlen($rempl); $i += $taille) {
 		// Convertir en base64 et cacher dans un attribut
 		// utiliser les " pour eviter le re-encodage de ' et &#8217
@@ -150,6 +151,16 @@ function echappe_html($letexte, $source='', $no_transform=false,
 $preg='') {
 	if (!is_string($letexte) or !strlen($letexte))
 		return $letexte;
+
+	// si le texte recu est long PCRE risque d'exploser, on
+	// fait donc un mic-mac pour augmenter pcre.backtrack_limit
+	if (($len = strlen($letexte)) > 100000) {
+		if (!$old = @ini_get('pcre.backtrack_limit')) $old = 100000;
+		if ($len > $old) {
+			$a = @ini_set('pcre.backtrack_limit', $len);
+			spip_log("ini_set pcre.backtrack_limit=$len ($old)");
+		}
+	}
 
 	if (($preg OR strpos($letexte,"<")!==false)
 	  AND preg_match_all($preg ? $preg : _PROTEGE_BLOCS, $letexte, $matches, PREG_SET_ORDER))
@@ -247,7 +258,7 @@ function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 	if (	$offset<$length
 			&& ($p_tag_ouvrant = strpos($texte,'<',$offset))!==NULL){
 		$p_tag_fermant = strpos($texte,'>',$offset);
-		if ($p_tag_fermant<$p_tag_ouvrant)
+		if ($p_tag_fermant && ($p_tag_fermant<$p_tag_ouvrant))
 			$offset = $p_tag_fermant+1; // prolonger la coupe jusqu'au tag fermant suivant eventuel
 	}
 	$texte = substr($texte, 0, $offset); /* eviter de travailler sur 10ko pour extraire 150 caracteres */

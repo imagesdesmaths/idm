@@ -186,7 +186,7 @@ function spip_log($message=NULL, $name=NULL) {
 	static $pre = array();
 	static $log;
 	preg_match('/^([a-z_]*)\.?(\d)?$/iS', (string) $name, $regs);
-	if (!$logname = $regs[1])
+	if (!isset($regs[1]) OR !$logname = $regs[1])
 		$logname = null;
 	if (!isset($regs[2]) OR !$niveau = $regs[2])
 		$niveau = _LOG_INFO;
@@ -490,7 +490,7 @@ function _T($texte, $args=array(), $options=array()) {
 		unset($args['spip_lang']);
 	}
 	// Sinon on prend la langue du contexte
-	else{
+	else {
 		$lang = $GLOBALS['spip_lang'];
 	}
 	$text = $traduire($texte, $lang);
@@ -1347,11 +1347,20 @@ function generer_form_ecrire($script, $corps, $atts='', $submit='') {
 	. "</div></form>\n";
 }
 
-// Attention, JS/Ajax n'aime pas le melange de param GET/POST
-// On n'applique pas la recommandation ci-dessus pour les scripts publics
-// qui ne sont pas destines a etre mis en signets
-
-// http://doc.spip.org/@generer_form_action
+/**
+ * Generer un formulaire pour lancer une action vers $script
+ *
+ * Attention, JS/Ajax n'aime pas le melange de param GET/POST
+ * On n'applique pas la recommandation ci-dessus pour les scripts publics
+ * qui ne sont pas destines a etre mis en signets
+ * http://doc.spip.org/@generer_form_action
+ *
+ * @param string $script
+ * @param string $corps
+ * @param string $atts
+ * @param bool $public
+ * @return string
+ */
 function generer_form_action($script, $corps, $atts='', $public=false) {
 	// si l'on est dans l'espace prive, on garde dans l'url
 	// l'exec a l'origine de l'action, qui permet de savoir si il est necessaire
@@ -1992,6 +2001,22 @@ function exec_info_dist() {
 		echo "pas admin";
 }
 
+/**
+ * Génère une erreur de squelette
+ *
+ * Génère une erreur de squelette qui sera bien visible par un
+ * administrateur authentifié lors d'une visite de la page en erreur 
+ *
+ * @param bool|string|array $message
+ * 		- Message d'erreur (string|array)
+ * 		- false pour retourner le texte des messages d'erreurs
+ * 		- vide pour afficher les messages d'erreurs
+ * @param string|array|object $lieu
+ * 		Lieu d'origine de l'erreur
+ * @return null|string
+ * 		Rien dans la plupart des cas
+ * 		- string si $message à false.
+**/
 function erreur_squelette($message='', $lieu='') {
 	$debusquer = charger_fonction('debusquer', 'public');
 	if (is_array($lieu)) {
@@ -2002,20 +2027,36 @@ function erreur_squelette($message='', $lieu='') {
 }
 
 /**
+ * Calcule un squelette avec un contexte et retourne son contenu
+ * 
  * La fonction de base de SPIP : un squelette + un contexte => une page.
  * $fond peut etre un nom de squelette, ou une liste de squelette au format array.
  * Dans ce dernier cas, les squelettes sont tous evalues et mis bout a bout
  * $options permet de selectionner les options suivantes :
  * 	trim => true (valeur par defaut) permet de ne rien renvoyer si le fond ne produit que des espaces ;
- * 	raw => true permet de recuperer la strucure $page complete avec entetes et invalideurs pour chaque $fond fourni.
+ * 	raw  => true permet de recuperer la strucure $page complete avec entetes et invalideurs
+ *          pour chaque $fond fourni.
  *
+ * @api
  * @param string/array $fond
+ * 		Le ou les squelettes à utiliser, sans l'extension, {@example prive/liste/auteurs}
+ * 		Le fichier sera retrouvé dans la liste des chemins connus de SPIP (squelettes, plugins, spip)
  * @param array $contexte
+ * 		Informations de contexte envoyées au squelette, {@example array('id_rubrique' => 8)}
+ * 		La langue est transmise automatiquement (sauf option étoile).
  * @param array $options
+ * 		Options complémentaires :
+ * 		- trim   : applique un trim sur le résultat (true par défaut)
+ * 		- raw    : retourne un tableau d'information sur le squelette (false par défaut)
+ * 		- etoile : ne pas transmettre la langue au contexte automatiquement (false par défaut),
+ * 		           équivalent de INCLURE*
+ * 		- ajax   : gere les liens internes du squelette en ajax (équivalent du paramètre {ajax})
  * @param string $connect
- * @return string/array
+ * 		Non du connecteur de bdd a utiliser
+ * @return string|array
+ * 		Contenu du squelette calculé
+ * 		ou tableau d'information sur le squelette.
  */
-// http://doc.spip.org/@recuperer_fond
 function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='') {
 	if (!function_exists('evaluer_fond'))
 		include_spip('public/assembler');

@@ -20,7 +20,7 @@
  * Les symboles sql_* (constantes et nom de fonctions) sont reserves
  * a cette interface, sans quoi le gestionnaire de version dysfonctionnera.
  *
- * @package SQL\API
+ * @package SPIP\SQL\API
  * @version 1
  */
 
@@ -77,7 +77,7 @@ function sql_serveur($ins_sql='', $serveur='', $continue=false) {
  * 		Le nom du connecteur
  * @param bool $option
  * 		Inutilise
- * @return string|false
+ * @return string|bool
  * 		Retourne le nom du charset si effectivement trouve, sinon false.
 **/
 function sql_get_charset($charset, $serveur='', $option=true){
@@ -188,6 +188,7 @@ function sql_select ($select = array(), $from = array(), $where = array(),
 		$res = $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, true);
 	}
 
+	// en cas d'erreur
 	if (!is_string($res)) return $res;
 	// denoncer l'erreur SQL dans sa version brute
 	spip_sql_erreur($serveur);
@@ -260,7 +261,7 @@ function sql_get_select($select = array(), $from = array(), $where = array(),
  * 		- continue -> ne pas echouer en cas de serveur sql indisponible,
  * 		- true -> executer la requete.
  *
- * @return int|false
+ * @return int|bool
  * 		Nombre de lignes de resultat
  * 		ou false en cas d'erreur
  *
@@ -281,7 +282,7 @@ function sql_countsel($from = array(), $where = array(),
  * Effectue une operation ALTER.
  *
  * @example
- * 		sql_alter('DROP COLUMN supprimer'); 
+ * 		<code>sql_alter('DROP COLUMN supprimer');</code>
  *
  * @api
  * @param string $q
@@ -321,7 +322,7 @@ function sql_alter($q, $serveur='', $option=true) {
  * 		- true -> executer la requete
  * 		- continue -> ne pas echouer en cas de serveur sql indisponible
  * 
- * @ return array
+ * @return array
  * 		Tableau de cles (colonnes SQL ou alias) / valeurs (valeurs dans la colonne de la table ou calculee)
  * 		presentant une ligne de resultat d'une selection 
  */
@@ -348,7 +349,7 @@ function sql_fetch($res, $serveur='', $option=true) {
  * 		- true -> executer la requete
  * 		- continue -> ne pas echouer en cas de serveur sql indisponible
  * 
- * @ return array
+ * @return array
  * 		Tableau contenant les enregistrements.
  * 		Chaque entree du tableau est un autre tableau
  * 		de cles (colonnes SQL ou alias) / valeurs (valeurs dans la colonne de la table ou calculee)
@@ -397,7 +398,27 @@ function sql_seek($res, $row_number, $serveur='', $option=true) {
 	return $r;
 }
 
-// http://doc.spip.org/@sql_listdbs
+
+/**
+ * Liste des bases de donnees accessibles
+ *
+ * Retourne un tableau du nom de toutes les bases de donnees
+ * accessibles avec les permissions de l'utilisateur SQL
+ * de cette connexion.
+ * Attention on n'a pas toujours les droits !
+ *
+ * @api
+ * @param string $serveur
+ * 		Nom du connecteur
+ * @param bool|string $option
+ * 		Peut avoir 2 valeurs : 
+ * 		- true -> executer la requete
+ * 		- continue -> ne pas echouer en cas de serveur sql indisponible
+ * 
+ * @return array|bool
+ * 		Tableau contenant chaque nom de base de donnees.
+ * 		False en cas d'erreur.
+**/
 function sql_listdbs($serveur='', $option=true) {
 	$f = sql_serveur('listdbs', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
@@ -406,7 +427,24 @@ function sql_listdbs($serveur='', $option=true) {
 	return $r;
 }
 
-// http://doc.spip.org/@sql_selectdb
+
+/**
+ * Demande d'utiliser d'une base de donnees
+ *
+ * @api
+ * @param string $nom
+ * 		Nom de la base a utiliser
+ * @param string $serveur
+ * 		Nom du connecteur
+ * @param bool|string $option
+ * 		Peut avoir 2 valeurs : 
+ * 		- true -> executer la requete
+ * 		- continue -> ne pas echouer en cas de serveur sql indisponible
+ * 
+ * @return bool|string
+ * 		True ou nom de la base en cas de success.
+ * 		False en cas d'erreur.
+**/
 function sql_selectdb($nom, $serveur='', $option=true)
 {
 	$f = sql_serveur('selectdb', $serveur,  $option==='continue' OR $option===false);
@@ -543,7 +581,24 @@ function sql_drop_view($table, $exist='', $serveur='', $option=true)
 	return $r;
 }
 
-// http://doc.spip.org/@sql_showbase
+/**
+ * Retourne une ressource de la liste des tables de la base de données 
+ *
+ * @api
+ * @param string $spip
+ *     Filtre sur tables retournées
+ *     - NULL : retourne les tables SPIP uniquement (tables préfixées avec le préfixe de la connexion)
+ *     - '%' : retourne toutes les tables de la base
+ * @param string $serveur
+ *     Le nom du connecteur
+ * @param bool|string $option
+ *     Peut avoir 3 valeurs : 
+ *     - false -> ne pas l'executer mais la retourner, 
+ *     - continue -> ne pas echouer en cas de serveur sql indisponible,
+ *     - true -> executer la requete.
+ * @return ressource
+ *     Ressource à utiliser avec sql_fetch()
+**/
 function sql_showbase($spip=NULL, $serveur='', $option=true)
 {
 	$f = sql_serveur('showbase', $serveur,  $option==='continue' OR $option===false);
@@ -558,6 +613,25 @@ function sql_showbase($spip=NULL, $serveur='', $option=true)
 	return $f($spip, $serveur, $option!==false);
 }
 
+/**
+ * Retourne la liste des tables SQL
+ *
+ * @api
+ * @uses sql_showbase()
+ * @param string $spip
+ *     Filtre sur tables retournées
+ *     - NULL : retourne les tables SPIP uniquement (tables préfixées avec le préfixe de la connexion)
+ *     - '%' : retourne toutes les tables de la base
+ * @param string $serveur
+ *     Le nom du connecteur
+ * @param bool|string $option
+ *     Peut avoir 3 valeurs : 
+ *     - false -> ne pas l'executer mais la retourner, 
+ *     - continue -> ne pas echouer en cas de serveur sql indisponible,
+ *     - true -> executer la requete.
+ * @return array
+ *     Liste des tables SQL
+**/
 function sql_alltable($spip=NULL, $serveur='', $option=true)
 {
 	$q = sql_showbase($spip, $serveur, $option);
@@ -627,14 +701,33 @@ function sql_multi($sel, $lang, $serveur='', $option=true)
 	return $f($sel, $lang);
 }
 
-// http://doc.spip.org/@sql_error
+
+/**
+ * Retourne la dernière erreur connue
+ *
+ * @api
+ * @param string $serveur
+ *      Nom du connecteur
+ * @return bool|string
+ *      Description de l'erreur
+ *      False si le serveur est indisponible
+ */
 function sql_error($serveur='') {
 	$f = sql_serveur('error', $serveur, 'continue');
 	if (!is_string($f) OR !$f) return false;
-	return $f('query inconnue', $serveur, $option!==false);
+	return $f('query inconnue', $serveur);
 }
 
-// http://doc.spip.org/@sql_errno
+/**
+ * Retourne le numéro de la derniere erreur connue
+ *
+ * @api
+ * @param string $serveur
+ *      Nom du connecteur
+ * @return bool|int
+ *      Numéro de l'erreur
+ *      False si le serveur est indisponible
+ */
 function sql_errno($serveur='') {
 	$f = sql_serveur('errno', $serveur, 'continue');
 	if (!is_string($f) OR !$f) return false;
@@ -687,8 +780,10 @@ function sql_query($ins, $serveur='', $option=true) {
  * comme si l'on appelait successivement sql_select() puis sql_fetch()
  * 
  * @example
+ * 		<code>
  * 		$art = sql_fetsel(array('id_rubrique','id_secteur'), 'spip_articles', 'id_article='.sql_quote($id_article));
  *		$id_rubrique = $art['id_rubrique'];
+ * 		</code>
  * 
  * @api
  * @uses sql_select()
@@ -719,7 +814,7 @@ function sql_query($ins, $serveur='', $option=true) {
  * @return array
  * 		Tableau de la premiere ligne de resultat de la selection
  * 		{@example
- * 			array('id_rubrique' => 1, 'id_secteur' => 2)
+ * 			<code>array('id_rubrique' => 1, 'id_secteur' => 2)</code>
  * 		}
  *
 **/
@@ -742,8 +837,10 @@ function sql_fetsel($select = array(), $from = array(), $where = array(),
  * comme si l'on appelait successivement sql_select() puis while(sql_fetch())
  * 
  * @example
+ * 		<code>
  * 		$rubs = sql_allfetsel('id_rubrique', 'spip_articles', 'id_secteur='.sql_quote($id_secteur));
  *		// $rubs = array(array('id_rubrique'=>1), array('id_rubrique'=>3, ...)
+ * 		</code>
  * 
  * @api
  * @uses sql_select()
@@ -775,11 +872,13 @@ function sql_fetsel($select = array(), $from = array(), $where = array(),
  * 		Tableau de toutes les lignes de resultat de la selection
  * 		Chaque entree contient un tableau des elements demandees dans le SELECT.
  * 		{@example
+ * 			<code>
  * 			array(
  * 				array('id_rubrique' => 1, 'id_secteur' => 2)
  * 				array('id_rubrique' => 4, 'id_secteur' => 2)
  * 				...
  * 			)
+ * 			</code>
  * 		}
  *
 **/
@@ -799,7 +898,9 @@ function sql_allfetsel($select = array(), $from = array(), $where = array(),
  * un unique champ demande
  * 
  * @example
+ * 		<code>
  * 		$id_rubrique = sql_getfetsel('id_rubrique', 'spip_articles', 'id_article='.sql_quote($id_article));
+ * 		</code>
  *
  * @api
  * @uses sql_fetsel()
@@ -872,9 +973,11 @@ function sql_version($serveur='', $option=true) {
  * de verifier que le moteur prefere utiliser des transactions dans ce cas.
  *
  * @example
+ * 		<code>
  * 		if (sql_preferer_transaction()) {
  * 			sql_demarrer_transaction();
  * 		}
+ * 		</code>
  *
  * @api
  * @see sql_demarrer_transaction()
@@ -912,7 +1015,9 @@ function sql_preferer_transaction($serveur='', $option=true) {
  * 		- continue pour ne pas echouer en cas de serveur sql indisponible.
  * 		- false pour obtenir le code de la requete
  * 
- * @return true
+ * @return bool
+ *      true si la transaction est demarree
+ *      false en cas d'erreur
 **/
 function sql_demarrer_transaction($serveur='', $option=true) {
 	$f = sql_serveur('demarrer_transaction', $serveur,  'continue');
@@ -936,7 +1041,9 @@ function sql_demarrer_transaction($serveur='', $option=true) {
  * 		- continue pour ne pas echouer en cas de serveur sql indisponible.
  * 		- false pour obtenir le code de la requete
  * 
- * @return true
+ * @return bool
+ *      true si la transaction est demarree
+ *      false en cas d'erreur
 **/
 function sql_terminer_transaction($serveur='', $option=true) {
 	$f = sql_serveur('terminer_transaction', $serveur,  'continue');
@@ -989,7 +1096,7 @@ function sql_hex($val, $serveur='', $option=true)
  * 		Nom du connecteur
  * @param string $type
  * 		Peut contenir une declaration de type de champ SQL
- * 		{@example int NOT NULL} qui sert alors aussi a calculer le type d'echappement
+ * 		{@example <code>int NOT NULL</code>} qui sert alors aussi a calculer le type d'echappement
  * @return string
  * 		La chaine echappee
 **/
@@ -1007,12 +1114,40 @@ function sql_date_proche($champ, $interval, $unite, $serveur='', $option=true)
 	return $f($champ, $interval, $unite);
 }
 
+/**
+ * Retourne une expression IN pour le gestionnaire de base de données
+ *
+ * Retourne un code à insérer dans une requête SQL pour récupérer
+ * les éléments d'une colonne qui appartiennent à une liste donnée
+ *
+ * @example
+ *     sql_in('id_rubrique', array(3,4,5))
+ *     retourne approximativement «id_rubrique IN (3,4,5)» selon ce qu'attend
+ *     le gestionnaire de base de donnée du connecteur en cours.
+ *
+ * @api
+ * @param string $val
+ *     Colonne SQL sur laquelle appliquer le test
+ * @param string|array $valeurs
+ *     Liste des valeurs possibles (séparés par des virgules si string)
+ * @param string $not
+ *     - '' sélectionne les éléments correspondant aux valeurs
+ *     - 'NOT' inverse en sélectionnant les éléments ne correspondant pas aux valeurs
+ * @param string $serveur
+ *   Nom du connecteur
+ * @param bool|string $option
+ *   Peut avoir 2 valeurs : 
+ *   - continue -> ne pas echouer en cas de serveur sql indisponible
+ *   - true ou false -> retourne l'expression
+ * @return string
+ *     Expression de requête SQL
+**/
 function sql_in($val, $valeurs, $not='', $serveur='', $option=true) {
 	if (is_array($valeurs)) {
 		$f = sql_serveur('quote', $serveur, true);
 		if (!is_string($f) OR !$f) return false;
 		$valeurs = join(',', array_map($f, array_unique($valeurs)));
-	} elseif ($valeurs[0]===',') $valeurs = substr($valeurs,1);
+	} elseif (isset($valeurs[0]) AND $valeurs[0]===',') $valeurs = substr($valeurs,1);
 	if (!strlen(trim($valeurs))) return ($not ? "0=0" : '0=1');
 
 	$f = sql_serveur('in', $serveur,  $option==='continue' OR $option===false);
@@ -1137,7 +1272,7 @@ function sql_format_date($annee=0, $mois=0, $jour=0, $h=0, $m=0, $s=0, $serveur=
  * 		Nom de la table dont on souhait la description
  * @param string $serveur
  * 		Nom du connecteur
- * @return array|false
+ * @return array|bool
  * 		Description de la table ou false si elle n'est pas trouvee ou declaree.
 **/
 function description_table($nom, $serveur=''){

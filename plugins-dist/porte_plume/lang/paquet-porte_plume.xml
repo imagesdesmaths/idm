@@ -1,6 +1,6 @@
 <traduction module="paquet-porte_plume" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://zone.spip.org/spip-zone/_core_/plugins/porte_plume/lang/" reference="fr">
 	<langue code="ar" url="http://trad.spip.org/tradlang_module/paquet-porte_plume?lang_cible=ar">
-		<traducteur nom="George" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
+		<traducteur nom="&lt;span lang=&#039;fr&#039;&gt;George&lt;/span&gt;" lien="http://trad.spip.org/auteur/جورج-قندلفت" />
 	</langue>
 	<langue code="de" url="http://trad.spip.org/tradlang_module/paquet-porte_plume?lang_cible=de">
 		<traducteur nom="klaus++" lien="http://trad.spip.org/auteur/klaus" />

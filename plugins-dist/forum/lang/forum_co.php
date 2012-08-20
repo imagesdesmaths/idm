@@ -35,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_acces_refuse' => 'Ùn avete più accessu à sti fori.',
 	'forum_attention_dix_caracteres' => '<b>Attenti !</b> U vostru messagiu deve cuntene à u mìnimu dece caràtteri.',
 	'forum_attention_message_non_poste' => 'Attention, vous n\'avez pas posté votre message !', # NEW
+	'forum_attention_nb_caracteres_mini' => '<b>Attention !</b> votre message doit contenir au moins @min@ caractères.', # NEW
 	'forum_attention_trois_caracteres' => '<b>Attenti !</b> U vostru tìtulu deve cuntene à u mìnimu trè caràtteri.',
 	'forum_attention_trop_caracteres' => '<b>Attention !</b> U vostru messagiu hè troppu longu (@compte@ caràtteri) : pè pudè esse arregistratu, 
 	ùn deve superà @max@ caràtteri.', # MODIF
@@ -111,6 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		rinsignate quì sottu a lista di \'estensioni di i ducumenti auturizati pè i fori (per esempiu : gif, jpg, png, mp3).', # MODIF
 	'info_question_visiteur_ajout_document_forum_format' => 'Sè vo vulete auturizà tutti i tippi di ducumenti cunsiderati da affidati da SPIP, mettite una 
 		stelluccia. Per ùn auturizà nunda, ùn mettite nunda.', # MODIF
+	'info_selectionner_message' => 'Sélectionner les messages :', # NEW
 	'interface_formulaire' => 'Interface formulaire', # NEW
 	'interface_onglets' => 'Interface avec onglets', # NEW
 	'item_activer_forum_administrateur' => 'Attivà u foru di l\'amministratori',
@@ -121,11 +123,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_non_config_forums_prive_objets' => 'Disattivà sti fori',
 
 	// L
+	'label_selectionner' => 'Sélectionner :', # NEW
 	'lien_reponse_article' => 'Risposta à l\'artìculu',
 	'lien_reponse_breve_2' => 'Risposta i dispacci',
 	'lien_reponse_message' => 'Réponse au message', # NEW
 	'lien_reponse_rubrique' => 'Risposta à a rùbbrica',
 	'lien_reponse_site_reference' => 'Risposta à u situ riferitu :', # MODIF
+	'lien_vider_selection' => 'Vider la selection', # NEW
 
 	// M
 	'messages_aucun' => 'Aucun', # NEW

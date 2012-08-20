@@ -89,6 +89,7 @@ is not created or is not writable.
 	'erreur_teleporter_format_archive_non_supporte' => 'Format "@extension@" is not supported by the teleporter',
 	'erreur_teleporter_methode_inconue' => 'Unknown method "@methode@" for teleport',
 	'erreur_teleporter_type_fichier_inconnu' => 'Unknown file type for the source @source@',
+	'erreurs_xml' => 'Unable to read some XML descriptions',
 	'explication_destination' => 'The path will be calculated from the archive name if you don\'t fill it.',
 
 	// F

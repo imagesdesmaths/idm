@@ -15,7 +15,7 @@
 		[(#REM) <!-- Checkbox action multiple -->]
 		[(#VALEUR{installe}|non|et{#VAL|test_plugins_auto})
 			<div class="check">
-				<input type="checkbox" class="checkbox" name="ids_paquet[(#VAL{91}|chr)][(#VAL{93}|chr)]" value="#ID_PAQUET"
+				<input type="checkbox" class="checkbox" name="ids_paquet\[\]" value="#ID_PAQUET"
 					[(#ID_PAQUET|in_any{#ENV{ids_paquet}}) checked="checked"] />
 			</div>
 		]

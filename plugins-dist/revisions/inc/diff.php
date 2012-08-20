@@ -29,7 +29,9 @@ function lcs_opt($s) {
 
 	// Insertion des points
 	asort($s);
+	$max = 400;
 	foreach ($s as $y => $c) {
+		if ($max-- < 0) break;  # eviter l'explosion memoire des tres gros diff
 		for ($len = $max_len; $len > 0; $len--) {
 			if ($paths_ymin[$len] < $y) {
 				$paths_ymin[$len + 1] = $y;
@@ -83,7 +85,7 @@ function lcs($s, $t) {
 			}
 		}
 	}
-	if ($paths[$max_len]) {
+	if (isset($paths[$max_len]) AND $paths[$max_len]) {
 		$path = explode(" ", $paths[$max_len]);
 		$u = $v = array();
 		foreach ($path as $p) {
@@ -336,11 +338,11 @@ class DiffPhrase {
 				// Attacher les raccourcis fermants au mot precedent
 				else
 				if (preg_match(',^[\]}]+$,', $punct)) {
-					$avant = substr($texte, 0, $p) . $regs[5] . $punct;
+					$avant = substr($texte, 0, $p) . (isset($regs[5])?$regs[5]:'') . $punct;
 					$texte = $regs[4] . substr($texte, $p + $l);
 				}
 				// Attacher les raccourcis ouvrants au mot suivant
-				else if ($regs[5] && preg_match(',^[\[{]+$,', $punct)) {
+				else if (isset($regs[5]) && $regs[5] && preg_match(',^[\[{]+$,', $punct)) {
 					$avant = substr($texte, 0, $p) . $regs[5];
 					$texte = $punct . substr($texte, $p + $l);
 				}

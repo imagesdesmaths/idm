@@ -37,6 +37,7 @@ function typographie_fr($t) {
 				$trans["\xe2\x80\x9d"] = '&#8221;';
 				$trans["\xe2\x80\x9c"] = '&#8220;';
 				$trans["\xc2\xb0"] = '&#176;';
+				$trans["\xe2\x80\x89"] = '~'; # &finesp;
 				break;
 			default:
 				$trans["\xa0"] = '~';

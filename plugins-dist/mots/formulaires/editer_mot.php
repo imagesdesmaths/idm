@@ -58,8 +58,7 @@ function mots_edit_config($row)
 	$config = $GLOBALS['meta'];
 	$config['lignes'] = ($spip_ecran == "large")? 8 : 5;
 	$config['langue'] = $spip_lang;
-
-	$config['restreint'] = ($row['statut'] == 'publie');
+	$config['restreint'] = false;
 	return $config;
 }
 

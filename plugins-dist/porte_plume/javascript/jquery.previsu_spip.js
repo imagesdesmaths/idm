@@ -48,6 +48,10 @@
 							objet[1])
 						)
 						.removeClass('ajaxLoad');
+					
+					//ouvre un nouvel onglet lorsqu'on clique sur un lien dans la prévisualisation
+					$(".markItUpPreview a").attr("target","blank");
+
 					return false;
 				});
 				$('.previsuEditer').click(function(){

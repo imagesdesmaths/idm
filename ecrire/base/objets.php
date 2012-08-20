@@ -10,8 +10,25 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Fonctions relatives aux objets éditoriaux et SQL
+ *
+ * @package SPIP\SQL\Tables
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Merge dans un tableau une de ses clés avec une valeur
+ *
+ * @param array $table
+ *     Tableau dont on veut compléter une clé
+ * @param string $index
+ *     Clé du tableau que l'on souhaite compléter
+ * @param array $valeur
+ *     Sous tableau à merger dans la clé.
+ * @return void
+**/
 function array_set_merge(&$table,$index,$valeur){
 	if (!isset($table[$index]))
 		$table[$index] = $valeur;
@@ -20,10 +37,12 @@ function array_set_merge(&$table,$index,$valeur){
 }
 
 /**
- * Lister les infos de toutes les tables sql declarees
- * si un argument est fourni, on ne renvoie que les infos de cette table
- * elle est auto-declaree si inconnue jusqu'alors.
+ * Lister les infos de toutes les tables sql declarées
+ * 
+ * Si un argument est fourni, on ne renvoie que les infos de cette table.
+ * Elle est auto-declarée si inconnue jusqu'alors.
  *
+ * @api
  * @param string $table_sql
  *   table_sql demandee explicitement
  * @param array $desc
@@ -403,7 +422,15 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 }
 
 
-// http://doc.spip.org/@base_serial
+/**
+ * Déclare les tables principales du Core
+ *
+ * Tables principales, hors objets éditoriaux.
+ *
+ * @param array $tables_principales
+ *     Description des tables principales déjà déclarées
+ * @return void
+**/
 function base_serial(&$tables_principales){
 
 	$spip_jobs = array(
@@ -430,7 +457,13 @@ function base_serial(&$tables_principales){
 }
 
 
-// http://doc.spip.org/@base_auxiliaires
+/**
+ * Déclare les tables auxiliaires du Core
+ *
+ * @param array $tables_auxiliaires
+ *     Description des tables auxiliaires déjà déclarées
+ * @return void
+**/
 function base_auxiliaires(&$tables_auxiliaires){
 $spip_resultats = array(
  		"recherche"	=> "char(16) DEFAULT '' NOT NULL",
@@ -658,7 +691,7 @@ function renseigner_table_objet_interfaces($table_sql,&$infos){
 		}
 	}
 	if (!isset($infos['date'])){
-		if (isset($GLOBALS['table_date'][$infos['table_objet']]))
+		if (isset($infos['table_objet']) and isset($GLOBALS['table_date'][$infos['table_objet']]))
 			$infos['date'] = $GLOBALS['table_date'][$infos['table_objet']];
 		else
 			$infos['date'] = ((isset($infos['field']['date']))?"date":'');
@@ -672,7 +705,13 @@ function renseigner_table_objet_interfaces($table_sql,&$infos){
 	return $infos;
 }
 
-
+/**
+ * Retourne la liste des tables principales et leurs descriptions 
+ *
+ * @api
+ * @return array
+ *     Liste et descriptions des tables principales
+**/
 function lister_tables_principales(){
 	static $done = false;
 	if (!$done OR !count($GLOBALS['tables_principales'])){
@@ -682,6 +721,13 @@ function lister_tables_principales(){
 	return $GLOBALS['tables_principales'];
 }
 
+/**
+ * Retourne la liste des tables auxiliaires et leurs descriptions 
+ *
+ * @api
+ * @return array
+ *     Liste et descriptions des tables auxiliaires
+**/
 function lister_tables_auxiliaires(){
 	static $done = false;
 	if (!$done OR !count($GLOBALS['tables_auxiliaires'])){
@@ -761,8 +807,23 @@ function lister_types_surnoms(){
 	return $surnoms;
 }
 
-// Nommage bizarre des tables d'objets
-// http://doc.spip.org/@table_objet
+ 
+/**
+ * Retrouve le nom d'objet à partir de la table
+ * 
+ * - spip_articles -> articles
+ * - id_article    -> articles
+ * - article       -> articles
+ *
+ * @api
+ * @param string $type
+ *     Nom de la table SQL (le plus souvent)
+ *     Tolère un nom de clé primaire.
+ * @param string $serveur
+ *     Nom du connecteur
+ * @return string
+ *     Nom de l'objet
+**/
 function table_objet($type,$serveur='') {
 	$surnoms = lister_tables_objets_surnoms();
 	$type = preg_replace(',^spip_|^id_|s$,', '', $type);
@@ -783,7 +844,22 @@ function table_objet($type,$serveur='') {
 	return rtrim($type,'s')."s"; # cas historique ne devant plus servir, sauf si $serveur=false
 }
 
-// http://doc.spip.org/@table_objet_sql
+/**
+ * Retrouve la table sql à partir de l'objet ou du type
+ *
+ * - articles    -> spip_articles
+ * - article     -> spip_articles
+ * - id_article  -> spip_articles
+ *
+ * @api
+ * @param string $type
+ *     Nom ou type de l'objet
+ *     Tolère un nom de clé primaire.
+ * @param string $serveur
+ *     Nom du connecteur
+ * @return string
+ *     Nom de la table SQL
+**/
 function table_objet_sql($type,$serveur='') {
 	global $table_des_tables;
 	$nom = table_objet($type, $serveur);
@@ -807,7 +883,21 @@ function table_objet_sql($type,$serveur='') {
 	return $nom ;
 }
 
-// http://doc.spip.org/@id_table_objet
+/**
+ * Retrouve la clé primaire à partir du nom d'objet ou de table
+ * 
+ * - articles      -> id_article
+ * - article       -> id_article
+ * - spip_articles -> id_article
+ *
+ * @api
+ * @param string $type
+ *     Nom de la table SQL ou de l'objet
+ * @param string $serveur
+ *     Nom du connecteur
+ * @return string
+ *     Nom de la clé primaire
+**/
 function id_table_objet($type,$serveur='') {
 	static $trouver_table = null;
 	$type = objet_type($type,$serveur);
@@ -825,7 +915,21 @@ function id_table_objet($type,$serveur='') {
 	return array_shift($keys);
 }
 
-// http://doc.spip.org/@objet_type
+/**
+ * Retrouve le type d'objet à partir du nom d'objet ou de table
+ * 
+ * - articles      -> article
+ * - spip_articles -> article
+ * - id_article    -> article
+ *
+ * @api
+ * @param string $table_objet
+ *     Nom de l'objet ou de la table SQL
+ * @param string $serveur
+ *     Nom du connecteur
+ * @return string
+ *     Type de l'objet
+**/
 function objet_type($table_objet, $serveur=''){
 	if (!$table_objet) return;
 	$surnoms = lister_types_surnoms();
@@ -872,7 +976,8 @@ function objet_type($table_objet, $serveur=''){
 
 /**
  * Determininer si un objet est publie ou non
- * on se base pour cela sur sa declaration de statut
+ * 
+ * On se base pour cela sur sa declaration de statut
  * pour des cas particuliers non declarables, on permet de fournir une fonction
  * base_xxxx_test_si_publie qui sera appele par la fonction
  *
@@ -899,7 +1004,7 @@ function objet_test_si_publie($objet,$id_objet, $serveur=''){
 		$boucle->nom = 'objet_test_si_publie';
 		$boucle->id_boucle = $id_table;
 		$boucle->id_table = $id_table;
-		$boucle->serveur = $serveur;
+		$boucle->sql_serveur = $serveur;
 		$boucle->select[] = $id_table_objet;
 		$boucle->from[$table_objet] = table_objet_sql($objet, $serveur);
 		$boucle->where[] = $id_table.".".$id_table_objet.'='.intval($id_objet);

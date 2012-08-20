@@ -1,6 +1,6 @@
 <?php
 
-/***************************************************************************\
+/* *************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
  *  Copyright (c) 2001-2012                                                *
@@ -10,9 +10,16 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Ce fichier contient les fonctions gerant
+ * les instructions SQL pour Sqlite
+ *
+ * @package SPIP\SQL\SQLite
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-# todo : get/set_caracteres ?
+// TODO: get/set_caracteres ?
 
 
 /*
@@ -117,12 +124,17 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db = '', $prefixe = '', $
 
 /**
  * Fonction de requete generale, munie d'une trace a la demande
- * http://doc.spip.org/@spip_sqlite_query
  *
- * @param  $query
+ * @param string $query
+ * 		Requete a executer
  * @param string $serveur
+ * 		Nom du connecteur
  * @param bool $requeter
+ * 		Effectuer la requete ?
+ * 		- true pour executer
+ * 		- false pour retourner le texte de la requete
  * @return bool|SQLiteResult|string
+ * 		Resultat de la requete
  */
 function spip_sqlite_query($query, $serveur = '', $requeter = true){
 	#spip_log("spip_sqlite_query() > $query",'sqlite.'._LOG_DEBUG);
@@ -377,9 +389,9 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true){
  * Fonction de creation d'une table SQL nommee $nom
  * http://doc.spip.org/@spip_sqlite_create
  *
- * @param  $nom
- * @param  $champs
- * @param  $cles
+ * @param string $nom
+ * @param array $champs
+ * @param array $cles
  * @param bool $autoinc
  * @param bool $temporary
  * @param string $serveur
@@ -439,11 +451,20 @@ function spip_sqlite_create_base($nom, $serveur = '', $option = true){
  * Fonction de creation d'une vue SQL nommee $nom
  * http://doc.spip.org/@spip_sqlite_create_view
  *
- * @param  $nom
- * @param  $query_select
+ * @param string $nom
+ * 		Nom de la vue a creer
+ * @param string $query_select
+ * 		Texte de la requete de selection servant de base a la vue
  * @param string $serveur
+ * 		Nom du connecteur
  * @param bool $requeter
+ * 		Effectuer la requete ?
+ * 		- true pour executer
+ * 		- false pour retourner le texte de la requete
  * @return bool|SQLiteResult|string
+ * 		Resultat de la requete ou
+ * 		- false si erreur ou si la vue existe deja
+ * 		- string texte de la requete si $requeter vaut false
  */
 function spip_sqlite_create_view($nom, $query_select, $serveur = '', $requeter = true){
 	if (!$query_select) return false;
@@ -655,23 +676,31 @@ function spip_sqlite_drop_index($nom, $table, $serveur = '', $requeter = true){
 }
 
 /**
- * Retourne la derniere erreur generee
+ * Retourne la dernière erreur generée
  *
- * http://doc.spip.org/@spip_sqlite_error
- *
- * @param $serveur nom de la connexion
- * @return string erreur eventuelle
+ * @param $serveur
+ * 		nom de la connexion
+ * @return string
+ * 		erreur eventuelle
  **/
 function spip_sqlite_error($query = '', $serveur = ''){
 	$link = _sqlite_link($serveur);
 
 	if (_sqlite_is_version(3, $link)){
 		$errs = $link->errorInfo();
+		/*
+			$errs[0]
+				numero SQLState ('HY000' souvent lors d'une erreur)
+				http://www.easysoft.com/developer/interfaces/odbc/sqlstate_status_return_codes.html
+			$errs[1]
+				numéro d'erreur SQLite (souvent 1 lors d'une erreur)
+				http://www.sqlite.org/c3ref/c_abort.html
+			$errs[2]
+				Le texte du message d'erreur
+		*/
 		$s = '';
-		if (ltrim($errs[0],'0')){ // 00000 si pas d'erreur
-			foreach ($errs as $n => $e){
-				$s .= " | $n : $e";
-			}
+		if (ltrim($errs[0],'0')) { // 00000 si pas d'erreur
+			$s = "$errs[2]";
 		}
 	} elseif ($link) {
 		$s = sqlite_error_string(sqlite_last_error($link));
@@ -683,13 +712,17 @@ function spip_sqlite_error($query = '', $serveur = ''){
 }
 
 /**
- * Retourne le numero de la derniere erreur SQL
- * (sauf que SQLite semble ne connaitre que 0 ou 1)
+ * Retourne le numero de la dernière erreur SQL
  *
- * http://doc.spip.org/@spip_sqlite_errno
- *
- * @param $serveur nom de la connexion
- * @return int 0 pas d'erreur / 1 une erreur
+ * Le numéro (en sqlite3/pdo) est un retour ODBC tel que (très souvent) HY000
+ * http://www.easysoft.com/developer/interfaces/odbc/sqlstate_status_return_codes.html
+ * 
+ * @param string $serveur
+ * 		nom de la connexion
+ * @return int|string
+ * 		0 pas d'erreur
+ * 		1 ou autre erreur (en sqlite 2)
+ * 		'HY000/1' : numéro de l'erreur SQLState / numéro d'erreur interne SQLite (en sqlite 3)
  **/
 function spip_sqlite_errno($serveur = ''){
 	$link = _sqlite_link($serveur);
@@ -697,6 +730,7 @@ function spip_sqlite_errno($serveur = ''){
 	if (_sqlite_is_version(3, $link)){
 		$t = $link->errorInfo();
 		$s = ltrim($t[0],'0'); // 00000 si pas d'erreur
+		if ($s) $s .= ' / ' . $t[1]; // ajoute l'erreur du moteur SQLite
 	} elseif ($link) {
 		$s = sqlite_last_error($link);
 	} else {
@@ -1077,11 +1111,32 @@ function spip_sqlite_select($select, $from, $where = '', $groupby = '', $orderby
 		.($orderby ? ("\nORDER BY "._sqlite_calculer_order($orderby)) : '')
 		.($limit ? "\nLIMIT $limit" : '');
 
-	return spip_sqlite_query($query, $serveur, $requeter);
+	// dans un select, on doit renvoyer la requête en cas d'erreur
+	$res = spip_sqlite_query($query, $serveur, $requeter);
+	// texte de la requete demande ?
+	if (!$requeter) return $res;
+	// erreur survenue ?
+	if ($res === false) {
+		return spip_sqlite::traduire_requete($query, $serveur);
+	}
+	return $res;
 }
 
 
-// http://doc.spip.org/@spip_sqlite_selectdb
+/**
+ * Selectionne un fichier de base de donnees
+ *
+ * @param string $nom
+ * 		Nom de la base a utiliser
+ * @param string $serveur
+ * 		Nom du connecteur
+ * @param bool $requeter
+ * 		Inutilise
+ * 
+ * @return bool|string
+ * 		Nom de la base en cas de success.
+ * 		False en cas d'erreur.
+**/
 function spip_sqlite_selectdb($db, $serveur = '', $requeter = true){
 	_sqlite_init();
 
@@ -1115,7 +1170,19 @@ function spip_sqlite_set_charset($charset, $serveur = '', $requeter = true){
 }
 
 
-// http://doc.spip.org/@spip_sqlite_showbase
+/**
+ * Retourne une ressource de la liste des tables de la base de données 
+ *
+ * @param string $match
+ *     Filtre sur tables à récupérer
+ * @param string $serveur
+ *     Connecteur de la base
+ * @param bool $requeter
+ *     true pour éxecuter la requête
+ *     false pour retourner le texte de la requête.
+ * @return ressource
+ *     Ressource à utiliser avec sql_fetch()
+**/
 function spip_sqlite_showbase($match, $serveur = '', $requeter = true){
 	// type est le type d'entrée : table / index / view
 	// on ne retourne que les tables (?) et non les vues...
@@ -1843,7 +1910,8 @@ function _sqlite_requete_create($nom, $champs, $cles, $autoinc = false, $tempora
 	// il faut passer par des create index
 	// Il gere par contre primary key !
 	// Soit la PK est definie dans les cles, soit dans un champs
-	if (!$c = $cles[$pk = "PRIMARY KEY"]){
+	$c = ""; // le champ de cle primaire
+	if (!isset($cles[$pk = "PRIMARY KEY"]) OR !$c = $cles[$pk]){
 		foreach ($champs as $k => $v){
 			if (false!==stripos($v, $pk)){
 				$c = $k;
@@ -1944,6 +2012,17 @@ class spip_sqlite {
 
 	function spip_sqlite(){}
 
+	/**
+	 * Retourne une unique instance du requêteur
+	 *
+	 * Retourne une instance unique du requêteur pour une connexion SQLite
+	 * donnée
+	 *
+	 * @param string $serveur
+	 * 		Nom du connecteur
+	 * @return sqlite_requeteur
+	 * 		Instance unique du requêteur
+	**/
 	static function requeteur($serveur){
 		if (!isset(spip_sqlite::$requeteurs[$serveur]))
 			spip_sqlite::$requeteurs[$serveur] = new sqlite_requeteur($serveur);

@@ -38,7 +38,8 @@ class TextWheelRule {
 	## the rule will be applied if the text...
 	# optional
 	var $if_chars; # ...contains one of these chars
-	var $if_str; # ...contains this string (case insensitive)
+	var $if_str; # ...contains this string (case sensitive)
+	var $if_stri; # ...contains this string (case insensitive)
 	var $if_match; # ...matches this simple expr
 
 

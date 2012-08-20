@@ -1,6 +1,6 @@
 <?php
 
-/***************************************************************************\
+/* *************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
  *  Copyright (c) 2001-2012                                                *
@@ -10,6 +10,13 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Ce fichier contient les fonctions gerant
+ * les instructions SQL pour PostgreSQL
+ *
+ * @package SPIP\SQL\PostgreSQL
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 define('_DEFAULT_DB', 'spip');
@@ -413,7 +420,21 @@ function spip_pg_explain($query, $serveur='',$requeter=true){
 	return spip_pg_fetch($r, NULL, $serveur);
 }
 
-// http://doc.spip.org/@spip_pg_selectdb
+
+/**
+ * Selectionne une base de donnees
+ *
+ * @param string $nom
+ * 		Nom de la base a utiliser
+ * @param string $serveur
+ * 		Nom du connecteur
+ * @param bool $requeter
+ * 		Inutilise
+ * 
+ * @return bool|string
+ * 		Nom de la base en cas de success.
+ * 		False en cas d'erreur.
+**/
 function spip_pg_selectdb($db, $serveur='',$requeter=true) {
 	// se connecter a la base indiquee
 	// avec les identifiants connus
@@ -421,7 +442,7 @@ function spip_pg_selectdb($db, $serveur='',$requeter=true) {
 
 	if ($link = spip_connect_db('', '', '', '', $db, 'pg', '', '')){
 		if (($db==$link['db']) && $GLOBALS['connexions'][$index] = $link)
-			return $db;					
+			return $db;
 	} else
 		return false;
 }
@@ -1043,7 +1064,7 @@ function spip_pg_quote($v, $type='')
 		return spip_pg_cite($v,$type);
 	// si c'est un tableau, le parcourir en propageant le type
 	foreach($v as $k=>$r)
-		$v[$k] = spip_sqlite_quote($r, $type);
+		$v[$k] = spip_pg_quote($r, $type);
 	return join(",", $v);
 }
 
@@ -1120,7 +1141,19 @@ function spip_pg_drop_view($view, $exist='', $serveur='',$requeter=true) {
 	return spip_pg_query("DROP VIEW$exist $view", $serveur, $requeter);
 }
 
-// http://doc.spip.org/@spip_pg_showbase
+/**
+ * Retourne une ressource de la liste des tables de la base de données 
+ *
+ * @param string $match
+ *     Filtre sur tables à récupérer
+ * @param string $serveur
+ *     Connecteur de la base
+ * @param bool $requeter
+ *     true pour éxecuter la requête
+ *     false pour retourner le texte de la requête.
+ * @return ressource
+ *     Ressource à utiliser avec sql_fetch()
+**/
 function spip_pg_showbase($match, $serveur='',$requeter=true)
 {
 	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];

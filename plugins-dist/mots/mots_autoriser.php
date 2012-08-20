@@ -10,11 +10,26 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Définit les autorisations du plugin mots 
+ *
+ * @package Mots\Autorisations
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/** Fonction d'appel pour le pipeline */
 function mots_autoriser(){}
 
-
+/**
+ * Autorisation de voir un élément de menu 
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_mots_menu_dist($faire, $type, $id, $qui, $opt){
 	if ($qui['statut'] == '0minirezo')
 		return 	($GLOBALS['meta']['articles_mots'] != 'non' OR sql_countsel('spip_groupes_mots'));
@@ -28,14 +43,38 @@ function autoriser_mots_menu_dist($faire, $type, $id, $qui, $opt){
 	  AND sql_countsel('spip_groupes_mots',$where));
 }
 
+/**
+ * Autorisation de voir le bouton d'accès rapide à la création d'un mot clé
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_motcreer_menu_dist($faire, $type, $id, $qui, $opt){
-	return 	($GLOBALS['meta']['articles_mots'] != 'non'
+	// [fixme] Meta 'article_mots' mal nommée maintenant
+	// car elle désigne l'activation ou non des mots clés, quelque soit l'objet.
+	return ($GLOBALS['meta']['articles_mots'] != 'non'
 		AND sql_countsel('spip_groupes_mots')
-	  AND autoriser('creer','mot',null,$qui,$opt));
+		AND autoriser('creer','mot',null,$qui,$opt));
 }
 
-// Voir un objet
-// http://doc.spip.org/@autoriser_voir_dist
+
+/**
+ * Autorisation de voir un groupe de mots
+ *
+ * L'autorisation est donnée selon la configuration du groupe
+ * qui gère cela par type d'auteur (administrateur, rédacteurs, visiteurs)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_groupemots_voir_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut'] == '0minirezo') return true;
 	$acces = sql_fetsel("comite,forum", "spip_groupes_mots", "id_groupe=".intval($id));
@@ -46,35 +85,73 @@ function autoriser_groupemots_voir_dist($faire, $type, $id, $qui, $opt) {
 	return false;
 }
 
-// Autoriser a creer un groupe de mots
-// http://doc.spip.org/@autoriser_groupemots_creer_dist
+/**
+ * Autorisation de créer un groupe de mots
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_groupemots_creer_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$qui['statut'] == '0minirezo'
 		AND !$qui['restreint'];
 }
 
-// Autoriser a modifier un groupe de mots $id
-// y compris en ajoutant/modifiant les mots lui appartenant
-// http://doc.spip.org/@autoriser_groupemots_modifier_dist
+
+/**
+ * Autorisation de modifier un groupe de mots
+ *
+ * Cela inclut également l'ajout ou modification des mots lui appartenant
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_groupemots_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$qui['statut'] == '0minirezo' AND !$qui['restreint']
 		AND autoriser('voir','groupemots',$id,$qui,$opt);
 }
 
+
 /**
- * Autoriser a supprimer un groupe de mots $id
- */
+ * Autorisation de supprimer un groupe de mots
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_groupemots_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	if (!autoriser('modifier','groupemots',$id))
 		return false;
 	return sql_countsel('spip_mots','id_groupe='.intval($id))?false:true;
 }
 
-// Autoriser a modifier un mot $id ; note : si on passe l'id_groupe
-// dans les options, on gagne du CPU (c'est ce que fait l'espace prive)
-// http://doc.spip.org/@autoriser_mot_modifier_dist
+/**
+ * Autorisation de modifier un mot
+ *
+ * Il faut avoir le droit de modifier le groupe parent
+ * 
+ * Note : passer l'id_groupe dans le tableau d'option
+ * permet de gagner du CPU et une requête SQL (c'est ce que fait l'espace privé)
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_mot_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return
 	isset($opt['id_groupe'])
@@ -85,6 +162,22 @@ function autoriser_mot_modifier_dist($faire, $type, $id, $qui, $opt) {
 		);
 }
 
+/**
+ * Autorisation de créer un mot
+ *
+ * Vérifie si une association est demandée en option, qu'elle est possible dans un des groupes,
+ * c'est à dire qu'une liaison est possible entre un groupe et l'objet lié
+ *
+ * Si l'id_groupe est passé en option,
+ * vérifie également que l'auteur a le droit de modifier ce groupe
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_mot_creer_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut'] != '0minirezo' OR $qui['restreint'])
 		return false;
@@ -108,8 +201,18 @@ function autoriser_mot_creer_dist($faire, $type, $id, $qui, $opt) {
 	return true;
 }
 
-// Supprimer un mot ?
-// Par défaut : pouvoir créer un mot dans le groupe
+/**
+ * Autorisation de supprimer un mot
+ *
+ * Par défaut : pouvoir créer un mot dans le groupe
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_mot_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	// On cherche le groupe du mot
 	$id_groupe = $opt['id_groupe'] ? $opt['id_groupe'] : sql_getfetsel('id_groupe', 'spip_mots', 'id_mot = '.intval($id));
@@ -119,44 +222,51 @@ function autoriser_mot_supprimer_dist($faire, $type, $id, $qui, $opt) {
 
 
 /**
- * Autorisation pour verifier le droit d'associer des mots
- * a un objet
- * si groupe_champ ou id_groupe est fourni dans opts, on regarde les droits pour ce groupe
- * en particulier
+ * Autorisation d'associer des mots à un objet
  *
- * @return bool
+ * Si groupe_champ ou id_groupe est fourni dans le tableau d'options,
+ * on regarde les droits pour ce groupe en particulier
+ *
+ * On interdit aussi d'associer des mots à d'autres mots ou groupes de mots
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
  */
-function autoriser_associermots_dist($faire,$quoi,$id,$qui,$opts){
+function autoriser_associermots_dist($faire,$type,$id,$qui,$opt){
 	// jamais de mots sur des mots
-	if ($quoi=='mot') return false;
-	if ($quoi=='groupemots') return false;
+	if ($type=='mot') return false;
+	if ($type=='groupemots') return false;
 	$droit = substr($qui['statut'],1);
 
-	if (!isset($opts['groupe_champs']) AND !isset($opts['id_groupe'])){
+	if (!isset($opt['groupe_champs']) AND !isset($opt['id_groupe'])){
 		// chercher si un groupe est autorise pour mon statut
 		// et pour la table demandee
-		$table = addslashes(table_objet($quoi));
+		$table = addslashes(table_objet($type));
 		if (sql_countsel('spip_groupes_mots',"tables_liees REGEXP '(^|,)$table($|,)' AND ".addslashes($droit)."='oui'"))
 			return true;
 	}
 	// cas d'un groupe en particulier
 	else {
 		// on recupere les champs du groupe s'ils ne sont pas passes en opt
-		if (!isset($opts['groupe_champs'])){
-			if (!$id_groupe = $opts['id_groupe'])
+		if (!isset($opt['groupe_champs'])){
+			if (!$id_groupe = $opt['id_groupe'])
 				return false;
 			include_spip('base/abstract_sql');
-			$opts['groupe_champs'] = sql_fetsel("*", "spip_groupes_mots", "id_groupe=".intval($id_groupe));
+			$opt['groupe_champs'] = sql_fetsel("*", "spip_groupes_mots", "id_groupe=".intval($id_groupe));
 		}
-		$droit = $opts['groupe_champs'][$droit];
+		$droit = $opt['groupe_champs'][$droit];
 
 		return
 			($droit == 'oui')
 			AND
 			// on verifie que l'objet demande est bien dans les tables liees
 			in_array(
-				table_objet($quoi),
-				explode(',', $opts['groupe_champs']['tables_liees'])
+				table_objet($type),
+				explode(',', $opt['groupe_champs']['tables_liees'])
 			);
 	}
 	return false;
@@ -164,24 +274,49 @@ function autoriser_associermots_dist($faire,$quoi,$id,$qui,$opts){
 
 
 /**
- * Autorisation pour verifier le droit d'afficher le selecteur de mots
- * pour un groupe de mot donne, dans un objet / id_objet donne
+ * Autorisation d'affichier le sélecteur de mots
+ * 
+ * Vérifie le droit d'afficher le selecteur de mots
+ * pour un groupe de mot donné, dans un objet / id_objet donné
  *
- * @return bool
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
  */
-function autoriser_groupemots_afficherselecteurmots_dist($faire,$quoi,$id,$qui,$opts){
+function autoriser_groupemots_afficherselecteurmots_dist($faire,$type,$id,$qui,$opt){
 	return true;
 }
 
 
-	
-// http://doc.spip.org/@autoriser_mot_iconifier_dist
-function autoriser_mot_iconifier_dist($faire,$quoi,$id,$qui,$opts){
- return (($qui['statut'] == '0minirezo') AND !$qui['restreint']);
+/**
+ * Autorisation d'affichier le formulaire de logo
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+ */
+function autoriser_mot_iconifier_dist($faire,$type,$id,$qui,$opt){
+	return (($qui['statut'] == '0minirezo') AND !$qui['restreint']);
 }
 
-function autoriser_groupemots_iconifier_dist($faire,$quoi,$id,$qui,$opts){
- return (($qui['statut'] == '0minirezo') AND !$qui['restreint']);
+/**
+ * Autorisation d'affichier le formulaire de logo
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+ */
+function autoriser_groupemots_iconifier_dist($faire,$type,$id,$qui,$opt){
+	return (($qui['statut'] == '0minirezo') AND !$qui['restreint']);
 }
 
 ?>

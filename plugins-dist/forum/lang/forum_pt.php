@@ -38,6 +38,7 @@ utilizadores devem ter uma assinatura ao fornecer o seu endereço e-mail antes d
 	'forum_acces_refuse' => 'Já não tem acesso a esses fóruns.',
 	'forum_attention_dix_caracteres' => '<b>Atenção !</b> a sua mensagem contém menos de dez carácteres.',
 	'forum_attention_message_non_poste' => 'Attention, vous n\'avez pas posté votre message !', # NEW
+	'forum_attention_nb_caracteres_mini' => '<b>Attention !</b> votre message doit contenir au moins @min@ caractères.', # NEW
 	'forum_attention_trois_caracteres' => '<b>Atenção !</b> o seu título contém menos de três carácteres.',
 	'forum_attention_trop_caracteres' => '<b>Attention !</b> votre message est trop long (@compte@ caractères) : pour pouvoir être enregistré, il ne doit pas dépasser @max@ caractères.', # NEW
 	'forum_avez_selectionne' => 'Seleccionou :',
@@ -109,6 +110,7 @@ utilizadores devem ter uma assinatura ao fornecer o seu endereço e-mail antes d
 	'info_pas_de_forum' => 'não há fórum',
 	'info_question_visiteur_ajout_document_forum' => 'Si vous souhaitez autoriser les visiteurs à joindre des documents (images, sons...) à leurs messages de forum, indiquer ci-dessous la liste des extensions de documents autorisés pour les forums (ex: gif, jpg, png, mp3).', # MODIF
 	'info_question_visiteur_ajout_document_forum_format' => 'Si vous souhaitez autoriser tous les types de documents considérés comme fiables par SPIP, mettre une étoile. Pour ne rien autoriser, ne rien indiquer.', # MODIF
+	'info_selectionner_message' => 'Sélectionner les messages :', # NEW
 	'interface_formulaire' => 'Interface formulaire', # NEW
 	'interface_onglets' => 'Interface avec onglets', # NEW
 	'item_activer_forum_administrateur' => 'Activar o fórum dos administradores',
@@ -119,11 +121,13 @@ utilizadores devem ter uma assinatura ao fornecer o seu endereço e-mail antes d
 	'item_non_config_forums_prive_objets' => 'Désactiver ces forums', # NEW
 
 	// L
+	'label_selectionner' => 'Sélectionner :', # NEW
 	'lien_reponse_article' => 'Resposta ao artigo',
 	'lien_reponse_breve_2' => 'Resposta à notícia',
 	'lien_reponse_message' => 'Réponse au message', # NEW
 	'lien_reponse_rubrique' => 'Resposta à rubrica ',
 	'lien_reponse_site_reference' => 'Resposta ao sítio referenciado', # MODIF
+	'lien_vider_selection' => 'Vider la selection', # NEW
 
 	// M
 	'messages_aucun' => 'Aucun', # NEW

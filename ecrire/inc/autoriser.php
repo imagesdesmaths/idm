@@ -10,19 +10,33 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'API autoriser et fonctions d'autorisations de SPIP
+ *
+ * @package SPIP\Autorisations
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/abstract_sql');
 
-# faut-il tracer les autorisations dans tmp/spip.log ?
+/**
+ * Tracer les autorisations dans tmp/spip.log pour débug ?
+ */
 defined('_DEBUG_AUTORISER') || define('_DEBUG_AUTORISER', false);
 
 // Constantes surchargeables, cf. plugin autorite
-// false pour ignorer la notion d'admin restreint # todo: une option a activer
+
+/**
+ * Gérer les admins restreints ?
+ * 
+ * @todo une option à activer
+ */
 defined('_ADMINS_RESTREINTS') || define('_ADMINS_RESTREINTS', true);
-// statut par defaut a la creation
+
+/** Statut par defaut à la creation */
 defined('_STATUT_AUTEUR_CREATION') || define('_STATUT_AUTEUR_CREATION', '1comite');
-// statuts associables a des rubriques (separes par des virgules)
+
+/** statuts associables a des rubriques (separes par des virgules) */
 defined('_STATUT_AUTEUR_RUBRIQUE') || define('_STATUT_AUTEUR_RUBRIQUE', _ADMINS_RESTREINTS ? '0minirezo' : '');
 
 // mes_fonctions peut aussi declarer des autorisations, donc il faut donc le charger
@@ -32,10 +46,43 @@ if ($f = find_in_path('mes_fonctions.php')) {
 }
 
 
-// surcharge possible de autoriser(), sinon autoriser_dist()
 if (!function_exists('autoriser')) {
-// http://doc.spip.org/@autoriser
-	function autoriser() {
+/**
+ * Autoriser une action
+ * 
+ * Teste si une personne (par défaut le visiteur en cours) peut effectuer
+ * une certaine action. Cette fonction est le point d'entrée de toutes
+ * les autorisations.
+ *
+ * La fonction se charge d'appeler des fonctions d'autorisations spécifiques
+ * aux actions demandées si elles existent. Elle cherche donc les fonctions
+ * dans cet ordre :
+ * - autoriser_{type}_{faire}, sinon avec _dist
+ * - autoriser_{type}, sinon avec _dist
+ * - autoriser_{faire}, sinon avec _dist
+ * - autoriser_{defaut}, sinon avec _dist
+ * 
+ * Seul le premier argument est obligatoire
+ *
+ * @api
+ * @see autoriser_dist()
+ * 
+ * @param string $faire
+ *   une action ('modifier', 'publier'...)
+ * @param string $type
+ *   type d'objet ou nom de table ('article')
+ * @param int $id
+ *   id de l'objet sur lequel on veut agir
+ * @param null|int|array $qui
+ *   - si null on prend alors visiteur_session
+ *   - un id_auteur (on regarde dans la base)
+ *   - un tableau auteur complet, y compris [restreint]
+ * @param null|array $opt
+ *   options sous forme de tableau associatif
+ * @return bool
+ *   true si la personne peut effectuer l'action
+ */
+	function autoriser($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 		// Charger les fonctions d'autorisation supplementaires
 		static $pipe;
 		if (!isset($pipe)) { $pipe = 1; pipeline('autoriser'); }
@@ -47,13 +94,12 @@ if (!function_exists('autoriser')) {
 
 
 /**
- * API pour une fonction generique d'autorisation :
- * (par exemple pour preciser si l'autorisation concerne tel ou tel champ)
- *
- * Seul le premier argument est obligatoire
- *
- * http://doc.spip.org/@autoriser_dist
- *
+ * Autoriser une action
+ * 
+ * Voir autoriser() pour une description complète
+ * 
+ * @see autoriser()
+ * 
  * @param string $faire
  *   une action ('modifier', 'publier'...)
  * @param string $type
@@ -67,6 +113,7 @@ if (!function_exists('autoriser')) {
  * @param null|array $opt
  *   options sous forme de tableau associatif
  * @return bool
+ *   true si la personne peut effectuer l'action
  */
 function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 
@@ -80,10 +127,11 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 
 	// Admins restreints, on construit ici (pas generique mais...)
 	// le tableau de toutes leurs rubriques (y compris les sous-rubriques)
-	if (_ADMINS_RESTREINTS AND is_array($qui))
-		$qui['restreint'] = liste_rubriques_auteur($qui['id_auteur']);
+	if (_ADMINS_RESTREINTS AND is_array($qui)) {
+		$qui['restreint'] = isset($qui['id_auteur']) ? liste_rubriques_auteur($qui['id_auteur']) : array();
+	}
 
-	if (_DEBUG_AUTORISER) spip_log("autoriser $faire $type $id ($qui[nom]) ?");
+	if (_DEBUG_AUTORISER) spip_log("autoriser $faire $type $id (" . (isset($qui['nom']) ? $qui['nom'] : '') . ") ?");
 
 	// passer par objet_type pour avoir les alias
 	// et supprimer les _
@@ -122,23 +170,23 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 		}
 	}
 
-	if (_DEBUG_AUTORISER) spip_log("$f($faire,$type,$id,$qui[nom]): ".($a?'OK':'niet'));
+	if (_DEBUG_AUTORISER) spip_log("$f($faire,$type,$id," . (isset($qui['nom']) ? $qui['nom'] : '') . "): ".($a?'OK':'niet'));
 
 	return $a;
 }
 
 // une globale pour aller au plus vite dans la fonction generique ci dessus
 $GLOBALS['autoriser_exception']=array();
+
 /**
  * Accorder une autorisation exceptionnel pour le hit en cours, ou la revoquer
  *
  * http://doc.spip.org/@autoriser_exception
  *
- * @param string $faire
- * @param string $type
- * @param null|int|array $id
- * @param bool $autoriser
- *   accorder (true) ou revoquer (false)
+ * @param string $faire   Action demandée
+ * @param string $type    Type d'objet sur lequel appliquer l'action
+ * @param int    $id      Identifiant de l'objet
+ * @param bool $autoriser accorder (true) ou revoquer (false)
  * @return bool
  */
 function autoriser_exception($faire,$type,$id,$autoriser=true){
@@ -155,28 +203,67 @@ function autoriser_exception($faire,$type,$id,$autoriser=true){
 	return false;
 }
 
-// Autorisation par defaut : les admins complets OK, les autres non
-// http://doc.spip.org/@autoriser_defaut_dist
+ 
+/**
+ * Autorisation par defaut
+ *
+ * Les admins complets OK, les autres non
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_defaut_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$qui['statut'] == '0minirezo'
 		AND !$qui['restreint'];
 }
 
-// A-t-on acces a l'espace prive ?
-// http://doc.spip.org/@autoriser_ecrire_dist
+
+/**
+ * Autorisation d'accès è l'espace privé ?
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_ecrire_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
-// A-t-on le droit de creer un contenu :
-// par defaut ceux qui accedent a l'espace prive,
-// peut etre surcharge au cas par cas
+/**
+ * Autorisation de créer un contenu
+ *
+ * Accordée par defaut ceux qui accèdent à l'espace privé,
+ * peut-être surchargée au cas par cas
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_creer_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
-// http://doc.spip.org/@autoriser_previsualiser_dist
+/**
+ * Autorisation de prévisualiser un contenu
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 	// si auteur pas autorise, NIET
 	if (strpos($GLOBALS['meta']['preview'], ",". $qui['statut'] .",")===false)
@@ -201,11 +288,30 @@ function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 	return true;
 }
 
-
+/**
+ * Autorisation de changer de langue un contenu
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_changerlangue_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('modifier',$type,$id,$qui,$opt);
 }
 
+/**
+ * Autorisation de changer la date d'un contenu
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_dater_dist($faire, $type, $id, $qui, $opt) {
 	if (!isset($opt['statut'])){
 		$table = table_objet($type);
@@ -228,12 +334,35 @@ function autoriser_dater_dist($faire, $type, $id, $qui, $opt) {
 	return false;
 }
 
+/**
+ * Autorisation d'instituer un contenu
+ *
+ * C'est à dire de changer son statut ou son parent.
+ * Par défaut, il faut l'autorisation de modifier le contenu
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_instituer_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('modifier',$type,$id,$qui,$opt);
 }
 
-// Autoriser a publier dans la rubrique $id
-// http://doc.spip.org/@autoriser_rubrique_publierdans_dist
+/**
+ * Autorisation de publier dans une rubrique $id
+ *
+ * Il faut être administrateur ou administrateur restreint de la rubrique
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt) {
 	return
 		($qui['statut'] == '0minirezo')
@@ -243,8 +372,18 @@ function autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt) {
 		);
 }
 
-// Autoriser a creer une rubrique dans la rubrique $id
-// http://doc.spip.org/@autoriser_rubrique_creerrubriquedans_dist
+/**
+ * Autorisation de créer une sous rubrique dans une rubrique $id
+ *
+ * Il faut être administrateur et pouvoir publier dans la rubrique
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_rubrique_creerrubriquedans_dist($faire, $type, $id, $qui, $opt) {
 	return
 		($id OR ($qui['statut'] == '0minirezo' AND !$qui['restreint']))
@@ -252,8 +391,18 @@ function autoriser_rubrique_creerrubriquedans_dist($faire, $type, $id, $qui, $op
 		AND autoriser('publierdans','rubrique',$id);
 }
 
-// Autoriser a creer un article dans la rubrique $id
-// http://doc.spip.org/@autoriser_rubrique_creerarticledans_dist
+/**
+ * Autorisation de créer un article dans une rubrique $id
+ *
+ * Il faut pouvoir voir la rubrique
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_rubrique_creerarticledans_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$id
@@ -261,14 +410,35 @@ function autoriser_rubrique_creerarticledans_dist($faire, $type, $id, $qui, $opt
 }
 
 
-// Autoriser a modifier la rubrique $id
-// = publierdans rubrique $id
-// http://doc.spip.org/@autoriser_rubrique_modifier_dist
+/**
+ * Autorisation de modifier une rubrique $id
+ *
+ * Il faut pouvoir publier dans cette rubrique
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_rubrique_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return
 		autoriser('publierdans', 'rubrique', $id, $qui, $opt);
 }
 
+/**
+ * Autorisation de supprimer une rubrique $id
+ *
+ * Il faut quelle soit vide (pas d'enfant) et qu'on ait le droit de la modifier
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_rubrique_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	if (!$id = intval($id))
 		return false;
@@ -288,10 +458,19 @@ function autoriser_rubrique_supprimer_dist($faire, $type, $id, $qui, $opt) {
 }
 
 
-// Autoriser a modifier l'article $id
-// = publierdans rubrique parente
-// = ou statut 'prop,prepa' et $qui est auteur
-// http://doc.spip.org/@autoriser_article_modifier_dist
+/**
+ * Autorisation de modifier un article $id
+ *
+ * Il faut pouvoir publier dans le parent
+ * ou, si on change le statut en proposé ou préparation être auteur de l'article
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
 	$r = sql_fetsel("id_rubrique,statut", "spip_articles", "id_article=".sql_quote($id));
 
@@ -311,22 +490,38 @@ function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
 			)
 		);
 }
-/**
- * Autoriser a creer un article :
- * Il faut qu'une rubrique existe et qu'on ait le statut necessaire pour creer
+
+ /**
+ * Autorisation de créer un article
+ *
+ * Il faut qu'une rubrique existe et être au moins rédacteur
  * 
- * @return bool
- */
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_article_creer_dist($faire, $type, $id, $qui, $opt) {
 	return (sql_countsel('spip_rubriques')>0 AND in_array($qui['statut'], array('0minirezo', '1comite')));
 }
 
 /**
- * Autoriser a voir un article :
- * peut etre appelee sans id, mais avec un $opt['statut'] pour tester
- * la liste des status autorises en fonction de $qui['statut']
+ * Autorisation de voir un article
+ *
+ * Il faut être admin ou auteur de l'article, sinon il faut que l'article
+ * soit publié ou proposé.
  * 
- * @return bool
+ * Peut-être appelée sans $id, mais avec un $opt['statut'] pour tester
+ * la liste des status autorisés en fonction de $qui['statut']
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
  */
 function autoriser_article_voir_dist($faire, $type, $id, $qui, $opt){
 	if ($qui['statut'] == '0minirezo') return true;
@@ -349,8 +544,19 @@ function autoriser_article_voir_dist($faire, $type, $id, $qui, $opt){
 		     AND auteurs_article($id, "id_auteur=".$qui['id_auteur']));
 }
 
-// Voir un objet
-// http://doc.spip.org/@autoriser_voir_dist
+
+/**
+ * Autorisation de voir un objet
+ *
+ * Tout est visible par défaut, sauf les auteurs où il faut au moins être rédacteur.
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 	# securite, mais on aurait pas du arriver ici !
 	if (function_exists($f='autoriser_'.$type.'_voir') OR function_exists($f='autoriser_'.$type.'_voir_dist')){
@@ -366,11 +572,23 @@ function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 	return true;
 }
 
-// Est-on webmestre ? Signifie qu'on n'a meme pas besoin de passer par ftp
-// pour modifier les fichiers, cf. notamment inc/admin
-// = rien ni personne sauf definition de
-// a l'avenir peut-etre autoriser "admin numero 1" ou une interface de selection
-// http://doc.spip.org/@autoriser_webmestre_dist
+
+/**
+ * Autorisation de webmestre
+ *
+ * Est-on webmestre ? Signifie qu'on n'a même pas besoin de passer par ftp
+ * pour modifier les fichiers, cf. notamment inc/admin
+ * 
+ * Soit la liste des webmestres est définie via une constante _ID_WEBMESTRES,
+ * soit on regarde l'état "webmestre" de l'auteur
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_webmestre_dist($faire, $type, $id, $qui, $opt) {
 	return
 		(defined('_ID_WEBMESTRES')?
@@ -381,8 +599,18 @@ function autoriser_webmestre_dist($faire, $type, $id, $qui, $opt) {
 		;
 }
 
-// Configurer le site => idem autorisation par defaut
-// http://doc.spip.org/@autoriser_configurer_dist
+/**
+ * Autorisation Configurer le site
+ *
+ * Il faut être administrateur complet
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_configurer_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$qui['statut'] == '0minirezo'
@@ -390,25 +618,54 @@ function autoriser_configurer_dist($faire, $type, $id, $qui, $opt) {
 		;
 }
 
-// Effectuer un backup ?
-// admins y compris restreints
-// http://doc.spip.org/@autoriser_sauvegarder_dist
+/**
+ * Autorisation de sauvegarder la base de données
+ *
+ * Il faut être administrateur (y compris restreint)
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_sauvegarder_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$qui['statut'] == '0minirezo'
 		;
 }
 
-// Effacer la base de donnees ?
-// webmestres seulement
-// http://doc.spip.org/@autoriser_detruire_dist
+/**
+ * Autorisation d'effacer la base de données
+ *
+ * Il faut être webmestre
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_detruire_dist($faire, $type, $id, $qui, $opt) {
 	return
 		autoriser('webmestre', null, null, $qui, $opt);
 }
 
-//
-// http://doc.spip.org/@autoriser_auteur_previsualiser_dist
+/**
+ * Autorisation de prévisialiser un auteur
+ *
+ * Il faut être administrateur ou que l'auteur à prévisualiser
+ * ait au moins publié un article
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_auteur_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 	// les admins peuvent "previsualiser" une page auteur
 	if ($qui['statut'] == '0minirezo'
@@ -418,9 +675,21 @@ function autoriser_auteur_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 	return $n ? true : false;
 }
 
-// Modifier un auteur ?
-// Attention tout depend de ce qu'on veut modifier
-// http://doc.spip.org/@autoriser_auteur_modifier_dist
+
+/**
+ * Autorisation de modifier un auteur
+ *
+ * Attention tout depend de ce qu'on veut modifier. Il faut être au moins
+ * rédacteur, mais on ne peut pas promouvoir (changer le statut) un auteur
+ * avec des droits supérieurs au sien.
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 
 	// Ni admin ni redacteur => non
@@ -473,7 +742,7 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 		return false;
 	// et toucher au statut webmestre si il ne l'est pas lui meme
 	// ou si les webmestres sont fixes par constante (securite)
-	elseif ($opt['webmestre'] AND (defined('_ID_WEBMESTRES') OR !autoriser('webmestre')))
+	elseif (isset($opt['webmestre']) AND $opt['webmestre'] AND (defined('_ID_WEBMESTRES') OR !autoriser('webmestre')))
 		return false;
 	// et modifier un webmestre si il ne l'est pas lui meme
 	elseif (intval($id) AND autoriser('webmestre','',0,$id) AND !autoriser('webmestre'))
@@ -482,36 +751,69 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 		return true;
 }
 
-// Associer un auteur à un objet ?
-// par défaut : pouvoir modifier l'objet en question
-// http://doc.spip.org/@autoriser_associerauteurs_dist
+
+/**
+ * Autorisation d'associer un auteur sur un objet
+ *
+ * Il faut pouvoir modifier l'objet en question
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_associerauteurs_dist($faire, $type, $id, $qui, $opt){
 	return autoriser('modifier', $type, $id, $qui, $opt);
 }
 
 
-//
-// Peut-on faire de l'upload ftp ?
-// par defaut, les administrateurs
-//
-// http://doc.spip.org/@autoriser_chargerftp_dist
+/**
+ * Autorisation d'upload FTP
+ *
+ * Il faut être administrateur.
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_chargerftp_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo';
 }
 
-
-
-// Qui peut activer le debugueur ?
-// http://doc.spip.org/@autoriser_debug_dist
+/**
+ * Autorisation d'activer le mode debug
+ *
+ * Il faut être administrateur.
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
 function autoriser_debug_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo';
 }
 
-// Renvoie la liste des rubriques liees a cet auteur, independamment de son
-// statut (pour les admins restreints, il faut donc aussi verifier statut)
-// Memorise le resultat dans un tableau statique indexe par les id_auteur.
-// On peut reinitialiser un element en passant un 2e argument non vide
-// http://doc.spip.org/@liste_rubriques_auteur
+/**
+ * Liste les rubriques d'un auteur
+ *
+ * Renvoie la liste des rubriques liées à cet auteur, independamment de son
+ * statut (pour les admins restreints, il faut donc aussi vérifier statut)
+ *
+ * Mémorise le resultat dans un tableau statique indéxé par les id_auteur.
+ * On peut reinitialiser un élément en passant un 2e argument non vide
+ * 
+ * @param int  $id_auteur Identifiant de l'auteur
+ * @param bool $raz       Recalculer le résultat connu pour cet auteur
+ * @return array          Liste des rubriques
+**/
 function liste_rubriques_auteur($id_auteur, $raz=false) {
 	static $restreint = array();
 
@@ -548,103 +850,324 @@ function liste_rubriques_auteur($id_auteur, $raz=false) {
 	return $restreint[$id_auteur] = $rubriques;
 }
 
-// Autoriser a modifier l'URL d'un objet (cf. action=redirect)
-// http://doc.spip.org/@autoriser_modifierurl_dist
-function autoriser_modifierurl_dist($faire, $quoi, $id, $qui, $opt) {
-	return autoriser('modifier', $quoi, $id, $qui, $opt);
+/**
+ * Autorisation de modifier l'URL d'un objet
+ *
+ * Il faut pouvoir modifier l'objet.
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_modifierurl_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('modifier', $type, $id, $qui, $opt);
 }
 
-function autoriser_rubrique_previsualiser_dist($faire,$quoi,$id,$qui,$opts){
+/**
+ * Autorisation de prévisualiser une rubrique
+ *
+ * Il faut pouvoir prévisualiser.
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_rubrique_previsualiser_dist($faire,$type,$id,$qui,$opt){
 	return autoriser('previsualiser');
 }
 
-// http://doc.spip.org/@autoriser_rubrique_iconifier_dist
-function autoriser_rubrique_iconifier_dist($faire,$quoi,$id,$qui,$opts){
-	return autoriser('publierdans', 'rubrique', $id, $qui, $opts);
+/**
+ * Autorisation d'iconifier une rubrique (mettre un logo)
+ *
+ * Il faut pouvoir publier dans la rubrique.
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_rubrique_iconifier_dist($faire,$type,$id,$qui,$opt){
+	return autoriser('publierdans', 'rubrique', $id, $qui, $opt);
 }
-// http://doc.spip.org/@autoriser_auteur_iconifier_dist
-function autoriser_auteur_iconifier_dist($faire,$quoi,$id,$qui,$opts){
+
+/**
+ * Autorisation d'iconifier un auteur (mettre un logo)
+ *
+ * Il faut un administrateur ou que l'auteur soit celui qui demande l'autorisation
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_auteur_iconifier_dist($faire,$type,$id,$qui,$opt){
  return (($id == $qui['id_auteur']) OR
  		(($qui['statut'] == '0minirezo') AND !$qui['restreint']));
 }
 
-// http://doc.spip.org/@autoriser_article_iconifier_dist
-function autoriser_iconifier_dist($faire,$quoi,$id,$qui,$opts){
+/**
+ * Autorisation d'iconifier un objet (mettre un logo)
+ *
+ * Il faut pouvoir modifier l'objet
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_iconifier_dist($faire,$type,$id,$qui,$opt){
 	// par defaut, on a le droit d'iconifier si on a le droit de modifier
-	return autoriser('modifier', $quoi, $id, $qui, $opts);
+	return autoriser('modifier', $type, $id, $qui, $opt);
 }
 
-// Deux fonctions sans surprise pour permettre les tests
-// Dire toujours OK
-// http://doc.spip.org/@autoriser_ok_dist
+
+/**
+ * Autorisation OK
+ *
+ * Autorise toujours !
+ * Fonction sans surprise pour permettre les tests.
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true
+**/
 function autoriser_ok_dist($faire, $type, $id, $qui, $opt) { return true; }
-// Dire toujours niet
-// http://doc.spip.org/@autoriser_niet_dist
+
+/**
+ * Autorisation NIET
+ *
+ * Refuse toujours !
+ * Fonction sans surprise pour permettre les tests.
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          false
+**/
 function autoriser_niet_dist($faire, $type, $id, $qui, $opt) { return false; }
 
-
-function autoriser_base_reparer_dist($faire, $type, $id, $qui, $opts) {
+/**
+ * Autorisation de réparer la base de données
+ *
+ * Il faut pouvoir la détruire (et ne pas être en cours de réinstallation)
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          false
+**/
+function autoriser_base_reparer_dist($faire, $type, $id, $qui, $opt) {
 	if (!autoriser('detruire') OR _request('reinstall'))
 		return false;
 
 	return true;
 }
 
-// Autorisations pour les onglets de la page auteur
-function autoriser_infosperso_onglet_dist($faire,$quoi,$id,$qui,$opts) {
+/**
+ * Autorisation de voir l'onglet infosperso
+ *
+ * Toujours OK
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_infosperso_onglet_dist($faire,$type,$id,$qui,$opt) {
 	return true;
 }
-function autoriser_configurerlangage_onglet_dist($faire,$quoi,$id,$qui,$opts) {
-	return true;
-}
-function autoriser_configurerpreferences_onglet_dist($faire,$quoi,$id,$qui,$opts) {
-	return true;
-}
-function autoriser_auteurs_menu_dist($faire, $type, $id, $qui, $opts){return true;}
-function autoriser_articles_menu_dist($faire, $type, $id, $qui, $opts){return true;}
-function autoriser_rubriques_menu_dist($faire, $type, $id, $qui, $opts){return true;}
 
-function autoriser_articlecreer_menu_dist($faire, $type, $id, $qui, $opts){
+/**
+ * Autorisation de voir l'onglet configurerlangage
+ *
+ * Toujours OK
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_configurerlangage_onglet_dist($faire,$type,$id,$qui,$opt) {
+	return true;
+}
+
+/**
+ * Autorisation de voir l'onglet configurerpreferences
+ *
+ * Toujours OK
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_configurerpreferences_onglet_dist($faire,$type,$id,$qui,$opt) {
+	return true;
+}
+
+/**
+ * Autorisation de voir le menu auteurs
+ *
+ * Toujours OK
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_auteurs_menu_dist($faire, $type, $id, $qui, $opt){return true;}
+
+/**
+ * Autorisation de voir le menu articles
+ *
+ * Toujours OK
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_articles_menu_dist($faire, $type, $id, $qui, $opt){return true;}
+
+/**
+ * Autorisation de voir le menu rubriques
+ *
+ * Toujours OK
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_rubriques_menu_dist($faire, $type, $id, $qui, $opt){return true;}
+
+/**
+ * Autorisation de voir le menu articlecreer 
+ *
+ * Il faut au moins une rubrique présente.
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_articlecreer_menu_dist($faire, $type, $id, $qui, $opt){
 	return sql_countsel('spip_rubriques')>0;
 }
 
-function autoriser_suiviedito_menu_dist($faire, $type, $id, $qui, $opts){
-	return $qui['statut']=='0minirezo';
-}
-function autoriser_synchro_menu_dist($faire, $type, $id, $qui, $opts){
+/**
+ * Autorisation de voir le menu suiviedito
+ *
+ * Il faut être administrateur (y compris restreint).
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_suiviedito_menu_dist($faire, $type, $id, $qui, $opt){
 	return $qui['statut']=='0minirezo';
 }
 
 /**
- * Autoriser la purge de la queue : il faut etre webmestre
- * @return mixed
- */
-function autoriser_queue_purger_dist(){
+ * Autorisation de voir le menu synchro
+ *
+ * Il faut être administrateur (y compris restreint).
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_synchro_menu_dist($faire, $type, $id, $qui, $opt){
+	return $qui['statut']=='0minirezo';
+}
+
+/**
+ * Autorisation de purger la queue de travaux
+ *
+ * Il faut être webmestre.
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_queue_purger_dist($faire, $type, $id, $qui, $opt){
 	return autoriser('webmestre');
 }
 
-/*
- * Autoriser l'echafaudage de squelettes en Z
- * dans l'espace prive : oui si on est identifie
- * sinon il faut etre webmestre (pas de fuite d'informations publiees)
- */
-function autoriser_echafauder_dist($faire, $type, $id, $qui, $opts){
+
+/**
+ * Autorisation l'échafaudage de squelettes en Z
+ *
+ * Il faut être dans l'espace privé (et authentifié),
+ * sinon il faut être webmestre (pas de fuite d'informations publiées)
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_echafauder_dist($faire, $type, $id, $qui, $opt){
 	if (test_espace_prive())
 		return intval($qui['id_auteur'])?true:false;
 	else
-		return autoriser('webmestre','',$id,$qui,$opts);
+		return autoriser('webmestre','',$id,$qui,$opt);
 }
 
 
 /**
  * Lister les auteurs d'un article
- * fonction generique utilisee par plusieurs autorisations
+ * 
+ * Fonction générique utilisée par plusieurs autorisations
  *
- * http://doc.spip.org/@auteurs_article
- *
- * @param int $id_article
- * @param string $cond
+ * @param int $id_article Identifiant de l'article
+ * @param string $cond    Condition en plus dans le where de la requête
  * @return array|bool
+ *     - array : liste des id_auteur trouvés
+ *     - false : serveur SQL indisponible
  */
 function auteurs_article($id_article, $cond='')
 {
@@ -653,13 +1176,12 @@ function auteurs_article($id_article, $cond='')
 
 
 /**
- * Tester si on est admin restreint sur une rubrique donnee
- * fonction generique utilisee dans des autorisations ou assimilee
+ * Tester si on est admin restreint sur une rubrique donnée
+ * 
+ * Fonction générique utilisee dans des autorisations ou assimilée
  *
- * http://doc.spip.org/@acces_restreint_rubrique
- *
- * @param  $id_rubrique
- * @return bool
+ * @param int $id_rubrique  Identifiant de la rubrique
+ * @return bool             true si administrateur de cette rubrique, false sinon.
  */
 function acces_restreint_rubrique($id_rubrique) {
 	global $connect_id_rubrique;

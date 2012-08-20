@@ -93,6 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_teleporter_format_archive_non_supporte' => '   فرمت @extension@ توسط انتقال دهنده پشتيباني نمي‌شود',
 	'erreur_teleporter_methode_inconue' => 'روش @methode@ براي انتقال ناشناخته است',
 	'erreur_teleporter_type_fichier_inconnu' => 'نوع پرونده‌‌ي ناشناخته براي منبع @source@',
+	'erreurs_xml' => 'Impossible de lire certaines descriptions XML', # NEW
 	'explication_destination' => 'اگر اين را پر نكنيد مسير با نام آرشيوي محاسبه خواهد شد. ',
 
 	// F

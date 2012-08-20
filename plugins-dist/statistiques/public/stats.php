@@ -19,11 +19,11 @@ function public_stats_dist() {
 	else if (isset($GLOBALS["HTTP_SERVER_VARS"]["HTTP_REFERER"])) $referer = $GLOBALS["HTTP_SERVER_VARS"]["HTTP_REFERER"];
 	
 	// Rejet des robots (qui sont pourtant des humains comme les autres)
-	if (_IS_BOT OR strpbrk($referer, '<>"\'')) return;
+	if (_IS_BOT OR (isset($referer) AND strpbrk($referer, '<>"\''))) return;
 
 	// Ne pas tenir compte des tentatives de spam des forums
 	if ($_SERVER['REQUEST_METHOD'] !== 'GET'
-	OR $_GET['page'] == 'forum')
+	OR (isset($_GET['page']) AND $_GET['page'] == 'forum'))
 		return;
 
 	// rejet des pages 404

@@ -555,11 +555,14 @@ function image_masque($im, $masque, $pos="") {
 	
 	$creer = $image["creer"];
 
-
-	if ($defini["right"] OR $defini["left"] OR $defini["bottom"] OR $defini["top"] OR $defini["text-align"] OR $defini["vertical-align"]) {
-		$placer = true;
+	// doit-on positionner l'image ?
+	$placer = false;
+	foreach (array("right", "left", "bottom", "top", "text-align", "vertical-align") as $pl) {
+		if (isset($defini[$pl]) and $defini[$pl]) {
+			$placer = true;
+			break;
+		}
 	}
-	else $placer = false;
 
 	if ($creer) {
 		
@@ -590,23 +593,23 @@ function image_masque($im, $masque, $pos="") {
 			$dx = 0;
 			$dy = 0;
 			
-			if ($defini["right"]) {
+			if (isset($defini["right"]) and $defini["right"]) {
 				$right = $variable["right"];
 				$dx = ($x_i - $x_m) - $right;
 			}
-			if ($defini["bottom"]) {
+			if (isset($defini["bottom"]) and $defini["bottom"]) {
 				$bottom = $variable["bottom"];
 				$dy = ($y_i - $y_m) - $bottom;
 				}
-			if ($defini["top"]) {
+			if (isset($defini["top"]) and $defini["top"]) {
 				$top = $variable["top"];
 				$dy = $top;
 			}
-			if ($defini["left"]) {
+			if (isset($defini["left"]) and $defini["left"]) {
 				$left = $variable["left"];
 				$dx = $left;
 			}
-			if ($defini["text-align"]) {
+			if (isset($defini["text-align"]) and $defini["text-align"]) {
 				$align = $variable["text-align"];
 				if ($align == "right") {
 					$right = 0;
@@ -618,7 +621,7 @@ function image_masque($im, $masque, $pos="") {
 					$dx = round( ($x_i - $x_m) / 2 ) ;
 				}
 			}
-			if ($defini["vertical-align"]) {
+			if (isset($defini["vertical-align"]) and $defini["vertical-align"]) {
 				$valign = $variable["vertical-align"];
 				if ($valign == "bottom") {
 					$bottom = 0;
@@ -641,7 +644,7 @@ function image_masque($im, $masque, $pos="") {
 
 			
 
-			imagecopy ( $im3, $im2, $dx, $dy, 0, 0, $x_m, $y_m);	
+			imagecopy ( $im3, $im2, $dx, $dy, 0, 0, $x_m, $y_m);
 
 			imagedestroy($im2);
 			$im2 = imagecreatetruecolor($x_i, $y_i);
@@ -650,7 +653,7 @@ function image_masque($im, $masque, $pos="") {
 			
 			
 			
-			imagecopy ( $im2, $im3, 0, 0, 0, 0, $x_i, $y_i);			
+			imagecopy ( $im2, $im3, 0, 0, 0, 0, $x_i, $y_i);
 			imagedestroy($im3);
 			$x_m = $x_i;
 			$y_m = $y_i;
