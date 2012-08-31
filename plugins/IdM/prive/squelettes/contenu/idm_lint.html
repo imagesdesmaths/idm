@@ -48,6 +48,11 @@ function idm_lint_TeX ($txt) {
  *         5 -> redeemer regexp (if matches, it is not a mistake)
  */
 
+/* Still missing:
+ * - <a name="lkdjf">
+ * - some authorized things in 'HTML tag' should not be
+ */
+
 $bugs = array();
 $bugs[] = array ('Explicit link',             '|<a href="(.*)".*>(.*)</a>|iU',                     '[\2->\1]',                               0, 0, '');
 $bugs[] = array ('Wrong inner link',          '|\\[[^[]*->http://images.math.cnrs.fr/([^]]*)]|Ue', 'idm_lint_url("\\0","\\1")',              0, 1, '');
@@ -64,6 +69,8 @@ $bugs[] = array ('\label outside {equation}', '|\$\$ *([^$]*\\\\label{[^}]*}[^$]
                  '|\\\\begin{equation}|');
 $bugs[] = array ('HTML entity',               '/&[a-z]*;/ie',                                      'idm_lint_utf8("\0")',                    1, 1,
                  '/&(lt|gt);/');
+/* $bugs[] = array ('HTML tag (do not trust!)',  '|</?[0-9a-z ="]*>|i',                               '',                                       0, 0, */
+/*                  ':</?([a-z]+[0-9]+|sup|sub|intro|cadre|math|caption|hr|applet|param|small|embed|align|center|quote|code|div|a|html|pre|script|span|bloc|onglets|ul|li|table|thead|th|tbody|tr|td|em|i|b|strong|tt|iframe|object|font|p|br)[ 0-9>]:i'); */
 
 function idm_lint_bug ($bug, $texte) {
   $list = array();
