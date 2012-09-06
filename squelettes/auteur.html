@@ -1,23 +1,34 @@
 <BOUCLE_auteur(AUTEURS){id_auteur}>
 <INCLURE{fond=inc/head}{title=#NOM}{class=nopage}>
 
-<div class="page">
-[(#LOGO_AUTEUR{right})]
+    <div id="art_head">  
+      <h2 class="home_hat">Auteur</h2>  
+      <div id="art_social">[(#INCLURE{fond=inc/social_bar})]
+      </div>
+    </div>  
+    <div class="content artlist">
 
-<h1>#NOM</h1>
-[<h2 class="bio">(#BIO*) [(<a href="(#URL_SITE)">page web</a>)]</h2>]
 
-[<p><strong>Affiliation :</strong> (#AFFILIATION)</p>]
-
-#FORMULAIRE_ECRIRE_AUTEUR
-</div>
-
-<B_articles>
-<h2>Tous ses articles :</h2>
-<BOUCLE_articles(ARTICLES) {id_auteur} {id_secteur != 18} {par date} {inverse}>
-[(#INCLURE{fond=inc/resume}{id_article})]
-</BOUCLE_articles>
-
+      <div class="page">
+        <div id="logo_article">
+          [(#LOGO_AUTEUR{right})]
+         </div>
+      <h1>#NOM</h1>
+      [<h2 class="bio">(#BIO*) [(<a href="(#URL_SITE)">page web</a>)]</h2>]
+      
+      [<p><strong>Affiliation :</strong> (#AFFILIATION)</p>]
+      
+      #FORMULAIRE_ECRIRE_AUTEUR
+      
+  
+      <B_articles>
+      <h2>Tous ses articles :</h2>
+      <BOUCLE_articles(ARTICLES) {id_auteur} {id_secteur != 18} {par date} {inverse}>
+      [(#INCLURE{fond=inc/resume_list}{id_article})]
+      </BOUCLE_articles>
+      </div>
+    </div>
+      
 #INCLURE{fond=inc/foot}
 </BOUCLE_auteur>
 <INCLURE{fond=sommaire}>

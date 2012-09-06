@@ -1,61 +1,69 @@
 <INCLURE{fond=inc/head}{title=Plan du site}>
 
-<div class="plan">
-  #ONGLETS_DEBUT{par rubrique}
+    <div id="art_head">  
+      <h2 class="home_hat">Plan du site</h2>  
+      <div id="art_social">[(#INCLURE{fond=inc/social_bar})]
+      </div>
+    </div>  
+    <div class="content">
 
-  <ul>
-    <BOUCLE_rub(RUBRIQUES) {id_secteur != 18} {doublons rub} {par num titre, titre}>
-      <li class="heading"><a href="#URL_RUBRIQUE" >#TITRE</a></li>
-      <BOUCLE_art(ARTICLES) {id_rubrique} {par num titre, date}>
-        <li><a class="article" href="#URL_ARTICLE">#TITRE</a></li>
-      </BOUCLE_art>
-    </BOUCLE_rub>
-  </ul>
 
-  #ONGLETS_TITRE{par auteur}
-
-  <p style="text-align : right; margin-top : 0px;">
-    <BOUCLE_init(AUTEURS) {par nom}>
-      [<a href="#ini_(#NOM*|idm_initiale|unique{ini_head})">[(#NOM*|idm_initiale)]</a>]
-    </BOUCLE_init>
-  </p>
-
-  <ul>
-    <BOUCLE_aut(AUTEURS) {par nom}>
-      [<li class="heading" id="ini_(#NOM*|idm_initiale|unique{ini_body})">- [(#NOM*|idm_initiale)] -</li>]
-      <li><a href="#URL_AUTEUR">#NOM</a>
-        <ul>
-          <BOUCLE_artaut(ARTICLES) {id_auteur} {par titre}>
-            <li><a class="article" href="#URL_ARTICLE">#TITRE</a>
-              <B_coaut>(avec <BOUCLE_coaut(AUTEURS) {id_auteur != #ID_AUTEUR} {id_article} {par nom} {", "}><a href="#URL_AUTEUR">#NOM</a></BOUCLE_coaut>)</B_coaut>
-            </li>
-          </BOUCLE_artaut>
-        </ul>
-      </li>
-    </BOUCLE_aut>
-  </ul>
-
-  #ONGLETS_TITRE{par sujet}
-
-  <ul>
-    <BOUCLE_mot(MOTS) {id_groupe = 1} {par titre}>
-      <li class="heading"><a href="#URL_MOT">#TITRE</a></li>
-      <BOUCLE_artmot(ARTICLES) {id_mot} {par titre}>
-        <li><a class="article" href="#URL_ARTICLE">#TITRE</a>[, par (#LESAUTEURS)]</li>
-      </BOUCLE_artmot>
-    </BOUCLE_mot>
-  </ul>
-
-  #ONGLETS_TITRE{par date}
-
-  <ul>
-    <BOUCLE_date(ARTICLES) {par date} {inverse}>
-      [<li class="heading">(#DATE|affdate{mois_annee}|unique)</li>]
-      <li><a class="article" href="#URL_ARTICLE">#TITRE</a>, par #LESAUTEURS</li>
-    </BOUCLE_date>
-  </ul>
-
-  #ONGLETS_FIN
-</div>
-
+    <div class="plan">
+      #ONGLETS_DEBUT{par rubrique}
+    
+      <ul>
+        <BOUCLE_rub(RUBRIQUES) {id_secteur != 18} {doublons rub} {par num titre, titre}>
+          <li class="heading"><a href="#URL_RUBRIQUE" >#TITRE</a></li>
+          <BOUCLE_art(ARTICLES) {id_rubrique} {par num titre, date}>
+            <li><a class="article" href="#URL_ARTICLE">#TITRE</a></li>
+          </BOUCLE_art>
+        </BOUCLE_rub>
+      </ul>
+    
+      #ONGLETS_TITRE{par auteur}
+    
+      <p style="text-align : right; margin-top : 0px;">
+        <BOUCLE_init(AUTEURS) {par nom}>
+          [<a href="#ini_(#NOM*|idm_initiale|unique{ini_head})">[(#NOM*|idm_initiale)]</a>]
+        </BOUCLE_init>
+      </p>
+    
+      <ul>
+        <BOUCLE_aut(AUTEURS) {par nom}>
+          [<li class="heading" id="ini_(#NOM*|idm_initiale|unique{ini_body})">- [(#NOM*|idm_initiale)] -</li>]
+          <li><a href="#URL_AUTEUR">#NOM</a>
+            <ul>
+              <BOUCLE_artaut(ARTICLES) {id_auteur} {par titre}>
+                <li><a class="article" href="#URL_ARTICLE">#TITRE</a>
+                  <B_coaut>(avec <BOUCLE_coaut(AUTEURS) {id_auteur != #ID_AUTEUR} {id_article} {par nom} {", "}><a href="#URL_AUTEUR">#NOM</a></BOUCLE_coaut>)</B_coaut>
+                </li>
+              </BOUCLE_artaut>
+            </ul>
+          </li>
+        </BOUCLE_aut>
+      </ul>
+    
+      #ONGLETS_TITRE{par sujet}
+    
+      <ul>
+        <BOUCLE_mot(MOTS) {id_groupe = 1} {par titre}>
+          <li class="heading"><a href="#URL_MOT">#TITRE</a></li>
+          <BOUCLE_artmot(ARTICLES) {id_mot} {par titre}>
+            <li><a class="article" href="#URL_ARTICLE">#TITRE</a>[, par (#LESAUTEURS)]</li>
+          </BOUCLE_artmot>
+        </BOUCLE_mot>
+      </ul>
+    
+      #ONGLETS_TITRE{par date}
+    
+      <ul>
+        <BOUCLE_date(ARTICLES) {par date} {inverse}>
+          [<li class="heading">(#DATE|affdate{mois_annee}|unique)</li>]
+          <li><a class="article" href="#URL_ARTICLE">#TITRE</a>, par #LESAUTEURS</li>
+        </BOUCLE_date>
+      </ul>
+    
+      #ONGLETS_FIN
+    </div>
+  </div>
 #INCLURE{fond=inc/foot}

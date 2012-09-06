@@ -1,18 +1,27 @@
 <BOUCLE_breve(BREVES){id_breve}>
 <INCLURE{fond=inc/head}{title=#TITRE}>
 
-[<h1 class="titre">(#TITRE)</h1>]
+<div id="art_head">  
+  <h2 class="home_hat">Billet</h2>  
+  <div id="art_social">[(#INCLURE{fond=inc/social_bar})]
+  </div>
+</div>  
+<div class="content">
 
-<BOUCLE_futur (BREVES) {id_breve} {id_rubrique=33}>
-  <h3 class="auteur">Jusqu'au [(#DATE|affdate)]</h3>
-</BOUCLE_futur>
-  <h3 class="auteur">Le [(#DATE|affdate)]</h3>
-<//B_futur>
+  [<h1 class="titre">(#TITRE)</h1>]
+
+  <BOUCLE_futur (BREVES) {id_breve} {id_rubrique=33}>
+    <h3 class="auteur">Jusqu'au [(#DATE|affdate)]</h3>
+  </BOUCLE_futur>
+    <h3 class="auteur">Le [(#DATE|affdate)]</h3>
+  <//B_futur>
 
 [<div class="texte">(#TEXTE)</div>]
 [<div class="notes"><h3>Notes</h3>(#NOTES)</div>]
 
 [<p><a href="(#URL_SITE)">[(#NOM_SITE*|sinon{"Pour en savoir plus ..."})]</a></p>]
+
+</div>
 
 #INCLURE{fond=inc/foot}
 </BOUCLE_breve>

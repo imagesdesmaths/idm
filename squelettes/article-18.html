@@ -1,7 +1,13 @@
 <BOUCLE_article(ARTICLES){id_article}>
 <INCLURE{fond=inc/head}{title=#TITRE}{id_article=#ID_ARTICLE}{id_rubrique=#ID_RUBRIQUE}>
-
-[(#INCLURE{fond=inc/article}{id_article})]
+    <div id="art_head">  
+      <h2 class="home_hat">Article</h2>  
+      <div id="art_social">[(#INCLURE{fond=inc/social_bar})]
+      </div>
+    </div>  
+    <div class="content">
+      [(#INCLURE{fond=inc/article}{id_article})]
+    </div>
 
 #INCLURE{fond=inc/foot}
 </BOUCLE_article>

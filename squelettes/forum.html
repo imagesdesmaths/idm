@@ -1,33 +1,48 @@
 #CACHE{0}
 <BOUCLE_article(ARTICLES){id_article}>
 <INCLURE{fond=inc/head}{title=#TITRE - <:poster_message:>}{class=nopage}>
+    <div id="art_head">  
+      <h2 class="home_hat">[(#DATE_REDAC|sinon{#DATE}|affdate)]</h2>
+      <span class="comment">
+        <BOUCLE_decompte(FORUMS) {id_article} {plat}></BOUCLE_decompte>
+          [(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})
+          [(#TOTAL_BOUCLE|=={1}|?{message,messages})] -]
+        <//B_decompte>
+        <a href="#URL_ARTICLE">Retourner &agrave; l'article</a>
+      </span>            
+      <div id="art_social">[(#INCLURE{fond=inc/social_bar})]
+      </div>
+    </div>  
+    <div class="content artlist">       
+      <div class="page">
+      
+      <div class="no_rubrique">
+        <INCLURE{fond=inc/resume_list}{id_article}>
+      </div>
+      
+      <BOUCLE_auteur(AUTEURS){id_article}>
+        [(#SET{auteur_article,#NOM})]
+      </BOUCLE_auteur>
 
-<div class="no_rubrique">
-  <INCLURE{fond=inc/resume}{id_article}>
-</div>
-
-<BOUCLE_auteur(AUTEURS){id_article}>
-  [(#SET{auteur_article,#NOM})]
-</BOUCLE_auteur>
-
-<div class="page">
-<INCLURE{fond=inc/forum}{id_article}{id_forum}{auteur_article=#GET{auteur_article}}>
-
-[(#SESSION{id_auteur}|oui)#FORMULAIRE_FORUM{#URL_PAGE{forum,id_article=#ID_ARTICLE}}
-
-<div class="citer">Le comit&eacute; de r&eacute;daction se
-r&eacute;serve le droit de mod&eacute;rer votre commentaire (par exemple
-s'il estime qu'il n'a qu'un lien tr&egrave;s &eacute;loign&eacute; avec
-l'article auquel il est attach&eacute;, ou si le ton employ&eacute;
-n'est pas adapt&eacute; &agrave; un d&eacute;bat serein).</div>]
-
-[(#SESSION{id_auteur}|non)
-<div class="forumident">
-  Pour participer &agrave; la discussion merci de vous identifier : #LOGIN_PUBLIC
-  Si vous n'avez pas d'identifiant, vous pouvez <a href="#URL_PAGE{inscription}">vous inscrire</a>.
-</div>
-]
-</div>
+      
+      <INCLURE{fond=inc/forum}{id_article}{id_forum}{auteur_article=#GET{auteur_article}}>
+      
+      [(#SESSION{id_auteur}|oui)#FORMULAIRE_FORUM{#URL_PAGE{forum,id_article=#ID_ARTICLE}}
+      
+      <div class="citer">Le comit&eacute; de r&eacute;daction se
+      r&eacute;serve le droit de mod&eacute;rer votre commentaire (par exemple
+      s'il estime qu'il n'a qu'un lien tr&egrave;s &eacute;loign&eacute; avec
+      l'article auquel il est attach&eacute;, ou si le ton employ&eacute;
+      n'est pas adapt&eacute; &agrave; un d&eacute;bat serein).</div>]
+      
+      [(#SESSION{id_auteur}|non)
+      <div class="forumident">
+        Pour participer &agrave; la discussion merci de vous identifier : #LOGIN_PUBLIC
+        Si vous n'avez pas d'identifiant, vous pouvez <a href="#URL_PAGE{inscription}">vous inscrire</a>.
+      </div>
+      ]
+      </div>
+    </div>
 
 <INCLURE{fond=inc/foot}>
 </BOUCLE_article>

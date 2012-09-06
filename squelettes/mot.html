@@ -4,17 +4,31 @@
 
 [(#ID_GROUPE|=={4}|oui) <?php @header ("Location: #URL_PAGE{lexique}#mot_#ID_MOT"); ?>]
 
-<div class="page">
-<h1>#TITRE</h1>
+    <div id="art_head">         
+      <h2 class="home_hat">Dossier</h2>         
+      <div id="art_social">[(#INCLURE{fond=inc/social_bar})]       
+      </div>    
+    </div>
+    <div class="content artlist">
+      <div class="content artlist">       
+        <div class="page">
+          <h1>
+            <span[ class="script"(#ID_RUBRIQUE|=={34}|oui)]>#TITRE</span>
+          </h1>
+          [<div class="texte">(#TEXTE)</div>] 
+        </div>
+        <div class="eachart">
+  
+          <B_articles>#PAGINATION{idm}
+          <BOUCLE_articles(ARTICLES) {id_mot} {par date} {inverse} {pagination}>
+          [(#INCLURE{fond=inc/resume_list}{id_article})]
+          </BOUCLE_articles>
+          #PAGINATION{idm}
+          </B_articles>
+        </div>
+      </div>
+    </div>
 
-[<div class="texte">(#TEXTE)</div>]
-</div>
-
-<B_articles>#PAGINATION{idm}
-<BOUCLE_articles(ARTICLES) {id_mot} {par date} {inverse} {pagination}>
-[(#INCLURE{fond=inc/resume}{id_article})]
-</BOUCLE_articles>
-#PAGINATION{idm}</B_articles>
 
 #INCLURE{fond=inc/foot}
 </BOUCLE_mot>

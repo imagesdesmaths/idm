@@ -1,32 +1,49 @@
 <INCLURE{fond=inc/head}{title=Recherche sur le site}>
 
-<B_articles>
-  #ANCRE_PAGINATION
-  <h2>&#171;&nbsp;#RECHERCHE&nbsp;&#187; : #GRAND_TOTAL [(#GRAND_TOTAL|=={1}|?{article trouv&eacute;,articles trouv&eacute;s})].</h2>
-  <BOUCLE_articles(ARTICLES) {recherche} {!par points} {pagination 10}>
-    <INCLURE{fond=inc/resume,id_article}>
-  </BOUCLE_articles>
-  <p class="pagination" style="text-align:center">[(#PAGINATION)]</p>
-</B_articles>
-[<h2>&#171;&nbsp;(#RECHERCHE)&nbsp;&#187; : aucun article trouv&eacute; !</h2>]
-<//B_articles>
+    <div id="art_head">         
+      <h2 class="home_hat">Recherche</h2>         
+      <div id="art_social">[(#INCLURE{fond=inc/social_bar})]       
+      </div>    
+    </div>
+    <div class="content artlist">       
+      <div class="page">
+        <B_articles>
+          #ANCRE_PAGINATION
+        <h1>
+          &#171;&nbsp;#RECHERCHE&nbsp;&#187; : #GRAND_TOTAL [(#GRAND_TOTAL|=={1}|?{article trouv&eacute;,articles trouv&eacute;s})].
+        </h1>    
+      </div>
+      <div class="eachart">
+          <p class="pagination" style="text-align:center">[(#PAGINATION)]</p>
+          <BOUCLE_articles(ARTICLES) {recherche} {!par points} {pagination 10}>
+            <INCLURE{fond=inc/resume_list,id_article}>
+          </BOUCLE_articles>
+          <p class="pagination" style="text-align:center">[(#PAGINATION)]</p>
+        </B_articles>
+        [<h2>&#171;&nbsp;(#RECHERCHE)&nbsp;&#187; : aucun article trouv&eacute; !</h2>]
+        <//B_articles>
 
-<B_mots>
-  <h3>Voir aussi dans le lexique :</h3>
-  <ul>
-    <BOUCLE_mots(MOTS) {recherche} {par titre} {id_groupe=4}>
-      <li><a href="#URL_PAGE{lexique}#mot_#ID_MOT">#TITRE</a></li>
-    </BOUCLE_mots>
-  </ul>
-</B_mots>
+        <B_mots>
+          <h3>Voir aussi dans le lexique :</h3>
+          <ul>
+            <BOUCLE_mots(MOTS) {recherche} {par titre} {id_groupe=4}>
+              <li><a href="#URL_PAGE{lexique}#mot_#ID_MOT">#TITRE</a></li>
+            </BOUCLE_mots>
+          </ul>
+        </B_mots>
+        
+        <B_breves>
+          <h3>Voir aussi dans les brèves :</h3>
+          <ul>
+            <BOUCLE_breves(BREVES) {recherche} {par date} {inverse}>
+              <li><a href="#URL_BREVE">#TITRE</a> [(le (#DATE|affdate))]</li>
+            </BOUCLE_breves>
+          </ul>
+        </B_breves>
+        
 
-<B_breves>
-  <h3>Voir aussi dans les brèves :</h3>
-  <ul>
-    <BOUCLE_breves(BREVES) {recherche} {par date} {inverse}>
-      <li><a href="#URL_BREVE">#TITRE</a> [(le (#DATE|affdate))]</li>
-    </BOUCLE_breves>
-  </ul>
-</B_breves>
+      </div>
+    </div>
+
 
 <INCLURE{fond=inc/foot}>

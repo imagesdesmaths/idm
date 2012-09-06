@@ -1,0 +1,29 @@
+    <div class="relies noprint">      
+      <div class="piste">        
+        <BOUCLE_diff(MOTS) {id_groupe=5} {id_article}>          
+          <a class="piste_#ID_MOT" href="#URL_MOT">#TITRE</a>        
+        </BOUCLE_diff>      
+      </div>
+      <div id="meta">             
+        <B_mots>          
+          <span id="mots"[(#ID_RUBRIQUE|=={6}|oui) style="display:none;"]>            
+            <BOUCLE_mots(MOTS) {id_article} {id_groupe=1} {par titre} {', '}>              
+              <a href="#URL_MOT">#TITRE</a>            
+            </BOUCLE_mots>          
+          </span>        
+        </B_mots>        
+                        
+      </div>    
+    </div>  
+    <div id="logo_article">
+      [(#LOGO_ARTICLE|right||image_recadre{360,300,'center center','transparent'})]
+      [(#LOGO_ARTICLE|fichier|non)<INCLURE{fond=inc/auteur}{id_article=#ID_ARTICLE}{taille=300}>]       
+        <div id="partenariat">      
+          <B_partenariat>        
+            <BOUCLE_partenariat(MOTS) {id_groupe=6} {id_article}>
+              [(#INTRO|sinon{Article en partenariat avec})]
+              [(#LOGO_MOT|#URL_MOT|image_reduire{360,auto})]         
+            </BOUCLE_partenariat>      
+          </B_partenariat>      
+        </div>    
+    </div>  

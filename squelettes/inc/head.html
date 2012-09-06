@@ -30,6 +30,7 @@
   <link rel="start" title="Page principale" href="#URL_SITE_SPIP/"/>
   <link rel="index" title="Page principale" href="#URL_SITE_SPIP/"/>
   <link rel="shortcut icon" href="#CHEMIN{favicon.ico}" />
+  <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
 
   [(#MODELE{insert_head_og}{env}{id_article})]
 
@@ -52,13 +53,43 @@
 </head>
 
 <body>
-  <div id="head" class="noprint">
-    [(#ENV{date_default}|?{'',' '}) <div id="date">
+    [(#ENV{date_default}|?{'',' '})
+    <div id="date">
       Voici le contenu du site &laquo; #NOM_SITE_SPIP &raquo; tel qu'il &eacute;tait &agrave; la date du [(#DATE|affdate)] :
     </div>]
-    <div id="logo"><a href="http://www.cnrs.fr/"><img src="#CHEMIN{img/CNRS.jpg}" alt="CNRS" /></a></div>
-    <h1><a href="/"><img src="#CHEMIN{img/Logo_IDM_blanc_e00000.gif}" alt="#NOM_SITE_SPIP" /></a></h1>
-    <INCLURE{fond=inc/menu}>
+  <div id="head" class="noprint">
+    <div id="head_content">
+      <div id="logo"><a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/logo-cnrs.png}" alt="CNRS" /></a></div>
+      <h1><a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/logo_idm.png}" alt="#NOM_SITE_SPIP" /></a></h1>
+      <div id="head_nav">
+        <div id="identification">
+          <ul>
+            <li><a href="#">
+                [(#SESSION{id_auteur}|?{Mon IdM,Identification})]
+              </a><ul class="left">
+                [(#SESSION{id_auteur}|non)<li><a href="#URL_PAGE{perso}">S'identifier</a></li>]
+                [(#SESSION{id_auteur}|non)<li><a href="#URL_PAGE{inscription}">S'inscrire</a></li>]
+                [(#SESSION{id_auteur}|oui)<li><a href="#URL_PAGE{perso}">Espace personnel</a></li>]
+                <BOUCLE_moi(AUTEURS) {tous} {id_auteur=#SESSION{id_auteur}} {billettiste=oui}> <li><a href="#URL_PAGE{billet}">&Eacute;crire un nouveau billet</a></li></BOUCLE_moi>
+                <BOUCLE_relecteurs(spip_relecteurs_articles) {id_auteur=#SESSION{id_auteur}}> <li><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">Un article &agrave; relire !</a></li></BOUCLE_relecteurs>
+                [(#SESSION{statut}|=={0minirezo}|oui)<li><a href="ecrire/">Espace priv&eacute;</a></li>]
+                [(#SESSION{statut}|=={1comite}|oui)<li><a href="ecrire/">Espace de r&eacute;daction</a></li>]
+                [(#SESSION{id_auteur}|oui)<li><a href="#URL_LOGOUT{#URL_SITE_SPIP}">Se d&eacute;connecter</a></li>]
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="menu">
+        <INCLURE{fond=inc/menu}>
+        <B_podcast>
+          <div id="podcast">
+            <BOUCLE_podcast(ARTICLES) {id_rubrique = 38} {age_relatif < 7} {age_relatif >= 0} {0,1} {doublons}>
+              <p>Le podcast de la semaine :<br /><a href="#URL_ARTICLE">#TITRE</a></p>
+            </BOUCLE_podcast>
+          </div>
+        </B_podcast>    
+    </div>  
   </div>
-
-  <div class="[(#ENV{class}|sinon{page})] wrap">
+  <div class="[(#ENV{class}|sinon{page})] wrap main">

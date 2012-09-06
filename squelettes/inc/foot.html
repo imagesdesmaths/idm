@@ -1,4 +1,46 @@
   </div>
+  
+  <div id="footer">
+    <div id="foot_container">
+      <div class="column_foot">
+      	<h3>Navigation</h3>
+      	<ul>
+          <li><a href="#URL_PAGE{navigation}">Recherche avanc&eacute;e</a></li>
+          <li><a href="#URL_PAGE{plan}">Plan du site</a></li>
+      		<li><a href="#URL_RUBRIQUE{19}">Documentation</a></li>
+      		<li><a href="#URL_PAGE{random}">Un article au hasard</a></li>
+      		<li><a href="/?date=-1year">Il y a un an sur IdM</a></li>
+      	</ul>
+      </div>
+      <div class="column_foot">
+      	<h3>Sites partenaires</h3>
+      	<ul>
+          <BOUCLE_liens(ARTICLES) {id_rubrique = 25} {par num titre, titre}>
+            <li><a href="#URL_ARTICLE">#TITRE</a></li>
+          </BOUCLE_liens>
+        </ul>
+      </div>
+      <div class="column_foot">
+      	<h3>A propos d'images des maths</h3>
+      	<ul>
+      		<li><a href="#URL_ARTICLE{63}">Pr&eacute;sentation du site</a></li>
+      		<li><a href="#URL_ARTICLE{17}">Fonctionnement</a></li>
+          [<li>(#MODELE{special}{mot=mentionslegales})</li>]
+          <li><a href="mailto:#EMAIL_WEBMASTER">Nous contacter</a></li>
+      	</ul>
+      </div>
+      <div class="column_foot">
+      	<h3>Divers</h3>
+      	<ul>
+          <li><a href="javascript:unfold_and_print();">Imprimer cette page</a></li>
+          <li><a href="#URL_PAGE{backend}">Syndication (RSS)</a></li>
+          [<li>(#MODELE{special}{mot=ours})</li>]
+      		<li><a href="#URL_PAGE{lexique}">Lexique</a></li>
+      	</ul>
+      </div>
+    </div>
+    <div id="copyright">&copy; 2012 CNRS Media Inc. All Right Reserved</div>
+  </div>
 
   #SPIP_CRON
 

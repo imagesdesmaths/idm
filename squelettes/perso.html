@@ -1,5 +1,11 @@
 #CACHE{0}
 <INCLURE{fond=inc/head}{title=Votre espace personnel}>
+    <div id="art_head">  
+      <h2 class="home_hat">Espace personnel</h2>  
+      <div id="art_social">[(#INCLURE{fond=inc/social_bar})]
+      </div>
+    </div>  
+    <div class="content">
 
 <BOUCLE_moi(AUTEURS) {tous} {id_auteur=#SESSION{id_auteur}}>
   <h1>Bonjour, #NOM&nbsp;!</h1>
@@ -41,5 +47,7 @@
   #LOGIN_PUBLIC
   <p>Si vous n'avez pas d'identifiant, vous pouvez <a href="#URL_PAGE{inscription}">vous inscrire</a>.</p>
 <//B_moi>
+
+</div>
 
 <INCLURE{fond=inc/foot}>

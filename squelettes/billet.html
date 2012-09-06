@@ -1,6 +1,16 @@
 <BOUCLE_moi(AUTEURS) {tous} {id_auteur=#SESSION{id_auteur}} {billettiste=oui}>
   <INCLURE{fond=inc/head}{title=&Eacute;crire un billet}{class=nopage}>
-    <div class="ajax">#FORMULAIRE_BILLET</div>
+    <div id="art_head">  
+      <h2 class="home_hat">Billet</h2>  
+      <div id="art_social">[(#INCLURE{fond=inc/social_bar})]
+      </div>
+    </div>  
+    <div class="content">
+
+
+      <div class="ajax">#FORMULAIRE_BILLET</div>
+    </div>
+
   <INCLURE{fond=inc/foot}>
 </BOUCLE_moi>
   <INCLURE{fond=sommaire}>
