@@ -33,7 +33,7 @@
         </span>]
         <BOUCLE_decompte(FORUMS) {id_article} {plat}>#SET{nb,#TOTAL_BOUCLE}</BOUCLE_decompte>
         [<a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">
-          &nbsp;(#GET{nb}|>{0}|?{#GET{nb}[(#GET{nb}|>{1}|?{commentaires,commentaire})]})]
+        -&nbsp;(#GET{nb}|>{0}|?{#GET{nb}[(#GET{nb}|>{1}|?{&nbsp;commentaires,&nbsp;commentaire})]})]
         </a>
       </div>
     </div>

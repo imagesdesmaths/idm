@@ -8,24 +8,26 @@
     </div>  
     <div class="content artlist">
 
+      <div class="nopage wrap main">
 
-      <div class="page">
-        <div id="logo_article">
-          [(#LOGO_AUTEUR{right})]
-         </div>
-      <h1>#NOM</h1>
-      [<h2 class="bio">(#BIO*) [(<a href="(#URL_SITE)">page web</a>)]</h2>]
-      
-      [<p><strong>Affiliation :</strong> (#AFFILIATION)</p>]
-      
-      #FORMULAIRE_ECRIRE_AUTEUR
-      
-  
-      <B_articles>
-      <h2>Tous ses articles :</h2>
-      <BOUCLE_articles(ARTICLES) {id_auteur} {id_secteur != 18} {par date} {inverse}>
-      [(#INCLURE{fond=inc/resume_list}{id_article})]
-      </BOUCLE_articles>
+        <div class="page">
+          <div id="logo_article">
+            [(#LOGO_AUTEUR{right})]
+           </div>
+        <h1>#NOM</h1>
+        [<h2 class="bio">(#BIO*) [(<a href="(#URL_SITE)">page web</a>)]</h2>]
+        
+        [<p><strong>Affiliation :</strong> (#AFFILIATION)</p>]
+        
+        #FORMULAIRE_ECRIRE_AUTEUR
+        </div>        
+        <div class="eachart">
+          <B_articles>
+          <h2>Tous ses articles :</h2>
+          <BOUCLE_articles(ARTICLES) {id_auteur} {id_secteur != 18} {par date} {inverse}>
+          [(#INCLURE{fond=inc/resume_list}{id_article})]
+          </BOUCLE_articles>
+        </div>
       </div>
     </div>
       

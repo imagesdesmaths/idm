@@ -80,17 +80,25 @@
     </div>
     <div id="editolink">&Eacute;ditorial : 
       <a class="thickbox" href="#[(#REM)]TB_inline?width=700&amp;height=500&amp;inlineId=edito">#TITRE</a>
-    </div>
-    </BOUCLE_edito>  
+    </div>            
+    </BOUCLE_edito>
+    
+
+
       <div id="une">    
         <div class="home_hat">A la une</div>    
-          <BOUCLE_une(ARTICLES) {id_secteur IN 37,26} {par date} {inverse} {age_relatif >= 0} {0,1} {doublons}>
-            [(#INCLURE{fond=inc/resume_une}{id_article})]     
-          </BOUCLE_une>    
-          <BOUCLE_unedeux(ARTICLES) {id_secteur IN 37,26} {par date} {inverse} {age_relatif >= 0} {age_relatif <= 1} {doublons}>
-            [(#INCLURE{fond=inc/resume_une}{id_article})]     
-          </BOUCLE_unedeux>  
-      </div>
+
+        <div id="slides">
+  				<div class="slides_container">
+  					
+                    <BOUCLE_une(ARTICLES) {id_secteur IN 37,26} {par date} {inverse} {age_relatif >= 0} {0,2} {doublons}>
+                      <div class="slide">[(#INCLURE{fond=inc/resume_une}{id_article})]</div>     
+                    </BOUCLE_une>  
+  				</div><!-- end slide container -->
+  				<a href="#" class="prev"><img src="#CHEMIN{/slides/img/arrow-prev.png}" width="24" height="43" alt="Arrow Prev"></a>
+  				<a href="#" class="next"><img src="#CHEMIN{/slides/img/arrow-next.png}" width="24" height="43" alt="Arrow Next"></a>
+  			</div><!-- end slides -->
+      </div> <!-- end UNE -->
     </div>
   <div id="front">  
     <div id="billets">    
@@ -141,18 +149,22 @@
     <div id="hb_right">    
       
       <h2 class="home_hat"><a href="#URL_RUBRIQUE{34}">Communauté</a></h2>
-        <div id="communaute" class="resume bluelist">
-          <ul>
-          <BOUCLE_communeaute(ARTICLES){tout} {statut=publie} {par num titre} {0,5}>
-            <li><a href="#URL_ARTICLE">#TITRE</a>
-            
-            <BOUCLE_combien(FORUMS) {id_article} {plat}></BOUCLE_combien>
-              <div class="nb_commentaires"><div class="comment_count">[(#TOTAL_BOUCLE)]</div></div>
-            <//B_combien>
-            </li>
-          </BOUCLE_communeaute>
-          </ul>
-        </div>
+      <div id="communaute" class="resume bluelist">
+        <ul>
+    <BOUCLE1(ARTICLES){compteur forum} {par compteur_forum} {inverse} {0,5} >
+          <li><a href="#URL_ARTICLE"><?php echo trunctext("#TITRE", 70); ?></a>
+          
+            <div class="nb_commentaires"><div class="comment_count">#COMPTEUR{forum}</div></div>
+          </li>
+    </BOUCLE1>
+        </ul>
+      </div>
+
+
+
+
+  
+      
       <h2 class="home_hat"><a href="#URL_RUBRIQUE{34}">Courrier des lecteurs</a></h2>    
       <div class="resume bluelist">      
         <ul>        

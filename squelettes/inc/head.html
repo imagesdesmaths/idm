@@ -22,7 +22,7 @@
   <title>[(#ENV*{title}|textebrut) - ]#NOM_SITE_SPIP</title>
 
   <link rel="stylesheet" type="text/css" media="all" href="#CHEMIN{css/main.css}"/>
-  <link rel="stylesheet" type="text/css" media="all" href="#CHEMIN{css/tag_20120625152723.css}"/>
+  <link rel="stylesheet" type="text/css" media="all" href="#CHEMIN{css/tag_20120917104048.css}"/>
   <link rel="stylesheet" type="text/css" media="all" href="#CHEMIN{mediaelement/mediaelementplayer.min.css}"/>
 
   <link rel="alternate"  type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}"/>
@@ -31,10 +31,12 @@
   <link rel="index" title="Page principale" href="#URL_SITE_SPIP/"/>
   <link rel="shortcut icon" href="#CHEMIN{favicon.ico}" />
   <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
-
+  
   [(#MODELE{insert_head_og}{env}{id_article})]
 
   <script type="text/javascript" src="#CHEMIN{svgweb/svg.js}"></script>
+
+
 
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -50,6 +52,42 @@
   </script>
 
   #INSERT_HEAD
+
+<script src="http://slidesjs.com/examples/linking/js/slides.min.jquery.js"></script>
+
+
+
+  <script type="text/javascript">
+
+// <![CDATA[
+$(document).ready(function(){
+			// Set starting slide to 1
+			var startSlide = 1;
+			// Get slide number if it exists
+			if (window.location.hash) {
+				startSlide = window.location.hash.replace('#','');
+			}
+			// Initialize Slides
+			$('#slides').slides({
+				preload: true,
+				preloadImage: '#CHEMIN{img/loading.gif}',
+				generatePagination: false,
+				play: 5000,
+				pause: 2500,
+				hoverPause: true,
+				// Get the starting slide
+				start: startSlide,
+				animationComplete: function(current){
+					// Set the slide number as a hash
+					window.location.hash = '#' + current;
+				}
+			});
+
+});
+// ]]>
+
+</script>
+  
 </head>
 
 <body>
