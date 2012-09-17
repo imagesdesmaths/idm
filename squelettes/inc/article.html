@@ -22,8 +22,8 @@
     <BOUCLE_auteurs(AUTEURS) {id_article} {1,1}>[(#SET{uniqueauteur,0})]
     </BOUCLE_auteurs>    
     <BOUCLE_unique(AUTEURS) {id_auteur=#GET{uniqueauteur}}>      
-      <p class="bio">[(#BIO*) [(
-        <a href="(#URL_SITE)">page web</a>)]]
+      <p class="bio">[(#BIO*) [
+        (<a href="(#URL_SITE)">page web</a>)]]
       </p>    
     </BOUCLE_unique>       [
     <div class="chapo">(#CHAPO)
