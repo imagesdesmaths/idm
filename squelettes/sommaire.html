@@ -1,114 +1,114 @@
-#CACHE{3600} 
+#CACHE{3600}
 <INCLURE{fond=inc/head}{class=nopage}{env}>
-  <BOUCLE_rdp(ARTICLES) {id_rubrique=26} {age_relatif < 8} {age_relatif >= 0} {par date} {inverse} {0,1}> 
+  <BOUCLE_rdp(ARTICLES) {id_rubrique=26} {age_relatif < 8} {age_relatif >= 0} {par date} {inverse} {0,1}>
     <h2 class="rdp">
       <a href="#URL_ARTICLE">La revue de presse du [(#DATE|affdate)]</a></h2>
   </BOUCLE_rdp>
-  <div id="top">  
-    <div id="actu">    
+  <div id="top">
+    <div id="actu">
       <h2 class="home_hat">Actualit&eacute;s
         <a class="plus" href="[(#URL_PAGE{breves,id_rubrique=26})]"></a>
-      </h2>    
-      <div class="resume">      
-        <ul>        
-          <BOUCLE_actu(BREVES) {id_rubrique=26} {age_relatif >= 0} {par date} {inverse} {0,3}>         
+      </h2>
+      <div class="resume">
+        <ul>
+          <BOUCLE_actu(BREVES) {id_rubrique=26} {age_relatif >= 0} {par date} {inverse} {0,3}>
             <li>
               <div class="calendar ">
                 <span class="mois"><?php echo substr('[(#DATE|nom_mois)]', 0, 4); ?></span>
                 <span class="jour">[(#DATE|jour)]</span>
-              </div> 
+              </div>
             <a href="#URL_BREVE">#TITRE</a>
-            </li>        
-          </BOUCLE_actu>              
-        </ul>    
-      </div>  
-    </div>  
-    <div id="evt">    
+            </li>
+          </BOUCLE_actu>
+        </ul>
+      </div>
+    </div>
+    <div id="evt">
       <h2 class="home_hat">&Eacute;v&eacute;nements
         <a class="plus" href="[(#URL_PAGE{breves,id_rubrique=33})]"></a>
-      </h2>    
-      <div class="resume">      
-        <B_evts>      
-          <ul>        
-            <BOUCLE_evts(BREVES) {id_rubrique=33} {par date} {0,2} >        
+      </h2>
+      <div class="resume">
+        <B_evts>
+          <ul>
+            <BOUCLE_evts(BREVES) {id_rubrique=33} {par date} {inverse} {0,2} >
               <li>
               <div class="calendar ">
                 <span class="mois"><?php echo substr('[(#DATE|nom_mois)]', 0, 4); ?></span>
                 <span class="jour">[(#DATE|jour)]</span>
-              </div> 
+              </div>
               <a href="#URL_BREVE">#TITRE</a>
-              </li>        
-            </BOUCLE_evts>        
-          </ul>      
-        </B_evts>    
+              </li>
+            </BOUCLE_evts>
+          </ul>
+        </B_evts>
       </div>
-    </div>  
-    <div id="rdp">    
+    </div>
+    <div id="rdp">
       <h2 class="home_hat">Revues de presse
       <a class="plus"  href="#URL_RUBRIQUE{26}"></a>
-      </h2>    
-      <div class="resume">      
-        <ul>        
-          <BOUCLE_rdpall(ARTICLES) {id_rubrique=26} {par date} {age_relatif >= 0} {inverse} {0,3}>         
+      </h2>
+      <div class="resume">
+        <ul>
+          <BOUCLE_rdpall(ARTICLES) {id_rubrique=26} {par date} {age_relatif >= 0} {inverse} {0,3}>
             <li>
             <a href="#URL_ARTICLE">#TITRE</a>
-            </li>        
-          </BOUCLE_rdpall>             
-        </ul>    
-      </div>  
-    </div>
-  </div>
-  <BOUCLE_nospecial(ARTICLES) {id_secteur = 18} {doublons}> 
-  </BOUCLE_nospecial>
-  <BOUCLE_nodouble(ARTICLES) {titre_mot=double} {doublons}> 
-  </BOUCLE_nodouble>
-  <BOUCLE_edito(ARTICLES) {titre_mot=editorial} {par date} {inverse} {age_relatif < 14} {0,1} {doublons}>
-    <div id="edito" style="display:none;">  
-      <div class="article">    
-        <div class="titre"><h2>#TITRE</h2>
-        </div>    
-        <BOUCLE_auteur(AUTEURS) {id_article}>[(#SET{uniqueauteur,#ID_AUTEUR})]
-        </BOUCLE_auteur>    
-        <BOUCLE_auteurs(AUTEURS) {id_article} {1,1}>[(#SET{uniqueauteur,0})]
-        </BOUCLE_auteurs>    
-        <BOUCLE_unique(AUTEURS) {id_auteur=#GET{uniqueauteur}}>      [
-          <h3 class="bio">(#BIO*) [(
-            <a href="(#URL_SITE)">page web</a>)]</h3>]     
-        </BOUCLE_unique>    #TEXTE     [
-        <h3 class="auteur">Le [(#DATE|affdate)], par (#LESAUTEURS)</h3>]   
+            </li>
+          </BOUCLE_rdpall>
+        </ul>
       </div>
     </div>
-    <div id="editolink">&Eacute;ditorial : 
+  </div>
+  <BOUCLE_nospecial(ARTICLES) {id_secteur = 18} {doublons}>
+  </BOUCLE_nospecial>
+  <BOUCLE_nodouble(ARTICLES) {titre_mot=double} {doublons}>
+  </BOUCLE_nodouble>
+  <BOUCLE_edito(ARTICLES) {titre_mot=editorial} {par date} {inverse} {age_relatif < 14} {0,1} {doublons}>
+    <div id="edito" style="display:none;">
+      <div class="article">
+        <div class="titre"><h2>#TITRE</h2>
+        </div>
+        <BOUCLE_auteur(AUTEURS) {id_article}>[(#SET{uniqueauteur,#ID_AUTEUR})]
+        </BOUCLE_auteur>
+        <BOUCLE_auteurs(AUTEURS) {id_article} {1,1}>[(#SET{uniqueauteur,0})]
+        </BOUCLE_auteurs>
+        <BOUCLE_unique(AUTEURS) {id_auteur=#GET{uniqueauteur}}>      [
+          <h3 class="bio">(#BIO*) [(
+            <a href="(#URL_SITE)">page web</a>)]</h3>]
+        </BOUCLE_unique>    #TEXTE     [
+        <h3 class="auteur">Le [(#DATE|affdate)], par (#LESAUTEURS)</h3>]
+      </div>
+    </div>
+    <div id="editolink">&Eacute;ditorial :
       <a class="thickbox" href="#[(#REM)]TB_inline?width=700&amp;height=500&amp;inlineId=edito">#TITRE</a>
-    </div>            
+    </div>
     </BOUCLE_edito>
-    
 
 
-      <div id="une">    
-        <div class="home_hat">A la une</div>    
+
+      <div id="une">
+        <div class="home_hat">A la une</div>
 
         <div id="slides">
-  				<div class="slides_container">
-  					
+                                <div class="slides_container">
+
                     <BOUCLE_une(ARTICLES) {id_secteur IN 37,26} {par date} {inverse} {age_relatif >= 0} {0,2} {doublons}>
-                      <div class="slide">[(#INCLURE{fond=inc/resume_une}{id_article})]</div>     
-                    </BOUCLE_une>  
-  				</div><!-- end slide container -->
-  				<a href="#" class="prev"><img src="#CHEMIN{/slides/img/arrow-prev.png}" width="24" height="43" alt="Arrow Prev"></a>
-  				<a href="#" class="next"><img src="#CHEMIN{/slides/img/arrow-next.png}" width="24" height="43" alt="Arrow Next"></a>
-  			</div><!-- end slides -->
+                      <div class="slide">[(#INCLURE{fond=inc/resume_une}{id_article})]</div>
+                    </BOUCLE_une>
+                                </div><!-- end slide container -->
+                                <a href="#" class="prev"><img src="#CHEMIN{/slides/img/arrow-prev.png}" width="24" height="43" alt="Arrow Prev"></a>
+                                <a href="#" class="next"><img src="#CHEMIN{/slides/img/arrow-next.png}" width="24" height="43" alt="Arrow Next"></a>
+                        </div><!-- end slides -->
       </div> <!-- end UNE -->
     </div>
-  <div id="front">  
-    <div id="billets">    
+  <div id="front">
+    <div id="billets">
       <h2 class="home_hat">
-        <a href="#URL_RUBRIQUE{6}">Nos billets</a></h2>    
+        <a href="#URL_RUBRIQUE{6}">Nos billets</a></h2>
       <div class="resume">
-        <div class="higlight">      
+        <div class="higlight">
           <BOUCLE_premierbillet(ARTICLES) {id_rubrique = 6} {par date} {age_relatif >= 0} {inverse} {0,1} {doublons}>
-            [(#INCLURE{fond=inc/highlight}{id_article})]       
-          </BOUCLE_premierbillet>      
+            [(#INCLURE{fond=inc/highlight}{id_article})]
+          </BOUCLE_premierbillet>
         </div>
         <ul class="list_hp">
           <li class="other">Autres billets</li>
@@ -116,21 +116,21 @@
             <li>
               <a href="#URL_ARTICLE">#TITRE</a>
               <div class="auteurs">#LESAUTEURS</div>
-            </li>      
+            </li>
           </BOUCLE_billetssuivants>
           <li class="linkall"><a href="#URL_RUBRIQUE{6}">Voir tous les billets</a></li>
-        </ul>      
-    
-      </div>  
-    </div>  
-    <div id="recents">    
+        </ul>
+
+      </div>
+    </div>
+    <div id="recents">
       <h2 class="home_hat">
-        <a href="#URL_RUBRIQUE{37}">Nos articles</a></h2>    
+        <a href="#URL_RUBRIQUE{37}">Nos articles</a></h2>
       <div class="resume">
-        <div class="higlight">      
+        <div class="higlight">
           <BOUCLE_premierold(ARTICLES) {id_secteur = 37} {par date} {inverse} {age_relatif >= 0} {0,1} {doublons}>
-            [(#INCLURE{fond=inc/highlight}{id_article})]       
-          </BOUCLE_premierold>      
+            [(#INCLURE{fond=inc/highlight}{id_article})]
+          </BOUCLE_premierold>
         </div>
         <ul class="list_hp">
           <li class="other">Autres articles</li>
@@ -138,22 +138,22 @@
             <li>
               <a href="#URL_ARTICLE">#TITRE</a>
               <div class="auteurs">#LESAUTEURS</div>
-            </li>       
+            </li>
           </BOUCLE_oldsuivants>
-          <li class="linkall"><a href="#URL_RUBRIQUE{37}">Voir tous les articles</a></li>      
-        </ul>  
-      </div>  
+          <li class="linkall"><a href="#URL_RUBRIQUE{37}">Voir tous les articles</a></li>
+        </ul>
+      </div>
     </div>
   </div>
-  <div id="home_bottom">  
-    <div id="hb_right">    
-      
+  <div id="home_bottom">
+    <div id="hb_right">
+
       <h2 class="home_hat"><a href="#URL_RUBRIQUE{34}">Communauté</a></h2>
       <div id="communaute" class="resume bluelist">
         <ul>
     <BOUCLE1(ARTICLES){compteur forum} {par compteur_forum} {inverse} {0,5} >
           <li><a href="#URL_ARTICLE"><?php echo trunctext("#TITRE", 70); ?></a>
-          
+
             <div class="nb_commentaires"><div class="comment_count">#COMPTEUR{forum}</div></div>
           </li>
     </BOUCLE1>
@@ -163,28 +163,29 @@
 
 
 
-  
-      
-      <h2 class="home_hat"><a href="#URL_RUBRIQUE{34}">Courrier des lecteurs</a></h2>    
-      <div class="resume bluelist">      
-        <ul>        
-          <BOUCLE_courrier(ARTICLES) {id_rubrique=34} {age_relatif >= 0} {par date} {inverse} {0,5}>         
+
+
+      <h2 class="home_hat"><a href="#URL_RUBRIQUE{34}">Courrier des lecteurs</a></h2>
+      <div class="resume bluelist">
+        <ul>
+          <BOUCLE_courrier(ARTICLES) {id_rubrique=34} {age_relatif >= 0} {par date} {inverse} {0,5}>
             <li>
-              <span>[(#DATE|affdate{'d/m/Y'})]</span> 
+              <span>[(#DATE|affdate{'d/m/Y'})]</span>
               <a href="#URL_ARTICLE"><?php echo trunctext("#TITRE", 70); ?></a>
-              
-            </li>        
-          </BOUCLE_courrier>        
-     
-        </ul>    
-      </div>  
-    </div>  
+
+            </li>
+          </BOUCLE_courrier>
+
+        </ul>
+      </div>
+    </div>
     <div id="hb_left">
       <h2 class="home_hat">Image du moment</h2>
       <div class="resume" id="imagemoment">
-        <BOUCLE_imgmoment(ARTICLES) {id_rubrique=21} {age_relatif >= 0} {par date} {inverse} {3,1}>         
-            [<div class="unelogo">(#LOGO_ARTICLE{#URL_ARTICLE}|image_recadre{455,455,'center center','transparent'})</div>]       
-        </BOUCLE_imgmoment>          
+        <BOUCLE_imgmoment(ARTICLES) {id_rubrique=21} {age_relatif >= 0} {par date} {inverse} {3,1}>
+            [<div class="unelogo">(#LOGO_ARTICLE{#URL_ARTICLE}|image_recadre{455,455,'center center','transparent'})</div>]
+        </BOUCLE_imgmoment>
       </div>
     </div>
-  </div>#INCLURE{fond=inc/foot}
+  </div>
+#INCLURE{fond=inc/foot}
