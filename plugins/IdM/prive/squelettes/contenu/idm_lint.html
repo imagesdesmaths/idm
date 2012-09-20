@@ -69,8 +69,11 @@ $bugs[] = array ('\label outside {equation}', '|\$\$ *([^$]*\\\\label{[^}]*}[^$]
                  '|\\\\begin{equation}|');
 $bugs[] = array ('HTML entity',               '/&[a-z]*;/ie',                                      'idm_lint_utf8("\0")',                    1, 1,
                  '/&(lt|gt);/');
+$bugs[] = array ('HTML italic',               ':<(i|em)>([^<]*)</(i|em)>:i',                       ' {\2} ',                                 0, 0, '');
+$bugs[] = array ('HTML bold',                 ':<(b|strong)>([^<]*)</(b|strong)>|i',               ' {{\2}} ',                               0, 0, '');
+
 /* $bugs[] = array ('HTML tag (do not trust!)',  '|</?[0-9a-z ="]*>|i',                               '',                                       0, 0, */
-/*                  ':</?([a-z]+[0-9]+|sup|sub|intro|cadre|math|caption|hr|applet|param|small|embed|align|center|quote|code|div|a|html|pre|script|span|bloc|onglets|ul|li|table|thead|th|tbody|tr|td|em|i|b|strong|tt|iframe|object|font|p|br)[ 0-9>]:i'); */
+/*                  ':</?([a-z]+[0-9]+|sup|sub|intro|cadre|math|caption|hr|applet|param|small|embed|align|center|quote|code|div|a|html|pre|script|span|bloc|onglets|ul|li|table|thead|th|tbody|tr|td|tt|iframe|object|font|p|br|em|i|b|strong)[ 0-9>]:i'); */
 
 function idm_lint_bug ($bug, $texte) {
   $list = array();
@@ -121,7 +124,7 @@ while ($art = sql_fetch($all)) {
       echo "<h3>Bug: {$bug[0]}</h3>\n";
 
       foreach ($list as $in => $out) {
-        print "Texte erron&eacute; : <tt class=\"bad tex2jax_ignore\">" . htmlentities($in) . "</tt> (" . strlen($in) . ")<br>\n";
+        print "Texte erron&eacute; : <tt class=\"bad tex2jax_ignore\">" . htmlentities($in, ENT_COMPAT | ENT_HTML401, "UTF-8") . "</tt> (" . strlen($in) . ")<br>\n";
         print "Interpr&eacute;t&eacute; par SPIP : <span class=\"bad\">" . PtoBR(propre($in)) . "</span><br>\n";
         print "Remplacement propos&eacute; : <tt class=\"good tex2jax_ignore\">" . htmlentities($out, ENT_COMPAT | ENT_HTML401, "UTF-8") . "</tt> (" . strlen($out) . ")<br>\n";
         print "Interpr&eacute;t&eacute; par SPIP : <span class=\"good\">" . PtoBR(propre($out)) . "</span><br>\n";
