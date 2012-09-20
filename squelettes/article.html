@@ -1,43 +1,57 @@
-<BOUCLE_article(ARTICLES){id_article}>[(#SET{desc,[(#DESCRIPTIF*|sinon{#INTRODUCTION*})]})] [(#SET{class,[(#ID_RUBRIQUE|=={6}|?{billet})]})] [(#SET{class,[(#ID_RUBRIQUE|=={34}|?{courrier,#GET{class}})]})] 
+<BOUCLE_article(ARTICLES){id_article}>
+  [(#SET{desc,[(#DESCRIPTIF*|sinon{#INTRODUCTION*})]})]
+  [(#SET{class,[(#ID_RUBRIQUE|=={6}|?{billet})]})]
+  [(#SET{class,[(#ID_RUBRIQUE|=={34}|?{courrier,#GET{class}})]})]
+
   <INCLURE{fond=inc/head}{title=#TITRE}{id_rubrique=#ID_RUBRIQUE}{id_article=#ID_ARTICLE}{desc=#GET{desc}}{class=#GET{class}}>
-    <BOUCLE_f(FORUMS){id_article}> 
-    </BOUCLE_f>#SET{nb,#TOTAL_BOUCLE}
-    </B_f>
-    <div id="art_head">  
-      <h2 class="home_hat">[(#DATE_REDAC|sinon{#DATE}|affdate)]</h2> <a class="comment" href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">
-            #GET{nb,0} [ (#GET{nb}|>{1}|?{commentaires,commentaire})] - commenter cet article</a> 
-      <div id="art_social">[(#INCLURE{fond=inc/social_bar})]
+
+  <BOUCLE_f(FORUMS){id_article}> </BOUCLE_f>#SET{nb,#TOTAL_BOUCLE}</B_f>
+
+  <div id="art_head">
+    <h2 class="home_hat">[(#DATE_REDAC|sinon{#DATE}|affdate)]</h2>
+    <a class="comment" href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">
+      #GET{nb,0} [ (#GET{nb}|>{1}|?{commentaires,commentaire})] &mdash; commenter cet article
+    </a>
+    <div id="art_social">[(#INCLURE{fond=inc/social_bar})]</div>
+  </div>
+
+  <div class="content">
+    [(#INCLURE{fond=inc/article}{id_article})]
+    <div class="noprint">
+      #BLOC_TITRE
+        Cr&eacute;dits images
+      #BLOC_DEBUT
+        [<a href="IMG/#LOGO_ARTICLE**">Image &agrave; la une</a> &mdash; (#CREDITS_LOGO|propre|PtoBR)<br/>]
+        <BOUCLE_img(DOCUMENTS) {id_article} {credits == .}>
+          <a href="#URL_DOCUMENT">[(#TITRE|sinon{img_#ID_DOCUMENT})]</a> &mdash; [(#CREDITS|propre|PtoBR)]<br/>
+        </BOUCLE_img>
+      #BLOC_FIN
+    </div>
+
+    <B_affiliation>
+      <div class="notes">
+        <h3>[(#TOTAL_BOUCLE|>{1}|?{Affiliation des auteurs,Affiliation de l'auteur})]</h3>
+        <BOUCLE_affiliation(AUTEURS) {id_article} {", "}>
+          [<a class="auteur" href="#URL_AUTEUR">#NOM</a> : (#AFFILIATION)]
+        </BOUCLE_affiliation>
       </div>
-    </div>  
-    <div class="content"> [(#INCLURE{fond=inc/article}{id_article})]   
-      <div class="noprint">    #BLOC_TITRE Cr&eacute;dits images     #BLOC_DEBUT     [
-        <a href="IMG/#LOGO_ARTICLE**">Image &agrave; la une</a> &mdash; (#CREDITS_LOGO|propre|PtoBR)
-        <br/>]     
-        <BOUCLE_img(DOCUMENTS) {id_article} {credits == .}>      
-          <a href="#URL_DOCUMENT">[(#TITRE|sinon{img_#ID_DOCUMENT})]</a> &mdash; [(#CREDITS|propre|PtoBR)]
-          <br/>    
-        </BOUCLE_img>    #BLOC_FIN   
-      </div>  
-      <B_affiliation>  
-        <div class="notes">    <h3>      [(#TOTAL_BOUCLE|>{1}|?{Affiliation des auteurs,Affiliation de l'auteur})]     </h3>    
-          <BOUCLE_affiliation(AUTEURS) {id_article} {", "}>[
-            <a class="auteur" href="#URL_AUTEUR">#NOM</a> : (#AFFILIATION)]
-          </BOUCLE_affiliation>  
-        </div>  
-      </B_affiliation>  
-      <h3 class="discuter noprint">
-        <a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">      [(#GET{nb}|>{0}|?{Commentaires sur l'article,Soyez le premier &agrave; d&eacute;poser un commentaire})]   </a></h3>  
-      <div class="citer">    
-        <p>Pour citer cet article : [(#LESAUTEURS),]<strong>&laquo; #TITRE &raquo;</strong> &mdash; 
-          <em>Images des Math&eacute;matiques
-          </em>, CNRS, [(#DATE|annee)].
-          </p>     <p> En ligne, URL : 
-          <a href="#URL_ARTICLE">
-            <tt>#URL_SITE_SPIP/#URL_ARTICLE
-            </tt></a>
-        </p>  
-      </div>
-    </div>  #INCLURE{fond=inc/foot} 
+    </B_affiliation>
+
+    <h3 class="discuter noprint">
+      <a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">
+        [(#GET{nb}|>{0}|?{Commentaires sur l'article,Soyez le premier &agrave; d&eacute;poser un commentaire})]
+      </a>
+    </h3>
+
+    <div class="citer">
+      <p>Pour citer cet article : [(#LESAUTEURS),] <strong>&laquo; #TITRE &raquo;</strong> &mdash;
+        <em>Images des Math&eacute;matiques</em>, CNRS, [(#DATE|annee)].
+      </p>
+      <p>En ligne, URL : <a href="#URL_ARTICLE"><tt>#URL_SITE_SPIP/#URL_ARTICLE</tt></a></p>
+    </div>
+  </div>
+
+  #INCLURE{fond=inc/foot}
 </BOUCLE_article>
-<INCLURE{fond=sommaire}>
-  <//B_article>
+  <INCLURE{fond=sommaire}>
+<//B_article>

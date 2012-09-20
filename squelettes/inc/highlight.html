@@ -7,17 +7,17 @@
 <BOUCLE_article(ARTICLES) {id_article} {recherche ?}>
   <div class="resume_rubrique_#ID_RUBRIQUE resume_secteur_#ID_SECTEUR[ resume_piste_(#GET{piste_id})] wrap">
     <div class="img_hl">
-      [<div class="hllogo">(#LOGO_ARTICLE{#URL_ARTICLE}|image_recadre{455,300,center center})</div>]    
+      [<div class="hllogo">(#LOGO_ARTICLE{#URL_ARTICLE}|image_reduire{455,300}|image_recadre{455,300,center center})</div>]
     </div>
     <div class="content_hl">
       <h2><a href="#URL_ARTICLE"><?php echo trunctext("#TITRE", 40); ?></a></h2>
       <div class="meta">#LESAUTEURS
         <BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {id_rubrique != 6}>
           <a href="#URL_RUBRIQUE"> - #TITRE</a>
-        </BOUCLE_rubrique>      
-      </div>    
+        </BOUCLE_rubrique>
+      </div>
       <div class="introduction"><a class="plain" href="#URL_ARTICLE"><?php echo trunctext("#DESCRIPTIF", 200); ?></a></div>
-      <div class="hl_footer">  
+      <div class="hl_footer">
         <B_diff>
         <div class="piste">
           <BOUCLE_diff(MOTS) {id_groupe=5} {id_article}>

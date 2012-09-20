@@ -22,7 +22,7 @@
   <title>[(#ENV*{title}|textebrut) - ]#NOM_SITE_SPIP</title>
 
   <link rel="stylesheet" type="text/css" media="all" href="#CHEMIN{css/main.css}"/>
-  <link rel="stylesheet" type="text/css" media="all" href="#CHEMIN{css/tag_20120917104048.css}"/>
+  <link rel="stylesheet" type="text/css" media="all" href="#CHEMIN{css/tag_20120920211649.css}"/>
   <link rel="stylesheet" type="text/css" media="all" href="#CHEMIN{mediaelement/mediaelementplayer.min.css}"/>
 
   <link rel="alternate"  type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}"/>
@@ -31,74 +31,26 @@
   <link rel="index" title="Page principale" href="#URL_SITE_SPIP/"/>
   <link rel="shortcut icon" href="#CHEMIN{favicon.ico}" />
   <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
-  
+
   [(#MODELE{insert_head_og}{env}{id_article})]
 
   <script type="text/javascript" src="#CHEMIN{svgweb/svg.js}"></script>
-
-
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-4259270-1']);
-    _gaq.push(['_trackPageview']);
-    _gaq.push(['_trackPageLoadTime']);
-
-    (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
+  <script type="text/javascript" src="#CHEMIN{js/slides.min.jquery.js}"></script>
 
   #INSERT_HEAD
-
-<script src="#CHEMIN{js/slides.min.jquery.js}"></script>
-
-
-
-  <script type="text/javascript">
-
-// <![CDATA[
-$(document).ready(function(){
-			// Set starting slide to 1
-			var startSlide = 1;
-			// Get slide number if it exists
-			if (window.location.hash) {
-				startSlide = window.location.hash.replace('#','');
-			}
-			// Initialize Slides
-			$('#slides').slides({
-				preload: true,
-				preloadImage: '#CHEMIN{img/loading.gif}',
-				generatePagination: false,
-				play: 5000,
-				pause: 2500,
-				hoverPause: true,
-				// Get the starting slide
-				start: startSlide,
-				animationComplete: function(current){
-					// Set the slide number as a hash
-					window.location.hash = '#' + current;
-				}
-			});
-
-});
-// ]]>
-
-</script>
-  
 </head>
 
 <body>
-    [(#ENV{date_default}|?{'',' '})
-    <div id="date">
-      Voici le contenu du site &laquo; #NOM_SITE_SPIP &raquo; tel qu'il &eacute;tait &agrave; la date du [(#DATE|affdate)] :
-    </div>]
+  [(#ENV{date_default}|?{'',' '})
+  <div id="date">
+    Voici le contenu du site &laquo; #NOM_SITE_SPIP &raquo; tel qu'il &eacute;tait &agrave; la date du [(#DATE|affdate)] :
+  </div>]
+
   <div id="head" class="noprint">
     <div id="head_content">
       <div id="logo"><a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/logo-cnrs.png}" alt="CNRS" /></a></div>
       <h1><a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/logo_idm.png}" alt="#NOM_SITE_SPIP" /></a></h1>
+
       <div id="head_nav">
         <div id="identification">
           <ul>
@@ -108,8 +60,12 @@ $(document).ready(function(){
                 [(#SESSION{id_auteur}|non)<li><a href="#URL_PAGE{perso}">S'identifier</a></li>]
                 [(#SESSION{id_auteur}|non)<li><a href="#URL_PAGE{inscription}">S'inscrire</a></li>]
                 [(#SESSION{id_auteur}|oui)<li><a href="#URL_PAGE{perso}">Espace personnel</a></li>]
-                <BOUCLE_moi(AUTEURS) {tous} {id_auteur=#SESSION{id_auteur}} {billettiste=oui}> <li><a href="#URL_PAGE{billet}">&Eacute;crire un nouveau billet</a></li></BOUCLE_moi>
-                <BOUCLE_relecteurs(spip_relecteurs_articles) {id_auteur=#SESSION{id_auteur}}> <li><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">Un article &agrave; relire !</a></li></BOUCLE_relecteurs>
+                <BOUCLE_moi(AUTEURS) {tous} {id_auteur=#SESSION{id_auteur}} {billettiste=oui}>
+                  <li><a href="#URL_PAGE{billet}">&Eacute;crire un nouveau billet</a></li>
+                </BOUCLE_moi>
+                <BOUCLE_relecteurs(spip_relecteurs_articles) {id_auteur=#SESSION{id_auteur}}>
+                  <li><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">Un article &agrave; relire !</a></li>
+                </BOUCLE_relecteurs>
                 [(#SESSION{statut}|=={0minirezo}|oui)<li><a href="ecrire/">Espace priv&eacute;</a></li>]
                 [(#SESSION{statut}|=={1comite}|oui)<li><a href="ecrire/">Espace de r&eacute;daction</a></li>]
                 [(#SESSION{id_auteur}|oui)<li><a href="#URL_LOGOUT{#URL_SITE_SPIP}">Se d&eacute;connecter</a></li>]
@@ -119,15 +75,18 @@ $(document).ready(function(){
         </div>
       </div>
     </div>
+
     <div id="menu">
-        <INCLURE{fond=inc/menu}>
+      <INCLURE{fond=inc/menu}>
         <B_podcast>
           <div id="podcast">
             <BOUCLE_podcast(ARTICLES) {id_rubrique = 38} {age_relatif < 7} {age_relatif >= 0} {0,1} {doublons}>
               <p>Le podcast de la semaine :<br /><a href="#URL_ARTICLE">#TITRE</a></p>
             </BOUCLE_podcast>
           </div>
-        </B_podcast>    
-    </div>  
+        </B_podcast>
+      </div>
+    </div>
   </div>
+
   <div class="[(#ENV{class}|sinon{page})] wrap main">
