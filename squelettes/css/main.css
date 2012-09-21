@@ -207,15 +207,14 @@ border:1px solid #c0c0c0; background:url(../img/bg_nav_select.gif);height:24px;l
 #une div.introduction a {}
 #une .resume {position:relative; box-shadow: 5px 5px 15px black;}
 #une .meta {font-weight:bold;font-size:14px;}
-#une #img_une {position:relative;overflow:hidden;}
-#une #content_une {color:#FFF;position:absolute;bottom:15px;width:580px;padding:15px;background-color:rgba(0,0,0,0.8);}
+#une .img_une {position:relative;overflow:hidden;width:610px; height:610px;background-color:#000;}
+#une .content_une {color:#FFF;position:absolute;bottom:15px;width:580px;padding:15px;background-color:rgba(0,0,0,0.8);}
 #une div.unelogo { background-color:#000;text-align: center; }
-#une #img_une {width:610px; height:610px;background-color:#000;}
 #une img.spip_logos { float: none; margin:0 auto; width:610px; height:610px;display:block; }
 #une div.forumlink { clear: none; text-align: right; }
-#une_footer {line-height:15px;margin-top:30px;}
-#une_footer .piste {float:left;}
-#une_footer .forumlink {float:right;font-size:12px; font-weight:bold;}
+#une .une_footer {line-height:15px;margin-top:30px;}
+#une .une_footer .piste {float:left;}
+#une .une_footer .forumlink {float:right;font-size:12px; font-weight:bold;}
 
 #editolink { text-align: center; font-size: 180%; font-weight: bold; margin: .5ex 0em 2.5ex; font-variant: small-caps; }
 #editolink a:hover { text-decoration: underline; }

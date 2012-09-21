@@ -1,10 +1,10 @@
 <BOUCLE_article(ARTICLES) {id_article} {recherche ?}>
   <div class="resume resume_rubrique_#ID_RUBRIQUE resume_secteur_#ID_SECTEUR">
 
-    <div id="img_une">
+    <div class="img_une">
       [<div class="unelogo">(#LOGO_ARTICLE|image_reduire{610,610}|image_recadre{610,610,center center})</div>]
     </div>
-    <div id="content_une">
+    <div class="content_une">
       <h2><a href="#URL_ARTICLE">#TITRE</a></h2>
       <div class="meta">#LESAUTEURS -
         <BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {id_rubrique != 6}>
@@ -12,7 +12,7 @@
         </BOUCLE_rubrique>
       </div>
       <div class="introduction"><a class="plain" href="#URL_ARTICLE">[(#DESCRIPTIF|PtoBR)]</a></div>
-      <div id="une_footer">
+      <div class="une_footer">
 
 
         <B_diff>
