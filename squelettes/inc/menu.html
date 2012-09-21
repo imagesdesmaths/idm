@@ -1,24 +1,18 @@
-
-  <ul>
-    
-    <li class="nav_select" >[(#FORMULAIRE_RECHERCHE)]</li>
-    
-    <li><a alt="Recherche avancée" id="adv_search" href="#URL_PAGE{navigation}"></a></li>
-
-    <li class="nav_select" id="nav_rubriques"><a href="#">Rubriques</a>
-      <ul>
-        <BOUCLE_rubriques(RUBRIQUES) {id_secteur IN 6,26,34,37} {id_rubrique !IN 28,29,37} {par num titre, titre}>
-          <li><a href="#URL_RUBRIQUE">#TITRE</a></li>
-        </BOUCLE_rubriques>
-      </ul>
-    </li>
-
-    <li class="nav_select" id="nav_dossiers"><a href="#">Dossiers</a>
-      <ul>
-        <BOUCLE_dossier(MOTS) {id_groupe=3} {par titre}>
-          <li><a href="#URL_MOT">#TITRE</a></li>
-        </BOUCLE_dossier>
-      </ul>
-    </li>
-  </ul>
-
+<ul>
+  <li class="nav_select" >[(#FORMULAIRE_RECHERCHE)]</li>
+  <li><a id="adv_search" href="#URL_PAGE{navigation}"></a></li>
+  <li class="nav_select" id="nav_rubriques"><a href="#">Rubriques</a>
+    <ul>
+      <BOUCLE_rubriques(RUBRIQUES) {id_secteur IN 6,26,34,37} {id_rubrique !IN 28,29,37} {par num titre, titre}>
+        <li><a href="#URL_RUBRIQUE">#TITRE</a></li>
+      </BOUCLE_rubriques>
+    </ul>
+  </li>
+  <li class="nav_select" id="nav_dossiers"><a href="#">Dossiers</a>
+    <ul>
+      <BOUCLE_dossier(MOTS) {id_groupe=3} {par titre}>
+        <li><a href="#URL_MOT">#TITRE</a></li>
+      </BOUCLE_dossier>
+    </ul>
+  </li>
+</ul>

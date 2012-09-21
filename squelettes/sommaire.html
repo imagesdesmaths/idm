@@ -148,7 +148,7 @@
     <div id="communaute" class="resume bluelist">
       <ul>
         <BOUCLE1(ARTICLES){compteur forum} {par compteur_forum} {inverse} {0,5} >
-          <li><a href="#URL_ARTICLE"><?php echo trunctext("#TITRE", 70); ?></a>
+          <li><a href="#URL_ARTICLE">[(#TITRE|trunctext{70})]</a>
             <div class="nb_commentaires"><div class="comment_count">#COMPTEUR{forum}</div></div>
           </li>
         </BOUCLE1>
@@ -161,7 +161,7 @@
         <BOUCLE_courrier(ARTICLES) {id_rubrique=34} {age_relatif >= 0} {par date} {inverse} {0,5}>
           <li>
             <span>[(#DATE|affdate{'d/m/Y'})]</span>
-            <a href="#URL_ARTICLE"><?php echo trunctext("#TITRE", 70); ?></a>
+            <a href="#URL_ARTICLE">[(#TITRE|trunctext{70})]</a>
           </li>
         </BOUCLE_courrier>
       </ul>
