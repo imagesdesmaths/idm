@@ -171,9 +171,11 @@
   <div id="hb_left">
     <h2 class="home_hat">Image du moment</h2>
     <div class="resume" id="imagemoment">
-      <BOUCLE_imgmoment(ARTICLES) {id_rubrique=21} {age_relatif >= 0} {par date} {inverse} {3,1}>
-        [<div class="unelogo">(#LOGO_ARTICLE{#URL_ARTICLE}|image_recadre{455,455,'center center','transparent'})</div>]
-      </BOUCLE_imgmoment>
+      <BOUCLE_img(DOCUMENTS) {id_article=167} {tous} {0,1} {par hasard}>
+        <a href="#URL_PAGE{image,id_document=#ID_DOCUMENT}">
+          [(#LOGO_DOCUMENT|image_reduire{455,455}|image_recadre{455,455,center center})]
+        </a>
+      </BOUCLE_img>
     </div>
   </div>
 </div>

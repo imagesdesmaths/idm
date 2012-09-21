@@ -1,15 +1,22 @@
 <BOUCLE_img(DOCUMENTS){id_document=#ENV{id_document}}{tous}>
 <INCLURE{fond=inc/head}{title=#TITRE}>
 
-[<h1>(#TITRE)</h1>]
-
-<div class="figure">
-  <a href="#URL_DOCUMENT"><img src="#URL_DOCUMENT"[ alt="(#TITRE)" title="#TITRE"]></a>
+<div id="art_head">
+  <h2 class="home_hat">L'image du moment</h2>
+  <div id="art_social">[(#INCLURE{fond=inc/social_bar})]</div>
 </div>
 
-[(#DESCRIPTIF)]
+<div class="content">
+  [<h1>(#TITRE)</h1>]
 
-[<p class="copyright">Cr&eacute;dits : (#CREDITS)</p>]
+  <div class="figure">
+    <img src="#URL_DOCUMENT"[ alt="(#TITRE)" title="#TITRE"] />
+  </div>
+
+  [(#DESCRIPTIF)]
+
+  [<p class="copyright">Cr&eacute;dits : (#CREDITS)</p>]
+</div>
 
 #INCLURE{fond=inc/foot}
 </BOUCLE_img>
