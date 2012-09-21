@@ -108,7 +108,7 @@
 
       <ul class="list_hp">
         <li class="other">Autres billets</li>
-        <BOUCLE_billetssuivants(ARTICLES) {id_rubrique = 6} {par date} {age_relatif >= 0} {inverse} {1,5} {doublons}>
+        <BOUCLE_billetssuivants(ARTICLES) {id_rubrique = 6} {par date} {age_relatif >= 0} {inverse} {0,5} {doublons}>
           <li>
             <a href="#URL_ARTICLE">#TITRE</a>
             <div class="auteurs">#LESAUTEURS</div>
@@ -130,7 +130,7 @@
 
       <ul class="list_hp">
         <li class="other">Autres articles</li>
-        <BOUCLE_oldsuivants(ARTICLES) {id_secteur = 37} {par date} {inverse} {age_relatif >= 0} {1,5} {doublons}>
+        <BOUCLE_oldsuivants(ARTICLES) {id_secteur = 37} {par date} {inverse} {age_relatif >= 0} {0,5} {doublons}>
           <li>
             <a href="#URL_ARTICLE">#TITRE</a>
             <div class="auteurs">#LESAUTEURS</div>
