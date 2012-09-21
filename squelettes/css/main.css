@@ -203,7 +203,7 @@ border:1px solid #c0c0c0; background:url(../img/bg_nav_select.gif);height:24px;l
 #une a {color:#FFF;}
 #une h2 a:hover { color: #e20000; }
 #une h3 { text-align: center; font-weight: normal; font-size: 100%; margin: 0 0 1ex; }
-#une div.introduction { font-size: 12px; font-style: normal; margin:0; }
+#une div.introduction { font-size: 12px; font-style: normal; margin: 1ex 0 0; }
 #une div.introduction a {}
 #une .resume {position:relative; box-shadow: 5px 5px 15px black;}
 #une .meta {font-weight:bold;font-size:14px;}
