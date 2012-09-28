@@ -71,6 +71,9 @@ function action_ajouter_documents_dist($id_document, $files, $objet, $id_objet, 
  * @param string $mode
  *   mode par defaut si pas precise pour le document
  * @return array|bool|int|mixed|string|unknown
+ * 	 si int : l'id_document ajouté (opération réussie)
+ *   si string : une erreur s'est produit, la chaine est le message d'erreur
+ *  
  */
 function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet, $mode) {
 
@@ -137,7 +140,14 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 		$champs['extension'] = $fichier['extension'];
 		$champs['fichier'] = $fichier['fichier'];
 
-
+		/**
+		 * Récupère les informations du fichier
+		 * -* largeur
+		 * -* hauteur
+		 * -* type_image
+		 * -* taille
+		 * -* ses metadonnées si une fonction de metadatas/ est présente
+		 */
 		$infos = renseigner_taille_dimension_image($champs['fichier'],$champs['extension']);
 		if (is_string($infos))
 			return $infos; // c'est un message d'erreur !
@@ -156,7 +166,6 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 			return $test; // erreur sur les dimensions du fichier
 		}
 
-		
 		unset($champs['type_image']);
 		unset($champs['inclus']);
 		$champs['fichier'] = set_spip_doc($champs['fichier']);
@@ -356,7 +365,7 @@ function fixer_fichier_upload($file, $mode=''){
 /**
  * Verifier si le fichier respecte les contraintes de tailles
  * 
- * @param  $infos
+ * @param  array $infos
  * @return bool|mixed|string
  */
 function verifier_taille_document_acceptable($infos){

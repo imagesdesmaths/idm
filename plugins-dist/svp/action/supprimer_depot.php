@@ -1,7 +1,16 @@
 <?php
 /**
- * Action de suppression en base de donnees du depot et de ses plugins
+ * Gestion de l'action supprimer_depot
  *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Actions
+ */
+ 
+/**
+ * Action de suppression en base de données d'un dépot et de ses plugins
+ *
+ * @return void
  */
 function action_supprimer_depot_dist(){
 

@@ -1,36 +1,100 @@
 <?php
-/*
- * Plugin Porte Plume pour SPIP 2
- * Licence GPL
- * Auteur Matthieu Marcillaud
+/**
+ * Fonctions utiles pour le Porte Plume
+ * 
+ * @plugin Porte Plume pour SPIP
+ * @license GPL
+ * @package SPIP\PortePlume\BarreOutils
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * La class Barre_outils est un objet contenant les differents
- * parametres definissant une barre markitup
+ * Objet contenant les différents paramètres definissant une barre d'outils
+ * Markitup et permettant d'agir dessus
+ *
+ * @example
+ *     $barre = new Barre_Outil($description);
  * 
+ * @package SPIP\PortePlume\BarreOutils
  */
 class Barre_outils{
-	var $id = "";
-	var $nameSpace = "";
-	var $lang = "";
-	var $previewAutoRefresh = false;
-	var $previewParserPath = "";
-	var $onEnter = array();
-	var $onShiftEnter = array();
-	var $onCtrlEnter = array();
-	var $onTab = array();
-	var $beforeInsert = "";
-	var $afterInsert = "";
-	var $markupSet = array();
+	/**
+	 * Identifiant HTML de la barre
+	 * @todo À supprimer car non utilisé !
+	 * @var string */
+	public $id = "";
+
+	/**
+	 * Nom de la barre d'outil
+	 * @var string */
+	public $nameSpace = "";
+
+	/**
+	 * Langue
+	 * @todo À supprimer car non utilisé !
+	 * @var string */
+	public $lang = "";
+
+	/**
+	 * Option de markitup : rafraîchir la prévisu ?
+	 * @todo À supprimer car non utilisé !
+	 * @var bool */
+	public $previewAutoRefresh = false;
+
+	/**
+	 * Option de markitup : nom de la fonction de prévisu
+	 * @todo À supprimer car on le redéfini dans l'appel javascript !
+	 * @var bool */
+	public $previewParserPath = "";
+
+	/**
+	 * Option de markitup : que faire sur l'appuie de Entrée ?
+	 * @var array */
+	public $onEnter = array();
 	
-	// liste de fonctions supplementaires a mettre apres le json
-	var $functions = "";
-	
-	// private
-	var $_liste_params_autorises = array(
+
+	/**
+	 * Option de markitup : que faire sur l'appuie de Shift+Entrée ?
+	 * @example array('keepDefault'=>false, 'replaceWith'=>"\n_ ")
+	 * @var array */
+	public $onShiftEnter = array();
+
+	/**
+	 * Option de markitup : que faire sur l'appuie de Control+Entrée ?
+	 * @var array */
+	public $onCtrlEnter = array();
+
+	/**
+	 * Option de markitup : que faire sur l'appuie d'une tabulation ?
+	 * @var array */
+	public $onTab = array();
+
+	/**
+	 * Option de markitup : Code JS à exécuter avant une insertion
+	 * @var string */
+	public $beforeInsert = "";
+
+	/**
+	 * Option de markitup : Code JS à exécuter après une insertion
+	 * @var string */
+	public $afterInsert = "";
+
+	/**
+	 * Description des outils/boutons et leurs sous boutons éventuels
+	 * @var array */
+	public $markupSet = array();
+
+	/**
+	 * Fonctions JS supplémentaires à écrire après la déclaration JSON
+	 * des outils. Ces fonctions peuvent servir aux boutons.
+	 * @var string */
+	public $functions = "";
+
+	/**
+	 * Liste des paramètres valides pour une description d'outils (markupSet)
+	 * @var array */
+	private $_liste_params_autorises = array(
 	
 		'replaceWith',
 		'openWith',
@@ -65,10 +129,16 @@ class Barre_outils{
 		// donner un identifiant unique au bouton (pour le php)
 		'id',
 	);
-	
+
 	/**
-	 * Initialise les parametres
-	 * @param array $params :  param->valeur
+	 * Constructeur
+	 * 
+	 * Initialise la barre avec les paramètres transmis
+	 * en n'adressant que les paramètres effectivement valides
+	 *
+	 * @api
+	 * @param array $params Paramètres de la barre d'outil
+	 * @return void
 	 */
 	function Barre_outils($params=array()){
 		foreach ($params as $p=>$v) {
@@ -81,13 +151,18 @@ class Barre_outils{
 			}
 		}
 	}
-	
+
+
 	/**
-	 * Verifie que les parametres transmis existent
-	 * et retourne un tableau des parametres valides
+	 * Vérifie que les paramètres d'une clé existent
+	 * et retourne un tableau des paramètres valides
 	 * 
-	 * @param string $nom : cle du parametre (eventuel)
-	 * @param array  $params : parametres du parametre (param->valeur)
+	 * @param string $nom
+	 *     Clé à vérifier (ex: 'markupSet')
+	 * @param array $params
+	 *     Paramètres de cette clé (description des boutons ou sous boutons)
+	 * @return array
+	 *     Paramètres, soustrait de ceux qui ne sont pas valides
 	 */
 	function verif_params($nom, $params=array()) {
 		// si markupset, on boucle sur les items
@@ -106,40 +181,46 @@ class Barre_outils{
 		}
 		return $params;
 	}
-	
+
 	/**
-	 * Permet d'affecter des parametres a un element de la barre
-	 * La fonction retourne les parametres, de sorte qu'on peut s'en servir pour simplement recuperer ceux-ci.
+	 * Permet d'affecter des paramètres à un élément de la barre
 	 * 
-	 * Il est possible d'affecter des parametres avant/apres l'element trouve
-	 * en definisant une valeur differente pour le $lieu : 'dedans','avant','apres'
-	 * par defaut 'dedans' (modifie l'element trouve).
+	 * La fonction retourne les paramètres, de sorte qu'on peut s'en servir
+	 * pour simplement récupérer ceux-ci.
 	 * 
-	 * Lorsqu'on demande d'inserer avant ou apres, la fonction retourne les parametres inseres
+	 * Il est possible d'affecter des paramètres avant/après l'élément trouvé
+	 * en definisant une valeur différente pour le $lieu : 'dedans','avant','apres'
+	 * par defaut 'dedans' (modifie l'élément trouvé).
 	 * 
-	 * @param false/array $tableau
-	 * 		tableau ou chercher les elements (sert pour la recursion)
+	 * Lorsqu'on demande d'insérer avant ou après, la fonction retourne
+	 * les paramètres inserés
+	 * 
+	 * @param array $tableau
+	 *     Tableau ou chercher les elements (sert pour la recursion)
 	 * @param string $identifiant
-	 * 		identifiant du bouton a afficher
+	 *     Identifiant du bouton a afficher
 	 * @param array $params
-	 * 		parametres a affecter a la trouvaille.
-	 * 		Peut etre tableau cle/valeur ou
-	 * 		Tableau de tableaux cle/valeur (sauf pour $lieu = dedans)
+	 *     Paramètres à affecter à la trouvaille (ou avant ou après).
+	 *     Peut être un tableau clé/valeur ou un tableau de tableaux
+	 *     clé/valeur (sauf pour $lieu = dedans)
 	 * @param string $lieu
-	 * 		lieu d'affectation des parametres (dedans, avant, apres)
+	 *     Lieu d'affectation des paramètres (dedans, avant, apres)
 	 * @param bool $plusieurs
-	 * 		definit si $params est une forme simple (tableau cle/valeur)
-	 * 		ou comporte plusieurs boutons (tableau de tableaux cle/valeur).
+	 *     Définit si $params est une forme simple (tableau cle/valeur)
+	 *     ou comporte plusieurs boutons (tableau de tableaux cle/valeur).
+	 * @return array|bool
+	 *     Paramètres de l'élément modifié ou paramètres ajoutés
+	 *     False si l'identifiant cherché n'est pas trouvé
 	 */
 	function affecter(&$tableau, $identifiant, $params=array(), $lieu='dedans', $plusieurs=false){
 		static $cle_de_recherche = 'id'; // ou className ?
 		
-		if ($tableau === null)
+		if ($tableau === null) // utile ?
 			$tableau = &$this->markupSet;
-			
+
 		if (!in_array($lieu, array('dedans','avant','apres'))) 
 			$lieu = 'dedans';
-		
+
 		// present en premiere ligne ?
 		$trouve = false;
 		foreach ($tableau as $i=>$v){
@@ -173,7 +254,7 @@ class Barre_outils{
 			}
 			return $tableau[$trouve];
 		}
-				
+
 		// recursivons sinon !
 		foreach ($tableau as $i=>$v){
 			if (is_array($v)) {
@@ -188,12 +269,18 @@ class Barre_outils{
 
 	
 	/**
-	 * Permet d'affecter des parametres toutes les elements de la barre
+	 * Permet d'affecter des paramètres à tous les éléments de la barre
+	 * ou à une liste d'identifiants d'éléments indiqués.
 	 * 
-	 * @param array $params : parametres a affecter a la trouvaille
-	 * @param array $ids : tableau identifiants particuliers a qui on affecte les parametres
-	 *                     si vide, tous les identifiants seront modifies
-	 * @param false/array $tableau : tableau ou chercher les elements (sert pour la recursion)
+	 * @param array $tableau
+	 *     Tableau où chercher les éléments
+	 * @param array $params
+	 *     Paramètres à affecter aux éléments
+	 * @param array $ids
+	 *     Tableau d'identifiants particuliers à qui on affecte les paramètres.
+	 *     Si vide, tous les identifiants seront modifiés
+	 * @return bool
+	 *     false si aucun paramètre à affecter, true sinon.
 	 */
 	function affecter_a_tous(&$tableau, $params=array(), $ids=array()){
 		if (!$params)
@@ -217,69 +304,90 @@ class Barre_outils{
 		return true;
 	}
 	
-		
+	
 	/**
-	 * Affecte les valeurs des parametres indiques au bouton demande
-	 * et retourne l'ensemble des parametres du bouton (sinon false)
-	 * 
-	 * @param string/array $identifiant : id du ou des boutons a afficher
-	 * @param array $params : param->valeur
-	 * @return mixed
+	 * Affecte les valeurs des paramètres indiqués au bouton demandé
+	 * et retourne l'ensemble des paramètres du bouton (sinon false)
+	 *
+	 * @api
+	 * @param string|array $identifiant
+	 *     Identifiant du ou des boutons.
+	 * @param array $params
+	 *     Paramètres de l'ajout (tableau paramètre=>valeur)
+	 * @return bool|array
+	 *     false si l'identifiant n'a pas été trouvé
+	 *     true si plusieurs identifiants,
+	 *     array sinon : description de l'identifiant cherché.
 	 */
 	function set($identifiant, $params=array()) {
 		// prudence tout de meme a pas tout modifier involontairement (si array)
 		if (!$identifiant) return false;
-			
+	
 		if (is_string($identifiant)) {
 			return $this->affecter($this->markupSet, $identifiant, $params);
 		}
 		elseif (is_array($identifiant)) {
 			return $this->affecter_a_tous($this->markupSet, $params, $identifiant);
 		}
-		return false;		
+		return false;
 	}
 	
 	/**
 	 * Retourne les parametres du bouton demande
-	 * 
-	 * @param string $identifiant : nom (de la classe du) bouton
-	 * @return mixed
+	 *
+	 * @api
+	 * @param string|array $identifiant
+	 *     Identifiant du ou des boutons.
+	 * @return bool|array
+	 *     false si l'identifiant n'est pas trouvé
+	 *     array sinon : Description de l'identifiant cherché.
 	 */
 	function get($identifiant) {
 		if ($a = $this->affecter($this->markupSet, $identifiant)) {
 			return $a;
 		}
-		return false;		
+		return false;
 	}
 	
-		 		
+	
 	/**
-	 * Affiche le bouton demande
-	 * 
-	 * @param string $identifiant : nom (de la classe du) bouton a afficher
-	 * @return true/false
+	 * Affiche le ou les boutons demandés
+	 *
+	 * @api
+	 * @param string|array $identifiant
+	 *     Identifiant du ou des boutons
+	 * @return bool|array
+	 *     false si l'identifiant n'a pas été trouvé
+	 *     true si plusieurs identifiants,
+	 *     array sinon : description de l'identifiant cherché.
 	 */
 	function afficher($identifiant){
 		return $this->set($identifiant,array('display'=>true));
 	}
 	
-		
+	
 	/**
-	 * Cache le bouton demande
-	 * 
-	 * @param string $identifiant : nom (de la classe du) bouton a afficher
-	 * @return true/false
+	 * Cache le ou les boutons demandés
+	 *
+	 * @api
+	 * @param string|array $identifiant
+	 *     Identifiant du ou des boutons
+	 * @return bool|array
+	 *     false si l'identifiant n'a pas été trouvé
+	 *     true si plusieurs identifiants,
+	 *     array sinon : description de l'identifiant cherché.
 	 */
 	function cacher($identifiant){
-		return $this->set($identifiant,array('display'=>false));
+		return $this->set($identifiant, array('display'=>false));
 	}
 	
-		 		
+	
 	/**
 	 * Affiche tous les boutons
-	 * 
-	 * @param string $identifiant : nom (de la classe du) bouton a afficher
-	 * @return true/false
+	 *
+	 * @api
+	 * @return bool
+	 *     false si aucun paramètre à affecter, true sinon.
 	 */
 	function afficherTout(){
 		return $this->affecter_a_tous($this->markupSet, array('display'=>true));
@@ -287,9 +395,10 @@ class Barre_outils{
 	
 	/**
 	 * Cache tous les boutons
-	 * 
-	 * @param string $identifiant : nom (de la classe du) bouton a afficher
-	 * @return true/false
+	 *
+	 * @api
+	 * @return bool
+	 *     false si aucun paramètre à affecter, true sinon.
 	 */
 	function cacherTout(){
 		return $this->affecter_a_tous($this->markupSet, array('display'=>false));
@@ -297,78 +406,98 @@ class Barre_outils{
 	
 
 	/**
-	 * ajouter un bouton ou quelque chose, avant un autre deja present
-	 * 
-	 * @param string $identifiant : identifiant du bouton ou l'on doit se situer
+	 * Ajoute un bouton ou quelque chose, avant un autre déjà présent
+	 *
+	 * @api
+	 * @param string $identifiant
+	 *     Identifiant du bouton où l'on doit se situer
 	 * @param array $params
-	 * 		Parametres de l'ajout.
-	 * 		Description d'1 bouton (tableau cle/valeurs)
+	 *     Paramètres de l'ajout.
+	 *     Description d'un bouton (tableau clé/valeurs).
+	 * @return array|bool
+	 *     Paramètres ajoutés avant
+	 *     False si l'identifiant cherché n'est pas trouvé
 	 */
 	function ajouterAvant($identifiant, $params){
 		return $this->affecter($this->markupSet, $identifiant, $params, 'avant');
 	}
-	
+
 	/**
-	 * ajouter plusieurs boutons, avant un autre deja present
-	 * 
-	 * @param string $identifiant : identifiant du bouton ou l'on doit se situer
+	 * Ajoute plusieurs boutons, avant un autre déjà présent
+	 *
+	 * @api
+	 * @param string $identifiant
+	 *     Identifiant du bouton où l'on doit se situer
 	 * @param array $tableau_params
-	 * 		Parametres de l'ajout.
-	 * 		Description de plusieurs boutons (tableau de tableaux cle/valeurs).
+	 *     Paramètres de l'ajout.
+	 *     Description de plusieurs boutons (tableau de tableaux clé/valeurs).
+	 * @return array|bool
+	 *     Paramètres ajoutés avant
+	 *     False si l'identifiant cherché n'est pas trouvé
 	 */
 	function ajouterPlusieursAvant($identifiant, $tableau_params){
 		return $this->affecter($this->markupSet, $identifiant, $tableau_params, 'avant', true);
 	}
-	
+
 	/**
-	 * ajouter un bouton ou quelque chose, apres un autre deja present
-	 * 
+	 * Ajoute un bouton ou quelque chose, après un autre déjà présent
+	 *
+	 * @api
 	 * @param string $identifiant
-	 * 		identifiant du bouton ou l'on doit se situer
+	 *     Identifiant du bouton où l'on doit se situer
 	 * @param array $params
-	 * 		parametres de l'ajout.
-	 * 		Description d'1 bouton (tableau cle/valeurs)
+	 *     Paramètres de l'ajout.
+	 *     Description d'un bouton (tableau clé/valeurs).
+	 * @return array|bool
+	 *     Paramètres ajoutés après
+	 *     False si l'identifiant cherché n'est pas trouvé
 	 */
 	function ajouterApres($identifiant, $params){
 		return $this->affecter($this->markupSet, $identifiant, $params, 'apres');
 	}
 
 	/**
-	 * ajouter plusieurs boutons, apres un autre deja present
-	 * 
+	 * Ajoute plusieurs boutons, après un autre déjà présent
+	 *
+	 * @api
 	 * @param string $identifiant
-	 * 		identifiant du bouton ou l'on doit se situer
+	 *     Identifiant du bouton où l'on doit se situer
 	 * @param array $tableau_params
-	 * 		Parametres de l'ajout.
-	 * 		Description de plusieurs boutons (tableau de tableaux cle/valeurs).
+	 *     Paramètres de l'ajout.
+	 *     Description de plusieurs boutons (tableau de tableaux clé/valeurs).
+	 * @return array|bool
+	 *     Paramètres ajoutés après
+	 *     False si l'identifiant cherché n'est pas trouvé
 	 */
 	function ajouterPlusieursApres($identifiant, $tableau_params){
 		return $this->affecter($this->markupSet, $identifiant, $tableau_params, 'apres', true);
 	}
-			
+	
 	/**
-	 * ajouter une fonction js pour etre utilises dans les boutons
-	 * 
-	 * @param string $fonction : code de la fonction js
-	 * @return null
+	 * Ajoute une fonction JS qui pourra être utilisée par les boutons
+	 *
+	 * @api
+	 * @param string $fonction Code de la fonction JS
+	 * @return void
 	 */
 	function ajouterFonction($fonction){
 		if (false === strpos($this->functions, $fonction)){
 			$this->functions .= "\n" . $fonction . "\n";
 		}
 	}
-		
+	
 	/**
-	 * Supprimer les elements non affiches (display:false)
+	 * Supprimer les éléments non affichés (display:false)
 	 * Et les séparateurs (li vides) selon la configuration
 	 * 
-	 * @param false/array $tableau : tableau a analyser (sert pour la recursion)
+	 * @param array $tableau Tableau de description des outils
+	 * @return void
 	 */
 	function enlever_elements_non_affiches(&$tableau){
-		if ($tableau === null)
+		if ($tableau === null) // utile ?
 			$tableau = &$this->markupSet;
 		
-		foreach ($tableau as $p=>$v){
+		foreach ($tableau as $p=>$v) {
 
 			if (isset($v['display']) AND !$v['display']) {
 				unset($tableau[$p]);
@@ -386,22 +515,21 @@ class Barre_outils{
 					}
 				}
 			}
-
 		}
 	}
 
 	/**
-	 * Enleve les separateurs pour ameliorer l'accessibilite
-	 * au detriment du stylage possible de ces separateurs.
+	 * Enlève les séparateurs pour améliorer l'accessibilité
+	 * au détriment du stylage possible de ces séparateurs.
 	 *
-	 * Le bouton precedent le separateur recoit une classe CSS 'separateur_avant'
+	 * Le bouton précédent le séparateur reçoit une classe CSS 'separateur_avant'
 	 * Celui apres 'separateur_apres'
 	 * 
-	 * @param 
-	 * @return 
+	 * @param array Tableau de description des outils 
+	 * @return void
 	**/
 	function enlever_separateurs(&$tableau) {
-		if ($tableau === null)
+		if ($tableau === null) // utile ?
 			$tableau = &$this->markupSet;
 
 		foreach ($tableau as $p=>$v) {
@@ -423,13 +551,13 @@ class Barre_outils{
 			}
 		}
 	}
-	
+
 	/**
-	 * Supprime les elements vides (uniquement a la racine de l'objet)
-	 * et uniquement si chaine ou tableau.
+	 * Supprime les éléments vides (uniquement à la racine de l'objet)
+	 * et uniquement si chaîne ou tableau.
 	 * 
-	 * Supprime les parametres prives
-	 * Supprime les parametres inutiles a markitup/json dans les parametres markupSet
+	 * Supprime les paramètres privés
+	 * Supprime les paramètres inutiles a markitup/json dans les paramètres markupSet
 	 * (id, display, icone)
 	 */
 	function enlever_parametres_inutiles() {
@@ -454,10 +582,9 @@ class Barre_outils{
 	
 	
 	/**
-	 * Cree la sortie json pour le javascript des parametres de la barre
-	 * et la retourne
+	 * Crée la sortie json pour le javascript des paramètres de la barre
 	 * 
-	 * @return string : declaration json de la barre
+	 * @return string Déclaration json de la barre
 	 */
 	function creer_json(){
 		$barre = $this;
@@ -475,13 +602,14 @@ class Barre_outils{
 		// lorsqu'on clique sur l'icone
 		include_spip('inc/charsets');
 		$json = unicode2charset(html2unicode($json));
-		return "\n\nbarre_outils_$type = ".$json . "\n\n $fonctions";		
+		return "\n\nbarre_outils_$type = ".$json . "\n\n $fonctions";
 	}
-	
+
 	/**
-	 * Transform a variable into its javascript equivalent (recursive)
-	 * (depuis ecrire/inc/json, mais modifie pour que les fonctions
-	 * js ne soient pas mises dans un string
+	 * Transforme une variable PHP dans un équivalent javascript (json)
+	 * 
+	 * Copié depuis ecrire/inc/json, mais modifié pour que les fonctions
+	 * JavaScript ne soient pas encapsulées dans une chaîne (string)
 	 * 
 	 * @access private
 	 * @param mixed the variable
@@ -532,16 +660,17 @@ class Barre_outils{
 }
 
 
-
 /**
- * Cette fonction cree la css pour les images
- * des icones des barres d'outils
- * en s'appuyant sur la description des jeux de barres disponibles.
+ * Crée le code CSS pour les images des icones des barres d'outils
  * 
- * elle cherche une fonction barre_outils_($barre)_icones pour chaque
- * barre et l'appelle si existe.
+ * S'appuie sur la description des jeux de barres disponibles et cherche
+ * une fonction barre_outils_($barre)_icones pour chaque barre et
+ * l'exécute si existe, attendant alors en retour un tableau de couples :
+ * nom de l'outil => nom de l'image
+ *
+ * @pipeline_appel porte_plume_lien_classe_vers_icone
  * 
- * @return string : declaration css des icones
+ * @return string Déclaration CSS des icones
  */
 function barre_outils_css_icones(){
 	// recuperer la liste, extraire les icones
@@ -562,8 +691,19 @@ function barre_outils_css_icones(){
 		}
 	}
 	
-	// passer le tout dans un pipeline pour ceux qui ajoutent de simples icones a des barres existantes
-	$classe2icone = pipeline('porte_plume_lien_classe_vers_icone',$classe2icone);
+	/**
+	 * Permettre aux plugins d'étendre les icones connues du porte plume
+	 *
+	 * On passe la liste des icones connues au pipeline pour ceux qui
+	 * ajoutent de simples icones à des barres existantes
+	 *
+	 * @pipeline_appel porte_plume_lien_classe_vers_icone
+	 * @var array $classe2icone
+	 *     Couples identifiant de bouton => nom de l'image (ou tableau)
+	 *     Dans le cas d'un tableau, cela indique une sprite : (nom de l'image , position haut, position bas)
+	 *     Exemple : 'outil_header1' => array('spt-v1.png','-10px -226px')
+	 */
+	$classe2icone = pipeline('porte_plume_lien_classe_vers_icone', $classe2icone);
 	
 	// passage en css
 	foreach ($classe2icone as $n=>$i) {
@@ -581,10 +721,15 @@ function barre_outils_css_icones(){
 
 /**
  * Retourne une instance de Barre_outils
- * cree a partir du type de barre demande
+ * crée à partir du type de barre demandé
+ *
+ * Une fonction barre_outils_{type}_dist() retournant la barre doit
+ * donc exister.
  * 
- * @param string $set : type de barre
- * @return object/false : objet de type barre_outil
+ * @param string $set
+ *     Type de barre (ex: 'edition')
+ * @return Barre_Outils|bool
+ *     La barre d'outil si la fonction a été trouvée, false sinon
  */
 function barre_outils_initialiser($set){
 	if ($f = charger_fonction($set, 'barre_outils')) {
@@ -597,13 +742,15 @@ function barre_outils_initialiser($set){
 /**
  * Retourne la liste des barres d'outils connues
  *
- * @return array/false : tableau des noms de barres trouvees
+ * @return array|bool
+ *     Tableau des noms de barres d'outils trouvées
+ *     False si on ne trouve aucune barre.
  */
 function barre_outils_liste(){
 	static $sets = -1;
 	if ($sets !== -1) 
 		return $sets;
-	
+
 	// on recupere l'ensemble des barres d'outils connues
 	if (!$sets = find_all_in_path('barre_outils/','.*[.]php')
 	or !is_array($sets)) {
@@ -611,48 +758,68 @@ function barre_outils_liste(){
 		$sets = false;
 		return $sets;
 	}
-		
+
 	foreach($sets as $fichier=>$adresse) {
 		$sets[$fichier] = substr($fichier,0,-4); // juste le nom
 	}
-	return $sets;	
+	return $sets;
 }
 
 /**
- * filtre appliquant les traitements SPIP d'un champ (et eventuellement d'un type d'objet) sur un texte
- * (voir la fonction champs_traitements($p) dans : public/references.php)
- * ce mecanisme est a preferer au traditionnel #TEXTE*|propre
- * traitements_previsu() consulte la globale $table_des_traitements et applique le traitement adequat
- * si aucun traitement n'est trouve, alors propre() est applique
+ * Filtre appliquant les traitements SPIP d'un champ
+ *
+ * Applique les filtres prévus sur un champ (et eventuellement un type d'objet)
+ * sur un texte donné. Sécurise aussi le texte en appliquant safehtml().
+ *
+ * Ce mécanisme est à préférer au traditionnel #TEXTE*|propre
  * 
- * @param string $texte : texte source
- * @param string $nom_champ : champ (en majuscules)
- * @param string $type_objet : objet (en minuscules)
- * @return string : texte traite
+ * traitements_previsu() consulte la globale $table_des_traitements et
+ * applique le traitement adequat. Si aucun traitement n'est trouvé,
+ * alors propre() est appliqué.
+ *
+ * @package SPIP\PortePlume\Fonctions
+ * @see champs_traitements() dans public/references.php
+ * @global table_des_traitements
+ * 
+ * @param string $texte
+ *     Texte source
+ * @param string $nom_champ
+ *     Nom du champ (nom de la balise, en majuscules)
+ * @param string $type_objet
+ *     L'objet a qui appartient le champ (en minuscules)
+ * @param string $connect
+ *     Nom du connecteur de base de données
+ * @return string
+ *     Texte traité avec les filtres déclarés pour le champ.
  */
 function traitements_previsu($texte, $nom_champ='', $type_objet='', $connect=null) {
 	include_spip('public/interfaces'); // charger les traitements
-	safehtml($t);
+
 	global $table_des_traitements;
-	if(!strlen($nom_champ) || !isset($table_des_traitements[$nom_champ])) {
+	if (!strlen($nom_champ) || !isset($table_des_traitements[$nom_champ])) {
 		$texte = propre($texte, $connect);
 	}
 	else {
 		include_spip('base/abstract_sql');
 		$table = table_objet($type_objet);
 		$ps = $table_des_traitements[$nom_champ];
-		if(is_array($ps))
+		if (is_array($ps)) {
 			$ps = $ps[(strlen($table) && isset($ps[$table])) ? $table : 0];
-		if(!$ps)
+		}
+		if (!$ps) {
 			$texte = propre($texte, $connect);
-		else
+		} else {
+			// [FIXME] Éviter une notice sur le eval suivant qui ne connait
+			// pas la Pile ici. C'est pas tres joli...
+			$Pile = array( 0 => array() );
 			// remplacer le placeholder %s par le texte fourni
 			eval('$texte=' . str_replace('%s', '$texte', $ps) . ';');
+		}
 	}
-	// il faut toujours securiser le texte preivusalise car il peut contenir n'importe quoi
+	// il faut toujours securiser le texte prévisualisé car il peut contenir n'importe quoi
 	// et servir de support a une attaque xss ou vol de cookie admin
-	// on ne peut donc se fier au statut de l'auteur connecte car le contenu ne vient pas
-	// forcement de lui
+	// on ne peut donc se fier au statut de l'auteur connecté car le contenu ne vient pas
+	// forcément de lui
 	return safehtml($texte);
 }
 ?>

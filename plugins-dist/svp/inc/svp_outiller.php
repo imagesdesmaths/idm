@@ -1,22 +1,38 @@
 <?php
 
+/**
+ * Fichier de fonctions 
+ *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Fonctions
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
-// Version SPIP minimale quand un plugin ne le precise pas
-// -- Version SPIP correspondant a l'apparition des plugins
 if (!defined('_SVP_VERSION_SPIP_MIN')) {
+/**
+ * Version SPIP minimale quand un plugin ne le precise pas
+ *
+ * Version SPIP correspondant à l'apparition des plugins */
 	define('_SVP_VERSION_SPIP_MIN', '1.9.0');
 }
 
-// -- Pour l'instant on ne connait pas la borne sup exacte
 if (!defined('_SVP_VERSION_SPIP_MAX')) {
+/**
+ * Version SPIP maximale 
+ *
+ * Pour l'instant on ne connait pas la borne sup exacte */
 	define('_SVP_VERSION_SPIP_MAX', '3.1.99');
 }
 
-// Liste des branches significatives de SPIP et de leurs bornes (versions min et max)
-// A mettre a jour en fonction des sorties
-# define('_INFOS_BRANCHES_SPIP', serialize($infos_branches_spip));
+/**
+ * Liste des branches significatives de SPIP et de leurs bornes (versions min et max)
+ *
+ * À mettre a jour en fonction des sorties
+ * @global array $GLOBALS['infos_branches_spip']
+ */
 $GLOBALS['infos_branches_spip'] = array(
 	'1.9' => array(_SVP_VERSION_SPIP_MIN,'1.9.2'),
 	'2.0' => array('2.0.0','2.0.99'),
@@ -24,9 +40,13 @@ $GLOBALS['infos_branches_spip'] = array(
 	'3.0' => array('3.0.0','3.0.99'),
 	'3.1' => array('3.1.0',_SVP_VERSION_SPIP_MAX)
 );
+# define('_INFOS_BRANCHES_SPIP', serialize($infos_branches_spip));
 
-// Liste des licences de plugin
-# define('_LICENCES_PLUGIN', serialize($licences_plugin));
+/**
+ * Liste des licences de plugin
+ *
+ * @global array $GLOBALS['licences_plugin']
+ */
 $GLOBALS['licences_plugin'] = array(
 	'apache' => array(
 		'versions' => array('2.0', '1.1', '1.0'),
@@ -66,8 +86,24 @@ $GLOBALS['licences_plugin'] = array(
 		'nom' => 'CC BY@suffixe@ @version@',
 		'url' => 'http://creativecommons.org/licenses/by@suffixe@/@version@/')
 );
+# define('_LICENCES_PLUGIN', serialize($licences_plugin));
 
-
+/**
+ * Fusionne 2 intervalles de compatibilité 
+ *
+ * Soit '[1.9;2.1]' et '[2.1;3.0.*]', la fonction retourne '[1.9;3.0.*]'
+ *
+ * En gros la fonction est utilisé pour calculer l'intervalle de validité
+ * d'un plugin ayant plusieurs paquets avec des compatibilités différentes.
+ * La compatibilité du plugin est le total de toutes les compatibilités.
+ * 
+ * @param string $intervalle_a
+ *     Intervalle de compatibilité
+ * @param string $intervalle_b
+ *     Intervalle de compatibilité
+ * @return string
+ *     Intervalle de compatibilité
+**/
 function fusionner_intervalles($intervalle_a, $intervalle_b) {
 
 	// On recupere les bornes de chaque intervalle
@@ -109,7 +145,24 @@ function fusionner_intervalles($intervalle_a, $intervalle_b) {
 	return construire_intervalle($bornes_fusionnees);
 }
 
-
+/**
+ * Extrait les valeurs d'un intervalle de compatibilité.
+ *
+ * Calcule les valeurs min, max et si ces valeurs sont intégrées ou non
+ * à l'intervalle.
+ *
+ * @param string $intervalle
+ *     Intervalle de compatibilité, tel que '[2.1;3.0]'
+ * @param bool $initialiser
+ *     - True pour mettre les valeurs connues mini et maxi de SPIP lorsque
+ *     les bornes ne sont pas renseignées dans l'intervalle.
+ *     - False pour ne rien mettre sinon.
+ * @return array
+ *     Tableau avec les index :
+ *     - min : la borne inférieure, qui contient les index 'valeur' et 'incluse'
+ *     - max : la borne  supérieure, qui contient les index 'valeur' et 'incluse'
+ *     Le sous index 'incluse' vaut true si cette borne est incluse dans l'intervalle.
+**/
 function extraire_bornes($intervalle, $initialiser=false) {
 	static $borne_vide = array('valeur' => '', 'incluse' => false);
 	static $borne_inf_init = array('valeur' => _SVP_VERSION_SPIP_MIN, 'incluse' => true);
@@ -132,10 +185,24 @@ function extraire_bornes($intervalle, $initialiser=false) {
 		}
 	}
 
-	
 	return $bornes;
 }
 
+/**
+ * Contruit un intervalle de compatibilité 
+ *
+ * @param array $bornes
+ *     L'intervalle décrit sous forme de tableau avec pour index :
+ *     - min : la borne inférieure, qui contient les index 'valeur' et 'incluse'
+ *     - max : la borne  supérieure, qui contient les index 'valeur' et 'incluse'
+ *     Le sous index 'incluse' vaut true si cette borne est incluse dans l'intervalle.
+ * @param string $dtd
+ *     DTD de destination (paquet ou plugin) qui influera sur l'écriture à faire
+ *     en utilisant des parenthèses ou des crochets pour définir l'exclusion d'une intervalle
+ *     tel que ']2.1.2,3.0.1[' (paquet) ou '(2.1.2,3.0.1)' (plugin)
+ * @return string
+ *     Intervalle de compatibilité tel que '[2.1;3.0]'
+**/
 function construire_intervalle($bornes, $dtd='paquet') {
 	return ($bornes['min']['incluse'] ? '[' : ($dtd=='paquet' ? ']' : '('))
 			. $bornes['min']['valeur'] . ';' . $bornes['max']['valeur']
@@ -143,6 +210,15 @@ function construire_intervalle($bornes, $dtd='paquet') {
 }
 
 
+/**
+ * Retourne la liste des branches de SPIP comprises dans un intervalle
+ * de compatibilité donné.
+ *
+ * @param string $intervalle
+ *     Intervalle de compatibilité, tel que [2.0.0;3.0.0]
+ * @return string
+ *     Branches de SPIP séparées par des virgules, tel que 2.0,2.1,3.0
+**/
 function compiler_branches_spip($intervalle) {
 	include_spip('plugins/installer');
 
@@ -200,7 +276,7 @@ function compiler_branches_spip($intervalle) {
 	if (!in_array($branche_sup, $liste_branches_spip))
 		return '';
 	// -- on complete la borne sup de l'intervalle de x.y en x.y.z et on determine la vraie branche
-	if (!$t[2]) {
+	if (!isset($t[2]) or !$t[2]) {
 		if ($bornes['max']['incluse'])
 			$borne_sup = $infos_branches_spip[$branche_sup][1];
 		else {
@@ -228,13 +304,30 @@ function compiler_branches_spip($intervalle) {
 }
 
 
+/**
+ * Transforme un texte écrit en entités HTML, dans le charset du site 
+ *
+ * @param string $texte
+ *     Texte avec des entités HTML
+ * @return string $texte
+ *     Texte dans le charset du site
+**/
 function entite2charset($texte) {
 	if (!strlen($texte)) return '';
 	include_spip('inc/charsets');
 	return unicode2charset(html_entity_decode(preg_replace('/&([lg]t;)/S', '&amp;\1', $texte), ENT_NOQUOTES, $GLOBALS['meta']['charset']));
 }
 
-
+/**
+ * Teste si 2 balises XML sont identiques 
+ *
+ * @param array|string $balise1
+ *     Balise à comparer
+ * @param array|string $balise2
+ *     Balise à comparer
+ * @return bool
+ *     True si elles sont identiques, false sinon.
+**/
 function balise_identique($balise1, $balise2) {
 	if (is_array($balise1)) {
 		foreach ($balise1 as $_attribut1 => $_valeur1){
@@ -251,7 +344,22 @@ function balise_identique($balise1, $balise2) {
 }
 
 
-// Determiner la licence exacte avec un nom et un lien de doc standardise
+/**
+ * Déterminer la licence exacte avec un nom et un lien de doc standardisé
+ *
+ * @param string $prefixe
+ *     Préfixe de la licence tel que gnu, free, cc, creative common
+ * @param string $nom
+ *     Nom de la licence tel que gpl, lgpl, agpl, fdl, mit, bsd...
+ * @param string $suffixe
+ *     Suffixe de la licence tel que licence, -sharealike, -nc-nd ...
+ * @param string $version
+ *     Version de la licence tel que 3.0
+ * @return array
+ *     Si la licence est connu, retourne 2 index :
+ *     - nom : le nom le la licence
+ *     - url : lien vers la licence
+ */
 function definir_licence($prefixe, $nom, $suffixe, $version) {
 	global $licences_plugin;
 	$licence = array();
@@ -294,6 +402,17 @@ function definir_licence($prefixe, $nom, $suffixe, $version) {
 	return $licence;
 }
 
+/**
+ * Liste les librairies présentes 
+ *
+ * Cherche des librairie dans tous les dossiers 'lib' présents dans chaque
+ * chemin déclaré (plugins, squelettes, SPIP). Un répertoire dans un dossier
+ * 'lib' est considéré comme une librairie, et le nom de ce répertoire est
+ * utilisé comme nom de la librairie.
+ * 
+ * @return array
+ *     Tableau de couples (nom de la librairie => répertoire de la librairie)
+**/
 function svp_lister_librairies() {
 	$libs = array();
 	foreach (array_reverse(creer_chemin()) as $d) {
@@ -310,10 +429,17 @@ function svp_lister_librairies() {
 
 
 /**
- * Retourner la chaine de la version x.y.z sous une forme normalisee
- * permettant le tri naturel.
+ * Retourne '00x.00y.00z' à partir de 'x.y.z'
+ * 
+ * Retourne la chaine de la version x.y.z sous une forme normalisée
+ * permettant le tri naturel. On complète à gauche d'un nombre de zéro
+ * manquant pour aller à 3 caractères entre chaque point.
  *
+ * @see denormaliser_version()
+ * @param string $version
+ *     Numéro de version dénormalisée
  * @return string
+ *     Numéro de version normalisée
 **/
 function normaliser_version($version='') {
 

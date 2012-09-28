@@ -1,13 +1,34 @@
 <?php
 
+/**
+ * Fichier permettant de calculer les descriptions
+ * d'un plugin.xml contenant plusieurs balises <plugin>
+ *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Plugins
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/plugin');
 include_spip('inc/svp_outiller');
 
-// Fusion des informations de chaque balise plugin en considerant la compatibilite SPIP
-// Pour les balise plugin unique cette fonction permet de generer une structure
-// identique pour les balises dites techniques
-// On limite le traitement a deux balises plugins maximum, ce qui est le cas de tous les plugin.xml actuellement
+/**
+ * Fusion des informations de chaque balise plugin d'un plugin.xml en
+ * considérant la compatibilité SPIP
+ * 
+ * Pour les balises plugins uniques cette fonction permet de générer une structure
+ * identique pour les balises dites techniques
+ * 
+ * On limite le traitement a deux balises plugins maximum,
+ * ce qui est le cas de tous les plugin.xml actuellement connus
+ *
+ * @param array $plugins
+ *     Arbre des balises plugins présents dans un plugin.xml
+ * @return array
+ *     Fusion des éléments classé par balise, puis par compatibilité à SPIP.
+ *     L'index 0 dans la compatibilité est valable quelque soit la version de SPIP.
+ */
 function plugins_fusion_plugin($plugins) {
 	global $balises_techniques;
 

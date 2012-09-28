@@ -1,22 +1,29 @@
 <?php
 /**
- * Plugin S.P
- * Licence IV
- * (c) 2011 vers l'infini et au dela
+ * Gestion du téléporteur HTTP. 
+ *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Teleporteur
  */
-
+ 
 /**
- * Teleporter et deballer un composant
- * Deployer un repo SVN depuis source et revision donnees
+ * Téléporter et déballer un composant SVN
+ * 
+ * Déployer un repository SVN depuis une source et une révision données
  *
  * @param string $methode
- *   http|git|svn|...
+ *     Méthode de téléportation : http|git|svn|...
  * @param string $source
+ *     URL de la source SVN
  * @param string $dest
+ *     Chemin du répertoire de destination
  * @param array $options
- *   revision => nnn
- *   literal => --ignore-externals
+ *     Tableau d'options. Index possibles :
+ *     - revision => 'nnn'
+ *     - literal => --ignore-externals
  * @return bool
+ *     True si l'opération réussie, false sinon.
  */
 function teleporter_svn_dist($methode,$source,$dest,$options=array()){
 	if (is_dir($dest)){
@@ -66,11 +73,19 @@ function teleporter_svn_dist($methode,$source,$dest,$options=array()){
 }
 
 /**
- * Lire source et revision d'un repertoire SVN
+ * Lire source et révision d'un répertoire SVN
  * et reconstruire la ligne de commande
- * @param $dest
- * @param $options
- * @return string
+ * 
+ * @param string $dest
+ *     Chemin du répertoire SVN
+ * @param array $options
+ *     Options
+ * @return array|string
+ *     Chaîne vide si pas SVN ou erreur de lecture,
+ *     Tableau sinon avec les index :
+ *     - source : URL de la source SVN
+ *     - revision : numéro de la révision SVN
+ *     - dest : Chemin du répertoire
  */
 function teleporter_svn_read($dest,$options=array()){
 

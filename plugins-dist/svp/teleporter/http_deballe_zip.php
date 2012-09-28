@@ -1,19 +1,25 @@
 <?php
 /**
- * Plugin S.P
- * Licence IV
- * (c) 2011 vers l'infini et au dela
+ * Gestion du téléporteur HTTP \ Zip. 
+ *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Teleporteur
  */
-
+ 
 
 /**
- * Deballer le fichier au format zip dans le repertoire $dest
+ * Déballer le fichier au format zip dans le répertoire $dest
  * en utilisant le dossier temporaire $tmp si besoin
  *
  * @param string $archive
+ *     Chemin du fichier zip
  * @param string $dest
+ *     Répertoire où on veut décompresser
  * @param string $tmp
+ *     Répertoire de stockage temporaire
  * @return bool|string
+ *     Répertoire où a été décompressé le zip, false sinon.
  */
 function teleporter_http_deballe_zip_dist($archive, $dest, $tmp){
 	$status = teleporter_http_charger_zip(
@@ -45,11 +51,18 @@ function teleporter_http_deballe_zip_dist($archive, $dest, $tmp){
 
 
 /**
- * Charger un zip a partir d'un tableau d'options descriptives
- * http://doc.spip.org/@chargeur_charger_zip
+ * Charger un zip à partir d'un tableau d'options descriptives
  *
  * @param array $quoi
+ *     Tableau d'options
  * @return array|bool|int|string
+ *     En cas de réussite, Tableau décrivant le zip, avec les index suivant :
+ *     - files : la liste des fichiers présents dans le zip,
+ *     - size : la taille décompressée
+ *     - compressed_size : la taille compressée
+ *     - dirname : répertoire où les fichiers devront être décompréssés
+ *     - tmpname : répertoire temporaire où les fichiers sont décompressés
+ *     - target : cible sur laquelle décompresser les fichiers...
  */
 function teleporter_http_charger_zip($quoi = array()){
 	if (!$quoi)

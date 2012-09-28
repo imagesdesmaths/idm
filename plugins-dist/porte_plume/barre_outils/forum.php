@@ -1,15 +1,19 @@
 <?php
-/*
- * Plugin Porte Plume pour SPIP 2
- * Licence GPL
- * Auteur Matthieu Marcillaud
+/**
+ * Déclaration de la barre d'outil de forum de SPIP
+ * 
+ * @plugin Porte Plume pour SPIP
+ * @license GPL
+ * @package SPIP\PortePlume\BarreOutils
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 
 /**
- * Definition de la barre 'forum' pour markitup
+ * Définition de la barre 'forum' pour markitup
+ *
+ * @return Barre_outils La barre d'outil
  */
 function barre_outils_forum(){
 	// on modifie simplement la barre d'edition

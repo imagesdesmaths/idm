@@ -206,7 +206,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_dependance_plugin' => 'Le plugin @plugin@ dépend de @dependance@.',
 	'message_dependance_plugin_version' => 'Le plugin @plugin@ dépend de @dependance@ @version@',
 	'message_erreur_aucun_plugin_selectionne' => 'Aucun plugin sélectionné.',
-	'message_erreur_ecriture_lib' => '@plugin@ a besoin de la bibliothèque <a href="@lib_url@">@lib@</a> placée dans le répertoire <var>lib/</var> à la racine de votre site. Cependant, ce répertoire n\'est pas accessible en écriture. Vous devez l\'installer manuellement ou donner des permissions d\'écriture à ce répertoire.',
+	'message_erreur_ecriture_lib' => '@plugin@ a besoin de la bibliothèque <a href="@lib_url@">@lib@</a> placée dans le répertoire <var>lib/</var> à la racine de votre site. Cependant, ce répertoire n\'existe pas ou n\'est pas accessible en écriture. Vous devez installer manuellement cette bibliothèque ou créer ce répertoire en lui donnant des permissions d\'écriture.',
 	'message_erreur_maj_inconnu' => 'Mise à jour impossible d\'un plugin inconnu.',
 	'message_erreur_plugin_introuvable' => 'Il est impossible de trouver le plugin @plugin@ pour @action@.',
 	'message_erreur_plugin_non_actif' => 'Il est impossible de désactiver un plugin non actif.',

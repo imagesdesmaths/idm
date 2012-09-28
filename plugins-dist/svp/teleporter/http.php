@@ -1,19 +1,29 @@
 <?php
 /**
- * Plugin S.P
- * Licence IV
- * (c) 2011 vers l'infini et au dela
+ * Gestion du téléporteur HTTP. 
+ *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Teleporteur
  */
-
+ 
 /**
- * Teleporter et deballer un composant
+ * Téléporter et déballer un composant HTTP
+ * 
  * @param string $methode
- *   http|git|svn|...
+ *   Méthode de téléportation : http|git|svn|...
  * @param string $source
+ *     URL de la source HTTP
  * @param string $dest
+ *     Chemin du répertoire de destination
  * @param array $options
- *   non utilise ici
- * @return bool
+ *     Tableau d'options.
+ *     Doit au moins avoir l'index :
+ *     - dir_tmp : Indique un répertoire temporaire pour stocker
+ *       les fichiers. Par exemple défini avec : sous_repertoire(_DIR_CACHE, 'chargeur');
+ * @return bool|string
+ *     Texte d'erreur si erreur,
+ *     True si l'opération réussie.
  */
 function teleporter_http_dist($methode,$source,$dest,$options=array()){
 
@@ -43,11 +53,15 @@ function teleporter_http_dist($methode,$source,$dest,$options=array()){
 }
 
 /**
- * Recuperer la source et detecter son extension
+ * Récupérer la source et détecter son extension
  *
  * @param string $source
+ *     URL de la source HTTP
  * @param string $dest_tmp
+ *     Répertoire de destination
  * @return array|string
+ *     - Texte d'erreur si une erreur survient,
+ *     - Liste sinon (répertoire de destination temporaire, extension du fichier source)
  */
 function teleporter_http_recuperer_source($source,$dest_tmp){
 
@@ -105,6 +119,17 @@ function teleporter_http_recuperer_source($source,$dest_tmp){
 	return array($dest_tmp,$extension);
 }
 
+/**
+ * Retrouve l'extension d'un fichier 
+ *
+ * @note
+ *     Retourne tgz pour un fichier .tar.gz
+ * 
+ * @param string $file
+ *     Chemin du fichier
+ * @return string
+ *     Extension du fichier, sinon vide
+**/
 function teleporter_http_extension($file){
 	$e = pathinfo($file, PATHINFO_EXTENSION);
 
@@ -116,6 +141,14 @@ function teleporter_http_extension($file){
 	return $e;
 }
 
+/**
+ * Cherche la plus longue racine commune à tous les fichiers
+ *
+ * @param array $list
+ *     Liste de chemin de fichiers
+ * @return string
+ *     Chemin commun entre tous les fichiers
+**/
 function http_deballe_recherche_racine($list){
 	// on cherche la plus longue racine commune a tous les fichiers
 	// pour l'enlever au deballage

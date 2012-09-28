@@ -1,10 +1,25 @@
 <?php
+/**
+ * Déclarations relatives à la base de données
+ * 
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Pipelines
+**/
 
-// Declaration des tables pourles nouveaux objets de SVP:
-// - depot : table spip_depots
-// - plugin : table spip_plugins
-// - paquet : table spip_paquets
-//
+/**
+ * Déclarer les objets éditoriaux de SVP
+ *
+ * - Dépot  : table spip_depots
+ * - Plugin : table spip_plugins
+ * - Paquet : table spip_paquets
+ *
+ * @pipeline declarer_tables_objets_sql
+ * @param array $tables
+ *     Description des tables
+ * @return array
+ *     Description complétée des tables
+ */
 function svp_declarer_tables_objets_sql($tables) {
 	include_spip('inc/config');
 	
@@ -186,6 +201,17 @@ function svp_declarer_tables_objets_sql($tables) {
 }
 
 
+/**
+ * Déclarer les tables de liaisons de SVP
+ *
+ * Déclare la table spip_depots_plugins
+ *
+ * @pipeline declarer_tables_auxiliaires
+ * @param array $tables_auxiliaires
+ *     Description des tables auxiliaires
+ * @return array
+ *     Description complétée des tables auxiliaires
+ */
 function svp_declarer_tables_auxiliaires($tables_auxiliaires) {
 	// Tables de liens entre plugins et depots : spip_depots_plugins
 	$spip_depots_plugins = array(
@@ -203,7 +229,15 @@ function svp_declarer_tables_auxiliaires($tables_auxiliaires) {
 	return $tables_auxiliaires;
 }
 
-
+/**
+ * Déclare les alias de boucle et traitements automatiques de certaines balises
+ *
+ * @pipeline declarer_tables_interfaces
+ * @param array $interface
+ *     Déclarations d'interface pour le compilateur
+ * @return array
+ *     Déclarations d'interface pour le compilateur
+ */
 function svp_declarer_tables_interfaces($interface) {
 	// Les tables : permet d'appeler une boucle avec le *type* de la table uniquement
  	$interface['table_des_tables']['depots'] = 'depots';

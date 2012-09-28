@@ -3,18 +3,31 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2012                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Surcharge de la page admin_plugin de SPIP
+ *
+ * Ce fichier est laissé en PHP pour de sombres histoires de redirections
+ * lors de l'approche d'un timeout au moment de l'installation ou de
+ * mise à jour de plugin.
+ *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Actions
+ */
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/presentation');
 
-// http://doc.spip.org/@exec_admin_plugin_dist
+/**
+ * Affichage de la page de gestion des plugins
+ */
 function exec_admin_plugin_dist() {
 
 	if (!autoriser('configurer', 'plugins')) {
@@ -117,17 +130,32 @@ function exec_admin_plugin_dist() {
 }
 
 
-
+/**
+ * Retourne un texte des actions realisées s'il y en a eu tel que
+ * activation, désactivation, téléchargement de plugins...
+ *
+ * Nettoie au passage le fichier de cache décrivant les actions faites
+ * (ou encore à faire) dans les cas suivant :
+ * - il n'y a plus d'action
+ * - le nettoyage est expressement demandé par la commande 'nettoyer_actions'
+ *   dans l'URL (ce lien est justement disponible si l'auteur des actions
+ *   tombe sur cette page alors qu'il reste des actions à faire, ce qui
+ *   signale en général un problème)
+ * 
+ * @return string
+ *     Code HTML présentant les actions réalisées
+ *     Vide si rien ne s'est passé !
+**/
 function svp_presenter_actions_realisees() {
 	// presenter les traitements realises... si tel est le cas...
 	include_spip('inc/svp_actionner');
 	$actionneur = new Actionneur();
-	
+
 	// s'il ne reste aucune action a faire ou si on force un nettoyage.
 	if (_request('nettoyer_actions')) {
 		$actionneur->nettoyer_actions();
 	}
-	
+
 	$actionneur->get_actions();
 	$pres = $actionneur->presenter_actions($fin = true);
 
@@ -135,7 +163,7 @@ function svp_presenter_actions_realisees() {
 	if (!$actionneur->est_verrouille() OR !count($actionneur->end)) {
 		$actionneur->nettoyer_actions();
 	}
-		
+
 	return $pres;
-	
+
 }

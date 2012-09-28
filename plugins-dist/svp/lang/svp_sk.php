@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/svp?lang_cible=sk
+// extrait automatiquement de http://trad.spip.net/tradlang_module/svp?lang_cible=sk
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -221,10 +221,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_dependance_plugin' => 'Zásuvný modul @plugin@ si vyžaduje @dependance@.',
 	'message_dependance_plugin_version' => 'Zásuvný modul @plugin@ si vyžaduje @dependance@ @version@',
 	'message_erreur_aucun_plugin_selectionne' => 'Nevybrali ste žiaden zásuvný modul.',
-	'message_erreur_ecriture_lib' => '@plugin@ potrebuje knižnicu <a href="@lib_url@">@lib@</a>
-   								umiestnenú v priečinku <var>lib/</var> do koreňového adresára vašej stránky.
-   								Do tohto priečinka sa však nedá zapisovať.
-   								Musíte ho nainštalovať manuálne alebo udeliť tomuto priečinku povolenia na zápis.',
+	'message_erreur_ecriture_lib' => '@plugin@ potrebuje knižnicu <a href="@lib_url@">@lib@</a>  umiestnenú v priečinku <var>lib/</var> koreňového adresára vašej stránky. Tento priečinok však neexistuje, alebo sa doň nedá zapisovať. Musíte manuálne nainštalovať knižnicu
+alebo vytvoriť tento priečinok a nastaviť mu povolenie na zápis.',
 	'message_erreur_maj_inconnu' => 'Neznámy zásuvný modul sa nedá aktualizovať.',
 	'message_erreur_plugin_introuvable' => 'Nedá sa nájsť zásuvný modul @plugin@ na @action@.',
 	'message_erreur_plugin_non_actif' => 'Nedá sa deaktivovať zásuvný modul, ktorý nebol aktivovaný.',

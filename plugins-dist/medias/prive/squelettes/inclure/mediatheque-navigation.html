@@ -38,8 +38,9 @@
 </ul>
 
 <ul class='sanstitre'>
-[<li class='first'>(#GET{self}|parametre_url{sanstitre,''}|lien_ou_expose{<:medias:documents_tous:>,#ENV{sanstitre,''}|=={''},ajax})</li>]
-[<li>(#GET{self}|parametre_url{sanstitre,'1'}|lien_ou_expose{<:info_sans_titre:>,#ENV{sanstitre,''}|=={'1'},ajax})</li>]
+[<li class='first'>(#GET{self}|parametre_url{sanstitre,''}|parametre_url{sansvignette,''}|lien_ou_expose{<:medias:documents_tous:>,#ENV{sanstitre,#ENV{sansvignette}}|=={''},ajax})</li>]
+[<li>(#GET{self}|parametre_url{sanstitre,'1'}|parametre_url{sansvignette,''}|lien_ou_expose{<:info_sans_titre:>,#ENV{sanstitre,''}|=={'1'},ajax})</li>]
+[<li>(#GET{self}|parametre_url{sansvignette,'1'}|parametre_url{sanstitre,''}|lien_ou_expose{<:medias:info_sans_vignette:>,#ENV{sansvignette,''}|=={'1'},ajax})</li>]
 </ul>
 </div>
 

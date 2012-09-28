@@ -13,6 +13,16 @@
 		[(#TRI{largeur,<:medias:par_largeur:>}) |]
 		[(#TRI{hauteur,<:medias:par_hauteur:>}) |]
 		[(#TRI{titre,<:medias:par_titre:>}) |]
+		
+		[<:medias:label_paginer_par:> (#GRAND_TOTAL|>{100}|oui)
+			[(#SELF|parametre_url{pagination,''}|lien_ou_expose{10,#ENV{pagination,10}|=={10},ajax})]
+			[<span class="sep">|</span> (#SELF|parametre_url{pagination,50}|lien_ou_expose{50,#ENV{pagination,10}|=={50},ajax})]]
+		[(#GRAND_TOTAL|>{500}|oui)
+			[<span class="sep">|</span> (#SELF|parametre_url{pagination,100}|lien_ou_expose{100,#ENV{pagination,10}|=={100},ajax})]
+		]
+		[(#GRAND_TOTAL|>{5000}|oui)
+			[<span class="sep">|</span> (#SELF|parametre_url{pagination,500}|lien_ou_expose{500,#ENV{pagination,10}|=={500},ajax})]
+		]
 	</div>
 	[<div class="pagination">(#PAGINATION{prive})</div>]
 	<table>
@@ -25,7 +35,7 @@
 		<th><:medias:descriptif:></th>
 		<th></th>
 	</thead>
-	<BOUCLE_galerie(DOCUMENTS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?} {tri id_document,inverse}{media?}{extension?}{distant?}{brise?}{statut==#ENV{statut,.*}}{orphelins?}{titre==(#ENV{sanstitre}|?{'^$','.*'})}{pagination 10}>
+	<BOUCLE_galerie(DOCUMENTS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?} {tri id_document,inverse}{media?}{extension?}{distant?}{brise?}{statut==#ENV{statut,.*}}{orphelins?}{titre==(#ENV{sanstitre}|?{'^$','.*'})}{id_vignette==(#ENV{sansvignette}|?{'^0','.*'})}{pagination #ENV{pagination,10}}>
 	<tr class="[(#ENV{media}|non)[ media-(#MEDIA)]]" id="#ENV{iddoc,media}#ID_DOCUMENT">
 		<td class='infos'>
 		[(#DISTANT|=={oui}|non)#SET{missing,#FICHIER|file_exists|non}]

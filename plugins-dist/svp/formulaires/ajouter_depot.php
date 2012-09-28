@@ -1,13 +1,35 @@
 <?php
 
+/**
+ * Gestion du formulaire d'ajout de dépot
+ *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Formulaires
+ */
+ 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
+/**
+ * Chargement du formulaire d'ajout de dépot
+ *
+ * @return array
+ *     Environnement du formulaire
+**/
 function formulaires_ajouter_depot_charger_dist(){
 	// On ne renvoie pas les valeurs saisies mais on fait un raz systematique
 	return array();
 }
 
+/**
+ * Vérifications du formulaire d'ajout de dépot
+ *
+ * Vérifie qu'une adresse valide est soumise et que ce dépot n'a pas
+ * déjà été créé.
+ * 
+ * @return array
+ *     Tableau des erreurs
+**/
 function formulaires_ajouter_depot_verifier_dist(){
 	
 	$erreurs = array();
@@ -28,6 +50,16 @@ function formulaires_ajouter_depot_verifier_dist(){
 	return $erreurs;
 }
 
+/**
+ * Traitement du formulaire d'ajout de dépot
+ *
+ * Ajoute le dépot.
+ * Retourne une éventuelle erreur si le dépot a un XML mal formé
+ * ou s'il n'a aucun plugin.
+ * 
+ * @return array
+ *     Retours du traitement
+**/
 function formulaires_ajouter_depot_traiter_dist(){
 	include_spip('inc/svp_depoter_distant');
 
@@ -54,13 +86,16 @@ function formulaires_ajouter_depot_traiter_dist(){
 
 
 /**
- * Teste la validite d'une url d'un depot de paquets
+ * Teste la validité d'une URL d'un dépot de paquets
  *
+ * Pour cela on tente de rapatrier le fichier distant
+ * en local. Si on réussi, c'est bon.
+ * 
  * @param string $url
- * @return boolean
+ *     URL du fichier xml de description du depot
+ * @return bool
+ *     Le dépot est-il valide ?
  */
-
-// $url	=> url du fichier xml de description du depot
 function svp_verifier_adresse_depot($url){
 	include_spip('inc/distant');
 	// evitons de recuperer 2 fois le XML demandé.

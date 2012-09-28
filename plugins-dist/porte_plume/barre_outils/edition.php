@@ -1,14 +1,18 @@
 <?php
-/*
- * Plugin Porte Plume pour SPIP 2
- * Licence GPL
- * Auteur Matthieu Marcillaud
+/**
+ * Déclaration de la barre d'outil d'édition de SPIP
+ * 
+ * @plugin Porte Plume pour SPIP
+ * @license GPL
+ * @package SPIP\PortePlume\BarreOutils
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
- * Definition de la barre 'edition' pour markitup
+ * Définition de la barre 'edition' pour markitup
+ *
+ * @return Barre_outils La barre d'outil
  */
 function barre_outils_edition(){
 	$set = new Barre_outils(array(
@@ -57,7 +61,7 @@ function barre_outils_edition(){
 				"display"   => true,
 				"selectionType" => "word",
 			),
-				
+			
 			// montrer une suppression
 			array(
 				"id"        => 'stroke_through',
@@ -79,7 +83,7 @@ function barre_outils_edition(){
 				"selectionType" => "line",
 				"forceMultiline" => true,
 				"dropMenu"    => array(
-					// liste -#		
+					// liste -#
 					array(
 						"id"        => 'liste_ol',
 						"name"      => _T('barreoutils:barre_liste_ol'), 
@@ -89,7 +93,7 @@ function barre_outils_edition(){
 						"selectionType" => "line",
 						"forceMultiline" => true,
 					),
-					// desindenter	
+					// desindenter
 					array(
 						"id"        => 'desindenter',
 						"name"      => _T('barreoutils:barre_desindenter'), 
@@ -99,7 +103,7 @@ function barre_outils_edition(){
 						"selectionType" => "line",
 						"forceMultiline" => true,
 					),
-					// indenter		
+					// indenter
 					array(
 						"id"        => 'indenter',
 						"name"      => _T('barreoutils:barre_indenter'), 
@@ -110,10 +114,9 @@ function barre_outils_edition(){
 						"forceMultiline" => true,
 					),
 				),
-			),	
+			),
 
-						
-			
+
 			// separation
 			array(
 				"id" => "sepLink", // trouver un nom correct !
@@ -140,7 +143,7 @@ function barre_outils_edition(){
 				"display"     => true,
 				"selectionType" => "word",
 			),
-					
+			
 			
 			// separation
 			array(
@@ -248,7 +251,7 @@ function barre_outils_edition(){
 				)
 			),
 
-			
+
 			// separation
 			array(
 				"id" => "sepCaracteres",
@@ -368,7 +371,7 @@ function barre_outils_edition(){
 					"name"        => _T('barreoutils:barre_inserer_code'),
 					"className"   => 'outil_code',
 					"openWith" => "<code>",
-					"closeWith" => "</code>",		
+					"closeWith" => "</code>",
 					"display"     => true,
 					"dropMenu"    => array(
 						// bouton <cadre>
@@ -484,7 +487,10 @@ function barre_outils_edition(){
 
 
 /**
- * Definitions des liens entre css et icones
+ * Définitions des liens entre css et icones
+ *
+ * @return array
+ *     Couples identifiant de bouton => nom de l'image (ou tableau nom, position haut, position bas)
  */
 function barre_outils_edition_icones(){
 	return array(

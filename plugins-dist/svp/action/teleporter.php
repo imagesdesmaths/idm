@@ -1,22 +1,28 @@
 <?php
 /**
- * Plugin S.P
- * Licence IV
- * (c) 2011 vers l'infini et au dela
+ * Gestion de l'action teleporter
+ *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Actions
  */
+ 
 
 /**
- * Teleporter et deballer un composant
+ * Téléporter et déballer un composant
+ * 
  * @param string $methode
  *   http|git|svn|...
  * @param string $source
- *   url source du composant
+ *   URL source du composant
  * @param string $dest
- *   chemin du repertoire ou deballer le composant. Inclus le dernier segment
+ *   Chemin du répertoire où déballer le composant. Inclus le dernier segment
  * @param array $options
  *   revision => ''
  *   --ignore-externals
- * @return bool\string
+ * @return bool|string
+ *   String : texte d'une erreur
+ *   true si l'opération est correctement réalisée
  */
 function action_teleporter_composant_dist($methode,$source,$dest,$options=array()){
 
@@ -45,10 +51,12 @@ function action_teleporter_composant_dist($methode,$source,$dest,$options=array(
 
 
 /**
- * Verifier et preparer l'arborescence jusqu'au repertoire parent
+ * Vérifier et préparer l'arborescence jusqu'au répertoire parent
  *
  * @param string $dest
  * @return bool|string
+ *     false en cas d'échec
+ *     Chemin du répertoire sinon
  */
 function teleporter_verifier_destination($dest){
 	$dest = rtrim($dest,"/");
@@ -74,6 +82,19 @@ function teleporter_verifier_destination($dest){
 	return $base."/$final";
 }
 
+/**
+ * Déplace un répertoire pour libérer l'emplacement.
+ *
+ * Si le répertoire donné existe, le déplace dans un répertoire de backup.
+ * Si ce backup existe déjà, il est supprimé auparavant.
+ * Retourne le nouveau chemin du répertoire.
+ * 
+ * @param string $dest
+ *     Chemin du répertoire à déplacer
+ * @return string
+ *     Nouveau chemin du répertoire s'il existait,
+ *     Chaîne vide sinon
+**/
 function teleporter_nettoyer_vieille_version($dest){
 	$old = "";
 	if (is_dir($dest)){

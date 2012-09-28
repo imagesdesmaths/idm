@@ -1,22 +1,29 @@
 <?php
 /**
- * Plugin S.P
- * Licence IV
- * (c) 2011 vers l'infini et au dela
+ * Gestion du téléporteur GIT. 
+ *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Teleporteur
  */
-
+ 
 /**
- * Teleporter et deballer un composant
- * Deployer un repo GIT depuis source et revision donnees
+ * Téléporter et déballer un composant GIT
+ * 
+ * Déployer un repository GIT depuis une source et une révision données
  *
  * @param string $methode
- *   http|git|svn|...
+ *     Méthode de téléportation : http|git|svn|...
  * @param string $source
+ *     URL de la source GIT
  * @param string $dest
+ *     Chemin du répertoire de destination
  * @param array $options
- *   revision => 'ae89'
- *   branche => 'xxx'
+ *     Tableau d'options. Index possibles :
+ *     - revision => 'ae89'
+ *     - branche => 'xxx'
  * @return bool
+ *     True si l'opération réussie, false sinon.
  */
 function teleporter_git_dist($methode,$source,$dest,$options=array()){
 
@@ -70,12 +77,23 @@ function teleporter_git_dist($methode,$source,$dest,$options=array()){
 }
 
 /**
- * Lire l'etat GIT du repo
+ * Lire l'état GIT du repository
+ *
+ * Retourne les informations GIT d'un répertoire donné
+ * 
  * @param string $dest
+ *     Chemin du répertoire à tester
  * @param array $options
- * @return void
+ *     Tableau d'options
+ * @return string|bool|array
+ *     - Chaîne vide si pas un dépot GIT
+ *     - False si erreur sur le dépot GIT
+ *     - array sinon. Tableau avec 3 index :
+ *     -- source : Source du dépot GIT à cette destination
+ *     -- revision : Révision du dépot
+ *     -- dest : Répertoire du dépot.
  */
-function teleporter_git_read($dest, $options=array()){
+function teleporter_git_read($dest, $options=array()) {
 
 	if (!is_dir("$dest/.git"))
 		return "";
@@ -103,7 +121,7 @@ function teleporter_git_read($dest, $options=array()){
 	$hash = explode(" ",reset($output));
 	$hash = end($hash);
 
-	// lire la branche ? TODO
+	// [TODO] lire la branche ?
 	chdir($curdir);
 
 	if (preg_match(",[^0-9a-f],i",$hash))
@@ -116,7 +134,17 @@ function teleporter_git_read($dest, $options=array()){
 	);
 }
 
-function teleporter_git_exec($dest,$command){
+
+/**
+ * Exécuter une commande GIT
+ *
+ * @param string $dest
+ *     Répertoire de destination
+ * @param string $command
+ *     Commande à exécuter
+ * @return void
+ */
+function teleporter_git_exec($dest,$command) {
 	spip_log("{$dest}:{$command}","teleport");
 	$curdir = getcwd();
 	chdir($dest);
