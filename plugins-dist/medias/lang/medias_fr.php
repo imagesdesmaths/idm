@@ -89,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_creer_document' => 'Ajouter un document',
+	'info_sans_vignette' => 'Sans vignette',
 	'id' => 'ID',
 	'image_tourner_180' => 'Rotation 180°',
 	'image_tourner_droite' => 'Rotation 90° à droite',
@@ -123,6 +124,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_credits' => 'Crédits',
 	'label_fichier' => 'Fichier',
 	'label_fichier_vignette' => 'Vignette',
+	'label_paginer_par' => 'Paginer par :',
 	'label_parents' => 'Ce document est lié à',
 	'label_refdoc_joindre' => 'Document numéro',
 	'lien_tout_enlever' => 'Tout enlever',

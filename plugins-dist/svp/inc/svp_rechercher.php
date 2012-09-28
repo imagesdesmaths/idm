@@ -1,12 +1,57 @@
 <?php
 
+/**
+ * Gestion des recherches de plugins
+ *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Recherche
+**/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/plugin');
 
 // ----------------------- Recherches de plugins ---------------------------------
 
+/**
+ * Calcule une liste des paquets en fonctions de critères de recherche
+ *
+ * Cette liste :
+ * - est sans doublons, ie on ne garde que la version la plus récente
+ * - correspond aux critères
+ * - est compatible avec la version SPIP installée sur le site
+ * - ne liste pas ceux étant déjà installés (ces paquets peuvent toutefois être affichés)
+ * - est triée par nom ou score
+ *
+ * @param string $phrase
+ *     Texte de la recherche
+ * @param string $categorie
+ *     Type de catégorie de plugin (auteur, date...)
+ * @param string $etat
+ *     État de plugin (stable, test...)
+ * @param string|int $depot
+ *     Identifiant de dépot
+ * @param string $version_spip
+ *     Version de SPIP dont le paquet doit être compatible
+ * @param array $exclusions
+ *     Liste d'identifiants de plugin à ne pas intégrer dans la liste
+ * @param bool $afficher_exclusions
+ *     Afficher aussi les paquets déjà installés (true)
+ *     ou ceux qui ne le sont pas (false) ?
+ * @param bool $doublon
+ *     Afficher toutes les versions de paquet (true)
+ *     ou seulement la plus récente (false) ?
+ * @param string $tri
+ *     Ordre du tri : nom | score
+ * 
+ * @return array
+ *     Tableau classé par pertinence de résultat
+ *     - 'prefixe' => tableau de description du paquet (si pas de doublons demandé)
+ *     - n => tableau de descriptions du paquet (si doublons autorisés)
+**/
 function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $depot, $version_spip='',
-									$exclusions=array(), $afficher_exclusions=false, $doublon=false, $tri='nom') {
+	$exclusions=array(), $afficher_exclusions=false, $doublon=false, $tri='nom')
+{
 
 	include_spip('inc/rechercher');
 	
@@ -145,9 +190,10 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $depot, $versio
 
 
 /**
- * Recuperation des id des plugins a exclure car deja installes
+ * Récupère les identifiants des plugins déjà installés
  *
- * @return array
+ * @return int[]
+ *     Liste d'identifiants de plugins
  */
 function svp_lister_plugins_installes(){
 
@@ -171,9 +217,15 @@ function svp_lister_plugins_installes(){
 
 
 /**
- * Test de la compatibilite du plugin avec une version donnee de SPIP
+ * Teste la compatibilité d'un intervalle de compatibilité avec une version
+ * donnée de SPIP
  *
- * @return boolean
+ * @param string $intervalle
+ *     Intervalle de compatibilité, tel que [2.1;3.0]
+ * @param string $version_spip
+ *     Version de SPIP, tel que 3.0.4 (par défaut la version de SPIP en cours)
+ * @return bool
+ *     true si l'intervalle est compatible, false sinon
  */
 function svp_verifier_compatibilite_spip($intervalle, $version_spip = '') {
 	if (!$version_spip)
@@ -183,9 +235,14 @@ function svp_verifier_compatibilite_spip($intervalle, $version_spip = '') {
 
 
 /**
- * Tri decroissant des resultats par score. 
- * Cette fonction est appelee par un usort ou uasort
+ * Callback de tri pour trier les résultats de plugin par score décroissant.
+ * 
+ * Cette fonction est appelée par un usort ou uasort
  *
+ * @param array $p1
+ *     Plugin à comparer
+ * @param array $p2
+ *     Plugin à comparer
  * @return int
  */
 function svp_trier_par_score($p1, $p2){
@@ -197,11 +254,16 @@ function svp_trier_par_score($p1, $p2){
 }
 
 
-/**
- * Tri croissant des resultats par nom. 
- * Si le nom est identique on classe par version decroissante 
- * Cette fonction est appelee par un usort ou uasort
+ /**
+ * Callback de tri pour trier les résultats de plugin par nom (alphabétique).
  *
+ * Si le nom est identique on classe par version decroissante 
+ * Cette fonction est appelée par un usort ou uasort
+ *
+ * @param array $p1
+ *     Plugin à comparer
+ * @param array $p2
+ *     Plugin à comparer
  * @return int
  */
 function svp_trier_par_nom($p1, $p2){

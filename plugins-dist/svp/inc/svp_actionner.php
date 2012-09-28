@@ -1,21 +1,59 @@
 <?php
 
+/**
+ * Gestion de l'actionneur : il effectue les actions sur les plugins 
+ *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Actionneur
+ */
+ 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// l'actionneur calcule l'ordre des actions
-// et permet de les stocker et de les effectuer.
 
+/**
+ * L'actionneur calcule l'ordre des actions, permet de les stocker
+ * dans un fichier cache et de les effectuer.
+ *
+ * @package SPIP\SVP\Actionner
+**/
 class Actionneur {
 
+	/**
+	 * Instance du décideur
+	 * @var Decideur */
 	var $decideur;
 
-	// loggue t'on ?
+	/**
+	 * Loguer les différents éléments
+	 * 
+	 * Sa valeur sera initialisée par la configuration 'mode_log_verbeux' de SVP
+	 * 
+	 * @var bool */
 	var $log = false;
 
-	// actions au debut (avant analyse)
+	/**
+	 * Liste des actions à faire
+	 * @var array
+	 *     Tableau identifiant du paquet => type d'action
+	 */
 	var $start = array();
 
-	// actions en cours d'analyse
+	/**
+	 * Actions en cours d'analyse
+	 *
+	 * Lorsqu'on ajoute les actions à faire, elles sont réordonnées
+	 * et classées dans ces quatre sous-tableaux
+	 *
+	 * Chaque sous-tableau est composé d'une description courte du paquet
+	 * auquel est ajouté dans l'index 'todo' le type d'action à faire.
+	 * 
+	 * @var array
+	 *     Index 'off' : les paquets à désactiver (ordre inverse des dépendances)
+	 *     Index 'lib' : les librairies à installer
+	 *     Index 'on' : les paquets à activer (ordre des dépendances)
+	 *     Index 'neutre' : autres actions dont l'ordre a peu d'importance.
+	 */
 	var $middle = array(
 		'off' => array(),
 		'lib' => array(),
@@ -23,21 +61,56 @@ class Actionneur {
 		'neutre' => array(),
 	);
 
-	// actions a la fin (apres analyse, et dans l'ordre)
-	var $end = array();  // a faire...
-	var $done = array(); // faites
-	var $work = array(); // en cours
+	// actions à la fin (apres analyse, et dans l'ordre)
 
-	// listing des erreurs rencontrées
+	/**
+	 * Liste des actions à faire
+	 * 
+	 * Liste de description courtes des paquets + index 'todo' indiquant l'action
+	 * @var array */
+	var $end = array();
+
+	/**
+	 * Liste des actions faites
+	 * Liste de description courtes des paquets + index 'todo' indiquant l'action
+	 * @var array */
+	var $done = array(); // faites
+
+	/**
+	 * Actions en cours
+	 * Description courte du paquet + index 'todo' indiquant l'action
+	 * @var array */
+	var $work = array();
+
+	/**
+	 * Liste des erreurs
+	 * 
+	 * @var array Liste des erreurs */
 	var $err = array();
-	
-	// Verrou.
-	// Le verrou est posé au moment de passer à l'action.
+
+	/**
+	 * Verrou.
+	 * Le verrou est posé au moment de passer à l'action.
+	 * @var array
+	 *     Index 'id_auteur' : Identifiant de l'auteur ayant déclenché des actions
+	 *     Indix 'time' : timestamp de l'heure de déclenchement de l'action */
 	var $lock = array('id_auteur'=>0, 'time'=>'');
 
-	// SVP (ce plugin) est a desactiver ?
+	/**
+	 * SVP (ce plugin) est-il à désactiver dans une des actions ?
+	 *
+	 * Dans ce cas, on tente de le désactiver après d'autres plugins à désactiver
+	 * sinon l'ensemble des actions suivantes échoueraient.
+	 * 
+	 * @var bool
+	 *     false si SVP n'est pas à désactiver, true sinon */
 	var $svp_off = false;
 
+	/**
+	 * Constructeur
+	 *
+	 * Détermine si les logs sont activés et instancie un décideur.
+	 */
 	function Actionneur(){
 		include_spip('inc/config');
 		$this->log = (lire_config('svp/mode_log_verbeux') == 'oui');
@@ -53,10 +126,11 @@ class Actionneur {
 
 	/**
 	 * Ajoute un log
-	 * lorsqu'on a activé les logs sur notre objet
-	 * $actionneur->log = true;
 	 *
-	 * @param string $quoi : le texte du log
+	 * Ajoute un log si la propriété $log l'autorise;
+	 *
+	 * @param mixed $quoi
+	 *     La chose à logguer (souvent un texte)
 	**/
 	function log($quoi) {
 		if ($this->log) {
@@ -66,9 +140,12 @@ class Actionneur {
 
 	/**
 	 * Ajoute une erreur
-	 * a la liste des erreurs presentees au moment de traiter les actions.
+	 * 
+	 * Ajoute une erreur à la liste des erreurs présentées au moment
+	 * de traiter les actions.
 	 *
-	 * @param string $erreur : le texte de l'erreur
+	 * @param string $erreur
+	 *     Le texte de l'erreur
 	**/
 	function err($erreur) {
 		if ($erreur) {
@@ -76,6 +153,9 @@ class Actionneur {
 		}
 	}
 
+	/**
+	 * Remet à zéro les tableaux d'actions
+	 */
 	function clear() {
 		$this->middle = array(
 			'off' => array(),
@@ -88,6 +168,12 @@ class Actionneur {
 		$this->work = array();
 	}
 
+	/**
+	 * Ajoute les actions à faire dans l'actionneur 
+	 *
+	 * @param array $todo
+	 *     Tableau des actions à faire (identifiant de paquet => type d'action)
+	**/
 	function ajouter_actions($todo) {
 		foreach ($todo as $id => $action) {
 			$this->start[$id] = $action;
@@ -96,7 +182,16 @@ class Actionneur {
 	}
 
 
-	// ajouter une librairie a installer.
+	/**
+	 * Ajoute une librairie à installer
+	 *
+	 * Ajoute l'action de télécharger une librairie, si la libraire
+	 * n'est pas déjà présente et si le répertoire de librairie est
+	 * écrivable.
+	 *
+	 * @param string $nom Nom de la librairie
+	 * @param string $source URL pour obtenir la librairie
+	 */
 	function add_lib($nom, $source) {
 		if (!$this->decideur->est_presente_lib($nom)) {
 			if (is_writable(_DIR_LIB)) {
@@ -116,23 +211,28 @@ class Actionneur {
 		return true;
 	}
 
-
+	/**
+	 * Ordonne les actions demandées
+	 *
+	 * La fonction définie quelles sont les actions graduellement réalisables.
+	 * Si un plugin A dépend de B qui dépend de C
+	 * - pour tout ce qui est à installer : ordre des dependances (d'abord C, puis B, puis A)
+	 * - pour tout ce qui est à désinstaller : ordre inverse des dependances. (d'abord A, puis B, puis C)
+	 *
+	 * On commence donc par séparer
+	 * - ce qui est à désinstaller,
+	 * - ce qui est à installer,
+	 * - les actions neutres (get, up sur non actif, kill)
+	 *
+	 * Dans les traitements, on commencera par faire
+	 * - ce qui est à désinstaller (il est possible que certains plugins
+	 * nécessitent la désinstallation d'autres présents - tel que : 1 seul
+	 * service d'envoi de mail)
+	 * - puis ce qui est a installer (à commencer par les librairies, puis paquets),
+	 * - puis les actions neutres
+	 */
 	function ordonner_actions() {
-		// il faut deja definir quels sont les
-		// actions graduellement realisables.
-		// Pour tout ce qui est a installer : ordre des dependances
-		// Pour tout ce qui est a desinstaller : ordre inverse des dependances.
-
-		// on commence par separer
-		// - ce qui est a desinstaller.
-		// - ce qui est a installer
-		// - les actions neutres (get, up sur non actif, kill)
-
-		// on commencera par faire ce qui est a desinstaller
-		// (il est possible que certains plugins necessitent la desinstallation
-		//  d'autres present - tel que : 1 seul service d'envoi de mail)
-		// puis ce qui est a installer
-		// puis les actions neutres
+		// nettoyer le terrain
 		$this->clear();
 
 		foreach ($this->start as $id=>$action) {
@@ -194,10 +294,27 @@ class Actionneur {
 	}
 
 
-	// a chaque fois qu'une action arrive,
-	// on compare avec celles deja presentes
-	// pour savoir si on doit la traiter avant ou apres
-
+	/**
+	 * Ajoute un paquet à activer 
+	 *
+	 * À chaque fois qu'un nouveau paquet arrive ici, on le compare
+	 * avec ceux déjà présents pour savoir si on doit le traiter avant
+	 * ou après un des paquets à activer déjà présent.
+	 *
+	 * Si le paquet est une dépendance d'un autre plugin, il faut le mettre
+	 * avant (pour l'activer avant celui qui en dépend).
+	 *
+	 * Si le paquet demande une librairie, celle-ci est ajoutée (les
+	 * librairies seront téléchargées avant l'activation des plugins,
+	 * le plugin aura donc sa librairie lorsqu'il sera activé)
+	 *
+	 * 
+	 * @param array $info
+	 *     Description du paquet
+	 * @param string $action
+	 *     Action à réaliser (on, upon)
+	 * @return void
+	**/
 	function on($info, $action) {
 		$info['todo'] = $action;
 		$p = $info['p'];
@@ -280,13 +397,42 @@ class Actionneur {
 	}
 
 
+	/**
+	 * Ajoute un paquet avec une action neutre 
+	 *
+	 * Ces actions seront traitées en dernier, et peu importe leur
+	 * ordre car elles n'entrent pas en conflit avec des dépendances.
+	 * 
+	 * @param array $info
+	 *     Description du paquet
+	 * @param string $action
+	 *     Action à réaliser (kill, get, up (sur plugin inactif))
+	 * @return void
+	**/
 	function neutre($info, $action) {
 		$info['todo'] = $action;
 		$this->log("NEUTRE:  $info[p] $action");
 		$this->middle['neutre'][] = $info;
 	}
 
-
+	/**
+	 * Ajoute un paquet à désactiver
+	 *
+	 * Ces actions seront traitées en premier.
+	 *
+	 * À chaque fois qu'un nouveau paquet arrive ici, on le compare
+	 * avec ceux déjà présents pour savoir si on doit le traiter avant
+	 * ou après un des paquets à désactiver déjà présent.
+	 *
+	 * Si le paquet est une dépendance d'un autre plugin, il faut le mettre
+	 * après (pour désactiver avant celui qui en dépend).
+	 * 
+	 * @param array $info
+	 *     Description du paquet
+	 * @param string $action
+	 *     Action à réaliser (kill, get, up (sur plugin inactif))
+	 * @return void
+	**/
 	function off($info, $action) {
 		$info['todo'] = $action;
 		$p = $info['p'];
@@ -336,7 +482,18 @@ class Actionneur {
 	}
 
 
-
+	/**
+	 * Retourne un bilan, texte HTML, des actions qui ont été faites
+	 *
+	 * Si c'est un affichage du bilan de fin, et qu'il reste des actions
+	 * à faire, un lien est proposé pour faire supprimer ces actions restantes
+	 * et le verrou qui va avec.
+	 * 
+	 * @param bool $fin
+	 *     Est-ce un affichage intermédiaire (false) ou le tout dernier (true).
+	 * @return string
+	 *     Bilan des actions au format HTML
+	**/
 	function presenter_actions($fin = false) {
 		$affiche = "";
 
@@ -413,7 +570,19 @@ class Actionneur {
 		return $affiche;
 	}
 
-
+	/**
+	 * Teste l'existance d'un verrou par un auteur ?
+	 *
+	 * Si un id_auteur est transmis, teste que c'est cet auteur
+	 * précis qui a posé le verrou.
+	 *
+	 * @see Actionneur::verouiller()
+	 * 
+	 * @param int|string $id_auteur
+	 *     Identifiant de l'auteur, ou vide
+	 * @return bool
+	 *     true si un verrou est là, false sinon
+	**/
 	function est_verrouille($id_auteur = '') {
 		if ($id_auteur == '') {
 			return ($this->lock['id_auteur'] ? true : false);
@@ -421,7 +590,20 @@ class Actionneur {
 		return ($this->lock['id_auteur'] == $id_auteur);
 	}
 
-
+	/**
+	 * Pose un verrou
+	 *
+	 * Un verrou permet de garentir qu'une seule exécution d'actions
+	 * est lancé à la fois, ce qui évite que deux administrateurs
+	 * puissent demander en même temps des actions qui pourraient
+	 * s'entrechoquer.
+	 *
+	 * Le verrou est signé par l'id_auteur de l'auteur actuellement identifié.
+	 *
+	 * Le verrou sera sauvegardé en fichier avec la liste des actions
+	 * 
+	 * @see Actionneur::sauver_actions()
+	**/
 	function verrouiller() {
 		$this->lock = array(
 			'id_auteur' => $GLOBALS['visiteur_session']['id_auteur'],
@@ -429,7 +611,9 @@ class Actionneur {
 		);
 	}
 
-
+	/**
+	 * Enlève le verrou
+	**/
 	function deverrouiller() {
 		$this->lock = array(
 			'id_auteur' => 0,
@@ -437,7 +621,17 @@ class Actionneur {
 		);
 	}
 
-
+	/**
+	 * Sauvegarde en fichier cache la liste des actions et le verrou
+	 *
+	 * Crée un tableau contenant les informations principales qui permettront
+	 * de retrouver ce qui est à faire comme action, ce qui a été fait,
+	 * les erreurs générées, et le verrouillage.
+	 *
+	 * Le cache peut être lu avec la méthode get_actions()
+	 * 
+	 * @see Actionneur::get_actions()
+	**/
 	function sauver_actions() {
 		$contenu = serialize(array(
 			'todo' => $this->end,
@@ -449,7 +643,14 @@ class Actionneur {
 		ecrire_fichier(_DIR_TMP . 'stp_actions.txt', $contenu);
 	}
 
-
+	/**
+	 * Lit le fichier cache de la liste des actions et verrou
+	 *
+	 * Restaure les informations contenues dans le fichier de cache
+	 * et écrites avec la méthode sauver_actions().
+	 * 
+	 * @see Actionneur::sauver_actions()
+	**/
 	function get_actions() {
 		lire_fichier(_DIR_TMP . 'stp_actions.txt', $contenu);
 		$infos = unserialize($contenu);
@@ -460,6 +661,11 @@ class Actionneur {
 		$this->lock = $infos['lock'];
 	}
 
+	/**
+	 * Nettoyage des actions et verrou
+	 *
+	 * Remet tout à zéro pour pouvoir repartir d'un bon pied.
+	**/
 	function nettoyer_actions() {
 		$this->todo = array();
 		$this->done = array();
@@ -470,7 +676,15 @@ class Actionneur {
 	}
 
 	/**
-	 * Effectue une des actions qui reste a faire.  
+	 * Effectue une des actions qui reste à faire.
+	 *
+	 * Dépile une des actions à faire s'il n'y en a pas en cours
+	 * au moment de l'appel et traite cette action
+	 *
+	 * @see Actionneur::do_action()
+	 * @return bool|array
+	 *     False si aucune action à faire,
+	 *     sinon tableau de description courte du paquet + index 'todo' indiquant l'action
 	**/
 	function one_action() {
 		// s'il reste des actions, on en prend une, et on la fait
@@ -517,7 +731,14 @@ class Actionneur {
 	}
 
 	/**
-	 * Effectue l'action en attente.  
+	 * Effectue l'action en attente.
+	 *
+	 * Appelle une methode do_{todo} de l'Actionneur où todo
+	 * est le type d'action à faire.
+	 *
+	 * Place dans la clé 'done' de description courte du paquet
+	 * le résultat de l'action (un booléen indiquant si elle s'est bien
+	 * déroulée).
 	**/
 	function do_action() {
 		if ($do = $this->work) {
@@ -532,7 +753,14 @@ class Actionneur {
 	}
 
 
-	// attraper et activer un plugin
+	/**
+	 * Attraper et activer un paquet
+	 *
+	 * @param array $info
+	 *     Description courte du paquet
+	 * @return bool
+	 *     false si erreur, true sinon.
+	 */
 	function do_geton($info) {
 		if (!$this->tester_repertoire_plugins_auto()) {
 			return false;
@@ -547,10 +775,19 @@ class Actionneur {
 		return false;
 	}
 
-	// activer un plugin
-	// soit il est la... soit il est a telecharger...
+	/**
+	 * Activer un paquet
+	 *
+	 * Soit il est là... soit il est à télécharger...
+	 *
+	 * @param array $info
+	 *     Description courte du paquet
+	 * @return bool
+	 *     false si erreur, true sinon.
+	 */
 	function do_on($info) {
 		$i = sql_fetsel('*','spip_paquets','id_paquet='.sql_quote($info['i']));
+		// à télécharger ?
 		if ($i['id_zone'] > 0) {
 			return $this->do_geton($info);
 		}
@@ -567,8 +804,15 @@ class Actionneur {
 	}
 
 
-
-	// mettre a jour un plugin
+	/**
+	 * Mettre à jour un paquet
+	 *
+	 * @param array $info
+	 *     Description courte du paquet
+	 * @return bool|array
+	 *     false si erreur,
+	 *     description courte du nouveau plugin sinon.
+	 */
 	function do_up($info) {
 		// ecriture du nouveau
 		// suppression de l'ancien (si dans auto, et pas au meme endroit)
@@ -589,6 +833,7 @@ class Actionneur {
 			array(
 			'pl.prefixe='.sql_quote($info['p']),
 			'pa.version='.sql_quote($info['maj']),
+			'pa.id_plugin = pl.id_plugin',
 			'pa.id_depot>'.sql_quote(0)),
 			'', 'pa.etatnum DESC', '0,1')) {
 
@@ -620,7 +865,14 @@ class Actionneur {
 	}
 
 
-	// mettre a jour et activer un plugin
+	/**
+	 * Mettre à jour et activer un paquet
+	 *
+	 * @param array $info
+	 *     Description courte du paquet
+	 * @return bool
+	 *     false si erreur, true sinon
+	 */
 	function do_upon($info) {
 		$i = sql_fetsel('*', 'spip_paquets', 'id_paquet='.sql_quote($info['i']));
 		if ($dirs = $this->do_up($info)) {
@@ -631,7 +883,14 @@ class Actionneur {
 	}
 
 
-	// desactiver un plugin
+	/**
+	 * Désactiver un paquet
+	 *
+	 * @param array $info
+	 *     Description courte du paquet
+	 * @return bool
+	 *     false si erreur, true sinon
+	 */
 	function do_off($info) {
 		$i = sql_fetsel('*','spip_paquets','id_paquet='.sql_quote($info['i']));
 		// il faudra prendre en compte les autres _DIR_xx
@@ -650,16 +909,20 @@ class Actionneur {
 	}
 
 
-	// desinstaller un plugin
+	/**
+	 * Désinstaller un paquet
+	 *
+	 * @param array $info
+	 *     Description courte du paquet
+	 * @return bool
+	 *     false si erreur, true sinon
+	 */
 	function do_stop($info) {
 		$i = sql_fetsel('*','spip_paquets','id_paquet=' . sql_quote($info['i']));
 		// il faudra prendre en compte les autres _DIR_xx
 		if (in_array($i['constante'], array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL'))) {
 			include_spip('inc/plugin');
 			$dossier = rtrim($i['src_archive'],'/');
-			$constante = $i['constante'];
-
-			# $constante = $this->donner_chemin_constante_plugins( $i['constante'] );
 
 			$installer_plugins = charger_fonction('installer', 'plugins');
 			// retourne :
@@ -682,7 +945,14 @@ class Actionneur {
 	}
 
 
-	// effacer les fichiers d'un plugin
+	/**
+	 * Effacer les fichiers d'un paquet
+	 *
+	 * @param array $info
+	 *     Description courte du paquet
+	 * @return bool
+	 *     false si erreur, true sinon
+	 */
 	function do_kill($info) {
 		// on reverifie que c'est bien un plugin auto !
 		// il faudrait aussi faire tres attention sur un site mutualise
@@ -712,7 +982,7 @@ class Actionneur {
 					include_spip('inc/svp_depoter_local');
 					svp_corriger_obsolete_paquets(array($id_plugin));
 				}
-					
+
 				// on tente un nettoyage jusqu'a la racine de auto/
 				// si la suppression concerne une profondeur d'au moins 2
 				// et que les repertoires sont vides
@@ -747,8 +1017,15 @@ class Actionneur {
 		return false;
 	}
 
-	
-	// installer une librairie
+
+	/**
+	 * Installer une librairie
+	 *
+	 * @param array $info
+	 *     Description courte du paquet (une librairie ici)
+	 * @return bool
+	 *     false si erreur, true sinon
+	 */
 	function do_getlib($info) {
 		if (!defined('_DIR_LIB') or !_DIR_LIB) {
 			$this->err(_T('svp:erreur_dir_dib_indefini'));
@@ -777,7 +1054,14 @@ class Actionneur {
 	}
 
 
-	// telecharger un plugin
+	/**
+	 * Télécharger un paquet
+	 *
+	 * @param array $info
+	 *     Description courte du paquet
+	 * @return bool
+	 *     false si erreur, true sinon
+	 */
 	function do_get($info) {
 		if (!$this->tester_repertoire_plugins_auto()) {
 			return false;
@@ -794,15 +1078,30 @@ class Actionneur {
 	}
 
 
-
-	// lancer l'installation d'un plugin
+	/**
+	 * Lancer l'installation d'un paquet
+	 *
+	 * @param array $info
+	 *     Description courte du paquet
+	 * @return bool
+	 *     false si erreur, true sinon
+	 */
 	function do_install($info) {
-		$message_install = $this->installer_plugin($info);
-		return $message_install;
+		return $this->installer_plugin($info);
 	}
 
 
-	// adresse du dossier, et row SQL du plugin en question
+	/**
+	 * Activer un plugin 
+	 *
+	 * @param string $dossier
+	 *     Chemin du répertoire du plugin
+	 * @param array $i
+	 *     Description en BDD du paquet - row SQL (tableau clé => valeur)
+	 * @param string $constante
+	 *     Constante indiquant le chemin de base du plugin (_DIR_PLUGINS, _DIR_PLUGINS_SUPPL, _DIR_PLUGINS_DIST)
+	 * @return void
+	**/
 	function activer_plugin_dossier($dossier, $i, $constante='_DIR_PLUGINS') {
 		include_spip('inc/plugin');
 		$this->log("Demande d'activation de : " . $dossier);
@@ -840,7 +1139,15 @@ class Actionneur {
 	}
 
 
-	// actualiser les plugins interessants
+	/**
+	 * Actualiser les plugins intéressants
+	 *
+	 * Décrémente chaque score de plugin présent dans la méta
+	 * 'plugins_interessants' et signifiant que ces plugins
+	 * ont été utilisés récemment.
+	 * 
+	 * Les plugins atteignant un score de zéro sont évacués ce la liste.
+	 */
 	function actualiser_plugin_interessants() {
 		// Chaque fois que l'on valide des plugins,
 		// on memorise la liste de ces plugins comme etant "interessants",
@@ -882,7 +1189,15 @@ class Actionneur {
 	}
 
 
-
+	/**
+	 * Ajoute un plugin dans les plugins intéressants
+	 *
+	 * Initialise à 30 le score du plugin indiqué par le chemin transmis,
+	 * dans la liste des plugins intéressants.
+	 *
+	 * @param string $dir
+	 *     Chemin du répertoire du plugin
+	 */
 	function ajouter_plugin_interessants_meta($dir) {
 		$plugins_interessants = @unserialize($GLOBALS['meta']['plugins_interessants']);
 		if (!is_array($plugins_interessants)) {
@@ -892,7 +1207,14 @@ class Actionneur {
 		ecrire_meta('plugins_interessants', serialize($plugins_interessants));
 	}
 
-
+	/**
+	 * Lancer l'installation d'un plugin
+	 *
+	 * @param array $info
+	 *     Description courte du paquet
+	 * @return bool
+	 *     false si erreur, true sinon
+	 */
 	function installer_plugin($info){
 		// il faut info['dossier'] et info['constante'] pour installer
 		if ($plug = $info['dossier']) {
@@ -926,11 +1248,21 @@ class Actionneur {
 		}
 		return false;
 	}
-	
 
 
-	// telecharge un paquet
-	// et supprime les fichiers obsoletes (si presents)
+	/**
+	 * Télécharge un paquet
+	 * 
+	 * Supprime les fichiers obsolètes (si présents)
+	 *
+	 * @param int|array $id_or_row
+	 *     Identifiant du paquet ou description ligne SQL du paquet
+	 * @return bool|array
+	 *     False si erreur.
+	 *     Tableau de 2 index sinon :
+	 *     - dir : Chemin du paquet téléchargé depuis la racine
+	 *     - dossier : Chemin du paquet téléchargé, depuis _DIR_PLUGINS
+	 */
 	function get_paquet_id($id_or_row) {
 		// on peut passer direct le row sql...
 		if (!is_array($id_or_row)) {
@@ -980,7 +1312,6 @@ class Actionneur {
 				}
 
 
-
 				// on recupere la mise a jour...
 				include_spip('action/teleporter');
 				$teleporter_composant = charger_fonction('teleporter_composant', 'action');
@@ -1005,7 +1336,8 @@ class Actionneur {
 	 * Teste que le répertoire plugins auto existe et
 	 * que l'on peut ecrire dedans !
 	 *
-	 * @return bool : C'est ok, ou pas
+	 * @return bool
+	 *     True si on peut écrire dedans, false sinon
 	**/
 	function tester_repertoire_plugins_auto() {
 		include_spip('inc/plugin'); // pour _DIR_PLUGINS_AUTO
@@ -1022,23 +1354,18 @@ class Actionneur {
 		return true;
 	}
 
-	/**
-	 * Retourne le chemin relatif d'un repertoire plugins
-	 * depuis _DIR_PLUGINS
-	 * 
-	 * Étrange chose que ce _DIR_PLUGINS_SUPPL...
-	**/
-	function donner_chemin_constante_plugins($constante) {
-		if ($i['constante'] == '_DIR_PLUGINS_SUPPL') {
-			return _DIR_RACINE . constant($constante);
-		}
-		return constant($constante);
-	}
 
 	/**
-	 * Teste si le plugin SVP (celui-ci donc) a ete desinstalle / desactive dans les actions realisees 
+	 * Teste si le plugin SVP (celui-ci donc) a
+	 * été désinstallé / désactivé dans les actions réalisées 
 	 *
-	 * @return bool C'est le cas ou non.
+	 * @note
+	 *     On ne peut tester sa désactivation que dans le hit où la désinstallation
+	 *     est réalisée, puisque après, s'il a été désactivé, au prochain hit
+	 *     on ne connaîtra plus ce fichier !
+	 * 
+	 * @return bool
+	 *     true si SVP a été désactivé, false sinon
 	**/
 	function tester_si_svp_desactive() {
 		foreach ($this->done as $d) {
@@ -1055,13 +1382,15 @@ class Actionneur {
 
 
 /**
- * Fonction pour aider le traitement des actions
- * dans un formulaire CVT 
+ * Gère le traitement des actions des formulaires utilisant l'Actionneur
  *
- * @param array $actions la liste des actions a faire (id_paquet => action)
- * @param array $retour le tableau de retour du CVT dans la partie traiter
- * @param string $redirect l'url de retour
- * @return bool Action ok.
+ * @param array $actions
+ *     Liste des actions a faire (id_paquet => action)
+ * @param array $retour
+ *     Tableau de retour du CVT dans la partie traiter
+ * @param string $redirect
+ *     URL de retour
+ * @return void
 **/
 function svp_actionner_traiter_actions_demandees($actions, &$retour,$redirect=null) {
 		$actionneur = new Actionneur();

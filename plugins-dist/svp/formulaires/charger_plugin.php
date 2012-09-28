@@ -1,7 +1,22 @@
 <?php
 
+/**
+ * Gestion du formulaire de recherche et téléchargement de plugins
+ * distants connus dans un dépot
+ *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Formulaires
+ */
+ 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Chargement du formulaire de recherche et téléchargement de plugins
+ *
+ * @return array
+ *     Environnement du formulaire
+**/
 function formulaires_charger_plugin_charger_dist(){
 	return array(
 		'phrase' => _request('phrase'),
@@ -14,6 +29,23 @@ function formulaires_charger_plugin_charger_dist(){
 		'_todo' => _request('_todo'));
 }
 
+/**
+ * Vérification du formulaire de recherche et téléchargement de plugins
+ *
+ * Appelle le décideur qui détermine la liste des actions à faire et si celles-ci
+ * peuvent être faites (dépendances connues). Une erreur sera levé dans le
+ * cas contraire.
+ *
+ * Si toutes les actions peuvent être faites, une demande de confirmation
+ * est envoyée (dans une erreur spéciale), présentant alors toutes les
+ * actions qui seront réalisées (celle demandée + celles à faire par voie
+ * de conséquence.
+ *
+ * Si on reçoit une demande de confirmation, on sort sans lever d'erreur !
+ * 
+ * @return array
+ *     Tableau des erreurs
+**/
 function formulaires_charger_plugin_verifier_dist(){
 
 	$erreurs = array();
@@ -63,6 +95,15 @@ function formulaires_charger_plugin_verifier_dist(){
 	return $erreurs;
 }
 
+/**
+ * Traitement du formulaire de recherche et téléchargement de plugins
+ *
+ * Si une liste d'action est validée, on redirige de formulaire sur
+ * l'action 'actionner' qui les traitera une par une.
+ * 
+ * @return array
+ *     Retours du traitement
+**/
 function formulaires_charger_plugin_traiter_dist(){
 
 	$retour = array();

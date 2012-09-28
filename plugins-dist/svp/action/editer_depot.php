@@ -3,15 +3,28 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2009                                                *
+ *  Copyright (c) 2001-2012                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'action editer_depot
+ *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Actions
+ */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Action de mise à jour des descriptions d'un dépot 
+ *
+ * @return array
+ *     Liste identifiant du dépot, texte d'erreur éventuel
+**/
 function action_editer_depot_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -52,9 +65,19 @@ function action_editer_depot_dist() {
 	return array($id_depot, $err);
 }
 
-// Appelle toutes les fonctions de modification d'un depot
-// $err est de la forme '&trad_err=1'
-// Cette fonction ne fait rien actuellement sur un depot
+
+/**
+ * Appelle toutes les fonctions de modification d'un dépot
+ * $err est de la forme '&trad_err=1'
+ *
+ * @note
+ *     Cette fonction ne fait rien actuellement !!
+ * 
+ * @param int $id_depot
+ *     Identifiant du dépot
+ * @return string
+ *     Texte d'une eventuelle erreur
+**/
 function depots_set($id_depot) {
 	$err = '';
 

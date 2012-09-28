@@ -1,11 +1,32 @@
 <?php
+
+/**
+ * Gestion des recherches de plugins par version ou branche
+ *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Recherche
+**/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Fonction qui construit le WHERE du select des plugins ou paquets
+ * Construit le WHERE d'une requête SQL de selection des plugins ou paquets
  * compatibles avec une version ou une branche de spip.
- * Cette fonction est appelee par le critere {compatible_spip}
- * @return 
+ * 
+ * Cette fonction est appelée par le critère {compatible_spip}
+ * 
+ * @used-by svp_compter()
+ * @used-by critere_compatible_spip_dist()
+ *
+ * @param string $version
+ *     Numéro de version de SPIP, tel que 2.0.8
+ * @param string $table
+ *     Table d'application ou son alias SQL
+ * @param string $op
+ *     Opérateur de comparaison, tel que '>' ou '='
+ * @return string
+ *     Expression where de la requête SQL
  */
 function inc_where_compatible_spip($version='', $table, $op) {
 

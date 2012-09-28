@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/svp?lang_cible=ar
+// extrait automatiquement de http://trad.spip.net/tradlang_module/svp?lang_cible=ar
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -207,7 +207,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_dependance_plugin' => 'الملحق @plugin@ يعتمد على @dependance@.',
 	'message_dependance_plugin_version' => 'الملحق @plugin@ يعتمد على @dependance@ @version@.',
 	'message_erreur_aucun_plugin_selectionne' => 'لا يوجد اي ملحق محدد',
-	'message_erreur_ecriture_lib' => 'يتطلب @plugin@ مكتبة <a href="@lib_url@">@lib@</a> الموجودة في مجلد <var>lib/</var> في أصل الموقع. الا ان هذا المجلد ممنوع عن الكتابة. بالتالي يجب تثبيت الملحق يدوياً او إعطاء اذن الكتابة لهذا المجلد.',
+	'message_erreur_ecriture_lib' => 'يتطلب @plugin@ مكتبة <a href="@lib_url@">@lib@</a> الموجودة في مجلد <var>lib/</var> في أصل الموقع. الا ان هذا المجلد غير موجود او ممنوع عن الكتابة. بالتالي يجب تثبيت الملحق يدوياً او انشاء المجلد وإعطائه اذن الكتابة.',
 	'message_erreur_maj_inconnu' => 'ترقية غير ممكنة لملحق غير معروف.',
 	'message_erreur_plugin_introuvable' => 'لا يمكن العثور على الملحق @plugin@ لـ@action@. ',
 	'message_erreur_plugin_non_actif' => 'لا يمكن إيقاف ملحق غير فعال.',

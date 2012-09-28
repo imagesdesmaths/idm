@@ -61,7 +61,7 @@
     position: absolute;
 	right: 30px;
 	clear:right;
-	z-index:10; /* Un rien plus que .markItUpPreview */
+	z-index:5; /* Un rien plus que .markItUpPreview */
 }
 .markItUp .markItUpTabs a {
 	display:block; 

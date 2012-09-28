@@ -1,7 +1,26 @@
 <?php
 
+/**
+ * Fichier gérant l'installation et désinstallation du plugin
+ *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Installation
+**/
+
 include_spip('base/create');
 
+/**
+ * Installation et mises à jour du plugin
+ *
+ * Crée les tables SQL du plugin (spip_depots, spip_plugins, spip_depots_plugins, spip_paquets)
+ * 
+ * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @param string $version_cible
+ *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
+ * @return void
+**/
 function svp_upgrade($nom_meta_base_version, $version_cible){
 
 	$maj = array();
@@ -23,6 +42,15 @@ function svp_upgrade($nom_meta_base_version, $version_cible){
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
+/**
+ * Désinstallation du plugin
+ *
+ * Supprime les tables SQL du plugin (spip_depots, spip_plugins, spip_depots_plugins, spip_paquets)
+ * 
+ * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @return void
+**/
 function svp_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_depots");
 	sql_drop_table("spip_plugins");
@@ -34,7 +62,13 @@ function svp_vider_tables($nom_meta_base_version) {
 }
 
 
-// ajoute le prefixe des plugins dans chaque ligne de paquets
+/**
+ * Ajoute le préfixe des plugins dans chaque ligne de paquets
+ *
+ * Cette mise à jour permet de dupliquer le préfixe des plugins
+ * dans la ligne des paquets (cette colonne était absente avant)
+ * pour plus de simplicité ensuite dans les requêtes SQL.
+ */
 function svp_synchroniser_prefixe() {
 	$paquets = sql_allfetsel(
 		array('pa.id_paquet', 'pl.prefixe'),

@@ -52,11 +52,23 @@ function renseigner_source_distante($source){
 }
 
 /**
- * Renseigner les informations de taille et dimenssion d'une image
+ * Renseigner les informations de taille et dimension d'un document
+ * 
+ * Récupère les informations de taille (largeur / hauteur / type_image / taille) d'un document
+ * Utilise pour cela les fonctions du répertoire metadatas/*
+ * 
+ * Ces fonctions de récupérations peuvent retourner d'autres champs si ces champs sont définis
+ * comme editable dans la déclaration de la table spip_documents
+ * 
+ * TODO Renommer cette fonction sans "_image"
  *
- * @param string $fichier
+ * @param string $fichier 
+ * 		Le fichier à examiner 
  * @param string $ext
- * @return array
+ * 		L'extension du fichier à examiner
+ * @return array|string $infos
+ * 		Si c'est une chaine, c'est une erreur
+ * 		Si c'est un tableau, l'ensemble des informations récupérées du fichier
  */
 function renseigner_taille_dimension_image($fichier,$ext){
 

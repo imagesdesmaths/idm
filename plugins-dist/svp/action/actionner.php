@@ -1,7 +1,21 @@
 <?php
 
+/**
+ * Gestion de l'action actionner
+ *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Actions
+ */
+ 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Action effectuant 1 action dans la liste des actions à réaliser
+ * sur les plugins.
+ *
+ * Cette action sera relancée tant qu'il reste des actions à faire
+ */
 function action_actionner_dist() {
 	// droits
 	include_spip('inc/autoriser');

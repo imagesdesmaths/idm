@@ -1,12 +1,32 @@
 <?php
 
+/**
+ * Fichier permettant de calculer les descriptions
+ * d'un paquet.xml contenant plusieurs balises <spip>
+ *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Plugins
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/plugin');
 include_spip('inc/svp_outiller');
 
-// Fusion des informations de chaque balise plugin en considerant la compatibilite SPIP
-// Pour les balise paquet sans balise spip incluse cette fonction permet de generer une structure
-// identique pour les balises dites techniques
+
+/**
+ * Fusion des informations de chaque balise spip d'un paquet.xml en
+ * considérant la compatibilité SPIP
+ * 
+ * Pour les balises paquets sans balise spip cette fonction permet de générer
+ * une structure identique pour les balises dites techniques
+ * 
+ * @param array $plugins
+ *     Arbre de description du paquet.xml
+ * @return array
+ *     Fusion des éléments classé par balise, puis par compatibilité à SPIP.
+ *     L'index 0 dans la compatibilité est valable quelque soit la version de SPIP.
+ */
 function plugins_fusion_paquet($plugins) {
 	global $balises_techniques;
 
@@ -35,7 +55,7 @@ function plugins_fusion_paquet($plugins) {
 		}
 		else {
 			// Balise spip
-			// On merge les balises techniques existantes en les rangeant das un sous tableau indexe par
+			// On merge les balises techniques existantes en les rangeant dans un sous tableau indexe par
 			// la compatibilite et ce pour chaque balise
 			foreach ($_paquet_spip as $_index => $_balise) {
 				if ($_index AND $_index != 'balise') {

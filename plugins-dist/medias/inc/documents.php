@@ -71,10 +71,7 @@ function generer_url_document_dist($id_document, $args='', $ancre='') {
 	// Si droit de voir tous les docs, pas seulement celui-ci
 	// il est inutilement couteux de rajouter une protection
 	$r = (autoriser('voir', 'document'));
-	if (($r AND $r !== 'htaccess')
-		// idem si ce doc est visible par tous
-		// ie si ca ne renvoie pas false
-		OR autoriser('voir', 'document', $id_document, array()))
+	if (($r AND $r !== 'htaccess'))
 		return get_spip_doc($f);
 
 	include_spip('inc/securiser_action');
@@ -86,7 +83,7 @@ function generer_url_document_dist($id_document, $args='', $ancre='') {
 			. ($ancre ? "&ancre=$ancre" : '')
 			. '&cle=' . calculer_cle_action($id_document.','.$f)
 			. '&file=' . rawurlencode($f)
-			,false,true);
+			,true,true);
 }
 
 //
@@ -167,15 +164,26 @@ function image_du_document($document)
 	return '';
 }
 
-//
-// Afficher un document dans la colonne de gauche
-//
 
-// http://doc.spip.org/@afficher_documents_colonne
-function afficher_documents_colonne($id, $type="article",$script=NULL) {
-	if (!is_array($GLOBALS['medias_exec_colonne_document']) OR !in_array(_request('exec'),$GLOBALS['medias_exec_colonne_document']))
-		$GLOBALS['medias_exec_colonne_document'][] = _request('exec');
-	return "";
+/**
+ * Afficher un document dans la colonne de gauche
+ *
+ * @deprecated
+ *     Utiliser l'inclusion prévue ou une véritable
+ *     déclaration d'objet éditorial (la colonne document
+ *     est alors affichée automatiquement sur la page d'édition de l'objet)
+ *
+ * @param int $id
+ *     Identifiant de l'objet, ou id_auteur négatif pour un nouvel objet
+ * @param string $type
+ *     Type d'objet
+ * @param null $script
+ *     ??
+ * @return string
+ *     Code HTML permettant de gérer des documents
+ */
+function afficher_documents_colonne($id, $type="article", $script=NULL) {
+	return recuperer_fond('prive/objets/editer/colonne_document', array('objet'=>$type,'id_objet'=>$id));
 }
 
 

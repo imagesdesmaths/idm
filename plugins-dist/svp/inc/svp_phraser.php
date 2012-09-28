@@ -1,23 +1,34 @@
 <?php
 
+/**
+ * Fichier permettant de phraser les XML des fichiers paquet.xml et plugin.xml
+ * ainsi que des fichiers décrivant le contenu d'un dépot de paquets.
+ * 
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Plugins
+**/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/xml');
 include_spip('inc/config');
 
-// Mode d'utilisation de SVP runtime ou pas :
-// - En mode runtime (true), on ne charge que les plugins compatibles avec la version courante
-// - En mode non runtime (false) on charge tous les plugins : cas du site Plugins SPIP
-// Runtime est le mode par defaut
 if (!defined('_SVP_MODE_RUNTIME')) {
+/**
+ * Mode d'utilisation de SVP runtime ou pas :
+ * - En mode runtime (true), on ne charge que les plugins compatibles avec la version courante
+ * - En mode non runtime (false) on charge tous les plugins : cas du site Plugins SPIP
+ * Runtime est le mode par defaut
+ * @var bool */
 	define('_SVP_MODE_RUNTIME', (lire_config('svp/mode_runtime', 'oui') == 'oui' ? true : false));
 }
 
 
-// Type parseur XML a appliquer pour recuperer les infos du plugin 
-// - plugin, pour utiliser plugin.xml 
-// - paquet, pour paquet.xml 
+// Type parseur XML à appliquer pour récupérer les infos du plugin
+/** @var string  Phraseur à utiliser pour un XML de plugin.xml */
 define('_SVP_DTD_PLUGIN', 'plugin'); 
+/** @var string  Phraseur à utiliser pour un XML de paquet.xml */
 define('_SVP_DTD_PAQUET', 'paquet'); 
 
 // Regexp de recherche des balises principales de archives.xml
@@ -50,26 +61,35 @@ $GLOBALS['categories_plugin'] = array(
 	'aucune'
 );
 
-// Liste des balises techniques autorisees dans la balise <spip> et des balises autorisant une traduction
-# define('_BALISES_TECHNIQUES', serialize($balises_techniques));
+/** Liste des balises techniques autorisées dans la balise <spip> */
 $GLOBALS['balises_techniques'] = array(
 	'menu', 'chemin', 'lib', 'necessite', 'onglet', 'procure', 'pipeline', 'utilise',
 	'options', 'fonctions', 'install');
+# define('_BALISES_TECHNIQUES', serialize($balises_techniques));
 	
-# define('_BALISES_MULTIS', serialize($balises_multis));
+/** Liste des balises autorisant une traduction */
 $GLOBALS['balises_multis'] = array(
 	'nom', 'slogan', 'description');
+# define('_BALISES_MULTIS', serialize($balises_multis));
 
 
 /**
- * Phraser un fichier de source dont l'url est donnee
- * Le fichier est un fichier XML contenant deux balises principales :
+ * Phrase un fichier décrivant un dépot, dont le chemin local est donné
+ * 
+ * Le fichier est au format XML et contient deux balises principales :
  * - <depot>...</depot> : informations de description du depot (facultatif)
  * - <archives>...</archives> : liste des informations sur chaque archive (obligatoire)
  *
+ * La fonction met en cache le résultat du phrasage de chaque archive et ne
+ * rephrase que les archives ayant changées.
+ * 
  * @param string $fichier_xml
- *   nom du fichier XML de description du depot
+ *     Chemin local du fichier XML de description du dépot
  * @return array|bool
+ *     false si erreur,
+ *     Tableau de 2 index sinon :
+ *     - depot : description du dépot
+ *     - paquets : 
  */
 function svp_phraser_depot($fichier_xml) {
 
@@ -119,11 +139,23 @@ function svp_phraser_depot($fichier_xml) {
 }
 
 
-// Phraser la liste des balises <archive>
-	// Chaque bloc XML est constitue de 3 sous-blocs principaux :
-	// - <zip> : contient les balises d'information sur le zip (obligatoire)
-	// - <traductions> : contient la compilation des informations de traduction (facultatif)
-	// - <plugin> ou <paquet> suivant la DTD : le contenu du fichier plugin.xml ou paquet.xml (facultatif)
+/**
+ * Phrase la liste des balises <archive>
+ *
+ * Chaque bloc XML est constitue de 3 sous-blocs principaux :
+ * - <zip> : contient les balises d'information sur le zip (obligatoire)
+ * - <traductions> : contient la compilation des informations de traduction (facultatif)
+ * - <plugin> ou <paquet> suivant la DTD : le contenu du fichier plugin.xml ou paquet.xml (facultatif)
+ *
+ * @param array $archives
+ *     Tableau de la liste des archives trouvées dans la description d'un dépot
+ * @param array $md5_cache
+ *     Tableau des descriptions d'archives déjà connues : on supprime
+ *     à la fin celles qui ne font plus parties du dépot.
+ * @return array
+ *     Tableau décrivant chaque archive, avec en index l'url de l'archive.
+ *     Tableau (url => Tableau de description de l'archive)
+ */
 function svp_phraser_archives($archives,&$md5_cache=array()) {
 	include_spip('inc/plugin');
 	$seen = array();
@@ -200,10 +232,24 @@ function svp_phraser_archives($archives,&$md5_cache=array()) {
 }
 
 
-// Phrase le contenu du xml, soit la ou les balises <plugin> ou <paquet> suivant la DTD
-// (peut etre appelee via archives.xml ou via un xml de plugin)
-// et phrase la balise <multis> dans le cas d'une DTD paquet qui contient les traductions du 
-// nom, slogan et description 
+
+/**
+ * Phrase le contenu du XML décrivant une archive suivant une DTD
+ * de plugin.xml ou de paquet.xml donnée
+ *
+ * La fonction peut-être appelée via archives.xml ou via un xml de plugin.
+ * Elle phrase la balise <multi> dans le cas d'une DTD paquet qui contient
+ * les traductions du nom, slogan et description
+ *
+ * @global $balises_multis
+ * 
+ * @param string $dtd
+ *     Nom du type de dtd : plugin ou paquet (pour phraser un plugin.xml ou un paquet.xml)
+ * @param string $contenu
+ *     Contenu XML à phraser
+ * @return array
+ *     Description du plugin
+**/
 function svp_phraser_plugin($dtd, $contenu) {
 	global $balises_multis;
 	static $informer = array();
@@ -253,8 +299,21 @@ function svp_phraser_plugin($dtd, $contenu) {
 }
 
 
-// Phrase le contenu de la balise <zip>
-// -- nom du zip, taille, date, dernier commit, arborescence relative des sources...
+/**
+ * Phrase le contenu de la balise <zip>
+ *
+ * Extrait du XML les informations du zip
+ * 
+ * @param string $contenu
+ *     Description XML de l'archive
+ * @return array
+ *     Description du zip.
+ *     - Index 'file' : nom du zip
+ *     - Index 'size' : taille
+ *     - Index 'date' : date de création
+ *     - Index 'last_commit' : date du dernier commit
+ *     - Index 'source' : arborescence relative des sources
+ */
 function svp_phraser_zip($contenu) {
 	static $balises_zip = array('file', 'size', 'date', 'source', 'last_commit');
 	
@@ -266,14 +325,26 @@ function svp_phraser_zip($contenu) {
 }
 
 
-// Phrase le contenu d'une balise <traductions> en un tableau plus facilement utilisable
-// -- Par module, la langue de reference, le gestionnaire, les langues traduites et leurs traducteurs
+/**
+ * Phrase le contenu d'une balise <traductions> en un tableau plus
+ * facilement utilisable
+ *
+ * @param string $contenu
+ *     Contenu XML de la balise <traductions>
+ * @return array
+ *     Tableau complexe avec pour index les noms des modules de langue et pour
+ *     valeur leur description. Chaque description contient dedans 3 index :
+ *     - reference : la langue de référence
+ *     - gestionnaire : quel logiciel à servi à gérer les traductions
+ *     - langues : tableau classé par langue puis par traducteurs, qui indique
+ *       l'ensemble des traducteurs pour chacune des langues présentes
+ */
 function svp_phraser_traductions($contenu) {
 	
 	$traductions = array();
 	if (is_array($arbre = spip_xml_parse($contenu))) {
 		foreach ($arbre as $_tag => $_langues) {
-			// On commence par les balises <traduction> et leurs attributs	
+			// On commence par les balises <traduction> et leurs attributs
 			list($tag, $attributs_traduction) = spip_xml_decompose_tag($_tag);
 			$traductions[$attributs_traduction['module']]['reference'] = $attributs_traduction['reference'];
 			$traductions[$attributs_traduction['module']]['gestionnaire'] = isset($attributs_traduction['gestionnaire']) ? $attributs_traduction['gestionnaire'] : '' ;
@@ -300,10 +371,29 @@ function svp_phraser_traductions($contenu) {
 }
 
 
-// Aplatit plusieurs cles d'un arbre xml dans un tableau
-// -- Effectue un trim() au passage
-// -- le mode 'nonvide' permet de ne pas modifier une valeur du tableau si sa valeur dans
-//    l'arbre est vide et d'y affecter sa valeur par defaut si elle existe, la chaine vide sinon
+/**
+ * Aplatit plusieurs clés d'un arbre xml dans un tableau
+ * 
+ * Effectue un trim() de la valeur trouvée dans l'arbre
+ *
+ * @param array $balises
+ *     Liste de noms de balises XML.
+ *     Peut aussi être un tableau indiquant un renommage d'une balise
+ *     au passage tel que 'x' => 'y' qui cherchera x dans l'arbre XML et
+ *     l'applatira dans y.
+ * @param array $arbre_xml
+ *     Un arbre issu de spip_xml_parse()
+ * @param string $mode
+ *     Mode d'affectation des valeurs trouvées
+ *     - 'vide_et_nonvide' : Affecte une chaine vide si la balise n'est
+ *       pas trouvée dans l'arbre et affecte la valeur de la balise sinon.
+ *     - 'nonvide' : Si la balise n'est pas trouvée dans l'arbre ou si son
+ *       contenu est vide, affecte la valeur du tableau initial concernant
+ *       cette balise si elle est connue.
+ * @param array
+ *     Tableau initial pouvant contenir des valeurs par défaut à affecter
+ *     à chaque balise avec 'x' => 'valeur'
+ */
 function svp_aplatir_balises($balises, $arbre_xml, $mode='vide_et_nonvide', $tableau_initial=array()) {
 	$tableau_aplati = array();
 
