@@ -468,13 +468,16 @@ function balise_RANG_dist($p) {
 	}
 	else {
 		// chercher d'abord un champ sql rang (mais pas dans le env : defaut '' si on trouve pas de champ sql)
-		$_rang = champ_sql('rang', $p, '');
+		// dans la boucle immediatement englobante uniquement
+		// sinon on compose le champ calcule
+		$_rang = champ_sql('rang', $p, '', false);
 
 		// si pas trouve de champ sql rang :
 		if (!$_rang){
 			$boucle = &$p->boucles[$b];
 			$trouver_table = charger_fonction('trouver_table','base');
 			$desc = $trouver_table($boucle->id_table);
+			$_titre = ''; # champ dont on extrait le numero
 			if (isset($desc['titre'])){
 				$t=$desc['titre'];
 			  if (preg_match(';(^|,)([^,]*titre)(,|$);',$t,$m)){

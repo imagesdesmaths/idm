@@ -11,6 +11,7 @@
 		$.extend(options, settings);
 
 		return this.each(function() {
+
 			var $$, textarea, tabs, preview;
 			$$ = $(this);
 			textarea = this;
@@ -36,6 +37,7 @@
 						+ $(mark).find('.markItUpEditor').height()
 						+ $(mark).find('.markItUpFooter').height()
 					);
+
 					$(mark).find('.markItUpHeader').hide();
 					$(mark).find('.markItUpEditor').hide();
 					$(mark).find('.markItUpFooter').hide();
@@ -43,9 +45,9 @@
 					$(mark).find('.markItUpPreview').show()
 						.addClass('ajaxLoad')
 						.html(renderPreview(
-							$(mark).find('.pp_previsualisation textarea').val(),
+							$(mark).find('textarea.pp_previsualisation').val(),
 							champ[1].toUpperCase(),
-							objet[1])
+							(objet ? objet[1] : ''))
 						)
 						.removeClass('ajaxLoad');
 					
@@ -66,7 +68,7 @@
 			}
 
 
-			function renderPreview(val, champ, objet) {	
+			function renderPreview(val, champ, objet) {
 				var phtml;
 				if (options.previewParserPath !== '') {
 					$.ajax( {

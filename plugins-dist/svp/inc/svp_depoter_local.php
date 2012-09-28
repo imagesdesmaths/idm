@@ -1,20 +1,36 @@
 <?php
 
+/**
+ * Traitement du dépot local
+ *
+ * Le dépot local est la liste de paquets qui sont présents sur l'hébergement
+ * dans un des répertoires de plugins, actifs ou non actifs.
+ *
+ * Dans la base, un dépot local est représenté avec un id_dépot nul.
+ * Il n'y a cependant pas de ligne spécifique décrivant le dépot local
+ * dans la table SQL spip_depots, mais juste des valeurs id_depot=0 dans
+ * la table spip_paquets.
+ * 
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Depots
+ */
 
 /**
- * Met a jour les tables paquets et plugins
- * en ce qui concerne les paquets locaux (presents sur le site).
+ * Met à jour les tables SQL paquets et plugins pour qui concerne
+ * les paquets locaux (ceux présents sur le site).
  *
- * On ne met a jour que ce qui a change, sauf si :
- * - $force = true
- * - ou var_mode=vider_paquets_locaux
- * Dans ces cas, toutes les infos locales sont recalculees.
- *
+ * On ne met à jour que ce qui a changé, sauf si on force le recalcule
+ * de toutes les informations locales avec var_mode=vider_paquets_locaux
+ * dans l'URL ou en mettant le paramètre $force à true.
+ * 
  * @param bool $force
- * 		Forcer les mises a jour des infos en base de tous les paquets locaux
+ *     - false : n'actualise que les paquets modifiés
+ *     - true : efface et recrée la liste de tous les paquets locaux
  * @param array $erreurs_xml
- * 		Si des erreurs XML sont présentes, elles se retrouvent dans ce tableau
- * @return
+ *     Si des erreurs XML sont présentes, elles se retrouvent dans ce tableau
+ * @return string
+ *     Temps d'exécution
 **/
 function svp_actualiser_paquets_locaux($force = false, &$erreurs_xml = array()) {
 
@@ -39,18 +55,18 @@ function svp_actualiser_paquets_locaux($force = false, &$erreurs_xml = array()) 
 
 
 /**
- * Calcul la description de chaque paquet local
+ * Calcule la description de chaque paquet local
  *
  * Les paquets peuvent être stockés à 3 endroits :
  * plugins, plugins-dist, plugins-supp définis par les constantes respectives
  * _DIR_PLUGINS, _DIR_PLUGINS_DIST, _DIR_PLUGINS_SUPP
  *
  * @param array $erreurs_xml
- * 		Les erreurs XML éventuelles des paquet.xml se retrouvent dedans s'il y en a
+ *     Les erreurs XML éventuelles des paquet.xml se retrouvent dedans s'il y en a
  * @return array
- * 		Descriptions des paquets (intégrant un hash), stockés par
- * 		constante, puis par chemin.
- * 		array[_DIR_PLUGIN*][$chemin] = description
+ *     Descriptions des paquets (intégrant un hash), stockés par
+ *     constante, puis par chemin.
+ *     array[_DIR_PLUGIN*][$chemin] = description
 **/
 function svp_descriptions_paquets_locaux(&$erreurs_xml = array()) {
 	include_spip('inc/plugin');
@@ -86,7 +102,9 @@ function svp_descriptions_paquets_locaux(&$erreurs_xml = array()) {
 }
 
 
-// supprime les paquets et plugins locaux.
+/**
+ * Supprime tous les paquets et plugins locaux.
+**/ 
 function svp_base_supprimer_paquets_locaux() {
 	sql_delete('spip_paquets', 'id_depot = ' . 0); //_paquets locaux en 0
 	sql_delete('spip_plugins', sql_in('id_plugin', sql_get_select('DISTINCT(id_plugin)', 'spip_paquets'), 'NOT'));
@@ -94,11 +112,13 @@ function svp_base_supprimer_paquets_locaux() {
 
 
 /**
- * Actualise les informations en base
- * sur les paquets locaux
+ * Actualise les informations en base sur les paquets locaux
  * en ne modifiant que ce qui a changé.
  *
- * @param array $plugins liste d'identifiant de plugins
+ * @param array $paquets_locaux
+ *     Descriptions des paquets (intégrant un hash), stockés par
+ *     constante, puis par chemin.
+ *     array[_DIR_PLUGIN*][$chemin] = description
 **/
 function svp_base_modifier_paquets_locaux($paquets_locaux) {
 	include_spip('inc/svp_depoter_distant');
@@ -150,7 +170,22 @@ function svp_base_modifier_paquets_locaux($paquets_locaux) {
 }
 
 
-
+/**
+ * Insère en base tous les paquets locaux transmis
+ *
+ * De chaque description est extrait la partie plugin (1 seul plugin
+ * par préfixe de plugin connu) et la partie paquet (il peut y avoir plusieurs
+ * paquets pour un même préfixe de plugin).
+ * 
+ * @note
+ *     On essaie au mieux de faire des requêtes d'insertions multiples,
+ *     mieux gérées par les moteurs SQL (particulièrement pour SQLite)
+ * 
+ * @param array $paquets_locaux
+ *     Descriptions des paquets (intégrant un hash), stockés par
+ *     constante, puis par chemin.
+ *     array[_DIR_PLUGIN*][$chemin] = description
+**/
 function svp_base_inserer_paquets_locaux($paquets_locaux) {
 	include_spip('inc/svp_depoter_distant');
 	
@@ -397,8 +432,19 @@ function svp_base_actualiser_paquets_actifs() {
 
 }
 
-// Construit le contenu multi des balises nom, slogan et description a partir des items de langue
-// contenus dans les fichiers paquet-prefixe_langue.php
+/**
+ * Construit le contenu multilangue (tag <multi>) des balises nom, slogan
+ * et description à partir des items de langue contenus dans le fichier
+ * paquet-prefixe_langue.php
+ *
+ * @param string $prefixe     Préfixe du plugin
+ * @param string $dir_source  Chemin d'accès du plugin
+ * @return array
+ *     Tableau clé => texte multilangue entre <multi> et </multi>
+ *     Les clés peuvent être 'nom', 'slogan' et 'description', mais
+ *     seules les clés ayant une explication dans la chaine de langue
+ *     sont retournées.
+ */
 function svp_compiler_multis($prefixe, $dir_source) {
 
 	$multis =array();
@@ -443,12 +489,14 @@ function svp_compiler_multis($prefixe, $dir_source) {
 
 
 /**
- * Met à jour les informations d'obsolescence
- * des paquets locaux.
+ * Met à jour les informations d'obsolescence des paquets locaux.
  *
+ * L'obsolescence indique qu'un paquet est plus ancien (de version ou état
+ * moins avancé) qu'un autre également présent localement.
+ * 
  * @param array $ids_plugin
- * 		Identifiant de plugins concernes par les mises a jour
- * 		En cas d'absence, passera sur tous les paquets locaux
+ *     Liste d'identifiants de plugins
+ *     En cas d'absence, passera sur tous les paquets locaux
 **/
 function svp_corriger_obsolete_paquets($ids_plugin = array()) {
 	// on minimise au maximum le nombre de requetes.
@@ -551,33 +599,37 @@ function svp_corriger_obsolete_paquets($ids_plugin = array()) {
 /**
  * Supprime les plugins devenus orphelins dans cette liste.
  *
- * @param array $plugins liste d'identifiant de plugins
+ * @param array $ids_plugin
+ *     Liste d'identifiants de plugins
+ * @return array
+ *     Liste de plugins non orphelins
 **/
-function svp_supprimer_plugins_orphelins($plugins) {
+function svp_supprimer_plugins_orphelins($ids_plugin) {
 	// tous les plugins encore lies a des depots...
-	if ($plugins) {
-		$p = sql_allfetsel('DISTINCT(p.id_plugin)', array('spip_plugins AS p', 'spip_paquets AS pa'), array(sql_in('p.id_plugin', $plugins), 'p.id_plugin=pa.id_plugin'));
+	if ($ids_plugin) {
+		$p = sql_allfetsel('DISTINCT(p.id_plugin)', array('spip_plugins AS p', 'spip_paquets AS pa'), array(sql_in('p.id_plugin', $ids_plugin), 'p.id_plugin=pa.id_plugin'));
 		$p = array_map('array_shift', $p);
-		$diff = array_diff($plugins, $p);
+		$diff = array_diff($ids_plugin, $p);
 		// pour chaque plugin non encore utilise, on les vire !
 		sql_delete('spip_plugins', sql_in('id_plugin', $diff));
 		return $p; // les plugins encore en vie !
 	}
+	return array();
 }
 
 
 /**
- * Cherche dans les dépots distant
- * un plugin qui serait plus à jour que le prefixe, version et état que l'on transmet 
+ * Cherche dans les dépots distants un plugin qui serait plus à jour
+ * que le prefixe, version et état que l'on transmet 
  *
  * @param string $prefixe
  * 		Préfixe du plugin
  * @param string $version
- * 		Version du paquet a comparer
+ * 		Version du paquet à comparer
  * @param int $etatnum
  * 		État du paquet numérique
  * @return string
- * 		Version plus a jour, sinon rien
+ * 		Version plus à jour, sinon rien
 **/
 function svp_rechercher_maj_version($prefixe, $version, $etatnum) {
 
@@ -614,8 +666,7 @@ function svp_rechercher_maj_version($prefixe, $version, $etatnum) {
 
 
 /**
- * Actualise maj_version pour tous les paquets locaux
- * 
+ * Actualise l'information 'maj_version' pour tous les paquets locaux
 **/
 function svp_actualiser_maj_version() {
 	$update = array();

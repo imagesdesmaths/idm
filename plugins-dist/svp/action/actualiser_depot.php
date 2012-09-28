@@ -1,7 +1,15 @@
 <?php
 /**
- * Action de mises a jour en base de donnees des plugins du depot
+ * Gestion de l'action actualiser_depot
  *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Actions
+ */
+ 
+/**
+ * Action de mise à jour en base de données de la liste des plugins
+ * d'un ou de tous les dépots
  */
 function action_actualiser_depot_dist(){
 

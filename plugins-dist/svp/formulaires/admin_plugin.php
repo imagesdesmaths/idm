@@ -1,7 +1,33 @@
 <?php
 
+/**
+ * Gestion du formulaire de gestion des plugins 
+ *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Formulaires
+ */
+ 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Chargement du formulaire de gestion des plugins
+ *
+ * @param string $voir
+ *     Statut des plugins que l'on souhaite voir : actif, inactif, tous
+ * @param string $verrouille
+ *     Types de plugins que l'on souhaite voir :
+ *     - 'non' : les plugins utilisateurs
+ *     - 'oui' : les plugins verrouillés (plugins-dist)
+ *     - 'tous' : les deux !
+ * @param string|int $id_paquet
+ *     Identifiant du paquet dont on veut obtenir une description complète
+ *     lors de l'affichage du formulaire
+ * @param string $redirect
+ *     URL de redirection après les traitements
+ * @return array
+ *     Environnement du formulaire
+**/
 function formulaires_admin_plugin_charger_dist($voir='actif', $verrouille='non', $id_paquet='',$redirect=''){
 	$valeurs = array();
 
@@ -32,6 +58,35 @@ function formulaires_admin_plugin_charger_dist($voir='actif', $verrouille='non',
 	return $valeurs;
 }
 
+/**
+ * Vérifications du formulaire de gestion des plugins
+ *
+ * Appelle le décideur qui détermine la liste des actions à faire et si celles-ci
+ * peuvent être faites (dépendances connues). Une erreur sera levé dans le
+ * cas contraire.
+ *
+ * Si toutes les actions peuvent être faites, une demande de confirmation
+ * est envoyée (dans une erreur spéciale), présentant alors toutes les
+ * actions qui seront réalisées (celle demandée + celles à faire par voie
+ * de conséquence.
+ *
+ * Si on reçoit une demande de confirmation, on sort sans lever d'erreur !
+ * 
+ * @param string $voir
+ *     Statut des plugins que l'on souhaite voir : actif, inactif, tous
+ * @param string $verrouille
+ *     Types de plugins que l'on souhaite voir :
+ *     - 'non' : les plugins utilisateurs
+ *     - 'oui' : les plugins verrouillés (plugins-dist)
+ *     - 'tous' : les deux !
+ * @param string|int $id_paquet
+ *     Identifiant du paquet dont on veut obtenir une description complète
+ *     lors de l'affichage du formulaire
+ * @param string $redirect
+ *     URL de redirection après les traitements
+ * @return array
+ *     Tableau des erreurs
+**/
 function formulaires_admin_plugin_verifier_dist($voir='actif', $verrouille='non', $id_paquet='',$redirect=''){
 
 	$erreurs = array();
@@ -83,6 +138,27 @@ function formulaires_admin_plugin_verifier_dist($voir='actif', $verrouille='non'
 	return $erreurs;
 }
 
+/**
+ * Traitement du formulaire de gestion des plugins
+ *
+ * Si une liste d'action est validée, on redirige de formulaire sur
+ * l'action 'actionner' qui les traitera une par une.
+ * 
+ * @param string $voir
+ *     Statut des plugins que l'on souhaite voir : actif, inactif, tous
+ * @param string $verrouille
+ *     Types de plugins que l'on souhaite voir :
+ *     - 'non' : les plugins utilisateurs
+ *     - 'oui' : les plugins verrouillés (plugins-dist)
+ *     - 'tous' : les deux !
+ * @param string|int $id_paquet
+ *     Identifiant du paquet dont on veut obtenir une description complète
+ *     lors de l'affichage du formulaire
+ * @param string $redirect
+ *     URL de redirection après les traitements
+ * @return array
+ *     Retours du traitement
+**/
 function formulaires_admin_plugin_traiter_dist($voir='actif', $verrouille='non', $id_paquet='',$redirect=''){
 	
 	$retour = array();
@@ -96,15 +172,21 @@ function formulaires_admin_plugin_traiter_dist($voir='actif', $verrouille='non',
 		include_spip('inc/svp_actionner');
 		svp_actionner_traiter_actions_demandees($actions, $retour,$redirect);
 	}
-		
+
 	$retour['editable'] = true;
 	return $retour;
 }
 
 /**
- * Filtre pour simplifier la creation des actions du formulaire
- * [(#ID_PAQUET|svp_nom_action{desactiver})]
- * actions[desactiver][24]
+ * Crée une valeur d'action pour l'attribut 'name' d'une saisie de formulaire
+ *
+ * @example
+ *     [(#ID_PAQUET|svp_nom_action{on})]
+ *     écrit : actions[on][24]
+ * @param int $id_paquet
+ *     Identifiant du paquet
+ * @param string $action
+ *     Une action possible (on, off, stop, up, on, upon, kill)
 **/
 function filtre_svp_nom_action($id_paquet, $action) {
 	return "actions[$action][$id_paquet]";

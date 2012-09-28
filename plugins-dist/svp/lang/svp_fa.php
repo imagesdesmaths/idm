@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/svp?lang_cible=fa
+// extrait automatiquement de http://trad.spip.net/tradlang_module/svp?lang_cible=fa
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -216,7 +216,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_dependance_plugin_version' => 'پلاگين  @plugin@ بستگي به  @dependance@ @version@دارد ',
 	'message_erreur_aucun_plugin_selectionne' => 'هيچ پلاگيني انتخاب نشده.',
 	'message_erreur_ecriture_lib' => '@plugin@ مستلزم آن است كه آرشيو  <a href="@lib_url@">@lib@</a> در پرونده‌ي  <var>lib/</var> در ريشه‌ي سايت شما قرار بگيرد. با اين حال، اين پوشه غيرقابل نگارش است. شما بايد آن را به صورت دستي نصب كنيد يا مجوز نوشتن در آن پوشه را بدهيد. 
-',
+', # MODIF
 	'message_erreur_maj_inconnu' => 'به هنگام سازي پلاگين ناشناخته ممكن نسيت. ',
 	'message_erreur_plugin_introuvable' => 'يافتن پلاگين @plugin@ براي@action@ ممكن نيست. ',
 	'message_erreur_plugin_non_actif' => 'غيرفعال كردن پلاگيني كه فعال نيست ممكن نيست. ',

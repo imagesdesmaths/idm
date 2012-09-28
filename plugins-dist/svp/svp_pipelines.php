@@ -1,20 +1,27 @@
 <?php
 /**
- * Fonction pour le pipeline, n'a rien a effectuer
- *
- * @return
+ * Déclarations d'autorisations et utilisations de pipelines
+ * 
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Pipelines
+**/
+
+/**
+ * Fonction du pipeline autoriser. N'a rien à faire
+ * @pipeline autoriser
  */
 function svp_autoriser(){}
 
 /**
- * Autorisation d'iconification d'un depot
+ * Autoriser l'iconification (mettre un logo) d'un dépot
  *
- * @param object $faire
- * @param object $type
- * @param object $id
- * @param object $qui
- * @param object $opt
- * @return
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
  */
 function autoriser_depot_iconifier_dist($faire, $type, $id, $qui, $opt){
 	return true;
@@ -22,32 +29,41 @@ function autoriser_depot_iconifier_dist($faire, $type, $id, $qui, $opt){
 
 
 /**
- * Ajout de l'onglet Ajouter les plugins dont l'url depend du l'existence ou pas d'un depot
- * de plugins
+ * Ajout de l'onglet 'Ajouter les plugins'
  *
- * @param array $flux
- * @return array
+ * L'URL dépend de l'existence ou pas d'un dépot de plugins.
+ * En absence, on amène sur la page permettant de créer un premier dépot.
+ *
+ * @pipeline ajouter_onglets
+ * @param array $flux Données du pipeline
+ * @return array      Données du pipeline
  */
 function svp_ajouter_onglets($flux){
-    if ($flux['args']=='plugins') {
+	if ($flux['args']=='plugins') {
 		$compteurs = svp_compter('depot');
 		$page = ($compteurs['depot'] == 0) ? 'depots' : 'charger_plugin';
-        $flux['data']['charger_plugin']= new Bouton(
-												find_in_theme('images/plugin-add-24.png'),
-												'plugin_titre_automatique_ajouter',
-												generer_url_ecrire($page));
+		$flux['data']['charger_plugin'] =
+			new Bouton(
+				find_in_theme('images/plugin-add-24.png'),
+				'plugin_titre_automatique_ajouter',
+				generer_url_ecrire($page));
 	}
-    return $flux;
+	return $flux;
 }
 
 
 /**
- * On affiche dans les boucles (PLUGINS) (DEPOTS) et (PAQUETS)
- * que les distants par defaut
+ * Ne pas afficher par défaut les paquets,dépots,plugins locaux dans les boucles
+ * 
+ * On n'affiche dans les boucles (PLUGINS) (DEPOTS) et (PAQUETS)
+ * que les éléments distants par défaut (on cache les locaux).
+ * 
  * Utiliser {tout} pour tout avoir.
+ * Utiliser {tout}{id_depot=0} pour avoir les plugins ou paquets locaux.
  *
- * @param 
- * @return 
+ * @pipeline pre_boucle
+ * @param Boucle $boucle Description de la boucle
+ * @return Boucle        Description de la boucle
 **/
 function svp_pre_boucle($boucle) {
 
@@ -63,7 +79,7 @@ function svp_pre_boucle($boucle) {
 		if (
 			#!isset($boucle->modificateur['criteres']['id_depot']) && 
 			!isset($boucle->modificateur['tout'])) {
-				$boucle->where[] = array("'>'", "'$m_id_depot'", "'\"0\"'");				
+				$boucle->where[] = array("'>'", "'$m_id_depot'", "'\"0\"'");
 		}
 	}
 	// PLUGINS
@@ -87,14 +103,13 @@ function svp_pre_boucle($boucle) {
 		if (
 		#	!$id_depot && 
 			!isset($boucle->modificateur['tout'])) {
-				// Restreindre aux mots cles non techniques
+				// Restreindre aux plugins distant (id_depot > 0)
 				$boucle->from["depots_plugins"] =  "spip_depots_plugins";
 				$boucle->where[] = array("'='", "'depots_plugins.id_plugin'", "'$id_table.id_plugin'");
 				$boucle->where[] = array("'>'", "'depots_plugins.id_depot'", "'\"0\"'");
 		}
 	}
 
-	
 	return $boucle;
 
 }

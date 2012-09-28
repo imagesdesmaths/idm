@@ -1,7 +1,27 @@
 <?php
 
+/**
+ * Fichier permettant de transformer les données d'un arbre de description
+ * originaire d'un paquet.xml dans un format compatible avec la base de données
+ *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Plugins
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Pour une description de plugin donnée (issue de la dtd de paquet.xml),
+ * prépare les données à installer en bdd 
+ *
+ * Les données sont parfois sérialisées, parfois compilées
+ * pour tenir compte des spécificités de cette DTD et du stockage en bdd.
+ * 
+ * @param array $plugin
+ *     Description de plugin
+ * @return array
+ *     Couples clés => valeurs de description du paquet
+**/
 function plugins_preparer_sql_paquet($plugin)
 {
 	include_spip('inc/svp_outiller');

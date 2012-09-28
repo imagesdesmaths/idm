@@ -1,7 +1,28 @@
 <?php
 
+/**
+ * Fichier permettant de calculer les données SQL à insérer
+ * à partir d'une arbre de description originaire d'un plugin.xml
+ *
+ * @plugin SVP pour SPIP
+ * @license GPL
+ * @package SPIP\SVP\Plugins
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Pour une description de plugin donnée (issue de la dtd de plugin.xml),
+ * prépare les données à installer en bdd 
+ *
+ * Les données sont parfois sérialisées, parfois transcodées, parfois compilées
+ * pour tenir compte des spécificités de cette DTD et du stockage en bdd.
+ * 
+ * @param array $plugin
+ *     Description de plugin
+ * @return array
+ *     Couples clés => valeurs de description du paquet
+**/
 function plugins_preparer_sql_plugin($plugin)
 {
 	include_spip('inc/svp_outiller');
@@ -77,6 +98,20 @@ function plugins_preparer_sql_plugin($plugin)
 }
 
 
+/**
+ * Normalise un nom issu d'un plugin.xml 
+ *
+ * @todo Supprimer cette fonction qui ne sert nulle part ?
+ * 
+ * @param string $nom
+ *     Le nom
+ * @param string $langue
+ *     La langue à extraire
+ * @param bool $supprimer_numero
+ *     Supprimer les numéros ?
+ * @return string
+ *     Le nom
+**/
 function normaliser_nom($nom, $langue='', $supprimer_numero=true) {
 	include_spip('inc/texte');
 
@@ -107,8 +142,17 @@ function normaliser_nom($nom, $langue='', $supprimer_numero=true) {
 }
 
 
-// Eliminer les textes superflus dans les liens (raccourcis [XXX->http...])
-// et normaliser l'esperluete pour eviter l'erreur d'entite indefinie
+/**
+ * Normalise un lien issu d'un plugin.xml
+ * 
+ * Éliminer les textes superflus dans les liens (raccourcis [XXX->http...])
+ * et normaliser l'esperluete pour éviter l'erreur d'entité indéfinie
+ *
+ * @param string $url
+ *     URL à normaliser
+ * @return string
+ *     URL normalisée
+ */
 function normaliser_lien($url) {
 	if (!preg_match(',https?://[^]\s]+,', $url, $r))
 		return '';
@@ -117,9 +161,21 @@ function normaliser_lien($url) {
 }
 
 
-// - elimination des multi (exclue dans la nouvelle version)
-// - transformation en attribut des balises A
-// - interpretation des balises BR et LI et de la virgule et du espace+tiret comme separateurs
+/**
+ * Normalise un auteur ou une licence issue d'un plugin.xml
+ * 
+ * - Élimination des multi (exclus dans la nouvelle version)
+ * - Transformation en attribut des balises A
+ * - Interprétation des balises BR et LI et de la virgule et du
+ *   espace+tiret comme séparateurs
+ *
+ * @param string $texte
+ *     Texte de la balise
+ * @param string $balise
+ *     Nom de la balise (auteur | licence)
+ * @return array
+ *     Tableau listant les auteurs, licences et copyright trouvés
+ */
 function normaliser_auteur_licence($texte, $balise) {
 	include_spip('inc/filtres');
 	include_spip('inc/lien');
@@ -198,7 +254,14 @@ function normaliser_auteur_licence($texte, $balise) {
 }
 
 
-// Expanse les multi en un tableau de textes complets, un par langue
+/**
+ * Expanse les multi en un tableau de textes complets, un par langue
+ *
+ * @param string $texte
+ *     Le texte
+ * @return array
+ *     Texte expansé par code de langue : couples (code de langue => texte)
+ */
 function normaliser_multi($texte) {
 	include_spip('inc/filtres');
 

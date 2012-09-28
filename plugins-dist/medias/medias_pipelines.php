@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2012                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -174,6 +174,9 @@ function medias_editer_document_actions($flux){
 	return $flux;
 }
 
+function medias_renseigner_document_distant($flux){
+	return $flux;
+}
 
 /**
  * Compter les documents dans un objet

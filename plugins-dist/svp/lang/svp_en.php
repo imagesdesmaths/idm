@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/svp?lang_cible=en
+// extrait automatiquement de http://trad.spip.net/tradlang_module/svp?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -205,7 +205,7 @@ is not created or is not writable.
 	'message_dependance_plugin' => 'The plugin @plugin@ depends on @dependance@.',
 	'message_dependance_plugin_version' => 'The plugin @plugin@ depends on @dependance@ @version@',
 	'message_erreur_aucun_plugin_selectionne' => 'No plugin selected.',
-	'message_erreur_ecriture_lib' => '@plugin@ requires the library <a href="@lib_url@">@lib@</a> placed in the <var>lib/</var> at the root of your site. However, this directory is not writable. You must manually install it or give write permissions to that directory.',
+	'message_erreur_ecriture_lib' => '@plugin@ requires the library <a href="@lib_url@">@lib@</a> stored in the <var>lib/</var> at the root of your site. However, this directory doesn\'t exist or doesn\'t have write permission. You must manually install the library or create this directory with write permission.',
 	'message_erreur_maj_inconnu' => 'Impossible update of an unknown plugin.',
 	'message_erreur_plugin_introuvable' => 'It is impossible to find the plugin@plugin@ for @action@.',
 	'message_erreur_plugin_non_actif' => 'It is impossible to disable a plugin not active.',
