@@ -30,9 +30,9 @@
     serait sur la partie publique du site s'il &eacute;tait
     publi&eacute; en l'&eacute;tat. Bonne lecture !</p>
 
-    </div><div class="page">
-    [(#INCLURE{fond=inc/article}{id_article})]
-    </div><div class="page">
+    <div class="content">
+      [(#INCLURE{fond=inc/article}{id_article})]
+    </div>
 
     <BOUCLE_auteur(AUTEURS){id_article}>[(#SET{auteur_article,#NOM})]</BOUCLE_auteur>
     [(#INCLURE{fond=inc/forum-relecture}{id_article}{id_forum}{auteur_article=#GET{auteur_article}})]
