@@ -387,7 +387,7 @@ div.relies #social #fb-root, div.relies #social .fb_like { display: inline; vert
 div.article {}
 div.article #partenariat {width: 360px;text-align: center; margin: 0; float: right;clear:both; }
 div.article #partenariat .spip_logos { margin:0 auto; padding: 0; display: block; float: none; border: none; }
-div.article .spip_logos {float: right; margin-bottom: 15px;background-color:#2B2B2B;}
+div.article .spip_logos {float: right; margin-bottom: 15px;}
 div.article h1 { font-size:30px;clear:left;}
 div.article h2 { font-size:25px;}
 div.article h3 { font-size:20px;margin-top: 60px;}
