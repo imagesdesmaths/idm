@@ -159,9 +159,12 @@
     <h2 class="home_hat"><a href="#URL_RUBRIQUE{34}">Dans nos
     archives &hellip;</a></h2>
     <div id="communaute" class="resume bluelist">
-      <ul>
-        <BOUCLE1(ARTICLES) {id_secteur in 6,37} {par hasard} {0,5} {doublons}>
-          <li><a href="#URL_ARTICLE">[(#TITRE|trunctext{70})]</a></li>
+      <ul class="list_hp" style="background: transparent">
+        <BOUCLE1(ARTICLES) {id_secteur in 6,37} {par hasard} {0,4} {doublons}>
+          <li>
+            <a href="#URL_ARTICLE">[(#TITRE|trunctext{70})]</a>
+            <div class="auteurs">#LESAUTEURS</div>
+          </li>
         </BOUCLE1>
       </ul>
     </div>
