@@ -144,17 +144,6 @@
 
 <div id="home_bottom">
   <div id="hb_right">
-    <h2 class="home_hat"><a href="#URL_RUBRIQUE{34}">Communauté</a></h2>
-    <div id="communaute" class="resume bluelist">
-      <ul>
-        <BOUCLE1(ARTICLES){compteur forum} {par compteur_forum} {inverse} {0,5} >
-          <li><a href="#URL_ARTICLE">[(#TITRE|trunctext{70})]</a>
-            <div class="nb_commentaires"><div class="comment_count">#COMPTEUR{forum}</div></div>
-          </li>
-        </BOUCLE1>
-      </ul>
-    </div>
-
     <h2 class="home_hat"><a href="#URL_RUBRIQUE{34}">Courrier des lecteurs</a></h2>
     <div class="resume bluelist">
       <ul>
@@ -164,6 +153,16 @@
             <a href="#URL_ARTICLE">[(#TITRE|trunctext{70})]</a>
           </li>
         </BOUCLE_courrier>
+      </ul>
+    </div>
+
+    <h2 class="home_hat"><a href="#URL_RUBRIQUE{34}">Dans nos
+    archives &hellip;</a></h2>
+    <div id="communaute" class="resume bluelist">
+      <ul>
+        <BOUCLE1(ARTICLES) {id_secteur in 6,37} {par hasard} {0,5} {doublons}>
+          <li><a href="#URL_ARTICLE">[(#TITRE|trunctext{70})]</a></li>
+        </BOUCLE1>
       </ul>
     </div>
   </div>
