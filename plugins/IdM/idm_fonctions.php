@@ -200,21 +200,19 @@ function idm_clean_TeX ($texte) {
 }
 
 function idm_protect_TeX ($texte) {
+  $texte = echappe_html($texte);
+
   $texte = str_replace ('\[', '$$', $texte);
   $texte = str_replace ('\]', '$$', $texte);
+  $texte = preg_replace ('/\$\$([^$]+)\$\$/s', '<html>\[\1\]</html>', $texte);
+  $texte = echappe_html($texte);
+
   $texte = str_replace ('\(', '$', $texte);
   $texte = str_replace ('\)', '$', $texte);
-
-  $texte = preg_replace ('/\$\$([^$]+)\$\$/s', '<html>\[\1\]</html>', $texte);
   $texte = preg_replace ('/\$([^$]+)\$/s', '<html>$\1$</html>', $texte);
-  $texte = str_replace ('\[', '$$', $texte);
-  $texte = str_replace ('\]', '$$', $texte);
+  $texte = echappe_html($texte);
 
-  while (preg_match ('/<html>[$]+[^$]+</s', $texte)) {
-    $texte = preg_replace ('/(<html>[$]+[^$]+)</s', '\1&lt;', $texte);
-  }
-
-  return echappe_html ($texte);
+  return $texte;
 }
 
 function idm_pre_typo ($texte) {
