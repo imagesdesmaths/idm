@@ -2,7 +2,9 @@
 <INCLURE{fond=inc/head}{title=#TITRE}>
 
 <div id="art_head">  
-  <h2 class="home_hat">Billet</h2>  
+  <BOUCLE_rub(RUBRIQUES){id_rubrique}>
+    <h2 class="home_hat">#TITRE</h2>
+  </BOUCLE_rub>
   <div id="art_social">[(#INCLURE{fond=inc/social_bar})]
   </div>
 </div>  
