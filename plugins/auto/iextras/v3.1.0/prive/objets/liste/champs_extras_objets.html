@@ -1,0 +1,17 @@
+
+<B_objets>
+<div class='liste champs_extras_objets'>
+	<ul class='liste-items'>
+<BOUCLE_objets(DATA){source tableau,#VAL|lister_tables_objets_sql}{par cle}{editable = oui}>
+	[(#CLE|is_string|oui)
+		<li class='item  [(#COMPTEUR_BOUCLE|alterner{unit,lastUnit})] size1of2'>
+			[(#SET{nb,[(#CLE|compter_champs_extras)]})]
+			[(#ENV{lien,#SELF}
+				|parametre_url{objet,[(#VALEUR{type})]}
+				|icone_horizontale{ [(#VALEUR{texte_objets}|_T)][ (#GET{nb}|oui)<small>- [(#GET{nb}|singulier_ou_pluriel{iextras:nb_element,iextras:nb_elements})]</small>], [(#VALEUR{icone_objet})] })]
+		</li>
+	]
+</BOUCLE_objets>
+	</ul>
+</div>
+</B_objets>

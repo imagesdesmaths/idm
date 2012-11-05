@@ -1,0 +1,13 @@
+<traduction module="paquet-iextras" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/champs_extras/interface/trunk/lang/" reference="fr">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-iextras?lang_cible=en">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
+	<langue code="fr" />
+	<langue code="it" url="http://trad.spip.net/tradlang_module/paquet-iextras?lang_cible=it">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-iextras?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
+</traduction>

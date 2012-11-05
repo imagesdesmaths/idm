@@ -1,0 +1,35 @@
+<BOUCLE_si_extras(CONDITION){si (#VAL|extras_champs_utilisables)}>
+[(#BOITE_OUVRIR{
+	#CHEMIN_IMAGE{iextras-24.png}
+		|balise_img{'',cadre-icone}
+		|concat{<:iextras:liste_des_extras_possibles:>},'simple','titrem'})]
+		
+	<BOUCLE_tables(POUR){tableau (#VAL|extras_champs_utilisables)}>
+	<h2>[(#CLE|lister_tables_objets_sql|table_valeur{texte_objets}|_T)]</h2>
+		<B_extras>
+		<div class="liste">
+		<ul class="liste-items liste_extras_possibles">
+		<BOUCLE_extras(POUR){tableau #VALEUR}>
+			<li class="item">
+				#CLE
+				<ul class="actions">
+				<li><a href="[(#URL_ACTION_AUTEUR{iextras, [associer_champ/#_tables:CLE/(#CLE)], #SELF})]" title="<:iextras:action_associer_title|attribut_html:>"><:iextras:action_associer:></a></li>
+				<li><a href="[(#URL_ACTION_AUTEUR{iextras, [supprimer_champ/#_tables:CLE/(#CLE)], #SELF})]" class="supprimer" title="<:iextras:action_supprimer_title|attribut_html:>"><:iextras:action_supprimer:></a></li>
+				</ul>
+			</li>
+		</BOUCLE_extras>
+		</ul>
+		</div>
+		</B_extras>
+	</BOUCLE_tables>
+	
+#BOITE_FERMER
+
+<script type="text/javascript">
+(function($) {
+	$('ul.liste_extras_possibles .supprimer').click(function(){
+		return confirm("<:iextras:supprimer_reelement|attribut_html:>");
+	});
+})(jQuery);
+</script>
+</BOUCLE_si_extras>

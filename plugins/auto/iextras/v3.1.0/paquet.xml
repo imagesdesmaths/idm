@@ -1,0 +1,33 @@
+<paquet
+	prefix="iextras"
+	categorie="outil"
+	version="3.1.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="images/iextras-64.png"
+	documentation="http://www.spip-contrib.net/?article4028"
+	schema="1.0.0"
+>
+
+	<nom>Champs Extras (Interface)</nom>
+
+	<auteur>Matthieu Marcillaud</auteur>
+	<auteur>Fil</auteur>
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="declarer_champs_extras" inclure="base/iextras.php" />
+
+	<pipeline nom="autoriser" inclure="inc/iextras_autoriser.php" />
+	<pipeline nom="formulaire_verifier" inclure="inc/iextras.php" />
+
+	<necessite nom="cextras" compatibilite="[3.0.4;]" />
+	<necessite nom="saisies" compatibilite="[1.21.0;]" />
+	<necessite nom="verifier" compatibilite="[0.1.12;]" />
+	<necessite nom="yaml" compatibilite="[1.5.0;]" />
+
+	<menu nom="champs_extras" titre="iextras:champs_extras" parent="menu_configuration" icone="images/iextras-16.png" />
+
+</paquet>
+
+
+

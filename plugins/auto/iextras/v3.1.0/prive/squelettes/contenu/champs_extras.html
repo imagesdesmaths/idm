@@ -1,0 +1,12 @@
+[(#AUTORISER{configurer,champs_extras}|sinon_interdire_acces)]
+
+<h1><:iextras:titre_iextras:></h1>
+
+<div id="wysiwyg">
+[(#BOITE_OUVRIR{ <:iextras:liste_objets_applicables:>})]
+<INCLURE{fond=prive/objets/liste/champs_extras_objets,lien=#URL_ECRIRE{champs_extras_edit}} />
+#BOITE_FERMER
+
+<INCLURE{fond=prive/objets/contenu/champs_extras_possibles} />
+</div>
+
