@@ -1,0 +1,33 @@
+[(#REM) 
+
+  ### /!\ boucle POUR (spip Bonux) ###
+	
+  Parametres :
+  - ** datas : tableau de donnees cle=>valeur
+  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+  - cacher_option_intro : pas de premier option vide  (defaut:"")
+  - class : classe(s) css ajoutes au select
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+  
+  Exemple d'appel :
+	[(#SAISIE{selection,produits,
+		label=<:plugin:info_produits:>,
+		datas=#ARRAY{
+			cle1,valeur1,
+			cle2,valeur2,
+			cle3,valeur3}})] 
+]
+
+[(#REM) datas peut être une chaine qu'on sait décomposer ]
+#SET{datas, #ENV*{datas}}
+#SET{datas, #GET{datas}|is_string|?{(#GET{datas}|saisies_chaine2tableau), #GET{datas}}}
+[(#REM) Attention, la valeur ou la valeur forcée peut être une chaine vide. On doit donc tester avec is_null. ]
+#SET{valeur,#ENV{valeur_forcee}|is_null|?{#ENV{valeur}|is_null|?{#ENV{defaut},#ENV{valeur}},#ENV{valeur_forcee}}}
+
+<select name="#ENV{nom}" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ size="(#ENV{size})"][ (#ENV*{attributs})]>
+[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
+<BOUCLE_selection(POUR){tableau #GET{datas}}>
+	<option value="#CLE"[(#CLE|=={#GET{valeur}}|oui)selected="selected"]>#VALEUR</option>
+</BOUCLE_selection>
+</select>

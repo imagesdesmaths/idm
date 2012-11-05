@@ -1,0 +1,147 @@
+<html>
+<head>
+	<title>Test de génération des vues de saisies</title>
+	[<link rel="stylesheet" href="(#CHEMIN{spip_formulaires.css})" type="text/css" media="all" title="formulaires" charset="utf-8" />]
+	<style type="text/css">
+		.formulaire_spip{
+			width:40%;
+			border:1px solid black;
+			-moz-border-radius:10px;
+			-webkit-border-radius:10px;
+			border-radius:10px;
+		}
+		.formulaire_spip ul li{
+			padding:0.5em;
+		}
+		.formulaire_spip li.fieldset{
+			padding:0;
+		}
+		.formulaire_spip li.obligatoire{
+			background:#ffcfcf;
+		}
+		.formulaire_spip .fieldset .legend{
+			margin:0;
+			font-style:italic;
+		}
+	</style>
+</head>
+<body>
+	<h1>Générer des vues de saisie</h1>
+
+	#SET{saisies,
+		#ARRAY{
+			0,#ARRAY{
+				saisie, destinataires,
+				options, #ARRAY{
+					nom, destinataires,
+					label, Destinataires,
+					choix_destinataires, #ARRAY{0,1,1,2},
+					type_choix, plusieurs,
+					obligatoire, oui
+				}
+			},
+			1,#ARRAY{
+				saisie, input,
+				options, #ARRAY{
+					nom, prenom,
+					label, Prénom,
+				}
+			},
+			2,#ARRAY{
+				saisie, input,
+				options, #ARRAY{
+					nom, nom,
+					label, Nom,
+					obligatoire, oui
+				}
+			},
+			3,#ARRAY{
+				saisie, input,
+				options, #ARRAY{
+					nom, courriel,
+					label, Courriel,
+					obligatoire, oui
+				},
+				verifier, #ARRAY{
+					type, email
+				}
+			},
+			4,#ARRAY{
+				saisie, case,
+				options, #ARRAY{
+					nom, case,
+					label, Une sorte de case à cocher,
+					label_case, Check la vibes
+				}
+			},
+			5,#ARRAY{
+				saisie, fieldset,
+				options, #ARRAY{
+					nom, adresse,
+					label, Adresse
+				},
+				saisies, #ARRAY{
+					1,#ARRAY{
+						saisie, textarea,
+						options, #ARRAY{
+							nom, voie,
+							label, Voie,
+							obligatoire, non,
+						}
+					},
+					2,#ARRAY{
+						saisie, input,
+						options, #ARRAY{
+							nom, code_postal,
+							label, Code postal,
+							obligatoire, oui
+						}
+					},
+					3,#ARRAY{
+						saisie, input,
+						options, #ARRAY{
+							nom, ville,
+							label, Ville,
+							obligatoire, oui
+						}
+					}
+				}
+			},
+			6,#ARRAY{
+				saisie, oui_non,
+				options, #ARRAY{
+					nom, peutetre,
+					label, Tu veux ou tu veux pas ?,
+					obligatoire, oui,
+					info_obligatoire, " / obligatoire"
+				}
+			},
+		}
+	}
+
+	<h2>Formulaire auquel on doit répondre</h2>
+	<div class="formulaire_spip">
+	<ul>
+	#GENERER_SAISIES{#GET{saisies}}
+	</ul>
+	</div>
+
+
+	#SET{valeurs,
+		#ARRAY{
+			case, on,
+			peutetre, '',
+			prenom, Jean-Paul,
+			code_postal, 22222,
+			nom, Fitousi,
+			ville, Deuville,
+			courriel, robert@menard.com,
+			destinataires, #ARRAY{1,1},
+			voie, 2 rue du Deux,
+		}
+	}
+
+	<h2>Réponse à ce formulaire</h2>
+	#VOIR_SAISIES{#GET{saisies}, #GET{valeurs}}
+</body>
+</html>

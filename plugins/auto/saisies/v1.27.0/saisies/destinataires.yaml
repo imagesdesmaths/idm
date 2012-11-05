@@ -1,0 +1,83 @@
+
+titre: '<:saisies:saisie_destinataires_titre:>'
+description: '<:saisies:saisie_destinataires_explication:>'
+options:
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'description'
+      label: '<:saisies:option_groupe_description:>'
+    saisies:
+      -
+        saisie: 'input'
+        options:
+          nom: 'label'
+          label: '<:saisies:option_label_label:>'
+          explication: '<:saisies:option_label_explication:>'
+          size: 50
+      -
+        saisie: 'input'
+        options:
+          nom: 'explication'
+          label: '<:saisies:option_explication_label:>'
+          explication: '<:saisies:option_explication_explication:>'
+          size: 50
+      -
+        saisie: 'auteurs'
+        options:
+          nom: 'choix_destinataires'
+          label: '<:saisies:option_choix_destinataires_label:>'
+          explication: '<:saisies:option_choix_destinataires_explication:>'
+          multiple: 'oui'
+          option_statut: 'oui'
+      -
+        saisie: 'radio'
+        options:
+          nom: 'type_choix'
+          datas:
+            tous: '<:saisies:option_type_choix_tous:>'
+            un: '<:saisies:option_type_choix_un:>'
+            plusieurs: '<:saisies:option_type_choix_plusieurs:>'
+          defaut: 'tous'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'affichage'
+      label: '<:saisies:option_groupe_affichage:>'
+    saisies:
+      -
+        saisie: 'input'
+        options:
+          nom: 'attention'
+          label: '<:saisies:option_attention_label:>'
+          explication: '<:saisies:option_attention_explication:>'
+          size: 50
+      -
+        saisie: 'input'
+        options:
+          nom: 'info_obligatoire'
+          label: '<:saisies:option_info_obligatoire_label:>'
+          explication: '<:saisies:option_info_obligatoire_explication:>'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'validation'
+      label: '<:saisies:option_groupe_validation:>'
+    saisies:
+      -
+        saisie: 'oui_non'
+        options:
+          nom: 'obligatoire'
+          label: '<:saisies:option_obligatoire_label:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'erreur_obligatoire'
+          label: '<:saisies:option_erreur_obligatoire_label:>'
+          explication: '<:saisies:option_erreur_obligatoire_explication:>'
+defaut:
+  options:
+    label: '<:saisies:saisie_destinataires_titre:>'
+    choix_destinataires: [1,2,3,4]
+    # champs extras (definition du champ sql)
+    sql: "text DEFAULT '' NOT NULL"

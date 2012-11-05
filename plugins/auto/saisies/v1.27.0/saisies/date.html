@@ -1,0 +1,17 @@
+[(#REM) 
+		Zone de saisie de date utilsant le dateur de Bonux si présent.
+		Sur les sites en HTML5, utilise type="date"
+		sur le input, et type="text" par défaut pour les autres.
+		Pour tous on utilise class="date" pour activer le dateur.
+		La valeur fournie peut être au format mysql aaaa-mm-jj ou spip jj/mm/aaaa
+		La date est proposée au format jj/mm/aaaa
+]
+#SET{valeur,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}
+#SET{date_mysql,([0-9][0-9][0-9][0-9])-([0-9][0-9])-([0-9][0-9])}
+[(#GET{valeur}|match{#GET{date_mysql}}|oui) #SET{valeur,#GET{valeur}|affdate{'d/m/Y'}]
+[(#INCLURE{fond=saisies/input,
+			env,
+            valeur=#GET{valeur},
+            type=#HTML5|?{date,text},
+            class=[(#ENV{class}) ]date})]
+[(#ENV{disable}|non|et{#ENV{readonly}|non})[(#INCLURE{fond=formulaires/dateur/inc-dateur})]]

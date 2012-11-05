@@ -1,0 +1,51 @@
+<html>
+<head>
+	<title>Test de configuration de saisie</title>
+	[<link rel="stylesheet" href="(#CHEMIN{spip_formulaires.css})" type="text/css" media="all" title="formulaires" charset="utf-8" />]
+	<style type="text/css">
+		.formulaire_spip{
+			width:40%;
+			border:1px solid black;
+			-moz-border-radius:10px;
+			-webkit-border-radius:10px;
+			border-radius:10px;
+		}
+		.formulaire_spip ul li{
+			padding:0.5em;
+		}
+		.formulaire_spip li.fieldset{
+			padding:0;
+		}
+		.formulaire_spip li.obligatoire{
+			background:#ffcfcf;
+		}
+		.formulaire_spip .fieldset .legend{
+			margin:0;
+			font-style:italic;
+		}
+	</style>
+</head>
+<body>
+	<h1>Test pour générer le formulaire de configuration d'une saisie</h1>
+	
+	<h2>Par defaut, sans configuration du nom du champ</h2>
+	<form class="formulaire_spip" action="#SELF" method="post">
+		<ul>
+			#CONFIGURER_SAISIE{#ENV{saisie, input}}
+			<li class="boutons">
+				<input type="submit" class="submit" />
+			</li>
+		</ul>
+	</form>
+	
+	<h2>En forçant la configuration du nom</h2>
+	<form class="formulaire_spip" action="#SELF" method="post">
+		<ul>
+			#CONFIGURER_SAISIE{#ENV{saisie, input}, avec_nom=oui}
+			<li class="boutons">
+				<input type="submit" class="submit" />
+			</li>
+		</ul>
+	</form>
+</body>
+</html>

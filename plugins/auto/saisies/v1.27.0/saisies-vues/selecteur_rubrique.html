@@ -1,0 +1,24 @@
+[(#REM) 
+	  
+  ### /!\ selecteur (spip Bonux) ###
+	  Attention, ce qui est retourne est un tableau :
+	  _request($name) = array('rubrique|3', 'rubrique|9', 'rubrique|10');
+	  Une fonction de SPIP Bonux permet de récupérer un tableau d'identifiants par type d'objet :
+	  [(#CHAMP|picker_selected{article})]
+	  Cette fonction peut etre pratique dans une boucle en utilisant le critere IN
+	  
+]
+
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	<B_rubriques_selectionnees>
+	<ul>
+	<BOUCLE_rubriques_selectionnees(RUBRIQUES){tout}{id_rubrique IN #ENV*{valeur}|picker_selected{rubrique}}>
+		<li class="choix">#TITRE (<:rubrique:> #ID_RUBRIQUE) - #STATUT</li>
+	</BOUCLE_rubriques_selectionnees>
+	</ul>
+	</B_rubriques_selectionnees>
+</BOUCLE_test_multiple>
+	<BOUCLE_rubrique_selectionnee(RUBRIQUES){tout}{id_rubrique IN #ENV*{valeur}|picker_selected{rubrique}}>
+	  	<p>#TITRE (<:rubrique:> #ID_RUBRIQUE) - #STATUT</p>
+	</BOUCLE_rubrique_selectionnee>
+<//B_test_multiple>
