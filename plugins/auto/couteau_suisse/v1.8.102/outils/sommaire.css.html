@@ -1,0 +1,78 @@
+div.cs_sommaire {
+	display:block;
+	float:right;
+	margin-left:1em;
+	margin-right:0.4em;
+	overflow:auto;
+	z-index:100;
+	max-height:350px;
+	text-align:left;
+}
+
+a.sommaire_ancre {
+	background:transparent url([(#EVAL{_DIR_IMG_PACK}|url_absolue)]spip_out.gif) no-repeat scroll left center;
+	padding-left:10px;
+	text-decoration:none;
+}
+
+div.cs_sommaire a:after {
+	display:none;
+}
+
+div.cs_sommaire_avec_fond {
+	background: transparent url([(#CHEMIN{img/sommaire/coin.gif}|url_absolue)]) no-repeat scroll left top;
+	border-right: 1px solid rgb(153, 153, 153);
+	border-bottom: 1px solid rgb(153, 153, 153);
+	padding-bottom:0.1em;
+}
+
+div.cs_sommaire_sans_fond {
+	border: thin solid gray;
+	background-color: white;
+}
+
+div.cs_sommaire_inner {
+	margin: 3pt;
+}
+
+div.cs_sommaire_titre_avec_fond, div.cs_sommaire_titre_sans_fond {
+	border-bottom: 1px dotted silver;
+	line-height: 1;
+	position: inherit;
+	font-weight: bold;
+	text-align: center;
+}
+
+div.cs_sommaire_titre_avec_fond {
+	margin-left: 15px;
+}
+
+div.cs_sommaire ul{
+	margin: 0.3em 0.5em 0.1em 0.7em;
+	padding: 0pt;
+	font-size: 84%;
+	list-style-image: none;
+	list-style-position: outside;
+	list-style-type: none;
+}
+
+div.cs_sommaire ul li{
+	margin: 0pt;
+	padding: 0pt;
+	list-style-image: none;
+	list-style-position: outside;
+	list-style-type: none;
+}
+
+div.cs_sommaire_titre_avec_fond, div.cs_sommaire_titre_sans_fond {
+	background:transparent url([(#EVAL{_DIR_IMG_PACK}|url_absolue)]deplierbas.gif) no-repeat scroll right center;
+	cursor:pointer;
+	padding: 0.3em 18px;
+}
+
+div.cs_sommaire_replie {
+	background:transparent url([(#EVAL{_DIR_IMG_PACK}|url_absolue)]deplierhaut_rtl.gif) no-repeat scroll right center;
+	border:none;
+}
+
+.cs_sommaire_invisible{ display:none; }

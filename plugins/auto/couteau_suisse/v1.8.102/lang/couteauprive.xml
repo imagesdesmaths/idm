@@ -1,0 +1,33 @@
+<traduction module="couteauprive" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/couteau_suisse/lang/" reference="fr">
+	<langue code="ast" />
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=ca">
+		<traducteur nom="merce" lien="http://trad.spip.net/auteur/merce" />
+	</langue>
+	<langue code="en" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=en">
+		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
+		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
+		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
+		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
+		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
+		<traducteur nom="merce" lien="http://trad.spip.net/auteur/merce" />
+	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=es">
+		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
+	</langue>
+	<langue code="fr" />
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=fr_tu">
+		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
+		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
+	</langue>
+	<langue code="gl" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=gl">
+		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
+	</langue>
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=nl">
+		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
+	</langue>
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
+	</langue>
+	<langue code="tr" />
+</traduction>

@@ -1,0 +1,131 @@
+#CACHE{0}
+<script language="JavaScript" type="text/javascript">
+var ar_type_urls = "#ENV*{type_urls}";
+var ar_var_vide = "[(#REM|sinon{<:couteauprive:variable_vide:>}|html2unicode|addslashes)]";
+var ar_url_calculee = "[(#REM|sinon{<:couteauprive:urls_url_calculee:>}|html2unicode|addslashes)]";
+var ar_edit_erreur = "[(#REM|sinon{<:couteauprive:urls_edit_erreur:>}|html2unicode|addslashes)]";
+var ar_attente = "[(#REM|sinon{<:couteauprive:attente:>}|html2unicode|addslashes)]";
+var ar_valeur_vide = "[(#REM|sinon{<:couteauprive:urls_valeur_vide:>}|html2unicode|addslashes)]";
+
+function html_type_urls(selecteur, chaine, rempl) {
+	jQuery(selecteur).html(chaine.replace(/@type@/, rempl));
+}
+
+if (window.jQuery) jQuery(function(){
+	jQuery("#ar_chercher", this).click( function() {
+		jQuery("#ar_url_objet").val(ar_attente);
+		jQuery("#ar_titre, #ar_url_propre, #ar_url_calculee").html('');
+		html_type_urls("#label_url_calculee", ar_url_calculee, '...');
+		var num = /\d+/.exec(jQuery("#ar_num_objet").val());
+		if(num==null) {
+			jQuery("#ar_url_objet").val('');
+			return;
+		}
+		var val = jQuery("#ar_type_objet").val();
+		var url = "./?exec=action_rapide&script=admin_couteau_suisse&arg=type_urls|URL_objet_191&type_objet="+val+"&id_objet="+num;
+		jQuery("#ar_url_trouvee").load(url);
+	});
+
+	if(typeof onAjaxLoad=='function') onAjaxLoad(ar_load);
+});
+
+function ar_load() {
+	// on sort si le load ne nous concerne pas
+	if(this.id != "ar_url_trouvee") return;
+	var res = jQuery("#ar_url_trouvee").html();
+	jQuery("#ar_url_objet").val('');
+	if(!res) {
+		jQuery("#ar_url_objet, #url_objet_input").enable(false);
+		return;
+	}
+	res = res.split(/\|\|/);
+	jQuery("#ar_url_propre").html(res[0]?res[0]:ar_var_vide);
+	jQuery("#ar_titre").html(res[1]?res[1]:ar_var_vide);
+	jQuery("#ar_url_calculee").html(res[2]?res[2]:res[0]);
+	jQuery("#ar_url_objet").val(res[4]);
+	if(res[3]) ar_type_urls = res[3];
+	html_type_urls("#label_url_calculee", ar_url_calculee, ar_type_urls);
+	disab = (ar_type_urls=='page') || (ar_type_urls=='standard') || (ar_type_urls=='html');
+	jQuery("#ar_url_objet, #url_objet_input").attr('disabled',disab?'disabled':'')
+	if(disab) {
+		html_type_urls("#ar_edit_info", ar_edit_erreur, ar_type_urls);
+		jQuery("#url_objet_input").addClass("cs_hidden");
+	} else {
+		jQuery("#ar_edit_info").html(ar_valeur_vide);
+		jQuery("#url_objet_input").removeClass("cs_hidden");
+	}
+	jQuery("#ar_edit_info").removeClass("cs_hidden");
+}
+
+</script>
+<div style='text-align: left; padding:0.4em;'>
+	<fieldset><legend><:couteauprive:urls_purger_tout:> </legend>
+#SET{nb, 0}<BOUCLE_nb_articles(ARTICLES){tout}{url_propre!=''}> </BOUCLE_nb_articles>#SET{nb, #TOTAL_BOUCLE}</B_nb_articles>
+#SET{val, #REM|sinon{couteauprive:urls_base_vide}|_T}
+[(#GET{nb}|>{0}|oui)
+ #SET{val, #REM|sinon{couteauprive:urls_base_total}|_T|replace{@nb@,#GET{nb}}}
+]<label><input name="purger_articles"[ checked="(#GET{nb}|>{0}|?{checked})"] type="checkbox" value="articles" /><:couteau:objet_articles:>.
+<span class="ar_edit_info">#GET{val}.</span></label>
+#SET{nb, 0}<BOUCLE_nb_rubriques(RUBRIQUES){tout}{url_propre!=''}> </BOUCLE_nb_rubriques>#SET{nb, #TOTAL_BOUCLE}</B_nb_rubriques>
+#SET{val, #REM|sinon{couteauprive:urls_base_vide}|_T}
+[(#GET{nb}|>{0}|oui)
+ #SET{val, #REM|sinon{couteauprive:urls_base_total}|_T|replace{@nb@,#GET{nb}}}
+]<br /><label><input name="purger_rubriques"[ checked="(#GET{nb}|>{0}|?{checked})"] type="checkbox" value="rubriques" /><:couteau:objet_rubriques:>.
+<span class="ar_edit_info">#GET{val}.</span></label>
+#SET{nb, 0}<BOUCLE_nb_breves(BREVES){tout}{url_propre!=''}> </BOUCLE_nb_breves>#SET{nb, #TOTAL_BOUCLE}</B_nb_breves>
+#SET{val, #REM|sinon{couteauprive:urls_base_vide}|_T}
+[(#GET{nb}|>{0}|oui)
+ #SET{val, #REM|sinon{couteauprive:urls_base_total}|_T|replace{@nb@,#GET{nb}}}
+]<br /><label><input name="purger_breves"[ checked="(#GET{nb}|>{0}|?{checked})"] type="checkbox" value="breves" /><:couteau:objet_breves:>.
+<span class="ar_edit_info">#GET{val}.</span></label>
+#SET{nb, 0}<BOUCLE_nb_auteurs(AUTEURS){tout}{url_propre!=''}> </BOUCLE_nb_auteurs>#SET{nb, #TOTAL_BOUCLE}</B_nb_auteurs>
+#SET{val, #REM|sinon{couteauprive:urls_base_vide}|_T}
+[(#GET{nb}|>{0}|oui)
+ #SET{val, #REM|sinon{couteauprive:urls_base_total}|_T|replace{@nb@,#GET{nb}}}
+]<br /><label><input name="purger_auteurs"[ checked="(#GET{nb}|>{0}|?{checked})"] type="checkbox" value="auteurs" /><:couteau:objet_auteurs:>.
+<span class="ar_edit_info">#GET{val}.</span></label>
+#SET{nb, 0}<BOUCLE_nb_mots(MOTS){tout}{url_propre!=''}> </BOUCLE_nb_mots>#SET{nb, #TOTAL_BOUCLE}</B_nb_mots>
+#SET{val, #REM|sinon{couteauprive:urls_base_vide}|_T}
+[(#GET{nb}|>{0}|oui)
+ #SET{val, #REM|sinon{couteauprive:urls_base_total}|_T|replace{@nb@,#GET{nb}}}
+]<br /><label><input name="purger_mots"[ checked="(#GET{nb}|>{0}|?{checked})"] type="checkbox" value="mots" /><:couteau:objet_mots:>.
+<span class="ar_edit_info">#GET{val}.</span></label>
+#SET{nb, 0}<BOUCLE_nb_sites(SITES){tout}{url_propre!=''}> </BOUCLE_nb_sites>#SET{nb, #TOTAL_BOUCLE}</B_nb_sites>
+#SET{val, #REM|sinon{couteauprive:urls_base_vide}|_T}
+[(#GET{nb}|>{0}|oui)
+ #SET{val, #REM|sinon{couteauprive:urls_base_total}|_T|replace{@nb@,#GET{nb}}}
+]<br /><label><input name="purger_syndic"[ checked="(#GET{nb}|>{0}|?{checked})"] type="checkbox" value="syndic" /><:couteau:objet_syndics:>.
+<span class="ar_edit_info">#GET{val}.</span></label>
+
+	<div style='text-align: right; padding:0.4em;'><input name="submit" class='fondo' type='submit' value="<:couteauprive:urls_purger_tables:>" /></div>
+	</fieldset>
+</div>
+
+[(#REM) Ce separateur va permettre de commencer ici une deuxieme <form/> Ajax )]
+@@CS_FORM@@
+
+<div style='text-align: center; padding:0.4em;'>
+	<fieldset><legend><:couteauprive:urls_choix_objet:> </legend>
+     <div style="margin:0.3em 0;"><label><b><:couteauprive:urls_type_objet:></b>
+     <select class="forml ar_select" name="ar_type_objet" id="ar_type_objet">
+        <option value='article' [selected="(#ENV{ar_type_objet,article}|=={article}|?{selected})"] ><:couteau:objet_article:></option>
+        <option value='rubrique' [selected="(#ENV{ar_type_objet,article}|=={rubrique}|?{selected})"] ><:couteau:objet_rubrique:></option>
+        <option value='breve' [selected="(#ENV{ar_type_objet,article}|=={breve}|?{selected})"] ><:couteau:objet_breve:></option>
+        <option value='auteur' [selected="(#ENV{ar_type_objet,article}|=={auteur}|?{selected})"] ><:couteau:objet_auteur:></option>
+        <option value='mot' [selected="(#ENV{ar_type_objet,article}|=={mot}|?{selected})"] ><:couteau:objet_mot:></option>
+        <option value='syndic' [selected="(#ENV{ar_type_objet,article}|=={syndic}|?{selected})"] ><:couteau:objet_syndic:></option>
+     </select></label>
+	 &nbsp;
+	 <label for="ar_num_objet"><b><:couteauprive:urls_num_objet:></b>&nbsp;<input class="ar_num_objet" id="ar_num_objet" name="ar_num_objet" size="5" value="#ENV*{ar_num_objet}"/></label><img id="ar_chercher" style="vertical-align:bottom; cursor:pointer; margin-left:1em;" title="<:couteauprive:urls_rechercher:>" src="#EVAL{_DIR_IMG_PACK}loupe.png" alt="<:bouton_chercher:>"/>
+	 </div>
+	 <div style="text-align:left;">
+	  <b><:couteauprive:urls_titre_objet:></b>&nbsp;<span id="ar_titre"> </span><br />
+	  <b><:couteauprive:urls_url_objet:></b>&nbsp;<span id="ar_url_propre"> </span><br />
+	  <span id="label_url_calculee" style="font-weight:bold;">[(#REM|sinon{<:couteauprive:urls_url_calculee:>}|replace{@type@,#ENV*{type_urls}})]</span>  <span id="ar_url_calculee">&nbsp;</span><br />
+	  <label><b><:couteauprive:urls_nouvelle:></b><input style="width:100%;" id="ar_url_objet" name="ar_url_objet" value="" disabled="disabled"/></label>
+	  <div class="ar_edit_info cs_hidden" id="ar_edit_info">&nbsp;</div>
+	 </div>
+	 <div style="text-align:right"><input name="submit" id='url_objet_input' class='fondo' type='submit' disabled="disabled" value="<:couteauprive:urls_enregistrer:>" /></div>
+	 <div id="ar_url_trouvee" class="cs_hidden">||</div>
+	</fieldset>
+</div>
