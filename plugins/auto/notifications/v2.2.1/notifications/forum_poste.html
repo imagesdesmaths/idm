@@ -1,0 +1,11 @@
+[(#REM)
+	
+	Si on a facteur, on teste que l'on a bien le squelette emails/texte.html
+	
+	Si oui, on l'utilise comme wrapper de notre email, sinon on envoit la version textuelle
+	
+][(#VAL{texte}|trouver_fond{emails/}|?{
+	#INCLURE**{fond=emails/texte,sujet=#INCLURE**{fond=notifications/forum_poste_html_sujet,env},html=#INCLURE**{fond=notifications/forum_poste_html_corps,env}}
+	,
+	#INCLURE**{fond=notifications/forum_poste_texte,env}
+})]

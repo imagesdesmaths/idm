@@ -1,0 +1,20 @@
+
+        [(#REM) Timeline des forums ]
+        <B_forumstimeline>
+        <div class="menu timeline">
+        <h2><:notifications:suivis_public_vos_forums_date:></h2>
+        <ul>
+         <BOUCLE_forumstimeline(FORUMS)
+         {id_auteur=(#SESSION{id_auteur}|sinon{-1})}
+            {!par date_heure}
+            {statut?}
+            {plat}>[#GET{fermeul}
+            <li>(#DATE|annee|unique)<ul>[(#SET{fermeul,</ul></li>})]]
+            [<li><a href="[(#SELF|parametre_url{
+            	debut_forums,[(#COMPTEUR_BOUCLE|moins{1})]}
+            	)#pagination_forums]">(#DATE|affdate_court|unique)</a></li>
+	]</BOUCLE_forumstimeline>
+	#GET{fermeul}
+	</ul>
+	</div>
+	</B_forumstimeline>
