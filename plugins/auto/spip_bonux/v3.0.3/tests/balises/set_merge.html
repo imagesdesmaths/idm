@@ -1,0 +1,60 @@
+[(#REM)
+
+	la balise SET_MERGE sert a merger des valeurs dans un tableau #SET
+	#SET_MERGE{tab,t1} : merge tab et t1 dans tab
+	#SET_MERGE{tab,t1,t2} : merge t1 et t2 dans tab
+]
+
+[(#REM) ----- 2 arguments ------ ]
+[(#REM) 
+	SET SET+GET|merge = SET MERGE
+]
+	#SET{Aa,#ARRAY{a,aaa}} #SET{Aaa,#ARRAY{a,aaa}}
+	#SET{Ab,#ARRAY{b,bbb}}
+	[(#SET{Ac,[(#GET{Aa}|array_merge{#GET{Ab}})]})]
+	#SET_MERGE{Aaa,#GET{Ab}}
+	[(#GET{Ac}|!=={#GET{Aaa}}|oui)[(#SET{err,"Aaa et Ac sont differents"})]]
+
+
+[(#REM) 
+	SET_MERGE peut etre fait sans declarer un SET prealable
+]
+	#SET{Ba,#ARRAY{a,aaa}}
+	#SET_MERGE{Bb,#GET{Ba}}
+	[(#GET{Ba}|!=={#GET{Bb}}|oui)[(#SET{err,"Ba et Bb sont différents"})]]
+
+[(#REM) 
+	Si une chaine est donnee a MERGE, elle est transformee en tableau
+]
+	#SET_MERGE{C,coucou}
+	[(#GET{C}|!=={#ARRAY{0,coucou}})[(#SET{err,"(C) String non compris par #SET_MERGE"})]]
+
+
+[(#REM) ----- 3 arguments ------ ]
+[(#REM) 
+	SET SET+GET|merge = SET MERGE
+]
+	#SET{Fa,#ARRAY{a,aaa}}
+	#SET{Fb,#ARRAY{b,bbb}}
+	[(#SET{Fc,[(#GET{Fa}|array_merge{#GET{Fb}})]})]
+	#SET_MERGE{Fd,#GET{Fa},#GET{Fb}}
+	[(#GET{Fc}|!=={#GET{Fd}}|oui)[(#SET{err,"Fc et Fd sont differents"})]]
+	
+	
+[(#REM) 
+	MERGE peut etre fait sans declarer un SET prealable
+]
+	#SET{Ga,#ARRAY{a,aaa}}
+	#SET{Gb,#ARRAY{b,bbb}}
+	[(#SET{Gc,[(#GET{Ga}|array_merge{#GET{Gb}})]})]
+	#SET_MERGE{Gd,#GET{Ga},#GET{Gb}}
+	[(#GET{Gc}|!=={#GET{Gd}}|oui)[(#SET{err,"Gc et Gd sont différents"})]]
+
+
+[(#REM) 
+	Si une chaine est donnee a MERGE, elle est transformee en tableau
+]
+	#SET_MERGE{H,coucou,toutou}
+	[(#GET{H}|!=={#ARRAY{0,coucou,1,toutou}})[(#SET{err,"(H) String non compris par #SET_MERGE"})]]
+
+[(#GET{err}|?{ERREUR,OK}) #GET{err} ]
