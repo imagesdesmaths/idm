@@ -1,0 +1,20 @@
+
+titre: '<:verifier:type_email:>'
+description: '<:verifier:type_email_description:>'
+options:
+  -
+    saisie: 'radio'
+    options:
+      nom: 'mode'
+      label: '<:verifier:option_email_mode_label:>'
+      datas:
+        normal: '<:verifier:option_email_mode_normal:>'
+        strict: '<:verifier:option_email_mode_strict:>'
+        rfc5322: '<:verifier:option_email_mode_5322:>'
+      defaut: 'normal'
+  -
+    saisie: 'case'
+    options:
+      nom: 'disponible'
+      label: '<:verifier:option_email_disponible_label:>'
+      label_case: '<:verifier:option_email_disponible_label_case:>'

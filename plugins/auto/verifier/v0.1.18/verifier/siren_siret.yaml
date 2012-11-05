@@ -1,0 +1,12 @@
+
+titre: '<:verifier:type_siren_siret:>'
+description: '<:verifier:type_siren_siret_description:>'
+options:
+  -
+    saisie: 'radio'
+    options:
+      nom: 'mode'
+      label: '<:verifier:option_siren_siret_mode_label:>'
+      datas:
+        siren: '<:verifier:option_siren_siret_mode_siren:>'
+        siret: '<:verifier:option_siren_siret_mode_siret:>'
