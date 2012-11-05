@@ -1,0 +1,15 @@
+nom: '<:formidable:noisette_nom_noisette_formulaire:>'
+icon: 'images/formulaire-24.png'
+parametres:
+  -
+    saisie: 'formulaire_formidable'
+    options:
+      nom: 'identifiant'
+      label: '<:formidable:noisette_label_identifiant:>'
+      cacher_option_intro: 'oui'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'afficher_titre_formulaire'
+      label: '<:formidable:noisette_label_afficher_titre_formulaire:>'
+      defaut: ''

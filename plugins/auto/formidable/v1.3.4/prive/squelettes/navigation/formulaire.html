@@ -1,0 +1,42 @@
+<BOUCLE_formulaire(FORMULAIRES){id_formulaire}>
+#BOITE_OUVRIR{'','info'}
+#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','formulaire','id',#ENV{id_formulaire}}}}
+
+[(#AUTORISER{editer, formulaire, #ID_FORMULAIRE}|oui)
+
+[(#URL_ECRIRE{formulaire_edit}
+	|parametre_url{id_formulaire, #ID_FORMULAIRE}
+	|parametre_url{configurer,formulaire}
+	|parametre_url{avertissement,''}
+	|icone_horizontale{<:formidable:editer_menu_formulaire:>,formulaire,formulaire-editer-24,center})]
+
+[(#URL_ECRIRE{formulaire_edit}
+	|parametre_url{id_formulaire, #ID_FORMULAIRE}
+	|parametre_url{configurer,champs}
+	|parametre_url{avertissement,''}
+	|icone_horizontale{<:formidable:editer_menu_champs:>,formulaire,formulaire-config-champs-24,center})]
+
+[(#URL_ECRIRE{formulaire_edit}
+	|parametre_url{id_formulaire, #ID_FORMULAIRE}
+	|parametre_url{configurer,traitements}
+	|parametre_url{avertissement,''}
+	|icone_horizontale{<:formidable:editer_menu_traitements:>,formulaire,formulaire-config-traitements-24,center})]
+
+]
+
+<BOUCLE_resultats(FORMULAIRES_REPONSES){id_formulaire}>
+</BOUCLE_resultats>
+
+<div class='navigation_resultats'>
+[(#URL_ECRIRE{formulaires_reponses}
+	|parametre_url{id_formulaire, #ID_FORMULAIRE}
+	|icone_horizontale{<:formidable:voir_reponses:> &#40;#TOTAL_BOUCLE&#41;,formulaire,formulaire-reponses-24,center})]
+[(#URL_ECRIRE{formulaires_analyse}
+	|parametre_url{id_formulaire, #ID_FORMULAIRE}
+	|icone_horizontale{<:formidable:reponses_analyse:>,formulaire,formulaire-analyse-24,center})]
+</div>
+
+</B_resultats>
+
+#BOITE_FERMER
+</BOUCLE_formulaire>

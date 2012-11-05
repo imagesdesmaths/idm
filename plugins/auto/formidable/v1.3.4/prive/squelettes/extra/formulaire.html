@@ -1,0 +1,19 @@
+<BOUCLE_formulaire(FORMULAIRES){id_formulaire}>
+<!--#extra-->
+[(#BOITE_OUVRIR{<:formidable:titre_cadre_raccourcis:>,'simple','section'})]
+	[(#AUTORISER{editer, formulaire}|oui)
+	[(#URL_ACTION_AUTEUR{dupliquer_formulaire, #ID_FORMULAIRE}|icone_horizontale{<:formidable:formulaires_dupliquer:>,formulaire,formulaire-dupliquer-24})]
+	]
+	[(#AUTORISER{editer, formulaire, #ID_FORMULAIRE}|oui)
+	[(#URL_ACTION_AUTEUR{supprimer_formulaire, #ID_FORMULAIRE}|inserer_attribut{'onclick','return confirm("<:formidable:formulaires_supprimer_confirmation:>");'}
+	|icone_horizontale{<:formidable:formulaires_supprimer:>,formulaire,formulaire-supprimer-24})]
+	]
+#BOITE_FERMER
+
+[(#BOITE_OUVRIR{<:formidable:voir_exporter:>,'simple','section'})]
+	<BOUCLE_exports(POUR){tableau #VAL|echanges_formulaire_lister_disponibles|table_valeur{exporter}}>
+	[(#URL_ACTION_AUTEUR{exporter_formulaire,#ID_FORMULAIRE-#CLE}|icone_horizontale{#CLE,formulaire,formulaire-exporter-24})]
+	</BOUCLE_exports>
+#BOITE_FERMER
+<!--/#extra-->
+</BOUCLE_formulaire>

@@ -1,0 +1,17 @@
+<BOUCLE_formulaire(FORMULAIRES){id_formulaire}>
+	<strong><:formidable:traitements_aide_memoire:></strong>
+	<dl>
+		<dt>@nom_site_spip@</dt>
+		<dd><:info_nom_site:></dd>
+	</dl>
+	
+	<BOUCLE_champs(POUR){tableau #SAISIES*|unserialize|saisies_lister_par_nom{0}}>
+	[(#SET{label, [(#VALEUR|table_valeur{options}|table_valeur{label})]})]
+	[(#SET{label_case, [(#VALEUR|table_valeur{options}|table_valeur{label_case})]})]
+	
+	<dl>
+		<dt>@#CLE@</dt>
+		[<dd>(#GET{label}|sinon{#GET{label_case}})</dd>]
+	</dl>
+	</BOUCLE_champs>
+</BOUCLE_formulaire>

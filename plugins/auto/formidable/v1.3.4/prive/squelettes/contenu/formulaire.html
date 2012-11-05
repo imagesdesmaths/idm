@@ -1,0 +1,35 @@
+<BOUCLE_formulaire(FORMULAIRES){id_formulaire}>
+[(#BOITE_OUVRIR{
+	[(#AUTORISER{editer, formulaire, #ID_FORMULAIRE}|oui)
+		[(#URL_ECRIRE{formulaire_edit,id_formulaire=#ID_FORMULAIRE}
+			|icone_verticale{<:formidable:editer_modifier_formulaire:>,formulaire,formulaire-editer-24,right})]
+	]
+	[<h1>(#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{formulaire-24.png}|balise_img{formulaire,cadre-icone})]</h1>]
+,simple fiche_objet})]
+
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/formulaire,id=#ID_FORMULAIRE,id_formulaire=#ID_FORMULAIRE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+	#SET{traitements_disponibles, #VAL|traitements_lister_disponibles}
+	[(#BOITE_OUVRIR{#CHEMIN_IMAGE{formulaire-config-traitements-24.png}
+		|balise_img{'',cadre-icone}
+		|concat{<:formidable:traitements_actives:>},'simple traitements'})]
+	<B_traitements>
+		<ul class='spip'>
+			<BOUCLE_traitements(POUR){tableau #TRAITEMENTS|unserialize|sinon{#ARRAY}}>
+				<li>[(#GET{traitements_disponibles}|table_valeur{#CLE}|table_valeur{titre})]</li>
+			</BOUCLE_traitements>
+		</ul>
+	</B_traitements>
+		<p><:formidable:aucun_traitement:></p>
+	<//B_traitements>
+	#BOITE_FERMER
+
+	#FORMULAIRE_FORMIDABLE{#ID_FORMULAIRE}
+
+#BOITE_FERMER
+</BOUCLE_formulaire>

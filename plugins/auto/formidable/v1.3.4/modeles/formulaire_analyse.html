@@ -1,0 +1,63 @@
+<BOUCLE_formulaire(FORMULAIRES){id_formulaire}>
+<div class='formidable_analyse'>
+[(#REM) On fait un tableau qui contient toutes les réponses, classées par champ ]
+#SET{valeurs,#ARRAY}
+#SET{reponses_total,0}
+<BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire}>
+<BOUCLE_champs(FORMULAIRES_REPONSES_CHAMPS){id_formulaires_reponse}>
+#SET_MERGE{liste_valeurs, #GET{valeurs}|table_valeur{#NOM}|sinon{#ARRAY}, #ARRAY{0,#VALEUR|tenter_unserialize}}
+#SET_MERGE{valeurs, #ARRAY{#NOM,#GET{liste_valeurs}}}
+</BOUCLE_champs>
+</BOUCLE_reponses>
+#SET{reponses_total,#TOTAL_BOUCLE}
+<strong class='nombre_reponse'>
+	[(#TOTAL_BOUCLE|singulier_ou_pluriel{formidable:reponse_une,formidable:reponses_nb})]
+</strong>
+</B_reponses>
+	<strong class='nombre_reponse'><:formidable:reponse_aucune:></strong>
+<//B_reponses>
+
+<BOUCLE_saisies(POUR){tableau #SAISIES|unserialize|saisies_lister_par_nom}>
+[(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
+	[(#VALEUR|formidable_analyser_saisie{#GET{valeurs}, #GET{reponses_total}})]
+]
+</BOUCLE_saisies>
+
+</div><!-- formidable_analyse -->
+<script type='text/javascript'>
+(function($){
+$(document).ready(function(){
+	/* Récupérer tous les tableaux d'analyse non décorés */
+	$('.formidable_analyse table:not(.stat_done)').each(function() {
+		$(this).addClass('stat_done');
+		/* Le tableau contient le nombre total d'élément. On parcours chaque valeur */
+		$nbtotal = $(this).data('nombre');
+		$(this).find('td.stat').each(function(){
+			$val = $(this).html();
+			/* Certaines valeurs sont a ignorer (les moyennes) */
+			$ignore = $(this).is('.ignore');
+			if (!$ignore) {
+				/* Calcul du pourcentage */
+				$taux = Math.round($val/$nbtotal*100);
+				/* On affiche le nombre de réponses */
+				$reponses = $(this).attr('title');
+				if (!parseInt($val) || ($reponses === undefined)) {
+					$reponses = '';
+				} else {
+					$reponses = "<small> - " + $reponses + "</small>";
+				}
+				$text = "\
+				<div class='[(#CONFIG{formidable/analyse/classe}) ]progress-bar'>\
+					<span></span><strong>" + $taux + "%" + $reponses + "</strong>\
+				</div>";
+				$(this).html($text).find('span').width($taux + '%');
+			}
+		});
+	});
+});
+})(jQuery);
+</script>
+<style type='text/css'>
+<INCLURE{fond=css/formidable_analyse.css} />
+</style>
+</BOUCLE_formulaire>

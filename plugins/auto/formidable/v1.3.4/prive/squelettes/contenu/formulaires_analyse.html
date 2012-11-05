@@ -1,0 +1,24 @@
+﻿<BOUCLE_formulaire(FORMULAIRES){id_formulaire}>
+<BOUCLE_autoriser(CONDITION){si #AUTORISER{voir, formulaires_reponse}}>
+[(#BOITE_OUVRIR{'','simple'})]
+        [(#URL_ECRIRE{formulaire}|parametre_url{id_formulaire,#ID_FORMULAIRE}|icone_verticale{<:retour:>,formulaire,formulaire-24,left})]
+
+	[<h4><:formidable:reponses_analyse:></h4>
+	<h1>(#TITRE|sinon{<:info_sans_titre:>})</h1>]
+
+	[(#BOITE_OUVRIR{'','simple'})]	
+	<BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire}>
+	</BOUCLE_reponses>
+	<strong>[(#_reponses:TOTAL_BOUCLE
+		|singulier_ou_pluriel{formidable:analyse_une_reponse_total,formidable:analyse_nb_reponses_total})]</strong>
+	</B_reponses>
+	<strong><:formidable:analyse_zero_reponse_total:></strong>
+	<//B_reponses>
+	#BOITE_FERMER
+#BOITE_FERMER
+
+[(#BOITE_OUVRIR{'','simple'})]
+#INCLURE{fond=modeles/formulaire_analyse,id_formulaire}
+#BOITE_FERMER
+</BOUCLE_autoriser>
+</BOUCLE_formulaire>

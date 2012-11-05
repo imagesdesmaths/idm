@@ -1,0 +1,38 @@
+<BOUCLE_autoriser(CONDITION){si #AUTORISER{editer, formulaire}}>
+[(#BOITE_OUVRIR{'','info'})]
+<script type="text/javascript">/*<![CDATA[*/
+if (window.jQuery){
+function debloquer_prive(){ jQuery('input[required], textarea[required], select[required]').removeAttr('required'); }
+jQuery('document').ready(debloquer_prive);
+onAjaxLoad(debloquer_prive);
+}
+/*]]>*/</script>
+		<BOUCLE_formulaire(FORMULAIRES){id_formulaire=#VAL{id_formulaire}|_request}>
+			[(#URL_ECRIRE{formulaire}|parametre_url{id_formulaire,#ID_FORMULAIRE}|icone_verticale{<:retour:>,formulaire,formulaire-24,left})]
+
+			<h4><:formidable:editer_modifier_formulaire:></h4>
+			<h1>#TITRE</h1>
+			
+			#SET{configurer,#ENV{configurer}|in_array{#ARRAY{0,formulaire,1,champs,2,traitements}}|?{#ENV{configurer},champs}}
+		</BOUCLE_formulaire>
+		[(#URL_ECRIRE{formulaires}|icone_verticale{<:retour:>,formulaire,formulaire-24,left})]
+			
+			<:formidable:editer_modifier_formulaire:>
+			<h1>
+				[(#ENV{nouveau}|=={oui}|?{<:formidable:editer_nouveau:>,#VAL{id_menu}|_request})]
+			</h1>
+			
+			#SET{configurer,formulaire}
+		<//B_formulaire>
+	
+	[(#GET{configurer}|=={formulaire}|oui)
+		#FORMULAIRE_EDITER_FORMULAIRE{#VAL{id_formulaire}|_request|sinon{0}, #VAL{nouveau}|_request|sinon{''}}
+	]
+	[(#GET{configurer}|=={champs}|oui)
+		#FORMULAIRE_EDITER_FORMULAIRE_CHAMPS{#ENV{id_formulaire}}
+	]
+	[(#GET{configurer}|=={traitements}|oui)
+		#FORMULAIRE_EDITER_FORMULAIRE_TRAITEMENTS{#ENV{id_formulaire}}
+	]
+#BOITE_FERMER
+</BOUCLE_autoriser>

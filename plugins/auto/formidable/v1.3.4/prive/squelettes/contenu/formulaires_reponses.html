@@ -1,0 +1,15 @@
+<BOUCLE_formulaire(FORMULAIRES){id_formulaire}>
+<BOUCLE_autoriser(CONDITION){si #AUTORISER{voir, formulaires_reponse}}>
+[(#BOITE_OUVRIR{'','simple'})]
+	[(#URL_ECRIRE{formulaire}|parametre_url{id_formulaire,#ID_FORMULAIRE}|icone_verticale{<:retour:>,formulaire,formulaire-24,left})]
+	
+	<h4><:formidable:voir_reponses:></h4>
+	<h1>#TITRE</h1>
+#BOITE_FERMER
+
+<INCLURE{fond=prive/objets/liste/formulaires_reponses}{id_formulaire}{statut=prop}{titre=<:formidable:reponses_liste_prop:>}{ajax}>
+
+<INCLURE{fond=prive/objets/liste/formulaires_reponses}{id_formulaire}{statut=publie}{titre=<:formidable:reponses_liste_publie:>}{ajax}>
+
+</BOUCLE_autoriser>
+</BOUCLE_formulaire>

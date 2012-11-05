@@ -1,0 +1,8 @@
+<BOUCLE_formulaires_reponse(FORMULAIRES_REPONSES){id_formulaires_reponse=#ENV{id}}{statut?}>
+<div class='infos'>
+<div class='numero'><:formidable:reponse_numero:><p>#ID_FORMULAIRES_REPONSE</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{formulaires_reponses,#ID_FORMULAIRES_REPONSE})]
+
+</div>
+</BOUCLE_formulaires_reponse>

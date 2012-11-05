@@ -1,0 +1,24 @@
+<BOUCLE_formulaires_reponse(FORMULAIRES_REPONSES){tout}{id_formulaires_reponse}>
+<BOUCLE_autoriser(CONDITION){si #AUTORISER{voir, formulaires_reponse, #ID_FORMULAIRES_REPONSE}}>
+[(#BOITE_OUVRIR{
+	<h1><:formulaires_reponse:formulaires_reponse_numero{nb=#ID_FORMULAIRES_REPONSE}:></h1>
+,simple fiche_objet})]
+
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/formulaires_reponse,
+	id=#ID_FORMULAIRES_REPONSE,
+	id_formulaires_reponse=#ID_FORMULAIRES_REPONSE,
+	virtuel=oui,ajax=wysiwyg,wysiwyg=1} />
+</div>
+
+<div class='nettoyeur'></div>
+[(#BOITE_OUVRIR{<h3><:formulaires_reponse:reponses_donnees:></h3>,reponses})]
+#INCLURE{fond=modeles/formulaires_reponse,id_formulaires_reponse}
+#BOITE_FERMER
+
+#BOITE_FERMER
+</BOUCLE_autoriser>
+</BOUCLE_formulaires_reponse>

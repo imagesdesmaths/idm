@@ -1,0 +1,13 @@
+[(#BOITE_OUVRIR{
+	<h1><:formidable:bouton_formulaires:></h1>
+	<p><:formidable:formulaires_introduction:></p>
+})]
+#BOITE_FERMER
+
+<INCLURE{fond=prive/objets/liste/formulaires, titre=<:formulaire:titre_formulaires:>, ajax} />
+
+[(#AUTORISER{editer, formulaire}|oui)
+[(#URL_ECRIRE{formulaire_edit}
+	|parametre_url{nouveau,oui}
+	|icone_verticale{<:formulaire:icone_creer_formulaire:>,formulaire,formulaire-nouveau-48,center})]
+]

@@ -1,0 +1,7 @@
+<BOUCLE_formulaire(FORMULAIRES){id_formulaire}>
+<BOUCLE_autoriser(CONDITION){si #AUTORISER{voir, formulaires_reponse}}>
+<a href="#URL_ECRIRE{formulaires}"><:formulaire:titre_formulaires:></a> &gt;
+<a href="[(#URL_ECRIRE{formulaire}|parametre_url{id_formulaire,#ID_FORMULAIRE})]">#TITRE</a> &gt;
+<strong class="on"><:formidable:reponses_analyse:></strong>
+</BOUCLE_autoriser>
+</BOUCLE_formulaire>

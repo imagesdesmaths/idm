@@ -1,0 +1,22 @@
+[(#REM) 
+  Saisie permettant de sélectionner un formulaire par son identifiant
+  
+  ### /!\ boucle POUR (spip Bonux) ###
+	
+  Parametres :
+  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+  - cacher_option_intro : pas de premier option vide  (defaut:"")
+  - class : classe(s) css ajoutes au select
+  
+  Exemple d'appel :
+	[(#SAISIE{formulaire_formidable,nom,
+		label=<:plugin:label:>,
+	})] 
+]
+
+<select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
+[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
+<BOUCLE_selection(FORMULAIRES){par titre}>
+	<option value="#IDENTIFIANT" [(#IDENTIFIANT|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>[(#TITRE|typo)] (#IDENTIFIANT)</option>
+</BOUCLE_selection>
+</select>

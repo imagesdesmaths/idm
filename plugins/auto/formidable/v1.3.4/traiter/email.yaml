@@ -1,0 +1,57 @@
+
+titre: '<:formidable:traiter_email_titre:>'
+description: '<:formidable:traiter_email_description:>'
+options:
+  -
+    saisie: 'champ'
+    options:
+      nom: 'champ_destinataires'
+      label: '<:formidable:traiter_email_option_destinataires_label:>'
+      explication: '<:formidable:traiter_email_option_destinataires_explication:>'
+      forcer_type: [destinataires,hidden]
+      env: true
+  -
+    saisie: 'input'
+    options:
+      nom: 'destinataires_plus'
+      label: '<:formidable:traiter_email_option_destinataires_plus_label:>'
+      explication: '<:formidable:traiter_email_option_destinataires_plus_explication:>'
+    verifier:
+      type: 'email'
+  -
+    saisie: 'champ'
+    options:
+      nom: 'champ_courriel'
+      label: '<:formidable:traiter_email_option_envoyeur_courriel_label:>'
+      explication: '<:formidable:traiter_email_option_envoyeur_courriel_explication:>'
+      env: true
+  -
+    saisie: 'case'
+    options:
+      nom: 'activer_vrai_envoyeur'
+      label: '<:formidable:traiter_email_option_vrai_envoyeur_label:>'
+      explication: '<:formidable:traiter_email_option_vrai_envoyeur_explication:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'champ_nom'
+      label: '<:formidable:traiter_email_option_envoyeur_nom_label:>'
+      explication: '<:formidable:traiter_email_option_envoyeur_nom_explication:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'champ_sujet'
+      label: '<:formidable:traiter_email_option_sujet_label:>'
+      explication: '<:formidable:traiter_email_option_sujet_explication:>'
+  -
+    saisie: 'case'
+    options:
+      nom: 'activer_accuse'
+      label: '<:formidable:traiter_email_option_activer_accuse_label:>'
+      label_case: '<:formidable:traiter_email_option_activer_accuse_label_case:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'sujet_accuse'
+      label: '<:formidable:traiter_email_option_sujet_accuse_label:>'
+      explication: '<:formidable:traiter_email_option_sujet_explication:>'

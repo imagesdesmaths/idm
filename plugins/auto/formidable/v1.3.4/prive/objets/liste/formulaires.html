@@ -1,0 +1,45 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,-1,
+	titre,1,
+	id_formulaire,1
+}})
+]<B_formulaires>
+#ANCRE_PAGINATION
+<div class="liste-objets formulaires">
+<table class="spip liste">
+[<caption><strong class="caption">(#ENV*{titre})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="id_formulaire id" scope='col'>[(#TRI{id_formulaire,<span>#</span>,ajax})]</th>
+			<th class="titre" scope='col'>[(#TRI{titre,<:formidable:editer_titre:>,ajax})]</th>
+			<th class="identifiant" scope='col'>[(#TRI{identifiant,<:formidable:editer_identifiant:>,ajax})]</th>
+			<th class="action" scope='col'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_formulaires(FORMULAIRES){statut?}{tri #ENV{order,titre},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)]">
+			<td class="id_formulaire"><:info_numero_abbreviation:>#ID_FORMULAIRE</td>
+			<td class="titre"><a href="[(#ID_FORMULAIRE|generer_url_entite{formulaire})]">#TITRE</a></td>
+			<td class="identifiant">#IDENTIFIANT</td>
+			<td class="action">
+				[(#AUTORISER{editer, formulaire}|oui)
+					[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{formulaire-dupliquer-24.png}
+						|balise_img{<:formidable:formulaires_dupliquer:>})],
+						#URL_ACTION_AUTEUR{dupliquer_formulaire, #ID_FORMULAIRE},link})]
+				]
+				[(#AUTORISER{editer, formulaire, #ID_FORMULAIRE}|oui)
+					[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{formulaire-supprimer-24.png}
+						|balise_img{<:formidable:formulaires_supprimer:>})],
+						#URL_ACTION_AUTEUR{supprimer_formulaire, #ID_FORMULAIRE},link,<:formidable:formulaires_supprimer_confirmation:>})]
+				]
+			</td>
+		</tr>
+	</BOUCLE_formulaires>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_formulaires>[
+<div class="liste-objets formulaires"><strong class="caption">(#ENV*{sinon,<:formidable:formulaires_aucun:>})</strong></div>
+]<//B_formulaires>

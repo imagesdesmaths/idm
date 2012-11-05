@@ -1,0 +1,15 @@
+<BOUCLE_formulaires_reponse(FORMULAIRES_REPONSES){tout}{id_formulaires_reponse}>
+<BOUCLE_autoriser(CONDITION){si #AUTORISER{voir, formulaires_reponse, #ID_FORMULAIRES_REPONSE}}>
+[(#BOITE_OUVRIR{'','info'})]
+
+	[(#PIPELINE{boite_infos,#ARRAY{data,'',
+		args,#ARRAY{'type','formulaires_reponse','id',#ENV{id_formulaires_reponse}}}})]
+
+	[(#URL_ECRIRE{formulaires_analyse}
+		|parametre_url{id_formulaire,#ID_FORMULAIRE}
+		|icone_horizontale{<:formidable:reponses_analyse:>,formulaire,formulaire-analyse-24,center})]
+
+#BOITE_FERMER
+
+</BOUCLE_autoriser>
+</BOUCLE_formulaires_reponse>
