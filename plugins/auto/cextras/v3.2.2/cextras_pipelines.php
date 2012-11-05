@@ -1,0 +1,285 @@
+<?php
+
+/**
+ * Utilisations de pipelines
+ *
+ * @package SPIP\Cextras\Pipelines
+**/
+
+// sécurité
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+/**
+ * Retourne la liste des saisies de champs extras concernant un objet donné
+ *
+ * @pipeline_appel declarer_champs_extras
+ * @param string $table
+ *     Nom d'une table SQL éditoriale
+ * @return array
+ *     Liste des saisies de champs extras de l'objet
+**/
+function champs_extras_objet($table) {
+	static $saisies_tables = array();
+	if (!$saisies_tables) {
+		$saisies_tables = pipeline('declarer_champs_extras', array());
+	}
+
+	return isset($saisies_tables[$table]) ? $saisies_tables[$table] : array();
+}
+
+/**
+ * Filtrer par autorisation les saisies transmises 
+ *
+ * Chacune des saisies est parcourue et si le visiteur n'a pas l'autorisation
+ * de la voir, elle est enlevée de la liste.
+ * La fonction ne retourne donc que la liste des saisies que peut voir
+ * la personne.
+ * 
+ * @param string $faire
+ *     Type d'autorisation testée : 'voir', 'modifier'
+ * @param string $quoi
+ *     Type d'objet tel que 'article'
+ * @param array $saisies
+ *     Liste des saisies à filtrer
+ * @param array $args
+ *     Arguments pouvant être utiles à l'autorisation
+ * @return array
+ *     Liste des saisies filtrées
+**/
+function champs_extras_autorisation($faire, $quoi='', $saisies=array(), $args=array()) {
+	if (!$saisies) return array();
+	include_spip('inc/autoriser');
+
+	foreach ($saisies as $cle=>$saisie) {
+		$id = isset($args['id']) ? $args['id'] : $args['id_objet'];
+		if (!autoriser($faire . 'extra', $quoi, $id, '', array(
+			'type' => $quoi,
+			'id_objet' => $id,
+			'contexte' => $args['contexte'],
+			'table' => table_objet_sql($quoi),
+			'saisie' => $saisie,
+			'champ' => $saisie['options']['nom'],
+		))) {
+			// on n'est pas autorise
+			unset($saisies[$cle]);
+		}
+		else
+		{
+			// on est autorise
+			// on teste les sous-elements
+			if (isset($saisie['saisies']) and $saisie['saisies']) {
+				$saisies['saisies'] = champs_extras_autorisation($faire, $quoi, $saisie['saisies'], $args);
+			}
+		}
+	}
+	return $saisies;
+}
+
+/**
+ * Ajoute pour chaque saisie de type SQL un drapeau (input hidden)
+ * permettant de retrouver les saisies editées.
+ * 
+ * Particulièrement utile pour les checkbox qui ne renvoient
+ * rien si on les décoche.
+ *
+ * @param array $saisies
+ *     Liste de saisies 
+ * @return array $saisies
+ *     Saisies complétées des drapeaux d'édition
+**/
+function champs_extras_ajouter_drapeau_edition($saisies) {
+	$saisies_sql = saisies_lister_avec_sql($saisies);
+	foreach ($saisies_sql as $saisie) {
+		$nom = $saisie['options']['nom'];
+		$saisies[] = array(
+			'saisie' => 'hidden',
+			'options' => array(
+				'nom' => "cextra_$nom",
+				'defaut' => 1 
+			)
+		);
+	}
+	return $saisies;
+}
+
+// ---------- pipelines -----------
+
+
+/**
+ * Ajouter les champs extras sur les formulaires CVT editer_xx
+ *
+ * Liste les champs extras de l'objet, et s'il y en a les ajoute
+ * sur le formulaire d'édition en ayant filtré uniquement les saisies
+ * que peut voir le visiteur et en ayant ajouté des champs hidden
+ * servant à champs extras.
+ * 
+ * @pipeline editer_contenu_objet
+ * @param array $flux Données du pipeline
+ * @return array      Données du pipeline
+**/ 
+function cextras_editer_contenu_objet($flux){
+	
+	// recuperer les saisies de l'objet en cours
+	$objet = $flux['args']['type'];
+	include_spip('inc/cextras');
+	if ($saisies = champs_extras_objet( table_objet_sql($objet) )) {
+		// filtrer simplement les saisies que la personne en cours peut voir
+		$saisies = champs_extras_autorisation('modifier', $objet, $saisies, $flux['args']);
+		// pour chaque saisie presente, de type champs extras (hors fieldset et autres)
+		// ajouter un flag d'edition
+		$saisies = champs_extras_ajouter_drapeau_edition($saisies);
+		// ajouter au formulaire
+		$ajout = recuperer_fond('inclure/generer_saisies', array_merge($flux['args']['contexte'], array('saisies'=>$saisies)));
+		$flux['data'] = preg_replace('%(<!--extra-->)%is', '<ul class="champs_extras">'.$ajout.'</ul>'."\n".'$1', $flux['data']);
+	}
+
+	return $flux;
+}
+
+
+/**
+ * Ajouter les champs extras soumis par les formulaire CVT editer_xx
+ *
+ * Pour chaque champs extras envoyé par le formulaire d'édition,
+ * ajoute les valeurs dans l'enregistrement à effectuer.
+ * 
+ * @pipeline pre_edition
+ * @param array $flux Données du pipeline
+ * @return array      Données du pipeline
+**/ 
+function cextras_pre_edition($flux){
+	
+	include_spip('inc/cextras');
+	$table = $flux['args']['table'];
+	if ($saisies = champs_extras_objet( $table )) {
+		$saisies = saisies_lister_avec_sql($saisies);
+		foreach ($saisies as $saisie) {
+			$nom = $saisie['options']['nom'];
+			if (_request('cextra_' .  $nom)) {
+				$extra = _request($nom);
+				if (is_array($extra)) {
+					$extra = join(',' , $extra);
+				}
+				$flux['data'][$nom] = corriger_caracteres($extra);
+			}
+		}
+	}
+
+	return $flux;
+}
+
+
+/**
+ * Ajouter les champs extras sur la visualisation de l'objet
+ *
+ * S'il y a des champs extras sur l'objet, la fonction les ajoute
+ * à la vue de l'objet, en enlevant les saisies que la personne n'a
+ * pas l'autorisation de voir.
+ * 
+ * @pipeline afficher_contenu_objet
+ * @param array $flux Données du pipeline
+ * @return array      Données du pipeline
+**/ 
+function cextras_afficher_contenu_objet($flux){
+	// recuperer les saisies de l'objet en cours
+	$objet = $flux['args']['type'];
+	include_spip('inc/cextras');
+	if ($saisies = champs_extras_objet( $table = table_objet_sql($objet) )) {
+		// ajouter au contexte les noms et valeurs des champs extras
+		$saisies_sql = saisies_lister_avec_sql($saisies);
+		$valeurs = sql_fetsel(array_keys($saisies_sql), $table, id_table_objet($table) . '=' . sql_quote($flux['args']['id_objet']));
+		if (!$valeurs) {
+			$valeurs = array();
+		} else {
+			// on applique les eventuels traitements definis
+			// /!\ La saisies-vues/_base applique |propre par defaut si elle ne trouve pas de saisie
+			// Dans ce cas, certains traitements peuvent être effectués 2 fois !
+			$saisies_traitees = saisies_lister_avec_traitements($saisies_sql);
+			unset($saisies_sql);
+			foreach ($saisies_traitees as $saisie) {
+				$traitement = $saisie['options']['traitements'];
+				$traitement = defined($traitement) ? constant($traitement) : $traitement;
+				$nom = $saisie['options']['nom'];
+				list($avant, $apres) = explode('%s', $traitement);
+				eval('$val = ' . $avant . ' $valeurs[$nom] ' . $apres . ';');
+				$valeurs[$nom] = $val;
+			}
+		}
+		$contexte = array_merge($flux['args']['contexte'], $valeurs);
+
+		// restreindre la vue selon les autorisations
+		$saisies = champs_extras_autorisation('voir', $objet, $saisies, $flux['args']);
+
+		// ajouter les vues
+		$flux['data'] .= recuperer_fond('inclure/voir_saisies', array_merge($contexte, array(
+					'saisies' => $saisies,
+					'valeurs' => $valeurs,
+		)));
+	}
+
+	return $flux;
+}
+
+/**
+ * Vérification de la validité des champs extras
+ *
+ * Lorsqu'un formulaire 'editer_xx' se présente, la fonction effectue,
+ * pour chaque champs extra les vérifications prévues dans la
+ * définition de la saisie, et retourne les éventuelles erreurs rencontrées.
+ * 
+ * @pipeline formulaire_verifier
+ * @param array $flux Données du pipeline
+ * @return array      Données du pipeline
+**/ 
+function cextras_formulaire_verifier($flux){
+	$form = $flux['args']['form'];
+	
+	if (strncmp($form, 'editer_', 7) !== 0) {
+		return $flux;
+	}
+	
+	$objet = substr($form, 7);
+	if ($saisies = champs_extras_objet( $table = table_objet_sql($objet) )) {
+		include_spip('inc/autoriser');
+		include_spip('inc/saisies');
+
+		$verifier   = charger_fonction('verifier', 'inc', true);
+		$saisies    = saisies_lister_avec_sql($saisies);
+
+		// restreindre la vue selon les autorisations
+		$id_objet = $flux['args']['args'][0]; // ? vraiment toujours ?
+		$saisies = champs_extras_autorisation('modifier', $objet, $saisies, array_merge($flux['args'], array(
+			'id' => $id_objet,
+			'contexte' => array()))); // nous ne connaissons pas le contexte dans ce pipeline
+
+		foreach ($saisies as $saisie) {
+			// verifier obligatoire
+			$nom = $saisie['options']['nom'];
+			if (isset($saisie['options']['obligatoire']) and $saisie['options']['obligatoire']
+			and !_request($nom))
+			{
+				$flux['data'][$nom] = _T('info_obligatoire');
+			
+			// verifier (api) + normalisation
+			} elseif ($verifier
+			   AND isset($saisie['verifier']['type'])
+			   AND $verif = $saisie['verifier']['type'])
+			{
+				$options = isset($saisie['verifier']['options']) ? $saisie['verifier']['options'] : array();
+				$normaliser = null;
+				if ($erreur = $verifier(_request($nom), $verif, $options, $normaliser)) {
+					$flux['data'][$nom] = $erreur;
+				// si une valeur de normalisation a ete transmis, la prendre.
+				} elseif (!is_null($normaliser)) {
+					set_request($nom, $normaliser);
+				}
+			}
+		}
+	}
+
+	return $flux;
+}
+
+
+
+?>

@@ -1,0 +1,19 @@
+<traduction module="paquet-cextras" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/champs_extras/core/trunk/lang/" reference="fr">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/paquet-cextras?lang_cible=de">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
+	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-cextras?lang_cible=en">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-cextras?lang_cible=es">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
+	<langue code="fr" />
+	<langue code="it" url="http://trad.spip.net/tradlang_module/paquet-cextras?lang_cible=it">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-cextras?lang_cible=sk">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
+</traduction>
