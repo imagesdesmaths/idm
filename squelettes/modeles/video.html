@@ -1,12 +1,9 @@
-#SET{base_url,/media/#ENV{id}}
-#SET{base_url,http://vbeffara.disque.math.cnrs.fr/bulk/#ENV{id}}
-
 <?php eval(file_get_contents (find_in_path ("media/#ENV{id}/data"))); ?>
 
 <div class='spip_documents spip_documents_center[ spip_document_video(#ENV{id})]'>
   <video width="<?php print $img_width; ?>"
          height="<?php print $img_height; ?>"
-         src="#GET{base_url}/video.mp4"
+         src="#CHEMIN{media/#ENV{id}/video.mp4}"
          poster="#CHEMIN{media/#ENV{id}/video.jpg}">
   </video>
   <div class='spip_doc_titre'><?php print $img_title; ?></div>
