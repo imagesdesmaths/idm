@@ -11,3 +11,4 @@
 /.dbdump
 /config/connect*
 /mathjax/fonts/HTML-CSS/TeX/png
+/lib
