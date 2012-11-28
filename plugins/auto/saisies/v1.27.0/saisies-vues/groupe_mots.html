@@ -1,9 +1,0 @@
-[(#SET{valeurs,[(#ENV{multiple}|oui|?{#ENV*{valeur},#ARRAY{0,#ENV{valeur}}})]})]
-
-<B_choix>
-<ul>
-	<BOUCLE_choix(GROUPES_MOTS){id_groupe IN #GET{valeurs}}{par titre}>
-	<li class="choix">#TITRE</li>
-	</BOUCLE_choix>
-</ul>
-</B_choix>
