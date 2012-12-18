@@ -51,12 +51,13 @@ function idm_lint_TeX ($txt) {
 /* Still missing:
  * - <a name="lkdjf">
  * - some authorized things in 'HTML tag' should not be
+ * - and keep only accents v1
  */
 
 $bugs = array();
 $bugs[] = array ('Explicit link',             '|<a href="(.*)".*>(.*)</a>|iU',                     '[\2->\1]',                               0, 0, '');
 $bugs[] = array ('Wrong inner link',          '|\\[[^[]*->http://images.math.cnrs.fr/([^]]*)]|Ue', 'idm_lint_url("\\0","\\1")',              0, 1, '');
-$bugs[] = array ('LaTeX accent',              '|\\\\[\'`^"][aeiou]|ie',                            'idm_lint_TeX("\0")',                     1, 1, '');
+$bugs[] = array ('LaTeX accent',              '|\\\\[\'`^"]{?\\\\?[aeiou]}?|ie',                   'idm_lint_TeX("\0")',                     1, 1, '');
 $bugs[] = array ('Wrong guillemets (v1)',     '|``([^\']*)\'\'|Us',                                '&laquo;\1&raquo;',                       0, 0, '');
 $bugs[] = array ('Wrong guillemets (v2)',     '|``([^\']*)\'\'|Us',                                '&ldquo;\1&rdquo;',                       0, 0, '');
 $bugs[] = array ('Wrong guillemets (v3)',     '|``([^\']*)\'\'|Us',                                '"\1"',                                   0, 0, '');
