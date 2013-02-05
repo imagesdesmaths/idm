@@ -38,6 +38,8 @@
     [(#INCLURE{fond=inc/forum-relecture}{id_article}{id_forum}{auteur_article=#GET{auteur_article}})]
     <div class="ajax">#FORMULAIRE_FORUM_RELECTURE{#ID_ARTICLE,#ID_FORUM}</div>
 
+    <div class="ajax">#FORMULAIRE_RELECTEURS_MAIL{#ID_ARTICLE}</div>
+
     <INCLURE{fond=inc/foot}>
   </BOUCLE_securite>
     <INCLURE{fond=inc/head}{title=Acc&egrave;s refus&eacute;}>

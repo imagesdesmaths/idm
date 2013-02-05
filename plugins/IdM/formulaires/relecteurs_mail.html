@@ -1,0 +1,16 @@
+
+<hr><h3>&Eacute;crire un e-mail &agrave; tous les relecteurs de cet article :</h3>
+
+[(#ENV{message_ok}|non)
+  <form action="#ENV{action}" method="post" id="relecteurs_mail">
+    #ACTION_FORMULAIRE{#ENV{action}}
+        
+    <textarea name="texte" cols="75" rows="20">#ENV{texte}</textarea>
+    [<p class="erreur">(#ENV**{erreurs}|table_valeur{texte})</p>]
+    
+    <p class="boutons">
+      <input type="submit" class="submit" name="submit" value="Envoyer" />
+    </p>
+  </form>]
+
+[(#ENV{message_ok}|oui)<p>Message envoy&eacute;.</p>]
