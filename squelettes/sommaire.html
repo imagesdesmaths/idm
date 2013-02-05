@@ -93,6 +93,8 @@
       <BOUCLE_carr(ARTICLES) {par date} {inverse} {age_relatif >= 0} {age_relatif < 8} {titre_mot = carrousel} {0,1} {doublons}>
         <div class="slide">[(#INCLURE{fond=inc/resume_une}{id_article})]</div>
       </BOUCLE_carr>
+      <BOUCLE_carroff(ARTICLES) {par date} {inverse} {age_relatif >= 0} {titre_mot = carrousel} {doublons}>
+      </BOUCLE_carroff>
       <BOUCLE_une(ARTICLES) {id_secteur IN 37,26} {par date} {inverse} {age_relatif >= 0} {0,2} {doublons}>
         <div class="slide">[(#INCLURE{fond=inc/resume_une}{id_article})]</div>
       </BOUCLE_une>
