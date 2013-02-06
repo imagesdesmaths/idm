@@ -6,6 +6,11 @@ function idm_boite_infos (&$flux) {
     $id_rubrique = sql_getfetsel ('id_rubrique', 'spip_articles', "id_article = $id_article");
     $statut      = sql_getfetsel ('statut',      'spip_articles', "id_article = $id_article");
 
+    if ($statut == "publie") {
+      $url = generer_url_ecrire ("idm_source", "id_article=$id_article");
+      $flux['data'] .= icone_horizontale ("Code source", $url, "article-24");
+    }
+
     if ($statut == "prop") {
       $message = "G&eacute;rer la relecture";
       $url = generer_url_public ("propose", array('id_article' => $id_article));
