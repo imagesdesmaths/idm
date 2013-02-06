@@ -45,6 +45,7 @@ function formulaires_relecteurs_article_traiter ($id_article) {
     }
     if (_request("assign_$id_auteur")) {
       sql_insertq ("spip_relecteurs_articles", array("id_auteur"=>$id_auteur, "id_article"=>$id_article));
+      sql_insertq ("spip_idm_relecture", array("id_auteur"=>$id_auteur, "action"=>'affected', "id_article"=>$id_article));
       sql_update ("spip_idm_relecteurs", array("combien"=>"combien+1"), "id_auteur = $id_auteur");
       notify_user ($id_auteur, $id_article);
     }

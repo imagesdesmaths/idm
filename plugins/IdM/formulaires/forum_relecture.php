@@ -26,7 +26,7 @@ function formulaires_forum_relecture_traiter ($id_article, $id_parent) {
   $id_auteur = intval ($GLOBALS['auteur_session']['id_auteur']);
   $auteur    = sql_getfetsel ('nom', 'spip_auteurs', "id_auteur = $id_auteur");
 
-  sql_insertq ('spip_forum', array (
+  $id_forum = sql_insertq ('spip_forum', array (
     'id_parent'  => intval ($id_parent),
     'objet'      => 'article',
     'id_objet'   => intval ($id_article),
@@ -36,6 +36,13 @@ function formulaires_forum_relecture_traiter ($id_article, $id_parent) {
     'texte'      => _request ('texte'),
     'date_heure' => 'NOW()',
     'statut'     => 'relmod'
+  ));
+
+  sql_insertq ('spip_idm_relecture', array(
+    'id_auteur'  => $id_auteur,
+    'action'     => 'comment',
+    'id_article' => intval($id_article),
+    'id_forum'   => intval($id_forum)
   ));
 
   if (sql_countsel ('spip_forum', "id_auteur=$id_auteur AND id_article=$id_article") == 1) {
