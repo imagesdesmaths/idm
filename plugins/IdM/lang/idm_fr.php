@@ -55,10 +55,9 @@ l'adresse suivante :
 
   http://images.math.cnrs.fr/spip.php?page=propose&id_article=@id_article@
 
-Vous y trouverez l'article dans son état actuel, un forum de discussion
+Vous y trouverez l'article dans son état actuel, et un forum de discussion
 vous permettant de déposer vos commentaires et de dialoguer avec les
-autres relecteurs ainsi qu'avec l'auteur de l'article, et enfin un
-formulaire de vote pour donner votre avis sur sa publication.
+autres relecteurs ainsi qu'avec l'auteur de l'article.
 
 Nous souhaiterions pouvoir publier cet article dans les 15 jours qui
 viennent. Si vous n'avez pas le temps de le relire d'ici là, ça n'est

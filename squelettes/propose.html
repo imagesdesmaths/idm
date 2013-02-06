@@ -5,6 +5,20 @@
     <h1>Article en cours de relecture</h1>
     <h2 style="margin-top : 0ex;">dans la rubrique &laquo; #INFO_TITRE{rubrique,#ID_RUBRIQUE}&nbsp;&raquo;</h2>
 
+    <?php
+      $id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+      $id_article = #ENV{id_article};
+      $status = sql_getfetsel ('status','spip_relecteurs_articles',"id_auteur=$id_auteur AND id_article=$id_article");
+
+      if ($status == 'pas_vu') {
+        sql_updateq ('spip_relecteurs_articles', array('status'=>'vu'), "id_auteur=$id_auteur AND id_article=$id_article");
+        sql_insertq ('spip_idm_relecture', array('id_auteur'=>$id_auteur, 'action'=>'read', 'id_article'=>intval($id_article)));
+        $lus = intval ( sql_getfetsel ('lus', 'spip_idm_relecteurs', "id_auteur=$id_auteur") );
+        sql_updateq ('spip_idm_relecteurs', array('lus'=>$lus + 1), "id_auteur=$id_auteur");
+        $status = "vu";
+      }
+    ?>
+
     <p>Bienvenue dans l'espace de relecture collaborative de Images des
     Math&eacute;matiques. C'est ici que vous pourrez participer au
     processus &eacute;ditorial de la revue. Le but n'est pas de
@@ -23,8 +37,6 @@
     <p>Techniquement, un forum, dispos&eacute; en bas de cette page, vous
     permet de dialoguer avec l'auteur et avec les autres relecteurs.
     Utilisez-le pour faire vos commentaires sur l'article.</p>
-
-    <!--<div class="ajax">#FORMULAIRE_RELECTEURS_VOTE{#ID_ARTICLE}</div>-->
 
     <p>Voici le texte de l'article, pr&eacute;sent&eacute; tel qu'il le
     serait sur la partie publique du site s'il &eacute;tait
