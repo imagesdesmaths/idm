@@ -15,10 +15,8 @@ function idm_upgrade ($nom_meta_base_version, $version_cible) {
   $maj = array();
 
   $maj['create'] = array(array('maj_tables', array('spip_idm_relecteurs',
-                                                   'spip_idm_sujets',
                                                    'spip_idm_teams',
                                                    'spip_relecteurs_articles',
-                                                   'spip_idm_sujets_articles',
                                                    'spip_auteurs',
                                                    'spip_articles')));
 

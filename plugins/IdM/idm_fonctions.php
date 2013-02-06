@@ -101,23 +101,6 @@ function idm_jquery_plugins ($scripts) {
   return $scripts;
 }
 
-function idm_import_sujets () {
-  $raw = file_get_contents(find_in_path("Dewey.org"));
-
-  preg_match_all ('/\| ([0-9\.]*) *\| ([0-9\.]*) *\| ([^\|]*[^ ]) *\|/',
-                  $raw, $out, PREG_SET_ORDER);
-
-  foreach ($out as $r)
-    sql_insertq ("spip_idm_sujets",
-                 array("id_sujet" => $r[1],
-                       "id_parent" => $r[2],
-                       "intitule" => $r[3]));
-}
-
-function idm_dewey ($cote) {
-  return preg_replace ('/([0-9][0-9][0-9])([0-9]+)/', '$1.$2', $cote);
-}
-
 function idm_clean_TeX ($texte) {
   $acc_tex = array(); $acc_html = array();
 
