@@ -1,0 +1,22 @@
+<h1>Espionnage de la relecture</h1>
+
+<table id="spip_log">
+	<thead><tr>
+		<th>Date</th>
+		<th>Relecteur</th>
+		<th>Action</th>
+		<th>Article</th>
+	</tr></thead>
+	<BOUCLE_log(spip_idm_relecture){par date}>
+	<tr>
+		<td>#DATE</td>
+		<td><BOUCLE_a(AUTEURS){id_auteur}{tous}>#NOM</BOUCLE_a></td>
+		<td>#ACTION</td>
+		<td><BOUCLE_t(ARTICLES){id_article}{statut==.}>#TITRE</BOUCLE_t></td>
+	</tr>
+	</BOUCLE_log>
+</table>
+
+<script type="text/javascript">
+  $("#spip_log").tablesorter( {sortList : [[0,0]]} );
+</script>
