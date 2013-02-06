@@ -3,6 +3,9 @@
     <BOUCLE_relecteurs(IDM_RELECTEURS spip_auteurs) {role = relecteur} {id_auteur}>
       <h1>Fiche de relecteur : #NOM</h1>
       <div class="ajax">#FORMULAIRE_IDM_RELECTEUR{#ID_AUTEUR}</div>
+
+      <h2>Activit&eacute; r&eacute;cente :</h2>
+      [(#MODELE{idm_relecture}{id_auteur})]
     </BOUCLE_relecteurs>
   </BOUCLE_gars>
 </BOUCLE_securite>
