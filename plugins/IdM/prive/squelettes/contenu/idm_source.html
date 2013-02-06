@@ -1,4 +1,4 @@
-<BOUCLE_a(ARTICLES) {id_article}>
-	<h1>Code source : <a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></h1>
-	<pre>#TEXTE**</pre>
+<BOUCLE_a(ARTICLES) {id_article} {statut == .}>
+  <h1>Code source : <a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></h1>
+  <pre style="white-space:pre-wrap;">#TEXTE**</pre>
 </BOUCLE_a>
