@@ -39,6 +39,9 @@ RewriteBase /
 ################ REGLAGES PERSONNALISES ######################
 # Inscrivez ci-dessous vos reglages supplementaires
 
+RewriteCond %{HTTP_HOST} ^www.images.math.cnrs.fr$ [NC]
+RewriteRule .? http://images.math.cnrs.fr%{REQUEST_URI} [R=301,L]
+
 RewriteRule ^spip/(.*)$ $1 [R=301,L]
 
 ExpiresActive On

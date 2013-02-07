@@ -1,11 +1,4 @@
 #CACHE{3600}
-<?php
-  if ($_SERVER['HTTP_HOST'] == 'www.images.math.cnrs.fr') {
-    include_spip ('inc/headers');
-    $uri = $_SERVER['REQUEST_URI'];
-    redirige_par_entete ("http://images.math.cnrs.fr$uri", '', 301);
-  }
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:og="http://ogp.me/ns#"
