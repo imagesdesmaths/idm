@@ -4,6 +4,12 @@
       <h1>Fiche de relecteur : #NOM</h1>
       <div class="ajax">#FORMULAIRE_IDM_RELECTEUR{#ID_AUTEUR}</div>
 
+      <B_a>
+      <h2>Article(s) relu(s) :</h2>
+      <BOUCLE_a(spip_idm_relecture){id_auteur}>
+        <BOUCLE_t(ARTICLES){id_article}{statut == .}{doublons}><h5>- #TITRE</h5></BOUCLE_t>
+      </BOUCLE_a>
+
       <h2>Activit&eacute; r&eacute;cente :</h2>
       [(#MODELE{idm_relecture}{id_auteur})]
     </BOUCLE_relecteurs>

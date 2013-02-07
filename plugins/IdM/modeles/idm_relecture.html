@@ -8,9 +8,9 @@
 	<BOUCLE_log(spip_idm_relecture){par date}{id_article?}{id_auteur?}>
 	<tr>
 		<td>#DATE</td>
-		<td><BOUCLE_a(AUTEURS){id_auteur}{tous}>#NOM</BOUCLE_a></td>
+		<td><BOUCLE_a(AUTEURS){id_auteur}{tous}><a href="#URL_ECRIRE{idm_relecteur,id_auteur=#ID_AUTEUR}">#NOM</a></BOUCLE_a></td>
 		<td>#ACTION</td>
-		<td><BOUCLE_t(ARTICLES){id_article}{statut==.}>#TITRE</BOUCLE_t></td>
+		<td><BOUCLE_t(ARTICLES){id_article}{statut==.}><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">#TITRE</a></BOUCLE_t></td>
 	</tr>
 	</BOUCLE_log>
 </table>
