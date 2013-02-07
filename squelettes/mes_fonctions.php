@@ -1,8 +1,7 @@
 
 <?php 
 
-function trunctext($texte, $longeur_max)
-{
+function trunctext($texte, $longeur_max) {
     if (strlen($texte) > $longeur_max)
     {
     $texte = substr($texte, 0, $longeur_max);
@@ -12,10 +11,5 @@ function trunctext($texte, $longeur_max)
 
     return $texte;
 }
-
-
-
-a
-
 
 ?>
