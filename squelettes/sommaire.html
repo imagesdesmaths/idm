@@ -16,7 +16,7 @@
         <BOUCLE_actu(BREVES) {id_rubrique=26} {age_relatif >= 0} {par date} {inverse} {0,3}>
           <li>
             <div class="calendar">
-              <span class="mois"><?php echo substr('[(#DATE|nom_mois)]', 0, 4); ?></span>
+              <span class="mois">[(#DATE|nom_mois|substr{0,4})]</span>
               <span class="jour">[(#DATE|jour)]</span>
             </div>
             <a href="#URL_BREVE">#TITRE</a>
@@ -35,7 +35,7 @@
         <BOUCLE_evts(BREVES) {id_rubrique=33} {par date} {inverse} {0,3} >
           <li>
             <div class="calendar ">
-              <span class="mois"><?php echo substr('[(#DATE|nom_mois)]', 0, 4); ?></span>
+              <span class="mois">[(#DATE|nom_mois|substr{0,4})]</span>
               <span class="jour">[(#DATE|jour)]</span>
             </div>
             <a href="#URL_BREVE">#TITRE</a>
