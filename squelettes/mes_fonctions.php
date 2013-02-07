@@ -1,4 +1,3 @@
-
 <?php 
 
 function trunctext($texte, $longeur_max) {
