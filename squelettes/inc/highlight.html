@@ -8,6 +8,7 @@
   <div class="resume_rubrique_#ID_RUBRIQUE resume_secteur_#ID_SECTEUR[ resume_piste_(#GET{piste_id})] wrap">
     <div class="img_hl">
       [<div class="hllogo">(#LOGO_ARTICLE{#URL_ARTICLE}|image_reduire{455,300}|image_recadre{455,300,center center})</div>]
+      [<div class="hllogo">(#LOGO_ARTICLE|fichier|non)<INCLURE{fond=inc/auteur}{id_article=#ID_ARTICLE}{taille=300}></div>]
     </div>
     <div class="content_hl">
       <h2><a href="#URL_ARTICLE">[(#TITRE)]</a></h2>
