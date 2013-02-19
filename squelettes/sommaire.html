@@ -140,7 +140,11 @@
         <li class="other">Autres articles</li>
         <BOUCLE_oldsuivants(ARTICLES) {id_secteur = 37} {par date} {inverse} {age_relatif >= 0} {0,5} {doublons}>
           <li>
-            <a href="#URL_ARTICLE">#TITRE</a>
+            <a href="#URL_ARTICLE">#TITRE
+            <BOUCLE_diff(MOTS) {id_groupe=5} {id_article}>
+              &nbsp;&nbsp;<span class="piste_#ID_MOT">&nbsp;#TITRE&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            </BOUCLE_diff>
+            </a>
             <div class="auteurs">[(#DATE|affdate) - ]#LESAUTEURS</div>
           </li>
         </BOUCLE_oldsuivants>
