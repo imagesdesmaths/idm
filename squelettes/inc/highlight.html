@@ -12,7 +12,7 @@
     </div>
     <div class="content_hl">
       <h2><a href="#URL_ARTICLE">[(#TITRE)]</a></h2>
-      <div class="meta">#LESAUTEURS
+      <div class="meta">[(#DATE|affdate) - ]#LESAUTEURS
         <BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {id_rubrique != 6}>
           <a href="#URL_RUBRIQUE"> - #TITRE</a>
         </BOUCLE_rubrique>

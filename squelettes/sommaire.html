@@ -119,7 +119,7 @@
         <BOUCLE_billetssuivants(ARTICLES) {id_rubrique = 6} {par date} {age_relatif >= 0} {inverse} {0,5} {doublons}>
           <li>
             <a href="#URL_ARTICLE">#TITRE</a>
-            <div class="auteurs">#LESAUTEURS</div>
+            <div class="auteurs">[(#DATE|affdate) - ]#LESAUTEURS</div>
           </li>
         </BOUCLE_billetssuivants>
         <li class="linkall"><a href="#URL_RUBRIQUE{6}">Voir tous les billets</a></li>
@@ -141,7 +141,7 @@
         <BOUCLE_oldsuivants(ARTICLES) {id_secteur = 37} {par date} {inverse} {age_relatif >= 0} {0,5} {doublons}>
           <li>
             <a href="#URL_ARTICLE">#TITRE</a>
-            <div class="auteurs">#LESAUTEURS</div>
+            <div class="auteurs">[(#DATE|affdate) - ]#LESAUTEURS</div>
           </li>
         </BOUCLE_oldsuivants>
         <li class="linkall"><a href="#URL_RUBRIQUE{37}">Voir tous les articles</a></li>
@@ -157,7 +157,7 @@
       <ul>
         <BOUCLE_courrier(ARTICLES) {id_rubrique=34} {age_relatif >= 0} {par date} {inverse} {0,5}>
           <li>
-            <span>[(#DATE|affdate{'d/m/Y'})]</span>
+            <span>[(#DATE|affdate) - ]</span>
             <a href="#URL_ARTICLE">[(#TITRE|trunctext{70})]</a>
           </li>
         </BOUCLE_courrier>
@@ -171,7 +171,7 @@
         <BOUCLE1(ARTICLES) {id_secteur in 6,37} {par hasard} {0,4} {doublons}>
           <li>
             <a href="#URL_ARTICLE">[(#TITRE|trunctext{70})]</a>
-            <div class="auteurs">#LESAUTEURS</div>
+            <div class="auteurs">[(#DATE|affdate) - ]#LESAUTEURS</div>
           </li>
         </BOUCLE1>
       </ul>
