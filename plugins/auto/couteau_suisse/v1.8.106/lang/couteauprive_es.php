@@ -579,6 +579,7 @@ Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère
 	'outil_actif_court' => 'actif', # NEW
 	'outil_activer' => 'Activar',
 	'outil_activer_le' => 'Activar la herramienta',
+	'outil_actualiser' => 'Actualiser l\'outil', # NEW
 	'outil_cacher' => 'No volver a mostrar',
 	'outil_desactiver' => 'Desactivar',
 	'outil_desactiver_le' => 'Desactivar la herramienta',

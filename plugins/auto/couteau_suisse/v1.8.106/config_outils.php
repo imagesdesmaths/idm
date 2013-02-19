@@ -1078,7 +1078,7 @@ add_outil( array(
 	'contrib'	=> 1564,
 	'code:options' => '%%expo_bofbof%%',
 	'pipeline:post_typo' => 'typo_exposants',
-	'code:css' => 'sup, sup.typo_exposants { font-size:78%; font-variant:inherit; vertical-align:23%; }',
+	'code:css' => 'sup, sup.typo_exposants { font-size:78%; font-variant:inherit; line-height:inherit; vertical-align:23%; }',
 ));
 
 add_outil( array(

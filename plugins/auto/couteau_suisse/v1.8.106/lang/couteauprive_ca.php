@@ -598,6 +598,7 @@ Per forçar la publicació de continguts amagats, n\'hi ha prou afegint el crite
 	'outil_actif_court' => 'actiu',
 	'outil_activer' => 'Activar',
 	'outil_activer_le' => 'Activar l\'eina',
+	'outil_actualiser' => 'Actualiser l\'outil', # NEW
 	'outil_cacher' => 'No visualitzar més',
 	'outil_desactiver' => 'Desactivar',
 	'outil_desactiver_le' => 'Desactivar l\'eina',

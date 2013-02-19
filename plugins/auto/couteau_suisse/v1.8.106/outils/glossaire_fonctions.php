@@ -148,7 +148,8 @@ function glossaire_parse($titre) {
 	if(count($mots)) {
 		$mots = array_unique($mots);
 		array_walk($mots, 'cs_preg_quote');
-		$mots = glossaire_accents(join('|', $mots));
+		// expliciter l'apostrophe et les accents
+		$mots = str_replace("'", "(?:'|&#8217;)", glossaire_accents(join('|', $mots)));
 	} else $mots = '';
 	return array($mots, $regs, $titres);
 }

@@ -35,7 +35,7 @@ add_variables(array(
 	'nom' => 'bloc_h4',
 	'format' => _format_CHAINE,
 	'defaut' => '"h4"',
-	'code:preg_match(\',^h\d$,i\', trim(%s))' => "define('_BLOC_TITRE_H', %s);",
+	'code:preg_match(\',^(div|h\d)$,i\', trim(%s))' => "define('_BLOC_TITRE_H', %s);",
 ), array(
 	'nom' => 'bloc_unique',
 	'format' => _format_NOMBRE,

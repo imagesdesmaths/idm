@@ -554,6 +554,7 @@ Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère
 	'outil_actif_court' => 'actif', # NEW
 	'outil_activer' => 'Aktive et',
 	'outil_activer_le' => 'Aleti aktive et',
+	'outil_actualiser' => 'Actualiser l\'outil', # NEW
 	'outil_cacher' => 'Artık gösterme',
 	'outil_desactiver' => 'Deaktive et',
 	'outil_desactiver_le' => 'Aleti deaktive et',

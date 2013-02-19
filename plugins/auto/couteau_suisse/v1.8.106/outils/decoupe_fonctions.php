@@ -33,7 +33,7 @@ function onglets_callback($matches) {
 	$pages = explode(_decoupe_SEPARATEUR, $matches[2]);
 	foreach ($pages as $p) {
 		$t = preg_split(',(\n\n|\r\n\r\n|\r\r),', $p, 2);
-		$t = array(trim(textebrut(nettoyer_raccourcis_typo(echappe_retour($t[0],'CS')))), cs_safebalises($t[1]));
+		$t = array(trim(textebrut(nettoyer_raccourcis_typo(extraire_multi(echappe_retour($t[0],'CS'))))), cs_safebalises($t[1]));
 		if(strlen($t[0].$t[1])) $contenus[] = _onglets_CONTENU.$t[0]._onglets_CONTENU2."<div>\n\n".$t[1]."\n\n</div></div>";
 	}
 	return _onglets_DEBUT.join('', $contenus).'</div>'._onglets_FIN;

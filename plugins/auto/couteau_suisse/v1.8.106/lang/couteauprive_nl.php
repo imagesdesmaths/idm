@@ -567,6 +567,7 @@ Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère
 	'outil_actif_court' => 'actif', # NEW
 	'outil_activer' => 'Activeren',
 	'outil_activer_le' => 'Het werktuig activeren',
+	'outil_actualiser' => 'Actualiser l\'outil', # NEW
 	'outil_cacher' => 'Niet meer aangeven',
 	'outil_desactiver' => 'Buiten dienst zetten.',
 	'outil_desactiver_le' => 'het werktuig buiten dienst zetten.',

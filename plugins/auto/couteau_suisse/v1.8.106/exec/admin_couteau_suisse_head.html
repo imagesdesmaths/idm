@@ -208,7 +208,8 @@ function outils_toggle() {
 
 // clic sur un outil (fonction egalement utilisee par l'outil 'maj_auto')
 function cs_href_click(this_, force) {
-	var this_id = this_.id.replace(/^href_/,'');
+	var this_id = typeof(this_)=='string' ? this_ : this_.id.replace(/^href_/,'');
+	if(this_id=='') this_id = cs_descripted;
 	// on s'en va si l'outil est deja affiche
 	if(!force && cs_descripted==this_id) return false;
 	cs_descripted=this_id;

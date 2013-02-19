@@ -1,7 +1,7 @@
 <paquet
 	prefix="couteau_suisse"
 	categorie="maintenance"
-	version="1.8.102"
+	version="1.8.106"
 	etat="stable"
 	compatibilite="[1.9.2;3.0.99]"
 	logo="img/couteau-50.gif"

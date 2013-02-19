@@ -39,14 +39,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'maj_actu' => 'Force a remote update',
 	'maj_liste' => 'Plugins detected:',
-	'maj_maj' => 'Update this plugin', # MODIF
+	'maj_maj' => 'Update the selected plugins',
 	'maj_ok' => 'This [plugin->@zip@] appears to be [up-to-date->@url@].',
 	'maj_rev' => 'Ver. @revision@',
 	'maj_rev_ko' => 'The [remote version->@url@] could not be found.',
 	'maj_rev_ok' => 'Version [@revision@->@url@] is [available->@zip@].',
 	'maj_spip' => 'After having updated all of your plugins, we strongly recommended you now update SPIP itself by clicking on the link above and following the instructions.',
 	'maj_svn' => 'This SVN plugin appears to be [up-to-date->@url@].',
-	'maj_tiers' => 'Nécessite/Utilise/Procure', # NEW
+	'maj_tiers' => 'Needs/Uses/Provides',
 	'maj_verif' => 'First check which file is right for you:',
 	'maj_verif2' => 'N.B. After clicking on the button above, make sure that the file you downloaded corresponds to the plugin you want to update.',
 	'maj_zip_ko' => 'The remote .zip file could not be identified.',

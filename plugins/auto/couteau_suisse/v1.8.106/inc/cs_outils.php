@@ -300,7 +300,7 @@ function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 	if(!isset($outil['fichiers_distants'])) return '';
 	$lib = sous_repertoire(_DIR_RACINE, 'lib');
 	$actif = $outil['actif'];
-	$a = array();
+	$a = array(); $reload = false;
 	foreach($outil['fichiers_distants'] as $i) {
 		$erreur = false;
 		$res_pipe = '';
@@ -329,17 +329,19 @@ function cs_action_fichiers_distants(&$outil, $forcer=false, $tester=false) {
 				} else
 					$distant = ecrire_fichier($file, $distant);
 			}
-			if($distant) $statut = '<span style="color:green">'.couteauprive_T('distant_charge').'</span>';
+			if($distant) { $statut = '<span style="color:green">'.couteauprive_T('distant_charge').'</span>'; $reload = true; }
 			else $erreur = $statut = '<span style="color:red">'.couteauprive_T('distant_echoue').'</span>';
 		} else $erreur = $statut = couteauprive_T('distant_inactif');
 		$a[] = '[{'.basename($file)."}->{$outil[$i]}]\n_ ".$statut.$message;
 		if($erreur) $outil['erreurs']['fichiers_distants'][$outil[$i]] = -1;
 	}
 	if($tester) return $a;
+	if($reload) $reload = "<input class='cs_sobre' type='submit' value=\" [" 
+		. attribut_html(couteauprive_T('outil_actualiser')).']" onclick="javascript:return cs_href_click(\'\', true);" />';
 	$a = '<ul style="margin:0.6em 0 0.6em 4em;"><li>' . join("</li><li style='margin-top:0.4em;'>", $a) . '</li></ul>';
 	$b = ($actif || !$erreur)?'rss_actualiser':($erreur?'distant_charger':false);
 	$b = $b?"\n<p class='cs_sobre'><input class='cs_sobre' type='submit' value=\" ["
-			. attribut_html(couteauprive_T(''.$b)).']" /></p>':'';
+			. attribut_html(couteauprive_T(''.$b)).']" />' . $reload . '</p>':'';
 	return ajax_action_auteur('action_rapide', 'fichiers_distants', 'admin_couteau_suisse', "arg=$outil[id]|fichiers_distants&cmd=descrip#cs_action_rapide",
 			'<p>' . couteauprive_T('distant_aide') . '</p>'
 			. '<p style="margin-top:1em"><strong>' . definir_puce() . '&nbsp;' . couteauprive_T('detail_fichiers_distant') . '</strong></p>'

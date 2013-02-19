@@ -128,7 +128,7 @@ Príklady: <code>#SET{x,1}#SET_PLUS{x,2}</code> alebo <code>#SET{x,avions}#SET_R
 	'cache_permanent' => 'Trvalá cache',
 	'cache_sans' => 'Žiadna cache',
 	'categ:admin' => '1. Administrácia',
-	'categ:devel' => '55. Développement', # NEW
+	'categ:devel' => '55. Vývoj',
 	'categ:divers' => '60. Rôzne',
 	'categ:interface' => '10. Private interface',
 	'categ:public' => '40. Verejná stránka',
@@ -138,8 +138,8 @@ Príklady: <code>#SET{x,1}#SET_PLUS{x,2}</code> alebo <code>#SET{x,avions}#SET_R
 	'categ:typo-racc' => '30. Klávesové skratky',
 	'certaines_couleurs' => 'Len tagy definované nižšie @_CS_ASTER@:',
 	'chatons:aide' => 'Smajlíky: @liste@',
-	'chatons:description' => 'Nahradiť <code>názov</code> obrázkami smajlíkov.
-_ Tento nástroj nahradí skratky obrázkami s rovnakým názvom, ktoré sa našli v priečinku <code>mon_squelette_toto/img/chatons/</code>, alebo podľa predvolených nastavení v priečinku <code>@_DIR_CS_ROOT@img/chatons/</code>.', # MODIF
+	'chatons:description' => 'Vloží obrázky (alebo emotikony  známe z {četu}) code> do všetkých textov, kde je reťazec, ako napr. {{<code>":nom".</code>}}
+_ Tento nástroj nahradí skratky obrázkami s rovnakým názvom, ktoré sa nájdu v priečinku <code>mon_squelette_toto/img/chatons/,</code> alebo podľa predvolených nastavení priečinka <code>@_DIR_CS_ROOT@img/chatons/</code>.',
 	'chatons:nom' => 'Smajlíky',
 	'citations_bb:description' => 'Na dodržanie HTML v spipovskom obsahu vašej stránky (články, rubriky, atď.) tento nástroj nahradí označenie <quote> označením <q> tam, kde je prázdny riadok. ',
 	'citations_bb:nom' => 'Dobre označené citácie',
@@ -264,7 +264,7 @@ Tento nástroj môžete spojiť s nástrojom "[zhrnutie.->sommaire]".',
 	'detail_pipelines' => 'Potrubie:',
 	'detail_raccourcis' => 'Tento nástroj upravil nasledovné klávesové skratky.',
 	'detail_spip_options' => '{{Poznámka:}} Ak tento nástroj nefunguje, určte prioritu nastaveniam SPIPU pomocou utility "@lien@".',
-	'detail_spip_options2' => 'Odporúča sa určiť prioritu nastavení SPIPU pomocou nástroja "[.->cs_comportement]".', # MODIF
+	'detail_spip_options2' => 'Tu sa určiť prioritu možností SPIPU pomocou nástroja "[.->cs_comportement]".',
 	'detail_spip_options_ok' => '{{Poznámka:}} Tento nástroj momentálne určuje prioritu nastavení SPIPU pomocou utility "@lien@".',
 	'detail_surcharge' => 'Preťažený nástroj:',
 	'detail_traitements' => 'Riešenie:',
@@ -544,8 +544,8 @@ _ • {predvolený:} automatické nahrádzanie (od verzie 2.0).
 [[%liens_orphelins%]]',
 	'liens_orphelins:description1' => '[[Ak má internetová adresa viac ako %long_url% znakov, SPIP ju zmenší na %coupe_url% znakov]].',
 	'liens_orphelins:nom' => 'Pekné www adresy',
-	'log_brut' => 'Données écrites en format brut (non HTML)', # NEW
-	'log_fileline' => 'Informations supplémentaires de débogage', # NEW
+	'log_brut' => 'Údaje zapísané ako neformátovaný text (nie ako HTML)',
+	'log_fileline' => 'Doplňujúce údaje o ladení',
 
 	// M
 	'mailcrypt:description' => 'Hides all the email links in your textes and replaces them with a Javascript link which activates the visitor\'s email programme when the link is clicked. This antispam tool attempts to prevent web robots from collecting email addresses which have been placed in forums or in the text displayed by the tags in your templates.',
@@ -589,6 +589,7 @@ Publikované objekty, ale skryté pred verejnosťou:
 	'outil_actif_court' => 'aktívny',
 	'outil_activer' => 'Aktivovať',
 	'outil_activer_le' => 'Aktivovať nástroj',
+	'outil_actualiser' => 'Actualiser l\'outil', # NEW
 	'outil_cacher' => 'Už viac nezobrazovať',
 	'outil_desactiver' => 'Deactivate',
 	'outil_desactiver_le' => 'Deactivate this tool',
@@ -623,7 +624,7 @@ Publikované objekty, ale skryté pred verejnosťou:
 Tento kód PHP môžete uložiť do súboru /config/mes_options.php. Na stránku "balíka {@pack@}" umiestni odkaz na obnovenie. Samozrejme, jeho názov môžete zmeniť nižšie.
 
 Ak zásuvný modul obnovíte kliknutím na balík, modul Vreckový nožík sa sám nastaví podľa hodnôt definovaných v tomto balíku.',
-	'pack_du' => '• of the pack @pack@', # MODIF
+	'pack_du' => 'Z balíka @pack@',
 	'pack_installe' => 'Inštalácia balíka s nastaveniami',
 	'pack_installer' => 'Are you sure you want to re-initialise the Penknife and install the « @pack@ » pack?',
 	'pack_nb_plrs' => 'V tejto chvíli je k dispozícii @nb@ "balíkov s nastaveniami".',
@@ -656,7 +657,7 @@ Na to, aby ostal zachovaný prístup k pôvodnému obrázku odrážky SPIPu (ma
 	// R
 	'raccourcis' => 'Active Penknife typographical shortcuts:',
 	'raccourcis_barre' => 'Klávesové skratky modulu Vreckový nožík',
-	'rafraichir' => 'Ďakujeme, že po dokončení nastavovania zásuvného modulu aktualizujete túto stránku.', # MODIF
+	'rafraichir' => 'Na to, aby sa dokončilo nastavovanie zásuvného modulu, aktualizujte túto stránku.',
 	'reserve_admin' => 'Access restricted to administrators',
 	'rss_actualiser' => 'Aktualizovať',
 	'rss_attente' => 'Čaká sa na RSS...',
@@ -753,8 +754,8 @@ _ • {Kontrola cache:} rovnaké ako predchádzajúca možnosť. Všetky výsled
 	'spip_log:description' => '@puce@ Gérez ici les différents paramètres pris en compte par SPIP pour mettre en logs les évènements particuliers du site. Fonction PHP à utiliser : <code>spip_log()</code>.@SPIP_OPTIONS@
 [[Ne conserver que %nombre_de_logs% fichier(s), chacun ayant pour taille maximale %taille_des_logs% Ko.<br /><q3>{Mettre à zéro l\'une de ces deux cases désactive la mise en log.}</q3>]][[@puce@ Dossier où sont stockés les logs (laissez vide par défaut) :<q1>%dir_log%{Actuellement :} @DIR_LOG@</q1>]][[->@puce@ Fichier par défaut : %file_log%]][[->@puce@ Extension : %file_log_suffix%]][[->@puce@ Pour chaque hit : %max_log% accès par fichier maximum]]', # NEW
 	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en log d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP.[[%filtre_gravite%]][[radio->%filtre_gravite_trace%]]', # NEW
-	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».', # NEW
-	'spip_log:nom' => 'SPIP et les logs', # NEW
+	'spip_log:description3' => '@puce@Špeciálne protokoly pre modul Vreckový nožík aktivujte tu: «[.->cs_comportement]».',
+	'spip_log:nom' => 'SPIP a jeho protokoly',
 	'stat_auteurs' => 'Autori v štatistikách',
 	'statuts_spip' => 'Iba tento status SPIPU:',
 	'statuts_tous' => 'Všetky stavy',
@@ -769,7 +770,7 @@ _ • {Kontrola cache:} rovnaké ako predchádzajúca možnosť. Všetky výsled
 _ Utile pour n\'en oublier aucune !
 
 @puce@ Un test : ', # NEW
-	'test_i18n:nom' => 'Traductions manquantes', # NEW
+	'test_i18n:nom' => 'Chýbajúce preklady',
 	'titre' => 'Vreckový nožík',
 	'titre_parent:description' => 'Within a loop it is common to want to show the title of the parent of the current object. You normally need to use a second loop to do this, but a new tag #TITRE_PARENT makes the syntax easier. In the case of a MOTS loop, the tag gives the title of the keyword group. For other objetcs (articles, sections, news items, etc.) it gives the title of the parent section (if it exists).
 
@@ -790,7 +791,7 @@ Tento nástroj je kompatibilný s nástrojom: "[.->sommaire]".',
 _ Cet outil active donc l\'application automatique des raccourcis typographiques de SPIP sur toutes les balises #TITRE et apparentées (#NOM pour un auteur, etc.).
 
 Exemple d\'utilisation : le titre d\'un livre cité dans le titre d\'un article, à mettre en italique.', # NEW
-	'titres_typographies:nom' => 'Titres typographiés', # NEW
+	'titres_typographies:nom' => 'Typografické nadpisy',
 	'tous' => 'Všetko',
 	'toutes_couleurs' => '36 farieb v štýloch CSS: @_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Multilingual blocks: <b><:trad:></b>', # MODIF
