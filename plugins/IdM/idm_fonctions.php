@@ -325,15 +325,4 @@ function idm_pre_edition ($flux) {
   return $flux;
 }
 
-function idm_teams () {
-  $idm_team_relecture = array (327,633,637);
-  $idm_team_billets   = array (63,285,286,7,50);
-
-  sql_delete ("spip_idm_teams");
-  foreach ($idm_team_relecture as $i)
-    sql_insertq ("spip_idm_teams", array('id_auteur'=>$i, 'team'=>'relecture'));
-  foreach ($idm_team_billets as $i)
-    sql_insertq ("spip_idm_teams", array('id_auteur'=>$i, 'team'=>'billets'));
-}
-
 ?>
