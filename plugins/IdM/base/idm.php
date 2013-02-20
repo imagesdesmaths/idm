@@ -44,7 +44,8 @@ function idm_declarer_tables_auxiliaires ($tables) {
                                                            'id_auteur'  => "BIGINT(21) NOT NULL",
                                                            'action'     => "ENUM ('born', 'affected', 'read', 'comment', 'complete', 'lazy', 'silent')",
                                                            'id_article' => "BIGINT(21) NOT NULL",
-                                                           'id_forum'   => "BIGINT(21) NOT NULL"),
+                                                           'id_forum'   => "BIGINT(21) NOT NULL",
+                                                           'active'     => "ENUM ('no', 'yes')"),
                                          'key' => array());
 
   $tables['spip_idm_teams'] = array ('field' => array ('team'      => "TINYTEXT",

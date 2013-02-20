@@ -1,11 +1,11 @@
 <paquet
     prefix        = "idm"
     categorie     = "edition"
-    version       = "1.1.0"
+    version       = "1.1.1"
     etat          = "stable"
     compatibilite = "[3.0.0-alpha2;3.0.*]"
     logo          = "prive/themes/spip/images/idm-logo-60.png"
-    schema        = "201302061815"
+    schema        = "201302201203"
     >
   <nom>IdM</nom>
 
