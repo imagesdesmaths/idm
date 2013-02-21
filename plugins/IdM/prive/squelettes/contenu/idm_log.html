@@ -1,3 +1,36 @@
 <h1>Espionnage de la relecture</h1>
 
+<?php
+
+	function idm_relecture_commit ($id_article) {
+		$titre = sql_getfetsel ('titre', 'spip_articles', "id_article = $id_article");
+		echo "Article $id_article : <b>$titre</b> ...<br>\n<ul>\n";
+		$rel = sql_select ('*', 'spip_idm_relecture', "id_article = $id_article AND action = 'affected'");
+		while ($r = sql_fetch($rel)) {
+			$id_auteur = $r['id_auteur'];
+			$nom     = sql_getfetsel ('nom', 'spip_auteurs', "id_auteur = $id_auteur");
+			$read    = sql_countsel ('spip_idm_relecture', "id_auteur = $id_auteur AND id_article = $id_article AND action = 'read'");
+			$comment = sql_countsel ('spip_idm_relecture', "id_auteur = $id_auteur AND id_article = $id_article AND action = 'comment'");
+
+			$action = "lazy";
+			if ($read) $action = "silent";
+			if ($comment) $action = "complete";
+
+			echo "<li>&nbsp;&nbsp;<b>$nom</b>: read=$read, comment=$comment -> action=$action</li>\n";
+			sql_insertq ('spip_idm_relecture', array("id_auteur"=>$id_auteur, "id_article"=>$id_article, "action"=>$action));
+		}
+		sql_updateq ('spip_idm_relecture', array('active'=>"no"), "id_article = $id_article");
+		echo "</ul><hr>\n";
+	}
+?>
+
+#SET{reload,no}
+<BOUCLE_up (spip_idm_relecture) {active=yes}>
+	<BOUCLE_a (ARTICLES) {id_article} {statut=publie} {unique}>
+		<?php idm_relecture_commit(#ID_ARTICLE); ?>
+		#SET{reload,yes}
+	</BOUCLE_a>
+</BOUCLE_up>
+[(#GET{reload}|=={yes}|?{' ',''}) <p><b>Reload page to update the table !</b></p><hr>]
+
 [(#MODELE{idm_relecture}{id_article}{id_auteur})]
