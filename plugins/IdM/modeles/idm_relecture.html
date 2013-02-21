@@ -1,16 +1,23 @@
+
+#SET{f,yes}
+[(#ENV{id_article}|?{' ',''})#SET{f,.}]
+[(#ENV{id_auteur}|?{' ',''})#SET{f,.}]
+
 <table id="spip_log">
 	<thead><tr>
 		<th>Date</th>
 		<th>Relecteur</th>
 		<th>Action</th>
 		<th>Article</th>
+		<th>Active</th>
 	</tr></thead>
-	<BOUCLE_log(spip_idm_relecture){par date}{id_article?}{id_auteur?}>
+	<BOUCLE_log(spip_idm_relecture){par date}{id_article?}{id_auteur?}{active == #GET{f}}>
 	<tr>
 		<td>#DATE</td>
 		<td><BOUCLE_a(AUTEURS){id_auteur}{tous}><a href="#URL_ECRIRE{idm_relecteur,id_auteur=#ID_AUTEUR}">#NOM</a></BOUCLE_a></td>
 		<td>#ACTION</td>
-		<td><BOUCLE_t(ARTICLES){id_article}{statut==.}><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">#TITRE</a></BOUCLE_t></td>
+		<td><BOUCLE_t(ARTICLES){id_article}{statut==.}><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">#TITRE</a> (#STATUT)</BOUCLE_t></td>
+		<td>#ACTIVE</td>
 	</tr>
 	</BOUCLE_log>
 </table>
