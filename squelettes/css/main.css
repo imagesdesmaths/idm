@@ -555,6 +555,7 @@ div.texte h4 {font-style: italic; font-weight: bold; text-decoration: underline;
 div.texte h5 { text-align: left; font-style: italic; font-weight: bold; text-decoration: none; padding: .5ex 2em; margin: 0px; font-size: 110%; }
 div.texte li { margin-top: 1ex; }
 div.texte pre { padding-left: 1em; margin-left: 1em; border-left: 1px solid #e20000; }
+div.texte > p:first-child:first-letter { color: #ad282d; float: left; font-size: 440%; font-weight: bold; margin: -0.4ex 0.1em -0.4ex 0px; }
 
 div.thm { border-left: 2px solid #e20000; margin: 1ex 0em 1ex 1.5em; padding-left: 1em; font-style: italic; }
 div.thm span.titre { font-weight: bold; font-style: normal; margin-left: -2.5em; background: white; border-bottom: 2px solid #e20000; border-top: 1px solid white; }
