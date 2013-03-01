@@ -22,7 +22,7 @@
         Cr&eacute;dits images
       #BLOC_DEBUT
         [<a href="IMG/#LOGO_ARTICLE**">Image &agrave; la une</a> &mdash; (#CREDITS_LOGO|propre|PtoBR)<br/>]
-        <BOUCLE_img(DOCUMENTS) {id_article} {credits == .}>
+        <BOUCLE_img(DOCUMENTS) {id_article} {credits == .} {statut == .}>
           <a href="#URL_DOCUMENT">[(#TITRE|sinon{img_#ID_DOCUMENT})]</a> &mdash; [(#CREDITS|propre|PtoBR)]<br/>
         </BOUCLE_img>
       #BLOC_FIN
