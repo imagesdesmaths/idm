@@ -1,27 +1,28 @@
 <?php
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-    'billettistes'       => "Gestion des billettistes",
+    'billettistes'       => "Gestion billettistes",
 
     'categorie'          => "Catégorie “@nom@” :",
 
     'menu'               => "Gestion IdM",
-    'moderation'         => "Interface de modération",
+    'moderation'         => "Modération",
 
     'equipe'             => "Équipe “@nom@” :",
 
-    'lint'               => "Vérificateur d'articles",
+    'lint'               => "Vérificateur",
+    'log'                => "Suivi relecture",
 
     'non_plan'           => "Articles proposés et non planifiés",
 
     'planning'           => "Planning de publication",
 
-    'relecteurs'         => "Gestion des relecteurs",
-    'relecture'          => "Articles en cours de relecture",
+    'relecteurs'         => "Gestion relecteurs",
+    'relecture'          => "Art. en relecture",
     'relecture_aucun'    => "Aucun article proposé !",
 
     'tableau'            => "Tableau de bord",
-    'teams'              => "Les équipes de rédaction",
+    'teams'              => "Les équipes",
     'titre_relecteurs'   => "Relecteurs",
 
     'mail_billet_valide' => <<<EOT
