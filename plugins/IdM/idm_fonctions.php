@@ -212,7 +212,7 @@ function idm_pre_typo ($texte) {
 
 function idm_insert_head ($texte) {
   $mj_insert = <<<END
-    <script type="text/javascript" src="/mathjax/MathJax.js">
+    <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         jax: [ "input/TeX", "output/HTML-CSS" ],
         extensions: [ "tex2jax.js", "jsMath2jax.js" ],
@@ -223,6 +223,7 @@ function idm_insert_head ($texte) {
         }
       });
     </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 END;
   return $texte . $mj_insert;
 }
