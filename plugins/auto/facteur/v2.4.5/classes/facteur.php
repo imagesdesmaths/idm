@@ -21,14 +21,40 @@ include_spip('facteur_fonctions');
 
 class Facteur extends PHPMailer {
 
-	function Facteur($email, $objet, $message_html, $message_texte) {
+	/**
+	 * @param $email
+	 * @param $objet
+	 * @param $message_html
+	 * @param $message_texte
+	 * @param array $options
+	 *
+	 */
+	function Facteur($email, $objet, $message_html, $message_texte, $options = array()) {
+		$defaut = array(
+			'adresse_envoi' => $GLOBALS['meta']['facteur_adresse_envoi'],
+			'adresse_envoi_email' => $GLOBALS['meta']['facteur_adresse_envoi_email'],
+			'adresse_envoi_nom' => $GLOBALS['meta']['facteur_adresse_envoi_nom'],
+			'cc' => $GLOBALS['meta']['facteur_cc'],
+			'bcc' => $GLOBALS['meta']['facteur_bcc'],
+			'smtp' => $GLOBALS['meta']['facteur_smtp'],
+			'smtp_host' => $GLOBALS['meta']['facteur_smtp_host'],
+			'smtp_port' => $GLOBALS['meta']['facteur_smtp_port'],
+			'smtp_auth' => $GLOBALS['meta']['facteur_smtp_auth'],
+			'smtp_username' => $GLOBALS['meta']['facteur_smtp_username'],
+			'smtp_password' => $GLOBALS['meta']['facteur_smtp_password'],
+			'smtp_secure' => $GLOBALS['meta']['facteur_smtp_secure'],
+			'smtp_sender' => $GLOBALS['meta']['facteur_smtp_sender'],
+			'filtre_images' => $GLOBALS['meta']['facteur_filtre_images'],
+			'filtre_iso_8859' => $GLOBALS['meta']['facteur_filtre_iso_8859'],
+		);
+		$options = array_merge($defaut, $options);
 
 		if (defined('_FACTEUR_DEBUG_SMTP')) {
 			$this->SMTPDebug = _FACTEUR_DEBUG_SMTP ;
 		}
-		if ($GLOBALS['meta']['facteur_adresse_envoi'] == 'oui'
-		  AND $GLOBALS['meta']['facteur_adresse_envoi_email'])
-			$this->From = $GLOBALS['meta']['facteur_adresse_envoi_email'];
+		if ($options['adresse_envoi'] == 'oui'
+		  AND $options['adresse_envoi_email'])
+			$this->From = $options['adresse_envoi_email'];
 		else
 			$this->From = (isset($GLOBALS['meta']["email_envoi"]) AND $GLOBALS['meta']["email_envoi"])?
 				$GLOBALS['meta']["email_envoi"]
@@ -36,9 +62,9 @@ class Facteur extends PHPMailer {
 
 		// Si plusieurs emails dans le from, pas de Name !
 		if (strpos($this->From,",")===false){
-			if ($GLOBALS['meta']['facteur_adresse_envoi'] == 'oui'
-			  AND $GLOBALS['meta']['facteur_adresse_envoi_nom'])
-				$this->FromName = $GLOBALS['meta']['facteur_adresse_envoi_nom'];
+			if ($options['adresse_envoi'] == 'oui'
+			  AND $options['adresse_envoi_nom'])
+				$this->FromName = $options['adresse_envoi_nom'];
 			else
 				$this->FromName = strip_tags(extraire_multi($GLOBALS['meta']['nom_site']));
 		}
@@ -58,34 +84,34 @@ class Facteur extends PHPMailer {
 			if (!$this->AddAddress($email))
 				spip_log("Erreur AddAddress $email : ".print_r($this->ErrorInfo,true),'facteur');
 
-		if (!empty($GLOBALS['meta']['facteur_smtp_sender'])) {
-			$this->Sender = $GLOBALS['meta']['facteur_smtp_sender'];
+		if (!empty($options['smtp_sender'])) {
+			$this->Sender = $options['smtp_sender'];
 			$this->AddCustomHeader("Errors-To: ".$this->Sender);
 		}
 
-		if (!empty($GLOBALS['meta']['facteur_cc'])) {
-			$this->AddCC( $GLOBALS['meta']['facteur_cc'] );
+		if (!empty($options['cc'])) {
+			$this->AddCC( $options['cc'] );
 		}
-		if (!empty($GLOBALS['meta']['facteur_bcc'])) {
-			$this->AddBCC( $GLOBALS['meta']['facteur_bcc'] );
+		if (!empty($options['bcc'])) {
+			$this->AddBCC( $options['bcc'] );
 		}
 		
-		if (isset($GLOBALS['meta']['facteur_smtp']) AND $GLOBALS['meta']['facteur_smtp'] == 'oui') {
+		if (isset($options['smtp']) AND $options['smtp'] == 'oui') {
 			$this->Mailer	= 'smtp';
-			$this->Host 	= $GLOBALS['meta']['facteur_smtp_host'];
-			$this->Port 	= $GLOBALS['meta']['facteur_smtp_port'];
-			if ($GLOBALS['meta']['facteur_smtp_auth'] == 'oui') {
+			$this->Host 	= $options['smtp_host'];
+			$this->Port 	= $options['smtp_port'];
+			if ($options['smtp_auth'] == 'oui') {
 				$this->SMTPAuth = true;
-				$this->Username = $GLOBALS['meta']['facteur_smtp_username'];
-				$this->Password = $GLOBALS['meta']['facteur_smtp_password'];
+				$this->Username = $options['smtp_username'];
+				$this->Password = $options['smtp_password'];
 			}
 			else {
 				$this->SMTPAuth = false;
 			}
 			if (intval(phpversion()) == 5) {
-			if ($GLOBALS['meta']['facteur_smtp_secure'] == 'ssl')
+			if ($options['smtp_secure'] == 'ssl')
 				$this->SMTPSecure = 'ssl';
-			if ($GLOBALS['meta']['facteur_smtp_secure'] == 'tls')
+			if ($options['smtp_secure'] == 'tls')
 				$this->SMTPSecure = 'tls';
 			}
 		}
@@ -94,7 +120,7 @@ class Facteur extends PHPMailer {
 			$message_html = unicode_to_utf_8(charset2unicode($message_html,$GLOBALS['meta']['charset']));
 			$this->Body = $message_html;
 			$this->IsHTML(true);
-			if ($GLOBALS['meta']['facteur_filtre_images'])
+			if ($options['filtre_images'])
 				$this->JoindreImagesHTML();
 			$this->UrlsAbsolues();
 		}
@@ -109,7 +135,7 @@ class Facteur extends PHPMailer {
 			}
 		}
 
-		if ($GLOBALS['meta']['facteur_filtre_iso_8859'])
+		if ($options['filtre_iso_8859'])
 			$this->ConvertirUtf8VersIso8859();
 
 	}
@@ -209,10 +235,10 @@ class Facteur extends PHPMailer {
 	 * Transformer les urls des liens et des images en url absolues
 	 * sans toucher aux images embarquees de la forme "cid:..."
 	 */
-	function UrlsAbsolues(){
+	function UrlsAbsolues($base=null){
 		include_spip('inc/filtres_mini');
 		if (preg_match_all(',(<(a|link)[[:space:]]+[^<>]*href=["\']?)([^"\' ><[:space:]]+)([^<>]*>),imsS',
-		$this->Body, $liens, PREG_SET_ORDER)) {
+		  $this->Body, $liens, PREG_SET_ORDER)) {
 			foreach ($liens as $lien) {
 				if (strncmp($lien[3],"cid:",4)!==0){
 					$abs = url_absolue($lien[3], $base);
@@ -222,7 +248,7 @@ class Facteur extends PHPMailer {
 			}
 		}
 		if (preg_match_all(',(<(img|script)[[:space:]]+[^<>]*src=["\']?)([^"\' ><[:space:]]+)([^<>]*>),imsS',
-		$this->Body, $liens, PREG_SET_ORDER)) {
+		  $this->Body, $liens, PREG_SET_ORDER)) {
 			foreach ($liens as $lien) {
 				if (strncmp($lien[3],"cid:",4)!==0){
 					$abs = url_absolue($lien[3], $base);
@@ -245,30 +271,40 @@ class Facteur extends PHPMailer {
 							'tiff'	=> 'image/tiff',
 							'swf'	=> 'application/x-shockwave-flash'
 						);
-		while (list($key,) = each($image_types))
-			$extensions[] = $key;
+		$src_found = array();
+		$images_embeded = array();
+		if (preg_match_all(
+			'/["\'](([^"\']+)\.('.implode('|', array_keys($image_types)).'))([?][^"\']+)?([#][^"\']+)?["\']/Uims',
+			$this->Body, $images, PREG_SET_ORDER)) {
 
-		preg_match_all('/["\'](([^"\']+)\.('.implode('|', $extensions).'))([?][^"\']+)?["\']/Ui', $this->Body, $images, PREG_SET_ORDER);
+			$adresse_site = $GLOBALS['meta']['adresse_site'].'/';
+			foreach($images as $im){
+				$src_orig = $im[1].$im[4].$im[5];
+				if (!isset($src_found[$src_orig])){ // deja remplace ? rien a faire (ie la meme image presente plusieurs fois)
+					// examiner le src et voir si embedable
+					$src = $im[1];
+					if ($src AND strncmp($src,$adresse_site,strlen($adresse_site))==0)
+						$src = _DIR_RACINE . substr($src,strlen($adresse_site));
+					if ($src
+					  AND !preg_match(",^[a-z0-9]+://,i",$src)
+					  AND (
+					      file_exists($f=$src) // l'image a ete generee depuis le meme cote que l'envoi
+					      OR (_DIR_RACINE AND file_exists($f=_DIR_RACINE.$src)) // l'image a ete generee dans le public et on est dans le prive
+					      OR (!_DIR_RACINE AND file_exists($f=_DIR_RESTREINT.$src)) // l'image a ete generee dans le prive et on est dans le public
+					     )
+					  ){
+						if (!isset($images_embeded[$f])){
+							$extension = strtolower($im[3]);
+							$header_extension = $image_types[$extension];
+							$cid = md5($f); // un id unique pour un meme fichier
+							$images_embeded[$f] = $cid; // marquer l'image comme traitee, inutile d'y revenir
+							$this->AddEmbeddedImage($f, $cid, basename($f),'base64',$header_extension);
+						}
 
-		$html_images = array();
-		foreach($images as $im){
-			if (!preg_match(",^[a-z0-9]+://,i",$im[1])
-			 AND ($src = $im[1].$im[4])
-			 AND (
-			      file_exists($f=$im[1]) // l'image a ete generee depuis le meme cote que l'envoi
-			      OR (_DIR_RACINE AND file_exists($f=_DIR_RACINE.$im[1])) // l'image a ete generee dans le public et on est dans le prive
-			      OR (!_DIR_RACINE AND strncmp($im[1],"../",3)==0 AND file_exists($f=substr($im[1],3))) // l'image a ete generee dans le prive et on est dans le public
-			     )
-			 AND !isset($html_images[$src])){
-
-				$extension = strtolower($im[3]);
-				$header_extension = $image_types[$extension];
-				$cid = md5($f); // un id unique pour un meme fichier
-				// l'ajouter si pas deja present (avec un autre ?...)
-				if (!in_array($cid,$html_images))
-					$this->AddEmbeddedImage($f, $cid, basename($f),'base64',$header_extension);
-				$this->Body = str_replace($src, "cid:$cid", $this->Body);
-				$html_images[$src] = $cid; // marquer l'image comme traitee, inutile d'y revenir
+						$this->Body = str_replace($src_orig, "cid:".$images_embeded[$f], $this->Body);
+						$src_found[$src_orig] = $f;
+					}
+				}
 			}
 		}
 	}
