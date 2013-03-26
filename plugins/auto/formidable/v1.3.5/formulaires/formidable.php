@@ -51,9 +51,7 @@ function formulaires_formidable_charger($id_formulaire, $valeurs=array(), $id_fo
 			$saisies = unserialize($formulaire['saisies']);
 			$traitements = unserialize($formulaire['traitements']);
 			// On déclare les champs
-			foreach (saisies_lister_champs($saisies) as $c)
-			  $contexte[$c] = '';
-			/* $contexte += array_fill_keys(saisies_lister_champs($saisies), ''); */
+			$contexte += array_fill_keys(saisies_lister_champs($saisies), '');
 			$contexte['mechantrobot'] = '';
 			// On ajoute le formulaire complet
 			$contexte['_saisies'] = $saisies;

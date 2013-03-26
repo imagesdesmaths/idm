@@ -4,7 +4,7 @@
 #SET{valeurs,#ARRAY}
 #SET{reponses_total,0}
 <BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire}>
-<BOUCLE_champs(FORMULAIRES_REPONSES_CHAMPS){id_formulaires_reponse}>
+<BOUCLE_champs(FORMULAIRES_REPONSES_CHAMPS){id_formulaires_reponse}{nom ?= #ENV{nom}}>
 #SET_MERGE{liste_valeurs, #GET{valeurs}|table_valeur{#NOM}|sinon{#ARRAY}, #ARRAY{0,#VALEUR|tenter_unserialize}}
 #SET_MERGE{valeurs, #ARRAY{#NOM,#GET{liste_valeurs}}}
 </BOUCLE_champs>
@@ -19,7 +19,9 @@
 
 <BOUCLE_saisies(POUR){tableau #SAISIES|unserialize|saisies_lister_par_nom}>
 [(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
+  [(#CLE|=={#ENV{nom,#CLE}}|oui)
 	[(#VALEUR|formidable_analyser_saisie{#GET{valeurs}, #GET{reponses_total}})]
+  ]
 ]
 </BOUCLE_saisies>
 
