@@ -6,10 +6,11 @@
 ***      http://www.april.org/gnu/gpl_french.html		     ***
 ******************************************************************/
 ]
-<BOUCLE_carmetaldoc(DOCUMENTS){id_document=#ENV**{doc}}{mode=document}{extension==zir}>
-<applet archive="#EVAL{_DIR_PLUGIN_EVA_GEOMETRIE}scripts/CaRMetal.jar" code="rene.zirkel.ZirkelApplet.class"
+<BOUCLE_carmetaldoc(DOCUMENTS){id_document=#ENV**{doc}}{mode=document}{extension==zir|zirs}>
+<applet archive="#EVAL{_DIR_PLUGIN_EVA_GEOMETRIE}scripts/CaRMetal.jar" code="Main.class"
 width="[(#ENV**{largeur}|?{#ENV**{largeur},"100%"})]"
-height="[(#ENV**{hauteur}|?{#ENV**{hauteur},"500"})]">
+height="[(#ENV**{hauteur}|?{#ENV**{hauteur},"500"})]"
+mayscript="true">
 <param name="file" VALUE="#URL_DOCUMENT">
 </applet>
 </BOUCLE_carmetaldoc>
