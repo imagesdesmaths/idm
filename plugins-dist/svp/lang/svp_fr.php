@@ -221,6 +221,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_sql_insert_depot' => 'Erreur SQL lors de l\'ajout du dépôt @objet@',
 	'message_nok_url_depot_incorrecte' => 'L\'adresse « @url@ » est incorrecte',
 	'message_nok_xml_non_conforme' => 'Le fichier XML « @fichier@ » de description du dépôt n\'est pas conforme',
+	'message_nok_xml_non_recupere' => 'Le fichier XML « @fichier@ » n\'a pas pu être récupéré',
 	'message_ok_aucun_plugin_trouve' => 'Aucun plugin ne correspond aux critères choisis.',
 	'message_ok_depot_ajoute' => 'Le dépôt « @url@ » a été ajouté.',
 	'message_ok_plugins_trouves' => '@nb_plugins@ plugin(s) correspondent aux critères choisis (@tri@). Sélectionnez ci-dessous les plugins que vous souhaitez télécharger et activer sur votre serveur.',

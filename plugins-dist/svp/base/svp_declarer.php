@@ -92,7 +92,7 @@ function svp_declarer_tables_objets_sql($tables) {
 			"branches_spip"	=> "varchar(255) DEFAULT '' NOT NULL"), // union des branches spip supportees par les paquets du plugin
 		'key'					=> array(
 			"PRIMARY KEY"	=> "id_plugin",
-			"KEY"			=> "prefixe"),
+			"KEY prefixe"		=> "prefixe"),
 		'tables_jointures'		=> array('id_depot' => 'depots_plugins'),
 		'principale'			=> 'oui',
 

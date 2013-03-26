@@ -31,7 +31,7 @@
 		#SET{c,#VAL{article}|classement_populaires}
 		<B_plusvisites>
 			<ol class='classement'>
-			<BOUCLE_plusvisites(ARTICLES){popularite>0}{!par visites}{0,30}{doublons}>
+			<BOUCLE_plusvisites(ARTICLES){popularite>0}{!par visites}{0,30}>
 				<li value="[(#ID_ARTICLE|array_search{#GET{c}}|plus{1})]"[ class="(#EXPOSE)"]><a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]" class="ajax"
 							title="<:statistiques:info_popularite_3{visites=#VISITES,popularite=#POPULARITE}|attribut_html:>">#TITRE</a></li>
 			</BOUCLE_plusvisites>

@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -30,7 +30,6 @@ function mots_declarer_tables_interfaces($interfaces){
 	$interfaces['exceptions_des_jointures']['type_mot_syndic'] = array('spip_mots', 'type');
 	$interfaces['exceptions_des_jointures']['spip_articles']['id_groupe'] = array('spip_mots', 'id_groupe');
 	$interfaces['exceptions_des_jointures']['spip_rubriques']['id_groupe'] = array('spip_mots', 'id_groupe');
-	$interfaces['exceptions_des_jointures']['spip_syndic']['id_groupe'] = array('spip_mots', 'id_groupe');
 
 	return $interfaces;
 }
@@ -72,8 +71,7 @@ function mots_declarer_tables_auxiliaires($tables_auxiliaires){
 function mots_declarer_tables_objets_sql($tables){
 	$tables['spip_mots'] = array(
 		'type'=>'mot',
-	  'type_surnoms' => array('mot-cle'), // pour les icones...
-
+		'type_surnoms' => array('mot-cle'), // pour les icones...
 		'texte_retour' => 'icone_retour',
 		'texte_objets' => 'public:mots_clefs',
 		'texte_objet' => 'public:mots_clef',
@@ -82,9 +80,9 @@ function mots_declarer_tables_objets_sql($tables){
 		'texte_creer' => 'titre_ajouter_un_mot',
 		'texte_logo_objet' => 'mots:logo_mot_cle',
 		'texte_creer_associer' => 'mots:creer_et_associer_un_mot',
-		'info_aucun_objet'=> 'info_aucun_mot',
-		'info_1_objet' => 'info_1_mot',
-		'info_nb_objets' => 'info_nb_mots',
+		'info_aucun_objet'=> 'mots:info_aucun_mot_cle',
+		'info_1_objet' => 'info_1_mot_cle',
+		'info_nb_objets' => 'info_nb_mots_cles',
 		'titre' => "titre, '' AS lang",
 		'date' => 'date',
 		'principale' => 'oui',
@@ -99,6 +97,7 @@ function mots_declarer_tables_objets_sql($tables){
 		),
 		'key' => array(
 			"PRIMARY KEY"	=> "id_mot",
+			"KEY id_groupe" => "id_groupe"
 		),
 		'rechercher_champs' => array(
 		  'titre' => 8, 'texte' => 1, 'descriptif' => 5

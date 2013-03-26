@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/forum?lang_cible=bs
+// extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=bs
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -48,6 +48,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_page_url' => '(Ako se vasa poruka odnosi na clanak objavljen na web-u, ili na stranicu koja pruza dodatne informacije, mozete na kraju naznaciti naziv i URL adresu stranice.)',
 	'forum_permalink' => 'Lien permanent vers le commentaire', # NEW
 	'forum_poste_par' => 'Poruku postavio/la@parauteur@; poruka slijedi nakon vaseg clanka.', # MODIF
+	'forum_poste_par_court' => 'Message posté@parauteur@.', # NEW
+	'forum_poste_par_generique' => 'Message posté@parauteur@ (@objet@ « @titre@ »).', # NEW
 	'forum_qui_etes_vous' => '<b>Ko ste?</b> (optionnel)', # MODIF
 	'forum_saisie_texte_info' => 'Ce formulaire accepte les raccourcis SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> et le code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Pour créer des paragraphes, laissez simplement des lignes vides.', # NEW
 	'forum_texte' => 'Tekst vase poruke:', # MODIF

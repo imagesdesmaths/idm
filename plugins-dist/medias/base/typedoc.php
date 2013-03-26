@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -119,6 +119,7 @@ $tables_documents = array(
 			'kmz' => 'Google Earth Placemark File',
 			'lyx' => 'Lyx file',
 			'mathml' => 'MathML',
+			'mbtiles' => 'MBTiles',
 			'm3u' => 'M3U Playlist',
 			'm3u8' => 'M3U8 Playlist',
 			'm4u' => 'MPEG4 Playlist',
@@ -304,6 +305,7 @@ $tables_mime = array(
 		'm3u' => 'text/plain',
 		'm3u8' => 'text/plain',
 		'mathml' => 'application/mathml+xml',
+		'mbtiles' => 'application/x-sqlite3',
 		'pas' => 'text/x-pascal',
 		'pdf' => 'application/pdf',
 		'pgn' => 'application/x-chess-pgn',

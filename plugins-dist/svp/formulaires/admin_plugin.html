@@ -37,7 +37,7 @@
 					<a href="#" id="select_aucun"><:svp:tout_decocher:></a><span class="sep"> | </span>
 					<a href="#" id="select_up"><:svp:tout_cocher_up:></a>
 				</p>
-				<select class="action" name="action_globale">
+				<select id="action_globale" class="action" name="action_globale">
 					[(#ENV{actif}|=={oui}|non)<option value="on"><:svp:bouton_activer:></option>]
 					[(#ENV{actif}|=={non}|non)<option value="off"><:svp:bouton_desactiver:></option>]
 					<option value="up" id="option_up"><:svp:bouton_up:></option>
@@ -60,6 +60,7 @@
 						if ($(".plugins li.item.up").length != 0) {
 							$("#select_up").click(function(){
 								$(".plugins li.item.up input.select_plugin").attr("checked",true);
+								$("select#action_globale>option#option_up").attr("selected","selected");
 								return false;
 							});
 						} else {

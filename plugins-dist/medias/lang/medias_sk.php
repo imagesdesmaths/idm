@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/medias?lang_cible=sk
+// extrait automatiquement de http://trad.spip.net/tradlang_module/medias?lang_cible=sk
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -112,6 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_modifier_document' => 'Upraviť dokument',
 	'info_portfolio' => 'Portfólio',
 	'info_referencer_doc_distant' => 'Odkázať na dokument na internete:',
+	'info_sans_vignette' => 'Žiadna miniatúra',
 	'info_statut_document' => 'Tento dokument je:',
 	'info_telecharger' => 'Nahrať z vášho počítača:',
 	'infos' => 'Technické údaje',
@@ -125,6 +126,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_credits' => 'Autori',
 	'label_fichier' => 'Súbor',
 	'label_fichier_vignette' => 'Miniatúra',
+	'label_paginer_par' => 'Stránkovať po:',
 	'label_parents' => 'Tento dokument je prepojený s prvkom',
 	'label_refdoc_joindre' => 'Dokument číslo',
 	'lien_tout_enlever' => 'Odstrániť všetko',

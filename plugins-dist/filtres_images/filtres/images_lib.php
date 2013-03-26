@@ -2,7 +2,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -197,9 +197,9 @@ function _couleur_hsl2rgb ($H,$S,$L) {
 	
 	if ( $S == 0 )                       //HSV values = 0 -> 1
 	{
-	   $R = $V * 255;
-	   $G = $V * 255;
-	   $B = $V * 255;
+	   $R = $L * 255;
+	   $G = $L * 255;
+	   $B = $L * 255;
 	}
 	else
 	{

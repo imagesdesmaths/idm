@@ -28,7 +28,7 @@
 ]
 [(#SET{
 	image,
-		#MODE|match{'image|vignette'}
+		#ENV{mode_force,#MODE}|match{'image|vignette'}
 		|sinon{#ENV{embed}}
 		|oui
 })][

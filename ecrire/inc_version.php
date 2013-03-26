@@ -66,7 +66,7 @@ if (!defined('_NOM_PERMANENTS_ACCESSIBLES')) define('_NOM_PERMANENTS_ACCESSIBLES
 if (!defined('_IS_BOT'))
 	define('_IS_BOT',
 		isset($_SERVER['HTTP_USER_AGENT'])
-		AND preg_match(',bot|slurp|crawler|spider|webvac|yandex,i',
+		AND preg_match(',bot|slurp|crawler|spider|webvac|yandex|INA dlweb|EC2LinkFinder|80legs,i',
 			$_SERVER['HTTP_USER_AGENT'])
 	);
 
@@ -222,7 +222,10 @@ $xml_indent = false;
 // - Alexa, equivalent Thumbshots, avec vignettes beaucoup plus grandes mais avertissement si pas de preview
 //   Pour Alexa, penser a indiquer l'url du site dans l'id.
 //   Dans Alexa, si on supprimer size=small, alors vignettes tres grandes
-$source_vignettes = "http://open.thumbshots.org/image.pxf?url=http://";
+// - On abandonne thumbshots.com qui demande une inscription et on passe sous apercite.fr en conservant exactement la même
+//   expression pour insérer l'url du site
+$source_vignettes = "http://www.apercite.fr/api/apercite/120x90/oui/oui/http://";
+// $source_vignettes = "http://open.thumbshots.org/image.pxf?url=http://";
 // $source_vignettes = "http://msnsearch.srv.girafa.com/srv/i?s=MSNSEARCH&r=http://";
 // $source_vignettes = "http://pthumbnails.alexa.com/image_server.cgi?id=www.monsite.net&size=small&url=http://";
 
@@ -293,7 +296,7 @@ $liste_des_authentifications = array(
 // pour specifier les versions de SPIP necessaires
 // il faut s'en tenir a un nombre de decimales fixe
 // ex : 2.0.0, 2.0.0-dev, 2.0.0-beta, 2.0.0-beta2
-$spip_version_branche = "3.0.5";
+$spip_version_branche = "3.0.6";
 // version des signatures de fonctions PHP
 // (= numero SVN de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
 $spip_version_code = 17873;
@@ -329,9 +332,6 @@ if (!defined('E_DEPRECATED')) define('E_DEPRECATED', 8192); // compatibilite PHP
 if (!defined('SPIP_ERREUR_REPORT')) define('SPIP_ERREUR_REPORT', E_ALL ^ E_NOTICE ^ E_DEPRECATED);
 error_reporting(SPIP_ERREUR_REPORT);
 
-// niveau maxi d'enregistrement des logs
-defined('_LOG_FILTRE_GRAVITE') || define('_LOG_FILTRE_GRAVITE', _LOG_INFO_IMPORTANTE);
-
 // Initialisations critiques non surchargeables par les plugins
 // INITIALISER LES REPERTOIRES NON PARTAGEABLES ET LES CONSTANTES
 // (charge aussi inc/flock)
@@ -365,6 +365,9 @@ if (@is_readable(_CACHE_PLUGINS_OPT) AND @is_readable(_CACHE_PLUGINS_PATH)){
 }
 // Initialisations non critiques surchargeables par les plugins
 spip_initialisation_suite();
+
+// niveau maxi d'enregistrement des logs
+defined('_LOG_FILTRE_GRAVITE') || define('_LOG_FILTRE_GRAVITE', _LOG_INFO_IMPORTANTE);
 
 if (!defined('_OUTILS_DEVELOPPEURS'))
 	define('_OUTILS_DEVELOPPEURS',false);

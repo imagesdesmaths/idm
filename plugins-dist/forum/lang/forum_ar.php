@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/forum?lang_cible=ar
+// extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=ar
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_acces_refuse' => 'لم تعد تتمتع بحق الدخول إلى هذه المنتديات.',
 	'forum_attention_dix_caracteres' => '<b>تحذير!</b> يجب أن تحتوي رسالتك على عشرة حروف على الأقل.',
 	'forum_attention_message_non_poste' => 'تحذير، لم تقم ببعث رسالتك!',
-	'forum_attention_nb_caracteres_mini' => '<b>Attention !</b> votre message doit contenir au moins @min@ caractères.', # NEW
+	'forum_attention_nb_caracteres_mini' => '<b>تحذير!</b> يجب أن تحتوي رسالتك على @min@ حرف على الأقل.',
 	'forum_attention_trois_caracteres' => '<b>تحذير!</b> يجب أن يحتوي موضوعك على ثلاثة حروف على الأقل.',
 	'forum_attention_trop_caracteres' => '<b>تحذير!</b> رسالتك طويلة جداً (@compte@ حرف): لكي يتم تسجيلها، لا يجب ان تتعدى @max@ حرف.',
 	'forum_avez_selectionne' => 'لقد حددت:',
@@ -54,6 +54,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_page_url' => '(إذا كانت مشاركتك تشير إلى مقال منشور على النسيج أو صفحة توفر المزيد من المعلومات، الرجاء إدخال اسم هذه الصفحة وعنوانها أدناه).',
 	'forum_permalink' => 'رابط دائم الى التعليق',
 	'forum_poste_par' => 'مشاركة مرسلة@parauteur@ تعقيباً على المقال «@titre@».',
+	'forum_poste_par_court' => 'مشاركة مرسلة@parauteur@.',
+	'forum_poste_par_generique' => 'مشاركة مرسلة@parauteur@ (@objet@ « @titre@ »).',
 	'forum_qui_etes_vous' => 'من أنت؟',
 	'forum_saisie_texte_info' => 'تدعم هذه الاستمارة اختصارات SPIP <code>[-&gt;url] {{أسود}} {مائل} &lt;quote&gt; &lt;code&gt;</code> وعلامات HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. لإنشاء فقرات أترك اسطر فارغة.',
 	'forum_texte' => 'نص المشاركة',

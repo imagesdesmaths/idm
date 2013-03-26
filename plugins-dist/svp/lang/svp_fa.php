@@ -234,6 +234,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ',
 	'message_nok_url_depot_incorrecte' => ' نشاني«@url@» درست نيست',
 	'message_nok_xml_non_conforme' => 'پرونده ايكس.ام.ال «@fichier@»در توصيف مخزن تأييد نمي‌شود. ',
+	'message_nok_xml_non_recupere' => 'Le fichier XML « @fichier@ » n\'a pas pu être récupéré', # NEW
 	'message_ok_aucun_plugin_trouve' => 'هيچ پلاگيني با معيار‌هاي منتخب جور نيست.',
 	'message_ok_depot_ajoute' => 'مخزن «@url@» افزوده شده.',
 	'message_ok_plugins_trouves' => '@nb_plugins@.در زير پلاگين‌هايي را كه مي‌خواهيد بارگذاري كرده و در سرور خود فعال كنيد، انتخاب نماييد. پلاگين با معيارهاي منتخب(@tri@) جور است

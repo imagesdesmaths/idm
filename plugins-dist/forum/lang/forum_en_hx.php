@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/forum?lang_cible=en_hx
+// extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=en_hx
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -54,6 +54,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_page_url' => '(1f y0ur m3554g3 r3f3r5 70 4n 4r71c13 pub115h3d 0n 7h3 w3b 0r 70 4 p4g3 pr0v1d1ng fur7h3r 1nf0rm4710n, p13453 3n73r 7h3 71713 0f 7h3 p4g3 4nd 175 UR1 b310w).',
 	'forum_permalink' => 'Lien permanent vers le commentaire', # NEW
 	'forum_poste_par' => 'M3554g3 p0573d@parauteur@ f0110w1ng y0ur 4r71c13.', # MODIF
+	'forum_poste_par_court' => 'Message posté@parauteur@.', # NEW
+	'forum_poste_par_generique' => 'Message posté@parauteur@ (@objet@ « @titre@ »).', # NEW
 	'forum_qui_etes_vous' => '<b>Wh0 4r3 y0u?</b> (0p710n41)', # MODIF
 	'forum_saisie_texte_info' => 'Ce formulaire accepte les raccourcis SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> et le code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Pour créer des paragraphes, laissez simplement des lignes vides.', # NEW
 	'forum_texte' => '73x7 0f y0ur m3554g3:', # MODIF

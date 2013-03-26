@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -135,7 +135,9 @@ function quete_calendrier_interval_breves($avant, $apres, &$evenements) {
 
 // http://doc.spip.org/@quete_calendrier_interval_rv
 function quete_calendrier_interval_rv($avant, $apres) {
-	global $connect_id_auteur;
+	include_spip('inc/session');
+	$connect_id_auteur = session_get('id_auteur');
+
 	$evenements= array();
 	if (!$connect_id_auteur) return $evenements;
 	$result=sql_select("M.id_message, M.titre, M.texte, M.date_heure, M.date_fin, M.type",
@@ -201,7 +203,8 @@ function quete_calendrier_interval_rv($avant, $apres) {
 
 // http://doc.spip.org/@quete_calendrier_agenda
 function quete_calendrier_agenda ($annee, $mois) {
-	global $connect_id_auteur;
+	include_spip('inc/session');
+	$connect_id_auteur = session_get('id_auteur');
 
 	$rv = array();
 	if (!$connect_id_auteur) return $rv;

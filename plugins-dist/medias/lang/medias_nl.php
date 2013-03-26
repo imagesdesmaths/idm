@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.net/tradlang_module/medias?lang_cible=nl
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -8,184 +8,186 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aucun_audio' => 'Aucune bande son', # NEW
-	'aucun_document' => 'Aucun document', # NEW
-	'aucun_file' => 'Aucun document', # NEW
-	'aucun_image' => 'Aucune image', # NEW
-	'aucun_video' => 'Aucune s&eacute;quence', # NEW
-	'aucune_utilisation' => 'Ce document n\'est pas utilis&eacute;', # NEW
-	'aucune_vignette' => 'Aucune vignette', # NEW
+	'aucun_audio' => 'Geen geluidsband',
+	'aucun_document' => 'Geen document',
+	'aucun_file' => 'Geen document',
+	'aucun_image' => 'Geen beeld',
+	'aucun_video' => 'Geen video',
+	'aucune_utilisation' => 'Dit document is nergens gebruikt',
+	'aucune_vignette' => 'Geen verkleining',
 
 	// B
 	'bouton_ajouter_document' => 'Een document toevoegen',
 	'bouton_ajouter_image' => 'Een beeld toevoegen',
 	'bouton_ajouter_image_document' => 'Een beeld of een document toevoegen',
-	'bouton_attacher_document' => 'Attacher', # NEW
-	'bouton_copier_local' => 'Copier dans le site', # NEW
-	'bouton_download_depuis' => 'depuis&nbsp;:', # NEW
-	'bouton_download_local' => 'mon ordinateur', # NEW
-	'bouton_download_par_ftp' => 'le serveur', # NEW
-	'bouton_download_par_mediatheque' => 'la mediath&egrave;que', # NEW
-	'bouton_download_sur_le_web' => 'internet', # NEW
-	'bouton_enlever_document' => 'Detacher', # NEW
-	'bouton_enlever_supprimer_document' => 'Supprimer', # NEW
-	'bouton_enlever_supprimer_document_confirmation' => 'Etes-vous s&ucirc;r de vouloir supprimer le document ?', # NEW
-	'bouton_modifier_document' => 'Modifier', # NEW
-	'bouton_parcourir' => 'Parcourir...', # NEW
-	'bouton_refresh_document' => 'Rafraichir le document', # NEW
-	'bouton_remplacer_document' => 'Remplacer ce document', # NEW
-	'bouton_remplacer_image' => 'Remplacer cette image', # NEW
-	'bouton_remplacer_image_document' => 'Remplacer par une image ou un document', # NEW
-	'bouton_supprimer' => 'Supprimer', # NEW
-	'bouton_supprimer_tous_orphelins' => 'Supprimer tous les orphelins', # NEW
-	'bouton_supprimer_tous_orphelins_confirmation' => 'Etes-vous s&ucirc;r de vouloir supprimer @nb@ orphelins ?', # NEW
-	'bouton_upload' => 'T&eacute;l&eacute;charger', # NEW
+	'bouton_attacher_document' => 'Verbinden',
+	'bouton_copier_local' => 'Copieren in het site',
+	'bouton_download_depuis' => 'vanuit :',
+	'bouton_download_local' => 'mijn computer',
+	'bouton_download_par_ftp' => 'de server',
+	'bouton_download_par_mediatheque' => 'de mediatheek',
+	'bouton_download_sur_le_web' => 'internet',
+	'bouton_enlever_document' => 'Losbinden',
+	'bouton_enlever_supprimer_document' => 'Afschaffen',
+	'bouton_enlever_supprimer_document_confirmation' => 'Ben je zeker het document willen afschaffen  ?',
+	'bouton_modifier_document' => 'Wijzigen',
+	'bouton_parcourir' => 'Doorlopen...',
+	'bouton_refresh_document' => 'Document opfrissen',
+	'bouton_remplacer_document' => 'Dit document vervangen',
+	'bouton_remplacer_image' => 'Deze beeld vervangen',
+	'bouton_remplacer_image_document' => 'Een beeld of een document vervangen',
+	'bouton_supprimer' => 'Afschaffen',
+	'bouton_supprimer_tous_orphelins' => 'Alle weesbestanden uitwissen',
+	'bouton_supprimer_tous_orphelins_confirmation' => 'Ben je zeker om @nb@ weesbestanden  te willen uitwissen ?',
+	'bouton_upload' => 'Uploaden',
 
 	// D
-	'des_audios' => '@nb@ bandes sons', # NEW
-	'des_documents' => '@nb@ documents', # NEW
-	'des_files' => '@nb@ documents', # NEW
-	'des_images' => '@nb@ images', # NEW
-	'des_utilisations' => '@nb@ utilisations', # NEW
-	'des_videos' => '@nb@ s&eacute;quences', # NEW
-	'descriptif' => 'Description', # NEW
-	'document_attache_succes' => 'Le document a bien &eacute;t&eacute; ajout&eacute;', # NEW
-	'document_copie_locale_succes' => 'Le fichier a bien &eacute;t&eacute; copi&eacute; dans le site', # NEW
-	'document_installe_succes' => 'Le fichier a bien &eacute;t&eacute; charg&eacute;', # NEW
-	'document_vu' => 'Ins&eacute;r&eacute; dans le texte', # NEW
-	'documents' => 'Mediath&egrave;que', # NEW
-	'documents_brises' => 'Bris&eacute;s', # NEW
-	'documents_distants' => 'Distants', # NEW
-	'documents_locaux' => 'Locaux', # NEW
-	'documents_non_publies' => 'Non publi&eacute;s', # NEW
-	'documents_orphelins' => 'Inutilis&eacute;s', # NEW
-	'documents_publies' => 'Publi&eacute;s', # NEW
-	'documents_tous' => 'Tous', # NEW
+	'des_audios' => '@nb@ geluidsbanden',
+	'des_documents' => '@nb@ documenten',
+	'des_files' => '@nb@ documenten',
+	'des_images' => '@nb@ beelden',
+	'des_utilisations' => '@nb@ gebruiken',
+	'des_videos' => '@nb@ videosequenties',
+	'descriptif' => 'Beschrijving',
+	'document_attache_succes' => 'Het document werd bijgevoegd',
+	'document_copie_locale_succes' => 'Het bestand werd in de site gekopieerd',
+	'document_installe_succes' => 'Het bestand werd opgeslagen',
+	'document_vu' => 'In de tekst geplaatst',
+	'documents' => 'Mediatheek',
+	'documents_brises' => 'Gebroken',
+	'documents_distants' => 'Afstandelijke',
+	'documents_locaux' => 'Lokaal',
+	'documents_non_publies' => 'Niet gepubliceerd',
+	'documents_orphelins' => 'Ongebruikte',
+	'documents_publies' => 'Gepubliceerde',
+	'documents_tous' => 'Alles',
 	'double_clic_inserer_doc' => 'Dubbelklik om deze snelkoppeling in de tekst te lassen.',
 
 	// E
 	'entree_dimensions' => 'Afmetingen:',
 	'entree_titre_document' => 'Documenttitel:',
 	'entree_titre_image' => 'Afbeeldingstitel:',
-	'erreur_aucun_document' => 'Ce document n\'existe pas dans la mediath&egrave;que', # NEW
-	'erreur_aucun_fichier' => 'Aucun fichier n\'a &eacute;t&eacute; trouv&eacute;', # NEW
-	'erreur_chemin_distant' => 'Le fichier distant @nom@ n\'a pas pu &ecirc;tre trouv&eacute;', # NEW
-	'erreur_chemin_ftp' => 'Le fichier indiqu&eacute; n\'a pas &eacute;t&eacute; trouv&eacute; sur le serveur', # NEW
-	'erreur_copie_fichier' => 'Impossible de copier le fichier @nom@', # NEW
-	'erreur_dossier_tmp_manquant' => 'Un dossier temporaire est manquant pour télécharger les fichiers', # NEW
-	'erreur_ecriture_fichier' => 'Erreur lors de l\'écriture du fichier sur le disque', # NEW
-	'erreur_format_fichier_image' => 'Le format de @nom@ ne convient pas pour une image', # NEW
-	'erreur_indiquez_un_fichier' => 'Indiquez un fichier !', # NEW
-	'erreur_insertion_document_base' => 'Impossible d\'enregistrer le document @fichier@ en base de donn&eacute;es', # NEW
-	'erreur_suppression_vignette' => 'Erreur lors de la suppression de la vignette', # NEW
-	'erreur_upload_type_interdit' => 'Le telechargement des fichiers du type de @nom@ n\'est pas autoris&eacute;', # NEW
-	'erreur_upload_vignette' => 'Erreur lors du chargement de la vignette @nom@', # NEW
-	'erreurs' => '@nb@ erreurs', # NEW
-	'erreurs_voir' => 'Voir les @nb@ erreurs', # NEW
+	'erreur_aucun_document' => 'Deze document bestaat niet in de mediatheek ',
+	'erreur_aucun_fichier' => 'Geen bestand wordt gevonden',
+	'erreur_chemin_distant' => 'Afstandelijk bestand @nom@ werd niet gevonden',
+	'erreur_chemin_ftp' => 'Het gekozen bestand werd niet op de server gevonden',
+	'erreur_copie_fichier' => 'Onmogelijk het bestand @nom@ te kopiëren ',
+	'erreur_dossier_tmp_manquant' => 'Er mist een voorlopige dossier om de bestanden te uploaden',
+	'erreur_ecriture_fichier' => 'Fout tijdens het schrijven van het bestand op de server',
+	'erreur_format_fichier_image' => 'Het @nom@ formaat is ongeldig voor een beeld',
+	'erreur_indiquez_un_fichier' => 'Wijs een bestand aan !',
+	'erreur_insertion_document_base' => 'Onmogelijk het document @fichier@ in de databank op te slaan',
+	'erreur_suppression_vignette' => 'Fout tijdens het uitwissen van de verkleining',
+	'erreur_upload_type_interdit' => 'Het uploaden van bestanden uit de type van  @nom@ is niet toegelaten',
+	'erreur_upload_vignette' => 'Fout tijdens het laden van de verkleining @nom@',
+	'erreurs' => '@nb@ fouten',
+	'erreurs_voir' => 'De @nb@ fouten kijken',
 
 	// F
-	'fichier_distant' => 'Fichier distant', # NEW
-	'fichier_manquant' => 'Fichier manquant', # NEW
-	'fichier_modifie' => 'Le fichier a &eacute;t&eacute; modifi&eacute;. Cliquez sur enregistrer.', # NEW
-	'format_date_incorrect' => 'La date ou l\'heure sont incorrectes', # NEW
+	'fichier_distant' => 'Afstandelijk bestand',
+	'fichier_manquant' => 'Missende bestand',
+	'fichier_modifie' => 'Het bestand wordt veranderd. Klik op opslaan.',
+	'format_date_incorrect' => 'Datum of uur is ongeldig',
 
 	// I
-	'icone_creer_document' => 'Ajouter un document', # NEW
-	'id' => 'ID', # NEW
+	'icone_creer_document' => 'Een document bijvoegen',
+	'id' => 'ID',
 	'image_tourner_180' => '180° draaien',
 	'image_tourner_droite' => '90° naar rechts draaien',
 	'image_tourner_gauche' => '90° naar links draaien',
-	'info_doc_max_poids' => 'Les documents doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).', # NEW
+	'info_doc_max_poids' => 'De documenten moeten verplicht minder dan @maxi@ wegen (dit bestand is @actuel@ zwaar).',
 	'info_document' => 'Document',
 	'info_document_indisponible' => 'Dit document is niet beschikbaar',
 	'info_documents' => 'documenten',
-	'info_gauche_numero_document' => 'DOCUMENT NUM&Eacute;RO', # NEW
-	'info_hauteur' => 'Hauteur', # NEW
-	'info_heure' => 'Heure', # NEW
-	'info_illustrations' => 'Illustrations', # NEW
-	'info_image_max_poids' => 'Les images doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).', # NEW
+	'info_gauche_numero_document' => 'DOCUMENT NUMMER',
+	'info_hauteur' => 'Hoogte',
+	'info_heure' => 'Uur',
+	'info_illustrations' => 'Illustraties',
+	'info_image_max_poids' => 'De beelden moeten verplicht minder dan @maxi@ wegen (huidige bestand is @actuel@).',
 	'info_inclusion_directe' => 'Directe insluiting:',
 	'info_inclusion_vignette' => 'Insluiten van de miniatuurafbeelding:',
 	'info_installer_tous_documents' => 'Alle documenten installeren',
-	'info_largeur' => 'Largeur', # NEW
+	'info_largeur' => 'Breedte',
 	'info_logo_max_taille' => 'Logo\'s mogen maximaal @maxi@ zijn (dit bestand is @actuel@).',
-	'info_modifier_document' => 'Modifier le document', # NEW
+	'info_modifier_document' => 'Document veranderen',
 	'info_portfolio' => 'Portfolio',
 	'info_referencer_doc_distant' => 'Naar een document op internet verwijzen :',
-	'info_statut_document' => 'Ce document est&nbsp;:', # NEW
+	'info_sans_vignette' => 'Zonder verkleining',
+	'info_statut_document' => 'Deze document is :',
 	'info_telecharger' => 'Opladen vanf je computer:',
-	'infos' => 'Infos techniques', # NEW
+	'infos' => 'Technische infos',
 	'item_autoriser_selectionner_date_en_ligne' => 'Het mogelijk maken om de datum van elk document te wijzigen',
 	'item_non_autoriser_selectionner_date_en_ligne' => 'De datum van de documenten is die van hun toevoegsel op de plaats',
 
 	// L
-	'label_activer_document_objets' => 'Activer les documents pour les contenus&nbsp;:', # NEW
-	'label_apercu' => 'Aper&ccedil;u', # NEW
-	'label_caracteristiques' => 'Caract&eacute;ristiques', # NEW
-	'label_credits' => 'Cr&eacute;dits', # NEW
-	'label_fichier' => 'Fichier', # NEW
-	'label_fichier_vignette' => 'Vignette', # NEW
-	'label_parents' => 'Ce document est li&eacute; &agrave;', # NEW
-	'label_refdoc_joindre' => 'Document num&eacute;ro', # NEW
-	'lien_tout_enlever' => 'Tout enlever', # NEW
-	'logo' => 'Logo', # NEW
+	'label_activer_document_objets' => 'Documenten activeren voor volgende inhouden :',
+	'label_apercu' => 'Overzicht',
+	'label_caracteristiques' => 'Kenmerken',
+	'label_credits' => 'Krediet',
+	'label_fichier' => 'Bestand',
+	'label_fichier_vignette' => 'Verkleining',
+	'label_paginer_par' => 'Pagineren door :',
+	'label_parents' => 'Deze document is verbonden aan',
+	'label_refdoc_joindre' => 'Document nummer',
+	'lien_tout_enlever' => 'Alles uittrekken',
+	'logo' => 'Logo',
 
 	// M
-	'media_audio' => 'Bandes sons', # NEW
-	'media_file' => 'Autres', # NEW
-	'media_image' => 'Images', # NEW
-	'media_video' => 'S&eacute;quences', # NEW
+	'media_audio' => 'Geluidsbanden',
+	'media_file' => 'Andere',
+	'media_image' => 'Beelden',
+	'media_video' => 'Videosequenties',
+	'miniature_automatique_active' => 'SPIP zal automatisch een verkleining van het beeld aanmaken',
 
 	// N
-	'nb_documents_attache_succes' => '@nb@ documents ont bien &eacute;t&eacute; ajout&eacute;s', # NEW
-	'nb_documents_installe_succes' => '@nb@ fichiers charg&eacute;s avec succ&egrave;s', # NEW
+	'nb_documents_attache_succes' => '@nb@ documenten werden bijgevoegd',
+	'nb_documents_installe_succes' => '@nb@ bestanden opgeslagen met succes ',
 
 	// O
-	'objet_document' => 'Document', # NEW
-	'objet_documents' => 'Documents', # NEW
+	'objet_document' => 'Document',
+	'objet_documents' => 'Documenten',
 
 	// P
-	'par_date' => 'Date', # NEW
-	'par_hauteur' => 'Hauteur', # NEW
-	'par_id' => 'ID', # NEW
-	'par_largeur' => 'Largeur', # NEW
-	'par_taille' => 'Poids', # NEW
-	'par_titre' => 'Titre', # NEW
+	'par_date' => 'Datum',
+	'par_hauteur' => 'Hoogte',
+	'par_id' => 'ID',
+	'par_largeur' => 'Breedte',
+	'par_taille' => 'Gewicht',
+	'par_titre' => 'Title',
 
 	// T
-	'texte_documents_joints' => 'Je kan het toevoegen van documenten (teksten, afbeeldingen, multimedia, ...) bij artikels of rubrieken toelaten. De bijgevoegde bestanden 
-kunnen vervolgens gekoppeld worden in het 
-artikel of afzonderlijk getoond worden.', # MODIF
-	'texte_documents_joints_2' => 'Deze instelling verhindert de directe opname van beelden in artikels niet.',
+	'texte_documents_joints' => 'Je kan het toevoegen van documenten (teksten, afbeeldingen, multimedia, ...) bij artikels, rubrieken en andere toelaten. De bijgevoegde bestanden  kunnen vervolgens gekoppeld worden in het 
+tekst of afzonderlijk getoond worden.',
+	'texte_documents_joints_2' => 'Deze instelling verhindert de directe opname van beelden in artikels niet noch het inzetten van documenten rechtsreeks in de teksten van van andere inhouden.',
 	'titre_documents_joints' => 'Bijlagen',
-	'titre_page_documents_edit' => 'Modifier le document : @titre@', # NEW
-	'tous_les_medias' => 'Tous les medias', # NEW
+	'titre_page_documents_edit' => 'Het document veranderen: @titre@',
+	'tous_les_medias' => 'Alle medias',
 	'tout_dossier_upload' => 'Alles in de map @upload@',
-	'tout_voir' => 'Tout voir', # NEW
+	'tout_voir' => 'Alles zien',
 
 	// U
-	'un_audio' => '1 bande son', # NEW
-	'un_document' => '1 document', # NEW
-	'un_file' => '1 document', # NEW
-	'un_image' => '1 image', # NEW
-	'un_video' => '1 s&eacute;quence', # NEW
-	'une_utilisation' => '1 utilisation', # NEW
+	'un_audio' => '1 geluidsband',
+	'un_document' => '1 document',
+	'un_file' => '1 document',
+	'un_image' => '1 beeld',
+	'un_video' => '1 videosequentie',
+	'une_utilisation' => '1 gebruik',
 	'upload_fichier_zip' => 'ZIP bestand',
 	'upload_fichier_zip_texte' => 'Het bestand dat je wil installeren is een ZIP bestand.',
 	'upload_fichier_zip_texte2' => 'Dit bestand kan zijn :',
-	'upload_info_mode_document' => 'D&eacute;poser dans le portfolio', # NEW
-	'upload_info_mode_image' => 'Retirer du portfolio', # NEW
+	'upload_info_mode_document' => 'In de portfolio neerzetten',
+	'upload_info_mode_image' => 'Uit de portfolio ontnemen ',
 	'upload_limit' => 'Dit bestand is te groot voor de server ; de maximale bestandsgrootte voor <i>upload</i> is @max@.',
-	'upload_zip_conserver' => 'Het archief behouden na winning',
+	'upload_zip_conserver' => 'Het archief behouden na het unzippen',
 	'upload_zip_decompacter' => 'uitgepakt en elk bestand geïnstalleerd op de site. De bestanden die op de site komen, zijn :',
-	'upload_zip_mode_document' => 'D&eacute;poser toutes les images dans le portfolio', # NEW
+	'upload_zip_mode_document' => 'Alle beelden in de portfolio neerleggen',
 	'upload_zip_telquel' => 'geïnstalleerd als gezipt (gecomprimeerd) bestand ;',
 	'upload_zip_titrer' => 'Volgens de naam bestanden betitelen',
 
 	// V
-	'verifier_documents_brises' => 'V&eacute;rifier les fichiers manquants', # NEW
-	'verifier_documents_inutilises' => 'V&eacute;rifier les liens des documents', # NEW
-	'vignette_supprimee' => 'La vignette a &eacute;t&eacute; supprim&eacute;e' # NEW
+	'verifier_documents_brises' => 'Missende bestanden checken',
+	'verifier_documents_inutilises' => 'Links van de documenten checken',
+	'vignette_supprimee' => 'Verkleining wordt uitgewist'
 );
 
 ?>

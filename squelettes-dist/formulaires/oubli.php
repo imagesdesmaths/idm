@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -28,19 +28,15 @@ function message_oubli($email, $param)
 		include_spip('action/inscrire_auteur');
 		$cookie = auteur_attribuer_jeton($r[1]['id_auteur']);
 
-		$nom = textebrut(corriger_typo($GLOBALS['meta']["nom_site"]));
-		$envoyer_mail = charger_fonction('envoyer_mail','inc');
-
-		if ($envoyer_mail($email,
-				  ("[$nom] " .  _T('pass_oubli_mot')),
-				  _T('pass_mail_passcookie',
-				     array('nom_site_spip' => $nom,
-					   'adresse_site' => url_de_base(),
-					   'sendcookie' => generer_url_public('spip_pass',
-					   "$param=$cookie", true, false)))) )
-		  return _T('pass_recevoir_mail');
-		else
-		  return  _T('pass_erreur_probleme_technique');
+		$msg = recuperer_fond(
+			"modeles/mail_oubli",
+			array(
+				'url_reset'=>generer_url_public('spip_pass',"$param=$cookie", true, false)
+			)
+		);
+		include_spip("inc/notifications");
+		notifications_envoyer_mails($email, $msg);
+	  return _T('pass_recevoir_mail');
 	}
 	return  _T('pass_erreur_probleme_technique');
 }

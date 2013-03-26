@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.net/tradlang_module/revisions?lang_cible=lb
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -8,52 +8,52 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_comparer' => 'Voir les diff&eacute;rences', # NEW
+	'bouton_comparer' => 'D\'Ënnerscheeder weisen',
 
 	// D
-	'diff_para_ajoute' => 'Kapitel derbäi setzen',
-	'diff_para_deplace' => 'Kapitel geréckelt',
-	'diff_para_supprime' => 'Kapitel geläscht',
-	'diff_texte_ajoute' => 'Text derbäi setzen',
+	'diff_para_ajoute' => 'Abschnitt bäigefléckt',
+	'diff_para_deplace' => 'Abschnitt geréckelt',
+	'diff_para_supprime' => 'Abschnitt geläscht',
+	'diff_texte_ajoute' => 'Text bäigefléckt',
 	'diff_texte_deplace' => 'Text geréckelt',
 	'diff_texte_supprime' => 'Text geläscht',
-	'differences_versions' => 'Diff&eacute;rences entre version N<sup>o</sup>@id_version@ et version N<sup>o</sup>@id_diff@', # NEW
+	'differences_versions' => 'Differenz tëschent der Versioun Nr. @id_version@ an der Versioun Nr. @id_diff@',
 
 	// I
-	'icone_restaurer_version' => 'Restaurer la version N<sup>o</sup>@version@', # NEW
-	'icone_suivi_revisions' => 'Suivi des r&eacute;visions', # NEW
-	'info_1_revision' => '1 r&eacute;vision', # NEW
-	'info_aucune_revision' => 'Aucune r&eacute;vision', # NEW
+	'icone_restaurer_version' => 'D\'Versioun Nr. @version@ zeréckspillen',
+	'icone_suivi_revisions' => 'Verwaltung vun de Versiounen',
+	'info_1_revision' => '1 Versioun',
+	'info_aucune_revision' => 'Kéng Versiounen',
 	'info_historique' => 'Versiounen:',
-	'info_historique_lien' => 'Historique vun den Ännerungen weisen',
+	'info_historique_lien' => 'Geschicht vun de Versioune weisen',
 	'info_historique_titre' => 'Versioning',
-	'info_nb_revisions' => '@nb@ r&eacute;visions', # NEW
+	'info_nb_revisions' => '@nb@ Versiounen',
 
 	// L
-	'label_choisir_id_version' => 'S&eacute;lectionnez les versions &agrave; comparer', # NEW
-	'label_config_revisions_objets' => 'Sur quels objets activer les r&eacute;visions&nbsp;:', # NEW
+	'label_choisir_id_version' => 'Wielt d\'Versiounen déi solle verglach ginn',
+	'label_config_revisions_objets' => 'D\'Versiounen op dësen Objekter aschalten:',
+
+	// M
+	'message_valider_recuperer_version' => 'Bestätegt de Formulaire fir op dës Versioun zeréck ze fueren.',
 
 	// O
-	'objet_editorial' => 'objet', # NEW
+	'objet_editorial' => 'Objet',
 
 	// P
-	'plugin_update' => 'Mise &agrave; jour du plugin "R&eacute;visions" en version @version@.', # NEW
+	'plugin_update' => 'Update vum Plugin "Révisions" op d\'Versioun @version@.',
 
 	// T
-	'titre_form_revisions_objets' => 'Activer les r&eacute;visions', # NEW
-	'titre_restaurer_version' => 'Restaurer une version', # NEW
-	'titre_revisions' => 'R&eacute;visions', # NEW
+	'titre_form_revisions_objets' => 'Versiounen aschalten',
+	'titre_restaurer_version' => 'Eng Versioun zeréckspillen',
+	'titre_revisions' => 'Versiounen',
 
 	// V
-	'version_deplace_rubrique' => 'Verschoben vun <b>"@from@"</b> op <b>"@to@"</b>.',
+	'version_deplace_rubrique' => 'Geréckelt vun <b>"@from@"</b> op <b>"@to@"</b>.',
 	'version_initiale' => 'Original-Versioun',
-	'voir_differences' => 'Voir les diff&eacute;rences', # NEW
-	'voir_mes_revisions' => 'Mes r&eacute;visions', # NEW
-	'voir_revisions' => 'Voir les r&eacute;visions (@objet@ @id_objet@&nbsp;: @titre@)', # NEW
-	'voir_toutes_les_revisions' => 'Toutes les r&eacute;visions', # NEW
-
-	// Z
-	'z' => 'zzz' # NEW
+	'voir_differences' => 'D\'Ënnerscheeder gesinn',
+	'voir_mes_revisions' => 'Meng Versiounen',
+	'voir_revisions' => 'D\'Versioune gesinn (@objet@ @id_objet@: @titre@)',
+	'voir_toutes_les_revisions' => 'All d\'Versiounen'
 );
 
 ?>

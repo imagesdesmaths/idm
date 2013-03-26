@@ -372,6 +372,25 @@ function autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt) {
 		);
 }
 
+ /**
+ * Autorisation de créer une rubrique
+ *
+ * Il faut être administrateur pour pouvoir publier à la racine
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_rubrique_creer_dist($faire, $type, $id, $qui, $opt) {
+	return 
+		((!$id AND autoriser('defaut',null,null,$qui, $opt))
+		OR $id AND autoriser('creerrubriquedans','rubrique', $id, $qui, $opt)
+		);
+}
+
 /**
  * Autorisation de créer une sous rubrique dans une rubrique $id
  *
@@ -673,6 +692,33 @@ function autoriser_auteur_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 	// "Voir en ligne" si l'auteur a un article publie
 	$n = sql_fetsel('A.id_article', 'spip_auteurs_liens AS L LEFT JOIN spip_articles AS A ON (L.objet=\'article\' AND L.id_objet=A.id_article)', "A.statut='publie' AND L.id_auteur=".sql_quote($id));
 	return $n ? true : false;
+}
+
+/**
+ * Autorisation de créer un auteur
+ *
+ * Il faut être administrateur (restreint compris).
+ *
+ * @note
+ *     Seuls les administrateurs complets ont accès à tous les
+ *     champs du formulaire d'édition d'un auteur. À la création
+ *     d'un auteur, son statut est 'poubelle'. C'est l'autorisation
+ *     de modifier qui permet de changer les informations sensibles
+ *     (statut, login, pass, etc.) à l'institution.
+ * 
+ * @see auteur_inserer()
+ * @see auteur_instituer()
+ * @see autoriser_auteur_modifier_dist() 
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_auteur_creer_dist($faire, $type, $id, $qui, $opt) {
+	return ($qui['statut'] == '0minirezo');
 }
 
 
@@ -1085,7 +1131,25 @@ function autoriser_rubriques_menu_dist($faire, $type, $id, $qui, $opt){return tr
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_articlecreer_menu_dist($faire, $type, $id, $qui, $opt){
-	return sql_countsel('spip_rubriques')>0;
+	return verifier_table_non_vide();
+}
+
+/**
+ * Autorisation de voir le menu auteurcreer
+ *
+ * Il faut pouvoir créer un auteur !
+ * 
+ * @see autoriser_auteur_creer_dist()
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_auteurcreer_menu_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('creer', 'auteur', $id, $qui, $opt);
 }
 
 /**
@@ -1187,5 +1251,21 @@ function acces_restreint_rubrique($id_rubrique) {
 	global $connect_id_rubrique;
 
 	return (isset($connect_id_rubrique[$id_rubrique]));
+}
+
+
+/**
+ * Verifier qu'il existe au moins un parent
+ * 
+ * Fonction utilisee dans des autorisations des boutons / menus du prive des objets enfants (articles, breves, sites)
+ *
+ * @param string $table  	la table a verifier
+ * @return bool             true si un parent existe
+ */
+function verifier_table_non_vide($table='spip_rubriques') {
+	static $done = array();
+	if (!isset($done[$table]))
+		 $done[$table] = sql_countsel($table)>0;
+	return $done[$table];
 }
 ?>

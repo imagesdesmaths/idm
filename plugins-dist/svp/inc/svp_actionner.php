@@ -896,7 +896,7 @@ class Actionneur {
 		// il faudra prendre en compte les autres _DIR_xx
 		if (in_array($i['constante'], array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL'))) {
 			include_spip('inc/plugin');
-			$dossier = ($i['constante'] == '_DIR_PLUGINS') ? $i['src_archive'] : '../' . constant($i['constante']) . $i['src_archive'];
+			$dossier = rtrim($i['src_archive'], '/');
 			ecrire_plugin_actifs(array(rtrim($dossier,'/')), false, 'enleve');
 			sql_updateq('spip_paquets', array('actif'=>'non', 'installe'=>'non'), 'id_paquet='.sql_quote($info['i']));
 			$this->actualiser_plugin_interessants();
@@ -1115,7 +1115,6 @@ class Actionneur {
 		if (@is_readable(_CACHE_PLUGINS_FCT)) {include_once(_CACHE_PLUGINS_FCT);}
 		if (@is_readable(_CACHE_PIPELINES))   {include_once(_CACHE_PIPELINES);}
 
-		$dossier = ($constante == '_DIR_PLUGINS')? $dossier : '../'.constant($constante).$dossier;
 		include_spip('inc/plugin');
 		ecrire_plugin_actifs(array($dossier), false, 'ajoute');
 		$installe = $i['version_base'] ? 'oui' : 'non';

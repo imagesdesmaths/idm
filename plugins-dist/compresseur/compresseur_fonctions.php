@@ -3,25 +3,35 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Fonctions et filtres du compresseur
+ * 
+ * @package SPIP\Compresseur\Fonctions
+ */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Minifier un fichier js ou css :
- * Si la source est un chemin, on retourne un chemin avec le contenu minifie
+ * Minifier un fichier JS ou CSS
+ * 
+ * Si la source est un chemin, on retourne un chemin avec le contenu minifié
  * dans _DIR_VAR/cache_$format/
- * Si c'est un flux on le renvoit compacte
+ * Si c'est un flux on le renvoit compacté
  * Si on ne sait pas compacter, on renvoie ce qu'on a recu
  *
  * @param string $source
+ *     Contenu à minifier ou chemin vers un fichier dont on veut minifier le contenu
  * @param string $format
+ *     Format de la source (js|css). 
  * @return string
+ *     - Contenu minifié (si la source est un contenu)
+ *     - Chemin vers un fichier ayant le contenu minifié (si source est un fichier)
  */
 function minifier($source, $format = null) {
 	if (!$format AND preg_match(',\.(js|css)$,', $source, $r))
@@ -64,8 +74,11 @@ function minifier($source, $format = null) {
 	// Sinon simple minification de contenu
 	return $minifier($source);
 }
+
 /**
  * Synonyme historique de minifier, pour compatibilite
+ *
+ * @deprecated Utiliser minifier()
  * 
  * @param string $source
  * @param string $format
@@ -75,18 +88,30 @@ function compacte($source, $format = null){
 	return minifier($source, $format);
 }
 
-// Cette fonction verifie les reglages du site et traite le compactage
-// des css et/ou js d'un <head>
-// un fichier .gz est cree pour chaque, qui peut etre utilise par apache
-// et lui eviter de recompresser a chaque hit, avec les directives suivantes :
-//<IfModule mod_gzip.c>
-//mod_gzip_on                   Yes
-//mod_gzip_can_negotiate        Yes
-//mod_gzip_static_suffix        .gz
-//AddEncoding              gzip .gz
-//mod_gzip_item_include         file       \.(js|css)$
-//</IfModule>
-// http://doc.spip.org/@compacte_head
+/**
+ * Compacte les éléments CSS et JS d'un <head> HTML
+ * 
+ * Cette fonction vérifie les réglages du site et traite le compactage
+ * des css et/ou js d'un <head>
+ * 
+ * Un fichier .gz est crée pour chaque, qui peut etre utilisé par apache
+ * et lui éviter de recompresser à chaque hit, avec les directives suivantes :
+ * 
+ * <IfModule mod_gzip.c>
+ * mod_gzip_on                   Yes
+ * mod_gzip_can_negotiate        Yes
+ * mod_gzip_static_suffix        .gz
+ * AddEncoding              gzip .gz
+ * mod_gzip_item_include         file       \.(js|css)$
+ * </IfModule>
+ *
+ * @see compacte_head_files()
+ * 
+ * @param string $flux
+ *     Partie de contenu du head HTML
+ * @return string
+ *     Partie de contenu du head HTML
+ */
 function compacte_head($flux){
 	include_spip('inc/compresseur');
 	if (!defined('_INTERDIRE_COMPACTE_HEAD')){
@@ -100,19 +125,25 @@ function compacte_head($flux){
 }
 
 /**
- * Embarquer sous forme URI Scheme
- * data:xxx/yyy;base64,....
- * un fichier
+ * Embarquer sous forme URI Scheme un fichier
  *
+ * Une URI Scheme est de la forme data:xxx/yyy;base64,....
+ * 
  * Experimental
  *
+ * @filtre embarque_fichier
+ * 
  * @staticvar array $mime
+ *     Couples (extension de fichier => type myme)
  * @param string $src
- *   chemin du fichier
+ *     Chemin du fichier
  * @param string $base
- *   le chemin de base a partir duquel chercher $src
+ *     Le chemin de base à partir duquel chercher $src
  * @param int $maxsize
+ *     Taille maximale des fichiers à traiter
  * @return string
+ *     URI Scheme du fichier si la compression est faite,
+ *     URL du fichier sinon (la source)
  */
 function filtre_embarque_fichier ($src, $base="", $maxsize = 4096) {
 	static $mime = array();
@@ -141,8 +172,11 @@ function filtre_embarque_fichier ($src, $base="", $maxsize = 4096) {
  * Experimental
  *
  * @param string $img
+ *     Code HTML d'une image
  * @param int $maxsize
+ *     Taille maximale des fichiers à traiter
  * @return string
+ *     Code HTML de l'image, avec la source en URI Scheme si cela a été possible.
  */
 function filtre_embarque_src ($img, $maxsize = 4096){
 	$src = extraire_attribut($img,'src');

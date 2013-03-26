@@ -22,7 +22,7 @@
 //   The use of this software is at the risk of the user.
 //
 // --------------------------------------------------------------------------------
-// $Id: pclzip.php 14957 2010-01-22 17:10:56Z esj@rezo.net $
+// $Id: pclzip.php 19990 2012-11-03 12:57:57Z eric@smellup.net $
 // --------------------------------------------------------------------------------
 
   // ----- Constants
@@ -63,7 +63,7 @@
   // define( 'PCLZIP_TEMPORARY_DIR', '/temp/' );
   // define( 'PCLZIP_TEMPORARY_DIR', 'C:/Temp/' );
   if (!defined('PCLZIP_TEMPORARY_DIR')) {
-    define( 'PCLZIP_TEMPORARY_DIR', '' );
+    define( 'PCLZIP_TEMPORARY_DIR', _DIR_TMP );
   }
 
   // ----- Optional threshold ratio for use of temporary files

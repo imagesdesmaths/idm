@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/forum?lang_cible=sk
+// extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=sk
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -52,7 +52,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_ne_repondez_pas' => 'Neodpovedajte na tento mejl priamo - prosím, použite diskusné fórum:',
 	'forum_page_url' => '(If your message refers to an article published on the web or to a page providing further information, please enter the title of the page and its URL below).',
 	'forum_permalink' => 'Trvalý odkaz na komentár',
-	'forum_poste_par' => 'Príspevky @parauteur@ k vášmu článku "@titre@".',
+	'forum_poste_par' => 'Príspevky @parauteur@ k vášmu článku "@titre@".', # MODIF
+	'forum_poste_par_court' => 'Message posté@parauteur@.', # NEW
+	'forum_poste_par_generique' => 'Message posté@parauteur@ (@objet@ « @titre@ »).', # NEW
 	'forum_qui_etes_vous' => 'Kto ste?',
 	'forum_saisie_texte_info' => 'Tento formulár akceptuje skratky SPIPu <code>[-&gt;url] {{tučné}} {kurzíva} &lt;citácia&gt; &lt;kód&gt;</code> a kód HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;.</code> Ak chcete vytvoriť odseky, jednoducho vynechajte niekoľko riadkov.',
 	'forum_texte' => 'Text vášho príspevku',

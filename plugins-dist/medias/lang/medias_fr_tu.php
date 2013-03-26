@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/medias?lang_cible=fr_tu
+// extrait automatiquement de http://trad.spip.net/tradlang_module/medias?lang_cible=fr_tu
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -112,6 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_modifier_document' => 'Modifier le document',
 	'info_portfolio' => 'Portfolio',
 	'info_referencer_doc_distant' => 'Référencer un document sur l\'internet :',
+	'info_sans_vignette' => 'Sans vignette', # NEW
 	'info_statut_document' => 'Ce document est :',
 	'info_telecharger' => 'Télécharger depuis ton ordinateur :',
 	'infos' => 'Infos techniques',
@@ -125,6 +126,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_credits' => 'Crédits',
 	'label_fichier' => 'Fichier',
 	'label_fichier_vignette' => 'Vignette',
+	'label_paginer_par' => 'Paginer par :', # NEW
 	'label_parents' => 'Ce document est lié à',
 	'label_refdoc_joindre' => 'Document numéro',
 	'lien_tout_enlever' => 'Tout enlever',

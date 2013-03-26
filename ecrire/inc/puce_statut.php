@@ -250,16 +250,15 @@ function puce_statut_changement_rapide($id, $statut, $id_rubrique, $type='articl
 
 	if (!$id
 	  OR !_SPIP_AJAX
-	  OR !$menu_rapide
-	  OR !$id_rubrique
-	  OR !autoriser('publierdans', 'rubrique', $id_rubrique)) {
+	  OR !$menu_rapide) {
 	  $ajax_node ='';
 	}
 	else
 		$ajax_node = " class='imgstatut$type$id'";
 
 
-	$inser_puce = http_img_pack($src,statut_titre($type, $statut),$ajax_node);
+	$t = statut_titre($type, $statut);
+	$inser_puce = http_img_pack($src,$t,$ajax_node,$t);
 
 	if (!$ajax_node)
 		return $inser_puce;
@@ -268,6 +267,17 @@ function puce_statut_changement_rapide($id, $statut, $id_rubrique, $type='articl
 	$desc = lister_tables_objets_sql($table);
 	if (!isset($desc['statut_textes_instituer']))
 		return $inser_puce;
+
+	// cas ou l'on a un parent connu (devrait disparaitre au profit du second cas plus generique)
+	if ($id_rubrique){
+		if (!autoriser('publierdans', 'rubrique', $id_rubrique))
+			return $inser_puce;
+	}
+	// si pas d'id_rubrique fourni, tester directement instituer type avec le statut publie
+	else {
+		if (!autoriser('instituer', $type, $id, null, array('statut'=>'publie')))
+			return $inser_puce;
+	}
 
 	$coord = array_flip(array_keys($desc['statut_textes_instituer']));
 	if (!isset($coord[$statut]))

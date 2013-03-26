@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/urls?lang_cible=sk
+// extrait automatiquement de http://trad.spip.net/tradlang_module/urls?lang_cible=sk
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -9,6 +9,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'actualiser_toutes' => 'Aktualizovať všetky URL',
+	'actualiser_toutes_explication' => 'Vous pouvez recalculer les URLs.
+		Si une URL a changé, une nouvelle entrée sera créée (sans perdre les URLs déjà
+		présentes et sans affecter les URLs définies manuellement.', # NEW
 
 	// B
 	'bouton_supprimer_url' => 'Odstrániť túto URL',

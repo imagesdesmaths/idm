@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/compagnon?lang_cible=de
+// extrait automatiquement de http://trad.spip.net/tradlang_module/compagnon?lang_cible=de
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -24,8 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'c_article_redaction_redacteur' => 'Der Artikel befindet sich in Bearbeitung.',
 	'c_article_redaction_redacteur_texte' => 'Um Ihren Artikel den Admins und Redakteuren vor der Veröffentlichung vorzulegen,
 		ändern Sie im Kasten links auf der Seite « in Bearbeitung » nach « vorgeschlagen ».',
-	'c_article_redaction_texte' => 'Um diesen Artikel zu veröffentlichen, müssen Sie seinen Status ändern.
-		Ändern Sie dazu im Kasten links  « in Bearbeitung » nach « veröffentlicht».',
+	'c_article_redaction_texte' => 'Um diesen Artikel zu veröffentlichen, müssen Sie seinen Status ändern. Ändern Sie dazu im Kasten links  «in Bearbeitung» zu «veröffentlicht».',
 	'c_articles_creer' => 'Wie werden Artikel erstellt?',
 	'c_articles_creer_texte' => 'Sie können auf dieser Seite nur Artikel erstellen, wenn Ihre Website mindestens eine Rubrik enthält. Sie können eine über den Menüpunkt  « Redaktion» im Unterbereich « Rubriken» anlegen.',
 	'c_job' => 'Anstehende Aufgaben',

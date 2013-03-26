@@ -220,6 +220,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_sql_insert_depot' => 'Произошла SQL ошибка при добавления репозитория @objet@',
 	'message_nok_url_depot_incorrecte' => 'Адрес « @url@ » задан неправильно',
 	'message_nok_xml_non_conforme' => 'Не подходит описание XML файла « @fichier@',
+	'message_nok_xml_non_recupere' => 'Не возможно восстановить XML файл « @fichier@ » ',
 	'message_ok_aucun_plugin_trouve' => 'Не найдены плагины по заданным критериям поиска.',
 	'message_ok_depot_ajoute' => 'Репозиторий « @url@ » успешно добавлен.',
 	'message_ok_plugins_trouves' => 'Найдено @nb_plugins@ плагин(ов) по запросу (@tri@). Вы можете выбрать какие плагины вы хотите скачать и установить.',

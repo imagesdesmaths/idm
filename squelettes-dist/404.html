@@ -10,7 +10,7 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
 <head>
 <script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
-<title><:pass_erreur:> [(#ENV{code, 404}|textebrut)] - [(#NOM_SITE_SPIP|textebrut)]</title>
+<title><:pass_erreur:> [(#ENV{status, 404}|textebrut)] - [(#NOM_SITE_SPIP|textebrut)]</title>
 <INCLURE{fond=inclure/head} />
 <meta name="robots" content="none" />
 </head>
@@ -26,8 +26,16 @@
 			<p class="arbo"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:pass_erreur:></strong></p>
 	
 			<div class="cartouche">
-				<h1><:pass_erreur:> [(#ENV{code, 404}|intval)]</h1>
+				<h1><:pass_erreur:> [(#ENV{status, 404}|intval)]</h1>
 			</div>
+			[(#ENV{erreur}|non)
+			[(#ENV{fond_erreur}|=={article}|oui)<div class="chapo"><p><:aucun_article:></p></div>]
+			[(#ENV{fond_erreur}|=={rubrique}|oui)<div class="chapo"><p><:aucune_rubrique:></p></div>]
+			[(#ENV{fond_erreur}|=={breve}|oui)<div class="chapo"><p><:aucune_breve:></p></div>]
+			[(#ENV{fond_erreur}|=={auteur}|oui)<div class="chapo"><p><:aucun_auteur:></p></div>]
+			[(#ENV{fond_erreur}|=={site}|oui)<div class="chapo"><p><:aucun_site:></p></div>]
+			[(#ENV{fond_erreur}|=={forum}|oui)<div class="chapo"><p><:forum:aucun_message_forum:></p></div>]
+			]
 			[<div class="chapo"><p>(#ENV{erreur})</p></div>]
 	
 		</div><!--.content-->

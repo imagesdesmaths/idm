@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/forum?lang_cible=fa
+// extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=fa
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -48,7 +48,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_ne_repondez_pas' => 'به اين ايميل مستقيماً پاسخ ندهيد-از سخنگاه وصل‌خط در نشاني زير استفاده كنيد:',
 	'forum_page_url' => 'اگر پيامتان راجع به يك مقاله چاپ شده يا به يك صفحه اى كه داراى اطلاعات سودمندى است مربوط ميشود، خواهشمند است عنوان صفحه وآدرس آنرا در زير مشخص كنيد ',
 	'forum_permalink' => 'پيوند دائمي به نظر',
-	'forum_poste_par' => 'پيام @parauteur@ بدنبال مقاله « @titre@ »  فرستاده شده. ',
+	'forum_poste_par' => 'پيام @parauteur@ بدنبال مقاله « @titre@ »  فرستاده شده. ', # MODIF
+	'forum_poste_par_court' => 'Message posté@parauteur@.', # NEW
+	'forum_poste_par_generique' => 'Message posté@parauteur@ (@objet@ « @titre@ »).', # NEW
 	'forum_qui_etes_vous' => ' كى هستيد؟                                      ',
 	'forum_saisie_texte_info' => 'اين فرم خلاصه‌هاي اسپيپ را مي‌پذيرد  <code>[->url] {{gras}} {italique} <quote> <code></code>   و كد‌هاي  HTML <code><q> <del> <ins></code>. براي ايجاد پارگراف، يك خط خالي بگذاريد. .',
 	'forum_texte' => 'متن پيامتان',

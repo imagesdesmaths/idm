@@ -237,6 +237,7 @@ alebo vytvoriť tento priečinok a nastaviť mu povolenie na zápis.',
 	'message_nok_sql_insert_depot' => 'Pri pridávaní depozitára @objet@ sa vyskytla chyba SQL',
 	'message_nok_url_depot_incorrecte' => 'Adresa "@url@" je nesprávna',
 	'message_nok_xml_non_conforme' => 'Súbor XML, ktorý je popisom depozitára,  "@fichier@"  nie je kompatibilný',
+	'message_nok_xml_non_recupere' => 'Le fichier XML « @fichier@ » n\'a pas pu être récupéré', # NEW
 	'message_ok_aucun_plugin_trouve' => 'Vybraným kritériám nevyhovuje žiaden zásuvný modul.',
 	'message_ok_depot_ajoute' => 'Depozitár "@url@" bol priadaný.',
 	'message_ok_plugins_trouves' => 'Vybraným kritériám (@tri@) vyhovuje @nb_plugins@ zásuvný(ch) modul(ov). Vyberte si tie zásuvné moduly, ktoré chcete stiahnuť a aktivovať na svojom serveri.',

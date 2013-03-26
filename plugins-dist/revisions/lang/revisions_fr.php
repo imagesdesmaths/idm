@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_valider_recuperer_version' => 'Validez le formulaire pour revenir à cette version.',
-	
+
 	// O
 	'objet_editorial' => 'objet',
 

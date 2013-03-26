@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -61,7 +61,7 @@ function boucle_DOCUMENTS($id_boucle, &$boucles) {
 	 * Utiliser le "pipeline medias_documents_visibles" pour en ajouter
 	 */
 	if (!isset($boucle->modificateur['criteres']['mode'])
-	AND !isset($boucle->modificateur['criteres']['tout'])) {
+	AND !isset($boucle->modificateur['tout'])) {
 		$modes = pipeline('medias_documents_visibles',array('image','document'));
 		$f = sql_serveur('quote', $boucle->sql_serveur, true);
 		$modes = addslashes(join(',', array_map($f, array_unique($modes))));

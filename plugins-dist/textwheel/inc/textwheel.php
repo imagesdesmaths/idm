@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2010                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -13,6 +13,10 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('engine/textwheel');
+// si une regle change et rend son cache non valide
+// incrementer ce define au numero de commit concerne
+// (inconsistence entre la wheel et l'inclusion php)
+if (!defined('_WHEELS_VERSION')) define('_WHEELS_VERSION',68672);
 
 //
 // Definition des principales wheels de SPIP
@@ -79,7 +83,7 @@ class SPIPTextWheelRuleset extends TextWheelRuleSet {
 		# memoization
 		# attention : le ruleset peut contenir apres loading des chemins relatifs
 		# il faut donc que le cache depende du chemin courant vers la racine de SPIP
-		$key = 'tw-'.md5(serialize($ruleset).$callback.$class._DIR_RACINE);
+		$key = 'tw-'.md5(_WHEELS_VERSION."-".serialize($ruleset).$callback.$class._DIR_RACINE);
 
 		# lecture du cache
 		include_spip('inc/memoization');

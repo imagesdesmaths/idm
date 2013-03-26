@@ -1,33 +1,65 @@
 <?php
 
 /**
+ * Class Minify_HTML
+ * @package Minify
+ */
+
+
+/**
+ * Surcharge du minifieur HTML
+ * 
  * Surcharge pour ne pas manger les commentaires <!--extra-->
- * qui servent parfois aux plugins, et parfois meme apres
+ * qui servent parfois aux plugins, et parfois même après
  * le passage du compacteur HTML
- * (c'etait le cas du bouton statistiques du formulaire admin par exemple)
+ * 
+ * C'était le cas du bouton statistiques du formulaire admin par exemple
  *
+ * On permet de conserver également tout commentaire commençant par <!--keepme: -->
+ *
+ * @package SPIP\Compresseur\Minifieur
 **/
 class Minify_HTML_SPIP extends Minify_HTML {
 
-    // appeler la bonne classe dans l'instanciateur
+    /**
+     * {@inheritdoc}
+     *
+     *
+     * @param string $html
+     *     HTML à minifier
+     * @param array $options
+     *     Tableau d'option avec les index possibles 
+     *     - 'cssMinifier' : (optional) callback function to process content of STYLE
+     *        elements.
+     *     - 'jsMinifier' : (optional) callback function to process content of SCRIPT
+     *        elements. Note: the type attribute is ignored.
+     *     - 'xhtml' : (optional boolean) should content be treated as XHTML1.0? If
+     *        unset, minify will sniff for an XHTML doctype.
+     * @return string
+     *     HTML minifié
+    **/
     public static function minify($html, $options = array()) {
         $min = new Minify_HTML_SPIP($html, $options);
         return $min->process();
     }
 
-    // le cas extras doit etre conserve dans les commentaires.
+    /**
+     * Minification des commentaires
+     * 
+     * Le cas <!--extra--> doit être conservé dans les commentaires,
+     * tout comme <!--keepme: xxx -->
+     *
+     * @param array $m    Matches du preg_match d'un commentaire HTML
+     * @return string     Contenu minifié
+     */
     protected function _commentCB($m)
     {
         if ($m[1] === 'extra') return $m[0];
+        if ($m[1] AND $m[1][0] === 'k' AND substr($m[1],0,7) === 'keepme:') return $m[0];
         return parent::_commentCB($m);
     }
 }
 
-
-/**
- * Class Minify_HTML
- * @package Minify
- */
 
 /**
  * Compress HTML

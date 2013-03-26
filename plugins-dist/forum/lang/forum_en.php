@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/forum?lang_cible=en
+// extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_acces_refuse' => 'You no longer have access to these forums.',
 	'forum_attention_dix_caracteres' => '<b>Warning!</b> Your post must be at least ten characters long.',
 	'forum_attention_message_non_poste' => 'Be careful, you did not post your message!',
-	'forum_attention_nb_caracteres_mini' => '<b>Attention !</b> votre message doit contenir au moins @min@ caractères.', # NEW
+	'forum_attention_nb_caracteres_mini' => '<b>Warning!</b> your message must contain @min@ characters at least.',
 	'forum_attention_trois_caracteres' => '<b>Warning!</b> Your title must be at least three characters long.',
 	'forum_attention_trop_caracteres' => '<b>Warning !</b> Your message is too long (@compte@ characters) to be saved, it cannot contain more than @max@ characters.',
 	'forum_avez_selectionne' => 'You have selected:',
@@ -50,6 +50,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_page_url' => '(If your message refers to an article published on the web or to a page providing further information, please enter the title of the page and its URL below).',
 	'forum_permalink' => 'Permalink to the comment',
 	'forum_poste_par' => 'Message posted@parauteur@ following your article "@titre@".',
+	'forum_poste_par_court' => 'Message posted@parauteur@.',
+	'forum_poste_par_generique' => 'Message posted@parauteur@ (@objet@ "@titre@").',
 	'forum_qui_etes_vous' => 'Who are you?',
 	'forum_saisie_texte_info' => 'This form accepts SPIP shortcuts <code>[-&gt;url] {{bold}} {italic} &lt;quote&gt; &lt;code&gt;</code> and the HTML code <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. To create paragraphs, simply leave blank lines.',
 	'forum_texte' => 'Text of your message',

@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/urls?lang_cible=ar
+// extrait automatiquement de http://trad.spip.net/tradlang_module/urls?lang_cible=ar
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -9,6 +9,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'actualiser_toutes' => 'تحديث كل عناوين URL',
+	'actualiser_toutes_explication' => 'يمكنك إعادة حساب عناوين URL.
+		إذا كان أحد العناوين قد تغير، يتم إنشاء سجل جديد (دون فقدان العناوين الموجودة ودون اي تأثير على العناوين المنشأة يدوياً).
+',
 
 	// B
 	'bouton_supprimer_url' => 'حذف هذا العنوان',

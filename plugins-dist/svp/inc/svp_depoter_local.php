@@ -77,9 +77,9 @@ function svp_descriptions_paquets_locaux(&$erreurs_xml = array()) {
 		'_DIR_PLUGINS'    => $get_infos(array(), false, _DIR_PLUGINS),
 		'_DIR_PLUGINS_DIST' => $get_infos(array(), false, _DIR_PLUGINS_DIST),
 	);
-	if (defined('_DIR_PLUGINS_SUPP') and _DIR_PLUGINS_SUPP) {
-		liste_plugin_files(_DIR_PLUGINS_SUPP);
-		$paquets_locaux['_DIR_PLUGINS_SUPP'] = $get_infos(array(), false, _DIR_PLUGINS_SUPP);
+	if (defined('_DIR_PLUGINS_SUPPL') and _DIR_PLUGINS_SUPPL) {
+		liste_plugin_files(_DIR_PLUGINS_SUPPL);
+		$paquets_locaux['_DIR_PLUGINS_SUPPL'] = $get_infos(array(), false, _DIR_PLUGINS_SUPPL);
 	}
 
 	// creer la liste des signatures
@@ -457,6 +457,7 @@ function svp_compiler_multis($prefixe, $dir_source) {
 
 	// On cherche tous les fichiers de langue destines a la traduction du paquet.xml
 	if ($fichiers_langue = glob($dir_source . "/lang/{$module}_*.php")) {
+		include_spip('inc/lang_liste');
 		$nom = $slogan = $description = '';
 		foreach ($fichiers_langue as $_fichier_langue) {
 			$nom_fichier = basename($_fichier_langue, '.php');

@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/medias?lang_cible=ru
+// extrait automatiquement de http://trad.spip.net/tradlang_module/medias?lang_cible=ru
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -112,6 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_modifier_document' => 'Изменить файл',
 	'info_portfolio' => 'Галерея фотографий и документов',
 	'info_referencer_doc_distant' => 'Ссылка на файл (URL):',
+	'info_sans_vignette' => 'Нет миниатюры',
 	'info_statut_document' => 'Статус документа:',
 	'info_telecharger' => 'Загрузить с вашего компьютера:',
 	'infos' => 'Техническая информация',
@@ -125,6 +126,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_credits' => 'Информация о авторе',
 	'label_fichier' => 'Файл',
 	'label_fichier_vignette' => 'Миниатюра',
+	'label_paginer_par' => 'Постранично по:',
 	'label_parents' => 'Документ используется в:',
 	'label_refdoc_joindre' => 'Номер документа',
 	'lien_tout_enlever' => 'Удалить все',
