@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -67,10 +67,10 @@ function inc_forum_insert_dist($objet, $id_objet, $id_forum, $force_statut = NUL
 	$c['objet'] = $objet;
 	$c['id_objet'] = $id_objet;
 
-	foreach (array(
-		'titre', 'texte', 'nom_site', 'url_site'
-	) as $champ)
-		$c[$champ] = _request($champ);
+	include_spip('inc/filtres');
+	include_spip('inc/modifier');
+	$champs = objet_info('forum','champs_editables');
+	$c = collecter_requests($champs, array());
 
 	$c['auteur'] = sinon($GLOBALS['visiteur_session']['nom'],
 		$GLOBALS['visiteur_session']['session_nom']);

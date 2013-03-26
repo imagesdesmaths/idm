@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/statistiques?lang_cible=es
+// extrait automatiquement de http://trad.spip.net/tradlang_module/statistiques?lang_cible=es
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_effacer_referers' => 'Eliminar sólo los enlaces entrantes',
-	'bouton_effacer_statistiques' => 'Borrar las estadísticas', # MODIF
+	'bouton_effacer_statistiques' => 'Borrar todas las estadísticas',
 
 	// C
 	'csv' => 'csv',
@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_visites' => 'visitas:',
 	'info_visites_plus_populaires' => 'Mostrar las visitas de <b>los artículos más populares</b> y de <b>los últimos artículos publicados</b>',
 	'info_zoom' => 'zoom',
-	'item_gerer_statistiques' => 'Gestionar las estadísticas', # MODIF
+	'item_gerer_statistiques' => 'Gestionar las estadísticas de visitas',
 
 	// O
 	'onglet_origine_visites' => 'Origen de las visitas',

@@ -29,6 +29,23 @@ function autoriser_depot_iconifier_dist($faire, $type, $id, $qui, $opt){
 
 
 /**
+ * Autoriser l'ajout d'un plugin ou d'un dépôt
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+ */
+function autoriser_plugins_ajouter_dist($faire, $type, $id, $qui, $opt){
+	if (!defined('_AUTORISER_TELECHARGER_PLUGINS'))
+		define('_AUTORISER_TELECHARGER_PLUGINS', true);
+	return _AUTORISER_TELECHARGER_PLUGINS AND autoriser('webmestre');
+}
+
+
+/**
  * Ajout de l'onglet 'Ajouter les plugins'
  *
  * L'URL dépend de l'existence ou pas d'un dépot de plugins.
@@ -39,7 +56,8 @@ function autoriser_depot_iconifier_dist($faire, $type, $id, $qui, $opt){
  * @return array      Données du pipeline
  */
 function svp_ajouter_onglets($flux){
-	if ($flux['args']=='plugins') {
+	if (($flux['args']=='plugins')
+	AND (autoriser('ajouter', '_plugins'))){
 		$compteurs = svp_compter('depot');
 		$page = ($compteurs['depot'] == 0) ? 'depots' : 'charger_plugin';
 		$flux['data']['charger_plugin'] =

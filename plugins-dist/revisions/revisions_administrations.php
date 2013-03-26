@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -68,6 +68,16 @@ function revisions_upgrade($nom_meta_base_version,$version_cible){
 		array('revisions_upate_meta'),
 		array('sql_updateq',"spip_versions",array('objet'=>'article'),"objet=''"),
 		array('sql_updateq',"spip_versions_fragments",array('objet'=>'article'),"objet=''"),
+	);
+	$maj['1.1.3'] = array(
+		array('sql_alter',"TABLE spip_versions DROP KEY id_objet"),
+		array('sql_alter',"TABLE spip_versions ADD INDEX id_version (id_version)"),
+		array('sql_alter',"TABLE spip_versions ADD INDEX id_objet (id_objet)"),
+		array('sql_alter',"TABLE spip_versions ADD INDEX objet (objet)")
+	);
+	$maj['1.1.4'] = array(
+		array('sql_alter',"TABLE spip_versions CHANGE permanent permanent char(3) DEFAULT '' NOT NULL"),
+		array('sql_alter',"TABLE spip_versions CHANGE champs champs text DEFAULT '' NOT NULL"),
 	);
 
 

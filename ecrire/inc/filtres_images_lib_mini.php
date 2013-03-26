@@ -253,6 +253,10 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 			reconstruire_image_intermediaire($fichier);
 		}
 	}
+
+	if ($creer)
+		spip_log("filtre image ".($fonction_creation?reset($fonction_creation):'')."[$effet] sur $fichier","images"._LOG_DEBUG);
+
 	// TODO: si une image png est nommee .jpg, le reconnaitre avec le bon $f
 	$ret["fonction_imagecreatefrom"] = "_imagecreatefrom".$term_fonction;
 	$ret["fichier"] = $fichier;
@@ -361,7 +365,7 @@ function _imagecreatefromgif($filename){
  * @param string $fichier
  * 		Le path vers l'image (ex : local/cache-vignettes/L180xH51/image.png).
  * @return bool
- * 		false si l'image créée a une largeur nulle ;
+ * 		false si l'image créée a une largeur nulle ou n'existe pas ;
  * 		true si une image est bien retournée.
  */
 function _image_imagepng($img, $fichier) {
@@ -369,12 +373,15 @@ function _image_imagepng($img, $fichier) {
 	$tmp = $fichier.".tmp";
 	$ret = imagepng($img,$tmp);
 	
-	$taille_test = getimagesize($tmp);
-	if ($taille_test[0] < 1) return false;
-
-	spip_unlink($fichier); // le fichier peut deja exister
-	@rename($tmp, $fichier);
-	return $ret;
+	if(file_exists($tmp)){
+		$taille_test = getimagesize($tmp);
+		if ($taille_test[0] < 1) return false;
+	
+		spip_unlink($fichier); // le fichier peut deja exister
+		@rename($tmp, $fichier);
+		return $ret;
+	}
+	return false;
 }
 
 /**
@@ -386,21 +393,23 @@ function _image_imagepng($img, $fichier) {
  * @param string $fichier
  * 		Le path vers l'image (ex : local/cache-vignettes/L180xH51/image.gif).
  * @return bool
- * 		false si l'image créée a une largeur nulle ;
+ * 		false si l'image créée a une largeur nulle ou n'existe pas;
  * 		true si une image est bien retournée.
  */
 function _image_imagegif($img,$fichier) {
 	if  (!function_exists('imagegif')) return false;
 	$tmp = $fichier.".tmp";
 	$ret = imagegif($img,$tmp);
+	
+	if(file_exists($tmp)){
+		$taille_test = getimagesize($tmp);
+		if ($taille_test[0] < 1) return false;
 
-	$taille_test = getimagesize($tmp);
-	if ($taille_test[0] < 1) return false;
-
-
-	spip_unlink($fichier); // le fichier peut deja exister
-	@rename($tmp, $fichier);
-	return $ret;
+		spip_unlink($fichier); // le fichier peut deja exister
+		@rename($tmp, $fichier);
+		return $ret;
+	}
+	return false;
 }
 
 /**
@@ -417,20 +426,23 @@ function _image_imagegif($img,$fichier) {
  * 		valeur (85) de la constante _IMG_GD_QUALITE (modifiable depuis
  * 		mes_options.php).
  * @return bool
- * 		false si l'image créée a une largeur nulle ;
+ * 		false si l'image créée a une largeur nulle ou n'existe pas ;
  * 		true si une image est bien retournée.
  */
 function _image_imagejpg($img,$fichier,$qualite=_IMG_GD_QUALITE) {
 	if (!function_exists('imagejpeg')) return false;
 	$tmp = $fichier.".tmp";
 	$ret = imagejpeg($img,$tmp, $qualite);
-
-	$taille_test = getimagesize($tmp);
-	if ($taille_test[0] < 1) return false;
-
-	spip_unlink($fichier); // le fichier peut deja exister
-	@rename($tmp, $fichier);
-	return $ret;
+	
+	if(file_exists($tmp)){
+		$taille_test = getimagesize($tmp);
+		if ($taille_test[0] < 1) return false;
+	
+		spip_unlink($fichier); // le fichier peut deja exister
+		@rename($tmp, $fichier);
+		return $ret;
+	}
+	return false;
 }
 
 /**
@@ -546,7 +558,7 @@ function image_graver($img){
 	if (strlen($fichier) < 1)
 		$fichier = $img;
 	# si jamais le fichier final n'a pas ete calcule car suppose temporaire
-	if (!@file_exists($fichier)) 
+	if (!@file_exists($fichier))
 		reconstruire_image_intermediaire($fichier);
 	ramasse_miettes($fichier);
 	return $img; // on ne change rien
@@ -594,13 +606,15 @@ function _image_tag_changer_taille($tag,$width,$height,$style=false){
 		$style = "margin:${espace}px;".$style;
 		$tag = inserer_attribut($tag,'hspace','');
 	}
-	$tag = inserer_attribut($tag,'style',$style);
+	$tag = inserer_attribut($tag,'style',$style, true, $style ? false : true);
 	return $tag;
 }
 
 // function d'ecriture du de la balise img en sortie des filtre image
 // reprend le tag initial et surcharge les tags modifies
 function _image_ecrire_tag($valeurs,$surcharge=array()){
+	$valeurs = pipeline('image_ecrire_tag_preparer',$valeurs);
+
 	$tag = 	str_replace(">","/>",str_replace("/>",">",$valeurs['tag'])); // fermer les tags img pas bien fermes;
 	
 	// le style
@@ -648,6 +662,16 @@ function _image_ecrire_tag($valeurs,$surcharge=array()){
 		foreach($surcharge as $attribut=>$valeur)
 			$tag = inserer_attribut($tag,$attribut,$valeur);
 	
+	$tag = pipeline('image_ecrire_tag_finir',
+		array(
+			'args' => array(
+				'valeurs' => $valeurs,
+				'surcharge' => $surcharge,
+			),
+			'data' => $tag
+		)
+	);
+
 	return $tag;
 }
 
@@ -967,7 +991,7 @@ function process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_
 		// de l'image, de facon a tromper le cache du navigateur
 		// quand on fait supprimer/reuploader un logo
 		// (pas de filemtime si SAFE MODE)
-		$date = test_espace_prive() ? ('?date='.$date) : '';
+		$date = test_espace_prive() ? ('?'.$date) : '';
 		return _image_ecrire_tag($image,array('src'=>"$logo$date",'width'=>$destWidth,'height'=>$destHeight));
 	}
 	else

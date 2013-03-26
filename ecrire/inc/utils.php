@@ -43,8 +43,10 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 	if (isset($echecs[$f])) return $echecs[$f];
 	// Sinon charger le fichier de declaration si plausible
 
-	if (!preg_match(',^\w+$,', $f))
+	if (!preg_match(',^\w+$,', $f)){
+		if ($continue) return false; //appel interne, on passe
 		die(htmlspecialchars($nom)." pas autorise");
+	}
 
 	// passer en minuscules (cf les balises de formulaires)
 	// et inclure le fichier
@@ -191,7 +193,7 @@ function spip_log($message=NULL, $name=NULL) {
 	if (!isset($regs[2]) OR !$niveau = $regs[2])
 		$niveau = _LOG_INFO;
 
-	if ($niveau <= _LOG_FILTRE_GRAVITE) {
+	if ($niveau <= (defined('_LOG_FILTRE_GRAVITE') ? _LOG_FILTRE_GRAVITE : _LOG_INFO_IMPORTANTE)) {
 		if (!$pre){
 			$pre = array(
 				_LOG_HS=>'HS:',
@@ -1058,16 +1060,30 @@ function autoriser_sans_cookie($nom)
   return in_array($nom, $autsanscookie);
 }
 
-// Fonction codant et decodant les URLS des objets SQL mis en page par SPIP
-// $id = numero de la cle primaire si nombre, URL a decoder si pas numerique
-// $entite = surnom de la table SQL (donne acces au nom de cle primaire)
-// $args = query_string a placer apres cle=$id&....
-// $ancre = ancre a mettre a la fin de l'URL a produire
-// $public = produire l'URL publique ou privee (par defaut: selon espace)
-// $type = fichier dans le repertoire ecrire/urls determinant l'apparence
-// @return string : url codee
-// @return string : fonction de decodage
-// http://doc.spip.org/@generer_url_entite
+/**
+ * Fonction codant et decodant les URLS des objets SQL mis en page par SPIP
+ *
+ * http://doc.spip.org/@generer_url_entite
+ *
+ *
+ * @param string $id
+ *   numero de la cle primaire si nombre, URL a decoder si pas numerique
+ * @param string $entite
+ *   surnom de la table SQL (donne acces au nom de cle primaire)
+ * @param string $args
+ *   query_string a placer apres cle=$id&....
+ * @param string $ancre
+ *   ancre a mettre a la fin de l'URL a produire
+ * @param bool|string $public
+ *   produire l'URL publique ou privee (par defaut: selon espace)
+ *   si string : serveur de base de donnee (nom du connect)
+ * @param string $type
+ *   fichier dans le repertoire ecrire/urls determinant l'apparence
+ * @return string|array
+ *   url codee ou fonction de decodage
+ *   array : derogatoire, la fonction d'url retourne (objet,id_objet) utilises par nettoyer_raccourcis_typo() pour generer un lien titre
+ *           (cas des raccourcis personalises [->spip20] : il faut implementer une fonction generer_url_spip et une fonction generer_url_ecrire_spip)
+ */
 function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NULL, $type=NULL)
 {
 	if ($public === NULL) $public = !test_espace_prive();
@@ -1507,6 +1523,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	if (!defined('_DEFAULT_CHARSET')) define('_DEFAULT_CHARSET', 'utf-8');
 	if (!defined('_ROOT_PLUGINS')) define('_ROOT_PLUGINS', _ROOT_RACINE . "plugins/");
 	if (!defined('_ROOT_PLUGINS_DIST')) define('_ROOT_PLUGINS_DIST', _ROOT_RACINE . "plugins-dist/");
+	if (!defined('_ROOT_PLUGINS_SUPPL') && defined('_DIR_PLUGINS_SUPPL') && _DIR_PLUGINS_SUPPL) define('_ROOT_PLUGINS_SUPPL', _ROOT_RACINE . str_replace(_DIR_RACINE,'',_DIR_PLUGINS_SUPPL));
 
 	// La taille des Log
 	if (!defined('_MAX_LOG')) define('_MAX_LOG', 100);
@@ -1788,7 +1805,7 @@ function init_var_mode(){
 							// basculer sur les criteres de preview dans les boucles
 							if (!defined('_VAR_PREVIEW')) define('_VAR_PREVIEW',true);
 							// forcer le calcul
-							if (!defined('_VAR_MODE')) define('_VAR_MODE','recalcul');
+							if (!defined('_VAR_MODE')) define('_VAR_MODE','calcul');
 							// et ne pas enregistrer de cache
 							if (!defined('_VAR_NOCACHE')) define('_VAR_NOCACHE',true);
 							break;

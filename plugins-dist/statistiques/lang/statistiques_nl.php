@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/statistiques?lang_cible=nl
+// extrait automatiquement de http://trad.spip.net/tradlang_module/statistiques?lang_cible=nl
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -8,11 +8,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_effacer_referers' => 'Effacer seulement les liens entrants', # NEW
-	'bouton_effacer_statistiques' => 'De statistieken uitwissen', # MODIF
+	'bouton_effacer_referers' => 'Alleen binnenkomende links uitwissen',
+	'bouton_effacer_statistiques' => 'De statistieken uitwissen',
 
 	// C
-	'csv' => 'csv', # NEW
+	'csv' => 'csv',
 
 	// I
 	'icone_evolution_visites' => 'Evolutie van de bezoeken<br />@visites@ bezoeken',
@@ -25,13 +25,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_popularite_2' => 'populariteit van de site:',
 	'info_popularite_3' => 'populariteit: @popularite@; bezoeken: @visites@',
 	'info_popularite_5' => 'populariteit:',
-	'info_previsions' => 'prévisions :', # NEW
+	'info_previsions' => 'verwachtingen :',
 	'info_question_vignettes_referer' => 'Wanneer u de statistieken raadpleegt, kunt u korte overzichten van de plaatsen van oorsprong van de bezoeken zichtbaar maken',
 	'info_question_vignettes_referer_oui' => 'De vangsten van de siten van oorsprong van de bezoeken te kennen geven',
 	'info_visites' => 'bezoeke:',
 	'info_visites_plus_populaires' => 'Toon de bezoeken voor <b>de meest populaire artikels</b> en voor <b>de laatst gepubliceerde artikels:</b>',
 	'info_zoom' => 'zoom',
-	'item_gerer_statistiques' => 'Statistieken aanmaken', # MODIF
+	'item_gerer_statistiques' => 'Statistieken beheren',
 
 	// O
 	'onglet_origine_visites' => 'Herkomst van de bezoeken',
@@ -39,11 +39,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'onglet_repartition_lang' => 'Verdeling volgens taal',
 
 	// R
-	'resume' => 'Resume', # MODIF
+	'resume' => 'Samenvatting',
 
 	// T
 	'texte_admin_effacer_stats' => 'Deze bestelling wist alle gegevens in verband met de statistieken van bezoek van de plaats uit, met inbegrip van de populariteit van de artikelen.',
-	'texte_admin_effacer_toutes_stats' => 'Le premier bouton supprime toutes les statistiques : visites, popularité des articles et liens entrants.', # NEW
+	'texte_admin_effacer_toutes_stats' => 'Het eerste knopje wist alle statiestieken uit: bezoeken, populariteit van de artikels en binnenkomende links.',
 	'texte_comment_lire_tableau' => 'De plaats van het artikel,
  in de rangschikking volgens populariteit, is in de marge
  aangegeven; de populariteit(*) van het artikel en het
@@ -62,8 +62,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_statistiques_visites' => 'Statistieken van de bezoeken',
 
 	// V
-	'visites_journalieres' => 'Nombre de visites par jour', # NEW
-	'visites_mensuelles' => 'Nombre de visites par mois' # NEW
+	'visites_journalieres' => 'Aantal bezoeken per dag',
+	'visites_mensuelles' => 'Aantal maandelijkse bezoeken'
 );
 
 ?>

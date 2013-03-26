@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -416,7 +416,10 @@ function ajouter_version($id_objet,$objet, $champs, $titre_version = "", $id_aut
 	// Attention a une edition anonyme (type wiki): id_auteur n'est pas
 	// definie, on enregistre alors le numero IP
 	$str_auteur = intval($id_auteur) ? intval($id_auteur) : $GLOBALS['ip'];
-	$permanent = empty($titre_version) ? 'non' : 'oui';
+	// si pas de titre dans cette version, la marquer 'non' permanente,
+	// et elle pourra etre fusionnee avec une revision ulterieure dans un delai < _INTERVALLE_REVISIONS
+	// permet de fusionner plusieurs editions consecutives champs par champs avec les crayons
+	$permanent = empty($titre_version) ? 'non' : '';
 
 	// Detruire les tentatives d'archivages non abouties en 1 heure
 	sql_delete('spip_versions', "id_objet=".intval($id_objet)." AND objet=".sql_quote($objet)." AND id_version <= 0 AND date < DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).", INTERVAL "._INTERVALLE_REVISIONS." SECOND)");
@@ -467,8 +470,8 @@ function ajouter_version($id_objet,$objet, $champs, $titre_version = "", $id_aut
 		$paras_old = recuperer_fragments($id_objet,$objet, $id_version);
 		$champs_old = $row['champs'];
 		if ($row['id_auteur']!= $str_auteur
-		OR $row['permanent']=='oui'
-		OR strtotime($row['date']) < (time()-_INTERVALLE_REVISIONS)) {
+		  OR $row['permanent']!='non'
+		  OR strtotime($row['date']) < (time()-_INTERVALLE_REVISIONS)) {
 			spip_log(strtotime($row['date']), 'revisions');
 			spip_log(time(), 'revisions');
 			spip_log(_INTERVALLE_REVISIONS, 'revisions');

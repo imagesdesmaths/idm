@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/urls?lang_cible=en
+// extrait automatiquement de http://trad.spip.net/tradlang_module/urls?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -9,6 +9,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'actualiser_toutes' => 'Update all urls',
+	'actualiser_toutes_explication' => 'You can re-process the URLs.
+		If a URL has changed, a new entry will be created (without loosing the URLs already 
+		present and without affecting the manually defined URLs).',
 
 	// B
 	'bouton_supprimer_url' => 'Delete this URL',

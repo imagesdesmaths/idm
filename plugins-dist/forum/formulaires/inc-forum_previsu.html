@@ -22,10 +22,12 @@
 			[<li class="reponse_formulaire reponse error">(#ENV*{erreur})</li>]
 		</li>
 	</ul>
-	[<p class="boutons"><input type="submit" class="submit" onclick="confirmer_previsu_forum_poste=true;" name="confirmer_previsu_forum" value="(#ENV*{bouton})" /></p>]
+	[<p class="boutons"><input type="submit" class="submit" onclick="jQuery(window).unbind();" name="confirmer_previsu_forum" value="(#ENV*{bouton})" /></p>]
 </fieldset>
 <br class="clear" />
 <script type="text/javascript">/*<![CDATA[*/
-var confirmer_previsu_forum_poste = false;
-if (window.jQuery){ jQuery(function(){ jQuery(window).unload(function() { if (!confirmer_previsu_forum_poste) alert('<:forum:forum_attention_message_non_poste|texte_script:>');confirmer_previsu_forum_poste=true;});});}
+if (window.jQuery){ jQuery(function(){
+	jQuery(window).unload(function() { alert('<:forum:forum_attention_message_non_poste|texte_script:>');jQuery(window).unbind();});
+	jQuery(window).on('beforeunload', function(){		jQuery(window).unbind();return '<:forum:forum_attention_message_non_poste|texte_script:>';	});
+});}
 /*]]>*/</script>

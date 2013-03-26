@@ -2,7 +2,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -11,7 +11,7 @@
 
 /**
  * Toutes les fonctions image_xx de ce fichier :
- * 	- prennent une image en entree
+ *  - prennent une image en entree
  *  - fournissent une image en sortie
  *  - sont chainables les unes derrieres les autres dans toutes les combinaisons possibles
  */
@@ -504,23 +504,29 @@ function image_masque($im, $masque, $pos="") {
 	// Sinon, c'est la taille de l'image source qui est utilisee.
 	//
 	// $pos est une variable libre, qui permet de passer left=..., right=..., bottom=..., top=...
-	// dans ce cas, le pasque est place a ces positions sur l'image d'origine,
+	// dans ce cas, le masque est place a ces positions sur l'image d'origine,
 	// et evidemment cette image d'origine n'est pas redimensionnee
 	// 
 	// Positionnement horizontal: text-align=left, right, center
-	// Positionnement vertical : vertical-align: top, bottom, middle
+	// Positionnement vertical : vertical-align=top, bottom, middle
 	// (les positionnements left, right, top, left sont relativement inutiles, mais coherence avec CSS)
 	//
-	// Choix du mode de fusion: mode=masque, normal, eclaircir, obscurcir, produit, difference
+	// Choix du mode de fusion: mode=masque, normal, eclaircir, obscurcir, produit, difference, ecran, superposer, lumiere_dure, teinte, saturation, valeur
+	// https://en.wikipedia.org/wiki/Blend_modes
 	// masque: mode par defaut
 	// normal: place la nouvelle image par dessus l'ancienne
 	// eclaircir: place uniquement les points plus clairs
 	// obscurcir: place uniquement les points plus fonc'es
 	// produit: multiplie par le masque (points noirs rendent l'image noire, points blancs ne changent rien)
 	// difference: remplit avec l'ecart entre les couleurs d'origine et du masque
+	// ecran: effet inverse de 'produit' -> l'image resultante est plus claire
+	// superposer: combine les modes 'produit' et 'ecran' -> les parties claires sont eclaircies, les parties sombres assombries.
+	// lumiere_dure: equivalent a 'superposer', sauf que l'image du bas et du haut sont inversees.
+	// teinte: utilise la teinte du masque
+	// saturation: utilise la saturation du masque
+	// valeur: utilise la valeur du masque
 
 	$mode = "masque";
-
 
 	$numargs = func_num_args();
 	$arg_list = func_get_args();
@@ -549,10 +555,10 @@ function image_masque($im, $masque, $pos="") {
 
 	$x_i = $image["largeur"];
 	$y_i = $image["hauteur"];
-	
+
 	$im = $image["fichier"];
 	$dest = $image["fichier_dest"];
-	
+
 	$creer = $image["creer"];
 
 	// doit-on positionner l'image ?
@@ -569,7 +575,7 @@ function image_masque($im, $masque, $pos="") {
 		$im_m = $mask["fichier"];
 		$x_m = $mask["largeur"];
 		$y_m = $mask["hauteur"];
-	
+
 		$im2 = $mask["fonction_imagecreatefrom"]($masque);
 		if ($mask["format_source"] == "gif" AND function_exists('ImageCopyResampled')) { 
 			$im2_ = imagecreatetruecolor($x_m, $y_m);
@@ -583,13 +589,13 @@ function image_masque($im, $masque, $pos="") {
 			imagedestroy($im2);
 			$im2 = $im2_;
 		}
-		
+
 		if ($placer) {
 			// On fabriquer une version "agrandie" du masque,
 			// aux dimensions de l'image source
 			// et on "installe" le masque dans cette image
 			// ainsi: aucun redimensionnement
-			
+
 			$dx = 0;
 			$dy = 0;
 			
@@ -633,8 +639,8 @@ function image_masque($im, $masque, $pos="") {
 					$dy = round( ($y_i - $y_m) / 2 ) ;
 				}
 			}
-			
-			
+
+
 			$im3 = imagecreatetruecolor($x_i, $y_i);
 			@imagealphablending($im3, false);
 			@imagesavealpha($im3,true);
@@ -642,7 +648,6 @@ function image_masque($im, $masque, $pos="") {
 			else $color_t = ImageColorAllocateAlpha( $im3, 128, 128, 128 , 127 );
 			imagefill ($im3, 0, 0, $color_t);
 
-			
 
 			imagecopy ( $im3, $im2, $dx, $dy, 0, 0, $x_m, $y_m);
 
@@ -650,16 +655,14 @@ function image_masque($im, $masque, $pos="") {
 			$im2 = imagecreatetruecolor($x_i, $y_i);
 			@imagealphablending($im2, false);
 			@imagesavealpha($im2,true);
-			
-			
-			
+
 			imagecopy ( $im2, $im3, 0, 0, 0, 0, $x_i, $y_i);
 			imagedestroy($im3);
 			$x_m = $x_i;
 			$y_m = $y_i;
 		}
-		
-	
+
+
 		$rapport = $x_i / $x_m;
 		if (($y_i / $y_m) < $rapport ) {
 			$rapport = $y_i / $y_m;
@@ -667,7 +670,7 @@ function image_masque($im, $masque, $pos="") {
 			
 		$x_d = ceil($x_i / $rapport);
 		$y_d = ceil($y_i / $rapport);
-		
+
 
 		if ($x_i < $x_m OR $y_i < $y_m) {
 			$x_dest = $x_i;
@@ -685,8 +688,8 @@ function image_masque($im, $masque, $pos="") {
 		$nouveau = _image_valeurs_trans(image_reduire($im, $x_d, $y_d),"");
 		if (!is_array($nouveau)) return("");
 		$im_n = $nouveau["fichier"];
-		
-	
+
+
 		$im = $nouveau["fonction_imagecreatefrom"]($im_n);
 		imagepalettetotruecolor($im);
 		if ($nouveau["format_source"] == "gif" AND function_exists('ImageCopyResampled')) { 
@@ -708,23 +711,21 @@ function image_masque($im, $masque, $pos="") {
 		imagefill ($im_, 0, 0, $color_t);
 
 
+		// calcul couleurs de chaque pixel selon les modes de fusion
 		for ($x = 0; $x < $x_dest; $x++) {
 			for ($y=0; $y < $y_dest; $y++) {
-				$rgb = ImageColorAt($im2, $x, $y);
+				$rgb = ImageColorAt($im2, $x, $y); // image au dessus
 				$a = ($rgb >> 24) & 0xFF;
 				$r = ($rgb >> 16) & 0xFF;
 				$g = ($rgb >> 8) & 0xFF;
 				$b = $rgb & 0xFF;
-				
 
-				$rgb2 = ImageColorAt($im, $x+$x_dec, $y+$y_dec);
+				$rgb2 = ImageColorAt($im, $x+$x_dec, $y+$y_dec); // image en dessous
 				$a2 = ($rgb2 >> 24) & 0xFF;
 				$r2 = ($rgb2 >> 16) & 0xFF;
 				$g2 = ($rgb2 >> 8) & 0xFF;
 				$b2 = $rgb2 & 0xFF;
-				
-				
-				
+
 				if ($mode == "normal") {
 					$v = (127 - $a) / 127;
 					if ($v == 1) {
@@ -737,7 +738,7 @@ function image_masque($im, $masque, $pos="") {
 							$r_ = $r2;
 							$g_ = $g2;
 							$b_ = $b2;
-						} else if ($v2 ==0) {
+						} else if ($v2 == 0) {
 							$r_ = $r;
 							$g_ = $g;
 							$b_ = $b;
@@ -752,42 +753,53 @@ function image_masque($im, $masque, $pos="") {
 						}
 					}
 					$a_ = min($a,$a2);
-				} elseif ($mode == "produit" OR $mode == "difference") {					
 
+				} elseif (in_array($mode, array("produit","difference","superposer","lumiere_dure","ecran"))) {
 					if ($mode == "produit") {
 						$r = ($r/255) * $r2;
 						$g = ($g/255) * $g2;
 						$b = ($b/255) * $b2;
-					} else if ($mode == "difference") {
+					} elseif ($mode == "difference") {
 						$r = abs($r-$r2);
 						$g = abs($g-$g2);
-						$b = abs($b-$b2);				
+						$b = abs($b-$b2);
+					} elseif ($mode == "superposer") {
+						$r = ($r2 < 128) ? 2 * $r * $r2 / 255 : 255 - (2 * (255 - $r) * (255 - $r2) / 255);
+						$g = ($g2 < 128) ? 2 * $g * $g2 / 255 : 255 - (2 * (255 - $g) * (255 - $g2) / 255);
+						$b = ($b2 < 128) ? 2 * $b * $b2 / 255 : 255 - (2 * (255 - $b) * (255 - $b2) / 255);
+					} elseif ($mode == "lumiere_dure") {
+						$r = ($r < 128) ? 2 * $r * $r2 / 255 : 255 - (2 * (255 - $r2) * (255 - $r) / 255);
+						$g = ($g < 128) ? 2 * $g * $g2 / 255 : 255 - (2 * (255 - $g2) * (255 - $g) / 255);
+						$b = ($b < 128) ? 2 * $b * $b2 / 255 : 255 - (2 * (255 - $b2) * (255 - $b) / 255);
+					} elseif ($mode == "ecran") {
+						$r = 255 - (((255 - $r) * (255 - $r2)) / 255);
+						$g = 255 - (((255 - $g) * (255 - $g2)) / 255);
+						$b = 255 - (((255 - $b) * (255 - $b2)) / 255);
 					}
-
 					$r = max(0, min($r, 255));
 					$g = max(0, min($g, 255));
 					$b = max(0, min($b, 255));
 
+					// melange en fonction de la transparence du masque
 					$v = (127 - $a) / 127;
-					if ($v == 1) {
+					if ($v == 1) { // melange complet
 						$r_ = $r;
 						$g_ = $g;
 						$b_ = $b;
 					} else {
 						$v2 = (127 - $a2) / 127;
-						if ($v+$v2 == 0) {
+						if ($v+$v2 == 0) { // ??
 							$r_ = $r2;
 							$g_ = $g2;
 							$b_ = $b2;
-						} else {
+						} else { // pas de melange (transparence du masque)
 							$r_ = $r + (($r2 - $r) * $v2 * (1 - $v));
 							$g_ = $g + (($g2 - $g) * $v2 * (1 - $v));
 							$b_ = $b + (($b2 - $b) * $v2 * (1 - $v));
 						}
 					}
-
-
 					$a_ = $a2;
+
 				} elseif ($mode == "eclaircir" OR $mode == "obscurcir") {
 					$v = (127 - $a) / 127;
 					if ($v == 1) {
@@ -813,10 +825,55 @@ function image_masque($im, $masque, $pos="") {
 					} else {
 						$r_ = min ($r_, $r2);
 						$g_ = min ($g_, $g2);
-						$b_ = min ($b_, $b2);					
+						$b_ = min ($b_, $b2);
 					}
-					
 					$a_ = min($a,$a2);
+
+				} elseif (in_array($mode, array("teinte","saturation","valeur"))) {
+					include_spip("filtres/images_lib");
+					$hsv = _couleur_rgb2hsv($r, $g, $b); // image au dessus
+					$h = $hsv["h"];
+					$s = $hsv["s"];
+					$v = $hsv["v"];
+					$hsv2 = _couleur_rgb2hsv($r2, $g2, $b2); // image en dessous
+					$h2 = $hsv2["h"];
+					$s2 = $hsv2["s"];
+					$v2 = $hsv2["v"];
+					switch ($mode)  {
+						case "teinte";
+							$rgb3 = _couleur_hsv2rgb($h, $s2, $v2);
+							break;
+						case "saturation";
+							$rgb3 = _couleur_hsv2rgb($h2, $s, $v2);
+							break;
+						case "valeur";
+							$rgb3 = _couleur_hsv2rgb($h2, $s2, $v);
+							break;
+					}
+					$r = $rgb3["r"];
+					$g = $rgb3["g"];
+					$b = $rgb3["b"];
+
+					// melange en fonction de la transparence du masque
+					$v = (127 - $a) / 127;
+					if ($v == 1) { // melange complet
+						$r_ = $r;
+						$g_ = $g;
+						$b_ = $b;
+					} else {
+						$v2 = (127 - $a2) / 127;
+						if ($v+$v2 == 0) { // ??
+							$r_ = $r2;
+							$g_ = $g2;
+							$b_ = $b2;
+						} else { // pas de melange (transparence du masque)
+							$r_ = $r + (($r2 - $r) * $v2 * (1 - $v));
+							$g_ = $g + (($g2 - $g) * $v2 * (1 - $v));
+							$b_ = $b + (($b2 - $b) * $v2 * (1 - $v));
+						}
+					}
+					$a_ = $a2;
+
 				} else {
 					$r_ = $r2 + 1 * ($r - 127);
 					$r_ = max(0, min($r_, 255));
@@ -824,12 +881,11 @@ function image_masque($im, $masque, $pos="") {
 					$g_ = max(0, min($g_, 255));
 					$b_ = $b2 + 1 * ($b - 127);
 					$b_ = max(0, min($b_, 255));
-					
 					$a_ = $a + $a2 - round($a*$a2/127);
 				}
 
 				$color = ImageColorAllocateAlpha( $im_, $r_, $g_, $b_ , $a_ );
-				imagesetpixel ($im_, $x, $y, $color);			
+				imagesetpixel ($im_, $x, $y, $color);
 			}
 		}
 

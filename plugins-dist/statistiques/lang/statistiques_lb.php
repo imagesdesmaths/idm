@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/statistiques?lang_cible=lb
+// extrait automatiquement de http://trad.spip.net/tradlang_module/statistiques?lang_cible=lb
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -8,52 +8,52 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_effacer_referers' => 'Effacer seulement les liens entrants', # NEW
-	'bouton_effacer_statistiques' => 'Statistik läschen', # MODIF
+	'bouton_effacer_referers' => 'Nëmmen d\'Linken déi erakomme läschen',
+	'bouton_effacer_statistiques' => 'All d\'Statistike läschen',
 
 	// C
-	'csv' => 'csv', # NEW
+	'csv' => 'CSV',
 
 	// I
-	'icone_evolution_visites' => 'Evolutioun vun den Visiten<br />@visites@ Visiten',
+	'icone_evolution_visites' => 'Entwécklung vun de Visiten<br />@visites@ Visiten',
 	'icone_repartition_actuelle' => 'Déi aktuell Verdeelung weisen',
 	'icone_repartition_visites' => 'Verdeelung vun de Visiten',
 	'icone_statistiques_visites' => 'Statistik',
-	'info_affichier_visites_articles_plus_visites' => 'D\'Visiten fir <b>déi am meeschten gefroten Artikel zënter dem Ufank</b> weisen:',
-	'info_comment_lire_tableau' => 'Wéi een dës Tabell liesen soll',
+	'info_affichier_visites_articles_plus_visites' => 'D\'Visite fir <b>déi am meeschte gefroten Artikelen zënter dem Ufank</b> weisen:',
+	'info_comment_lire_tableau' => 'Wéi een dës Tabell liese soll',
 	'info_forum_statistiques' => 'Statistik vun de Visiten',
-	'info_popularite_2' => 'Popularitéit vum Site:',
-	'info_popularite_3' => 'Popularitéit: @popularite@; Visiten: @visites@',
-	'info_popularite_5' => 'Popularitéit:',
-	'info_previsions' => 'prévisions :', # NEW
-	'info_question_vignettes_referer' => 'Wann dir d\'Statistik kuckt kënnt dir eng Preview vun den Ausgangs-Site gesinn',
-	'info_question_vignettes_referer_oui' => 'Preview vun den Ausgangs-Site weisen',
+	'info_popularite_2' => 'Beléiftheet vum Site:',
+	'info_popularite_3' => 'Beléiftheet: @popularite@; Visiten: @visites@',
+	'info_popularite_5' => 'Beléiftheet:',
+	'info_previsions' => 'Prognos:',
+	'info_question_vignettes_referer' => 'Wann dir d\'Statistik kuckt kënnt dir e Screenshot vun den Urspronks-Site gesinn',
+	'info_question_vignettes_referer_oui' => 'Screenshot vun den Urspronks-Site weisen',
 	'info_visites' => 'Visiten:',
-	'info_visites_plus_populaires' => 'Visiten weisen fir <b>déi populärsten</b> a fir <b>déi läscht publizéiert</b> Artikelen:',
+	'info_visites_plus_populaires' => 'Visite weisen fir <b>déi beléifsten</b> a fir <b>déi läscht verëffentlecht</b> Artikelen:',
 	'info_zoom' => 'Zoom',
-	'item_gerer_statistiques' => 'Statistik maachen', # MODIF
+	'item_gerer_statistiques' => 'D\'Statistik vun de Visite verwalten',
 
 	// O
-	'onglet_origine_visites' => 'Origine vun de Visiten',
-	'onglet_repartition_debut' => 'zënter Ufank',
+	'onglet_origine_visites' => 'Urspronk vun de Visiten',
+	'onglet_repartition_debut' => 'zënter dem Ufank',
 	'onglet_repartition_lang' => 'Verdeelung no Sprooch',
 
 	// R
-	'resume' => 'Resume', # MODIF
+	'resume' => 'Zesummefaassung',
 
 	// T
-	'texte_admin_effacer_stats' => 'Dës Prozedur läscht d\'Statistik an d\'Popularitéit vun den Artikele vun ärem Site.',
-	'texte_admin_effacer_toutes_stats' => 'Le premier bouton supprime toutes les statistiques : visites, popularité des articles et liens entrants.', # NEW
-	'texte_comment_lire_tableau' => 'D\'Plaz vum Artikel am Klassement no Popularitéit steet am Rand; d\'Popularitéit vum Artikel (eng Estimatioun vun der Zuel vun de Visiten pro Dag wann ët esou weidergeet) an Zuel vun de Visiten zënter Ufank stinn an der Erklärung déi erschéngt wann dier mat der Maus iwwer den Titel fuert.',
-	'texte_signification' => 'Déi kumuléiert Donnéen sinn donkel (Total vun den Ënner-Rubriken), d\'Zuel vun de Visiten fir all Rubrik sinn hell.',
-	'titre_evolution_visite' => 'Évolutioun vun de Visiten',
-	'titre_liens_entrants' => 'Linken déi eran komm sinn',
+	'texte_admin_effacer_stats' => 'Dës Prozedur läscht d\'Statistik an d\'Beléiftheet vun den Artikele vum Site.',
+	'texte_admin_effacer_toutes_stats' => 'Den 1. Knäppche läscht all d\'Statistiken: Visiten, Beléiftheet vun den Artikelen a Linken déi erakommen.',
+	'texte_comment_lire_tableau' => 'D\'Plaz vum Artikel am Klassement no Beléiftheet steet am Rand; d\'Beléiftheet vum Artikel (eng Prognos vun der Zuel vun de Visite pro Dag wann et esou weidergeet) an d\'Zuel vun de Visite zënter Ufank stinn an der Erklärung déi erschéngt wann dir mat der Maus iwwer den Titel fuert.',
+	'texte_signification' => 'Déi kumuléiert Date sinn donkel (Total vun den Ënner-Rubriken), d\'Zuel vun de Visite fir all Rubrik sinn hell.',
+	'titre_evolution_visite' => 'Entwécklung vun de Visiten',
+	'titre_liens_entrants' => 'Linken déi era komm sinn',
 	'titre_page_statistiques' => 'Statistik pro Rubrik',
 	'titre_page_statistiques_visites' => 'Statistik vun de Visiten',
 
 	// V
-	'visites_journalieres' => 'Nombre de visites par jour', # NEW
-	'visites_mensuelles' => 'Nombre de visites par mois' # NEW
+	'visites_journalieres' => 'Zuel vun de Visite pro Dag',
+	'visites_mensuelles' => 'Zuel vun de Visite pro Mount'
 );
 
 ?>

@@ -10,13 +10,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'action_patienter' => 'The actions are being processed. Please wait...',
 	'actions_a_faire' => 'Actions to process',
-	'actions_demandees' => 'Action requested:',
-	'actions_en_erreur' => 'Errors that occurred',
+	'actions_demandees' => 'Actions requested:',
+	'actions_en_erreur' => 'Occurring errors',
 	'actions_necessaires' => 'The following additional actions will be performed:',
 	'actions_non_traitees' => 'Actions not processed',
 	'actions_realises' => 'Actions processed',
 	'afficher_les_plugins_incompatibles' => 'Display incompatible plugins',
-	'alerte_compatibilite' => 'Enforced compatibiliy',
+	'alerte_compatibilite' => 'Forced compatibiliy',
 
 	// B
 	'bouton_activer' => 'Enable',
@@ -220,6 +220,7 @@ is not created or is not writable.
 	'message_nok_sql_insert_depot' => 'SQL error when adding the repository @objet@',
 	'message_nok_url_depot_incorrecte' => 'The address "@url@" is incorrect',
 	'message_nok_xml_non_conforme' => 'The description XML file "@fichier@" of the repository doesn\'t conform',
+	'message_nok_xml_non_recupere' => 'The XML file "@fichier@" could not be recovered',
 	'message_ok_aucun_plugin_trouve' => 'No plugins that match the selected criteria.',
 	'message_ok_depot_ajoute' => 'The repository "@url@" has been added.',
 	'message_ok_plugins_trouves' => '@nb_plugins@ plugin(s) match the selected criteria (@tri@). Select below the plugins you want to download and activate on your server.',

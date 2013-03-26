@@ -8,14 +8,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'barre_a_accent_grave' => 'Insertar À', # MODIF
-	'barre_adresse' => 'Adresse', # NEW
+	'barre_a_accent_grave' => 'Insertar una À',
+	'barre_adresse' => 'Dirección',
 	'barre_aide' => 'Puedes enriquecer el formato de tu texto utilizando &quot;atajos tipográficos&quot;',
-	'barre_alignerdroite' => '[/Alinear a derecha/]',
+	'barre_alignerdroite' => '[/Alinear a derecha/] el párrafo',
 	'barre_ancres' => 'Anclas',
-	'barre_barre' => 'Barrer le texte', # NEW
+	'barre_barre' => 'Tachar el texto',
 	'barre_bulle' => 'Globo de ayuda',
-	'barre_c_cedille_maj' => 'Insertar Ç', # MODIF
+	'barre_c_cedille_maj' => 'Insertar una Ç',
 	'barre_cadre' => 'Mostrar dentro de una  &lt;cadre&gt;caja de texto&lt;/cadre&gt;',
 	'barre_caracteres' => 'Caracteres especiales',
 	'barre_centrer' => '[|Centrar|] párrafo',
@@ -23,14 +23,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_clean' => 'Limpiar el código de todas las etiquetas HTML',
 	'barre_code' => 'Mostrar como &lt;code&gt;código fuente&lt;/code&gt;',
 	'barre_desindenter' => 'Deshacer sublista',
-	'barre_e_accent_aigu' => 'Insertar É', # MODIF
-	'barre_e_accent_grave' => 'Intertar È', # MODIF
-	'barre_ea' => 'Insertar ligadura æ', # MODIF
-	'barre_ea_maj' => 'Insertar ligadura Æ', # MODIF
+	'barre_e_accent_aigu' => 'Insertar una É',
+	'barre_e_accent_grave' => 'Intertar una È',
+	'barre_ea' => 'Insertar una æ',
+	'barre_ea_maj' => 'Insertar una Æ',
 	'barre_encadrer' => '[(Párrafo con recuadro)]',
-	'barre_eo' => 'Insertar ligadura œ', # MODIF
-	'barre_eo_maj' => 'Insertar  ligadura &OElig', # MODIF
-	'barre_euro' => 'Insertar símbolo € ',
+	'barre_eo' => 'Insertar una œ',
+	'barre_eo_maj' => 'Insertar  una Œ',
+	'barre_euro' => 'Insertar el símbolo € ',
 	'barre_exposant' => 'Poner el texto en &lt;sup&gt;superíndice&lt;/sup&gt;',
 	'barre_formatages_speciaux' => 'Formateado especial',
 	'barre_galerie' => 'Abrir la galería',
@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_gestion_anc_inserer' => 'Convertir a un ancla',
 	'barre_gestion_anc_nom' => 'Nombre del ancla',
 	'barre_gestion_anc_pointer' => 'Apuntar a un ancla',
-	'barre_gestion_caption' => 'Encabezado y resumen', # MODIF
+	'barre_gestion_caption' => 'Leyenda y resumen',
 	'barre_gestion_colonne' => 'Núm de columnas',
 	'barre_gestion_cr_casse' => 'Respetar mayúsculas y minúsculas',
 	'barre_gestion_cr_changercasse' => 'Alternar',
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_gestion_cr_entier' => 'Sólo palabras completas',
 	'barre_gestion_cr_remplacer' => 'Reemplazar',
 	'barre_gestion_cr_tout' => 'Reemplazar todo',
-	'barre_gestion_entete' => 'Encabezado', # MODIF
+	'barre_gestion_entete' => 'Encabezado',
 	'barre_gestion_ligne' => 'Núm de líneas',
 	'barre_gestion_taille' => 'Tamaño fijo',
 	'barre_glossaire' => '[?Referencia] (Wikipedia)',
@@ -58,9 +58,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_guillemets' => 'Encerrar entre «comillas dobles«',
 	'barre_guillemets_simples' => 'Place between “single quotes“',
 	'barre_indenter' => 'Convertir en sublista',
-	'barre_inserer_cadre' => 'Insérer un code preformaté (cadre)', # NEW
+	'barre_inserer_cadre' => 'Inseretar un código preformatado (marco)',
 	'barre_inserer_caracteres' => 'Insertar caracteres especiales',
-	'barre_inserer_code' => 'Insérer un code informatique (code)', # NEW
+	'barre_inserer_code' => 'Insertar un código informático (código)',
 	'barre_intertitre' => 'Convertir en {{{intertítulo}}}',
 	'barre_italic' => '{cursiva}',
 	'barre_langue' => 'Idioma abreviado',
@@ -82,28 +82,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_tableau' => 'Insertar/modificar una tabla (seleccionala primero)',
 
 	// C
-	'config_info_enregistree' => 'Configuration sauvegardée', # NEW
+	'config_info_enregistree' => 'Configuración guardada',
 
 	// E
 	'editer' => 'Editar',
-	'explication_barre_outils_public' => 'Les scripts CSS et Javascript des barre d\'outils
-	(extension Porte Plume) sont chargés sur l\'espace public
-	et permettent d\'utiliser ces barres sur les formulaires de forums,
-	les crayons publics ou pour d\'autres plugins, si leurs configurations
-	respectives le permettent.', # NEW
-	'explication_barre_outils_public_2' => 'Vous pouvez choisir de ne pas charger
-	ces scripts afin d\'alléger le poids des pages publiques.
-	Dès lors quelque soit la configuration des forums, crayons ou plugin,
-	aucune barre d\'outils du Porte Plume ne pourra être
-	présente automatiquement sur l\'espace public.', # NEW
+	'explication_barre_outils_public' => 'Los scripts CSS y Javascript de las barras de herramientas (extensión Porta Pluma) se cargan en el espacio público y permiten utilizar estas barras en los formularios de foros, el "lápiz" público o para otros plugins, si sus respectivas configuraciones lo preven.',
+	'explication_barre_outils_public_2' => 'Puedes elegir no cargar estos scripts para alivianar el tamaño de las páginas públicas.
+Si es así, sea cual sea la configuración de los foros, lápiz, u otro plugin, ninguna barra de herramientas podrá estar presente automáticamente en el espacio público.',
 
 	// I
-	'info_barre_outils_public' => 'Barre d\'outils publique', # NEW
-	'info_porte_plume_titre' => 'Configurer les barres d\'outils', # NEW
+	'info_barre_outils_public' => 'Barra de herramientas pública',
+	'info_porte_plume_titre' => 'Configurar las barras de herramientas',
 
 	// L
-	'label_barre_outils_public_non' => 'Ne pas charger les scripts de barre d\'outils sur l\'espace public', # NEW
-	'label_barre_outils_public_oui' => 'Charger les scripts de barre d\'outils sur l\'espace public', # NEW
+	'label_barre_outils_public_non' => 'No cargar los scripts de la barra de herramientas en el espacio público. ',
+	'label_barre_outils_public_oui' => 'CArgar los scripts de las barras de herramientas en el espacio público',
 
 	// V
 	'voir' => 'Ver'

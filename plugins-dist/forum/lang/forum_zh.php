@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/forum?lang_cible=zh
+// extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=zh
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -54,6 +54,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_page_url' => '(如果您的消息引用了web上发表的文章请提供进一步的消息, 请输入页头和它的URL).',
 	'forum_permalink' => 'Lien permanent vers le commentaire', # NEW
 	'forum_poste_par' => '您文章@parauteur@之后后发表的信息.', # MODIF
+	'forum_poste_par_court' => 'Message posté@parauteur@.', # NEW
+	'forum_poste_par_generique' => 'Message posté@parauteur@ (@objet@ « @titre@ »).', # NEW
 	'forum_qui_etes_vous' => '<b>您是谁?</b> (可选)', # MODIF
 	'forum_saisie_texte_info' => 'Ce formulaire accepte les raccourcis SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> et le code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Pour créer des paragraphes, laissez simplement des lignes vides.', # NEW
 	'forum_texte' => '消息正文:', # MODIF

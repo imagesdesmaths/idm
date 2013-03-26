@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=ru
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -8,25 +8,25 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'alerte_confirmer_suppression_signatures' => 'Vous allez supprimer toutes les signatures de cette p&eacute;tition. &Ecirc;tes-vous sur de vouloir continuer ?', # NEW
-	'aucune_signature' => 'Aucune signature', # NEW
+	'alerte_confirmer_suppression_signatures' => 'Вы удалите все подписи. Продолжить ?',
+	'aucune_signature' => 'Пока нет ни одной подписи',
 
 	// B
-	'bouton_checkbox_envoi_message' => 'possibilit&eacute; d\'envoyer un message', # NEW
-	'bouton_checkbox_indiquer_site' => 'indiquer obligatoirement un site web', # NEW
-	'bouton_checkbox_signature_unique_email' => 'une seule signature par adresse email', # NEW
-	'bouton_checkbox_signature_unique_site' => 'une seule signature par site web', # NEW
+	'bouton_checkbox_envoi_message' => 'возможность отправлять сообщения',
+	'bouton_checkbox_indiquer_site' => 'необходимо указать название сайта',
+	'bouton_checkbox_signature_unique_email' => 'один email - одна подпись',
+	'bouton_checkbox_signature_unique_site' => 'один сайт = одна подпись',
 
 	// F
-	'filtre' => 'Filtre :', # NEW
-	'form_pet_adresse_site' => 'URL вашего сайта', # MODIF
-	'form_pet_aucune_signature' => 'Этому коду не соответствует никакая подпись...',
+	'filtre' => 'Фильтр:',
+	'form_pet_adresse_site' => 'URL вашего сайта',
+	'form_pet_aucune_signature' => 'Не найдено подписей, соответствующих этому коду...',
 	'form_pet_confirmation' => 'Пожалуйста, подтвердите вашу подпись:',
-	'form_pet_deja_signe' => 'Вы уже подписали этот текст.',
-	'form_pet_envoi_mail_confirmation' => 'Вам было отправленно письмо, для окончания регистрации перейдите по ссылке в письме.', # MODIF
+	'form_pet_deja_signe' => 'Вы уже оставили подпись под этим текст.',
+	'form_pet_envoi_mail_confirmation' => 'Вам было отправлено письмо на e-mail @email@. Что бы подтвердить вашу подпись перейдите по ссылке в письме.',
 	'form_pet_mail_confirmation' => 'Добрый день,
 
-Вы решили подписать прошение:
+Вы решили поддержать материал:
 @titre@.
 
 Вы предоставили следующую информацию:
@@ -35,74 +35,75 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 Важно!
 Чтобы подтвердить свою подпись, перейдите, пожалуйста, по указанному ниже адресу 
-(иначе, ваш запрос будет удален):
+(иначе, ваша подпись будет удалена):
     @url@
+    @message@
 
 Спасибо за участие!
 ',
-	'form_pet_message_commentaire' => 'Любое сообщение или комментарий?', # MODIF
-	'form_pet_nom_site2' => 'Название вашего сайта', # MODIF
-	'form_pet_probleme_liens' => 'Отредактируйте ваше сообщение, исключив из него все ссылки.',
-	'form_pet_probleme_technique' => 'Техническая проблема, подписка временно не работает.',
-	'form_pet_signature_validee' => 'Ваша подписка подтверждена. Спасибо!',
+	'form_pet_message_commentaire' => 'Сообщение, комментарий ?',
+	'form_pet_nom_site2' => 'Название вашего сайта',
+	'form_pet_probleme_liens' => 'Отредактируйте ваше сообщение, удалив из него все ссылки.',
+	'form_pet_probleme_technique' => 'Техническая проблема, временно нельзя оставлять подписи.',
+	'form_pet_signature_validee' => 'Ваша подпись подтверждена. Спасибо!',
 	'form_pet_site_deja_enregistre' => 'Этот сайт уже зарегистрирован',
 	'form_pet_url_invalide' => 'Вы указали неправильный URL сайта.',
 	'form_pet_votre_email' => 'Ваш e-mail адрес',
-	'form_pet_votre_nom' => 'Ваше имя или псевдоним', # MODIF
-	'form_pet_votre_site' => 'Если у вас есть сайт, вы можете указать его ниже',
+	'form_pet_votre_nom' => 'Как вас зовут',
+	'form_pet_votre_site' => 'Вы можете указать URL вашего сайта',
 
 	// I
-	'icone_relancer_signataire' => 'Relancer le signataire', # NEW
-	'icone_relancer_signataires' => 'Relancer les signataires', # NEW
-	'icone_suivi_petitions' => 'Suivre/g&eacute;rer les p&eacute;titions', # NEW
-	'icone_supprimer_signature' => 'Supprimer cette signature', # NEW
-	'icone_supprimer_signatures' => 'Supprimer les signatures', # NEW
-	'icone_valider_signature' => 'Valider cette signature', # NEW
-	'icone_valider_signatures' => 'Valider les signatures', # NEW
-	'info_adresse_email' => 'АДРЕС ЭЛЕКТРОННОЙ ПОЧТЫ:',
-	'info_fonctionnement_petition' => 'Fonctionnement de la p&eacute;tition :', # NEW
+	'icone_relancer_signataire' => 'Повторно связаться с автором',
+	'icone_relancer_signataires' => 'Повторно связаться с авторами',
+	'icone_suivi_petitions' => 'Управление подписями',
+	'icone_supprimer_signature' => 'Удалить подпись',
+	'icone_supprimer_signatures' => 'Удалить подписи',
+	'icone_valider_signature' => 'Подтвердить подпись',
+	'icone_valider_signatures' => 'Подтвердить подписи',
+	'info_adresse_email' => 'E-MAIL:',
+	'info_fonctionnement_petition' => 'Настройки :',
 	'info_signature_supprimee' => 'Подпись удалена',
-	'info_signature_supprimee_erreur' => 'Ошибка: данному удалению не соответствует никакая подпись',
+	'info_signature_supprimee_erreur' => 'Ошибка: данному удалению не соответствует ни одна подпись',
 	'info_site_web' => 'ВЕБСАЙТ:',
-	'info_texte_message' => 'Текст Вашего сообщения:',
+	'info_texte_message' => 'Текст сообщения или комментария :',
 
 	// L
-	'lien_reponse_article' => 'Ответить на статью',
+	'lien_reponse_article' => 'Оставить комментарий',
 
 	// N
-	'nombre_signatures' => '@nb@ signatures', # NEW
+	'nombre_signatures' => '@nb@ подписей',
 
 	// S
-	'sans_nom' => 'Anonyme', # NEW
-	'signatures_article' => 'Signatures de l\'article :', # NEW
-	'signatures_aucune' => 'Aucune', # NEW
-	'signatures_meme_auteur' => 'Les signatures du m', # NEW
-	'signatures_meme_site' => 'Les signatures avec le m', # NEW
-	'signatures_poubelle' => 'Supprim&eacute;es', # NEW
-	'signatures_prop' => 'En attente', # NEW
-	'signatures_publie' => 'Confirm&eacute;es', # NEW
-	'signatures_recherche_label' => 'Rechercher des signatures&nbsp;:', # NEW
-	'signatures_toutes' => 'Toutes', # NEW
-	'statut_poubelle' => 'Supprim&eacute;e', # NEW
-	'statut_prop' => 'En attente de validation', # NEW
-	'statut_publie' => 'Confirm&eacute;e', # NEW
+	'sans_nom' => 'Анонимус',
+	'signatures_article' => 'Подписи под статьей :',
+	'signatures_aucune' => 'Отсутствует',
+	'signatures_meme_auteur' => 'Подписи этого же автора',
+	'signatures_meme_site' => 'Подписи с такого же сайта',
+	'signatures_poubelle' => 'Удаленные',
+	'signatures_prop' => 'Ожидают',
+	'signatures_publie' => 'Подтвержденные',
+	'signatures_recherche_label' => 'Найти подпись :',
+	'signatures_toutes' => 'Все',
+	'statut_poubelle' => 'Удаленные',
+	'statut_prop' => 'Ожидают подтверждения',
+	'statut_publie' => 'Подтвержденные',
 
 	// T
-	'texte_descriptif_petition' => 'Descriptif de la p&eacute;tition', # NEW
-	'titre_page_controle_petition' => 'Suivi des p&eacute;titions', # NEW
-	'titre_petition' => 'P&eacute;tition', # NEW
-	'titre_petitions' => 'P&eacute;titions', # NEW
-	'titre_selection_action' => 'Sélection', # NEW
-	'titre_signatures_attente' => 'Signatures en attente de validation', # NEW
-	'titre_signatures_publie' => 'Signatures confirm&eacute;es', # NEW
-	'titre_suivi_petition' => 'Suivi des p&eacute;titions', # NEW
-	'tout_voir' => 'Voir toutes les signatures', # NEW
+	'texte_descriptif_petition' => 'Описание',
+	'titre_page_controle_petition' => 'Отслеживание подписей',
+	'titre_petition' => 'Подпись',
+	'titre_petitions' => 'Подписи',
+	'titre_selection_action' => 'Выбор',
+	'titre_signatures_attente' => 'Подписи, ожидающие подтверждения',
+	'titre_signatures_publie' => 'Подтвержденные подписи',
+	'titre_suivi_petition' => 'Отслеживание подписей',
+	'tout_voir' => 'Показать все подписи',
 
 	// U
-	'une_signature' => '1 signature', # NEW
+	'une_signature' => '1 подпись',
 
 	// V
-	'voir_signatures_objet' => 'Voir les signatures' # NEW
+	'voir_signatures_objet' => 'Показать подписи'
 );
 
 ?>

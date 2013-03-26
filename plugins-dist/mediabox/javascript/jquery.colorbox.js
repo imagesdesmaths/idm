@@ -488,6 +488,9 @@
 					if (eltclass.indexOf("boxIframe")!==-1) {
 						$.data(this, colorbox, $.extend($.data(this, colorbox),{iframe:true}));
 					}
+					if (eltclass.indexOf("boxInline")!==-1) {
+						$.data(this, colorbox, $.extend($.data(this, colorbox),{inline:true}));
+					}
 					if (eltclass.indexOf("boxSlideshow_off")!==-1) {
 						$.data(this, colorbox, $.extend($.data(this, colorbox),{slideshow:false}));
 					}

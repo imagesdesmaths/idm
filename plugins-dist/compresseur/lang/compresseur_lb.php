@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/compresseur?lang_cible=lb
+// extrait automatiquement de http://trad.spip.net/tradlang_module/compresseur?lang_cible=lb
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -8,21 +8,21 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'info_compresseur_titre' => 'Optimisatioun a Compressioun',
-	'info_question_activer_compactage_css' => 'Wëll dir d\'Kompressioun vun de Style-Sheets (CSS) aschalten?', # MODIF
-	'info_question_activer_compactage_js' => 'Wëllt dir d\'Kompressioun vun de Skripter (Javascript) aschalten?', # MODIF
-	'info_question_activer_compresseur' => 'Wëllt dir d\'Kompressioun vum HTTP-Flow aschalten?', # MODIF
-	'item_compresseur_closure' => 'Utiliser Google Closure Compiler [expérimental]', # NEW
-	'item_compresseur_css' => 'Activer la compression des feuilles de styles (CSS)', # NEW
-	'item_compresseur_html' => 'Activer la compression du HTML', # NEW
-	'item_compresseur_js' => 'Activer la compression des scripts (javascript)', # NEW
+	'info_compresseur_titre' => 'Optimisatioun a Kompressioun',
+	'info_question_activer_compactage_css' => 'CSS',
+	'info_question_activer_compactage_js' => 'Skripten',
+	'info_question_activer_compresseur' => 'HTML',
+	'item_compresseur_closure' => 'Google Closure Compiler benotzen [experimentell]',
+	'item_compresseur_css' => 'Kompressioun vun de Style-Sheets (CSS) aschalten',
+	'item_compresseur_html' => 'Kompressioun vum HTML aschalten',
+	'item_compresseur_js' => 'Kompressioun vun de Skripten (Javascript) aschalten',
 
 	// T
-	'texte_compacter_avertissement' => 'Schalt dës Optiounen nët wärend der Entwëcklung vum Site an: déi kompriméiert Elementer sinn nët einfach liesbar.',
-	'texte_compacter_script_css' => 'SPIP kann Javascript oder CSS Style-Sheets kompriméieren fir als statësch Dokumenter ze späicheren; da ginn d\'Säite vum Site méi séier gewisen.',
-	'texte_compresseur_page' => 'SPIP kann automatësch all Säit kompriméieren déi ugewise gëtt. Dës Astellung erlaabt d\'Bandbreed ze spueren (de Site ass op enger lueser Leitung méi séier), mais dat verlaangt méi Leeschtung vum Server.',
-	'titre_compacter_script_css' => 'Skripter an CSS kompriméieren',
-	'titre_compresser_flux_http' => 'HTTP-Flow kompriméiren' # MODIF
+	'texte_compacter_avertissement' => 'Schalt dës Optiounen net während der Entwécklung vum Site an: déi kompriméiert Elementer si net einfach liesbar.',
+	'texte_compacter_script_css' => 'SPIP ka Javascript oder CSS Style-Sheets kompriméieren an als statesch Dokumenter späicheren; da ginn d\'Säite vum Site méi séier gewisen.',
+	'texte_compresseur_page' => 'SPIP kann automatesch all Säit kompriméieren déi gewise gëtt. Dës Astellung erlaabt Bandbreet ze spueren (d.h. de Site ass mat enger lueser Leitung méi séier), mais dat verlaangt méi Leeschtung vum Server.',
+	'titre_compacter_script_css' => 'Skripten an CSS kompriméieren',
+	'titre_compresser_flux_http' => 'HTML kompriméieren'
 );
 
 ?>

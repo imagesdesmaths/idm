@@ -1499,8 +1499,18 @@ function extraire_attribut($balise, $attribut, $complet = false) {
 		return $att;
 }
 
-// modifier (ou inserer) un attribut html dans une balise
-// http://doc.spip.org/@inserer_attribut
+/**
+ * modifier (ou inserer) un attribut html dans une balise
+ *
+ * http://doc.spip.org/@inserer_attribut
+ *
+ * @param string $balise
+ * @param string $attribut
+ * @param string $val
+ * @param bool $proteger
+ * @param bool $vider
+ * @return string
+ */
 function inserer_attribut($balise, $attribut, $val, $proteger=true, $vider=false) {
 	// preparer l'attribut
 	// supprimer les &nbsp; etc mais pas les balises html
@@ -1633,7 +1643,10 @@ function enclosure2microformat($e) {
 	if (!$url = filtrer_entites(extraire_attribut($e, 'url')))
 		$url = filtrer_entites(extraire_attribut($e, 'href'));
 	$type = extraire_attribut($e, 'type');
-	$length = extraire_attribut($e, 'length');
+	if (!$length = extraire_attribut($e, 'length')) {
+		# <media:content : longeur dans fileSize. On tente.
+		$length = extraire_attribut($e, 'fileSize');
+	}
 	$fichier = basename($url);
 	return '<a rel="enclosure"'
 		. ($url? ' href="'.htmlspecialchars($url).'"' : '')
@@ -1753,6 +1766,11 @@ function form_hidden($action) {
 			$action = preg_replace('/([?]'.preg_quote($fond).'[^&=]*[0-9]+)(&|$)/', '?&', $action);
 		}
 	}
+	// defaire ce qu'a injecte urls_decoder_url : a revoir en modifiant la signature de urls_decoder_url
+	if (defined('_DEFINIR_CONTEXTE_TYPE') AND _DEFINIR_CONTEXTE_TYPE)
+		unset($contexte['type']);
+	if (defined('_DEFINIR_CONTEXTE_TYPE_PAGE') AND _DEFINIR_CONTEXTE_TYPE_PAGE)
+		unset($contexte['type-page']);
 
 	// on va remplir un tableau de valeurs en prenant bien soin de ne pas
 	// ecraser les elements de la forme mots[]=1&mots[]=2
@@ -2318,7 +2336,7 @@ function filtre_puce_statut_dist($statut,$objet,$id_objet=0,$id_parent=0){
 	static $puce_statut = null;
 	if (!$puce_statut)
 		$puce_statut = charger_fonction('puce_statut','inc');
-	return $puce_statut($id_objet, $statut, $id_parent, $objet);
+	return $puce_statut($id_objet, $statut, $id_parent, $objet, false, objet_info($objet,'editable')?_ACTIVER_PUCE_RAPIDE:false);
 }
 
 
@@ -2826,16 +2844,16 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile=""){
 	// On va ensuite chercher les traitements automatiques a faire
 	$champ = strtoupper($info);
 	$traitement = isset($table_des_traitements[$champ]) ? $table_des_traitements[$champ] : false;
-	$table_objet = table_objet($type_objet);
+	$table_sql = table_objet_sql($type_objet);
 
 	if (!$etoile
 		AND is_array($traitement)
-	  AND (isset($traitement[$table_objet]) OR isset($traitement[0]))){
-		$traitement = $traitement[isset($traitement[$table_objet]) ? $table_objet : 0];
+	  AND (isset($traitement[$table_sql]) OR isset($traitement[0]))){
+		$traitement = $traitement[isset($traitement[$table_sql]) ? $table_sql : 0];
 		$traitement = str_replace('%s', "'".texte_script($info_generee)."'", $traitement);
 		// FIXME: $connect et $Pile[0] font souvent partie des traitements.
 		// on les definit pour eviter des notices, mais ce fonctionnement est a ameliorer !
-		$connect = ""; $Pile = array(0 => array());
+		$connect = ""; $Pile = array(0 => array('id_objet'=>$id_objet,'objet'=>$type_objet));
 		eval("\$info_generee = $traitement;");
 	}
 
@@ -2934,6 +2952,9 @@ function objet_icone($objet,$taille=24){
 function insert_head_css_conditionnel($flux){
 	if (strpos($flux,'<!-- insert_head_css -->')===false
 		AND $p=strpos($flux,'<!-- insert_head -->')){
+		// plutot avant le premier js externe (jquery) pour etre non bloquant
+		if ($p1 = stripos($flux,'<script src=') AND $p1<$p)
+			$p = $p1;
 		$flux = substr_replace($flux,pipeline('insert_head_css','<!-- insert_head_css -->'),$p,0);
 	}
 	return $flux;
@@ -3021,6 +3042,22 @@ function filtre_nettoyer_titre_email_dist($titre){
 	return nettoyer_titre_email($titre);
 }
 
+/**
+ * Afficher le sélecteur de rubrique
+ *
+ * Il permet de placer un objet dans la hiérarchie des rubriques de SPIP
+ *
+ * @param string $titre
+ * @param int $id_objet
+ * @param int $id_parent
+ * @param string $objet
+ * @param int $id_secteur
+ * @param bool $restreint
+ * @param bool $actionable
+ *   true : fournit le selecteur dans un form directement postable
+ * @param bool $retour_sans_cadre
+ * @return string
+ */
 function filtre_chercher_rubrique_dist($titre,$id_objet, $id_parent, $objet, $id_secteur, $restreint,$actionable = false, $retour_sans_cadre=false){
 	include_spip('inc/filtres_ecrire');
 	return chercher_rubrique($titre,$id_objet, $id_parent, $objet, $id_secteur, $restreint,$actionable, $retour_sans_cadre);

@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'actions_non_traitees' => 'Acciones no ejecutadas',
 	'actions_realises' => 'Acciones ejecutadas',
 	'afficher_les_plugins_incompatibles' => 'Mostrar los plugins incompatibles',
-	'alerte_compatibilite' => 'Compatibilité forcée', # NEW
+	'alerte_compatibilite' => 'Compatibilidad forzada',
 
 	// B
 	'bouton_activer' => 'Activar',
@@ -27,17 +27,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_desactiver' => 'Desactivar',
 	'bouton_desinstaller' => 'Desinstalar',
 	'bouton_installer' => 'Descargar y activar',
-	'bouton_modifier_depot' => 'Modificar el repositorio',
+	'bouton_modifier_depot' => 'Modificar el depósito',
 	'bouton_supprimer' => 'Eliminar',
 	'bouton_up' => 'Actualizar',
 	'bulle_actualiser_depot' => 'Actualizar los paquetes del repositorio',
 	'bulle_actualiser_tout_depot' => 'Actualizar los paquetes de todos los repositorios',
 	'bulle_afficher_xml_plugin' => 'Contenido del archivo XML del plugin',
 	'bulle_ajouter_spipzone' => 'Añadir el repositorio SPIP-Zone',
-	'bulle_aller_depot' => 'Dirige a la página de este repositorio',
+	'bulle_aller_depot' => 'Ir a la página de este depósito',
 	'bulle_aller_documentation' => 'Se dirige a la página de documentación',
 	'bulle_aller_plugin' => 'Se dirige a la página del plugin',
-	'bulle_supprimer_depot' => 'Suprimir el repositorio y sus paquetes',
+	'bulle_supprimer_depot' => 'Eliminar el depósito y sus paquetes',
 	'bulle_telecharger_archive' => 'Descargar el archivo',
 	'bulle_telecharger_fichier_depot' => 'Descargar el archivo XML del repositorio',
 	'bulle_telecharger_librairie' => 'Descargar la biblioteca',
@@ -71,23 +71,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_telecharger_dans' => 'El plugin será cargado en una carpeta (@dir@) que ya existe. Esta acción  eliminará el contenido actual de dicha carpeta. Una copia de los contenidos actuales será guardado en "@dir_backup@". Debes confirmar esta acción.',
 
 	// E
-	'erreur_actions_non_traitees' => 'Certaines actions n\'ont pas été réalisées. Cela peut provenir d\'une erreur lors des actions à réaliser, ou d\'un affichage de cette page alors que des actions sont encore en cours. Les actions avaient été lancées par @auteur@ le @date@.', # NEW
-	'erreur_dir_dib_ecriture' => 'Le répertoire des bibliothèques @dir@ n\'est pas accessible en écriture. Impossible d\'y charger une bibliothèque !', # NEW
-	'erreur_dir_dib_indefini' => 'Le répertoire _DIR_LIB n\'est pas défini. Impossible d\'y charger une bibliothèque !', # NEW
-	'erreur_dir_plugins_auto' => 'Le répertoire « plugins/auto » permettant de télécharger des paquets
-		n\'est pas créé ou n\'est pas accessible en écriture.
-		<strong>Vous devez le créer pour pouvoir installer de nouveaux plugins depuis cette interface.</strong>', # NEW
-	'erreur_dir_plugins_auto_ecriture' => 'Le répertoire de paquets @dir@ n\'est pas accessible en écriture. Impossible d\'y charger un paquet !', # NEW
+	'erreur_actions_non_traitees' => 'Ciertas acciones no fueron realizadas. Esto puede provenir de un error durante las acciones por realizar, o de la activación de esta página mientras las acciones aún están en curso. Las acciones fueron lanzadas por @auteur@ el @date@.',
+	'erreur_dir_dib_ecriture' => 'El reprertorio de las bibliotecas @dir@ no está accesible en escritura. ¡Imposible cargar en él una biblioteca!',
+	'erreur_dir_dib_indefini' => 'El repertorio _DIR_LIB no está définido. ¡Imposible cargar una biblioteca!',
+	'erreur_dir_plugins_auto' => 'El repertorio «plugins/auto» que permite desargar paquetes no está creado o no tenemos acceso en escritura 		<strong>Tienes que crearlo para poder instalar nuevos plugins desde esta interfaz.</strong>',
+	'erreur_dir_plugins_auto_ecriture' => 'El repertorio de paquetes @dir@ no está accesible en escritura. ¡Imposible cargar en él un paquete!',
 	'erreur_dir_plugins_auto_indefini' => 'La carpeta _DIR_PLUGIN_AUTO no está definida. No es posible cargar el paquete! ',
 	'erreur_dir_plugins_auto_titre' => 'No se puede acceder a "plugins/auto"!',
-	'erreur_teleporter_chargement_source_impossible' => 'Chargement impossible de la source @source@', # NEW
-	'erreur_teleporter_destination_erreur' => 'Répertoire @dir@ non accessible pour téléporter', # NEW
+	'erreur_teleporter_chargement_source_impossible' => 'Descarga imposible desde la fuente @source@',
+	'erreur_teleporter_destination_erreur' => 'Carpeta @dir@ no accesible para subir archivos',
 	'erreur_teleporter_echec_deballage_archive' => 'No se puede descomprimir  @fichier@',
-	'erreur_teleporter_format_archive_non_supporte' => 'Le format @extension@ n\'est pas supporté par le téléporteur', # NEW
-	'erreur_teleporter_methode_inconue' => 'Méthode @methode@ inconnue pour téléporter', # NEW
+	'erreur_teleporter_format_archive_non_supporte' => 'El formato @extension@ no está soportado por el teleportador',
+	'erreur_teleporter_methode_inconue' => 'Método @methode@ desconocido para teleportar',
 	'erreur_teleporter_type_fichier_inconnu' => 'Tipo de archivo desconocido para  @source@',
-	'erreurs_xml' => 'Impossible de lire certaines descriptions XML', # NEW
-	'explication_destination' => 'Le chemin sera calculé depuis le nom de l\'archive si vous ne le remplissez pas.', # NEW
+	'erreurs_xml' => 'Imposible leer ciertas descripciones XML',
+	'explication_destination' => 'El camino será calculado a partir del nombre de archivos, si no se lo ingresa.',
 
 	// F
 	'fieldset_debug' => 'Depurar',
@@ -98,30 +96,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_depot' => '1 repositorio',
 	'info_1_paquet' => '1 paquete',
 	'info_1_plugin' => '1 plugin',
-	'info_admin_plugin_actif_non_verrou_non' => 'Cette page liste les plugins non actifs du site. Ces plugins sont forcément non verrouillés.', # NEW
-	'info_admin_plugin_actif_non_verrou_tous' => 'Cette page liste les plugins non actifs du site. Ces plugins sont forcément non verrouillés.', # NEW
-	'info_admin_plugin_actif_oui_verrou_non' => 'Cette page liste les plugins actifs et non verrouillés du site.', # NEW
-	'info_admin_plugin_actif_oui_verrou_tous' => 'Cette page liste tous les plugins actifs du site, verrouillés ou pas.', # NEW
-	'info_admin_plugin_verrou_non' => 'Cette page liste tous les plugins non verrouillés du site, actifs ou pas.', # NEW
+	'info_admin_plugin_actif_non_verrou_non' => 'Esta página lista los plugins del sitio que no están activos. Estos plugins no pueden estar bloqueados. ',
+	'info_admin_plugin_actif_non_verrou_tous' => 'Esta página lista los plugins del sitio que no están activos. Estos plugins no pueden estar bloqueados. ',
+	'info_admin_plugin_actif_oui_verrou_non' => 'Esta página lista los plugins activos y no bloqueados del sitio.',
+	'info_admin_plugin_actif_oui_verrou_tous' => 'Esta página lista todos los plugins activos del sitio, bloqueados o no.',
+	'info_admin_plugin_verrou_non' => 'Esta página lista todos los plugins no bloqueados del sitio, activos o no.',
 	'info_admin_plugin_verrou_tous' => 'Esta página muestra todos los plugins del sitio.',
-	'info_admin_plugin_verrouille' => 'Cette page liste les plugins actifs et verrouillés (placés dans le répertoire <code>@dir_plugins_dist@</code>).
-	Si vous souhaitez les désactiver,
-	veuillez contacter le webmestre du site,
-	ou vous reporter <a href="http://programmer.spip.org/repertoire_plugins_dist">à la documentation</a>.', # NEW
+	'info_admin_plugin_verrouille' => 'Esta página lista los plugins activos y bloqueados (situados en la carpeta <code>@dir_plugins_dist@</code>). Si quieres desactivarlos, contacta al webmaster del sitio, o consulta <a href="http://programmer.spip.org/repertoire_plugins_dist">à la documentación</a>.',
 	'info_adresse_spipzone' => 'SPIP-Zone - Plugins',
-	'info_ajouter_depot' => 'En ajoutant des dépôts à votre base, vous aurez la possiblité d\'obtenir des informations et d\'effectuer des recherches sur tous les paquets hébergés par les dépôts ajoutés.<br />Un dépôt est décrit par un fichier XML contenant les informations sur le dépôt et sur tous ses paquets.', # NEW
+	'info_ajouter_depot' => 'Agregando depósitos a tu base, tendrás la posibilidad de obtener información y realizar búsquedas sobre todos los paquetes hospedados en los depósitos agregados.<br />Un depósito se describe por un archivo XML que contiene informaciones sobre el depósito y todos sus paquetes.',
 	'info_aucun_depot' => 'ningún repositorio',
-	'info_aucun_depot_ajoute' => 'Aucun dépôt disponible !<br /> Utilisez le formulaire ci-dessous pour ajouter le dépôt «SPIP-Zone - Plugins» dont l\'url est déjà pré-remplie ou un autre dépôt de votre choix.', # NEW
+	'info_aucun_depot_ajoute' => '¡Ningún depósito disponible!<br /> Utiliza el formulario a continuación para agregar el depósito «SPIP-Zone - Plugins» cuya URL ya está pre-ingresada u otro depósito de tu elección.',
 	'info_aucun_paquet' => 'ningún paquete',
 	'info_aucun_plugin' => 'ningún plugin',
-	'info_boite_charger_plugin' => '<strong>Cette page est uniquement accessible aux webmestres du site.</strong><p>Elle vous permet de rechercher des plugins mis à disposition par les dépôts enregistrés dans votre configuration et de les installer physiquement sur votre serveur</p>', # NEW
-	'info_boite_depot_gerer' => '<strong>Cette page est uniquement accessible aux webmestres du site.</strong><p>Elle permet l\'ajout et l\'actualisation des dépôts de plugins.</p>', # NEW
-	'info_charger_plugin' => 'Pour ajouter un ou plusieurs plugins, effectuez préalablement une recherche multi-critères sur les plugins de la galaxie SPIP. La recherche n\'inclut que les plugins compatibles avec la version SPIP installée et signale les plugins déjà actifs sur le site.', # NEW
+	'info_boite_charger_plugin' => '<strong>Esta página sólo es accesible a los webmestres del sitio.</strong><p>Te permite buscar plugins a disposición en los depósitos registrados en la configuración del sitio e instalarlos físicamente en tu servidor.</p>',
+	'info_boite_depot_gerer' => '<strong>Esta página sólo es accesible a los webmestres del sitio.</strong><p>Perrmite agregar o actualizar los depósitos de plugins.</p>',
+	'info_charger_plugin' => 'Para agregar uno o varios plugins, realiza primero una búsqueda multi-criterios entre los plugins de la galaxia SPIP. La búsqueda solo incluirá los plugins compatibles con la versión SPIP instalada, y señala los plugins que ya están activados en el sitio.',
 	'info_compatibilite_dependance' => 'Para @compatibilite@:',
-	'info_contributions_hebergees' => '@total_autres@ autre(s) contribution(s) hébergée(s)', # NEW
-	'info_critere_phrase' => 'Saisissez les mots-clés à chercher dans le préfixe, le nom, le slogan, la description et les auteurs des plugins', # NEW
+	'info_contributions_hebergees' => '@total_autres@ otra(s) contribución(es) hospedada(s)',
+	'info_critere_phrase' => 'Ingresa las palabras clave que quieres buscar en el prefijo, el nombre, el eslogan, la descripción y los autores de los plugins',
 	'info_depots_disponibles' => '@total_depots@ repositorio(s)',
-	'info_fichier_depot' => 'Saisissez l\'url du fichier de description du dépôt à ajouter.<br />Pour ajouter le dépôt «SPIP-Zone - Plugins» cliquez sur ce lien : ', # NEW
+	'info_fichier_depot' => 'Ingresa la URL del archivo de descripción del depósito para agregar.<br />PAra agregar el depósito «SPIP-Zone - Plugins» visita el siguiente enlace: ',
 	'info_nb_depots' => '@nb@ repositorios',
 	'info_nb_paquets' => '@nb@ paquetes',
 	'info_nb_plugins' => '@nb@ plugins',
@@ -205,13 +200,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_dependance_plugin' => 'El plugin @plugin@ depende de @dependance@.',
 	'message_dependance_plugin_version' => 'El plugin @plugin@ depende de @dependance@ @version@',
 	'message_erreur_aucun_plugin_selectionne' => 'No se ha seleccionado ningún plugin.',
-	'message_erreur_ecriture_lib' => '@plugin@ a besoin de la bibliothèque <a href="@lib_url@">@lib@</a> placée dans le répertoire <var>lib/</var> à la racine de votre site. Cependant, ce répertoire n\'est pas accessible en écriture. Vous devez l\'installer manuellement ou donner des permissions d\'écriture à ce répertoire.', # NEW
+	'message_erreur_ecriture_lib' => '@plugin@ necesita la biblioteca <a href="@lib_url@">@lib@</a> situada en la carpeta <var>lib/</var> en la raíz de tu sitio. Sin embargo, esta carpeta no existe o no está accesible en escritura. Tienes que instalarla manualmente o dar derechos a esta carpeta al servidor web.',
 	'message_erreur_maj_inconnu' => 'No se puede actualizar un plugin desconocido.',
 	'message_erreur_plugin_introuvable' => 'No fue posible encontrar el plugin @plugin@ para @action@.',
 	'message_erreur_plugin_non_actif' => 'No se puede desactivar un plugin inactivo.',
 	'message_incompatibilite_spip' => '@plugin@  no es compatible con la versión de SPIP que estás utilizando.',
-	'message_nok_aucun_depot_disponible' => 'Aucun plugin n\'est disponible ! Veuillez vous rendre dans la page de gestion des dépôts pour ajouter des listes de plugins.', # NEW
-	'message_nok_aucun_paquet_ajoute' => 'Le dépôt « @url@ » ne fournit aucun nouveau paquet par rapport à la base déjà enregistrée. Il n\'a donc pas été ajouté', # NEW
+	'message_nok_aucun_depot_disponible' => '¡Ningún plugin está disponible! Puedes dirigirte a la página de gestión de los depósitos para agregar listas de plugins.',
+	'message_nok_aucun_paquet_ajoute' => 'Le depósito «@url@» no proporciona ningún nuevo paquete respecto a la base que ya estaba registrada. Por ende, no fue agregado. ',
 	'message_nok_aucun_plugin_selectionne' => 'No hay plugins a instalar. Selecciona los plugins que deseas instalar',
 	'message_nok_champ_obligatoire' => 'Este campo es requerido',
 	'message_nok_depot_deja_ajoute' => 'La dirección "@url@" corresponde a un repositorio que ya ha sido añadido',
@@ -219,7 +214,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_plugin_inexistant' => 'El plugin solicitado no existe  (@plugin@).',
 	'message_nok_sql_insert_depot' => 'Se obtuvo un error SQL al intentar añadir el repositorio  @objet@',
 	'message_nok_url_depot_incorrecte' => 'La dirección "@url@" no es correcta',
-	'message_nok_xml_non_conforme' => 'Le fichier XML « @fichier@ » de description du dépôt n\'est pas conforme', # NEW
+	'message_nok_xml_non_conforme' => 'El archivo XML « @fichier@ » de descripción del depósito no es conforme',
+	'message_nok_xml_non_recupere' => 'El archivo XML «@fichier@» no ha podido recuperarse',
 	'message_ok_aucun_plugin_trouve' => 'No hay plugins coincidentes con los criterios señalados.',
 	'message_ok_depot_ajoute' => 'El repositorio "@url@" ha sido añadido.',
 	'message_ok_plugins_trouves' => '@nb_plugins@ plugin(s) coinciden con los criterios de búsqueda señalados (@tri@). Selecciona debajo los plugins que deseas descargar y activar en tu servidor.',
@@ -240,19 +236,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'placeholder_phrase' => 'prefijo, nombre, eslogan, descripción o autor',
 	'plugin_info_actif' => 'Plugin activo',
 	'plugin_info_up' => 'Está disponible una actualización del plugin (versión @version@)',
-	'plugin_info_verrouille' => 'Plugin verrouillé', # NEW
+	'plugin_info_verrouille' => 'Plugin bloqueado',
 	'plugins_inactifs_liste' => 'Inactivos',
-	'plugins_non_verrouilles_liste' => 'Non verrouillés', # NEW
-	'plugins_verrouilles_liste' => 'Verrouillés', # NEW
+	'plugins_non_verrouilles_liste' => 'No bloqueados',
+	'plugins_verrouilles_liste' => 'Bloqueados',
 
 	// R
 	'resume_table_depots' => 'Lista de los repositorios añadidos',
 	'resume_table_paquets' => 'Lista de los paquetes',
-	'resume_table_plugins' => 'Liste des plugins @categorie@', # NEW
+	'resume_table_plugins' => 'Lista de plugins @categorie@',
 
 	// T
-	'telecharger_archive_plugin_explication' => 'Vous pouvez télécharger une archive qui se chargera
-		dans votre répertoire « plugins/auto », en écrivant l\'URL de l\'archive dans le champ de saisie.', # NEW
+	'telecharger_archive_plugin_explication' => 'Puedes subir un archivo que será cargado en la carpeta «plugins/auto» del sitio, escribiendo la URL del archivo en el campo de ingreso.',
 	'titre_depot' => 'Repositorio',
 	'titre_depots' => 'Repositorios',
 	'titre_form_ajouter_depot' => 'Añadir un repositorio',

@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -101,8 +101,9 @@ function renseigner_taille_dimension_image($fichier,$ext){
 	}
 	
 	include_spip('inc/filtres'); # pour objet_info()
+	$editables = objet_info('document','champs_editables');
 	foreach($meta as $m=>$v)
-		if (in_array($m,objet_info('document','champs_editables')))
+		if (isset($infos[$m]) OR in_array($m,$editables))
 			$infos[$m] = $v;
 
 	return $infos;

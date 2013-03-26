@@ -27,7 +27,7 @@
 			[(#TITRE|sinon{#VAL{<:medias:info_document:>}|concat{' ',#EXTENSION|majuscules}})]
 				</div>
 			]
-			[(#ID_DOCUMENT|medias_raccourcis_doc{#_docslies:TITRE,#_docslies:DESCRIPTIF,#INCLUS,#LARGEUR,#HAUTEUR,#MODE,#VU})]
+			[(#ID_DOCUMENT|medias_raccourcis_doc{#_docslies:TITRE,#_docslies:DESCRIPTIF,#INCLUS,#LARGEUR,#HAUTEUR,#MODE,#VU,#MEDIA})]
 			</BOUCLE_type_doc>
 				[<div class="mode">(#INCLUS|=={image}|et{#EVAL{_BOUTON_MODE_IMAGE}}|oui)
 					[(#MODE|=={image}|oui)

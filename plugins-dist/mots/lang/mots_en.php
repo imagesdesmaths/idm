@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/mots?lang_cible=en
+// extrait automatiquement de http://trad.spip.net/tradlang_module/mots?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_retirer_mot' => 'Remove this keyword',
 	'info_retirer_mots' => 'Remove all keywords',
 	'info_rubriques_liees_mot' => 'Sections with this keyword',
-	'info_selection_un_seul_mot_cle' => 'You only can select <b>one keyword</b> at a time in this group.',
+	'info_selection_un_seul_mot_cle' => 'You can select only <b>one keyword</b> at a time in this group.',
 	'info_supprimer_mot' => 'delete this keyword',
 	'info_titre_mot_cle' => 'Keyword name or title',
 	'info_un_mot' => 'One keyword at a time',

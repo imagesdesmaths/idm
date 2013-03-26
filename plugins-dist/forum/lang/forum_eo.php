@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/forum?lang_cible=eo
+// extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=eo
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -49,7 +49,9 @@ forviŝi ilin poste).',
 	'forum_ne_repondez_pas' => 'Ne respondu al tiu ĉi retletero, sed en la forumo ĉe la jena adreso:', # MODIF
 	'forum_page_url' => '(Se via mesaĝo rilatas al artikolo publikigita ĉe la reto, aŭ al paĝo donanta pli da informoj, bonvolu indiki ĉi-poste la titolon de la paĝo kaj ties ret-adreson.)',
 	'forum_permalink' => 'Lien permanent vers le commentaire', # NEW
-	'forum_poste_par' => 'Mesaĝo posté@parauteur@ reage al via artikolo « @titre@ ».',
+	'forum_poste_par' => 'Mesaĝo posté@parauteur@ reage al via artikolo « @titre@ ».', # MODIF
+	'forum_poste_par_court' => 'Message posté@parauteur@.', # NEW
+	'forum_poste_par_generique' => 'Message posté@parauteur@ (@objet@ « @titre@ »).', # NEW
 	'forum_qui_etes_vous' => '<b>Kiu vi estas?</b> (nedeviga)', # MODIF
 	'forum_saisie_texte_info' => 'Ce formulaire accepte les raccourcis SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> et le code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Pour créer des paragraphes, laissez simplement des lignes vides.', # NEW
 	'forum_texte' => 'Teksto de via mesaĝo:', # MODIF
@@ -57,7 +59,7 @@ forviŝi ilin poste).',
 	'forum_url' => 'URL:', # MODIF
 	'forum_valider' => 'Validigi tiun elekton',
 	'forum_voir_avant' => 'Vidi tiun ĉi mesaĝon antaŭ ol sendi ĝin', # MODIF
-	'forum_votre_email' => 'Via retpoŝtadreso:', # MODIF
+	'forum_votre_email' => 'Via retpoŝtadreso',
 	'forum_votre_nom' => 'Via nomo (aŭ salutnomo):', # MODIF
 	'forum_vous_enregistrer' => 'Por partopreni en ;
   tiu ĉi forumo, vi devas antaŭe registriĝi. Bonvolu

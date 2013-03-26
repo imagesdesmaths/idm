@@ -222,6 +222,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_sql_insert_depot' => 'خطأ SQL لدى إضافة المستودع @objet@',
 	'message_nok_url_depot_incorrecte' => '@url@» غير صحيح',
 	'message_nok_xml_non_conforme' => 'ملف «@fichier@» لوصف المستودع بتنسيق XML غير ملائم',
+	'message_nok_xml_non_recupere' => 'لم يتم استرجاع ملف « @fichier@ » بتنسيق XML',
 	'message_ok_aucun_plugin_trouve' => 'لم يتم العثور على اي ملحق يطابق المعايير المحددة.',
 	'message_ok_depot_ajoute' => 'تمت إضافة المستودع @url@.',
 	'message_ok_plugins_trouves' => 'يتطابق @nb_plugins@ ملحق مع العايير المحددة (@tri@). الرجاء تحديد أدناه الملحقات المطلوب تحميلها وتفعيلها على الخادم.',

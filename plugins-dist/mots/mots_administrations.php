@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -66,6 +66,9 @@ function mots_upgrade($nom_meta_base_version,$version_cible){
 	$maj['2.1.0'] = array(
 		array('sql_alter',"TABLE spip_mots_liens ADD id_objet (id_objet)"),
 		array('sql_alter',"TABLE spip_mots_liens ADD objet (objet)"),
+	);
+	$maj['2.1.1'] = array(
+		array('sql_alter',"TABLE spip_mots ADD INDEX id_groupe (id_groupe)")
 	);
 
 	include_spip('base/upgrade');

@@ -12,7 +12,7 @@
 
 ][(#ID_AUTEUR|non)[ <a class='ajax' href='[(#GET{self}|parametre_url{auteur,#AUTEUR})]' title='<:forum:messages_meme_auteur|attribut_html:>' >(#AUTEUR)</a>]
 
-][ &mdash; <a class='ajax' href='[(#GET{self}|parametre_url{email_auteur,#EMAIL_AUTEUR})]' title='<:forum:messages_meme_email|attribut_html:>' >(#EMAIL_AUTEUR|email_valide|?{#EMAIL_AUTEUR})</a>
+][ &mdash; <a class='ajax' href='mailto:#EMAIL_AUTEUR' title='<:envoyer_message|attribut_html:>' >(#EMAIL_AUTEUR|email_valide|?{#EMAIL_AUTEUR})</a>
 
 ][(#STATUT|!={publie}|oui)[ &mdash; IP <a class='ajax' href='[(#GET{self}|parametre_url{ip,#IP})]' title='<:forum:messages_meme_ip|attribut_html:>' >(#IP)</a>]]</div>
 
@@ -25,6 +25,10 @@
 <BOUCLE_bre(BREVES){id_breve=#OBJET|=={breve}|?{#ID_OBJET}}{statut!=''}><div class='reponse_a'><:forum:lien_reponse_breve_2:> <a href='[(#ID_BREVE|generer_url_entite{breve,'',forum#ID_FORUM, #_forum:STATUT|!={prive}})]'>#TITRE</a>#SET{voir,'</div>'}</BOUCLE_bre>
 <BOUCLE_sit(SYNDIC){id_syndic=#OBJET|=={syndic}|?{#ID_OBJET}}><div class='reponse_a'><:forum:lien_reponse_site_reference:> <a href='[(#ID_SYNDIC|generer_url_entite{site,'','',1}|ancre_url{forum#ID_FORUM})]'>#NOM_SITE</a>#SET{voir,'</div>'}</BOUCLE_sit>
 <//B_art>
+[(#OBJET|in_array{#LISTE{article,rubrique,breve,syndic}}|non)
+<div class='reponse_a'>[(#OBJET|concat{:lien_reponse_,#OBJET}|_T)] <a href='[(#ID_OBJET|generer_url_entite{#OBJET,'',forum#ID_FORUM, #STATUT|!={prive}})]'>[(#TITRE|?{#TITRE,#NOM})]</a>
+#SET{voir,'</div>'}
+]
 [ &#91;<a href='[(#GET{self}|parametre_url{objet,#OBJET}|parametre_url{id_objet,#ID_OBJET})]' class="ajax"><:forum:voir_messages_objet:></a>&#93;(#GET{voir})]
 </div>
 [(#REM) Le corps ---------------------------------------------------------]

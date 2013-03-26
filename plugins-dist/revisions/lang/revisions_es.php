@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.net/tradlang_module/revisions?lang_cible=es
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_comparer' => 'Voir les diff&eacute;rences', # NEW
+	'bouton_comparer' => 'Ver las diferencias',
 
 	// D
 	'diff_para_ajoute' => 'Párrafo añadido',
@@ -17,43 +17,43 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'diff_texte_ajoute' => 'Texto añadido',
 	'diff_texte_deplace' => 'Texto desplazado',
 	'diff_texte_supprime' => 'Texto suprimido',
-	'differences_versions' => 'Diff&eacute;rences entre version N<sup>o</sup>@id_version@ et version N<sup>o</sup>@id_diff@', # NEW
+	'differences_versions' => 'Diferencias entre versión N<sup>o</sup>@id_version@ y version N<sup>o</sup>@id_diff@',
 
 	// I
-	'icone_restaurer_version' => 'Restaurer la version N<sup>o</sup>@version@', # NEW
-	'icone_suivi_revisions' => 'Suivi des r&eacute;visions', # NEW
-	'info_1_revision' => '1 r&eacute;vision', # NEW
-	'info_aucune_revision' => 'Aucune r&eacute;vision', # NEW
+	'icone_restaurer_version' => 'Restaurar la versión N<sup>o</sup>@version@',
+	'icone_suivi_revisions' => 'Seguimiento de revisiones',
+	'info_1_revision' => '1 revisión',
+	'info_aucune_revision' => 'Ninguna revisión',
 	'info_historique' => 'Revisiones :',
 	'info_historique_lien' => 'Mostrar el historial de modificaciones',
 	'info_historique_titre' => 'Seguimiento de revisiones',
-	'info_nb_revisions' => '@nb@ r&eacute;visions', # NEW
+	'info_nb_revisions' => '@nb@ revisiones',
 
 	// L
-	'label_choisir_id_version' => 'S&eacute;lectionnez les versions &agrave; comparer', # NEW
-	'label_config_revisions_objets' => 'Sur quels objets activer les r&eacute;visions&nbsp;:', # NEW
+	'label_choisir_id_version' => 'Selecciona las versiones para comparar',
+	'label_config_revisions_objets' => 'Sobre qué objetos activar las revisiones:',
+
+	// M
+	'message_valider_recuperer_version' => 'Valida el formulario para volver a esta versión.',
 
 	// O
-	'objet_editorial' => 'objet', # NEW
+	'objet_editorial' => 'objeto',
 
 	// P
-	'plugin_update' => 'Mise &agrave; jour du plugin "R&eacute;visions" en version @version@.', # NEW
+	'plugin_update' => 'Actualización del plugin "Revisioness" a la versión @version@.',
 
 	// T
-	'titre_form_revisions_objets' => 'Activer les r&eacute;visions', # NEW
-	'titre_restaurer_version' => 'Restaurer une version', # NEW
-	'titre_revisions' => 'R&eacute;visions', # NEW
+	'titre_form_revisions_objets' => 'Activar las revisiones',
+	'titre_restaurer_version' => 'Restaurar una versión',
+	'titre_revisions' => 'Revisiones',
 
 	// V
 	'version_deplace_rubrique' => 'Desplazado de <b>« @from@ »</b> a <b>« @to@ »</b>.',
 	'version_initiale' => 'Versión inicial',
-	'voir_differences' => 'Voir les diff&eacute;rences', # NEW
-	'voir_mes_revisions' => 'Mes r&eacute;visions', # NEW
-	'voir_revisions' => 'Voir les r&eacute;visions (@objet@ @id_objet@&nbsp;: @titre@)', # NEW
-	'voir_toutes_les_revisions' => 'Toutes les r&eacute;visions', # NEW
-
-	// Z
-	'z' => 'zzz' # NEW
+	'voir_differences' => 'Ver las diferencias',
+	'voir_mes_revisions' => 'Mis revisiones',
+	'voir_revisions' => 'Ver las revisiones (@objet@ @id_objet@ : @titre@)',
+	'voir_toutes_les_revisions' => 'Todas las revisiones'
 );
 
 ?>

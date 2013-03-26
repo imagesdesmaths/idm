@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/forum?lang_cible=de
+// extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=de
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_acces_refuse' => 'Sie haben keinen Zugang mehr zu diesen Foren.',
 	'forum_attention_dix_caracteres' => '<b>Achtung!</b> Ihr Beitrag ist muss mindestens 10 Zeichen lang sein.',
 	'forum_attention_message_non_poste' => 'Pozor, neposlali ste svoj príspevok!',
-	'forum_attention_nb_caracteres_mini' => '<b>Attention !</b> votre message doit contenir au moins @min@ caractères.', # NEW
+	'forum_attention_nb_caracteres_mini' => '<b>Achtung!</b> ihr Beitrag muss mindestens @min@ Zeichen enthalten.',
 	'forum_attention_trois_caracteres' => '<b>Achtung!</b> Ihr Titel muss mindestens drei Zeichen lang sein.',
 	'forum_attention_trop_caracteres' => '<b>Achtung!</b> Ihr Beitrag ist zu lang (@compte@ Zeichen). Damit er gespeichert werden kann, darf er maximal @max@ Zeichen lang sein.',
 	'forum_avez_selectionne' => 'Sie haben ausgewählt:',
@@ -47,7 +47,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_ne_repondez_pas' => 'Antworten Sie nicht auf diese Mail, sondern im Forum mit dieser Adresse:',
 	'forum_page_url' => '(Wenn sich Ihr Beitrag auf einen Artikel im Internet oder auf eine Seite mit Zusatzinformationen bezieht, geben Sie hier bitte den Titel der Seite und ihre Adresse bzw. URL an.)',
 	'forum_permalink' => 'Permalink des Beitrags',
-	'forum_poste_par' => 'Beitrag von @parauteur@ als Antwort auf den Artikel « @titre@ ».',
+	'forum_poste_par' => 'Beitrag von @parauteur@ als Antwort auf den Artikel « @titre@ ».', # MODIF
+	'forum_poste_par_court' => 'Message posté@parauteur@.', # NEW
+	'forum_poste_par_generique' => 'Message posté@parauteur@ (@objet@ « @titre@ »).', # NEW
 	'forum_qui_etes_vous' => 'Wer sind Sie?',
 	'forum_saisie_texte_info' => 'In diesem Formular können Sie die SPIP-Tags <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code>sowie die HTML-Codes <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code> verwenden.Absätze fügen Sie mit Leerzeilen ein.',
 	'forum_texte' => 'Text Ihres Beitrags',
@@ -98,7 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_pas_de_forum' => 'kein Forum',
 	'info_question_visiteur_ajout_document_forum' => 'Wenn Sie den Besuchern gestatten, ihren Forumsbeiträgen Dokumente (Töne, Bilder, ...) beizufügen, wählen Sie bitte aus der Liste die erlaubten Formate (z.B. gif, jpg, png, mp3).',
 	'info_question_visiteur_ajout_document_forum_format' => 'Wenn Sie alle von SPIP akzeptierten Dateitypen zulassen möchten, geben Sie bitte einen Asterisk (*) ein. Wenn Sie keine Dokumente zulassen möchten, tragen Sie keinen Wert ein.',
-	'info_selectionner_message' => 'Sélectionner les messages :', # NEW
+	'info_selectionner_message' => 'Beiträge auswählen:',
 	'interface_formulaire' => 'Interface als Formular',
 	'interface_onglets' => 'Interface mit Reitern',
 	'item_activer_forum_administrateur' => 'Admin-Forum aktivieren',
@@ -109,13 +111,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_non_config_forums_prive_objets' => 'Diese Foren abschalten',
 
 	// L
-	'label_selectionner' => 'Sélectionner :', # NEW
+	'label_selectionner' => 'Auswählen:',
 	'lien_reponse_article' => 'Antwort auf Artikel',
 	'lien_reponse_breve_2' => 'Antwort auf Meldung',
 	'lien_reponse_message' => 'Beitrag beantworten',
 	'lien_reponse_rubrique' => 'Antwort auf Rubrik',
 	'lien_reponse_site_reference' => 'Antwort auf verlinkte Website',
-	'lien_vider_selection' => 'Vider la selection', # NEW
+	'lien_vider_selection' => 'Auswahl entfernen',
 
 	// M
 	'messages_aucun' => 'Kein',

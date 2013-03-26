@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -47,12 +47,15 @@ function revisions_declarer_tables_auxiliaires($tables_auxiliaires){
 		"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"id_auteur"	=> "VARCHAR(23) DEFAULT '' NOT NULL", # stocke aussi IP(v6)
 		"titre_version"	=> "text DEFAULT '' NOT NULL",
-		"permanent"	=> "char(3)",
-		"champs"	=> "text");
+		"permanent"	=> "char(3) DEFAULT '' NOT NULL",
+		"champs"	=> "text DEFAULT '' NOT NULL"
+	);
 
 	$spip_versions_key = array (
 		"PRIMARY KEY"	=> "id_version, id_objet, objet",
-		"KEY id_objet" => "id_version");
+		"KEY id_version" => "id_version",
+		"KEY id_objet" => "id_objet",
+		"KEY objet" => "objet");
 
 	$spip_versions_fragments = array(
 		"id_fragment"	=> "int unsigned DEFAULT '0' NOT NULL",

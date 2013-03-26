@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/forum?lang_cible=ro
+// extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=ro
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -49,7 +49,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_ne_repondez_pas' => 'Nu răspundeţi acestui email, ci direct pe forum la adresa următoare :', # MODIF
 	'forum_page_url' => '(Dacă mesajul se referă la un articol publicat pe Web sau la o pagină cu informaţii suplimentare, indicaţi mai jos titlul şi adresa URL a paginii.)',
 	'forum_permalink' => 'Lien permanent vers le commentaire', # NEW
-	'forum_poste_par' => 'Mesaj publicat de @parauteur@ ca răspuns la articolul « @titre@ ».',
+	'forum_poste_par' => 'Mesaj publicat de @parauteur@ ca răspuns la articolul « @titre@ ».', # MODIF
+	'forum_poste_par_court' => 'Message posté@parauteur@.', # NEW
+	'forum_poste_par_generique' => 'Message posté@parauteur@ (@objet@ « @titre@ »).', # NEW
 	'forum_qui_etes_vous' => '<b>Cine sunteţi dumneavoastră ?</b> (opţional)', # MODIF
 	'forum_saisie_texte_info' => 'Ce formulaire accepte les raccourcis SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> et le code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Pour créer des paragraphes, laissez simplement des lignes vides.', # NEW
 	'forum_texte' => 'Textul mesajului dumneavoastră :', # MODIF
