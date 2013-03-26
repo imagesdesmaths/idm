@@ -129,7 +129,7 @@ function autoriser_voirextra_dist($faire, $type, $id, $qui, $opt){
 	if (isset($opt['saisie'])) {
 		// tester des fonctions d'autorisations plus precises declarees
 		if ($opt['champ']) {
-			$f = 'autoriser_' . $opt['table'] . '_voirextra_' . $opt['champ'];
+			$f = 'autoriser_' . $opt['type'] . '_voirextra_' . $opt['champ'];
 			if (function_exists($f) OR function_exists($f .= '_dist')) {
 				return $f($faire, $type, $id, $qui, $opt);
 			}
@@ -164,7 +164,7 @@ function autoriser_modifierextra_dist($faire, $type, $id, $qui, $opt){
 	if (isset($opt['saisie'])) {
 		// tester des fonctions d'autorisations plus precises declarees
 		if ($opt['champ']) {
-			$f = 'autoriser_' . $opt['table'] . '_modifierextra_' . $opt['champ'];
+			$f = 'autoriser_' . $opt['type'] . '_modifierextra_' . $opt['champ'];
 			if (function_exists($f) OR function_exists($f .= '_dist')) {
 				return $f($faire, $type, $id, $qui, $opt);
 			}

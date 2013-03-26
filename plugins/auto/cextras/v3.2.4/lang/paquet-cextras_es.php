@@ -8,11 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cextras_description' => 'Offre une API simple permettant de créer de nouveaux champs dans les objets éditoriaux.
-					Il est donc le socle pour d\'autres plugins notamment pour «Champs Extras Interface» qui donne
-					une interface graphique de gestion de ces nouveaux champs.', # NEW
+	'cextras_description' => 'Ofrece una API simple permitiendo crear nuevos campos en los objetos editoriales. 
+Es pues la base para otros plugins, especialmente para «Campos Extras Interfaz», que da una interfaz gráfica de gestión de estos nuevos campos.',
 	'cextras_nom' => 'Campos Extras',
-	'cextras_slogan' => 'Crear nuevos campos para los objetos editoriales dee SPIP',
+	'cextras_slogan' => 'API de gestión de nuevos campos en los objetos editoriales',
 	'cextras_titre' => 'Campos Extras'
 );
 

@@ -3,7 +3,9 @@
 	<langue code="en" url="http://trad.spip.net/tradlang_module/cextras?lang_cible=en">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" />
+	<langue code="es" url="http://trad.spip.net/tradlang_module/cextras?lang_cible=es">
+		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
+	</langue>
 	<langue code="fr" />
 	<langue code="it" />
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/cextras?lang_cible=sk">

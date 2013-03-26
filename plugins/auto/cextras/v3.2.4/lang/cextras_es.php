@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cextra_par_defaut' => 'Valor por omisión',
+	'cextra_par_defaut' => 'Valor por defecto',
 
 	// P
 	'pas_auteur' => 'sin autor',
@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type' => '@type@',
 
 	// Z
-	'zbug_balise_argument_non_texte' => 'L\'argument @nb@ dans la balise @balise@ doit être de type texte' # NEW
+	'zbug_balise_argument_non_texte' => 'El argumento @nb@ de la etiqueta @balise@ debe ser de tipo texto'
 );
 
 ?>

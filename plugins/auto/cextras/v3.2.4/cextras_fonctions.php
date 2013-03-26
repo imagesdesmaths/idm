@@ -139,7 +139,7 @@ function balise_LISTER_CHOIX_dist($p) {
 
 	// generer le code d'execution
 	$p->code = "calculer_balise_LISTER_CHOIX('$objet', $colonne)";
-		
+
 	// retourne un array si #LISTER_CHOIX**
 	// sinon fabrique une chaine avec le separateur designe.
 	if ($p->etoile != "**") {
@@ -268,6 +268,7 @@ function balise_LISTER_VALEURS_dist($p) {
  *     - Chaîne vide si le champs extra n'est pas trouvé
 **/
 function calculer_balise_LISTER_VALEURS($objet, $colonne, $cles) {
+
 	// exploser les cles !
 	$cles = explode(',', $cles);
 

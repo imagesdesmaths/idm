@@ -23,7 +23,6 @@ function champs_extras_objet($table) {
 	if (!$saisies_tables) {
 		$saisies_tables = pipeline('declarer_champs_extras', array());
 	}
-
 	return isset($saisies_tables[$table]) ? $saisies_tables[$table] : array();
 }
 
@@ -267,11 +266,46 @@ function cextras_formulaire_verifier($flux){
 			{
 				$options = isset($saisie['verifier']['options']) ? $saisie['verifier']['options'] : array();
 				$normaliser = null;
-				if ($erreur = $verifier(_request($nom), $verif, $options, $normaliser)) {
+				$valeur = _request($nom);
+				if ($erreur = $verifier($valeur, $verif, $options, $normaliser)) {
 					$flux['data'][$nom] = $erreur;
 				// si une valeur de normalisation a ete transmis, la prendre.
 				} elseif (!is_null($normaliser)) {
 					set_request($nom, $normaliser);
+				} else {
+
+					// [FIXME] exceptions connues de vérifications (pour les dates entre autres)
+					// en attendant une meilleure solution !
+					//
+					// Lorsque le champ n'est pas rempli dans le formulaire
+					// alors qu'une normalisation est demandée,
+					// verifier() sort sans indiquer d'erreur (c'est normal).
+					// 
+					// Sauf que la donnée alors soumise à SQL sera une chaine vide,
+					// ce qui ne correspond pas toujours à ce qui est attendu.
+					if (is_string($valeur) and !strlen($valeur)
+					  and isset($options['normaliser'])
+					  and $norme = $options['normaliser']) {
+						// Charger la fonction de normalisation théoriquement dans verifier/date
+						// et si on en trouve une, obtenir la valeur normalisée
+						// qui est théoriquement la valeur par défaut, puisque $valeur est vide
+						include_spip("verifier/$verif");
+						if ($normaliser = charger_fonction("${verif}_${norme}", "normaliser", true)) {
+							$erreur = null;
+							$defaut = $normaliser($valeur, $options, $erreur);
+							if (is_null($erreur)) {
+								set_request($nom, $defaut);
+							} else {
+								// on affecte l'erreur, mais il est probable que
+								// l'utilisateur ne comprenne pas grand chose
+								$flux['data'][$nom] = $erreur;
+							}
+						} else {
+							include_spip('inc/cextras');
+							extras_log("Fonction de normalisation pour ${verif}_${norme} introuvable");
+						}
+
+					}
 				}
 			}
 		}
