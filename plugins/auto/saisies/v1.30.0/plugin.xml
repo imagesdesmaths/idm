@@ -1,0 +1,65 @@
+<plugin>
+    <nom><multi>[fr]Saisies pour formulaires[en]Entries for forms</multi></nom>
+	<slogan>Ecrire facilement des champs de formulaires</slogan>
+    <auteur>Matthieu Marcillaud - RastaPopoulos - Joseph</auteur>
+    <licence>&#169; 2009-2012 GNU/GPL</licence>
+    <version>1.30.0</version>
+    <etat>test</etat>
+    <categorie>outil</categorie>
+    
+	<description>
+		<multi>
+		[fr]
+		Ce plugin permet de faciliter l'&#233;criture de champs de formulaires en proposant une
+		balise #SAISIE. Le HTML g&#233;n&#233;r&#233; est compatible avec la nomenclature des formulaires
+		propos&#233;e par SPIP > 2.0 et avec le plugin de configuration CFG.
+		[en]
+		This plugin makes it easier to write form fields by providing a #SAISIE tag. 
+		The generated HTML is compatible with the classification of forms
+		proposed by SPIP > 2.0 and with the configuration plugin CFG.
+		</multi>
+	</description>
+    
+    <lien>http://www.spip-contrib.net/Saisies</lien>
+    <prefix>saisies</prefix>
+    <icon>images/logo_saisie_48.png</icon>
+    
+    <fonctions>balise/saisie.php</fonctions>
+    <fonctions>inc/saisies.php</fonctions>
+    <fonctions>saisies_fonctions.php</fonctions>
+    <options>saisies_options.php</options>
+
+    <pipeline>
+    	<nom>header_prive</nom>
+    	<inclure>saisies_pipelines.php</inclure>
+    </pipeline>
+    <pipeline>
+    	<nom>affichage_final</nom>
+    	<inclure>saisies_pipelines.php</inclure>
+    </pipeline>
+	<pipeline>
+		<nom>saisies_autonomes</nom>
+		<inclure>saisies_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_saisies</nom>
+		<inclure>saisies_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>saisies_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>saisies_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>styliser</nom>
+		<inclure>saisies_pipelines.php</inclure>
+	</pipeline>
+    
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+	<utilise id="verifier" />
+	<utilise id="spip_bonux" />
+	<traduire gestionnaire="salvatore" module="saisies" reference="fr" />
+</plugin>

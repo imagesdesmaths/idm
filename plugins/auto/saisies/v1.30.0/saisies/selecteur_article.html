@@ -1,0 +1,41 @@
+[(#REM) 
+	  
+  ### /!\ selecteur (spip Bonux) ###
+	  Attention, ce qui est retourne est un tableau :
+	  _request($name) = array('article|3', 'article|9', 'rubrique|10');
+	  Une fonction de SPIP Bonux permet de récupérer un tableau d'identifiants par type d'objet "picker_selected" :
+	  (picker_selected est dans prive/formulaires/selecteur/generique_fonctions.php de SPIP 3)
+	  Cette fonction peut etre pratique dans une boucle en utilisant le critere IN
+	  
+  Parametres :
+  - multiple : si oui, on peut selectionner plusieurs articles
+  - afficher_langue : si oui, on affiche la langue de l'objet selectionne
+  - afficher_art_dans_langue_interface : si oui, on n'affiche que les articles de la langue de l'interface
+  - limite_branche : branche dans laquelle on limite le selecteur
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+	 
+  Exemple d'appel :
+	[(#SAISIE{selecteur_article,id_article,
+		label=<:plugin:article_en_une:>})] 
+]
+[(#SET{val,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}})]
+
+[(#SET{filtrer_langue_article,[(#ENV{afficher_art_dans_langue_interface,0}|oui) #ENV{lang}]})]
+
+[(#REM) input necessaire au tag label for 
+	Mais si on le garde, la saisie enregistree en base, n'est pas correcte
+   On pourrait rajouter l'id dans le input cree par Bonux, mais du coup manque la chaine "champ_"
+   Comme ca a l'air un peu tordu tout ca, tant pis pour l'erreur HTML
+   Yffic
+]
+[(#REM) Donner a manger a CFG ou CVT-configurer si aucune valeur definie ]
+<!--keepme: <input type="hidden" name="[(#ENV{nom,id_item})][]" value="" />-->
+[(#INCLURE{fond=formulaires/selecteur/articles,
+	selected=#GET{val},
+	name=#ENV{nom},
+	afficher_langue=#ENV{afficher_langue,''},
+	filtrer_langue_article=#GET{filtrer_langue_article,''},
+	select=[(#ENV{multiple}|?{0,1})],
+	limite_branche=#ENV{limite_branche,''},
+	rubriques=0})]
