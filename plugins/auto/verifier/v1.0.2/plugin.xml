@@ -9,7 +9,7 @@
 	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
 	<icon>images/verifier-128.png</icon>
 	<licence>GPL v3</licence>
-	<version>0.1.18</version>
+	<version>1.0.2</version>
 	<etat>test</etat>
 	<description>
 		<multi>
@@ -21,8 +21,7 @@
 	<lien>http://www.spip-contrib.net/Verifier,1505</lien>
 	<pipeline>
 		<nom>verifier</nom>
-		<action>verifier_verifier</action>
-		<inclure>verifier_pipelines.php</inclure>
+		<action></action>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.10;3.0.99]" />
 	<utilise id="yaml" />	

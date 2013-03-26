@@ -26,7 +26,10 @@ function verifier_siren_siret_dist($valeur, $options=array()){
 	else{
 		$mode = $options['mode'];
 	}
-	
+
+	// on supprime les espaces avant d'effectuer les tests
+	$valeur = preg_replace('/\s/', '', $valeur);
+
 	// Test de SIREN
 	if ($mode == 'siren'){
 		$erreur = _T('verifier:erreur_siren');

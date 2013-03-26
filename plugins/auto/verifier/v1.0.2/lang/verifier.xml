@@ -8,8 +8,11 @@
 		<traducteur nom="RastaPopoulos" lien="http://trad.spip.net/auteur/rastapopoulos" />
 		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
+		<traducteur nom="drBouvierLeduc" lien="http://trad.spip.net/auteur/drbouvierleduc" />
 	</langue>
-	<langue code="es" />
+	<langue code="es" url="http://trad.spip.net/tradlang_module/verifier?lang_cible=es">
+		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
+	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/verifier?lang_cible=fa">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>

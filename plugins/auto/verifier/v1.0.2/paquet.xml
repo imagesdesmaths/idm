@@ -1,7 +1,7 @@
 <paquet
 	prefix="verifier"
 	categorie="outil"
-	version="0.1.18"
+	version="1.0.2"
 	etat="test"
 	compatibilite="[2.0.10;3.0.*]"
 	logo="images/verifier-128.png"
@@ -17,7 +17,7 @@
 
 	<traduire module="verifier" reference="fr" gestionnaire="salvatore" />
 
-	<pipeline nom="verifier" action="verifier_verifier" inclure="verifier_pipelines.php" />
+	<pipeline nom="verifier" action="" />
 
 	<utilise nom="yaml" />
 </paquet>
