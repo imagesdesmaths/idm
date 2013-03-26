@@ -112,6 +112,7 @@ function notifications_notifications_destinataires($flux){
 
 		while ($qui = sql_fetch($result_email)){
 			$flux['data'][] = $qui['email'];
+			spip_log($options['statut'] . " article > auteur " . $qui['id_auteur'] . " prevenu", 'notifications');
 		}
 
 	}

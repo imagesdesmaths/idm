@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'alt_logo_conf' => 'Notifications plugin logo',
 	'article_prive' => 'Articles publishing',
 	'article_prive_admins_restreints' => '<strong>Administrators</strong>: Administrators get notified when article(s) is(are) proposed in their section',
-	'article_prive_auteurs' => '<strong>Authors</strong>: Authors get notified when their article(s) is(are) published',
+	'article_prive_auteurs' => '<strong>Authors</strong>: Authors get notified when their article(s) is(are) proposed, published or deleted.',
 	'article_propose_detail' => 'The article "@titre@" is submitted for publication.',
 	'article_propose_sujet' => '[@nom_site_spip@] Submitted: @titre@',
 	'article_propose_titre' => 'Article submitted
@@ -30,6 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_valide_url' => 'Meanwhile, it is visible at this temporary address :',
 
 	// B
+	'bouton_changer_pass' => 'Change my password',
+	'bouton_finir_inscription' => 'Validate my registration',
 	'breve_propose_detail' => 'The news item "@titre@" is proposed for publication since',
 	'breve_propose_sujet' => '[@nom_site_spip@] Proposed: @titre@',
 	'breve_propose_titre' => 'Proposed news item
@@ -45,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_notification' => 'Following events may generate email notifications.',
 
 	// F
+	'form_forum_confirmer_email' => 'To confirm your email address, click the button below:',
 	'forum_prives_auteur' => '<strong>Authors</strong>: Authors get notified when comments are posted to their article(s) or comment(s) on the private area.',
 	'forum_prives_moderateur' => 'Please write here moderators\' email adress for private forums, coma separated.',
 	'forum_prives_thread' => '<strong>Forum thread</strong>: Posters to the same thread get notified when a new comment is posted to the (private) thread.',
@@ -66,6 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_moderation_interdite' => 'You are not allowed to moderate this message',
 	'info_moderation_lien_titre' => 'Moderate this message from the private area',
 	'info_moderation_url_perimee' => 'This moderation link is not valid anymore.',
+	'info_nouveau_commentaire' => 'New comment',
 	'inscription' => 'Editors registration',
 	'inscription_admins' => 'Administrators',
 	'inscription_explication' => 'Which authors receive notifications when registering new editors?',
@@ -78,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_a_valider' => 'Message to confirm:',
+	'message_spam_a_confirmer' => 'SPAM to confirm:',
 	'message_voir_configuration' => 'Look at the notification setup',
 	'messagerie_interne' => 'Private messages',
 	'messagerie_interne_signaler' => '<strong>Notify new private messages</strong>: activate this to get redactors notified when they haven\'t seen a Private Message had been sent to them. Redactors get notified 20 minutes after the Private Message is sent, in order to avoid spam, when the redactor is connected to the private area.',
@@ -85,6 +90,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'notifications' => 'Notifications',
+
+	// P
+	'pass_mail_passcookie_1' => 'To regain access to the site @nom_site_spip@, click the button:',
+	'pass_mail_passcookie_2' => 'You can then enter a new password and reconnect to the site.',
 
 	// S
 	'signature_petition' => 'Petition signatures',

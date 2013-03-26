@@ -1,0 +1,32 @@
+<B_test_contenu><title>[[(#NOM_SITE_SPIP|textebrut)]] <:nouveautes:></title>
+
+
+<body>
+<div class="header">
+<p><:bonjour:></p>
+<p><:texte_lettre_information:> "[(#NOM_SITE_SPIP|textebrut)]" (#URL_SITE_SPIP).</p>
+<p><:texte_lettre_information_2:> [(#ENV{jours_neuf})] <:jours:>.</p>
+</div>
+
+<BOUCLE_test_contenu(AUTEURS){0,1}{tous}><B_nv1>
+
+<h1><:nouveaux_articles:></h1>
+<hr />
+<BOUCLE_nv1(ARTICLES){age_relatif<=0}{par date}{inverse}{0,30}>
+<div style="padding-bottom:2em">
+<INCLURE{fond=notifications/inc-article,id_article} />
+<p><a href="[(#URL_ARTICLE|url_absolue)]">[(#URL_ARTICLE|url_absolue)]</a></p>
+</div>
+</BOUCLE_nv1><B_nv2>
+
+<h1><:nouvelles_breves:></h1>
+<hr />
+<BOUCLE_nv2(BREVES){age_relatif<=0}{par date}{inverse}{0,30}>
+<div style="padding-bottom:2em">
+<INCLURE{fond=notifications/inc-breve,id_breve} />
+<p><a href="[(#URL_BREVE|url_absolue)]">[(#URL_BREVE|url_absolue)]</a></p>
+</div>
+</BOUCLE_nv2></BOUCLE_test_contenu>
+</body>
+</B_test_contenu>
+#FILTRE{facteur_email_wrap_to_html}

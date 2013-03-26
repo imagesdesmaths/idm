@@ -1,0 +1,25 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 SPIP
+  Distribue sous licence GPL
+
+]
+<BOUCLE_bre(BREVES){id_breve}{statut?}{tout}>
+<title>[(#VAL{notifications:breve_publie_sujet}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE}}|nettoyer_titre_email)]</title>
+
+<body>
+<div class="header">
+<h1><:notifications:breve_publie_titre|trim|trim{-}:></h1>
+<p>
+[(#SET{titre,[<a href="[(#URL_BREVE|url_absolue)]"><strong>(#TITRE)</strong></a>]})]
+[(#VAL{notifications:breve_publie_detail}|_T{#ARRAY{titre,#GET{titre},connect_nom,#SESSION{nom}}})]
+[ (#VAL{date_fmt_nomjour_date}|_T{[(#ARRAY{'nomjour',[(#DATE|nom_jour)],'date',[(#DATE|affdate)]})]}).]
+</p>
+<hr />
+</div>
+
+<INCLURE{fond=notifications/inc-breve,id_breve} />
+</body>
+</BOUCLE_bre>
+#FILTRE{facteur_email_wrap_to_html}

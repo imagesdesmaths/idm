@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'alt_logo_conf' => 'لوگوي پلاگين اطلاعيه‌ها',
 	'article_prive' => 'نشر مقاله‌ها',
 	'article_prive_admins_restreints' => '<strong>ادمين‌ها </strong> : ادمين‌ها وقتي مقاله‌ها داخل بخش‌ آن‌ها پيشنهاد شود با خبر خواهند شد',
-	'article_prive_auteurs' => '<strong>نويسندگان</strong> :نويسندگان هنگام نشر مقاله‌ (ها) با خبر مي‌شوند',
+	'article_prive_auteurs' => '<strong>نويسندگان</strong> :نويسندگان هنگام نشر مقاله‌ (ها) با خبر مي‌شوند', # MODIF
 	'article_propose_detail' => 'مقاله "@titre@" براي نشر پيشنهاد شده',
 	'article_propose_sujet' => '[@nom_site_spip@] پيشنهاد شده: @titre@',
 	'article_propose_titre' => 'مقاله پيشنهادي
@@ -29,6 +29,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_valide_url' => 'در ضمن، در اين نشاني موقت ديدني است:',
 
 	// B
+	'bouton_changer_pass' => 'Changer mon mot de passe', # NEW
+	'bouton_finir_inscription' => 'Finir mon inscription', # NEW
 	'breve_propose_detail' => 'خبر "@titre@" براي نشر پيشنهاد شده',
 	'breve_propose_sujet' => '[@nom_site_spip@]  پيشنهاد شده: @titre@',
 	'breve_propose_titre' => 'خبر پيشنهادي
@@ -43,6 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_notification' => 'رويدادهاي آتي ممكن است سبب اطلاعيه‌هاي ايميلي شوند.',
 
 	// F
+	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, cliquez sur le bouton ci-dessous : ', # NEW
 	'forum_prives_auteur' => '<strong>نويسندگان: </strong>: نويسنده‌ها اطلاعيه‌هايي از سخنگاه‌هاي پست شده روي مقالاتشان يا پيام‌هايشان در قسمت شخصي سايت دريافت مي‌كنند. ',
 	'forum_prives_moderateur' => 'در زير نشاني ايميل گرداننده‌ي سخنگاه‌هاي قسمت شخصي را قيد كنيد (اگرچندتاست، با ويرگول جدا كنيد).',
 	'forum_prives_thread' => '<strong>خط گفتگو</strong> : شركت كنندگان در همان خط گفتگو اطلايه‌هاي سخنگاه‌ها را دريافت خواهند كرد (خصوصي)',
@@ -65,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_moderation_interdite' => 'Vous n\'avez pas le droit de moderer ce message', # NEW
 	'info_moderation_lien_titre' => 'Moderer ce message depuis l\'espace privé', # NEW
 	'info_moderation_url_perimee' => 'Ce lien de moderation n\'est plus valide.', # NEW
+	'info_nouveau_commentaire' => 'Nouveau commentaire', # NEW
 	'inscription' => 'ثبت سردبيران',
 	'inscription_admins' => 'مديران',
 	'inscription_explication' => 'كدام نويسندگان اطلاعيه ثبت سردبيران جديد را دريافت مي‌كنند؟',
@@ -77,6 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_a_valider' => 'Message à valider : ', # NEW
+	'message_spam_a_confirmer' => 'SPAM à confirmer : ', # NEW
 	'message_voir_configuration' => 'به پيكربندي اطلاعيه‌ها بنگريد',
 	'messagerie_interne' => 'پيك داخلي',
 	'messagerie_interne_signaler' => '<strong>خبر يك پيام خصوصي</strong>: اين گزينه‌ را فعال كنيد تا هنگامي كه  نويسندگان يك پيام خصوصي را كه برايشان ارسال شده نديده باشند سايت يك اطلاعيه ارسال كند. سامانه پيش از خبر كردن نويسنده 20 دقيقه صبر خواهد كرد،  براي آنكه نويسنده‌اي كه الان در قسمت شخصي روي خط است اسپم نباشد.
@@ -85,6 +90,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'notifications' => 'اطلاعيه‌ها',
+
+	// P
+	'pass_mail_passcookie_1' => 'Pour retrouver votre accès au site @nom_site_spip@, cliquez sur le bouton : ', # NEW
+	'pass_mail_passcookie_2' => 'Vous pourrez alors entrer un nouveau mot de passe et vous reconnecter au site.', # NEW
 
 	// S
 	'signature_petition' => 'امضا كنندگان طومار ',

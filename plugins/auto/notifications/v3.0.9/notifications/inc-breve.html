@@ -1,0 +1,19 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 SPIP
+  Distribue sous licence GPL
+
+]
+<BOUCLE_bre(BREVES){id_breve}{statut?}{tout}>
+<div class="cartouche">
+	<h2 class="titre">[(#LOGO_BREVE_RUBRIQUE|image_reduire{40,*}) ]#TITRE</h2>
+	<p class="info-publi"><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr></p>
+</div>
+
+[<div class="texte">(#TEXTE|image_reduire{500,*})</div>]
+
+[<p class="hyperlien" style="font-style: italic"><:voir_en_ligne:> : <a href="(#URL_SITE)">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+
+[<div class="notes" style="border-top:1px solid #eee;font-size: 0.9em">(#NOTES)</div>]
+</BOUCLE_bre>
