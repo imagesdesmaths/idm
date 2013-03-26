@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -234,20 +234,25 @@ function analyser_backend($rss, $url_syndic='') {
 		// ou des microformats relEnclosure,
 		// ou encore les media:content
 		if (!afficher_enclosures(join(', ', $tags))) {
+			// on prend toutes les pièces jointes possibles, et on essaie de les rendre uniques.
+			$enclosures = array();
+			# rss 2
 			if (preg_match_all(',<enclosure[[:space:]][^<>]+>,i',
-			$item, $matches, PREG_PATTERN_ORDER))
-				$data['enclosures'] = join(', ',
-					array_map('enclosure2microformat', $matches[0]));
-			else if (
-			preg_match_all(',<link\b[^<>]+rel=["\']?enclosure["\']?[^<>]+>,i',
-			$item, $matches, PREG_PATTERN_ORDER))
-				$data['enclosures'] = join(', ',
-					array_map('enclosure2microformat', $matches[0]));
-			else if (
-			preg_match_all(',<media:content\b[^<>]+>,i',
-			$item, $matches, PREG_PATTERN_ORDER))
-				$data['enclosures'] = join(', ',
-					array_map('enclosure2microformat', $matches[0]));
+				$item, $matches, PREG_PATTERN_ORDER)) {
+					$enclosures += array_map('enclosure2microformat', $matches[0]);
+			}
+			# atom
+			if (preg_match_all(',<link\b[^<>]+rel=["\']?enclosure["\']?[^<>]+>,i', 
+				$item, $matches, PREG_PATTERN_ORDER)) {
+					$enclosures += array_map('enclosure2microformat', $matches[0]);
+			}
+			# media rss
+			if (preg_match_all(',<media:content\b[^<>]+>,i', 
+				$item, $matches, PREG_PATTERN_ORDER)) {
+					$enclosures += array_map('enclosure2microformat', $matches[0]);
+			}
+			$data['enclosures'] = join(', ', array_unique($enclosures));
+			unset($enclosures);
 		}
 		$data['item'] = $item;
 

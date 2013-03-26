@@ -77,29 +77,27 @@
 	<legend><:medias:bouton_ajouter_document:></legend>
 	<ul>
 	<li class='editer saisie_document_forum[ (#ENV**{erreurs}|table_valeur{document_forum}|oui)erreur]'>
-	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{document_forum})</span>]
-	<input type="hidden" name="cle_ajouter_document" value="(#ENV{cle_ajouter_document})" />
-	[<div id="ajouter_document_up">(#ENV{ajouter_document})
-	<label for="supprimer_document_ajoute"><input type='checkbox' name='supprimer_document_ajoute' id='supprimer_document_ajoute' />
-	<:lien_supprimer:></label>
-	</div>]
-	<div>
-	[<label for="ajouter_document">(#ENV{formats_documents_forum}|join{', '})</label>]
-	<input class='file' type="file" name="ajouter_document" id="ajouter_document"[
-	accept="(#ENV{formats_documents_forum}|join{','})"] />
-	</div>
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{document_forum})</span>]
+		<input type="hidden" name="cle_ajouter_document" value="(#ENV{cle_ajouter_document})" />
+		[<div id="ajouter_document_up">(#ENV{ajouter_document})
+		<label for="supprimer_document_ajoute"><input type='checkbox' name='supprimer_document_ajoute' id='supprimer_document_ajoute' />
+		<:lien_supprimer:></label>
+		</div>]
+		<div>
+		[<label for="ajouter_document">(#ENV{formats_documents_forum}|join{', '})</label>]
+		<input class='file' type="file" name="ajouter_document" id="ajouter_document"[
+		accept="(#ENV{formats_documents_forum}|join{','})"] />
+		</div>
 
-	<script type='text/javascript'>
-	jQuery('#ajouter_document_up')
-	.next()
-		.hide()
-	.prev()
-	.find(':checkbox')
-	.bind('change', function(){
-		jQuery('#ajouter_document_up').hide().next().show();
-	})
-	;
-	</script>
+		<script type='text/javascript'>/*<!\[CDATA\[*/
+		if (window.jQuery) jQuery(function(){
+			jQuery('#ajouter_document_up')
+			.next().hide()
+			.prev().find(':checkbox').bind('change', function(){
+				jQuery('#ajouter_document_up').hide().next().show();
+			});
+		});
+		/*\]\]>*/</script>
 	</li>
 	</ul></fieldset>
 ]

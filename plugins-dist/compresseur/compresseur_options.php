@@ -1,13 +1,14 @@
 <?php
 
 /**
+ * Réglage de l'output buffering
  *
- * Reglage de l'output buffering : si possible, generer une sortie
- * compressee pour economiser de la bande passante
+ * Si possible, générer une sortie compressée pour économiser de la bande passante
  *
- * Utilisation deconseillee et desactivee par defaut
- * utilisable uniquement via define('_AUTO_GZIP_HTTP',true)
+ * Utilisation déconseillee et désactivee par défaut.
+ * Utilisable uniquement via define('_AUTO_GZIP_HTTP',true)
  *
+ * @package SPIP\Compresseur\Options
  */
 
 // si un buffer est deja ouvert, stop

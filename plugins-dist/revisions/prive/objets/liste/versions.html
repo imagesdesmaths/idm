@@ -19,7 +19,8 @@
 	</thead>
 	<tbody>
 	<BOUCLE_liste_rev(VERSIONS){id_version>1}{objet!=''}{id_auteur?}{id_objet?}{objet?}{where?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
-		<BOUCLE_auteur(AUTEURS){id_auteur}{si #ID_AUTEUR|is_numeric}{tout}>[(#SET{td_auteur,<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a>})]</BOUCLE_auteur>[(#GET{td_auteur}|non)[(#SET{td_auteur,#ID_AUTEUR[(#ID_AUTEUR|is_numeric)]})]]<//B_auteur>
+		<BOUCLE_auteur(AUTEURS){id_auteur}{si #ID_AUTEUR|is_numeric}{tout}>[(#SET{td_auteur,<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a>})]
+		</BOUCLE_auteur>[(#SET{td_auteur,#ID_AUTEUR})]<//B_auteur>
 		[(#AUTORISER{voirrevisions, #OBJET, #ID_OBJET}|oui)
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 				<td class='statut'>[(#INFO_STATUT{#OBJET,#ID_OBJET}|puce_statut{#OBJET})]</td>

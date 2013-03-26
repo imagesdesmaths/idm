@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/spip?lang_cible=en
+// extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=en
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_note' => 'Turn into a [[Footnote]]',
 	'barre_paragraphe' => 'Create a paragraph',
 	'barre_quote' => '<quote>Quote a message</quote>',
-	'bouton_changer' => 'Edit',
+	'bouton_changer' => 'Change',
 	'bouton_chercher' => 'Search',
 	'bouton_choisir' => 'Select',
 	'bouton_deplacer' => 'Move',
@@ -319,7 +319,7 @@ the site "@nom_site_spip@" (@adresse_login@):',
 	'icone_rubriques' => 'Sections',
 	'icone_sauver_site' => 'Site backup',
 	'icone_site_entier' => 'The entire site',
-	'icone_sites_references' => 'Sites referenced',
+	'icone_sites_references' => 'Referenced sites',
 	'icone_statistiques' => 'Site statistics',
 	'icone_suivi_activite' => 'Follow site activity',
 	'icone_suivi_actualite' => 'Site statistics',

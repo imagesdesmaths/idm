@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/medias?lang_cible=de
+// extrait automatiquement de http://trad.spip.net/tradlang_module/medias?lang_cible=de
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -112,6 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_modifier_document' => 'Dokument bearbeiten',
 	'info_portfolio' => 'Portfolio',
 	'info_referencer_doc_distant' => 'Dokument im Internet verlinken:',
+	'info_sans_vignette' => 'Ohne Icon',
 	'info_statut_document' => 'Dieses Dokument ist:',
 	'info_telecharger' => 'Von Ihrem Computer hochladen:',
 	'infos' => 'Technische Informationen',
@@ -119,12 +120,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_non_autoriser_selectionner_date_en_ligne' => 'Das Datum der Dokumente entspricht dem Zeitpunkt des Uploads.',
 
 	// L
-	'label_activer_document_objets' => 'Hochladen von Dokumenten erlauben:',
+	'label_activer_document_objets' => 'Hochladen von Dokumenten erlauben für:',
 	'label_apercu' => 'Vorschau',
 	'label_caracteristiques' => 'Eigenschaften',
 	'label_credits' => 'Beteiligte',
 	'label_fichier' => 'Datei',
 	'label_fichier_vignette' => 'Miniaturbild',
+	'label_paginer_par' => 'Seitenweise sortieren nach:',
 	'label_parents' => 'Dieses Dokument gehört zu',
 	'label_refdoc_joindre' => 'Dokument Nummer',
 	'lien_tout_enlever' => 'Alles entfernen',

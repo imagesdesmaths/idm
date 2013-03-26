@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/forum?lang_cible=it
+// extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=it
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -39,7 +39,7 @@ cancellarli successivamente).',
 	'forum_acces_refuse' => 'Non hai accesso a questi forum.',
 	'forum_attention_dix_caracteres' => '<b>Attenzione!</b> il messaggio deve contenere almeno dieci caratteri.',
 	'forum_attention_message_non_poste' => 'Attenzione, non puoi postare il tuo messaggio!',
-	'forum_attention_nb_caracteres_mini' => '<b>Attention !</b> votre message doit contenir au moins @min@ caractères.', # NEW
+	'forum_attention_nb_caracteres_mini' => '<b>Attenzione!</b> Il vostro messaggio deve contenere almeno @min@ caratteri.',
 	'forum_attention_trois_caracteres' => '<b>Attenzione!</b> il titolo deve contenere almeno tre caratteri.',
 	'forum_attention_trop_caracteres' => '<b>Attenzione!</b> il messaggio è troppo lungo (@compte@ caratteri): per poter essere registrato esso non deve essere più lungo di @max@ caratteri.',
 	'forum_avez_selectionne' => 'Hai selezionato:',
@@ -53,7 +53,9 @@ cancellarli successivamente).',
 	'forum_ne_repondez_pas' => 'Non rispondere a questa email ma intervieni sul forum all\'indirizzo seguente:',
 	'forum_page_url' => '(Se il tuo messaggio si riferisce ad un articolo pubblicato sul Web o ad una pagina contenente maggiori informazioni, è possibile indicare di seguito il titolo della pagina ed il suo indirizzo URL.)',
 	'forum_permalink' => 'Permalink al commento',
-	'forum_poste_par' => 'Messaggio inviato da @parauteur@ in calce all\'articolo  « @titre@ ».',
+	'forum_poste_par' => 'Messaggio inviato da @parauteur@ in calce all\'articolo  « @titre@ ».', # MODIF
+	'forum_poste_par_court' => 'Message posté@parauteur@.', # NEW
+	'forum_poste_par_generique' => 'Message posté@parauteur@ (@objet@ « @titre@ »).', # NEW
 	'forum_qui_etes_vous' => 'Chi sei?',
 	'forum_saisie_texte_info' => 'Questo form accetta scorciatoie di SPIP <code>[-&gt;url] {{bold}} {italic} &lt;quote&gt; &lt;code&gt;</code> e il codice HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Per creare un paragrafo lasciate semplicemente una riga vuota.',
 	'forum_texte' => 'Testo del messaggio',

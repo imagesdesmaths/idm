@@ -39,7 +39,15 @@ function svp_ajouter_depot($url, &$erreur='') {
 	$url = trim($url);
 	// Ajout du depot dans la table spip_depots. Les compteurs de paquets et de plugins
 	// sont mis a jour apres le traitement des paquets
-	$fichier_xml = _DIR_RACINE . copie_locale($url, 'modif');
+
+	// on recupère le XML
+	$fichier_xml = copie_locale($url, 'modif');
+	if (!$fichier_xml) {
+		$erreur = _T('svp:message_nok_xml_non_recupere', array('fichier' => $url));
+		return false;
+	}
+
+	$fichier_xml = _DIR_RACINE . $fichier_xml;
 
 	// Lire les donnees d'un depot de paquets
 	$infos = svp_phraser_depot($fichier_xml);

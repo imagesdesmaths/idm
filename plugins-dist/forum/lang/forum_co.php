@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/forum?lang_cible=co
+// extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=co
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -51,7 +51,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_page_url' => '(Sì u vostru messagiu siriferisce à un artìculu pubblicatu nant\'à u web, o à una pàgina 
 	chì furnisce di più infurmazioni, pudete puru rinsignà custì u tìtulu di a pàgina cù u so indirizzu.)',
 	'forum_permalink' => 'Lien permanent vers le commentaire', # NEW
-	'forum_poste_par' => 'Messagiu postu@parauteur@ in coda di l\'artìculu « @titre@ ».',
+	'forum_poste_par' => 'Messagiu postu@parauteur@ in coda di l\'artìculu « @titre@ ».', # MODIF
+	'forum_poste_par_court' => 'Message posté@parauteur@.', # NEW
+	'forum_poste_par_generique' => 'Message posté@parauteur@ (@objet@ « @titre@ »).', # NEW
 	'forum_qui_etes_vous' => '<b>Quale site ?</b> (micca ubbligatoriu)', # MODIF
 	'forum_saisie_texte_info' => 'Ce formulaire accepte les raccourcis SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> et le code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Pour créer des paragraphes, laissez simplement des lignes vides.', # NEW
 	'forum_texte' => 'Testu di u vostru messagiu :', # MODIF

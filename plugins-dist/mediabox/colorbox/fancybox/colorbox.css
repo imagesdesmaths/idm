@@ -22,29 +22,29 @@
 */
 #cboxOverlay{background:transparent;}
 #colorbox{}
-    #cboxTopLeft{width:20px; height:20px; background: transparent url('images/fancy_shadow_nw.png') no-repeat;}
-    #cboxTopRight{width:20px; height:20px; background: transparent url('images/fancy_shadow_ne.png') no-repeat;}
-    #cboxBottomLeft{width:20px; height:20px; background: transparent url('images/fancy_shadow_sw.png') no-repeat;}
-    #cboxBottomRight{width:20px; height:20px; background: transparent url('images/fancy_shadow_se.png') no-repeat;}
-    #cboxMiddleLeft{width:20px; background: transparent url('images/fancy_shadow_w.png') repeat-y;}
-    #cboxMiddleRight{width:20px; background: transparent url('images/fancy_shadow_e.png') repeat-y;}
-    #cboxTopCenter{height:20px; background: transparent url('images/fancy_shadow_n.png') repeat-x;}
-    #cboxBottomCenter{height:20px; background: transparent url('images/fancy_shadow_s.png') repeat-x;}
+    #cboxTopLeft{width:20px; height:20px; background: transparent url('images/fancy_shadow-spt1.png') no-repeat -130px bottom;}
+    #cboxTopRight{width:20px; height:20px; background: transparent url('images/fancy_shadow-spt1.png') no-repeat -50px bottom;}
+    #cboxBottomLeft{width:20px; height:20px; background: transparent url('images/fancy_shadow-spt1.png') no-repeat -130px top;}
+    #cboxBottomRight{width:20px; height:20px; background: transparent url('images/fancy_shadow-spt1.png') no-repeat -50px top;}
+    #cboxMiddleLeft{width:20px; background: transparent url('images/fancy_shadow-spt1.png') repeat-y -105px top;}
+    #cboxMiddleRight{width:20px; background: transparent url('images/fancy_shadow-spt1.png') repeat-y -75px top;}
+    #cboxTopCenter{height:20px; background: transparent url('images/fancy_shadow-spt2.png') repeat-x bottom;}
+    #cboxBottomCenter{height:20px; background: transparent url('images/fancy_shadow-spt2.png') repeat-x top;}
     #cboxContent{background:#fff;}
         #cboxLoadedContent{padding:10px;}
         #cboxTitle{ position: absolute; left: 10px; right: 10px; bottom: 10px; padding: 0 10px;
         	text-align: center; color: #fff; font-weight: bold; font-size: 0.9em; background-image: url('images/fancy_title_over.png'); }
         #cboxCurrent{position: absolute; left: -3000em}
         #cboxPrevious{position: absolute; top: 0; left: 15px; width: 35% ; height: 100%; text-indent:-9999px;}
-        #cboxPrevious.hover{background:url(images/fancy_left.png) left 50% no-repeat;}
+        #cboxPrevious.hover{background:url(images/fancy_shadow-spt1.png) -170px 50% no-repeat;}
         #cboxNext{position: absolute; top: 0; right: 15px; width: 35% ; height: 100%; text-indent:-9999px;}
         #cboxNext.hover{background:url(images/fancy_right.png) right 50% no-repeat;}
         #cboxSlideshow{position:absolute; top: -12px; left:-15px; width: 30px; height: 30px;
-        	background:url(images/fancy_play.png) 0 0 no-repeat; text-indent:-9999px;}
+        	background:url(images/fancy_shadow-spt2.png) -40px -35px no-repeat; text-indent:-9999px;}
         #cboxLoadingOverlay{background:#fff;}
         #cboxLoadingGraphic{background:url(images/loading.gif) center center no-repeat;}
         #cboxClose{position:absolute; top: -12px; right: -15px; height: 30px; width: 30px;
-        	background:url(images/fancy_closebox.png) 0 0 no-repeat; text-indent:-9999px;}
+        	background:url(images/fancy_shadow-spt2.png) -0px -35px no-repeat; text-indent:-9999px;}
 
-        .cboxSlideshow_on #cboxSlideshow{background:url(images/fancy_pause.png) no-repeat;}
-        .cboxSlideshow_off #cboxSlideshow{background:url(images/fancy_play.png) no-repeat;}
+        .cboxSlideshow_on #cboxSlideshow{background-position:-80px -35px;}
+        .cboxSlideshow_off #cboxSlideshow{background-position:-40px -35px;}

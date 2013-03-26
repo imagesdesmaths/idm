@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/mediabox?lang_cible=es
+// extrait automatiquement de http://trad.spip.net/tradlang_module/mediabox?lang_cible=es
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_reinitialiser' => 'Reinicializar',
 	'boxstr_close' => 'Cerrar',
-	'boxstr_current' => '@current@/@total@', # MODIF
+	'boxstr_current' => '@current@/@total@',
 	'boxstr_next' => 'Siguiente',
 	'boxstr_previous' => 'Anterior',
 	'boxstr_slideshowStart' => 'Presentación',
@@ -26,9 +26,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_active' => 'Activar mediabox en el espacio público',
 	'label_apparence' => 'Apariencia',
-	'label_aucun_style' => 'No usar ningún estilo por defecto',
-	'label_choix_transition_elastic' => 'Elástico', # MODIF
-	'label_choix_transition_fade' => 'Degradado', # MODIF
+	'label_aucun_style' => 'No usar ningún estilo por omisión',
+	'label_choix_transition_elastic' => 'Elástico',
+	'label_choix_transition_fade' => 'transición progresiva',
 	'label_choix_transition_none' => 'Ninguno',
 	'label_maxheight' => 'Alto máximo (% o px)',
 	'label_maxwidth' => 'Ancho máximo (% o px)',

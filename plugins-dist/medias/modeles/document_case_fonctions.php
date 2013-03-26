@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 define('_BOUTON_MODE_IMAGE', true);
 
 include_spip('inc/documents'); // pour la fonction affiche_raccourci_doc
-function medias_raccourcis_doc($id_document,$titre,$descriptif,$inclus,$largeur,$hauteur,$mode,$vu){
+function medias_raccourcis_doc($id_document,$titre,$descriptif,$inclus,$largeur,$hauteur,$mode,$vu,$media=null){
 	$raccourci = '';
 	$doc = 'doc';
 
@@ -19,24 +19,21 @@ function medias_raccourcis_doc($id_document,$titre,$descriptif,$inclus,$largeur,
 		$doc = 'img';
 
 	// Affichage du raccourci <doc...> correspondant
-	if ($vu=='oui')
-		$raccourci = affiche_raccourci_doc($doc, $id_document, '');
-	else {
-		$raccourci = 
-			  affiche_raccourci_doc($doc, $id_document, 'left')
-			. affiche_raccourci_doc($doc, $id_document, 'center')
-			. affiche_raccourci_doc($doc, $id_document, 'right');
-		if ($mode=='document'
-			AND ($inclus == "embed" OR $inclus == "image")
-			AND $largeur > 0 AND $hauteur > 0) {
-			$raccourci =
-			  "<span>"._T('medias:info_inclusion_vignette')."</span>"
-			. $raccourci
-			. "<span>"._T('medias:info_inclusion_directe')."</span>"
-			. affiche_raccourci_doc('emb', $id_document, 'left')
-			. affiche_raccourci_doc('emb', $id_document, 'center')
-			. affiche_raccourci_doc('emb', $id_document, 'right');
-		}
+	$raccourci = 
+		  affiche_raccourci_doc($doc, $id_document, 'left')
+		. affiche_raccourci_doc($doc, $id_document, 'center')
+		. affiche_raccourci_doc($doc, $id_document, 'right');
+	if ($mode=='document'
+		AND ($inclus == "embed" OR $inclus == "image")
+		AND (($largeur > 0 AND $hauteur > 0) 
+		OR in_array($media,array('video','audio')))) {
+		$raccourci =
+		  "<span>"._T('medias:info_inclusion_vignette')."</span>"
+		. $raccourci
+		. "<span>"._T('medias:info_inclusion_directe')."</span>"
+		. affiche_raccourci_doc('emb', $id_document, 'left')
+		. affiche_raccourci_doc('emb', $id_document, 'center')
+		. affiche_raccourci_doc('emb', $id_document, 'right');
 	}
 	return "<div class='raccourcis'>".$raccourci."</div>";
 }

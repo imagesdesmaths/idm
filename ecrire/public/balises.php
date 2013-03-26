@@ -409,7 +409,7 @@ function balise_LANG_dist ($p) {
 }
 
 // #LESAUTEURS
-// les auteurs d'un article (ou d'un article syndique)
+// les auteurs d'un objet
 // http://www.spip.net/fr_article902.html
 // http://www.spip.net/fr_article911.html
 // http://doc.spip.org/@balise_LESAUTEURS_dist
@@ -426,13 +426,25 @@ function balise_LESAUTEURS_dist ($p) {
 		$p->code = "safehtml($_lesauteurs)";
 		// $p->interdire_scripts = true;
 	} else {
-		$connect = !$p->id_boucle ? ''
-		  : $p->boucles[$p->id_boucle]->sql_serveur;
-
+		if(!$p->id_boucle){
+			$connect = '';
+			$objet = 'article';
+			$id_table_objet = 'id_article';
+		}
+		else{
+			$connect = $p->boucles[$p->id_boucle]->sql_serveur;
+			$type_boucle = $p->boucles[$p->id_boucle]->type_requete;
+			$objet = objet_type($type_boucle);
+			$id_table_objet = id_table_objet($type_boucle);
+		}
 		$c = memoriser_contexte_compil($p);
 
 		$p->code = sprintf(CODE_RECUPERER_FOND, "'modeles/lesauteurs'",
-				   "array('id_article' => ".champ_sql('id_article', $p) .")",
+				   "array('objet'=>'".$objet.
+					   "','id_objet' => ".champ_sql($id_table_objet, $p) .
+					   ",'$id_table_objet' => ".champ_sql($id_table_objet, $p) .
+					   ($objet=='article'?"":",'id_article' => ".champ_sql('id_article', $p)).
+					   ")",
 				   "'trim'=>true, 'compil'=>array($c)",
 				   _q($connect));
 		$p->interdire_scripts = false; // securite apposee par recuperer_fond()
@@ -967,25 +979,43 @@ function balise_CACHE_dist($p) {
 }
 
 
-//
-// #INSERT_HEAD
-// pour permettre aux plugins d'inserer des styles, js ou autre
-// dans l'entete sans modification du squelette
-// les css doivent etre inserees de preference par #INSERT_HEAD_CSS
-// pour en faciliter la surcharge
-//
-// http://doc.spip.org/@balise_INSERT_HEAD_dist
+/**
+ * #INSERT_HEAD
+ * pour permettre aux plugins d'inserer des styles, js ou autre
+ * dans l'entete sans modification du squelette
+ * les css doivent etre inserees de preference par #INSERT_HEAD_CSS
+ * pour en faciliter la surcharge
+ *
+ * on insere ici aussi un morceau de PHP qui verifiera a l'execution que le pipeline insert_head_css a bien ete vu
+ * et dans le cas contraire l'appelera. Permet de ne pas oublier les css de #INSERT_HEAD_CSS meme si cette balise
+ * n'est pas presente.
+ * Il faut mettre ce php avant le insert_head car le compresseur y mets ensuite un php du meme type pour collecter
+ * CSS et JS, et on ne veut pas qu'il rate les css inserees en fallback par insert_head_css_conditionnel
+ *
+ * http://doc.spip.org/@balise_INSERT_HEAD_dist
+ *
+ * @param object $p
+ * @return object
+ */
 function balise_INSERT_HEAD_dist($p) {
-	$p->code = "pipeline('insert_head','<!-- insert_head -->')";
-	$p->code .= '. \'<'
+	$p->code = '\'<'
 		.'?php header("X-Spip-Filtre: \'.'
 			.'\'insert_head_css_conditionnel\''
 		. " . '\"); ?'.'>'";
+	$p->code .= ". pipeline('insert_head','<!-- insert_head -->')";
 	$p->interdire_scripts = false;
 	return $p;
 }
 
-// http://doc.spip.org/@balise_INSERT_HEAD_CSS_dist
+/**
+ * homologue de #INSERT_HEAD pour les CSS
+ * (et par extension pour le js inline qui doit preferentiellement etre insere avant les CSS car bloquant sinon)
+ *
+ * http://doc.spip.org/@balise_INSERT_HEAD_CSS_dist
+ *
+ * @param object $p
+ * @return object
+ */
 function balise_INSERT_HEAD_CSS_dist($p) {
 	$p->code = "pipeline('insert_head_css','<!-- insert_head_css -->')";
 	$p->interdire_scripts = false;
@@ -1358,7 +1388,8 @@ function balise_BOUTON_ACTION_dist($p){
 		array_pop($args);
 	$args = implode(",",$args);
 
-	$p->code = "bouton_action($args)";
+	$bouton_action = chercher_filtre("bouton_action");
+	$p->code = "$bouton_action($args)";
 	$p->interdire_scripts = false;
 	return $p;
 }

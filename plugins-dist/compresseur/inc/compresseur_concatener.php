@@ -3,38 +3,43 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Fonctions pour concaténer plusieurs fichiers en un
+ * 
+ * @package SPIP\Compresseur\Concatener
+ */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
- * Concatener en un seul une liste de fichier,
+ * Concaténer en un seul une liste de fichier,
  * avec appels de callback sur chaque fichier,
  * puis sur le fichier final
  *
- * Gestion d'un cache : le fichier concatene n'est produit que si il n'existe pas
- * pour la liste de fichiers fournis en entree  
+ * Gestion d'un cache : le fichier concaténé n'est produit que si il n'existe pas
+ * pour la liste de fichiers fournis en entrée  
  *
  *
  * @param array $files
- *   liste des fichiers a concatener, chaque entree sour la forme html=>fichier
- *   string $key : html d'insertion du fichier dans la page
- *   string|array $fichier : chemin du fichier, ou tableau (page,argument) si c'est un squelette
+ *     Liste des fichiers à concatener, chaque entrée sour la forme html=>fichier
+ *     - string $key : html d'insertion du fichier dans la page
+ *     - string|array $fichier : chemin du fichier, ou tableau (page,argument) si c'est un squelette
  * @param string $format
- *   js ou css utilise pour l'extension du fichier de sortie
+ *     js ou css utilisé pour l'extension du fichier de sortie
  * @param array $callbacks
- *   tableau de fonctions a appeler :
- *   each_pre : fonction de preparation a appeler sur le contenu de chaque fichier
- *   each_min : fonction de minification a appeler sur le contenu de chaque fichier
- *   all_min : fonction de minification a appeler sur le contenu concatene complet, en fin de traitement
+ *     Tableau de fonctions à appeler :
+ *     - each_pre : fonction de préparation à appeler sur le contenu de chaque fichier
+ *     - each_min : fonction de minification à appeler sur le contenu de chaque fichier
+ *     - all_min : fonction de minification à appeler sur le contenu concatene complet, en fin de traitement
  * @return array
- *   tableau a 2 entrees retournant le nom du fichier et des commentairs html a inserer dans la page initiale
+ *     Tableau a 2 entrées retournant le nom du fichier et des commentaires HTML à insérer dans la page initiale
  */
 function concatener_fichiers($files,$format='js', $callbacks = array()){
 	$nom = "";
@@ -144,19 +149,43 @@ function concatener_fichiers($files,$format='js', $callbacks = array()){
 	return array($nom, (isset($comms) AND $comms) ? "<!-- $comms -->\n" : '');
 }
 
+/**
+ * Une callback pour la minification par défaut
+ *
+ * Mais justement, par défaut on ne minifie rien !
+ *
+ * @param string $contenu  Contenu à minifier
+ * @return string          Contenu à minifier
+ */
 function &concatener_callback_identite(&$contenu){
 	return $contenu;
 }
 
+/**
+ * Une callback pour ?
+ *
+ * @param array $tableau
+ *     
+ * @param string $orig_key
+ *     Index dont on cherche la valeur actuelle
+ * @param string $new_key
+ *     Nouvel index que l'on veut voir affecter de la valeur de la clé d'origine
+ * @param mixed $new_value
+ *     Si rempli, la nouvelle clé prend cette valeur à la place
+ *     de la valeur de la clé d'origine
+ * @return array
+ *     
+ */
 function &array_replace_key($tableau,$orig_key,$new_key,$new_value=null){
 	$t = array();
-  foreach($tableau as $k=>$v){
-	  if ($k==$orig_key){
-		  $k=$new_key;
-	    if (!is_null($new_value))
-		    $v = $new_value;
-	  }
-    $t[$k] = $v;
-  }
-  return $t;
+	foreach($tableau as $k=>$v) {
+		if ($k==$orig_key) {
+			$k=$new_key;
+			if (!is_null($new_value)) {
+				$v = $new_value;
+			}
+		}
+		$t[$k] = $v;
+	}
+	return $t;
 }

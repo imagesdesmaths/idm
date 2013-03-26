@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/forum?lang_cible=pt_br
+// extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=pt_br
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -48,7 +48,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_ne_repondez_pas' => 'Não responda a esta mensagem e sim no fórum com o endereço a seguir:',
 	'forum_page_url' => '(Se a sua mensagem se refere a uma matéria pubicada na Web, ou a uma página fornecendo mais informações, por favor informe abaixo o título da página e o seu endereço.)',
 	'forum_permalink' => 'Link permanente para o comentário',
-	'forum_poste_par' => 'Mensagem enviada @parauteur@ em seguimento da sua matéria.',
+	'forum_poste_par' => 'Mensagem enviada @parauteur@ em seguimento da sua matéria.', # MODIF
+	'forum_poste_par_court' => 'Message posté@parauteur@.', # NEW
+	'forum_poste_par_generique' => 'Message posté@parauteur@ (@objet@ « @titre@ »).', # NEW
 	'forum_qui_etes_vous' => 'Quem é você?',
 	'forum_saisie_texte_info' => 'Este formulário aceita os atalhos do SPIP <code>[->url] {{negrito}} {itálico} <quote> <code></code> e o código HTML <code><q> <del> <ins></code>. Para criar parágrafos, basta deixar uma linha em branco.',
 	'forum_texte' => 'Texto da sua mensagem',

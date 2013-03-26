@@ -5,6 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 # require_once 'engine/textwheel.php';
 
 function tw_liste_init($t){
+	charger_fonction('dummy', 'inc', true); // ne sert a rien mais evite un segmentation fault PHP, on dirait
 	return tw_liste_item($t,'init');
 }
 
@@ -44,8 +45,11 @@ function tw_liste_item($t,$quoi='item'){
 		
 		case 'item':
 		default:
-			if ($l=strlen($t[2])) {$profond=$l;$nouv_type='ul';}
-			elseif ($l=strlen($t[3])) {$profond=$l;$nouv_type='ol';}
+			$profond = 0;
+			if ($l=strlen($t[2])) {
+				$profond=$l;$nouv_type='ul';
+				if (strncmp($t[2],'#',1)==0) $nouv_type='ol';
+			}
 
 			if ($profond > 0) {
 				$ajout='';
@@ -90,7 +94,7 @@ function tw_liste_item($t,$quoi='item'){
 				$ajout = $t[1];	// puce normale ou <hr>
 			}
 
-			$t = $ajout . $t[4];
+			$t = $ajout . $t[3];
 			break;
 	}
 

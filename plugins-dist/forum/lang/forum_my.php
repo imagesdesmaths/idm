@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/forum?lang_cible=my
+// extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=my
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -47,7 +47,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_ne_repondez_pas' => 'ဤမေးလ်ကို တိုက်ရိုက် အကြောင်းမပြန်ပါနှင့်၊ အောက်ပါလိပ်စာမှ ပြန်ပါ', # MODIF
 	'forum_page_url' => '(သင့်ဆောင်ပါး ထုတ်ဝေမှုကို ဒီစာစောင်မ ညွှန်းထားတယ်ဆိုရင်တော့၊ အောက်ဖော်ပြပါနေရာတွင် စာမျက်နှာခေါင်းစဉ်နှင့် လိပ်စာကိုထည့်သွင်းပါ။)',
 	'forum_permalink' => 'Lien permanent vers le commentaire', # NEW
-	'forum_poste_par' => 'သင့်ဆောင်းပါး \\"@titre@\\" တင်သွင်းပြီးကြောင်း @parauteur@',
+	'forum_poste_par' => 'သင့်ဆောင်းပါး \\"@titre@\\" တင်သွင်းပြီးကြောင်း @parauteur@', # MODIF
+	'forum_poste_par_court' => 'Message posté@parauteur@.', # NEW
+	'forum_poste_par_generique' => 'Message posté@parauteur@ (@objet@ « @titre@ »).', # NEW
 	'forum_qui_etes_vous' => '<b>သင်ဘယ်သူလဲ?</b> (optional)', # MODIF
 	'forum_saisie_texte_info' => 'Ce formulaire accepte les raccourcis SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> et le code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Pour créer des paragraphes, laissez simplement des lignes vides.', # NEW
 	'forum_texte' => 'သင့်စာစောင်၏ စာသားများ', # MODIF

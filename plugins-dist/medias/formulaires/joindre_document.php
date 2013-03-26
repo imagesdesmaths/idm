@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -153,7 +153,11 @@ function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=
 	// on joint un document deja dans le site
 	if (_request('joindre_mediatheque')){
 		$refdoc_joindre = _request('refdoc_joindre');
-		$refdoc_joindre = strtr($refdoc_joindre,";,-","   ");
+		$refdoc_joindre = strtr($refdoc_joindre,";,","  ");
+		$refdoc_joindre = preg_replace(',\b(doc|document|img),','',$refdoc_joindre);
+		// expliciter les intervales xxx-yyy
+		while(preg_match(",\b(\d+)-(\d+)\b,",$refdoc_joindre,$m))
+			$refdoc_joindre = str_replace($m[0],implode(" ",range($m[1],$m[2])),$refdoc_joindre);
 		$refdoc_joindre = explode(" ",$refdoc_joindre);
 		include_spip('action/editer_document');
 		foreach($refdoc_joindre as $j){
@@ -161,7 +165,7 @@ function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=
 				// lier le parent en plus
 				$champs = array('ajout_parents' => array("$objet|$id_objet"));
 				document_modifier($j,$champs);
-				if (!$ance)
+				if (!$ancre)
 					$ancre = $j;
 				$sel[] = $j;
 				$res['message_ok'] = _T('medias:document_attache_succes');

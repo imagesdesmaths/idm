@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/urls?lang_cible=ru
+// extrait automatiquement de http://trad.spip.net/tradlang_module/urls?lang_cible=ru
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -9,6 +9,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'actualiser_toutes' => 'Обновить все URL',
+	'actualiser_toutes_explication' => 'Vous pouvez recalculer les URLs.
+		Si une URL a changé, une nouvelle entrée sera créée (sans perdre les URLs déjà
+		présentes et sans affecter les URLs définies manuellement.', # NEW
 
 	// B
 	'bouton_supprimer_url' => 'Удалить URL',
@@ -22,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_configurer_urls' => 'Настройки URL страниц',
 	'icone_controler_urls' => 'Понятные URL',
 	'info_1_url' => '1 URL',
-	'info_id_parent' => '#parent', # NEW
+	'info_id_parent' => '#родитель (#parent)',
 	'info_nb_urls' => '@nb@ URL',
 	'info_objet' => 'Объект',
 
@@ -31,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_tri_id' => 'Номер',
 	'label_tri_url' => 'URL',
 	'label_url' => 'Новый URL',
-	'label_url_minuscules_0' => 'Conserver la casse du titre', # NEW
+	'label_url_minuscules_0' => 'Сохранять регистр букв',
 	'label_url_minuscules_1' => 'Выводить URL  в нижнем регистре',
 	'label_url_permanente' => 'Запретить изменения URL ( ссылка не меняется после изменения материала)',
 	'label_url_sep_id' => 'Разделитель между дополнительными цифрами, который добавляются, что бы избежать дублирования URL',
@@ -47,13 +50,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_urls_nb_max_car' => 'Длинные названия будут обрезаны автоматически.',
 	'texte_urls_nb_min_car' => 'Короткие названия будут дополнены автоматически.',
 	'titre_gestion_des_urls' => 'Управление ссылками (URL)',
-	'titre_type_arbo' => 'URLs Arborescentes', # NEW
-	'titre_type_html' => 'URLs Objets HTML', # NEW
+	'titre_type_arbo' => 'Древовидные ссылки (URLs Arborescentes)',
+	'titre_type_html' => 'Ссылки c объектами HTML',
 	'titre_type_libres' => 'Свободный формат URLs',
-	'titre_type_page' => 'URLs Page', # NEW
-	'titre_type_propres' => 'URLs Propres', # NEW
-	'titre_type_propres2' => 'URLs Propres+<tt>.html</tt>', # NEW
-	'titre_type_propres_qs' => 'URLs Propres en query-string', # NEW
+	'titre_type_page' => 'Адрес страницы (URLs Page)',
+	'titre_type_propres' => 'Чистые  названия (clean URLs )',
+	'titre_type_propres2' => 'Чистые ссылки+<tt>.html</tt>',
+	'titre_type_propres_qs' => 'Чистые ссылки в строке запроса',
 	'titre_type_simple' => 'Упрощенный формат URL',
 	'titre_type_standard' => 'Исторический формат URL',
 	'titre_type_urls' => 'Автоматическое формирование URL',

@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/forum?lang_cible=oc_gsc
+// extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=oc_gsc
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -54,6 +54,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_page_url' => '(se lo vòste messatge e\'s refereish a un article publicat peu web, o a ua pagina qui baile mei informacions, que podetz marcar ça devath lo títol de la pagina e la soa adreiça URL.)',
 	'forum_permalink' => 'Lien permanent vers le commentaire', # NEW
 	'forum_poste_par' => 'Messatge poste@parauteur@ qui hè seguida au vòste article.', # MODIF
+	'forum_poste_par_court' => 'Message posté@parauteur@.', # NEW
+	'forum_poste_par_generique' => 'Message posté@parauteur@ (@objet@ « @titre@ »).', # NEW
 	'forum_qui_etes_vous' => '<b>Qui ètz?</b> (opcionau)', # MODIF
 	'forum_saisie_texte_info' => 'Ce formulaire accepte les raccourcis SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> et le code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Pour créer des paragraphes, laissez simplement des lignes vides.', # NEW
 	'forum_texte' => 'Tèxt deu vòste messatge:', # MODIF

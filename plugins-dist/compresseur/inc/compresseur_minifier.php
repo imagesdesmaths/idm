@@ -3,33 +3,43 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Fonctions de minification
+ * 
+ * @package SPIP\Compresseur\Minifier
+ */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Minifier un contenu CSS
- * Si $options est vide
- *	on utilise la methode regexp simple
- * Si $options est une chaine non vide
- *  elle definit un media a appliquer a la css
- *	si la css ne contient aucun @media ni @import, on encapsule tout dans "@media $option {...}" et on utilise regexp
- *  sinon on utilise csstidy pour ne pas faire d'erreur, mais c'est 12 fois plus lent
- * Si $options sous forme de array()
- *	on pass par csstidy pour parser le code
- *  et produire un contenu plus compact et prefixe eventuellement par un @media
+ * 
+ * Si $options est vide on utilise la methode regexp simple
+ *
+ * Si $options est une chaine non vide elle definit un media à appliquer
+ * à la css. Si la css ne contient aucun @media ni @import, on encapsule tout
+ * dans "@media $option {...}" et on utilise regexp sinon on utilise csstidy
+ * pour ne pas faire d'erreur, mais c'est 12 fois plus lent
+ *
+ * Si $options sous forme de array() on passe par csstidy pour parser le code
+ * et produire un contenu plus compact et prefixé eventuellement par un @media
  * options disponibles :
- *  string media : media qui seront utilises pour encapsuler par @media
- *	  les selecteurs sans media
- *  string template : format de sortie parmi 'low','default','high','highest'
- * @param string $contenu  contenu css
- * @param mixed $options options de minification
+ * - string media : media qui seront utilisés pour encapsuler par @media
+ *   les selecteurs sans media
+ * - string template : format de sortie parmi 'low','default','high','highest'
+ * 
+ * @param string $contenu
+ *     Contenu CSS
+ * @param mixed $options
+ *     Options de minification
  * @return string
+ *     Contenu CSS minifié
  */
 function minifier_css ($contenu, $options='') {
 	if (is_string($options) AND $options){
@@ -161,9 +171,10 @@ function minifier_css ($contenu, $options='') {
  * l'appel a closure compiler est fait une unique fois pour tous les js concatene
  * afin d'eviter les requetes externes
  *
- * @param  $flux
- * @param  $url_base
- * @return array
+ * @param string $flux
+ *     Contenu JS
+ * @return string
+ *     Contenu JS minifié
  */
 function minifier_js($flux) {
 	if (!strlen($flux))
@@ -182,16 +193,18 @@ function minifier_js($flux) {
 
 
 /**
- * Minification additionnelle :
+ * Minification additionnelle de JS
+ * 
  * Compacter du javascript plus intensivement
- * grace au google closure compiler
+ * grâce au google closure compiler
  *
  * @param string $content
- *  contenu a compresser
+ *     Contenu JS à compresser
  * @param bool $file
- *  indique si $content est ou non un fichier, et retourne un fichier dans ce dernier cas
- *  si $file est une chaine, c'est un nom de ficher sous lequel on ecrit aussi le fichier destination
+ *     Indique si $content est ou non un fichier, et retourne un fichier dans ce dernier cas
+ *     Si $file est une chaîne, c'est un nom de ficher sous lequel on écrit aussi le fichier destination
  * @return string
+ *     Contenu JS compressé
  */
 function minifier_encore_js($content,$file=false) {
 	# Closure Compiler n'accepte pas des POST plus gros que 200 000 octets
@@ -257,7 +270,8 @@ function minifier_encore_js($content,$file=false) {
 
 
 /**
- * Une callback applicable sur chaque balise link
+ * Une callback applicable sur chaque balise link qui minifie un fichier CSS
+ * 
  * @param string $contenu
  * @param  string $balise
  * @return string
@@ -267,7 +281,8 @@ function callback_minifier_css_file($contenu, $balise){
 }
 
 /**
- * Une callback applicable sur chaque balise script
+ * Une callback applicable sur chaque balise script qui minifie un JS
+ * 
  * @param string $contenu
  * @param  string $balise
  * @return string
@@ -278,10 +293,10 @@ function callback_minifier_js_file($contenu, $balise){
 
 
 /**
- * minifier du HTML
+ * Minifier du HTML
  * 
- * @param string $flux
- * @return string
+ * @param string $flux  HTML à compresser
+ * @return string       HTML compressé
  */
 function minifier_html($flux){
 

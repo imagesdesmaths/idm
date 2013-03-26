@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.net/tradlang_module/compresseur?lang_cible=eo
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -9,23 +9,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_compresseur_titre' => 'Plejbonigoj kaj densigoj',
-	'info_question_activer_compactage_css' => 'Ĉu vi deziras aktivigi la densigon de la stilfolio (CSS) ?', # MODIF
-	'info_question_activer_compactage_js' => 'Ĉu vi deziras aktivigi la densigon de la skriptoj (Ĝavoskripto) ?', # MODIF
-	'info_question_activer_compresseur' => 'Ĉu vi volas aktivigi densigon de la HTTP-fluo ?', # MODIF
-	'item_compresseur_closure' => 'Utiliser Google Closure Compiler [expérimental]', # NEW
-	'item_compresseur_css' => 'Activer la compression des feuilles de styles (CSS)', # NEW
-	'item_compresseur_html' => 'Activer la compression du HTML', # NEW
-	'item_compresseur_js' => 'Activer la compression des scripts (javascript)', # NEW
+	'info_question_activer_compactage_css' => 'CSS',
+	'info_question_activer_compactage_js' => 'Skriptoj',
+	'info_question_activer_compresseur' => 'HTML',
+	'item_compresseur_closure' => 'Uzi Google Closure Compiler [eksperimenta]',
+	'item_compresseur_css' => 'Aktivigi la densigon de la stilfolio (CSS)',
+	'item_compresseur_html' => 'Aktivigi densigon de HTML',
+	'item_compresseur_js' => 'Aktivigi la densigon de la skriptoj (ĝavoskripto)',
 
 	// T
-	'texte_compacter_avertissement' => 'Attention à ne pas activer ces options durant le développement de votre site : les éléments compactés perdent toute lisibilité.', # NEW
-	'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela accélère l\'affichage du site.', # NEW
-	'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
-visiteurs du site. Ce réglage permet d\'optimiser la bande passante (le
-site est plus rapide derrière une liaison à faible débit), mais
-demande plus de puissance au serveur.', # NEW
-	'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
-	'titre_compresser_flux_http' => 'Compression du flux HTTP' # MODIF
+	'texte_compacter_avertissement' => 'Atentu ne ebligi tiujn opciojn dum disvolviĝo de via retejo : la densigaj elementoj perdas ĉian legeblecon.',
+	'texte_compacter_script_css' => 'SPIP povas densigi ĝavoskriptaj skriptoj kaj CSS stilfolioj, por registri ilin en statikaj dosieroj. Tio plirapidigas la afiŝon de la retejo.',
+	'texte_compresseur_page' => 'SPIP povas aŭtomate densigi ĉiun paĝon kiun ĝi sendas al
+retej-vizitantoj. Tiu agordo permesas optimumi la bendlarĝo (la
+retejo estas pli rapida malantaŭ ligo kun malforta kapacito de traigivo), sed
+postulas pli da potenco al la servilo.',
+	'titre_compacter_script_css' => 'Densigo de skriptojn kaj CSS',
+	'titre_compresser_flux_http' => 'Densigo de la HTTP-fluo'
 );
 
 ?>

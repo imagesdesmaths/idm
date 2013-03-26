@@ -240,7 +240,7 @@ function compiler_branches_spip($intervalle) {
 		$bornes['min']['valeur'] = _SVP_VERSION_SPIP_MIN;
 		$bornes['min']['incluse'] = true;
 	}
-	if (spip_version_compare($bornes['max']['valeur'], _SVP_VERSION_SPIP_MAX, '>')) {
+	if (spip_version_compare(_SVP_VERSION_SPIP_MAX, $bornes['max']['valeur'], '<=')) {
 		$bornes['max']['valeur'] = _SVP_VERSION_SPIP_MAX;
 		$bornes['max']['incluse'] = true;
 	}

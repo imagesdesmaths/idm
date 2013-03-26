@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/medias?lang_cible=fa
+// extrait automatiquement de http://trad.spip.net/tradlang_module/medias?lang_cible=fa
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -112,6 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_modifier_document' => 'اصلاح سند ',
 	'info_portfolio' => 'كارنامه',
 	'info_referencer_doc_distant' => 'يك پرونده را در اينترنت ضبط كنيد:',
+	'info_sans_vignette' => 'Sans vignette', # NEW
 	'info_statut_document' => 'اين سند :',
 	'info_telecharger' => ':با رايانه خودتان بارگذارى كنيد',
 	'infos' => ' نمايش اطلاعات روي تمام بخش‌ها (اگرمي‌خواهيد استفاده‌ي متفاوتي از آن بشود)',
@@ -125,6 +126,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_credits' => 'اعتبارها',
 	'label_fichier' => 'پرونده',
 	'label_fichier_vignette' => 'ويگنت',
+	'label_paginer_par' => 'Paginer par :', # NEW
 	'label_parents' => 'اين سند پيوند خورده به ',
 	'label_refdoc_joindre' => 'شماره‌ي سند',
 	'lien_tout_enlever' => 'حذف همه',

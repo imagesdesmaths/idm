@@ -221,6 +221,7 @@ Se vuoi disabilitarla, per favore contatta il webmaster del sito oppure controll
 	'message_nok_sql_insert_depot' => 'Errore SQL aggiungendo il repository @objet@',
 	'message_nok_url_depot_incorrecte' => 'L\'indirizzo « @url@ » è sbagliato',
 	'message_nok_xml_non_conforme' => 'Il file XML di descrizione "@fichier@" » del repository non è conforme',
+	'message_nok_xml_non_recupere' => 'Le fichier XML « @fichier@ » n\'a pas pu être récupéré', # NEW
 	'message_ok_aucun_plugin_trouve' => 'Nessun plugin corrisponde al criterio selezionato.',
 	'message_ok_depot_ajoute' => 'Il repository « @url@ » è stato aggiunto.',
 	'message_ok_plugins_trouves' => '@nb_plugins@ plugin corrisponde ai criteri selezionati (@tri@). Selezionare qui sotto i plugin che volete scaricare e attivare sul vostro server.',

@@ -207,8 +207,10 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
  *     Descrition de la boucle
  * @param bool $echapper
  *     true pour échapper le code créé
+ * @param bool $ignore_previsu
+ *     true pour ne tester que le cas publie et ignorer l'eventuel var_mode=preview de la page
  */
-function instituer_boucle(&$boucle, $echapper=true){
+function instituer_boucle(&$boucle, $echapper=true, $ignore_previsu=false){
 	/*
 	$show['statut'][] = array(
 		'champ'=>'statut',  // champ de la table sur lequel porte le filtrage par le statut
@@ -274,15 +276,16 @@ function instituer_boucle(&$boucle, $echapper=true){
 				}
 				$mstatut = $id .'.'.$statut;
 
+				$arg_ignore_previsu=($ignore_previsu?",true":'');
 				include_spip('public/quete');
 				if (isset($s['post_date']) AND $s['post_date']
 					AND $GLOBALS['meta']["post_dates"] == 'non'){
 					$date = $id.'.'.preg_replace(',\W,','',$s['post_date']); // securite
 					array_unshift($boucle->where,
 						$echapper ?
-							"\nquete_condition_postdates('$date',"._q($boucle->sql_serveur).")"
+							"\nquete_condition_postdates('$date',"._q($boucle->sql_serveur)."$arg_ignore_previsu)"
 						:
-							quete_condition_postdates($date,$boucle->sql_serveur)
+							quete_condition_postdates($date,$boucle->sql_serveur,$ignore_previsu)
 					);
 				}
 				array_unshift($boucle->where,
@@ -290,9 +293,9 @@ function instituer_boucle(&$boucle, $echapper=true){
 						"\nquete_condition_statut('$mstatut',"
 							. _q($s['previsu']).","
 							._q($s['publie']).","
-							._q($boucle->sql_serveur).")"
+							._q($boucle->sql_serveur)."$arg_ignore_previsu)"
 					:
-						quete_condition_statut($mstatut,$s['previsu'],$s['publie'],$boucle->sql_serveur)
+						quete_condition_statut($mstatut,$s['previsu'],$s['publie'],$boucle->sql_serveur,$ignore_previsu)
 				);
 			}
 		}
@@ -1198,12 +1201,26 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 		// appeler la fonction de definition de la boucle
 
 		if ($req = $boucle->type_requete) {
-			$f = 'boucle_'.strtoupper($req);
-		// si pas de definition perso, definition spip
-			if (!function_exists($f)) $f = $f.'_dist';
-			// laquelle a une definition par defaut
-			if (!function_exists($f)) $f = 'boucle_DEFAUT';
-			if (!function_exists($f)) $f = 'boucle_DEFAUT_dist';
+			// boucle personnalisée ?
+			$table = strtoupper($boucle->type_requete);
+			$serveur = strtolower($boucle->sql_serveur);
+			if (
+				// fonction de boucle avec serveur & table
+				(!$serveur OR
+				 ((!function_exists($f = "boucle_".$serveur."_".$table))
+				  AND (!function_exists($f = $f."_dist"))
+				 )
+				)
+				// fonction de boucle avec table
+				AND (!function_exists($f = "boucle_".$table))
+					AND (!function_exists($f = $f."_dist"))
+			){
+				// fonction de boucle standard 
+				if (!function_exists($f = 'boucle_DEFAUT')) {
+					$f = 'boucle_DEFAUT_dist';
+				}
+			}
+
 			$req = "\n\n\tstatic \$command = array();\n\t" .
 					"static \$connect;\n\t" .
 					"\$command['connect'] = \$connect = " .

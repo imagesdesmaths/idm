@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/breves?lang_cible=lb
+// extrait automatiquement de http://trad.spip.net/tradlang_module/breves?lang_cible=lb
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -8,11 +8,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'breve' => 'Brève', # NEW
+	'breve' => 'Kuerzmeldung',
 	'breves' => 'Kuerzmeldungen',
 
 	// E
-	'entree_breve_publiee' => 'Soll dës Kuerzmeldung publizéiert ginn?', # MODIF
+	'entree_breve_publiee' => 'Dës Kuerzmeldung ass:',
 	'entree_texte_breve' => 'Text vun der Kuerzmeldung',
 
 	// I
@@ -21,29 +21,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_breve' => 'Dës Kuerzmeldung änneren',
 	'icone_nouvelle_breve' => 'Nei Kuerzmeldung schreiwen',
 	'info_1_breve' => '1 Kuerzmeldung',
-	'info_aucun_breve' => 'Aucune brève', # NEW
+	'info_aucun_breve' => 'Keng Kuerzmeldung',
 	'info_breves' => 'Benotzt äre Site de Kuerzmeldungs-System?',
 	'info_breves_02' => 'Kuerzmeldungen',
-	'info_breves_valider' => 'Kuerzmeldungen fir ze validéieren',
-	'info_gauche_numero_breve' => 'KUERZMELDUNG NUMMER', # MODIF
-	'info_nb_breves' => '@nb@ brèves', # NEW
-	'item_breve_proposee' => 'Proposéiert Kuerzmeldung', # MODIF
-	'item_breve_refusee' => 'NEEN - Kuerzmeldung refuséiert', # MODIF
-	'item_breve_validee' => 'JO - Kuerzmeldung validéiert', # MODIF
+	'info_breves_valider' => 'Kuerzmeldunge fir ze bestätegen',
+	'info_gauche_numero_breve' => 'Kuerzmeldung Nummer',
+	'info_nb_breves' => '@nb@ Kuerzmeldungen',
+	'item_breve_proposee' => 'virgeschloen',
+	'item_breve_refusee' => 'ofgeleent',
+	'item_breve_validee' => 'bestätegt',
 	'item_non_utiliser_breves' => 'D\'Kuerzmeldungen ausschalten',
 	'item_utiliser_breves' => 'D\'Kuerzmeldungen aschalten',
 
 	// L
-	'logo_breve' => 'LOGO VUN DER KUERZMELDUNG', # MODIF
+	'logo_breve' => 'Logo vun der Kuerzmeldung',
 
 	// T
-	'texte_breves' => 'D\'Kuerzmeldungen si kuerz an einfach Texter déi Iech erlaben Informatiounen séier ze publizéieren, eng Presse-Revue ze maachen, en Agenda ze weisen...',
-	'titre_breve_proposee' => 'Proposéiert Kuerzmeldung',
-	'titre_breve_publiee' => 'Publizéiert Kuerzmeldung',
-	'titre_breve_refusee' => 'Refuséiert Kuerzmeldung',
+	'texte_breves' => 'D\'Kuerzmeldunge si kuerz an einfach Texter déi Iech erlaben Informatiounen séier ze verëffentlechen, eng Presse-Revue ze maachen, en Agenda ze weisen...',
+	'titre_breve_proposee' => 'Virgeschloe Kuerzmeldung',
+	'titre_breve_publiee' => 'Verëffentlecht Kuerzmeldung',
+	'titre_breve_refusee' => 'Ofgeleente Kuerzmeldung',
 	'titre_breves' => 'D\'Kuerzmeldungen',
-	'titre_langue_breve' => 'SPROOCH VUN DER KUERZMELDUNG', # MODIF
-	'titre_nouvelle_breve' => 'Nouvelle brève', # NEW
+	'titre_langue_breve' => 'Sprooch vun der Kuerzmeldung',
+	'titre_nouvelle_breve' => 'Nei Kuerzmeldung',
 	'titre_page_breves' => 'Kuerzmeldungen'
 );
 

@@ -5,10 +5,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// T
-	'retour_ligne_ignore' => 'Retour ligne ignoré',
-	'retour_ligne_manuel' => 'Retour ligne manuel',
+	// R
 	'retour_ligne_auto' => 'Retour ligne automatique',
+	'retour_ligne_ignore' => 'Retour ligne ignoré',
+	'retour_ligne_manuel' => 'Retour ligne manuel'
 );
 
 ?>

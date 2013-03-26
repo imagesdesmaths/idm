@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -539,9 +539,9 @@ function urls_arbo_dist($i, $entite, $args='', $ancre='') {
 											'',
 											// en priorite celui qui a le bon parent et les deux segments
 											// puis le bon parent avec 1 segment
-											// puis un parent indefini et les deux segments
-											// puis un parent indefini et 1 segment
-											(intval($cp)?"id_parent=".intval($cp)." DESC, ":"")."segments DESC"
+											// puis un parent indefini (le 0 de preference) et les deux segments
+											// puis un parent indefini (le 0 de preference) et 1 segment
+											(intval($cp)?"id_parent=".intval($cp)." DESC, ":"")."segments DESC, id_parent"
 			);
 			if ($row){
 				if (!is_null($type) AND $row['url']==$type){

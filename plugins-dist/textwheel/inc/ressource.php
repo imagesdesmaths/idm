@@ -6,7 +6,7 @@
  *
  */
 
-define('_EXTRAIRE_RESSOURCES', ',' . '<"?(https?://|[\w -]+\.[\w -]+).*>'.',UimsS');
+define('_EXTRAIRE_RESSOURCES', ',' . '<"?(https?://|[\w -]+\.[\w -]+)[^<]*>'.',UimsS');
 
 
 function traiter_ressources($r) {

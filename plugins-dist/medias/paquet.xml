@@ -1,11 +1,11 @@
 <paquet
 	prefix="medias"
 	categorie="multimedia"
-	version="2.7.34"
+	version="2.7.43"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/portfolio-32.png"
-	schema="1.2.1"
+	schema="1.2.3"
 >
 
 	<nom>Medias</nom>
@@ -34,6 +34,7 @@
 	<pipeline nom="editer_document_actions" inclure="medias_pipelines.php" />
 	<pipeline nom="renseigner_document_distant" inclure="medias_pipelines.php" />
 	<pipeline nom="afficher_metas_document" action="" />
+	<pipeline nom="medias_documents_visibles" action="" />
 	<pipeline nom="ieconfig_metas" inclure="medias_ieconfig.php" />
 
 	<utilise nom="Z" compatibilite="[1.2.1;[" />

@@ -1,7 +1,7 @@
 <paquet
 	prefix="svp"
 	categorie="maintenance"
-	version="0.80.5"
+	version="0.80.12"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="svp-64.png"
@@ -12,7 +12,7 @@
 	<nom>SVP</nom>
 	<!-- SerVeur d'information et de téléchargement des Plugins -->
 
-	<auteur>Eric Lupinacci</auteur>
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
 	<auteur>Collectif SPIP</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>

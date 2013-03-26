@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -316,7 +316,17 @@ function fixer_fichier_upload($file, $mode=''){
 	if (is_array($row=verifier_upload_autorise($file['name'], $mode))) {
 		if (!isset($row['autozip'])){
 			$row['fichier'] = copier_document($row['extension'], $file['name'], $file['tmp_name']);
-			return $row;
+			
+			/**
+			 * On vérifie que le fichier a une taille
+			 * si non, on le supprime et on affiche une erreur
+			 */
+			if($row['fichier'] && (!$taille = @intval(filesize(get_spip_doc($row['fichier']))))) { 
+				spip_log ("Echec copie du fichier ".$file['tmp_name']." (taille de fichier indéfinie)");
+				spip_unlink(get_spip_doc($row['fichier']));
+				return _T('medias:erreur_copie_fichier',array('nom'=> $file['tmp_name']));
+			}else 
+				return $row;
 		}
 		// creer un zip comme demande
 		// pour encapsuler un fichier dont l'extension n'est pas supportee
@@ -331,7 +341,7 @@ function fixer_fichier_upload($file, $mode=''){
 			spip_unlink($tmp_dir);
 			@mkdir($tmp_dir);
 
-			include_spip('inc/charset');
+			include_spip('inc/charsets');
 			$tmp = $tmp_dir.'/'.translitteration($file['name']);
 
 			$file['name'] .= '.'.$ext; # conserver l'extension dans le nom de fichier, par exemple toto.js => toto.js.zip
@@ -355,7 +365,17 @@ function fixer_fichier_upload($file, $mode=''){
 
 			$row['fichier']  = copier_document($row['extension'], $file['name'], $source);
 			spip_unlink($source);
-			return $row;
+			
+			/**
+			 * On vérifie que le fichier zip créé a une taille
+			 * si non, on le supprime et on affiche une erreur
+			 */
+			if($row['fichier'] && (!$taille = @intval(filesize(get_spip_doc($row['fichier']))))) { 
+				spip_log ("Echec copie du fichier ".$file['tmp_name']." (taille de fichier indéfinie)");
+				spip_unlink(get_spip_doc($row['fichier']));
+				return _T('medias:erreur_copie_fichier',array('nom'=> $file['tmp_name']));
+			}else 
+				return $row;
 		}
 	}
 	else
