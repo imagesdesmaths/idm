@@ -1,7 +1,7 @@
 <paquet
 	prefix="spip_bonux"
 	categorie="outil"
-	version="3.0.3"
+	version="3.0.4"
 	etat="stable"
 	compatibilite="[3.0.0-dev;3.1.*]"
 	logo="img_pack/spip-bonux.png"
@@ -18,4 +18,5 @@
 	<copyright>2008-2011</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+	<pipeline nom="affichage_final" />
 </paquet>

@@ -7,6 +7,37 @@
  * 
  */
 
+if (_request('var_mode')=='preview'
+  AND $cle = _request('var_relecture')){
+	include_spip("spip_bonux_fonctions");
+	if (previsu_verifier_cle_temporaire($cle)){
+		include_spip("inc/autoriser");
+		autoriser_exception('previsualiser','',0);
+		define('_VAR_PREVIEW_EXCEPTION',true);
+	}
+}
+
+function spip_bonux_affichage_final($flux){
+	if (defined('_VAR_PREVIEW') AND _VAR_PREVIEW){
+		$p = stripos($flux,"</body>");
+		$url_relecture = parametre_url(self(),'var_mode','preview','&');
+		$js = "";
+		if (!defined('_VAR_PREVIEW_EXCEPTION')){
+			$url_relecture = parametre_url($url_relecture,'var_relecture',previsu_cle_temporaire(),'&');
+			$label = "Relecture temporaire";
+		}
+		else {
+			$label = _T('previsualisation');
+			$js = "jQuery('.spip-previsu').html('Relecture temporaire');";
+		}
+		$js .= "jQuery('#spip-admin').append('<a class=\"spip-admin-boutons review_link\" href=\"$url_relecture\">$label</a>');";
+		$js = "jQuery(function(){ $js });";
+		$js = "<script>$js</script>";
+		$flux = substr_replace($flux,$js,$p,0);
+	}
+	return $flux;
+}
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
  /**

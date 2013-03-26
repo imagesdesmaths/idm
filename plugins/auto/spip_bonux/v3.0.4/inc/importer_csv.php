@@ -67,8 +67,8 @@ function importer_csv_nettoie_key($key){
  */
 function inc_importer_csv_dist($file, $head = false, $delim = ",", $enclos = '"', $len = 10000) {
 	$return = false;
-	$handle = fopen($file, "r");
-	if ($handle){
+	if (@file_exists($file)
+		AND $handle = fopen($file, "r")){
 		if ($head) {
 			$header = fgetcsv($handle, $len, $delim, $enclos);
 			if ($header){
