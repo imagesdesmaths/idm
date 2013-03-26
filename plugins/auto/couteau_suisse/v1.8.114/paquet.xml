@@ -1,0 +1,57 @@
+<paquet
+	prefix="couteau_suisse"
+	categorie="maintenance"
+	version="1.8.114"
+	etat="stable"
+	compatibilite="[1.9.2;3.0.99]"
+	logo="img/couteau-50.gif"
+	schema="1.10"
+	documentation="http://www.spip-contrib.net/Le-Couteau-Suisse"
+>	
+	<nom>&lt;multi>[en]Swiss Knife[fr]Le Couteau Suisse[ca]El Ganivet Su&#237;s[ar]&#1587;&#1603;&#1610;&#1606; &#1575;&#1604;&#1580;&#1610;&#1576;[nl]Het Zwitserland Mes[gl]A navalla su&#237;za[es]La Navaja Suiza[de]Schweizer Taschenmesser[tr]&#304;svi&#231;re &#199;ak&#305;s&#305;[br]Ar Gontell Suis[pt_br]Canivete Su&#237;&#231;o[ast]La Navaya Suiza[gl]A navalla su&#237;za[ro]Cu&#355;itul Elve&#355;ian[it]Coltellino Svizzero&lt;/multi></nom>
+
+	<auteur>Patrice Vanneufville~&#169;~2007-2012</auteur>
+	<copyright>2007-2012</copyright>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+	<credit>Collectif SPIP, Vincent Ramos, Maïeul Rouquette, Fil, Arnaud Ventre, Joseph Larmarange, Cerdic, Pierre Andrews (Mortimer), IZO, Phil, Jérôme Combaz, Bertrand Marne, Têtue, Aurélien Pierard, FredoMkb, Sylvain, BoOz, Alexis Roussel, Paolo, PatV, Yohann(potter64), Nicolas Hoizey, Piero Wbmstr, etc.</credit>
+
+	<traduire module="couteau" reference="fr" gestionnaire="salvatore" />
+	<traduire module="couteauprive" reference="fr" gestionnaire="salvatore" />
+	<traduire module="paquet-couteau_suisse" reference="fr" gestionnaire="salvatore" />
+	<chemin path='' />
+
+	<pipeline nom="affichage_final" inclure="cout_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="cout_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="cout_pipelines.php" />
+	<pipeline nom="insert_head" inclure="cout_pipelines.php" />
+	<pipeline nom="header_prive" inclure="cout_pipelines.php" />
+	<pipeline nom="boite_infos" inclure="cout_pipelines.php" />
+	<pipeline nom="affiche_gauche" inclure="cout_pipelines.php" />
+	<pipeline nom="affiche_droite" inclure="cout_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="cout_pipelines.php" />
+	<pipeline nom="nettoyer_raccourcis_typo" inclure="cout_pipelines.php" />
+	<pipeline nom="pre_propre" inclure="cout_pipelines.php" />
+	<pipeline nom="pre_typo" inclure="cout_pipelines.php" />
+	<pipeline nom="post_propre" inclure="cout_pipelines.php" />
+	<pipeline nom="post_typo" inclure="cout_pipelines.php" />
+	<pipeline nom="pre_edition" inclure="cout_pipelines.php" />
+	<pipeline nom="post_edition" inclure="cout_pipelines.php" />
+	<pipeline nom="pre_boucle" inclure="cout_pipelines.php" />
+	<pipeline nom="creer_chaine_url" inclure="cout_pipelines.php" />
+	<pipeline nom="arbo_creer_chaine_url" inclure="cout_pipelines.php" />
+	<pipeline nom="propres_creer_chaine_url" inclure="cout_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="cout_pipelines.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="cout_pipelines.php" />
+	<!-- pipelines exterieurs -->
+	<pipeline nom="porte_plume_barre_pre_charger" inclure="cout_pipelines.php" />
+	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="cout_pipelines.php" />
+	<pipeline nom="facteur_pre_envoi" inclure="cout_pipelines.php" />
+	<!-- pipelines maison -->
+	<pipeline nom="pre_description_outil" inclure="cout_pipelines.php" />
+	<pipeline nom="fichier_distant" inclure="cout_pipelines.php" />
+	<pipeline nom="porte_plume_cs_pre_charger" inclure="cout_pipelines.php" />
+	
+
+	<menu nom="csconfig" titre="couteauprive:titre" parent="menu_configuration" icone="images/couteau-16.png" action ="admin_couteau_suisse" parametres="" />
+
+</paquet>
