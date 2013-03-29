@@ -1,0 +1,64 @@
+#CACHE{3600}
+<?php
+  if ($_SERVER['HTTP_HOST'] == 'www.images.math.cnrs.fr') {
+    include_spip ('inc/headers');
+    $uri = $_SERVER['REQUEST_URI'];
+    redirige_par_entete ("http://images.math.cnrs.fr$uri", '', 301);
+  }
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="http://www.facebook.com/2008/fbml"
+      version="XHTML+RDFa 1.0" xml:lang="fr">
+
+<head>
+  <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=#CHARSET"/>
+
+  [<meta name="description" content="(#ENV{desc}|sinon{#DESCRIPTIF_SITE_SPIP}|couper{150}|textebrut)"/>]
+
+  <meta name="svg.config.data-path" content="#CHEMIN{svgweb}" />
+
+  <title>[(#ENV*{title}|textebrut) - ]#NOM_SITE_SPIP</title>
+
+  <link rel="stylesheet" type="text/css" media="all" href="#CHEMIN{css/main.css}"/>
+  <link rel="stylesheet" type="text/css" media="all" href="#CHEMIN{css/tag_20120404181556.css}"/>
+  <link rel="stylesheet" type="text/css" media="all" href="#CHEMIN{mediaelement/mediaelementplayer.min.css}"/>
+
+  <link rel="alternate"  type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}"/>
+  <link rel="home"  title="Page principale" href="#URL_SITE_SPIP/"/>
+  <link rel="start" title="Page principale" href="#URL_SITE_SPIP/"/>
+  <link rel="index" title="Page principale" href="#URL_SITE_SPIP/"/>
+  <link rel="shortcut icon" href="#CHEMIN{favicon.ico}" />
+
+  [(#MODELE{insert_head_og}{env}{id_article})]
+
+  <script type="text/javascript" src="#CHEMIN{svgweb/svg.js}"></script>
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-4259270-1']);
+    _gaq.push(['_trackPageview']);
+    _gaq.push(['_trackPageLoadTime']);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+  #INSERT_HEAD
+</head>
+
+<body>
+  <div id="head" class="noprint">
+    [(#ENV{date_default}|?{'',' '}) <div id="date">
+      Voici le contenu du site &laquo; #NOM_SITE_SPIP &raquo; tel qu'il &eacute;tait &agrave; la date du [(#DATE|affdate)] :
+    </div>]
+    <div id="logo"><a href="http://www.cnrs.fr/"><img src="#CHEMIN{img/CNRS.jpg}" alt="CNRS" /></a></div>
+    <h1><a href="/"><img src="#CHEMIN{img/Logo_IDM_blanc_e00000.gif}" alt="#NOM_SITE_SPIP" /></a></h1>
+    <INCLURE{fond=inc/menu}>
+  </div>
+
+  <div class="[(#ENV{class}|sinon{page})] wrap">

@@ -1,0 +1,11 @@
+<pre>
+<BOUCLE_article(ARTICLES){id_secteur=37}{id_rubrique?}{id_mot?}>
+\section{#TITRE}
+\textbf{Auteur(s) :} <BOUCLE_aut(AUTEURS){id_article}{par nom}{", "}>#NOM</BOUCLE_aut> \\
+\textbf{Date de publication :} [(#DATE|affdate)] \\
+[(#ENV{id_mot}|?{%})]<B_piste>\textbf{Difficulté :} <BOUCLE_piste(MOTS){id_article}{id_groupe=5}>#TITRE \\</BOUCLE_piste>%<//B_piste>
+[(#ENV{id_rubrique}|?{%})]\textbf{Rubrique :} <BOUCLE_rub(RUBRIQUES){id_rubrique}>#TITRE</BOUCLE_rub>
+
+[(#DESCRIPTIF|sinon{[(#INTRODUCTION|textebrut)]}|PtoBR)]
+</BOUCLE_article>
+</pre>

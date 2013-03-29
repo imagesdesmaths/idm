@@ -1,0 +1,24 @@
+<BOUCLE_auteur(AUTEURS){id_auteur}>
+<INCLURE{fond=inc/head}{title=#NOM}{class=nopage}>
+
+<div class="page">
+[(#LOGO_AUTEUR{right})]
+
+<h1>#NOM</h1>
+[<h2 class="bio">(#BIO*) [(<a href="(#URL_SITE)">page web</a>)]</h2>]
+
+[<p><strong>Affiliation :</strong> (#AFFILIATION)</p>]
+
+#FORMULAIRE_ECRIRE_AUTEUR
+</div>
+
+<B_articles>
+<h2>Tous ses articles :</h2>
+<BOUCLE_articles(ARTICLES) {id_auteur} {id_secteur != 18} {par date} {inverse}>
+[(#INCLURE{fond=inc/resume}{id_article})]
+</BOUCLE_articles>
+
+#INCLURE{fond=inc/foot}
+</BOUCLE_auteur>
+<INCLURE{fond=sommaire}>
+<//B_auteur>

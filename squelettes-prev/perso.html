@@ -1,0 +1,45 @@
+#CACHE{0}
+<INCLURE{fond=inc/head}{title=Votre espace personnel}>
+
+<BOUCLE_moi(AUTEURS) {tous} {id_auteur=#SESSION{id_auteur}}>
+  <h1>Bonjour, #NOM&nbsp;!</h1>
+
+  <p>Bienvenue dans votre espace personnel sur Images des
+  Math&eacute;matiques.  C'est &agrave; partir de cette page que vous
+  pouvez g&eacute;rer votre participation au site et acc&eacute;der
+  &agrave; vos informations personnelles.</p>
+
+  [(#BILLETTISTE|=={oui}|oui) <h3>Vous &ecirc;tes billettiste.</h3>
+
+  <p>Pour &eacute;crire un billet, il vous suffit de cliquer ici
+  : <a href="#URL_PAGE{billet}">&eacute;crire un nouveau billet</a> (ou
+  sur le lien de m&ecirc;me titre dans le menu &quot;Mon IdM&quot;
+  ci-dessus).  Votre billet sera publi&eacute; aussit&ocirc;t que vous
+  l'aurez valid&eacute;. Si toutefois nous constations que trop de
+  billets sont soumis le m&ecirc;me jour, il se peut que nous le
+  retirions ensuite de la page d'accueil pour l'y remettre quelques
+  jours plus tard, afin de r&eacute;guler le flot de nouveaut&eacute;s ;
+  ne vous inqui&eacute;tez donc pas si votre contribution
+  dispara&icirc;t, elle n'est pas perdue !</p>]
+
+  [(#STATUT|=={1comite}|oui) <h3>Vous &ecirc;tes r&eacute;dacteur.</h3>
+
+  <p>Vous pouvez acc&eacute;der &agrave; la partie priv&eacute;e du site
+  (o&ugrave; vous pourrez &eacute;crire puis suivre le devenir de votre
+  article) en suivant le lien intitul&eacute; &quot;espace de
+  r&eacute;daction&quot; dans le menu &quot;Mon IdM&quot; ci-dessus. Une
+  fois votre article soumis, vous aurez &eacute;galement la
+  possibilit&eacute; de dialoguer avec ses relecteurs.</p>]
+
+  <div class="ajax">#FORMULAIRE_RELECTEURS_PERSO</div>
+
+  <BOUCLE_relecteurs(relecteurs_articles articles) {id_auteur=#SESSION{id_auteur}}>
+      <h3>Vous avez un article &agrave; relire : <a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">#TITRE</a></h3>
+  </BOUCLE_relecteurs>
+</BOUCLE_moi>
+  <h1>Merci de vous identifier</h1>
+  #LOGIN_PUBLIC
+  <p>Si vous n'avez pas d'identifiant, vous pouvez <a href="#URL_PAGE{inscription}">vous inscrire</a>.</p>
+<//B_moi>
+
+<INCLURE{fond=inc/foot}>

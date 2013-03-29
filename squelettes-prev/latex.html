@@ -1,0 +1,38 @@
+<BOUCLE_article(ARTICLES){id_article}>
+  <pre>
+\documentclass[a4paper,11pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=3cm]{geometry}
+\usepackage{graphicx,grffile}
+\usepackage{hyperref}
+
+[\title{(#TITRE)}]
+[\subtitle{(#SOUSTITRE)}]
+
+[\author{Par (#LESAUTEURS)}]
+[\date{Publié sur IdM le (#DATE|affdate)}]
+
+\begin{document}
+  \maketitle
+
+  \centerline{\includegraphics[width=.5\hsize]{#LOGO_ARTICLE**}}
+
+  [\begin{abstract}
+    (#CHAPO|wordwrap)
+  \end{abstract}]
+
+  [(#TEXTE*|idm_texify|wordwrap)]
+
+  [\section*{Post Scriptum}(#PS|wordwrap)]
+\end{document}
+
+<hr/>
+
+<a href="IMG/#LOGO_ARTICLE**">#LOGO_ARTICLE**</a>
+<BOUCLE_doc(DOCUMENTS) {id_article}>
+<a href="#URL_DOCUMENT">#URL_DOCUMENT</a>
+</BOUCLE_doc>
+
+  </pre>
+</BOUCLE_article>

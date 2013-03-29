@@ -6,4 +6,6 @@ define ('_ID_WEBMESTRES', '1');
 
 // ini_set('display_errors', '1');
 
+// $GLOBALS['dossier_squelettes'] = 'squelettes-prev';
+
 ?>

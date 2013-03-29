@@ -1,0 +1,23 @@
+<?php
+  $total = #ENV{total};
+  $position = #ENV{position};
+  $pas = #ENV{pas};
+  $npages = #ENV{nombre_pages};
+  $cpage = #ENV{page_courante};
+  $debut = "#ENV{debut}";
+
+  if ($npages>1) {
+    print '<p style="text-align : right">';
+    print "Page $cpage/$npages";
+    if ($position > 0) {
+      $prevpos = $position - $pas;
+      if ($prevpos<0) $prevpos=0;
+      print " - <a href=\"?$debut=$prevpos\">page précédente</a>";
+    }
+    if ($position < $total - $pas) {
+      $newpos = $position + $pas;
+      print " - <a href=\"?$debut=$newpos\">page suivante</a>";
+    }
+    print '</p>';
+  }
+?>
