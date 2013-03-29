@@ -27,7 +27,7 @@ is full of SPIP and PHP and geek stuff).
 
 * Code management
 
-This is done in Git, and there are 4 branches to keep track of (plus
+This is done in Git, and there are 3 branches to keep track of (plus
 temporary ones for experimental features, if needed). That can change if
 we end up working in a team but so far:
 - =release= is tracking the =zip= files containing the official
@@ -41,9 +41,6 @@ we end up working in a team but so far:
   =spip= when a new release appears, or when a bugfix is
   implemented. In principle no file is modified between =spip= and
   =idm=, just new stuff is added (=/squelettes=, =/plugins= etc.).
-- =idm_prev= contains a previous development tree, from where the
-  version of SPIP used on the site was still unreleased. Kept for
-  reference purposes, but not updated anymore.
 
 * Issues
 
