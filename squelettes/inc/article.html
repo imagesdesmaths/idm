@@ -1,13 +1,13 @@
-<BOUCLE_article(ARTICLES) {id_article = #ENV{id_article}} {statut == .}>  
+<BOUCLE_article(ARTICLES) {id_article = #ENV{id_article}} {statut == .}>
 
 
   <div class="rubrique">
-    <BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {id_rubrique != 6}>
+    <BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>
       <a class="plain" href="#URL_RUBRIQUE">#TITRE</a>
     </BOUCLE_rubrique>
-  </div>   
+  </div>
 
- <div class="[script(#ID_RUBRIQUE|=={34}|oui)]article">   
+ <div class="[script(#ID_RUBRIQUE|=={34}|oui)]article">
 
     [(#ID_ARTICLE|!={100}|?{' ',''})
       [(#INCLURE{fond=inc/affiche-logo}{id_article})]
@@ -16,15 +16,15 @@
     [<h2 class="surtitre">(#SURTITRE|echappe_retour)</h2>]
     [<h1 class="titre">(#TITRE)</h1>]
     [<h2 class="soustitre">(#SOUSTITRE|echappe_retour)</h2>]
-    [<h3 class="auteur">(#LESAUTEURS)</h3>]        
+    [<h3 class="auteur">(#LESAUTEURS)</h3>]
     <BOUCLE_auteur(AUTEURS) {id_article}>[(#SET{uniqueauteur,#ID_AUTEUR})]
-    </BOUCLE_auteur>    
+    </BOUCLE_auteur>
     <BOUCLE_auteurs(AUTEURS) {id_article} {1,1}>[(#SET{uniqueauteur,0})]
-    </BOUCLE_auteurs>    
-    <BOUCLE_unique(AUTEURS) {id_auteur=#GET{uniqueauteur}}>      
+    </BOUCLE_auteurs>
+    <BOUCLE_unique(AUTEURS) {id_auteur=#GET{uniqueauteur}}>
       <p class="bio">[(#BIO*) [
         (<a href="(#URL_SITE)">page web</a>)]]
-      </p>    
+      </p>
     </BOUCLE_unique>       [
     <div class="chapo">(#CHAPO)
     </div>]     [
@@ -35,6 +35,6 @@
       </span> (#PS)
     </div>]     [
     <div class="notes"><h3>Notes</h3>(#NOTES)
-    </div>]   
+    </div>]
   </div>
 </BOUCLE_article>

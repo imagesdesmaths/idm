@@ -17,7 +17,7 @@
       </a>
     </h3>
     <div class="rubrique">
-      <BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {id_rubrique != 6}>
+      <BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>
         <a class="plain" href="#URL_RUBRIQUE">#TITRE</a>
       </BOUCLE_rubrique>
     </div>
@@ -29,7 +29,7 @@
       </div>
       <div class="datecomment">
         [<span class="auteur[(#ID_SECTEUR|=={18}|?{' invisible'})]">Le [(#DATE_REDAC|sinon{#DATE}|affdate)], par (#LESAUTEURS)
-        
+
         </span>]
         <BOUCLE_decompte(FORUMS) {id_article} {plat}>#SET{nb,#TOTAL_BOUCLE}</BOUCLE_decompte>
         [<a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">
