@@ -1,0 +1,10 @@
+<style type="text/css">
+    div.doodle { width:520px; margin: 1ex auto; background:transparent url(#CHEMIN{img/bg_header_gradient.gif}) no-repeat; }
+</style>
+
+<div class="doodle">
+    <img src="#CHEMIN{img/logo-cnrs.png}" />
+    <BOUCLE_img(DOCUMENTS) {id_document = #ENV{id}} {tous}>
+        <img src="#URL_DOCUMENT" style="margin-left:-4px">
+    </BOUCLE_img>
+</div>
