@@ -16,8 +16,8 @@
 	</langue>
 	<langue code="fr" />
 	<langue code="it" url="http://trad.spip.net/tradlang_module/paquet-mediabox?lang_cible=it">
-		<traducteur nom="phante" lien="http://trad.spip.net/auteur/phante" />
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
+		<traducteur nom="phante" lien="http://trad.spip.net/auteur/phante" />
 	</langue>
 	<langue code="lb" url="http://trad.spip.net/tradlang_module/paquet-mediabox?lang_cible=lb">
 		<traducteur nom="jwander" lien="http://trad.spip.net/auteur/jwander" />

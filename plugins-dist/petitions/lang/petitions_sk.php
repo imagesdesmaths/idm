@@ -84,6 +84,7 @@ uvedenú nižšie (v opačnom prípade bude vaša
 	'signatures_prop' => 'Čakajúce',
 	'signatures_publie' => 'Potvrdené',
 	'signatures_recherche_label' => 'Vyhľadať podpisy:',
+	'signatures_selection' => 'Sélectionner les signatures :', # NEW
 	'signatures_toutes' => 'Všetky',
 	'statut_poubelle' => 'Vymazaný',
 	'statut_prop' => 'Čaká na potvrdenie',

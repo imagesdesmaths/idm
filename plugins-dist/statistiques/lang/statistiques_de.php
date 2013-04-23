@@ -47,13 +47,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_comment_lire_tableau' => 'Die Position eines Artikels wird durch einen Balken angezeigt. Seine Popularität (eine Schätzung der täglichen Besucher im Fall, dass die Zugriffe konstant bleiben) und die Anzahl der Besuche von Anfang an werden angezeigt, wenn der Mauszeiger über den Titel bewegt wird.',
 	'texte_signification' => 'Die roten Balken stellen die Summe der Einträge dar (Summe der Unterrubriken), die hellen Balken symbolisieren die Anzahl der Seitenabrufe pro Rubrik.',
 	'titre_evolution_visite' => 'Entwicklung der Seitenabrufe',
-	'titre_liens_entrants' => 'Referer von heute',
+	'titre_liens_entrants' => 'Referer',
 	'titre_page_statistiques' => 'Statistiken pro Rubrik',
 	'titre_page_statistiques_visites' => 'Statistik der Seitenabrufe',
 
 	// V
 	'visites_journalieres' => 'Anzahl Besuche pro Tag',
-	'visites_mensuelles' => 'Anzahl Besucher pro Tag'
+	'visites_mensuelles' => 'Anzahl Besucher pro Monat'
 );
 
 ?>

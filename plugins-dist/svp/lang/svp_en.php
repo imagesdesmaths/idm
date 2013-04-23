@@ -75,6 +75,7 @@ You must confirm this action.',
 
 	// E
 	'erreur_actions_non_traitees' => 'Some actions have not been performed. This may be due to an error during actions to be processed, or of a display of this page while actions are still pending. Actions were initiated by @auteur@ at @date@.',
+	'erreur_auth_plugins_ajouter_lib' => 'You do not have permission to add a library.',
 	'erreur_dir_dib_ecriture' => 'The library directory @dir@ is not writable. Impossible to load a library!',
 	'erreur_dir_dib_indefini' => '_DIR_LIB directory is not defined. Impossible to load a library!',
 	'erreur_dir_plugins_auto' => 'The directory "plugins/auto" allowing to download packages

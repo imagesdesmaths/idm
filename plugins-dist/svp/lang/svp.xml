@@ -6,13 +6,14 @@
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/svp?lang_cible=en">
-		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/svp?lang_cible=es">
-		<traducteur nom="jotacese" lien="http://trad.spip.net/auteur/jotacese" />
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
+		<traducteur nom="jotacese" lien="http://trad.spip.net/auteur/jotacese" />
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/svp?lang_cible=fa">

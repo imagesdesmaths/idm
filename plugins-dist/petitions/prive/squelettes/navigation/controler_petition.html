@@ -9,7 +9,7 @@
 		</p>
 		<p>
 		<p>
-		Sélectionner les signatures:<br />
+		<:petitions:signatures_selection:><br />
 		<a href="#" class="shortcut selectall" onclick="actiongroup.selectAll();return false;"><:petitions:signatures_toutes:></a> |
 		<a href="#" class="shortcut unselectall" onclick="actiongroup.unselectAll();return false;"><:petitions:signatures_aucune:></a> |
 		<a href="#" class="shortcut selectprop" onclick="actiongroup.selectAll($('li.statut_prop'));return false;"><:petitions:signatures_prop:></a>
@@ -29,7 +29,7 @@
 
 
 	<script type="text/javascript">/*<!\[CDATA\[*/
-	[(#INCLURE{prive/javascript/actiongroup.js}|minifier{js})]
+	[(#INCLURE{prive/javascript/actiongroup.js}|appliquer_filtre{minifier_js, true})]
 	function reinit(){actiongroup.activate(jQuery("ul.liste-items.signatures >.item.signature",this));}
 	jQuery(reinit);
 	onAjaxLoad(reinit);

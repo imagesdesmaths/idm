@@ -88,6 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_actions_non_traitees' => 'Niektoré akcie neboli vykonané.
 			Mohlo sa to stať kvôli chybám v akciách, ktoré bolo treba vykonať, alebo kvôli chybe v zobrazení tejto stránky, zatiaľčo akcie čakajú, kým budú vykonané. Akcie spustil(a) @auteur@ @date@.',
+	'erreur_auth_plugins_ajouter_lib' => 'Vous n\'avez pas les droits nécessaires pour ajouter une librairie.', # NEW
 	'erreur_dir_dib_ecriture' => 'Do adresára knižníc @dir@ sa nedá zapisovať. Knižnica sa nedá spustiť!',
 	'erreur_dir_dib_indefini' => 'Priečinok _DIR_LIB nie je definovaný. Knižnica sa nedá spustiť!',
 	'erreur_dir_plugins_auto' => 'Priečinok "plugins/auto" na stiahnutie balíkov

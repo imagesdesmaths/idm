@@ -12,9 +12,9 @@
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/compresseur?lang_cible=en">
-		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
-		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
+		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
 	</langue>
 	<langue code="eo" url="http://trad.spip.net/tradlang_module/compresseur?lang_cible=eo">
 		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
@@ -38,9 +38,9 @@
 		<traducteur nom="jwander" lien="http://trad.spip.net/auteur/jwander" />
 	</langue>
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/compresseur?lang_cible=nl">
-		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 		<traducteur nom="gerbrand" lien="http://trad.spip.net/auteur/gerbrand" />
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
+		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
 	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/compresseur?lang_cible=pt_br">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />

@@ -33,7 +33,7 @@
 ]
 
 <script type="text/javascript">/*<![CDATA[*/
-[(#INCLURE{prive/javascript/actiongroup.js}|minifier{js})]
+[(#INCLURE{prive/javascript/actiongroup.js}|appliquer_filtre{minifier_js, true})]
 function reinit(){actiongroup.activate(jQuery("ul.liste-items.forums >.item.forum:not(.statut_prive,.statut_privadm,.statut_privrac,.statut_privoff)",this));}
 jQuery(reinit);
 onAjaxLoad(reinit);

@@ -1,7 +1,7 @@
 <paquet
 	prefix="mots"
 	categorie="edition"
-	version="2.4.9"
+	version="2.4.10"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/mot-32.png"
@@ -15,7 +15,7 @@
 
 	<traduire module="mots" reference="fr" gestionnaire="salvatore" />
 
-	<pipeline nom="mots_indexation" />
+	<pipeline nom="mots_indexation" action="" />
 	<pipeline nom="autoriser" inclure="mots_autoriser.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/mots.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/mots.php" />

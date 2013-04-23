@@ -1037,6 +1037,11 @@ class Actionneur {
 			$this->log("/!\ Ne peut pas écrire dans _DIR_LIB !");
 			return false;
 		}
+		if(!autoriser('plugins_ajouter')){
+			$this->err(_T('svp:erreur_auth_plugins_ajouter_lib'));
+			$this->log("/!\ Pas autorisé à ajouter des libs !");
+			return false;
+		}
 
 		$this->log("Recuperer la librairie : " . $info['n'] );
 

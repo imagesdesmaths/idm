@@ -2,10 +2,10 @@
 <B_plugins>
 <div class="liste plugins" id="liste_plugins">
 	<ul class="liste-items">
-<BOUCLE_plugins(PAQUETS plugins){tout}{par multi nom, paquets.prefixe}{!par constante, actif}{id_depot=0}{actif ?}{constante ?IN #ENV{constante}}>
+	<BOUCLE_plugins(PAQUETS plugins){tout}{par multi nom, paquets.prefixe}{!par constante, actif}{id_depot=0}{actif ?}{constante ?IN #ENV{constante}}>
 		#SET{incompatible, #COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}, spip}|non}
 		#SET{verrou,#CONSTANTE|=={_DIR_PLUGINS_DIST}|oui}
-		<li class="item[ (#ACTIF|=={oui}|?{actif,inactif})][(#OBSOLETE|=={oui}|ou{#ATTENTE|=={oui}}|ou{#GET{incompatible}}|oui) disabled][(#GET{incompatible}|oui) incompatible][(#GET{verrou}|oui) verrou][(#MAJ_VERSION|oui) up]"[ id="(#PREFIXE|strtolower)-#COMPTEUR_BOUCLE"][ data-id_paquet="(#ID_PAQUET)"]>
+		<li class="item[ (#ACTIF|=={oui}|?{actif,inactif})][(#OBSOLETE|=={oui}|ou{#ATTENTE|=={oui}}|ou{#GET{incompatible}}|oui) disabled][(#GET{incompatible}|oui) incompatible][(#GET{verrou}|oui) verrou][(#MAJ_VERSION|oui|et{#AUTORISER{plugins_ajouter}|oui}|oui)up]"[ id="(#PREFIXE|strtolower)-#COMPTEUR_BOUCLE"][ data-id_paquet="(#ID_PAQUET)"]>
 			[(#OBSOLETE|=={non}|et{#CONSTANTE|!={_DIR_PLUGINS_DIST}}|et{#GET{incompatible}|non}|ou{#ATTENTE|=={oui}}|oui)
 			<div class="check">
 				<input type="checkbox" class="checkbox select_plugin" name="ids_paquet\[\]" value="#ID_PAQUET"
@@ -26,7 +26,8 @@
 				<span class="version">[(#VERSION)]</span>
 				<span class="etat">[ - (#ETAT)]</span>
 				[(#SET{erreur,[<span class="information">(#OBSOLETE|=={oui}|oui)<:svp:info_plugin_obsolete:></span> ]})]
-				[(#SET{erreur,[(#GET{erreur}|concat{[- <span class="information">(#ATTENTE|=={oui}|oui)<:svp:info_plugin_attente_dependance:></span> ]})]})]
+				[(#SET{erreur,[(#GET{erreur}|concat{[- <span class="information">(#ATTENTE|=={oui}|et{#AUTORISER{plugins_ajouter}|non}|oui)<:svp:info_plugin_attente_dependance_interdit:></span> ]})]})]
+				[(#SET{erreur,[(#GET{erreur}|concat{[- <span class="information">(#ATTENTE|=={oui}|et{#AUTORISER{plugins_ajouter}|oui}|oui)<:svp:info_plugin_attente_dependance:></span> ]})]})]
 				[(#SET{erreur,[(#GET{erreur}|concat{[- <span class="information">(#GET{incompatible}|oui)<:svp:info_plugin_incompatible:></span>]})]})]
 				<div class="short">[(#GET{erreur}|ltrim{'-'}|sinon{#SLOGAN|extraire_multi|typo|sinon{#DESCRIPTION|extraire_multi|propre}|PtoBR|explode{'<br />'}|reset|couper{80}})]</div>
 				[(#LOGO|oui)<div class="icon">
@@ -46,9 +47,10 @@
 			]
 			[(#OBSOLETE|=={non}|et{#CONSTANTE|!={_DIR_PLUGINS_DIST}}|et{#GET{incompatible}|non}|oui)
 				[(#ACTIF|=={oui}|non|ou{#ATTENTE|=={oui}})
-					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{on})]" class="submit" value="<:svp:bouton_activer:>" />
+					[(#ACTIF|=={oui}|non|ou{#ATTENTE|=={oui}|oui|et{#AUTORISER{plugins_ajouter}|oui}}|oui)
+					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{on})]" class="submit" value="<:svp:bouton_activer:>" />]
 				]
-				[(#MAJ_VERSION|oui)
+				[(#MAJ_VERSION|oui|et{#AUTORISER{plugins_ajouter}|oui}|oui)
 					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{up})]" class="submit" value="<:svp:bouton_up:>" />
 				]
 			]
@@ -72,7 +74,7 @@
 			[(#GET{verrou})
 				[(#CHEMIN_IMAGE{cadenas-16.png}|balise_img{<:svp:plugin_info_verrouille:>,picto_verrou}|inserer_attribut{title,<:svp:plugin_info_verrouille:>})]
 			]
-			[(#MAJ_VERSION|oui)
+			[(#MAJ_VERSION|oui|et{#AUTORISER{plugins_ajouter}|oui}|oui)
 			[(#CHEMIN_IMAGE{update-16.png}|balise_img{<:svp:plugin_info_up:>,picto_up}|inserer_attribut{title,<:svp:plugin_info_up{version=#MAJ_VERSION}:>})]
 			]
 			[(#OBSOLETE|=={oui}|ou{#GET{incompatible}}|ou{#ATTENTE|=={oui}}|oui)
@@ -84,7 +86,7 @@
 			][(#ENV{id_paquet}|=={#ID_PAQUET}|?{#SET{id_paquet,#ID_PAQUET},#SET{id_paquet,0}})]
 			[(#INCLURE{fond=prive/squelettes/inclure/plugin_detail,id_paquet=#GET{id_paquet},ajax=detail_#ID_PAQUET,env})]
 		</li>
-</BOUCLE_plugins>
+	</BOUCLE_plugins>
 	</ul>
 </div>
 </B_plugins>

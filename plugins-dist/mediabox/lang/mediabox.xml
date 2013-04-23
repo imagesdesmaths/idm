@@ -8,9 +8,9 @@
 		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/mediabox?lang_cible=en">
-		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
+		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/mediabox?lang_cible=es">
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
@@ -22,8 +22,8 @@
 	</langue>
 	<langue code="fr" />
 	<langue code="it" url="http://trad.spip.net/tradlang_module/mediabox?lang_cible=it">
-		<traducteur nom="phante" lien="http://trad.spip.net/auteur/phante" />
 		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
+		<traducteur nom="phante" lien="http://trad.spip.net/auteur/phante" />
 	</langue>
 	<langue code="lb" url="http://trad.spip.net/tradlang_module/mediabox?lang_cible=lb">
 		<traducteur nom="jwander" lien="http://trad.spip.net/auteur/jwander" />
@@ -32,9 +32,9 @@
 		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/mediabox?lang_cible=ru">
-		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
-		<traducteur nom="nazar" lien="http://trad.spip.net/auteur/nazar" />
 		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
+		<traducteur nom="nazar" lien="http://trad.spip.net/auteur/nazar" />
+		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/mediabox?lang_cible=sk">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />

@@ -25,10 +25,11 @@
  *   true si l'opération est correctement réalisée
  */
 function action_teleporter_composant_dist($methode,$source,$dest,$options=array()){
-
 	# Si definie a '', le chargeur est interdit ; mais on n'aurait de toutes
 	# facons jamais pu venir ici avec toutes les securisations faites :^)
-	if (!_DIR_PLUGINS_AUTO) die('jamais');
+
+	if (!preg_match(','.substr(_DIR_LIB,0,-1).',',$dest) && !_DIR_PLUGINS_AUTO) 
+		die('Vous ne pouvez pas télécharger, absence de _DIR_PLUGINS_AUTO');
 
 	// verifier que la methode est connue
 	if (!$teleporter =  charger_fonction($methode,"teleporter",true)){

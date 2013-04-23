@@ -4,13 +4,14 @@
 	</langue>
 	<langue code="de" url="http://trad.spip.net/tradlang_module/urls?lang_cible=de">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
+		<traducteur nom="Torsten Willmann" lien="http://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/urls?lang_cible=en">
-		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
-		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
-		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
+		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/urls?lang_cible=es">
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />

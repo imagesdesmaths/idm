@@ -75,6 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_actions_non_traitees' => 'لقد تم تنفيذ بعض العمليات. قد يأتي ذلك من خطأ في عمليات ستنفذ او من عرض هذه الصفحة بينما هناك عمليات قيد التنفيذ. تم إطلاق العمليات من قبل @auteur@ في @date@.',
+	'erreur_auth_plugins_ajouter_lib' => 'الأذونات الضرورية غير متوافرة لإضافة مكتبة.',
 	'erreur_dir_dib_ecriture' => 'مجلد المكتبات @dir@ غير متاح للكتابة. لا يمكن تغيير اي مكتبة داخله!',
 	'erreur_dir_dib_indefini' => 'المجلد _DIR_LIB غير محدد. لا يمكن تغيير اي مكتبة داخله!',
 	'erreur_dir_plugins_auto' => 'المجلد «plugins/auto» الذي يتيح تحميل الرزم 

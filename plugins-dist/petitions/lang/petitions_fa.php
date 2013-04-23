@@ -80,6 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'signatures_prop' => 'در انتظار',
 	'signatures_publie' => 'تأييد شده‌ها',
 	'signatures_recherche_label' => 'جستجوي امضاها:',
+	'signatures_selection' => 'Sélectionner les signatures :', # NEW
 	'signatures_toutes' => 'همه',
 	'statut_poubelle' => 'به سبدباطله',
 	'statut_prop' => 'در انتظار تأييد',

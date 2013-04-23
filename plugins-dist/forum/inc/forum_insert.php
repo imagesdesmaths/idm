@@ -63,15 +63,16 @@ function inc_forum_insert_dist($objet, $id_objet, $id_forum, $force_statut = NUL
 	}
 	spip_log("insertion de forum $force_statut sur $objet $id_objet (+$id_forum)", 'forum');
 
-	$c = array('statut'=>'off');
-	$c['objet'] = $objet;
-	$c['id_objet'] = $id_objet;
+
 
 	include_spip('inc/filtres');
 	include_spip('inc/modifier');
 	$champs = objet_info('forum','champs_editables');
 	$c = collecter_requests($champs, array());
-
+	
+	$c['statut'] = 'off';
+	$c['objet'] = $objet;
+	$c['id_objet'] = $id_objet;
 	$c['auteur'] = sinon($GLOBALS['visiteur_session']['nom'],
 		$GLOBALS['visiteur_session']['session_nom']);
 	$c['email_auteur'] = sinon($GLOBALS['visiteur_session']['email'],
