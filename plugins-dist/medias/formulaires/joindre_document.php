@@ -33,31 +33,23 @@ function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=
 	$valeurs['_mode'] = $mode;
 	
 	$valeurs['url'] = 'http://';
-	$valeurs['fichier_upload'] = '';
-	
-	$valeurs['_options_upload_ftp'] = '';
-	$valeurs['_dir_upload_ftp'] = '';
-	
-	$valeurs['joindre_upload']=''; 
-	$valeurs['joindre_distant']=''; 
-	$valeurs['joindre_ftp']='';
-	$valeurs['joindre_mediatheque']='';
+	$valeurs['fichier_upload'] = $valeurs['_options_upload_ftp'] = $valeurs['_dir_upload_ftp'] = ''; 
+	$valeurs['joindre_upload'] = $valeurs['joindre_distant'] = $valeurs['joindre_ftp'] = $valeurs['joindre_mediatheque'] = '';
 
 	$valeurs['editable'] = ' ';
-	if (intval($id_document)){
+	if (intval($id_document))
 		$valeurs['editable'] = autoriser('modifier','document',$id_document)?' ':'';
-	}
 	
 	$valeurs['proposer_media'] = is_string($proposer_media) ? (preg_match('/^(false|non|no)$/i', $proposer_media) ? false : true) : $proposer_media;
 	$valeurs['proposer_ftp'] = is_string($proposer_ftp) ? (preg_match('/^(false|non|no)$/i', $proposer_ftp) ? false : true) : $proposer_ftp;
-	
+
 	# regarder si un choix d'upload FTP est vraiment possible
 	if (
-	 $valeurs['proposer_ftp']
-	 AND test_espace_prive() # ??
-	 AND ($mode == 'document' OR $mode == 'choix') # si c'est pour un document
-	 //AND !$vignette_de_doc		# pas pour une vignette (NB: la ligne precedente suffit, mais si on la supprime il faut conserver ce test-ci)
-	 AND $GLOBALS['flag_upload']
+		$valeurs['proposer_ftp']
+		AND test_espace_prive() # ??
+		AND ($mode != 'image') AND ($mode != 'vignette') # si c'est pour un document
+		//AND !$vignette_de_doc		# pas pour une vignette (NB: la ligne precedente suffit, mais si on la supprime il faut conserver ce test-ci)
+		AND $GLOBALS['flag_upload']
 	 ) {
 		include_spip('inc/documents');
 		if ($dir = determine_upload('documents')) {
@@ -105,9 +97,8 @@ function formulaires_joindre_document_verifier_dist($id_document='new',$id_objet
 	// sinon c'est un upload
 	else {
 		$files = joindre_trouver_fichier_envoye();
-		if (is_string($files)){
+		if (is_string($files))
 			$erreurs['message_erreur'] = $files;
-		}
 		elseif(is_array($files)){
 			// erreur si on a pas trouve de fichier
 			if (!count($files))
@@ -128,8 +119,8 @@ function formulaires_joindre_document_verifier_dist($id_document='new',$id_objet
 				// si ce n'est pas deja un post de zip confirme
 				// regarder si il faut lister le contenu du zip et le presenter
 				if (!count($erreurs)
-				 AND !_request('joindre_zip')
-				 AND $contenu_zip = joindre_verifier_zip($files)){
+					AND !_request('joindre_zip')
+					AND $contenu_zip = joindre_verifier_zip($files)){
 					list($fichiers,$erreurs,$tmp_zip) = $contenu_zip;
 					if ($fichiers)
 						$erreurs['lister_contenu_archive'] = recuperer_fond("formulaires/inc-lister_archive_jointe",array('chemin_zip'=>$tmp_zip,'liste_fichiers_zip'=>$fichiers,'erreurs_fichier_zip'=>$erreurs));
@@ -145,7 +136,6 @@ function formulaires_joindre_document_verifier_dist($id_document='new',$id_objet
 	
 	return $erreurs;
 }
-
 
 function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=0,$objet='',$mode = 'auto',$galerie = false, $proposer_media=true, $proposer_ftp=true){
 	$res = array('editable'=>true);
@@ -198,9 +188,8 @@ function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=
 			if (!is_numeric($doc))
 				$messages_erreur[] = $doc;
 			// cas qui devrait etre traite en amont
-			elseif(!$doc){
+			elseif(!$doc)
 				$messages_erreur[] = _T('medias:erreur_insertion_document_base',array('fichier'=>'<em>???</em>'));
-			}
 			else{
 				if (!$ancre)
 					$ancre = $doc;
@@ -209,9 +198,8 @@ function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=
 		}
 		if (count($messages_erreur))
 			$res['message_erreur'] = implode('<br />',$messages_erreur);
-		if ($sel){
+		if ($sel)
 			$res['message_ok'] = singulier_ou_pluriel(count($sel),'medias:document_installe_succes','medias:nb_documents_installe_succes');
-		}
 		if ($ancre)
 			$res['redirect'] = "#doc$ancre";
 	}
@@ -234,8 +222,6 @@ function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=
 	return $res;
 }
 
-
-
 /**
  * Retourner le contenu du select HTML d'utilisation de fichiers envoyes
  *
@@ -245,14 +231,12 @@ function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=
  */
 function joindre_options_upload_ftp($dir, $mode = 'document') {
 	$fichiers = preg_files($dir);
-	$exts = array();
-	$dirs = array(); 
-	$texte_upload = array();
+	$exts = $dirs = $texte_upload = array();
 
 	// en mode "charger une image", ne proposer que les inclus
-	$inclus = ($mode == 'document' OR $mode =='choix')
-		? ''
-		: " AND inclus='image'";
+	$inclus = ($mode == 'image' OR $mode =='vignette')
+		? " AND inclus='image'"
+		: '';
 
 	foreach ($fichiers as $f) {
 		$f = preg_replace(",^$dir,",'',$f);
@@ -269,24 +253,24 @@ function joindre_options_upload_ftp($dir, $mode = 'document') {
 			$k = 2*substr_count($f,'/');
 			$n = strrpos($f, "/");
 			if ($n === false)
-			  $lefichier = $f;
+				$lefichier = $f;
 			else {
-			  $lefichier = substr($f, $n+1, strlen($f));
-			  $ledossier = substr($f, 0, $n);
-			  if (!in_array($ledossier, $dirs)) {
-				$texte_upload[] = "\n<option value=\"$ledossier\">"
-				. str_repeat("&nbsp;",$k) 
-				._T('medias:tout_dossier_upload', array('upload' => $ledossier))
-				."</option>";
-				$dirs[]= $ledossier;
-			  }
+				$lefichier = substr($f, $n+1, strlen($f));
+				$ledossier = substr($f, 0, $n);
+				if (!in_array($ledossier, $dirs)) {
+					$texte_upload[] = "\n<option value=\"$ledossier\">"
+					. str_repeat("&nbsp;",$k) 
+					._T('medias:tout_dossier_upload', array('upload' => $ledossier))
+					."</option>";
+					$dirs[]= $ledossier;
+				}
 			}
 
 			if ($exts[$ext] == 'oui')
-			  $texte_upload[] = "\n<option value=\"$f\">" .
-			    str_repeat("&nbsp;",$k+2) .
-			    $lefichier .
-			    "</option>";
+				$texte_upload[] = "\n<option value=\"$f\">" .
+					str_repeat("&nbsp;",$k+2) .
+			    	$lefichier .
+			    	"</option>";
 		}
 	}
 
@@ -299,7 +283,6 @@ function joindre_options_upload_ftp($dir, $mode = 'document') {
 
 	return $texte;
 }
-
 
 /**
  * Lister les fichiers contenus dans un zip
@@ -323,17 +306,14 @@ function joindre_liste_contenu_tailles_archive($files) {
 	return $res;
 }
 
-
 function joindre_liste_erreurs_to_li($erreurs){
 	if (count($erreurs)==1)
 		return "<p>".reset($erreurs)."</p>";
 
-
 	$res = implode("</li><li>",$erreurs);
 	if (strlen($res)) $res = "<li>$res</li></ul>";
-	if (count($erreurs)>4){
+	if (count($erreurs)>4)
 		$res = "<p style='cursor:pointer;' onclick='jQuery(this).siblings(\"ul\").toggle();return false;'>"._T("medias:erreurs_voir",array('nb'=>count($erreurs)))."</p><ul class=\"spip none-js\">".$res."</ul>";
-	}
 	else
 		$res = "<ul class=\"spip\">$res</ul>";
 	return $res;

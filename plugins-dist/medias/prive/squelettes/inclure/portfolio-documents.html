@@ -16,7 +16,7 @@
 	#MODELE{document_desc,id_document,id_objet,objet}
 </BOUCLE_illustrations>
 [(#TOTAL_BOUCLE|>{20}|oui)<p class="pagination">#PAGINATION</p>]
-[(#BOUTON_ACTION{<:medias:lien_tout_enlever:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-I/image,#SELF|ancre_url{illustrations}},'ajax tout_supprimer'})]
+[(#BOUTON_ACTION{<:medias:lien_tout_enlever:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-I/image,#SELF|ancre_url{illustrations}},'ajax tout_supprimer',<:ecrire:lien_tout_supprimer:> ?})]
 </div>
 #SET{nbdocs,#GET{nbdocs}|plus{#GRAND_TOTAL}}
 </B_illustrations>
@@ -30,7 +30,7 @@
 	#MODELE{document_desc,id_document,id_objet,objet}
 </BOUCLE_portfolio>
 [(#TOTAL_BOUCLE|>{20}|oui)<p class="pagination">#PAGINATION</p>]
-[(#BOUTON_ACTION{<:medias:lien_tout_enlever:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-I/document,#SELF|ancre_url{portfolio}},'ajax tout_supprimer'})]
+[(#BOUTON_ACTION{<:medias:lien_tout_enlever:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-I/document,#SELF|ancre_url{portfolio}},'ajax tout_supprimer',<:ecrire:lien_tout_supprimer:> ?})]
 </div>
 #SET{nbdocs,#GET{nbdocs}|plus{#GRAND_TOTAL}}
 </B_portfolio>
@@ -44,7 +44,7 @@
 	#MODELE{document_desc,id_document,id_objet,objet}
 </BOUCLE_documents>
 [(#TOTAL_BOUCLE|>{20}|oui)<p class="pagination">#PAGINATION</p>]
-[(#BOUTON_ACTION{<:medias:lien_tout_enlever:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-D/document,#SELF|ancre_url{documents}},'ajax tout_supprimer'})]
+[(#BOUTON_ACTION{<:medias:lien_tout_enlever:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-D/document,#SELF|ancre_url{documents}},'ajax tout_supprimer',<:ecrire:lien_tout_supprimer:> ?})]
 </div>
 #SET{nbdocs,#GET{nbdocs}|plus{#GRAND_TOTAL}}
 </B_documents>

@@ -1,7 +1,7 @@
 <paquet
 	prefix="stats"
 	categorie="statistique"
-	version="0.4.10"
+	version="0.4.11"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/statistique-32.png"
@@ -15,7 +15,7 @@
 
 	<traduire module="statistiques" reference="fr" gestionnaire="salvatore" />
 
-	<pipeline nom="delete_statistiques" />
+	<pipeline nom="delete_statistiques" action="" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/stats.php" />
 	<pipeline nom="configurer_liste_metas" inclure="stats_pipelines.php" />
 	<pipeline nom="affichage_entetes_final" inclure="stats_pipelines.php" />

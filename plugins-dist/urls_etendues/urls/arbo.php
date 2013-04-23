@@ -214,10 +214,12 @@ function declarer_url_arbo_rec($url,$type,$parent,$type_parent){
 	if (is_null($parent)){
 		return $url;
 	}
-	if($parent==0)
+	// Si pas de parent ou si son URL est vide, on ne renvoit que l'URL de l'objet en court
+	if ($parent==0 or !($url_parent = declarer_url_arbo($type_parent?$type_parent:'rubrique',$parent))){
 		return rtrim($url,'/');
+	}
+	// Sinon on renvoit l'URL de l'objet concaténée avec celle du parent
 	else {
-		$url_parent = declarer_url_arbo($type_parent?$type_parent:'rubrique',$parent);
 		return rtrim($url_parent,'/') . '/' . rtrim($url,'/');
 	}
 }

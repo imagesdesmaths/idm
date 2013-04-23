@@ -20,9 +20,9 @@
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/mots?lang_cible=en">
+		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
-		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
 	<langue code="en_hx" />
 	<langue code="eo" />
@@ -50,8 +50,8 @@
 	</langue>
 	<langue code="my" />
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/mots?lang_cible=nl">
-		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 		<traducteur nom="gerbrand" lien="http://trad.spip.net/auteur/gerbrand" />
+		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 	</langue>
 	<langue code="oc_auv" />
 	<langue code="oc_gsc" />

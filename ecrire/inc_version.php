@@ -216,17 +216,12 @@ $xml_indent = false;
 
 // Vignettes de previsulation des referers
 // dans les statistiques
-// 3 de trouves, possibilite de switcher
-// - Thumbshots.org: le moins instrusif, quand il n'a pas, il renvoit un pixel vide
-// - Girafa semble le plus complet, bicoz renvoit toujours la page d'accueil; mais avertissement si pas de preview
+// 2 de trouves, possibilite de switcher
 // - Alexa, equivalent Thumbshots, avec vignettes beaucoup plus grandes mais avertissement si pas de preview
 //   Pour Alexa, penser a indiquer l'url du site dans l'id.
 //   Dans Alexa, si on supprimer size=small, alors vignettes tres grandes
-// - On abandonne thumbshots.com qui demande une inscription et on passe sous apercite.fr en conservant exactement la même
-//   expression pour insérer l'url du site
+// - apercite.fr : on conserve exactement la même expression pour insérer l'url du site
 $source_vignettes = "http://www.apercite.fr/api/apercite/120x90/oui/oui/http://";
-// $source_vignettes = "http://open.thumbshots.org/image.pxf?url=http://";
-// $source_vignettes = "http://msnsearch.srv.girafa.com/srv/i?s=MSNSEARCH&r=http://";
 // $source_vignettes = "http://pthumbnails.alexa.com/image_server.cgi?id=www.monsite.net&size=small&url=http://";
 
 $formats_logos =  array ('gif', 'jpg', 'png');
@@ -296,7 +291,7 @@ $liste_des_authentifications = array(
 // pour specifier les versions de SPIP necessaires
 // il faut s'en tenir a un nombre de decimales fixe
 // ex : 2.0.0, 2.0.0-dev, 2.0.0-beta, 2.0.0-beta2
-$spip_version_branche = "3.0.7";
+$spip_version_branche = "3.0.8";
 // version des signatures de fonctions PHP
 // (= numero SVN de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
 $spip_version_code = 17873;

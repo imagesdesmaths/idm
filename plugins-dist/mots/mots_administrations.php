@@ -64,8 +64,8 @@ function mots_upgrade($nom_meta_base_version,$version_cible){
 		array('sql_updateq',"spip_mots_liens",array('objet'=>'site'),"objet='syndic'"),
 	);
 	$maj['2.1.0'] = array(
-		array('sql_alter',"TABLE spip_mots_liens ADD id_objet (id_objet)"),
-		array('sql_alter',"TABLE spip_mots_liens ADD objet (objet)"),
+		array('sql_alter',"TABLE spip_mots_liens ADD INDEX id_objet (id_objet)"),
+		array('sql_alter',"TABLE spip_mots_liens ADD INDEX objet (objet)"),
 	);
 	$maj['2.1.1'] = array(
 		array('sql_alter',"TABLE spip_mots ADD INDEX id_groupe (id_groupe)")

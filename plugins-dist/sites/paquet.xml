@@ -15,8 +15,8 @@
 
 	<traduire module="sites" reference="fr" gestionnaire="salvatore" />
 
-	<pipeline nom="pre_syndication" />
-	<pipeline nom="post_syndication" />
+	<pipeline nom="pre_syndication" action="" />
+	<pipeline nom="post_syndication" action="" />
 	<pipeline nom="autoriser" inclure="sites_autoriser.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/sites.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/sites.php" />

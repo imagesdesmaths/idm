@@ -6,8 +6,8 @@
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-svp?lang_cible=en">
-		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="_Eric_" lien="http://trad.spip.net/auteur/_eric_" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-svp?lang_cible=es">
 		<traducteur nom="jotacese" lien="http://trad.spip.net/auteur/jotacese" />

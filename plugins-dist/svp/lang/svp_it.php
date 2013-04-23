@@ -75,6 +75,7 @@ Devi confermare questa azione.',
 
 	// E
 	'erreur_actions_non_traitees' => 'Alcune azioni non possono essere eseguite. Questo potrebbe dipendere da un\'errore intercorso durante l\'esecuzione dell\'azione oppure dalla visualizzazione di questa pagina mentre le azioni erano in attesa. Le azioni sono state iniziare da @auteur@ il @date@.',
+	'erreur_auth_plugins_ajouter_lib' => 'Vous n\'avez pas les droits nécessaires pour ajouter une librairie.', # NEW
 	'erreur_dir_dib_ecriture' => 'La directory della libreria @dir@ non è scrivibile. Impossibile caricare una libreria!',
 	'erreur_dir_dib_indefini' => 'La directory _DIR_LIB non è definita. Impossibile caricare la libreria!',
 	'erreur_dir_plugins_auto' => 'La directory "plugins/auto" che permette il download dei pacchetti non esiste oppure non è scrivibile

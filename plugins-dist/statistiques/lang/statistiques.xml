@@ -16,11 +16,12 @@
 	<langue code="da" />
 	<langue code="de" url="http://trad.spip.net/tradlang_module/statistiques?lang_cible=de">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
+		<traducteur nom="Torsten Willmann" lien="http://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/statistiques?lang_cible=en">
-		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
 	</langue>
 	<langue code="en_hx" />
 	<langue code="eo" />

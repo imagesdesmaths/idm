@@ -3,8 +3,8 @@
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
 	<langue code="ast" url="http://trad.spip.net/tradlang_module/breves?lang_cible=ast">
-		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
 		<traducteur nom="akomarani" lien="http://trad.spip.net/auteur/akomarani" />
+		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
 	</langue>
 	<langue code="ay" />
 	<langue code="bg" url="http://trad.spip.net/tradlang_module/breves?lang_cible=bg">
@@ -29,8 +29,8 @@
 		<traducteur nom="Yannick Bailly" lien="http://trad.spip.net/auteur/yannick-bailly" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/breves?lang_cible=en">
-		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
+		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
 	</langue>
 	<langue code="en_hx" />
 	<langue code="eo" url="http://trad.spip.net/tradlang_module/breves?lang_cible=eo">
@@ -75,8 +75,8 @@
 	<langue code="my" />
 	<langue code="nb" />
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/breves?lang_cible=nl">
-		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
+		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
 	<langue code="oc_auv" />
 	<langue code="oc_gsc" />
