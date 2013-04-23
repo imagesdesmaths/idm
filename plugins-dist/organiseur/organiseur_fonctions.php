@@ -22,10 +22,13 @@ function critere_MESSAGES_destinataire_dist($idb, &$boucles, $crit) {
 	$boucle->from_type['auteurs_liens'] = 'LEFT';
 	$where =
 		array("'OR'",
-			array(
-				"'AND'",
-				array("'='","'auteurs_liens.id_auteur'","intval($_auteur)"),
-				array("'!='","'auteurs_liens.vu'","'\'poub\''"),
+			array("'AND'",
+				array("'!='","'".$boucle->id_table.".id_auteur'","intval($_auteur)"),
+				array(
+					"'AND'",
+					array("'='","'auteurs_liens.id_auteur'","intval($_auteur)"),
+					array("'!='","'auteurs_liens.vu'","'\'poub\''"),
+				),
 			),
 			array("'OR'",
 				array("'='","'".$boucle->id_table.".type'","sql_quote('affich')"),

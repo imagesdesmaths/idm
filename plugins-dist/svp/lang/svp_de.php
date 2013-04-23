@@ -75,6 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_actions_non_traitees' => 'Manche Aktionen konnten nicht ausgefühert werden. Die Ursache kann entweder ein Ausführungsfehler sein, oder diese Seite wurde neu geladen, währen die Aktionen noch nicht abgeschlossen waren. Die Aktionen wurden von @auteur@ am @date@ ausgelöst.',
+	'erreur_auth_plugins_ajouter_lib' => 'Vous n\'avez pas les droits nécessaires pour ajouter une librairie.', # NEW
 	'erreur_dir_dib_ecriture' => 'In das Verzeichnis für Bibliotheken @dir@ kann nicht geschrieben werden. Bibliotheken können nicht geladen werden!',
 	'erreur_dir_dib_indefini' => 'Das Verzeichnis _DIR_LIB wurde nicht definiert. Bibliotheken können dadurch nicht geladen werden !',
 	'erreur_dir_plugins_auto' => 'Das Verzeichnis « plugins/auto », in das Pakete geladen werden,

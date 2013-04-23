@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'c_accueil_configurer_site' => 'Agordi vian retejon',
 	'c_accueil_configurer_site_texte' => 'Unu el la unuaj aferoj por fari estas doni nomon al via retejo.
 Ĝi nuntempe nomiĝas « @nom@ ». La retejnomo estas montrita supre de ĉi paĝo.
-Klakante sur tio, vi povas ŝanĝi lian nomon, sed ankaŭ donas al ĝi vigneton kaj devizon.',
+Klakante sur tio, vi povas ŝanĝi lian nomon, sed ankaŭ donas al ĝi vinjeton kaj devizon.',
 	'c_accueil_publication' => 'Publikigu !',
 	'c_accueil_publication_texte' => 'Por publikigi paĝon, vi devas krei artikolon.
 Por tio, estas necesa krei almenaŭ unu rubrikon. Vi povas fari tion en la menuo «Eldono» per klako sur «Rubrikoj».',

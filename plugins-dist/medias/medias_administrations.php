@@ -113,8 +113,8 @@ function medias_upgrade($nom_meta_base_version,$version_cible){
 	);
 
 	$maj['1.1.0'] = array(
-		array('sql_alter',"TABLE spip_documents_liens ADD id_objet (id_objet)"),
-		array('sql_alter',"TABLE spip_documents_liens ADD objet (objet)"),
+		array('sql_alter',"TABLE spip_documents_liens ADD INDEX id_objet (id_objet)"),
+		array('sql_alter',"TABLE spip_documents_liens ADD INDEX objet (objet)"),
 	);
 	$maj['1.1.1'] = array(
 		array('creer_base_types_doc'),

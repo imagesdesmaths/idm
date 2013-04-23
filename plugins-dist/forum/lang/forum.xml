@@ -17,14 +17,14 @@
 	<langue code="cs" />
 	<langue code="da" />
 	<langue code="de" url="http://trad.spip.net/tradlang_module/forum?lang_cible=de">
-		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/forum?lang_cible=en">
-		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
-		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
-		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
+		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
 	</langue>
 	<langue code="en_hx" />
 	<langue code="eo" url="http://trad.spip.net/tradlang_module/forum?lang_cible=eo">
@@ -34,7 +34,9 @@
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
-	<langue code="eu" />
+	<langue code="eu" url="http://trad.spip.net/tradlang_module/forum?lang_cible=eu">
+		<traducteur nom="otalazt" lien="http://trad.spip.net/auteur/otalazt" />
+	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/forum?lang_cible=fa">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
@@ -58,8 +60,8 @@
 	</langue>
 	<langue code="my" />
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/forum?lang_cible=nl">
-		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
+		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
 	<langue code="oc_auv" />
 	<langue code="oc_gsc" />

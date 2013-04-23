@@ -87,6 +87,7 @@ Gracias por tu participación
 	'signatures_prop' => 'En espera',
 	'signatures_publie' => 'Confirmados',
 	'signatures_recherche_label' => 'Buscar firmas:',
+	'signatures_selection' => 'Sélectionner les signatures :', # NEW
 	'signatures_toutes' => 'Tiodas',
 	'statut_poubelle' => 'Suprimir',
 	'statut_prop' => 'En espera de validación',

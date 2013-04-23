@@ -84,6 +84,7 @@ Merci de votre participation
 	'signatures_prop' => 'En attente',
 	'signatures_publie' => 'Confirmées',
 	'signatures_recherche_label' => 'Rechercher des signatures :',
+	'signatures_selection' => 'Sélectionner les signatures :',
 	'signatures_toutes' => 'Toutes',
 	'statut_poubelle' => 'Supprimée',
 	'statut_prop' => 'En attente de validation',

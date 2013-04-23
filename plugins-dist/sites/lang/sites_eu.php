@@ -123,7 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	pour vous permettre ensuite de l\'importer dans votre navigateur ou dans un service en ligne', # NEW
 	'texte_expliquer_import_bookmarks' => 'Vous pouvez importer une liste de sites au format Marque-page HTML,
 	en provenance de votre navigateur ou d\'un service en ligne de gestion des Marques-pages.', # NEW
-	'texte_liens_sites_syndiques' => 'sindikatutakoguneetako estekak a priori blokeatu ahal dira ; azpiko konfigurazioak sindikatutakoguneen konfigurazio lehenetsia adierazten du bere sorrera ondoren. Hala ere, gero estekabakoitza banan-banan desblokeatzea posible da, edo lekuz leku, gune batetik edo bestetik datozenestekak blokeatzeko aukera izatea.', # MODIF
+	'texte_liens_sites_syndiques' => 'sindikatutako guneetako estekak a priori blokeatzen ahal dira ; azpiko konfigurazioak sindikatutako guneen konfigurazio lehenetsia adierazten du bere sorrera ondoren. Hala ere, gero esteka bakoitza banan-banan desblokeatzea posible da, edo gunez gune, gune batetik edo bestetik datozen estekak blokeatzeko aukera izatea.',
 	'texte_messages_publics' => 'Artikuluaren mezu publikoak',
 	'texte_non_fonction_referencement' => 'Agian nahiago duzu funtzio automatiko hau ezerabili, eta zuk zeuk adierazi toki honi dagozkien osagaiak...', # MODIF
 	'texte_referencement_automatique' => '<b>Leku bat automatikoki erreferentzia egitea</b>

@@ -6,8 +6,8 @@
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-urls?lang_cible=en">
-		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-urls?lang_cible=es">
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
@@ -20,8 +20,8 @@
 		<traducteur nom="phante" lien="http://trad.spip.net/auteur/phante" />
 	</langue>
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/paquet-urls?lang_cible=nl">
-		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 		<traducteur nom="gerbrand" lien="http://trad.spip.net/auteur/gerbrand" />
+		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
 	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/paquet-urls?lang_cible=pt_br">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />

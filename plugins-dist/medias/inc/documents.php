@@ -16,7 +16,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_once _DIR_RESTREINT . "inc/documents.php";
 
 include_spip('inc/actions'); // *action_auteur et determine_upload
-include_spip('inc/date');
 
 // Constante indiquant le charset probable des documents non utf-8 joints
 

@@ -44,6 +44,9 @@ function autoriser_message_modifier_dist($faire, $type='', $id=0, $qui = NULL, $
 }
 
 function autoriser_message_instituer_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
+	// rediriger vers la bonne autorisation en cas de suppression
+	if ($opt['statut'] == 'poub')
+		return autoriser('supprimer','message',$id,$qui,$opt);
 	return autoriser('modifier','message',$id,$qui,$opt);
 }
 
@@ -78,10 +81,11 @@ function autoriser_message_dater_dist($faire, $type='', $id=0, $qui = NULL, $opt
 	return false;
 }
 
-// par defaut, autorisation commune a tous les type de message
-// peut etre surchargee en fonction de $type (pb,affich,normal)
 function autoriser_envoyermessage_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	if(!($GLOBALS['meta']['messagerie_agenda'] == 'oui') OR !intval($qui['id_auteur']))
+	if (!($GLOBALS['meta']['messagerie_agenda'] == 'oui') OR !intval($qui['id_auteur']))
+		return false;
+	// on peut envoyer une annonce si on est admin
+	if (!($qui['statut']=='0minirezo') AND $type=='affich')
 		return false;
 	return true;
 }

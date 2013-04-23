@@ -80,6 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_actions_non_traitees' => 'بعضي از اقدام‌ها انجام نشده است. اين مي‌تواند ناشي از بروز خطا،حين پردازش آن اقدام‌ها، يا ناشي از نمايش اين صفحه هنگامي كه آن اقدام‌ها در دست پردازش بوده‌اند، باشد. اقدام‌ها به وسيله‌ي @auteur@در تاريخ @date@شروع شده‌اند. ',
+	'erreur_auth_plugins_ajouter_lib' => 'Vous n\'avez pas les droits nécessaires pour ajouter une librairie.', # NEW
 	'erreur_dir_dib_ecriture' => 'پوشه‌ي آرشيو‌هاي @dir@ قابل نوشتن نيستب. بارگذاري يك آرشيو ممكن نيست.  ',
 	'erreur_dir_dib_indefini' => 'پوشه‌ي  _DIR_LIB تعريف نشده. بارگذاري يك آرشيو ممكن نيست.',
 	'erreur_dir_plugins_auto' => 'پوشه‌ي «plugins/auto»  كه اجازه‌ي بارگذاري پاكت‌ها را مي‌دهد ايجاد نشده يا در دسترس نوشتن نيست. 
