@@ -1,0 +1,50 @@
+<div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	<h3 class="titrem"><:duplicator:configuration_duplicator:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<fieldset><legend><:duplicator:texte_duplicator:></legend>
+		<ul>
+			<li class="editer editer_facteur_filtres[ (#ENV**{erreurs}|table_valeur{facteur_filtres}|oui)erreur]">
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{facteur_smtp_secure})</span>]
+				<label><:duplicator:choix_type:></label>
+				<div class="choix">
+					<input type="checkbox" name="duplic_rubrique" class="checkbox" value="oui" id="duplic_rubrique"[(#ENV{duplic_rubrique,''}|=={oui}|oui)checked="checked"]/>
+					<label for="duplic_rubrique"><:duplicator:dupli_rub:></label>
+				</div>
+				<div class="choix">
+					<input type="checkbox" name="duplic_article" class="checkbox" value="oui" id="duplic_article"[(#ENV{duplic_article,''}|=={oui}|oui)checked="checked"]/>
+					<label for="duplic_article"><:duplicator:dupli_art:></label>
+				</div>
+			</li>
+		</ul>
+		</fieldset>
+
+		<fieldset><legend><:duplicator:choix_champs:></legend>
+			<ul>
+				<li>
+			        <p class="explication"><:duplicator:aide_choix_champs:></p>
+			        <label for="art_champs_1"><:duplicator:label_art_champs:></label>
+			        <textarea name="art_champs" id="art_champs" cols="60" rows="2">[(#CONFIG{duplicator/config/art_champs})]</textarea> 
+	        	</li>
+
+			    <li>
+			        <p class="explication"><:duplicator:aide_choix_champs:></p>
+			        <label for="rub_champs_1"><:duplicator:label_rub_champs:></label>
+			        <textarea name="rub_champs" id="rub_champs" cols="60" rows="2">[(#CONFIG{duplicator/config/rub_champs})]</textarea> 
+			      </li>	        	
+	    	</ul>
+		</fieldset>
+
+
+		<input type="hidden" name="_meta_casier" value="duplicator/config" />
+		<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</form>
+]
+</div>
+

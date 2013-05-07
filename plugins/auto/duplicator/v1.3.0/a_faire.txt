@@ -1,0 +1,3 @@
+-  Rajouter des logs (spip_log) c’est sûrement plus propre 
+-  Restreindre aux administrateurs 
+-  Prendre en charge les traductions qui ne sont pas dans le même dossier (en cas de rubricage racine : langue1/langue2, suivre les liens entre articles pour dupliquer les rubriques "liées").
