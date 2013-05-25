@@ -8,7 +8,7 @@
 	<B_pluspop>
 		<ol class='classement'>
 		<BOUCLE_pluspop(ARTICLES){id_article IN #GET{c}}{0,30}{doublons}>
-			<li[ class="(#EXPOSE)"]><a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]" class="ajax"
+			<li[ class="(#EXPOSE)"]><a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]#contenu" class="ajax"
 						title="<:statistiques:info_popularite_3{visites=#VISITES,popularite=#POPULARITE}|attribut_html:>">#TITRE</a></li>
 		</BOUCLE_pluspop>
 		</ol>
@@ -16,7 +16,7 @@
 			<p class="center">[...]</p>
 			<ol class='classement'>
 			<BOUCLE_derniers(ARTICLES){popularite>0}{!par date}{0,10}{doublons}>
-				<li value="[(#ID_ARTICLE|array_search{#GET{c}}|plus{1})]"[ class="(#EXPOSE)"]><a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]" class="ajax"
+				<li value="[(#ID_ARTICLE|array_search{#GET{c}}|plus{1})]"[ class="(#EXPOSE)"]><a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]#contenu" class="ajax"
 							title="<:statistiques:info_popularite_3{visites=#VISITES,popularite=#POPULARITE}|attribut_html:>">#TITRE</a></li>
 			</BOUCLE_derniers>
 			</ol>
@@ -32,14 +32,16 @@
 		<B_plusvisites>
 			<ol class='classement'>
 			<BOUCLE_plusvisites(ARTICLES){popularite>0}{!par visites}{0,30}>
-				<li value="[(#ID_ARTICLE|array_search{#GET{c}}|plus{1})]"[ class="(#EXPOSE)"]><a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]" class="ajax"
+				<li value="[(#ID_ARTICLE|array_search{#GET{c}}|plus{1})]"[ class="(#EXPOSE)"]><a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]#contenu" class="ajax"
 							title="<:statistiques:info_popularite_3{visites=#VISITES,popularite=#POPULARITE}|attribut_html:>">#TITRE</a></li>
 			</BOUCLE_plusvisites>
 			</ol>
 		</B_plusvisites>
 
-		<h4><a href='#' onclick="$(this).parent().next().toggle('fast');return false;"><:statistiques:info_comment_lire_tableau:></a></h4>
-		<p class="none"><:statistiques:texte_comment_lire_tableau:></p>
+		<br class="nettoyeur" />
+		<hr />
+		<h4><:statistiques:info_comment_lire_tableau:></h4>
+		<p><:statistiques:texte_comment_lire_tableau:></p>
 
 	</div>
 </div>

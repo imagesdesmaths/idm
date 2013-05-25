@@ -281,24 +281,90 @@ function calculer_rubriques_publiees() {
  *
  * Cherche les rubriques ayant des id_secteur ou profondeurs ne correspondant pas
  * avec leur parent, et les met à jour. De même avec les articles et leur id_secteur
+ * On procede en iterant la profondeur de 1 en 1 pour ne pas risquer une boucle infinie sur reference circulaire
  * 
  * @return void
 **/
 function propager_les_secteurs()
 {
-	// fixer les id_secteur des rubriques racines
+	// Profondeur 0
+	// Toutes les rubriques racines sont de profondeur 0
+	// et fixer les id_secteur des rubriques racines
 	sql_update('spip_rubriques', array('id_secteur'=>'id_rubrique','profondeur'=>0), "id_parent=0");
+	// Toute rubrique non racine est de profondeur >0
+	sql_updateq('spip_rubriques', array('profondeur'=>1), "id_parent<>0 AND profondeur=0");
+
+	// securite : pas plus d'iteration que de rubriques dans la base
+	$maxiter = sql_countsel("spip_rubriques");
 
 	// reparer les rubriques qui n'ont pas l'id_secteur de leur parent
+	// on fait profondeur par profondeur
+
+	$prof = 0;
 	do {
 		$continuer = false;
-		$r = sql_select("A.id_rubrique AS id, R.id_secteur AS secteur, R.profondeur+1 as profondeur", "spip_rubriques AS A, spip_rubriques AS R", "A.id_parent = R.id_rubrique AND (A.id_secteur <> R.id_secteur OR A.profondeur <> R.profondeur+1)");
-		while ($row = sql_fetch($r)) {
-			sql_update("spip_rubriques", array("id_secteur" => $row['secteur'],'profondeur' => $row['profondeur']), "id_rubrique=".$row['id']);
+
+		// Par recursivite : si toutes les rubriques de profondeur $prof sont bonnes
+		// on fixe le profondeur $prof+1
+
+		// Toutes les rubriques dont le parent est de profondeur $prof ont une profondeur $prof+1
+		// on teste A.profondeur > $prof+1 car :
+		// - toutes les rubriques de profondeur 0 à $prof sont bonnes
+		// - si A.profondeur = $prof+1 c'est bon
+		// - cela nous protege de la boucle infinie en cas de reference circulaire dans les rubriques
+		$maxiter2 = $maxiter;
+		while ($maxiter2--
+			AND $rows = sql_allfetsel(
+			"A.id_rubrique AS id, R.id_secteur AS id_secteur, R.profondeur+1 as profondeur",
+			"spip_rubriques AS A JOIN spip_rubriques AS R ON A.id_parent = R.id_rubrique",
+			"R.profondeur=".intval($prof)." AND (A.id_secteur <> R.id_secteur OR A.profondeur > R.profondeur+1)",
+		  "","R.id_secteur","0,100")){
+
+			$id_secteur = null;
+			$ids = array();
+			while ($row = array_shift($rows)) {
+				if ($row['id_secteur']!==$id_secteur){
+					if (count($ids))
+						sql_updateq("spip_rubriques", array("id_secteur" => $id_secteur,'profondeur' => $prof+1), sql_in('id_rubrique',$ids));
+					$id_secteur = $row['id_secteur'];
+					$ids = array();
+				}
+				$ids[] = $row['id'];
+			}
+			if (count($ids))
+				sql_updateq("spip_rubriques", array("id_secteur" => $id_secteur,'profondeur' => $prof+1), sql_in('id_rubrique',$ids));
+		}
+
+
+		// Toutes les rubriques de profondeur $prof+1 qui n'ont pas un parent de profondeur $prof sont decalees
+		$maxiter2 = $maxiter;
+		while ($maxiter2--
+			AND $rows = sql_allfetsel(
+			"id_rubrique as id",
+			"spip_rubriques",
+			"profondeur=".intval($prof+1)." AND id_parent NOT IN (".sql_get_select("zzz.id_rubrique","spip_rubriques AS zzz","zzz.profondeur=".intval($prof)).")",'','','0,100')){
+			$rows = array_map('reset',$rows);
+			sql_updateq("spip_rubriques", array('profondeur' => $prof+2), sql_in("id_rubrique",$rows));
+		}
+
+		// ici on a fini de valider $prof+1, toutes les rubriques de prondeur 0 a $prof+1 sont OK
+		// si pas de rubrique a profondeur $prof+1 pas la peine de continuer
+		// si il reste des rubriques non vues, c'est une branche morte ou reference circulaire (base foireuse)
+		// on arrete les frais
+		if (sql_countsel("spip_rubriques","profondeur=".intval($prof+1))){
+			$prof++;
 			$continuer = true;
 		}
-	} while ($continuer);
-	
+	}
+	while ($continuer AND $maxiter--);
+
+	// loger si la table des rubriques semble foireuse
+	// et mettre un id_secteur=0 sur ces rubriques pour eviter toute selection par les boucles
+	if (sql_countsel("spip_rubriques","profondeur>".intval($prof+1))){
+		spip_log("Les rubriques de profondeur>".($prof+1)." semblent suspectes (branches morte ou reference circulaire dans les parents)",_LOG_CRITIQUE);
+		sql_update("spip_rubriques",array('id_secteur'=>0),"profondeur>".intval($prof+1));
+	}
+
 	// reparer les articles
 	$r = sql_select("A.id_article AS id, R.id_secteur AS secteur", "spip_articles AS A, spip_rubriques AS R", "A.id_rubrique = R.id_rubrique AND A.id_secteur <> R.id_secteur");
 
@@ -469,13 +535,15 @@ function calcul_branche_in($id) {
  * @see inc_calcul_hierarchie_in_dist()
  * @param string|int|array $id
  *     Identifiant de la, ou des rubriques dont on veut obtenir les hierarchies
+ * @param bool $tout
+ *     inclure la rubrique de depart dans la hierarchie ou non
  * @return string
  *     Liste des identifiants séparés par des virgules,
  *     incluant les rubriques transmises et toutes leurs parentées
  */
-function calcul_hierarchie_in($id) {
+function calcul_hierarchie_in($id, $tout=true) {
 	$calcul_hierarchie_in = charger_fonction('calcul_hierarchie_in','inc');
-	return $calcul_hierarchie_in($id);
+	return $calcul_hierarchie_in($id, $tout);
 }
 
 
@@ -506,13 +574,14 @@ function inc_calcul_branche_in_dist($id) {
 	$branche = $r = $id;
 
 	// On ajoute une generation (les filles de la generation precedente)
-	// jusqu'a epuisement
-	while ($filles = sql_allfetsel(
+	// jusqu'a epuisement, en se protegeant des references circulaires
+	$maxiter = 10000;
+	while ($maxiter-- AND $filles = sql_allfetsel(
 					'id_rubrique',
 					'spip_rubriques',
-					sql_in('id_parent', $r)." AND ". sql_in('id_rubrique', $r, 'NOT')
+					sql_in('id_parent', $r) ." AND ". sql_in('id_rubrique', $r, 'NOT')
 					)) {
-		$r = join(',', array_map('array_shift', $filles));
+		$r = join(',', array_map('reset', $filles));
 		$branche .= ',' . $r;
 	}
 
@@ -532,11 +601,13 @@ function inc_calcul_branche_in_dist($id) {
  *
  * @param string|int|array $id
  *     Identifiant de la, ou des rubriques dont on veut obtenir les hierarchies
+ * @param bool $tout
+ *     inclure la rubrique de depart dans la hierarchie ou non
  * @return string
  *     Liste des identifiants séparés par des virgules,
  *     incluant les rubriques transmises et toutes leurs parentées
  */
-function inc_calcul_hierarchie_in_dist($id) {
+function inc_calcul_hierarchie_in_dist($id, $tout=true) {
 	static $b = array();
 
 	// normaliser $id qui a pu arriver comme un array, comme un entier, ou comme une chaine NN,NN,NN
@@ -545,14 +616,19 @@ function inc_calcul_hierarchie_in_dist($id) {
 	if (isset($b[$id]))
 		return $b[$id];
 
-	// Notre branche commence par la rubrique de depart
-	$hier = $id;
+	// Notre branche commence par la rubrique de depart si $tout=true
+	$hier = $tout?$id:"";
 
 	// On ajoute une generation (les filles de la generation precedente)
-	// jusqu'a epuisement
-	while ($parents = sql_allfetsel('id_parent', 'spip_rubriques',sql_in('id_rubrique', $id))) {
+	// jusqu'a epuisement, en se protegeant des references circulaires
+	$maxiter = 10000;
+	while ($maxiter-- AND $parents = sql_allfetsel(
+			'id_parent',
+			'spip_rubriques',
+			sql_in('id_rubrique', $id) ." AND ". sql_in('id_parent',$hier,'NOT')
+		  )) {
 		$id = join(',', array_map('reset', $parents));
-		$hier .= ',' . $id;
+		$hier = $id.(strlen($hier)?','.$hier:'');
 	}
 
 	# securite pour ne pas plomber la conso memoire sur les sites prolifiques

@@ -13,13 +13,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_radio_articles_futurs' => 'только для новых материалов (текущие настройки не изменятся).',
 	'bouton_radio_articles_tous' => 'для всех статей без исключения.',
-	'bouton_radio_articles_tous_sauf_forum_desactive' => 'для всех статей, кроме тех, в которых комментирование отключено.',
+	'bouton_radio_articles_tous_sauf_forum_desactive' => 'для всех статей, кроме тех, в которых комментарии отключены.',
 	'bouton_radio_enregistrement_obligatoire' => 'Только для зарегистрированных пользователей. Посетитель должен зарегистрироваться перед тем как оставить комментарий.',
 	'bouton_radio_moderation_priori' => 'Комментарии публикуются на сайте после проверки администратором (пре-модерация).',
 	'bouton_radio_modere_abonnement' => 'только пользователи сайта',
 	'bouton_radio_modere_posteriori' => 'размещать без проверки',
 	'bouton_radio_modere_priori' => 'проверять перед размещением',
-	'bouton_radio_publication_immediate' => 'Новые комментарии сразу публикуются на сайте без проверки (пост-модерация). Администраторы потом могут удалить комментарии.',
+	'bouton_radio_publication_immediate' => 'Новые комментарии публикуются на сайте без предварительной проверки (пост-модерация). Администраторы  могут удалить комментарии позже.',
 
 	// D
 	'documents_interdits_forum' => 'Запрещенно добавлять документы к сообщениям форума',
@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'form_pet_message_commentaire' => 'Комментарии',
 	'forum' => 'Форум',
-	'forum_acces_refuse' => 'Вы больше не имеете доступа к этим форумам.',
+	'forum_acces_refuse' => 'У вас больше нет доступа к данным форумам.',
 	'forum_attention_dix_caracteres' => '<b>Внимание!</b> Сообщение должно быть не менее десяти символов.',
 	'forum_attention_message_non_poste' => 'Внимание, ваш комментарий не опубликован на сайте.',
 	'forum_attention_nb_caracteres_mini' => '<b>Внимание !</b> текст сообщения должен содержать не меньше @min@ символов.',
@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_avez_selectionne' => 'Вы выбрали:',
 	'forum_cliquer_retour' => 'Нажмите  <a href=\'@retour_forum@\'>сюда</a> для продолжения.',
 	'forum_forum' => 'комментарий',
-	'forum_info_modere' => 'Комментарий проверяется администрацией сайта. Ваше сообщение появится после проверки администратором.',
+	'forum_info_modere' => 'Все комментарии проверяются администрацией сайта. Ваше сообщение будет опубликовано после одобрения администратором.',
 	'forum_lien_hyper' => 'Ссылка',
 	'forum_message' => 'Ваше сообщение',
 	'forum_message_definitif' => 'Всё верно. Отправить!',
@@ -47,9 +47,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_ne_repondez_pas' => 'Не отвечайте на это письмо - перейдите по ссылке:',
 	'forum_page_url' => '(Если ваше сообщение относится к материалу, размещенному в Интернете, укажите название этой статьи  и ссылку на нее).',
 	'forum_permalink' => 'Постоянная ссылка',
-	'forum_poste_par' => '@parauteur@ прокомментировал вашу статью.', # MODIF
-	'forum_poste_par_court' => 'Message posté@parauteur@.', # NEW
-	'forum_poste_par_generique' => 'Message posté@parauteur@ (@objet@ « @titre@ »).', # NEW
+	'forum_poste_par' => '@parauteur@ прокомментировал вашу статью « @titre@ ».',
+	'forum_poste_par_court' => 'Комментарий разместил @parauteur@.',
+	'forum_poste_par_generique' => 'Комментарий разместил @parauteur@ (@objet@ « @titre@ »).',
 	'forum_qui_etes_vous' => 'Кто вы?',
 	'forum_saisie_texte_info' => 'Вы можете использовать следующую разметку текста <code>[->ссылка] {{жирный}} {курсив} <quote> <code></code> и теги HTML <code><q> <del> <ins></code>. Что бы создать новый абзац два раза нажмите enter.',
 	'forum_texte' => 'Комментарий:',

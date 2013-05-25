@@ -126,22 +126,22 @@ function analyser_backend($rss, $url_syndic='') {
 		if (preg_match(',<(published|modified|issued)>([^<]*)<,Uims',
 		$item,$match)) {
 			cdata_echappe_retour($match[2], $echappe_cdata);
-			$la_date = my_strtotime($match[2]);
+			$la_date = my_strtotime($match[2], $langue_du_site);
 		}
 		if (!$la_date AND
 		preg_match(',<(pubdate)>([^<]*)<,Uims',$item, $match)) {
 			cdata_echappe_retour($match[2], $echappe_cdata);
-			$la_date = my_strtotime($match[2]);
+			$la_date = my_strtotime($match[2], $langue_du_site);
 		}
 		if (!$la_date AND
 		preg_match(',<([a-z]+:date)>([^<]*)<,Uims',$item,$match)) {
 			cdata_echappe_retour($match[2], $echappe_cdata);
-			$la_date = my_strtotime($match[2], $echappe_cdata);
+			$la_date = my_strtotime($match[2], $langue_du_site);
 		}
 		if (!$la_date AND
 		preg_match(',<date>([^<]*)<,Uims',$item,$match)) {
 			cdata_echappe_retour($match[1], $echappe_cdata);
-			$la_date = my_strtotime($match[1]);
+			$la_date = my_strtotime($match[1], $langue_du_site);
 		}
 
 		// controle de validite de la date
@@ -149,7 +149,8 @@ function analyser_backend($rss, $url_syndic='') {
 		// (note: ca pourrait etre defini site par site, mais ca risque d'etre
 		// plus lourd que vraiment utile)
 		if ($GLOBALS['controler_dates_rss']) {
-			if ($la_date > time() + 48 * 3600)
+			if (!$la_date
+				OR $la_date > time() + 48 * 3600)
 				$la_date = time();
 		}
 
@@ -159,7 +160,7 @@ function analyser_backend($rss, $url_syndic='') {
 		// Honorer le <lastbuilddate> en forcant la date
 		if (preg_match(',<(lastbuilddate|updated|modified)>([^<>]+)</\1>,i',
 		$item, $regs)
-		AND $lastbuilddate = my_strtotime(trim($regs[2]))
+		AND $lastbuilddate = my_strtotime(trim($regs[2]), $langue_du_site)
 		// pas dans le futur
 		AND $lastbuilddate < time())
 			$data['lastbuilddate'] = $lastbuilddate;
@@ -290,8 +291,7 @@ function analyser_backend($rss, $url_syndic='') {
 // helas strtotime ne reconnait pas le format W3C
 // http://www.w3.org/TR/NOTE-datetime
 // http://doc.spip.org/@my_strtotime
-function my_strtotime($la_date) {
-
+function my_strtotime($la_date, $lang=null) {
 	// format complet
 	if (preg_match(
 	',^(\d+-\d+-\d+[T ]\d+:\d+(:\d+)?)(\.\d+)?'
@@ -309,15 +309,46 @@ function my_strtotime($la_date) {
 	if (preg_match(',^\d{4}-\d{2}$,', $la_date, $match))
 		return strtotime($match[0]."-01");
 
-	// utiliser strtotime en dernier ressort
-	$s = strtotime($la_date);
-	if ($s > 0)
-		return $s;
-
 	// YYYY-MM-DD hh:mm:ss
 	if (preg_match(',^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}\b,', $la_date, $match))
 		return strtotime($match[0]);
 
+	// utiliser strtotime en dernier ressort
+	// en nettoyant le jour qui prefixe parfois la date, suivi d'une virgule
+	// et les UT qui sont en fait des UTC
+	$la_date_c = preg_replace("/^\w+,\s*/ms","",$la_date);
+	$la_date_c = preg_replace("/UT\s*$/ms","UTC",$la_date_c);
+	if ($s=strtotime($la_date)
+	  OR $s=strtotime($la_date_c))
+		return $s;
+
+	// essayons de voir si le nom du mois est dans la langue du flux et remplacons le
+	// par la version anglaise avant de faire strtotime
+	if ($lang){
+		// "fr-fr"
+		$lang = reset(explode("-",$lang));
+		static $months = null;
+		if (!isset($months[$lang])){
+			$prev_lang = $GLOBALS['spip_lang'];
+			changer_langue($lang);
+			foreach(range(1,12) as $m){
+				$s = _T("date_mois_$m");
+				$months[$lang][$s] = date("M",strtotime("2013-$m-01"));
+				$s = _T("date_mois_".$m."_abbr");
+				$months[$lang][$s] = date("M",strtotime("2013-$m-01"));
+				$months[$lang][trim($s,".")] = date("M",strtotime("2013-$m-01"));
+			}
+			changer_langue($prev_lang);
+		}
+		spip_log($la_date_c,"dbgs");
+		foreach($months[$lang] as $loc=>$en){
+			if (stripos($la_date_c,$loc)!==false){
+				$s=str_ireplace($loc,$en,$la_date_c);
+				if ($s=strtotime($s))
+					return $s;
+			}
+		}
+	}
 
 	// erreur
 	spip_log("Impossible de lire le format de date '$la_date'");

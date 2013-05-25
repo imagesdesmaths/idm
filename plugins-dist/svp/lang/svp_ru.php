@@ -76,7 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_actions_non_traitees' => 'Некоторые операции не были выполнены. Возможно, были ошибки в процессе выполнения. Выполнение операции инициировал @auteur@  @date@.',
-	'erreur_auth_plugins_ajouter_lib' => 'Vous n\'avez pas les droits nécessaires pour ajouter une librairie.', # NEW
+	'erreur_auth_plugins_ajouter_lib' => 'Не достаточно прав для того, что бы установить библиотеку.',
 	'erreur_dir_dib_ecriture' => 'Отсутствуют права на запись папки @dir@. Невозможно загркзить библиотеку!',
 	'erreur_dir_dib_indefini' => 'Не задано значение _DIR_LIB. Невозможно загрузить библиотеку!',
 	'erreur_dir_plugins_auto' => 'Папка « plugins/auto » позволяющая добавлять плагины из административной части сайта не создана или не хватает прав для записи в нее. Если вы хотите иметь такую возможность, то <strong>вам необходимо ее создать или установить права доступа 777 ( если такая папка существует)</strong>.',

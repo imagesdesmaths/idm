@@ -36,6 +36,7 @@ function squelettes_par_rubrique_styliser_par_rubrique($flux) {
 			if (@file_exists("$f.$ext"))
 				$squelette = $f;
 			else {
+				$maxiter = 10000; // on ne remonte pas au dela en profondeur
 				// fond-10 fond-<rubriques parentes>
 				do {
 					$f = "$squelette-$id_rubrique";
@@ -43,7 +44,12 @@ function squelettes_par_rubrique_styliser_par_rubrique($flux) {
 						$squelette = $f;
 						break;
 					}
-				} while ($id_rubrique = quete_parent($id_rubrique));
+				} while (
+					$maxiter--
+				  AND $id_rubrique = quete_parent($id_rubrique)
+					// se proteger des references circulaires
+				  AND $id_rubrique != $flux['args']['id_rubrique']
+				);
 			}
 			// sauver le squelette
 			$flux['data'] = $squelette;

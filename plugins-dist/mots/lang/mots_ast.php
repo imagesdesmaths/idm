@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'avis_conseil_selection_mot_cle' => '<b>Grupu importante:</b> s\'encamienta fonderamente escoyer una pallabra-clave pa esti grupu.',
-	'avis_doublon_mot_cle' => 'Yá esiste una pallabra con esti títulu. ¿Tas seguru de que quies crear la mesma?',
+	'avis_doublon_mot_cle' => 'Yá esiste una pallabra con esti títulu. ¿Tas seguru de que quies crear la mesma?', # MODIF
 
 	// B
 	'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'los y les alministradores del sitiu',

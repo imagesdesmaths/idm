@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'avis_conseil_selection_mot_cle' => '<b>Dôležitá skupina:</b> Veľmi sa odporúča vybrať kľúčové slovo z tejto skupiny.',
-	'avis_doublon_mot_cle' => 'Kľúčové slovo s týmto názvom už existuje. Naozaj chcete vytvoriť ďalšie?',
+	'avis_doublon_mot_cle' => 'Kľúčové slovo s týmto názvom už existuje. Naozaj chcete vytvoriť ďalšie?', # MODIF
 
 	// B
 	'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'administrátori stránky',
