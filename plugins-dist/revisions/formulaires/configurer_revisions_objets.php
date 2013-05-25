@@ -31,4 +31,20 @@ function formulaires_configurer_revisions_objets_traiter_dist(){
 	return array('message_ok'=>_T('config_info_enregistree'));
 }
 
+function test_objet_versionable($desc){
+	if (!$desc['editable']
+		OR !isset($desc['champs_versionnes'])
+		OR !count($desc['champs_versionnes'])
+	)
+		return '';
+
+	// regarder si il y a un vrai champ versionne, pas seulement une jointure
+	foreach ($desc['champs_versionnes'] as $c){
+		if (strncmp($c,'jointure_',9)!=0)
+			return ' ';
+	}
+
+
+	return '';
+}
 ?>

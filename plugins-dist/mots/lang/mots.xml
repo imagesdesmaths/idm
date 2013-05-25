@@ -34,7 +34,9 @@
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
 	<langue code="fon" />
-	<langue code="fr" />
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/mots?lang_cible=fr">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
+	</langue>
 	<langue code="fr_tu" />
 	<langue code="gl" />
 	<langue code="hu" />

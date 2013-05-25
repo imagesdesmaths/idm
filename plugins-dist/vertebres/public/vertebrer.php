@@ -73,7 +73,7 @@ function vertebrer_crit($v)
 {
 	$res = "";
 	foreach($v as $n => $t) {
-		if (!in_array($n, array('date', 'date_redac', 'lang')))
+		if (!in_array($n, array('date', 'date_redac', 'lang', 'recherche','logo')))
 			$res .= "\n\t\t{" . $n .  " ?}";
 	}
 	return $res;
@@ -91,7 +91,7 @@ function vertebrer_cell($fields)
 {
 	$res = "";
 	foreach($fields as $n => $t) {
-		$texte = "#" . strtoupper($n);
+		$texte = "#CHAMP_SQL{".$n."}";
 		if (preg_match('/\s+references\s+([\w_]+)/' , $t, $r)) {
 			$url = "[(#SELF|parametre_url{page,'" . $r[1] . "'})]";
 			$texte = "<a href='$url'>" . $texte . "</a>";

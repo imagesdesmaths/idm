@@ -147,6 +147,7 @@ $tables_documents = array(
 			'sxc' => 'OpenOffice.org Calc',
 			'sxi' => 'OpenOffice.org Impress',
 			'sxw' => 'OpenOffice.org',
+			'tar' => 'Tar',
 			'tex' => 'LaTeX',
 			'tgz' => 'TGZ',
 			'torrent' => 'BitTorrent',
@@ -329,6 +330,7 @@ $tables_mime = array(
 		'sxc' => 'application/vnd.sun.xml.calc',
 		'sxi' => 'application/vnd.sun.xml.impress',
 		'sxw' => 'application/vnd.sun.xml.writer',
+		'tar' => 'application/x-tar',
 		'tex' => 'text/x-tex',
 		'tgz' => 'application/x-gtar',
 		'torrent' => 'application/x-bittorrent',
@@ -393,7 +395,8 @@ $tables_mime = array(
 		'audio/x-musepack' => 'audio/musepack',
 		'audio/webm' => 'video/webm',
 		'video/flv' => 'video/x-flv',
-		'video/mp4' => 'application/mp4'
+		'video/mp4' => 'application/mp4',
+		'image/jpg' => 'image/jpeg'
 	);
 
 ?>

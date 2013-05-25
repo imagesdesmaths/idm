@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'avis_conseil_selection_mot_cle' => '<b>گروه مهم :</b>توصيه ميشود كه يك كليد-واژه در اين گروه انتخاب كنيد ',
-	'avis_doublon_mot_cle' => 'يك كلمه با اين تيتر وجود دارد. آيا اطمينان داريد كه مي‌خواهيد همان را ايجاد كنيد?',
+	'avis_doublon_mot_cle' => 'يك كلمه با اين تيتر وجود دارد. آيا اطمينان داريد كه مي‌خواهيد همان را ايجاد كنيد?', # MODIF
 
 	// B
 	'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'گردانندگان سايت',

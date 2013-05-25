@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'avis_conseil_selection_mot_cle' => '<b>Wichtige Kategorie:</b> Bitte wählen Sie ein Schlüsselwort dieser Gruppe.',
-	'avis_doublon_mot_cle' => 'Ein Schlagwort mit dieser Bezeichung gibt es bereits. Wollen sie es wirklich erneut anlegen?',
+	'avis_doublon_mot_cle' => 'Ein Schlagwort mit dieser Bezeichung gibt es bereits. Wollen sie es wirklich erneut anlegen?', # MODIF
 
 	// B
 	'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'Administratoren der Website',

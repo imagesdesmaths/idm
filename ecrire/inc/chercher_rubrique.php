@@ -96,7 +96,7 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
 				$niv+1, $data, $enfants, $exclus, $restreint, $type);
 
 	// si l'objet a deplacer est publie, verifier qu'on a acces aux rubriques
-	if ($restreint AND !autoriser('publierdans','rubrique',$root))
+	if ($restreint AND $root!=$id_rubrique AND !autoriser('publierdans','rubrique',$root))
 		return $sous;
 
 	// et voila le travail
@@ -216,7 +216,7 @@ function construire_selecteur($url, $js, $idom, $name, $init='', $id=0)
 	. $url
 	. "', this.parentNode.nextSibling, this.nextSibling,'',event)\"><img src='"
 	. chemin_image($icone)
-	. "'\nstyle='vertical-align: middle;' alt=' ' /></a><img src='"
+	. "'\nstyle='vertical-align: middle;' alt='"._T('titre_image_selecteur')."' /></a><img src='"
 	. chemin_image('searching.gif') 
 	. "' id='img_"
 	.  $idom

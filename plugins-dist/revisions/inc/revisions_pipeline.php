@@ -28,12 +28,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function revisions_boite_infos($flux){
 	$type = $flux['args']['type'];
 	if ($id = intval($flux['args']['id'])
-	  AND $tables = unserialize($GLOBALS['meta']['objets_versions'])
+		AND $tables = unserialize($GLOBALS['meta']['objets_versions'])
 		AND in_array(table_objet_sql($type),$tables)
-	  AND autoriser('voirrevisions',$type,$id)
-	  // regarder le numero de revision le plus eleve, et afficher le bouton
-	  // si c'est interessant (id_version>1)
-	  AND sql_countsel('spip_versions', 'id_objet='.intval($id).' AND objet = '.sql_quote($type)) > 1
+		AND autoriser('voirrevisions',$type,$id)
+		// regarder le numero de revision le plus eleve, et afficher le bouton
+		// si c'est interessant (id_version>1)
+		AND sql_countsel('spip_versions', 'id_objet='.intval($id).' AND objet = '.sql_quote($type)) > 1
 	) {
 		include_spip('inc/presentation');
 		$flux['data'] .= icone_horizontale(_T('revisions:info_historique_lien'), generer_url_ecrire('revision',"id_objet=$id&objet=$type"), "revision-24.png");
@@ -54,7 +54,7 @@ function revisions_boite_infos($flux){
 function revisions_affiche_milieu($flux) {
 	// la bonne page et des objets révisables cochées !
 	if (in_array($flux['args']['exec'], array('accueil', 'suivi_edito'))
-	  and unserialize($GLOBALS['meta']['objets_versions'])) {
+		AND unserialize($GLOBALS['meta']['objets_versions'])) {
 		$contexte = array();
 		if ($GLOBALS['visiteur_session']['statut']!=='0minirezo') {
 			$contexte['id_auteur'] = $GLOBALS['visiteur_session']['id_auteur'];
@@ -80,7 +80,6 @@ function revisions_configurer_liste_metas($metas){
 	return $metas;
 }
 
-
 /**
  * Charge les données d'une révision donnée dans le formulaire d'édition d'un objet
  * 
@@ -89,13 +88,13 @@ function revisions_configurer_liste_metas($metas){
  */
 function revisions_formulaire_charger($flux){
 	if (strncmp($flux['args']['form'],'editer_',7)==0
-	  AND $id_version = _request('id_version')
-	  AND $objet = substr($flux['args']['form'],7)
-	  AND $id_table_objet = id_table_objet($objet)
-	  AND isset($flux['data'][$id_table_objet])
+		AND $id_version = _request('id_version')
+		AND $objet = substr($flux['args']['form'],7)
+		AND $id_table_objet = id_table_objet($objet)
+		AND isset($flux['data'][$id_table_objet])
 		AND $id = intval($flux['data'][$id_table_objet])
-	  AND !$flux['args']['je_suis_poste']){
-		// ajouter un message convival pour indiquer qu'on a restaure la version
+		AND !$flux['args']['je_suis_poste']){
+		// ajouter un message convivial pour indiquer qu'on a restaure la version
 		$flux['data']['message_ok'] = _T('revisions:icone_restaurer_version',array('version'=>$id_version));
 		$flux['data']['message_ok'] .= "<br />"._T('revisions:message_valider_recuperer_version');
 		// recuperer la version
@@ -103,9 +102,8 @@ function revisions_formulaire_charger($flux){
 		$champs = recuperer_version($id,$objet, $id_version);
 		foreach($champs as $champ=>$valeur){
 			if (!strncmp($champ,'jointure_',9)==0){
-				if ($champ=='id_rubrique'){
+				if ($champ=='id_rubrique')
 					$flux['data']['id_parent'] = $valeur;
-				}
 				else
 					$flux['data'][$champ] = $valeur;
 			}
@@ -113,8 +111,6 @@ function revisions_formulaire_charger($flux){
 	}
 	return $flux;
 }
-
-
 
 /**
  * Sur une insertion en base, lever un flag pour ne pas creer une premiere révision vide
@@ -126,7 +122,7 @@ function revisions_formulaire_charger($flux){
 function revisions_post_insertion($x){
 	$table = $x['args']['table'];
 	include_spip('inc/revisions');
-	if  ($champs = liste_champs_versionnes($table)) {
+	if($champs = liste_champs_versionnes($table)) {
 		$GLOBALS['premiere_revision']["$table:".$x['args']['id_objet']] = true;
 	}
 	return $x;
@@ -143,7 +139,7 @@ function revisions_post_insertion($x){
 function revisions_pre_edition($x) {
 	// ne rien faire quand on passe ici en controle md5
 	if (!isset($x['args']['action'])
-	  OR $x['args']['action']!=='controler'){
+		OR $x['args']['action']!=='controler'){
 		$table = $x['args']['table'];
 		include_spip('inc/revisions');
 		// si flag leve passer son chemin, post_edition le fera (mais baisser le flag en le gardant en memoire tout de meme)
@@ -225,7 +221,6 @@ function revisions_post_edition($x) {
 				ajouter_version($x['args']['id_objet'],$objet, $champs, '', $GLOBALS['visiteur_session']['id_auteur']);
 		}
 	}
-
 	return $x;
 }
 

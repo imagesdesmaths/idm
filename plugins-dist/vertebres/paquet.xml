@@ -1,7 +1,7 @@
 <paquet
 	prefix="vertebres"
 	categorie="outil"
-	version="1.2.1"
+	version="1.2.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/vertebres-32.png"

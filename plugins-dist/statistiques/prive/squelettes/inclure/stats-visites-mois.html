@@ -1,17 +1,17 @@
+#SET{duree,#ENV{duree,0}|duree_affiche{mois}}
 
-
-<p class="pagination">
+<div class="pagination">
 	<span class="dl">
-		#SET{args,#ARRAY{id_article,#ID_ARTICLE,duree,#DUREE}}
+		#SET{args,#ARRAY{id_article,#ID_ARTICLE,duree,#GET{duree}}}
 		<a href="[(#URL_PAGE{transmettre,[(#VAL{statistiques}|param_low_sec{#GET{args}, '', 'transmettre'})]})]" class="noajax"><:statistiques:csv:></a>
 	</span>
 	|
-	[<span class="duree">(#ENV{duree,365}|div{30}|intval) <:date_mois:></span>] |
-	<a href="[(#SELF|parametre_url{duree,#ENV{duree,365}|duree_zoom{moins}})]"
+	[<span class="duree">(#GET{duree}|div{30}|intval) <:date_mois:></span>] |
+	<a href="[(#SELF|parametre_url{duree,#GET{duree}|duree_zoom{moins}})]"
 		 class="ajax">[(#CHEMIN_IMAGE{zoomout-24.png}|balise_img{<:statistiques:info_zoom:> -})]</a>
-	<a href="[(#SELF|parametre_url{duree,#ENV{duree,365}|duree_zoom{plus}})]"
+	<a href="[(#SELF|parametre_url{duree,#GET{duree}|duree_zoom{plus}})]"
 		 class="ajax">[(#CHEMIN_IMAGE{zoomin-24.png}|balise_img{<:statistiques:info_zoom:> +})]</a>
-</p>
+</div>
 
 
 <B_statsm>
@@ -26,7 +26,7 @@
 			</tr>
 		</thead>
 	  <tbody>
-		<BOUCLE_statsm(DATA){source stats_visites,mois,#ENV{duree,365},#ENV{id_article}}>
+		<BOUCLE_statsm(DATA){source stats_visites,mois,#GET{duree},#ENV{id_article}}>
 			<tr class="c_[(#CLE|affdate{l}|substr{0,3})][(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)c_today]">
 				<th title="[(#CLE|affdate{'Y/m/01'})]">[(#CLE|affdate_mois_annee)]</th>
 				<td class="val">#VALEUR{visites}</td>

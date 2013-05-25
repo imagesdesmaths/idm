@@ -6,4 +6,7 @@
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
 	<langue code="fr" />
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/paquet-safehtml?lang_cible=ru">
+		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
+	</langue>
 </traduction>

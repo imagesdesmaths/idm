@@ -5,7 +5,7 @@
 <div class='cartouche'>
 	<h3 class='titre'>
 		<span class='info_statut'>[(#CHEMIN_IMAGE{[signature-statut-(#GET{statut})-24.png]}|balise_img|inserer_attribut{alt,#VAL{petitions:statut_}|concat{#GET{statut}}|_T})]</span>
-		<a href='#signature#ID_SIGNATURE' title='[<:info_numero_abbreviation|attribut_html:> (#ID_SIGNATURE)]'>[(#NOM_EMAIL|sinon{<:petitions:sans_nom:>})]</a>
+		<a href='[(#GET{self}|parametre_url{debut_signatures,@#ID_SIGNATURE}|ancre_url{signature#ID_SIGNATURE})]' title='[<:info_numero_abbreviation|attribut_html:> (#ID_SIGNATURE)]'>[(#NOM_EMAIL|sinon{<:petitions:sans_nom:>})]</a>
 		[(<a href='#URL_SITE'>(#NOM_SITE|sinon{#URL_SITE}|couper{80})</a>)]
 	</h3>
 
