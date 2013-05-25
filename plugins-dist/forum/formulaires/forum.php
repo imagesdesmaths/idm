@@ -54,7 +54,7 @@ function formulaires_forum_charger_dist($objet, $id_objet, $id_forum,
 
 	// exiger l'authentification des posteurs pour les forums sur abo
 	if ($accepter_forum=="abo"){
-		if (!$GLOBALS["visiteur_session"]['statut']){
+		if (!isset($GLOBALS["visiteur_session"]['statut']) OR !$GLOBALS["visiteur_session"]['statut']){
 			return array(
 				'action' => '', #ne sert pas dans ce cas, on la vide pour mutualiser le cache
 				'editable' => false,

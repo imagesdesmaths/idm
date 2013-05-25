@@ -61,7 +61,8 @@
 				legend:{
 					show:true,
 					container:null,
-					labelFormatter:null
+					labelFormatter:null,
+					noColumns: 3
 				},
 				bars: {fill:false},
 				yaxis: { min: 0 },
@@ -86,6 +87,7 @@
 			$.extend(true, values.options, options.flot);
 
 			graph = $("<div class='graphResult' style='width:" + options.width + ";height:" + options.height + ";'></div>").appendTo(graphique);
+			graph.wrap("<div class='graphResult-wrap'></div>");
 			gInfo = $("<div class='graphInfo'></div>").appendTo(graphique);
 
 			// legende en dehors du dessin ?
@@ -94,7 +96,7 @@
 				values.options.legend.container = legend;
 			}
 			// legende avec items clicables pour desactiver certaines series
-			if (options.legendeActions) {
+			if (options.legendeExterne && options.legendeActions) {
 				  values.options.legend.labelFormatter = function(label) {
 					return '<a href="#label">' + label + '</a>';
 				  }
@@ -152,7 +154,7 @@
 			plots[idGraph] = $.plot(graph, values.series, values.options);
 
 			// prevoir les actions sur les labels
-			if (options.legendeActions) {
+			if (options.legendeExterne && options.legendeActions) {
 				$.extend(values.options, {legend:{container:null, show:false}});
 				actionsLegendes($('#graphique'+idGraph));
 			}
@@ -351,11 +353,11 @@
 				$.extend(true, options, {
 					lines:{
 						fill:true,
-						fillColor: { colors: [ { opacity: 0.7 }, { opacity: 0 } ] }
+						fillColor: { colors: [ { opacity: 0.9 }, { opacity: 0.9 } ] }
 					},
 					bars:{
 						fill:true,
-						fillColor: { colors: [ { opacity: 0.7 }, { opacity: 0 } ] }
+						fillColor: { colors: [ { opacity: 0.9 }, { opacity: 0.9 } ] }
 					}
 				});
 			}
@@ -426,16 +428,14 @@
 			// pour masquer / afficher certaines series
 			// a ne charger qu'une fois par graph !!!
 			$(graph).find('.legendLabel a').click(function(){
-				tr = $(this).parent().parent();
-				tr.toggleClass('cacher');
+				tr = $(this).parent().prev('.legendColorBox').toggleClass('cacher').parent();
 
-				// bof bof tous ces parent() et ca marche qu'avec legendeExterne:true
-				master = tr.parent().parent().parent().parent().parent();
+				master = tr.closest('.graphique');
 				pid = master.attr('id').substr(9); // enlever 'graphique'
 
 				var seriesActives = [];
-				tr.parent().find('tr:not(.cacher)').each(function(){
-					nom = $(this).find('a').text();
+				tr.find('.legendColorBox:not(.cacher)').each(function(){
+					nom = $(this).next('.legendLabel').find('a').text();
 					n = collections[pid].values.series.length;
 					for(i=0;i<n;i++) {
 						if (collections[pid].values.series[i].label == nom) {
@@ -478,7 +478,7 @@
 
 			// demarrer la vignette
 			vignette = $(graphique).find('.graphVignette');
-			pid = vignette.parent().parent().attr('id').substr(9);
+			pid = vignette.closest('.graphique').attr('id').substr(9);
 			vignettes[pid] = $.plot(vignette, series, options.flot);
 
 			if (vignettesSelection[pid] !== undefined) {
@@ -497,7 +497,7 @@
 
 			$(graphique).find('.graphResult').bind("plotselected", function (event, ranges) {
 				graph = $(event.target);
-				pid = graph.parent().attr('id').substr(9);
+				pid = graph.closest('.graphique').attr('id').substr(9);
 
 				// clamp the zooming to prevent eternal zoom
 				if (ranges.xaxis.to - ranges.xaxis.from < 0.00001)
@@ -522,7 +522,7 @@
 			// raz sur double clic
 			$(graphique).find('.graphResult').dblclick(function (event) {
 				var graphique;
-				graphique = $(event.target).parent().parent();
+				graphique = $(event.target).closest('.graphique');
 				pid = graphique.attr('id').substr(9);
 				vignettesSelection[pid] = undefined;
 				if (vignettes[pid] != undefined) {
@@ -546,7 +546,7 @@
 				// zoom depuis la miniature
 				vignette.bind("plotselected", function (event, ranges) {
 					graph = $(event.target);
-					pid = graph.parent().parent().attr('id').substr(9);
+					pid = graph.closest('.graphique').attr('id').substr(9);
 					vignettesSelection[pid] = ranges;
 					plots[pid].setSelection(ranges);
 				});
@@ -554,7 +554,7 @@
 				// raz depuis la miniature sur double clic
 				vignette.dblclick(function (event) {
 					var graphique;
-					graphique = $(event.target).parent().parent().parent();
+					graphique = $(event.target).closest('.graphique');
 					pid = graphique.attr('id').substr(9);
 					vignettesSelection[pid] = undefined;
 
@@ -586,7 +586,7 @@
 				$("#x").text(pos.x.toFixed(2));
 				$("#y").text(pos.y.toFixed(2));
 				graph = $(event.target);
-				pid = graph.parent().attr('id').substr(9);
+				pid = graph.closest('.graphique').attr('id').substr(9);
 
 				if (options.show) {
 					if (item) {
@@ -634,7 +634,7 @@
 		d.setUTCHours(0);
 		var i = d.getTime();
 		do {
-			markings.push({ xaxis: { from: i, to: i + 2*jour }, color: '#f6f6f6' });
+			markings.push({ xaxis: { from: i, to: i + 2*jour }, color: '#e8e8e8' });
 			i += 7*jour;
 		} while (i < axes.xaxis.max);
 
@@ -652,6 +652,9 @@
     	var markings = [];
 		var heure = 60 * 60 * 1000;
 		var jour = 24 * heure;
+		var width_year = jour;
+		if (axes.xaxis.options.minTickSize[1]=="month")
+			width_year = 30.4*jour;
 
 		// les mois et les ans...
 		d = new Date(axes.xaxis.min);
@@ -663,7 +666,7 @@
 			i = d.getTime();
 			if (m == 0) {couleur = '#CA5F18';}
 			else {couleur = '#D7C2AF'; }
-			markings.push({ xaxis: { from: i, to: i + jour}, color: couleur });
+			markings.push({ xaxis: { from: i, to: i + (m==0?width_year:jour)}, color: couleur });
 			if (++m == 12) {m=0; ++y;}
 			d = new Date(Date.UTC(y,m,1,0,0,0));
 		} while (d.getTime() < axes.xaxis.max);

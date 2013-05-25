@@ -5,6 +5,19 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/acces');
 include_spip('inc/statistiques');
 
+function duree_affiche($duree,$periode){
+	if (intval($duree))
+		return $duree;
+
+	if ($periode=='mois'){
+		$debut = sql_getfetsel("date","spip_visites","","","date","0,1");
+		$debut = strtotime($debut);
+		$duree = ceil((time()-$debut)/24/3600);
+		return $duree;
+	}
+	return 90;
+}
+
 function duree_zoom($duree,$sens='plus'){
 	$largeur_abs = 420/$duree;
 

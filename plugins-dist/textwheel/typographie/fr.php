@@ -61,7 +61,7 @@ function typographie_fr($t) {
 	}
 
 	/* 2 */
-	$t = preg_replace('/&#187;| --?,|(?::| %)(?:\W|$)/S', '~$0', $t);
+	$t = preg_replace('/&#187;| --?,|(?::(?!:)| %)(?:\W|$)/S', '~$0', $t);
 
 	/* 3 */
 	$t = preg_replace('/[!?][!?\.]*/S', "$pro~$0", $t, -1, $c);

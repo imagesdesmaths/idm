@@ -2,7 +2,21 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-function label_champ($champ){
+/**
+ * Trouver le label d'un champ de révision
+ * 
+ * Quelques champs ont un label dans dans les chaînes de langue de SPIP
+ * Pour un champ particulier d'un objet particulier, le pipeline revisions_chercher_label
+ * peut être utilisé
+ * 
+ * @param string $champ
+ * 		Le nom du champ révisionné
+ * @param string $objet
+ * 		Le type d'objet révisionné
+ * @return string $label
+ * 		Le label du champ
+ */
+function label_champ($champ,$objet=false){
 	$label = "";
 	// si jointure: renvoyer le nom des objets joints
 	if (strncmp($champ,'jointure_',9)==0)
@@ -24,7 +38,7 @@ function label_champ($champ){
 		case 'chapo':
 			$champ = "chapeau";
 		default:
-			$label = "info_$champ";
+			$label = pipeline('revisions_chercher_label',array('args'=>array('champ'=>$champ,'objet'=>$objet),'data' => 'info_'.$champ));
 			break;
 	}
 	return $label?_T($label):"";

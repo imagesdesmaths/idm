@@ -1,7 +1,7 @@
 <paquet
 	prefix="revisions"
 	categorie="edition"
-	version="1.7.3"
+	version="1.7.5"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/revision-32.png"
@@ -29,6 +29,7 @@
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/revisions.php" />
 	<pipeline nom="declarer_tables_objets_sql"  inclure="base/revisions.php" />
 	<pipeline nom="ieconfig_metas"              inclure="revisions_ieconfig.php" />
+	<pipeline nom="revisions_chercher_label"	action="" />
 
 	<menu nom="revisions" titre="revisions:info_historique_titre" parent="menu_publication" icone="images/revision-16.png" />
 	<menu nom="configurer_revisions" titre="revisions:titre_revisions" parent="menu_configuration" icone="images/revision-16.png" />

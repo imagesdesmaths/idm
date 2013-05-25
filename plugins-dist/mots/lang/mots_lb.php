@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'avis_conseil_selection_mot_cle' => '<b>Wichtege Grupp:</b> et ass wierklech ubruecht e Schlësselwuert aus dësem Grupp ze wielen.',
-	'avis_doublon_mot_cle' => 'Et gëtt schon e Schlësselwuert mat deem Titel. Sidd dir sécher dat dir de selwechten wëllt bäiflécken?',
+	'avis_doublon_mot_cle' => 'Et gëtt schon e Schlësselwuert mat deem Titel. Sidd dir sécher dat dir de selwechten wëllt bäiflécken?', # MODIF
 
 	// B
 	'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'd\'Administrateure vum Site',

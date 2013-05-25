@@ -33,12 +33,12 @@
     #cboxContent{background:#fff;}
         #cboxLoadedContent{margin:0 0 58px;}
         #cboxTitle{position:absolute; bottom:28px; left:0; text-align:left; width:100%; color:#000; font-weight:bold;font-size:0.9em;}
-        #cboxCurrent{position:absolute; bottom:0px; left:0px; color:#666666;font-size:0.85em;}
-        #cboxPrevious{position:absolute; bottom:0; left:40px; background:url(images/controls.png) 0px 0px no-repeat; width:13px; height:13px; text-indent:-9999px;}
+        #cboxCurrent{position:absolute; bottom:0px; left:0px; color:#666666;font-size:0.85em;width:65px; text-align:center;}
+        #cboxPrevious{position:absolute; bottom:0; left:70px; background:url(images/controls.png) 0px 0px no-repeat; width:13px; height:13px; text-indent:-9999px;}
         #cboxPrevious.hover{background-position:0px -13px;}
-        #cboxNext{position:absolute; bottom:0; left:60px; background:url(images/controls.png) -13px 0px no-repeat; width:13px; height:13px; text-indent:-9999px;}
+        #cboxNext{position:absolute; bottom:0; left:90px; background:url(images/controls.png) -13px 0px no-repeat; width:13px; height:13px; text-indent:-9999px;}
         #cboxNext.hover{background-position:-13px -13px;}
-        #cboxSlideshow{position:absolute; bottom:0px; left:80px; color:#666666;font-size:0.85em;}
+        #cboxSlideshow{position:absolute; bottom:0px; left:110px; color:#666666;font-size:0.85em;}
         #cboxLoadingOverlay{background:#fff;}
         #cboxLoadingGraphic{background:url(images/loading.gif) center center no-repeat;}
         #cboxClose{position:absolute; bottom:20px; right:0; background:url(images/close.gif) 0px 0px no-repeat; width:26px; height:26px; text-indent:-9999px;}
