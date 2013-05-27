@@ -15,12 +15,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function formulaires_inscription_charger_dist($mode='', $id=0) {
 	global $visiteur_session;
 	
-	// fournir le mode de la config ou tester si l'argument du formulaire est un mode accepte par celle-ci 
-	include_spip('inc/filtres');
-	$mode=tester_config($id, $mode);
-	
+	// fournir le mode de la config ou tester si l'argument du formulaire est un mode accepte par celle-ci
 	// pas de formulaire si le mode est interdit
-	if (!$mode)
+	include_spip('inc/autoriser');
+	if (!autoriser('inscrireauteur', $mode, $id))
 		return false;
 
 	// pas de formulaire si on a déjà une session avec un statut égal ou meilleur au mode
@@ -36,11 +34,11 @@ function formulaires_inscription_charger_dist($mode='', $id=0) {
 function formulaires_inscription_verifier_dist($mode='', $id=0) {
 	
 	include_spip('inc/filtres');
-	$mode=tester_config($id, $mode);
-	
 	$erreurs = array();
 
-	if (!$mode OR (strlen(_request('nobot'))>0))
+	include_spip('inc/autoriser');
+	if (!autoriser('inscrireauteur', $mode, $id)
+	  OR (strlen(_request('nobot'))>0))
 		$erreurs['message_erreur'] = _T('pass_rien_a_faire_ici');
 
 	if (!$nom = _request('nom_inscription'))
@@ -81,13 +79,16 @@ function formulaires_inscription_verifier_dist($mode='', $id=0) {
 function formulaires_inscription_traiter_dist($mode='', $id=0) {
 	
 	include_spip('inc/filtres');
-	$mode=tester_config($id, $mode);
-		
-	$nom = _request('nom_inscription');
-	$mail_complet = _request('mail_inscription');
+	include_spip('inc/autoriser');
+	if (!autoriser('inscrireauteur', $mode, $id))
+		$desc = "rien a faire ici";
+	else {
+		$nom = _request('nom_inscription');
+		$mail_complet = _request('mail_inscription');
 
-	$inscrire_auteur = charger_fonction('inscrire_auteur','action');
-	$desc = $inscrire_auteur($mode, $mail_complet, $nom, array('id'=>$id));
+		$inscrire_auteur = charger_fonction('inscrire_auteur','action');
+		$desc = $inscrire_auteur($mode, $mail_complet, $nom, array('id'=>$id));
+	}
 
 	// erreur ?
 	if (is_string($desc)){
