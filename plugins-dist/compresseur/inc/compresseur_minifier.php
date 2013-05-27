@@ -253,7 +253,7 @@ function minifier_encore_js($content,$file=false) {
 			$content = $dest;
 		  if (is_string($file)){
 			  ecrire_fichier ($file, $cc, true);
-			  clearstatcache(true,$file);
+			  spip_clearstatcache(true,$file);
 			  ecrire_fichier ("$file.gz", $cc, true);
 		    $content = $file;
 		  }
