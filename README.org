@@ -73,7 +73,6 @@ we end up working in a team but so far:
   - Add an anchor to the forum messages for linking
 - =squelettes/navigation.html=
   - should be re-done completely
-- Maybe remove CFG, it seems to be mostly useless now
 - Warn a team when a forum message is moderated
 - Allow visitors to edit part of their profile
 
