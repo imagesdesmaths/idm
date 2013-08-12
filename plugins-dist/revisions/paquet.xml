@@ -1,7 +1,7 @@
 <paquet
 	prefix="revisions"
 	categorie="edition"
-	version="1.7.5"
+	version="1.7.6"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/revision-32.png"
@@ -25,6 +25,7 @@
 	<pipeline nom="affiche_milieu"              inclure="inc/revisions_pipeline.php" />
 	<pipeline nom="configurer_liste_metas"      inclure="inc/revisions_pipeline.php" />
 	<pipeline nom="formulaire_charger"          inclure="inc/revisions_pipeline.php" />
+	<pipeline nom="taches_generales_cron" 		inclure="inc/revisions_pipeline.php" />
 	<pipeline nom="declarer_tables_interfaces"  inclure="base/revisions.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/revisions.php" />
 	<pipeline nom="declarer_tables_objets_sql"  inclure="base/revisions.php" />

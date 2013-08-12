@@ -145,11 +145,16 @@ function traiter_raccourci_notes($letexte, $marqueur_notes)
 		if ($nom) $nom = _NOTES_OUVRE_REF."<a href='#nb$ancre' class='spip_note' rel='footnote'$title$att>$nom</a>"._NOTES_FERME_REF;
 
 		$pos = strpos($letexte, $note_source);
-		$letexte = rtrim(substr($letexte, 0, $pos), ' ')
+
+		// supprimer les ' ' ou 'nbsp;' avant un appel de note
+		$avant = preg_replace(',( |&nbsp;|'.chr(194).chr(160).')+$,S', '', substr($letexte, 0, $pos));
+
+		$letexte = $avant
 		. code_echappement($nom)
 		. substr($letexte, $pos + strlen($note_source));
 
 	}
+
 	return array($letexte, $mes_notes);
 }
 
@@ -167,7 +172,7 @@ function traiter_les_notes($notes,$ignorer_autobr) {
 			. code_echappement($nom
 				? _NOTES_OUVRE_NOTE."<a".$atts.">$nom</a>"._NOTES_FERME_NOTE
 				: '')
-			. $texte
+			. trim($texte)
 			.'</div>';
 		}
 		if ($ignorer_autobr)

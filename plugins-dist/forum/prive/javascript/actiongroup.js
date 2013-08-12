@@ -4,6 +4,19 @@ var actiongroup={
 	countCurrent:0
 }
 /**
+ * Position fixe lors du scroll
+ */
+actiongroup.followScroll = function(){
+	var container = $("#actiongroup").parents('.box.raccourcis');
+	var limite = container.offset().top;
+	$(window).scroll(function() {
+		if($(this).scrollTop() > limite)
+			container.css({'position': 'fixed', 'top': 0, 'width': container.width()+'px'});
+		if($(this).scrollTop() < limite)
+			container.css({'position': 'static', 'width': 'auto'});	
+	});
+}
+/**
  * Vider completement la selection
  */
 actiongroup.emptySelection = function(){
@@ -192,4 +205,5 @@ actiongroup.activate = function(sel){
 			}
 		});
 	actiongroup.updateHtmlFromChecklist();
+	actiongroup.followScroll();
 }

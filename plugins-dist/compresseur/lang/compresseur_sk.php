@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 (javascript)',
 
 	// T
-	'texte_compacter_avertissement' => 'Dajte pozor na to, aby ste počas vývoja svojej stránky neaktivovali tieto možnosti: kompaktné prvky sa stanú nečitateľné.',
+	'texte_compacter_avertissement' => 'Dajte si pozor na to, aby ste tieto možnosti nenastavili počas vývoja svojej stránky, lebo kompaktné prvky sa stanú nečitateľné.',
 	'texte_compacter_script_css' => 'SPIP dokáže zmenšiť Javascriptove súbory a súbory so štýlmi a uložiť ich ako statické súbory. Tak zrýchľuje zobrazenie stránky.',
 	'texte_compresseur_page' => 'SPIP dokáže automaticky skomprimovať každú stránku, ktorú posiela návštevníkovi stránky. Tieto nastavenia optimalizujú šírku pásma (pri pomalšom pripojení je stránka rýchlejšia), ale vyžadujú si väčší výkon na strane servera. ',
 	'titre_compacter_script_css' => 'Kompresia skriptov a CSS',

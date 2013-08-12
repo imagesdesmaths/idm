@@ -56,6 +56,7 @@ function formulaires_mot_de_passe_charger_dist($id_auteur=null, $jeton=null){
 		$valeurs['editable'] =  false; // pas de saisie
 	}
 	$valeurs['oubli']='';
+	$valeurs['nobot']='';
 	return $valeurs;
 }
 
@@ -84,6 +85,9 @@ function formulaires_mot_de_passe_verifier_dist($id_auteur=null, $jeton=null){
 		set_request('oubli');
 		set_request('oubli_confirm');
 	}
+
+	if (_request('nobot'))
+		$erreurs['message_erreur'] = _T('pass_rien_a_faire_ici');
 
 	return $erreurs;
 }

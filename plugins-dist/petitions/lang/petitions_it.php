@@ -84,7 +84,7 @@ Grazie per la partecipazione',
 	'signatures_prop' => 'Attendere',
 	'signatures_publie' => 'Confermata',
 	'signatures_recherche_label' => 'Ricercare per adesione:',
-	'signatures_selection' => 'Sélectionner les signatures :', # NEW
+	'signatures_selection' => 'Seleziona la firma:',
 	'signatures_toutes' => 'Tutte',
 	'statut_poubelle' => 'Cancellata',
 	'statut_prop' => 'Aspettando la validazione',

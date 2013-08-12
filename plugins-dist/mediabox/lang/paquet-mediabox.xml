@@ -25,6 +25,9 @@
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/paquet-mediabox?lang_cible=nl">
 		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
+	<langue code="pt" url="http://trad.spip.net/tradlang_module/paquet-mediabox?lang_cible=pt">
+		<traducteur nom="Cláudia Anjos Lopes" lien="http://trad.spip.net/auteur/claudia_a_lopes" />
+	</langue>
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/paquet-mediabox?lang_cible=ru">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>

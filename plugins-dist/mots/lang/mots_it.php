@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'avis_conseil_selection_mot_cle' => '<b>Gruppo importante:</b> è consigliato selezionare una parola chiave in questo gruppo.',
-	'avis_doublon_mot_cle' => 'Una parola esiste già con questo titolo. Sei sicuro di volerne creare una uguale?', # MODIF
+	'avis_doublon_mot_cle' => 'Una parola esiste già con questo titolo. Sei sicuro di volerne creare una uguale?',
 
 	// B
 	'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'gli amministratori del sito',

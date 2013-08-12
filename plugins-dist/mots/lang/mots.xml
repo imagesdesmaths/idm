@@ -21,6 +21,7 @@
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/mots?lang_cible=en">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
 	</langue>
@@ -28,6 +29,7 @@
 	<langue code="eo" />
 	<langue code="es" url="http://trad.spip.net/tradlang_module/mots?lang_cible=es">
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
+		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
 	<langue code="eu" />
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/mots?lang_cible=fa">
@@ -64,7 +66,9 @@
 	<langue code="oc_prv" />
 	<langue code="oc_va" />
 	<langue code="pl" />
-	<langue code="pt" />
+	<langue code="pt" url="http://trad.spip.net/tradlang_module/mots?lang_cible=pt">
+		<traducteur nom="Cláudia Anjos Lopes" lien="http://trad.spip.net/auteur/claudia_a_lopes" />
+	</langue>
 	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/mots?lang_cible=pt_br">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>

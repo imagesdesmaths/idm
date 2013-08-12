@@ -88,7 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_actions_non_traitees' => 'Niektoré akcie neboli vykonané.
 			Mohlo sa to stať kvôli chybám v akciách, ktoré bolo treba vykonať, alebo kvôli chybe v zobrazení tejto stránky, zatiaľčo akcie čakajú, kým budú vykonané. Akcie spustil(a) @auteur@ @date@.',
-	'erreur_auth_plugins_ajouter_lib' => 'Vous n\'avez pas les droits nécessaires pour ajouter une librairie.', # NEW
+	'erreur_auth_plugins_ajouter_lib' => 'Na pridanie knižnice nemáte potrebné práva.',
 	'erreur_dir_dib_ecriture' => 'Do adresára knižníc @dir@ sa nedá zapisovať. Knižnica sa nedá spustiť!',
 	'erreur_dir_dib_indefini' => 'Priečinok _DIR_LIB nie je definovaný. Knižnica sa nedá spustiť!',
 	'erreur_dir_plugins_auto' => 'Priečinok "plugins/auto" na stiahnutie balíkov
@@ -103,7 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_teleporter_format_archive_non_supporte' => 'Premiestňovací program nepodporuje formát @extension@',
 	'erreur_teleporter_methode_inconue' => 'Premiestňovací program nepozná metódu @methode@',
 	'erreur_teleporter_type_fichier_inconnu' => 'Neznámy typ súboru pre zdroj @source@',
-	'erreurs_xml' => 'Niektoré popisy XML sa nedajú prečítať',
+	'erreurs_xml' => 'Niektoré opisy XML sa nedajú prečítať',
 	'explication_destination' => 'Ak nevyplníte umiestnenie, určí sa podľa názvu archívu.',
 
 	// F
@@ -136,9 +136,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_charger_plugin' => 'Ak chcete pridať jeden alebo viac zásuvných modulov SPIPu, vyhľadajte ich v "galaxii" cez vyhľadávanie podľa viacerých kritérií. Do vyhľadávania budú zaradené len zásuvné moduly kompatibilné s nainštalovanou verziou SPIPu a zásuvné moduly, ktoré sú aktívne, budú označené.',
 	'info_compatibilite_dependance' => 'Pre @compatibilite@:',
 	'info_contributions_hebergees' => '@total_autres@ iný(ch) príspevok (-kov) na serveri',
-	'info_critere_phrase' => 'Zadajte kľúčové slová, ktoré sa majú vyhľadávať v predpone, názve, slogane, popise a autoroch zásuvných modulov',
+	'info_critere_phrase' => 'Zadajte kľúčové slová, ktoré sa majú vyhľadávať v predpone, názve, slogane, opise a menách autorov zásuvných modulov',
 	'info_depots_disponibles' => '@total_depots@ depozitár(ov/e)',
-	'info_fichier_depot' => 'Zadajte adresu súboru s popisom depozitára, ktorý sa má pridať.<br />Ak chcete pridať depozitár "SPIP-Zone - Plugins", kliknite na tento odkaz: ',
+	'info_fichier_depot' => 'Zadajte adresu súboru s opisom depozitára, ktorý sa má pridať.<br />Ak chcete pridať depozitár "SPIP-Zone – Plugins", kliknite na tento odkaz: ',
 	'info_nb_depots' => '@nb@ depozitárov',
 	'info_nb_paquets' => '@nb@ balíkov',
 	'info_nb_plugins' => '@nb@ zásuvných modulov',
@@ -202,7 +202,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_action_finale_off_fail' => 'Deaktivácia zásuvného modulu "@plugin@" (verzia: @version@) nebola úspešne dokončená',
 	'message_action_finale_off_ok' => 'Deaktivácia zásuvného modulu "@plugin@" (verzia: @version@) bola úspešne dokončená',
 	'message_action_finale_on_fail' => 'Aktivácia zásuvného modulu "@plugin@" (verzia: @version@) nebola úspešne dokončená',
-	'message_action_finale_on_ok' => 'Aktivácia zásuvného modulu "@plugin@" (verzia: @version@) nebola úspešne dokončená',
+	'message_action_finale_on_ok' => 'Aktivácia zásuvného modulu "@plugin@" (verzia: @version@) bola úspešne dokončená',
 	'message_action_finale_stop_fail' => 'Odinštalovanie zásuvného modulu "@plugin@" (verzia: @version@) nebolo dokončené úspešne',
 	'message_action_finale_stop_ok' => 'Aktivácia zásuvného modulu "@plugin@" (verzia: @version@) bola úspešne dokončená',
 	'message_action_finale_up_fail' => 'Aktualizácia zásuvného modulu "@plugin@" (z verzie: @version@ na @version_maj@) neprebehla správne',
@@ -237,8 +237,8 @@ alebo vytvoriť tento priečinok a nastaviť mu povolenie na zápis.',
 	'message_nok_plugin_inexistant' => 'Požadovaný zásuvný modul neexistuje (@plugin@).',
 	'message_nok_sql_insert_depot' => 'Pri pridávaní depozitára @objet@ sa vyskytla chyba SQL',
 	'message_nok_url_depot_incorrecte' => 'Adresa "@url@" je nesprávna',
-	'message_nok_xml_non_conforme' => 'Súbor XML, ktorý je popisom depozitára,  "@fichier@"  nie je kompatibilný',
-	'message_nok_xml_non_recupere' => 'Le fichier XML « @fichier@ » n\'a pas pu être récupéré', # NEW
+	'message_nok_xml_non_conforme' => 'Súbor XML, ktorý je opisom depozitára  "@fichier@",  nie je kompatibilný',
+	'message_nok_xml_non_recupere' => 'Súbor XML " @fichier@ " sa nepodarilo získať',
 	'message_ok_aucun_plugin_trouve' => 'Vybraným kritériám nevyhovuje žiaden zásuvný modul.',
 	'message_ok_depot_ajoute' => 'Depozitár "@url@" bol priadaný.',
 	'message_ok_plugins_trouves' => 'Vybraným kritériám (@tri@) vyhovuje @nb_plugins@ zásuvný(ch) modul(ov). Vyberte si tie zásuvné moduly, ktoré chcete stiahnuť a aktivovať na svojom serveri.',
@@ -256,7 +256,7 @@ alebo vytvoriť tento priečinok a nastaviť mu povolenie na zápis.',
 	'option_etat_tout' => 'Všetky stavy',
 
 	// P
-	'placeholder_phrase' => 'predpona, názov, slogan, popis alebo autor',
+	'placeholder_phrase' => 'predpona, názov, slogan, opis alebo autor',
 	'plugin_info_actif' => 'Aktívny zásuvný modul',
 	'plugin_info_up' => 'K dispozícii je aktualizácia zásuvného modulu (verzia @version@)',
 	'plugin_info_verrouille' => 'Zamknutý zásuvný modul',

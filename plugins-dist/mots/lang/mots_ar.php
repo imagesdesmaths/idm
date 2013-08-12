@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'avis_conseil_selection_mot_cle' => '<b>مجموعة مهمة:</b> ينصح بالحاح اختيار مفتاح من هذه المجموعة.',
-	'avis_doublon_mot_cle' => 'هناك مفتاح موجود بهذا الاسم. هل انت متأكد من استخدام الاسم نفسه؟', # MODIF
+	'avis_doublon_mot_cle' => 'هناك مفتاح موجود بهذا الاسم. هل انت متأكد من استخدام الاسم نفسه؟',
 
 	// B
 	'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'مدراء الموقع',

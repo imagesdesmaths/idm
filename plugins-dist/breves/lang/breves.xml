@@ -87,7 +87,9 @@
 	<langue code="oc_prv" />
 	<langue code="oc_va" />
 	<langue code="pl" />
-	<langue code="pt" />
+	<langue code="pt" url="http://trad.spip.net/tradlang_module/breves?lang_cible=pt">
+		<traducteur nom="Cláudia Anjos Lopes" lien="http://trad.spip.net/auteur/claudia_a_lopes" />
+	</langue>
 	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/breves?lang_cible=pt_br">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
