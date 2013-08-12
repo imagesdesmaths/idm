@@ -62,7 +62,7 @@ uvedenú nižšie (v opačnom prípade bude vaša
 	'icone_valider_signature' => 'Potvrdiť tento podpis',
 	'icone_valider_signatures' => 'Potvrdiť podpisy',
 	'info_adresse_email' => 'E-MAILOVÁ ADRESA:',
-	'info_fonctionnement_petition' => 'Fungovanie petície:',
+	'info_fonctionnement_petition' => 'Nastavenie petície:',
 	'info_signature_supprimee' => 'Podpis odstránený',
 	'info_signature_supprimee_erreur' => 'Chyba: kód na odstránenie sa nezhoduje so žiadnym podpisom',
 	'info_site_web' => 'INTERNETOVÁ STRÁNKA:',
@@ -84,14 +84,14 @@ uvedenú nižšie (v opačnom prípade bude vaša
 	'signatures_prop' => 'Čakajúce',
 	'signatures_publie' => 'Potvrdené',
 	'signatures_recherche_label' => 'Vyhľadať podpisy:',
-	'signatures_selection' => 'Sélectionner les signatures :', # NEW
+	'signatures_selection' => 'Vyberte podpisy:',
 	'signatures_toutes' => 'Všetky',
 	'statut_poubelle' => 'Vymazaný',
 	'statut_prop' => 'Čaká na potvrdenie',
 	'statut_publie' => 'Potvrdený',
 
 	// T
-	'texte_descriptif_petition' => 'Popis petície',
+	'texte_descriptif_petition' => 'Opis petície',
 	'titre_page_controle_petition' => 'Sledovanie petícií',
 	'titre_petition' => 'Petícia',
 	'titre_petitions' => 'Petície',

@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_document' => 'Žiaden dokument',
 	'aucun_file' => 'Žiaden dokument',
 	'aucun_image' => 'Žiaden obrázok',
-	'aucun_video' => 'Žiadne videosekvencie',
+	'aucun_video' => 'Žiadne videá',
 	'aucune_utilisation' => 'Tento dokument sa nepoužíva.',
 	'aucune_vignette' => 'Žiadna miniatúra',
 
@@ -48,7 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'des_images' => '@nb@ obrázkov',
 	'des_utilisations' => '@nb@ použití',
 	'des_videos' => '@nb@ videosekvencií',
-	'descriptif' => 'Popis',
+	'descriptif' => 'Opis',
 	'document_attache_succes' => 'Dokument bol úspešne pridaný',
 	'document_copie_locale_succes' => 'Súbor bol úspešne skopírovaný na stránku',
 	'document_installe_succes' => 'Súbor sa úspešne nahral',
@@ -136,7 +136,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'media_audio' => 'Zvukové stopy',
 	'media_file' => 'Ostatné',
 	'media_image' => 'Obrázky',
-	'media_video' => 'Videosekvencie',
+	'media_video' => 'Videá',
 	'miniature_automatique_active' => 'SPIP automaticky vytvorí miniatúru obrázka',
 
 	// N

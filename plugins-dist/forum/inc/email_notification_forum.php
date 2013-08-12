@@ -30,15 +30,15 @@ function inc_email_notification_forum_dist ($t, $email, $contexte=array()) {
 		if ($t['statut'] == 'prive') # forum prive
 		{
 			if ($t['id_objet'])
-				$url = generer_url_entite($t['id_objet'], $t['objet'], '', '#id'.$id_forum, false);
+				$url = generer_url_entite($t['id_objet'], $t['objet'], '', 'forum'.$id_forum, false);
 		}
 		else if ($t['statut'] == 'privrac') # forum general
 		{
-			$url = generer_url_ecrire('forum').'#id'.$id_forum;
+			$url = generer_url_ecrire('forum').'#forum'.$id_forum;
 		}
 		else if ($t['statut'] == 'privadm') # forum des admins
 		{
-			$url = generer_url_ecrire('forum','quoi=admin').'#id'.$id_forum;
+			$url = generer_url_ecrire('forum','quoi=admin').'#forum'.$id_forum;
 		}
 		else if ($t['statut'] == 'publie') # forum publie
 		{

@@ -35,10 +35,13 @@ function label_champ($champ,$objet=false){
 		case 'email':
 			$label = "entree_adresse_email_2";
 			break;
+		case 'login':
+			$label = "item_login";
+			break;
 		case 'chapo':
 			$champ = "chapeau";
 		default:
-			$label = pipeline('revisions_chercher_label',array('args'=>array('champ'=>$champ,'objet'=>$objet),'data' => 'info_'.$champ));
+			$label = pipeline('revisions_chercher_label',array('args'=>array('champ'=>$champ,'objet'=>$objet),'data' => $label? $label:'info_'.$champ));
 			break;
 	}
 	return $label?_T($label):"";

@@ -24,6 +24,9 @@
 	<langue code="it" url="http://trad.spip.net/tradlang_module/urls?lang_cible=it">
 		<traducteur nom="phante" lien="http://trad.spip.net/auteur/phante" />
 	</langue>
+	<langue code="pt" url="http://trad.spip.net/tradlang_module/urls?lang_cible=pt">
+		<traducteur nom="Cláudia Anjos Lopes" lien="http://trad.spip.net/auteur/claudia_a_lopes" />
+	</langue>
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/urls?lang_cible=ru">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>

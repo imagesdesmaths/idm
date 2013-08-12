@@ -52,9 +52,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_ne_repondez_pas' => 'Neodpovedajte na tento mejl priamo - prosím, použite diskusné fórum:',
 	'forum_page_url' => '(If your message refers to an article published on the web or to a page providing further information, please enter the title of the page and its URL below).',
 	'forum_permalink' => 'Trvalý odkaz na komentár',
-	'forum_poste_par' => 'Príspevky @parauteur@ k vášmu článku "@titre@".', # MODIF
-	'forum_poste_par_court' => 'Message posté@parauteur@.', # NEW
-	'forum_poste_par_generique' => 'Message posté@parauteur@ (@objet@ « @titre@ »).', # NEW
+	'forum_poste_par' => 'Príspevok @parauteur@ odoslaný k článku "@titre@".',
+	'forum_poste_par_court' => 'Príspevok odoslaný@parauteur@.',
+	'forum_poste_par_generique' => 'Príspevok odoslaný@parauteur@ (@objet@ " @titre@ ").',
 	'forum_qui_etes_vous' => 'Kto ste?',
 	'forum_saisie_texte_info' => 'Tento formulár akceptuje skratky SPIPu <code>[-&gt;url] {{tučné}} {kurzíva} &lt;citácia&gt; &lt;kód&gt;</code> a kód HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;.</code> Ak chcete vytvoriť odseky, jednoducho vynechajte niekoľko riadkov.',
 	'forum_texte' => 'Text vášho príspevku',
@@ -92,7 +92,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  diskusných fór. Verejné diskusné fóra sa dajú povoliť na individuálnej báze
  pri článkoch; budú zakázané pre rubriky, novinky a pod.',
 	'info_envoi_forum' => 'Posielať príspevky z diskusného fóra príslušným autorom',
-	'info_fonctionnement_forum' => 'Operácia diskusného fóra:',
+	'info_fonctionnement_forum' => 'Nastavenie diskusného fóra:',
 	'info_forums_liees_mot' => 'Príspevky v diskusnom fóre s týmto slovom',
 	'info_gauche_suivi_forum_2' => 'Stránka na <i>sledovanie diskusných fór</i> je nástroj na riadenie vašej stránky (nie diskusií alebo úprav). Zobrazuje všetky príspevky do diskusných fór (tak na verejnej stránke, ako aj v súkromnej zóne) a umožňuje vám o týchto príspevkoch rozhodovať.',
 	'info_liens_syndiques_3' => 'diskusné fóra',

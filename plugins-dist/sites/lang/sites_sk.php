@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'entree_adresse_fichier_syndication' => 'Adresa syndikačného súboru:',
 	'entree_adresse_site' => '<b>Adresa stránky</b> [Povinné]',
-	'entree_description_site' => 'Popis stránky',
+	'entree_description_site' => 'Opis stránky',
 	'erreur_fichier_format_inconnu' => 'Formát súboru @fichier@ nie je podporovaný.',
 	'erreur_fichier_incorrect' => 'Súbor sa nedá čítať.',
 
@@ -48,7 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_articles_syndic' => 'Syndikované články',
 	'icone_controler_syndication' => 'Publikovanie syndikovaných článkov',
 	'icone_modifier_site' => 'Upraviť tieto stránky',
-	'icone_referencer_nouveau_site' => 'Odkázať sa na novú stránku',
+	'icone_referencer_nouveau_site' => 'Vytvoriť odkaz na novú stránku',
 	'icone_site_reference' => 'Odkazované stránky',
 	'icone_supprimer_article' => 'Odstrániť tento článok',
 	'icone_supprimer_articles' => 'Odstrániť tieto články',
@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_site_refuse' => 'Zamietnutá stránka',
 	'info_site_syndique' => 'Táto stránka je syndikovaná.',
 	'info_site_valider' => 'Stránky, ktoré čakajú na schválenie',
-	'info_sites_referencer' => 'Odkázať na stránku',
+	'info_sites_referencer' => 'Vložiť odkaz na stránku',
 	'info_sites_refuses' => 'Zamietnuté stránky',
 	'info_statut_site_1' => 'Táto stránka je:',
 	'info_statut_site_2' => 'Publikovaná',
@@ -130,7 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 			vybrať stránky, z ktorých sa budú prichádzajúce odkazy blokovať automaticky.',
 	'texte_messages_publics' => 'Verejné príspevky k článku:',
 	'texte_non_fonction_referencement' => 'Môžete sa rozhodnúť nepoužívať túto automatizovanú funkciu a zobrazovať prvky z danej stránky sami.',
-	'texte_referencement_automatique' => '<b>Automatické odkazovanie na stránky</b><br />Na stránku môžete rýchlo odkázať uvedením jej adresy alebo adresy jej syndikačného súboru. SPIP automaticky získa údaje o stránke (názov, popis...).',
+	'texte_referencement_automatique' => '<b>Automatické odkazovanie na stránky</b><br />Môžete rýchlo vložiť odkaz na stránku, tak, že uvediete jej adresu alebo adresu jej syndikačného súboru. SPIP automaticky získa údaje o tejto stránke (názov, popis, a pod.).',
 	'texte_referencement_automatique_verifier' => 'Pred uložením, prosím, skontrolujte údaje z <tt>@url@</tt>.',
 	'texte_syndication' => 'Zoznam nových funkcií sa dá získať automaticky, keď to stránka povoľuje. Na to musíte aktivovať syndikáciu. 
   <blockquote><i>Niektorí poskytovatelia webhostingu deaktivujú túto funkciu; 

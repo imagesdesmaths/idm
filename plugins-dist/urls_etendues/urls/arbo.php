@@ -346,7 +346,8 @@ function declarer_url_arbo($type, $id_objet) {
 	if ($modifier_url
 		AND CONFIRMER_MODIFIER_URL
 		AND $url_propre
-		AND $url != preg_replace('/,.*/', '', $url_propre))
+		// on essaye pas de regenerer une url en -xxx (suffixe id anti collision)
+		AND $url != preg_replace('/'.preg_quote(_url_propres_sep_id,'/').'.*/', '', $url_propre))
 		$confirmer = true;
 	else
 		$confirmer = false;

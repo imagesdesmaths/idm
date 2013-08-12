@@ -28,7 +28,8 @@ function afficher_diff_champ_dist($champ,$old,$new,$format='diff'){
 	if ($old==$new)
 		$out = ($format!='complet'?'':$new);
 	else {
-
+		if($f = charger_fonction($champ,'afficher_diff'))
+			return $f($champ,$old,$new,$format='diff');
 		$diff = new Diff(new DiffTexte);
 		$n = preparer_diff($new);
 		$o = preparer_diff($old);

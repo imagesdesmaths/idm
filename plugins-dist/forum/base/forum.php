@@ -39,12 +39,12 @@ function forum_declarer_tables_interfaces($interfaces){
 	$interfaces['table_statut']['spip_forum'][] = array('champ'=>'statut','publie'=>'publie','previsu'=>'publie,prop','exception'=>'statut');
 
 	$interfaces['table_des_traitements']['PARAMETRES_FORUM'][]= 'htmlspecialchars(%s)';
-	$interfaces['table_des_traitements']['TEXTE']['forums']= "safehtml(".str_replace("%s","interdit_html(%s)",_TRAITEMENT_RACCOURCIS).")";
-	$interfaces['table_des_traitements']['TITRE']['forums']= "safehtml(".str_replace("%s","interdit_html(%s)",_TRAITEMENT_TYPO).")";
-	$interfaces['table_des_traitements']['NOTES']['forums']= "safehtml(".str_replace("%s","interdit_html(%s)",_TRAITEMENT_RACCOURCIS).")";
-	$interfaces['table_des_traitements']['NOM_SITE']['forums']=  "safehtml(".str_replace("%s","interdit_html(%s)",_TRAITEMENT_TYPO).")";
+	$interfaces['table_des_traitements']['TEXTE']['forums']= "liens_nofollow(safehtml(".str_replace("%s","interdit_html(%s)",_TRAITEMENT_RACCOURCIS)."))";
+	$interfaces['table_des_traitements']['TITRE']['forums']= "liens_nofollow(safehtml(".str_replace("%s","interdit_html(%s)",_TRAITEMENT_TYPO)."))";
+	$interfaces['table_des_traitements']['NOTES']['forums']= "liens_nofollow(safehtml(".str_replace("%s","interdit_html(%s)",_TRAITEMENT_RACCOURCIS)."))";
+	$interfaces['table_des_traitements']['NOM_SITE']['forums']=  "liens_nofollow(safehtml(".str_replace("%s","interdit_html(%s)",_TRAITEMENT_TYPO)."))";
 	$interfaces['table_des_traitements']['URL_SITE']['forums']= 'safehtml(vider_url(%s))';
-	$interfaces['table_des_traitements']['AUTEUR']['forums']= 'safehtml(vider_url(%s))';
+	$interfaces['table_des_traitements']['AUTEUR']['forums']= 'liens_nofollow(safehtml(vider_url(%s)))';
 	$interfaces['table_des_traitements']['EMAIL_AUTEUR']['forums']= 'safehtml(vider_url(%s))';
 
 	return $interfaces;

@@ -148,6 +148,7 @@ function formulaires_editer_document_traiter_dist($id_document='new', $id_parent
 				$res['message_ok'] = (isset($res['message_ok'])?$res['message_ok'].'<br />':'')._T('medias:document_copie_locale_succes');
 			else
 				$res['message_erreur'] = (isset($res['message_erreur'])?$res['message_erreur'].'<br />':'').$err;
+			set_request('credits'); // modifie par la copie locale
 		}
 		else {
 			// liberer le nom de l'ancien fichier pour permettre le remplacement par un fichier du meme nom

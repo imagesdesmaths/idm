@@ -39,10 +39,10 @@ function petitions_declarer_tables_interfaces($interfaces){
 	// la securite et conformite XHTML de ces champs est assuree par safehtml()
 	foreach(array('NOM_EMAIL','AD_EMAIL','NOM_SITE','URL_SITE','MESSAGE') as $balise)
 		if (!isset($interfaces['table_des_traitements'][$balise]['signatures']))
-			$interfaces['table_des_traitements'][$balise]['signatures'] = 'safehtml(%s)';
+			$interfaces['table_des_traitements'][$balise]['signatures'] = 'liens_nofollow(safehtml(%s))';
 		else
 			if (strpos($interfaces['table_des_traitements'][$balise]['signatures'],'safehtml')==false)
-				$interfaces['table_des_traitements'][$balise]['signatures'] = 'safehtml('.$interfaces['table_des_traitements'][$balise]['signatures'].')';
+				$interfaces['table_des_traitements'][$balise]['signatures'] = 'liens_nofollow(safehtml('.$interfaces['table_des_traitements'][$balise]['signatures'].'))';
 
 	return $interfaces;
 }

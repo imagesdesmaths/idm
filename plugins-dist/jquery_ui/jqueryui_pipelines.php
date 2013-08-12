@@ -29,7 +29,7 @@ function jqueryui_jquery_plugins($plugins){
  * @param: $flux 
  * @return: $flux
  */
-function jqueryui_insert_head_css($flux) {
+function jqueryui_insert_head_css_dist($flux) {
 
 	// Modules demandés par le pipeline jqueryui_plugins
 	is_array($jqueryui_plugins = pipeline('jqueryui_plugins', array())) || $jqueryui_plugins = array();

@@ -20,6 +20,7 @@ function formulaires_ecrire_auteur_charger_dist($id_auteur, $id_article, $mail){
 		'sujet_message_auteur'=>'',
 		'texte_message_auteur'=>'',
 		'email_message_auteur'=>isset($GLOBALS['visiteur_session']['email'])?$GLOBALS['visiteur_session']['email']:'',
+		'nobot'=>'',
 	);
 	
 	// id du formulaire (pour en avoir plusieurs sur une meme page)
@@ -46,13 +47,16 @@ function formulaires_ecrire_auteur_verifier_dist($id_auteur, $id_article, $mail)
 
 	$sujet=_request('sujet_message_auteur');
 	if($sujet AND !(strlen($sujet)>3))
-		$erreurs['sujet_message_auteur'] = _T('forum_attention_trois_caracteres');
+		$erreurs['sujet_message_auteur'] = _T('forum:forum_attention_trois_caracteres');
 
 	if (!$texte=_request('texte_message_auteur'))
 		$erreurs['texte_message_auteur'] = _T("info_obligatoire");
 	elseif(!(strlen($texte)>10))
-		$erreurs['texte_message_auteur'] = _T('forum_attention_dix_caracteres');
+		$erreurs['texte_message_auteur'] = _T('forum:forum_attention_dix_caracteres');
 
+	if (_request('nobot'))
+		$erreurs['message_erreur'] = _T('pass_rien_a_faire_ici');
+		
 	if (!_request('confirmer') AND !count($erreurs))
 		$erreurs['previsu']=' ';
 	return $erreurs;

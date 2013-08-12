@@ -712,7 +712,12 @@ function barre_outils_css_icones(){
 			$pos = "background-position:".end($i);
 		  $i = reset($i);
 		}
-		$css .= "\n.markItUp .$n>a>em {background-image:url(".protocole_implicite(url_absolue(find_in_path("icones_barre/$i"))).");$pos}";
+		if (file_exists($i))
+			$file = $i;
+		else
+			$file = find_in_path("icones_barre/$i");
+		if ($file)
+			$css .= "\n.markItUp .$n>a>em {background-image:url(".protocole_implicite(url_absolue($file)).");$pos}";
 	}
 
 	return $css;
