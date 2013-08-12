@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_effacer_referers' => 'Удалить информацию о источниках переходов',
-	'bouton_effacer_statistiques' => 'Очистить статистику',
+	'bouton_effacer_statistiques' => 'Удалить всю статистику',
 
 	// C
 	'csv' => 'csv',
@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_evolution_visites' => 'Количество посещений<br />@visites@ ',
 	'icone_repartition_actuelle' => 'На данный момент',
-	'icone_repartition_visites' => 'Распределение посещений',
+	'icone_repartition_visites' => 'По разделам',
 	'icone_statistiques_visites' => 'Статистика посещений',
 	'info_affichier_visites_articles_plus_visites' => 'Самые популярные статьи с начала работы сайта: </b>',
 	'info_comment_lire_tableau' => 'Пояснения к графику',
@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'onglet_origine_visites' => 'Источники переходов',
 	'onglet_repartition_debut' => 'с начала',
-	'onglet_repartition_lang' => 'Распределение по языкам',
+	'onglet_repartition_lang' => 'По языкам',
 
 	// R
 	'resume' => 'Сводка',
@@ -54,7 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_signification' => 'Темные штрихи представляют накопленные записи (общее количество подразделов), светлые штрихи, представляют количество посещений для каждого раздела.',
 	'titre_evolution_visite' => 'Уровень посещений',
 	'titre_liens_entrants' => 'Источники переходов',
-	'titre_page_statistiques' => 'Распределение по разделам',
+	'titre_page_statistiques' => 'По разделам',
 	'titre_page_statistiques_visites' => 'История посещений',
 
 	// V

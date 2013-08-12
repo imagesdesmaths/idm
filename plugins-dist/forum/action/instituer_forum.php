@@ -81,8 +81,9 @@ function instituer_un_forum($statut,$row){
 				'type' => 'forum',
 				'id_objet' => $id_forum,
 				'action' => 'instituer',
+				'statut_ancien'=> $old,
 			),
-			'data' => null
+			'data' => array('statut'=>$statut)
 		)
 	);
 }

@@ -60,8 +60,13 @@ function typographie_fr($t) {
 		$t = preg_replace(',(&#?[0-9a-z]+)~;,iS', '$1;', $t);
 	}
 
-	/* 2 */
-	$t = preg_replace('/&#187;| --?,|(?::(?!:)| %)(?:\W|$)/S', '~$0', $t);
+	/* 2 ; ajout d'insecable */
+	$t = preg_replace('/&#187;| --?,|(?::| %)(?:\W|$)/S', '~$0', $t);
+
+	// {È} guillemet en italiques : ne pas doubler l'insecable 
+	$t = str_replace('~{~', '~{', $t);
+	$t = str_replace('~}~', '}~', $t);
+
 
 	/* 3 */
 	$t = preg_replace('/[!?][!?\.]*/S', "$pro~$0", $t, -1, $c);

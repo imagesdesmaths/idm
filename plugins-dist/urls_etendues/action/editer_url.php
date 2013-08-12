@@ -75,9 +75,12 @@ function url_nettoyer($titre,$longueur_maxi,$longueur_min=0,$separateur='-',$fil
 }
 
 function url_insert(&$set,$confirmer,$separateur){
+	$has_parent = true;
 	# assurer la coherence des champs techniques si non fournis
-	if (!isset($set['id_parent']))
+	if (!isset($set['id_parent'])){
+		$has_parent = false;
 		$set['id_parent'] = 0;
+	}
 	if (!isset($set['segments']))
 		$set['segments'] = count(explode('/',$set['url']));
 	$perma = false;
@@ -92,23 +95,32 @@ function url_insert(&$set,$confirmer,$separateur){
 		$separateur = "-";
 
 	// Si l'insertion echoue, c'est une violation d'unicite.
-	$where_thisurl = 'url='.sql_quote($set['url'])." AND id_parent=".intval($set['id_parent']);
-	if (@sql_insertq('spip_urls', $set) <= 0) {
+	$where_urllike = 'url LIKE '.url_sql_quote_like($set['url']);
+	$where_thisurl = $where_urllike." AND id_parent=".intval($set['id_parent']);
+	if (
+		// si pas de parent defini, il faut que cette url soit unique, independamment de id_parent
+		// il faut utiliser un LIKE pour etre case unsensitive en sqlite
+	  (!$has_parent AND sql_countsel("spip_urls",$where_urllike))
+		OR @sql_insertq('spip_urls', $set) <= 0) {
 
 		// On veut chiper une ancienne adresse ou prendre celle d'un repertoire deja present?
-		if ((!is_dir($set['url']) AND !file_exists($set['url'])) AND
-		// un vieux url
-		$vieux = sql_fetsel('*', 'spip_urls', $where_thisurl)
-		// l'objet a une url plus recente
-		AND $courant = sql_fetsel('*', 'spip_urls',
-			'type='.sql_quote($vieux['type']).' AND id_objet='.sql_quote($vieux['id_objet'])
-			.' AND date>'.sql_quote($vieux['date']), '', 'date DESC', 1
-		)) {
+		if (
+			(!is_dir(_DIR_RACINE.$set['url']) AND !file_exists(_DIR_RACINE.$set['url']))
+			// un vieux url
+			AND $vieux = sql_fetsel('*', 'spip_urls', $where_thisurl)
+			// qui n'est pas permanente
+			AND !$vieux['perma']
+		  // et dont l'objet a une url plus recente
+		  AND $courant = sql_fetsel('*', 'spip_urls',
+			  'type='.sql_quote($vieux['type']).' AND id_objet='.sql_quote($vieux['id_objet'])
+			  .' AND date>'.sql_quote($vieux['date']), '', 'date DESC', 1)
+		  ) {
 			if ($confirmer AND !_request('ok2')) {
 				die ("Vous voulez chiper l'URL de l'objet ".$courant['type']." "
 					. $courant['id_objet']." qui a maintenant l'url "
 					. $courant['url']);
 			}
+			$where_thisurl = "url=".sql_quote($vieux['url'])." AND id_parent=".intval($vieux['id_parent']);
 			// si oui on le chipe
 			sql_updateq('spip_urls', $set, $where_thisurl);
 			sql_updateq('spip_urls', array('date' => date('Y-m-d H:i:s')), $where_thisurl);
@@ -127,9 +139,11 @@ function url_insert(&$set,$confirmer,$separateur){
 				$where = "type=".sql_quote($set['type'])
 								 ." AND id_objet=".intval($set['id_objet'])
 								 ." AND id_parent=".intval($set['id_parent'])
-								 ." AND url=";
-				if (!is_dir($set['url']) && !file_exists($set['url']) && sql_countsel('spip_urls', $where  .sql_quote($set['url']))) {
-					sql_updateq('spip_urls', array('url'=>$set['url'], 'date' => date('Y-m-d H:i:s')), $where  .sql_quote($set['url']));
+								 ." AND url LIKE ";
+				if (
+					!is_dir(_DIR_RACINE.$set['url']) AND !file_exists(_DIR_RACINE.$set['url'])
+					AND sql_countsel('spip_urls', $where  .url_sql_quote_like($set['url']))) {
+					sql_updateq('spip_urls', array('url'=>$set['url'], 'date' => date('Y-m-d H:i:s')), $where  .url_sql_quote_like($set['url']));
 					spip_log("reordonne ".$set['type']." ".$set['id_objet']);
 					$redate = false;
 					continue;
@@ -139,8 +153,8 @@ function url_insert(&$set,$confirmer,$separateur){
 					if (strlen($set['url']) > 200)
 						//serveur out ? retourner au mieux
 						return false;
-					elseif (sql_countsel('spip_urls', $where . sql_quote($set['url']))) {
-						sql_updateq('spip_urls', array('url'=>$set['url'], 'date' => date('Y-m-d H:i:s')), $where .sql_quote($set['url']));
+					elseif (sql_countsel('spip_urls', $where . url_sql_quote_like($set['url']))) {
+						sql_updateq('spip_urls', array('url'=>$set['url'], 'date' => date('Y-m-d H:i:s')), $where .url_sql_quote_like($set['url']));
 						$redate = false;
 						continue;
 					}
@@ -158,8 +172,12 @@ function url_insert(&$set,$confirmer,$separateur){
 	if ($perma)
 		sql_update('spip_urls', array('perma' => "($where_thisurl)"), "type=".sql_quote($set['type'])." AND id_objet=".intval($set['id_objet']));
 	
-	spip_log("Creation de l'url propre '" . $set['url'] . "' pour ".$set['type']." ".$set['id_objet']." (parent ".$set['id_parent']." perma $perma)");
+	spip_log("Creation de l'url propre '" . $set['url'] . "' pour ".$set['type']." ".$set['id_objet']." (parent ".$set['id_parent']." perma $perma)","urls");
 	return true;
+}
+
+function url_sql_quote_like($url){
+	return sql_quote(str_replace(array("%","_"),array("\\%","\\_"),$url))." ESCAPE ".sql_quote('\\');
 }
 
 function url_verrouiller($objet,$id_objet,$url){

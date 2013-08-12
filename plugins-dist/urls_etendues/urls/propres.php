@@ -121,7 +121,13 @@ function declarer_url_propre($type, $id_objet) {
 	$row = sql_fetsel("U.url, U.date, U.perma, $champ_titre",
 	                  "$table AS O LEFT JOIN spip_urls AS U ON (U.type='$type' AND U.id_objet=O.$col_id)",
 	                  "O.$col_id=$id_objet AND (U.segments IS NULL OR U.segments=1)", '', 'U.date DESC', 1);
-	
+
+	// en SQLite le left join retourne du vide si il y a une url mais qui ne correspond pas pour la condition sur le segment
+	// on verifie donc que l'objet existe bien avant de sortir ou de creer une url pour cet objet
+	if (!$row)
+		$row = sql_fetsel("'' as url, '' as date, 0 as perma, $champ_titre",
+		                  "$table AS O",
+		                  "O.$col_id=$id_objet");
 	if (!$row) return ""; # Quand $id_objet n'est pas un numero connu
 
 	$url_propre = $row['url'];
@@ -168,7 +174,7 @@ function declarer_url_propre($type, $id_objet) {
 	if ($modifier_url
 		AND CONFIRMER_MODIFIER_URL
 		AND $url_propre
-		AND $url != preg_replace('/,.*/', '', $url_propre))
+		AND $url != preg_replace('/'.preg_quote(_url_propres_sep_id,'/').'.*/', '', $url_propre))
 		$confirmer = true;
 	else
 		$confirmer = false;

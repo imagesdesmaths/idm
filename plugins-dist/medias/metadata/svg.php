@@ -23,43 +23,45 @@ include_spip('inc/autoriser');
  * @return array
  */
 // http://doc.spip.org/@traite_svg
-function medata_svg_dist($file){
+function metadata_svg_dist($file){
 	$meta = array();
 
 	$texte = spip_file_get_contents($file);
 
 	// Securite si pas autorise : virer les scripts et les references externes
 	// sauf si on est en mode javascript 'ok' (1), cf. inc_version
-	if ($GLOBALS['filtrer_javascript'] < 1
-	  AND !autoriser('televerser','script')) {
+	if ($GLOBALS['filtrer_javascript']<1
+		AND !autoriser('televerser', 'script')
+	){
 		include_spip('inc/texte');
 		$new = trim(safehtml($texte));
 		// petit bug safehtml
-		if (substr($new,0,2) == ']>') $new = ltrim(substr($new,2));
-		if ($new != $texte) ecrire_fichier($file, $texte = $new);
+		if (substr($new, 0, 2)==']>') $new = ltrim(substr($new, 2));
+		if ($new!=$texte) ecrire_fichier($file, $texte = $new);
 	}
 
 	$width = $height = 150;
-	if (preg_match(',<svg[^>]+>,', $texte, $s)) {
+	if (preg_match(',<svg[^>]+>,', $texte, $s)){
 		$s = $s[0];
 		if (preg_match(',\WviewBox\s*=\s*.\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+),i', $s, $r)){
 			$width = $r[3];
-                	$height = $r[4];
-		} else {
-	// si la taille est en centimetre, estimer le pixel a 1/64 de cm
-		if (preg_match(',\Wwidth\s*=\s*.(\d+)([^"\']*),i', $s, $r)){
-			if ($r[2] != '%') {
-				$width = $r[1];
-				if ($r[2] == 'cm') $width <<=6;
+			$height = $r[4];
+		}
+		else {
+			// si la taille est en centimetre, estimer le pixel a 1/64 de cm
+			if (preg_match(',\Wwidth\s*=\s*.(\d+)([^"\']*),i', $s, $r)){
+				if ($r[2]!='%'){
+					$width = $r[1];
+					if ($r[2]=='cm') $width <<= 6;
+				}
+			}
+			if (preg_match(',\Wheight\s*=\s*.(\d+)([^"\']*),i', $s, $r)){
+				if ($r[2]!='%'){
+					$height = $r[1];
+					if ($r[2]=='cm') $height <<= 6;
+				}
 			}
 		}
-		if (preg_match(',\Wheight\s*=\s*.(\d+)([^"\']*),i', $s, $r)){
-			if ($r[2] != '%') {
-	                	$height = $r[1];
-				if ($r[2] == 'cm') $height <<=6;
-			}
-		}
-	   }
 	}
 	$meta['largeur'] = $width;
 	$meta['hauteur'] = $height;

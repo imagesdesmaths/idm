@@ -87,7 +87,7 @@ function renseigner_taille_dimension_image($fichier,$ext){
 			spip_log ("Echec copie du fichier $fichier");
 			return _T('medias:erreur_copie_fichier',array('nom'=> $fichier));
 	}
-	
+
 	// chercher une fonction de description
 	$meta = array();
 	if ($metadata = charger_fonction($ext,"metadata",true)){
@@ -99,7 +99,9 @@ function renseigner_taille_dimension_image($fichier,$ext){
 			$meta = $metadata($fichier);
 		}
 	}
-	
+
+	$meta = pipeline('renseigner_document',array('args'=>array('extension'=>$ext,'fichier'=>$fichier),'data' => $meta));
+
 	include_spip('inc/filtres'); # pour objet_info()
 	$editables = objet_info('document','champs_editables');
 	foreach($meta as $m=>$v)

@@ -13,7 +13,7 @@
 /**
  * Pipelines utilisés du plugin révisions
  *
- * @package Revisions\Pipelines
+ * @package SPIP\Revisions\Pipelines
 **/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
@@ -277,5 +277,18 @@ function revisions_post_edition_lien($x) {
 	return $x;
 }
 
-
+/**
+ * Ajoute la tâche d'optimisation des tables dans la liste des tâches périodiques
+ *
+ * @pipeline taches_generales_cron
+ *
+ * @param array $taches_generales
+ *     Tableau des tâches et leur périodicité en seconde
+ * @return array
+ *     Tableau des tâches et leur périodicité en seconde
+ */
+function revisions_taches_generales_cron($taches_generales){
+	$taches_generales['optimiser_revisions'] = 86400;
+	return $taches_generales;
+}
 ?>

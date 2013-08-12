@@ -53,9 +53,9 @@ cancellarli successivamente).',
 	'forum_ne_repondez_pas' => 'Non rispondere a questa email ma intervieni sul forum all\'indirizzo seguente:',
 	'forum_page_url' => '(Se il tuo messaggio si riferisce ad un articolo pubblicato sul Web o ad una pagina contenente maggiori informazioni, è possibile indicare di seguito il titolo della pagina ed il suo indirizzo URL.)',
 	'forum_permalink' => 'Permalink al commento',
-	'forum_poste_par' => 'Messaggio inviato da @parauteur@ in calce all\'articolo  « @titre@ ».', # MODIF
-	'forum_poste_par_court' => 'Message posté@parauteur@.', # NEW
-	'forum_poste_par_generique' => 'Message posté@parauteur@ (@objet@ « @titre@ »).', # NEW
+	'forum_poste_par' => 'Messaggio inviato da @parauteur@ in calce all\'articolo "@titre@".',
+	'forum_poste_par_court' => 'Messaggio inviato @parauteur@.',
+	'forum_poste_par_generique' => 'Messaggio inviato @parauteur@ (@objet@ "@titre@").',
 	'forum_qui_etes_vous' => 'Chi sei?',
 	'forum_saisie_texte_info' => 'Questo form accetta scorciatoie di SPIP <code>[-&gt;url] {{bold}} {italic} &lt;quote&gt; &lt;code&gt;</code> e il codice HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Per creare un paragrafo lasciate semplicemente una riga vuota.',
 	'forum_texte' => 'Testo del messaggio',

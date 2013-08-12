@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'c_job' => 'Anstehende Aufgaben',
 	'c_job_texte' => 'Diese Seite zeigt Wartungsaufgaben, die SPIP regelmäßig erledigen muß. Diese Aufgaben erledigt SPIP entweder automatisch in bestimmten Abständen oder auf besondere Anforderung durch Plugins, etwa um einen Massenversand von Mails zu erledigen.',
 	'c_rubrique_publier' => 'Legen Sie einen Artikel an.',
-	'c_rubrique_publier_texte' => 'Rubriken werden auf den öffentlichen Seinten nur angezeigt, wenn sie Inhalte enthalten, etwa einen veröffentlichten Artikel.#
+	'c_rubrique_publier_texte' => 'Rubriken werden auf den öffentlichen Seiten nur angezeigt, wenn sie Inhalte enthalten, etwa einen veröffentlichten Artikel.#
 Legen Sie einen Artikel an. Sie können das auf dieser Seite unterhalb der Beschreibung der Rubrik machen.',
 	'c_rubriques_creer' => 'Legen Sie eine erste Rubrik an!',
 	'c_rubriques_creer_texte' => 'Die Website setzt sich aus Rubriken zusammen. Artikel legen sie innerhalb der Rubriken an.

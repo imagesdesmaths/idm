@@ -75,7 +75,7 @@ Devi confermare questa azione.',
 
 	// E
 	'erreur_actions_non_traitees' => 'Alcune azioni non possono essere eseguite. Questo potrebbe dipendere da un\'errore intercorso durante l\'esecuzione dell\'azione oppure dalla visualizzazione di questa pagina mentre le azioni erano in attesa. Le azioni sono state iniziare da @auteur@ il @date@.',
-	'erreur_auth_plugins_ajouter_lib' => 'Vous n\'avez pas les droits nécessaires pour ajouter une librairie.', # NEW
+	'erreur_auth_plugins_ajouter_lib' => 'Non hai i permessi per aggiungere una libreria.',
 	'erreur_dir_dib_ecriture' => 'La directory della libreria @dir@ non è scrivibile. Impossibile caricare una libreria!',
 	'erreur_dir_dib_indefini' => 'La directory _DIR_LIB non è definita. Impossibile caricare la libreria!',
 	'erreur_dir_plugins_auto' => 'La directory "plugins/auto" che permette il download dei pacchetti non esiste oppure non è scrivibile
@@ -222,7 +222,7 @@ Se vuoi disabilitarla, per favore contatta il webmaster del sito oppure controll
 	'message_nok_sql_insert_depot' => 'Errore SQL aggiungendo il repository @objet@',
 	'message_nok_url_depot_incorrecte' => 'L\'indirizzo « @url@ » è sbagliato',
 	'message_nok_xml_non_conforme' => 'Il file XML di descrizione "@fichier@" » del repository non è conforme',
-	'message_nok_xml_non_recupere' => 'Le fichier XML « @fichier@ » n\'a pas pu être récupéré', # NEW
+	'message_nok_xml_non_recupere' => 'Il file XML « @fichier@ » non può essere recuperato',
 	'message_ok_aucun_plugin_trouve' => 'Nessun plugin corrisponde al criterio selezionato.',
 	'message_ok_depot_ajoute' => 'Il repository « @url@ » è stato aggiunto.',
 	'message_ok_plugins_trouves' => '@nb_plugins@ plugin corrisponde ai criteri selezionati (@tri@). Selezionare qui sotto i plugin che volete scaricare e attivare sul vostro server.',

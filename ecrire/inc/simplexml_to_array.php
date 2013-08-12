@@ -1,26 +1,58 @@
 <?php
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2013                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+
+
+
+/**
+ * Transforme un texte XML en tableau PHP
+ * @param string|object $u
+ * @param bool $utiliser_namespace
+ * @return array
+ */
+function inc_simplexml_to_array_dist($u, $utiliser_namespace=false){
+	// decoder la chaine en SimpleXML si pas deja fait
+	if (is_string($u))
+		$u = simplexml_load_string($u);
+	return array('root'=>@xmlObjToArr($u, $utiliser_namespace));
+}
 
 
 /**
  * Transforme un objet SimpleXML en tableau PHP
+ * http://www.php.net/manual/pt_BR/book.simplexml.php#108688
+ * xaviered at gmail dot com 17-May-2012 07:00
  *
  * @param object $obj
+ * @param bool $utiliser_namespace
  * @return array
 **/
-// http://www.php.net/manual/pt_BR/book.simplexml.php#108688
-// xaviered at gmail dot com 17-May-2012 07:00
-function inc_simplexml_to_array_dist($obj, $utiliser_namespace='false') {
+function xmlObjToArr($obj, $utiliser_namespace=false) {
 
 	$tableau = array();
 
 	// Cette fonction getDocNamespaces() est longue sur de gros xml. On permet donc
 	// de l'activer ou pas suivant le contenu supposé du XML
 	if (is_object($obj)) {
-		if ($utiliser_namespace)
-			$namespace = $obj->getDocNamespaces(true);
-		$namespace[NULL] = NULL;
+		if (is_array($utiliser_namespace)){
+			$namespace = $utiliser_namespace;
+		}
+		else {
+			if ($utiliser_namespace)
+				$namespace = $obj->getDocNamespaces(true);
+			$namespace[NULL] = NULL;
+		}
 
 		$name = strtolower((string)$obj->getName());
 		$text = trim((string)$obj);
@@ -51,16 +83,19 @@ function inc_simplexml_to_array_dist($obj, $utiliser_namespace='false') {
 				if( !empty($ns) ) {
 					$childName = $ns.':'.$childName;
 				}
-				$children[$childName][] = inc_simplexml_to_array_dist($child);
+				$children[$childName][] = xmlObjToArr($child, $namespace);
 			}
 		}
 
 		$tableau = array(
 			'name'=>$name,
-			'text'=>$text,
-			'attributes'=>$attributes,
-			'children'=>$children
 		);
+		if ($text)
+			$tableau['text'] = $text;
+		if ($attributes)
+			$tableau['attributes'] = $attributes;
+		if ($children)
+			$tableau['children'] = $children;
 	}
 
 	return $tableau;

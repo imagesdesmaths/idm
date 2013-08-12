@@ -12,6 +12,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+if (!defined('_DATA_SOURCE_MAX_SIZE')) define('_DATA_SOURCE_MAX_SIZE',2*1048576);
 
 
 /**
@@ -267,7 +268,7 @@ class IterateurDATA implements Iterator {
 			else {
 				if (preg_match(',^https?://,', $src)) {
 					include_spip('inc/distant');
-					$u = recuperer_page($src);
+					$u = recuperer_page($src, false, false, _DATA_SOURCE_MAX_SIZE);
 					if (!$u)
 						throw new Exception("404");
 					if (!isset($ttl)) $ttl = 24*3600;
@@ -619,6 +620,23 @@ function inc_glob_to_array_dist($u) {
 		GLOB_MARK | GLOB_NOSORT | GLOB_BRACE
 	);
 }
+
+/**
+ * YAML -> tableau
+ * @param string $u
+ * @return bool|array
+ * @throws Exception
+ */
+function inc_yaml_to_array_dist($u){
+	include_spip('inc/yaml-mini');
+	if (!function_exists("yaml_decode")){
+		throw new Exception('YAML: impossible de trouver la fonction yaml_decode');
+		return false;
+	}
+
+	return yaml_decode($u);
+}
+
 
 /**
  * pregfiles -> tableau
