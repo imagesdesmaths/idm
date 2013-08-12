@@ -9,7 +9,7 @@ function decoder_yaml($fichier){
 	return yaml_decode_file($fichier);
 }
 
-function inc_yaml_to_array_dist($u) {
+function inc_yaml_to_array($u) {
 	include_spip('inc/yaml');
 	return yaml_decode($u);
 }
