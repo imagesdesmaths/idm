@@ -6,7 +6,7 @@
 ***      http://www.april.org/gnu/gpl_french.html		     ***
 ******************************************************************/
 ]
-<BOUCLE_freeminddoc(DOCUMENTS){id_document=#ENV**{doc}}{mode=document}{extension==ggb}>
+<BOUCLE_freeminddoc(DOCUMENTS){id_document=#ID}{mode=document}{extension==ggb}>
 	<applet name="ggbApplet" code="geogebra.GeoGebraApplet" codebase="./"
 	[(#ENV**{dev}|?{'archive="http://www.geogebra.org/webstart/dev/geogebra.jar"','archive="http://www.geogebra.org/webstart/geogebra.jar"'})]
 	width="[(#ENV**{largeur}|?{#ENV**{largeur},"100%"})]"
