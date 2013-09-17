@@ -1,6 +1,15 @@
-#CACHE{0}
-<div id="social" class="noprint">
-  [(#MODELE{fb_like}{layout=button_count}{width=10})]
-  <a href="http://twitter.com/share" class="twitter-share-button" data-count="none" data-via="ImagesDesMaths" data-lang="fr">Tweeter</a>
-  <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-</div>
+<div data-path-prefix="/socialmediaprivacy/" data-perma_option="false" class="share"></div>
+
+<style>
+    div.share ul { margin: 0; }
+    div.share .social_share_privacy_area.line li .dummy_btn { margin: 0; }
+    div.share .settings_info { display: none; }
+</style>
+
+<script type="text/javascript" src="/socialmediaprivacy/javascripts/jquery.socialshareprivacy.min.js"></script>
+<script type="text/javascript" src="/socialmediaprivacy/javascripts/jquery.socialshareprivacy.min.fr.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.share').socialSharePrivacy();
+});
+</script>

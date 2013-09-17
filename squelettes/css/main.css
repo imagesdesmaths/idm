@@ -290,9 +290,7 @@ border:1px solid #c0c0c0; background:url(../img/bg_nav_select.gif);height:24px;l
 
 
 #art_social {float:right;}
-#art_social .fb_like {float: right;margin-left:5px;}
-#art_social #social {width:500px;}
-.fb_modeles fb_like, .twitter-share-button {float:right;}
+
 .nopage {clear: both;}
 
 .frame { border: 1px solid black; margin: 0ex 1em 20px; padding: 1ex 1em; background: white; -moz-box-shadow: 5px 5px 15px black; -webkit-box-shadow: 5px 5px 15px black; box-shadow: 5px 5px 15px black; }
