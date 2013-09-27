@@ -59,6 +59,9 @@ ExpiresDefault A0
 FileETag none
 
 AddType text/x-component htc
+AddType video/ogg .ogv
+AddType video/mp4 .mp4
+AddType video/webm .webm
 
 ################ GESTIONS DES URLS SPIP #######################
 
