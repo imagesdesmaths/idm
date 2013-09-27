@@ -63,7 +63,7 @@
       });
     });
 
-    $('video,audio').mediaelementplayer();
+    $('video,audio').mediaelementplayer({features: ['playpause', 'progress', 'current', 'duration' /*,'fullscreen'*/]});
 
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-4259270-1']);
