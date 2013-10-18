@@ -23,7 +23,7 @@
     <td>[<a href="(#VAL{idm_gerer}|generer_url_ecrire{id_article=#ID_ARTICLE})">Modifier</a>]</td>
   </tr>
 </BOUCLE_deja>
-<BOUCLE_prevus(ARTICLES) {statut = prop} {prevu = oui} {par date_prevue}>
+<BOUCLE_prevus(ARTICLES) {statut IN prop,prepa} {prevu = oui} {par date_prevue}>
   <tr>
     <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
     <td>#LESAUTEURS</td>
@@ -59,6 +59,31 @@
 </BOUCLE_article2>
 </table>
 </B_article2>
+
+<B_article3>
+<h2><:idm:non_plan_prepa:></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Auteur(s)</th>
+      <th>Rubrique</th>
+      <th>Éditeur</th>
+      <th>Modifier</th>
+    </tr>
+  </thead>
+<BOUCLE_article3(ARTICLES) {statut = prepa} {prevu != oui} {par titre}>
+  <tr>
+    <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
+    <td>#LESAUTEURS</td>
+    <td>#INFO_TITRE{rubrique,#ID_RUBRIQUE}</td>
+    <td>[<a href="(#ID_EDITEUR|generer_url_entite{auteur})">[(#INFO_TITRE{auteur,#ID_EDITEUR}|idm_prenom_nom)]</a>]</td>
+    <td>[<a href="(#VAL{idm_gerer}|generer_url_ecrire{id_article=#ID_ARTICLE})">Modifier</a>]</td>
+  </tr>
+</BOUCLE_article3>
+</table>
+</B_article3>
 
 <script type="text/javascript">
   $("#planning").tablesorter( {sortList : [[3,0]]} );

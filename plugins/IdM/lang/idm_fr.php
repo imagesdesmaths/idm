@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'log'                => "Suivi relecture",
 
     'non_plan'           => "Articles proposés et non planifiés",
+    'non_plan_prepa'     => "Articles en préparation et non planifiés",
 
     'planning'           => "Planning de publication",
 
