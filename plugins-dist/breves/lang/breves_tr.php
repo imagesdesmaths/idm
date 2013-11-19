@@ -8,7 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'breve' => 'Brève', # NEW
 	'breves' => 'Kısa haberler',
 
 	// E
@@ -21,12 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_breve' => 'Bu kısa haberi değiştir',
 	'icone_nouvelle_breve' => 'Yeni bir kısa haber yaz',
 	'info_1_breve' => '1 kısa haber',
-	'info_aucun_breve' => 'Aucune brève', # NEW
 	'info_breves' => 'Siteniz kısa haber sistemini kullanıyor mu ?',
 	'info_breves_02' => 'Kısa haberler',
 	'info_breves_valider' => 'Onaylanacak kısa haberler',
 	'info_gauche_numero_breve' => 'KISA HABER NUMARASI', # MODIF
-	'info_nb_breves' => '@nb@ brèves', # NEW
 	'item_breve_proposee' => 'Önerilen kısa haber', # MODIF
 	'item_breve_refusee' => 'HAYIR - Kısa haber reddedildi', # MODIF
 	'item_breve_validee' => 'EVET - Kısa haber onaylandı', # MODIF
@@ -45,7 +42,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_breve_refusee' => 'Reddedilen kısa haber',
 	'titre_breves' => 'Kısa haberler  ',
 	'titre_langue_breve' => 'KISA HABERİN DİLİ', # MODIF
-	'titre_nouvelle_breve' => 'Nouvelle brève', # NEW
 	'titre_page_breves' => 'Kısa haberler'
 );
 

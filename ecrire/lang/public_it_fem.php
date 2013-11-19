@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'Home page', # MODIF
-	'article' => 'Article', # NEW
 	'articles' => 'Articoli',
 	'articles_auteur' => 'Articoli di questo autore',
 	'articles_populaires' => 'Articoli più letti',
@@ -19,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'Non ci sono siti a questo indirizzo',
 	'aucune_breve' => 'Non ci sono brevi a questo indirizzo',
 	'aucune_rubrique' => 'Non ci sono rubriche a questo indirizzo',
-	'auteur' => 'Auteur', # NEW
 	'autres' => 'Altri',
 	'autres_breves' => 'Altre brevi',
 	'autres_groupes_mots_clefs' => 'Altri gruppi di parole chiave',
@@ -30,7 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Commenta questo sito',
-	'contact' => 'Contact', # NEW
 	'copie_document_impossible' => 'Impossibile copiare il documento',
 
 	// D
@@ -67,7 +64,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'Messaggio',
 	'messages_forum' => 'Messaggi del forum', # MODIF
 	'messages_recents' => 'Messaggi più recenti del forum',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => 'Parole chiave',
 	'mots_clefs_meme_groupe' => 'Parole chiave nello stesso gruppo',
 
@@ -83,17 +79,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_precedente' => 'pagina precedente',
 	'page_suivante' => 'pagina successiva',
 	'par_auteur' => 'di ',
-	'participer_site' => 'È possibile partecipare alla vita di questo sito e proporre degli articoli iscrivendosi qui sotto. Verrà spedito immediatamente un email con il codice di accesso all\'area riservata del sito.',
+	'participer_site' => 'È possibile partecipare alla vita di questo sito e proporre degli articoli iscrivendosi qui sotto. Verrà spedito immediatamente un email con il codice di accesso all’area riservata del sito.',
 	'plan_site' => 'Mappa del sito',
 	'popularite' => 'Popolarità',
 	'poster_message' => 'Inviare un messaggio',
 	'proposer_site' => 'È possibile proporre un sito da aggiungere a questa rubrica:',
 
 	// R
-	'repondre_article' => 'Rispondere all\'articolo',
+	'repondre_article' => 'Rispondere all’articolo',
 	'repondre_breve' => 'Rispondere a questa breve',
 	'resultats_recherche' => 'Risultati della ricerca',
-	'retour_debut_forums' => 'Tornare all\'inizio dei forum',
+	'retour_debut_forums' => 'Tornare all’inizio dei forum',
 	'rubrique' => 'Rubrica',
 	'rubriques' => 'Rubriche',
 

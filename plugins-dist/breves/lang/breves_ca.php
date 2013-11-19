@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'breves' => 'Breus',
 
 	// E
-	'entree_breve_publiee' => 'Aquesta breu s\'ha de publicar?', # MODIF
+	'entree_breve_publiee' => 'Aquesta breu s’ha de publicar?', # MODIF
 	'entree_texte_breve' => 'Text de la breu',
 
 	// I
@@ -37,13 +37,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'logo_breve' => 'LOGOTIP DE LA BREU', # MODIF
 
 	// T
-	'texte_breves' => 'Les breus son textes curts i simples que permeten posar ràpidament en línia informacions concises, gestionar una revista de premsa, un calendari d\'esdeveniments...',
+	'texte_breves' => 'Les breus son textes curts i simples que permeten posar ràpidament en línia informacions concises, gestionar una revista de premsa, un calendari d’esdeveniments...',
 	'titre_breve_proposee' => 'Breu proposada',
 	'titre_breve_publiee' => 'Breu publicada',
 	'titre_breve_refusee' => 'Breu refusada',
 	'titre_breves' => 'Les breus',
 	'titre_langue_breve' => 'LLENGUA DEL BREU', # MODIF
-	'titre_nouvelle_breve' => 'Nouvelle brève', # NEW
 	'titre_page_breves' => 'Breus'
 );
 

@@ -14,18 +14,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'0_mainteneur' => 'fausto@nosmet.com',
 
 	// A
-	'access_interface_graphique' => 'Ritorna all\'interfaccia grafica completa',
-	'access_mode_texte' => 'Visualizza l\'interfaccia testuale semplificata',
+	'access_interface_graphique' => 'Ritorna all’interfaccia grafica completa',
+	'access_mode_texte' => 'Visualizza l’interfaccia testuale semplificata',
 	'admin_debug' => 'debug',
-	'admin_modifier_article' => 'Modifica l\'articolo',
-	'admin_modifier_auteur' => 'Modifica l\'autrice',
+	'admin_modifier_article' => 'Modifica l’articolo',
+	'admin_modifier_auteur' => 'Modifica l’autrice',
 	'admin_modifier_breve' => 'Modifica la breve',
 	'admin_modifier_mot' => 'Modifica la parola chiave',
 	'admin_modifier_rubrique' => 'Modifica la rubrica',
 	'admin_recalculer' => 'Rigenera la pagina',
-	'afficher_calendrier' => 'Afficher le calendrier', # NEW
 	'afficher_trad' => 'visualizzare le traduzioni',
-	'alerte_maj_impossible' => '<b>Attenzione!</b> L\'aggiornamento del database SQL alla versione @version@ è impossibile, forse non si possiedono i diritti di modifica nel database. Contattare il proprio fornitore di hosting.',
+	'alerte_maj_impossible' => '<b>Attenzione!</b> L’aggiornamento del database SQL alla versione @version@ è impossibile, forse non si possiedono i diritti di modifica nel database. Contattare il proprio fornitore di hosting.',
 	'alerte_modif_info_concourante' => 'ATTENZIONE: Questa informazione è stata modificata altrove. Il valore attuale è:',
 	'analyse_xml' => 'Analisi XML',
 	'annuler' => 'Annulla',
@@ -42,14 +41,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_fonction_contexte' => 'Errore di programmazione. Questa funzione non deve essere chiamata in questo contesto.',
 	'avis_erreur_mysql' => 'Errore SQL ',
 	'avis_erreur_sauvegarde' => 'Errore nel salvataggio (@type@ @id_objet@)! ',
-	'avis_erreur_visiteur' => 'Problema di accesso all\'area riservata',
+	'avis_erreur_visiteur' => 'Problema di accesso all’area riservata',
 
 	// B
 	'barre_a_accent_grave' => 'Inserire una A maiscola con accento grave',
-	'barre_aide' => 'Utilizzare le scorciatoie tipografiche di SPIP per migliorare l\'impaginazione del testo',
+	'barre_aide' => 'Utilizzare le scorciatoie tipografiche di SPIP per migliorare l’impaginazione del testo',
 	'barre_e_accent_aigu' => 'Inserire una E maiscola con accento acuto',
-	'barre_eo' => 'Inserire una E nell\'O',
-	'barre_eo_maj' => 'Inserire una E nell\'O maiuscola',
+	'barre_eo' => 'Inserire una E nell’O',
+	'barre_eo_maj' => 'Inserire una E nell’O maiuscola',
 	'barre_euro' => 'Inserire il simbolo €',
 	'barre_gras' => 'Formattare in {{grassetto}}',
 	'barre_guillemets' => 'Porre il testo fra « virgolette basse francesi »',
@@ -57,20 +56,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_intertitre' => 'Trasformare in {{{titolo di paragrafo}}}',
 	'barre_italic' => 'Formattare in {corsivo}',
 	'barre_lien' => 'Trasformare in un [link ipertestuale->http://...]',
-	'barre_lien_input' => 'Indicare l\'indirizzo del link (è possibile indicare l\'indirizzo Web come http://www.ilmiosito.com o semplicemente indicare il numero di un singolo articolo).',
+	'barre_lien_input' => 'Indicare l’indirizzo del link (è possibile indicare l’indirizzo Web come http://www.ilmiosito.com o semplicemente indicare il numero di un singolo articolo).',
 	'barre_note' => 'Trasformare in [[Nota a fondo pagina]]',
 	'barre_paragraphe' => 'Crea un paragrafo',
 	'barre_quote' => '<quote>Citare un messaggio</quote>',
 	'bouton_changer' => 'Cambia',
 	'bouton_chercher' => 'Cerca',
 	'bouton_choisir' => 'Scegli',
-	'bouton_deplacer' => 'Déplacer', # NEW
 	'bouton_download' => 'Download', # MODIF
 	'bouton_enregistrer' => 'Salva',
 	'bouton_radio_desactiver_messagerie_interne' => 'Disattiva la messaggistica interna',
 	'bouton_radio_envoi_annonces' => 'Invia gli annunci editoriali',
 	'bouton_radio_non_envoi_annonces' => 'Non inviare annunci',
-	'bouton_radio_non_envoi_liste_nouveautes' => 'Non inviare l\'elenco delle novità',
+	'bouton_radio_non_envoi_liste_nouveautes' => 'Non inviare l’elenco delle novità',
 	'bouton_recharger_page' => 'ricaricare questa pagina',
 	'bouton_telecharger' => 'Upload',
 	'bouton_upload' => 'Upload', # MODIF
@@ -84,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cal_par_mois' => 'calendario mensile',
 	'cal_par_semaine' => 'calendario settimanale',
 	'choix_couleur_interface' => 'colore',
-	'choix_interface' => 'scelta dell\'interfaccia',
+	'choix_interface' => 'scelta dell’interfaccia',
 	'colonne' => 'Colonna',
 	'confirm_changer_statut' => 'Attenzione, è stato chiesto di modificare lo status di questo elemento. Continuare?',
 	'correcte' => 'corretto',
@@ -107,20 +105,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@ settembre',
 	'date_demain' => 'domani',
 	'date_fmt_heures_minutes' => '@h@:@m@',
-	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ ore @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@jourmois@',
 	'date_fmt_jour_mois_annee' => '@jourmois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => 'il @nomjour@ @date@',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
-	'date_fmt_periode_from' => 'Du', # NEW
-	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => 'ore',
 	'date_hier' => 'ieri',
 	'date_il_y_a' => '@delai@ fa',
@@ -181,50 +170,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mois' => 'mesi',
 	'date_mois_1' => 'Gennaio',
 	'date_mois_10' => 'Ottobre',
-	'date_mois_10_abbr' => 'oct.', # NEW
 	'date_mois_11' => 'Novembre',
-	'date_mois_11_abbr' => 'nov.', # NEW
 	'date_mois_12' => 'Dicembre',
-	'date_mois_12_abbr' => 'déc.', # NEW
-	'date_mois_1_abbr' => 'janv.', # NEW
 	'date_mois_2' => 'Febbraio',
-	'date_mois_2_abbr' => 'févr.', # NEW
 	'date_mois_3' => 'Marzo',
-	'date_mois_3_abbr' => 'mars', # NEW
 	'date_mois_4' => 'Aprile',
-	'date_mois_4_abbr' => 'avr.', # NEW
 	'date_mois_5' => 'Maggio',
-	'date_mois_5_abbr' => 'mai', # NEW
 	'date_mois_6' => 'Giugno',
-	'date_mois_6_abbr' => 'juin', # NEW
 	'date_mois_7' => 'Luglio',
-	'date_mois_7_abbr' => 'juil.', # NEW
 	'date_mois_8' => 'Agosto',
-	'date_mois_8_abbr' => 'août', # NEW
 	'date_mois_9' => 'Settembre',
-	'date_mois_9_abbr' => 'sept.', # NEW
 	'date_saison_1' => 'inverno',
 	'date_saison_2' => 'primavera',
 	'date_saison_3' => 'estate',
 	'date_saison_4' => 'autunno',
-	'date_secondes' => 'secondes', # NEW
 	'date_semaines' => 'settimane',
-	'date_un_mois' => 'mois', # NEW
-	'date_une_heure' => 'heure', # NEW
-	'date_une_minute' => 'minute', # NEW
-	'date_une_seconde' => 'seconde', # NEW
-	'date_une_semaine' => 'semaine', # NEW
-	'dirs_commencer' => ' per iniziare realmente l\'installazione',
+	'dirs_commencer' => ' per iniziare realmente l’installazione',
 	'dirs_preliminaire' => 'Prima di iniziare: <b>impostare i diritti di accesso</b>',
 	'dirs_probleme_droits' => 'Problema nei diritti di accesso',
 	'dirs_repertoires_absents' => '<p><b>Le seguenti cartelle non sono state trovate: </b></p><ul>@bad_dirs@.</ul>
-  <p>Probabilmente ciò è dovuto a un\'errata formattazione delle lettere maiuscole o minuscole.
+  <p>Probabilmente ciò è dovuto a un’errata formattazione delle lettere maiuscole o minuscole.
   Verificare che le maiuscole e le minuscole delle cartelle coincidano con quelle visualizzate
   qui sopra; se non è così, rinominare le cartelle utilizzando il software FTP.
   <p>Una volta effettuata questa correzione, si potrà',
 	'dirs_repertoires_suivants' => '<p><b>Le seguenti cartelle non sono accessibili in scrittura:</b></p> <ul>@bad_dirs@</ul>
 <p>Per risolvere il problema, utilizzare un client FTP per impostare i diritti di accesso
-di ciascuna di queste cartelle. La procedura è spiegata in dettaglio nella guida d\'installazione.</p>
+di ciascuna di queste cartelle. La procedura è spiegata in dettaglio nella guida d’installazione.</p>
 <p>Una volta attribuiti i permessi, si potrà ',
 	'double_occurrence' => 'Doppia occorrenza', # MODIF
 
@@ -233,39 +204,23 @@ di ciascuna di queste cartelle. La procedura è spiegata in dettaglio nella guid
 	'envoi_via_le_site' => 'Invio tramite il sito',
 	'erreur' => 'Errore',
 	'erreur_balise_non_fermee' => 'ultimo tag non chiuso:',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 	'erreur_texte' => 'errore/i',
 	'etape' => 'Fase',
 
 	// F
 	'fichier_introuvable' => 'File @fichier@ non trovato',
-	'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-	'form_auteur_email_modifie' => 'Votre adresse email a été modifiée.', # NEW
-	'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
-	'form_auteur_mail_confirmation' => 'Bonjour,
-
-Vous avez demandé à changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter à
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignorée) :
-
-    @url@
-', # NEW
 	'form_deja_inscrit' => 'Sei già iscritta.',
-	'form_email_non_valide' => 'L\'indirizzo email non è valido.',
+	'form_email_non_valide' => 'L’indirizzo email non è valido.',
 	'form_forum_access_refuse' => 'Non hai più accesso a questo sito.',
 	'form_forum_bonjour' => 'Buongiorno @nom@,',
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 	'form_forum_email_deja_enregistre' => 'Questo indirizzo email è già registrato, puoi dunque utilizzare la tua password abituale.',
 	'form_forum_identifiant_mail' => 'Il nuovo codice identificativo (ID) ti è stato appena inviato tramite email.',
 	'form_forum_identifiants' => 'Dati personali',
-	'form_forum_indiquer_nom_email' => 'Indica qui nome e indirizzo email.  L\'ID personale ti verrà recapitato tramite email a breve.',
+	'form_forum_indiquer_nom_email' => 'Indica qui nome e indirizzo email.  L’ID personale ti verrà recapitato tramite email a breve.',
 	'form_forum_login' => 'login:',
 	'form_forum_message_auto' => '(questo è un messaggio generato automaticamente)',
 	'form_forum_pass' => 'password:',
-	'form_forum_probleme_mail' => 'Problema di posta: l\'ID non può essere inviato.',
+	'form_forum_probleme_mail' => 'Problema di posta: l’ID non può essere inviato.',
 	'form_forum_voici1' => 'Ecco i dati per poter partecipare ai forum
  del sito"@nom_site_spip@" (@adresse_site@):',
 	'form_forum_voici2' => 'Ecco i dati per poter proporre degli articoli sul sito
@@ -275,9 +230,9 @@ sera ignorée) :
 	'form_indiquer_nom_site' => 'Indica il nome del tuo sito.',
 	'form_pet_deja_enregistre' => 'Questo sito è già registrato',
 	'form_pet_signature_pasprise' => 'La tua adesione non è stata presa in considerazione.',
-	'form_prop_confirmer_envoi' => 'Conferma l\'invio',
+	'form_prop_confirmer_envoi' => 'Conferma l’invio',
 	'form_prop_description' => 'Descrizione/commento',
-	'form_prop_enregistre' => 'La tua proposta è stata registrata ed apparirà on line dopo l\'approvazione della responsabile del sito.',
+	'form_prop_enregistre' => 'La tua proposta è stata registrata ed apparirà on line dopo l’approvazione della responsabile del sito.',
 	'form_prop_envoyer' => 'Invia un messaggio',
 	'form_prop_indiquer_email' => 'Indica un indirizzo email valido',
 	'form_prop_indiquer_nom_site' => 'Indica il nome del sito.',
@@ -286,14 +241,14 @@ sera ignorée) :
 	'form_prop_non_enregistre' => 'La tua proposta non è stata registrata.',
 	'form_prop_sujet' => 'Argomento',
 	'form_prop_url_site' => 'Indirizzo (URL) del sito', # MODIF
-	'forum_non_inscrit' => 'Non sei iscritta, oppure l\'indirizzo o la password inseriti non sono corretti.',
+	'forum_non_inscrit' => 'Non sei iscritta, oppure l’indirizzo o la password inseriti non sono corretti.',
 	'forum_par_auteur' => 'di @auteur@',
 	'forum_titre_erreur' => 'Errore...',
 
 	// I
 	'ical_texte_rss_articles' => 'Il file di "backend" degli articoli di questo sito si trova al seguente indirizzo:',
 	'ical_texte_rss_articles2' => 'È anche possibile ottenere un file di "backend" per gli articoli di una singola rubrica:',
-	'ical_texte_rss_breves' => 'Inoltre esiste un file per l\'insieme delle brevi del sito. Precisando un numero di rubrica ci si può limitare alle brevi in essa contenute.',
+	'ical_texte_rss_breves' => 'Inoltre esiste un file per l’insieme delle brevi del sito. Precisando un numero di rubrica ci si può limitare alle brevi in essa contenute.',
 	'icone_a_suivre' => 'Pannello di controllo',
 	'icone_admin_site' => 'Amministrazione del sito',
 	'icone_agenda' => 'Agenda',
@@ -317,21 +272,20 @@ sera ignorée) :
 	'icone_interface_simple' => 'Interfaccia semplificata',
 	'icone_maintenance_site' => 'Manutenzione tecnica',
 	'icone_messagerie_personnelle' => 'Messaggi personali',
-	'icone_repartition_debut' => 'Mostra la ripartizione dall\'inizio',
+	'icone_repartition_debut' => 'Mostra la ripartizione dall’inizio',
 	'icone_rubriques' => 'Rubriche',
 	'icone_sauver_site' => 'Backup del sito',
 	'icone_site_entier' => 'Tutto il sito',
 	'icone_sites_references' => 'Siti repertoriati',
 	'icone_statistiques' => 'Statistiche del sito',
-	'icone_suivi_activite' => 'Monitorare l\'attività del sito',
+	'icone_suivi_activite' => 'Monitorare l’attività del sito',
 	'icone_suivi_actualite' => 'Evoluzione del sito',
 	'icone_suivi_pettions' => 'Gestione delle petizioni',
 	'icone_suivi_revisions' => 'Modifiche agli articoli',
 	'icone_supprimer_document' => 'Elimina il documento',
-	'icone_supprimer_image' => 'Elimina l\'immagine',
+	'icone_supprimer_image' => 'Elimina l’immagine',
 	'icone_tous_articles' => 'Tutti i tuoi articoli',
 	'icone_tous_auteur' => 'Tutte le autrici',
-	'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 	'icone_visiter_site' => 'Visita il sito', # MODIF
 	'icone_voir_en_ligne' => 'Vedi on line',
 	'img_indisponible' => 'immagine non disponibile',
@@ -341,7 +295,7 @@ sera ignorée) :
 	'info_acces_refuse' => 'Accesso rifiutato',
 	'info_action' => 'Azione: @action@',
 	'info_administrer_rubriques' => 'Puoi amministrare questa rubrica e le relative sottorubriche',
-	'info_adresse_non_indiquee' => 'Non hai indicato l\'indirizzo da testare!',
+	'info_adresse_non_indiquee' => 'Non hai indicato l’indirizzo da testare!',
 	'info_aide' => 'AIUTO:',
 	'info_ajouter_mot' => 'Aggiungi questa parola',
 	'info_annonce' => 'ANNUNCIO',
@@ -353,14 +307,10 @@ sera ignorée) :
 	'info_article_supprime' => 'Articolo eliminato',
 	'info_articles' => 'Articoli',
 	'info_articles_a_valider' => 'Articoli da convalidare',
-	'info_articles_nb' => '@nb@ articles', # NEW
 	'info_articles_proposes' => 'Articoli proposti',
-	'info_articles_un' => '1 article', # NEW
 	'info_auteurs_nombre' => 'autrice(i):',
 	'info_authentification_ftp' => 'Autenticazione (via FTP).',
 	'info_breves_2' => 'brevi',
-	'info_breves_nb' => '@nb@ brèves', # NEW
-	'info_breves_un' => '1 brève', # NEW
 	'info_connexion_refusee' => 'Connessione rifiutata',
 	'info_contact_developpeur' => 'Contatta un programmatore.',
 	'info_contenance' => 'Questo sito contiene:',
@@ -370,16 +320,13 @@ sera ignorée) :
 	'info_copyright_gpl' => 'sotto licenza GPL',
 	'info_cours_edition' => 'Articoli in fase di redazione',
 	'info_creer_repertoire' => 'Creare un file o una cartella chiamata:',
-	'info_creer_repertoire_2' => 'all\'interno della sottocartella <b>@repertoire@</b>, poi:',
-	'info_creer_vignette' => 'creazione automatica dell\'anteprima',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
+	'info_creer_repertoire_2' => 'all’interno della sottocartella <b>@repertoire@</b>, poi:',
+	'info_creer_vignette' => 'creazione automatica dell’anteprima',
 	'info_deplier' => 'Espandi',
 	'info_descriptif_nombre' => 'descrizione(i):',
 	'info_description' => 'Descrizione:',
 	'info_description_2' => 'Descrizione:',
 	'info_dimension' => 'Dimensioni:',
-	'info_documents_nb' => '@nb@ documents', # NEW
-	'info_documents_un' => '1 document', # NEW
 	'info_ecire_message_prive' => 'Scrivi un messaggio privato',
 	'info_email_invalide' => 'Indirizzo email non valido.',
 	'info_en_cours_validation' => 'I tuoi articoli in corso di redazione',
@@ -388,9 +335,8 @@ sera ignorée) :
 	'info_erreur_requete' => 'Errore nella richiesta: ',
 	'info_erreur_squelette2' => 'Nessun modello di layout <b>@fichier@</b> trovato...',
 	'info_erreur_systeme' => 'Errore di sistema (errno @errsys@)',
-	'info_erreur_systeme2' => 'Il disco rigido potrebbe essere pieno o la base dati danneggiata. <br />
- <font color=\'red\'>Tenta di <a href=\'@script@\'>ripristinare la base dati</a>,
-o contatta il tuo hoster.</font>',
+	'info_erreur_systeme2' => 'Il disco rigido potrebbe essere pieno o la base dati danneggiata.<br />
+<span style="color:red;">Tenta di <a href=\'@script@\'>ripristinare la base dati</a>, o contatta il tuo hoster.</span>',
 	'info_fini' => 'Finito!',
 	'info_format_image' => 'Formati di file immagine utilizzabili per la creazione delle etichette: @gd_formats@.',
 	'info_format_non_defini' => 'formato non definito',
@@ -407,8 +353,8 @@ o contatta il tuo hoster.</font>',
 	'info_interface_simple' => 'Interfaccia semplificata',
 	'info_joindre_document_article' => 'Puoi allegare a questo articolo dei documenti del tipo',
 	'info_joindre_document_rubrique' => 'Puoi aggiungere a questa rubrica documenti del tipo',
-	'info_joindre_documents_article' => 'Puoi allegare all\'articolo documenti del tipo: ',
-	'info_l_article' => 'l\'articolo',
+	'info_joindre_documents_article' => 'Puoi allegare all’articolo documenti del tipo: ',
+	'info_l_article' => 'l’articolo',
 	'info_la_breve' => 'la breve',
 	'info_la_rubrique' => 'la sezione',
 	'info_langue_principale' => 'Lingua predefinita del sito',
@@ -419,14 +365,12 @@ o contatta il tuo hoster.</font>',
 	'info_mail_fournisseur' => 'tuo@provider.com',
 	'info_message_2' => 'MESSAGGIO',
 	'info_message_supprime' => 'MESSAGGIO ELIMINATO',
-	'info_messages_nb' => '@nb@ messages', # NEW
-	'info_messages_un' => '1 message', # NEW
 	'info_mise_en_ligne' => 'Data di pubblicazione on line:',
 	'info_modification_parametres_securite' => 'modifiche dei parametri di sicurezza',
 	'info_mois_courant' => 'Durante il mese:',
 	'info_mot_cle_ajoute' => 'La seguente parola chiave è stata aggiunta a',
 	'info_multi_herit' => 'Lingua predefinita',
-	'info_multi_langues_soulignees' => 'Le <u>lingue sottolineate</u> hanno la traduzione di tutti i testi dell\'interfaccia. Se si seleziona una di queste lingue, molti elementi del sito pubblico (date, form) verranno tradotti automaticamente. Per le lingue che non sono sottolineate, invece, tali elementi rimarranno nella lingua principale del sito.', # MODIF
+	'info_multi_langues_soulignees' => 'Le <u>lingue sottolineate</u> hanno la traduzione di tutti i testi dell’interfaccia. Se si seleziona una di queste lingue, molti elementi del sito pubblico (date, form) verranno tradotti automaticamente. Per le lingue che non sono sottolineate, invece, tali elementi rimarranno nella lingua principale del sito.', # MODIF
 	'info_multilinguisme' => 'Multilinguismo',
 	'info_nom_non_utilisateurs_connectes' => 'Il tuo nome non appare nella lista delle utenti collegate.',
 	'info_nom_utilisateurs_connectes' => 'Il tuo nome è visibile nella lista delle utenti collegate.',
@@ -448,26 +392,22 @@ o contatta il tuo hoster.</font>',
 	'info_propose_1' => '[@nom_site_spip@] Propone: @titre@',
 	'info_propose_2' => 'Articolo proposto
 ---------------',
-	'info_propose_3' => 'L\'articolo "@titre@" è proposto per la pubblicazione',
+	'info_propose_3' => 'L’articolo "@titre@" è proposto per la pubblicazione',
 	'info_propose_4' => 'Sei invitata a consultare e a dare la tua opinione ',
 	'info_propose_5' => 'nel forum annesso.
 
-È disponibile all\'indirizzo:',
-	'info_publie_01' => 'L\'articolo "@titre@" è stato convalidato da @connect_nom@.',
+È disponibile all’indirizzo:',
+	'info_publie_01' => 'L’articolo "@titre@" è stato convalidato da @connect_nom@.',
 	'info_publie_1' => '[@nom_site_spip@] PUBBLICA: @titre@',
 	'info_publie_2' => 'Articolo pubblicato
 --------------',
 	'info_rechercher' => 'Ricerca',
 	'info_rechercher_02' => 'Cerca:',
-	'info_remplacer_vignette' => 'Sostituire l\'icona predefinita con una personalizzata:',
-	'info_rubriques_nb' => '@nb@ rubriques', # NEW
-	'info_rubriques_un' => '1 rubrique', # NEW
+	'info_remplacer_vignette' => 'Sostituire l’icona predefinita con una personalizzata:',
 	'info_sans_titre_2' => 'senza titolo',
 	'info_selectionner_fichier' => 'Puoi selezionare un file della cartella @upload@',
 	'info_selectionner_fichier_2' => 'Seleziona un file:',
-	'info_sites_nb' => '@nb@ sites', # NEW
-	'info_sites_un' => '1 site', # NEW
-	'info_supprimer_vignette' => 'Cancella l\'immagine',
+	'info_supprimer_vignette' => 'Cancella l’immagine',
 	'info_symbole_bleu' => 'Il simbolo <b>blu</b> indica un <b>memo</b>: cioè un messaggio ad uso personale.',
 	'info_symbole_jaune' => 'Il simbolo <b>giallo</b> indica un <b>annuncio a tutte le redattrici</b>: modificabile da tutte le amministratrici e visibile da tutte le redattrici.',
 	'info_symbole_vert' => 'Il simbolo <b>verde</b> indica i <b>messaggi scambiati con altre utenti  </b> del sito.',
@@ -488,8 +428,6 @@ o contatta il tuo hoster.</font>',
 	'infos_vos_pense_bete' => 'I tuoi memo', # MODIF
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-	'label_poids_fichier' => 'Taille', # NEW
 	'lien_afficher_icones_seuls' => 'Mostra solo le icone',
 	'lien_afficher_texte_icones' => 'Mostra le icone e il testo',
 	'lien_afficher_texte_seul' => 'Mostra solo il testo',
@@ -510,14 +448,14 @@ o contatta il tuo hoster.</font>',
 	'lien_voir_auteur' => 'Vedi questa autrice',
 	'ligne' => 'Linea',
 	'login' => 'Collegamento',
-	'login_acces_prive' => 'accesso all\'area riservata',
+	'login_acces_prive' => 'accesso all’area riservata',
 	'login_autre_identifiant' => 'connettiti con un altro ID',
 	'login_cookie_accepte' => 'Imposta il tuo browser affinché li accetti (almeno per questo sito).',
 	'login_cookie_oblige' => 'Per identificarsi in modo sicuro su questo sito è necessario accettare i cookie.',
 	'login_deconnexion_ok' => 'Disconnessione effettuata.',
 	'login_erreur_pass' => 'Errore nella password.',
 	'login_espace_prive' => 'area riservata',
-	'login_identifiant_inconnu' => 'L\'ID « @login@ » risulta inesistente.',
+	'login_identifiant_inconnu' => 'L’ID « @login@ » risulta inesistente.',
 	'login_login' => 'Login:',
 	'login_login2' => 'Login (ID di connessione al sito):', # MODIF
 	'login_login_pass_incorrect' => '(Login o password errati.)',
@@ -528,14 +466,13 @@ devi attivare Javascript nel tuo browser e',
 	'login_nouvelle_tentative' => 'Nuovo tentativo',
 	'login_par_ici' => 'Sei registrata... per di qua...',
 	'login_pass2' => 'Password:',
-	'login_preferez_refuser' => '<b>Se preferisci non accettare i cookie</b> c\'è un altro metodo (meno sicuro) per connettersi:',
+	'login_preferez_refuser' => '<b>Se preferisci non accettare i cookie</b> c’è un altro metodo (meno sicuro) per connettersi:',
 	'login_recharger' => 'aggiorna questa pagina',
-	'login_rester_identifie' => 'Conservare l\'identificazione per alcuni giorni',
+	'login_rester_identifie' => 'Conservare l’identificazione per alcuni giorni',
 	'login_retour_public' => 'Ritorna al sito pubblico',
 	'login_retour_site' => 'Ritorna al sito pubblico',
 	'login_retoursitepublic' => 'ritorna al sito pubblico',
 	'login_sans_cookiie' => 'Identificazione senza cookie',
-	'login_securise' => 'Login sécurisé', # NEW
 	'login_sinscrire' => 'registrati',
 	'login_test_navigateur' => 'test browser/riconnessione',
 	'login_verifiez_navigateur' => '(Verifica comunque se il tuo browser ha memorizzato la password...)',
@@ -552,7 +489,7 @@ devi attivare Javascript nel tuo browser e',
 	// O
 	'occurence' => 'Occorrenza',
 	'onglet_affacer_base' => 'Svuota il database',
-	'onglet_auteur' => 'L\'autrice',
+	'onglet_auteur' => 'L’autrice',
 	'onglet_contenu_site' => 'Contenuto del sito',
 	'onglet_evolution_visite_mod' => 'Evoluzione',
 	'onglet_fonctions_avances' => 'Funzioni avanzate',
@@ -568,16 +505,16 @@ devi attivare Javascript nel tuo browser e',
 	'pass_erreur' => 'Errore',
 	'pass_erreur_acces_refuse' => '<b>Errore:</b> non hai più accesso a questo sito.',
 	'pass_erreur_code_inconnu' => '<b>Errore:</b> il codice inserito non corriponde a nessuno delle utenti che hanno accesso a questo sito.',
-	'pass_erreur_non_enregistre' => '<b>Errore:</b> l\'indirizzo <tt>@email_oubli@</tt> non è registrato su questo sito.',
+	'pass_erreur_non_enregistre' => '<b>Errore:</b> l’indirizzo <tt>@email_oubli@</tt> non è registrato su questo sito.',
 	'pass_erreur_non_valide' => '<b>Errore:</b> questo indirizzo <tt>@email_oubli@</tt> non è valido!',
-	'pass_erreur_probleme_technique' => '<b>Errore:</b> l\'email non può essere inviato a causa di un problema tecnico.',
-	'pass_espace_prive_bla' => 'L\'area riservata di questo sito è accessibile
+	'pass_erreur_probleme_technique' => '<b>Errore:</b> l’email non può essere inviato a causa di un problema tecnico.',
+	'pass_espace_prive_bla' => 'L’area riservata di questo sito è accessibile
 unicamente alle utenti registrate.
 Una volta iscritta, potrai consultare gli articoli in corso di redazione,
 proporre nuovi articoli e partecipare a tutti i forum.',
 	'pass_forum_bla' => 'Hai chiesto di intervenire su un forum
 riservato alle utenti registrate.',
-	'pass_indiquez_cidessous' => 'Indica qui sotto l\'indirizzo email con il quale ti sei registrata precedentemente.
+	'pass_indiquez_cidessous' => 'Indica qui sotto l’indirizzo email con il quale ti sei registrata precedentemente.
 Riceverai un email con le istruzioni per recuperare i dati di accesso al sito.',
 	'pass_mail_passcookie' => '(questo è un messaggio generato automaticamente)
 Per recuperare i dati di accesso al sito
@@ -587,7 +524,7 @@ Clicca su questo link:
     @sendcookie@
 
 Potrai quindi inserire una nuova password 
-e riconnetterti all\'area riservata.
+e riconnetterti all’area riservata.
 
 ',
 	'pass_mot_oublie' => 'Password dimenticata',
@@ -595,7 +532,6 @@ e riconnetterti all\'area riservata.
 	'pass_nouveau_pass' => 'Nuova password',
 	'pass_ok' => 'OK',
 	'pass_oubli_mot' => 'Password dimenticata',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 	'pass_quitter_fenetre' => 'Chiudi la finestra',
 	'pass_rappel_login' => 'Ricorda: il tuo ID (login) è « @login@ ».',
 	'pass_recevoir_mail' => 'Riceverai un email contenente le istruzioni per recuperare i dati di accesso al sito.',
@@ -604,7 +540,7 @@ e riconnetterti all\'area riservata.
 	'pass_vousinscrire' => 'Registrati al sito',
 	'precedent' => 'precedente',
 	'previsualisation' => 'Anteprima',
-	'previsualiser' => 'Visualizzare l\'anteprima',
+	'previsualiser' => 'Visualizzare l’anteprima',
 
 	// R
 	'retour' => 'Indietro',
@@ -618,24 +554,23 @@ e riconnetterti all\'area riservata.
 	'suivant' => 'successivo',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ Kb',
 	'taille_mo' => '@taille@ Mb',
 	'taille_octets' => '@taille@ byte',
-	'texte_actualite_site_1' => 'Quando avrai maggiore familiarità con l\'interfaccia, clicca su «',
+	'texte_actualite_site_1' => 'Quando avrai maggiore familiarità con l’interfaccia, clicca su «',
 	'texte_actualite_site_2' => 'interfaccia completa',
 	'texte_actualite_site_3' => '» per avere accesso a nuove opzioni.',
 	'texte_creation_automatique_vignette' => 'La creazione automatica di thumbnail di anteprima è attivata. Se inserisci in questo campo delle immagini in formato @gd_formats@, esse saranno accompagnate da thumbnail con una dimensione massima di @taille_preview@ pixel. ',
-	'texte_documents_associes' => 'I seguenti documenti sono associati all\'articolo,
+	'texte_documents_associes' => 'I seguenti documenti sono associati all’articolo,
 ma non vi sono stati inseriti direttamente.
 A seconda delle impostazioni di pubblicazione del sito,
 potranno essere disponibili sotto forma di documenti allegati.',
-	'texte_erreur_mise_niveau_base' => 'Errore nel database durante l\'aggiornamento.
-L\'immagine <b>@fichier@</b> non è passata (articolo @id_article@).
-Prendi nota di questo riferimento, ritenta l\'aggiornamento,
+	'texte_erreur_mise_niveau_base' => 'Errore nel database durante l’aggiornamento.
+L’immagine <b>@fichier@</b> non è passata (articolo @id_article@).
+Prendi nota di questo riferimento, ritenta l’aggiornamento,
 e verifica che le immagini si vedano ancora
 negli articoli.',
-	'texte_erreur_visiteur' => 'Si è tentato di entrare nell\'area riservata con un login non valido.',
+	'texte_erreur_visiteur' => 'Si è tentato di entrare nell’area riservata con un login non valido.',
 	'texte_inc_auth_1' => 'Sei identificata con il
 login <b>@auth_login@</b>, ma non esiste più nel database. 
 Prova a ',
@@ -644,7 +579,7 @@ Prova a ',
 riavviato il tuo browser.',
 	'texte_inc_config' => 'Le modifiche effettuate in queste pagine influenzano notevolmente il
 funzionamento del sito. Non intervenire finché non conosci bene i meccanismi del sistema SPIP. <br /><br /><b>In generale, si consiglia di lasciare sempre alla webmistress la configurazione delle opzioni qui presenti.</b>',
-	'texte_inc_meta_1' => 'La scrittura del file <code>@fichier@</code> ha causato un errore di sistema. L\'amministratrice del sito, ',
+	'texte_inc_meta_1' => 'La scrittura del file <code>@fichier@</code> ha causato un errore di sistema. L’amministratrice del sito, ',
 	'texte_inc_meta_2' => 'verifichi i diritti di scrittura',
 	'texte_inc_meta_3' => 'nella cartella <code>@repertoire@</code>.',
 	'texte_statut_en_cours_redaction' => 'in corso di redazione',
@@ -654,18 +589,17 @@ funzionamento del sito. Non intervenire finché non conosci bene i meccanismi de
 	'texte_statut_refuse' => 'rifiutato',
 	'titre_ajouter_mot_cle' => 'AGGIUNGI UNA PAROLA CHIAVE:',
 	'titre_cadre_raccourcis' => 'SCELTA RAPIDA:',
-	'titre_changer_couleur_interface' => 'Cambia il colore dell\'interfaccia',
+	'titre_changer_couleur_interface' => 'Cambia il colore dell’interfaccia',
 	'titre_image_admin_article' => 'Puoi amministrare questo articolo',
 	'titre_image_administrateur' => 'Amministratrice',
 	'titre_image_aide' => 'Aiuto su questo elemento',
 	'titre_image_auteur_supprime' => 'Autrice eliminata',
 	'titre_image_redacteur' => 'Redattrice senza accesso',
 	'titre_image_redacteur_02' => 'Redattrice',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Visitatore',
 	'titre_joindre_document' => 'ALLEGA UN DOCUMENTO',
 	'titre_mots_cles' => 'PAROLE CHIAVE',
-	'titre_probleme_technique' => 'Attenzione: un problema tecnico (server SQL) impedisce l\'accesso a questa parte del sito. Grazie per la comprensione.',
+	'titre_probleme_technique' => 'Attenzione: un problema tecnico (server SQL) impedisce l’accesso a questa parte del sito. Grazie per la comprensione.',
 	'titre_publier_document' => 'ALLEGA UN DOCUMENTO A QUESTA RUBRICA',
 	'titre_signatures_attente' => 'Firme in corso di convalida',
 	'titre_signatures_confirmees' => 'Firme confermate',
@@ -719,7 +653,7 @@ funzionamento del sito. Non intervenire finché non conosci bene i meccanismi de
 	'zxml_obligatoire_attribut' => 'attributo obbligatorio ma assente in',
 	'zxml_succession_fils_incorrecte' => 'successione dei figli non corretta',
 	'zxml_survoler' => 'passarci sopra col mouse per vedere i corretti',
-	'zxml_valeur_attribut' => 'valore dell\'attributo',
+	'zxml_valeur_attribut' => 'valore dell’attributo',
 	'zxml_vide_balise' => 'tag vuoto',
 	'zxml_vu' => 'visto in precedenza'
 );

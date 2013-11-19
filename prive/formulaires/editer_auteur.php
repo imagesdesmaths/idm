@@ -61,9 +61,13 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 	$auth_methode = sql_getfetsel('source','spip_auteurs','id_auteur='.intval($id_auteur));
 	$auth_methode = ($auth_methode ? $auth_methode : 'spip');
 	include_spip('inc/auth');
+	include_spip('inc/filtres');
+
+	if (!nom_acceptable(_request('nom'))) {
+		$erreurs['nom'] = _T("info_nom_pas_conforme");
+	}
 
 	if ($email = _request('email')){
-		include_spip('inc/filtres');
 		include_spip('inc/autoriser');
 		// un redacteur qui modifie son email n'a pas le droit de le vider si il y en avait un
 		if (!autoriser('modifier','auteur',$id_auteur,null,array('email'=>'?'))
@@ -76,6 +80,10 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 		else if (!email_valide($email)){
 			$erreurs['email'] = (($id_auteur==$GLOBALS['visiteur_session']['id_auteur'])?_T('form_email_non_valide'):_T('form_prop_indiquer_email'));
 		}
+	}
+
+	if (preg_match(",^\s*javascript,i", _request('url_site'))) {
+		$erreurs['url_site'] = _T('info_url_site_pas_conforme');
 	}
 
 	if ($err = auth_verifier_login($auth_methode, _request('new_login'), $id_auteur)){

@@ -18,13 +18,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'explication_selecteur' => 'Indiquez la cible des éléments qui déclencheront la boîte. (Expression CSS ou étendue jQuery)',
 	'explication_selecteur_galerie' => 'Indiquez la cible des éléments à regrouper en galerie. (Expression CSS ou étendue jQuery)',
-	'explication_splash_url' => 'Indiquez l\'url du média à afficher automatiquement dans une boîte lors de la première visite sur le site public.',
-	'explication_traiter_toutes_images' => 'Insérer une boîte sur toutes les images ?',
+	'explication_splash_url' => 'Indiquez l’url du média à afficher automatiquement dans une boîte lors de la première visite sur le site public.',
+	'explication_traiter_toutes_images' => 'Insérer une boîte sur toutes les images ?',
 
 	// L
-	'label_active' => 'Activer la mediabox dans le site public',
+	'label_active' => 'Activer la Boîte Multimédia dans le site public',
 	'label_apparence' => 'Apparence',
-	'label_aucun_style' => 'N\'insérer aucun habillage par défaut',
+	'label_aucun_style' => 'N’insérer aucun habillage par défaut',
 	'label_choix_transition_elastic' => 'Élastique',
 	'label_choix_transition_fade' => 'Fondu enchaîné',
 	'label_choix_transition_none' => 'Sans effet de transition',
@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_selecteur_commun' => 'En général',
 	'label_selecteur_galerie' => 'En galerie',
 	'label_skin' => 'Habillage visuel',
-	'label_slideshow_speed' => 'Temps d\'exposition des photos du diaporama (ms)',
+	'label_slideshow_speed' => 'Temps d’exposition des photos du diaporama (ms)',
 	'label_speed' => 'Vitesse de transition (ms)',
 	'label_splash' => 'Splash Boîte',
 	'label_splash_url' => 'URL à afficher',

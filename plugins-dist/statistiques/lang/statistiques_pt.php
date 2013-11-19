@@ -45,11 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_admin_effacer_stats' => 'Esta opção apaga todas as estatísticas das visitas ao seu sítio web, incluindo a popularidade dos artigos.',
 	'texte_admin_effacer_toutes_stats' => 'O primeiro botão apaga todas as estatísticas: visitas, popularidade dos artigos e ligações recebidas.',
 	'texte_comment_lire_tableau' => 'O lugar do artigo,
-na classificação por popularidade, é indicado na margem ; a popularidade do artigo (uma estimativa do
- número de visitas diárias que receberá se o ritmo actual de
- consulta se mantiver) e o número de visitas recebidas
-desde o início são exibidos no balão que
- aparece quando o rato passa sobre o título.',
+na classificação por popularidade, é indicado na margem ; a popularidade do artigo (uma estimativa do número de visitas diárias que receberá se o ritmo actual de consulta se mantiver) e o número de visitas recebidas desde o início são exibidos no balão que aparece quando o rato passa sobre o título.',
 	'texte_signification' => 'As barras escuras representam as entradas acumuladas (total das sub-rubricas), as barras claras o número de visitas para cada rubrica.',
 	'titre_evolution_visite' => 'Evolução das visitas',
 	'titre_liens_entrants' => 'Ligações a entrar',

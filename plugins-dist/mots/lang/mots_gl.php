@@ -16,9 +16,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'o equipo de redacción',
 	'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'visitantes do web público cando escriben unha mensaxe nun foro.',
 
-	// C
-	'creer_et_associer_un_mot' => 'Créér et associer un mot-clé', # MODIF
-
 	// I
 	'icone_creation_groupe_mots' => 'Crear un novo grupo de palabras',
 	'icone_creation_mots_cles' => 'Crear unha nova palabra chave',
@@ -26,23 +23,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_mot' => 'Modificar esta palabra clave',
 	'icone_mots_cles' => 'Palabras-clave',
 	'icone_supprimer_groupe_mots' => 'Borrar este grupo',
-	'icone_voir_groupe_mots' => 'Voir ce groupe de mots', # NEW
 	'icone_voir_tous_mots_cles' => 'Ver todas as palabras chave',
-	'info_1_groupe_mots' => '1 groupe de mots', # NEW
 	'info_articles_lies_mot' => 'Os artigos ligados a esta palabra chave',
-	'info_aucun_groupe_mots' => 'Aucun groupe de mots', # NEW
 	'info_aucun_mot_cle' => 'Ningunha palabra-clave',
 	'info_changer_nom_groupe' => 'Trocar o nome deste grupo:',
 	'info_creation_mots_cles' => 'Crea e configura aquí as palabras chave do web',
 	'info_dans_groupe' => 'No grupo:',
 	'info_delet_mots_cles' => 'Solicitouse eliminar a palabra clave
-<b>@titre_mot@</b> (@type_mot@). Esta palabra clave est&aacute; ligada a
-<b>@texte_lie@</b>, ten que confirmar a s&uacute;a decisi&oacute;n :', # MODIF
+<b>@titre_mot@</b> (@type_mot@). Esta palabra clave está ligada a
+<b>@texte_lie@</b>, ten que confirmar a súa decisión :', # MODIF
 	'info_groupe_important' => 'Grupo importante',
 	'info_modifier_mot' => 'Modificar a palabra clave :',
 	'info_mots_cles' => 'As palabras chave',
 	'info_mots_cles_association' => 'As palabras chave deste grupo poden estar aociadas:',
-	'info_nb_groupe_mots' => '@nb@ groupes de mots', # NEW
 	'info_oui_suppression_mot_cle' => 'Quero suprimir definitivamente esta palabra chave.',
 	'info_question_mots_cles' => 'Quere empregar as palabras chave neste seu web?',
 	'info_qui_attribue_mot_cle' => 'As palabras deste grupo poden ser atribuidas a:',
@@ -67,9 +60,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'logo_mot_cle' => 'LOGO DA PALABRA CHAVE',
 
 	// T
-	'texte_config_groupe_mots_cles' => 'Quere activar a configuraci&oacute;n avanzada das palabras clave,
-  para indicar, por exemplo que se pode seleccionar unha palabra &uacute;nica
-  por grupo, que un grupo &eacute; importante... ?', # MODIF
+	'texte_config_groupe_mots_cles' => 'Quere activar a configuración avanzada das palabras clave,
+  para indicar, por exemplo que se pode seleccionar unha palabra única
+  por grupo, que un grupo é importante... ?', # MODIF
 	'texte_mots_cles' => 'As palabras chave permiten crear ligazóns temáticas entre os artigos
   sen depender do seu emprazamento dentro dos temas. Pódese, dende
   mellorar a navegación do seu web, ata empregar as súas propiedades
@@ -78,13 +71,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_nouveau_mot' => 'Nova palabra',
 	'titre_config_groupe_mots_cles' => 'Configuración dos grupos de palabras chave',
 	'titre_gauche_mots_edit' => 'PALABRA NÚMERO:',
-	'titre_groupe_mots' => 'Groupe de mots-clés', # NEW
-	'titre_groupe_mots_numero' => 'GROUPE DE MOTS NUMÉRO :', # NEW
-	'titre_groupes_mots' => 'Groupes de mots-clés', # NEW
 	'titre_mots_cles_dans_forum' => 'Palabras chave nos foros do web público',
 	'titre_mots_tous' => 'As palabras chave',
 	'titre_nouveau_groupe' => 'Novo grupo',
-	'titre_objets_lies_mot' => 'Liés à ce mot-clé :', # NEW
 	'titre_page_mots_tous' => 'Palabras chave'
 );
 

@@ -14,11 +14,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'c_accueil_publication' => 'Publish!',
 	'c_accueil_publication_texte' => 'To publish a page, you need to create an article.
 It is also necessary that you create at least one section to do so. You can proceed by clicking on the menu "Edition" then  on "Sections".',
-	'c_accueil_texte' => 'You have just entered SPIP\'s private area.',
+	'c_accueil_texte' => 'You have just entered SPIP’s private area.',
 	'c_accueil_texte_revenir' => 'This page shows the latest editorial activity on your site.
 You can visit this page at any time by clicking the "house icon",
 on the top, under your name.',
-	'c_article_redaction' => 'L\'article est en cours de rédaction', # The editing of this article is in progress
+	'c_article_redaction' => 'L’article est en cours de rédaction', # The editing of this article is in progress
 	'c_article_redaction_redacteur' => 'This edition of this article is in progress',
 	'c_article_redaction_redacteur_texte' => 'To propose your article to the site administrators and to the other editors,
 within the block on the column side, change "edition in progress" to "submitted for evaluation."',
@@ -38,12 +38,12 @@ So create an article. You can do it from this page under the description of your
 
 	// E
 	'explication_activer_compagnon' => 'The companion adds comments on some pages of the private area to assist in taking SPIP in hand. Would you like to activate it?',
-	'explication_reinitialiser_compagnon' => 'Messages already seen by an author won\'t be displayed then.
+	'explication_reinitialiser_compagnon' => 'Messages already seen by an author won’t be displayed then.
 Would you like to reset these messages?',
 
 	// L
 	'label_activer_compagnon' => 'Enable the Companion?',
-	'label_reinitialiser_compagnon' => 'Reset the Companion\'s messages?',
+	'label_reinitialiser_compagnon' => 'Reset the Companion’s messages?',
 
 	// O
 	'ok' => 'OK',
@@ -56,7 +56,7 @@ Would you like to reset these messages?',
 	'reinitialisation' => 'Resetting',
 	'reinitialisation_ok' => 'Resetting done',
 	'reinitialiser' => 'Reset',
-	'reinitialiser_moi' => 'Yes, only those I\'ve already read',
+	'reinitialiser_moi' => 'Yes, only those I’ve already read',
 	'reinitialiser_tous' => 'Yes, whoever is the author',
 
 	// T

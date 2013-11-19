@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'compagnon_description' => 'Le compagnon offre une aide aux utilisateurs
-		lors de leur première visite dans l\'espace privé de SPIP.',
+		lors de leur première visite dans l’espace privé de SPIP.',
 	'compagnon_nom' => 'Compagnon',
 	'compagnon_slogan' => 'Assistant de premiers pas avec SPIP'
 );

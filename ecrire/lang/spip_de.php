@@ -108,10 +108,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_demain' => 'morgen',
 	'date_fmt_heures_minutes' => '@h@ Uhr @m@ Minuten',
 	'date_fmt_heures_minutes_court' => '@h@:@m@',
-	'date_fmt_jour' => '@nomjour@ @jour@.',
+	'date_fmt_jour' => '@nomjour@ @jour@',
 	'date_fmt_jour_heure' => '@jour@ um @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'am @jour@. von @heure_debut@ bis @heure_fin@',
-	'date_fmt_jour_heure_debut_fin_abbr' => 'am @dtstart@@jour@. von @heure_debut@@dtabbr@ bis @dtstart@@heure_fin@@dtend@',
+	'date_fmt_jour_heure_debut_fin' => 'am @jour@ von @heure_debut@ bis @heure_fin@',
+	'date_fmt_jour_heure_debut_fin_abbr' => 'am @dtstart@@jour@ von @heure_debut@@dtabbr@ bis @dtstart@@heure_fin@@dtend@',
 	'date_fmt_jour_mois' => '@jour@. @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@. @nommois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
@@ -233,7 +233,6 @@ Verzeichnisse zu setzen.Die Installationsanleitung erläutert die Details dazu.<
 	'envoi_via_le_site' => 'Gesendet über Website ',
 	'erreur' => 'Fehler',
 	'erreur_balise_non_fermee' => 'Letzter Tag nicht geschlossen:',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
 	'erreur_technique_enregistrement_champs' => 'Das Feld @champs@ konnte aufgrund eines technischen Problems nicht gespeichert werden.',
 	'erreur_technique_enregistrement_impossible' => 'Technisches Prolem: Speichern nicht möglich.',
 	'erreur_texte' => 'Fehler',
@@ -385,9 +384,8 @@ wird Ihre Adresse beibehalten):
 	'info_erreur_requete' => 'Abfragefehler: ',
 	'info_erreur_squelette2' => 'Keine Vorlage <b>@fichier@</b> vorhanden ...',
 	'info_erreur_systeme' => 'Systemfahler (Fehler no. @errsys@)',
-	'info_erreur_systeme2' => 'Möglicherweise ist die Festplatte voll oder die Datenbank beschädigt. <br />
- <font color=\'red\'>Versuchen Sie <a href=\'@script@\'>die Datenbank zu reparieren</a>,
- oder wenden Sie sich an Ihren Provider.</font>',
+	'info_erreur_systeme2' => 'Möglicherweise ist die Festplatte voll oder die Datenbank beschädigt.<br />
+<span style="color:red;">Versuchen Sie <a href=\'@script@\'>die Datenbank zu reparieren</a>, oder wenden Sie sich an Ihren Provider.</span>',
 	'info_fini' => 'Fertig!',
 	'info_format_image' => 'Für diese Dateiformate können Vorschaubilder erstellt werden: @gd_formats@.',
 	'info_format_non_defini' => 'Undefiniertes Format',
@@ -640,7 +638,6 @@ Sie können auf dieser Seite ein neues Passwort eingeben und sich wieder bei der
 	'titre_image_auteur_supprime' => 'gelöschter Autor',
 	'titre_image_redacteur' => 'Redakteur ohne Systemzugang',
 	'titre_image_redacteur_02' => 'Redakteur',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Besucher',
 	'titre_joindre_document' => 'DOKUMENT ANFÜGEN',
 	'titre_mots_cles' => 'SCHLAGWORTE',

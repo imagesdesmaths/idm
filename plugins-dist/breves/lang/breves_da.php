@@ -8,7 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'breve' => 'Brève', # NEW
 	'breves' => 'Nyheder',
 
 	// E
@@ -21,12 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_breve' => 'Ret denne nyhed',
 	'icone_nouvelle_breve' => 'Skriv ny nyhed',
 	'info_1_breve' => '1 nyhed',
-	'info_aucun_breve' => 'Aucune brève', # NEW
 	'info_breves' => 'Bruger dit websted nyhedssystemet?',
 	'info_breves_02' => 'Nyheder',
 	'info_breves_valider' => 'Nyheder der afventer godkendelse',
 	'info_gauche_numero_breve' => 'NYHED NUMMER:', # MODIF
-	'info_nb_breves' => '@nb@ brèves', # NEW
 	'item_breve_proposee' => 'Nyhed indsendt', # MODIF
 	'item_breve_refusee' => 'NEJ - Nyhed afvist', # MODIF
 	'item_breve_validee' => 'JA - Nyhed godkendt', # MODIF
@@ -43,7 +40,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_breve_refusee' => 'Afviste nyheder',
 	'titre_breves' => 'Nyheder',
 	'titre_langue_breve' => 'NYHEDENS SPROG', # MODIF
-	'titre_nouvelle_breve' => 'Nouvelle brève', # NEW
 	'titre_page_breves' => 'Nyheder'
 );
 

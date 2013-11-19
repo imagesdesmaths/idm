@@ -36,8 +36,8 @@ function action_acceder_document_dist() {
 	else if (!file_exists($file) OR !is_readable($file)) {
 		$status = 404;
 	} else {
-		$where = "documents.fichier=".sql_quote(set_spip_doc($file))
-		. ($arg ? " AND documents.id_document=".intval($arg): '');
+		$where = "D.fichier=".sql_quote(set_spip_doc($file))
+		. ($arg ? " AND D.id_document=".intval($arg): '');
 
 		$doc = sql_fetsel("D.id_document, D.titre, D.fichier, T.mime_type, T.inclus, D.extension", "spip_documents AS D LEFT JOIN spip_types_documents AS T ON D.extension=T.extension",$where);
 		if (!$doc) {

@@ -8,7 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'breve' => 'Brève', # NEW
 	'breves' => 'Kratke poruke',
 
 	// E
@@ -21,12 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_breve' => 'Izmijeni ovu kratku poruku',
 	'icone_nouvelle_breve' => 'Napisi novo obavjestenje',
 	'info_1_breve' => '1. kratka poruka',
-	'info_aucun_breve' => 'Aucune brève', # NEW
 	'info_breves' => 'Da li vasa stranica upotrebljava sistem  kratkih poruka?',
 	'info_breves_02' => 'Obavjestenja',
 	'info_breves_valider' => 'Obavjestenja za ovjeriti',
 	'info_gauche_numero_breve' => 'BROJ KRATKE PORUKE', # MODIF
-	'info_nb_breves' => '@nb@ brèves', # NEW
 	'item_breve_proposee' => 'Predlozena obavjestenja', # MODIF
 	'item_breve_refusee' => 'NE - Kratka poruka odbijena', # MODIF
 	'item_breve_validee' => 'DA - Kratka poruka ovjerena', # MODIF
@@ -43,7 +40,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_breve_refusee' => 'Obavjestenje odbijeno',
 	'titre_breves' => 'Kratke poruke',
 	'titre_langue_breve' => 'JEZIK KRATKE PORUKE', # MODIF
-	'titre_nouvelle_breve' => 'Nouvelle brève', # NEW
 	'titre_page_breves' => 'Kratke poruke'
 );
 

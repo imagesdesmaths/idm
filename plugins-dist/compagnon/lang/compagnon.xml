@@ -1,47 +1,54 @@
 <traduction module="compagnon" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_core_/plugins/compagnon/lang/" reference="fr">
-	<langue code="ar" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=ar">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=ar" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
-	<langue code="ca" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=ca">
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=ca" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Jaime Mullol García" lien="http://trad.spip.net/auteur/jaime-mullol-garcia" />
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=de">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=de" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=en">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=en" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Loiseau2nuit" lien="http://trad.spip.net/auteur/loiseau2nuit" />
 	</langue>
-	<langue code="eo" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=eo">
+	<langue code="eo" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=eo" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=es">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=es" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=fa">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=fa" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" />
-	<langue code="it" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=it">
-		<traducteur nom="phante" lien="http://trad.spip.net/auteur/phante" />
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=fr" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="lb" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=lb">
-		<traducteur nom="jwander" lien="http://trad.spip.net/auteur/jwander" />
-	</langue>
-	<langue code="nl" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=nl">
+	<langue code="fr_fem" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=fr_fem" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="denisb" lien="http://trad.spip.net/auteur/denisb" />
 		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
-	<langue code="pt" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=pt">
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=fr_tu" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="it" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=it" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="phante" lien="http://trad.spip.net/auteur/phante" />
+	</langue>
+	<langue code="lb" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=lb" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="jwander" lien="http://trad.spip.net/auteur/jwander" />
+	</langue>
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=nl" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
+	</langue>
+	<langue code="pt" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=pt" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Cláudia Anjos Lopes" lien="http://trad.spip.net/auteur/claudia_a_lopes" />
 	</langue>
-	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=pt_br">
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=pt_br" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
-	<langue code="ru" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=ru">
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=ru" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=sk">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/compagnon?lang_cible=sk" total="35" traduits="35" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>

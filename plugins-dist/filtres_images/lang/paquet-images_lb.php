@@ -8,8 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'images_description' => 'Ännerungs-Filteren fir d\'Biller an d\'Faarwen',
-	'images_slogan' => 'Ännerungs-Filteren fir d\'Biller an d\'Faarwen'
+	'images_description' => 'Ännerungs-Filteren fir d’Biller an d’Faarwen',
+	'images_slogan' => 'Ännerungs-Filteren fir d’Biller an d’Faarwen'
 );
 
 ?>

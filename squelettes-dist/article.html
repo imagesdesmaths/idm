@@ -36,7 +36,7 @@
 			</div>
 			
 			[<div class="#EDIT{chapo} chapo surlignable">(#CHAPO|image_reduire{500,*})</div>]
-			[<div class="#EDIT{texte} texte surlignable">(#TEXTE|image_reduire{500,*})</div>]
+			[<div class="#EDIT{texte} texte surlignable clearfix">(#TEXTE|image_reduire{500,*})</div>]
 		
 			[<hr /><p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 			[<div class="#EDIT{ps} ps surlignable"><hr />(#PS|image_reduire{500,*})</div>]
@@ -52,7 +52,6 @@
 			[<div class="notes"><hr />(#NOTES)</div>]
 			
 			[(#REM) Forum de l'article ]
-			<a href="#forum" name="forum" id="forum"></a>
 			<INCLURE{fond=inclure/forum,id_article} />
 			[<h2><:forum:form_pet_message_commentaire:></h2>
 			(#FORMULAIRE_FORUM)]

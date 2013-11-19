@@ -21,12 +21,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_breve' => 'Berri laburhau aldatu',
 	'icone_nouvelle_breve' => 'Labur berri bat eratu',
 	'info_1_breve' => 'berri labur 1',
-	'info_aucun_breve' => 'Aucune brève', # NEW
 	'info_breves' => 'Berri laburren sistema erabil dezakezu',
 	'info_breves_02' => 'Laburrak',
 	'info_breves_valider' => 'Egiaztatzeko laburrak',
 	'info_gauche_numero_breve' => 'Berri laburra', # MODIF
-	'info_nb_breves' => '@nb@ brèves', # NEW
 	'item_breve_proposee' => 'Proposaturiko berri laburra', # MODIF
 	'item_breve_refusee' => 'Berri laburra arbuiaturik', # MODIF
 	'item_breve_validee' => 'Berri laburra arbuiaturik', # MODIF
@@ -43,7 +41,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_breve_refusee' => 'Ezeztatutako laburra',
 	'titre_breves' => 'Laburrak',
 	'titre_langue_breve' => 'LABURRAREN HIZKUNTZA', # MODIF
-	'titre_nouvelle_breve' => 'Nouvelle brève', # NEW
 	'titre_page_breves' => 'Berri laburrak'
 );
 

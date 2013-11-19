@@ -7,6 +7,10 @@
 /* Listes SPIP */
 ul.spip,
 ol.spip { margin-left: 50px; }
+@media (max-width: 640px) {
+	ul.spip,
+	ol.spip { margin-left: 1.5em; }
+}
 ul.spip { list-style-type: square; }
 li ul.spip { list-style-type: disc; }
 li li ul.spip { list-style-type: circle; }

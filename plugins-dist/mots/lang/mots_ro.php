@@ -9,15 +9,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'avis_conseil_selection_mot_cle' => '<b>Grup important:</b>  e foarte indicat să selecţionaţi un cuvânt cheie în acest grup.',
-	'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. Êtes vous sûr de vouloir créer le même ?', # NEW
 
 	// B
 	'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'administratorii site-ului',
 	'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'redactorii',
 	'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'vizitatorii site-ului public când postează un mesaj într-un forum.',
-
-	// C
-	'creer_et_associer_un_mot' => 'Créér et associer un mot-clé', # MODIF
 
 	// I
 	'icone_creation_groupe_mots' => 'Creaţi un nou grup de cuvinte',
@@ -26,12 +22,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_mot' => 'Modificaţi acest cuvânt-cheie',
 	'icone_mots_cles' => 'Cuvinte-cheie',
 	'icone_supprimer_groupe_mots' => 'Ştergeţi acest grup',
-	'icone_voir_groupe_mots' => 'Voir ce groupe de mots', # NEW
 	'icone_voir_tous_mots_cles' => 'Vedeţi toate cuvintele-cheie',
-	'info_1_groupe_mots' => '1 groupe de mots', # NEW
 	'info_articles_lies_mot' => 'Articole legate de acest cuvânt-cheie',
-	'info_aucun_groupe_mots' => 'Aucun groupe de mots', # NEW
-	'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 	'info_changer_nom_groupe' => 'Schimbaţi numele acestui grup :',
 	'info_creation_mots_cles' => 'Creaţi şi configuraţi aici cuvintele-cheie de pe acest site',
 	'info_dans_groupe' => 'În grupul :',
@@ -42,11 +34,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_modifier_mot' => 'Modificaţi cuvântul-cheie :',
 	'info_mots_cles' => 'Cuvintele-cheie',
 	'info_mots_cles_association' => 'Cuvintele-cheie din acest grup pot fi asociate :',
-	'info_nb_groupe_mots' => '@nb@ groupes de mots', # NEW
 	'info_oui_suppression_mot_cle' => 'doresc să şterg definitiv acest cuvânt-cheie.',
 	'info_question_mots_cles' => 'Doriţi să utilizaţi cuvintele-cheie pe site-ul dumneavoastră ?',
 	'info_qui_attribue_mot_cle' => 'Cuvintele-cheie din acest grup pot fi atribuite de către :',
-	'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 	'info_retirer_mot' => 'Retrageţi acest cuvânt',
 	'info_retirer_mots' => 'Retrageţi toate cuvintele',
 	'info_rubriques_liees_mot' => 'Rubricile legate de acest cuvânt-cheie',
@@ -62,8 +52,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_utiliser_mots_cles' => 'Utilizaţi cuvintele-cheie',
 
 	// L
-	'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
-	'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
 	'logo_mot_cle' => 'VINIETA CUVÂNTULUI-CHEIE',
 
 	// T
@@ -78,13 +66,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_nouveau_mot' => 'Cuvânt nou',
 	'titre_config_groupe_mots_cles' => 'Configuraţia grupurilor de cuvinte-cheie',
 	'titre_gauche_mots_edit' => 'CUVÂNT NUMĂRUL :',
-	'titre_groupe_mots' => 'Groupe de mots-clés', # NEW
-	'titre_groupe_mots_numero' => 'GROUPE DE MOTS NUMÉRO :', # NEW
-	'titre_groupes_mots' => 'Groupes de mots-clés', # NEW
 	'titre_mots_cles_dans_forum' => 'Cuvinte-cheie în forum-urile site-ului public',
 	'titre_mots_tous' => 'Cuvintele-cheie',
 	'titre_nouveau_groupe' => 'Grup nou',
-	'titre_objets_lies_mot' => 'Liés à ce mot-clé :', # NEW
 	'titre_page_mots_tous' => 'Cuvinte-cheie'
 );
 

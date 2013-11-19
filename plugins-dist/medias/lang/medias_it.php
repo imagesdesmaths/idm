@@ -18,8 +18,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_ajouter_document' => 'Aggiungi un documento',
-	'bouton_ajouter_image' => 'Aggiungi un\'immagine',
-	'bouton_ajouter_image_document' => 'Aggiungi un\'immagine o un documento',
+	'bouton_ajouter_image' => 'Aggiungi un’immagine',
+	'bouton_ajouter_image_document' => 'Aggiungi un’immagine o un documento',
 	'bouton_attacher_document' => 'Allega',
 	'bouton_copier_local' => 'Copia sul sito',
 	'bouton_download_depuis' => 'da:',
@@ -34,8 +34,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_parcourir' => 'Sfoglia',
 	'bouton_refresh_document' => 'Aggiorna il documento',
 	'bouton_remplacer_document' => 'Sostituisci il documento',
-	'bouton_remplacer_image' => 'Sostituisci l\'immagine',
-	'bouton_remplacer_image_document' => 'Sostituisci con un\'immagine o un documento',
+	'bouton_remplacer_image' => 'Sostituisci l’immagine',
+	'bouton_remplacer_image_document' => 'Sostituisci con un’immagine o un documento',
 	'bouton_supprimer' => 'Cancella',
 	'bouton_supprimer_tous_orphelins' => 'Cancella tutti i non utilizzati',
 	'bouton_supprimer_tous_orphelins_confirmation' => 'Vuoi veramente cancellare @nb@ documenti non utilizzati?',
@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'entree_dimensions' => 'Dimensioni:',
 	'entree_titre_document' => 'Titolo del documento:',
-	'entree_titre_image' => 'Titolo dell\'immagine:',
+	'entree_titre_image' => 'Titolo dell’immagine:',
 	'erreur_aucun_document' => 'Il documento non esiste nella media library',
 	'erreur_aucun_fichier' => 'Nessun file è stato trovato',
 	'erreur_chemin_distant' => 'Il file remoto @nom@ non può essere trovato',
@@ -74,7 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_copie_fichier' => 'Impossibile copiare il file @nom@',
 	'erreur_dossier_tmp_manquant' => 'La directory temporanea per scaricare il file è mancante',
 	'erreur_ecriture_fichier' => 'Errore scrivendo il file sul disco',
-	'erreur_format_fichier_image' => 'Il formato di @nom@ non è assimilabile a un\'immagine',
+	'erreur_format_fichier_image' => 'Il formato di @nom@ non è assimilabile a un’immagine',
 	'erreur_indiquez_un_fichier' => 'Specifica un file!',
 	'erreur_insertion_document_base' => 'Impossibile salvare il documento @fichier@ nel database',
 	'erreur_suppression_vignette' => 'Errore durante la cancellazione della miniatura',
@@ -87,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fichier_distant' => 'File remoto',
 	'fichier_manquant' => 'File mancante',
 	'fichier_modifie' => 'Il file è stato modificato. Clicca su pulsante Salva',
-	'format_date_incorrect' => 'La data o l\'ora sono sbagliate',
+	'format_date_incorrect' => 'La data o l’ora sono sbagliate',
 
 	// I
 	'icone_creer_document' => 'Aggiungi un documento',
@@ -103,9 +103,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hauteur' => 'Altezza',
 	'info_heure' => 'Ora',
 	'info_illustrations' => 'Illustrazioni',
-	'info_image_max_poids' => 'L\'immagine deve essere necessariamente grande meno di @maxi@ (il file è @actuel@).',
+	'info_image_max_poids' => 'L’immagine deve essere necessariamente grande meno di @maxi@ (il file è @actuel@).',
 	'info_inclusion_directe' => 'Inclusione diretta:',
-	'info_inclusion_vignette' => 'Inclusione dell\'immagine:',
+	'info_inclusion_vignette' => 'Inclusione dell’immagine:',
 	'info_installer_tous_documents' => 'Installare tutti i documenti',
 	'info_largeur' => 'Larghezza',
 	'info_logo_max_taille' => 'I logo devono obbligatoriamente avere una dimensione inferiore a @maxi@ (questo file è di @actuel@).',
@@ -137,7 +137,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'media_file' => 'Altro',
 	'media_image' => 'Immagini',
 	'media_video' => 'Video',
-	'miniature_automatique_active' => 'SPIP genererà automaticamente le miniature dell\'immagine',
+	'miniature_automatique_active' => 'SPIP genererà automaticamente le miniature dell’immagine',
 
 	// N
 	'nb_documents_attache_succes' => '@nb@ documenti sono stati aggiunti',
@@ -156,8 +156,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'par_titre' => 'Titolo',
 
 	// T
-	'texte_documents_joints' => 'Puoi abilitare l\'interfaccia per l\'aggiunta di documenti (file di testo, fogli elettronici, immagini, file multimediali, ecc.) agli articoli, rubriche e altro. Questi file possono poi essere richiamati nel testo dell\'articolo, o visualizzati separatamente.',
-	'texte_documents_joints_2' => 'Questa impostazione non impedisce il caricamento diretto di immagini nell\'articolo ne l\'inclusione di documenti nel testo del contenuto.',
+	'texte_documents_joints' => 'Puoi abilitare l’interfaccia per l’aggiunta di documenti (file di testo, fogli elettronici, immagini, file multimediali, ecc.) agli articoli, rubriche e altro. Questi file possono poi essere richiamati nel testo dell’articolo, o visualizzati separatamente.',
+	'texte_documents_joints_2' => 'Questa impostazione non impedisce il caricamento diretto di immagini nell’articolo ne l’inclusione di documenti nel testo del contenuto.',
 	'titre_documents_joints' => 'Documenti allegati',
 	'titre_page_documents_edit' => 'Modifica il documento: @titre@',
 	'tous_les_medias' => 'Tutti i media',
@@ -177,10 +177,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'upload_info_mode_document' => 'Invia al portfolio',
 	'upload_info_mode_image' => 'Rimuovi dal portfolio',
 	'upload_limit' => 'Questo file è troppo grande per il server; la dimensione massima consentita per gli <i>upload</i> è di @max@.',
-	'upload_zip_conserver' => 'Conserva il file archivio dopo l\'estrazione del contenuto',
+	'upload_zip_conserver' => 'Conserva il file archivio dopo l’estrazione del contenuto',
 	'upload_zip_decompacter' => 'decompresso e ogni elemento installato nel sito. I file che saranno installati nel sito sono:',
 	'upload_zip_mode_document' => 'Inserisci tutte le immagini nel portfolio',
-	'upload_zip_telquel' => 'installato così com\'è in quanto archivio compresso Zip;',
+	'upload_zip_telquel' => 'installato così com’è in quanto archivio compresso Zip;',
 	'upload_zip_titrer' => 'Dare i titoli in base al nome dei file',
 
 	// V

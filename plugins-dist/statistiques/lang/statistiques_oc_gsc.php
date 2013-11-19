@@ -7,13 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// B
-	'bouton_effacer_referers' => 'Effacer seulement les liens entrants', # NEW
-	'bouton_effacer_statistiques' => 'Effacer toutes les statistiques', # NEW
-
-	// C
-	'csv' => 'csv', # NEW
-
 	// I
 	'icone_evolution_visites' => 'Evolucion de las vesitas<br />@visites@ vesitas',
 	'icone_repartition_actuelle' => 'Afichar la reparticion actuau',
@@ -25,9 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_popularite_2' => 'popularitat deu sit:',
 	'info_popularite_3' => 'popularitat: @popularite@; vesitas: @visites@',
 	'info_popularite_5' => 'popularitat:',
-	'info_previsions' => 'prévisions :', # NEW
-	'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
-	'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
 	'info_visites' => 'vesitas:',
 	'info_visites_plus_populaires' => 'Afichar las vesitas <b>taus articles mei populars</b> e <b>taus darrèrs articles publicats:</b>',
 	'info_zoom' => 'zoom',
@@ -42,22 +32,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resume' => 'Resume', # MODIF
 
 	// T
-	'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
-	'texte_admin_effacer_toutes_stats' => 'Le premier bouton supprime toutes les statistiques : visites, popularité des articles et liens entrants.', # NEW
-	'texte_comment_lire_tableau' => 'Lo reng de l\'article,
-dens lo classament per popularitat, qu\'ei indicat dens lo marge; la popularitat de l\'article 
-(ua estimacion deu nombre de vesitas quotidianas qu\'eth receberà se lo ritme actuau de consultacion se mantien) e lo nombre de vesitas recebudas
-dempuish lo començament que s\'afichan dens la bohòrla 
-qu\'apareish quan la murga e passa suu títol.',
+	'texte_comment_lire_tableau' => 'Lo reng de l’article,
+dens lo classament per popularitat, qu’ei indicat dens lo marge; la popularitat de l’article 
+(ua estimacion deu nombre de vesitas quotidianas qu’eth receberà se lo ritme actuau de consultacion se mantien) e lo nombre de vesitas recebudas
+dempuish lo començament que s’afichan dens la bohòrla 
+qu’apareish quan la murga e passa suu títol.',
 	'texte_signification' => 'Las barras escuras que representan las entradas cumuladas (totau de las sosrubricas), las barras claras lo nombre de vesitas tà cada rubrica.',
 	'titre_evolution_visite' => 'Evolucion de las vesitas',
 	'titre_liens_entrants' => 'Los ligams entrants',
 	'titre_page_statistiques' => 'Estadisticas per rubricas',
-	'titre_page_statistiques_visites' => 'Estadisticas de las vesitas',
-
-	// V
-	'visites_journalieres' => 'Nombre de visites par jour', # NEW
-	'visites_mensuelles' => 'Nombre de visites par mois' # NEW
+	'titre_page_statistiques_visites' => 'Estadisticas de las vesitas'
 );
 
 ?>

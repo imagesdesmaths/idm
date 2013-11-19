@@ -328,6 +328,22 @@ q=
 wd=
 (.*\.|)baidu\.com
 
+[Dogpile]
+q=
+(.*\.|)dogpile\.co\.uk
+
+[Trouver]
+q=
+(.*\.|)trouver\.fr
+
+[Pesquisa]
+q=
+pesquisa\.sapo\.pt
+
+[Qwant]
+q=
+(.*\.|)qwant\.com
+
 #
 # Services de mail
 # 

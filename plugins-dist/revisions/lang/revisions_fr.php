@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_revision' => '1 révision',
 	'info_aucune_revision' => 'Aucune révision',
 	'info_historique' => 'Révisions :',
-	'info_historique_lien' => 'Afficher l\'historique des modifications',
+	'info_historique_lien' => 'Afficher l’historique des modifications',
 	'info_historique_titre' => 'Suivi des révisions',
 	'info_nb_revisions' => '@nb@ révisions',
 

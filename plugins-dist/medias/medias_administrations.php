@@ -81,13 +81,8 @@ function medias_upgrade($nom_meta_base_version,$version_cible){
 	$maj['0.11.0'] = array(
 		array('sql_alter',"TABLE spip_documents CHANGE mode mode varchar(10) DEFAULT 'document' NOT NULL"),
 	);
-	$maj['0.11.0'] = array(
-		array('sql_alter',"TABLE spip_documents CHANGE mode mode varchar(10) DEFAULT 'document' NOT NULL"),
-	);
-	$maj['0.12.0'] = array(
-		array('medias_maj_meta_documents'),
-	);
 	$maj['0.14.0'] = array(
+		array('medias_maj_meta_documents'),
 		array('creer_base_types_doc','','media'),
 	);
 	$maj['0.15.0'] = array(
@@ -141,7 +136,6 @@ function medias_upgrade($nom_meta_base_version,$version_cible){
 		// ajout de tar
 		array('creer_base_types_doc')
 	);
-	
 	include_spip('base/upgrade');
 	include_spip('base/medias');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

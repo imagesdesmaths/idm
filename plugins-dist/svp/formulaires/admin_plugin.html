@@ -4,7 +4,7 @@
 	<:svp:erreurs_xml:>
 	<ul>
 <BOUCLE_erreurs_xml(DATA){source tableau,#ENV{erreurs_xml}}>
-	<li>#VALEUR</li>
+	<li>[(#VALEUR|htmlspecialchars_decode{#EVAL{ENT_QUOTES}})]</li>
 </BOUCLE_erreurs_xml>
 	</ul>
 	#BOITE_FERMER

@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'compresseur_description' => 'Compressione di CSS e javascript 
-nell\'intestazione delle pagine html di <code>ecrire/</code> e/o del sito pubblico pubblico.',
+nell’intestazione delle pagine html di <code>ecrire/</code> e/o del sito pubblico pubblico.',
 	'compresseur_slogan' => 'Compressione di CSS e javascript'
 );
 

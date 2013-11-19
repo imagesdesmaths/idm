@@ -8,7 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'breve' => 'Brève', # NEW
 	'breves' => 'Hírek',
 
 	// E
@@ -21,12 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_breve' => 'A hír módosítása',
 	'icone_nouvelle_breve' => 'Új hír írása',
 	'info_1_breve' => '1 hír',
-	'info_aucun_breve' => 'Aucune brève', # NEW
 	'info_breves' => 'Az Ön honlapja használja-e a hírek rendszerét ?',
 	'info_breves_02' => 'Hírek',
 	'info_breves_valider' => 'Jóváhagyandó hírek',
 	'info_gauche_numero_breve' => 'HÍR SZÁMA', # MODIF
-	'info_nb_breves' => '@nb@ brèves', # NEW
 	'item_breve_proposee' => 'Javasolt hír', # MODIF
 	'item_breve_refusee' => 'NEM - Elutasított hír', # MODIF
 	'item_breve_validee' => 'IGEN - Elfogadott hír', # MODIF
@@ -43,7 +40,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_breve_refusee' => 'Elutasított hír',
 	'titre_breves' => 'A hírek',
 	'titre_langue_breve' => 'A HÍR NYELVE', # MODIF
-	'titre_nouvelle_breve' => 'Nouvelle brève', # NEW
 	'titre_page_breves' => 'Hírek'
 );
 

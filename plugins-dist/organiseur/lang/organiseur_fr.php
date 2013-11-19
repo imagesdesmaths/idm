@@ -18,11 +18,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_date' => 'Cette date est incorrecte',
-	'erreur_date_avant_apres' => 'Indiquez une date de fin après la date de début !',
+	'erreur_date_avant_apres' => 'Indiquez une date de fin après la date de début !',
 	'erreur_date_corrigee' => 'La date a été corrigée',
-	'erreur_destinataire_invalide' => 'Le destinataire @dest@ n\'est pas valide',
+	'erreur_destinataire_invalide' => 'Le destinataire @dest@ n’est pas valide',
 	'erreur_heure' => 'Cette heure est incorrecte',
-	'erreur_heure_corrigee' => 'L\'heure a été corrigée',
+	'erreur_heure_corrigee' => 'L’heure a été corrigée',
 
 	// I
 	'icone_ecrire_nouveau_message' => 'Envoyer un nouveau message',
@@ -63,16 +63,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'messages' => 'Messages',
 
 	// N
-	'notification_annonce_lire_a_ladresse' => 'Vous pouvez la lire à l\'adresse suivante @url@.',
+	'notification_annonce_lire_a_ladresse' => 'Vous pouvez la lire à l’adresse suivante @url@.',
 	'notification_annonce_publie_1' => '[@nom_site_spip@] Annonce générale',
-	'notification_message_lire_a_ladresse' => 'Vous pouvez le lire et y répondre à l\'adresse suivante @url@.',
+	'notification_message_lire_a_ladresse' => 'Vous pouvez le lire et y répondre à l’adresse suivante @url@.',
 	'notification_message_publie_1' => '[@nom_site_spip@] Nouveau message',
 	'notification_message_recu_de' => 'Vous avez reçu un nouveau message de la part de @nom@.',
 
 	// T
 	'texte_message_brouillon' => 'Ce message est enregistré comme brouillon',
 	'titre_agenda_rv' => 'Rendez-vous',
-	'titre_boite_envoi' => 'Boîte d\'envoi',
+	'titre_boite_envoi' => 'Boîte d’envoi',
 	'titre_boite_reception' => 'Boîte de reception'
 );
 
