@@ -1,32 +1,36 @@
 <traduction module="svp" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_core_/plugins/svp/lang/" reference="fr">
-	<langue code="ar" url="http://trad.spip.net/tradlang_module/svp?lang_cible=ar">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/svp?lang_cible=ar" total="239" traduits="239" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/svp?lang_cible=de">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/svp?lang_cible=de" total="239" traduits="236" relire="0" modifs="1" nouveaux="2" pourcent="98.74">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/svp?lang_cible=en">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/svp?lang_cible=en" total="239" traduits="239" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/svp?lang_cible=es">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/svp?lang_cible=es" total="239" traduits="239" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
 		<traducteur nom="jotacese" lien="http://trad.spip.net/auteur/jotacese" />
-		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
+		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/svp?lang_cible=fa">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/svp?lang_cible=fa" total="239" traduits="233" relire="0" modifs="2" nouveaux="4" pourcent="97.49">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" />
-	<langue code="it" url="http://trad.spip.net/tradlang_module/svp?lang_cible=it">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/svp?lang_cible=fr" total="239" traduits="239" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="fr_fem" url="http://trad.spip.net/tradlang_module/svp?lang_cible=fr_fem" total="239" traduits="239" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="denisb" lien="http://trad.spip.net/auteur/denisb" />
+	</langue>
+	<langue code="it" url="http://trad.spip.net/tradlang_module/svp?lang_cible=it" total="239" traduits="238" relire="0" modifs="1" nouveaux="0" pourcent="99.58">
 		<traducteur nom="phante" lien="http://trad.spip.net/auteur/phante" />
 	</langue>
-	<langue code="ru" url="http://trad.spip.net/tradlang_module/svp?lang_cible=ru">
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/svp?lang_cible=ru" total="239" traduits="238" relire="0" modifs="1" nouveaux="0" pourcent="99.58">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/svp?lang_cible=sk">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/svp?lang_cible=sk" total="239" traduits="239" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>

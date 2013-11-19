@@ -12,10 +12,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_question_activer_compactage_css' => 'Doriţi să activaţi compactarea foilor de stil (CSS) ?', # MODIF
 	'info_question_activer_compactage_js' => 'Doriţi să activaţi compactarea scripturilor (javascript) ?', # MODIF
 	'info_question_activer_compresseur' => 'Doriţi să activaţi compresia fluxului HTTP ?', # MODIF
-	'item_compresseur_closure' => 'Utiliser Google Closure Compiler [expérimental]', # NEW
-	'item_compresseur_css' => 'Activer la compression des feuilles de styles (CSS)', # NEW
-	'item_compresseur_html' => 'Activer la compression du HTML', # NEW
-	'item_compresseur_js' => 'Activer la compression des scripts (javascript)', # NEW
 
 	// T
 	'texte_compacter_avertissement' => 'Atenţie: nu activaţi aceste opţiuni în timpul dezvoltării site-ului dumneavoastră, pentru că elementele compactate îşi pierd lizibilitatea.',

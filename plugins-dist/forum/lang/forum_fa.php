@@ -34,7 +34,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_acces_refuse' => '.شما ديگر اجازه استفاده از اين سخنگاه را نداريد',
 	'forum_attention_dix_caracteres' => '</b>! توجه<b>   پيامتان بايد بيش از ده حرف باشد.',
 	'forum_attention_message_non_poste' => 'تنبيه، لم تبعث برسالتك!',
-	'forum_attention_nb_caracteres_mini' => '<b>Attention !</b> votre message doit contenir au moins @min@ caractères.', # NEW
 	'forum_attention_trois_caracteres' => '</b>! توجه<b> عنوانتان بايد بيش از سه حرف باشد. ',
 	'forum_attention_trop_caracteres' => '<b>توجه!</b>(@compte@ كاراكتر براي آنكه ثبت شود، نبايد از @max@ كاراكتر بيشتر شود. )  پيام شما زياد طولاني است ',
 	'forum_avez_selectionne' => ': شما انتخاب كرده ايد',
@@ -49,8 +48,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_page_url' => 'اگر پيامتان راجع به يك مقاله چاپ شده يا به يك صفحه اى كه داراى اطلاعات سودمندى است مربوط ميشود، خواهشمند است عنوان صفحه وآدرس آنرا در زير مشخص كنيد ',
 	'forum_permalink' => 'پيوند دائمي به نظر',
 	'forum_poste_par' => 'پيام @parauteur@ بدنبال مقاله « @titre@ »  فرستاده شده. ', # MODIF
-	'forum_poste_par_court' => 'Message posté@parauteur@.', # NEW
-	'forum_poste_par_generique' => 'Message posté@parauteur@ (@objet@ « @titre@ »).', # NEW
 	'forum_qui_etes_vous' => ' كى هستيد؟                                      ',
 	'forum_saisie_texte_info' => 'اين فرم خلاصه‌هاي اسپيپ را مي‌پذيرد  <code>[->url] {{gras}} {italique} <quote> <code></code>   و كد‌هاي  HTML <code><q> <del> <ins></code>. براي ايجاد پارگراف، يك خط خالي بگذاريد. .',
 	'forum_texte' => 'متن پيامتان',
@@ -100,7 +97,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_pas_de_forum' => 'بدون سخنگاه',
 	'info_question_visiteur_ajout_document_forum' => 'اگر مايليد به بازديد‌كنندگان اجازه دهيد كه سند‌هايي (تصوير، صدا و . . . ) را به پيام‌هايشان در سخنگاه بچسبانند، فهرست توسعه‌هاي مجاز براي سند‌ها را براي سخنگاه‌ها، در زير، مشخص كنيد (ex: gif, jpg, png, mp3).',
 	'info_question_visiteur_ajout_document_forum_format' => 'اگر مايليد به تمام انواع سند‌هايي كه با اسپيپ منطبق است اجازه بدهيد، يك ستاره بگذاريد. اگر اجازه نمي‌دهيد هيچ كار نكنيد.',
-	'info_selectionner_message' => 'Sélectionner les messages :', # NEW
 	'interface_formulaire' => 'فرم ميانجي',
 	'interface_onglets' => 'فرم‌ها با تب‌ها',
 	'item_activer_forum_administrateur' => 'سخنگاه گردانندگان سايت را فعال كنيد',
@@ -111,13 +107,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_non_config_forums_prive_objets' => 'غيرفعال سازي اين سخنگاه‌ها',
 
 	// L
-	'label_selectionner' => 'Sélectionner :', # NEW
 	'lien_reponse_article' => 'پاسخ به مقاله',
 	'lien_reponse_breve_2' => 'پاسخ به مقاله كوتاه',
 	'lien_reponse_message' => 'پاسخ به يك پيام',
 	'lien_reponse_rubrique' => 'پاسخ به بخش',
 	'lien_reponse_site_reference' => ':پاسخ به سايت مرجع',
-	'lien_vider_selection' => 'Vider la selection', # NEW
 
 	// M
 	'messages_aucun' => 'هيچ',

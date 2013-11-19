@@ -8,8 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
-	'medias_description' => 'SPIP\'s media management',
-	'medias_slogan' => 'SPIP\'s media management'
+	'medias_description' => 'SPIP’s media management',
+	'medias_slogan' => 'SPIP’s media management'
 );
 
 ?>

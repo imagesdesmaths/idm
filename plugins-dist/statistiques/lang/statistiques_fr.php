@@ -23,10 +23,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_popularite_2' => 'popularité du site :',
 	'info_popularite_3' => 'popularité : @popularite@ ; visites : @visites@',
 	'info_popularite_5' => 'popularité :',
-	'info_previsions' => 'prévisions :',
-	'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites',
-	'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites',
-	'info_visites' => 'visites :',
+	'info_previsions' => 'prévisions :',
+	'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d’origine des visites',
+	'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d’origine des visites',
+	'info_visites' => 'visites :',
 	'info_visites_plus_populaires' => 'Afficher les visites pour <b>les articles les plus populaires</b> et pour <b>les derniers articles publiés :</b>',
 	'info_zoom' => 'zoom',
 	'item_gerer_statistiques' => 'Gérer les statistiques des visites',
@@ -41,14 +41,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.',
-	'texte_admin_effacer_toutes_stats' => 'Le premier bouton supprime toutes les statistiques : visites, popularité des articles et liens entrants.',
-	'texte_comment_lire_tableau' => 'Le rang de l\'article,
-		dans le classement par popularité, est indiqué dans la
-		marge ; la popularité de l\'article (une estimation du
-		nombre de visites quotidiennes qu\'il recevra si le rythme actuel de
-		consultation se maintient) et le nombre de visites reçues
-		depuis le début sont affichées dans la bulle qui
-		apparaît lorsque la souris survole le titre.',
+	'texte_admin_effacer_toutes_stats' => 'Le premier bouton supprime toutes les statistiques : visites, popularité des articles et liens entrants.',
+	'texte_comment_lire_tableau' => 'Le rang de l’article, dans le classement par popularité, est indiqué dans la marge ; la popularité de l’article (une estimation du nombre de visites quotidiennes qu’il recevra si le rythme actuel de consultation se maintient) et le nombre de visites reçues depuis le début sont affichés dans la bulle qui apparaît lorsque la souris survole le titre.',
 	'texte_signification' => 'Les barres foncées représentent les entrées cumulées (total des sous-rubriques), les barres claires le nombre de visites pour chaque rubrique.',
 	'titre_evolution_visite' => 'Évolution des visites',
 	'titre_liens_entrants' => 'Liens entrants',

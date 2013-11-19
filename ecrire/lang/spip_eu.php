@@ -233,7 +233,6 @@ Eragiketa hori egin eta gero, gauza izango zara',
 	'envoi_via_le_site' => 'Gunearen bitartez egindako bidalpena',
 	'erreur' => 'Errorea',
 	'erreur_balise_non_fermee' => 'ez itxitako azken etiketa :',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
 	'erreur_technique_enregistrement_champs' => 'Arazo tekniko batek @champs@ eremuaren grabaketa trabatu du.',
 	'erreur_technique_enregistrement_impossible' => 'Arazo tekniko batek grabaketa trabatu du.',
 	'erreur_texte' => 'errore',
@@ -386,7 +385,7 @@ Zure helbide berria baieztatzeko ondoko helbidea bisita ezazu.
 	'info_erreur_squelette2' => 'Ez dago <b>@fichier@</b> eskeletorik erabilgarri...',
 	'info_erreur_systeme' => 'Akatsa sistema (errno @errsys@)',
 	'info_erreur_systeme2' => 'Disko gogorra beteta edo datubasea hondatuta egon daiteke.
-Basea konpontzen saiatu, edo zure ostalaitzea kontaktatu.',
+Basea konpontzen saiatu, edo zure ostalaitzea kontaktatu.', # MODIF
 	'info_fini' => 'Bukatuta!',
 	'info_format_image' => 'Miniaturendako erabil daitezkeen irudi-formatuak @gd_formats@.',
 	'info_format_non_defini' => 'formatua ez dago definitua',
@@ -433,7 +432,7 @@ Azpimarratu gabeko hizkuntzetarako, elementuak gunearen hizkuntza nagusian agert
 	'info_non_utilisation_messagerie' => 'Ez erabili barne-mezularitza.',
 	'info_nouveau_message' => 'MEZU BERRI BAT BADUZU',
 	'info_nouveaux_messages' => '@total_messages@ MEZU BERRI BADITUZU',
-	'info_numero_abbreviation' => 'Zk  ',
+	'info_numero_abbreviation' => 'Zk ',
 	'info_obligatoire' => 'Informazio hori beharrezkoa da',
 	'info_pense_bete' => 'Buruz ikasteko oroigarria',
 	'info_petit_ecran' => 'Pantaila txikia',
@@ -642,7 +641,6 @@ Modu orokorrean, orrialde hauetako kudeaketa zure guneko web arduradun nagusiari
 	'titre_image_auteur_supprime' => 'Egile ezabatuta',
 	'titre_image_redacteur' => 'Baimenik gabeko idazlaria',
 	'titre_image_redacteur_02' => 'Idazlaria',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Bisitaria',
 	'titre_joindre_document' => 'Dokumentu bat erantsi',
 	'titre_mots_cles' => 'Gako-hitzak',

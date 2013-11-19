@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// J
 	'jqueryui_description' => 'Данный плагин подключает к сайту функционал библиотеки JQuery UI.
 
-	',
+	', # MODIF
 	'jqueryui_slogan' => 'Анимация, эффекты и плагины jQuery'
 );
 

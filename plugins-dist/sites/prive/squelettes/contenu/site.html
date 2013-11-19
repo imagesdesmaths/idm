@@ -56,6 +56,14 @@
 	]
 ]
 
+<BOUCLE_test(SYNDIC_ARTICLES){id_syndic=#ID_SYNDIC}{0,1}{si #SYNDICATION|=={non}}>
+	[(#AUTORISER{purger,site,#ID_SITE}|oui)
+		<div class='purger_syndic'>
+			[(#BOUTON_ACTION{<:sites:lien_purger_syndication:>,#URL_ACTION_AUTEUR{purger_site,#ID_SYNDIC,#SELF},ajax,<:sites:confirmer_purger_syndication:>})]
+		</div>
+	]
+</BOUCLE_test>
+
 #PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,site,id,#ID_SYNDIC},data,'<div class="nettoyeur"></div>'}}
 
 #BOITE_FERMER

@@ -20,11 +20,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_date' => 'La data è sbagliata',
-	'erreur_date_avant_apres' => 'Per favore inserite una data di fine successiva alla data d\'inizio.',
+	'erreur_date_avant_apres' => 'Per favore inserite una data di fine successiva alla data d’inizio.',
 	'erreur_date_corrigee' => 'La data è stata corretta',
 	'erreur_destinataire_invalide' => 'Il destinartario @dest@ non è valido',
-	'erreur_heure' => 'L\'ora è sbagliata',
-	'erreur_heure_corrigee' => 'L\'ora è stata corretta',
+	'erreur_heure' => 'L’ora è sbagliata',
+	'erreur_heure_corrigee' => 'L’ora è stata corretta',
 
 	// I
 	'icone_ecrire_nouveau_message' => 'Invia un nuovo messaggio',
@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'notification_annonce_lire_a_ladresse' => 'Puoi leggerla al seguente url @url@.',
 	'notification_annonce_publie_1' => '[@nom_site_spip@] Annuncio globale',
-	'notification_message_lire_a_ladresse' => 'Puoi leggerlo e replicare all\'indirizzo @url@.',
+	'notification_message_lire_a_ladresse' => 'Puoi leggerlo e replicare all’indirizzo @url@.',
 	'notification_message_publie_1' => '[@nom_site_spip@] Nuovo messaggio',
 	'notification_message_recu_de' => 'Hai ricevuto un nuovo messa da @nom@.',
 

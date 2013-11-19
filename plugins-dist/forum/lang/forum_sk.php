@@ -14,9 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_radio_articles_futurs' => 'len pre budúce články (žiadna zmena databázy).',
 	'bouton_radio_articles_tous' => 'pre všetky články bez výnimky.',
 	'bouton_radio_articles_tous_sauf_forum_desactive' => 'pre všetky články, okrem tých s deaktivovanými diskusnými fórami.',
-	'bouton_radio_enregistrement_obligatoire' => 'Vyžaduje sa registrácia (
-  používatelia sa musia zaregistrovať uvedením svojej e-mailovej adresy predtým,
-  ako budú môcť posielať príspevky).',
+	'bouton_radio_enregistrement_obligatoire' => 'Vyžaduje sa registrácia (používatelia sa musia zaregistrovať uvedením svojej e-mailovej adresy predtým, ako budú môcť posielať príspevky).',
 	'bouton_radio_moderation_priori' => 'Kontrola pred zverejnením (príspevky sa zobrazia až potom, čo ich
  schvália administrátori).',
 	'bouton_radio_modere_abonnement' => 'Vyžaduje sa registrácia',
@@ -58,7 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_qui_etes_vous' => 'Kto ste?',
 	'forum_saisie_texte_info' => 'Tento formulár akceptuje skratky SPIPu <code>[-&gt;url] {{tučné}} {kurzíva} &lt;citácia&gt; &lt;kód&gt;</code> a kód HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;.</code> Ak chcete vytvoriť odseky, jednoducho vynechajte niekoľko riadkov.',
 	'forum_texte' => 'Text vášho príspevku',
-	'forum_titre' => 'Nadpis',
+	'forum_titre' => 'Titulok',
 	'forum_url' => 'Vaša internetová stránka',
 	'forum_valider' => 'Potvrdiť výber',
 	'forum_voir_avant' => 'Ukážka',

@@ -8,7 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'breve' => 'Brève', # NEW
 	'breves' => 'Aktualności',
 
 	// E
@@ -21,12 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_breve' => 'Zmień ten news',
 	'icone_nouvelle_breve' => 'Napisz nowy news',
 	'info_1_breve' => '1 news',
-	'info_aucun_breve' => 'Aucune brève', # NEW
 	'info_breves' => 'Czy na Twojej stronie działa system newsów?',
 	'info_breves_02' => 'Newsy',
 	'info_breves_valider' => 'Newsy do zatwierdzenia',
 	'info_gauche_numero_breve' => 'NEWS NUMER', # MODIF
-	'info_nb_breves' => '@nb@ brèves', # NEW
 	'item_breve_proposee' => 'Zaproponowany news', # MODIF
 	'item_breve_refusee' => 'NIE - news odrzucony', # MODIF
 	'item_breve_validee' => 'TAK - news zatwierdzony', # MODIF
@@ -45,7 +42,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_breve_refusee' => 'News odrzucony',
 	'titre_breves' => 'Newsy',
 	'titre_langue_breve' => 'JĘZYK NEWSA', # MODIF
-	'titre_nouvelle_breve' => 'Nouvelle brève', # NEW
 	'titre_page_breves' => 'Newsy'
 );
 

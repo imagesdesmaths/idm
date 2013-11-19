@@ -352,7 +352,7 @@
             // Ditch the trouble maker and add a fresh new element
             MF.n--;
             MF.addSlave(newEle[0], this.i);
-            slave.parent().prepend(newEle);
+            MF.list.before(newEle);//slave.parent().prepend(newEle);
             slave.remove();
             return false;
           };
@@ -361,8 +361,8 @@
           $(this).css({ position:'absolute', top: '-3000px' });
           
           // Add new element to the form
-          //MF.list.before(newEle);//.append(newEle);
-          MF.wrapper.prepend(newEle);//.append(newEle);
+          MF.list.before(newEle);//.append(newEle);
+          //MF.wrapper.prepend(newEle);//.append(newEle);
           
           // Update list
           MF.addToList( this );

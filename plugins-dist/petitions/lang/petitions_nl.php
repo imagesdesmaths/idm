@@ -85,7 +85,6 @@ Bedankt voor je deelname
 	'signatures_prop' => 'In afwachting',
 	'signatures_publie' => 'Bevestigde',
 	'signatures_recherche_label' => 'Handtekeningen opzoeken:',
-	'signatures_selection' => 'Sélectionner les signatures :', # NEW
 	'signatures_toutes' => 'Alles',
 	'statut_poubelle' => 'Uitgewist',
 	'statut_prop' => 'In afwachting van bevestiging',

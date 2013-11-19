@@ -234,7 +234,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'Отправить при помощи сайта',
 	'erreur' => 'Ошибка',
 	'erreur_balise_non_fermee' => 'последний тэг не закрыт:',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
 	'erreur_technique_enregistrement_champs' => 'Из-за технической ошибки не удалось правильно зарегистрировать поле @champs@.',
 	'erreur_technique_enregistrement_impossible' => 'Не удается зарегистрировать из-за технической ошибки.',
 	'erreur_texte' => 'Ошибка(и)',
@@ -390,8 +389,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_squelette2' => 'Файл шаблона <b>@fichier@</b> недоступен',
 	'info_erreur_systeme' => 'Ошибка системы (errno @errsys@)',
 	'info_erreur_systeme2' => 'Закончилось место на диске или повреждена база данных. <br />
- <font color=\'red\'>Попробуйте <a href=\'@script@\'>восстановить базу данных</a>
- или обратитесь к вашему хостинг-провайдеру.</font>',
+<span style="color:red;">Попробуйте <a href=\'@script@\'>восстановить базу данных</a>
+ или обратитесь к вашему хостинг-провайдеру.</span>',
 	'info_fini' => 'Готово!',
 	'info_format_image' => 'Формат, который используется для автоматического уменьшения изображений @gd_formats@.',
 	'info_format_non_defini' => 'неопределенный формат',
@@ -672,7 +671,6 @@ and connect again to the site.
 	'titre_image_auteur_supprime' => 'Автор удален',
 	'titre_image_redacteur' => 'Редактор без доступа',
 	'titre_image_redacteur_02' => 'Редактор',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Посетитель',
 	'titre_joindre_document' => 'ПРИЛОЖИТЬ ДОКУМЕНТ',
 	'titre_mots_cles' => 'КЛЮЧИ',

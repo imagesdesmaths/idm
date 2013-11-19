@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_breves_valider' => 'Brèves à valider',
 	'info_gauche_numero_breve' => 'Brève numéro',
 	'info_nb_breves' => '@nb@ brèves',
-	'item_breve_proposee' => 'proposée à l\'évaluation',
+	'item_breve_proposee' => 'proposée à l’évaluation',
 	'item_breve_refusee' => 'refusée',
 	'item_breve_validee' => 'validée',
 	'item_non_utiliser_breves' => 'Ne pas utiliser les brèves',
@@ -35,9 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'logo_breve' => 'Logo de la brève',
 
 	// T
-	'texte_breves' => 'Les brèves sont des textes courts et simples permettant de
-	mettre en ligne rapidement des informations concises, de gérer
-	une revue de presse, un calendrier d\'événements...',
+	'texte_breves' => 'Les brèves sont des textes courts et simples permettant de mettre en ligne rapidement des informations concises, de gérer une revue de presse, un calendrier d’événements...',
 	'titre_breve_proposee' => 'Brève proposée',
 	'titre_breve_publiee' => 'Brève publiée',
 	'titre_breve_refusee' => 'Brève refusée',

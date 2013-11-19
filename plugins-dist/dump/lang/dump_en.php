@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_aucune_sauvegarde_trouvee' => 'No backup found',
-	'info_restauration_finie' => 'It\'s over!. The backup @archive@ has been restored to your site. you can',
+	'info_restauration_finie' => 'It’s over!. The backup @archive@ has been restored to your site. you can',
 	'info_restauration_sauvegarde' => 'Restoring the backup @archive@',
 	'info_sauvegarde' => 'Backup',
 	'info_sauvegarde_reussi_02' => 'The database has been saved in @archive@. You can',

@@ -7,13 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// B
-	'bouton_effacer_referers' => 'Effacer seulement les liens entrants', # NEW
-	'bouton_effacer_statistiques' => 'Effacer toutes les statistiques', # NEW
-
-	// C
-	'csv' => 'csv', # NEW
-
 	// I
 	'icone_evolution_visites' => '访问进展<br />@visites@个访问', # MODIF
 	'icone_repartition_actuelle' => '显示实际分布',
@@ -21,13 +14,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_statistiques_visites' => '访问统计', # MODIF
 	'info_affichier_visites_articles_plus_visites' => '显示<b>从开始访问最流行文章的</b>访问者:',
 	'info_comment_lire_tableau' => '如何读图',
-	'info_forum_statistiques' => 'Statistiques des visites', # NEW
 	'info_popularite_2' => '站点流行:',
 	'info_popularite_3' => '流行: @popularite@; 访问: @visites@',
 	'info_popularite_5' => '流行:',
-	'info_previsions' => 'prévisions :', # NEW
-	'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
-	'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
 	'info_visites' => '访问:',
 	'info_visites_plus_populaires' => '显示 <b>最流行的文章</b> 访问者和 <b>最近发表的文章:</b>',
 	'info_zoom' => '缩放',
@@ -42,8 +31,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resume' => 'Resume', # MODIF
 
 	// T
-	'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
-	'texte_admin_effacer_toutes_stats' => 'Le premier bouton supprime toutes les statistiques : visites, popularité des articles et liens entrants.', # NEW
 	'texte_comment_lire_tableau' => '根据流行程序的不同文章的等级,
   , 在页边标识 
   ; 文章流行度 (
@@ -55,11 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_evolution_visite' => '访问者评估',
 	'titre_liens_entrants' => '访问链接', # MODIF
 	'titre_page_statistiques' => '按专栏统计',
-	'titre_page_statistiques_visites' => '访问者统计',
-
-	// V
-	'visites_journalieres' => 'Nombre de visites par jour', # NEW
-	'visites_mensuelles' => 'Nombre de visites par mois' # NEW
+	'titre_page_statistiques_visites' => '访问者统计'
 );
 
 ?>

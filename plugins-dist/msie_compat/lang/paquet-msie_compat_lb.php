@@ -10,8 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'msie_compat_description' => 'Erlaabt verschidde Methoden ze wielen
 
--* fir déi transparent PNG Biller ënner MSIE~6 ze gesinn
--* an/oder verschidde CSS Selektoren am MSIE~6 a ~7 anzeschalten.',
+-* fir déi transparent PNG Biller ënner MSIE 6 ze gesinn
+-* an/oder verschidde CSS Selektoren am MSIE 6 a 7 anzeschalten.',
 	'msie_compat_nom' => 'Ënnerstëtzung vun ale Browseren',
 	'msie_compat_slogan' => 'PNG an CSS Selektoren fir déi al Browseren'
 );

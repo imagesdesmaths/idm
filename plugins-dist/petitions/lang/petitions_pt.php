@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://www.spip.net/trad-lang/
+// extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=pt
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -8,31 +8,31 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'alerte_confirmer_suppression_signatures' => 'Vous allez supprimer toutes les signatures de cette p&eacute;tition. &Ecirc;tes-vous sur de vouloir continuer ?', # NEW
-	'aucune_signature' => 'Aucune signature', # NEW
+	'alerte_confirmer_suppression_signatures' => 'Irá remover todas as assinaturas desta petição. Deseja continuar?',
+	'aucune_signature' => 'Sem assinaturas',
 
 	// B
-	'bouton_checkbox_envoi_message' => 'possibilit&eacute; d\'envoyer un message', # NEW
-	'bouton_checkbox_indiquer_site' => 'indiquer obligatoirement un site web', # NEW
-	'bouton_checkbox_signature_unique_email' => 'une seule signature par adresse email', # NEW
-	'bouton_checkbox_signature_unique_site' => 'une seule signature par site web', # NEW
+	'bouton_checkbox_envoi_message' => 'possibilidade de enviar uma mensagem',
+	'bouton_checkbox_indiquer_site' => 'necessita de indicar um sítio web',
+	'bouton_checkbox_signature_unique_email' => 'apenas uma assinatura por e-mail',
+	'bouton_checkbox_signature_unique_site' => 'apenas uma assinatura por sítio web',
 
 	// F
-	'filtre' => 'Filtre :', # NEW
-	'form_pet_adresse_site' => 'Endereço do seu sítio', # MODIF
+	'filtre' => 'Filtro :',
+	'form_pet_adresse_site' => 'Endereço do seu sítio',
 	'form_pet_aucune_signature' => 'Nenhuma assinatura corresponde a este código...',
-	'form_pet_confirmation' => 'Favor confirmar a sua assinatura:',
+	'form_pet_confirmation' => 'Por favor confirme a sua assinatura:',
 	'form_pet_deja_signe' => 'Já assinou este texto.',
-	'form_pet_envoi_mail_confirmation' => 'Um correio electrónico acabou de lhe ser enviado. Deverá visitar o endereço do sítio Web mencionado neste correio para validar a sua assinatura', # MODIF
+	'form_pet_envoi_mail_confirmation' => 'Um e-mail de confirmação acabou de lhe ser enviado @email@. Deverá visitar o endereço do sítio Web mencionado neste correio para validar a sua assinatura',
 	'form_pet_mail_confirmation' => 'Bom dia, 
 
-Pediu para assinar o abaixo assinado :
+Pediu para assinar a petição :
 @titre@.
 
 Forneceu as seguintes informações :
     Nome: @nom_email@
     Sítio: @nom_site@ - @url_site@
-
+    @message@
 
 IMPORTANTE...
 Para validar a sua assinatura, basta ligar-se ao
@@ -42,70 +42,71 @@ Para validar a sua assinatura, basta ligar-se ao
 
 
 Obrigado pela sua participação
-', # MODIF
-	'form_pet_message_commentaire' => 'Uma mensagem, um comentário ?', # MODIF
-	'form_pet_nom_site2' => 'Nome do seu sítio Web', # MODIF
-	'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
-	'form_pet_probleme_technique' => 'Problema técnico, as assinaturas estão temporariamente suspensas.',
+',
+	'form_pet_message_commentaire' => 'Uma mensagem, um comentário?',
+	'form_pet_nom_site2' => 'Nome do seu sítio Web',
+	'form_pet_probleme_liens' => 'Por favor edite a sua mensagem, removendo todas as hiperligações.',
+	'form_pet_probleme_technique' => 'Problema técnico: as assinaturas estão temporariamente suspensas.',
 	'form_pet_signature_validee' => 'A sua assinatura foi validada. Obrigado!',
 	'form_pet_site_deja_enregistre' => 'Este sítio já está registado',
 	'form_pet_url_invalide' => 'O URL que indicou não é válido.',
-	'form_pet_votre_email' => 'O seu endereço email',
-	'form_pet_votre_nom' => 'O seu nome ou pseudónimo', # MODIF
+	'form_pet_votre_email' => 'O seu endereço e-mail',
+	'form_pet_votre_nom' => 'O seu nome ou pseudónimo',
 	'form_pet_votre_site' => 'Se tem um sítio Web, pode indicá-lo a seguir',
 
 	// I
-	'icone_relancer_signataire' => 'Relancer le signataire', # NEW
-	'icone_relancer_signataires' => 'Relancer les signataires', # NEW
-	'icone_suivi_petitions' => 'Suivre/g&eacute;rer les p&eacute;titions', # NEW
-	'icone_supprimer_signature' => 'Supprimer cette signature', # NEW
-	'icone_supprimer_signatures' => 'Supprimer les signatures', # NEW
-	'icone_valider_signature' => 'Valider cette signature', # NEW
-	'icone_valider_signatures' => 'Valider les signatures', # NEW
-	'info_adresse_email' => 'ENDEREÇO EMAIL :',
-	'info_fonctionnement_petition' => 'Fonctionnement de la p&eacute;tition :', # NEW
-	'info_signature_supprimee' => 'Signature supprimée', # NEW
-	'info_signature_supprimee_erreur' => 'Erreur : ce code de suppression ne correspond a aucune signature', # NEW
+	'icone_relancer_signataire' => 'Contactar o signatário novamente',
+	'icone_relancer_signataires' => 'Contactar os signatários novamente',
+	'icone_suivi_petitions' => 'Seguir/Gerir as petições',
+	'icone_supprimer_signature' => 'Eliminar este assinatura',
+	'icone_supprimer_signatures' => 'Eliminar as assinaturas',
+	'icone_valider_signature' => 'Confirmar esta assinatura',
+	'icone_valider_signatures' => 'Confirmar as assinaturas',
+	'info_adresse_email' => 'ENDEREÇO E-MAIL :',
+	'info_fonctionnement_petition' => 'Configuração da petição:',
+	'info_signature_supprimee' => 'Assinatura eliminada',
+	'info_signature_supprimee_erreur' => 'Erro : este código de eliminação não corresponde a nenhuma assinatura',
 	'info_site_web' => 'SÍTIO WEB :',
 	'info_texte_message' => 'Texto da sua mensagem :',
 
 	// L
-	'lien_reponse_article' => 'Resposta ao artigo',
+	'lien_reponse_article' => 'Comentário ao artigo',
 
 	// N
-	'nombre_signatures' => '@nb@ signatures', # NEW
+	'nombre_signatures' => '@nb@ assinaturas',
 
 	// S
-	'sans_nom' => 'Anonyme', # NEW
-	'signatures_article' => 'Signatures de l\'article :', # NEW
-	'signatures_aucune' => 'Aucune', # NEW
-	'signatures_meme_auteur' => 'Les signatures du m', # NEW
-	'signatures_meme_site' => 'Les signatures avec le m', # NEW
-	'signatures_poubelle' => 'Supprim&eacute;es', # NEW
-	'signatures_prop' => 'En attente', # NEW
-	'signatures_publie' => 'Confirm&eacute;es', # NEW
-	'signatures_recherche_label' => 'Rechercher des signatures&nbsp;:', # NEW
-	'signatures_toutes' => 'Toutes', # NEW
-	'statut_poubelle' => 'Supprim&eacute;e', # NEW
-	'statut_prop' => 'En attente de validation', # NEW
-	'statut_publie' => 'Confirm&eacute;e', # NEW
+	'sans_nom' => 'Anónimo',
+	'signatures_article' => 'Assinaturas do artigo:',
+	'signatures_aucune' => 'Nenhum',
+	'signatures_meme_auteur' => 'Assinaturas do mesmo autor',
+	'signatures_meme_site' => 'Assinaturas com o mesmo sítio web',
+	'signatures_poubelle' => 'Eliminadas',
+	'signatures_prop' => 'Em espera',
+	'signatures_publie' => 'Confirmadas',
+	'signatures_recherche_label' => 'Procurar assinaturas:',
+	'signatures_selection' => 'Seleccionar as assinaturas :',
+	'signatures_toutes' => 'Todas',
+	'statut_poubelle' => 'Eliminada',
+	'statut_prop' => 'Aguardando validação',
+	'statut_publie' => 'Confirmado',
 
 	// T
-	'texte_descriptif_petition' => 'Descriptif de la p&eacute;tition', # NEW
-	'titre_page_controle_petition' => 'Suivi des p&eacute;titions', # NEW
-	'titre_petition' => 'P&eacute;tition', # NEW
-	'titre_petitions' => 'P&eacute;titions', # NEW
-	'titre_selection_action' => 'Sélection', # NEW
-	'titre_signatures_attente' => 'Signatures en attente de validation', # NEW
-	'titre_signatures_publie' => 'Signatures confirm&eacute;es', # NEW
-	'titre_suivi_petition' => 'Suivi des p&eacute;titions', # NEW
-	'tout_voir' => 'Voir toutes les signatures', # NEW
+	'texte_descriptif_petition' => 'Descrição da petição',
+	'titre_page_controle_petition' => 'Acompanhamento das petições',
+	'titre_petition' => 'Petição',
+	'titre_petitions' => 'Petições',
+	'titre_selection_action' => 'Selecção',
+	'titre_signatures_attente' => 'Assianturas aguardando validação',
+	'titre_signatures_publie' => 'Assinaturas confirmadas',
+	'titre_suivi_petition' => 'Acompanhamento das petições',
+	'tout_voir' => 'Visualizar todas as assinaturas',
 
 	// U
-	'une_signature' => '1 signature', # NEW
+	'une_signature' => '1 assinatura',
 
 	// V
-	'voir_signatures_objet' => 'Voir les signatures' # NEW
+	'voir_signatures_objet' => 'Visualizar as assinaturas'
 );
 
 ?>

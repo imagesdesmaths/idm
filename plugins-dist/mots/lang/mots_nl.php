@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'avis_conseil_selection_mot_cle' => '<b>Belangrijke groep:</b> het is erg aan te bevelen een trefwoord uit deze groep te kiezen.',
-	'avis_doublon_mot_cle' => 'Een woord bestaat al met deze titel. Ben je zeker dat je wilt dezelfde te maken ?', # MODIF
+	'avis_doublon_mot_cle' => 'Het woord bestaat reeds met deze titel. Weet u zeker dat u hetzelfde te creëren?',
 
 	// B
 	'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'beheerders van de site',
@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_question_mots_cles' => 'Wil je gebruik maken van trefwoorden op je site?',
 	'info_qui_attribue_mot_cle' => 'De woorden uit deze groep kunnen toegekend worden door:',
 	'info_remplacer_mot' => '"@titre@" te vervangen',
-	'info_retirer_mot' => 'Trek dat woord',
+	'info_retirer_mot' => 'Verwijder het woord',
 	'info_retirer_mots' => 'Alle trefwoorden intrekken',
 	'info_rubriques_liees_mot' => 'Rubrieken gekoppeld aan dit trefwoord',
 	'info_selection_un_seul_mot_cle' => 'Men kan slechts <b>één enkel trefwoord</b> tegelijk kiezen uit deze groep.',

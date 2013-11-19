@@ -73,10 +73,17 @@ function svp_afficher_etat($etat) {
  *     Une autre valeur indique qu'on demande la liste des librairies dépendantes.
  * @param string $sep
  *     Séparateur entre les noms de dépendances
+ * @param string $lien
+ * 	   Type de lien affecté au plugin référencé dans la base locale. Prend les valeurs :
+ *
+ * 		- local : le lien pointe vers la page publique du plugin sur le site lui-même. Il faut
+ * donc que le site propose des pages publiques pour les plugins sinon une 404 sera affichée;
+ * 		- pluginspip : le lien pointe vers la page du plugin sur le site de référence Plugins SPIP;
+ * 		- non : aucun lien n'est affiché.
  * @return string
  *     Texte informant des dépendances
 **/
-function svp_afficher_dependances($balise_serialisee, $dependance='necessite', $sep='<br />') {
+function svp_afficher_dependances($balise_serialisee, $dependance='necessite', $sep='<br />', $lien='local') {
 	$texte = '';
 	
 	$t = unserialize($balise_serialisee);
@@ -95,14 +102,22 @@ function svp_afficher_dependances($balise_serialisee, $dependance='necessite', $
 					$texte .= $sep;
 				if (($dependance == 'necessite' ) OR ($dependance == 'utilise')) {
 					if ($plugin = sql_fetsel('id_plugin, nom', 'spip_plugins', 'prefixe=' . sql_quote($_plugin['nom']))) {
-						$logiciel = '<a href="' . generer_url_entite($plugin['id_plugin'], 'plugin') . '" title="' . _T('svp:bulle_aller_plugin') . '">' .
-									extraire_multi($plugin['nom']) . '</a>';
+						$nom = extraire_multi($plugin['nom']);
+						if ($lien == 'non')
+							$logiciel = $nom;
+						else {
+							$url = ($lien == 'local')
+								 ? generer_url_entite($plugin['id_plugin'], 'plugin')
+								 : "http://plugins.spip.net/{$_plugin['nom']}.html";
+							$bulle = _T('svp:bulle_aller_plugin');
+							$logiciel = '<a href="' . $url . '" title="' . $bulle . '">' . $nom . '</a>';
+						}
 					} else {
 						// Cas ou le plugin n'est pas encore dans la base SVP.
 						// On affiche son préfixe, cependant ce n'est pas un affichage devant perdurer
 						$logiciel = $_plugin['nom'];
 					}
-					$intervalle = "";
+					$intervalle = '';
 					if (isset($_plugin['compatibilite'])) {
 						$intervalle = svp_afficher_intervalle($_plugin['compatibilite'], $logiciel);
 					}

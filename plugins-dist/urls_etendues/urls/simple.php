@@ -31,7 +31,7 @@ function _generer_url_simple($type,$id, $args='', $ancre='') {
 
 	$url = _debut_urls_simple . $type
 	  . "&" . id_table_objet($type) . "="
-	  . $id . _terminaison_urls_page;
+	  . $id . _terminaison_urls_simple;
 
 	if ($args) $args = strpos($url,'?') ? "&$args" : "?$args";
 	return _DIR_RACINE . $url . $args . ($ancre ? "#$ancre" : '');

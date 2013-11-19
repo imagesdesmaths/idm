@@ -8,7 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'breve' => 'Brève', # NEW
 	'breves' => 'Brèvas',
 
 	// E
@@ -21,12 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_breve' => 'Modificar aquela brèva',
 	'icone_nouvelle_breve' => 'Escriure una brèva nòva',
 	'info_1_breve' => '1 brèva',
-	'info_aucun_breve' => 'Aucune brève', # NEW
 	'info_breves' => 'Vòstre sit utiliza lo sistèma de brèvas?',
 	'info_breves_02' => 'Brèvas',
 	'info_breves_valider' => 'Brèvas de validar',
 	'info_gauche_numero_breve' => 'BRÈVA NUMÈRO', # MODIF
-	'info_nb_breves' => '@nb@ brèves', # NEW
 	'item_breve_proposee' => 'Brèva prepausaa', # MODIF
 	'item_breve_refusee' => 'NON - Brèva refusaa', # MODIF
 	'item_breve_validee' => 'ÒC - Brèva validaa', # MODIF
@@ -37,14 +34,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'logo_breve' => 'LÒGO DE LA BRÈVA', # MODIF
 
 	// T
-	'texte_breves' => 'Las brèvas son de tèxtes corts e simples que permeton de metre en linha lèu d\'informacions concisas, de gerir
- una revista de premsa, un chalendier d\'eveniments...',
+	'texte_breves' => 'Las brèvas son de tèxtes corts e simples que permeton de metre en linha lèu d’informacions concisas, de gerir
+ una revista de premsa, un chalendier d’eveniments...',
 	'titre_breve_proposee' => 'Brèva prepausaa',
 	'titre_breve_publiee' => 'Brèva publicaa',
 	'titre_breve_refusee' => 'Brèva refusaa',
 	'titre_breves' => 'Las brèvas',
 	'titre_langue_breve' => 'LENGA DE LA BRÈVA', # MODIF
-	'titre_nouvelle_breve' => 'Nouvelle brève', # NEW
 	'titre_page_breves' => 'Brèvas'
 );
 

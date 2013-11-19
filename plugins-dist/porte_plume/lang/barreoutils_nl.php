@@ -90,7 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	en maken het zo mogelijk om ze op de forumformuliers te gebriken,
 	de publieke potloden (plug-in) of nog andere plugins, of hun configuratie het zo voorziet.',
 	'explication_barre_outils_public_2' => 'Je mag kiezen deze scripts niet te laten laden
-	om de grootte van de publieke pagina\'s te verminderen.
+	om de grootte van de publieke pagina’s te verminderen.
 	In dit geval zal geen werkbalk in de publieke site beschikbaar 
         zijn, onafhankelijk van de configuraties van de fora, 
         potloden en andere plugins.',

@@ -87,9 +87,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'editer' => 'Редактировать',
 	'explication_barre_outils_public' => 'Файлы CSS и Javascript для панели инструментов будут загружены на сайте и панель форматирования текста будет выводится в модуле комментариев, редактирования текста на фронтэнде сайта. 
-	(extension Porte Plume) sont chargés sur l\'espace public
-	et permettent d\'utiliser ces barres sur les formulaires de forums,
-	les crayons publics ou pour d\'autres plugins, si leurs configurations
+	(extension Porte Plume) sont chargés sur l’espace public
+	et permettent d’utiliser ces barres sur les formulaires de forums,
+	les crayons publics ou pour d’autres plugins, si leurs configurations
 	respectives le permettent.',
 	'explication_barre_outils_public_2' => 'Что бы максимально облегчить сайт и ускорить время его загрузки вы можете отключить добавление этих файлов. Тогда пользователи не смогут форматировать текст при добавлении комментариев и прочих модулях.',
 

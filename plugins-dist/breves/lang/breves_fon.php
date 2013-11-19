@@ -8,7 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'breve' => 'Brève', # NEW
 	'breves' => 'Xogbè kléwun',
 
 	// E
@@ -21,12 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_breve' => 'mi vɔ ɖyɔ xókléwún',
 	'icone_nouvelle_breve' => 'mi vɔ xó kléwún ɖêvó wlán',
 	'info_1_breve' => 'xó kléwún ɖòkpó',
-	'info_aucun_breve' => 'Aucune brève', # NEW
 	'info_breves' => 'gblogblojí mi tɔn nɔ yí xó kléwún á?',
 	'info_breves_02' => 'xó kléwún lɛ',
 	'info_breves_valider' => 'xó kléwún ê nà sɔkɛná',
 	'info_gauche_numero_breve' => 'xó kléwûn nùmɛló', # MODIF
-	'info_nb_breves' => '@nb@ brèves', # NEW
 	'item_breve_proposee' => 'ɖɔ xó kléwún', # MODIF
 	'item_breve_refusee' => 'Éwó - yé gbɛ xó kléwún', # MODIF
 	'item_breve_validee' => 'Núgbó wɛ - yé sɔ kɛn nu xó kléwún', # MODIF
@@ -43,7 +40,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_breve_refusee' => 'xó kléwún yê gbɛ ɔ ',
 	'titre_breves' => 'xó kléwún ',
 	'titre_langue_breve' => 'Gbèzán xó kléwún ɔ tɔn', # MODIF
-	'titre_nouvelle_breve' => 'Nouvelle brève', # NEW
 	'titre_page_breves' => 'xó kléwún lɛ'
 );
 

@@ -1,7 +1,7 @@
 <paquet
 	prefix="medias"
 	categorie="multimedia"
-	version="2.7.48"
+	version="2.7.51"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/portfolio-32.png"
@@ -33,12 +33,14 @@
 	<pipeline nom="document_desc_actions" inclure="medias_pipelines.php" />
 	<pipeline nom="editer_document_actions" inclure="medias_pipelines.php" />
 	<pipeline nom="renseigner_document_distant" inclure="medias_pipelines.php" />
+	<pipeline nom="configurer_liste_metas" inclure="medias_pipelines.php" />
 	<pipeline nom="afficher_metas_document" action="" />
 	<pipeline nom="medias_documents_visibles" action="" />
 	<pipeline nom="ieconfig_metas" inclure="medias_ieconfig.php" />
 
 	<utilise nom="Z" compatibilite="[1.2.1;[" />
 	<utilise nom="mediabox" compatibilite="[0.5.0;[" />
+	<utilise nom="mots" compatibilite="[2.4.0;[" /> 
 
 	<menu nom="documents" titre="medias:info_documents" parent="menu_edition" icone="images/portfolio-16.png" />
 

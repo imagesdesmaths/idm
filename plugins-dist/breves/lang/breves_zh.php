@@ -8,7 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'breve' => 'Brève', # NEW
 	'breves' => '简要',
 
 	// E
@@ -21,12 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_breve' => '修改简要',
 	'icone_nouvelle_breve' => '写新简要',
 	'info_1_breve' => '1则简要',
-	'info_aucun_breve' => 'Aucune brève', # NEW
 	'info_breves' => '您的站点使用了新闻简要系统,吗?',
 	'info_breves_02' => '简要',
 	'info_breves_valider' => '需确认的简要',
 	'info_gauche_numero_breve' => '新闻号', # MODIF
-	'info_nb_breves' => '@nb@ brèves', # NEW
 	'item_breve_proposee' => '新闻提交', # MODIF
 	'item_breve_refusee' => '不 - 丢弃新闻', # MODIF
 	'item_breve_validee' => '是 - 确认新闻', # MODIF
@@ -45,7 +42,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_breve_refusee' => '丢弃的新闻',
 	'titre_breves' => '新闻',
 	'titre_langue_breve' => '新闻语言', # MODIF
-	'titre_nouvelle_breve' => 'Nouvelle brève', # NEW
 	'titre_page_breves' => '新闻'
 );
 

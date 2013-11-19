@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_download_depuis' => 'zënter:',
 	'bouton_download_local' => 'mäi Computer',
 	'bouton_download_par_ftp' => 'de Server',
-	'bouton_download_par_mediatheque' => 'd\'Mediathéik',
+	'bouton_download_par_mediatheque' => 'd’Mediathéik',
 	'bouton_download_sur_le_web' => 'Internet',
 	'bouton_enlever_document' => 'Lassmaachen',
 	'bouton_enlever_supprimer_document' => 'Läschen',
@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_remplacer_image' => 'Bild ersetzen',
 	'bouton_remplacer_image_document' => 'Duerch e Bild oder Dokument ersetzen',
 	'bouton_supprimer' => 'Läschen',
-	'bouton_supprimer_tous_orphelins' => 'All d\'Weesekanner läschen',
+	'bouton_supprimer_tous_orphelins' => 'All d’Weesekanner läschen',
 	'bouton_supprimer_tous_orphelins_confirmation' => 'Sollen déi @nb@ Weesekanner wierklech geläscht ginn?',
 	'bouton_upload' => 'Eroplueden',
 
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'des_utilisations' => '@nb@ Uwennungen',
 	'des_videos' => '@nb@ Sequenzen',
 	'descriptif' => 'Beschreiwung',
-	'document_attache_succes' => 'D\'Dokument gouf bäigefléckt',
+	'document_attache_succes' => 'D’Dokument gouf bäigefléckt',
 	'document_copie_locale_succes' => 'De Fichier gouf op de Site kopéiert',
 	'document_installe_succes' => 'De Fichier gouf gelueden',
 	'document_vu' => 'An den Text agesat',
@@ -72,13 +72,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_chemin_distant' => 'Den distante Fichier @nom@ gouf net fonnt',
 	'erreur_chemin_ftp' => 'Dee Fichier gouf nët um Server fonnt',
 	'erreur_copie_fichier' => 'Onméiglech de Fichier @nom@ déi richteg Plaz ze kopéieren',
-	'erreur_dossier_tmp_manquant' => 'E provisoreschen Dossier fir d\'Fichier\'en eropzeluede feelt',
+	'erreur_dossier_tmp_manquant' => 'E provisoreschen Dossier fir d’Fichier’en eropzeluede feelt',
 	'erreur_ecriture_fichier' => 'Fehler beim Schreiwe vum Fichier op den Disk',
 	'erreur_format_fichier_image' => 'De Format vu @nom@ ass kee Bild-Format',
 	'erreur_indiquez_un_fichier' => 'Wielt e Fichier aus!',
-	'erreur_insertion_document_base' => 'Onméiglech d\'Dokument @fichier@ an der Datebank ze späicheren',
+	'erreur_insertion_document_base' => 'Onméiglech d’Dokument @fichier@ an der Datebank ze späicheren',
 	'erreur_suppression_vignette' => 'Fehler beim Läsche vun der Vignette',
-	'erreur_upload_type_interdit' => 'D\'Eropluede vu Fichier vum Typ @nom@ ass net erlaabt',
+	'erreur_upload_type_interdit' => 'D’Eropluede vu Fichier vum Typ @nom@ ass net erlaabt',
 	'erreur_upload_vignette' => 'Fehler beim Eropluede vun der Vignette @nom@',
 	'erreurs' => '@nb@ Fehler',
 	'erreurs_voir' => '@nb@ Fehler weisen',
@@ -95,7 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'image_tourner_180' => '180° dréien',
 	'image_tourner_droite' => '90° no riets dréien',
 	'image_tourner_gauche' => '90° no lénks dréien',
-	'info_doc_max_poids' => 'D\'Maximalgréisst vun den Dokumenter ass @maxi@ (dëse Fichier huet @actuel@).',
+	'info_doc_max_poids' => 'D’Maximalgréisst vun den Dokumenter ass @maxi@ (dëse Fichier huet @actuel@).',
 	'info_document' => 'Dokument',
 	'info_document_indisponible' => 'Dëst Dokument gëtt ët nët',
 	'info_documents' => 'Dokumenter',
@@ -103,24 +103,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_hauteur' => 'Héicht',
 	'info_heure' => 'Zäit',
 	'info_illustrations' => 'Illustratiounen',
-	'info_image_max_poids' => 'D\'Maximalgréisst vun de Biller ass @maxi@ (dëse Fichier huet @actuel@).',
+	'info_image_max_poids' => 'D’Maximalgréisst vun de Biller ass @maxi@ (dëse Fichier huet @actuel@).',
 	'info_inclusion_directe' => 'Direkt Abannung:',
 	'info_inclusion_vignette' => 'Ubannen vun der Vignette:',
-	'info_installer_tous_documents' => 'All d\'Dokumenter eroplueden',
+	'info_installer_tous_documents' => 'All d’Dokumenter eroplueden',
 	'info_largeur' => 'Breet',
-	'info_logo_max_taille' => 'D\'Logoen mussen manner wéi @maxi@ hun (dëse Fichier huet @actuel@).',
+	'info_logo_max_taille' => 'D’Logoen mussen manner wéi @maxi@ hun (dëse Fichier huet @actuel@).',
 	'info_modifier_document' => 'Dokument änneren',
 	'info_portfolio' => 'Portefeuille',
 	'info_referencer_doc_distant' => 'En Dokument vum Internet referenzéieren:',
 	'info_sans_vignette' => 'Ouni Vignette',
 	'info_statut_document' => 'Dëst Dokument ass:',
 	'info_telecharger' => 'Vun ärem Computer eroplueden:',
-	'infos' => 'Eng Info fir all d\'Rubrike weisen (wann dir verschidden Informatioune wëllt, da benotzt d\'Beschreiwung).',
+	'infos' => 'Eng Info fir all d’Rubrike weisen (wann dir verschidden Informatioune wëllt, da benotzt d’Beschreiwung).',
 	'item_autoriser_selectionner_date_en_ligne' => 'Erlaaben den Datum vun all Dokument ze änneren',
 	'item_non_autoriser_selectionner_date_en_ligne' => 'Den Datum vun den Dokumenter ass deen wéini së op de Site gesaat goufen',
 
 	// L
-	'label_activer_document_objets' => 'D\'Eropluede vir dës Inhalter aschalten:',
+	'label_activer_document_objets' => 'D’Eropluede vir dës Inhalter aschalten:',
 	'label_apercu' => 'Iwwersiicht',
 	'label_caracteristiques' => 'Charakteristik',
 	'label_credits' => 'Krediter',
@@ -141,7 +141,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nb_documents_attache_succes' => '@nb@ Dokumenter goufe bäigefléckt',
-	'nb_documents_installe_succes' => '@nb@ Fichier\'en gelueden',
+	'nb_documents_installe_succes' => '@nb@ Fichier’en gelueden',
 
 	// O
 	'objet_document' => 'Dokument',
@@ -156,7 +156,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'par_titre' => 'No Titel',
 
 	// T
-	'texte_documents_joints' => 'Dir kënnt en Interface aschalten fir Dokumenter (Fichier\'en, Biller, Multimedia, asw) bei Artikelen, Rubriken oder aner Elementer bäi ze setzen. Dës Fichier\'en kënnen dann am Artikel verlinkt oder separat ugewisen ginn.',
+	'texte_documents_joints' => 'Dir kënnt en Interface aschalten fir Dokumenter (Fichier’en, Biller, Multimedia, asw) bei Artikelen, Rubriken oder aner Elementer bäi ze setzen. Dës Fichier’en kënnen dann am Artikel verlinkt oder separat ugewisen ginn.',
 	'texte_documents_joints_2' => 'Dës Astellung verhënnert net Biller oder Dokumenter direkt an den Text derbäi ze setzen.',
 	'titre_documents_joints' => 'Gelinkten Dokumenter',
 	'titre_page_documents_edit' => 'Dokument änneren: @titre@',
@@ -178,15 +178,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'upload_info_mode_image' => 'Dëst Bild aus dem Portefeuille eraushuelen',
 	'upload_limit' => 'Dëse Fichier ass ze grouss fir de Server; déi maximal Gréisst fir <i>eropzelueden</i> ass @max@.',
 	'upload_zip_conserver' => 'Archiv no der Extraktioun halen',
-	'upload_zip_decompacter' => 'de-kompriméiert an all Element um Site installéiert. D\'Fichier\'en déi dann um Site installéiert ginn sinn:',
-	'upload_zip_mode_document' => 'All d\'Biller an de Portefeuille setzen',
+	'upload_zip_decompacter' => 'de-kompriméiert an all Element um Site installéiert. D’Fichier’en déi dann um Site installéiert ginn sinn:',
+	'upload_zip_mode_document' => 'All d’Biller an de Portefeuille setzen',
 	'upload_zip_telquel' => 'esou wéi en ass, als kompriméierten Zip-Archiv installéiert;',
 	'upload_zip_titrer' => 'Titel ginn baséiert um Numm vum Fichier',
 
 	// V
-	'verifier_documents_brises' => 'D\'Fichier\'en déi feele kontrolléieren',
-	'verifier_documents_inutilises' => 'D\'Linke vun den Dokumenter kontrolléieren',
-	'vignette_supprimee' => 'D\'Vignette gouf geläscht'
+	'verifier_documents_brises' => 'D’Fichier’en déi feele kontrolléieren',
+	'verifier_documents_inutilises' => 'D’Linke vun den Dokumenter kontrolléieren',
+	'vignette_supprimee' => 'D’Vignette gouf geläscht'
 );
 
 ?>

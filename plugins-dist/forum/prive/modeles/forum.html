@@ -12,7 +12,7 @@
 
 ][(#ID_AUTEUR|non)[ <a class='ajax' href='[(#GET{self}|parametre_url{auteur,#AUTEUR})]' title='<:forum:messages_meme_auteur|attribut_html:>' >(#AUTEUR)</a>]
 
-][ &mdash; <a class='ajax' href='mailto:#EMAIL_AUTEUR' title='<:envoyer_message|attribut_html:>' >(#EMAIL_AUTEUR|email_valide|?{#EMAIL_AUTEUR})</a>
+][ &mdash; <a href='mailto:#EMAIL_AUTEUR' title='<:envoyer_message|attribut_html:>' >(#EMAIL_AUTEUR|email_valide|?{#EMAIL_AUTEUR})</a> [\[<a class='ajax' href='[(#GET{self}|parametre_url{auteur,#AUTEUR})]' title="(#EMAIL_AUTEUR|forum_compte_messages_from{#ID_FORUM}|singulier_ou_pluriel{'','forum:info_nb_messages_forum'})"><:forum:messages_meme_email:></a>\]]
 
 ][(#STATUT|!={publie}|oui)[ &mdash; IP <a class='ajax' href='[(#GET{self}|parametre_url{ip,#IP})]' title='<:forum:messages_meme_ip|attribut_html:>' >(#IP)</a>]]</div>
 

@@ -8,14 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_effacer_referers' => 'Effacer seulement les liens entrants', # NEW
 	'bouton_effacer_statistiques' => 'Borrar as estatísticas', # MODIF
 
-	// C
-	'csv' => 'csv', # NEW
-
 	// I
-	'icone_evolution_visites' => 'Evoluci&oacute;n das visitas<br />@visites@ visitas',
+	'icone_evolution_visites' => 'Evolución das visitas<br />@visites@ visitas',
 	'icone_repartition_actuelle' => 'Mostrar a distribución actual',
 	'icone_repartition_visites' => 'Distribución das visitas',
 	'icone_statistiques_visites' => 'Estatísticas',
@@ -38,28 +34,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'onglet_repartition_debut' => 'desde o principio',
 	'onglet_repartition_lang' => 'Distribución por linguas',
 
-	// R
-	'resume' => 'Resume', # MODIF
-
 	// T
 	'texte_admin_effacer_stats' => 'Este comando borra todos os datos ligados ás estatísticas de visita do web, e inclúe a popularidade dos artigos.',
-	'texte_admin_effacer_toutes_stats' => 'Le premier bouton supprime toutes les statistiques : visites, popularité des articles et liens entrants.', # NEW
-	'texte_comment_lire_tableau' => 'O rango do artigo,
-		na clasificación por popularidade, está indicado á marxe;
-		a popularidade do artigo (unha estimación do número
-		de visitas cotiás que terá se o ritmo actual de
-		consulta se mantén) e o número de visitas recibidas
-		dende o principio son amosadas no bolo que
-		aparece cando pasas co rato por riba do título.',
+	'texte_comment_lire_tableau' => 'O rango do artigo, na clasificación por popularidade, está indicado á marxe; a popularidade do artigo (unha estimación do número de visitas cotiás que terá se o ritmo actual de consulta se mantén) e o número de visitas recibidas dende o principio son amosadas no bolo que aparece cando pasas co rato por riba do título.',
 	'texte_signification' => 'As barras escuras representan as entradas acumuladas (total dos apartados), as barras claras o número de visitas para cada tema.',
 	'titre_evolution_visite' => 'Evolución das visitas',
 	'titre_liens_entrants' => 'As ligazóns entrantes do día',
 	'titre_page_statistiques' => 'Estatísticas por temas',
-	'titre_page_statistiques_visites' => 'Estatísticas das visitas',
-
-	// V
-	'visites_journalieres' => 'Nombre de visites par jour', # NEW
-	'visites_mensuelles' => 'Nombre de visites par mois' # NEW
+	'titre_page_statistiques_visites' => 'Estatísticas das visitas'
 );
 
 ?>

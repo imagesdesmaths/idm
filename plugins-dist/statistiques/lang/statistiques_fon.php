@@ -7,13 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// B
-	'bouton_effacer_referers' => 'Effacer seulement les liens entrants', # NEW
-	'bouton_effacer_statistiques' => 'Effacer toutes les statistiques', # NEW
-
-	// C
-	'csv' => 'csv', # NEW
-
 	// I
 	'icone_evolution_visites' => 'kàndíɖrɛn jònɔbíbàmɛ tɔn ',
 	'icone_repartition_actuelle' => 'mi sɔ ɖìɖèmɛ lɛ xlɛ',
@@ -25,9 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_popularite_2' => 'mɛ bí tùn gblogblojí ɔ :',
 	'info_popularite_3' => 'Tòbítùn : @popularite@ ; Jōnɔ : @visites@',
 	'info_popularite_5' => 'Tòbítùn :',
-	'info_previsions' => 'prévisions :', # NEW
-	'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
-	'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
 	'info_visites' => 'jónɔ bìbá:',
 	'info_visites_plus_populaires' => 'xlɛ jónɔ bìbá',
 	'info_zoom' => 'vlɔnvlɔn',
@@ -42,18 +32,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resume' => 'Resume', # MODIF
 
 	// T
-	'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
-	'texte_admin_effacer_toutes_stats' => 'Le premier bouton supprime toutes les statistiques : visites, popularité des articles et liens entrants.', # NEW
-	'texte_comment_lire_tableau' => 'gblogblojí é lɔ nɔ zɔn bɔ mi nɔ sɛ  wɛn ɖó bó nɔ lɛ yí wɛnxó kléwun lɛ wěmà kléwún ɖé lɛ wɛbɔ yé nɔ zɔn bɔ xó lɛ nɔ yí àtɛjí gànmɛgànmɛmi sɔ xóxòkplégbàví mi tɔn ',
+	'texte_comment_lire_tableau' => 'gblogblojí é lɔ nɔ zɔn bɔ mi nɔ sɛ  wɛn ɖó bó nɔ lɛ yí wɛnxó kléwun lɛ wěmà kléwún ɖé lɛ wɛbɔ yé nɔ zɔn bɔ xó lɛ nɔ yí àtɛjí gànmɛgànmɛmi sɔ xóxòkplégbàví mi tɔn ', # MODIF
 	'texte_signification' => 'mi ná sɔ mɔ àlì gégéwékpá é lɔxógbè lɛ nyɔwlántɔ lɛ gblogblojí é lɔ nɔ zɔn bɔ mi nɔ sɛ  wɛn ɖó bó nɔ lɛ yí wɛnxó kléwun lɛ wěmà kléwún ɖé lɛ wɛbɔ yé nɔ zɔn bɔ xó lɛ nɔ yí àtɛjí gànmɛgànmɛmi sɔ xóxòkplégbàví mi tɔn mɔnɔ hɛnmi cyían ɖê jɛ ɖéwú ɔ.',
 	'titre_evolution_visite' => 'núkɔn yíyí jónɔ yíyi tɔn',
 	'titre_liens_entrants' => 'càcàdó ná byɔmɛ',
 	'titre_page_statistiques' => 'àkɔŋtá àkpáxwé àkpáxwé',
-	'titre_page_statistiques_visites' => 'àkɔŋtá jónɔ lɛ tɔn',
-
-	// V
-	'visites_journalieres' => 'Nombre de visites par jour', # NEW
-	'visites_mensuelles' => 'Nombre de visites par mois' # NEW
+	'titre_page_statistiques_visites' => 'àkɔŋtá jónɔ lɛ tɔn'
 );
 
 ?>

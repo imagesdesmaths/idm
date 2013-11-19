@@ -48,8 +48,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_ajouter_participant' => ': يك شركت كننده اضافه كنيد',
 	'bouton_annonce' => 'خبر',
 	'bouton_annuler' => 'باطل کنید',
-	'bouton_cache_activer' => 'Réactiver le cache', # NEW
-	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'امكان فرستادن پيام',
 	'bouton_checkbox_indiquer_site' => 'يك سايت تارنما را الزامأ مشخص كنيد',
 	'bouton_checkbox_signature_unique_email' => 'تنها يك امضاء براى هر آدرس الكترونيكى',
@@ -283,7 +281,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_barre_outils' => 'با ميل ابزار آن؟',
 	'info_base_installee' => '.ساختار داده پى هايتان نصب شده',
 	'info_bio' => 'زندگي‌نامه',
-	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'سر متن',
 	'info_chapeau_2' => ':سر متن',
 	'info_chemin_acces_1' => 'گزینش: <b>مسير ورود به راهنما</b>',
@@ -294,7 +291,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_classement_2' => '<sup>ين</sup>در@liste@',
 	'info_code_acces' => '! كد ها ى وردي تان را فراموش نكنيد',
 	'info_compatibilite_html' => 'نرم اچ.تي.ام.ال براي پيگيري ',
-	'info_compresseur_gzip' => 'توصيه مي‌شود ابتدا ببينيد كه ارايه دهنده خدمات نويسه‌هاي پي.اچ.پي را به صورت سيستماتيك فشرده مي‌كند يا نه. براي اين كار مي‌توايد به عنوان نمونه از خدمات  : @testgzip@ استفاده كنيد.',
+	'info_compresseur_gzip' => 'توصيه مي‌شود ابتدا ببينيد كه ارايه دهنده خدمات نويسه‌هاي پي.اچ.پي را به صورت سيستماتيك فشرده مي‌كند يا نه. براي اين كار مي‌توايد به عنوان نمونه از خدمات : @testgzip@ استفاده كنيد.',
 	'info_compresseur_texte' => 'اگر سرور شما صفحه‌هاي اچ.تي.ام.ال را براي ارسال به اينترانت (internautes) به صورت خودكار فشرده نمي‌سازد، مي‌توانيد براي كم كردن بار صفحه‌هاي بارگذاري شده اينكار را انجام دهيد. <b>توجه</b>: اين امر مي‌تواند بعضي سرور‌ها را به نحو قابل توجه كند كند.',
 	'info_config_suivi' => 'اگر اين آدرس به فهرست ايميل ها mailing-list مربوط ميشود, ميتوانيد در زير آدرسى را كه شركت كنندگان سايت ميتوانند در آن ثبت نام كنند را مشخص كنيد. اين آدرس ميتواند يك  URL( مانند صفحه ثبت نام در فهرست) و يا ميتواند بدين صورت باشد : <tt>@adresse_suivi@?subject=subscribe</tt>):',
 	'info_config_suivi_explication' => ' شما ميتوانيد بطور خودكار بوسيله ايميل خبرهاى مربوط به فعاليت تحريريه سايت را دريافت كنيد. براى اين منظور شما بايد در فهرست ايميلها mailing-list ثبت نام كنيد.',
@@ -409,7 +406,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_visiteurs' => '@nb@ بازديد‌كننده',
 	'info_nom' => 'نام',
 	'info_nom_destinataire' => 'نام گيرنده',
-	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'نام سايتتان',
 	'info_nombre_articles' => 'مقاله @nb_articles@ ',
 	'info_nombre_partcipants' => ':شركت كنند گان در اين گفتگو',
@@ -438,7 +434,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_par_nom' => 'توسط نام',
 	'info_par_nombre_article' => 'توسط شمار مقالها',
 	'info_par_statut' => 'توسط نوع',
-	'info_par_tri' => '\'(بترتيب@tri@)\'',
+	'info_par_tri' => '’(بترتيب@tri@)’',
 	'info_passe_trop_court' => 'كلمه ورود خيلى كوتاه',
 	'info_passe_trop_court_car_pluriel' => 'گذرواژه‌ دست كم بايد @nb@ كاراكتر داشته باشد.',
 	'info_passes_identiques' => 'دو كلمه ورود با هم يكسان نيستند',
@@ -446,7 +442,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_plus_cinq_car' => 'بيش از پنج حرف',
 	'info_plus_cinq_car_2' => '(بيش از پنج حرف)',
 	'info_plus_trois_car' => '(بيش از سه حرف)',
-	'info_popularite' => '@popularite@ :  محبوبيت@visites@ : بازديد',
+	'info_popularite' => '@popularite@ : محبوبيت@visites@ : بازديد',
 	'info_popularite_4' => '@popularite@ : محبوبيت@visites@ : بازديد',
 	'info_post_scriptum' => 'نوشتار پس از متن اصلى',
 	'info_post_scriptum_2' => ':نوشتار پس از متن اصلى',
@@ -569,14 +565,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'install_pas_table' => 'پايگاه عملاً بدون جدول‌ها',
 	'install_pass_base_hebergeur' => 'کد ورودی به سایت که توسط میزبان وب داده شده',
 	'install_php_version' => 'نسخه @version@ PHP ناکافیست  دستکم= @minimum@',
-	'install_select_langue' => 'يك زبان را انتخاب كنيد سپس روى دكمه  "بعدى" كليك كنيد، روند استقرار برنامه بكار خواهد افتاد',
+	'install_select_langue' => 'يك زبان را انتخاب كنيد سپس روى دكمه "بعدى" كليك كنيد، روند استقرار برنامه بكار خواهد افتاد',
 	'install_select_type_db' => 'نوع پايگاه داده‌ها را تعيين كردن',
 	'install_select_type_mysql' => 'MySQL',
-	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',
-	'install_serveur_hebergeur' => 'Serveur de base de données attribué par l\'hébergeur ',
+	'install_serveur_hebergeur' => 'Serveur de base de données attribué par l’hébergeur ',
 	'install_table_prefix_hebergeur' => 'پیشوند جدولها که توسط میزبان وب داده شده:',
 	'install_tables_base' => 'جدول‌هاي پايگاه',
 	'install_types_db_connus' => 'اسپيپ مي‌تواند<b>MySQL</b> (رايج‌تر)و <b>SQLite</b> را استفاده كند.',
@@ -728,7 +723,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plugin_info_plugins_dist_1' => 'پلاگين‌هاي زير در پوشه‌ي @plugins_dist@ بارگذاري و فعال‌ شده‌اند. ',
 	'plugin_info_plugins_dist_2' => 'غيرفعال نمي‌شوند',
 	'plugin_info_telecharger' => 'باربرداري از @url@ و نصب در @rep@',
-	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'آرشيو‌هاي نصب‌ شده',
 	'plugin_necessite_lib' => 'اين پلاگين به آرشيو @lib@ نياز دارد',
 	'plugin_necessite_plugin' => 'به plugin @plugin@ نسخه ی @version@ نیاز دارید',
@@ -779,7 +773,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'sans_heure' => 'زمان نامشخص',
 	'statut_admin_restreint' => '(اداره محدود)', # MODIF
-	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'وظيفه‌ي CRON @function@ (ASAP)', # MODIF
@@ -836,7 +829,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_fichier_authent' => '<b>آيا سپيپ بايد فايل‌هاى <tt>.htpasswd</tt>
 و <tt>.htpasswd-admin</tt> را در دايركتوري @dossier@ بسازد؟</b><p>
 اين فايل‌ها مي‌توانند بشما در محدود كردن دسترسى نويسندگان وگردانندگان سايت در جاهاى ديگر( براى مثال برنامه خارجى آمار) كمك كنند).</p><p>
-اگر به اين گزينه نياز نيست، اسپيپ خودبخود آنرا اداره ميكند (بدون  ساخت فايل‌ها)</p>.',
+اگر به اين گزينه نياز نيست، اسپيپ خودبخود آنرا اداره ميكند (بدون  ساخت فايل‌ها)</p>.', # MODIF
 	'texte_informations_personnelles_1' => 'اكنون سيستم براى شما دسترسى انحصارى به سايت را درست ميكند.',
 	'texte_informations_personnelles_2' => 'تذكر : اگر موضوع مربوط به نصب دوباره ميباشد، وشما هنوز دسترسى به سايت داريد، ميتوانيد', # MODIF
 	'texte_introductif_article' => '(متن مقدمه اى مقاله.)',

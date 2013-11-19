@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_compresseur_js' => 'Aktivigi la densigon de la skriptoj (ĝavoskripto)',
 
 	// T
-	'texte_compacter_avertissement' => 'Atentu ne ebligi tiujn opciojn dum disvolviĝo de via retejo : la densigaj elementoj perdas ĉian legeblecon.',
+	'texte_compacter_avertissement' => 'Atentu ne ebligi tiujn opciojn dum disvolviĝo de via retejo : la densigaj elementoj perdas ĉian legeblecon.',
 	'texte_compacter_script_css' => 'SPIP povas densigi ĝavoskriptaj skriptoj kaj CSS stilfolioj, por registri ilin en statikaj dosieroj. Tio plirapidigas la afiŝon de la retejo.',
 	'texte_compresseur_page' => 'SPIP povas aŭtomate densigi ĉiun paĝon kiun ĝi sendas al
 retej-vizitantoj. Tiu agordo permesas optimumi la bendlarĝo (la

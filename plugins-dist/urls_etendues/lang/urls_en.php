@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_url' => 'Delete this URL',
 
 	// E
-	'erreur_arbo_2_segments_max' => 'You can\'t use more than two URL segments for an object',
+	'erreur_arbo_2_segments_max' => 'You can’t use more than two URL segments for an object',
 	'erreur_config_url_forcee' => 'The configuration of URLs is fixed in the <tt>mes_options.php</tt> file.',
 	'explication_editer' => 'The advanced management of URLs allows you to edit the URL of the pages of each editorial object, and to manage the history of their evolution.',
 
@@ -46,9 +46,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_type_urls' => 'You may choose how page URLs are to be calculated.',
-	'texte_type_urls_attention' => 'Warning: this setting will only work if the file @htaccess@ is correctly installed in the site\'s root directory.',
+	'texte_type_urls_attention' => 'Warning: this setting will only work if the file @htaccess@ is correctly installed in the site’s root directory.',
 	'texte_urls_nb_max_car' => 'If the title is longer, it will be cut.',
-	'texte_urls_nb_min_car' => 'If the title is shorter, it\'s its identifying number which will be used.',
+	'texte_urls_nb_min_car' => 'If the title is shorter, it’s its identifying number which will be used.',
 	'titre_gestion_des_urls' => 'URLs management',
 	'titre_type_arbo' => 'Arborescent URLs',
 	'titre_type_html' => 'HTML objects URLs ',
@@ -63,7 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tout_voir' => 'Show all URLs',
 
 	// U
-	'url_ajout_impossible' => 'An error has occurred. This URL couldn\'t be saved',
+	'url_ajout_impossible' => 'An error has occurred. This URL couldn’t be saved',
 	'url_ajoutee' => 'The URL has been added',
 
 	// V

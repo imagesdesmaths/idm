@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_file' => 'No document',
 	'aucun_image' => 'No image',
 	'aucun_video' => 'No video',
-	'aucune_utilisation' => 'This document isn\'t used.',
+	'aucune_utilisation' => 'This document isn’t used.',
 	'aucune_vignette' => 'No thumbnail',
 
 	// B
@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_dimensions' => 'Size:',
 	'entree_titre_document' => 'Document title:',
 	'entree_titre_image' => 'Image title:',
-	'erreur_aucun_document' => 'This document doesn\'t exist in the media library',
+	'erreur_aucun_document' => 'This document doesn’t exist in the media library',
 	'erreur_aucun_fichier' => 'No file was found',
 	'erreur_chemin_distant' => 'The remote file @nom@ could not be found',
 	'erreur_chemin_ftp' => 'The specified file was not found on the server',

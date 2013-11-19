@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'breves' => 'Fulm-informoj',
 
 	// E
-	'entree_breve_publiee' => 'Tiu fulm-informo estas :',
+	'entree_breve_publiee' => 'Tiu fulm-informo estas :',
 	'entree_texte_breve' => 'Teksto de la fulm-informo',
 
 	// I

@@ -288,7 +288,7 @@ französischen SPIP-Dokumentation</a>.',
 	'info_barre_outils' => 'mit Symbolleiste?',
 	'info_base_installee' => 'Die Struktur Ihrer Datenbank wurde angelegt.',
 	'info_bio' => 'Biographie',
-	'info_cache_desactive' => 'Der Cache ist vorübergehend abgeschaltet.',
+	'info_cache_desactive' => 'Der Cache ist vorübergehend deaktiviert.',
 	'info_chapeau' => 'Kopf',
 	'info_chapeau_2' => 'Kopf:',
 	'info_chemin_acces_1' => 'Optionen: <b>Pfad im Verzeichnis</b>',
@@ -444,7 +444,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 	'info_par_nom' => 'nach Namen',
 	'info_par_nombre_article' => 'nach Anzahl der Artikel',
 	'info_par_statut' => 'nach Status',
-	'info_par_tri' => '\'(nach @tri@)\'',
+	'info_par_tri' => '’(nach @tri@)’',
 	'info_passe_trop_court' => 'Passwort zu kurz.',
 	'info_passe_trop_court_car_pluriel' => 'Das Passwort muss mindestens @nb@ Zeichen haben.',
 	'info_passes_identiques' => 'Die zwei Passworte stimmen nicht überein.',
@@ -470,7 +470,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 	'info_publies' => 'Ihre veröffentlichten Artikel',
 	'info_question_accepter_visiteurs' => 'Bitte aktivieren Sie die folgende Option, wenn sich Besucher Ihrer Website als <i>Leser ohne Zugang zum Redaktionssystem</i> anmelden können.',
 	'info_question_inscription_nouveaux_redacteurs' => 'Möchten Sie, dass sich neue Redakteure vom öffentlichen Bereich
- aus anmelden können?  Wenn Sie es wollen, können sich Besucher über ein automatisch
+ aus anmelden können? Wenn Sie es wollen, können sich Besucher über ein automatisch
  erstelltes Formular anmelden und Artikel vorschlagen.
  <div class="notice">Nach der Anmeldung erhalten die neuen Redakteure automatisch
  eine E-Mail mit ihren Zugangsdaten. Manche Webhoster unterbinden den Mailversand
@@ -838,7 +838,7 @@ in einer Farbe, die den Status anzeigt :',
 	'texte_date_publication_anterieure' => 'DATUM EINER FRÜHEREN BEARBEITUNG',
 	'texte_date_publication_anterieure_nonaffichee' => 'Kein Datum einer früheren Bearbeitung anzeigen.',
 	'texte_date_publication_article' => 'ONLINE VERÖFFENTLICHT AM:',
-	'texte_date_publication_objet' => 'Veröffentlichungs-Datum:',
+	'texte_date_publication_objet' => 'Veröffentlichungsdatum:',
 	'texte_descriptif_petition' => 'Beschreibung der Petition',
 	'texte_descriptif_rapide' => 'Kurzbeschreibung',
 	'texte_effacer_base' => 'SPIP-Datenbank löschen',
@@ -847,7 +847,7 @@ in einer Farbe, die den Status anzeigt :',
 	'texte_en_cours_validation' => 'Die folgenden Einträge sind zur Veröffentlichung vorgeschlagen.',
 	'texte_enrichir_mise_a_jour' => 'Sie können Ihren Text ansprechend gestalten, indem Sie die typografischen Abkürzungen verwenden.',
 	'texte_fichier_authent' => '<b>Soll SPIP die Dateien <tt>.htpasswd</tt> und <tt>.htpasswd-admin</tt> im Verzeichnis @dossier@ anlegen?</b><p>
- Mit diesen Dateien können Sie den Zugang zu anderen Bereichen Ihrer Website (z.B. externe Logfile-Auswertungen) auf Redakteure und Administratoren beschränken.</p><p>Wenn Sie diese Möglickeit nicht nutzen, könnn Sie hier die Grundeinstellung (Dateien werden nicht angelegt) beibehalten.</p>',
+ Mit diesen Dateien können Sie den Zugang zu anderen Bereichen Ihrer Website (z.B. externe Logfile-Auswertungen) auf Redakteure und Administratoren beschränken.</p><p>Wenn Sie diese Möglickeit nicht nutzen, könnn Sie hier die Grundeinstellung (Dateien werden nicht angelegt) beibehalten.</p>', # MODIF
 	'texte_informations_personnelles_1' => 'Das System wird nun persönliche Zugangsdaten für Sie anlegen.',
 	'texte_informations_personnelles_2' => '(Hinweis: Wenn Sie die Site erneut installieren, und Ihre Zugangsdaten funktionieren, können Sie',
 	'texte_introductif_article' => '(Einleitender Text des Artikels.)',

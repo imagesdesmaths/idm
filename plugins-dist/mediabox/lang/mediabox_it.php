@@ -18,9 +18,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'boxstr_zoom' => 'Zoom',
 
 	// E
-	'explication_selecteur' => 'Specificare l\'elemento target che attiverà il box. (CSS expression o  jQuery)',
-	'explication_selecteur_galerie' => 'Specificare l\'elemento target da da raggruppare insieme nella galleria. (jQuery o CSS expression)',
-	'explication_splash_url' => 'Inserisci l\'URL dei media da visualizzare automaticamente in un box alla prima visita del sito pubblico.',
+	'explication_selecteur' => 'Specificare l’elemento target che attiverà il box. (CSS expression o  jQuery)',
+	'explication_selecteur_galerie' => 'Specificare l’elemento target da da raggruppare insieme nella galleria. (jQuery o CSS expression)',
+	'explication_splash_url' => 'Inserisci l’URL dei media da visualizzare automaticamente in un box alla prima visita del sito pubblico.',
 	'explication_traiter_toutes_images' => 'Inserire un box attorno a tutte le immagini?',
 
 	// L

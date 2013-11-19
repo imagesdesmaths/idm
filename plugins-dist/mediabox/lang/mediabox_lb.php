@@ -18,13 +18,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'boxstr_zoom' => 'Zoom',
 
 	// E
-	'explication_selecteur' => 'Gitt d\'Elementer un déi d\'Mediabox starten (CSS oder jQuery).',
-	'explication_selecteur_galerie' => 'Gitt d\'Elementer un déi sollen als Galerie gruppéiert ginn (CSS oder jQuery).',
-	'explication_splash_url' => 'Gitt d\'Url vum Element un dat soll automatesch an der Mediabox bei der éischter Visite vum ëffentleche Site gewise ginn.',
+	'explication_selecteur' => 'Gitt d’Elementer un déi d’Mediabox starten (CSS oder jQuery).',
+	'explication_selecteur_galerie' => 'Gitt d’Elementer un déi sollen als Galerie gruppéiert ginn (CSS oder jQuery).',
+	'explication_splash_url' => 'Gitt d’Url vum Element un dat soll automatesch an der Mediabox bei der éischter Visite vum ëffentleche Site gewise ginn.',
 	'explication_traiter_toutes_images' => 'Eng Box bei all Biller asetzen?',
 
 	// L
-	'label_active' => 'D\'Mediabox um ëffentleche Site aschalten',
+	'label_active' => 'D’Mediabox um ëffentleche Site aschalten',
 	'label_apparence' => 'Layout',
 	'label_aucun_style' => 'Ouni Default-Layout',
 	'label_choix_transition_elastic' => 'Elastesch',

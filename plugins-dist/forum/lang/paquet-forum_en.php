@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
-	'forum_description' => 'SPIP\'s forum (private and public)',
+	'forum_description' => 'SPIP’s forum (private and public)',
 	'forum_slogan' => 'Management of private and public forums in SPIP'
 );
 

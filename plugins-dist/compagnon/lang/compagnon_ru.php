@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		Так же необходимо, что бы у вас был минимум один раздел сайта. Если на сайте нет ни одного раздела мы можете создать его в нажав на пункт меню "Сайт-> Разделы" в верхней панели управления.',
 	'c_accueil_texte' => 'Вы только что вошли в систему управления вашими сайтом - CMS SPIP.',
 	'c_accueil_texte_revenir' => '		На этой странице отображаются последние изменения, которые были выполненный на сайте. В дальнейшем вы можете вернуться на эту страницу нажав на кнопку "Главная" в левом верхнем углу страницы.
-		Vous pouvez revenir sur cette page à tout instant en cliquant l\'icône de maison,
+		Vous pouvez revenir sur cette page à tout instant en cliquant l’icône de maison,
 		sur la partie haute, sous votre nom.',
 	'c_article_redaction' => 'Статус статьи - "редактируется"',
 	'c_article_redaction_redacteur' => 'Статус статьи - "редактируется"',
@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		В левой колонке изменить статус статьи с  « готовится » на « опубликована ».',
 	'c_articles_creer' => 'Как создать статью ?',
 	'c_articles_creer_texte' => 'Вы не можете создать статью на этой странице до тех пор, пока вы не создали хотя бы один раздел сайта. Что бы создать раздел наведите мышку на кнопку "Сайт" и выберете пункт меню "Разделы".
-		qu\'à partir du moment où il existe une rubrique dans votre site.
+		qu’à partir du moment où il existe une rubrique dans votre site.
 		Vous pouvez la créer depuis le menu « Édition », puis « Rubriques ».',
 	'c_job' => 'Список задач',
 	'c_job_texte' => 'На этой странице вы видите список задач, которые выполняет CMS SPIP.  Некоторые задачи выполняются периодически, другие от случая к случаю - например отправка рассылки подписчикам.',
