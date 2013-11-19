@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_attention_trois_caracteres' => '<b>Внимание!</b> Заголовок должен быть не менее трех символов.',
 	'forum_attention_trop_caracteres' => '<b>Внимание!</b> Ваше сообщение содержит @compte@ символов, мы можем добавить ваш комментарий только если его размер не превышает @max@ символов.',
 	'forum_avez_selectionne' => 'Вы выбрали:',
-	'forum_cliquer_retour' => 'Нажмите  <a href=\'@retour_forum@\'>сюда</a> для продолжения.',
+	'forum_cliquer_retour' => 'Нажмите <a href=\'@retour_forum@\'>сюда</a> для продолжения.',
 	'forum_forum' => 'комментарий',
 	'forum_info_modere' => 'Все комментарии проверяются администрацией сайта. Ваше сообщение будет опубликовано после одобрения администратором.',
 	'forum_lien_hyper' => 'Ссылка',

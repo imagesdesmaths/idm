@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_autoriser_activer_paquets_obsoletes' => 'Allow activation of obsolete packages?',
 	'config_autoriser_activer_paquets_obsoletes_explication' => 'Obsolete packages are local packages that are older than other local packages. Obsolescence is established on the basis of the status (stable, testing, dev) of the package and on the basis of its version. Enable this option if you still want to activate these outdatedplugins.',
 	'config_depot_editable' => 'Allow repository edition?',
-	'config_depot_editable_explication' => 'This makes editable the informations of a repository and enable eventually to associate keywords or documents to it. This option shouldn\'t interest anyone! Rather leave "no"!',
+	'config_depot_editable_explication' => 'This makes editable the informations of a repository and enable eventually to associate keywords or documents to it. This option shouldn’t interest anyone! Rather leave "no"!',
 	'confirmer_telecharger_dans' => 'The plugin will be loaded into a directory (@dir@) which already exists.
 This will overwrite the content of this directory.
 A copy of the old files will be saved in "@dir_backup@".
@@ -91,7 +91,7 @@ is not created or is not writable.
 	'erreur_teleporter_methode_inconue' => 'Unknown method "@methode@" for teleport',
 	'erreur_teleporter_type_fichier_inconnu' => 'Unknown file type for the source @source@',
 	'erreurs_xml' => 'Unable to read some XML descriptions',
-	'explication_destination' => 'The path will be calculated from the archive name if you don\'t fill it.',
+	'explication_destination' => 'The path will be calculated from the archive name if you don’t fill it.',
 
 	// F
 	'fieldset_debug' => 'Debug',
@@ -108,7 +108,8 @@ is not created or is not writable.
 	'info_admin_plugin_actif_oui_verrou_tous' => 'This page lists all the active plugins of the site, locked or not.',
 	'info_admin_plugin_verrou_non' => 'This page lists all unlocked plugins of the site, active or not.',
 	'info_admin_plugin_verrou_tous' => 'This page lists all the plugins of the website.',
-	'info_admin_plugin_verrouille' => 'This page lists the active and locked plugins (placed in the <code>@dir_plugins_dist@</code> directory). I you wish to disable them, please contact the webmaster of the site or see <a href="http://programmer.spip.org/directory_extensions">the documentation</a>.',
+	'info_admin_plugin_verrouille' => 'This page lists the active and locked plugins (stored in the <code>@dir_plugins_dist@</code> directory). 
+	If you wish to disable them, please contact the webmaster of the site or see <a href="http://programmer.spip.net/repertoire_plugins-dist">the documentation</a>.',
 	'info_adresse_spipzone' => 'SPIP-Zone - Plugins',
 	'info_ajouter_depot' => 'By adding repositories to your base, you will have the possibility to get information and to search on all packages hosted by the added repositories.<br />A repository is described by an XML file containing the informations on the deposit and on all its packages.',
 	'info_aucun_depot' => 'No repository',
@@ -129,7 +130,7 @@ is not created or is not writable.
 	'info_paquets_disponibles' => '@total_paquets@ available package(s)',
 	'info_plugin_attente_dependance' => 'missing dependencies',
 	'info_plugin_incompatible' => 'incompatible version',
-	'info_plugin_installe' => 'allready installed',
+	'info_plugin_installe' => 'already installed',
 	'info_plugin_obsolete' => 'obsolete version',
 	'info_plugins_disponibles' => '@total_plugins@ available plugin(s)',
 	'info_plugins_heberges' => '@total_plugins@ hosted plugin(s)',
@@ -173,7 +174,7 @@ is not created or is not writable.
 	'legende_rechercher_plugins' => 'Search plugins',
 
 	// M
-	'message_action_finale_get_fail' => 'The plugin "@plugin@" (Version : @version@) couldn\'t be successfully downloaded',
+	'message_action_finale_get_fail' => 'The plugin "@plugin@" (Version : @version@) couldn’t be successfully downloaded',
 	'message_action_finale_get_ok' => 'The plugin "@plugin@" (Version : @version@) has been successfully downloaded',
 	'message_action_finale_getlib_fail' => 'The installation of the library "@plugin@" failed',
 	'message_action_finale_getlib_ok' => 'The library "@plugin@" has been installed',
@@ -181,7 +182,7 @@ is not created or is not writable.
 	'message_action_finale_geton_ok' => 'The download and the activation of the plugin "@plugin@" (Version: @version@) were successful',
 	'message_action_finale_install_fail' => 'The installation of the plugin "@plugin@" (version: @version@) failed',
 	'message_action_finale_install_ok' => 'The installation of the plugin "@plugin@" (Version: @version@) was successful',
-	'message_action_finale_kill_fail' => 'The files of the plugin "@plugin@" (Version: @version@) couldn\'t be properly deleted',
+	'message_action_finale_kill_fail' => 'The files of the plugin "@plugin@" (Version: @version@) couldn’t be properly deleted',
 	'message_action_finale_kill_ok' => 'The files of the plugin "@plugin@" (Version: @version@) have been properly deleted',
 	'message_action_finale_off_fail' => 'The deactivation of the plugin "@plugin@" (Version: @version@) was not successful',
 	'message_action_finale_off_ok' => 'The deactivation of the plugin "@plugin@" (Version: @version@) was successful',
@@ -206,13 +207,13 @@ is not created or is not writable.
 	'message_dependance_plugin' => 'The plugin @plugin@ depends on @dependance@.',
 	'message_dependance_plugin_version' => 'The plugin @plugin@ depends on @dependance@ @version@',
 	'message_erreur_aucun_plugin_selectionne' => 'No plugin selected.',
-	'message_erreur_ecriture_lib' => '@plugin@ requires the library <a href="@lib_url@">@lib@</a> stored in the <var>lib/</var> at the root of your site. However, this directory doesn\'t exist or doesn\'t have write permission. You must manually install the library or create this directory with write permission.',
+	'message_erreur_ecriture_lib' => '@plugin@ requires the library <a href="@lib_url@">@lib@</a> stored in the <var>lib/</var> at the root of your site. However, this directory doesn’t exist or doesn’t have write permission. You must manually install the library or create this directory with write permission.',
 	'message_erreur_maj_inconnu' => 'Impossible update of an unknown plugin.',
 	'message_erreur_plugin_introuvable' => 'It is impossible to find the plugin@plugin@ for @action@.',
 	'message_erreur_plugin_non_actif' => 'It is impossible to disable a plugin not active.',
 	'message_incompatibilite_spip' => '@plugin@ is not compatible with the SPIP version you use.',
 	'message_nok_aucun_depot_disponible' => 'No plugin is available! Please go to the page of repositories management to add lists of plugins.',
-	'message_nok_aucun_paquet_ajoute' => 'The repository "@url@" doesn\'t provide any new packet compared to the base already stored. It has not been added',
+	'message_nok_aucun_paquet_ajoute' => 'The repository "@url@" doesn’t provide any new packet compared to the base already stored. It has not been added',
 	'message_nok_aucun_plugin_selectionne' => 'No plugin to install. Please select the plugins you want to install.',
 	'message_nok_champ_obligatoire' => 'This field is required',
 	'message_nok_depot_deja_ajoute' => 'The URL "@url@" matches an already added a repository',
@@ -220,7 +221,7 @@ is not created or is not writable.
 	'message_nok_plugin_inexistant' => 'The requested plugin does not exist(@plugin@).',
 	'message_nok_sql_insert_depot' => 'SQL error when adding the repository @objet@',
 	'message_nok_url_depot_incorrecte' => 'The address "@url@" is incorrect',
-	'message_nok_xml_non_conforme' => 'The description XML file "@fichier@" of the repository doesn\'t conform',
+	'message_nok_xml_non_conforme' => 'The description XML file "@fichier@" of the repository doesn’t conform',
 	'message_nok_xml_non_recupere' => 'The XML file "@fichier@" could not be recovered',
 	'message_ok_aucun_plugin_trouve' => 'No plugins that match the selected criteria.',
 	'message_ok_depot_ajoute' => 'The repository "@url@" has been added.',

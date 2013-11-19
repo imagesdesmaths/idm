@@ -16,7 +16,7 @@ collegamenti con il <code> classe CSS. mediabox </ code> sono arricchite da box 
 - * <code> Boxwidth-350 pixel </ code> consente di specificare una larghezza di 350 pixel per il box;
 - * <code> BoxHeight-90pc </ code> consente di specificare una altezza di 90% per il box
 
-Un pannello di configurazione permette di modificare le impostazioni generali a proprio piacimento, e l\'aspetto tra le skin disponibili.
+Un pannello di configurazione permette di modificare le impostazioni generali a proprio piacimento, e l’aspetto tra le skin disponibili.
 
 Questo plugin funziona su scheletri che hanno la <code> INSERT_HEAD # </ code> tag.',
 	'mediabox_nom' => 'MediaBox',

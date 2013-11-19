@@ -8,7 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'breve' => 'Brève', # NEW
 	'breves' => 'သတင်းများ',
 
 	// E
@@ -21,12 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_breve' => 'ဤသတင်းအချက်အလက်ကို ပြန်လည်မွမ်းမံပါ',
 	'icone_nouvelle_breve' => 'သတင်း အသစ်ရေးရန်',
 	'info_1_breve' => '၁ သတင်းအချက်',
-	'info_aucun_breve' => 'Aucune brève', # NEW
 	'info_breves' => 'သင့်ဝက်ဘ်ဆိုက်တွင် သတင်းထားသည့် စနစ်သုံးပါသလား',
 	'info_breves_02' => 'သတင်း',
 	'info_breves_valider' => 'သတင်းအတည်ပြုရန်',
 	'info_gauche_numero_breve' => 'သတင်းအချက်နံပါတ်', # MODIF
-	'info_nb_breves' => '@nb@ brèves', # NEW
 	'item_breve_proposee' => 'သတင်း တင်သွင်းပြီးပြီ', # MODIF
 	'item_breve_refusee' => 'မရပါ - သတင်းအချကအလက် ငြင်းပယ်သည်', # MODIF
 	'item_breve_validee' => 'ဟုတ်ကဲ့ - သတင်းအချက်အလက် ရနိုင်သည်', # MODIF
@@ -43,7 +40,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_breve_refusee' => 'သတင်းများ ငြင်းပယ်ထားပြီး',
 	'titre_breves' => 'သတင်း',
 	'titre_langue_breve' => 'သတင်းအချက်အလက် ဘာသာစကား', # MODIF
-	'titre_nouvelle_breve' => 'Nouvelle brève', # NEW
 	'titre_page_breves' => 'သတင်းများ'
 );
 

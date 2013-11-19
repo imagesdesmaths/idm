@@ -33,10 +33,11 @@ function forum_accueil_encours($texte){
 				$lien = "<a href='" . generer_url_ecrire("controler_forum","statut=prop") . "' style='color: black;'>". $lien . ".</a>";
 			$texte .= "\n<br />" . $lien;
 		}
-		if (strlen($texte) AND $GLOBALS['meta']['forum_prive_objets'] != 'non')
+		if (strlen($texte) AND $GLOBALS['meta']['forum_prive_objets'] != 'non') {
 			$cpt2 = sql_countsel("spip_articles", "statut='prop'");
 			if ($cpt2)
 				$texte = _T('forum:texte_en_cours_validation_forum') . $texte;
+		}
 	}
 
 	return $texte;

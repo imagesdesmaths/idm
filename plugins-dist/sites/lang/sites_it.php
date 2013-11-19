@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_echec_syndication_01' => 'La syndication è fallita: il backend indicato è indecifrabile o non propone alcun articolo.',
 	'avis_echec_syndication_02' => 'La syndication è fallita: impossibile accedere al backend di questo sito.',
 	'avis_site_introuvable' => 'Sito introvabile',
-	'avis_site_syndique_probleme' => 'Attenzione: si è verificato un errore nella syndication del sito; il sistema è temporaneamente fuori uso. Verifica l\'indirizzo del file per la syndication di questo sito (<b>@url_syndic@</b>) e prova nuovamente a recuperare le informazioni remote.',
+	'avis_site_syndique_probleme' => 'Attenzione: si è verificato un errore nella syndication del sito; il sistema è temporaneamente fuori uso. Verifica l’indirizzo del file per la syndication di questo sito (<b>@url_syndic@</b>) e prova nuovamente a recuperare le informazioni remote.',
 	'avis_sites_probleme_syndication' => 'Si sono verificati alcuni problemi nella syndication di questi siti',
 	'avis_sites_syndiques_probleme' => 'Si sono verificati alcuni problemi nella syndication di questi siti',
 
@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_site_importe' => 'Nessun sito è stato importato',
 	'info_bloquer' => 'bloccare',
 	'info_bloquer_lien' => 'bloccare questo link',
-	'info_derniere_syndication' => 'L\'ultima <em>syndication</em> di questo sito è stata effettuata il',
+	'info_derniere_syndication' => 'L’ultima <em>syndication</em> di questo sito è stata effettuata il',
 	'info_liens_syndiques_1' => 'link in syndication',
 	'info_liens_syndiques_2' => 'sono in attesa di convalida.',
 	'info_nb_sites_importes' => '@nb@ siti sono stati importati',
@@ -121,10 +121,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'texte_expliquer_export_bookmarks' => 'È possibile esportare una lista di siti prefriti con il formato HTML, in modo da poterli poi importare nel vostro browser o in un servizio online',
 	'texte_expliquer_import_bookmarks' => 'È possibile importare una lista segnalibri di siti in formato HTML , dal browser o da un servizio online di gestione dei segnalibri.',
-	'texte_liens_sites_syndiques' => 'I link provenienti dai siti in syndication possono essere bloccati a priori. L\'impostazione qui sotto indica i criteri predefiniti dei siti in syndication. In ogni caso sarà comunque possibile sbloccare singolarmente ogni collegamento oppure scegliere di bloccare tutti i collegamenti futuri da un sito particolare.',
-	'texte_messages_publics' => 'Messaggi pubblici dell\'articolo:',
+	'texte_liens_sites_syndiques' => 'I link provenienti dai siti in syndication possono essere bloccati a priori. L’impostazione qui sotto indica i criteri predefiniti dei siti in syndication. In ogni caso sarà comunque possibile sbloccare singolarmente ogni collegamento oppure scegliere di bloccare tutti i collegamenti futuri da un sito particolare.',
+	'texte_messages_publics' => 'Messaggi pubblici dell’articolo:',
 	'texte_non_fonction_referencement' => 'Puoi non utilizzare questa funzione automatica, e indicare direttamente gli elementi riguardanti il sito...',
-	'texte_referencement_automatique' => '<b>Inserimento automatizzato in repertorio</b><br />È possibile repertoriare rapidamente un sito Web indicandone qui sotto l\'indirizzo URL, o l\'indirizzo del file di syndication. SPIP recupererà automaticamente le informazioni riguardanti il sito (titolo, descrizione...).',
+	'texte_referencement_automatique' => '<b>Inserimento automatizzato in repertorio</b><br />È possibile repertoriare rapidamente un sito Web indicandone qui sotto l’indirizzo URL, o l’indirizzo del file di syndication. SPIP recupererà automaticamente le informazioni riguardanti il sito (titolo, descrizione...).',
 	'texte_referencement_automatique_verifier' => 'Controllare le informazioni fornite da <tt>@url@</tt> prima di registrare.',
 	'texte_syndication' => 'Quando un sito Web lo permette, è possibile recuperarne automaticamente
 la lista delle novità. A tal fine è necessario attivare la syndication.

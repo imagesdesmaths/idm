@@ -116,54 +116,64 @@ function get_feed_from_url($url, $buffer=false){
 	if (!preg_match("/^http:\/\/.*/", $url)) $url = "http://www." . $url;
 	if (!$buffer) $buffer = @file_get_contents($url);
 
+	include_spip("inc/filtres");
+
 	$feed_list = array();
 	//extraction des <link>
-	if (preg_match_all("/<link [^>]*>/i", $buffer, $matches)){
+	if ($links = extraire_balises($buffer,"link")){
 		//y a t-y rss atom rdf ou xml dans ces balises
-		foreach($matches[0] as $link){
-			if ((strpos($link, "rss")
-				|| strpos($link, "rdf")
-				|| strpos($link, "atom")
-				|| strpos($link, "xml"))
-				&& !strpos($link,'opensearch')){
+		foreach($links as $link){
+			if (
+				  (strpos($link, "rss")
+				  || strpos($link, "rdf")
+				  || strpos($link, "atom")
+				  || strpos($link, "xml"))
+				&&
+				  (!strpos($link,'opensearch') && !strpos($link,'oembed'))
+			  ){
 				//voila un candidat on va extraire sa partie href et la placer dans notre tableau
-				if (preg_match("/href=['|\"]?([^\s'\"]*)['|\"]?/",$link,$matches2)){
+				if ($href = extraire_attribut($link,"href")){
  					//on aura pris soin de verifier si ce lien est relatif d'en faire un absolu
-					if (!preg_match("/^http:\/\/.*/", $matches2[1])){
-						$matches2[1] = concat_url($url,$matches2[1]);
-					}
-					if($verif_complete){
-						if (is_feed($matches2[1])) $feed_list[] = $matches2[1];
-             		}
-             		else
-             			$feed_list[] = $matches2[1];
+					$href = suivre_lien($url, $href);
+					if(!$verif_complete OR is_feed($href)){
+						$feed_list[] = $href;
+          }
 				}
 			}
 		}
 	}
 	//extraction des <a>
-	if (preg_match_all("/<a [^>]*>/i", $buffer, $matches)){
+	if ($links = extraire_balises($buffer,"a")){
 		//y a t-y rss atom rdf ou xml dans ces balises
-		foreach($matches[0] as $link){
-			if ((strpos($link, "rss")
-				|| strpos($link, "rdf")
-				|| strpos($link, "atom")
-				|| strpos($link, "xml"))
-				&& !strpos($link,'opensearch')){
+		foreach($links as $link){
+			if (
+				  (strpos($link, "rss")
+				  || strpos($link, "rdf")
+				  || strpos($link, "atom")
+				  || strpos($link, "xml"))
+				&&
+				  (!strpos($link,'opensearch') && !strpos($link,'oembed'))
+			  ){
 				//voila un candidat on va extraire sa partie href et la placer dans notre tableau
-				if (preg_match("/href=['|\"]?([^\s'\"]*)['|\"]?/",$link,$matches2)){
-	 				//on aura pris soin de verifier si ce lien est relatif d'en faire un absolu
-					if (!preg_match("/^http:\/\/.*/", $matches2[1])){
-						$matches2[1] = concat_url($url,$matches2[1]);
-					}
-					if($verif_complete){
-						if (is_feed($matches2[1])) $feed_list[] = $matches2[1];
-					}
-					else
-						$feed_list[] = $matches2[1];
+				if ($href = extraire_attribut($link,"href")){
+ 					//on aura pris soin de verifier si ce lien est relatif d'en faire un absolu
+					$href = suivre_lien($url, $href);
+					if(!$verif_complete OR is_feed($href)){
+						$feed_list[] = $href;
+          }
 				}
 			}
 		}
+	}
+
+	// si c'est un site SPIP, tentons l'url connue
+	if (!count($feed_list)
+	  AND (
+		strpos($url,"spip") OR stripos($buffer,"spip")
+		)){
+		$href = suivre_lien($url,"spip.php?page=backend");
+		if (is_feed($href))
+			$feed_list[] = $href;
 	}
 	return $feed_list;
 }
@@ -198,30 +208,4 @@ Array
 )
 ************************************************************************/
 
-/**
- * petite fonction qui prend en charge les problèmes de double slash
- * quand on concatène les liens  
- */
-function concat_url($url1, $path){
-	/**
-	 * méthode spip
-	 */ 
-	if(function_exists('suivre_lien')) {
-		return suivre_lien($url1,$path);
-	}
-	$url = $url1 . "/" . $path;
-	//cette operation peut tres facilement avoir genere // ou /// 
-	$url = str_replace("///", "/", $url);
-	$url = str_replace("//", "/", $url); 
-	//cas particulier de http://
-	$url = str_replace("http:/", "http://", $url);
-	return $url;
-}
-
-/****************************test concat**********************
-echo concat_url("http://spip.net" , "ecrire")."<br />";
-echo concat_url("http://spip.net/" , "ecrire")."<br />";
-echo concat_url("http://spip.net" , "/ecrire")."<br />";
-echo concat_url("http://spip.net/" , "/ecrire")."<br />";
-*************************************************************/
 ?>

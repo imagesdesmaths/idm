@@ -9,15 +9,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'actualiser_toutes' => 'Aggiorna tutti gli url',
-	'actualiser_toutes_explication' => 'Puoi riprocessare l\'URL. Se un URL è cambiato, una nuova voce viene creata (senza perdere l\'URL già presente e senza impatti sugli URL modificati manualmente).',
+	'actualiser_toutes_explication' => 'Puoi riprocessare l’URL. Se un URL è cambiato, una nuova voce viene creata (senza perdere l’URL già presente e senza impatti sugli URL modificati manualmente).',
 
 	// B
 	'bouton_supprimer_url' => 'Cancella questo URL',
 
 	// E
-	'erreur_arbo_2_segments_max' => 'Non puoi usare più di due segmenti di URL per un\'oggetto',
+	'erreur_arbo_2_segments_max' => 'Non puoi usare più di due segmenti di URL per un’oggetto',
 	'erreur_config_url_forcee' => 'La configurazione degli URL è fissata nel file <tt>mes_options.php</tt>.',
-	'explication_editer' => 'La gestione avanzata degli URL permette di moficare l\'URL delle pagine per ogni oggetto editoriale, e di mantenere lo storico delle loro evoluzioni.',
+	'explication_editer' => 'La gestione avanzata degli URL permette di moficare l’URL delle pagine per ogni oggetto editoriale, e di mantenere lo storico delle loro evoluzioni.',
 
 	// I
 	'icone_configurer_urls' => 'Configurazione degli URL',
@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_url' => 'Nuovo URL',
 	'label_url_minuscules_0' => 'Conservare il maiuscolo/minuscolo dei caratteri',
 	'label_url_minuscules_1' => 'Forza i caratteri minuscoli negli URL',
-	'label_url_permanente' => 'Blocca questo URL (nessun aggiornamento dopo la modifica dell\'oggetto)',
+	'label_url_permanente' => 'Blocca questo URL (nessun aggiornamento dopo la modifica dell’oggetto)',
 	'label_url_sep_id' => 'Carattere di separazione dei numeri in caso di duplicati',
 	'label_urls_activer_controle_oui' => 'Attivare la gestione avanzata degli URL',
 	'label_urls_nb_max_car' => 'Massimo numero di caratteri',
@@ -43,7 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_des_urls' => 'Tutti gli URL',
 
 	// T
-	'texte_type_urls' => 'È possibile scegliere qui sotto il modo di elaborazione dell\'indirizzo delle pagine.',
+	'texte_type_urls' => 'È possibile scegliere qui sotto il modo di elaborazione dell’indirizzo delle pagine.',
 	'texte_type_urls_attention' => 'Attenzione: questa impostazione funziona solamente se il file @htaccess@ è installato correttamente alla radice del sito.',
 	'texte_urls_nb_max_car' => 'Se il titolo è più lungo verrà tagliato',
 	'texte_urls_nb_min_car' => 'Se il titolo è più corta, è il suo numero identificativo che verrà utilizzato.',
@@ -61,11 +61,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tout_voir' => 'Mostra tutti gli URL',
 
 	// U
-	'url_ajout_impossible' => 'C\'è stato un\'errore. L\'URL non è stato salvato.',
-	'url_ajoutee' => 'L\'URL è stato aggiunto',
+	'url_ajout_impossible' => 'C’è stato un’errore. L’URL non è stato salvato.',
+	'url_ajoutee' => 'L’URL è stato aggiunto',
 
 	// V
-	'verifier_url_nettoyee' => 'L\'URL è stato corretto, puoi controllarlo prima di salvare.',
+	'verifier_url_nettoyee' => 'L’URL è stato corretto, puoi controllarlo prima di salvare.',
 	'verrouiller_url' => 'Bloccato'
 );
 

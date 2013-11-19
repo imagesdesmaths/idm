@@ -8,7 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'breve' => 'Brève', # NEW
 	'breves' => 'N3w5 173m5',
 
 	// E
@@ -21,12 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_breve' => 'M0d1fy 7h15 n3w5 173m',
 	'icone_nouvelle_breve' => 'Wr173 4 n3w n3w5 173m',
 	'info_1_breve' => '1 n3w5 173m',
-	'info_aucun_breve' => 'Aucune brève', # NEW
 	'info_breves' => 'D035 y0ur 5173 u53 7h3 n3w5 5y573m?',
 	'info_breves_02' => 'N3w5',
 	'info_breves_valider' => 'N3w5 173m5 70 b3 v411d473d',
 	'info_gauche_numero_breve' => 'N3W5 173M NUMB3R', # MODIF
-	'info_nb_breves' => '@nb@ brèves', # NEW
 	'item_breve_proposee' => 'N3w5 173m 5ubm1773d', # MODIF
 	'item_breve_refusee' => 'N0 - N3w5 173m r3j3c73d', # MODIF
 	'item_breve_validee' => 'Y35 - N3w5 173m v411d473d', # MODIF
@@ -34,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_utiliser_breves' => 'U53 7h3 n3w5',
 
 	// L
-	'logo_breve' => 'N3W5 173M\'5 10G0', # MODIF
+	'logo_breve' => 'N3W5 173M’5 10G0', # MODIF
 
 	// T
 	'texte_breves' => 'N3w5 4r3 5h0r7 4nd 51mp13 73x75 wh1ch 4110w
@@ -45,7 +42,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_breve_refusee' => 'N3w5 173m r3j3c73d',
 	'titre_breves' => 'N3w5',
 	'titre_langue_breve' => 'N3W5 173M 14NGU4G3', # MODIF
-	'titre_nouvelle_breve' => 'Nouvelle brève', # NEW
 	'titre_page_breves' => 'N3w5'
 );
 

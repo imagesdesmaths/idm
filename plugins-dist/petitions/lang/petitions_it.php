@@ -14,16 +14,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_checkbox_envoi_message' => 'possibilità di inviare un messaggio',
 	'bouton_checkbox_indiquer_site' => 'devi inserire il nome di un sito web',
-	'bouton_checkbox_signature_unique_email' => 'solo un\'adesione per email',
+	'bouton_checkbox_signature_unique_email' => 'solo un’adesione per email',
 	'bouton_checkbox_signature_unique_site' => 'solo una adesione per sito web',
 
 	// F
 	'filtre' => 'Filtro:',
 	'form_pet_adresse_site' => 'Indirizzo del sito',
 	'form_pet_aucune_signature' => 'A questo codice non corrisponde nessuna desione ...',
-	'form_pet_confirmation' => 'Conferma l\'adesione:',
+	'form_pet_confirmation' => 'Conferma l’adesione:',
 	'form_pet_deja_signe' => 'Hai già firmato questo testo.',
-	'form_pet_envoi_mail_confirmation' => 'Ti è stato appena inviato un messaggio di posta elettronica all\'indirizzo @email@. Dovrai visitare l\'indirizzo web che appare nel messaggio per confermare la tua adesione.',
+	'form_pet_envoi_mail_confirmation' => 'Ti è stato appena inviato un messaggio di posta elettronica all’indirizzo @email@. Dovrai visitare l’indirizzo web che appare nel messaggio per confermare la tua adesione.',
 	'form_pet_mail_confirmation' => 'Salve,
 
 Hai richiesto di aderire alla petizione:
@@ -36,7 +36,7 @@ Hai fornito le seguenti informazioni:
 
 IMPORTANTE...
 
-Per confermare la tua adesione è sufficiente visitare l\'indirizzo web qui sotto (se non lo fai, la tua domanda sarà respinta):
+Per confermare la tua adesione è sufficiente visitare l’indirizzo web qui sotto (se non lo fai, la tua domanda sarà respinta):
 
     @url@
 
@@ -48,7 +48,7 @@ Grazie per la partecipazione',
 	'form_pet_probleme_technique' => 'Le adesioni sono temporaneamente sospese per il verificarsi di problemi tecnici.',
 	'form_pet_signature_validee' => 'La tua adesione è stata confermata. Grazie!',
 	'form_pet_site_deja_enregistre' => 'Questo sito è già registrato',
-	'form_pet_url_invalide' => 'L\'URL indicato non risulta valido.',
+	'form_pet_url_invalide' => 'L’URL indicato non risulta valido.',
 	'form_pet_votre_email' => 'Il tuo indirizzo email',
 	'form_pet_votre_nom' => 'Il tuo nome',
 	'form_pet_votre_site' => 'Se hai un sito Web, puoi segnalarlo qui sotto',
@@ -59,7 +59,7 @@ Grazie per la partecipazione',
 	'icone_suivi_petitions' => 'Segui/gestisci le petizioni',
 	'icone_supprimer_signature' => 'Cancella questa adesione',
 	'icone_supprimer_signatures' => 'Cancella le adesioni',
-	'icone_valider_signature' => 'Conferma l\'adesione',
+	'icone_valider_signature' => 'Conferma l’adesione',
 	'icone_valider_signatures' => 'Conferma le adesioni',
 	'info_adresse_email' => 'INDIRIZZO EMAIL:',
 	'info_fonctionnement_petition' => 'Come funzionano le petizioni:',
@@ -69,14 +69,14 @@ Grazie per la partecipazione',
 	'info_texte_message' => 'Testo del tuo messaggio:',
 
 	// L
-	'lien_reponse_article' => 'Risposta all\'articolo',
+	'lien_reponse_article' => 'Risposta all’articolo',
 
 	// N
 	'nombre_signatures' => '@nb@ adesioni',
 
 	// S
 	'sans_nom' => 'Anonimo',
-	'signatures_article' => 'Firmatari dell\'articolo:',
+	'signatures_article' => 'Firmatari dell’articolo:',
 	'signatures_aucune' => 'Nessuna',
 	'signatures_meme_auteur' => 'Adesioni dello stesso autore',
 	'signatures_meme_site' => 'Adesioni con lo stesso sito web',

@@ -34,7 +34,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_acces_refuse' => 'Você não tem mais acesso a estes fóruns.',
 	'forum_attention_dix_caracteres' => '<b>Atenção!</b> Sua mensagem precisa ter pelo menos dez caracteres.',
 	'forum_attention_message_non_poste' => 'Atenção, você não postou a sua mensagem!',
-	'forum_attention_nb_caracteres_mini' => '<b>Attention !</b> votre message doit contenir au moins @min@ caractères.', # NEW
 	'forum_attention_trois_caracteres' => '<b>Atenção!</b> Seu título precisa ter pelo menos três caracteres.',
 	'forum_attention_trop_caracteres' => '<b>Atenção!</b> sua mensagem é muito longa (@compte@ caracteres): para que ela seja gravada, ela não pode ultrapassar @max@ caracteres.',
 	'forum_avez_selectionne' => 'Você selecionou:',
@@ -49,8 +48,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_page_url' => '(Se a sua mensagem se refere a uma matéria pubicada na Web, ou a uma página fornecendo mais informações, por favor informe abaixo o título da página e o seu endereço.)',
 	'forum_permalink' => 'Link permanente para o comentário',
 	'forum_poste_par' => 'Mensagem enviada @parauteur@ em seguimento da sua matéria.', # MODIF
-	'forum_poste_par_court' => 'Message posté@parauteur@.', # NEW
-	'forum_poste_par_generique' => 'Message posté@parauteur@ (@objet@ « @titre@ »).', # NEW
 	'forum_qui_etes_vous' => 'Quem é você?',
 	'forum_saisie_texte_info' => 'Este formulário aceita os atalhos do SPIP <code>[->url] {{negrito}} {itálico} <quote> <code></code> e o código HTML <code><q> <del> <ins></code>. Para criar parágrafos, basta deixar uma linha em branco.',
 	'forum_texte' => 'Texto da sua mensagem',
@@ -100,7 +97,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_pas_de_forum' => 'sem fórum',
 	'info_question_visiteur_ajout_document_forum' => 'Se você deseja autorizar os visitantes a anexarem documentos (imagens, áudios...) às suas mensagens em fóruns, indique abaixo a lista das extensões de arquivos permitidos para os fóruns (ex.: gif, jpg, png, mp3).',
 	'info_question_visiteur_ajout_document_forum_format' => 'Se você deseja permitir todos os tipos de documentos considerados como seguros pelo SPIP, digite * (asterisco). Para não permitir nenhum, deixe em branco.',
-	'info_selectionner_message' => 'Sélectionner les messages :', # NEW
 	'interface_formulaire' => 'Interface de formulário',
 	'interface_onglets' => 'Interface com abas',
 	'item_activer_forum_administrateur' => 'Ativar o fórum dos administradores',
@@ -111,29 +107,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_non_config_forums_prive_objets' => 'Desativar estes fóruns',
 
 	// L
-	'label_selectionner' => 'Sélectionner :', # NEW
 	'lien_reponse_article' => 'Resposta à matéria',
 	'lien_reponse_breve_2' => 'Resposta à nota',
 	'lien_reponse_message' => 'Resposta à mensagem',
 	'lien_reponse_rubrique' => 'Resposta à seção',
 	'lien_reponse_site_reference' => 'resposta ao site referenciado',
-	'lien_vider_selection' => 'Vider la selection', # NEW
 
 	// M
 	'messages_aucun' => 'Nenhuma',
 	'messages_meme_auteur' => 'Todas as mensagens deste autor',
 	'messages_meme_email' => 'Todas as mensagens deste e-mail',
-	'messages_meme_ip' => 'Tous les messages de cette IP', # NEW
-	'messages_off' => 'Supprimés', # NEW
-	'messages_perso' => 'Personnels', # NEW
-	'messages_privadm' => 'Administrateurs', # NEW
-	'messages_prive' => 'Privés', # NEW
-	'messages_privoff' => 'Supprimés', # NEW
-	'messages_privrac' => 'Généraux', # NEW
-	'messages_prop' => 'Proposés', # NEW
-	'messages_publie' => 'Publiés', # NEW
-	'messages_spam' => 'Spam', # NEW
-	'messages_tous' => 'Tous', # NEW
 
 	// O
 	'onglet_messages_internes' => 'Mensagens internas',
@@ -144,28 +127,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'repondre_message' => 'Responder a esta mensagem',
 
 	// S
-	'statut_off' => 'Supprimé', # NEW
 	'statut_original' => 'original',
-	'statut_prop' => 'Proposé', # NEW
-	'statut_publie' => 'Publié', # NEW
-	'statut_spam' => 'Spam', # NEW
 
 	// T
 	'text_article_propose_publication_forum' => 'Não hesite a dar a sua contribuição no fórum associado a esta matéria (no pé da página).',
-	'texte_en_cours_validation' => 'Les articles, brèves, forums ci dessous sont proposés à la publication.', # NEW
 	'texte_en_cours_validation_forum' => 'Não hesite a dar a sua opinião sobre as mesmas nos fóruns a elas associados.',
-	'texte_messages_publics' => 'Messages publics sur :', # NEW
 	'titre_cadre_forum_administrateur' => 'Fórum privado dos administradores',
 	'titre_cadre_forum_interne' => 'Fórum interno',
 	'titre_config_forums_prive' => 'Fóruns da área privada',
 	'titre_forum' => 'Fórum',
 	'titre_forum_suivi' => 'Acompanhamento dos fóruns',
-	'titre_page_forum_suivi' => 'Acompanhamento dos fóruns',
-	'titre_selection_action' => 'Sélection', # NEW
-	'tout_voir' => 'Voir tous les messages', # NEW
-
-	// V
-	'voir_messages_objet' => 'voir les messages' # NEW
+	'titre_page_forum_suivi' => 'Acompanhamento dos fóruns'
 );
 
 ?>

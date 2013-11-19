@@ -30,18 +30,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_breve_proposee' => 'virgeschloen',
 	'item_breve_refusee' => 'ofgeleent',
 	'item_breve_validee' => 'bestätegt',
-	'item_non_utiliser_breves' => 'D\'Kuerzmeldungen ausschalten',
-	'item_utiliser_breves' => 'D\'Kuerzmeldungen aschalten',
+	'item_non_utiliser_breves' => 'D’Kuerzmeldungen ausschalten',
+	'item_utiliser_breves' => 'D’Kuerzmeldungen aschalten',
 
 	// L
 	'logo_breve' => 'Logo vun der Kuerzmeldung',
 
 	// T
-	'texte_breves' => 'D\'Kuerzmeldunge si kuerz an einfach Texter déi Iech erlaben Informatiounen séier ze verëffentlechen, eng Presse-Revue ze maachen, en Agenda ze weisen...',
+	'texte_breves' => 'D’Kuerzmeldunge si kuerz an einfach Texter déi Iech erlaben Informatiounen séier ze verëffentlechen, eng Presse-Revue ze maachen, en Agenda ze weisen...',
 	'titre_breve_proposee' => 'Virgeschloe Kuerzmeldung',
 	'titre_breve_publiee' => 'Verëffentlecht Kuerzmeldung',
 	'titre_breve_refusee' => 'Ofgeleente Kuerzmeldung',
-	'titre_breves' => 'D\'Kuerzmeldungen',
+	'titre_breves' => 'D’Kuerzmeldungen',
 	'titre_langue_breve' => 'Sprooch vun der Kuerzmeldung',
 	'titre_nouvelle_breve' => 'Nei Kuerzmeldung',
 	'titre_page_breves' => 'Kuerzmeldungen'

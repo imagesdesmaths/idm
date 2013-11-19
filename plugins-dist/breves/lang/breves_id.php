@@ -8,7 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'breve' => 'Brève', # NEW
 	'breves' => 'Artikel-artikel berita',
 
 	// E
@@ -21,12 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_breve' => 'Modifikasi artikel berita ini',
 	'icone_nouvelle_breve' => 'Tulis sebuah artikel berita baru',
 	'info_1_breve' => '1 artikel berita',
-	'info_aucun_breve' => 'Aucune brève', # NEW
 	'info_breves' => 'Apakah situs anda menggunakan sistem pemberitaan?',
 	'info_breves_02' => 'Berita',
 	'info_breves_valider' => 'Artikel berita yang akan divalidasi',
 	'info_gauche_numero_breve' => 'NOMOR ARTIKEL BERITA', # MODIF
-	'info_nb_breves' => '@nb@ brèves', # NEW
 	'item_breve_proposee' => 'Artikel berita dikirim', # MODIF
 	'item_breve_refusee' => 'TIDAK - Artikel berita ditolak', # MODIF
 	'item_breve_validee' => 'YA - Artikel berita divalidasi', # MODIF
@@ -44,7 +41,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_breve_refusee' => 'Artikel berita ditolak',
 	'titre_breves' => 'Berita',
 	'titre_langue_breve' => 'BAHASA ARTIKEL BERITA', # MODIF
-	'titre_nouvelle_breve' => 'Nouvelle brève', # NEW
 	'titre_page_breves' => 'Berita'
 );
 

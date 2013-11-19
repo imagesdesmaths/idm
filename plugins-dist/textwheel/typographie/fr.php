@@ -63,7 +63,7 @@ function typographie_fr($t) {
 	/* 2 ; ajout d'insecable */
 	$t = preg_replace('/&#187;| --?,|(?::| %)(?:\W|$)/S', '~$0', $t);
 
-	// {È} guillemet en italiques : ne pas doubler l'insecable 
+	// {Â»} guillemet en italiques : ne pas doubler l'insecable 
 	$t = str_replace('~{~', '~{', $t);
 	$t = str_replace('~}~', '}~', $t);
 
@@ -87,7 +87,7 @@ function typographie_fr($t) {
 		$t = str_replace($pro, '', $t);
 	}
 
-	$t = preg_replace(',(https?|ftp|mailto)~((://[^"\'\s\[\]\}\)<>]+)~([?]))?,S', '$1$3$4', $t);
+	$t = preg_replace(',(' ._PROTOCOLES_STD . ')~((://[^"\'\s\[\]\}\)<>]+)~([?]))?,S', '$1$3$4', $t);
 	$t = str_replace('~', '&nbsp;', $t);
 
 	return $t;

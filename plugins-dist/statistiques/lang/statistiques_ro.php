@@ -8,11 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_effacer_referers' => 'Effacer seulement les liens entrants', # NEW
 	'bouton_effacer_statistiques' => 'Ştergeţi statisticile', # MODIF
-
-	// C
-	'csv' => 'csv', # NEW
 
 	// I
 	'icone_evolution_visites' => 'Evoluţia vizitelor<br />@visites@ vizite',
@@ -25,7 +21,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_popularite_2' => 'popularitatea site-ului :',
 	'info_popularite_3' => 'popularitate : @popularite@ ; vizites : @visites@',
 	'info_popularite_5' => 'popularitate :',
-	'info_previsions' => 'prévisions :', # NEW
 	'info_question_vignettes_referer' => 'Atunci când vizualizaţi statisticile, puteţi vizualiza pre-vederi ale site-uri de unde provin vizitele',
 	'info_question_vignettes_referer_oui' => 'Afişaţi capturile site-urilor de unde provin vizitele',
 	'info_visites' => 'vizite :',
@@ -43,20 +38,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_admin_effacer_stats' => 'Această comandă şterge toate datele legate de statisticile vizitelor în site, incluzând şi datele de popularitate a articolelor.',
-	'texte_admin_effacer_toutes_stats' => 'Le premier bouton supprime toutes les statistiques : visites, popularité des articles et liens entrants.', # NEW
-	'texte_comment_lire_tableau' => 'Rangul articolului,
-  în clasamentul de popularitate este indicat cu o marjă ;
-  popularitatea articolului (care este o estimare a numărului de vizite zilnice pe care articolul le va primi dacă ritmul actual de consultare se menţine) şi numărul de vizite primite
-  de la început sunt afişate în mica fereastră care apare la un survol al mouse-ului deasupra titlului.',
+	'texte_comment_lire_tableau' => 'Rangul articolului, în clasamentul de popularitate este indicat cu o marjă ; popularitatea articolului (care este o estimare a numărului de vizite zilnice pe care articolul le va primi dacă ritmul actual de consultare se menţine) şi numărul de vizite primite de la început sunt afişate în mica fereastră care apare la un survol al mouse-ului deasupra titlului.',
 	'texte_signification' => 'Barele întunecate reprezintă intrarile cumulate (totalul sub-rubricilor), barele  deschise la culoare reprezintă numărul de vizite pentru fiecare rubrică.',
 	'titre_evolution_visite' => 'Evoluţia vizitelor',
 	'titre_liens_entrants' => 'Legături în intrare',
 	'titre_page_statistiques' => 'Statisticile pe rubrici',
-	'titre_page_statistiques_visites' => 'Statisticile vizitelor',
-
-	// V
-	'visites_journalieres' => 'Nombre de visites par jour', # NEW
-	'visites_mensuelles' => 'Nombre de visites par mois' # NEW
+	'titre_page_statistiques_visites' => 'Statisticile vizitelor'
 );
 
 ?>

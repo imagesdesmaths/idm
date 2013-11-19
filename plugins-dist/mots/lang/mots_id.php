@@ -9,29 +9,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'avis_conseil_selection_mot_cle' => '<b>Kelompok penting:</b> Sangat dianjurkan untuk memilih sebuah kata kunci untuk kelompok ini.',
-	'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. Êtes vous sûr de vouloir créer le même ?', # NEW
 
 	// B
 	'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'administrator situs',
 	'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'editor',
 	'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'pengunjung situs umum saat mereka mengirimkan sebuah pesan di forum.',
 
-	// C
-	'creer_et_associer_un_mot' => 'Créér et associer un mot-clé', # MODIF
-
 	// I
 	'icone_creation_groupe_mots' => 'Buat sebuah kelompok kata kunci baru',
 	'icone_creation_mots_cles' => 'Buat sebuah kata kunci baru',
 	'icone_modif_groupe_mots' => 'Modifikasi kelompok kata kunci ini',
-	'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 	'icone_mots_cles' => 'Kata-kata kunci',
 	'icone_supprimer_groupe_mots' => 'Hapus kelompok ini',
-	'icone_voir_groupe_mots' => 'Voir ce groupe de mots', # NEW
 	'icone_voir_tous_mots_cles' => 'Tampilkan semua kata kunci',
-	'info_1_groupe_mots' => '1 groupe de mots', # NEW
 	'info_articles_lies_mot' => 'Artikel-artikel yang terasosiasi dengan kata kunci ini',
-	'info_aucun_groupe_mots' => 'Aucun groupe de mots', # NEW
-	'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 	'info_changer_nom_groupe' => 'Ganti nama kelompok ini:',
 	'info_creation_mots_cles' => 'Buat dan konfigurasi kata-kata kunci situs di sini',
 	'info_dans_groupe' => 'Dalam kelompok:',
@@ -39,14 +30,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <b>@titre_mot@</b> (@type_mot@). Kata kunci ini ditautkan ke
 <b>@texte_lie@</b>Anda harus mengkonfirmasi keputusan ini:', # MODIF
 	'info_groupe_important' => 'Kelompok penting',
-	'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
 	'info_mots_cles' => 'Kata-kata kunci',
 	'info_mots_cles_association' => 'Kata-kata kunci dalam kelompok ini dapat diasosiasikan dengan:',
-	'info_nb_groupe_mots' => '@nb@ groupes de mots', # NEW
 	'info_oui_suppression_mot_cle' => 'Saya ingin menghapus kata kunci ini selamanya.',
 	'info_question_mots_cles' => 'Apakah anda ingin menggunakan kata-kata kunci di situs anda?',
 	'info_qui_attribue_mot_cle' => 'Kata-kata kunci dalam kelompok ini dapat ditunjuk oleh:',
-	'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 	'info_retirer_mot' => 'Hapus kata kunci ini',
 	'info_retirer_mots' => 'Hapus semua kata kunci',
 	'info_rubriques_liees_mot' => 'Bagian-bagian yang terasosiasi dengan kata kunci ini',
@@ -62,8 +50,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_utiliser_mots_cles' => 'Gunakan kata-kata kunci',
 
 	// L
-	'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
-	'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
 	'logo_mot_cle' => 'LOGO KATA KUNCI',
 
 	// T
@@ -78,13 +64,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_nouveau_mot' => 'Kata kunci baru',
 	'titre_config_groupe_mots_cles' => 'Konfigurasi kelompok kata kunci',
 	'titre_gauche_mots_edit' => 'NOMOR KATA KUNCI:',
-	'titre_groupe_mots' => 'Groupe de mots-clés', # NEW
-	'titre_groupe_mots_numero' => 'GROUPE DE MOTS NUMÉRO :', # NEW
-	'titre_groupes_mots' => 'Groupes de mots-clés', # NEW
 	'titre_mots_cles_dans_forum' => 'Kata-kata kunci di forum situs umum',
 	'titre_mots_tous' => 'Kata kunci',
 	'titre_nouveau_groupe' => 'Kelompok baru',
-	'titre_objets_lies_mot' => 'Liés à ce mot-clé :', # NEW
 	'titre_page_mots_tous' => 'Kata kunci'
 );
 

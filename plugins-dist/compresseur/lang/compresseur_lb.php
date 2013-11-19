@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_compacter_avertissement' => 'Schalt dës Optiounen net während der Entwécklung vum Site an: déi kompriméiert Elementer si net einfach liesbar.',
-	'texte_compacter_script_css' => 'SPIP ka Javascript oder CSS Style-Sheets kompriméieren an als statesch Dokumenter späicheren; da ginn d\'Säite vum Site méi séier gewisen.',
+	'texte_compacter_script_css' => 'SPIP ka Javascript oder CSS Style-Sheets kompriméieren an als statesch Dokumenter späicheren; da ginn d’Säite vum Site méi séier gewisen.',
 	'texte_compresseur_page' => 'SPIP kann automatesch all Säit kompriméieren déi gewise gëtt. Dës Astellung erlaabt Bandbreet ze spueren (d.h. de Site ass mat enger lueser Leitung méi séier), mais dat verlaangt méi Leeschtung vum Server.',
 	'titre_compacter_script_css' => 'Skripten an CSS kompriméieren',
 	'titre_compresser_flux_http' => 'HTML kompriméieren'

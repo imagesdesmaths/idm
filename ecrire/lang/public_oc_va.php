@@ -9,18 +9,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'Acuelh dau sit', # MODIF
-	'article' => 'Article', # NEW
 	'articles' => 'Articles',
-	'articles_auteur' => 'Articles d\'aquel autor',
+	'articles_auteur' => 'Articles d’aquel autor',
 	'articles_populaires' => 'Los articles mai populars',
-	'articles_rubrique' => 'Articles d\'aquela rubrica',
-	'aucun_article' => 'I a ges d\'article a aquela adreiça ',
-	'aucun_auteur' => 'I a ges d\'autor a aquela adreiça ',
+	'articles_rubrique' => 'Articles d’aquela rubrica',
+	'aucun_article' => 'I a ges d’article a aquela adreiça ',
+	'aucun_auteur' => 'I a ges d’autor a aquela adreiça ',
 	'aucun_site' => 'I a ges de sit a aquela adreiça ',
 	'aucune_breve' => 'I a ges de brèva a aquela adreiça ',
 	'aucune_rubrique' => 'I a ges de rubrica a aquela adreiça ',
-	'auteur' => 'Auteur', # NEW
-	'autres' => 'Autres', # NEW
 	'autres_breves' => 'Autras brèvas',
 	'autres_groupes_mots_clefs' => 'Autres grops de mots clau',
 	'autres_sites' => 'Autres sits',
@@ -30,8 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Comentar aqueu sit',
-	'contact' => 'Contact', # NEW
-	'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 	// D
 	'date' => 'Data',
@@ -48,17 +43,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoyer_message' => 'Mandar un messatge',
 	'espace_prive' => 'Espaci privat',
 
-	// F
-	'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-
 	// H
 	'hierarchie_site' => 'Ierarquia dau sit',
 
 	// J
 	'jours' => 'jorns',
-
-	// L
-	'lien_connecter' => 'Se connecter', # NEW
 
 	// M
 	'meme_auteur' => 'Dau mesme autor',
@@ -67,7 +56,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'Messatge',
 	'messages_forum' => 'Messatges de forum', # MODIF
 	'messages_recents' => 'Los messatges de forums mai recents',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => 'Mots clau',
 	'mots_clefs_meme_groupe' => 'Mots clau dins lo mesme grop',
 
@@ -83,11 +71,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_precedente' => 'pagina precedenta',
 	'page_suivante' => 'pagina seguenta',
 	'par_auteur' => 'per ',
-	'participer_site' => 'Poètz participar a la vita d\'aqueu sit e prepausar los articles vòstres en vos inscrivent çai sos. Recebretz sus lo còp un e-mail que vos indicarà vòstres còdes per accedir a l\'espaci privat dau sit.',
+	'participer_site' => 'Poètz participar a la vita d’aqueu sit e prepausar los articles vòstres en vos inscrivent çai sos. Recebretz sus lo còp un e-mail que vos indicarà vòstres còdes per accedir a l’espaci privat dau sit.',
 	'plan_site' => 'Plan dau sit',
 	'popularite' => 'Popularitat',
 	'poster_message' => 'Postar un messatge',
-	'proposer_site' => 'Poètz prepausar un sit d\'apondre a aquesta rubrica:',
+	'proposer_site' => 'Poètz prepausar un sit d’apondre a aquesta rubrica:',
 
 	// R
 	'repondre_article' => 'Respòndre a aquel article',
@@ -102,20 +90,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'site_realise_avec_spip' => 'Sit realizat amb SPIP',
 	'sites_web' => 'Sits web',
 	'sous_rubriques' => 'Sosrubricas',
-	'spam' => 'Spam', # NEW
 	'suite' => 'segua',
 	'sur_web' => 'Sobre lo web',
 	'syndiquer_rubrique' => 'Sindicar aquela rubrica',
 	'syndiquer_site' => 'Sindicar tot lo sit',
 
 	// T
-	'texte_lettre_information' => 'Vaicí la letra d\'informacion dau sit',
+	'texte_lettre_information' => 'Vaicí la letra d’informacion dau sit',
 	'texte_lettre_information_2' => 'Aquela letra recensa los articles e brèvas publicats despuei', # MODIF
 
 	// V
-	'ver_imprimer' => 'Version d\'estampar',
-	'voir_en_ligne' => 'Veètz en linha',
-	'voir_squelette' => 'voir le squelette de cette page' # NEW
+	'ver_imprimer' => 'Version d’estampar',
+	'voir_en_ligne' => 'Veètz en linha'
 );
 
 ?>

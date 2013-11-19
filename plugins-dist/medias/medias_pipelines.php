@@ -73,7 +73,7 @@ function medias_affiche_milieu($flux){
 }
 
 function medias_configurer_liste_metas($config){
-	$config['documents_objets'] = '';
+	$config['documents_objets'] = 'spip_articles';
 	$config['documents_date'] = 'non';
 	return $config;
 }

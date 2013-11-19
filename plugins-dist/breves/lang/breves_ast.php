@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'breves' => 'Breves',
 
 	// E
-	'entree_breve_publiee' => '¿Hai qu\'espublizar esta breve?', # MODIF
+	'entree_breve_publiee' => '¿Hai qu’espublizar esta breve?', # MODIF
 	'entree_texte_breve' => 'Testu de la breve',
 
 	// I
@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_nouvelle_breve' => 'Escribir una breve nueva',
 	'info_1_breve' => '1 breve',
 	'info_aucun_breve' => 'Denguna breve',
-	'info_breves' => '¿Utiliza\'l to sitiu el sistema de breves?',
+	'info_breves' => '¿Utiliza’l to sitiu el sistema de breves?',
 	'info_breves_02' => 'Breves',
 	'info_breves_valider' => 'Curties por validar',
 	'info_gauche_numero_breve' => 'BREVE NÚMBERU', # MODIF
@@ -45,7 +45,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_breve_refusee' => 'Breve refugada',
 	'titre_breves' => 'Les breves',
 	'titre_langue_breve' => 'LLINGUA DE LA BREVE', # MODIF
-	'titre_nouvelle_breve' => 'Nouvelle brève', # NEW
 	'titre_page_breves' => 'Breves'
 );
 

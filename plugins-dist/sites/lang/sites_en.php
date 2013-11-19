@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_echec_syndication_01' => 'Syndication failed: either the selected backend is unreadable, or it does not contain any articles.',
 	'avis_echec_syndication_02' => 'Syndication failed: could not find the backend file for this site.',
 	'avis_site_introuvable' => 'Site not found',
-	'avis_site_syndique_probleme' => 'Warning: syndication for this site has encountered a problem. As a result, the system has been temporarily interrupted. Please check the URL of this site\'s syndication file (<b>@url_syndic@</b>), and try again.',
+	'avis_site_syndique_probleme' => 'Warning: syndication for this site has encountered a problem. As a result, the system has been temporarily interrupted. Please check the URL of this site’s syndication file (<b>@url_syndic@</b>), and try again.',
 	'avis_sites_probleme_syndication' => 'These sites encountered a syndication problem',
 	'avis_sites_syndiques_probleme' => 'These syndicated sites generated a problem',
 

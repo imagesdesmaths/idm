@@ -26,8 +26,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_connect_dump' => 'Un server chiamato « @dump@ » esiste già. Rinominatelo.',
 	'erreur_creation_base_sqlite' => 'Impossibile creare un databse SQLite per il salvataggio dei backup',
 	'erreur_nom_fichier' => 'Il nome del file non è permesso',
-	'erreur_restaurer_verifiez' => 'Risolvere l\'errore in modo da ripristinare.',
-	'erreur_sauvegarde_deja_en_cours' => 'C\'è già un backup in corso',
+	'erreur_restaurer_verifiez' => 'Risolvere l’errore in modo da ripristinare.',
+	'erreur_sauvegarde_deja_en_cours' => 'C’è già un backup in corso',
 	'erreur_sqlite_indisponible' => 'Impossibile effettuate un backup SQLite sul tuo hosting provider',
 	'erreur_table_absente' => 'Table @table@ assente',
 	'erreur_table_donnees_manquantes' => 'Tabella @table@, dati mancanti',
@@ -65,7 +65,7 @@ Non dimenticare di recuperare integralmente anche la cartella @img@, che contien
 	'texte_admin_tech_02' => 'Attenzione: questo backup potrà essere ripristinato SOLO in un sito installato con la stessa versione di SPIP. Non è possibile « svuotare il database » pensando di ripristinare questo backup dopo aver aggiornato la versione di SPIP...
 Per maggiori informazioni consulta <a href="@spipnet@">la documentazione di SPIP</a>.',
 	'texte_restaurer_base' => 'Ripristina un backup del database',
-	'texte_restaurer_sauvegarde' => 'Quest\'opzione permette il ripristino di un backup del database.
+	'texte_restaurer_sauvegarde' => 'Quest’opzione permette il ripristino di un backup del database.
 Il file di salvataggio deve trovarsi nella cartella @dossier@.
 Attenzione: <b>le modifiche o la perdita eventuale di dati sono irreversibili.</b>',
 	'texte_sauvegarde' => 'Salva il contenuto del database',

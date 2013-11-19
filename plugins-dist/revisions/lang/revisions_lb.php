@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_comparer' => 'D\'Ënnerscheeder weisen',
+	'bouton_comparer' => 'D’Ënnerscheeder weisen',
 
 	// D
 	'diff_para_ajoute' => 'Abschnitt bäigefléckt',
@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'differences_versions' => 'Differenz tëschent der Versioun Nr. @id_version@ an der Versioun Nr. @id_diff@',
 
 	// I
-	'icone_restaurer_version' => 'D\'Versioun Nr. @version@ zeréckspillen',
+	'icone_restaurer_version' => 'D’Versioun Nr. @version@ zeréckspillen',
 	'icone_suivi_revisions' => 'Verwaltung vun de Versiounen',
 	'info_1_revision' => '1 Versioun',
 	'info_aucune_revision' => 'Kéng Versiounen',
@@ -30,8 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_revisions' => '@nb@ Versiounen',
 
 	// L
-	'label_choisir_id_version' => 'Wielt d\'Versiounen déi solle verglach ginn',
-	'label_config_revisions_objets' => 'D\'Versiounen op dësen Objekter aschalten:',
+	'label_choisir_id_version' => 'Wielt d’Versiounen déi solle verglach ginn',
+	'label_config_revisions_objets' => 'D’Versiounen op dësen Objekter aschalten:',
 
 	// M
 	'message_valider_recuperer_version' => 'Bestätegt de Formulaire fir op dës Versioun zeréck ze fueren.',
@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'objet_editorial' => 'Objet',
 
 	// P
-	'plugin_update' => 'Update vum Plugin "Révisions" op d\'Versioun @version@.',
+	'plugin_update' => 'Update vum Plugin "Révisions" op d’Versioun @version@.',
 
 	// T
 	'titre_form_revisions_objets' => 'Versiounen aschalten',
@@ -50,10 +50,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'version_deplace_rubrique' => 'Geréckelt vun <b>"@from@"</b> op <b>"@to@"</b>.',
 	'version_initiale' => 'Original-Versioun',
-	'voir_differences' => 'D\'Ënnerscheeder gesinn',
+	'voir_differences' => 'D’Ënnerscheeder gesinn',
 	'voir_mes_revisions' => 'Meng Versiounen',
-	'voir_revisions' => 'D\'Versioune gesinn (@objet@ @id_objet@: @titre@)',
-	'voir_toutes_les_revisions' => 'All d\'Versiounen'
+	'voir_revisions' => 'D’Versioune gesinn (@objet@ @id_objet@: @titre@)',
+	'voir_toutes_les_revisions' => 'All d’Versiounen'
 );
 
 ?>

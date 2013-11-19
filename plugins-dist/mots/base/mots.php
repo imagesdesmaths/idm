@@ -57,7 +57,7 @@ function mots_declarer_tables_auxiliaires($tables_auxiliaires){
 
 	$tables_auxiliaires['spip_mots_liens'] =
 		array('field' => &$spip_mots_liens, 'key' => &$spip_mots_liens_key);
-		
+
 	return $tables_auxiliaires;
 }
 
@@ -70,7 +70,7 @@ function mots_declarer_tables_auxiliaires($tables_auxiliaires){
  */
 function mots_declarer_tables_objets_sql($tables){
 	$tables['spip_mots'] = array(
-		'type'=>'mot',
+		'type' => 'mot',
 		'type_surnoms' => array('mot-cle'), // pour les icones...
 		'texte_retour' => 'icone_retour',
 		'texte_objets' => 'public:mots_clefs',
@@ -111,7 +111,7 @@ function mots_declarer_tables_objets_sql($tables){
 	$tables['spip_groupes_mots'] = array(
 		'table_objet_surnoms' => array('groupemot','groupe_mots' /*hum*/,'groupe_mot' /* hum*/,'groupe' /*hum (EXPOSE)*/),
 		'type'=>'groupe_mots',
-	    'type_surnoms' => array('groupes_mot','groupemot','groupe_mot'),
+		'type_surnoms' => array('groupes_mot','groupemot','groupe_mot'),
 		'texte_retour' => 'icone_retour',
 		'texte_objets' => 'mots:titre_groupes_mots',
 		'texte_objet' => 'mots:titre_groupe_mots',
@@ -142,7 +142,7 @@ function mots_declarer_tables_objets_sql($tables){
 			"PRIMARY KEY"	=> "id_groupe"
 		),
 		'rechercher_champs' => array(
-	    'titre' => 8, 'texte' => 1, 'descriptif' => 5
+			'titre' => 8, 'texte' => 1, 'descriptif' => 5
 		),
 		'tables_jointures' => array(
 			'mots'
@@ -160,7 +160,6 @@ function mots_declarer_tables_objets_sql($tables){
 	$tables['spip_auteurs']['tables_jointures'][]= 'mots';
 	$tables['spip_mots']['tables_jointures'][]= 'mots_liens';
 	$tables['spip_mots']['tables_jointures'][]= 'mots';
-
 
 	// recherche jointe sur les mots pour tous les objets
 	$tables[]['rechercher_jointures']['mot'] = array('titre' => 3);

@@ -8,7 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'breve' => 'Brève', # NEW
 	'breves' => 'ពត៌មានសង្ខេប',
 
 	// E
@@ -21,12 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_breve' => 'កែប្រែ ពត៌មានខ្លីនេះ',
 	'icone_nouvelle_breve' => 'សរសេរ​ មួយពត៌មានសង្ខេប ​ថ្មី',
 	'info_1_breve' => '១ ខ្ទង់ពត៌មាន',
-	'info_aucun_breve' => 'Aucune brève', # NEW
 	'info_breves' => 'សៃថ៍ របស់អ្នក ប្រើប្រាស់ ប្រព័ន្ធពត៌មានខ្លី ឬ ?',
 	'info_breves_02' => 'ពត៌មានសង្ខេប',
 	'info_breves_valider' => 'ពត៌មានសង្ខេប ​ត្រូវធ្វើ​អោយ​​សុពលភាព',
 	'info_gauche_numero_breve' => 'លេខដំណឹង', # MODIF
-	'info_nb_breves' => '@nb@ brèves', # NEW
 	'item_breve_proposee' => 'បានស្នើ ពត៌មាន​សង្ខេប', # MODIF
 	'item_breve_refusee' => 'ទេ - ខ្ទង់ដំណឹង ត្រូវបានបដិសេធ', # MODIF
 	'item_breve_validee' => 'បាទ/ចាស - ខ្ទង់ដំណឹង មានសុពលភាព', # MODIF
@@ -44,7 +41,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_breve_refusee' => '​បាន​បដិសេធ ពត៌មានសង្ខេប',
 	'titre_breves' => 'ដំណឹង',
 	'titre_langue_breve' => 'ភាសា នៃខ្ទង់ដំណឹង', # MODIF
-	'titre_nouvelle_breve' => 'Nouvelle brève', # NEW
 	'titre_page_breves' => 'ដំណឹង'
 );
 

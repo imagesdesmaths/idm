@@ -7,13 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// B
-	'bouton_effacer_referers' => 'Effacer seulement les liens entrants', # NEW
-	'bouton_effacer_statistiques' => 'Effacer toutes les statistiques', # NEW
-
-	// C
-	'csv' => 'csv', # NEW
-
 	// I
 	'icone_evolution_visites' => 'Udvikling i besøg <br />@visites@ besøg',
 	'icone_repartition_actuelle' => 'Vis faktisk fordeling',
@@ -25,12 +18,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_popularite_2' => 'webstedets polularitet:',
 	'info_popularite_3' => 'polularitet: @popularite@; besøg: @visites@',
 	'info_popularite_5' => 'polularitet:',
-	'info_previsions' => 'prévisions :', # NEW
-	'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
-	'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
 	'info_visites' => 'besøg:',
 	'info_visites_plus_populaires' => 'Vis besøg til <b>de mest populære artikler</b> og til <b>de senest offentliggjorte artikler:</b>',
-	'info_zoom' => 'zoom', # NEW
 	'item_gerer_statistiques' => 'Dan statistik', # MODIF
 
 	// O
@@ -42,22 +31,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resume' => 'Resume', # MODIF
 
 	// T
-	'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
-	'texte_admin_effacer_toutes_stats' => 'Le premier bouton supprime toutes les statistiques : visites, popularité des articles et liens entrants.', # NEW
-	'texte_comment_lire_tableau' => 'Artiklens rangering i popularitetslisten vises i marginen. Artiklens popularitet 
-		(et overslag over hvor mange daglige besøg den vil opnå, hvis det aktuelle trafikomfang opretholdes) 
-		og antallet af besøg, der er registreret siden begyndelsen, vises i den ballon, der kommer til syne når musen 
-		holdes over titlen.',
+	'texte_comment_lire_tableau' => 'Artiklens rangering i popularitetslisten vises i marginen. Artiklens popularitet (et overslag over hvor mange daglige besøg den vil opnå, hvis det aktuelle trafikomfang opretholdes) og antallet af besøg, der er registreret siden begyndelsen, vises i den ballon, der kommer til syne når musen holdes over titlen.',
 	'texte_signification' => 'Røde bjælker viser summer (totaler for underafsnit), 
 		grønne bjælker viser antal besøg i hvert afsnit.',
 	'titre_evolution_visite' => 'Udvikling i besøgstal',
 	'titre_liens_entrants' => 'Dagens indkomne links',
 	'titre_page_statistiques' => 'Statistik pr. afsnit',
-	'titre_page_statistiques_visites' => 'Besøgsstatistik',
-
-	// V
-	'visites_journalieres' => 'Nombre de visites par jour', # NEW
-	'visites_mensuelles' => 'Nombre de visites par mois' # NEW
+	'titre_page_statistiques_visites' => 'Besøgsstatistik'
 );
 
 ?>

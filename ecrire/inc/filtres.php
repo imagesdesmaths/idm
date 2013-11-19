@@ -627,14 +627,9 @@ function attribut_html($texte,$textebrut = true) {
 function vider_url($url, $entites = true) {
 	# un message pour abs_url
 	$GLOBALS['mode_abs_url'] = 'url';
-
 	$url = trim($url);
-	if (preg_match(",^(http:?/?/?|mailto:?)$,iS", $url))
-		return '';
-
-	if ($entites) $url = entites_html($url);
-
-	return $url;
+	$r = ",^(?:" . _PROTOCOLES_STD . '):?/?/?$,iS';
+	return preg_match($r, $url) ? '': ($entites ? entites_html($url) : $url);
 }
 
 // Extraire une date de n'importe quel champ (a completer...)
@@ -1444,6 +1439,11 @@ function extraire_trads($bloc) {
 	return $trads;
 }
 
+// Calculer l'initiale d'un nom
+function initiale($nom){
+	return spip_substr(trim(strtoupper(extraire_multi($nom))),0,1);
+}
+
 //
 // Ce filtre retourne la donnee si c'est la premiere fois qu'il la voit ;
 // possibilite de gerer differentes "familles" de donnees |unique{famille}
@@ -1629,6 +1629,23 @@ function modulo($nb, $mod, $add=0) {
 	return ($mod?$nb%$mod:0)+$add;
 }
 
+
+/**
+ * Vérifie qu'un nom (d'auteur) ne comporte pas d'autres tags que <multi>
+ *
+ * @param string $nom
+ *      Nom (signature) proposé
+ * @return bool
+ *      - false si pas conforme,
+ *      - true sinon
+**/
+function nom_acceptable($nom) {
+	if (!is_string($nom)) {
+		return false;
+	}
+	$v_nom = str_replace(array('@multi@','@/multi@'), array('<multi>','</multi>'), supprimer_tags(str_replace(array('<multi>','</multi>'), array('@multi@','@/multi@'), $nom)));
+	return str_replace('&lt;', '<', $v_nom) == $nom;
+}
 
 // Verifier la conformite d'une ou plusieurs adresses email
 //  retourne false ou la  normalisation de la derniere adresse donnee

@@ -9,13 +9,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_compresseur_titre' => 'Optimizasyon ve sıkıştırma',
-	'info_question_activer_compactage_css' => 'CSS\'lerin sıkıştırılmasını aktive etmek ister misiniz ?', # MODIF
+	'info_question_activer_compactage_css' => 'CSS’lerin sıkıştırılmasını aktive etmek ister misiniz ?', # MODIF
 	'info_question_activer_compactage_js' => 'Skriptlerin (javascript) sıkıştırılmasını aktive etmek ister misiniz ?', # MODIF
 	'info_question_activer_compresseur' => 'HTTP akışının sıkıştırılmasını aktive etmek ister misiniz ?', # MODIF
-	'item_compresseur_closure' => 'Utiliser Google Closure Compiler [expérimental]', # NEW
-	'item_compresseur_css' => 'Activer la compression des feuilles de styles (CSS)', # NEW
-	'item_compresseur_html' => 'Activer la compression du HTML', # NEW
-	'item_compresseur_js' => 'Activer la compression des scripts (javascript)', # NEW
 
 	// T
 	'texte_compacter_avertissement' => 'Sitenizin geliştirilmesi esnasında bu seçenekleri aktive etmeyin : sıkıştırılmış elemanlar tüm okunabilirliklerini kaybederler.',

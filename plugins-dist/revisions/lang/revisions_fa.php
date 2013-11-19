@@ -33,9 +33,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_choisir_id_version' => 'بازنگري‌ها را براي تطابق انتخاب نيد',
 	'label_config_revisions_objets' => 'روي كدام موضوع بازنگري فعال شود:',
 
-	// M
-	'message_valider_recuperer_version' => 'Validez le formulaire pour revenir à cette version.', # NEW
-
 	// O
 	'objet_editorial' => 'موضوع',
 

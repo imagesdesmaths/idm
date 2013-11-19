@@ -23,10 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_mot' => 'Bu anahtar sözcüğü değiştir',
 	'admin_modifier_rubrique' => 'Bu bölümü değiştir',
 	'admin_recalculer' => 'Bu sayfayı yeniden oluştur',
-	'afficher_calendrier' => 'Afficher le calendrier', # NEW
 	'afficher_trad' => 'çevirileri listele',
 	'alerte_maj_impossible' => '<b>Dikkat !</b> SQL veri tabanının @version@ sürümüne güncellenmesi imkansız. Sorun veritabanı değiştirme haklarından kaynaklanıyor olabilir, lütfen sitenizi barındıran şirkete başvurunuz.',
-	'alerte_modif_info_concourante' => 'DİKKAT: Bu bilgi başka bir yerde değiştirildi. Güncel değer  :',
+	'alerte_modif_info_concourante' => 'DİKKAT: Bu bilgi başka bir yerde değiştirildi. Güncel değer :',
 	'analyse_xml' => 'XML analizi',
 	'annuler' => 'İptal et',
 	'antispam_champ_vide' => 'Lütfen bu alanı boş bırakınız :',
@@ -47,14 +46,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'barre_a_accent_grave' => 'A harfinin üstüne aksan ekle (Türkçede anlamsız)',
 	'barre_aide' => 'Sayfa düzenini zenginleştirmek için tipografik kısayolları kullanınız',
-	'barre_e_accent_aigu' => 'E harfinin üstüne aksan ekle (Türkçe\'de anlamsız)',
-	'barre_eo' => 'Türkçe\'de anlamsız',
-	'barre_eo_maj' => 'Türkçe\'de anlamsız',
+	'barre_e_accent_aigu' => 'E harfinin üstüne aksan ekle (Türkçe’de anlamsız)',
+	'barre_eo' => 'Türkçe’de anlamsız',
+	'barre_eo_maj' => 'Türkçe’de anlamsız',
 	'barre_euro' => '€ işaretini girin',
 	'barre_gras' => '{{Kalın}} yaz',
 	'barre_guillemets' => '« Tırnak » içine al',
 	'barre_guillemets_simples' => 'İkinci biçimde tırnak içine al',
-	'barre_intertitre' => '{{{Arabaşlık\'a}}} dönüştür',
+	'barre_intertitre' => '{{{Arabaşlık’a}}} dönüştür',
 	'barre_italic' => '{Yana yatık (italik)} yaz',
 	'barre_lien' => '[Hipermetin bağlantısına->http://...] dönüştür',
 	'barre_lien_input' => 'Lütfen bağlantınızın adresini girin (adresi http://www.adresim.com veya bu sitede bulunan bir metnin numarası şeklinde girebilirsiniz).',
@@ -64,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_changer' => 'Değiştir',
 	'bouton_chercher' => 'Ara',
 	'bouton_choisir' => 'Seç',
-	'bouton_deplacer' => 'Déplacer', # NEW
 	'bouton_download' => 'İndir', # MODIF
 	'bouton_enregistrer' => 'Kaydet',
 	'bouton_radio_desactiver_messagerie_interne' => 'İç iletileri kapat',
@@ -107,20 +105,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@ @nommois@',
 	'date_demain' => 'yarın',
 	'date_fmt_heures_minutes' => '@h@h@m@min',
-	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@jour@ @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ @nommois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => '@date@ @nomjour@',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
-	'date_fmt_periode_from' => 'Du', # NEW
-	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => 'saat ',
 	'date_hier' => 'dün',
 	'date_il_y_a' => '@delai@ önce',
@@ -181,39 +170,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mois' => 'ay',
 	'date_mois_1' => 'Ocak',
 	'date_mois_10' => 'Ekim',
-	'date_mois_10_abbr' => 'oct.', # NEW
 	'date_mois_11' => 'Kasım',
-	'date_mois_11_abbr' => 'nov.', # NEW
 	'date_mois_12' => 'Aralık',
-	'date_mois_12_abbr' => 'déc.', # NEW
-	'date_mois_1_abbr' => 'janv.', # NEW
 	'date_mois_2' => 'Şubat',
-	'date_mois_2_abbr' => 'févr.', # NEW
 	'date_mois_3' => 'Mart',
-	'date_mois_3_abbr' => 'mars', # NEW
 	'date_mois_4' => 'Nisan',
-	'date_mois_4_abbr' => 'avr.', # NEW
 	'date_mois_5' => 'Mayıs',
-	'date_mois_5_abbr' => 'mai', # NEW
 	'date_mois_6' => 'Haziran',
-	'date_mois_6_abbr' => 'juin', # NEW
 	'date_mois_7' => 'Temmuz',
-	'date_mois_7_abbr' => 'juil.', # NEW
 	'date_mois_8' => 'Ağustos',
-	'date_mois_8_abbr' => 'août', # NEW
 	'date_mois_9' => 'Eylül',
-	'date_mois_9_abbr' => 'sept.', # NEW
 	'date_saison_1' => 'kış',
 	'date_saison_2' => 'ilkbahar',
 	'date_saison_3' => 'yaz',
 	'date_saison_4' => 'sonbahar',
-	'date_secondes' => 'secondes', # NEW
 	'date_semaines' => 'hafta',
-	'date_un_mois' => 'mois', # NEW
-	'date_une_heure' => 'heure', # NEW
-	'date_une_minute' => 'minute', # NEW
-	'date_une_seconde' => 'seconde', # NEW
-	'date_une_semaine' => 'semaine', # NEW
 	'dirs_commencer' => ' yüklemeye gerçekten başlamak için',
 	'dirs_preliminaire' => 'Ön bilgi : <b>Erişim haklarını ayarlayınız</b>',
 	'dirs_probleme_droits' => 'Erişim hakları sorunu ',
@@ -231,31 +202,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'Site üzerinden gönder',
 	'erreur' => 'Hata',
 	'erreur_balise_non_fermee' => 'son etiket kapatılmamış :',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 	'erreur_texte' => 'hata(lar)',
 	'etape' => 'Aşama',
 
 	// F
 	'fichier_introuvable' => '@fichier@ dosyası bulunamadı',
-	'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-	'form_auteur_email_modifie' => 'Votre adresse email a été modifiée.', # NEW
-	'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
-	'form_auteur_mail_confirmation' => 'Bonjour,
-
-Vous avez demandé à changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter à
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignorée) :
-
-    @url@
-', # NEW
 	'form_deja_inscrit' => 'Zaten kayıtlısınız.',
 	'form_email_non_valide' => 'E-posta adresiniz geçersiz.',
 	'form_forum_access_refuse' => 'Artık bu siteye erişim izniniz yok.',
 	'form_forum_bonjour' => 'Merhaba @nom@,',
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 	'form_forum_email_deja_enregistre' => 'Bu e-posta adresi zaten kayıtlı, kullanmakta olduğunuz şifrenizi kullanmaya devam edebilirsiniz.',
 	'form_forum_identifiant_mail' => 'Yeni tanımlayıcınız e-posta yoluyla gönderildi.',
 	'form_forum_identifiants' => 'Kişisel tanımlayıcılar',
@@ -327,7 +282,6 @@ sera ignorée) :
 	'icone_supprimer_image' => 'Bu resmi sil',
 	'icone_tous_articles' => 'Tüm makaleleriniz',
 	'icone_tous_auteur' => 'Tüm yazarlar',
-	'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 	'icone_visiter_site' => 'Ziyaret et', # MODIF
 	'icone_voir_en_ligne' => 'Çevrimiçi göster',
 	'img_indisponible' => 'resim mevcut değil',
@@ -349,14 +303,10 @@ sera ignorée) :
 	'info_article_supprime' => 'Silinen makale',
 	'info_articles' => 'Makaleler',
 	'info_articles_a_valider' => 'Onaylanacak makaleler',
-	'info_articles_nb' => '@nb@ articles', # NEW
 	'info_articles_proposes' => 'Önerilen makaleler',
-	'info_articles_un' => '1 article', # NEW
 	'info_auteurs_nombre' => 'yazar(lar) :',
 	'info_authentification_ftp' => 'Onay (FTP ile)',
 	'info_breves_2' => 'kısa haberler',
-	'info_breves_nb' => '@nb@ brèves', # NEW
-	'info_breves_un' => '1 brève', # NEW
 	'info_connexion_refusee' => 'Bağlantı reddedildi',
 	'info_contact_developpeur' => 'Lütfen bir program geliştirici ile temasa geçiniz.',
 	'info_contenance' => 'Site içeriği :',
@@ -368,14 +318,11 @@ sera ignorée) :
 	'info_creer_repertoire' => 'Şu isimde bir dosya veya dizin oluşturunuz :',
 	'info_creer_repertoire_2' => '<b>@repertoire@</b> alt-dizini içerisinde, daha sonra :',
 	'info_creer_vignette' => 'otomatik ikon oluşturma',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Açılıp sergilenmesi',
 	'info_descriptif_nombre' => 'tanımlayıcı(lar) :',
 	'info_description' => 'Tanımlama :',
 	'info_description_2' => 'Tanımlama :',
 	'info_dimension' => 'Boyutlar :',
-	'info_documents_nb' => '@nb@ documents', # NEW
-	'info_documents_un' => '1 document', # NEW
 	'info_ecire_message_prive' => 'Özel bir ileti yaz',
 	'info_email_invalide' => 'Geçersiz e-posta adresi.',
 	'info_en_cours_validation' => 'Yazılmakta olan makaleleriniz',
@@ -384,9 +331,8 @@ sera ignorée) :
 	'info_erreur_requete' => 'Aramada hata :',
 	'info_erreur_squelette2' => 'Hiçbir @fichier@ iskeleti müsait değil...',
 	'info_erreur_systeme' => 'Sistem hatası (hata no @errsys@)',
-	'info_erreur_systeme2' => 'Sabit disk dolu olabilir veya veritabanı hasar görmüş olabilir.  <br />
- <font color=\'red\'>Veritabanını <a href=\'@script@\'>onarmayı deneyiniz </a>,
- veya sitenizi barındıran firmayı arayınız.</font>',
+	'info_erreur_systeme2' => 'Sabit disk dolu olabilir veya veritabanı hasar görmüş olabilir.<br />
+<span style="color:red;">Veritabanını <a href=\'@script@\'>onarmayı deneyiniz </a>, veya sitenizi barındıran firmayı arayınız.</span>',
 	'info_fini' => 'Bitti !',
 	'info_format_image' => 'İkon yaratmak için kullanılabilecek resim formatları : @gd_formats@.',
 	'info_format_non_defini' => 'tanımsız format',
@@ -403,7 +349,7 @@ sera ignorée) :
 	'info_interface_simple' => 'Basit arayüz',
 	'info_joindre_document_article' => 'Bu makaleye ekleyebileceğiniz belgeler ',
 	'info_joindre_document_rubrique' => 'Bu bölüme ekleyebileceğiniz belgeler ',
-	'info_joindre_documents_article' => 'Makalenize ekleyebileceğiniz belgeler  :',
+	'info_joindre_documents_article' => 'Makalenize ekleyebileceğiniz belgeler :',
 	'info_l_article' => 'makale',
 	'info_la_breve' => 'kısa haber',
 	'info_la_rubrique' => 'bölüm',
@@ -415,8 +361,6 @@ sera ignorée) :
 	'info_mail_fournisseur' => 'isminiz@hizmet_veren_firma.com',
 	'info_message_2' => 'İLETİ',
 	'info_message_supprime' => 'İLETİ SİLİNDİ',
-	'info_messages_nb' => '@nb@ messages', # NEW
-	'info_messages_un' => '1 message', # NEW
 	'info_mise_en_ligne' => 'Çevrimiçi yayın tarihi :',
 	'info_modification_parametres_securite' => 'güvenlik parametreleri değişikliği',
 	'info_mois_courant' => 'Ay içinde :',
@@ -454,13 +398,9 @@ sera ignorée) :
 	'info_rechercher' => 'Ara',
 	'info_rechercher_02' => 'Ara :',
 	'info_remplacer_vignette' => 'Varsayılan etiketi kişiselleştirilmiş bir logo ile değiştir :',
-	'info_rubriques_nb' => '@nb@ rubriques', # NEW
-	'info_rubriques_un' => '1 rubrique', # NEW
 	'info_sans_titre_2' => 'başlıksız',
 	'info_selectionner_fichier' => '@upload@ dizininden bir dosya seçebilirsiniz. ',
 	'info_selectionner_fichier_2' => 'Bir dosya seç :',
-	'info_sites_nb' => '@nb@ sites', # NEW
-	'info_sites_un' => '1 site', # NEW
 	'info_supprimer_vignette' => 'Bu etiketi sil',
 	'info_symbole_bleu' => '<b>Mavi</b> sembol bir <b>hatırlatmayı</b> gösterir : yani, kişisel kullanımınız için bir iletidir.',
 	'info_symbole_jaune' => '<b>Sarı</b> sembol <b>tüm editörlere yönelik</b> bir duyuruyu gösterir : tüm yöneticiler tarafından değiştirilebilir ve tüm editörler tarafından görülebilir. ',
@@ -482,8 +422,6 @@ sera ignorée) :
 	'infos_vos_pense_bete' => 'Hatırlatmalarınız', # MODIF
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-	'label_poids_fichier' => 'Taille', # NEW
 	'lien_afficher_icones_seuls' => 'Sadece ikonları görüntüle',
 	'lien_afficher_texte_icones' => 'ikonları ve metni görüntüle',
 	'lien_afficher_texte_seul' => 'Sadece metni görüntüle',
@@ -518,7 +456,7 @@ sera ignorée) :
 	'login_motpasseoublie' => 'Şifreyi unuttum',
 	'login_non_securise' => 'Dikkat, bu form güvenli değil.
           Eğer şifrenizin ağ üzerinde tesbit edilmesini istemiyorsanız,
-          lütfen gezgininizde Javascript\'i çalıştırınız ve ',
+          lütfen gezgininizde Javascript’i çalıştırınız ve ',
 	'login_nouvelle_tentative' => 'Yeni deneme',
 	'login_par_ici' => 'Kayıt oldunuz... buradan devam ediniz...',
 	'login_pass2' => 'Şifre :',
@@ -529,7 +467,6 @@ sera ignorée) :
 	'login_retour_site' => 'Kamusal siteye dön',
 	'login_retoursitepublic' => 'Kamusal siteye dön',
 	'login_sans_cookiie' => 'Çerezsiz tanımlanma',
-	'login_securise' => 'Login sécurisé', # NEW
 	'login_sinscrire' => 'Kayıt ol',
 	'login_test_navigateur' => 'Gezgini dene / Tekrar bağlan',
 	'login_verifiez_navigateur' => '(Ancak gezginin şifrenizi belleğe almadığından emin olunuz...)',
@@ -590,7 +527,6 @@ sera ignorée) :
 	'pass_nouveau_pass' => 'Yeni şifre',
 	'pass_ok' => 'OK',
 	'pass_oubli_mot' => 'Şifremi unuttum',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 	'pass_quitter_fenetre' => 'Bu pencereyi terk et',
 	'pass_rappel_login' => 'Hatırlatma : kullanıcı isminiz « @login@ » dır.',
 	'pass_recevoir_mail' => 'Siteye erişiminizi yeniden nasıl kazanabileceğinizi belirten bir e-posta alacaksınız. ',
@@ -605,7 +541,7 @@ sera ignorée) :
 	'retour' => 'Geri dön',
 
 	// S
-	'spip_conforme_dtd' => 'SPIP bu belgeyi DOCTYPE\'e uygun buluyor :',
+	'spip_conforme_dtd' => 'SPIP bu belgeyi DOCTYPE’e uygun buluyor :',
 	'squelette' => 'iskelet',
 	'squelette_inclus_ligne' => 'iskelet eklendi, satır',
 	'squelette_ligne' => 'iskelet, satır',
@@ -613,13 +549,12 @@ sera ignorée) :
 	'suivant' => 'sonraki',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ kb',
 	'taille_mo' => '@taille@ Mb',
 	'taille_octets' => '@taille@ bayt',
 	'texte_actualite_site_1' => 'Arayüze alışınca «',
 	'texte_actualite_site_2' => 'Tüm arayüz',
-	'texte_actualite_site_3' => '»\'e tıklayarak daha fazla seçeneğe ulaşabilirsiniz.',
+	'texte_actualite_site_3' => '»’e tıklayarak daha fazla seçeneğe ulaşabilirsiniz.',
 	'texte_creation_automatique_vignette' => 'Bu sitede öngörüntüleme ikonlarının otomatik olarak yaratılması işlemi etkinleştirişmiştir. Eğer bu formdan hareket ederek @gd_formats@, formatlı resimler yüklerseniz, bunlara, en fazla @taille_preview@ piksel boyutunda bir ikon eşlik edecektir.',
 	'texte_documents_associes' => 'Aşağıdaki belgeler makale ile bağlantılı olup,
     doğrudan makalenin içine dahil edilmemiştir. Kamu sitesinin sayfa düzenine göre,
@@ -629,7 +564,7 @@ sera ignorée) :
 	'texte_inc_auth_1' => '<b>@auth_login@</b> kullanıcı ismini girdiniz ancak veritabanında bu kullanıcı ismi yok/artık yok. Lütfen şunu deneyiniz',
 	'texte_inc_auth_2' => 'gezgininizi kapatıp tekrar çalıştırınız ve ',
 	'texte_inc_auth_3' => 'tekrar bağlanınız.',
-	'texte_inc_config' => 'Bu sayfalarda yapılan değişiklikler sitenizin işleyişi üzerinde büyük ölçüde etkilidir. SPIP sisteminin işleyişine aşina olmadığınız sürece müdahale etmemenizi öneririz.  <br /><br /><b>Daha genel bir ifadeyle söylemek gerekirse bu sayfalarla ilgilenme işini sitenin Ağ Yöneticisi\'ne bırakmanızı özellikle öneririz.</b>',
+	'texte_inc_config' => 'Bu sayfalarda yapılan değişiklikler sitenizin işleyişi üzerinde büyük ölçüde etkilidir. SPIP sisteminin işleyişine aşina olmadığınız sürece müdahale etmemenizi öneririz.  <br /><br /><b>Daha genel bir ifadeyle söylemek gerekirse bu sayfalarla ilgilenme işini sitenin Ağ Yöneticisi’ne bırakmanızı özellikle öneririz.</b>',
 	'texte_inc_meta_1' => 'Sistem <code>@fichier@</code> dosyasının yazılması sırasında bir hata ile karşılaştı. Lütfen, site yöneticisi olarak ',
 	'texte_inc_meta_2' => '(<code>ecrire/data/</code> dizinindeki) ',
 	'texte_inc_meta_3' => '<code>@repertoire@</code> dizinindeki yazma haklarını kontrol ediniz. ',
@@ -647,7 +582,6 @@ sera ignorée) :
 	'titre_image_auteur_supprime' => 'Silinmiş yazar',
 	'titre_image_redacteur' => 'Erişim hakkı olmayan yazar',
 	'titre_image_redacteur_02' => 'Yazar',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Ziyaretçi',
 	'titre_joindre_document' => 'BİR BELGE EKLE',
 	'titre_mots_cles' => 'ANAHTAR SÖZCÜKLER',

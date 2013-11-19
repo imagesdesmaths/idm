@@ -8,7 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'breve' => 'Brève', # NEW
 	'breves' => 'Tin ngắn',
 
 	// E
@@ -21,12 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_breve' => 'Sửa tin ngắn này',
 	'icone_nouvelle_breve' => 'Viết một tin ngắn mới',
 	'info_1_breve' => '1 bản tin ngắn',
-	'info_aucun_breve' => 'Aucune brève', # NEW
 	'info_breves' => 'Trang web của bạn có sử dụng hệ thống tin ngắn không?',
 	'info_breves_02' => 'Tin ngắn',
 	'info_breves_valider' => 'Những tin ngắn chờ thông qua',
 	'info_gauche_numero_breve' => 'SỐ THỨ TỰ TIN NGẮN', # MODIF
-	'info_nb_breves' => '@nb@ brèves', # NEW
 	'item_breve_proposee' => 'Nộp vào', # MODIF
 	'item_breve_refusee' => 'TỪ CHỐI - không đăng', # MODIF
 	'item_breve_validee' => 'CHẤP THUẬN đăng tải', # MODIF
@@ -43,7 +40,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_breve_refusee' => 'Tin ngắn bị từ chối',
 	'titre_breves' => 'Tin ngắn',
 	'titre_langue_breve' => 'NGÔN NGỮ CỦA TIN NGẮN', # MODIF
-	'titre_nouvelle_breve' => 'Nouvelle brève', # NEW
 	'titre_page_breves' => 'Tin ngắn'
 );
 

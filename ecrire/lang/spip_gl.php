@@ -107,20 +107,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@ @nommois@',
 	'date_demain' => 'mañá;',
 	'date_fmt_heures_minutes' => '@h@h@m@min',
-	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ ás @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@jour@ de @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ de @nommois@ do @annee@',
 	'date_fmt_mois_annee' => '@nommois@ do @annee@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => 'o @nomjour@ @date@',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
-	'date_fmt_periode_from' => 'Du', # NEW
-	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => 'horas',
 	'date_hier' => 'onte',
 	'date_il_y_a' => 'fai @delai@',
@@ -233,9 +224,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'Envío vía o sitio web',
 	'erreur' => 'Erro',
 	'erreur_balise_non_fermee' => 'a última baliza non foi pechada :',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 	'erreur_texte' => 'erro(s)',
 	'etape' => 'Etapa',
 
@@ -257,7 +245,6 @@ sera ignorada) :
 	'form_email_non_valide' => 'O seu enderezo de correo-e. non é válido.',
 	'form_forum_access_refuse' => 'Non tes acceso a este web.',
 	'form_forum_bonjour' => 'Ola, @nom@,',
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 	'form_forum_email_deja_enregistre' => 'Este enderezo de correo xa está rexistrado, daquela pode empregar a súa chave de sempre.',
 	'form_forum_identifiant_mail' => 'Enviouselle a vostede o seu novo identificador por correo electrónico.',
 	'form_forum_identifiants' => 'Identificadores persoais',
@@ -372,7 +359,6 @@ do web "@nom_site_spip@" (@adresse_site@):',
 	'info_creer_repertoire' => 'Debe crear un ficheiro ou cartafol chamado :',
 	'info_creer_repertoire_2' => 'dentro do subcartafol <b>@repertoire@</b>, e logo:',
 	'info_creer_vignette' => 'creación automática da viñeta',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Despregar',
 	'info_descriptif_nombre' => 'descrición(s):',
 	'info_description' => 'Descrición:',
@@ -388,9 +374,8 @@ do web "@nom_site_spip@" (@adresse_site@):',
 	'info_erreur_requete' => 'Erro na petición:',
 	'info_erreur_squelette2' => 'Ningún esqueleto <b>@fichier@</b> está dispoñible...',
 	'info_erreur_systeme' => 'Erro do sistema (errno @errsys@)',
-	'info_erreur_systeme2' => 'O disco duro pode ser que estea cheo, ou a base de datos danada. <br />
- <font color=\'red\'>Probe a <a href=\'@script@\'>reparar a base</a>,
- ou contacte co seu aloxador.</font>',
+	'info_erreur_systeme2' => 'O disco duro pode ser que estea cheo, ou a base de datos danada.<br />
+<span style="color:red;">Probe a <a href=\'@script@\'>reparar a base</a>, ou contacte co seu aloxador.</span>',
 	'info_fini' => 'Rematou!',
 	'info_format_image' => 'Formatos de imaxes que poden ser utilizados para crear as viñetas: @gd_formats@.',
 	'info_format_non_defini' => 'formato non definido',
@@ -486,8 +471,6 @@ do web "@nom_site_spip@" (@adresse_site@):',
 	'infos_vos_pense_bete' => 'As súas notas',
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-	'label_poids_fichier' => 'Taille', # NEW
 	'lien_afficher_icones_seuls' => 'Amosar só as iconas',
 	'lien_afficher_texte_icones' => 'Amosar as iconas e o texto',
 	'lien_afficher_texte_seul' => 'Amosar só o texto',
@@ -595,7 +578,6 @@ e reconectar co web.
 	'pass_nouveau_pass' => 'Nova chave',
 	'pass_ok' => 'ben',
 	'pass_oubli_mot' => 'Chave esquecida',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 	'pass_quitter_fenetre' => 'Pechar esta xanela',
 	'pass_rappel_login' => 'Lembra: o teu identificador (login) é « @login@ «.',
 	'pass_recevoir_mail' => 'Recibirás un correo indicándote os pasos a seguir para recuperar o teu acceso.',
@@ -618,7 +600,6 @@ e reconectar co web.
 	'suivant' => 'seguinte',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ KB',
 	'taille_mo' => '@taille@ MB',
 	'taille_octets' => '@taille@ bytes',
@@ -662,7 +643,6 @@ e reconectar co web.
 	'titre_image_auteur_supprime' => 'Autor/a suprimido',
 	'titre_image_redacteur' => 'Redactor/a sen acceso',
 	'titre_image_redacteur_02' => 'Redactor/a',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Visitante',
 	'titre_joindre_document' => 'ANEXAR UN DOCUMENTO',
 	'titre_mots_cles' => 'PALABRAS-CLAVE',

@@ -8,7 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'breve' => 'Brève', # NEW
 	'breves' => 'Novinky',
 
 	// E
@@ -21,12 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_breve' => 'Změnit novinku',
 	'icone_nouvelle_breve' => 'Napsat novinku',
 	'info_1_breve' => '1 novinka',
-	'info_aucun_breve' => 'Aucune brève', # NEW
 	'info_breves' => 'Používá váš web novinky?',
 	'info_breves_02' => 'Novinky',
 	'info_breves_valider' => 'Novinky ke schválení',
 	'info_gauche_numero_breve' => 'ČÍSLO NOVINKY', # MODIF
-	'info_nb_breves' => '@nb@ brèves', # NEW
 	'item_breve_proposee' => 'Předložené novinky', # MODIF
 	'item_breve_refusee' => 'Odmítnutá novinka', # MODIF
 	'item_breve_validee' => 'Schválená novinka', # MODIF
@@ -44,7 +41,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_breve_refusee' => 'Novinka zamítnuta',
 	'titre_breves' => 'Novinky',
 	'titre_langue_breve' => 'JAZYK NOVINKY', # MODIF
-	'titre_nouvelle_breve' => 'Nouvelle brève', # NEW
 	'titre_page_breves' => 'Novinky'
 );
 
