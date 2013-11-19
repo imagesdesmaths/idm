@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('Europe/Paris');
+ini_set('date.timezone','Europe/Paris');
 define ('_ID_WEBMESTRES', '1:41');
 #define ('_SPIP_LOCK_MODE', 0);
 #define ('_LOG_FILTRE_GRAVITE', 7);
