@@ -6,56 +6,66 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_SegmentEditor
+ * @package SegmentEditor
  */
+namespace Piwik\Plugins\SegmentEditor;
+
+use Exception;
+use Piwik\Common;
+use Piwik\Db;
+use Piwik\Version;
 
 /**
- * @package Piwik_SegmentEditor
+ * @package SegmentEditor
  */
-class Piwik_SegmentEditor extends Piwik_Plugin
+class SegmentEditor extends \Piwik\Plugin
 {
+    /**
+     * @see Piwik_Plugin::getInformation
+     */
     public function getInformation()
     {
         return array(
             'description'     => 'Create and reuse custom visitor Segments with the Segment Editor.',
             'author'          => 'Piwik',
             'author_homepage' => 'http://piwik.org/',
-            'version'         => Piwik_Version::VERSION,
+            'version'         => Version::VERSION,
+            'license'          => 'GPL v3+',
+            'license_homepage' => 'http://www.gnu.org/licenses/gpl.html'
         );
     }
 
+    /**
+     * @see Piwik_Plugin::getListHooksRegistered
+     */
     public function getListHooksRegistered()
     {
         return array(
-            'Piwik.getKnownSegmentsToArchiveForSite'  => 'getKnownSegmentsToArchiveForSite',
-            'Piwik.getKnownSegmentsToArchiveAllSites' => 'getKnownSegmentsToArchiveAllSites',
-            'AssetManager.getJsFiles'                 => 'getJsFiles',
-            'AssetManager.getCssFiles'                => 'getCssFiles',
-            'template_nextToCalendar'                 => 'getSegmentEditorHtml',
+            'Segments.getKnownSegmentsToArchiveForSite'  => 'getKnownSegmentsToArchiveForSite',
+            'Segments.getKnownSegmentsToArchiveAllSites' => 'getKnownSegmentsToArchiveAllSites',
+            'AssetManager.getJavaScriptFiles'            => 'getJsFiles',
+            'AssetManager.getStylesheetFiles'            => 'getStylesheetFiles',
+            'Template.nextToCalendar'                    => 'getSegmentEditorHtml',
         );
     }
 
-    function getSegmentEditorHtml($notification)
+    function getSegmentEditorHtml(&$out)
     {
-        $out =& $notification->getNotificationObject();
-        $controller = new Piwik_SegmentEditor_Controller();
+        $controller = new Controller();
         $out .= $controller->getSelector();
     }
 
-    public function getKnownSegmentsToArchiveAllSites($notification)
+    public function getKnownSegmentsToArchiveAllSites(&$segments)
     {
-        $segments =& $notification->getNotificationObject();
-        $segmentToAutoArchive = Piwik_SegmentEditor_API::getInstance()->getAll($idSite = false, $returnAutoArchived = true);
-        if (!empty($segmentToAutoArchive)) {
-            $segments = array_merge($segments, $segmentToAutoArchive);
+        $segmentsToAutoArchive = API::getInstance()->getAll($idSite = false, $returnAutoArchived = true);
+        foreach ($segmentsToAutoArchive as $segment) {
+            $segments[] = $segment['definition'];
         }
     }
 
-    public function getKnownSegmentsToArchiveForSite($notification)
+    public function getKnownSegmentsToArchiveForSite(&$segments, $idSite)
     {
-        $segments =& $notification->getNotificationObject();
-        $idSite = $notification->getNotificationInfo();
-        $segmentToAutoArchive = Piwik_SegmentEditor_API::getInstance()->getAll($idSite, $returnAutoArchived = true);
+        $segmentToAutoArchive = API::getInstance()->getAll($idSite, $returnAutoArchived = true);
 
         foreach ($segmentToAutoArchive as $segmentInfo) {
             $segments[] = $segmentInfo['definition'];
@@ -65,7 +75,7 @@ class Piwik_SegmentEditor extends Piwik_Plugin
 
     public function install()
     {
-        $queries[] = 'CREATE TABLE `' . Piwik_Common::prefixTable('segment') . '` (
+        $queries[] = 'CREATE TABLE `' . Common::prefixTable('segment') . '` (
 					`idsegment` INT(11) NOT NULL AUTO_INCREMENT,
 					`name` VARCHAR(255) NOT NULL,
 					`definition` TEXT NOT NULL,
@@ -80,30 +90,22 @@ class Piwik_SegmentEditor extends Piwik_Plugin
 				) DEFAULT CHARSET=utf8';
         try {
             foreach ($queries as $query) {
-                Piwik_Exec($query);
+                Db::exec($query);
             }
         } catch (Exception $e) {
-            if (!Zend_Registry::get('db')->isErrNo($e, '1050')) {
+            if (!Db::get()->isErrNo($e, '1050')) {
                 throw $e;
             }
         }
     }
 
-    public function getJsFiles($notification)
+    public function getJsFiles(&$jsFiles)
     {
-        $jsFiles = & $notification->getNotificationObject();
-        $jsFiles[] = "plugins/SegmentEditor/templates/jquery.jscrollpane.js";
-        $jsFiles[] = "plugins/SegmentEditor/templates/Segmentation.js";
-        $jsFiles[] = "plugins/SegmentEditor/templates/jquery.mousewheel.js";
-        $jsFiles[] = "plugins/SegmentEditor/templates/mwheelIntent.js";
+        $jsFiles[] = "plugins/SegmentEditor/javascripts/Segmentation.js";
     }
 
-    public function getCssFiles($notification)
+    public function getStylesheetFiles(&$stylesheets)
     {
-        $cssFiles = & $notification->getNotificationObject();
-        $cssFiles[] = "plugins/SegmentEditor/templates/Segmentation.css";
-        $cssFiles[] = "plugins/SegmentEditor/templates/jquery.jscrollpane.css";
-        $cssFiles[] = "plugins/SegmentEditor/templates/scroll.css";
+        $stylesheets[] = "plugins/SegmentEditor/stylesheets/segmentation.less";
     }
-
 }

@@ -6,8 +6,12 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_UserCountry
+ * @package UserCountry
  */
+namespace Piwik\Plugins\UserCountry\LocationProvider\GeoIp;
+
+use Piwik\Piwik;
+use Piwik\Plugins\UserCountry\LocationProvider\GeoIp;
 
 /**
  * A LocationProvider that uses the PECL implementation of GeoIP.
@@ -15,9 +19,9 @@
  * FIXME: For some reason, if the PECL module is loaded & an organization DB is available, the PHP
  * module won't return organization info. If the PECL module is not loaded, organization info is returned.
  *
- * @package Piwik_UserCountry
+ * @package UserCountry
  */
-class Piwik_UserCountry_LocationProvider_GeoIp_Pecl extends Piwik_UserCountry_LocationProvider_GeoIp
+class Pecl extends GeoIp
 {
     const ID = 'geoip_pecl';
     const TITLE = 'GeoIP (PECL)';
@@ -122,16 +126,16 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Pecl extends Piwik_UserCountry_Lo
 
             // check if the directory the PECL module is looking for exists
             if (!is_dir($dbDir)) {
-                return Piwik_Translate('UserCountry_PeclGeoIPNoDBDir', array($quotedDir, "'geoip.custom_directory'"));
+                return Piwik::translate('UserCountry_PeclGeoIPNoDBDir', array($quotedDir, "'geoip.custom_directory'"));
             }
 
             // check if the user named the city database GeoLiteCity.dat
             if (file_exists($dbDir . 'GeoLiteCity.dat')) {
-                return Piwik_Translate('UserCountry_PeclGeoLiteError',
+                return Piwik::translate('UserCountry_PeclGeoLiteError',
                     array($quotedDir, "'GeoLiteCity.dat'", "'GeoIPCity.dat'"));
             }
 
-            return Piwik_Translate('UserCountry_CannotFindPeclGeoIPDb',
+            return Piwik::translate('UserCountry_CannotFindPeclGeoIPDb',
                 array($quotedDir, "'GeoIP.dat'", "'GeoIPCity.dat'"));
         }
 
@@ -209,11 +213,11 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Pecl extends Piwik_UserCountry_Lo
      */
     public function getInfo()
     {
-        $desc = Piwik_Translate('UserCountry_GeoIpLocationProviderDesc_Pecl1') . '<br/><br/>'
-            . Piwik_Translate('UserCountry_GeoIpLocationProviderDesc_Pecl2');
+        $desc = Piwik::translate('UserCountry_GeoIpLocationProviderDesc_Pecl1') . '<br/><br/>'
+            . Piwik::translate('UserCountry_GeoIpLocationProviderDesc_Pecl2');
         $installDocs = '<em>'
             . '<a target="_blank" href="http://piwik.org/faq/how-to/#faq_164">'
-            . Piwik_Translate('UserCountry_HowToInstallGeoIpPecl')
+            . Piwik::translate('UserCountry_HowToInstallGeoIpPecl')
             . '</a>'
             . '</em>';
 
@@ -221,32 +225,32 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Pecl extends Piwik_UserCountry_Lo
         if ($this->isAvailable()) {
             $peclDir = ini_get('geoip.custom_directory');
             if ($peclDir === false) {
-                $extraMessage = Piwik_Translate('UserCountry_GeoIPPeclCustomDirNotSet', "'geoip.custom_directory'");
+                $extraMessage = Piwik::translate('UserCountry_GeoIPPeclCustomDirNotSet', "'geoip.custom_directory'");
             } else {
                 $extraMessage = 'The \'geoip.custom_directory\' PHP ini option is set to \'' . $peclDir . '\'.';
             }
 
             $availableDatabaseTypes = array();
             if (self::isCityDatabaseAvailable()) {
-                $availableDatabaseTypes[] = Piwik_Translate('UserCountry_City');
+                $availableDatabaseTypes[] = Piwik::translate('UserCountry_City');
             }
             if (self::isRegionDatabaseAvailable()) {
-                $availableDatabaseTypes[] = Piwik_Translate('UserCountry_Region');
+                $availableDatabaseTypes[] = Piwik::translate('UserCountry_Region');
             }
             if (self::isCountryDatabaseAvailable()) {
-                $availableDatabaseTypes[] = Piwik_Translate('UserCountry_Country');
+                $availableDatabaseTypes[] = Piwik::translate('UserCountry_Country');
             }
             if (self::isISPDatabaseAvailable()) {
                 $availableDatabaseTypes[] = 'ISP';
             }
             if (self::isOrgDatabaseAvailable()) {
-                $availableDatabaseTypes[] = Piwik_Translate('UserCountry_Organization');
+                $availableDatabaseTypes[] = Piwik::translate('UserCountry_Organization');
             }
 
-            $extraMessage .= '<br/><br/>' . Piwik_Translate('UserCountry_GeoIPImplHasAccessTo') . ':&nbsp;<strong><em>'
+            $extraMessage .= '<br/><br/>' . Piwik::translate('UserCountry_GeoIPImplHasAccessTo') . ':&nbsp;<strong><em>'
                 . implode(', ', $availableDatabaseTypes) . '</em></strong>.';
 
-            $extraMessage = '<strong><em>' . Piwik_Translate('General_Note') . ':&nbsp;</em></strong>' . $extraMessage;
+            $extraMessage = '<strong><em>' . Piwik::translate('General_Note') . ':&nbsp;</em></strong>' . $extraMessage;
         }
 
         return array('id'            => self::ID,
@@ -266,8 +270,8 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Pecl extends Piwik_UserCountry_Lo
     public static function isLocationDatabaseAvailable()
     {
         return self::isCityDatabaseAvailable()
-            || self::isRegionDatabaseAvailable()
-            || self::isCountryDatabaseAvailable();
+        || self::isRegionDatabaseAvailable()
+        || self::isCountryDatabaseAvailable();
     }
 
     /**
@@ -278,7 +282,7 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Pecl extends Piwik_UserCountry_Lo
     public static function isCityDatabaseAvailable()
     {
         return geoip_db_avail(GEOIP_CITY_EDITION_REV0)
-            || geoip_db_avail(GEOIP_CITY_EDITION_REV1);
+        || geoip_db_avail(GEOIP_CITY_EDITION_REV1);
     }
 
     /**
@@ -289,7 +293,7 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Pecl extends Piwik_UserCountry_Lo
     public static function isRegionDatabaseAvailable()
     {
         return geoip_db_avail(GEOIP_REGION_EDITION_REV0)
-            || geoip_db_avail(GEOIP_REGION_EDITION_REV1);
+        || geoip_db_avail(GEOIP_REGION_EDITION_REV1);
     }
 
     /**

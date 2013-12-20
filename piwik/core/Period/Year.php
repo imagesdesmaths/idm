@@ -8,12 +8,16 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\Period;
+
+use Piwik\Date;
+use Piwik\Period;
 
 /**
  * @package Piwik
- * @subpackage Piwik_Period
+ * @subpackage Period
  */
-class Piwik_Period_Year extends Piwik_Period
+class Year extends Period
 {
     protected $label = 'year';
 
@@ -62,8 +66,8 @@ class Piwik_Period_Year extends Piwik_Period
 
         $year = $this->date->toString("Y");
         for ($i = 1; $i <= 12; $i++) {
-            $this->addSubperiod(new Piwik_Period_Month(
-                    Piwik_Date::factory("$year-$i-01")
+            $this->addSubperiod(new Month(
+                    Date::factory("$year-$i-01")
                 )
             );
         }
@@ -77,12 +81,10 @@ class Piwik_Period_Year extends Piwik_Period
      */
     function toString($format = 'ignored')
     {
-        if (!$this->subperiodsProcessed) {
-            $this->generate();
-        }
+        $this->generate();
         $stringMonth = array();
         foreach ($this->subperiods as $month) {
-            $stringMonth[] = $month->get("Y") . "-" . $month->get("m") . "-01";
+            $stringMonth[] = $month->getDateStart()->toString("Y") . "-" . $month->getDateStart()->toString("m") . "-01";
         }
         return $stringMonth;
     }

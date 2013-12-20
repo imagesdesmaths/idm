@@ -6,37 +6,45 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_ImageGraph
+ * @package ImageGraph
  */
+namespace Piwik\Plugins\ImageGraph;
 
-class Piwik_ImageGraph extends Piwik_Plugin
+use Piwik\Common;
+use Piwik\Config;
+use Piwik\Period;
+use Piwik\Period\Range;
+use Piwik\Site;
+use Piwik\Url;
+
+class ImageGraph extends \Piwik\Plugin
 {
+    public function getInformation()
+    {
+        $suffix = ' Debug: <a href="' . Url::getCurrentQueryStringWithParametersModified(
+                array('module' => 'ImageGraph', 'action' => 'index')) . '">All images</a>';
+        $info = parent::getInformation();
+        $info['description'] .= ' ' . $suffix;
+        return $info;
+    }
+
     static private $CONSTANT_ROW_COUNT_REPORT_EXCEPTIONS = array(
-        'Referers_getRefererType',
+        'Referrers_getReferrerType',
     );
 
     // row evolution support not yet implemented for these APIs
     static private $REPORTS_DISABLED_EVOLUTION_GRAPH = array(
-        'Referers_getAll',
+        'Referrers_getAll',
     );
 
-    public function getInformation()
-    {
-        return array(
-            'description'     => Piwik_Translate('ImageGraph_PluginDescription')
-                . ' Debug: <a href="' . Piwik_Url::getCurrentQueryStringWithParametersModified(
-                array('module' => 'ImageGraph', 'action' => 'index'))
-                . '">All images</a>',
-            'author'          => 'Piwik',
-            'author_homepage' => 'http://piwik.org/',
-            'version'         => Piwik_Version::VERSION
-        );
-    }
-
-    function getListHooksRegistered()
+    /**
+     * @see Piwik_Plugin::getListHooksRegistered
+     */
+    public function getListHooksRegistered()
     {
         $hooks = array(
-            'API.getReportMetadata.end.end' => 'getReportMetadata',
+            'API.getReportMetadata.end' => array('function' => 'getReportMetadata',
+                                                 'after'    => true),
         );
         return $hooks;
     }
@@ -45,13 +53,12 @@ class Piwik_ImageGraph extends Piwik_Plugin
     const GRAPH_EVOLUTION_LAST_PERIODS = 30;
 
     /**
-     * @param Piwik_Event_Notification $notification  notification object
+     * @param array $reports
+     * @param array $info
      * @return mixed
      */
-    public function getReportMetadata($notification)
+    public function getReportMetadata(&$reports, $info)
     {
-        $info = $notification->getNotificationInfo();
-        $reports = & $notification->getNotificationObject();
         $idSites = $info['idSites'];
 
         // If only one website is selected, we add the Graph URL
@@ -69,7 +76,7 @@ class Piwik_ImageGraph extends Piwik_Plugin
         }
 
         // need two sets of period & date, one for single period graphs, one for multiple periods graphs
-        if (Piwik_Archive::isMultiplePeriod($info['date'], $info['period'])) {
+        if (Period::isMultiplePeriod($info['date'], $info['period'])) {
             $periodForMultiplePeriodGraph = $info['period'];
             $dateForMultiplePeriodGraph = $info['date'];
 
@@ -79,13 +86,13 @@ class Piwik_ImageGraph extends Piwik_Plugin
             $periodForSinglePeriodGraph = $info['period'];
             $dateForSinglePeriodGraph = $info['date'];
 
-            $piwikSite = new Piwik_Site($idSite);
+            $piwikSite = new Site($idSite);
             if ($periodForSinglePeriodGraph == 'range') {
-                $periodForMultiplePeriodGraph = Piwik_Config::getInstance()->General['graphs_default_period_to_plot_when_period_range'];
+                $periodForMultiplePeriodGraph = Config::getInstance()->General['graphs_default_period_to_plot_when_period_range'];
                 $dateForMultiplePeriodGraph = $dateForSinglePeriodGraph;
             } else {
                 $periodForMultiplePeriodGraph = $periodForSinglePeriodGraph;
-                $dateForMultiplePeriodGraph = Piwik_Controller::getDateRangeRelativeToEndDate(
+                $dateForMultiplePeriodGraph = Range::getRelativeToEndDate(
                     $periodForSinglePeriodGraph,
                     'last' . self::GRAPH_EVOLUTION_LAST_PERIODS,
                     $dateForSinglePeriodGraph,
@@ -94,7 +101,7 @@ class Piwik_ImageGraph extends Piwik_Plugin
             }
         }
 
-        $token_auth = Piwik_Common::getRequestVar('token_auth', false);
+        $token_auth = Common::getRequestVar('token_auth', false);
 
         $urlPrefix = "index.php?";
         foreach ($reports as &$report) {
@@ -125,12 +132,12 @@ class Piwik_ImageGraph extends Piwik_Plugin
             }
 
             // add the idSubtable if it exists
-            $idSubtable = Piwik_Common::getRequestVar('idSubtable', false);
+            $idSubtable = Common::getRequestVar('idSubtable', false);
             if ($idSubtable !== false) {
                 $parameters['idSubtable'] = $idSubtable;
             }
 
-            $report['imageGraphUrl'] = $urlPrefix . Piwik_Url::getQueryStringFromParameters($parameters);
+            $report['imageGraphUrl'] = $urlPrefix . Url::getQueryStringFromParameters($parameters);
 
             // thanks to API.getRowEvolution, reports with dimensions can now be plotted using an evolution graph
             // however, most reports with a fixed set of dimension values are excluded
@@ -139,11 +146,12 @@ class Piwik_ImageGraph extends Piwik_Plugin
 
             $reportSupportsEvolution = !in_array($reportUniqueId, self::$REPORTS_DISABLED_EVOLUTION_GRAPH);
 
-            if ( $reportSupportsEvolution
-                && $reportWithDimensionsSupportsEvolution) {
+            if ($reportSupportsEvolution
+                && $reportWithDimensionsSupportsEvolution
+            ) {
                 $parameters['period'] = $periodForMultiplePeriodGraph;
                 $parameters['date'] = $dateForMultiplePeriodGraph;
-                $report['imageGraphEvolutionUrl'] = $urlPrefix . Piwik_Url::getQueryStringFromParameters($parameters);
+                $report['imageGraphEvolutionUrl'] = $urlPrefix . Url::getQueryStringFromParameters($parameters);
             }
         }
     }

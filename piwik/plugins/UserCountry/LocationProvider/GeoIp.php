@@ -6,15 +6,20 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_UserCountry
+ * @package UserCountry
  */
+namespace Piwik\Plugins\UserCountry\LocationProvider;
+
+use Exception;
+use Piwik\Piwik;
+use Piwik\Plugins\UserCountry\LocationProvider;
 
 /**
  * Base type for all GeoIP LocationProviders.
  *
- * @package Piwik_UserCountry
+ * @package UserCountry
  */
-abstract class Piwik_UserCountry_LocationProvider_GeoIp extends Piwik_UserCountry_LocationProvider
+abstract class GeoIp extends LocationProvider
 {
     /* For testing, use: 'http://piwik-team.s3.amazonaws.com/GeoLiteCity.dat.gz' */
     const GEO_LITE_URL = 'http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz';
@@ -115,7 +120,7 @@ abstract class Piwik_UserCountry_LocationProvider_GeoIp extends Piwik_UserCountr
             }
 
             if (!$isResultCorrect) {
-                $unknown = Piwik_Translate('General_Unknown');
+                $unknown = Piwik::translate('General_Unknown');
 
                 $location = "'"
                     . (empty($location[self::CITY_NAME_KEY]) ? $unknown : $location[self::CITY_NAME_KEY])
@@ -130,7 +135,7 @@ abstract class Piwik_UserCountry_LocationProvider_GeoIp extends Piwik_UserCountr
                     . $expectedResult[self::COUNTRY_CODE_KEY] . "'";
 
                 $bind = array($testIp, $location, $expectedLocation);
-                return Piwik_Translate('UserCountry_TestIPLocatorFailed', $bind);
+                return Piwik::translate('UserCountry_TestIPLocatorFailed', $bind);
             }
 
             return true;
@@ -156,7 +161,7 @@ abstract class Piwik_UserCountry_LocationProvider_GeoIp extends Piwik_UserCountr
         if (isset($regionNames[$countryCode][$regionCode])) {
             return $regionNames[$countryCode][$regionCode];
         } else {
-            return Piwik_Translate('General_Unknown');
+            return Piwik::translate('General_Unknown');
         }
     }
 
@@ -168,6 +173,7 @@ abstract class Piwik_UserCountry_LocationProvider_GeoIp extends Piwik_UserCountr
     public static function getRegionNames()
     {
         if (is_null(self::$regionNames)) {
+            $GEOIP_REGION_NAME = array();
             require_once PIWIK_INCLUDE_PATH . '/libs/MaxMindGeoIP/geoipregionvars.php';
             self::$regionNames = $GEOIP_REGION_NAME;
         }
@@ -229,8 +235,8 @@ abstract class Piwik_UserCountry_LocationProvider_GeoIp extends Piwik_UserCountr
     public static function isDatabaseInstalled()
     {
         return self::getPathToGeoIpDatabase(self::$dbNames['loc'])
-            || self::getPathToGeoIpDatabase(self::$dbNames['isp'])
-            || self::getPathToGeoIpDatabase(self::$dbNames['org']);
+        || self::getPathToGeoIpDatabase(self::$dbNames['isp'])
+        || self::getPathToGeoIpDatabase(self::$dbNames['org']);
     }
 
     /**
@@ -253,7 +259,6 @@ abstract class Piwik_UserCountry_LocationProvider_GeoIp extends Piwik_UserCountr
         return false;
     }
 }
-
 
 /**
  * @see plugins/UserCountry/LocationProvider/GeoIp/ServerBased.php

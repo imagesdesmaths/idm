@@ -9,19 +9,26 @@
  * @package Updates
  */
 
+namespace Piwik\Updates;
+
+use Piwik\Common;
+use Piwik\DbHelper;
+use Piwik\Updater;
+use Piwik\Updates;
+
 /**
  * @package Updates
  */
-class Piwik_Updates_0_5_5 extends Piwik_Updates
+class Updates_0_5_5 extends Updates
 {
     static function getSql($schema = 'Myisam')
     {
         $sqlarray = array(
-            'DROP INDEX index_idsite_date ON ' . Piwik_Common::prefixTable('log_visit')                                                                => '1091',
-            'CREATE INDEX index_idsite_date_config ON ' . Piwik_Common::prefixTable('log_visit') . ' (idsite, visit_server_date, config_md5config(8))' => '1061',
+            'DROP INDEX index_idsite_date ON ' . Common::prefixTable('log_visit')                                                                => '1091',
+            'CREATE INDEX index_idsite_date_config ON ' . Common::prefixTable('log_visit') . ' (idsite, visit_server_date, config_md5config(8))' => '1061',
         );
 
-        $tables = Piwik::getTablesInstalled();
+        $tables = DbHelper::getTablesInstalled();
         foreach ($tables as $tableName) {
             if (preg_match('/archive_/', $tableName) == 1) {
                 $sqlarray['DROP INDEX index_all ON ' . $tableName] = '1091';
@@ -36,7 +43,7 @@ class Piwik_Updates_0_5_5 extends Piwik_Updates
 
     static function update()
     {
-        Piwik_Updater::updateDatabase(__FILE__, self::getSql());
+        Updater::updateDatabase(__FILE__, self::getSql());
 
     }
 }

@@ -9,13 +9,16 @@
  * @package Piwik
  */
 
+namespace Piwik\Unzip;
+
+
 /**
  * Unzip implementation for .gz files.
  *
  * @package Piwik
- * @subpackage Piwik_Unzip
+ * @subpackage Unzip
  */
-class Piwik_Unzip_Gzip implements Piwik_Unzip_Interface
+class Gzip implements UncompressInterface
 {
     /**
      * Name of .gz file.

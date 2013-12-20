@@ -8,6 +8,7 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik;
 
 /**
  * Abstract class for update scripts
@@ -15,12 +16,12 @@
  * @example core/Updates/0.4.2.php
  * @package Piwik
  */
-abstract class Piwik_Updates
+abstract class Updates
 {
     /**
      * Return SQL to be executed in this update
      *
-     * @param string $schema  Schema name
+     * @param string $schema Schema name
      * @return array(
      *              'ALTER .... ' => '1234', // if the query fails, it will be ignored if the error code is 1234
      *              'ALTER .... ' => false,  // if an error occurs, the update will stop and fail
@@ -42,6 +43,8 @@ abstract class Piwik_Updates
     /**
      * Tell the updater that this is a major update.
      * Leads to a more visible notice.
+     *
+     * @return bool
      */
     static function isMajorUpdate()
     {
@@ -53,7 +56,7 @@ abstract class Piwik_Updates
      */
     static function enableMaintenanceMode()
     {
-        $config = Piwik_Config::getInstance();
+        $config = Config::getInstance();
         $config->init();
 
         $tracker = $config->Tracker;
@@ -72,7 +75,7 @@ abstract class Piwik_Updates
      */
     static function disableMaintenanceMode()
     {
-        $config = Piwik_Config::getInstance();
+        $config = Config::getInstance();
         $config->init();
 
         $tracker = $config->Tracker;
@@ -86,10 +89,9 @@ abstract class Piwik_Updates
         $config->forceSave();
     }
 
-
     public static function deletePluginFromConfigFile($pluginToDelete)
     {
-        $config = Piwik_Config::getInstance();
+        $config = Config::getInstance();
         $config->init();
         if (isset($config->Plugins['Plugins'])) {
             $plugins = $config->Plugins['Plugins'];
@@ -107,10 +109,4 @@ abstract class Piwik_Updates
             $config->forceSave();
         }
     }
-
-    public static function deletePluginFromFilesystem($plugin)
-    {
-        Piwik::unlinkRecursive(PIWIK_INCLUDE_PATH . '/plugins/' . $plugin, $deleteRootToo = true);
-    }
-
 }

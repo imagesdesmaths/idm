@@ -8,6 +8,8 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\DataTable\Renderer;
+
 
 /**
  * TSV export
@@ -16,9 +18,9 @@
  * TSV is therefore the 'CSV' that is Excel compatible
  *
  * @package Piwik
- * @subpackage Piwik_DataTable
+ * @subpackage DataTable
  */
-class Piwik_DataTable_Renderer_Tsv extends Piwik_DataTable_Renderer_Csv
+class Tsv extends Csv
 {
     /**
      * Constructor

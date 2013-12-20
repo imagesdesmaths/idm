@@ -8,14 +8,19 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\DataTable\Renderer;
+
+use Piwik\DataTable\Manager;
+use Piwik\DataTable;
+use Piwik\DataTable\Renderer;
 
 /**
  * Simple output
  *
  * @package Piwik
- * @subpackage Piwik_DataTable
+ * @subpackage Piwik_DataTable_Renderer_ConsoleDataTable
  */
-class Piwik_DataTable_Renderer_Console extends Piwik_DataTable_Renderer
+class Console extends Renderer
 {
     /**
      * Prefix
@@ -50,7 +55,7 @@ class Piwik_DataTable_Renderer_Console extends Piwik_DataTable_Renderer
     /**
      * Sets the prefix to be used
      *
-     * @param string $str  new prefix
+     * @param string $str new prefix
      */
     public function setPrefixRow($str)
     {
@@ -60,15 +65,15 @@ class Piwik_DataTable_Renderer_Console extends Piwik_DataTable_Renderer
     /**
      * Computes the output of the given array of data tables
      *
-     * @param Piwik_DataTable_Array $tableArray  data tables to render
-     * @param string $prefix      prefix to output before table data
+     * @param DataTable\Map $map data tables to render
+     * @param string $prefix prefix to output before table data
      * @return string
      */
-    protected function renderDataTableArray(Piwik_DataTable_Array $tableArray, $prefix)
+    protected function renderDataTableMap(DataTable\Map $map, $prefix)
     {
-        $output = "Piwik_DataTable_Array<hr />";
+        $output = "Set<hr />";
         $prefix = $prefix . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-        foreach ($tableArray->getArray() as $descTable => $table) {
+        foreach ($map->getDataTables() as $descTable => $table) {
             $output .= $prefix . "<b>" . $descTable . "</b><br />";
             $output .= $prefix . $this->renderTable($table, $prefix . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
             $output .= "<hr />";
@@ -79,19 +84,19 @@ class Piwik_DataTable_Renderer_Console extends Piwik_DataTable_Renderer
     /**
      * Computes the given dataTable output and returns the string/binary
      *
-     * @param Piwik_DataTable $table   data table to render
-     * @param string $prefix  prefix to output before table data
+     * @param DataTable $table data table to render
+     * @param string $prefix prefix to output before table data
      * @return string
      */
     protected function renderTable($table, $prefix = "")
     {
         if (is_array($table)) // convert array to DataTable
         {
-            $table = Piwik_DataTable::makeFromSimpleArray($table);
+            $table = DataTable::makeFromSimpleArray($table);
         }
 
-        if ($table instanceof Piwik_DataTable_Array) {
-            return $this->renderDataTableArray($table, $prefix);
+        if ($table instanceof DataTable\Map) {
+            return $this->renderDataTableMap($table, $prefix);
         }
 
         if ($table->getRowsCount() == 0) {
@@ -102,12 +107,12 @@ class Piwik_DataTable_Renderer_Console extends Piwik_DataTable_Renderer
         $output = '';
         $i = 1;
         foreach ($table->getRows() as $row) {
-            $dataTableArrayBreak = false;
+            $dataTableMapBreak = false;
             $columns = array();
             foreach ($row->getColumns() as $column => $value) {
-                if ($value instanceof Piwik_DataTable_Array) {
-                    $output .= $this->renderDataTableArray($value, $prefix);
-                    $dataTableArrayBreak = true;
+                if ($value instanceof DataTable\Map) {
+                    $output .= $this->renderDataTableMap($value, $prefix);
+                    $dataTableMapBreak = true;
                     break;
                 }
                 if (is_string($value)) $value = "'$value'";
@@ -115,7 +120,7 @@ class Piwik_DataTable_Renderer_Console extends Piwik_DataTable_Renderer
 
                 $columns[] = "'$column' => $value";
             }
-            if ($dataTableArrayBreak === true) {
+            if ($dataTableMapBreak === true) {
                 continue;
             }
             $columns = implode(", ", $columns);
@@ -136,7 +141,7 @@ class Piwik_DataTable_Renderer_Console extends Piwik_DataTable_Renderer
                 if ($row->isSubtableLoaded()) {
                     $depth++;
                     $output .= $this->renderTable(
-                        Piwik_DataTable_Manager::getInstance()->getTable(
+                        Manager::getInstance()->getTable(
                             $row->getIdSubDataTable()
                         ),
                         $prefix . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
@@ -149,9 +154,10 @@ class Piwik_DataTable_Renderer_Console extends Piwik_DataTable_Renderer
             $i++;
         }
 
-        if (!empty($table->metadata)) {
+        $metadata = $table->getAllTableMetadata();
+        if (!empty($metadata)) {
             $output .= "<hr />Metadata<br />";
-            foreach ($table->metadata as $id => $metadata) {
+            foreach ($metadata as $id => $metadata) {
                 $output .= "<br />";
                 $output .= $prefix . " <b>$id</b><br />";
                 foreach ($metadata as $name => $value) {

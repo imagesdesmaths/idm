@@ -8,6 +8,7 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik;
 
 /**
  * Simple class to handle the cookies:
@@ -17,7 +18,7 @@
  *
  * @package Piwik
  */
-class Piwik_Cookie
+class Cookie
 {
     /**
      * Don't create a cookie bigger than 1k
@@ -76,11 +77,11 @@ class Piwik_Cookie
      * Instantiate a new Cookie object and tries to load the cookie content if the cookie
      * exists already.
      *
-     * @param string $cookieName  cookie Name
-     * @param int $expire      The timestamp after which the cookie will expire, eg time() + 86400;
+     * @param string $cookieName cookie Name
+     * @param int $expire The timestamp after which the cookie will expire, eg time() + 86400;
      *                                  use 0 (int zero) to expire cookie at end of browser session
-     * @param string $path        The path on the server in which the cookie will be available on.
-     * @param bool|string $keyStore    Will be used to store several bits of data (eg. one array per website)
+     * @param string $path The path on the server in which the cookie will be available on.
+     * @param bool|string $keyStore Will be used to store several bits of data (eg. one array per website)
      */
     public function __construct($cookieName, $expire = null, $path = null, $keyStore = false)
     {
@@ -126,9 +127,9 @@ class Piwik_Cookie
      *
      * @link http://php.net/setcookie
      *
-     * @param string $Name      Name of cookie
-     * @param string $Value     Value of cookie
-     * @param int $Expires   Time the cookie expires
+     * @param string $Name Name of cookie
+     * @param string $Value Value of cookie
+     * @param int $Expires Time the cookie expires
      * @param string $Path
      * @param string $Domain
      * @param bool $Secure
@@ -155,7 +156,7 @@ class Piwik_Cookie
             . (!$Secure ? '' : '; secure')
             . (!$HTTPOnly ? '' : '; HttpOnly');
 
-        Piwik_Common::sendHeader($header, false);
+        Common::sendHeader($header, false);
     }
 
     /**
@@ -163,7 +164,7 @@ class Piwik_Cookie
      */
     protected function setP3PHeader()
     {
-        Piwik_Common::sendHeader("P3P: CP='OTI DSP COR NID STP UNI OTPa OUR'");
+        Common::sendHeader("P3P: CP='OTI DSP COR NID STP UNI OTPa OUR'");
     }
 
     /**
@@ -203,7 +204,7 @@ class Piwik_Cookie
     {
         $signature = substr($content, -40);
         if (substr($content, -43, 3) == self::VALUE_SEPARATOR . '_=' &&
-            $signature == sha1(substr($content, 0, -40) . Piwik_Common::getSalt())
+            $signature == sha1(substr($content, 0, -40) . SettingsPiwik::getSalt())
         ) {
             // strip trailing: VALUE_SEPARATOR '_=' signature"
             return substr($content, 0, -43);
@@ -269,7 +270,7 @@ class Piwik_Cookie
             $cookieStr .= '_=';
 
             // sign cookie
-            $signature = sha1($cookieStr . Piwik_Common::getSalt());
+            $signature = sha1($cookieStr . SettingsPiwik::getSalt());
             return $cookieStr . $signature;
         }
 
@@ -316,8 +317,8 @@ class Piwik_Cookie
      * You should save arrays only when you are sure about their maximum data size.
      * A cookie has to stay small and its size shouldn't increase over time!
      *
-     * @param string $name   Name of the value to save; the name will be used to retrieve this value
-     * @param string|array|number $value  Value to save. If null, entry will be deleted from cookie.
+     * @param string $name Name of the value to save; the name will be used to retrieve this value
+     * @param string|array|number $value Value to save. If null, entry will be deleted from cookie.
      */
     public function set($name, $value)
     {
@@ -375,11 +376,11 @@ class Piwik_Cookie
      * Escape values from the cookie before sending them back to the client
      * (when using the get() method).
      *
-     * @param string $value  Value to be escaped
+     * @param string $value Value to be escaped
      * @return mixed  The value once cleaned.
      */
     protected static function escapeValue($value)
     {
-        return Piwik_Common::sanitizeInputValues($value);
+        return Common::sanitizeInputValues($value);
     }
 }

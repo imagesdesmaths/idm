@@ -9,17 +9,23 @@
  * @package Updates
  */
 
+namespace Piwik\Updates;
+
+use Piwik\Common;
+use Piwik\Updater;
+use Piwik\Updates;
+
 /**
  * @package Updates
  */
-class Piwik_Updates_1_7_b1 extends Piwik_Updates
+class Updates_1_7_b1 extends Updates
 {
     static function getSql($schema = 'Myisam')
     {
         return array(
-            'ALTER TABLE `' . Piwik_Common::prefixTable('pdf') . '`
-		    	ADD COLUMN `aggregate_reports_format` TINYINT(1) NOT NULL AFTER `reports`'                      => false,
-            'UPDATE `' . Piwik_Common::prefixTable('pdf') . '`
+            'ALTER TABLE `' . Common::prefixTable('pdf') . '`
+		    	ADD COLUMN `aggregate_reports_format` TINYINT(1) NOT NULL AFTER `reports`'                => false,
+            'UPDATE `' . Common::prefixTable('pdf') . '`
 		    	SET `aggregate_reports_format` = 1' => false,
         );
     }
@@ -27,8 +33,8 @@ class Piwik_Updates_1_7_b1 extends Piwik_Updates
     static function update()
     {
         try {
-            Piwik_Updater::updateDatabase(__FILE__, self::getSql());
-        } catch (Exception $e) {
+            Updater::updateDatabase(__FILE__, self::getSql());
+        } catch (\Exception $e) {
         }
     }
 }

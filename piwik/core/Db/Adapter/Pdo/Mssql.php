@@ -8,12 +8,24 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\Db\Adapter\Pdo;
+
+use Exception;
+use PDO;
+use PDOException;
+use Piwik\Config;
+use Piwik\Db\AdapterInterface;
+use Piwik\Piwik;
+use Zend_Db;
+use Zend_Db_Adapter_Exception;
+use Zend_Db_Adapter_Pdo_Mssql;
+use Zend_Db_Profiler;
 
 /**
  * @package Piwik
  * @subpackage Piwik_Db
  */
-class Piwik_Db_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Mssql implements Piwik_Db_Adapter_Interface
+class Mssql extends Zend_Db_Adapter_Pdo_Mssql implements AdapterInterface
 {
     /**
      * Returns connection handle
@@ -37,7 +49,7 @@ class Piwik_Db_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Mssql implements Piwik_Db_A
             /**
              * @see Zend_Db_Adapter_Exception
              */
-            throw new Zend_Db_Adapter_Exception('The PDO extension is required for this adapter but the extension is not loaded');
+            throw new \Zend_Db_Adapter_Exception('The PDO extension is required for this adapter but the extension is not loaded');
         }
 
         // check the PDO driver is available
@@ -45,7 +57,7 @@ class Piwik_Db_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Mssql implements Piwik_Db_A
             /**
              * @see Zend_Db_Adapter_Exception
              */
-            throw new Zend_Db_Adapter_Exception('The ' . $this->_pdoType . ' driver is not currently installed');
+            throw new \Zend_Db_Adapter_Exception('The ' . $this->_pdoType . ' driver is not currently installed');
         }
 
         // create PDO connection
@@ -70,7 +82,6 @@ class Piwik_Db_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Mssql implements Piwik_Db_A
 
             $this->_connection = new PDO("sqlsrv:$serverName", $uid, $pwd, array('Database' => $database));
 
-
             if ($this->_connection === false) {
                 die(self::FormatErrors(sqlsrv_errors()));
             }
@@ -90,7 +101,6 @@ class Piwik_Db_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Mssql implements Piwik_Db_A
             $this->_connection->setAttribute(PDO::ATTR_CASE, $this->_caseFolding);
             $this->_connection->setAttribute(PDO::SQLSRV_ENCODING_UTF8, true);
 
-
             // always use exceptions.
             $this->_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -99,7 +109,7 @@ class Piwik_Db_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Mssql implements Piwik_Db_A
             /**
              * @see Zend_Db_Adapter_Exception
              */
-            throw new Zend_Db_Adapter_Exception($e->getMessage(), $e->getCode(), $e);
+            throw new \Zend_Db_Adapter_Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -129,11 +139,10 @@ class Piwik_Db_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Mssql implements Piwik_Db_A
     public function checkServerVersion()
     {
         $serverVersion = $this->getServerVersion();
-        $requiredVersion = Piwik_Config::getInstance()->General['minimum_mssql_version'];
+        $requiredVersion = Config::getInstance()->General['minimum_mssql_version'];
         if (version_compare($serverVersion, $requiredVersion) === -1) {
-            throw new Exception(Piwik_TranslateException('General_ExceptionDatabaseVersion', array('MSSQL', $serverVersion, $requiredVersion)));
+            throw new Exception(Piwik::translate('General_ExceptionDatabaseVersion', array('MSSQL', $serverVersion, $requiredVersion)));
         }
-
     }
 
     /**
@@ -167,7 +176,7 @@ class Piwik_Db_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Mssql implements Piwik_Db_A
         if (version_compare($serverVersion, '10') >= 0
             && version_compare($clientVersion, '10') < 0
         ) {
-            throw new Exception(Piwik_TranslateException('General_ExceptionIncompatibleClientServerVersions', array('MSSQL', $clientVersion, $serverVersion)));
+            throw new Exception(Piwik::translate('General_ExceptionIncompatibleClientServerVersions', array('MSSQL', $clientVersion, $serverVersion)));
         }
     }
 
@@ -244,9 +253,9 @@ class Piwik_Db_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Mssql implements Piwik_Db_A
         $this->_connect();
         try {
             $version = $this->_connection->getAttribute(PDO::ATTR_CLIENT_VERSION);
-            $requiredVersion = Piwik_Config::getInstance()->General['minimum_mssql_client_version'];
+            $requiredVersion = Config::getInstance()->General['minimum_mssql_client_version'];
             if (version_compare($version['DriverVer'], $requiredVersion) === -1) {
-                throw new Exception(Piwik_TranslateException('General_ExceptionDatabaseVersion', array('MSSQL', $serverVersion, $requiredVersion)));
+                throw new Exception(Piwik::translate('General_ExceptionDatabaseVersion', array('MSSQL', $version['DriverVer'], $requiredVersion)));
             } else {
                 return $version['DriverVer'];
             }

@@ -6,27 +6,34 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_SegmentEditor
+ * @package SegmentEditor
  */
+namespace Piwik\Plugins\SegmentEditor;
+
+use Piwik\Common;
+use Piwik\Piwik;
+use Piwik\Plugins\API\API as APIMetadata;
+use Piwik\View;
 
 /**
- * @package Piwik_SegmentEditor
+ * @package SegmentEditor
  */
-class Piwik_SegmentEditor_Controller extends Piwik_Controller
+class Controller extends \Piwik\Plugin\Controller
 {
 
     public function getSelector()
     {
-        $view = Piwik_View::factory('selector');
-        $idSite = Piwik_Common::getRequestVar('idSite');
+        $view = new View('@SegmentEditor/getSelector');
+        $idSite = Common::getRequestVar('idSite');
         $this->setGeneralVariablesView($view);
-        $segments = Piwik_API_API::getInstance()->getSegmentsMetadata($idSite);
+        $segments = APIMetadata::getInstance()->getSegmentsMetadata($idSite);
 
         $segmentsByCategory = $customVariablesSegments = array();
-        foreach($segments as $segment) {
-            if($segment['category'] == Piwik_Translate('General_Visit')
-                && $segment['type'] == 'metric') {
-                $metricsLabel = Piwik_Translate('General_Metrics');
+        foreach ($segments as $segment) {
+            if ($segment['category'] == Piwik::translate('General_Visit')
+                && ($segment['type'] == 'metric' && $segment['segment'] != 'visitIp')
+            ) {
+                $metricsLabel = Piwik::translate('General_Metrics');
                 $metricsLabel[0] = strtolower($metricsLabel[0]);
                 $segment['category'] .= ' (' . $metricsLabel . ')';
             }
@@ -36,22 +43,22 @@ class Piwik_SegmentEditor_Controller extends Piwik_Controller
 
         $view->segmentsByCategory = $segmentsByCategory;
 
-        $savedSegments = Piwik_SegmentEditor_API::getInstance()->getAll($idSite);
-        foreach($savedSegments as &$savedSegment) {
-            $savedSegment['name'] = Piwik_Common::sanitizeInputValue($savedSegment['name']);
+        $savedSegments = API::getInstance()->getAll($idSite);
+        foreach ($savedSegments as &$savedSegment) {
+            $savedSegment['name'] = Common::sanitizeInputValue($savedSegment['name']);
         }
-        $view->savedSegmentsJson = Piwik_Common::json_encode($savedSegments);
+        $view->savedSegmentsJson = Common::json_encode($savedSegments);
         $view->authorizedToCreateSegments = !Piwik::isUserIsAnonymous();
 
-        $view->segmentTranslations = Piwik_Common::json_encode($this->getTranslations());
+        $view->segmentTranslations = Common::json_encode($this->getTranslations());
         $out = $view->render();
-        echo $out;
+        return $out;
     }
 
     public function sortSegmentCategories($a, $b)
     {
         // Custom Variables last
-        if($a == Piwik_Translate('CustomVariables_CustomVariables')) {
+        if ($a == Piwik::translate('CustomVariables_CustomVariables')) {
             return 1;
         }
         return 0;
@@ -78,12 +85,10 @@ class Piwik_SegmentEditor_Controller extends Piwik_Controller
             'General_Edit',
             'General_Search',
             'General_SearchNoResults',
-            '',
-            '',
-            '',
         );
-        foreach($translationKeys as $key) {
-            $translations[$key] = Piwik_Translate($key);
+        $translations = array();
+        foreach ($translationKeys as $key) {
+            $translations[$key] = Piwik::translate($key);
         }
         return $translations;
     }

@@ -8,17 +8,25 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\ScheduledTime;
+
+use Exception;
+use Piwik\ScheduledTime;
 
 /**
- * Piwik_ScheduledTime_Weekly class is used to schedule tasks every week.
+ * Weekly class is used to schedule tasks every week.
  *
- * @see Piwik_ScheduledTask
+ * @see ScheduledTask
  * @package Piwik
- * @subpackage Piwik_ScheduledTime
+ * @subpackage ScheduledTime
+ *
  */
-class Piwik_ScheduledTime_Weekly extends Piwik_ScheduledTime
+class Weekly extends ScheduledTime
 {
-
+    /**
+     * @see ScheduledTime::getRescheduledTime
+     * @return int
+     */
     public function getRescheduledTime()
     {
         $currentTime = $this->getTime();
@@ -51,15 +59,29 @@ class Piwik_ScheduledTime_Weekly extends Piwik_ScheduledTime
     }
 
     /**
-     * @param int $_day the day to set, has to be >= 1 and < 8
+     * @param int $day the day to set, has to be >= 1 and < 8
      * @throws Exception if parameter _day is invalid
      */
-    public function setDay($_day)
+    public function setDay($day)
     {
-        if (!($_day >= 1 && $_day < 8)) {
+        if (!is_int($day)) {
+            $day = self::getDayIntFromString($day);
+        }
+
+        if (!($day >= 1 && $day < 8)) {
             throw new Exception ("Invalid day parameter, must be >=1 and < 8");
         }
 
-        $this->day = $_day;
+        $this->day = $day;
+    }
+
+    public static function getDayIntFromString($dayString)
+    {
+        $time = strtotime($dayString);
+        if ($time === false) {
+            throw new Exception("Invalid day string '$dayString'. Must be 'monday', 'tuesday', etc.");
+        }
+
+        return date("N", $time);
     }
 }

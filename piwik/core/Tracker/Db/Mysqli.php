@@ -8,14 +8,18 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\Tracker\Db;
+
+use Exception;
+use Piwik\Tracker\Db;
 
 /**
  * mysqli wrapper
  *
  * @package Piwik
- * @subpackage Piwik_Tracker
+ * @subpackage Tracker
  */
-class Piwik_Tracker_Db_Mysqli extends Piwik_Tracker_Db
+class Mysqli extends Db
 {
     protected $connection = null;
     protected $host;
@@ -64,7 +68,7 @@ class Piwik_Tracker_Db_Mysqli extends Piwik_Tracker_Db
     /**
      * Connects to the DB
      *
-     * @throws Exception|Piwik_Tracker_Db_Exception  if there was an error connecting the DB
+     * @throws Exception|DbException  if there was an error connecting the DB
      */
     public function connect()
     {
@@ -74,11 +78,11 @@ class Piwik_Tracker_Db_Mysqli extends Piwik_Tracker_Db
 
         $this->connection = mysqli_connect($this->host, $this->username, $this->password, $this->dbname, $this->port, $this->socket);
         if (!$this->connection || mysqli_connect_errno()) {
-            throw new Piwik_Tracker_Db_Exception("Connect failed: " . mysqli_connect_error());
+            throw new DbException("Connect failed: " . mysqli_connect_error());
         }
 
         if ($this->charset && !mysqli_set_charset($this->connection, $this->charset)) {
-            throw new Piwik_Tracker_Db_Exception("Set Charset failed: " . mysqli_error($this->connection));
+            throw new DbException("Set Charset failed: " . mysqli_error($this->connection));
         }
 
         $this->password = '';
@@ -102,10 +106,10 @@ class Piwik_Tracker_Db_Mysqli extends Piwik_Tracker_Db
      *
      * @see query()
      *
-     * @param string $query       Query
-     * @param array $parameters  Parameters to bind
+     * @param string $query Query
+     * @param array $parameters Parameters to bind
      * @return array
-     * @throws Exception|Piwik_Tracker_Db_Exception if an exception occured
+     * @throws Exception|DbException if an exception occured
      */
     public function fetchAll($query, $parameters = array())
     {
@@ -118,7 +122,7 @@ class Piwik_Tracker_Db_Mysqli extends Piwik_Tracker_Db
             $query = $this->prepare($query, $parameters);
             $rs = mysqli_query($this->connection, $query);
             if (is_bool($rs)) {
-                throw new Piwik_Tracker_Db_Exception('fetchAll() failed: ' . mysqli_error($this->connection) . ' : ' . $query);
+                throw new DbException('fetchAll() failed: ' . mysqli_error($this->connection) . ' : ' . $query);
             }
 
             while ($row = mysqli_fetch_array($rs, MYSQLI_ASSOC)) {
@@ -131,7 +135,7 @@ class Piwik_Tracker_Db_Mysqli extends Piwik_Tracker_Db
             }
             return $rows;
         } catch (Exception $e) {
-            throw new Piwik_Tracker_Db_Exception("Error query: " . $e->getMessage());
+            throw new DbException("Error query: " . $e->getMessage());
         }
     }
 
@@ -140,9 +144,12 @@ class Piwik_Tracker_Db_Mysqli extends Piwik_Tracker_Db
      *
      * @see query()
      *
-     * @param string $query       Query
-     * @param array $parameters  Parameters to bind
-     * @throws Piwik_Tracker_Db_Exception if an exception occurred
+     * @param string $query Query
+     * @param array $parameters Parameters to bind
+     *
+     * @return array
+     *
+     * @throws DbException if an exception occurred
      */
     public function fetch($query, $parameters = array())
     {
@@ -154,7 +161,7 @@ class Piwik_Tracker_Db_Mysqli extends Piwik_Tracker_Db
             $query = $this->prepare($query, $parameters);
             $rs = mysqli_query($this->connection, $query);
             if (is_bool($rs)) {
-                throw new Piwik_Tracker_Db_Exception('fetch() failed: ' . mysqli_error($this->connection) . ' : ' . $query);
+                throw new DbException('fetch() failed: ' . mysqli_error($this->connection) . ' : ' . $query);
             }
 
             $row = mysqli_fetch_array($rs, MYSQLI_ASSOC);
@@ -165,18 +172,18 @@ class Piwik_Tracker_Db_Mysqli extends Piwik_Tracker_Db
             }
             return $row;
         } catch (Exception $e) {
-            throw new Piwik_Tracker_Db_Exception("Error query: " . $e->getMessage());
+            throw new DbException("Error query: " . $e->getMessage());
         }
     }
 
     /**
      * Executes a query, using optional bound parameters.
      *
-     * @param string $query       Query
-     * @param array|string $parameters  Parameters to bind array('idsite'=> 1)
+     * @param string $query Query
+     * @param array|string $parameters Parameters to bind array('idsite'=> 1)
      *
      * @return bool|resource  false if failed
-     * @throws Piwik_Tracker_Db_Exception  if an exception occurred
+     * @throws DbException  if an exception occurred
      */
     public function query($query, $parameters = array())
     {
@@ -200,7 +207,7 @@ class Piwik_Tracker_Db_Mysqli extends Piwik_Tracker_Db
             }
             return $result;
         } catch (Exception $e) {
-            throw new Piwik_Tracker_Db_Exception("Error query: " . $e->getMessage() . "
+            throw new DbException("Error query: " . $e->getMessage() . "
 								In query: $query
 								Parameters: " . var_export($parameters, true));
         }
@@ -266,7 +273,7 @@ class Piwik_Tracker_Db_Mysqli extends Piwik_Tracker_Db
     /**
      * Return number of affected rows in last query
      *
-     * @param mixed $queryResult  Result from query()
+     * @param mixed $queryResult Result from query()
      * @return int
      */
     public function rowCount($queryResult)

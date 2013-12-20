@@ -8,14 +8,19 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik;
+
+use Exception;
+use Piwik\Session\SaveHandler\DbTable;
+use Zend_Session;
 
 /**
  * Session initialization.
  *
  * @package Piwik
- * @subpackage Piwik_Session
+ * @subpackage Session
  */
-class Piwik_Session extends Zend_Session
+class Session extends Zend_Session
 {
     protected static $sessionStarted = false;
 
@@ -26,20 +31,20 @@ class Piwik_Session extends Zend_Session
      */
     public static function isFileBasedSessions()
     {
-        $config = Piwik_Config::getInstance();
+        $config = Config::getInstance();
         return !isset($config->General['session_save_handler'])
-            || $config->General['session_save_handler'] === 'files';
+        || $config->General['session_save_handler'] === 'files';
     }
 
     /**
      * Start the session
      *
-     * @param array|bool $options  An array of configuration options; the auto-start (bool) setting is ignored
+     * @param array|bool $options An array of configuration options; the auto-start (bool) setting is ignored
      * @return void
      */
     public static function start($options = false)
     {
-        if (Piwik_Common::isPhpCliMode()
+        if (Common::isPhpCliMode()
             || self::$sessionStarted
             || (defined('PIWIK_ENABLE_SESSION_START') && !PIWIK_ENABLE_SESSION_START)
         ) {
@@ -54,7 +59,7 @@ class Piwik_Session extends Zend_Session
         @ini_set('session.use_only_cookies', '1');
 
         // advise browser that session cookie should only be sent over secure connection
-        if (Piwik::isHttps()) {
+        if (ProxyHttp::isHttps()) {
             @ini_set('session.cookie_secure', '1');
         }
 
@@ -70,7 +75,7 @@ class Piwik_Session extends Zend_Session
         @ini_set('session.referer_check', '');
 
         $currentSaveHandler = ini_get('session.save_handler');
-        $config = Piwik_Config::getInstance();
+        $config = Config::getInstance();
 
         if (self::isFileBasedSessions()) {
             // Note: this handler doesn't work well in load-balanced environments and may have a concurrency issue with locked session files
@@ -78,7 +83,7 @@ class Piwik_Session extends Zend_Session
             // for "files", use our own folder to prevent local session file hijacking
             $sessionPath = self::getSessionsDirectory();
             // We always call mkdir since it also chmods the directory which might help when permissions were reverted for some reasons
-            Piwik_Common::mkdir($sessionPath);
+            Filesystem::mkdir($sessionPath);
 
             @ini_set('session.save_handler', 'files');
             @ini_set('session.save_path', $sessionPath);
@@ -89,10 +94,10 @@ class Piwik_Session extends Zend_Session
             // - user  - we can't verify that user-defined session handler functions have already been set via session_set_save_handler()
             // - mm    - this handler is not recommended, unsupported, not available for Windows, and has a potential concurrency issue
 
-            $db = Zend_Registry::get('db');
+            $db = Db::get();
 
             $config = array(
-                'name'           => Piwik_Common::prefixTable('session'),
+                'name'           => Common::prefixTable('session'),
                 'primary'        => 'id',
                 'modifiedColumn' => 'modified',
                 'dataColumn'     => 'data',
@@ -100,7 +105,7 @@ class Piwik_Session extends Zend_Session
                 'db'             => $db,
             );
 
-            $saveHandler = new Piwik_Session_SaveHandler_DbTable($config);
+            $saveHandler = new DbTable($config);
             if ($saveHandler) {
                 self::setSaveHandler($saveHandler);
             }
@@ -115,17 +120,19 @@ class Piwik_Session extends Zend_Session
             Zend_Session::start();
             register_shutdown_function(array('Zend_Session', 'writeClose'), true);
         } catch (Exception $e) {
-            Piwik::log('Unable to start session: ' . $e->getMessage());
+            Log::warning('Unable to start session: ' . $e->getMessage());
 
             $enableDbSessions = '';
-            if (Piwik::isInstalled()) {
+            if (DbHelper::isInstalled()) {
                 $enableDbSessions = "<br/>If you still experience issues after trying these changes,
 			            			we recommend that you <a href='http://piwik.org/faq/how-to-install/#faq_133' target='_blank'>enable database session storage</a>.";
             }
 
+            $pathToSessions = Filechecks::getErrorMessageMissingPermissions(Filesystem::getPathToPiwikRoot() . '/tmp/sessions/');
+            $pathToSessions = SettingsPiwik::rewriteTmpPathWithHostname($pathToSessions);
             $message = sprintf("Error: %s %s %s\n<pre>Debug: the original error was \n%s</pre>",
-                Piwik_Translate('General_ExceptionUnableToStartSession'),
-                Piwik::getErrorMessageMissingPermissions(Piwik_Common::getPathToPiwikRoot() . '/tmp/sessions/'),
+                Piwik::translate('General_ExceptionUnableToStartSession'),
+                $pathToSessions,
                 $enableDbSessions,
                 $e->getMessage()
             );
@@ -141,6 +148,7 @@ class Piwik_Session extends Zend_Session
      */
     public static function getSessionsDirectory()
     {
-        return PIWIK_USER_PATH . '/tmp/sessions';
+        $path = PIWIK_USER_PATH . '/tmp/sessions';
+        return SettingsPiwik::rewriteTmpPathWithHostname($path);
     }
 }

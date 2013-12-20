@@ -8,22 +8,35 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\DataTable\Filter;
+
+use Piwik\DataTable;
+use Piwik\DataTable\Row;
+use Piwik\Site;
 
 /**
- * A DataTable filter that calculates the evolution of a metric and adds
+ * A {@link DataTable} filter that calculates the evolution of a metric and adds
  * it to each row as a percentage.
  *
- * This filter cannot be used as a normal filter since it requires
- * corresponding data from another datatable. Instead, to use it,
- * you must manually perform a binary filter (see the MultiSites API).
+ * **This filter cannot be used as an argument to {@link Piwik\DataTable::filter()}** since
+ * it requires corresponding data from another DataTable. Instead, 
+ * you must manually perform a binary filter (see the **MultiSites** API for an
+ * example).
  *
  * The evolution metric is calculated as:
- * <code>((currentValue - pastValue) / pastValue) * 100</code>
+ * 
+ *     ((currentValue - pastValue) / pastValue) * 100
+ *
+ * @package Piwik
+ * @subpackage DataTable
+ * @api
  */
-class Piwik_DataTable_Filter_CalculateEvolutionFilter extends Piwik_DataTable_Filter_ColumnCallbackAddColumnPercentage
+class CalculateEvolutionFilter extends ColumnCallbackAddColumnPercentage
 {
     /**
      * The the DataTable that contains past data.
+     *
+     * @var DataTable
      */
     private $pastDataTable;
 
@@ -35,13 +48,13 @@ class Piwik_DataTable_Filter_CalculateEvolutionFilter extends Piwik_DataTable_Fi
     /**
      * Constructor.
      *
-     * @param Piwik_DataTable $table The DataTable being filtered.
-     * @param string          $pastDataTable
-     * @param string          $columnToAdd
-     * @param string          $columnToRead
-     * @param int             $quotientPrecision
+     * @param DataTable $table The DataTable being filtered.
+     * @param DataTable $pastDataTable The DataTable containing data for the period in the past.
+     * @param string $columnToAdd The column to add evolution data to, eg, `'visits_evolution'`.
+     * @param string $columnToRead The column to use to calculate evolution data, eg, `'nb_visits'`.
+     * @param int $quotientPrecision The precision to use when rounding the evolution value.
      */
-    function __construct($table, $pastDataTable, $columnToAdd, $columnToRead, $quotientPrecision = 0)
+    public function __construct($table, $pastDataTable, $columnToAdd, $columnToRead, $quotientPrecision = 0)
     {
         parent::__construct(
             $table, $columnToAdd, $columnToRead, $columnToRead, $quotientPrecision, $shouldSkipRows = true);
@@ -55,7 +68,7 @@ class Piwik_DataTable_Filter_CalculateEvolutionFilter extends Piwik_DataTable_Fi
      * Returns the difference between the column in the specific row and its
      * sister column in the past DataTable.
      *
-     * @param Piwik_DataTable_Row $row
+     * @param Row $row
      * @return int|float
      */
     protected function getDividend($row)
@@ -66,7 +79,7 @@ class Piwik_DataTable_Filter_CalculateEvolutionFilter extends Piwik_DataTable_Fi
         // we don't add the new column
         if ($currentValue === false
             && $this->isRevenueEvolution
-            && !Piwik_Site::isEcommerceEnabledFor($row->getColumn('label'))
+            && !Site::isEcommerceEnabledFor($row->getColumn('label'))
         ) {
             return false;
         }
@@ -85,7 +98,7 @@ class Piwik_DataTable_Filter_CalculateEvolutionFilter extends Piwik_DataTable_Fi
      * Returns the value of the column in $row's sister row in the past
      * DataTable.
      *
-     * @param Piwik_DataTable_Row $row
+     * @param Row $row
      * @return int|float
      */
     protected function getDivisor($row)
@@ -99,7 +112,7 @@ class Piwik_DataTable_Filter_CalculateEvolutionFilter extends Piwik_DataTable_Fi
     /**
      * Calculates and formats a quotient based on a divisor and dividend.
      *
-     * Unlike Piwik_DataTable_Filter_ColumnCallbackAddColumnPercentage's,
+     * Unlike ColumnCallbackAddColumnPercentage's,
      * version of this method, this method will return 100% if the past
      * value of a metric is 0, and the current value is not 0. For a
      * value representative of an evolution, this makes sense.
@@ -118,7 +131,8 @@ class Piwik_DataTable_Filter_CalculateEvolutionFilter extends Piwik_DataTable_Fi
     /**
      * Utility function. Returns the current row in the past DataTable.
      *
-     * @param Piwik_DataTable_Row $row The row in the 'current' DataTable.
+     * @param Row $row The row in the 'current' DataTable.
+     * @return bool|Row
      */
     private function getPastRowFromCurrent($row)
     {
@@ -128,24 +142,26 @@ class Piwik_DataTable_Filter_CalculateEvolutionFilter extends Piwik_DataTable_Fi
     /**
      * Calculates the evolution percentage for two arbitrary values.
      *
-     * @param float|int  $currentValue      The current metric value.
-     * @param float|int  $pastValue         The value of the metric in the past. We measure the % change
+     * @param float|int $currentValue The current metric value.
+     * @param float|int $pastValue The value of the metric in the past. We measure the % change
      *                                      from this value to $currentValue.
-     * @param float|int  $quotientPrecision The quotient precision to round to.
+     * @param float|int $quotientPrecision The quotient precision to round to.
+     * @param bool $appendPercentSign Whether to append a '%' sign to the end of the number or not.
      *
-     * @return string The evolution percent 15%
+     * @return string The evolution percent, eg `'15%'`.
      */
-    public static function calculate($currentValue, $pastValue, $quotientPrecision = 0)
+    public static function calculate($currentValue, $pastValue, $quotientPrecision = 0, $appendPercentSign = true)
     {
         $number = self::getPercentageValue($currentValue - $pastValue, $pastValue, $quotientPrecision);
-        $number = self::appendPercentSign($number);
+        if ($appendPercentSign) {
+            $number = self::appendPercentSign($number);
+        }
         return $number;
     }
 
     public static function appendPercentSign($number)
     {
-        $number = $number . '%';
-        return $number;
+        return $number . '%';
     }
 
     public static function prependPlusSignToNumber($number)

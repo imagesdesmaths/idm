@@ -8,15 +8,30 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\DataTable\Filter;
+
+use Piwik\DataTable;
+use Piwik\DataTable\BaseFilter;
 
 /**
- * Filter that will remove columns from a DataTable using either a blacklist,
+ * Filter that will remove columns from a {@link DataTable} using either a blacklist,
  * whitelist or both.
  *
+ * This filter is used to handle the **hideColumn** and **showColumn** query parameters.
+ * 
+ * **Basic usage example**
+ * 
+ *     $columnsToRemove = array('nb_hits', 'nb_pageviews');
+ *     $dataTable->filter('ColumnDelete', array($columnsToRemove));
+ * 
+ *     $columnsToKeep = array('nb_visits');
+ *     $dataTable->filter('ColumnDelete', array(array(), $columnsToKeep));
+ * 
  * @package Piwik
- * @subpackage Piwik_DataTable
+ * @subpackage DataTable
+ * @api
  */
-class Piwik_DataTable_Filter_ColumnDelete extends Piwik_DataTable_Filter
+class ColumnDelete extends BaseFilter
 {
     /**
      * The columns that should be removed from DataTable rows.
@@ -51,13 +66,13 @@ class Piwik_DataTable_Filter_ColumnDelete extends Piwik_DataTable_Filter
     /**
      * Constructor.
      *
-     * @param Piwik_DataTable $table
-     * @param array|string    $columnsToRemove An array of column names or a comma-separated list of
-     *                                         column names. These columns will be removed.
-     * @param array|string    $columnsToKeep   An array of column names that should be kept or a
-     *                                         comma-separated list of column names. Columns not in
-     *                                         this list will be removed.
-     * @param bool            $deleteIfZeroOnly
+     * @param DataTable $table The DataTable instance that will eventually be filtered.
+     * @param array|string $columnsToRemove An array of column names or a comma-separated list of
+     *                                      column names. These columns will be removed.
+     * @param array|string $columnsToKeep An array of column names that should be kept or a
+     *                                    comma-separated list of column names. Columns not in
+     *                                    this list will be removed.
+     * @param bool $deleteIfZeroOnly If true, columns will be removed only if their value is 0.
      */
     public function __construct($table, $columnsToRemove, $columnsToKeep = array(), $deleteIfZeroOnly = false)
     {
@@ -77,10 +92,9 @@ class Piwik_DataTable_Filter_ColumnDelete extends Piwik_DataTable_Filter
     }
 
     /**
-     * Filters the given DataTable. Removes columns that are not desired from
-     * each DataTable row.
+     * See {@link ColumnDelete}.
      *
-     * @param Piwik_DataTable $table
+     * @param DataTable $table
      */
     public function filter($table)
     {
@@ -112,15 +126,16 @@ class Piwik_DataTable_Filter_ColumnDelete extends Piwik_DataTable_Filter
 
                     $keep = false;
                     // @see self::APPEND_TO_COLUMN_NAME_TO_KEEP
-                    foreach($this->columnsToKeep as $nameKeep => $true) {
-                        if(strpos($name, $nameKeep . self::APPEND_TO_COLUMN_NAME_TO_KEEP) === 0) {
+                    foreach ($this->columnsToKeep as $nameKeep => $true) {
+                        if (strpos($name, $nameKeep . self::APPEND_TO_COLUMN_NAME_TO_KEEP) === 0) {
                             $keep = true;
                         }
                     }
 
                     if (!$keep
                         && $name != 'label' // label cannot be removed via whitelisting
-                        && !isset($this->columnsToKeep[$name])) {
+                        && !isset($this->columnsToKeep[$name])
+                    ) {
                         $row->deleteColumn($name);
                     }
                 }

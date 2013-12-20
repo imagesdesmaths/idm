@@ -9,21 +9,27 @@
  * @package Updates
  */
 
+namespace Piwik\Updates;
+
+use Piwik\Common;
+use Piwik\Updater;
+use Piwik\Updates;
+
 /**
  * @package Updates
  */
-class Piwik_Updates_0_2_35 extends Piwik_Updates
+class Updates_0_2_35 extends Updates
 {
     static function getSql($schema = 'Myisam')
     {
         return array(
-            'ALTER TABLE `' . Piwik_Common::prefixTable('user_dashboard') . '`
+            'ALTER TABLE `' . Common::prefixTable('user_dashboard') . '`
 				CHANGE `layout` `layout` TEXT NOT NULL' => false,
         );
     }
 
     static function update()
     {
-        Piwik_Updater::updateDatabase(__FILE__, self::getSql());
+        Updater::updateDatabase(__FILE__, self::getSql());
     }
 }

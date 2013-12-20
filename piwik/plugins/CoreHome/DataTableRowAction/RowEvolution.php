@@ -6,15 +6,27 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_CoreHome
+ * @package CoreHome
  */
+namespace Piwik\Plugins\CoreHome\DataTableRowAction;
+
+use Exception;
+use Piwik\API\Request;
+use Piwik\API\ResponseBuilder;
+use Piwik\Common;
+use Piwik\Date;
+use Piwik\Metrics;
+use Piwik\Piwik;
+use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution as EvolutionViz;
+use Piwik\Url;
+use Piwik\ViewDataTable\Factory;
 
 /**
  * ROW EVOLUTION
  * The class handles the popover that shows the evolution of a singe row in a data table
- * @package Piwik_CoreHome
+ * @package CoreHome
  */
-class Piwik_CoreHome_DataTableRowAction_RowEvolution
+class RowEvolution
 {
 
     /** The current site id */
@@ -43,7 +55,7 @@ class Piwik_CoreHome_DataTableRowAction_RowEvolution
 
     /**
      * The data
-     * @var Piwik_DataTable_Array
+     * @var \Piwik\DataTable
      */
     protected $dataTable;
 
@@ -66,20 +78,21 @@ class Piwik_CoreHome_DataTableRowAction_RowEvolution
      * The constructor
      * Initialize some local variables from the request
      * @param int $idSite
-     * @param Piwik_Date $date ($this->date from controller)
+     * @param Date $date ($this->date from controller)
+     * @param null|string $graphType
      * @throws Exception
      */
     public function __construct($idSite, $date, $graphType = null)
     {
-        $this->apiMethod = Piwik_Common::getRequestVar('apiMethod', '', 'string');
+        $this->apiMethod = Common::getRequestVar('apiMethod', '', 'string');
         if (empty($this->apiMethod)) throw new Exception("Parameter apiMethod not set.");
 
-        $this->label = Piwik_API_ResponseBuilder::getLabelFromRequest($_GET);
+        $this->label = ResponseBuilder::getLabelFromRequest($_GET);
         $this->label = $this->label[0];
 
         if ($this->label === '') throw new Exception("Parameter label not set.");
 
-        $this->period = Piwik_Common::getRequestVar('period', '', 'string');
+        $this->period = Common::getRequestVar('period', '', 'string');
         if (empty($this->period)) throw new Exception("Parameter period not set.");
 
         $this->idSite = $idSite;
@@ -88,10 +101,9 @@ class Piwik_CoreHome_DataTableRowAction_RowEvolution
         if ($this->period != 'range') {
             // handle day, week, month and year: display last X periods
             $end = $date->toString();
-            list($this->date, $lastN) =
-                Piwik_ViewDataTable_GenerateGraphHTML_ChartEvolution::getDateRangeAndLastN($this->period, $end);
+            list($this->date, $lastN) = EvolutionViz::getDateRangeAndLastN($this->period, $end);
         }
-        $this->segment = Piwik_ViewDataTable::getRawSegmentFromRequest();
+        $this->segment = \Piwik\API\Request::getRawSegmentFromRequest();
 
         $this->loadEvolutionReport();
     }
@@ -99,25 +111,25 @@ class Piwik_CoreHome_DataTableRowAction_RowEvolution
     /**
      * Render the popover
      * @param Piwik_CoreHome_Controller
-     * @param Piwik_View (the popover_rowevolution template)
+     * @param View (the popover_rowevolution template)
      */
     public function renderPopover($controller, $view)
     {
         // render main evolution graph
         $this->graphType = 'graphEvolution';
         $this->graphMetrics = $this->availableMetrics;
-        $view->graph = $controller->getRowEvolutionGraph(true);
+        $view->graph = $controller->getRowEvolutionGraph($fetch = true, $rowEvolution = $this);
 
         // render metrics overview
-        $view->metrics = $this->getMetricsToggles($controller);
+        $view->metrics = $this->getMetricsToggles();
 
         // available metrics text
-        $metricsText = Piwik_Translate('RowEvolution_AvailableMetrics');
+        $metricsText = Piwik::translate('RowEvolution_AvailableMetrics');
         $popoverTitle = '';
         if ($this->rowLabel) {
             $icon = $this->rowIcon ? '<img src="' . $this->rowIcon . '" alt="">' : '';
             $rowLabel = str_replace('/', '<wbr>/', str_replace('&', '<wbr>&', $this->rowLabel));
-            $metricsText = sprintf(Piwik_Translate('RowEvolution_MetricsFor'), $this->dimension . ': ' . $icon . ' ' . $rowLabel);
+            $metricsText = sprintf(Piwik::translate('RowEvolution_MetricsFor'), $this->dimension . ': ' . $icon . ' ' . $rowLabel);
             $popoverTitle = $icon . ' ' . $rowLabel;
         }
 
@@ -150,9 +162,9 @@ class Piwik_CoreHome_DataTableRowAction_RowEvolution
             $parameters['column'] = $column;
         }
 
-        $url = Piwik_Url::getQueryStringFromParameters($parameters);
+        $url = Url::getQueryStringFromParameters($parameters);
 
-        $request = new Piwik_API_Request($url);
+        $request = new Request($url);
         $report = $request->process();
 
         $this->extractEvolutionReport($report);
@@ -161,7 +173,7 @@ class Piwik_CoreHome_DataTableRowAction_RowEvolution
     protected function extractEvolutionReport($report)
     {
         $this->dataTable = $report['reportData'];
-        $this->rowLabel = Piwik_Common::sanitizeInputValue($report['label']);
+        $this->rowLabel = Common::sanitizeInputValue($report['label']);
         $this->rowIcon = !empty($report['logo']) ? $report['logo'] : false;
         $this->availableMetrics = $report['metadata']['metrics'];
         $this->dimension = $report['metadata']['dimension'];
@@ -170,57 +182,55 @@ class Piwik_CoreHome_DataTableRowAction_RowEvolution
     /**
      * Generic method to get an evolution graph or a sparkline for the row evolution popover.
      * Do as much as possible from outside the controller.
-     * @return Piwik_ViewDataTable
+     * @param string|bool $graphType
+     * @param array|bool $metrics
+     * @return Factory
      */
-    public function getRowEvolutionGraph()
+    public function getRowEvolutionGraph($graphType = false, $metrics = false)
     {
         // set up the view data table
-        $view = Piwik_ViewDataTable::factory($this->graphType);
+        $view = Factory::build($graphType ? : $this->graphType, $this->apiMethod,
+            $controllerAction = 'CoreHome.getRowEvolutionGraph', $forceDefault = true);
         $view->setDataTable($this->dataTable);
-        $view->init('CoreHome', 'getRowEvolutionGraph', $this->apiMethod);
 
-        if (!empty($this->graphMetrics)) // In row Evolution popover, this is empty
-        {
-            $view->setColumnsToDisplay(array_keys($this->graphMetrics));
+        if (!empty($this->graphMetrics)) { // In row Evolution popover, this is empty
+            $view->config->columns_to_display = array_keys($metrics ? : $this->graphMetrics);
         }
-        $view->hideAllViewsIcons();
+
+        $view->config->show_goals = false;
+        $view->config->show_all_views_icons = false;
+        $view->config->show_active_view_icon = false;
+        $view->config->show_related_reports  = false;
+        $view->config->show_series_picker    = false;
+        $view->config->show_footer_message   = false;
 
         foreach ($this->availableMetrics as $metric => $metadata) {
-            $view->setColumnTranslation($metric, $metadata['name']);
+            $view->config->translations[$metric] = $metadata['name'];
         }
 
-        if (method_exists($view, 'addRowEvolutionSeriesToggle')) {
-            $view->addRowEvolutionSeriesToggle($this->initiallyShowAllMetrics);
-        }
+        $view->config->external_series_toggle = 'RowEvolutionSeriesToggle';
+        $view->config->external_series_toggle_show_all = $this->initiallyShowAllMetrics;
 
         return $view;
     }
 
     /**
      * Prepare metrics toggles with spark lines
-     * @param $controller
      * @return array
      */
-    protected function getMetricsToggles($controller)
+    protected function getMetricsToggles()
     {
-        $chart = new Piwik_Visualization_Chart_Evolution;
-        $colors = $chart->getSeriesColors();
-
         $i = 0;
         $metrics = array();
         foreach ($this->availableMetrics as $metric => $metricData) {
-            $max = isset($metricData['max']) ? $metricData['max'] : 0;
-            $min = isset($metricData['min']) ? $metricData['min'] : 0;
+            $unit = Metrics::getUnit($metric, $this->idSite);
             $change = isset($metricData['change']) ? $metricData['change'] : false;
 
-            $unit = Piwik_API_API::getUnit($metric, $this->idSite);
-            $min .= $unit;
-            $max .= $unit;
-
-            $details = Piwik_Translate('RowEvolution_MetricBetweenText', array($min, $max));
+            list($first, $last) = $this->getFirstAndLastDataPointsForMetric($metric);
+            $details = Piwik::translate('RowEvolution_MetricBetweenText', array($first, $last));
 
             if ($change !== false) {
-                $lowerIsBetter = Piwik_API_API::isLowerValueBetter($metric);
+                $lowerIsBetter = Metrics::isLowerValueBetter($metric);
                 if (substr($change, 0, 1) == '+') {
                     $changeClass = $lowerIsBetter ? 'bad' : 'good';
                     $changeImage = $lowerIsBetter ? 'arrow_up_red' : 'arrow_up';
@@ -236,15 +246,21 @@ class Piwik_CoreHome_DataTableRowAction_RowEvolution
                     . ($changeImage ? '<img src="plugins/MultiSites/images/' . $changeImage . '.png" /> ' : '')
                     . $change . '</span>';
 
-                $details .= ', ' . Piwik_Translate('RowEvolution_MetricChangeText', $change);
+                $details .= ', ' . Piwik::translate('RowEvolution_MetricChangeText', $change);
             }
 
-            $color = $colors[$i % count($colors)];
+            // set metric min/max text (used as tooltip for details)
+            $max = isset($metricData['max']) ? $metricData['max'] : 0;
+            $min = isset($metricData['min']) ? $metricData['min'] : 0;
+            $min .= $unit;
+            $max .= $unit;
+            $minmax = Piwik::translate('RowEvolution_MetricMinMax', array($metricData['name'], $min, $max));
+
             $newMetric = array(
                 'label'     => $metricData['name'],
-                'color'     => $color,
                 'details'   => $details,
-                'sparkline' => $this->getSparkline($metric, $controller),
+                'minmax'    => $minmax,
+                'sparkline' => $this->getSparkline($metric),
             );
             // Multi Rows, each metric can be for a particular row and display an icon
             if (!empty($metricData['logo'])) {
@@ -258,14 +274,13 @@ class Piwik_CoreHome_DataTableRowAction_RowEvolution
     }
 
     /** Get the img tag for a sparkline showing a single metric */
-    protected function getSparkline($metric, $controller)
+    protected function getSparkline($metric)
     {
-        $this->graphType = 'sparkline';
-        $this->graphMetrics = array($metric => $metric);
-
         // sparkline is always echoed, so we need to buffer the output
+        $view = $this->getRowEvolutionGraph($graphType = 'sparkline', $metrics = array($metric => $metric));
+
         ob_start();
-        $controller->getRowEvolutionGraph();
+        $view->render();
         $spark = ob_get_contents();
         ob_end_clean();
 
@@ -281,5 +296,28 @@ class Piwik_CoreHome_DataTableRowAction_RowEvolution
     public function useAvailableMetrics()
     {
         $this->graphMetrics = $this->availableMetrics;
+    }
+
+    private function getFirstAndLastDataPointsForMetric($metric)
+    {
+        $first = 0;
+        $firstTable = $this->dataTable->getFirstRow();
+        if (!empty($firstTable)) {
+            $row = $firstTable->getFirstRow();
+            if (!empty($row)) {
+                $first = floatval($row->getColumn($metric));
+            }
+        }
+
+        $last = 0;
+        $lastTable = $this->dataTable->getLastRow();
+        if (!empty($lastTable)) {
+            $row = $lastTable->getFirstRow();
+            if (!empty($row)) {
+                $last = floatval($row->getColumn($metric));
+            }
+        }
+
+        return array($first, $last);
     }
 }

@@ -8,13 +8,17 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik;
+
+use Exception;
+use Piwik\Plugins\SitesManager\API;
 
 /**
  * Class to check if a newer version of Piwik is available
  *
  * @package Piwik
  */
-class Piwik_UpdateCheck
+class UpdateCheck
 {
     const CHECK_INTERVAL = 28800; // every 8 hours
     const UI_CLICK_CHECK_INTERVAL = 10; // every 10s when user clicks UI link
@@ -25,8 +29,8 @@ class Piwik_UpdateCheck
     /**
      * Check for a newer version
      *
-     * @param bool $force     Force check
-     * @param int  $interval  Interval used for update checks
+     * @param bool $force Force check
+     * @param int $interval Interval used for update checks
      */
     public static function check($force = false, $interval = null)
     {
@@ -34,32 +38,32 @@ class Piwik_UpdateCheck
             $interval = self::CHECK_INTERVAL;
         }
 
-        $lastTimeChecked = Piwik_GetOption(self::LAST_TIME_CHECKED);
+        $lastTimeChecked = Option::get(self::LAST_TIME_CHECKED);
         if ($force
             || $lastTimeChecked === false
             || time() - $interval > $lastTimeChecked
         ) {
             // set the time checked first, so that parallel Piwik requests don't all trigger the http requests
-            Piwik_SetOption(self::LAST_TIME_CHECKED, time(), $autoload = 1);
+            Option::set(self::LAST_TIME_CHECKED, time(), $autoLoad = 1);
             $parameters = array(
-                'piwik_version' => Piwik_Version::VERSION,
+                'piwik_version' => Version::VERSION,
                 'php_version'   => PHP_VERSION,
-                'url'           => Piwik_Url::getCurrentUrlWithoutQueryString(),
-                'trigger'       => Piwik_Common::getRequestVar('module', '', 'string'),
-                'timezone'      => Piwik_SitesManager_API::getInstance()->getDefaultTimezone(),
+                'url'           => Url::getCurrentUrlWithoutQueryString(),
+                'trigger'       => Common::getRequestVar('module', '', 'string'),
+                'timezone'      => API::getInstance()->getDefaultTimezone(),
             );
 
-            $url = Piwik_Config::getInstance()->General['api_service_url']
+            $url = Config::getInstance()->General['api_service_url']
                 . '/1.0/getLatestVersion/'
                 . '?' . http_build_query($parameters, '', '&');
             $timeout = self::SOCKET_TIMEOUT;
 
-            if (@Piwik_Config::getInstance()->Debug['allow_upgrades_to_beta']) {
+            if (@Config::getInstance()->Debug['allow_upgrades_to_beta']) {
                 $url = 'http://builds.piwik.org/LATEST_BETA';
             }
 
             try {
-                $latestVersion = Piwik_Http::sendHttpRequest($url, $timeout);
+                $latestVersion = Http::sendHttpRequest($url, $timeout);
                 if (!preg_match('~^[0-9][0-9a-zA-Z_.-]*$~D', $latestVersion)) {
                     $latestVersion = '';
                 }
@@ -67,21 +71,21 @@ class Piwik_UpdateCheck
                 // e.g., disable_functions = fsockopen; allow_url_open = Off
                 $latestVersion = '';
             }
-            Piwik_SetOption(self::LATEST_VERSION, $latestVersion);
+            Option::set(self::LATEST_VERSION, $latestVersion);
         }
     }
 
     /**
      * Returns version number of a newer Piwik release.
      *
-     * @return string|false  false if current version is the latest available,
+     * @return string|bool  false if current version is the latest available,
      *                       or the latest version number if a newest release is available
      */
     public static function isNewestVersionAvailable()
     {
-        $latestVersion = Piwik_GetOption(self::LATEST_VERSION);
+        $latestVersion = Option::get(self::LATEST_VERSION);
         if (!empty($latestVersion)
-            && version_compare(Piwik_Version::VERSION, $latestVersion) == -1
+            && version_compare(Version::VERSION, $latestVersion) == -1
         ) {
             return $latestVersion;
         }

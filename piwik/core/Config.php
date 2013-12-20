@@ -9,52 +9,41 @@
  * @package Piwik
  */
 
+namespace Piwik;
+
+use Exception;
+
 /**
- * For general performance (and specifically, the Tracker), we use deferred (lazy) initialization
- * and cache sections.  We also avoid any dependency on Zend Framework's Zend_Config.
+ * Singleton that provides read & write access to Piwik's INI configuration.
+ * 
+ * This class reads and writes to the `config/config.ini.php` file. If config
+ * options are missing from that file, this class will look for their default
+ * values in `config/global.ini.php`.
+ * 
+ * ### Examples
+ * 
+ * **Getting a value:**
  *
- * We use a parse_ini_file() wrapper to parse the configuration files, in case php's built-in
- * function is disabled.
+ *     // read the minimum_memory_limit option under the [General] section
+ *     $minValue = Config::getInstance()->General['minimum_memory_limit'];
  *
- * Example reading a value from the configuration:
+ * **Setting a value:**
  *
- *     $minValue = Piwik_Config::getInstance()->General['minimum_memory_limit'];
- *
- * will read the value minimum_memory_limit under the [General] section of the config file.
- *
- * Example setting a section in the configuration:
- *
- *    $brandingConfig = array(
- *        'use_custom_logo' => 1,
- *    );
- *    Piwik_Config::getInstance()->branding = $brandingConfig;
- *
- * Example setting an option within a section in the configuration:
- *
- *    $brandingConfig = Piwik_Config::getInstance()->branding;
- *    $brandingConfig['use_custom_logo'] = 1;
- *    Piwik_Config::getInstance()->branding = $brandingConfig;
- *
+ *     // set the minimum_memory_limit option
+ *     Config::getInstance()->General['minimum_memory_limit'] = 256;
+ *     Config::getInstance()->forceSave();
+ * 
+ * **Setting an entire section:**
+ * 
+ *     Config::getInstance()->MySection = array('myoption' => 1);
+ *     Config::getInstance()->forceSave();
+ * 
  * @package Piwik
  * @subpackage Piwik_Config
+ * @method static \Piwik\Config getInstance()
  */
-class Piwik_Config
+class Config extends Singleton
 {
-    private static $instance = null;
-
-    /**
-     * Returns the singleton Piwik_Config
-     *
-     * @return Piwik_Config
-     */
-    public static function getInstance()
-    {
-        if (self::$instance == null) {
-            self::$instance = new self;
-        }
-        return self::$instance;
-    }
-
     /**
      * Contains configuration files values
      *
@@ -67,10 +56,12 @@ class Piwik_Config
     protected $pathGlobal = null;
     protected $pathLocal = null;
 
+    /**
+     * Constructor
+     */
     protected function __construct()
     {
-        $this->pathGlobal = self::getGlobalConfigPath();
-        $this->pathLocal = self::getLocalConfigPath();
+        $this->clear();
     }
 
     /**
@@ -99,6 +90,9 @@ class Piwik_Config
         }
 
         $this->init();
+
+        // this proxy will not record any data in the production database.
+        // this provides security for Piwik installs and tests were setup.
         if (isset($this->configGlobal['database_tests'])
             || isset($this->configLocal['database_tests'])
         ) {
@@ -120,6 +114,20 @@ class Piwik_Config
         // for unit tests, we set that no plugin is installed. This will force
         // the test initialization to create the plugins tables, execute ALTER queries, etc.
         $this->configCache['PluginsInstalled'] = array('PluginsInstalled' => array());
+
+        // DevicesDetection plugin is not yet enabled by default
+        if (isset($configGlobal['Plugins'])) {
+            $this->configCache['Plugins'] = $this->configGlobal['Plugins'];
+            $this->configCache['Plugins']['Plugins'][] = 'DevicesDetection';
+        }
+        if (isset($configGlobal['Plugins_Tracker'])) {
+            $this->configCache['Plugins_Tracker'] = $this->configGlobal['Plugins_Tracker'];
+            $this->configCache['Plugins_Tracker']['Plugins_Tracker'][] = 'DevicesDetection';
+        }
+
+        // to avoid weird session error in travis
+        $this->configCache['General']['session_save_handler'] = 'dbtables';
+
     }
 
     /**
@@ -127,22 +135,9 @@ class Piwik_Config
      *
      * @return string
      */
-    public static function getGlobalConfigPath()
+    protected static function getGlobalConfigPath()
     {
         return PIWIK_USER_PATH . '/config/global.ini.php';
-    }
-
-    /**
-     * Backward compatibility stub
-     *
-     * @todo remove in 2.0
-     * @since 1.7
-     * @deprecated 1.7
-     * @return string
-     */
-    public static function getDefaultDefaultConfigPath()
-    {
-        return self::getGlobalConfigPath();
     }
 
     /**
@@ -152,11 +147,77 @@ class Piwik_Config
      */
     public static function getLocalConfigPath()
     {
+        $path = self::getByDomainConfigPath();
+        if ($path) {
+            return $path;
+        }
+
         return PIWIK_USER_PATH . '/config/config.ini.php';
     }
 
+    private static function getLocalConfigInfoForHostname($hostname)
+    {
+        $perHostFilename  = $hostname . '.config.ini.php';
+        $pathDomainConfig = PIWIK_USER_PATH . '/config/' . $perHostFilename;
+
+        return array('file' => $perHostFilename, 'path' => $pathDomainConfig);
+    }
+
+    public function getConfigHostnameIfSet()
+    {
+        if ($this->getByDomainConfigPath() === false) {
+            return false;
+        }
+        return $this->getHostname();
+    }
+
+    protected static function getByDomainConfigPath()
+    {
+        $host       = self::getHostname();
+        $hostConfig = self::getLocalConfigInfoForHostname($host);
+
+        if (Filesystem::isValidFilename($hostConfig['file'])
+            && file_exists($hostConfig['path'])
+        ) {
+            return $hostConfig['path'];
+        }
+        return false;
+    }
+
+    protected static function getHostname()
+    {
+        $host = Url::getHost($checkIfTrusted = false); // Check trusted requires config file which is not ready yet
+        return $host;
+    }
+
     /**
-     * Is local configuration file writable?
+     * If set, Piwik will use the hostname config no matter if it exists or not. Useful for instance if you want to
+     * create a new hostname config:
+     *
+     *     $config = Config::getInstance();
+     *     $config->forceUsageOfHostnameConfig('piwik.example.com');
+     *     $config->save();
+     *
+     * @param string $hostname eg piwik.example.com
+     *
+     * @throws \Exception In case the domain contains not allowed characters
+     */
+    public function forceUsageOfLocalHostnameConfig($hostname)
+    {
+        $hostConfig = static::getLocalConfigInfoForHostname($hostname);
+
+        if (!Filesystem::isValidFilename($hostConfig['file'])) {
+            throw new Exception('Hostname is not valid');
+        }
+
+        $this->pathLocal   = $hostConfig['path'];
+        $this->configLocal = array();
+        $this->initialized = false;
+        return $this->pathLocal;
+    }
+
+    /**
+     * Returns `true` if the local configuration file is writable.
      *
      * @return bool
      */
@@ -187,26 +248,31 @@ class Piwik_Config
     public function init()
     {
         $this->initialized = true;
-        $reportError = empty($GLOBALS['PIWIK_TRACKER_MODE']);
+        $reportError = !empty($GLOBALS['PIWIK_TRACKER_MODE']);
 
         // read defaults from global.ini.php
         if (!is_readable($this->pathGlobal) && $reportError) {
-            Piwik_ExitWithMessage(Piwik_TranslateException('General_ExceptionConfigurationFileNotFound', array($this->pathGlobal)));
+            Piwik_ExitWithMessage(Piwik::translate('General_ExceptionConfigurationFileNotFound', array($this->pathGlobal)));
         }
 
         $this->configGlobal = _parse_ini_file($this->pathGlobal, true);
         if (empty($this->configGlobal) && $reportError) {
-            Piwik_ExitWithMessage(Piwik_TranslateException('General_ExceptionUnreadableFileDisabledMethod', array($this->pathGlobal, "parse_ini_file()")));
+            Piwik_ExitWithMessage(Piwik::translate('General_ExceptionUnreadableFileDisabledMethod', array($this->pathGlobal, "parse_ini_file()")));
         }
 
-        // read the local settings from config.ini.php
-        if (!is_readable($this->pathLocal) && $reportError) {
-            throw new Exception(Piwik_TranslateException('General_ExceptionConfigurationFileNotFound', array($this->pathLocal)));
+        if ($reportError) {
+            $this->checkLocalConfigFound();
         }
-
         $this->configLocal = _parse_ini_file($this->pathLocal, true);
         if (empty($this->configLocal) && $reportError) {
-            Piwik_ExitWithMessage(Piwik_TranslateException('General_ExceptionUnreadableFileDisabledMethod', array($this->pathLocal, "parse_ini_file()")));
+            Piwik_ExitWithMessage(Piwik::translate('General_ExceptionUnreadableFileDisabledMethod', array($this->pathLocal, "parse_ini_file()")));
+        }
+    }
+
+    public function checkLocalConfigFound()
+    {
+        if (!is_readable($this->pathLocal)) {
+            throw new Exception(Piwik::translate('General_ExceptionConfigurationFileNotFound', array($this->pathLocal)));
         }
     }
 
@@ -222,10 +288,9 @@ class Piwik_Config
             foreach ($values as &$value) {
                 $value = $this->decodeValues($value);
             }
-        } else {
-            $values = html_entity_decode($values, ENT_COMPAT, 'UTF-8');
+            return $values;
         }
-        return $values;
+        return html_entity_decode($values, ENT_COMPAT, 'UTF-8');
     }
 
     /**
@@ -247,17 +312,22 @@ class Piwik_Config
     }
 
     /**
-     * Magic get methods catching calls to $config->var_name
-     * Returns the value if found in the configuration
+     * Returns a configuration value or section by name.
      *
-     * @param string $name
-     * @return string|array The value requested, returned by reference
-     * @throws Exception if the value requested not found in both files
+     * @param string $name The value or section name.
+     * @return string|array The requested value requested. Returned by reference.
+     * @throws Exception If the value requested not found in either `config.ini.php` or
+     *                   `global.ini.php`.
+     * @api
      */
     public function &__get($name)
     {
         if (!$this->initialized) {
             $this->init();
+
+            // must be called here, not in init(), since setTestEnvironment() calls init(). (this avoids
+            // infinite recursion)
+            Piwik::postTestEvent('Config.createConfigSingleton', array( $this ));
         }
 
         // check cache for merged section
@@ -266,12 +336,7 @@ class Piwik_Config
             return $tmp;
         }
 
-        $section = null;
-
-        // merge corresponding sections from global and local settings
-        if (isset($this->configGlobal[$name])) {
-            $section = $this->configGlobal[$name];
-        }
+        $section = $this->getFromDefaultConfig($name);
 
         if (isset($this->configLocal[$name])) {
             // local settings override the global defaults
@@ -281,7 +346,7 @@ class Piwik_Config
         }
 
         if ($section === null) {
-            throw new Exception("Error while trying to read a specific config file entry <b>'$name'</b> from your configuration files.</b>If you just completed a Piwik upgrade, please check that the file config/global.ini.php was overwritten by the latest Piwik version.");
+            throw new Exception("Error while trying to read a specific config file entry <strong>'$name'</strong> from your configuration files.</b>If you just completed a Piwik upgrade, please check that the file config/global.ini.php was overwritten by the latest Piwik version.");
         }
 
         // cache merged section for later
@@ -291,11 +356,20 @@ class Piwik_Config
         return $tmp;
     }
 
+    public function getFromDefaultConfig($name)
+    {
+        if (isset($this->configGlobal[$name])) {
+            return $this->configGlobal[$name];
+        }
+        return null;
+    }
+
     /**
-     * Set value
+     * Sets a configuration value or section.
      *
-     * @param string $name This corresponds to the section name
+     * @param string $name This section name or value name to set.
      * @param mixed $value
+     * @api
      */
     public function __set($name, $value)
     {
@@ -363,77 +437,79 @@ class Piwik_Config
         $output = "; <?php exit; ?> DO NOT REMOVE THIS LINE\n";
         $output .= "; file automatically generated or modified by Piwik; you can manually override the default values in global.ini.php by redefining them in this file.\n";
 
-        if ($configCache) {
+        if (!$configCache) {
+            return false;
+        }
+        if ($configLocal) {
             foreach ($configLocal as $name => $section) {
                 if (!isset($configCache[$name])) {
                     $configCache[$name] = $this->decodeValues($section);
                 }
             }
-
-            $sectionNames = array_unique(array_merge(array_keys($configGlobal), array_keys($configCache)));
-
-            foreach ($sectionNames as $section) {
-                if (!isset($configCache[$section])) {
-                    continue;
-                }
-
-                // Only merge if the section exists in global.ini.php (in case a section only lives in config.ini.php)
-
-                // get local and cached config
-                $local = isset($configLocal[$section]) ? $configLocal[$section] : array();
-                $config = $configCache[$section];
-
-                // remove default values from both (they should not get written to local)
-                if (isset($configGlobal[$section])) {
-                    $config = $this->array_unmerge($configGlobal[$section], $configCache[$section]);
-                    $local = $this->array_unmerge($configGlobal[$section], $local);
-                }
-
-                // if either local/config have non-default values and the other doesn't,
-                // OR both have values, but different values, we must write to config.ini.php
-                if (empty($local) xor empty($config)
-                    || (!empty($local)
-                        && !empty($config)
-                        && self::compareElements($config, $configLocal[$section]))
-                ) {
-                    $dirty = true;
-                }
-
-                // no point in writing empty sections, so skip if the cached section is empty
-                if (empty($config)) {
-                    continue;
-                }
-
-                $output .= "[$section]\n";
-
-                foreach ($config as $name => $value) {
-                    $value = $this->encodeValues($value);
-
-                    if (is_numeric($name)) {
-                        $name = $section;
-                        $value = array($value);
-                    }
-
-                    if (is_array($value)) {
-                        foreach ($value as $currentValue) {
-                            $output .= $name . "[] = \"$currentValue\"\n";
-                        }
-                    } else {
-                        if (!is_numeric($value)) {
-                            $value = "\"$value\"";
-                        }
-                        $output .= $name . ' = ' . $value . "\n";
-                    }
-                }
-
-                $output .= "\n";
-            }
-
-            if ($dirty) {
-                return $output;
-            }
         }
 
+        $sectionNames = array_unique(array_merge(array_keys($configGlobal), array_keys($configCache)));
+
+        foreach ($sectionNames as $section) {
+            if (!isset($configCache[$section])) {
+                continue;
+            }
+
+            // Only merge if the section exists in global.ini.php (in case a section only lives in config.ini.php)
+
+            // get local and cached config
+            $local = isset($configLocal[$section]) ? $configLocal[$section] : array();
+            $config = $configCache[$section];
+
+            // remove default values from both (they should not get written to local)
+            if (isset($configGlobal[$section])) {
+                $config = $this->array_unmerge($configGlobal[$section], $configCache[$section]);
+                $local = $this->array_unmerge($configGlobal[$section], $local);
+            }
+
+            // if either local/config have non-default values and the other doesn't,
+            // OR both have values, but different values, we must write to config.ini.php
+            if (empty($local) xor empty($config)
+                || (!empty($local)
+                    && !empty($config)
+                    && self::compareElements($config, $configLocal[$section]))
+            ) {
+                $dirty = true;
+            }
+
+            // no point in writing empty sections, so skip if the cached section is empty
+            if (empty($config)) {
+                continue;
+            }
+
+            $output .= "[$section]\n";
+
+            foreach ($config as $name => $value) {
+                $value = $this->encodeValues($value);
+
+                if (is_numeric($name)) {
+                    $name = $section;
+                    $value = array($value);
+                }
+
+                if (is_array($value)) {
+                    foreach ($value as $currentValue) {
+                        $output .= $name . "[] = \"$currentValue\"\n";
+                    }
+                } else {
+                    if (!is_numeric($value)) {
+                        $value = "\"$value\"";
+                    }
+                    $output .= $name . ' = ' . $value . "\n";
+                }
+            }
+
+            $output .= "\n";
+        }
+
+        if ($dirty) {
+            return $output;
+        }
         return false;
     }
 
@@ -445,8 +521,10 @@ class Piwik_Config
      * @param array $configGlobal
      * @param array $configCache
      * @param string $pathLocal
+     *
+     * @throws Exception if config file not writable
      */
-    public function writeConfig($configLocal, $configGlobal, $configCache, $pathLocal)
+    protected function writeConfig($configLocal, $configGlobal, $configCache, $pathLocal)
     {
         if ($this->isTest) {
             return;
@@ -454,17 +532,32 @@ class Piwik_Config
 
         $output = $this->dumpConfig($configLocal, $configGlobal, $configCache);
         if ($output !== false) {
-            @file_put_contents($pathLocal, $output);
+            $success = @file_put_contents($pathLocal, $output);
+            if (!$success) {
+                throw $this->getConfigNotWritableException();
+            }
         }
 
         $this->clear();
     }
 
     /**
-     * Force save
+     * Writes the current configuration to the **config.ini.php** file. Only writes options whose
+     * values are different from the default.
+     * 
+     * @api
      */
     public function forceSave()
     {
         $this->writeConfig($this->configLocal, $this->configGlobal, $this->configCache, $this->pathLocal);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function getConfigNotWritableException()
+    {
+        $path = "config/" . basename($this->pathLocal);
+        return new Exception(Piwik::translate('General_ConfigFileIsNotWritable', array("(" . $path . ")", "")));
     }
 }

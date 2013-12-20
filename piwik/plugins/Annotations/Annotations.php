@@ -6,64 +6,42 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_Annotations
+ * @package Annotations
  */
+namespace Piwik\Plugins\Annotations;
 
 /**
  * Annotations plugins. Provides the ability to attach text notes to
  * dates for each sites. Notes can be viewed, modified, deleted or starred.
  *
- * @package Piwik_Annotations
+ * @package Annotations
  */
-class Piwik_Annotations extends Piwik_Plugin
+class Annotations extends \Piwik\Plugin
 {
     /**
-     * Returns information about this plugin.
-     *
-     * @return array
-     */
-    public function getInformation()
-    {
-        return array(
-            'description'     => Piwik_Translate('Annotations_PluginDescription'),
-            'author'          => 'Piwik',
-            'author_homepage' => 'http://piwik.org/',
-            'version'         => Piwik_Version::VERSION,
-        );
-    }
-
-    /**
-     * Returns list of event hooks.
-     *
-     * @return array
+     * @see Piwik_Plugin::getListHooksRegistered
      */
     public function getListHooksRegistered()
     {
         return array(
-            'AssetManager.getCssFiles' => 'getCssFiles',
-            'AssetManager.getJsFiles'  => 'getJsFiles'
+            'AssetManager.getStylesheetFiles' => 'getStylesheetFiles',
+            'AssetManager.getJavaScriptFiles' => 'getJsFiles',
         );
     }
 
     /**
      * Adds css files for this plugin to the list in the event notification.
-     *
-     * @param Piwik_Event_Notification $notification  notification object
      */
-    function getCssFiles($notification)
+    public function getStylesheetFiles(&$stylesheets)
     {
-        $cssFiles = & $notification->getNotificationObject();
-        $cssFiles[] = "plugins/Annotations/templates/styles.css";
+        $stylesheets[] = "plugins/Annotations/stylesheets/annotations.less";
     }
 
     /**
      * Adds js files for this plugin to the list in the event notification.
-     *
-     * @param Piwik_Event_Notification $notification  notification object
      */
-    function getJsFiles($notification)
+    public function getJsFiles(&$jsFiles)
     {
-        $jsFiles = & $notification->getNotificationObject();
-        $jsFiles[] = "plugins/Annotations/templates/annotations.js";
+        $jsFiles[] = "plugins/Annotations/javascripts/annotations.js";
     }
 }

@@ -9,21 +9,27 @@
  * @package Updates
  */
 
+namespace Piwik\Updates;
+
+use Piwik\Config;
+use Piwik\Piwik;
+use Piwik\Updates;
+
 /**
  * @package Updates
  */
-class Piwik_Updates_1_1 extends Piwik_Updates
+class Updates_1_1 extends Updates
 {
     static function update($schema = 'Myisam')
     {
-        $config = Piwik_Config::getInstance();
+        $config = Config::getInstance();
 
         $rootLogin = $config->superuser['login'];
         try {
             // throws an exception if invalid
             Piwik::checkValidLoginString($rootLogin);
-        } catch (Exception $e) {
-            throw new Exception('Superuser login name "' . $rootLogin . '" is no longer a valid format. '
+        } catch (\Exception $e) {
+            throw new \Exception('Superuser login name "' . $rootLogin . '" is no longer a valid format. '
                 . $e->getMessage()
                 . ' Edit your config/config.ini.php to change it.');
         }

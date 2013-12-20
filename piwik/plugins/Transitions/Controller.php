@@ -6,13 +6,17 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_Transitions
+ * @package Transitions
  */
+namespace Piwik\Plugins\Transitions;
+
+use Piwik\Piwik;
+use Piwik\View;
 
 /**
- * @package Piwik_Transitions
+ * @package Transitions
  */
-class Piwik_Transitions_Controller extends Piwik_Controller
+class Controller extends \Piwik\Plugin\Controller
 {
 
     /**
@@ -22,27 +26,27 @@ class Piwik_Transitions_Controller extends Piwik_Controller
      * translation keys.
      */
     private static $metricTranslations = array(
-        'pageviewsInline'                => 'Transitions_PageviewsInline',
+        'pageviewsInline'                => 'VisitsSummary_NbPageviewsDescription',
         'loopsInline'                    => 'Transitions_LoopsInline',
         'fromPreviousPages'              => 'Transitions_FromPreviousPages',
         'fromPreviousPagesInline'        => 'Transitions_FromPreviousPagesInline',
         'fromPreviousSiteSearches'       => 'Transitions_FromPreviousSiteSearches',
         'fromPreviousSiteSearchesInline' => 'Transitions_FromPreviousSiteSearchesInline',
         'fromSearchEngines'              => 'Transitions_FromSearchEngines',
-        'fromSearchEnginesInline'        => 'Transitions_FromSearchEnginesInline',
+        'fromSearchEnginesInline'        => 'Referrers_TypeSearchEngines',
         'fromWebsites'                   => 'Transitions_FromWebsites',
-        'fromWebsitesInline'             => 'Transitions_FromWebsitesInline',
+        'fromWebsitesInline'             => 'Referrers_TypeWebsites',
         'fromCampaigns'                  => 'Transitions_FromCampaigns',
-        'fromCampaignsInline'            => 'Transitions_FromCampaignsInline',
+        'fromCampaignsInline'            => 'Referrers_TypeCampaigns',
         'directEntries'                  => 'Transitions_DirectEntries',
-        'directEntriesInline'            => 'Referers_TypeDirectEntries',
+        'directEntriesInline'            => 'Referrers_TypeDirectEntries',
         'toFollowingPages'               => 'Transitions_ToFollowingPages',
         'toFollowingPagesInline'         => 'Transitions_ToFollowingPagesInline',
         'toFollowingSiteSearches'        => 'Transitions_ToFollowingSiteSearches',
         'toFollowingSiteSearchesInline'  => 'Transitions_ToFollowingSiteSearchesInline',
-        'downloads'                      => 'Actions_ColumnDownloads',
+        'downloads'                      => 'General_Downloads',
         'downloadsInline'                => 'VisitsSummary_NbDownloadsDescription',
-        'outlinks'                       => 'Actions_ColumnOutlinks',
+        'outlinks'                       => 'General_Outlinks',
         'outlinksInline'                 => 'VisitsSummary_NbOutlinksDescription',
         'exits'                          => 'General_ColumnExits',
         'exitsInline'                    => 'Transitions_ExitsInline',
@@ -65,7 +69,7 @@ class Piwik_Transitions_Controller extends Piwik_Controller
 
     public static function getTranslation($key)
     {
-        return Piwik_Translate(self::$metricTranslations[$key]);
+        return Piwik::translate(self::$metricTranslations[$key]);
     }
 
     /**
@@ -74,18 +78,17 @@ class Piwik_Transitions_Controller extends Piwik_Controller
      */
     public function renderPopover()
     {
-        $view = Piwik_View::factory('transitions');
+        $view = new View('@Transitions/renderPopover');
         $view->translations = $this->getTranslations();
-        echo $view->render();
+        return $view->render();
     }
 
     public function getTranslations()
     {
         $translations = self::$metricTranslations + self::$jsTranslations;
         foreach ($translations as &$message) {
-            $message = Piwik_Translate($message);
+            $message = Piwik::translate($message);
         }
         return $translations;
     }
-
 }

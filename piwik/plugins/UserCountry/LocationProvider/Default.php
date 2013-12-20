@@ -6,16 +6,22 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_UserCountry
+ * @package UserCountry
  */
+namespace Piwik\Plugins\UserCountry\LocationProvider;
+
+use Piwik\Common;
+use Piwik\Config;
+use Piwik\Piwik;
+use Piwik\Plugins\UserCountry\LocationProvider;
 
 /**
  * The default LocationProvider, this LocationProvider guesses a visitor's country
  * using the language they use. This provider is not very accurate.
  *
- * @package Piwik_UserCountry
+ * @package UserCountry
  */
-class Piwik_UserCountry_LocationProvider_Default extends Piwik_UserCountry_LocationProvider
+class DefaultProvider extends LocationProvider
 {
     const ID = 'default';
     const TITLE = 'General_Default';
@@ -28,12 +34,12 @@ class Piwik_UserCountry_LocationProvider_Default extends Piwik_UserCountry_Locat
      */
     public function getLocation($info)
     {
-        $enableLanguageToCountryGuess = Piwik_Config::getInstance()->Tracker['enable_language_to_country_guess'];
+        $enableLanguageToCountryGuess = Config::getInstance()->Tracker['enable_language_to_country_guess'];
 
         if (empty($info['lang'])) {
-            $info['lang'] = Piwik_Common::getBrowserLanguage();
+            $info['lang'] = Common::getBrowserLanguage();
         }
-        $country = Piwik_Common::getCountry($info['lang'], $enableLanguageToCountryGuess, $info['ip']);
+        $country = Common::getCountry($info['lang'], $enableLanguageToCountryGuess, $info['ip']);
 
         $location = array(parent::COUNTRY_CODE_KEY => $country);
         $this->completeLocationResult($location);
@@ -46,7 +52,7 @@ class Piwik_UserCountry_LocationProvider_Default extends Piwik_UserCountry_Locat
      *
      * This implementation is always available.
      *
-     * @return true
+     * @return bool  always true
      */
     public function isAvailable()
     {
@@ -58,7 +64,7 @@ class Piwik_UserCountry_LocationProvider_Default extends Piwik_UserCountry_Locat
      *
      * This implementation is always working correctly.
      *
-     * @return true
+     * @return bool  always true
      */
     public function isWorking()
     {
@@ -98,11 +104,11 @@ class Piwik_UserCountry_LocationProvider_Default extends Piwik_UserCountry_Locat
      */
     public function getInfo()
     {
-        $desc = Piwik_Translate('UserCountry_DefaultLocationProviderDesc1') . ' '
-            . Piwik_Translate('UserCountry_DefaultLocationProviderDesc2',
+        $desc = Piwik::translate('UserCountry_DefaultLocationProviderDesc1') . ' '
+            . Piwik::translate('UserCountry_DefaultLocationProviderDesc2',
                 array('<strong>', '<em>', '</em>', '</strong>'))
             . '<p><em><a href="http://piwik.org/faq/how-to/#faq_163" target="_blank">'
-            . Piwik_Translate('UserCountry_HowToInstallGeoIPDatabases')
+            . Piwik::translate('UserCountry_HowToInstallGeoIPDatabases')
             . '</em></a></p>';
         return array('id' => self::ID, 'title' => self::TITLE, 'description' => $desc, 'order' => 1);
     }

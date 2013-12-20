@@ -6,15 +6,21 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_UserCountry
+ * @package UserCountry
  */
+namespace Piwik\Plugins\UserCountry\LocationProvider\GeoIp;
+
+
+use Piwik\Log;
+use Piwik\Piwik;
+use Piwik\Plugins\UserCountry\LocationProvider\GeoIp;
 
 /**
  * A LocationProvider that uses the PHP implementation of GeoIP.
  *
- * @package Piwik_UserCountry
+ * @package UserCountry
  */
-class Piwik_UserCountry_LocationProvider_GeoIp_Php extends Piwik_UserCountry_LocationProvider_GeoIp
+class Php extends GeoIp
 {
     const ID = 'geoip_php';
     const TITLE = 'GeoIP (Php)';
@@ -37,7 +43,7 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Php extends Piwik_UserCountry_Loc
      * This variable is an array mapping either the 'loc', 'isp' or 'org' strings with
      * an array of filenames.
      *
-     * By default, this will be set to Piwik_UserCountry_LocationProvider_GeoIp_Php::$dbNames.
+     * By default, this will be set to Php::$dbNames.
      *
      * @var array
      */
@@ -46,7 +52,7 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Php extends Piwik_UserCountry_Loc
     /**
      * Constructor.
      *
-     * @param array|false $customDbNames The possible filenames for each type of GeoIP database.
+     * @param array|bool $customDbNames The possible filenames for each type of GeoIP database.
      *                                   eg array(
      *                                       'loc' => array('GeoLiteCity.dat'),
      *                                       'isp' => array('GeoIP.dat', 'GeoIPISP.dat')
@@ -125,7 +131,7 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Php extends Piwik_UserCountry_Loc
                     $result[self::COUNTRY_CODE_KEY] = geoip_country_code_by_addr($locationGeoIp, $ip);
                     break;
                 default: // unknown database type, log warning and fallback to country edition
-                    Piwik::log(sprintf("Found unrecognized database type: %s", $locationGeoIp->databaseType));
+                    Log::warning("Found unrecognized database type: %s", $locationGeoIp->databaseType);
 
                     $result[self::COUNTRY_CODE_KEY] = geoip_country_code_by_addr($locationGeoIp, $ip);
                     break;
@@ -179,11 +185,35 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Php extends Piwik_UserCountry_Loc
     public function isWorking()
     {
         if (!function_exists('mb_internal_encoding')) {
-            return Piwik_Translate('UserCountry_GeoIPCannotFindMbstringExtension',
+            return Piwik::translate('UserCountry_GeoIPCannotFindMbstringExtension',
                 array('mb_internal_encoding', 'mbstring'));
         }
 
-        return parent::isWorking();
+        $geoIpError = false;
+        $catchGeoIpError = function ($errno, $errstr, $errfile, $errline) use (&$geoIpError) {
+            $filename = basename($errfile);
+            if ($filename == 'geoip.inc'
+                || $filename == 'geoipcity.inc'
+            ) {
+                $geoIpError = array($errno, $errstr, $errfile, $errline);
+            } else {
+                throw new \Exception("Error in PHP GeoIP provider: $errstr on line $errline of $errfile"); // unexpected
+            }
+        };
+
+        // catch GeoIP errors
+        set_error_handler($catchGeoIpError);
+        $result = parent::isWorking();
+        restore_error_handler();
+
+        if ($geoIpError) {
+            list($errno, $errstr, $errfile, $errline) = $geoIpError;
+            Log::warning("Got GeoIP error when testing PHP GeoIP location provider: %s(%s): %s", $errfile, $errline, $errstr);
+
+            return Piwik::translate('UserCountry_GeoIPIncorrectDatabaseFormat');
+        }
+
+        return $result;
     }
 
     /**
@@ -268,32 +298,32 @@ class Piwik_UserCountry_LocationProvider_GeoIp_Php extends Piwik_UserCountry_Loc
      */
     public function getInfo()
     {
-        $desc = Piwik_Translate('UserCountry_GeoIpLocationProviderDesc_Php1') . '<br/><br/>'
-            . Piwik_Translate('UserCountry_GeoIpLocationProviderDesc_Php2',
+        $desc = Piwik::translate('UserCountry_GeoIpLocationProviderDesc_Php1') . '<br/><br/>'
+            . Piwik::translate('UserCountry_GeoIpLocationProviderDesc_Php2',
                 array('<strong><em>', '</em></strong>', '<strong><em>', '</em></strong>'));
         $installDocs = '<em><a target="_blank" href="http://piwik.org/faq/how-to/#faq_163">'
-            . Piwik_Translate('UserCountry_HowToInstallGeoIPDatabases')
+            . Piwik::translate('UserCountry_HowToInstallGeoIPDatabases')
             . '</em></a>';
 
         $availableDatabaseTypes = array();
         if (self::getPathToGeoIpDatabase(array('GeoIPCity.dat', 'GeoLiteCity.dat')) !== false) {
-            $availableDatabaseTypes[] = Piwik_Translate('UserCountry_City');
+            $availableDatabaseTypes[] = Piwik::translate('UserCountry_City');
         }
         if (self::getPathToGeoIpDatabase(array('GeoIPRegion.dat')) !== false) {
-            $availableDatabaseTypes[] = Piwik_Translate('UserCountry_Region');
+            $availableDatabaseTypes[] = Piwik::translate('UserCountry_Region');
         }
         if (self::getPathToGeoIpDatabase(array('GeoIPCountry.dat')) !== false) {
-            $availableDatabaseTypes[] = Piwik_Translate('UserCountry_Country');
+            $availableDatabaseTypes[] = Piwik::translate('UserCountry_Country');
         }
         if (self::getPathToGeoIpDatabase(array('GeoIPISP.dat')) !== false) {
             $availableDatabaseTypes[] = 'ISP';
         }
         if (self::getPathToGeoIpDatabase(array('GeoIPOrg.dat')) !== false) {
-            $availableDatabaseTypes[] = Piwik_Translate('UserCountry_Organization');
+            $availableDatabaseTypes[] = Piwik::translate('UserCountry_Organization');
         }
 
-        $extraMessage = '<strong><em>' . Piwik_Translate('General_Note') . '</em></strong>:&nbsp;'
-            . Piwik_Translate('UserCountry_GeoIPImplHasAccessTo') . ':&nbsp;<strong><em>'
+        $extraMessage = '<strong><em>' . Piwik::translate('General_Note') . '</em></strong>:&nbsp;'
+            . Piwik::translate('UserCountry_GeoIPImplHasAccessTo') . ':&nbsp;<strong><em>'
             . implode(', ', $availableDatabaseTypes) . '</em></strong>.';
 
         return array('id'            => self::ID,

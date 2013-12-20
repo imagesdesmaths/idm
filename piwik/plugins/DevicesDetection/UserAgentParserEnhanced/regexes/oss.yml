@@ -5,7 +5,7 @@
 # @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
 #
 # @category Piwik_Plugins
-# @package Piwik_DevicesDetection
+# @package DevicesDetection
 ###############
 
 ##########
@@ -81,7 +81,7 @@
 ##########
 # Windows
 ##########
-- regex: 'CYGWIN_NT-6.2|Windows NT 6.2|Windows 8'
+- regex: 'CYGWIN_NT-6.2|Windows NT 6.2|Windows NT 6.3|Windows 8'
   name: 'Windows 8'
   version: '8'
   

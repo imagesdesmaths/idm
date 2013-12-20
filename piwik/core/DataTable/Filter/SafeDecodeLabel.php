@@ -8,18 +8,23 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\DataTable\Filter;
+
+use Piwik\DataTable;
+use Piwik\DataTable\BaseFilter;
 
 /**
+ * Sanitizes DataTable labels as an extra precaution. Called internally by Piwik.
+ * 
  * @package Piwik
- * @subpackage Piwik_DataTable
+ * @subpackage DataTable
  */
-class Piwik_DataTable_Filter_SafeDecodeLabel extends Piwik_DataTable_Filter
+class SafeDecodeLabel extends BaseFilter
 {
     private $columnToDecode;
-    static private $outputHtml = true;
 
     /**
-     * @param Piwik_DataTable $table
+     * @param DataTable $table
      */
     public function __construct($table)
     {
@@ -33,43 +38,39 @@ class Piwik_DataTable_Filter_SafeDecodeLabel extends Piwik_DataTable_Filter
      * @param string $value
      * @return mixed|string
      */
-    static public function safeDecodeLabel($value)
+    public static function decodeLabelSafe($value)
     {
         if (empty($value)) {
             return $value;
         }
         $raw = urldecode($value);
         $value = htmlspecialchars_decode($raw, ENT_QUOTES);
-        if (self::$outputHtml) {
-            // Pre 5.3
-            if (!defined('ENT_IGNORE')) {
-                $style = ENT_QUOTES;
-            } else {
-                $style = ENT_QUOTES | ENT_IGNORE;
-            }
-            // See changes in 5.4: http://nikic.github.com/2012/01/28/htmlspecialchars-improvements-in-PHP-5-4.html
-            // Note: at some point we should change ENT_IGNORE to ENT_SUBSTITUTE
-            $value = htmlspecialchars($value, $style, 'UTF-8');
-        }
+
+        // ENT_IGNORE so that if utf8 string has some errors, we simply discard invalid code unit sequences
+        $style = ENT_QUOTES | ENT_IGNORE;
+
+        // See changes in 5.4: http://nikic.github.com/2012/01/28/htmlspecialchars-improvements-in-PHP-5-4.html
+        // Note: at some point we should change ENT_IGNORE to ENT_SUBSTITUTE
+        $value = htmlspecialchars($value, $style, 'UTF-8');
+
         return $value;
     }
 
     /**
      * Decodes all columns of the given data table
      *
-     * @param Piwik_DataTable $table
+     * @param DataTable $table
      */
     public function filter($table)
     {
         foreach ($table->getRows() as $row) {
             $value = $row->getColumn($this->columnToDecode);
             if ($value !== false) {
-                $value = self::safeDecodeLabel($value);
+                $value = self::decodeLabelSafe($value);
                 $row->setColumn($this->columnToDecode, $value);
 
                 $this->filterSubTable($row);
             }
         }
     }
-
 }

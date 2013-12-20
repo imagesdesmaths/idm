@@ -114,15 +114,9 @@ THIRD-PARTY COMPONENTS AND LIBRARIES
 	Notes:
 	- reference implementation
 
-	Name:  cssmin
-	Link:  http://code.google.com/p/cssmin/
-	License:  MIT
-
-	Name:  jsmin
-	Link:  http://code.google.com/p/jsmin-php/
-	License:  MIT
-	Notes:
-	- contains additional clause "The Software shall be used for Good, not Evil."
+	Name:  jshrink
+	Link: https://github.com/tedivm/jshrink
+	License: BSD-3-Clause
 
 	Name:  sparkline
 	Link:  https//sourceforge.net/projects/sparkline/
@@ -178,9 +172,9 @@ THIRD-PARTY COMPONENTS AND LIBRARIES
 	Link:  http://www.getrank.org/free-pagerank-script
 	License:  GPL
 
-	Name:  Smarty
-	Link:  http://smarty.net/
-	License:  LGPL v2.1 or later
+	Name:  Twig
+	Link:  http://twig.sensiolabs.org/
+	License:  BSD
 
 	Name:  TCPDF
 	Link:  http://sourceforge.net/projects/tcpdf
@@ -210,10 +204,6 @@ THIRD-PARTY COMPONENTS AND LIBRARIES
 	Link: http://raphaeljs.com/
 	License: MIT
 
-	Name: kmeans.js
-	Link: http://polymaps.org/ex/cluster.html
-	License: BSD
-
 THIRD-PARTY CONTENT
 
 	Name:  FamFamFam icons - Mark James
@@ -231,6 +221,14 @@ THIRD-PARTY CONTENT
 	License: LGPL v2.1
 	Notes:
 	- used in ImageGraph plugin
+
+	Name: plugins/CorePluginsAdmin/images/themes.png
+	Link: https://www.iconfinder.com/icons/17022/colors_draw_paint_icon
+	License: Free for commercial use
+
+	Name: plugins/CorePluginsAdmin/images/plugins.png
+	Link: http://findicons.com/icon/94051/tools_wizard?id=396912
+	License: GNU/GPL
 
 Notes:
 - the "New BSD" license refers to either the "Modified BSD" and "Simplified BSD"

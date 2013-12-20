@@ -9,16 +9,20 @@
  * @package Updates
  */
 
+namespace Piwik\Updates;
+
+use Piwik\Updates;
+
 /**
  * @package Updates
  */
-class Piwik_Updates_1_12_b15 extends Piwik_Updates
+class Updates_1_12_b15 extends Updates
 {
     static function update()
     {
         try {
-            Piwik_PluginsManager::getInstance()->activatePlugin('SegmentEditor');
-        } catch (Exception $e) {
+            \Piwik\Plugin\Manager::getInstance()->activatePlugin('SegmentEditor');
+        } catch (\Exception $e) {
             // pass
         }
     }

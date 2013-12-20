@@ -8,15 +8,33 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\DataTable\Filter;
+
+use Piwik\DataTable\BaseFilter;
+use Piwik\DataTable;
+use Piwik\DataTable\Row;
 
 /**
- * Replace a column value with a new value resulting
- * from the function called with the column's value
- *
+ * Replaces one or more column values in each row of a DataTable with the results
+ * of a callback.
+ * 
+ * **Basic usage example**
+ * 
+ *     $truncateString = function ($value, $truncateLength) {
+ *         if (strlen($value) > $truncateLength) {
+ *             return substr(0, $truncateLength);
+ *         } else {
+ *             return $value;
+ *         }
+ *     };
+ *     
+ *     // label, url and truncate_length are columns in $dataTable
+ *     $dataTable->filter('ColumnCallbackReplace', array('label', 'url'), $truncateString, null, array('truncate_length'));
+ * 
  * @package Piwik
- * @subpackage Piwik_DataTable
+ * @subpackage DataTable
  */
-class Piwik_DataTable_Filter_ColumnCallbackReplace extends Piwik_DataTable_Filter
+class ColumnCallbackReplace extends BaseFilter
 {
     private $columnsToFilter;
     private $functionToApply;
@@ -24,11 +42,17 @@ class Piwik_DataTable_Filter_ColumnCallbackReplace extends Piwik_DataTable_Filte
     private $extraColumnParameters;
 
     /**
-     * @param Piwik_DataTable $table
-     * @param array|string $columnsToFilter
-     * @param callback $functionToApply
-     * @param array|null $functionParameters
-     * @param array $extraColumnParameters
+     * Constructor.
+     * 
+     * @param DataTable $table The DataTable to filter.
+     * @param array|string $columnsToFilter The columns whose values should be passed to the callback
+     *                                      and then replaced with the callback's result.
+     * @param callable $functionToApply The function to execute. Must take the column value as a parameter
+     *                                  and return a value that will be used to replace the original.
+     * @param array|null $functionParameters deprecated - use an [anonymous function](http://php.net/manual/en/functions.anonymous.php)
+     *                                       instead.
+     * @param array $extraColumnParameters Extra column values that should be passed to the callback, but
+     *                                     shouldn't be replaced.
      */
     public function __construct($table, $columnsToFilter, $functionToApply, $functionParameters = null,
                                 $extraColumnParameters = array())
@@ -46,9 +70,9 @@ class Piwik_DataTable_Filter_ColumnCallbackReplace extends Piwik_DataTable_Filte
     }
 
     /**
-     * Filters the given data table
+     * See {@link ColumnCallbackReplace}.
      *
-     * @param Piwik_DataTable $table
+     * @param DataTable $table
      */
     public function filter($table)
     {
@@ -79,7 +103,7 @@ class Piwik_DataTable_Filter_ColumnCallbackReplace extends Piwik_DataTable_Filte
     /**
      * Replaces the given column within given row with the given value
      *
-     * @param Piwik_DataTable_Row $row
+     * @param Row $row
      * @param string $columnToFilter
      * @param mixed $newValue
      */
@@ -91,7 +115,7 @@ class Piwik_DataTable_Filter_ColumnCallbackReplace extends Piwik_DataTable_Filte
     /**
      * Returns the element that should be replaced
      *
-     * @param Piwik_DataTable_Row $row
+     * @param Row $row
      * @param string $columnToFilter
      * @return mixed
      */

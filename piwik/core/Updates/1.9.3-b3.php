@@ -9,19 +9,23 @@
  * @package Updates
  */
 
+namespace Piwik\Updates;
+
+use Piwik\Updates;
+
 /**
  * @package Updates
  */
-class Piwik_Updates_1_9_3_b3 extends Piwik_Updates
+class Updates_1_9_3_b3 extends Updates
 {
     static function update()
     {
         // Insight was a temporary code name for Overlay
         $pluginToDelete = 'Insight';
         self::deletePluginFromConfigFile($pluginToDelete);
-        self::deletePluginFromFilesystem($pluginToDelete);
+        \Piwik\Plugin\Manager::getInstance()->deletePluginFromFilesystem($pluginToDelete);
 
         // We also clean up 1.9.1 and delete Feedburner plugin
-        self::deletePluginFromFilesystem('Feedburner');
+        \Piwik\Plugin\Manager::getInstance()->deletePluginFromFilesystem('Feedburner');
     }
 }

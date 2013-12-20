@@ -6,14 +6,26 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_Login
+ * @package Login
  */
+namespace Piwik\Plugins\Login;
+
+use Exception;
+use Piwik\AuthResult;
+use Piwik\Common;
+use Piwik\Config;
+use Piwik\Cookie;
+use Piwik\Db;
+use Piwik\Piwik;
+use Piwik\Plugins\UsersManager\API;
+use Piwik\ProxyHttp;
+use Piwik\Session;
 
 /**
  *
- * @package Piwik_Login
+ * @package Login
  */
-class Piwik_Login_Auth implements Piwik_Auth
+class Auth implements \Piwik\Auth
 {
     protected $login = null;
     protected $token_auth = null;
@@ -31,27 +43,27 @@ class Piwik_Login_Auth implements Piwik_Auth
     /**
      * Authenticates user
      *
-     * @return Piwik_Auth_Result
+     * @return AuthResult
      */
     public function authenticate()
     {
-        $rootLogin = Piwik_Config::getInstance()->superuser['login'];
-        $rootPassword = Piwik_Config::getInstance()->superuser['password'];
-        $rootToken = Piwik_UsersManager_API::getInstance()->getTokenAuth($rootLogin, $rootPassword);
+        $rootLogin = Config::getInstance()->superuser['login'];
+        $rootPassword = Config::getInstance()->superuser['password'];
+        $rootToken = API::getInstance()->getTokenAuth($rootLogin, $rootPassword);
 
         if (is_null($this->login)) {
             if ($this->token_auth === $rootToken) {
-                return new Piwik_Auth_Result(Piwik_Auth_Result::SUCCESS_SUPERUSER_AUTH_CODE, $rootLogin, $this->token_auth);
+                return new AuthResult(AuthResult::SUCCESS_SUPERUSER_AUTH_CODE, $rootLogin, $this->token_auth);
             }
 
-            $login = Piwik_FetchOne(
+            $login = Db::fetchOne(
                 'SELECT login
-                FROM ' . Piwik_Common::prefixTable('user') . '
+                FROM ' . Common::prefixTable('user') . '
 					WHERE token_auth = ?',
                 array($this->token_auth)
             );
             if (!empty($login)) {
-                return new Piwik_Auth_Result(Piwik_Auth_Result::SUCCESS, $login, $this->token_auth);
+                return new AuthResult(AuthResult::SUCCESS, $login, $this->token_auth);
             }
         } else if (!empty($this->login)) {
             if ($this->login === $rootLogin
@@ -59,13 +71,13 @@ class Piwik_Login_Auth implements Piwik_Auth
                 || $rootToken === $this->token_auth
             ) {
                 $this->setTokenAuth($rootToken);
-                return new Piwik_Auth_Result(Piwik_Auth_Result::SUCCESS_SUPERUSER_AUTH_CODE, $rootLogin, $this->token_auth);
+                return new AuthResult(AuthResult::SUCCESS_SUPERUSER_AUTH_CODE, $rootLogin, $this->token_auth);
             }
 
             $login = $this->login;
-            $userToken = Piwik_FetchOne(
+            $userToken = Db::fetchOne(
                 'SELECT token_auth
-                FROM ' . Piwik_Common::prefixTable('user') . '
+                FROM ' . Common::prefixTable('user') . '
 					WHERE login = ?',
                 array($login)
             );
@@ -74,11 +86,43 @@ class Piwik_Login_Auth implements Piwik_Auth
                     || $userToken === $this->token_auth)
             ) {
                 $this->setTokenAuth($userToken);
-                return new Piwik_Auth_Result(Piwik_Auth_Result::SUCCESS, $login, $userToken);
+                return new AuthResult(AuthResult::SUCCESS, $login, $userToken);
             }
         }
 
-        return new Piwik_Auth_Result(Piwik_Auth_Result::FAILURE, $this->login, $this->token_auth);
+        return new AuthResult(AuthResult::FAILURE, $this->login, $this->token_auth);
+    }
+
+    /**
+     * Authenticates the user and initializes the session.
+     */
+    public function initSession($login, $md5Password, $rememberMe)
+    {
+        $tokenAuth = API::getInstance()->getTokenAuth($login, $md5Password);
+
+        $this->setLogin($login);
+        $this->setTokenAuth($tokenAuth);
+        $authResult = $this->authenticate();
+
+        $authCookieName = Config::getInstance()->General['login_cookie_name'];
+        $authCookieExpiry = $rememberMe ? time() + Config::getInstance()->General['login_cookie_expire'] : 0;
+        $authCookiePath = Config::getInstance()->General['login_cookie_path'];
+        $cookie = new Cookie($authCookieName, $authCookieExpiry, $authCookiePath);
+        if (!$authResult->wasAuthenticationSuccessful()) {
+            $cookie->delete();
+            throw new Exception(Piwik::translate('Login_LoginPasswordNotCorrect'));
+        }
+
+        $cookie->set('login', $login);
+        $cookie->set('token_auth', $this->getHashTokenAuth($login, $authResult->getTokenAuth()));
+        $cookie->setSecure(ProxyHttp::isHttps());
+        $cookie->setHttpOnly(true);
+        $cookie->save();
+
+        @Session::regenerateId();
+
+        // remove password reset entry if it exists
+        Login::removePasswordResetInfo($login);
     }
 
     /**

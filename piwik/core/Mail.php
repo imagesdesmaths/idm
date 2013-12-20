@@ -8,20 +8,24 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik;
+
+use Zend_Mail;
 
 /**
  * Class for sending mails, for more information see:
+ * {@link http://framework.zend.com/manual/en/zend.mail.html}
  *
  * @package Piwik
  * @see Zend_Mail, libs/Zend/Mail.php
- * @link http://framework.zend.com/manual/en/zend.mail.html
+ * @api
  */
-class Piwik_Mail extends Zend_Mail
+class Mail extends Zend_Mail
 {
     /**
-     * Default charset utf-8
+     * Constructor.
      *
-     * @param string $charset  charset, defaults to utf-8
+     * @param string $charset charset, defaults to utf-8
      */
     public function __construct($charset = 'utf-8')
     {
@@ -30,19 +34,19 @@ class Piwik_Mail extends Zend_Mail
     }
 
     /**
-     * Sets the sender to use
+     * Sets the sender.
      *
-     * @param string $email
-     * @param null|string $name
+     * @param string $email Email address of the sender.
+     * @param null|string $name Name of the sender.
      * @return Zend_Mail
      */
     public function setFrom($email, $name = null)
     {
-        $hostname = Piwik_Config::getInstance()->mail['defaultHostnameIfEmpty'];
-        $piwikHost = Piwik_Url::getCurrentHost($hostname);
+        $hostname = Config::getInstance()->mail['defaultHostnameIfEmpty'];
+        $piwikHost = Url::getCurrentHost($hostname);
 
         // If known Piwik URL, use it instead of "localhost"
-        $piwikUrl = Piwik::getPiwikUrl();
+        $piwikUrl = SettingsPiwik::getPiwikUrl();
         $url = parse_url($piwikUrl);
         if (isset($url['host'])
             && $url['host'] != 'localhost'
@@ -59,7 +63,7 @@ class Piwik_Mail extends Zend_Mail
      */
     private function initSmtpTransport()
     {
-        $mailConfig = Piwik_Config::getInstance()->mail;
+        $mailConfig = Config::getInstance()->mail;
         if (empty($mailConfig['host'])
             || $mailConfig['transport'] != 'smtp'
         ) {
@@ -75,8 +79,8 @@ class Piwik_Mail extends Zend_Mail
         if (!empty($mailConfig['encryption']))
             $smtpConfig['ssl'] = $mailConfig['encryption'];
 
-        $tr = new Zend_Mail_Transport_Smtp($mailConfig['host'], $smtpConfig);
-        Piwik_Mail::setDefaultTransport($tr);
+        $tr = new \Zend_Mail_Transport_Smtp($mailConfig['host'], $smtpConfig);
+        Mail::setDefaultTransport($tr);
         ini_set("smtp_port", $mailConfig['port']);
     }
 }

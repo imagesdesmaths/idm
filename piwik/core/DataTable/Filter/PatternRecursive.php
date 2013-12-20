@@ -8,41 +8,53 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\DataTable\Filter;
+
+use Exception;
+use Piwik\DataTable\BaseFilter;
+use Piwik\DataTable;
+use Piwik\DataTable\Manager;
 
 /**
- * Delete all rows for which
- * - the given $columnToFilter do not contain the $patternToSearch
- * - AND all the subTables associated to this row do not contain the $patternToSearch
- *
- * This filter is to be used on columns containing strings.
- * Example: from the pages viewed report, keep only the rows that contain "piwik" or for which a subpage contains "piwik".
+ * Deletes rows that do not contain a column that matches a regex pattern and do not contain a
+ * subtable that contains a column that matches a regex pattern.
+ * 
+ * **Example**
+ * 
+ *     // only display index pageviews in Actions.getPageUrls
+ *     $dataTable->filter('PatternRecursive', array('label', 'index'));
  *
  * @package Piwik
- * @subpackage Piwik_DataTable
+ * @subpackage DataTable
+ * @api
  */
-class Piwik_DataTable_Filter_PatternRecursive extends Piwik_DataTable_Filter
+class PatternRecursive extends BaseFilter
 {
     private $columnToFilter;
     private $patternToSearch;
     private $patternToSearchQuoted;
 
     /**
-     * @param Piwik_DataTable $table
-     * @param string $columnToFilter
-     * @param string $patternToSearch
+     * Constructor.
+     * 
+     * @param DataTable $table The table to eventually filter.
+     * @param string $columnToFilter The column to match with the `$patternToSearch` pattern.
+     * @param string $patternToSearch The regex pattern to use.
      */
     public function __construct($table, $columnToFilter, $patternToSearch)
     {
         parent::__construct($table);
         $this->patternToSearch = $patternToSearch;
-        $this->patternToSearchQuoted = Piwik_DataTable_Filter_Pattern::getPatternQuoted($patternToSearch);
+        $this->patternToSearchQuoted = Pattern::getPatternQuoted($patternToSearch);
         $this->patternToSearch = $patternToSearch; //preg_quote($patternToSearch);
         $this->columnToFilter = $columnToFilter;
     }
 
     /**
-     * @param Piwik_DataTable $table
-     * @return int
+     * See {@link PatternRecursive}.
+     * 
+     * @param DataTable $table
+     * @return int The number of deleted rows.
      */
     public function filter($table)
     {
@@ -56,7 +68,7 @@ class Piwik_DataTable_Filter_PatternRecursive extends Piwik_DataTable_Filter
 
             try {
                 $idSubTable = $row->getIdSubDataTable();
-                $subTable = Piwik_DataTable_Manager::getInstance()->getTable($idSubTable);
+                $subTable = Manager::getInstance()->getTable($idSubTable);
 
                 // we delete the row if we couldn't find the pattern in any row in the
                 // children hierarchy
@@ -69,7 +81,7 @@ class Piwik_DataTable_Filter_PatternRecursive extends Piwik_DataTable_Filter
             }
 
             if ($patternNotFoundInChildren
-                && !Piwik_DataTable_Filter_Pattern::match($this->patternToSearch, $this->patternToSearchQuoted, $row->getColumn($this->columnToFilter), $invertedMatch = false)
+                && !Pattern::match($this->patternToSearch, $this->patternToSearchQuoted, $row->getColumn($this->columnToFilter), $invertedMatch = false)
             ) {
                 $table->deleteRow($key);
             }

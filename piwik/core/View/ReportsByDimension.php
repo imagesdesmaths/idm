@@ -8,23 +8,32 @@
  * @category Piwik
  * @package SmartyPlugins
  */
+namespace Piwik\View;
+
+use Piwik\FrontController;
+use Piwik\Piwik;
+use Piwik\Url;
+use Piwik\View;
 
 /**
- * A facade that makes it easier to use the 'reports_by_dimension.tpl' template.
+ * A facade that makes it easier to use the '_reportsByDimension.twig' template.
  *
  * This view will output HTML that displays a list of report names by category and
  * loads them by AJAX when clicked. The loaded report is displayed to the right
  * of the report listing.
  */
-class Piwik_View_ReportsByDimension extends Piwik_View
+class ReportsByDimension extends View
 {
     /**
      * Constructor.
+     *
+     * @param string $id
      */
-    public function __construct()
+    public function __construct($id)
     {
-        parent::__construct(PIWIK_INCLUDE_PATH . '/plugins/CoreHome/templates/reports_by_dimension.tpl');
+        parent::__construct('@CoreHome/ReportsByDimension/_reportsByDimension');
         $this->dimensionCategories = array();
+        $this->id = $id;
     }
 
     /**
@@ -47,7 +56,7 @@ class Piwik_View_ReportsByDimension extends Piwik_View
         $categories[$category][] = array(
             'title'  => $title,
             'params' => $params,
-            'url'    => Piwik_Url::getCurrentQueryStringWithParametersModified($params)
+            'url'    => Url::getCurrentQueryStringWithParametersModified($params)
         );
         $this->dimensionCategories = $categories;
     }
@@ -67,12 +76,30 @@ class Piwik_View_ReportsByDimension extends Piwik_View
     }
 
     /**
+     * @return string The ID specified in the constructor, usually the plugin name
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * Renders this view.
      *
      * @return string The rendered view.
      */
     public function render()
     {
+        /**
+         * Triggered before rendering {@link ReportsByDimension} views.
+         * 
+         * Plugins can use this event to configure {@link ReportsByDimension} instances by
+         * adding or removing reports to display.
+         * 
+         * @param ReportsByDimension $this The view instance.
+         */
+        Piwik::postEvent('View.ReportsByDimension.render', array($this));
+
         $this->firstReport = "";
 
         // if there are reports & report categories added, render the first one so we can
@@ -93,7 +120,7 @@ class Piwik_View_ReportsByDimension extends Piwik_View
 
             $module = $firstReportInfo['params']['module'];
             $action = $firstReportInfo['params']['action'];
-            $this->firstReport = Piwik_FrontController::getInstance()->fetchDispatch($module, $action);
+            $this->firstReport = FrontController::getInstance()->fetchDispatch($module, $action);
 
             $_GET = $oldGet;
             $_POST = $oldPost;

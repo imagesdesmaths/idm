@@ -8,21 +8,48 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\DataTable\Filter;
+
+use Piwik\DataTable\BaseFilter;
+use Piwik\DataTable\Row;
+use Piwik\DataTable;
+use Piwik\Metrics;
 
 /**
+ * Adds processed metrics columns to a {@link DataTable} using metrics that already exist.
+ *
+ * Columns added are:
+ * 
+ * - **conversion_rate**: percent value of `nb_visits_converted / nb_visits
+ * - **nb_actions_per_visit**: `nb_actions / nb_visits`
+ * - **avg_time_on_site**: in number of seconds, `round(visit_length / nb_visits)`. Not
+ *                         pretty formatted.
+ * - **bounce_rate**: percent value of `bounce_count / nb_visits`
+ * 
+ * Adding the **filter_add_columns_when_show_all_columns** query parameter to
+ * an API request will trigger the execution of this Filter.
+ * 
+ * _Note: This filter must be called before {@link ReplaceColumnNames} is called._
+ * 
+ * **Basic usage example**
+ * 
+ *     $dataTable->filter('AddColumnsProcessedMetrics');
+ * 
  * @package Piwik
- * @subpackage Piwik_DataTable
+ * @subpackage DataTable
+ * @api
  */
-class Piwik_DataTable_Filter_AddColumnsProcessedMetrics extends Piwik_DataTable_Filter
+class AddColumnsProcessedMetrics extends BaseFilter
 {
     protected $invalidDivision = 0;
     protected $roundPrecision = 2;
     protected $deleteRowsWithNoVisit = true;
 
     /**
-     * @param Piwik_DataTable $table
-     * @param bool $deleteRowsWithNoVisit  Automatically set to true when filter_add_columns_when_show_all_columns is found in the API request
-     * @return Piwik_DataTable_Filter_AddColumnsProcessedMetrics
+     * Constructor.
+     * 
+     * @param DataTable $table The table to eventually filter.
+     * @param bool $deleteRowsWithNoVisit Whether to delete rows with no visits or not.
      */
     public function __construct($table, $deleteRowsWithNoVisit = true)
     {
@@ -31,16 +58,17 @@ class Piwik_DataTable_Filter_AddColumnsProcessedMetrics extends Piwik_DataTable_
     }
 
     /**
-     * Filters the given data table
+     * Adds the processed metrics. See {@link AddColumnsProcessedMetrics} for
+     * more information.
      *
-     * @param Piwik_DataTable $table
+     * @param DataTable $table
      */
     public function filter($table)
     {
         $rowsIdToDelete = array();
         foreach ($table->getRows() as $key => $row) {
-            $nbVisits = $this->getColumn($row, Piwik_Archive::INDEX_NB_VISITS);
-            $nbActions = $this->getColumn($row, Piwik_Archive::INDEX_NB_ACTIONS);
+            $nbVisits = $this->getColumn($row, Metrics::INDEX_NB_VISITS);
+            $nbActions = $this->getColumn($row, Metrics::INDEX_NB_ACTIONS);
             if ($nbVisits == 0
                 && $nbActions == 0
                 && $this->deleteRowsWithNoVisit
@@ -51,12 +79,12 @@ class Piwik_DataTable_Filter_AddColumnsProcessedMetrics extends Piwik_DataTable_
                 continue;
             }
 
-            $nbVisitsConverted = (int)$this->getColumn($row, Piwik_Archive::INDEX_NB_VISITS_CONVERTED);
+            $nbVisitsConverted = (int)$this->getColumn($row, Metrics::INDEX_NB_VISITS_CONVERTED);
             if ($nbVisitsConverted > 0) {
                 $conversionRate = round(100 * $nbVisitsConverted / $nbVisits, $this->roundPrecision);
                 try {
                     $row->addColumn('conversion_rate', $conversionRate . "%");
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     // conversion_rate can be defined upstream apparently? FIXME
                 }
             }
@@ -68,21 +96,21 @@ class Piwik_DataTable_Filter_AddColumnsProcessedMetrics extends Piwik_DataTable_
                 // sum_visit_length / nb_visits => Avg. Time on Site
                 // bounce_count / nb_visits => Bounce Rate
                 $actionsPerVisit = round($nbActions / $nbVisits, $this->roundPrecision);
-                $visitLength = $this->getColumn($row, Piwik_Archive::INDEX_SUM_VISIT_LENGTH);
+                $visitLength = $this->getColumn($row, Metrics::INDEX_SUM_VISIT_LENGTH);
                 $averageTimeOnSite = round($visitLength / $nbVisits, $rounding = 0);
-                $bounceRate = round(100 * $this->getColumn($row, Piwik_Archive::INDEX_BOUNCE_COUNT) / $nbVisits, $this->roundPrecision);
+                $bounceRate = round(100 * $this->getColumn($row, Metrics::INDEX_BOUNCE_COUNT) / $nbVisits, $this->roundPrecision);
             }
             try {
                 $row->addColumn('nb_actions_per_visit', $actionsPerVisit);
                 $row->addColumn('avg_time_on_site', $averageTimeOnSite);
                 // It could be useful for API users to have raw sum length value.
                 //$row->addMetadata('sum_visit_length', $visitLength);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
             }
 
             try {
                 $row->addColumn('bounce_rate', $bounceRate . "%");
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
             }
 
             $this->filterSubTable($row);
@@ -96,18 +124,18 @@ class Piwik_DataTable_Filter_AddColumnsProcessedMetrics extends Piwik_DataTable_
      * - raw datatables coming from the archive DB, which columns are int indexed
      * - datatables processed resulting of API calls, which columns have human readable english names
      *
-     * @param Piwik_DataTable_Row $row
-     * @param int $columnIdRaw see consts in Piwik_Archive::
-     * @param bool $mappingIdToName
+     * @param Row|array $row
+     * @param int $columnIdRaw see consts in Archive::
+     * @param bool|array $mappingIdToName
      * @return mixed  Value of column, false if not found
      */
     protected function getColumn($row, $columnIdRaw, $mappingIdToName = false)
     {
         if (empty($mappingIdToName)) {
-            $mappingIdToName = Piwik_Archive::$mappingFromIdToName;
+            $mappingIdToName = Metrics::$mappingFromIdToName;
         }
         $columnIdReadable = $mappingIdToName[$columnIdRaw];
-        if ($row instanceof Piwik_DataTable_Row) {
+        if ($row instanceof Row) {
             $raw = $row->getColumn($columnIdRaw);
             if ($raw !== false) {
                 return $raw;
@@ -122,5 +150,4 @@ class Piwik_DataTable_Filter_AddColumnsProcessedMetrics extends Piwik_DataTable_
         }
         return false;
     }
-
 }

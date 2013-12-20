@@ -8,22 +8,39 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\DataTable\Filter;
+
+use Piwik\DataTable;
+use Piwik\DataTable\Row;
 
 /**
- * Replace a metadata value with a new value resulting
- * from the function called with the metadata's value
+ * Execute a callback for each row of a {@link DataTable} passing certain column values and metadata
+ * as metadata, and replaces row metadata with the callback result.
+ * 
+ * **Basic usage example**
+ * 
+ *     $dataTable->filter('MetadataCallbackReplace', array('url', function ($url) {
+ *         return $url . '#index';
+ *     }));
  *
  * @package Piwik
- * @subpackage Piwik_DataTable
+ * @subpackage DataTable
+ * @api
  */
-class Piwik_DataTable_Filter_MetadataCallbackReplace extends Piwik_DataTable_Filter_ColumnCallbackReplace
+class MetadataCallbackReplace extends ColumnCallbackReplace
 {
     /**
-     * @param Piwik_DataTable $table
-     * @param array|string $metadataToFilter
-     * @param callback $functionToApply
-     * @param null|array $functionParameters
-     * @param array $extraColumnParameters
+     * Constructor.
+     * 
+     * @param DataTable $table The DataTable that will eventually be filtered.
+     * @param array|string $metadataToFilter The metadata whose values should be passed to the callback
+     *                                       and then replaced with the callback's result.
+     * @param callable $functionToApply The function to execute. Must take the metadata value as a parameter
+     *                                  and return a value that will be used to replace the original.
+     * @param array|null $functionParameters deprecated - use an [anonymous function](http://php.net/manual/en/functions.anonymous.php)
+     *                                       instead.
+     * @param array $extraColumnParameters Extra column values that should be passed to the callback, but
+     *                                     shouldn't be replaced.
      */
     public function __construct($table, $metadataToFilter, $functionToApply, $functionParameters = null,
                                 $extraColumnParameters = array())
@@ -32,7 +49,7 @@ class Piwik_DataTable_Filter_MetadataCallbackReplace extends Piwik_DataTable_Fil
     }
 
     /**
-     * @param Piwik_DataTable_Row $row
+     * @param Row $row
      * @param string $metadataToFilter
      * @param mixed $newValue
      */
@@ -42,9 +59,9 @@ class Piwik_DataTable_Filter_MetadataCallbackReplace extends Piwik_DataTable_Fil
     }
 
     /**
-     * @param Piwik_DataTable_Row $row
+     * @param Row $row
      * @param string $metadataToFilter
-     * @return array|false|mixed
+     * @return array|bool|mixed
      */
     protected function getElementToReplace($row, $metadataToFilter)
     {

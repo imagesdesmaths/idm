@@ -8,6 +8,11 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\API\DataTableManipulator;
+
+use Piwik\API\DataTableManipulator;
+use Piwik\DataTable;
+use Piwik\DataTable\Row;
 
 /**
  * This class is responsible for flattening data tables.
@@ -18,7 +23,7 @@
  * @package Piwik
  * @subpackage Piwik_API
  */
-class Piwik_API_DataTableManipulator_Flattener extends Piwik_API_DataTableManipulator
+class Flattener extends DataTableManipulator
 {
 
     private $includeAggregateRows = false;
@@ -40,8 +45,8 @@ class Piwik_API_DataTableManipulator_Flattener extends Piwik_API_DataTableManipu
     public $recursiveLabelSeparator = ' - ';
 
     /**
-     * @param  Piwik_DataTable $dataTable
-     * @return Piwik_DataTable|Piwik_DataTable_Array
+     * @param  DataTable $dataTable
+     * @return DataTable|DataTable\Map
      */
     public function flatten($dataTable)
     {
@@ -56,15 +61,16 @@ class Piwik_API_DataTableManipulator_Flattener extends Piwik_API_DataTableManipu
      * Template method called from self::manipulate.
      * Flatten each data table.
      *
-     * @param Piwik_DataTable $dataTable
-     * @return Piwik_DataTable
+     * @param DataTable $dataTable
+     * @return DataTable
      */
     protected function manipulateDataTable($dataTable)
     {
-        if ($this->includeAggregateRows) {
-            $dataTable->applyQueuedFilters();
-        }
-        
+        // apply filters now since subtables have their filters applied before generic filters. if we don't do this
+        // now, we'll try to apply filters to rows that have already been manipulated. this results in errors like
+        // 'column ... already exists'.
+        $dataTable->applyQueuedFilters();
+
         $newDataTable = $dataTable->getEmptyClone($keepFilters = false);
         foreach ($dataTable->getRows() as $row) {
             $this->flattenRow($row, $newDataTable);
@@ -73,12 +79,12 @@ class Piwik_API_DataTableManipulator_Flattener extends Piwik_API_DataTableManipu
     }
 
     /**
-     * @param Piwik_DataTable_Row $row
-     * @param Piwik_DataTable $dataTable
+     * @param Row $row
+     * @param DataTable $dataTable
      * @param string $labelPrefix
      * @param bool $parentLogo
      */
-    private function flattenRow(Piwik_DataTable_Row $row, Piwik_DataTable $dataTable,
+    private function flattenRow(Row $row, DataTable $dataTable,
                                 $labelPrefix = '', $parentLogo = false)
     {
         $label = $row->getColumn('label');
@@ -122,8 +128,10 @@ class Piwik_API_DataTableManipulator_Flattener extends Piwik_API_DataTableManipu
      *
      * @param array $request
      */
-    protected function manipulateSubtableRequest(&$request)
+    protected function manipulateSubtableRequest($request)
     {
         unset($request['flat']);
+
+        return $request;
     }
 }

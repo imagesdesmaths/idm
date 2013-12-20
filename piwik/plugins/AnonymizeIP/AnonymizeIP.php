@@ -6,39 +6,44 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_AnonymizeIP
+ * @package AnonymizeIP
  */
+namespace Piwik\Plugins\AnonymizeIP;
+
+use Piwik\Config;
+use Piwik\IP;
+use Piwik\Piwik;
+use Piwik\Version;
 
 /**
  * Anonymize visitor IP addresses to comply with the privacy laws/guidelines in countries, such as Germany.
  *
- * @package Piwik_AnonymizeIP
+ * @package AnonymizeIP
  */
-class Piwik_AnonymizeIP extends Piwik_Plugin
+class AnonymizeIP extends \Piwik\Plugin
 {
     /**
-     * Get plugin information
-     * @return array
+     * @see Piwik_Plugin::getInformation
      */
     public function getInformation()
     {
         return array(
-            'description'     => Piwik_Translate('AnonymizeIP_PluginDescription'),
-            'author'          => 'Piwik',
-            'author_homepage' => 'http://piwik.org/',
-            'version'         => Piwik_Version::VERSION,
-            'TrackerPlugin'   => true,
+            'description'      => Piwik::translate('AnonymizeIP_PluginDescription'),
+            'author'           => 'Piwik',
+            'author_homepage'  => 'http://piwik.org/',
+            'version'          => Version::VERSION,
+            'license'          => 'GPL v3+',
+            'license_homepage' => 'http://www.gnu.org/licenses/gpl.html'
         );
     }
 
     /**
-     * Get list of hooks to register
-     * @return array
+     * @see Piwik_Plugin::getListHooksRegistered
      */
     public function getListHooksRegistered()
     {
         return array(
-            'Tracker.Visit.setVisitorIp' => 'setVisitorIpAddress',
+            'Tracker.setVisitorIp' => 'setVisitorIpAddress',
         );
     }
 
@@ -49,28 +54,35 @@ class Piwik_AnonymizeIP extends Piwik_Plugin
      * @param int $maskLength Number of octets to reset
      * @return string
      */
-    static public function applyIPMask($ip, $maskLength)
+    public static function applyIPMask($ip, $maskLength)
     {
-        $i = Piwik_Common::strlen($ip);
-        if ($maskLength > $i) {
-            $maskLength = $i;
-        }
+        // IPv4 or mapped IPv4 in IPv6
+        if (IP::isIPv4($ip)) {
+            $i = strlen($ip);
+            if ($maskLength > $i) {
+                $maskLength = $i;
+            }
 
-        while ($maskLength-- > 0) {
-            $ip[--$i] = chr(0);
+            while ($maskLength-- > 0) {
+                $ip[--$i] = chr(0);
+            }
+        } else {
+            $masks = array(
+                'ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff',
+                'ffff:ffff:ffff:ffff::',
+                'ffff:ffff:ffff:0000::',
+                'ffff:ff00:0000:0000::'
+            );
+            return $ip & pack('a16', inet_pton($masks[$maskLength]));
         }
-
         return $ip;
     }
 
     /**
-     * Hook on Tracker.Visit.setVisitorIp to anonymize visitor IP addresses
-     *
-     * @param Piwik_Event_Notification $notification  notification object
+     * Hook on Tracker.Visit.setVisitorIp to anomymize visitor IP addresses
      */
-    function setVisitorIpAddress($notification)
+    public function setVisitorIpAddress(&$ip)
     {
-        $ip =& $notification->getNotificationObject();
-        $ip = self::applyIPMask($ip, Piwik_Config::getInstance()->Tracker['ip_address_mask_length']);
+        $ip = self::applyIPMask($ip, Config::getInstance()->Tracker['ip_address_mask_length']);
     }
 }

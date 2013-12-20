@@ -6,26 +6,42 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_Live
+ * @package Live
  */
+namespace Piwik\Plugins\Live;
+
+use Piwik\Common;
+use Piwik\DataAccess\LogAggregator;
+use Piwik\DataTable\Filter\ColumnDelete;
+use Piwik\Date;
+use Piwik\Db;
+use Piwik\IP;
+use Piwik\Piwik;
+use Piwik\Plugins\API\API as APIMetadata;
+use Piwik\Plugins\Referrers\API as APIReferrers;
+use Piwik\Plugins\UserCountry\LocationProvider\GeoIp;
+use Piwik\Tracker\Action;
+use Piwik\Tracker\GoalManager;
+use Piwik\Tracker;
+use Piwik\Tracker\Visit;
+use Piwik\UrlHelper;
 
 /**
- * @see plugins/Referers/functions.php
+ * @see plugins/Referrers/functions.php
  * @see plugins/UserCountry/functions.php
  * @see plugins/UserSettings/functions.php
  * @see plugins/Provider/functions.php
  */
 
-require_once PIWIK_INCLUDE_PATH . '/plugins/Referers/functions.php';
+require_once PIWIK_INCLUDE_PATH . '/plugins/Referrers/functions.php';
 require_once PIWIK_INCLUDE_PATH . '/plugins/UserCountry/functions.php';
 require_once PIWIK_INCLUDE_PATH . '/plugins/UserSettings/functions.php';
 require_once PIWIK_INCLUDE_PATH . '/plugins/Provider/functions.php';
 
 /**
- *
- * @package Piwik_Live
+ * @package Live
  */
-class Piwik_Live_Visitor
+class Visitor
 {
     const DELIMITER_PLUGIN_NAME = ", ";
 
@@ -49,6 +65,7 @@ class Piwik_Live_Visitor
             'visitEcommerceStatusIcon'    => $this->getVisitEcommerceStatusIcon(),
 
             'searches'                    => $this->getNumberOfSearches(),
+            'events'                      => $this->getNumberOfEvents(),
             'actions'                     => $this->getNumberOfActions(),
             // => false are placeholders to be filled in API later
             'actionDetails'               => false,
@@ -88,16 +105,16 @@ class Piwik_Live_Visitor
             'providerName'                => $this->getProviderName(),
             'providerUrl'                 => $this->getProviderUrl(),
 
-            'referrerType'                => $this->getRefererType(),
-            'referrerTypeName'            => $this->getRefererTypeName(),
-            'referrerName'                => $this->getRefererName(),
+            'referrerType'                => $this->getReferrerType(),
+            'referrerTypeName'            => $this->getReferrerTypeName(),
+            'referrerName'                => $this->getReferrerName(),
             'referrerKeyword'             => $this->getKeyword(),
             'referrerKeywordPosition'     => $this->getKeywordPosition(),
-            'referrerUrl'                 => $this->getRefererUrl(),
+            'referrerUrl'                 => $this->getReferrerUrl(),
             'referrerSearchEngineUrl'     => $this->getSearchEngineUrl(),
             'referrerSearchEngineIcon'    => $this->getSearchEngineIcon(),
             'operatingSystem'             => $this->getOperatingSystem(),
-            'operatingSystemCode'             => $this->getOperatingSystemCode(),
+            'operatingSystemCode'         => $this->getOperatingSystemCode(),
             'operatingSystemShortName'    => $this->getOperatingSystemShortName(),
             'operatingSystemIcon'         => $this->getOperatingSystemIcon(),
             'browserFamily'               => $this->getBrowserFamily(),
@@ -166,7 +183,7 @@ class Piwik_Live_Visitor
     function getIp()
     {
         if (isset($this->details['location_ip'])) {
-            return Piwik_IP::N2P($this->details['location_ip']);
+            return IP::N2P($this->details['location_ip']);
         }
         return false;
     }
@@ -186,6 +203,11 @@ class Piwik_Live_Visitor
         return $this->details['visit_total_actions'];
     }
 
+    function getNumberOfEvents()
+    {
+        return $this->details['visit_total_events'];
+    }
+
     function getNumberOfSearches()
     {
         return $this->details['visit_total_searches'];
@@ -198,7 +220,7 @@ class Piwik_Live_Visitor
 
     function getVisitLengthPretty()
     {
-        return Piwik::getPrettyTimeFromSeconds($this->details['visit_total_time']);
+        return \Piwik\MetricsFormatter::getPrettyTimeFromSeconds($this->details['visit_total_time']);
     }
 
     function getVisitorReturning()
@@ -217,7 +239,7 @@ class Piwik_Live_Visitor
         if ($type == 'returning'
             || $type == 'returningCustomer'
         ) {
-            return "plugins/Live/templates/images/returningVisitor.gif";
+            return "plugins/Live/images/returningVisitor.gif";
         }
         return null;
     }
@@ -239,22 +261,22 @@ class Piwik_Live_Visitor
 
     function getCountryName()
     {
-        return Piwik_CountryTranslate($this->getCountryCode());
+        return \Piwik\Plugins\UserCountry\countryTranslate($this->getCountryCode());
     }
 
     function getCountryFlag()
     {
-        return Piwik_getFlagFromCode($this->getCountryCode());
+        return \Piwik\Plugins\UserCountry\getFlagFromCode($this->getCountryCode());
     }
 
     function getContinent()
     {
-        return Piwik_ContinentTranslate($this->getContinentCode());
+        return \Piwik\Plugins\UserCountry\continentTranslate($this->getContinentCode());
     }
 
     function getContinentCode()
     {
-        return Piwik_Common::getContinent($this->details['location_country']);
+        return Common::getContinent($this->details['location_country']);
     }
 
     function getCityName()
@@ -268,8 +290,8 @@ class Piwik_Live_Visitor
     public function getRegionName()
     {
         $region = $this->getRegionCode();
-        if ($region != '' && $region != Piwik_Tracker_Visit::UNKNOWN_CODE) {
-            return Piwik_UserCountry_LocationProvider_GeoIp::getRegionNameFromCodes(
+        if ($region != '' && $region != Visit::UNKNOWN_CODE) {
+            return GeoIp::getRegionNameFromCodes(
                 $this->details['location_country'], $region);
         }
         return null;
@@ -317,7 +339,7 @@ class Piwik_Live_Visitor
     function getCustomVariables()
     {
         $customVariables = array();
-        for ($i = 1; $i <= Piwik_Tracker::MAX_CUSTOM_VARIABLES; $i++) {
+        for ($i = 1; $i <= Tracker::MAX_CUSTOM_VARIABLES; $i++) {
             if (!empty($this->details['custom_var_k' . $i])) {
                 $customVariables[$i] = array(
                     'customVariableName' . $i  => $this->details['custom_var_k' . $i],
@@ -328,47 +350,47 @@ class Piwik_Live_Visitor
         return $customVariables;
     }
 
-    function getRefererType()
+    function getReferrerType()
     {
-        return Piwik_getRefererTypeFromShortName($this->details['referer_type']);
+        return \Piwik\Plugins\Referrers\getReferrerTypeFromShortName($this->details['referer_type']);
     }
 
-    function getRefererTypeName()
+    function getReferrerTypeName()
     {
-        return Piwik_getRefererTypeLabel($this->details['referer_type']);
+        return \Piwik\Plugins\Referrers\getReferrerTypeLabel($this->details['referer_type']);
     }
 
     function getKeyword()
     {
         $keyword = $this->details['referer_keyword'];
-        if (Piwik_PluginsManager::getInstance()->isPluginActivated('Referers')
-            && $this->getRefererType() == 'search'
+        if (\Piwik\Plugin\Manager::getInstance()->isPluginActivated('Referrers')
+            && $this->getReferrerType() == 'search'
         ) {
-            $keyword = Piwik_Referers::getCleanKeyword($keyword);
+            $keyword = \Piwik\Plugins\Referrers\API::getCleanKeyword($keyword);
         }
         return urldecode($keyword);
     }
 
-    function getRefererUrl()
+    function getReferrerUrl()
     {
-        if ($this->getRefererType() == 'search') {
-            if (Piwik_PluginsManager::getInstance()->isPluginActivated('Referers')
-                && $this->details['referer_keyword'] == Piwik_Referers::LABEL_KEYWORD_NOT_DEFINED
+        if ($this->getReferrerType() == 'search') {
+            if (\Piwik\Plugin\Manager::getInstance()->isPluginActivated('Referrers')
+                && $this->details['referer_keyword'] == APIReferrers::LABEL_KEYWORD_NOT_DEFINED
             ) {
                 return 'http://piwik.org/faq/general/#faq_144';
             } // Case URL is google.XX/url.... then we rewrite to the search result page url
-            elseif ($this->getRefererName() == 'Google'
+            elseif ($this->getReferrerName() == 'Google'
                 && strpos($this->details['referer_url'], '/url')
             ) {
                 $refUrl = @parse_url($this->details['referer_url']);
                 if (isset($refUrl['host'])) {
-                    $url = Piwik_getSearchEngineUrlFromUrlAndKeyword('http://google.com', $this->getKeyword());
+                    $url = \Piwik\Plugins\Referrers\getSearchEngineUrlFromUrlAndKeyword('http://google.com', $this->getKeyword());
                     $url = str_replace('google.com', $refUrl['host'], $url);
                     return $url;
                 }
             }
         }
-        if (Piwik_Common::isLookLikeUrl($this->details['referer_url'])) {
+        if (\Piwik\UrlHelper::isLookLikeUrl($this->details['referer_url'])) {
             return $this->details['referer_url'];
         }
         return null;
@@ -376,14 +398,14 @@ class Piwik_Live_Visitor
 
     function getKeywordPosition()
     {
-        if ($this->getRefererType() == 'search'
-            && strpos($this->getRefererName(), 'Google') !== false
+        if ($this->getReferrerType() == 'search'
+            && strpos($this->getReferrerName(), 'Google') !== false
         ) {
             $url = @parse_url($this->details['referer_url']);
             if (empty($url['query'])) {
                 return null;
             }
-            $position = Piwik_Common::getParameterFromQueryString($url['query'], 'cd');
+            $position = UrlHelper::getParameterFromQueryString($url['query'], 'cd');
             if (!empty($position)) {
                 return $position;
             }
@@ -391,17 +413,17 @@ class Piwik_Live_Visitor
         return null;
     }
 
-    function getRefererName()
+    function getReferrerName()
     {
         return urldecode($this->details['referer_name']);
     }
 
     function getSearchEngineUrl()
     {
-        if ($this->getRefererType() == 'search'
+        if ($this->getReferrerType() == 'search'
             && !empty($this->details['referer_name'])
         ) {
-            return Piwik_getSearchEngineUrlFromName($this->details['referer_name']);
+            return \Piwik\Plugins\Referrers\getSearchEngineUrlFromName($this->details['referer_name']);
         }
         return null;
     }
@@ -410,7 +432,7 @@ class Piwik_Live_Visitor
     {
         $searchEngineUrl = $this->getSearchEngineUrl();
         if (!is_null($searchEngineUrl)) {
-            return Piwik_getSearchEngineLogoFromUrl($searchEngineUrl);
+            return \Piwik\Plugins\Referrers\getSearchEngineLogoFromUrl($searchEngineUrl);
         }
         return null;
     }
@@ -446,7 +468,7 @@ class Piwik_Live_Visitor
             $pluginIcons = array();
 
             foreach ($pluginNames as $plugin) {
-                $pluginIcons[] = array("pluginIcon" => Piwik_getPluginsLogo($plugin), "pluginName" => $plugin);
+                $pluginIcons[] = array("pluginIcon" => \Piwik\Plugins\UserSettings\getPluginsLogo($plugin), "pluginName" => $plugin);
             }
             return $pluginIcons;
         }
@@ -460,27 +482,27 @@ class Piwik_Live_Visitor
 
     function getOperatingSystem()
     {
-        return Piwik_getOSLabel($this->details['config_os']);
+        return \Piwik\Plugins\UserSettings\getOSLabel($this->details['config_os']);
     }
 
     function getOperatingSystemShortName()
     {
-        return Piwik_getOSShortLabel($this->details['config_os']);
+        return \Piwik\Plugins\UserSettings\getOSShortLabel($this->details['config_os']);
     }
 
     function getOperatingSystemIcon()
     {
-        return Piwik_getOSLogo($this->details['config_os']);
+        return \Piwik\Plugins\UserSettings\getOSLogo($this->details['config_os']);
     }
 
     function getBrowserFamilyDescription()
     {
-        return Piwik_getBrowserTypeLabel($this->getBrowserFamily());
+        return \Piwik\Plugins\UserSettings\getBrowserTypeLabel($this->getBrowserFamily());
     }
 
     function getBrowserFamily()
     {
-        return Piwik_getBrowserFamily($this->details['config_browser_name']);
+        return \Piwik\Plugins\UserSettings\getBrowserFamily($this->details['config_browser_name']);
     }
 
     function getBrowserCode()
@@ -495,23 +517,23 @@ class Piwik_Live_Visitor
 
     function getBrowser()
     {
-        return Piwik_getBrowserLabel($this->details['config_browser_name'] . ";" . $this->details['config_browser_version']);
+        return \Piwik\Plugins\UserSettings\getBrowserLabel($this->details['config_browser_name'] . ";" . $this->details['config_browser_version']);
     }
 
     function getBrowserIcon()
     {
-        return Piwik_getBrowsersLogo($this->details['config_browser_name'] . ";" . $this->details['config_browser_version']);
+        return \Piwik\Plugins\UserSettings\getBrowsersLogo($this->details['config_browser_name'] . ";" . $this->details['config_browser_version']);
     }
 
     function getScreenType()
     {
-        return Piwik_getScreenTypeFromResolution($this->details['config_resolution']);
+        return \Piwik\Plugins\UserSettings\getScreenTypeFromResolution($this->details['config_resolution']);
     }
 
     function getDeviceType()
     {
-        if(Piwik_PluginsManager::getInstance()->isPluginActivated('DevicesDetection')) {
-            return Piwik_getDeviceTypeLabel($this->details['config_device_type']);
+        if (\Piwik\Plugin\Manager::getInstance()->isPluginActivated('DevicesDetection')) {
+            return \Piwik\Plugins\DevicesDetection\getDeviceTypeLabel($this->details['config_device_type']);
         }
         return false;
     }
@@ -523,26 +545,26 @@ class Piwik_Live_Visitor
 
     function getScreenTypeIcon()
     {
-        return Piwik_getScreensLogo($this->getScreenType());
+        return \Piwik\Plugins\UserSettings\getScreensLogo($this->getScreenType());
     }
-    
+
     function getProvider()
     {
         if (isset($this->details['location_provider'])) {
             return $this->details['location_provider'];
         } else {
-            return Piwik_Translate('General_Unknown');
+            return Piwik::translate('General_Unknown');
         }
     }
 
     function getProviderName()
     {
-        return Piwik_Provider_getPrettyProviderName($this->getProvider());
+        return \Piwik\Plugins\Provider\getPrettyProviderName($this->getProvider());
     }
 
     function getProviderUrl()
     {
-        return Piwik_getHostnameUrl(@$this->details['location_provider']);
+        return \Piwik\Plugins\Provider\getHostnameUrl(@$this->details['location_provider']);
     }
 
     function getDateTimeLastAction()
@@ -555,27 +577,408 @@ class Piwik_Live_Visitor
         $status = $this->getVisitEcommerceStatus();
 
         if (in_array($status, array('ordered', 'orderedThenAbandonedCart'))) {
-            return "themes/default/images/ecommerceOrder.gif";
+            return "plugins/Zeitgeist/images/ecommerceOrder.gif";
         } elseif ($status == 'abandonedCart') {
-            return "themes/default/images/ecommerceAbandonedCart.gif";
+            return "plugins/Zeitgeist/images/ecommerceAbandonedCart.gif";
         }
         return null;
     }
 
     function getVisitEcommerceStatus()
     {
-        return Piwik_API_API::getVisitEcommerceStatusFromId($this->details['visit_goal_buyer']);
+        return APIMetadata::getVisitEcommerceStatusFromId($this->details['visit_goal_buyer']);
     }
 
     function getVisitorGoalConvertedIcon()
     {
         return $this->isVisitorGoalConverted()
-            ? "themes/default/images/goal.png"
+            ? "plugins/Zeitgeist/images/goal.png"
             : null;
     }
 
     function isVisitorGoalConverted()
     {
         return $this->details['visit_goal_converted'];
+    }
+
+    /**
+     * Removes fields that are not meant to be displayed (md5 config hash)
+     * Or that the user should only access if he is super user or admin (cookie, IP)
+     *
+     * @param array $visitorDetails
+     * @return array
+     */
+    public static function cleanVisitorDetails($visitorDetails)
+    {
+        $toUnset = array('config_id');
+        if (Piwik::isUserIsAnonymous()) {
+            $toUnset[] = 'idvisitor';
+            $toUnset[] = 'location_ip';
+        }
+        foreach ($toUnset as $keyName) {
+            if (isset($visitorDetails[$keyName])) {
+                unset($visitorDetails[$keyName]);
+            }
+        }
+
+        return $visitorDetails;
+    }
+
+    /**
+     * The &flat=1 feature is used by API.getSuggestedValuesForSegment
+     *
+     * @param $visitorDetailsArray
+     * @return array
+     */
+    public static function flattenVisitorDetailsArray($visitorDetailsArray)
+    {
+        // NOTE: if you flatten more fields from the "actionDetails" array
+        //       ==> also update API/API.php getSuggestedValuesForSegment(), the $segmentsNeedActionsInfo array
+
+        // flatten visit custom variables
+        if (is_array($visitorDetailsArray['customVariables'])) {
+            foreach ($visitorDetailsArray['customVariables'] as $thisCustomVar) {
+                $visitorDetailsArray = array_merge($visitorDetailsArray, $thisCustomVar);
+            }
+            unset($visitorDetailsArray['customVariables']);
+        }
+
+        // flatten page views custom variables
+        $count = 1;
+        foreach ($visitorDetailsArray['actionDetails'] as $action) {
+            if (!empty($action['customVariables'])) {
+                foreach ($action['customVariables'] as $thisCustomVar) {
+                    foreach ($thisCustomVar as $cvKey => $cvValue) {
+                        $flattenedKeyName = $cvKey . ColumnDelete::APPEND_TO_COLUMN_NAME_TO_KEEP . $count;
+                        $visitorDetailsArray[$flattenedKeyName] = $cvValue;
+                        $count++;
+                    }
+                }
+            }
+        }
+
+        // Flatten Goals
+        $count = 1;
+        foreach ($visitorDetailsArray['actionDetails'] as $action) {
+            if (!empty($action['goalId'])) {
+                $flattenedKeyName = 'visitConvertedGoalId' . ColumnDelete::APPEND_TO_COLUMN_NAME_TO_KEEP . $count;
+                $visitorDetailsArray[$flattenedKeyName] = $action['goalId'];
+                $count++;
+            }
+        }
+
+        // Flatten Page Titles/URLs
+        $count = 1;
+        foreach ($visitorDetailsArray['actionDetails'] as $action) {
+            if (!empty($action['url'])) {
+                $flattenedKeyName = 'pageUrl' . ColumnDelete::APPEND_TO_COLUMN_NAME_TO_KEEP . $count;
+                $visitorDetailsArray[$flattenedKeyName] = $action['url'];
+            }
+
+            // API.getSuggestedValuesForSegment
+            $flatten = array( 'pageTitle', 'siteSearchKeyword', 'eventCategory', 'eventAction', 'eventName', 'eventValue');
+            foreach($flatten as $toFlatten) {
+                if (!empty($action[$toFlatten])) {
+                    $flattenedKeyName = $toFlatten . ColumnDelete::APPEND_TO_COLUMN_NAME_TO_KEEP . $count;
+                    $visitorDetailsArray[$flattenedKeyName] = $action[$toFlatten];
+                }
+            }
+            $count++;
+        }
+
+        // Entry/exit pages
+        $firstAction = $lastAction = false;
+        foreach ($visitorDetailsArray['actionDetails'] as $action) {
+            if ($action['type'] == 'action') {
+                if (empty($firstAction)) {
+                    $firstAction = $action;
+                }
+                $lastAction = $action;
+            }
+        }
+
+        if (!empty($firstAction['pageTitle'])) {
+            $visitorDetailsArray['entryPageTitle'] = $firstAction['pageTitle'];
+        }
+        if (!empty($firstAction['url'])) {
+            $visitorDetailsArray['entryPageUrl'] = $firstAction['url'];
+        }
+        if (!empty($lastAction['pageTitle'])) {
+            $visitorDetailsArray['exitPageTitle'] = $lastAction['pageTitle'];
+        }
+        if (!empty($lastAction['url'])) {
+            $visitorDetailsArray['exitPageUrl'] = $lastAction['url'];
+        }
+
+
+        return $visitorDetailsArray;
+    }
+
+    /**
+     * @param $visitorDetailsArray
+     * @param $actionsLimit
+     * @param $timezone
+     * @return array
+     */
+    public static function enrichVisitorArrayWithActions($visitorDetailsArray, $actionsLimit, $timezone)
+    {
+        $idVisit = $visitorDetailsArray['idVisit'];
+
+        $sqlCustomVariables = '';
+        for ($i = 1; $i <= Tracker::MAX_CUSTOM_VARIABLES; $i++) {
+            $sqlCustomVariables .= ', custom_var_k' . $i . ', custom_var_v' . $i;
+        }
+        // The second join is a LEFT join to allow returning records that don't have a matching page title
+        // eg. Downloads, Outlinks. For these, idaction_name is set to 0
+        $sql = "
+				SELECT
+					COALESCE(log_action_event_category.type, log_action.type, log_action_title.type) AS type,
+					log_action.name AS url,
+					log_action.url_prefix,
+					log_action_title.name AS pageTitle,
+					log_action.idaction AS pageIdAction,
+					log_link_visit_action.server_time as serverTimePretty,
+					log_link_visit_action.time_spent_ref_action as timeSpentRef,
+					log_link_visit_action.idlink_va AS pageId,
+					log_link_visit_action.custom_float
+					". $sqlCustomVariables . ",
+					log_action_event_category.name AS eventCategory,
+					log_action_event_action.name as eventAction
+				FROM " . Common::prefixTable('log_link_visit_action') . " AS log_link_visit_action
+					LEFT JOIN " . Common::prefixTable('log_action') . " AS log_action
+					ON  log_link_visit_action.idaction_url = log_action.idaction
+					LEFT JOIN " . Common::prefixTable('log_action') . " AS log_action_title
+					ON  log_link_visit_action.idaction_name = log_action_title.idaction
+					LEFT JOIN " . Common::prefixTable('log_action') . " AS log_action_event_category
+					ON  log_link_visit_action.idaction_event_category = log_action_event_category.idaction
+					LEFT JOIN " . Common::prefixTable('log_action') . " AS log_action_event_action
+					ON  log_link_visit_action.idaction_event_action = log_action_event_action.idaction
+				WHERE log_link_visit_action.idvisit = ?
+				ORDER BY server_time ASC
+				LIMIT 0, $actionsLimit
+				 ";
+        $actionDetails = Db::fetchAll($sql, array($idVisit));
+
+        foreach ($actionDetails as $actionIdx => &$actionDetail) {
+            $actionDetail =& $actionDetails[$actionIdx];
+            $customVariablesPage = array();
+            for ($i = 1; $i <= Tracker::MAX_CUSTOM_VARIABLES; $i++) {
+                if (!empty($actionDetail['custom_var_k' . $i])) {
+                    $cvarKey = $actionDetail['custom_var_k' . $i];
+                    $cvarKey = static::getCustomVariablePrettyKey($cvarKey);
+                    $customVariablesPage[$i] = array(
+                        'customVariablePageName' . $i  => $cvarKey,
+                        'customVariablePageValue' . $i => $actionDetail['custom_var_v' . $i],
+                    );
+                }
+                unset($actionDetail['custom_var_k' . $i]);
+                unset($actionDetail['custom_var_v' . $i]);
+            }
+            if (!empty($customVariablesPage)) {
+                $actionDetail['customVariables'] = $customVariablesPage;
+            }
+
+
+            if($actionDetail['type'] == Action::TYPE_EVENT_CATEGORY) {
+                // Handle Event
+                if(strlen($actionDetail['pageTitle']) > 0) {
+                    $actionDetail['eventName'] = $actionDetail['pageTitle'];
+                }
+
+                unset($actionDetail['pageTitle']);
+
+            } else if ($actionDetail['type'] == Action::TYPE_SITE_SEARCH) {
+                // Handle Site Search
+                $actionDetail['siteSearchKeyword'] = $actionDetail['pageTitle'];
+                unset($actionDetail['pageTitle']);
+            }
+
+            // Event value / Generation time
+            if($actionDetail['type'] == Action::TYPE_EVENT_CATEGORY) {
+                if(strlen($actionDetail['custom_float']) > 0) {
+                    $actionDetail['eventValue'] = $actionDetail['custom_float'];
+                }
+            } elseif ($actionDetail['custom_float'] > 0) {
+                $actionDetail['generationTime'] = \Piwik\MetricsFormatter::getPrettyTimeFromSeconds($actionDetail['custom_float'] / 1000);
+            }
+            unset($actionDetail['custom_float']);
+
+            if($actionDetail['type'] != Action::TYPE_EVENT_CATEGORY) {
+                unset($actionDetail['eventCategory']);
+                unset($actionDetail['eventAction']);
+            }
+
+            // Reconstruct url from prefix
+            $actionDetail['url'] = Tracker\PageUrl::reconstructNormalizedUrl($actionDetail['url'], $actionDetail['url_prefix']);
+            unset($actionDetail['url_prefix']);
+
+            // Set the time spent for this action (which is the timeSpentRef of the next action)
+            if (isset($actionDetails[$actionIdx + 1])) {
+                $actionDetail['timeSpent'] = $actionDetails[$actionIdx + 1]['timeSpentRef'];
+                $actionDetail['timeSpentPretty'] = \Piwik\MetricsFormatter::getPrettyTimeFromSeconds($actionDetail['timeSpent']);
+            }
+            unset($actionDetails[$actionIdx]['timeSpentRef']); // not needed after timeSpent is added
+
+        }
+
+        // If the visitor converted a goal, we shall select all Goals
+        $sql = "
+				SELECT
+						'goal' as type,
+						goal.name as goalName,
+						goal.idgoal as goalId,
+						goal.revenue as revenue,
+						log_conversion.idlink_va as goalPageId,
+						log_conversion.server_time as serverTimePretty,
+						log_conversion.url as url
+				FROM " . Common::prefixTable('log_conversion') . " AS log_conversion
+				LEFT JOIN " . Common::prefixTable('goal') . " AS goal
+					ON (goal.idsite = log_conversion.idsite
+						AND
+						goal.idgoal = log_conversion.idgoal)
+					AND goal.deleted = 0
+				WHERE log_conversion.idvisit = ?
+					AND log_conversion.idgoal > 0
+                ORDER BY server_time ASC
+				LIMIT 0, $actionsLimit
+			";
+        $goalDetails = Db::fetchAll($sql, array($idVisit));
+
+        $sql = "SELECT
+						case idgoal when " . GoalManager::IDGOAL_CART . " then '" . Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_CART . "' else '" . Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER . "' end as type,
+						idorder as orderId,
+						" . LogAggregator::getSqlRevenue('revenue') . " as revenue,
+						" . LogAggregator::getSqlRevenue('revenue_subtotal') . " as revenueSubTotal,
+						" . LogAggregator::getSqlRevenue('revenue_tax') . " as revenueTax,
+						" . LogAggregator::getSqlRevenue('revenue_shipping') . " as revenueShipping,
+						" . LogAggregator::getSqlRevenue('revenue_discount') . " as revenueDiscount,
+						items as items,
+
+						log_conversion.server_time as serverTimePretty
+					FROM " . Common::prefixTable('log_conversion') . " AS log_conversion
+					WHERE idvisit = ?
+						AND idgoal <= " . GoalManager::IDGOAL_ORDER . "
+					ORDER BY server_time ASC
+					LIMIT 0, $actionsLimit";
+        $ecommerceDetails = Db::fetchAll($sql, array($idVisit));
+
+        foreach ($ecommerceDetails as &$ecommerceDetail) {
+            if ($ecommerceDetail['type'] == Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_CART) {
+                unset($ecommerceDetail['orderId']);
+                unset($ecommerceDetail['revenueSubTotal']);
+                unset($ecommerceDetail['revenueTax']);
+                unset($ecommerceDetail['revenueShipping']);
+                unset($ecommerceDetail['revenueDiscount']);
+            }
+
+            // 25.00 => 25
+            foreach ($ecommerceDetail as $column => $value) {
+                if (strpos($column, 'revenue') !== false) {
+                    if ($value == round($value)) {
+                        $ecommerceDetail[$column] = round($value);
+                    }
+                }
+            }
+        }
+
+        // Enrich ecommerce carts/orders with the list of products
+        usort($ecommerceDetails, array('static', 'sortByServerTime'));
+        foreach ($ecommerceDetails as $key => &$ecommerceConversion) {
+            $sql = "SELECT
+							log_action_sku.name as itemSKU,
+							log_action_name.name as itemName,
+							log_action_category.name as itemCategory,
+							" . LogAggregator::getSqlRevenue('price') . " as price,
+							quantity as quantity
+						FROM " . Common::prefixTable('log_conversion_item') . "
+							INNER JOIN " . Common::prefixTable('log_action') . " AS log_action_sku
+							ON  idaction_sku = log_action_sku.idaction
+							LEFT JOIN " . Common::prefixTable('log_action') . " AS log_action_name
+							ON  idaction_name = log_action_name.idaction
+							LEFT JOIN " . Common::prefixTable('log_action') . " AS log_action_category
+							ON idaction_category = log_action_category.idaction
+						WHERE idvisit = ?
+							AND idorder = ?
+							AND deleted = 0
+						LIMIT 0, $actionsLimit
+				";
+            $bind = array($idVisit, isset($ecommerceConversion['orderId'])
+                ? $ecommerceConversion['orderId']
+                : GoalManager::ITEM_IDORDER_ABANDONED_CART
+            );
+
+            $itemsDetails = Db::fetchAll($sql, $bind);
+            foreach ($itemsDetails as &$detail) {
+                if ($detail['price'] == round($detail['price'])) {
+                    $detail['price'] = round($detail['price']);
+                }
+            }
+            $ecommerceConversion['itemDetails'] = $itemsDetails;
+        }
+
+        $actions = array_merge($actionDetails, $goalDetails, $ecommerceDetails);
+
+        usort($actions, array('static', 'sortByServerTime'));
+
+        $visitorDetailsArray['actionDetails'] = $actions;
+        foreach ($visitorDetailsArray['actionDetails'] as &$details) {
+            switch ($details['type']) {
+                case 'goal':
+                    $details['icon'] = 'plugins/Zeitgeist/images/goal.png';
+                    break;
+                case Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER:
+                case Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_CART:
+                    $details['icon'] = 'plugins/Zeitgeist/images/' . $details['type'] . '.gif';
+                    break;
+                case Action::TYPE_DOWNLOAD:
+                    $details['type'] = 'download';
+                    $details['icon'] = 'plugins/Zeitgeist/images/download.png';
+                    break;
+                case Action::TYPE_OUTLINK:
+                    $details['type'] = 'outlink';
+                    $details['icon'] = 'plugins/Zeitgeist/images/link.gif';
+                    break;
+                case Action::TYPE_SITE_SEARCH:
+                    $details['type'] = 'search';
+                    $details['icon'] = 'plugins/Zeitgeist/images/search_ico.png';
+                    break;
+                case Action::TYPE_EVENT_CATEGORY:
+                    $details['type'] = 'event';
+                    $details['icon'] = 'plugins/Zeitgeist/images/event.png';
+                    break;
+                default:
+                    $details['type'] = 'action';
+                    $details['icon'] = null;
+                    break;
+            }
+            // Convert datetimes to the site timezone
+            $dateTimeVisit = Date::factory($details['serverTimePretty'], $timezone);
+            $details['serverTimePretty'] = $dateTimeVisit->getLocalized(Piwik::translate('CoreHome_ShortDateFormat') . ' %time%');
+        }
+        $visitorDetailsArray['goalConversions'] = count($goalDetails);
+        return $visitorDetailsArray;
+    }
+
+    private static function getCustomVariablePrettyKey($key)
+    {
+        $rename = array(
+            Tracker\ActionSiteSearch::CVAR_KEY_SEARCH_CATEGORY => Piwik::translate('Actions_ColumnSearchCategory'),
+            Tracker\ActionSiteSearch::CVAR_KEY_SEARCH_COUNT    => Piwik::translate('Actions_ColumnSearchResultsCount'),
+        );
+        if (isset($rename[$key])) {
+            return $rename[$key];
+        }
+        return $key;
+    }
+
+    private static function sortByServerTime($a, $b)
+    {
+        $ta = strtotime($a['serverTimePretty']);
+        $tb = strtotime($b['serverTimePretty']);
+        return $ta < $tb
+            ? -1
+            : ($ta == $tb
+                ? 0
+                : 1);
     }
 }

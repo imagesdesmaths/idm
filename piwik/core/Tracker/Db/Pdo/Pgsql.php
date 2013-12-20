@@ -9,13 +9,18 @@
  * @package Piwik
  */
 
+namespace Piwik\Tracker\Db\Pdo;
+
+use Exception;
+use PDO;
+
 /**
  * PDO PostgreSQL wrapper
  *
  * @package Piwik
- * @subpackage Piwik_Tracker
+ * @subpackage Tracker
  */
-class Piwik_Tracker_Db_Pdo_Pgsql extends Piwik_Tracker_Db_Pdo_Mysql
+class Pgsql extends Mysql
 {
     /**
      * Builds the DB object
@@ -38,7 +43,6 @@ class Piwik_Tracker_Db_Pdo_Pgsql extends Piwik_Tracker_Db_Pdo_Mysql
         if (self::$profiling) {
             $timer = $this->initProfiler();
         }
-
 
         $this->connection = new PDO($this->dsn, $this->username, $this->password, $config = array());
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -106,7 +110,7 @@ class Piwik_Tracker_Db_Pdo_Pgsql extends Piwik_Tracker_Db_Pdo_Mysql
     /**
      * Return number of affected rows in last query
      *
-     * @param mixed $queryResult  Result from query()
+     * @param mixed $queryResult Result from query()
      * @return int
      */
     public function rowCount($queryResult)

@@ -8,12 +8,16 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\Period;
+
+use Piwik\Period;
+use Piwik\Piwik;
 
 /**
  * @package Piwik
- * @subpackage Piwik_Period
+ * @subpackage Period
  */
-class Piwik_Period_Month extends Piwik_Period
+class Month extends Period
 {
     protected $label = 'month';
 
@@ -25,7 +29,7 @@ class Piwik_Period_Month extends Piwik_Period
     public function getLocalizedShortString()
     {
         //"Aug 09"
-        $out = $this->getDateStart()->getLocalized(Piwik_Translate('CoreHome_ShortMonthFormat'));
+        $out = $this->getDateStart()->getLocalized(Piwik::translate('CoreHome_ShortMonthFormat'));
         return $out;
     }
 
@@ -37,7 +41,7 @@ class Piwik_Period_Month extends Piwik_Period
     public function getLocalizedLongString()
     {
         //"August 2009"
-        $out = $this->getDateStart()->getLocalized(Piwik_Translate('CoreHome_LongMonthFormat'));
+        $out = $this->getDateStart()->getLocalized(Piwik::translate('CoreHome_LongMonthFormat'));
         return $out;
     }
 
@@ -67,7 +71,7 @@ class Piwik_Period_Month extends Piwik_Period
         $startMonth = $date->setDay(1);
         $currentDay = clone $startMonth;
         while ($currentDay->compareMonth($startMonth) == 0) {
-            $this->addSubperiod(new Piwik_Period_Day($currentDay));
+            $this->addSubperiod(new Day($currentDay));
             $currentDay = $currentDay->addDay(1);
         }
     }

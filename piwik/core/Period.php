@@ -8,26 +8,45 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik;
+
+use Exception;
+use Piwik\Period\Day;
+use Piwik\Period\Month;
+use Piwik\Period\Range;
+use Piwik\Period\Week;
+use Piwik\Period\Year;
 
 /**
- * Creating a new Piwik_Period subclass:
- *
- * Every overloaded method must start with the code
- *        if(!$this->subperiodsProcessed)
- *        {
- *            $this->generate();
- *        }
- *    that checks whether the subperiods have already been computed.
- *    This is for performance improvements, computing the subperiods is done a per demand basis.
- *
+ * Date range representation.
+ * 
+ * Piwik allows users to view aggregated statistics for single days and for date
+ * ranges consisting of several days. When requesting data, a **date** string and
+ * a **period** string must be used to specify the date range that the data regards.
+ * This is the class Piwik uses to represent and manipulate those date ranges.
+ * 
+ * There are five types of periods in Piwik: day, week, month, year and range,
+ * where **range** is any date range. The reason the other periods exist instead
+ * of just **range** is that Piwik will pre-archive reports for days, weeks, months
+ * and years, while every other date range is archived on-demand.
+ * 
+ * ### Examples
+ * 
+ * **Building a period from 'date' and 'period' query parameters**
+ * 
+ *     $date = Common::getRequestVar('date', null, 'string');
+ *     $period = Common::getRequestVar('period', null, 'string');
+ *     $periodObject = Period::advancedFactory($period, $date);
+ * 
  * @package Piwik
- * @subpackage Piwik_Period
+ * @subpackage Period
+ * @api
  */
-abstract class Piwik_Period
+abstract class Period
 {
     /**
      * Array of subperiods
-     * @var Piwik_Period[]
+     * @var \Piwik\Period[]
      */
     protected $subperiods = array();
     protected $subperiodsProcessed = false;
@@ -38,86 +57,136 @@ abstract class Piwik_Period
     protected $label = null;
 
     /**
-     * @var Piwik_Date
+     * @var Date
      */
     protected $date = null;
-    static protected $errorAvailablePeriods = 'day, week, month, year, range';
 
     /**
-     * Constructor
-     * @param Piwik_Date $date
+     * Constructor.
+     * 
+     * @param Date $date
+     * @ignore
      */
-    public function __construct($date)
+    public function __construct(Date $date)
     {
-        $this->checkInputDate($date);
         $this->date = clone $date;
     }
 
     /**
-     * @param string $strPeriod "day", "week", "month", "year"
-     * @param Piwik_Date $date Piwik_Date object
-     * @throws Exception
-     * @return Piwik_Period
+     * Creates a new Period instance with a period ID and {@link Date} instance.
+     * 
+     * _Note: This method cannot create {@link Period\Range} periods._
+     * 
+     * @param string $strPeriod `"day"`, `"week"`, `"month"`, `"year"`, `"range"`.
+     * @param Date|string $date A date within the period or the range of dates.
+     * @throws Exception If `$strPeriod` is invalid.
+     * @return \Piwik\Period
      */
-    static public function factory($strPeriod, Piwik_Date $date)
+    static public function factory($strPeriod, $date)
     {
+        if (is_string($date)) {
+            if (Period::isMultiplePeriod($date, $strPeriod) || $strPeriod == 'range') {
+                return new Range($strPeriod, $date);
+            }
+
+            $date = Date::factory($date);
+        }
+
         switch ($strPeriod) {
             case 'day':
-                return new Piwik_Period_Day($date);
+                return new Day($date);
                 break;
 
             case 'week':
-                return new Piwik_Period_Week($date);
+                return new Week($date);
                 break;
 
             case 'month':
-                return new Piwik_Period_Month($date);
+                return new Month($date);
                 break;
 
             case 'year':
-                return new Piwik_Period_Year($date);
+                return new Year($date);
                 break;
 
             default:
-                throw new Exception(Piwik_TranslateException('General_ExceptionInvalidPeriod', array($strPeriod, self::$errorAvailablePeriods)));
+                $message = Piwik::translate(
+                    'General_ExceptionInvalidPeriod', array($strPeriod, 'day, week, month, year, range'));
+                throw new Exception($message);
                 break;
         }
     }
 
     /**
-     * The advanced factory method is easier to use from the API than the factory
-     * method above. It doesn't require an instance of Piwik_Date and works for
-     * period=range. Generally speaking, anything that can be passed as period
-     * and range to the API methods can directly be forwarded to this factory
-     * method in order to get a suitable instance of Piwik_Period.
-     *
-     * @param string $strPeriod "day", "week", "month", "year", "range"
-     * @param string $strDate
-     * @return Piwik_Period
+     * Returns true if `$dateString` and `$period` represent multiple periods.
+     * 
+     * Will return true for date/period combinations where date references multiple
+     * dates and period is not `'range'`. For example, will return true for:
+     * 
+     * - **date** = `2012-01-01,2012-02-01` and **period** = `'day'`
+     * - **date** = `2012-01-01,2012-02-01` and **period** = `'week'`
+     * - **date** = `last7` and **period** = `'month'`
+     * 
+     * etc.
+     * 
+     * @static
+     * @param  $dateString The **date** query parameter value.
+     * @param  $period The **period** query parameter value.
+     * @return boolean
      */
-    static public function advancedFactory($strPeriod, $strDate)
+    public static function isMultiplePeriod($dateString, $period)
     {
-        if (Piwik_Archive::isMultiplePeriod($strDate, $strPeriod) || $strPeriod == 'range') {
-            return new Piwik_Period_Range($strPeriod, $strDate);
-        }
-        return self::factory($strPeriod, Piwik_Date::factory($strDate));
+        return is_string($dateString)
+            && (preg_match('/^(last|previous){1}([0-9]*)$/D', $dateString, $regs)
+                || Range::parseDateRange($dateString))
+            && $period != 'range';
     }
 
+    /**
+     * Creates a Period instance using a period, date and timezone.
+     *
+     * @param string $timezone The timezone of the date. Only used if `$date` is `'now'`, `'today'`,
+     *                         `'yesterday'` or `'yesterdaySameTime'`.
+     * @param string $period The period string: `"day"`, `"week"`, `"month"`, `"year"`, `"range"`.
+     * @param string $date The date or date range string. Can be a special value including
+     *                     `'now'`, `'today'`, `'yesterday'`, `'yesterdaySameTime'`.
+     * @return \Piwik\Period
+     */
+    public static function makePeriodFromQueryParams($timezone, $period, $date)
+    {
+        if (empty($timezone)) {
+            $timezone = 'UTC';
+        }
+
+        if ($period == 'range') {
+            $oPeriod = new Period\Range('range', $date, $timezone, Date::factory('today', $timezone));
+        } else {
+            if (!($date instanceof Date)) {
+                if ($date == 'now' || $date == 'today') {
+                    $date = date('Y-m-d', Date::factory('now', $timezone)->getTimestamp());
+                } elseif ($date == 'yesterday' || $date == 'yesterdaySameTime') {
+                    $date = date('Y-m-d', Date::factory('now', $timezone)->subDay(1)->getTimestamp());
+                }
+                $date = Date::factory($date);
+            }
+            $oPeriod = Period::factory($period, $date);
+        }
+        return $oPeriod;
+    }
 
     /**
-     * Returns the first day of the period
+     * Returns the first day of the period.
      *
-     * @return Piwik_Date First day of the period
+     * @return Date
      */
     public function getDateStart()
     {
-        if (!$this->subperiodsProcessed) {
-            $this->generate();
-        }
+        $this->generate();
         if (count($this->subperiods) == 0) {
             return $this->getDate();
         }
         $periods = $this->getSubperiods();
+        /** @var $currentPeriod Period */
         $currentPeriod = $periods[0];
         while ($currentPeriod->getNumberOfSubperiods() > 0) {
             $periods = $currentPeriod->getSubperiods();
@@ -127,19 +196,18 @@ abstract class Piwik_Period
     }
 
     /**
-     * Returns the last day of the period ; can be a date in the future
+     * Returns the last day of the period.
      *
-     * @return Piwik_Date Last day of the period
+     * @return Date
      */
     public function getDateEnd()
     {
-        if (!$this->subperiodsProcessed) {
-            $this->generate();
-        }
+        $this->generate();
         if (count($this->subperiods) == 0) {
             return $this->getDate();
         }
         $periods = $this->getSubperiods();
+        /** @var $currentPeriod Period */
         $currentPeriod = $periods[count($periods) - 1];
         while ($currentPeriod->getNumberOfSubperiods() > 0) {
             $periods = $currentPeriod->getSubperiods();
@@ -148,14 +216,20 @@ abstract class Piwik_Period
         return $currentPeriod->getDate();
     }
 
+    /**
+     * Returns the period ID.
+     * 
+     * @return int A unique integer for this type of period.
+     */
     public function getId()
     {
         return Piwik::$idPeriods[$this->getLabel()];
     }
 
     /**
-     * Returns the label for the current period
-     * @return string
+     * Returns the label for the current period.
+     * 
+     * @return string `"day"`, `"week"`, `"month"`, `"year"`, `"range"`
      */
     public function getLabel()
     {
@@ -163,25 +237,11 @@ abstract class Piwik_Period
     }
 
     /**
-     * @return Piwik_Date
+     * @return Date
      */
     protected function getDate()
     {
         return $this->date;
-    }
-
-    /**
-     * Checks if the given date is an instance of Piwik_Date
-     *
-     * @param Piwik_Date $date
-     *
-     * @throws Exception
-     */
-    protected function checkInputDate($date)
-    {
-        if (!($date instanceof Piwik_Date)) {
-            throw new Exception("The date must be a Piwik_Date object. " . var_export($date, true));
-        }
     }
 
     protected function generate()
@@ -190,37 +250,35 @@ abstract class Piwik_Period
     }
 
     /**
-     * Returns the number of available subperiods
+     * Returns the number of available subperiods.
+     * 
      * @return int
      */
     public function getNumberOfSubperiods()
     {
-        if (!$this->subperiodsProcessed) {
-            $this->generate();
-        }
+        $this->generate();
         return count($this->subperiods);
     }
 
     /**
-     * Returns Period_Day for a period made of days (week, month),
-     *            Period_Month for a period made of months (year)
-     *
-     * @return array Piwik_Period
+     * Returns the set of Period instances that together make up this period. For a year,
+     * this would be 12 months. For a month this would be 28-31 days. Etc.
+     * 
+     * @return Period[]
      */
     public function getSubperiods()
     {
-        if (!$this->subperiodsProcessed) {
-            $this->generate();
-        }
+        $this->generate();
         return $this->subperiods;
     }
 
     /**
      * Add a date to the period.
      *
-     * Protected because it not yet supported to add periods after the initialization
+     * Protected because adding periods after initialization is not supported.
      *
-     * @param Piwik_Period $period Valid Piwik_Period object
+     * @param \Piwik\Period $period Valid Period object
+     * @ignore
      */
     protected function addSubperiod($period)
     {
@@ -228,18 +286,14 @@ abstract class Piwik_Period
     }
 
     /**
-     * Returns a string representing the current period
-     * Given param will be used to format the returned value
+     * Returns a list of strings representing the current period.
      *
-     * @param string $format
-     *
-     * @return array
+     * @param string $format The format of each individual day.
+     * @return array An array of string dates that this period consists of.
      */
     public function toString($format = "Y-m-d")
     {
-        if (!$this->subperiodsProcessed) {
-            $this->generate();
-        }
+        $this->generate();
         $dateString = array();
         foreach ($this->subperiods as $period) {
             $dateString[] = $period->toString($format);
@@ -247,22 +301,46 @@ abstract class Piwik_Period
         return $dateString;
     }
 
+    /**
+     * See {@link toString()}.
+     * 
+     * @return string
+     */
     public function __toString()
     {
         return implode(",", $this->toString());
     }
 
-    public function get($part = null)
-    {
-        if (!$this->subperiodsProcessed) {
-            $this->generate();
-        }
-        return $this->date->toString($part);
-    }
-
+    /**
+     * Returns a pretty string describing this period.
+     * 
+     * @return string
+     */
     abstract public function getPrettyString();
 
+    /**
+     * Returns a short string description of this period that is localized with the currently used
+     * language.
+     * 
+     * @return string
+     */
     abstract public function getLocalizedShortString();
 
+    /**
+     * Returns a long string description of this period that is localized with the currently used
+     * language.
+     * 
+     * @return string
+     */
     abstract public function getLocalizedLongString();
+
+    /**
+     * Returns a succinct string describing this period.
+     * 
+     * @return string eg, `'2012-01-01,2012-01-31'`.
+     */
+    public function getRangeString()
+    {
+        return $this->getDateStart()->toString("Y-m-d") . "," . $this->getDateEnd()->toString("Y-m-d");
+    }
 }

@@ -8,14 +8,49 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik;
+
+use Exception;
 
 /**
- * Class to retrieve absolute URL or URI components of the current URL,
- * and handle URL redirection.
- *
+ * Provides URL related helper methods.
+ * 
+ * This class provides simple methods that can be used to parse and modify
+ * the current URL. It is most useful when plugins need to redirect the current
+ * request to a URL and when they need to link to other parts of Piwik in
+ * HTML.
+ * 
+ * ### Examples
+ * 
+ * **Redirect to a different controller action**
+ * 
+ *     public function myControllerAction()
+ *     {
+ *         $url = Url::getCurrentQueryStringWithParametersModified(array(
+ *             'module' => 'UserSettings',
+ *             'action' => 'index'
+ *         ));
+ *         Url::redirectToUrl($url);
+ *     }
+ * 
+ * **Link to a different controller action in a template**
+ * 
+ *     public function myControllerAction()
+ *     {
+ *         $url = Url::getCurrentQueryStringWithParametersModified(array(
+ *             'module' => 'UserCountryMap',
+ *             'action' => 'realtimeMap',
+ *             'changeVisitAlpha' => 0,
+ *             'removeOldVisits' => 0
+ *         ));
+ *         $view = new View("@MyPlugin/myPopup");
+ *         $view->realtimeMapUrl = $url;
+ *         return $view->render();
+ *     }
+ * 
  * @package Piwik
  */
-class Piwik_Url
+class Url
 {
     /**
      * List of hosts that are never checked for validity.
@@ -23,52 +58,56 @@ class Piwik_Url
     private static $alwaysTrustedHosts = array('localhost', '127.0.0.1', '::1', '[::1]');
 
     /**
-     * If current URL is "http://example.org/dir1/dir2/index.php?param1=value1&param2=value2"
-     * will return "http://example.org/dir1/dir2/index.php?param1=value1&param2=value2"
+     * Returns the current URL.
      *
-     * @return string
+     * @return string eg, `"http://example.org/dir1/dir2/index.php?param1=value1&param2=value2"`
+     * @api
      */
     static public function getCurrentUrl()
     {
         return self::getCurrentScheme() . '://'
-            . self::getCurrentHost()
-            . self::getCurrentScriptName()
-            . self::getCurrentQueryString();
+        . self::getCurrentHost()
+        . self::getCurrentScriptName()
+        . self::getCurrentQueryString();
     }
 
     /**
-     * If current URL is "http://example.org/dir1/dir2/index.php?param1=value1&param2=value2"
-     * will return "http://example.org/dir1/dir2/index.php"
-     *
+     * Returns the current URL without the query string.
+     * 
      * @param bool $checkTrustedHost Whether to do trusted host check. Should ALWAYS be true,
-     *                               except in Piwik_Controller.
-     * @return string
+     *                               except in {@link Piwik\Plugin\Controller}.
+     * @return string eg, `"http://example.org/dir1/dir2/index.php"` if the current URL is
+     *                `"http://example.org/dir1/dir2/index.php?param1=value1&param2=value2"`.
+     * @api
      */
     static public function getCurrentUrlWithoutQueryString($checkTrustedHost = true)
     {
         return self::getCurrentScheme() . '://'
-            . self::getCurrentHost($default = 'unknown', $checkTrustedHost)
-            . self::getCurrentScriptName();
+        . self::getCurrentHost($default = 'unknown', $checkTrustedHost)
+        . self::getCurrentScriptName();
     }
 
     /**
-     * If current URL is "http://example.org/dir1/dir2/index.php?param1=value1&param2=value2"
-     * will return "http://example.org/dir1/dir2/"
+     * Returns the current URL without the query string and without the name of the file
+     * being executed.
      *
-     * @return string with trailing slash
+     * @return string eg, `"http://example.org/dir1/dir2/"` if the current URL is
+     *                `"http://example.org/dir1/dir2/index.php?param1=value1&param2=value2"`.
+     * @api
      */
     static public function getCurrentUrlWithoutFileName()
     {
         return self::getCurrentScheme() . '://'
-            . self::getCurrentHost()
-            . self::getCurrentScriptPath();
+        . self::getCurrentHost()
+        . self::getCurrentScriptPath();
     }
 
     /**
-     * If current URL is "http://example.org/dir1/dir2/index.php?param1=value1&param2=value2"
-     * will return "/dir1/dir2/"
+     * Returns the path to the script being executed. The script file name is not included.
      *
-     * @return string with trailing slash
+     * @return string eg, `"/dir1/dir2/"` if the current URL is
+     *                `"http://example.org/dir1/dir2/index.php?param1=value1&param2=value2"`
+     * @api
      */
     static public function getCurrentScriptPath()
     {
@@ -85,10 +124,11 @@ class Piwik_Url
     }
 
     /**
-     * If current URL is "http://example.org/dir1/dir2/index.php?param1=value1&param2=value2"
-     * will return "/dir1/dir2/index.php"
+     * Returns the path to the script being executed. Includes the script file name.
      *
-     * @return string
+     * @return string eg, `"/dir1/dir2/index.php"` if the current URL is
+     *                `"http://example.org/dir1/dir2/index.php?param1=value1&param2=value2"`
+     * @api
      */
     static public function getCurrentScriptName()
     {
@@ -135,15 +175,15 @@ class Piwik_Url
     }
 
     /**
-     * If the current URL is 'http://example.org/dir1/dir2/index.php?param1=value1&param2=value2"
-     * will return 'http'
+     * Returns the current URL's protocol.
      *
-     * @return string 'https' or 'http'
+     * @return string `'https'` or `'http'`
+     * @api
      */
     static public function getCurrentScheme()
     {
         try {
-            $assume_secure_protocol = @Piwik_Config::getInstance()->General['assume_secure_protocol'];
+            $assume_secure_protocol = @Config::getInstance()->General['assume_secure_protocol'];
         } catch (Exception $e) {
             $assume_secure_protocol = false;
         }
@@ -158,18 +198,18 @@ class Piwik_Url
     }
 
     /**
-     * Validate "Host" (untrusted user input)
+     * Validates the **Host** HTTP header (untrusted user input). Used to prevent Host header
+     * attacks.
      *
-     * @param string|bool $host Contents of Host: header from Request. If false, gets the
+     * @param string|bool $host Contents of Host: header from the HTTP request. If `false`, gets the
      *                          value from the request.
-     *
-     * @return bool True if valid; false otherwise
+     * @return bool `true` if valid; `false` otherwise.
      */
     static public function isValidHost($host = false)
     {
         // only do trusted host check if it's enabled
-        if (isset(Piwik_Config::getInstance()->General['enable_trusted_host_check'])
-            && Piwik_Config::getInstance()->General['enable_trusted_host_check'] == 0
+        if (isset(Config::getInstance()->General['enable_trusted_host_check'])
+            && Config::getInstance()->General['enable_trusted_host_check'] == 0
         ) {
             return true;
         }
@@ -186,7 +226,7 @@ class Piwik_Url
             return true;
         }
 
-        $trustedHosts = @Piwik_Config::getInstance()->General['trusted_hosts'];
+        $trustedHosts = @Config::getInstance()->General['trusted_hosts'];
         // if no trusted hosts, just assume it's valid
         if (empty($trustedHosts)) {
             self::saveTrustedHostnameInConfig($host);
@@ -194,7 +234,7 @@ class Piwik_Url
         }
 
         // Only punctuation we allow is '[', ']', ':', '.' and '-'
-        $hostLength = Piwik_Common::strlen($host);
+        $hostLength = strlen($host);
         if ($hostLength !== strcspn($host, '`~!@#$%^&*()_+={}\\|;"\'<>,?/ ')) {
             return false;
         }
@@ -202,9 +242,9 @@ class Piwik_Url
         foreach ($trustedHosts as &$trustedHost) {
             $trustedHost = preg_quote($trustedHost);
         }
-        $untrustedHost = Piwik_Common::mb_strtolower($host);
+        $untrustedHost = Common::mb_strtolower($host);
         $untrustedHost = rtrim($untrustedHost, '.');
-        $hostRegex = Piwik_Common::mb_strtolower('/(^|.)' . implode('|', $trustedHosts) . '$/');
+        $hostRegex = Common::mb_strtolower('/(^|.)' . implode('|', $trustedHosts) . '$/');
         $result = preg_match($hostRegex, $untrustedHost);
         return 0 !== $result;
     }
@@ -220,9 +260,9 @@ class Piwik_Url
     public static function saveTrustedHostnameInConfig($host)
     {
         if (Piwik::isUserIsSuperUser()
-            && file_exists(Piwik_Config::getLocalConfigPath())
+            && file_exists(Config::getLocalConfigPath())
         ) {
-            $general = Piwik_Config::getInstance()->General;
+            $general = Config::getInstance()->General;
             if (!is_array($host)) {
                 $host = array($host);
             }
@@ -231,19 +271,19 @@ class Piwik_Url
                 return false;
             }
             $general['trusted_hosts'] = $host;
-            Piwik_Config::getInstance()->General = $general;
-            Piwik_Config::getInstance()->forceSave();
+            Config::getInstance()->General = $general;
+            Config::getInstance()->forceSave();
             return true;
         }
         return false;
     }
 
     /**
-     * Get host
+     * Returns the current host.
      *
      * @param bool $checkIfTrusted Whether to do trusted host check. Should ALWAYS be true,
-     *                             except in Piwik_Controller.
-     * @return string|false
+     *                             except in Controller.
+     * @return string|bool eg, `"demo.piwik.org"` or false if no host found.
      */
     static public function getHost($checkIfTrusted = true)
     {
@@ -265,32 +305,50 @@ class Piwik_Url
     }
 
     /**
-     * If current URL is "http://example.org/dir1/dir2/index.php?param1=value1&param2=value2"
-     * will return "example.org"
+     * Sets the host. Useful for CLI scripts, eg. archive.php
+     * 
+     * @param $host string
+     */
+    static public function setHost($host)
+    {
+        $_SERVER['HTTP_HOST'] = $host;
+    }
+
+    /**
+     * Returns the current host.
      *
      * @param string $default Default value to return if host unknown
      * @param bool $checkTrustedHost Whether to do trusted host check. Should ALWAYS be true,
-     *                               except in Piwik_Controller.
-     * @return string
+     *                               except in Controller.
+     * @return string eg, `"example.org"` if the current URL is
+     *                `"http://example.org/dir1/dir2/index.php?param1=value1&param2=value2"`
+     * @api
      */
     static public function getCurrentHost($default = 'unknown', $checkTrustedHost = true)
     {
-        $hostHeaders = @Piwik_Config::getInstance()->General['proxy_host_headers'];
+        $hostHeaders = array();
+
+        $config = Config::getInstance()->General;
+        if(isset($config['proxy_host_headers'])) {
+            $hostHeaders = $config['proxy_host_headers'];
+        }
+
         if (!is_array($hostHeaders)) {
             $hostHeaders = array();
         }
 
         $host = self::getHost($checkTrustedHost);
-        $default = Piwik_Common::sanitizeInputValue($host ? $host : $default);
+        $default = Common::sanitizeInputValue($host ? $host : $default);
 
-        return Piwik_IP::getNonProxyIpFromHeader($default, $hostHeaders);
+        return IP::getNonProxyIpFromHeader($default, $hostHeaders);
     }
 
     /**
-     * If current URL is "http://example.org/dir1/dir2/index.php?param1=value1&param2=value2"
-     * will return "?param1=value1&param2=value2"
+     * Returns the query string of the current URL.
      *
-     * @return string
+     * @return string eg, `"?param1=value1&param2=value2"` if the current URL is
+     *                `"http://example.org/dir1/dir2/index.php?param1=value1&param2=value2"`
+     * @api
      */
     static public function getCurrentQueryString()
     {
@@ -304,28 +362,35 @@ class Piwik_Url
     }
 
     /**
-     * If current URL is "http://example.org/dir1/dir2/index.php?param1=value1&param2=value2"
-     * will return
-     *  array
-     *    'param1' => string 'value1'
-     *    'param2' => string 'value2'
+     * Returns an array mapping query paramater names with query parameter values for
+     * the current URL.
      *
-     * @return array
+     * @return array If current URL is `"http://example.org/dir1/dir2/index.php?param1=value1&param2=value2"`
+     *               this will return:
+     *               
+     *                   array(
+     *                       'param1' => string 'value1',
+     *                       'param2' => string 'value2'
+     *                   )
+     * @api
      */
-    static function getArrayFromCurrentQueryString()
+    static public function getArrayFromCurrentQueryString()
     {
         $queryString = self::getCurrentQueryString();
-        $urlValues = Piwik_Common::getArrayFromQueryString($queryString);
+        $urlValues = UrlHelper::getArrayFromQueryString($queryString);
         return $urlValues;
     }
 
     /**
-     * Given an array of name-values, it will return the current query string
-     * with the new requested parameter key-values;
-     * If a parameter wasn't found in the current query string, the new key-value will be added to the returned query string.
+     * Modifies the current query string with the supplied parameters and returns
+     * the result. Parameters in the current URL will be overwritten with values
+     * in `$params` and parameters absent from the current URL but present in `$params`
+     * will be added to the result.
      *
-     * @param array $params array ( 'param3' => 'value3' )
-     * @return string ?param2=value2&param3=value3
+     * @param array $params set of parameters to modify/add in the current URL
+     *                      eg, `array('param3' => 'value3')`
+     * @return string eg, `"?param2=value2&param3=value3"`
+     * @api
      */
     static function getCurrentQueryStringWithParametersModified($params)
     {
@@ -341,19 +406,18 @@ class Piwik_Url
     }
 
     /**
-     * Given an array of parameters name->value, returns the query string.
-     * Also works with array values using the php array syntax for GET parameters.
-     *
-     * @param array $parameters eg. array( 'param1' => 10, 'param2' => array(1,2))
-     * @return string eg. "param1=10&param2[]=1&param2[]=2"
+     * Converts an array of parameters name => value mappings to a query
+     * string.
+     * 
+     * @param array $parameters eg. `array('param1' => 10, 'param2' => array(1,2))`
+     * @return string eg. `"param1=10&param2[]=1&param2[]=2"`
+     * @api
      */
     static public function getQueryStringFromParameters($parameters)
     {
         $query = '';
         foreach ($parameters as $name => $value) {
-            if (is_null($value)
-                || $value === false
-            ) {
+            if (is_null($value) || $value === false) {
                 continue;
             }
             if (is_array($value)) {
@@ -369,12 +433,14 @@ class Piwik_Url
     }
 
     /**
-     * Redirects the user to the referrer if found.
-     * If the user doesn't have a referrer set, it redirects to the current URL without query string.
+     * Redirects the user to the referrer. If no referrer exists, the user is redirected
+     * to the current URL without query string.
+     * 
+     * @api
      */
-    static public function redirectToReferer()
+    static public function redirectToReferrer()
     {
-        $referrer = self::getReferer();
+        $referrer = self::getReferrer();
         if ($referrer !== false) {
             self::redirectToUrl($referrer);
         }
@@ -382,13 +448,14 @@ class Piwik_Url
     }
 
     /**
-     * Redirects the user to the specified URL
+     * Redirects the user to the specified URL.
      *
      * @param string $url
+     * @api
      */
     static public function redirectToUrl($url)
     {
-        if (Piwik_Common::isLookLikeUrl($url)
+        if (UrlHelper::isLookLikeUrl($url)
             || strpos($url, 'index.php') === 0
         ) {
             @header("Location: $url");
@@ -399,11 +466,12 @@ class Piwik_Url
     }
 
     /**
-     * Returns the HTTP_REFERER header, false if not found.
+     * Returns the **HTTP_REFERER** `$_SERVER` variable, or `false` if not found.
      *
      * @return string|false
+     * @api
      */
-    static public function getReferer()
+    static public function getReferrer()
     {
         if (!empty($_SERVER['HTTP_REFERER'])) {
             return $_SERVER['HTTP_REFERER'];
@@ -412,10 +480,11 @@ class Piwik_Url
     }
 
     /**
-     * Is the URL on the same host?
+     * Returns `true` if the URL points to something on the same host, `false` if otherwise.
      *
      * @param string $url
      * @return bool True if local; false otherwise.
+     * @api
      */
     static public function isLocalUrl($url)
     {
@@ -432,15 +501,15 @@ class Piwik_Url
         }
 
         // drop port numbers from hostnames and IP addresses
-        $hosts = array_map(array('Piwik_IP', 'sanitizeIp'), $hosts);
+        $hosts = array_map(array('Piwik\IP', 'sanitizeIp'), $hosts);
 
-        $disableHostCheck = Piwik_Config::getInstance()->General['enable_trusted_host_check'] == 0;
+        $disableHostCheck = Config::getInstance()->General['enable_trusted_host_check'] == 0;
         // compare scheme and host
         $parsedUrl = @parse_url($url);
-        $host = Piwik_IP::sanitizeIp(@$parsedUrl['host']);
+        $host = IP::sanitizeIp(@$parsedUrl['host']);
         return !empty($host)
-            && ($disableHostCheck || in_array($host, $hosts))
-            && !empty($parsedUrl['scheme'])
-            && in_array($parsedUrl['scheme'], array('http', 'https'));
+        && ($disableHostCheck || in_array($host, $hosts))
+        && !empty($parsedUrl['scheme'])
+        && in_array($parsedUrl['scheme'], array('http', 'https'));
     }
 }

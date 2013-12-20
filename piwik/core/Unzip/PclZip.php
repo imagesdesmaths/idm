@@ -8,6 +8,8 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\Unzip;
+
 
 /**
  * @see libs/PclZip
@@ -18,9 +20,9 @@ require_once PIWIK_INCLUDE_PATH . '/libs/PclZip/pclzip.lib.php';
  * Unzip wrapper around PclZip
  *
  * @package Piwik
- * @subpackage Piwik_Unzip
+ * @subpackage Unzip
  */
-class Piwik_Unzip_PclZip implements Piwik_Unzip_Interface
+class PclZip implements UncompressInterface
 {
     /**
      * @var PclZip
@@ -34,18 +36,18 @@ class Piwik_Unzip_PclZip implements Piwik_Unzip_Interface
     /**
      * Constructor
      *
-     * @param string $filename  Name of the .zip archive
+     * @param string $filename Name of the .zip archive
      */
     public function __construct($filename)
     {
-        $this->pclzip = new PclZip($filename);
+        $this->pclzip = new \PclZip($filename);
         $this->filename = $filename;
     }
 
     /**
      * Extract files from archive to target directory
      *
-     * @param string $pathExtracted  Absolute path of target directory
+     * @param string $pathExtracted Absolute path of target directory
      * @return mixed  Array of filenames if successful; or 0 if an error occurred
      */
     public function extract($pathExtracted)
@@ -73,10 +75,9 @@ class Piwik_Unzip_PclZip implements Piwik_Unzip_Interface
             PCLZIP_OPT_PATH, $pathExtracted,
             PCLZIP_OPT_STOP_ON_ERROR,
             PCLZIP_OPT_REPLACE_NEWER,
-            PCLZIP_CB_PRE_EXTRACT, create_function(
-                '$p_event, &$p_header',
-                "return strncmp(\$p_header['filename'], '$pathExtracted', strlen('$pathExtracted')) ? 0 : 1;"
-            )
+            PCLZIP_CB_PRE_EXTRACT, function ($p_event, &$p_header) use ($pathExtracted) {
+                return strncmp($p_header['filename'], $pathExtracted, strlen($pathExtracted)) ? 0 : 1;
+            }
         );
     }
 

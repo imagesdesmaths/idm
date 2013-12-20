@@ -6,14 +6,20 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_LanguagesManager
+ * @package LanguagesManager
  *
  */
+namespace Piwik\Plugins\LanguagesManager;
+
+use Piwik\Common;
+use Piwik\DbHelper;
+use Piwik\Piwik;
+use Piwik\Url;
 
 /**
- * @package Piwik_LanguagesManager
+ * @package LanguagesManager
  */
-class Piwik_LanguagesManager_Controller extends Piwik_Controller
+class Controller extends \Piwik\Plugin\Controller
 {
     /**
      * anonymous = in the session
@@ -21,19 +27,19 @@ class Piwik_LanguagesManager_Controller extends Piwik_Controller
      */
     public function saveLanguage()
     {
-        $language = Piwik_Common::getRequestVar('language');
+        $language = Common::getRequestVar('language');
 
         // Prevent CSRF only when piwik is not installed yet (During install user can change language)
-        if (Piwik::isInstalled()) {
+        if (DbHelper::isInstalled()) {
             $this->checkTokenInUrl();
         }
-        Piwik_LanguagesManager::setLanguageForSession($language);
-        if (Zend_Registry::isRegistered('access')) {
+        LanguagesManager::setLanguageForSession($language);
+        if (\Piwik\Registry::isRegistered('access')) {
             $currentUser = Piwik::getCurrentUserLogin();
             if ($currentUser && $currentUser !== 'anonymous') {
-                Piwik_LanguagesManager_API::getInstance()->setLanguageForUser($currentUser, $language);
+                API::getInstance()->setLanguageForUser($currentUser, $language);
             }
         }
-        Piwik_Url::redirectToReferer();
+        Url::redirectToReferrer();
     }
 }

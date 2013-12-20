@@ -6,15 +6,17 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_ImageGraph_StaticGraph
+ * @package StaticGraph
  */
+namespace Piwik\Plugins\ImageGraph\StaticGraph;
+use Piwik\Piwik;
 
 
 /**
  *
- * @package Piwik_ImageGraph_StaticGraph
+ * @package StaticGraph
  */
-class Piwik_ImageGraph_StaticGraph_HorizontalBar extends Piwik_ImageGraph_StaticGraph_GridGraph
+class HorizontalBar extends GridGraph
 {
     const INTERLEAVE = 0.30;
     const PADDING_CHARS = ' ';
@@ -79,7 +81,7 @@ class Piwik_ImageGraph_StaticGraph_HorizontalBar extends Piwik_ImageGraph_Static
                 $truncatedOrdinateSeries[$column][] = $sumOfOthers[$column];
             }
 
-            $truncatedAbscissaSeries[] = Piwik_Translate('General_Others');
+            $truncatedAbscissaSeries[] = Piwik::translate('General_Others');
             $this->abscissaSeries = $truncatedAbscissaSeries;
             $this->ordinateSeries = $truncatedOrdinateSeries;
             $this->abscissaLogos = $truncatedAbscissaLogos;
@@ -115,10 +117,10 @@ class Piwik_ImageGraph_StaticGraph_HorizontalBar extends Piwik_ImageGraph_Static
         $gridLeftMarginWithoutLabels = $this->getGridLeftMargin($horizontalGraph = true, $withLabel = false);
         $labelWidthLimit =
             $this->width
-                - $gridLeftMarginWithoutLabels
-                - $gridRightMargin
-                - $paddingWidth
-                - $minGraphSize;
+            - $gridLeftMarginWithoutLabels
+            - $gridRightMargin
+            - $paddingWidth
+            - $minGraphSize;
 
         // truncate labels if needed
         foreach ($this->abscissaSeries as &$label) {
@@ -168,12 +170,12 @@ class Piwik_ImageGraph_StaticGraph_HorizontalBar extends Piwik_ImageGraph_Static
 
                     $logoYPosition =
                         ($logoInterleave * $i)
-                            + $this->getGridTopMargin(true, $verticalLegend)
-                            + $graphData['Axis'][1]['Margin']
-                            - $logoHeight / 2
-                            + 1;
+                        + $this->getGridTopMargin(true, $verticalLegend)
+                        + $graphData['Axis'][1]['Margin']
+                        - $logoHeight / 2
+                        + 1;
 
-                    if(method_exists($this->pImage, $drawingFunction)) {
+                    if (method_exists($this->pImage, $drawingFunction)) {
                         $this->pImage->$drawingFunction(
                             $gridLeftMarginBeforePadding,
                             $logoYPosition,

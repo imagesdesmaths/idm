@@ -9,36 +9,40 @@
  * @package Piwik
  */
 
+namespace Piwik;
+
+use Exception;
+
 /**
  * The ranking query class wraps an arbitrary SQL query with more SQL that limits
- * the number of results while grouping the rest to "Others" and allows for some
- * more fancy things that can be configured via method calls of this class. The
- * advanced use cases are explained in the doc comments of the methods.
+ * the number of results while aggregating the rest in an a new "Others" row. It als
+ * allows for some more fancy things that can be configured via method calls of this
+ * class. The advanced use cases are explained in the doc comments of the methods.
  *
  * The general use case looks like this:
  *
- * // limit to 500 rows + "Others"
- * $rankingQuery = new Piwik_RankingQuery(500);
+ *     // limit to 500 rows + "Others"
+ *     $rankingQuery = new RankingQuery();
+ *     $rankingQuery->setLimit(500);
  *
- * // idaction_url will be "Others" in the row that contains the aggregated rest
- * $rankingQuery->addLabelColumn('idaction_url');
+ *     // idaction_url will be "Others" in the row that contains the aggregated rest
+ *     $rankingQuery->addLabelColumn('idaction_url');
  *
- * // the actual query. it's important to sort it before the limit is applied
- * $sql = 'SELECT idaction_url, COUNT(*) AS nb_hits
- *         FROM log_link_visit_action
- *         GROUP BY idaction_url
- *         ORDER BY nb_hits DESC';
+ *     // the actual query. it's important to sort it before the limit is applied
+ *     $sql = 'SELECT idaction_url, COUNT(*) AS nb_hits
+ *             FROM log_link_visit_action
+ *             GROUP BY idaction_url
+ *             ORDER BY nb_hits DESC';
  *
- * // execute the query
- * $rankingQuery->execute($sql);
- *
+ *     // execute the query
+ *     $rankingQuery->execute($sql);
  *
  * For more examples, see RankingQueryTest.php
  *
- *
  * @package Piwik
+ * @api
  */
-class Piwik_RankingQuery
+class RankingQuery
 {
 
     /**
@@ -86,8 +90,9 @@ class Piwik_RankingQuery
     private $othersLabelValue = 'Others';
 
     /**
-     * The constructor.
-     * Can be used as a shortcut for setLimit()
+     * Constructor.
+     * 
+     * @param int|false $limit The result row limit. See {@link setLimit()}.
      */
     public function __construct($limit = false)
     {
@@ -97,9 +102,9 @@ class Piwik_RankingQuery
     }
 
     /**
-     * Set the limit after which everything is grouped to "Others"
+     * Set the limit after which everything is grouped to "Others".
      *
-     * @param $limit int
+     * @param int $limit
      */
     public function setLimit($limit)
     {
@@ -109,7 +114,7 @@ class Piwik_RankingQuery
     /**
      * Set the value to use for the label in the 'Others' row.
      *
-     * @param $value string
+     * @param string $value
      */
     public function setOthersLabel($value)
     {
@@ -120,7 +125,7 @@ class Piwik_RankingQuery
      * Add a label column.
      * Labels are the columns that are replaced with "Others" after the limit.
      *
-     * @param $labelColumn string|array
+     * @param string|array $labelColumn
      */
     public function addLabelColumn($labelColumn)
     {
@@ -137,8 +142,8 @@ class Piwik_RankingQuery
      * Add a column that has be added to the outer queries.
      *
      * @param $column
-     * @param string|bool $aggregationFunction string
-     *         If set, this function is used to aggregate the values of "Others"
+     * @param string|bool $aggregationFunction If set, this function is used to aggregate the values of "Others",
+     *                                         eg, `'min'`, `'max'` or `'sum'`.
      */
     public function addColumn($column, $aggregationFunction = false)
     {
@@ -152,13 +157,13 @@ class Piwik_RankingQuery
     }
 
     /**
-     * The inner query can have a column that marks the rows that shall be excluded from limiting.
-     * If the column contains 0, rows are handled as usual. For values greater than 0, separate
-     * groups are made. If this method is used, generate() returns both the regular result and
-     * the excluded columns separately.
+     * Sets a column that will be used to filter the result into two categories.
+     * Rows where this column has a value > 0 will be removed from the result and put
+     * into another array. Both the result and the array of excluded rows are returned
+     * by {@link execute()}.
      *
-     * @param $column string  name of the column
-     * @throws Exception when method is used more than once
+     * @param $column string Name of the column.
+     * @throws Exception if method is used more than once.
      */
     public function setColumnToMarkExcludedRows($column)
     {
@@ -171,16 +176,22 @@ class Piwik_RankingQuery
     }
 
     /**
-     * This method can be used to get multiple groups in one go. For example, one might query
-     * the top following pages, outlinks and downloads in one go by using log_action.type as
-     * the partition column and [TYPE_ACTION_URL, TYPE_OUTLINK, TYPE_DOWNLOAD] as the possible
-     * values.
-     * When this method has been used, generate() returns as array that contains one array
-     * per group of data.
+     * This method can be used to parition the result based on the possible values of one
+     * table column. This means the query will split the result set into other sets of rows
+     * for each possible value you provide (where the rows of each set have a column value
+     * that equals a possible value). Each of these new sets of rows will be individually
+     * limited resulting in several limited result sets.
+     * 
+     * For example, you can run a query aggregating some data on the log_action table and
+     * partition by log_action.type with the possible values of {@link Piwik\Tracker\Action::TYPE_PAGE_URL},
+     * {@link Piwik\Tracker\Action::TYPE_OUTLINK}, {@link Piwik\Tracker\Action::TYPE_DOWNLOAD}.
+     * The result will be three separate result sets that are aggregated the same ways, but for rows
+     * where `log_action.type = TYPE_OUTLINK`, for rows where `log_action.type = TYPE_ACTION_URL` and for
+     * rows `log_action.type = TYPE_DOWNLOAD`.
      *
-     * @param $partitionColumn string
-     * @param $possibleValues array of integers
-     * @throws Exception when method is used more than once
+     * @param $partitionColumn string The column name to partion by.
+     * @param $possibleValues Array of possible column values.
+     * @throws Exception if method is used more than once.
      */
     public function partitionResultIntoMultipleGroups($partitionColumn, $possibleValues)
     {
@@ -194,18 +205,20 @@ class Piwik_RankingQuery
     }
 
     /**
-     * Execute the query.
+     * Executes the query.
      * The object has to be configured first using the other methods.
      *
-     * @param $innerQuery string  The "payload" query. The result has be sorted as desired.
+     * @param $innerQuery string  The "payload" query that does the actual data aggregation. The ordering
+     *                            has to be specified in this query. {@link RankingQuery} cannot apply ordering
+     *                            itself.
      * @param $bind array         Bindings for the inner query.
      * @return array              The format depends on which methods have been used
-     *                            to configure the ranking query
+     *                            to configure the ranking query.
      */
     public function execute($innerQuery, $bind = array())
     {
         $query = $this->generateQuery($innerQuery);
-        $data = Piwik_FetchAll($query, $bind);
+        $data = Db::fetchAll($query, $bind);
 
         if ($this->columnToMarkExcludedRows !== false) {
             // split the result into the regular result and the rows with special treatment
@@ -250,11 +263,13 @@ class Piwik_RankingQuery
 
     /**
      * Generate the SQL code that does the magic.
-     * If you want to get the result, use execute() instead. If you're interested in
-     * the generated SQL code (e.g. for debugging), use this method.
+     * If you want to get the result, use execute() instead. If you want to run the query
+     * yourself, use this method.
      *
-     * @param $innerQuery string  SQL of the actual query
-     * @return string             entire ranking query SQL
+     * @param $innerQuery string  The "payload" query that does the actual data aggregation. The ordering
+     *                            has to be specified in this query. {@link RankingQuery} cannot apply ordering
+     *                            itself.
+     * @return string             The entire ranking query SQL.
      */
     public function generateQuery($innerQuery)
     {
@@ -285,7 +300,6 @@ class Piwik_RankingQuery
             } else {
                 $additionalColumnsAggregatedString .= ', `' . $additionalColumn . '`';
             }
-
         }
 
         // initialize the counters
@@ -359,5 +373,4 @@ class Piwik_RankingQuery
 			END
 		";
     }
-
 }

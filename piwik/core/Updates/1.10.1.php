@@ -9,10 +9,14 @@
  * @package Updates
  */
 
+namespace Piwik\Updates;
+
+use Piwik\Updates;
+
 /**
  * @package Updates
  */
-class Piwik_Updates_1_10_1 extends Piwik_Updates
+class Updates_1_10_1 extends Updates
 {
     static function isMajorUpdate()
     {
@@ -22,8 +26,8 @@ class Piwik_Updates_1_10_1 extends Piwik_Updates
     static function update()
     {
         try {
-            Piwik_PluginsManager::getInstance()->activatePlugin('Overlay');
-        } catch (Exception $e) {
+            \Piwik\Plugin\Manager::getInstance()->activatePlugin('Overlay');
+        } catch (\Exception $e) {
             // pass
         }
     }

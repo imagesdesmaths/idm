@@ -6,79 +6,80 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_LanguagesManager
+ * @package LanguagesManager
  *
  */
+namespace Piwik\Plugins\LanguagesManager;
+
+use Exception;
+use Piwik\Common;
+use Piwik\Config;
+
+use Piwik\Cookie;
+use Piwik\Db;
+use Piwik\Menu\MenuTop;
+use Piwik\Piwik;
+use Piwik\Translate;
+use Piwik\View;
 
 /**
  *
- * @package Piwik_LanguagesManager
+ * @package LanguagesManager
  */
-class Piwik_LanguagesManager extends Piwik_Plugin
+class LanguagesManager extends \Piwik\Plugin
 {
-    public function getInformation()
-    {
-        return array(
-            'description'     => Piwik_Translate('LanguagesManager_PluginDescription'),
-            'author'          => 'Piwik',
-            'author_homepage' => 'http://piwik.org/',
-            'version'         => Piwik_Version::VERSION,
-        );
-    }
-
+    /**
+     * @see Piwik_Plugin::getListHooksRegistered
+     */
     public function getListHooksRegistered()
     {
         return array(
-            'AssetManager.getCssFiles'    => 'getCssFiles',
-            'AssetManager.getJsFiles'     => 'getJsFiles',
-            'TopMenu.add'                 => 'showLanguagesSelector',
-            'Translate.getLanguageToLoad' => 'getLanguageToLoad',
-            'UsersManager.deleteUser'     => 'deleteUserLanguage',
-            'template_topBar'             => 'addLanguagesManagerToOtherTopBar',
+            'AssetManager.getStylesheetFiles' => 'getStylesheetFiles',
+            'AssetManager.getJavaScriptFiles' => 'getJsFiles',
+            'Menu.Top.addItems'               => 'showLanguagesSelector',
+            'User.getLanguage'                => 'getLanguageToLoad',
+            'UsersManager.deleteUser'         => 'deleteUserLanguage',
+            'Template.topBar'                 => 'addLanguagesManagerToOtherTopBar',
+            'Console.addCommands'             => 'addConsoleCommands'
         );
     }
 
-    /**
-     * @param Piwik_Event_Notification $notification  notification object
-     */
-    function getCssFiles($notification)
+    public function addConsoleCommands(&$commands)
     {
-        $cssFiles = & $notification->getNotificationObject();
-
-        $cssFiles[] = "themes/default/styles.css";
+        $commands[] = 'Piwik\Plugins\LanguagesManager\Commands\CreatePull';
+        $commands[] = 'Piwik\Plugins\LanguagesManager\Commands\FetchFromOTrance';
+        $commands[] = 'Piwik\Plugins\LanguagesManager\Commands\LanguageCodes';
+        $commands[] = 'Piwik\Plugins\LanguagesManager\Commands\LanguageNames';
+        $commands[] = 'Piwik\Plugins\LanguagesManager\Commands\PluginsWithTranslations';
+        $commands[] = 'Piwik\Plugins\LanguagesManager\Commands\SetTranslations';
+        $commands[] = 'Piwik\Plugins\LanguagesManager\Commands\Update';
     }
 
-    /**
-     * @param Piwik_Event_Notification $notification  notification object
-     */
-    function getJsFiles($notification)
+    public function getStylesheetFiles(&$stylesheets)
     {
-        $jsFiles = & $notification->getNotificationObject();
-
-        $jsFiles[] = "plugins/LanguagesManager/templates/languageSelector.js";
+        $stylesheets[] = "plugins/Zeitgeist/stylesheets/base.less";
     }
 
-    /**
-     * Show styled language selection drop-down list
-     */
-    function showLanguagesSelector()
+    public function getJsFiles(&$jsFiles)
     {
-        Piwik_AddTopMenu('LanguageSelector', $this->getLanguagesSelector(), true, $order = 30, true);
+        $jsFiles[] = "plugins/LanguagesManager/javascripts/languageSelector.js";
+    }
+
+    public function showLanguagesSelector()
+    {
+        MenuTop::addEntry('LanguageSelector', $this->getLanguagesSelector(), true, $order = 30, true);
     }
 
     /**
      * Adds the languages drop-down list to topbars other than the main one rendered
-     * in CoreHome/templates/top_bar.tpl. The 'other' topbars are on the Installation
+     * in CoreHome/templates/top_bar.twig. The 'other' topbars are on the Installation
      * and CoreUpdater screens.
-     *
-     * @param Piwik_Event_Notification $notification notification object
      */
-    public function addLanguagesManagerToOtherTopBar($notification)
+    public function addLanguagesManagerToOtherTopBar(&$str)
     {
-        $str =& $notification->getNotificationObject();
         // piwik object & scripts aren't loaded in 'other' topbars
         $str .= "<script type='text/javascript'>if (!window.piwik) window.piwik={};</script>";
-        $str .= "<script type='text/javascript' src='plugins/LanguagesManager/templates/languageSelector.js'></script>";
+        $str .= "<script type='text/javascript' src='plugins/LanguagesManager/javascripts/languageSelector.js'></script>";
         $str .= $this->getLanguagesSelector();
     }
 
@@ -89,35 +90,26 @@ class Piwik_LanguagesManager extends Piwik_Plugin
      */
     private function getLanguagesSelector()
     {
-        // don't use Piwik_View::factory() here
-        $view = new Piwik_View("LanguagesManager/templates/languages.tpl");
-        $view->languages = Piwik_LanguagesManager_API::getInstance()->getAvailableLanguageNames();
+        $view = new View("@LanguagesManager/getLanguagesSelector");
+        $view->languages = API::getInstance()->getAvailableLanguageNames();
         $view->currentLanguageCode = self::getLanguageCodeForCurrentUser();
         $view->currentLanguageName = self::getLanguageNameForCurrentUser();
         return $view->render();
     }
 
-    /**
-     * @param Piwik_Event_Notification $notification  notification object
-     */
-    function getLanguageToLoad($notification)
+    function getLanguageToLoad(&$language)
     {
-        $language =& $notification->getNotificationObject();
         if (empty($language)) {
             $language = self::getLanguageCodeForCurrentUser();
         }
-        if (!Piwik_LanguagesManager_API::getInstance()->isLanguageAvailable($language)) {
-            $language = Piwik_Translate::getInstance()->getLanguageDefault();
+        if (!API::getInstance()->isLanguageAvailable($language)) {
+            $language = Translate::getLanguageDefault();
         }
     }
 
-    /**
-     * @param Piwik_Event_Notification $notification  notification object
-     */
-    function deleteUserLanguage($notification)
+    public function deleteUserLanguage($userLogin)
     {
-        $userLogin = $notification->getNotificationObject();
-        Piwik_Query('DELETE FROM ' . Piwik_Common::prefixTable('user_language') . ' WHERE login = ?', $userLogin);
+        Db::query('DELETE FROM ' . Common::prefixTable('user_language') . ' WHERE login = ?', $userLogin);
     }
 
     /**
@@ -127,16 +119,16 @@ class Piwik_LanguagesManager extends Piwik_Plugin
     {
         // we catch the exception
         try {
-            $sql = "CREATE TABLE " . Piwik_Common::prefixTable('user_language') . " (
+            $sql = "CREATE TABLE " . Common::prefixTable('user_language') . " (
 					login VARCHAR( 100 ) NOT NULL ,
 					language VARCHAR( 10 ) NOT NULL ,
 					PRIMARY KEY ( login )
 					)  DEFAULT CHARSET=utf8 ";
-            Piwik_Exec($sql);
+            Db::exec($sql);
         } catch (Exception $e) {
             // mysql code error 1050:table already exists
             // see bug #153 http://dev.piwik.org/trac/ticket/153
-            if (!Zend_Registry::get('db')->isErrNo($e, '1050')) {
+            if (!Db::get()->isErrNo($e, '1050')) {
                 throw $e;
             }
         }
@@ -147,7 +139,7 @@ class Piwik_LanguagesManager extends Piwik_Plugin
      */
     public function uninstall()
     {
-        Piwik_DropTables(Piwik_Common::prefixTable('user_language'));
+        Db::dropTables(Common::prefixTable('user_language'));
     }
 
     /**
@@ -156,11 +148,11 @@ class Piwik_LanguagesManager extends Piwik_Plugin
     static public function getLanguageCodeForCurrentUser()
     {
         $languageCode = self::getLanguageFromPreferences();
-        if (!Piwik_LanguagesManager_API::getInstance()->isLanguageAvailable($languageCode)) {
-            $languageCode = Piwik_Common::extractLanguageCodeFromBrowserLanguage(Piwik_Common::getBrowserLanguage(), Piwik_LanguagesManager_API::getInstance()->getAvailableLanguages());
+        if (!API::getInstance()->isLanguageAvailable($languageCode)) {
+            $languageCode = Common::extractLanguageCodeFromBrowserLanguage(Common::getBrowserLanguage(), API::getInstance()->getAvailableLanguages());
         }
-        if (!Piwik_LanguagesManager_API::getInstance()->isLanguageAvailable($languageCode)) {
-            $languageCode = Piwik_Translate::getInstance()->getLanguageDefault();
+        if (!API::getInstance()->isLanguageAvailable($languageCode)) {
+            $languageCode = Translate::getLanguageDefault();
         }
         return $languageCode;
     }
@@ -171,12 +163,13 @@ class Piwik_LanguagesManager extends Piwik_Plugin
     static public function getLanguageNameForCurrentUser()
     {
         $languageCode = self::getLanguageCodeForCurrentUser();
-        $languages = Piwik_LanguagesManager_API::getInstance()->getAvailableLanguageNames();
+        $languages = API::getInstance()->getAvailableLanguageNames();
         foreach ($languages as $language) {
             if ($language['code'] === $languageCode) {
                 return $language['name'];
             }
         }
+        return false;
     }
 
     /**
@@ -190,22 +183,21 @@ class Piwik_LanguagesManager extends Piwik_Plugin
 
         try {
             $currentUser = Piwik::getCurrentUserLogin();
-            return Piwik_LanguagesManager_API::getInstance()->getLanguageForUser($currentUser);
+            return API::getInstance()->getLanguageForUser($currentUser);
         } catch (Exception $e) {
             return false;
         }
     }
 
-
     /**
-     * Returns the langage for the session
+     * Returns the language for the session
      *
      * @return string|null
      */
     static public function getLanguageForSession()
     {
-        $cookieName = Piwik_Config::getInstance()->General['language_cookie_name'];
-        $cookie = new Piwik_Cookie($cookieName);
+        $cookieName = Config::getInstance()->General['language_cookie_name'];
+        $cookie = new Cookie($cookieName);
         if ($cookie->isCookieFound()) {
             return $cookie->get('language');
         }
@@ -220,13 +212,14 @@ class Piwik_LanguagesManager extends Piwik_Plugin
      */
     static public function setLanguageForSession($languageCode)
     {
-        if (!Piwik_LanguagesManager_API::getInstance()->isLanguageAvailable($languageCode)) {
+        if (!API::getInstance()->isLanguageAvailable($languageCode)) {
             return false;
         }
 
-        $cookieName = Piwik_Config::getInstance()->General['language_cookie_name'];
-        $cookie = new Piwik_Cookie($cookieName, 0);
+        $cookieName = Config::getInstance()->General['language_cookie_name'];
+        $cookie = new Cookie($cookieName, 0);
         $cookie->set('language', $languageCode);
         $cookie->save();
+        return true;
     }
 }

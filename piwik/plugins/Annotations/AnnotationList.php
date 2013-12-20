@@ -6,15 +6,22 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_Annotations
+ * @package Annotations
  */
+namespace Piwik\Plugins\Annotations;
+
+use Exception;
+use Piwik\Date;
+use Piwik\Option;
+use Piwik\Piwik;
+use Piwik\Site;
 
 /**
  * This class can be used to query & modify annotations for multiple sites
  * at once.
  *
  * Example use:
- *   $annotations = new Piwik_Annotations_AnnotationList($idSites = "1,2,5");
+ *   $annotations = new AnnotationList($idSites = "1,2,5");
  *   $annotation = $annotations->get($idSite = 1, $idNote = 4);
  *   // do stuff w/ annotation
  *   $annotations->update($idSite = 2, $idNote = 4, $note = "This is the new text.");
@@ -24,9 +31,9 @@
  * an annotation for the same site, it's possible one of their changes will
  * never get made (as it will be overwritten by the other's).
  *
- * @package Piwik_Annotations
+ * @package Annotations
  */
-class Piwik_Annotations_AnnotationList
+class AnnotationList
 {
     const ANNOTATION_COLLECTION_OPTION_SUFFIX = '_annotations';
 
@@ -51,7 +58,7 @@ class Piwik_Annotations_AnnotationList
      */
     public function __construct($idSites)
     {
-        $this->idSites = Piwik_Site::getIdSitesFromIdSitesString($idSites);
+        $this->idSites = Site::getIdSitesFromIdSitesString($idSites);
         $this->annotations = $this->getAnnotationsForSite();
     }
 
@@ -101,7 +108,7 @@ class Piwik_Annotations_AnnotationList
         $this->checkIdSiteIsLoaded($idSite);
 
         $optionName = self::getAnnotationCollectionOptionName($idSite);
-        Piwik_SetOption($optionName, serialize($this->annotations[$idSite]));
+        Option::set($optionName, serialize($this->annotations[$idSite]));
     }
 
     /**
@@ -170,7 +177,6 @@ class Piwik_Annotations_AnnotationList
      *
      * @param int $idSite The ID of the site to get an annotation for.
      * @param int $idNote The ID of the note to get.
-     * @param array The annotation.
      * @throws Exception if $idSite is not an ID that was supplied upon construction.
      * @throws Exception if $idNote does not refer to valid note for the site.
      */
@@ -192,9 +198,9 @@ class Piwik_Annotations_AnnotationList
      *
      * @see self::get for info on what attributes stored within annotations.
      *
-     * @param Piwik_Date|false $startDate The start of the date range.
-     * @param Piwik_Date|false $endDate The end of the date range.
-     * @param string|int|array|false $idSite IDs of the sites whose annotations to
+     * @param Date|bool $startDate The start of the date range.
+     * @param Date|bool $endDate The end of the date range.
+     * @param array|bool|int|string $idSite IDs of the sites whose annotations to
      *                                       search through.
      * @return array Array mapping site IDs with arrays of annotations, eg:
      *               array(
@@ -213,7 +219,7 @@ class Piwik_Annotations_AnnotationList
     public function search($startDate, $endDate, $idSite = false)
     {
         if ($idSite) {
-            $idSites = Piwik_Site::getIdSitesFromIdSitesString($idSite);
+            $idSites = Site::getIdSitesFromIdSitesString($idSite);
         } else {
             $idSites = array_keys($this->annotations);
         }
@@ -228,7 +234,7 @@ class Piwik_Annotations_AnnotationList
 
             foreach ($this->annotations[$idSite] as $idNote => $annotation) {
                 if ($startDate !== false) {
-                    $annotationDate = Piwik_Date::factory($annotation['date']);
+                    $annotationDate = Date::factory($annotation['date']);
                     if ($annotationDate->getTimestamp() < $startDate->getTimestamp()
                         || $annotationDate->getTimestamp() > $endDate->getTimestamp()
                     ) {
@@ -264,7 +270,7 @@ class Piwik_Annotations_AnnotationList
         $this->checkIdSiteIsLoaded($idSite);
 
         // search includes end date, and count should not, so subtract one from the timestamp
-        $annotations = $this->search($startDate, Piwik_Date::factory($endDate->getTimestamp() - 1));
+        $annotations = $this->search($startDate, Date::factory($endDate->getTimestamp() - 1));
 
         // count the annotations
         $count = $starred = 0;
@@ -286,6 +292,7 @@ class Piwik_Annotations_AnnotationList
      * @param string $date
      * @param string $note
      * @param int $starred
+     * @return array
      */
     private function makeAnnotation($date, $note, $starred = 0)
     {
@@ -306,7 +313,7 @@ class Piwik_Annotations_AnnotationList
         $result = array();
         foreach ($this->idSites as $id) {
             $optionName = self::getAnnotationCollectionOptionName($id);
-            $serialized = Piwik_GetOption($optionName);
+            $serialized = Option::get($optionName);
 
             if ($serialized !== false) {
                 $result[$id] = unserialize($serialized);
@@ -410,17 +417,19 @@ class Piwik_Annotations_AnnotationList
      * Returns true if the current user can add notes for a specific site.
      *
      * @param int $idSite The site to add notes to.
+     * @return bool
      */
     public static function canUserAddNotesFor($idSite)
     {
         return Piwik::isUserHasViewAccess($idSite)
-            && !Piwik::isUserIsAnonymous($idSite);
+        && !Piwik::isUserIsAnonymous($idSite);
     }
 
     /**
      * Returns the option name used to store annotations for a site.
      *
      * @param int $idSite The site ID.
+     * @return string
      */
     public static function getAnnotationCollectionOptionName($idSite)
     {

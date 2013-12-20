@@ -8,15 +8,26 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\Tracker\Db\Pdo;
+
+use Exception;
+use PDO;
+use PDOException;
+use PDOStatement;
+use Piwik\Tracker\Db;
+use Piwik\Tracker\Db\DbException;
 
 /**
  * PDO MySQL wrapper
  *
  * @package Piwik
- * @subpackage Piwik_Tracker
+ * @subpackage Tracker
  */
-class Piwik_Tracker_Db_Pdo_Mysql extends Piwik_Tracker_Db
+class Mysql extends Db
 {
+    /**
+     * @var PDO
+     */
     protected $connection = null;
     protected $dsn;
     protected $username;
@@ -33,7 +44,7 @@ class Piwik_Tracker_Db_Pdo_Mysql extends Piwik_Tracker_Db
     {
         if (isset($dbInfo['unix_socket']) && $dbInfo['unix_socket'][0] == '/') {
             $this->dsn = $driverName . ':dbname=' . $dbInfo['dbname'] . ';unix_socket=' . $dbInfo['unix_socket'];
-        } else if ($dbInfo['port'][0] == '/') {
+        } else if (!empty($dbInfo['port']) && $dbInfo['port'][0] == '/') {
             $this->dsn = $driverName . ':dbname=' . $dbInfo['dbname'] . ';unix_socket=' . $dbInfo['port'];
         } else {
             $this->dsn = $driverName . ':dbname=' . $dbInfo['dbname'] . ';host=' . $dbInfo['host'] . ';port=' . $dbInfo['port'];
@@ -92,11 +103,11 @@ class Piwik_Tracker_Db_Pdo_Mysql extends Piwik_Tracker_Db
     /**
      * Returns an array containing all the rows of a query result, using optional bound parameters.
      *
-     * @param string $query       Query
-     * @param array $parameters  Parameters to bind
+     * @param string $query Query
+     * @param array $parameters Parameters to bind
      * @return array|bool
      * @see query()
-     * @throws Exception|Piwik_Tracker_Db_Exception if an exception occurred
+     * @throws Exception|DbException if an exception occurred
      */
     public function fetchAll($query, $parameters = array())
     {
@@ -107,7 +118,7 @@ class Piwik_Tracker_Db_Pdo_Mysql extends Piwik_Tracker_Db
             }
             return $sth->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            throw new Piwik_Tracker_Db_Exception("Error query: " . $e->getMessage());
+            throw new DbException("Error query: " . $e->getMessage());
         }
     }
 
@@ -118,7 +129,7 @@ class Piwik_Tracker_Db_Pdo_Mysql extends Piwik_Tracker_Db
      * @param array $parameters Parameters to bind
      * @return bool|mixed
      * @see query()
-     * @throws Exception|Piwik_Tracker_Db_Exception if an exception occurred
+     * @throws Exception|DbException if an exception occurred
      */
     public function fetch($query, $parameters = array())
     {
@@ -129,17 +140,17 @@ class Piwik_Tracker_Db_Pdo_Mysql extends Piwik_Tracker_Db
             }
             return $sth->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            throw new Piwik_Tracker_Db_Exception("Error query: " . $e->getMessage());
+            throw new DbException("Error query: " . $e->getMessage());
         }
     }
 
     /**
      * Executes a query, using optional bound parameters.
      *
-     * @param string $query       Query
-     * @param array|string $parameters  Parameters to bind array('idsite'=> 1)
+     * @param string $query Query
+     * @param array|string $parameters Parameters to bind array('idsite'=> 1)
      * @return PDOStatement|bool  PDOStatement or false if failed
-     * @throws Piwik_Tracker_Db_Exception if an exception occured
+     * @throws DbException if an exception occured
      */
     public function query($query, $parameters = array())
     {
@@ -163,7 +174,7 @@ class Piwik_Tracker_Db_Pdo_Mysql extends Piwik_Tracker_Db
             }
             return $sth;
         } catch (PDOException $e) {
-            throw new Piwik_Tracker_Db_Exception("Error query: " . $e->getMessage() . "
+            throw new DbException("Error query: " . $e->getMessage() . "
 								In query: $query
 								Parameters: " . var_export($parameters, true));
         }
@@ -198,7 +209,7 @@ class Piwik_Tracker_Db_Pdo_Mysql extends Piwik_Tracker_Db
     /**
      * Return number of affected rows in last query
      *
-     * @param mixed $queryResult  Result from query()
+     * @param mixed $queryResult Result from query()
      * @return int
      */
     public function rowCount($queryResult)

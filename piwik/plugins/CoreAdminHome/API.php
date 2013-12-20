@@ -6,27 +6,30 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_CoreAdminHome
+ * @package CoreAdminHome
  */
+namespace Piwik\Plugins\CoreAdminHome;
+
+use Exception;
+use Piwik\Config;
+use Piwik\DataAccess\ArchiveTableCreator;
+use Piwik\Date;
+use Piwik\Db;
+use Piwik\Option;
+use Piwik\Period;
+use Piwik\Period\Week;
+use Piwik\Piwik;
+use Piwik\Plugins\SitesManager\SitesManager;
+use Piwik\SettingsPiwik;
+use Piwik\Site;
+use Piwik\TaskScheduler;
 
 /**
- * @package Piwik_CoreAdminHome
+ * @package CoreAdminHome
+ * @method static \Piwik\Plugins\CoreAdminHome\API getInstance()
  */
-class Piwik_CoreAdminHome_API
+class API extends \Piwik\Plugin\API
 {
-    static private $instance = null;
-
-    /**
-     * @return Piwik_CoreAdminHome_API
-     */
-    static public function getInstance()
-    {
-        if (self::$instance == null) {
-            self::$instance = new self;
-        }
-        return self::$instance;
-    }
-
     /**
      * Will run all scheduled tasks due to run at this time.
      *
@@ -35,13 +38,13 @@ class Piwik_CoreAdminHome_API
     public function runScheduledTasks()
     {
         Piwik::checkUserIsSuperUser();
-        return Piwik_TaskScheduler::runTasks();
+        return TaskScheduler::runTasks();
     }
 
     public function getKnownSegmentsToArchive()
     {
         Piwik::checkUserIsSuperUser();
-        return Piwik::getKnownSegmentsToArchive();
+        return SettingsPiwik::getKnownSegmentsToArchive();
     }
 
     /*
@@ -64,11 +67,12 @@ class Piwik_CoreAdminHome_API
      *
      * @param string $idSites Comma separated list of idSite that have had data imported for the specified dates
      * @param string $dates Comma separated list of dates to invalidate for all these websites
+     * @throws Exception
      * @return array
      */
     public function invalidateArchivedReports($idSites, $dates)
     {
-        $idSites = Piwik_Site::getIdSitesFromIdSitesString($idSites);
+        $idSites = Site::getIdSitesFromIdSitesString($idSites);
         if (empty($idSites)) {
             throw new Exception("Specify a value for &idSites= as a comma separated list of website IDs, for which your token_auth has 'admin' permission");
         }
@@ -80,7 +84,7 @@ class Piwik_CoreAdminHome_API
         $dates = array_unique($dates);
         foreach ($dates as $theDate) {
             try {
-                $date = Piwik_Date::factory($theDate);
+                $date = Date::factory($theDate);
             } catch (Exception $e) {
                 $invalidDates[] = $theDate;
                 continue;
@@ -92,24 +96,20 @@ class Piwik_CoreAdminHome_API
             }
         }
 
-        // Lookup archive tables
-        $tables = Piwik::getTablesInstalled();
-        $archiveTables = Piwik::getTablesArchivesInstalled();
-
         // If using the feature "Delete logs older than N days"...
-        $logsAreDeletedBeforeThisDate = Piwik_Config::getInstance()->Deletelogs['delete_logs_schedule_lowest_interval'];
-        $logsDeleteEnabled = Piwik_Config::getInstance()->Deletelogs['delete_logs_enable'];
+        $logsAreDeletedBeforeThisDate = Config::getInstance()->Deletelogs['delete_logs_schedule_lowest_interval'];
+        $logsDeleteEnabled = Config::getInstance()->Deletelogs['delete_logs_enable'];
         $minimumDateWithLogs = false;
         if ($logsDeleteEnabled
             && $logsAreDeletedBeforeThisDate
         ) {
-            $minimumDateWithLogs = Piwik_Date::factory('today')->subDay($logsAreDeletedBeforeThisDate);
+            $minimumDateWithLogs = Date::factory('today')->subDay($logsAreDeletedBeforeThisDate);
         }
 
         // Given the list of dates, process which tables they should be deleted from
         $minDate = false;
         $warningDates = $processedDates = array();
-        /* @var $date Piwik_Date */
+        /* @var $date Date */
         foreach ($toInvalidate as $date) {
             // we should only delete reports for dates that are more recent than N days
             if ($minimumDateWithLogs
@@ -129,10 +129,10 @@ class Piwik_CoreAdminHome_API
             $datesByMonth[$year][] = $date->toString();
 
             // but also weeks overlapping several months stored in the month where the week is starting
-            /* @var $week Piwik_Period_Week */
-            $week = Piwik_Period::factory('week', $date);
-            $week = $week->getDateStart()->toString('Y_m');
-            $datesByMonth[$week][] = $date->toString();
+            /* @var $week Week */
+            $week = Period::factory('week', $date);
+            $weekAsString = $week->getDateStart()->toString('Y_m');
+            $datesByMonth[$weekAsString][] = $date->toString();
 
             // Keep track of the minimum date for each website
             if ($minDate === false
@@ -143,11 +143,10 @@ class Piwik_CoreAdminHome_API
         }
 
         // In each table, invalidate day/week/month/year containing this date
-        $sqlIdSites = implode(",", $idSites);
+        $archiveTables = ArchiveTableCreator::getTablesArchivesInstalled();
         foreach ($archiveTables as $table) {
             // Extract Y_m from table name
-            $suffix = str_replace(array('archive_numeric_', 'archive_blob_'), '', Piwik_Common::unprefixTable($table));
-
+            $suffix = ArchiveTableCreator::getDateFromTableName($table);
             if (!isset($datesByMonth[$suffix])) {
                 continue;
             }
@@ -166,27 +165,19 @@ class Piwik_CoreAdminHome_API
 
             $query = "DELETE FROM $table " .
                 " WHERE ( $sql ) " .
-                " AND idsite IN (" . $sqlIdSites . ")";
-            Piwik_Query($query, $bind);
+                " AND idsite IN (" . implode(",", $idSites) . ")";
+            Db::query($query, $bind);
         }
-
-        // Update piwik_site.ts_created
-        $query = "UPDATE " . Piwik_Common::prefixTable("site") .
-            " SET ts_created = ?" .
-            " WHERE idsite IN ( $sqlIdSites )
-					AND ts_created > ?";
-        $minDateSql = $minDate->subDay(1)->getDatetime();
-        $bind = array($minDateSql, $minDateSql);
-        Piwik_Query($query, $bind);
+        \Piwik\Plugins\SitesManager\API::getInstance()->updateSiteCreatedTime($idSites, $minDate);
 
         // Force to re-process data for these websites in the next archive.php cron run
-        $invalidatedIdSites = Piwik_CoreAdminHome_API::getWebsiteIdsToInvalidate();
+        $invalidatedIdSites = self::getWebsiteIdsToInvalidate();
         $invalidatedIdSites = array_merge($invalidatedIdSites, $idSites);
         $invalidatedIdSites = array_unique($invalidatedIdSites);
         $invalidatedIdSites = array_values($invalidatedIdSites);
-        Piwik_SetOption(self::OPTION_INVALIDATED_IDSITES, serialize($invalidatedIdSites));
+        Option::set(self::OPTION_INVALIDATED_IDSITES, serialize($invalidatedIdSites));
 
-        Piwik_Site::clearCache();
+        Site::clearCache();
 
         $output = array();
         // output logs
@@ -210,7 +201,7 @@ class Piwik_CoreAdminHome_API
     static public function getWebsiteIdsToInvalidate()
     {
         Piwik::checkUserHasSomeAdminAccess();
-        $invalidatedIdSites = Piwik_GetOption(self::OPTION_INVALIDATED_IDSITES);
+        $invalidatedIdSites = Option::get(self::OPTION_INVALIDATED_IDSITES);
         if ($invalidatedIdSites
             && ($invalidatedIdSites = unserialize($invalidatedIdSites))
             && count($invalidatedIdSites)
@@ -219,4 +210,5 @@ class Piwik_CoreAdminHome_API
         }
         return array();
     }
+
 }

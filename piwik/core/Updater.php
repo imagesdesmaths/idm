@@ -8,19 +8,15 @@
  * @category Piwik
  * @package Piwik
  */
-
-/**
- * @see core/Option.php
- */
-require_once PIWIK_INCLUDE_PATH . '/core/Option.php';
+namespace Piwik;
 
 /**
  * Load and execute all relevant, incremental update scripts for Piwik core and plugins, and bump the component version numbers for completed updates.
  *
  * @package Piwik
- * @subpackage Piwik_Updater
+ * @subpackage Updater
  */
-class Piwik_Updater
+class Updater
 {
     const INDEX_CURRENT_VERSION = 0;
     const INDEX_NEW_VERSION = 1;
@@ -30,6 +26,9 @@ class Piwik_Updater
     private $componentsToCheck = array();
     private $hasMajorDbUpdate = false;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->pathUpdateFileCore = PIWIK_INCLUDE_PATH . '/core/Updates/';
@@ -53,11 +52,11 @@ class Piwik_Updater
      * @param string $name
      * @param string $version
      */
-    public function recordComponentSuccessfullyUpdated($name, $version)
+    public static function recordComponentSuccessfullyUpdated($name, $version)
     {
         try {
-            Piwik_SetOption($this->getNameInOptionTable($name), $version, $autoload = 1);
-        } catch (Exception $e) {
+            Option::set(self::getNameInOptionTable($name), $version, $autoLoad = 1);
+        } catch (\Exception $e) {
             // case when the option table is not yet created (before 0.2.10)
         }
     }
@@ -67,7 +66,7 @@ class Piwik_Updater
      * @param string $name
      * @return string
      */
-    private function getNameInOptionTable($name)
+    private static function getNameInOptionTable($name)
     {
         return 'version_' . $name;
     }
@@ -93,7 +92,7 @@ class Piwik_Updater
     public function hasNewVersion($componentName)
     {
         return isset($this->componentsWithNewVersion) &&
-            isset($this->componentsWithNewVersion[$componentName]);
+        isset($this->componentsWithNewVersion[$componentName]);
     }
 
     /**
@@ -111,6 +110,7 @@ class Piwik_Updater
      * Returns the list of SQL queries that would be executed during the update
      *
      * @return array of SQL queries
+     * @throws \Exception
      */
     public function getSqlQueriesToExecute()
     {
@@ -120,19 +120,19 @@ class Piwik_Updater
                 require_once $file; // prefixed by PIWIK_INCLUDE_PATH
 
                 $className = $this->getUpdateClassName($componentName, $fileVersion);
-                if (class_exists($className, false)) {
-                    $queriesForComponent = call_user_func(array($className, 'getSql'));
-                    foreach ($queriesForComponent as $query => $error) {
-                        $queries[] = $query . ';';
-                    }
-
-                    $this->hasMajorDbUpdate = $this->hasMajorDbUpdate || call_user_func(array($className, 'isMajorUpdate'));
+                if (!class_exists($className, false)) {
+                    throw new \Exception("The class $className was not found in $file");
                 }
+                $queriesForComponent = call_user_func(array($className, 'getSql'));
+                foreach ($queriesForComponent as $query => $error) {
+                    $queries[] = $query . ';';
+                }
+                $this->hasMajorDbUpdate = $this->hasMajorDbUpdate || call_user_func(array($className, 'isMajorUpdate'));
             }
-            // unfortunately had to extract this query from the Piwik_Option class
-            $queries[] = 'UPDATE `' . Piwik_Common::prefixTable('option') . '`
+            // unfortunately had to extract this query from the Option class
+            $queries[] = 'UPDATE `' . Common::prefixTable('option') . '`
     				SET option_value = \'' . $fileVersion . '\'
-    				WHERE option_name = \'' . $this->getNameInOptionTable($componentName) . '\';';
+    				WHERE option_name = \'' . self::getNameInOptionTable($componentName) . '\';';
         }
         return $queries;
     }
@@ -140,17 +140,19 @@ class Piwik_Updater
     private function getUpdateClassName($componentName, $fileVersion)
     {
         $suffix = strtolower(str_replace(array('-', '.'), '_', $fileVersion));
+        $className = 'Updates_' . $suffix;
+
         if ($componentName == 'core') {
-            return 'Piwik_Updates_' . $suffix;
+            return '\\Piwik\\Updates\\' . $className;
         }
-        return 'Piwik_' . $componentName . '_Updates_' . $suffix;
+        return '\\Piwik\\Plugins\\' . $componentName . '\\' . $className;
     }
 
     /**
      * Update the named component
      *
      * @param string $componentName 'core', or plugin name
-     * @throws Exception|Piwik_Updater_UpdateErrorException
+     * @throws \Exception|UpdaterErrorException
      * @return array of warning strings if applicable
      */
     public function update($componentName)
@@ -162,19 +164,20 @@ class Piwik_Updater
 
                 $className = $this->getUpdateClassName($componentName, $fileVersion);
                 if (class_exists($className, false)) {
+                    // update()
                     call_user_func(array($className, 'update'));
                 }
 
-                $this->recordComponentSuccessfullyUpdated($componentName, $fileVersion);
-            } catch (Piwik_Updater_UpdateErrorException $e) {
+                self::recordComponentSuccessfullyUpdated($componentName, $fileVersion);
+            } catch (UpdaterErrorException $e) {
                 throw $e;
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $warningMessages[] = $e->getMessage();
             }
         }
 
         // to debug, create core/Updates/X.php, update the core/Version.php, throw an Exception in the try, and comment the following line
-        $this->recordComponentSuccessfullyUpdated($componentName, $this->componentsWithNewVersion[$componentName][self::INDEX_NEW_VERSION]);
+        self::recordComponentSuccessfullyUpdated($componentName, $this->componentsWithNewVersion[$componentName][self::INDEX_NEW_VERSION]);
         return $warningMessages;
     }
 
@@ -217,7 +220,7 @@ class Piwik_Updater
                 uasort($componentsWithUpdateFile[$name], "version_compare");
             } else {
                 // there are no update file => nothing to do, update to the new version is successful
-                $this->recordComponentSuccessfullyUpdated($name, $newVersion);
+                self::recordComponentSuccessfullyUpdated($name, $newVersion);
             }
         }
         return $componentsWithUpdateFile;
@@ -226,7 +229,7 @@ class Piwik_Updater
     /**
      * Construct list of outdated components
      *
-     * @throws Exception
+     * @throws \Exception
      * @return array array( componentName => array( oldVersion, newVersion), [...])
      */
     public function getComponentsWithNewVersion()
@@ -242,10 +245,10 @@ class Piwik_Updater
 
         foreach ($this->componentsToCheck as $name => $version) {
             try {
-                $currentVersion = Piwik_GetOption('version_' . $name);
-            } catch (Exception $e) {
+                $currentVersion = Option::get(self::getNameInOptionTable($name));
+            } catch (\Exception $e) {
                 // mysql error 1146: table doesn't exist
-                if (Zend_Registry::get('db')->isErrNo($e, '1146')) {
+                if (Db::get()->isErrNo($e, '1146')) {
                     // case when the option table is not yet created (before 0.2.10)
                     $currentVersion = false;
                 } else {
@@ -256,11 +259,13 @@ class Piwik_Updater
             if ($currentVersion === false) {
                 if ($name === 'core') {
                     // This should not happen
-                    $currentVersion = Piwik_Version::VERSION;
+                    $currentVersion = Version::VERSION;
                 } else {
-                    $currentVersion = '0.0.1';
+                    // When plugins have been installed since Piwik 2.0 this should not happen
+                    // We "fix" the data for any plugin that may have been ported from Piwik 1.x
+                    $currentVersion = $version;
                 }
-                $this->recordComponentSuccessfullyUpdated($name, $currentVersion);
+                self::recordComponentSuccessfullyUpdated($name, $currentVersion);
             }
 
             $versionCompare = version_compare($currentVersion, $version);
@@ -270,7 +275,7 @@ class Piwik_Updater
                     self::INDEX_NEW_VERSION     => $version
                 );
             } else if ($versionCompare == 1) {
-                // the version in the DB is newest.. we choose to ignore (for the time being)
+                // the version in the DB is newest.. we choose to ignore
             }
         }
         return $componentsToUpdate;
@@ -281,19 +286,19 @@ class Piwik_Updater
      *
      * @param string $file Update script filename
      * @param array $sqlarray An array of SQL queries to be executed
-     * @throws Piwik_Updater_UpdateErrorException
+     * @throws UpdaterErrorException
      */
     static function updateDatabase($file, $sqlarray)
     {
         foreach ($sqlarray as $update => $ignoreError) {
             try {
-                Piwik_Exec($update);
-            } catch (Exception $e) {
+                Db::exec($update);
+            } catch (\Exception $e) {
                 if (($ignoreError === false)
-                    || !Zend_Registry::get('db')->isErrNo($e, $ignoreError)
+                    || !Db::get()->isErrNo($e, $ignoreError)
                 ) {
                     $message = $file . ":\nError trying to execute the query '" . $update . "'.\nThe error was: " . $e->getMessage();
-                    throw new Piwik_Updater_UpdateErrorException($message);
+                    throw new UpdaterErrorException($message);
                 }
             }
         }
@@ -304,8 +309,8 @@ class Piwik_Updater
  * Exception thrown by updater if a non-recoverable error occurs
  *
  * @package Piwik
- * @subpackage Piwik_Updater
+ * @subpackage Updater
  */
-class Piwik_Updater_UpdateErrorException extends Exception
+class UpdaterErrorException extends \Exception
 {
 }

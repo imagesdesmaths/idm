@@ -9,21 +9,28 @@
  * @package Updates
  */
 
+namespace Piwik\Updates;
+
+use Piwik\Common;
+use Piwik\DbHelper;
+use Piwik\Updater;
+use Piwik\Updates;
+
 /**
  * @package Updates
  */
-class Piwik_Updates_0_2_27 extends Piwik_Updates
+class Updates_0_2_27 extends Updates
 {
     static function getSql($schema = 'Myisam')
     {
         $sqlarray = array(
-            'ALTER TABLE `' . Piwik_Common::prefixTable('log_visit') . '`
-				ADD `visit_goal_converted` VARCHAR( 1 ) NOT NULL AFTER `visit_total_time`'                                                                              => false,
+            'ALTER TABLE `' . Common::prefixTable('log_visit') . '`
+				ADD `visit_goal_converted` VARCHAR( 1 ) NOT NULL AFTER `visit_total_time`'                                                                        => false,
             // 0.2.27 [826]
-            'ALTER IGNORE TABLE `' . Piwik_Common::prefixTable('log_visit') . '`
+            'ALTER IGNORE TABLE `' . Common::prefixTable('log_visit') . '`
 				CHANGE `visit_goal_converted` `visit_goal_converted` TINYINT(1) NOT NULL' => false,
 
-            'CREATE TABLE `' . Piwik_Common::prefixTable('goal') . "` (
+            'CREATE TABLE `' . Common::prefixTable('goal') . "` (
 				`idsite` int(11) NOT NULL,
 				`idgoal` int(11) NOT NULL,
 				`name` varchar(50) NOT NULL,
@@ -36,7 +43,7 @@ class Piwik_Updates_0_2_27 extends Piwik_Updates
 				PRIMARY KEY  (`idsite`,`idgoal`)
 			)"                                                                                       => false,
 
-            'CREATE TABLE `' . Piwik_Common::prefixTable('log_conversion') . '` (
+            'CREATE TABLE `' . Common::prefixTable('log_conversion') . '` (
 				`idvisit` int(10) unsigned NOT NULL,
 				`idsite` int(10) unsigned NOT NULL,
 				`visitor_idcookie` char(32) NOT NULL,
@@ -60,7 +67,7 @@ class Piwik_Updates_0_2_27 extends Piwik_Updates
 			)'                                                                             => false,
         );
 
-        $tables = Piwik::getTablesInstalled();
+        $tables = DbHelper::getTablesInstalled();
         foreach ($tables as $tableName) {
             if (preg_match('/archive_/', $tableName) == 1) {
                 $sqlarray['CREATE INDEX index_all ON ' . $tableName . ' (`idsite`,`date1`,`date2`,`name`,`ts_archived`)'] = false;
@@ -72,6 +79,6 @@ class Piwik_Updates_0_2_27 extends Piwik_Updates
 
     static function update()
     {
-        Piwik_Updater::updateDatabase(__FILE__, self::getSql());
+        Updater::updateDatabase(__FILE__, self::getSql());
     }
 }

@@ -6,62 +6,68 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_UserSettings
+ * @package UserSettings
  */
+
+namespace Piwik\Plugins\UserSettings;
+
+use Piwik\Piwik;
+use Piwik\Tracker\Request;
+use UserAgentParser;
 
 /**
  * @see libs/UserAgentParser/UserAgentParser.php
  */
 require_once PIWIK_INCLUDE_PATH . '/libs/UserAgentParser/UserAgentParser.php';
 
-function Piwik_getPluginsLogo($oldLabel)
+function getPluginsLogo($oldLabel)
 {
-    if($oldLabel == Piwik_Translate('General_Others')) {
+    if ($oldLabel == Piwik::translate('General_Others')) {
         return false;
     }
     return 'plugins/UserSettings/images/plugins/' . $oldLabel . '.gif';
 }
 
-function Piwik_getOSLabel($osId)
+function getOSLabel($osId)
 {
     $osName = UserAgentParser::getOperatingSystemNameFromId($osId);
     if ($osName !== false) {
         return $osName;
     }
     if ($osId == 'UNK') {
-        return Piwik_Translate('General_Unknown');
+        return Piwik::translate('General_Unknown');
     }
     return $osId;
 }
 
-function Piwik_getOSShortLabel($osId)
+function getOSShortLabel($osId)
 {
     $osShortName = UserAgentParser::getOperatingSystemShortNameFromId($osId);
     if ($osShortName !== false) {
         return $osShortName;
     }
     if ($osId == 'UNK') {
-        return Piwik_Translate('General_Unknown');
+        return Piwik::translate('General_Unknown');
     }
     return $osId;
 }
 
 
-function Piwik_UserSettings_getOSFamily($osLabel)
+function getOSFamily($osLabel)
 {
     $osId = UserAgentParser::getOperatingSystemIdFromName($osLabel);
     $osFamily = UserAgentParser::getOperatingSystemFamilyFromId($osId);
 
     if ($osFamily == 'unknown') {
-        $osFamily = Piwik_Translate('General_Unknown');
+        $osFamily = Piwik::translate('General_Unknown');
     } else if ($osFamily == 'Gaming Console') {
-        $osFamily = Piwik_Translate('UserSettings_GamingConsole');
+        $osFamily = Piwik::translate('UserSettings_GamingConsole');
     }
 
     return $osFamily;
 }
 
-function Piwik_UserSettings_getDeviceTypeFromOS($osLabel)
+function getDeviceTypeFromOS($osLabel)
 {
     $osId = UserAgentParser::getOperatingSystemIdFromName($osLabel);
     $osFamily = UserAgentParser::getOperatingSystemFamilyFromId($osId);
@@ -86,108 +92,108 @@ function Piwik_UserSettings_getDeviceTypeFromOS($osLabel)
     }
 }
 
-function Piwik_getBrowserTypeLabel($oldLabel)
+function getBrowserTypeLabel($oldLabel)
 {
-    if (isset(Piwik_UserSettings::$browserType_display[$oldLabel])) {
-        return Piwik_UserSettings::$browserType_display[$oldLabel];
+    if (isset(UserSettings::$browserType_display[$oldLabel])) {
+        return UserSettings::$browserType_display[$oldLabel];
     }
     if ($oldLabel == 'unknown') {
-        return Piwik_Translate('General_Unknown');
+        return Piwik::translate('General_Unknown');
     }
     return $oldLabel;
 }
 
 
-function Piwik_getConfigurationLabel($str)
+function getConfigurationLabel($str)
 {
     if (strpos($str, ';') === false) {
         return $str;
     }
     $values = explode(";", $str);
 
-    $os = Piwik_getOSLabel($values[0]);
+    $os = getOSLabel($values[0]);
     $name = $values[1];
     $browser = UserAgentParser::getBrowserNameFromId($name);
     if ($browser === false) {
-        $browser = Piwik_Translate('General_Unknown');
+        $browser = Piwik::translate('General_Unknown');
     }
     $resolution = $values[2];
     return $os . " / " . $browser . " / " . $resolution;
 }
 
-function Piwik_getBrowserLabel($oldLabel)
+function getBrowserLabel($oldLabel)
 {
-    $browserId = Piwik_getBrowserId($oldLabel);
-    $version = Piwik_getBrowserVersion($oldLabel);
+    $browserId = getBrowserId($oldLabel);
+    $version = getBrowserVersion($oldLabel);
     $browserName = UserAgentParser::getBrowserNameFromId($browserId);
     if ($browserName !== false) {
         return $browserName . " " . $version;
     }
     if ($browserId == 'UNK') {
-        return Piwik_Translate('General_Unknown');
+        return Piwik::translate('General_Unknown');
     }
     return $oldLabel;
 }
 
-function Piwik_getBrowserShortLabel($oldLabel)
+function getBrowserShortLabel($oldLabel)
 {
-    $browserId = Piwik_getBrowserId($oldLabel);
-    $version = Piwik_getBrowserVersion($oldLabel);
+    $browserId = getBrowserId($oldLabel);
+    $version = getBrowserVersion($oldLabel);
     $browserName = UserAgentParser::getBrowserShortNameFromId($browserId);
     if ($browserName !== false) {
         return $browserName . " " . $version;
     }
     if ($browserId == 'UNK') {
-        return Piwik_Translate('General_Unknown');
+        return Piwik::translate('General_Unknown');
     }
     return $oldLabel;
 }
 
-function Piwik_getBrowserId($str)
+function getBrowserId($str)
 {
     return substr($str, 0, strpos($str, ';'));
 }
 
-function Piwik_getBrowserVersion($str)
+function getBrowserVersion($str)
 {
     return substr($str, strpos($str, ';') + 1);
 }
 
-function Piwik_getLogoImageFromId($dir, $id)
+function getLogoImageFromId($dir, $id)
 {
-    $path = $dir.'/'.$id.'.gif';
+    $path = $dir . '/' . $id . '.gif';
     if (file_exists(PIWIK_INCLUDE_PATH . '/' . $path)) {
         return $path;
     } else {
-        return $dir.'/UNK.gif';
+        return $dir . '/UNK.gif';
     }
 }
 
-function Piwik_getBrowsersLogo($label)
+function getBrowsersLogo($label)
 {
-    $id = Piwik_getBrowserId($label);
+    $id = getBrowserId($label);
     // For aggregated row 'Others'
     if (empty($id)) {
         $id = 'UNK';
     }
-    return Piwik_getLogoImageFromId('plugins/UserSettings/images/browsers', $id);
+    return getLogoImageFromId('plugins/UserSettings/images/browsers', $id);
 }
 
-function Piwik_getOSLogo($label)
+function getOSLogo($label)
 {
     // For aggregated row 'Others'
     if (empty($label)) {
         $label = 'UNK';
     }
-    return Piwik_getLogoImageFromId('plugins/UserSettings/images/os', $label);
+    return getLogoImageFromId('plugins/UserSettings/images/os', $label);
 }
 
-function Piwik_getScreensLogo($label)
+function getScreensLogo($label)
 {
     return 'plugins/UserSettings/images/screens/' . $label . '.gif';
 }
 
-function Piwik_UserSettings_getDeviceTypeImg($oldOSImage, $osFamilyLabel)
+function getDeviceTypeImg($oldOSImage, $osFamilyLabel)
 {
     switch ($osFamilyLabel) {
         case 'General_Desktop':
@@ -200,14 +206,9 @@ function Piwik_UserSettings_getDeviceTypeImg($oldOSImage, $osFamilyLabel)
     }
 }
 
-function Piwik_UserSettings_keepStrlenGreater($value)
+function getScreenTypeFromResolution($resolution)
 {
-    return strlen($value) > 5;
-}
-
-function Piwik_getScreenTypeFromResolution($resolution)
-{
-    if ($resolution === 'unknown') {
+    if ($resolution === Request::UNKNOWN_RESOLUTION) {
         return $resolution;
     }
 
@@ -227,7 +228,7 @@ function Piwik_getScreenTypeFromResolution($resolution)
     return $name;
 }
 
-function Piwik_getBrowserFamily($browserLabel)
+function getBrowserFamily($browserLabel)
 {
     $familyNameToUse = UserAgentParser::getBrowserFamilyFromId(substr($browserLabel, 0, 2));
     return $familyNameToUse;
@@ -236,7 +237,7 @@ function Piwik_getBrowserFamily($browserLabel)
 /**
  * Extracts the browser name from a string with the browser name and version.
  */
-function Piwik_UserSettings_getBrowserFromBrowserVersion($browserWithVersion)
+function getBrowserFromBrowserVersion($browserWithVersion)
 {
     if (preg_match("/(.+) [0-9]+(?:\.[0-9]+)?$/", $browserWithVersion, $matches) === 0) {
         return $browserWithVersion;
@@ -252,19 +253,19 @@ function Piwik_UserSettings_getBrowserFromBrowserVersion($browserWithVersion)
  *
  * @return string
  */
-function Piwik_LanguageTranslate($label)
+function languageTranslate($label)
 {
     if ($label == '' || $label == 'xx') {
-        return Piwik_Translate('General_Unknown');
+        return Piwik::translate('General_Unknown');
     }
 
-    $key = 'UserLanguage_Language_' . $label;
+    $key = 'UserSettings_Language_' . $label;
 
-    $translation = Piwik_Translate($key);
+    $translation = Piwik::translate($key);
 
     // Show language code if unknown code
     if ($translation == $key) {
-        $translation = Piwik_Translate('TranslationsAdmin_LanguageCode') . ' ' . $label;
+        $translation = Piwik::translate('UserSettings_LanguageCode') . ' ' . $label;
     }
 
     return $translation;

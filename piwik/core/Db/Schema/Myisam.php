@@ -8,6 +8,15 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\Db\Schema;
+
+use Exception;
+use Piwik\Common;
+use Piwik\Config;
+use Piwik\Date;
+use Piwik\Db\SchemaInterface;
+use Piwik\Db;
+use Piwik\DbHelper;
 
 /**
  * MySQL schema
@@ -15,7 +24,7 @@
  * @package Piwik
  * @subpackage Piwik_Db
  */
-class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
+class Myisam implements SchemaInterface
 {
     /**
      * Is this MySQL storage engine available?
@@ -25,7 +34,7 @@ class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
      */
     static private function hasStorageEngine($engineName)
     {
-        $db = Zend_Registry::get('db');
+        $db = Db::get();
         $allEngines = $db->fetchAssoc('SHOW ENGINES');
         if (array_key_exists($engineName, $allEngines)) {
             $support = $allEngines[$engineName]['Support'];
@@ -51,7 +60,7 @@ class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
      */
     public function getTablesCreateSql()
     {
-        $config = Piwik_Config::getInstance();
+        $config = Config::getInstance();
         $prefixTables = $config->database['tables_prefix'];
         $tables = array(
             'user'                  => "CREATE TABLE {$prefixTables}user (
@@ -88,7 +97,8 @@ class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
   						  excluded_ips TEXT NOT NULL,
   						  excluded_parameters TEXT NOT NULL,
   						  excluded_user_agents TEXT NOT NULL,
-  						  `group` VARCHAR(250) NOT NULL, 
+  						  `group` VARCHAR(250) NOT NULL,
+  						  `type` VARCHAR(255) NOT NULL,
   						  keep_url_fragment TINYINT NOT NULL DEFAULT 0,
 						  PRIMARY KEY(idsite)
 						)  DEFAULT CHARSET=utf8
@@ -118,49 +128,14 @@ class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
 
             'logger_message'        => "CREATE TABLE {$prefixTables}logger_message (
 									  idlogger_message INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+                                      tag VARCHAR(50) NULL,
 									  timestamp TIMESTAMP NULL,
+                                      level VARCHAR(16) NULL,
 									  message TEXT NULL,
 									  PRIMARY KEY(idlogger_message)
 									)  DEFAULT CHARSET=utf8
 			",
 
-            'logger_api_call'       => "CREATE TABLE {$prefixTables}logger_api_call (
-									  idlogger_api_call INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-									  class_name VARCHAR(255) NULL,
-									  method_name VARCHAR(255) NULL,
-									  parameter_names_default_values TEXT NULL,
-									  parameter_values TEXT NULL,
-									  execution_time FLOAT NULL,
-									  caller_ip VARBINARY(16) NOT NULL,
-									  timestamp TIMESTAMP NULL,
-									  returned_value TEXT NULL,
-									  PRIMARY KEY(idlogger_api_call)
-									)  DEFAULT CHARSET=utf8
-			",
-
-            'logger_error'          => "CREATE TABLE {$prefixTables}logger_error (
-									  idlogger_error INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-									  timestamp TIMESTAMP NULL,
-									  message TEXT NULL,
-									  errno INTEGER UNSIGNED NULL,
-									  errline INTEGER UNSIGNED NULL,
-									  errfile VARCHAR(255) NULL,
-									  backtrace TEXT NULL,
-									  PRIMARY KEY(idlogger_error)
-									) DEFAULT CHARSET=utf8
-			",
-
-            'logger_exception'      => "CREATE TABLE {$prefixTables}logger_exception (
-									  idlogger_exception INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-									  timestamp TIMESTAMP NULL,
-									  message TEXT NULL,
-									  errno INTEGER UNSIGNED NULL,
-									  errline INTEGER UNSIGNED NULL,
-									  errfile VARCHAR(255) NULL,
-									  backtrace TEXT NULL,
-									  PRIMARY KEY(idlogger_exception)
-									)  DEFAULT CHARSET=utf8
-			",
 
             'log_action'            => "CREATE TABLE {$prefixTables}log_action (
 									  idaction INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -191,9 +166,10 @@ class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
 							  visit_entry_idaction_name INTEGER(11) UNSIGNED NOT NULL,
 							  visit_total_actions SMALLINT(5) UNSIGNED NOT NULL,
 							  visit_total_searches SMALLINT(5) UNSIGNED NOT NULL,
+							  visit_total_events SMALLINT(5) UNSIGNED NOT NULL,
 							  visit_total_time SMALLINT(5) UNSIGNED NOT NULL,
 							  visit_goal_converted TINYINT(1) NOT NULL,
-							  visit_goal_buyer TINYINT(1) NOT NULL, 
+							  visit_goal_buyer TINYINT(1) NOT NULL,
 							  referer_type TINYINT(1) UNSIGNED NULL,
 							  referer_name VARCHAR(70) NULL,
 							  referer_url TEXT NOT NULL,
@@ -243,7 +219,7 @@ class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
 										          server_time DATETIME NOT NULL,
 												  idvisit INTEGER(10) UNSIGNED NOT NULL,
 												  idorder varchar(100) NOT NULL,
-												  
+
 												  idaction_sku INTEGER(10) UNSIGNED NOT NULL,
 												  idaction_name INTEGER(10) UNSIGNED NOT NULL,
 												  idaction_category INTEGER(10) UNSIGNED NOT NULL,
@@ -254,7 +230,7 @@ class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
 												  price FLOAT NOT NULL,
 												  quantity INTEGER(10) UNSIGNED NOT NULL,
 												  deleted TINYINT(1) UNSIGNED NOT NULL,
-												  
+
 												  PRIMARY KEY(idvisit, idorder, idaction_sku),
 										          INDEX index_idsite_servertime ( idsite, server_time )
 												)  DEFAULT CHARSET=utf8
@@ -283,7 +259,7 @@ class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
 									  url text NOT NULL,
 									  idgoal int(10) NOT NULL,
 									  buster int unsigned NOT NULL,
-									  
+
 									  idorder varchar(100) default NULL,
 									  items SMALLINT UNSIGNED DEFAULT NULL,
 									  revenue float default NULL,
@@ -291,7 +267,7 @@ class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
 									  revenue_tax float default NULL,
 									  revenue_shipping float default NULL,
 									  revenue_discount float default NULL,
-        							  
+
 									  custom_var_k1 VARCHAR(200) DEFAULT NULL,
         							  custom_var_v1 VARCHAR(200) DEFAULT NULL,
         							  custom_var_k2 VARCHAR(200) DEFAULT NULL,
@@ -318,6 +294,8 @@ class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
 											  idaction_url_ref INTEGER(10) UNSIGNED NULL DEFAULT 0,
 											  idaction_name INTEGER(10) UNSIGNED,
 											  idaction_name_ref INTEGER(10) UNSIGNED NOT NULL,
+											  idaction_event_category INTEGER(10) UNSIGNED DEFAULT NULL,
+											  idaction_event_action INTEGER(10) UNSIGNED DEFAULT NULL,
 											  time_spent_ref_action INTEGER(10) UNSIGNED NOT NULL,
 											  custom_var_k1 VARCHAR(200) DEFAULT NULL,
 											  custom_var_v1 VARCHAR(200) DEFAULT NULL,
@@ -403,7 +381,7 @@ class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
      */
     public function getTableCreateSql($tableName)
     {
-        $tables = Piwik::getTablesCreateSql();
+        $tables = DbHelper::getTablesCreateSql();
 
         if (!isset($tables[$tableName])) {
             throw new Exception("The table '$tableName' SQL creation code couldn't be found.");
@@ -421,7 +399,7 @@ class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
     public function getTablesNames()
     {
         $aTables = array_keys($this->getTablesCreateSql());
-        $config = Piwik_Config::getInstance();
+        $config = Config::getInstance();
         $prefixTables = $config->database['tables_prefix'];
         $return = array();
         foreach ($aTables as $table) {
@@ -435,7 +413,7 @@ class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
     /**
      * Get list of tables installed
      *
-     * @param bool $forceReload  Invalidate cache
+     * @param bool $forceReload Invalidate cache
      * @return array  installed Tables
      */
     public function getTablesInstalled($forceReload = true)
@@ -443,8 +421,8 @@ class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
         if (is_null($this->tablesInstalled)
             || $forceReload === true
         ) {
-            $db = Zend_Registry::get('db');
-            $config = Piwik_Config::getInstance();
+            $db = Db::get();
+            $config = Config::getInstance();
             $prefixTables = $config->database['tables_prefix'];
 
             // '_' matches any character; force it to be literal
@@ -458,8 +436,7 @@ class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
             // we get the intersection between all the tables in the DB and the tables to be installed
             $tablesInstalled = array_intersect($allMyTables, $allTables);
 
-            // at this point we have only the piwik tables which is good
-            // but we still miss the piwik generated tables (using the class Piwik_TablePartitioning)
+            // at this point we have the static list of core tables, but let's add the monthly archive tables
             $allArchiveNumeric = $db->fetchCol("SHOW TABLES LIKE '" . $prefixTables . "archive_numeric%'");
             $allArchiveBlob = $db->fetchCol("SHOW TABLES LIKE '" . $prefixTables . "archive_blob%'");
 
@@ -483,14 +460,14 @@ class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
     /**
      * Create database
      *
-     * @param string $dbName  Name of the database to create
+     * @param string $dbName Name of the database to create
      */
     public function createDatabase($dbName = null)
     {
         if (is_null($dbName)) {
-            $dbName = Piwik_Config::getInstance()->database['dbname'];
+            $dbName = Config::getInstance()->database['dbname'];
         }
-        Piwik_Exec("CREATE DATABASE IF NOT EXISTS " . $dbName . " DEFAULT CHARACTER SET utf8");
+        Db::exec("CREATE DATABASE IF NOT EXISTS " . $dbName . " DEFAULT CHARACTER SET utf8");
     }
 
     /**
@@ -498,8 +475,8 @@ class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
      */
     public function dropDatabase()
     {
-        $dbName = Piwik_Config::getInstance()->database['dbname'];
-        Piwik_Exec("DROP DATABASE IF EXISTS " . $dbName);
+        $dbName = Config::getInstance()->database['dbname'];
+        Db::exec("DROP DATABASE IF EXISTS " . $dbName);
     }
 
     /**
@@ -507,8 +484,8 @@ class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
      */
     public function createTables()
     {
-        $db = Zend_Registry::get('db');
-        $config = Piwik_Config::getInstance();
+        $db = Db::get();
+        $config = Config::getInstance();
         $prefixTables = $config->database['tables_prefix'];
 
         $tablesAlreadyInstalled = $this->getTablesInstalled();
@@ -531,9 +508,9 @@ class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
     {
         // The anonymous user is the user that is assigned by default
         // note that the token_auth value is anonymous, which is assigned by default as well in the Login plugin
-        $db = Zend_Registry::get('db');
-        $db->query("INSERT INTO " . Piwik_Common::prefixTable("user") . "
-					VALUES ( 'anonymous', '', 'anonymous', 'anonymous@example.org', 'anonymous', '" . Piwik_Date::factory('now')->getDatetime() . "' );");
+        $db = Db::get();
+        $db->query("INSERT INTO " . Common::prefixTable("user") . "
+					VALUES ( 'anonymous', '', 'anonymous', 'anonymous@example.org', 'anonymous', '" . Date::factory('now')->getDatetime() . "' );");
     }
 
     /**
@@ -543,19 +520,19 @@ class Piwik_Db_Schema_Myisam implements Piwik_Db_Schema_Interface
     {
         $tablesAlreadyInstalled = $this->getTablesInstalled($forceReload = true);
         foreach ($tablesAlreadyInstalled as $table) {
-            Piwik_Query("TRUNCATE `$table`");
+            Db::query("TRUNCATE `$table`");
         }
     }
 
     /**
      * Drop specific tables
      *
-     * @param array $doNotDelete  Names of tables to not delete
+     * @param array $doNotDelete Names of tables to not delete
      */
     public function dropTables($doNotDelete = array())
     {
         $tablesAlreadyInstalled = $this->getTablesInstalled();
-        $db = Zend_Registry::get('db');
+        $db = Db::get();
 
         $doNotDeletePattern = '/(' . implode('|', $doNotDelete) . ')/';
 

@@ -8,12 +8,17 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\Period;
+
+
+use Piwik\Period;
+use Piwik\Piwik;
 
 /**
  * @package Piwik
- * @subpackage Piwik_Period
+ * @subpackage Period
  */
-class Piwik_Period_Week extends Piwik_Period
+class Week extends Period
 {
     protected $label = 'week';
 
@@ -28,7 +33,7 @@ class Piwik_Period_Week extends Piwik_Period
         $dateStart = $this->getDateStart();
         $dateEnd = $this->getDateEnd();
 
-        $string = Piwik_Translate('CoreHome_ShortWeekFormat');
+        $string = Piwik::translate('CoreHome_ShortWeekFormat');
         $string = self::getTranslatedRange($string, $dateStart, $dateEnd);
         return $string;
     }
@@ -40,11 +45,18 @@ class Piwik_Period_Week extends Piwik_Period
      */
     public function getLocalizedLongString()
     {
-        $format = Piwik_Translate('CoreHome_LongWeekFormat');
+        $format = Piwik::translate('CoreHome_LongWeekFormat');
         $string = self::getTranslatedRange($format, $this->getDateStart(), $this->getDateEnd());
-        return Piwik_Translate('CoreHome_PeriodWeek') . " " . $string;
+        return Piwik::translate('CoreHome_PeriodWeek') . " " . $string;
     }
 
+    /**
+     * @param string $format
+     * @param \Piwik\Date $dateStart
+     * @param \Piwik\Date $dateEnd
+     *
+     * @return mixed
+     */
     static protected function getTranslatedRange($format, $dateStart, $dateEnd)
     {
         $string = str_replace('From%', '%', $format);
@@ -61,7 +73,7 @@ class Piwik_Period_Week extends Piwik_Period
      */
     public function getPrettyString()
     {
-        $out = Piwik_Translate('General_DateRangeFromTo',
+        $out = Piwik::translate('General_DateRangeFromTo',
             array($this->getDateStart()->toString(),
                   $this->getDateEnd()->toString())
         );
@@ -87,7 +99,7 @@ class Piwik_Period_Week extends Piwik_Period
 
         $currentDay = clone $startWeek;
         while ($currentDay->compareWeek($startWeek) == 0) {
-            $this->addSubperiod(new Piwik_Period_Day($currentDay));
+            $this->addSubperiod(new Day($currentDay));
             $currentDay = $currentDay->addDay(1);
         }
     }

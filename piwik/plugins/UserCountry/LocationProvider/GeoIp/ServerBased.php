@@ -6,8 +6,16 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_UserCountry
+ * @package UserCountry
  */
+
+namespace Piwik\Plugins\UserCountry\LocationProvider\GeoIp;
+
+use Piwik\Common;
+use Piwik\IP;
+use Piwik\Piwik;
+use Piwik\Plugins\UserCountry\LocationProvider;
+use Piwik\Plugins\UserCountry\LocationProvider\GeoIp;
 
 /**
  * A LocationProvider that uses an GeoIP module installed in an HTTP Server.
@@ -15,9 +23,9 @@
  * To make this provider available, make sure the GEOIP_ADDR server
  * variable is set.
  *
- * @package Piwik_UserCountry
+ * @package UserCountry
  */
-class Piwik_UserCountry_LocationProvider_GeoIp_ServerBased extends Piwik_UserCountry_LocationProvider_GeoIp
+class ServerBased extends GeoIp
 {
     const ID = 'geoip_serverbased';
     const TITLE = 'GeoIP (%s)';
@@ -64,24 +72,24 @@ class Piwik_UserCountry_LocationProvider_GeoIp_ServerBased extends Piwik_UserCou
 
         // geoip modules that are built into servers can't use a forced IP. in this case we try
         // to fallback to another version.
-        $myIP = Piwik_IP::getIpFromHeader();
+        $myIP = IP::getIpFromHeader();
         if (!self::isSameOrAnonymizedIp($ip, $myIP)
             && (!isset($info['disable_fallbacks'])
                 || !$info['disable_fallbacks'])
         ) {
-            printDebug("The request is for IP address: " . $info['ip'] . " but your IP is: $myIP. GeoIP Server Module (apache/nginx) does not support this use case... ");
+            Common::printDebug("The request is for IP address: " . $info['ip'] . " but your IP is: $myIP. GeoIP Server Module (apache/nginx) does not support this use case... ");
             $fallbacks = array(
-                Piwik_UserCountry_LocationProvider_GeoIp_Pecl::ID,
-                Piwik_UserCountry_LocationProvider_GeoIp_Php::ID
+                Pecl::ID,
+                Php::ID
             );
             foreach ($fallbacks as $fallbackProviderId) {
-                $otherProvider = Piwik_UserCountry_LocationProvider::getProviderById($fallbackProviderId);
+                $otherProvider = LocationProvider::getProviderById($fallbackProviderId);
                 if ($otherProvider) {
-                    printDebug("Used $fallbackProviderId to detect this visitor IP");
+                    Common::printDebug("Used $fallbackProviderId to detect this visitor IP");
                     return $otherProvider->getLocation($info);
                 }
             }
-            printDebug("FAILED to lookup the geo location of this IP address, as no fallback location providers is configured. We recommend to configure Geolocation PECL module to fix this error.");
+            Common::printDebug("FAILED to lookup the geo location of this IP address, as no fallback location providers is configured. We recommend to configure Geolocation PECL module to fix this error.");
 
             return false;
         }
@@ -152,11 +160,11 @@ class Piwik_UserCountry_LocationProvider_GeoIp_ServerBased extends Piwik_UserCou
         } else // if not available return message w/ extra info
         {
             if (!function_exists('apache_get_modules')) {
-                return Piwik_Translate('General_Note') . ':&nbsp;' . Piwik_Translate('UserCountry_AssumingNonApache');
+                return Piwik::translate('General_Note') . ':&nbsp;' . Piwik::translate('UserCountry_AssumingNonApache');
             }
 
-            $message = "<strong><em>" . Piwik_Translate('General_Note') . ':&nbsp;'
-                . Piwik_Translate('UserCountry_FoundApacheModules')
+            $message = "<strong><em>" . Piwik::translate('General_Note') . ':&nbsp;'
+                . Piwik::translate('UserCountry_FoundApacheModules')
                 . "</em></strong>:<br/><br/>\n<ul style=\"list-style:disc;margin-left:24px\">\n";
             foreach (apache_get_modules() as $name) {
                 $message .= "<li>$name</li>\n";
@@ -176,7 +184,7 @@ class Piwik_UserCountry_LocationProvider_GeoIp_ServerBased extends Piwik_UserCou
         if (empty($_SERVER[self::TEST_SERVER_VAR])
             && empty($_SERVER[self::TEST_SERVER_VAR_ALT])
         ) {
-            return Piwik_Translate("UserCountry_CannotFindGeoIPServerVar", self::TEST_SERVER_VAR . ' $_SERVER');
+            return Piwik::translate("UserCountry_CannotFindGeoIPServerVar", self::TEST_SERVER_VAR . ' $_SERVER');
         }
 
         return true; // can't check for another IP
@@ -198,23 +206,23 @@ class Piwik_UserCountry_LocationProvider_GeoIp_ServerBased extends Piwik_UserCou
         if (function_exists('apache_note')) {
             $serverDesc = 'Apache';
         } else {
-            $serverDesc = Piwik_Translate('UserCountry_HttpServerModule');
+            $serverDesc = Piwik::translate('UserCountry_HttpServerModule');
         }
 
         $title = sprintf(self::TITLE, $serverDesc);
-        $desc = Piwik_Translate('UserCountry_GeoIpLocationProviderDesc_ServerBased1', array('<strong>', '</strong>'))
+        $desc = Piwik::translate('UserCountry_GeoIpLocationProviderDesc_ServerBased1', array('<strong>', '</strong>'))
             . '<br/><br/>'
-            . '<em>' . Piwik_Translate('UserCountry_GeoIpLocationProviderDesc_ServerBasedAnonWarn') . '</em>'
+            . '<em>' . Piwik::translate('UserCountry_GeoIpLocationProviderDesc_ServerBasedAnonWarn') . '</em>'
             . '<br/><br/>'
-            . Piwik_Translate('UserCountry_GeoIpLocationProviderDesc_ServerBased2',
+            . Piwik::translate('UserCountry_GeoIpLocationProviderDesc_ServerBased2',
                 array('<strong><em>', '</em></strong>', '<strong><em>', '</em></strong>'));
         $installDocs =
             '<em><a target="_blank" href="http://piwik.org/faq/how-to/#faq_165">'
-                . Piwik_Translate('UserCountry_HowToInstallApacheModule')
-                . '</a></em><br/><em>'
-                . '<a target="_blank" href="http://piwik.org/faq/how-to/#faq_166">'
-                . Piwik_Translate('UserCountry_HowToInstallNginxModule')
-                . '</a></em>';
+            . Piwik::translate('UserCountry_HowToInstallApacheModule')
+            . '</a></em><br/><em>'
+            . '<a target="_blank" href="http://piwik.org/faq/how-to/#faq_166">'
+            . Piwik::translate('UserCountry_HowToInstallNginxModule')
+            . '</a></em>';
 
         $geoipServerVars = array();
         foreach ($_SERVER as $key => $value) {
@@ -224,9 +232,9 @@ class Piwik_UserCountry_LocationProvider_GeoIp_ServerBased extends Piwik_UserCou
         }
 
         if (empty($geoipServerVars)) {
-            $extraMessage = '<strong><em>' . Piwik_Translate('UserCountry_GeoIPNoServerVars', '$_SERVER') . '</em></strong>';
+            $extraMessage = '<strong><em>' . Piwik::translate('UserCountry_GeoIPNoServerVars', '$_SERVER') . '</em></strong>';
         } else {
-            $extraMessage = '<strong><em>' . Piwik_Translate('UserCountry_GeoIPServerVarsFound', '$_SERVER')
+            $extraMessage = '<strong><em>' . Piwik::translate('UserCountry_GeoIPServerVarsFound', '$_SERVER')
                 . ":</em></strong><br/><br/>\n<ul style=\"list-style:disc;margin-left:24px\">\n";
             foreach ($geoipServerVars as $key) {
                 $extraMessage .= '<li>' . $key . "</li>\n";

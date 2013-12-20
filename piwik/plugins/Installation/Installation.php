@@ -6,36 +6,34 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_Installation
+ * @package Installation
  */
+namespace Piwik\Plugins\Installation;
+
+use Piwik\Common;
+use Piwik\FrontController;
+use Piwik\Menu\MenuAdmin;
+use Piwik\Piwik;
+use Piwik\Translate;
 
 /**
  *
- * @package Piwik_Installation
+ * @package Installation
  */
-class Piwik_Installation extends Piwik_Plugin
+class Installation extends \Piwik\Plugin
 {
-    protected $installationControllerName = 'Piwik_Installation_Controller';
+    protected $installationControllerName = '\\Piwik\\Plugins\\Installation\\Controller';
 
-    public function getInformation()
-    {
-        $info = array(
-            'description'     => Piwik_Translate('Installation_PluginDescription'),
-            'author'          => 'Piwik',
-            'author_homepage' => 'http://piwik.org/',
-            'version'         => Piwik_Version::VERSION,
-        );
-
-        return $info;
-    }
-
-    function getListHooksRegistered()
+    /**
+     * @see Piwik_Plugin::getListHooksRegistered
+     */
+    public function getListHooksRegistered()
     {
         $hooks = array(
-            'FrontController.NoConfigurationFile'  => 'dispatch',
-            'FrontController.badConfigurationFile' => 'dispatch',
-            'AdminMenu.add'                        => 'addMenu',
-            'AssetManager.getCssFiles'             => 'getCss',
+            'Config.NoConfigurationFile'      => 'dispatch',
+            'Config.badConfigurationFile'     => 'dispatch',
+            'Menu.Admin.addItems'             => 'addMenu',
+            'AssetManager.getStylesheetFiles' => 'getStylesheetFiles',
         );
         return $hooks;
     }
@@ -51,27 +49,27 @@ class Piwik_Installation extends Piwik_Plugin
     }
 
     /**
-     * @param Piwik_Event_Notification|null $notification  notification object
+     * @param \Exception|null $exception
      */
-    function dispatch($notification = null)
+    public function dispatch($exception = null)
     {
-        if ($notification) {
-            $exception = $notification->getNotificationObject();
+        if ($exception) {
             $message = $exception->getMessage();
         } else {
             $message = '';
         }
 
-        Piwik_Translate::getInstance()->loadCoreTranslation();
+        Translate::loadCoreTranslation();
 
-        Piwik_PostEvent('Installation.startInstallation', $this);
-
-        $step = Piwik_Common::getRequestVar('action', 'welcome', 'string');
+        $step = Common::getRequestVar('action', 'welcome', 'string');
         $controller = $this->getInstallationController();
-        if (in_array($step, array_keys($controller->getInstallationSteps())) || $step == 'saveLanguage') {
-            $controller->$step($message);
+        $isActionWhiteListed = in_array($step, array('saveLanguage', 'getBaseCss'));
+        if (in_array($step, array_keys($controller->getInstallationSteps()))
+            || $isActionWhiteListed
+        ) {
+            echo FrontController::getInstance()->dispatch('Installation', $step, array($message));
         } else {
-            Piwik::exitWithErrorMessage(Piwik_Translate('Installation_NoConfigFound'));
+            Piwik::exitWithErrorMessage(Piwik::translate('Installation_NoConfigFound'));
         }
 
         exit;
@@ -82,19 +80,17 @@ class Piwik_Installation extends Piwik_Plugin
      */
     public function addMenu()
     {
-        Piwik_AddAdminSubMenu('CoreAdminHome_MenuDiagnostic', 'Installation_SystemCheck',
+        MenuAdmin::addEntry('Installation_SystemCheck',
             array('module' => 'Installation', 'action' => 'systemCheckPage'),
-            $addIf = Piwik::isUserIsSuperUser(),
+            Piwik::isUserIsSuperUser(),
             $order = 15);
     }
 
     /**
      * Adds CSS files to list of CSS files for asset manager.
      */
-    public function getCss($notification)
+    public function getStylesheetFiles(&$stylesheets)
     {
-        $cssFiles = & $notification->getNotificationObject();
-
-        $cssFiles[] = "plugins/Installation/templates/systemCheckPage.css";
+        $stylesheets[] = "plugins/Installation/stylesheets/systemCheckPage.less";
     }
 }

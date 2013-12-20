@@ -8,17 +8,25 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\Db\Adapter;
+
+use Exception;
+use Piwik\Config;
+use Piwik\Db\AdapterInterface;
+use Piwik\Piwik;
+use Zend_Config;
+use Zend_Db_Adapter_Mysqli;
 
 /**
  * @package Piwik
  * @subpackage Piwik_Db
  */
-class Piwik_Db_Adapter_Mysqli extends Zend_Db_Adapter_Mysqli implements Piwik_Db_Adapter_Interface
+class Mysqli extends Zend_Db_Adapter_Mysqli implements AdapterInterface
 {
     /**
      * Constructor
      *
-     * @param array|Zend_Config $config  database configuration
+     * @param array|Zend_Config $config database configuration
      */
     public function __construct($config)
     {
@@ -53,9 +61,9 @@ class Piwik_Db_Adapter_Mysqli extends Zend_Db_Adapter_Mysqli implements Piwik_Db
     public function checkServerVersion()
     {
         $serverVersion = $this->getServerVersion();
-        $requiredVersion = Piwik_Config::getInstance()->General['minimum_mysql_version'];
+        $requiredVersion = Config::getInstance()->General['minimum_mysql_version'];
         if (version_compare($serverVersion, $requiredVersion) === -1) {
-            throw new Exception(Piwik_TranslateException('General_ExceptionDatabaseVersion', array('MySQL', $serverVersion, $requiredVersion)));
+            throw new Exception(Piwik::translate('General_ExceptionDatabaseVersion', array('MySQL', $serverVersion, $requiredVersion)));
         }
     }
 
@@ -72,7 +80,7 @@ class Piwik_Db_Adapter_Mysqli extends Zend_Db_Adapter_Mysqli implements Piwik_Db
         if (version_compare($serverVersion, '5.0.3') >= 0
             && version_compare($clientVersion, '5.0.3') < 0
         ) {
-            throw new Exception(Piwik_TranslateException('General_ExceptionIncompatibleClientServerVersions', array('MySQL', $clientVersion, $serverVersion)));
+            throw new Exception(Piwik::translate('General_ExceptionIncompatibleClientServerVersions', array('MySQL', $clientVersion, $serverVersion)));
         }
     }
 

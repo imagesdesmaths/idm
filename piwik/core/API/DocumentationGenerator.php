@@ -8,12 +8,18 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\API;
+
+use Exception;
+use Piwik\Common;
+use Piwik\Piwik;
+use Piwik\Url;
 
 /**
  * @package Piwik
  * @subpackage Piwik_API
  */
-class Piwik_API_DocumentationGenerator
+class DocumentationGenerator
 {
     protected $modulesToHide = array('CoreAdminHome', 'DBStats');
     protected $countPluginsLoaded = 0;
@@ -23,11 +29,11 @@ class Piwik_API_DocumentationGenerator
      */
     public function __construct()
     {
-        $plugins = Piwik_PluginsManager::getInstance()->getLoadedPluginsName();
+        $plugins = \Piwik\Plugin\Manager::getInstance()->getLoadedPluginsName();
         foreach ($plugins as $plugin) {
-            $plugin = Piwik::unprefixClass($plugin);
             try {
-                Piwik_API_Proxy::getInstance()->registerClass('Piwik_' . $plugin . '_API');
+                $className = Request::getClassNameAPI($plugin);
+                Proxy::getInstance()->registerClass($className);
             } catch (Exception $e) {
             }
         }
@@ -50,13 +56,13 @@ class Piwik_API_DocumentationGenerator
         $str = $toc = '';
         $token_auth = "&token_auth=" . Piwik::getCurrentUserTokenAuth();
         $parametersToSet = array(
-            'idSite' => Piwik_Common::getRequestVar('idSite', 1, 'int'),
-            'period' => Piwik_Common::getRequestVar('period', 'day', 'string'),
-            'date'   => Piwik_Common::getRequestVar('date', 'today', 'string')
+            'idSite' => Common::getRequestVar('idSite', 1, 'int'),
+            'period' => Common::getRequestVar('period', 'day', 'string'),
+            'date'   => Common::getRequestVar('date', 'today', 'string')
         );
 
-        foreach (Piwik_API_Proxy::getInstance()->getMetadata() as $class => $info) {
-            $moduleName = Piwik_API_Proxy::getInstance()->getModuleNameFromClassName($class);
+        foreach (Proxy::getInstance()->getMetadata() as $class => $info) {
+            $moduleName = Proxy::getInstance()->getModuleNameFromClassName($class);
             if (in_array($moduleName, $this->modulesToHide)) {
                 continue;
             }
@@ -85,9 +91,9 @@ class Piwik_API_DocumentationGenerator
                         }
                         $exampleUrl = $prefixUrls . $exampleUrl;
                         $str .= " [ Example in
-									<a target=_blank href='$exampleUrl&format=xml$token_auth'>XML</a>, 
-									<a target=_blank href='$exampleUrl&format=JSON$token_auth'>Json</a>, 
-									<a target=_blank href='$exampleUrl&format=Tsv$token_auth&translateColumnNames=1'>Tsv (Excel)</a> 
+									<a target=_blank href='$exampleUrl&format=xml$token_auth'>XML</a>,
+									<a target=_blank href='$exampleUrl&format=JSON$token_auth'>Json</a>,
+									<a target=_blank href='$exampleUrl&format=Tsv$token_auth&translateColumnNames=1'>Tsv (Excel)</a>
 									$lastNUrls
 									]";
                     } else {
@@ -98,11 +104,11 @@ class Piwik_API_DocumentationGenerator
                 $str .= '</small>';
                 $str .= "</div>\n";
             }
-            $str .= '<div style="margin:15px;"><a href="#topApiRef" style="color:#95AECB">↑ Back to top</a></div>';
+            $str .= '<div style="margin:15px;"><a href="#topApiRef">↑ Back to top</a></div>';
         }
 
         $str = "<h2 id='topApiRef' name='topApiRef'>Quick access to APIs</h2>
-				$toc 
+				$toc
 				$str";
         return $str;
     }
@@ -112,10 +118,10 @@ class Piwik_API_DocumentationGenerator
      * It will export links to XML, CSV, HTML, JSON, PHP, etc.
      * It will not export links for methods such as deleteSite or deleteUser
      *
-     * @param string $class            the class
-     * @param string $methodName       the method
-     * @param array $parametersToSet  parameters to set
-     * @return string|false when not possible
+     * @param string $class the class
+     * @param string $methodName the method
+     * @param array $parametersToSet parameters to set
+     * @return string|bool when not possible
      */
     public function getExampleUrl($class, $methodName, $parametersToSet = array())
     {
@@ -127,10 +133,12 @@ class Piwik_API_DocumentationGenerator
 
             'languageCode'   => 'fr',
             'url'            => 'http://forum.piwik.org/',
+            'pageUrl'        => 'http://forum.piwik.org/',
             'apiModule'      => 'UserCountry',
             'apiAction'      => 'getCountry',
             'lastMinutes'    => '30',
             'abandonedCarts' => '0',
+            'segmentName'    => 'pageTitle',
             'ip'             => '194.57.91.215',
 //            'segmentName'    => 'browserCode',
         );
@@ -162,7 +170,7 @@ class Piwik_API_DocumentationGenerator
         }
 
         // we try to give an URL example to call the API
-        $aParameters = Piwik_API_Proxy::getInstance()->getParametersList($class, $methodName);
+        $aParameters = Proxy::getInstance()->getParametersList($class, $methodName);
         // Kindly force some known generic parameters to appear in the final list
         // the parameter 'format' can be set to all API methods (used in tests)
         // the parameter 'hideIdSubDatable' is used for integration tests only
@@ -186,7 +194,7 @@ class Piwik_API_DocumentationGenerator
         $aParameters['showColumns'] = false;
         $aParameters['filter_pattern_recursive'] = false;
 
-        $moduleName = Piwik_API_Proxy::getInstance()->getModuleNameFromClassName($class);
+        $moduleName = Proxy::getInstance()->getModuleNameFromClassName($class);
         $aParameters = array_merge(array('module' => 'API', 'method' => $moduleName . '.' . $methodName), $aParameters);
 
         foreach ($aParameters as $nameVariable => &$defaultValue) {
@@ -194,24 +202,23 @@ class Piwik_API_DocumentationGenerator
                 $defaultValue = $knowExampleDefaultParametersValues[$nameVariable];
             } // if there isn't a default value for a given parameter,
             // we need a 'know default value' or we can't generate the link
-            elseif ($defaultValue instanceof Piwik_API_Proxy_NoDefaultValue) {
+            elseif ($defaultValue instanceof NoDefaultValue) {
                 return false;
             }
         }
-        return '?' . Piwik_Url::getQueryStringFromParameters($aParameters);
+        return '?' . Url::getQueryStringFromParameters($aParameters);
     }
-
 
     /**
      * Returns the methods $class.$name parameters (and default value if provided) as a string.
      *
-     * @param string $class  The class name
-     * @param string $name   The method name
+     * @param string $class The class name
+     * @param string $name The method name
      * @return string  For example "(idSite, period, date = 'today')"
      */
     public function getParametersString($class, $name)
     {
-        $aParameters = Piwik_API_Proxy::getInstance()->getParametersList($class, $name);
+        $aParameters = Proxy::getInstance()->getParametersList($class, $name);
         $asParameters = array();
         foreach ($aParameters as $nameVariable => $defaultValue) {
             // Do not show API parameters starting with _
@@ -220,7 +227,7 @@ class Piwik_API_DocumentationGenerator
                 continue;
             }
             $str = $nameVariable;
-            if (!($defaultValue instanceof Piwik_API_Proxy_NoDefaultValue)) {
+            if (!($defaultValue instanceof NoDefaultValue)) {
                 if (is_array($defaultValue)) {
                     $str .= " = 'Array'";
                 } else {
@@ -232,5 +239,4 @@ class Piwik_API_DocumentationGenerator
         $sParameters = implode(", ", $asParameters);
         return "($sParameters)";
     }
-
 }

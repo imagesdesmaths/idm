@@ -6,330 +6,241 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_VisitorInterest
+ * @package VisitorInterest
  */
+namespace Piwik\Plugins\VisitorInterest;
+
+use Piwik\ArchiveProcessor;
+use Piwik\FrontController;
+use Piwik\Menu\MenuMain;
+use Piwik\Metrics;
+use Piwik\Piwik;
+use Piwik\Plugin\ViewDataTable;
+use Piwik\Plugins\CoreVisualizations\Visualizations\Cloud;
+use Piwik\Plugins\CoreVisualizations\Visualizations\Graph;
+use Piwik\WidgetsList;
 
 /**
  *
- * @package Piwik_VisitorInterest
+ * @package VisitorInterest
  */
-class Piwik_VisitorInterest extends Piwik_Plugin
+class VisitorInterest extends \Piwik\Plugin
 {
-    public function getInformation()
-    {
-        $info = array(
-            'description'     => Piwik_Translate('VisitorInterest_PluginDescription'),
-            'author'          => 'Piwik',
-            'author_homepage' => 'http://piwik.org/',
-            'version'         => Piwik_Version::VERSION,
-        );
-        return $info;
-    }
-
-    function getListHooksRegistered()
+    /**
+     * @see Piwik_Plugin::getListHooksRegistered
+     */
+    public function getListHooksRegistered()
     {
         $hooks = array(
-            'ArchiveProcessing_Day.compute'    => 'archiveDay',
-            'ArchiveProcessing_Period.compute' => 'archivePeriod',
-            'WidgetsList.add'                  => 'addWidgets',
-            'Menu.add'                         => 'addMenu',
+            'WidgetsList.addWidgets'           => 'addWidgets',
+            'Menu.Reporting.addItems'          => 'addMenu',
             'API.getReportMetadata'            => 'getReportMetadata',
+            'ViewDataTable.configure'          => 'configureViewDataTable',
+            'ViewDataTable.getDefaultType'     => 'getDefaultTypeViewDataTable'
         );
         return $hooks;
     }
 
-    /**
-     * @param Piwik_Event_Notification $notification  notification object
-     */
-    public function getReportMetadata($notification)
+    public function getReportMetadata(&$reports)
     {
-        $reports = & $notification->getNotificationObject();
         $reports[] = array(
-            'category'          => Piwik_Translate('General_Visitors'),
-            'name'              => Piwik_Translate('VisitorInterest_WidgetLengths'),
+            'category'          => Piwik::translate('General_Visitors'),
+            'name'              => Piwik::translate('VisitorInterest_WidgetLengths'),
             'module'            => 'VisitorInterest',
             'action'            => 'getNumberOfVisitsPerVisitDuration',
-            'dimension'         => Piwik_Translate('VisitorInterest_ColumnVisitDuration'),
+            'dimension'         => Piwik::translate('VisitorInterest_ColumnVisitDuration'),
             'metrics'           => array('nb_visits'),
             'processedMetrics'  => false,
             'constantRowsCount' => true,
-            'documentation'     => Piwik_Translate('VisitorInterest_WidgetLengthsDocumentation')
-                . '<br />' . Piwik_Translate('General_ChangeTagCloudView'),
+            'documentation'     => Piwik::translate('VisitorInterest_WidgetLengthsDocumentation')
+                . '<br />' . Piwik::translate('General_ChangeTagCloudView'),
             'order'             => 15
         );
 
         $reports[] = array(
-            'category'          => Piwik_Translate('General_Visitors'),
-            'name'              => Piwik_Translate('VisitorInterest_WidgetPages'),
+            'category'          => Piwik::translate('General_Visitors'),
+            'name'              => Piwik::translate('VisitorInterest_WidgetPages'),
             'module'            => 'VisitorInterest',
             'action'            => 'getNumberOfVisitsPerPage',
-            'dimension'         => Piwik_Translate('VisitorInterest_ColumnPagesPerVisit'),
+            'dimension'         => Piwik::translate('VisitorInterest_ColumnPagesPerVisit'),
             'metrics'           => array('nb_visits'),
             'processedMetrics'  => false,
             'constantRowsCount' => true,
-            'documentation'     => Piwik_Translate('VisitorInterest_WidgetPagesDocumentation')
-                . '<br />' . Piwik_Translate('General_ChangeTagCloudView'),
+            'documentation'     => Piwik::translate('VisitorInterest_WidgetPagesDocumentation')
+                . '<br />' . Piwik::translate('General_ChangeTagCloudView'),
             'order'             => 20
         );
 
         $reports[] = array(
-            'category'          => Piwik_Translate('General_Visitors'),
-            'name'              => Piwik_Translate('VisitorInterest_visitsByVisitCount'),
+            'category'          => Piwik::translate('General_Visitors'),
+            'name'              => Piwik::translate('VisitorInterest_visitsByVisitCount'),
             'module'            => 'VisitorInterest',
             'action'            => 'getNumberOfVisitsByVisitCount',
-            'dimension'         => Piwik_Translate('VisitorInterest_visitsByVisitCount'),
+            'dimension'         => Piwik::translate('VisitorInterest_visitsByVisitCount'),
             'metrics'           => array(
                 'nb_visits',
-                'nb_visits_percentage' => Piwik_Translate('General_ColumnPercentageVisits')
+                'nb_visits_percentage' => Piwik::translate('General_ColumnPercentageVisits'),
             ),
             'processedMetrics'  => false,
             'constantRowsCount' => true,
-            'documentation'     => Piwik_Translate('VisitorInterest_WidgetVisitsByNumDocumentation')
-                . '<br />' . Piwik_Translate('General_ChangeTagCloudView'),
+            'documentation'     => Piwik::translate('VisitorInterest_WidgetVisitsByNumDocumentation')
+                . '<br />' . Piwik::translate('General_ChangeTagCloudView'),
             'order'             => 25
         );
 
         $reports[] = array(
-            'category'          => Piwik_Translate('General_Visitors'),
-            'name'              => Piwik_Translate('VisitorInterest_VisitsByDaysSinceLast'),
+            'category'          => Piwik::translate('General_Visitors'),
+            'name'              => Piwik::translate('VisitorInterest_VisitsByDaysSinceLast'),
             'module'            => 'VisitorInterest',
             'action'            => 'getNumberOfVisitsByDaysSinceLast',
-            'dimension'         => Piwik_Translate('VisitorInterest_VisitsByDaysSinceLast'),
+            'dimension'         => Piwik::translate('VisitorInterest_VisitsByDaysSinceLast'),
             'metrics'           => array('nb_visits'),
             'processedMetrics'  => false,
             'constantRowsCount' => true,
-            'documentation'     => Piwik_Translate('VisitorInterest_WidgetVisitsByDaysSinceLastDocumentation'),
+            'documentation'     => Piwik::translate('VisitorInterest_WidgetVisitsByDaysSinceLastDocumentation'),
             'order'             => 30
         );
     }
 
-    function addWidgets()
+    public function addWidgets()
     {
-        Piwik_AddWidget('General_Visitors', 'VisitorInterest_WidgetLengths', 'VisitorInterest', 'getNumberOfVisitsPerVisitDuration');
-        Piwik_AddWidget('General_Visitors', 'VisitorInterest_WidgetPages', 'VisitorInterest', 'getNumberOfVisitsPerPage');
-        Piwik_AddWidget('General_Visitors', 'VisitorInterest_visitsByVisitCount', 'VisitorInterest', 'getNumberOfVisitsByVisitCount');
-        Piwik_AddWidget('General_Visitors', 'VisitorInterest_WidgetVisitsByDaysSinceLast', 'VisitorInterest', 'getNumberOfVisitsByDaysSinceLast');
+        WidgetsList::add('General_Visitors', 'VisitorInterest_WidgetLengths', 'VisitorInterest', 'getNumberOfVisitsPerVisitDuration');
+        WidgetsList::add('General_Visitors', 'VisitorInterest_WidgetPages', 'VisitorInterest', 'getNumberOfVisitsPerPage');
+        WidgetsList::add('General_Visitors', 'VisitorInterest_visitsByVisitCount', 'VisitorInterest', 'getNumberOfVisitsByVisitCount');
+        WidgetsList::add('General_Visitors', 'VisitorInterest_WidgetVisitsByDaysSinceLast', 'VisitorInterest', 'getNumberOfVisitsByDaysSinceLast');
     }
 
-    function addMenu()
+    public function addMenu()
     {
-        Piwik_RenameMenuEntry('General_Visitors', 'VisitFrequency_SubmenuFrequency',
+        MenuMain::getInstance()->rename('General_Visitors', 'VisitFrequency_SubmenuFrequency',
             'General_Visitors', 'VisitorInterest_Engagement');
     }
 
     function postLoad()
     {
-        Piwik_AddAction('template_headerVisitsFrequency', array('Piwik_VisitorInterest', 'headerVisitsFrequency'));
-        Piwik_AddAction('template_footerVisitsFrequency', array('Piwik_VisitorInterest', 'footerVisitsFrequency'));
+        Piwik::addAction('Template.headerVisitsFrequency', array('Piwik\Plugins\VisitorInterest\VisitorInterest', 'headerVisitsFrequency'));
+        Piwik::addAction('Template.footerVisitsFrequency', array('Piwik\Plugins\VisitorInterest\VisitorInterest', 'footerVisitsFrequency'));
     }
 
-    // third element is unit (s for seconds, default is munutes)
-    protected static $timeGap = array(
-        array(0, 10, 's'),
-        array(11, 30, 's'),
-        array(31, 60, 's'),
-        array(1, 2),
-        array(2, 4),
-        array(4, 7),
-        array(7, 10),
-        array(10, 15),
-        array(15, 30),
-        array(30)
-    );
-
-    protected static $pageGap = array(
-        array(1, 1),
-        array(2, 2),
-        array(3, 3),
-        array(4, 4),
-        array(5, 5),
-        array(6, 7),
-        array(8, 10),
-        array(11, 14),
-        array(15, 20),
-        array(20)
-    );
-
-    /**
-     * The set of ranges used when calculating the 'visitors who visited at least N times' report.
-     */
-    protected static $visitNumberGap = array(
-        array(1, 1),
-        array(2, 2),
-        array(3, 3),
-        array(4, 4),
-        array(5, 5),
-        array(6, 6),
-        array(7, 7),
-        array(8, 8),
-        array(9, 14),
-        array(15, 25),
-        array(26, 50),
-        array(51, 100),
-        array(101, 200),
-        array(200)
-    );
-
-    /**
-     * The set of ranges used when calculating the 'days since last visit' report.
-     */
-    protected static $daysSinceLastVisitGap = array(
-        array(0, 0),
-        array(1, 1),
-        array(2, 2),
-        array(3, 3),
-        array(4, 4),
-        array(5, 5),
-        array(6, 6),
-        array(7, 7),
-        array(8, 14),
-        array(15, 30),
-        array(31, 60),
-        array(61, 120),
-        array(121, 364),
-        array(364)
-    );
-
-    /**
-     * @param Piwik_Event_Notification $notification  notification object
-     * @return mixed
-     */
-    function archivePeriod($notification)
+    static public function headerVisitsFrequency(&$out)
     {
-        $archiveProcessing = $notification->getNotificationObject();
-
-        if (!$archiveProcessing->shouldProcessReportsForPlugin($this->getPluginName())) return;
-
-        $dataTableToSum = array(
-            'VisitorInterest_timeGap',
-            'VisitorInterest_pageGap',
-            'VisitorInterest_visitsByVisitCount',
-            'VisitorInterest_daysSinceLastVisit'
-        );
-        $archiveProcessing->archiveDataTable($dataTableToSum);
-    }
-
-    /**
-     * @param Piwik_Event_Notification $notification  notification object
-     * @return mixed
-     */
-    public function archiveDay($notification)
-    {
-        $this->archiveProcessing = $notification->getNotificationObject();
-
-        if (!$this->archiveProcessing->shouldProcessReportsForPlugin($this->getPluginName())) return;
-
-        // these prefixes are prepended to the 'SELECT as' parts of each SELECT expression. detecting
-        // these prefixes allows us to get all the data in one query.
-        $timeGapPrefix = 'tg';
-        $pageGapPrefix = 'pg';
-        $visitsByVisitNumPrefix = 'vbvn';
-        $daysSinceLastVisitPrefix = 'dslv';
-
-        // extra condition for the SQL SELECT that makes sure only returning visits are counted
-        // when creating the 'days since last visit' report. the SELECT expression below it
-        // is used to count all new visits.
-        $daysSinceLastExtraCondition = 'and log_visit.visitor_returning = 1';
-        $selectAs = $daysSinceLastVisitPrefix . 'General_NewVisits';
-        $newVisitCountSelect = "sum(case when log_visit.visitor_returning = 0 then 1 else 0 end) as `$selectAs`";
-
-        // create the select expressions to use
-        $timeGapSelects = Piwik_ArchiveProcessing_Day::buildReduceByRangeSelect(
-            'visit_total_time', self::getSecondsGap(), 'log_visit', $timeGapPrefix);
-        $pageGapSelects = Piwik_ArchiveProcessing_Day::buildReduceByRangeSelect(
-            'visit_total_actions', self::$pageGap, 'log_visit', $pageGapPrefix);
-        $visitsByVisitNumSelects = Piwik_ArchiveProcessing_Day::buildReduceByRangeSelect(
-            'visitor_count_visits', self::$visitNumberGap, 'log_visit', $visitsByVisitNumPrefix);
-
-        $daysSinceLastVisitSelects = Piwik_ArchiveProcessing_Day::buildReduceByRangeSelect(
-            'visitor_days_since_last', self::$daysSinceLastVisitGap, 'log_visit', $daysSinceLastVisitPrefix,
-            $daysSinceLastExtraCondition);
-        array_unshift($daysSinceLastVisitSelects, $newVisitCountSelect);
-
-        $selects = array_merge(
-            $timeGapSelects, $pageGapSelects, $visitsByVisitNumSelects, $daysSinceLastVisitSelects);
-
-        // select data for every report
-        $row = $this->archiveProcessing->queryVisitsSimple(implode(',', $selects));
-
-        // archive visits by total time report
-        $recordName = 'VisitorInterest_timeGap';
-        $this->archiveRangeStats($recordName, $row, Piwik_Archive::INDEX_NB_VISITS, $timeGapPrefix);
-
-        // archive visits by total actions report
-        $recordName = 'VisitorInterest_pageGap';
-        $this->archiveRangeStats($recordName, $row, Piwik_Archive::INDEX_NB_VISITS, $pageGapPrefix);
-
-        // archive visits by visit number report
-        $recordName = 'VisitorInterest_visitsByVisitCount';
-        $this->archiveRangeStats($recordName, $row, Piwik_Archive::INDEX_NB_VISITS, $visitsByVisitNumPrefix);
-
-        // archive days since last visit report
-        $recordName = 'VisitorInterest_daysSinceLastVisit';
-        $this->archiveRangeStats($recordName, $row, Piwik_Archive::INDEX_NB_VISITS, $daysSinceLastVisitPrefix);
-    }
-
-    /**
-     * Transforms and returns the set of ranges used to calculate the 'visits by total time'
-     * report from ranges in minutes to equivalent ranges in seconds.
-     */
-    protected static function getSecondsGap()
-    {
-        $secondsGap = array();
-        foreach (self::$timeGap as $gap) {
-            if (count($gap) == 3 && $gap[2] == 's') // if the units are already in seconds, just assign them
-            {
-                $secondsGap[] = array($gap[0], $gap[1]);
-            } else if (count($gap) == 2) {
-                $secondsGap[] = array($gap[0] * 60, $gap[1] * 60);
-            } else {
-                $secondsGap[] = array($gap[0] * 60);
-            }
-        }
-        return $secondsGap;
-    }
-
-    /**
-     * Creates and archives a DataTable from some (or all) elements of a supplied database
-     * row.
-     *
-     * @param string $recordName The record name to use when inserting the new archive.
-     * @param array $row The database row to use.
-     * @param string $selectAsPrefix The string to look for as the prefix of SELECT as
-     *                               expressions. Elements in $row that have a SELECT as
-     *                               with this string as a prefix are used in creating
-     *                               the DataTable.'
-     */
-    protected function archiveRangeStats($recordName, $row, $index, $selectAsPrefix)
-    {
-        // create the DataTable from parts of the result row
-        $dataTable = $this->archiveProcessing->getSimpleDataTableFromRow($row, $index, $selectAsPrefix);
-
-        // insert the data table as a blob archive
-        $this->archiveProcessing->insertBlobRecord($recordName, $dataTable->getSerialized());
-        destroy($dataTable);
-    }
-
-    /**
-     * @param Piwik_Event_Notification $notification  notification object
-     */
-    static public function headerVisitsFrequency($notification)
-    {
-        $out =& $notification->getNotificationObject();
         $out = '<div id="leftcolumn">';
     }
 
-    /**
-     * @param Piwik_Event_Notification $notification  notification object
-     */
-    static public function footerVisitsFrequency($notification)
+    static public function footerVisitsFrequency(&$out)
     {
-        $out =& $notification->getNotificationObject();
         $out = '</div>
 			<div id="rightcolumn">
 			';
-        $out .= Piwik_FrontController::getInstance()->fetchDispatch('VisitorInterest', 'index');
+        $out .= FrontController::getInstance()->fetchDispatch('VisitorInterest', 'index');
         $out .= '</div>';
     }
-}
 
+    public function getDefaultTypeViewDataTable(&$defaultViewTypes)
+    {
+        $defaultViewTypes['VisitorInterest.getNumberOfVisitsPerVisitDuration'] = Cloud::ID;
+        $defaultViewTypes['VisitorInterest.getNumberOfVisitsPerPage']          = Cloud::ID;
+    }
+
+    public function configureViewDataTable(ViewDataTable $view)
+    {
+        switch ($view->requestConfig->apiMethodToRequestDataTable) {
+            case 'VisitorInterest.getNumberOfVisitsPerVisitDuration':
+                $this->configureViewForGetNumberOfVisitsPerVisitDuration($view);
+                break;
+            case 'VisitorInterest.getNumberOfVisitsPerPage':
+                $this->configureViewForGetNumberOfVisitsPerPage($view);
+                break;
+            case 'VisitorInterest.getNumberOfVisitsByVisitCount':
+                $this->configureViewForGetNumberOfVisitsByVisitCount($view);
+                break;
+            case 'VisitorInterest.getNumberOfVisitsByDaysSinceLast':
+                $this->configureViewForGetNumberOfVisitsByDaysSinceLast($view);
+                break;
+        }
+    }
+
+    private function configureViewForGetNumberOfVisitsPerVisitDuration(ViewDataTable $view)
+    {
+        $view->requestConfig->filter_sort_column = 'label';
+        $view->requestConfig->filter_sort_order  = 'asc';
+
+        $view->config->addTranslation('label', Piwik::translate('VisitorInterest_ColumnVisitDuration'));
+        $view->config->enable_sort = false;
+        $view->config->show_exclude_low_population = false;
+        $view->config->show_offset_information = false;
+        $view->config->show_pagination_control = false;
+        $view->config->show_limit_control      = false;
+        $view->config->show_search             = false;
+        $view->config->show_table_all_columns  = false;
+        $view->config->columns_to_display      = array('label', 'nb_visits');
+
+        if ($view->isViewDataTableId(Graph::ID)) {
+            $view->config->show_series_picker = false;
+            $view->config->selectable_columns = array();
+            $view->config->max_graph_elements = 10;
+        }
+    }
+
+    private function configureViewForGetNumberOfVisitsPerPage(ViewDataTable $view)
+    {
+        $view->requestConfig->filter_sort_column = 'label';
+        $view->requestConfig->filter_sort_order  = 'asc';
+
+        $view->config->addTranslation('label', Piwik::translate('VisitorInterest_ColumnVisitDuration'));
+        $view->config->enable_sort = false;
+        $view->config->show_exclude_low_population = false;
+        $view->config->show_offset_information = false;
+        $view->config->show_pagination_control = false;
+        $view->config->show_limit_control      = false;
+        $view->config->show_search             = false;
+        $view->config->show_table_all_columns  = false;
+        $view->config->columns_to_display      = array('label', 'nb_visits');
+
+        if ($view->isViewDataTableId(Graph::ID)) {
+            $view->config->show_series_picker = false;
+            $view->config->selectable_columns = array();
+            $view->config->max_graph_elements = 10;
+        }
+    }
+
+    private function configureViewForGetNumberOfVisitsByVisitCount(ViewDataTable $view)
+    {
+        $view->requestConfig->filter_sort_column = 'label';
+        $view->requestConfig->filter_sort_order  = 'asc';
+        $view->requestConfig->filter_limit = 15;
+
+        $view->config->addTranslations(array(
+            'label'                => Piwik::translate('VisitorInterest_VisitNum'),
+            'nb_visits_percentage' => Metrics::getPercentVisitColumn())
+        );
+
+        $view->config->columns_to_display = array('label', 'nb_visits', 'nb_visits_percentage');
+        $view->config->show_exclude_low_population = false;
+
+        $view->config->enable_sort = false;
+        $view->config->show_offset_information = false;
+        $view->config->show_pagination_control = false;
+        $view->config->show_limit_control      = false;
+        $view->config->show_search             = false;
+        $view->config->show_table_all_columns  = false;
+        $view->config->show_all_views_icons    = false;
+    }
+
+    private function configureViewForGetNumberOfVisitsByDaysSinceLast(ViewDataTable $view)
+    {
+        $view->requestConfig->filter_sort_column = 'label';
+        $view->requestConfig->filter_sort_order  = 'asc';
+        $view->requestConfig->filter_limit = 15;
+
+        $view->config->show_search = false;
+        $view->config->enable_sort = false;
+        $view->config->show_offset_information = false;
+        $view->config->show_pagination_control = false;
+        $view->config->show_limit_control      = false;
+        $view->config->show_all_views_icons    = false;
+        $view->config->show_table_all_columns  = false;
+        $view->config->show_exclude_low_population = false;
+        $view->config->addTranslation('label', Piwik::translate('General_DaysSinceLastVisit'));
+    }
+}

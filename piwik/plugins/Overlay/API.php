@@ -6,26 +6,27 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_Overlay
+ * @package Overlay
  */
+namespace Piwik\Plugins\Overlay;
 
-class Piwik_Overlay_API
+use Exception;
+use Piwik\Access;
+use Piwik\Config;
+use Piwik\DataTable;
+use Piwik\Piwik;
+use Piwik\Plugins\SitesManager\API as APISitesManager;
+use Piwik\Plugins\SitesManager\SitesManager;
+use Piwik\Plugins\Transitions\API as APITransitions;
+use Piwik\Tracker\PageUrl;
+
+/**
+ * Class API
+ * @package Overlay
+ * @method static \Piwik\Plugins\Overlay\API getInstance()
+ */
+class API extends \Piwik\Plugin\API
 {
-
-    private static $instance = null;
-
-    /**
-     * Get Singleton instance
-     * @return Piwik_Overlay_API
-     */
-    public static function getInstance()
-    {
-        if (self::$instance == null) {
-            self::$instance = new self;
-        }
-        return self::$instance;
-    }
-
     /**
      * Get translation strings
      */
@@ -40,7 +41,7 @@ class Piwik_Overlay_API
             'link'             => 'Overlay_Link'
         );
 
-        return array_map('Piwik_Translate', $translations);
+        return array_map(array('\\Piwik\\Piwik','translate'), $translations);
     }
 
     /**
@@ -51,11 +52,11 @@ class Piwik_Overlay_API
     {
         $this->authenticate($idSite);
 
-        $sitesManager = Piwik_SitesManager_API::getInstance();
+        $sitesManager = APISitesManager::getInstance();
         $site = $sitesManager->getSiteFromId($idSite);
 
         try {
-            return Piwik_SitesManager::getTrackerExcludedQueryParameters($site);
+            return SitesManager::getTrackerExcludedQueryParameters($site);
         } catch (Exception $e) {
             // an exception is thrown when the user has no view access.
             // do not throw the exception to the outside.
@@ -74,14 +75,14 @@ class Piwik_Overlay_API
     {
         $this->authenticate($idSite);
 
-        $url = Piwik_Tracker_Action::excludeQueryParametersFromUrl($url, $idSite);
+        $url = PageUrl::excludeQueryParametersFromUrl($url, $idSite);
         // we don't unsanitize $url here. it will be done in the Transitions plugin.
 
-        $resultDataTable = new Piwik_DataTable;
+        $resultDataTable = new DataTable;
 
         try {
-            $limitBeforeGrouping = Piwik_Config::getInstance()->General['overlay_following_pages_limit'];
-            $transitionsReport = Piwik_Transitions_API::getInstance()->getTransitionsForAction(
+            $limitBeforeGrouping = Config::getInstance()->General['overlay_following_pages_limit'];
+            $transitionsReport = APITransitions::getInstance()->getTransitionsForAction(
                 $url, $type = 'url', $idSite, $period, $date, $segment, $limitBeforeGrouping,
                 $part = 'followingActions', $returnNormalizedUrls = true);
         } catch (Exception $e) {
@@ -105,11 +106,29 @@ class Piwik_Overlay_API
     /** Do cookie authentication. This way, the token can remain secret. */
     private function authenticate($idSite)
     {
-        $notification = null;
-        Piwik_PostEvent('FrontController.initAuthenticationObject', $notification, $allowCookieAuthentication = true);
+        /**
+         * Triggered immediately before the user is authenticated.
+         * 
+         * This event can be used by plugins that provide their own authentication mechanism
+         * to make that mechanism available. Subscribers should set the `'auth'` object in
+         * the {@link Piwik\Registry} to an object that implements the {@link Piwik\Auth} interface.
+         * 
+         * **Example**
+         * 
+         *     use Piwik\Registry;
+         * 
+         *     public function initAuthenticationObject($allowCookieAuthentication)
+         *     {
+         *         Registry::set('auth', new LDAPAuth($allowCookieAuthentication));
+         *     }
+         * 
+         * @param bool $allowCookieAuthentication Whether authentication based on `$_COOKIE` values should
+         *                                        be allowed.
+         */
+        Piwik::postEvent('Request.initAuthenticationObject', array($allowCookieAuthentication = true));
 
-        $auth = Zend_Registry::get('auth');
-        $success = Zend_Registry::get('access')->reloadAccess($auth);
+        $auth = \Piwik\Registry::get('auth');
+        $success = Access::getInstance()->reloadAccess($auth);
 
         if (!$success) {
             throw new Exception('Authentication failed');
@@ -117,5 +136,4 @@ class Piwik_Overlay_API
 
         Piwik::checkUserHasViewAccess($idSite);
     }
-
 }

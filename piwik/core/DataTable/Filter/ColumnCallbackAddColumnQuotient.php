@@ -8,15 +8,28 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\DataTable\Filter;
+
+use Piwik\DataTable\BaseFilter;
+use Piwik\DataTable;
+use Piwik\DataTable\Row;
 
 /**
- * Adds a new column that is a division of two columns of the current row.
- * Useful to process bounce rates, exit rates, average time on page, etc.
+ * Calculates the quotient of two columns and adds the result as a new column
+ * for each row of a DataTable.
+ * 
+ * This filter is used to calculate rate values (eg, `'bounce_rate'`), averages
+ * (eg, `'avg_time_on_page'`) and other types of values.
  *
+ * **Basic usage example**
+ * 
+ *     $dataTable->queueFilter('ColumnCallbackAddColumnQuotient', array('bounce_rate', 'bounce_count', 'nb_visits', $precision = 2));
+ * 
  * @package Piwik
- * @subpackage Piwik_DataTable
+ * @subpackage DataTable
+ * @api
  */
-class Piwik_DataTable_Filter_ColumnCallbackAddColumnQuotient extends Piwik_DataTable_Filter
+class ColumnCallbackAddColumnQuotient extends BaseFilter
 {
     protected $table;
     protected $columnValueToRead;
@@ -28,17 +41,22 @@ class Piwik_DataTable_Filter_ColumnCallbackAddColumnQuotient extends Piwik_DataT
     protected $getDivisorFromSummaryRow;
 
     /**
-     * @param Piwik_DataTable $table
-     * @param string $columnNameToAdd
-     * @param string $columnValueToRead
+     * Constructor.
+     * 
+     * @param DataTable $table The DataTable that will eventually be filtered.
+     * @param string $columnNameToAdd The name of the column to add the quotient value to.
+     * @param string $columnValueToRead The name of the column that holds the dividend.
      * @param number|string $divisorValueOrDivisorColumnName
-     *                           if a numeric value is given, we use this value as the divisor to process the percentage.
-     *                           if a string is given, this string is the column name's value used as the divisor.
-     * @param int $quotientPrecision                 Division precision
-     * @param bool|number $shouldSkipRows                    Whether rows w/o the column to read should be skipped.
-     * @param bool $getDivisorFromSummaryRow          Whether to get the divisor from the summary row or the current row.
+     *                           Either numeric value to use as the divisor for every row,
+     *                           or the name of the column whose value should be used as the
+     *                           divisor.
+     * @param int $quotientPrecision The precision to use when rounding the quotient.
+     * @param bool|number $shouldSkipRows Whether rows w/o the column to read should be skipped or not.
+     * @param bool $getDivisorFromSummaryRow Whether to get the divisor from the summary row or the current
+     *                                       row iteration.
      */
-    public function __construct($table, $columnNameToAdd, $columnValueToRead, $divisorValueOrDivisorColumnName, $quotientPrecision = 0, $shouldSkipRows = false, $getDivisorFromSummaryRow = false)
+    public function __construct($table, $columnNameToAdd, $columnValueToRead, $divisorValueOrDivisorColumnName,
+                                $quotientPrecision = 0,$shouldSkipRows = false, $getDivisorFromSummaryRow = false)
     {
         parent::__construct($table);
         $this->table = $table;
@@ -55,20 +73,21 @@ class Piwik_DataTable_Filter_ColumnCallbackAddColumnQuotient extends Piwik_DataT
     }
 
     /**
-     * Filters the given data table
+     * See {@link ColumnCallbackAddColumnQuotient}.
      *
-     * @param Piwik_DataTable $table
+     * @param DataTable $table
      */
     public function filter($table)
     {
         foreach ($table->getRows() as $key => $row) {
-            $existingValue = $row->getColumn($this->columnNameToAdd);
-            if ($existingValue !== false) {
+            $value = $this->getDividend($row);
+            if ($value === false && $this->shouldSkipRows) {
                 continue;
             }
 
-            $value = $this->getDividend($row);
-            if ($value === false && $this->shouldSkipRows) {
+            // Delete existing column if it exists
+            $existingValue = $row->getColumn($this->columnNameToAdd);
+            if ($existingValue !== false) {
                 continue;
             }
 
@@ -101,7 +120,7 @@ class Piwik_DataTable_Filter_ColumnCallbackAddColumnQuotient extends Piwik_DataT
      * Returns the dividend to use when calculating the new column value. Can
      * be overridden by descendent classes to customize behavior.
      *
-     * @param Piwik_DataTable_Row $row  The row being modified.
+     * @param Row $row The row being modified.
      * @return int|float
      */
     protected function getDividend($row)
@@ -113,7 +132,7 @@ class Piwik_DataTable_Filter_ColumnCallbackAddColumnQuotient extends Piwik_DataT
      * Returns the divisor to use when calculating the new column value. Can
      * be overridden by descendent classes to customize behavior.
      *
-     * @param Piwik_DataTable_Row $row  The row being modified.
+     * @param Row $row The row being modified.
      * @return int|float
      */
     protected function getDivisor($row)
@@ -121,7 +140,7 @@ class Piwik_DataTable_Filter_ColumnCallbackAddColumnQuotient extends Piwik_DataT
         if (!is_null($this->totalValueUsedAsDivisor)) {
             return $this->totalValueUsedAsDivisor;
         } else if ($this->getDivisorFromSummaryRow) {
-            $summaryRow = $this->table->getRowFromId(Piwik_DataTable::ID_SUMMARY_ROW);
+            $summaryRow = $this->table->getRowFromId(DataTable::ID_SUMMARY_ROW);
             return $summaryRow->getColumn($this->columnNameUsedAsDivisor);
         } else {
             return $row->getColumn($this->columnNameUsedAsDivisor);

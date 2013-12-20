@@ -9,23 +9,30 @@
  * @package Updates
  */
 
+namespace Piwik\Updates;
+
+use Piwik\Common;
+use Piwik\DbHelper;
+use Piwik\Updater;
+use Piwik\Updates;
+
 /**
  * @package Updates
  */
-class Piwik_Updates_0_2_33 extends Piwik_Updates
+class Updates_0_2_33 extends Updates
 {
     static function getSql($schema = 'Myisam')
     {
         $sqlarray = array(
             // 0.2.33 [1020]
-            'ALTER TABLE `' . Piwik_Common::prefixTable('user_dashboard') . '`
-				CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci '                                                                            => '1146',
-            'ALTER TABLE `' . Piwik_Common::prefixTable('user_language') . '`
+            'ALTER TABLE `' . Common::prefixTable('user_dashboard') . '`
+				CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci '                                                                      => '1146',
+            'ALTER TABLE `' . Common::prefixTable('user_language') . '`
 				CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci ' => '1146',
         );
 
         // alter table to set the utf8 collation
-        $tablesToAlter = Piwik::getTablesInstalled(true);
+        $tablesToAlter = DbHelper::getTablesInstalled(true);
         foreach ($tablesToAlter as $table) {
             $sqlarray['ALTER TABLE `' . $table . '`
 				CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci '] = false;
@@ -36,6 +43,6 @@ class Piwik_Updates_0_2_33 extends Piwik_Updates
 
     static function update()
     {
-        Piwik_Updater::updateDatabase(__FILE__, self::getSql());
+        Updater::updateDatabase(__FILE__, self::getSql());
     }
 }

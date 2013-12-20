@@ -6,30 +6,16 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_ExampleAPI
+ * @package ExampleAPI
  */
+namespace Piwik\Plugins\ExampleAPI;
 
 /**
- * ExampleAPI plugin
+ * This plugin only provides an API.php file, so we leave the plugin class empty
  *
- * @package Piwik_ExampleAPI
+ * @package ExamplePlugin
  */
-class Piwik_ExampleAPI extends Piwik_Plugin
+class ExampleAPI extends \Piwik\Plugin
 {
-    /**
-     * Return information about this plugin.
-     *
-     * @see Piwik_Plugin
-     *
-     * @return array
-     */
-    public function getInformation()
-    {
-        return array(
-            'description'     => Piwik_Translate('ExampleAPI_PluginDescription'),
-            'author'          => 'Piwik',
-            'author_homepage' => 'http://piwik.org/',
-            'version'         => '0.1',
-        );
-    }
+
 }

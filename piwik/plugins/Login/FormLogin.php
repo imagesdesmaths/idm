@@ -6,14 +6,19 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_Login
+ * @package Login
  */
+namespace Piwik\Plugins\Login;
+
+use HTML_QuickForm2_DataSource_Array;
+use Piwik\Piwik;
+use Piwik\QuickForm2;
 
 /**
  *
- * @package Piwik_Login
+ * @package Login
  */
-class Piwik_Login_FormLogin extends Piwik_QuickForm2
+class FormLogin extends QuickForm2
 {
     function __construct($id = 'login_form', $method = 'post', $attributes = null, $trackSubmit = false)
     {
@@ -23,10 +28,10 @@ class Piwik_Login_FormLogin extends Piwik_QuickForm2
     function init()
     {
         $this->addElement('text', 'form_login')
-            ->addRule('required', Piwik_Translate('General_Required', Piwik_Translate('General_Username')));
+            ->addRule('required', Piwik::translate('General_Required', Piwik::translate('General_Username')));
 
         $this->addElement('password', 'form_password')
-            ->addRule('required', Piwik_Translate('General_Required', Piwik_Translate('Login_Password')));
+            ->addRule('required', Piwik::translate('General_Required', Piwik::translate('General_Password')));
 
         $this->addElement('hidden', 'form_nonce');
 

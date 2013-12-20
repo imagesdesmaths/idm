@@ -6,8 +6,24 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_UserCountry
+ * @package UserCountry
  */
+namespace Piwik\Plugins\UserCountry;
+
+use Piwik\ArchiveProcessor;
+use Piwik\Common;
+use Piwik\Config;
+use Piwik\IP;
+use Piwik\Menu\MenuAdmin;
+use Piwik\Menu\MenuMain;
+use Piwik\Piwik;
+use Piwik\Plugin\ViewDataTable;
+use Piwik\Plugins\UserCountry\LocationProvider\DefaultProvider;
+
+use Piwik\Plugins\UserCountry\LocationProvider;
+use Piwik\Plugins\UserCountry\LocationProvider\GeoIp;
+use Piwik\Url;
+use Piwik\WidgetsList;
 
 /**
  * @see plugins/UserCountry/GeoIPAutoUpdater.php
@@ -16,154 +32,181 @@ require_once PIWIK_INCLUDE_PATH . '/plugins/UserCountry/GeoIPAutoUpdater.php';
 
 /**
  *
- * @package Piwik_UserCountry
+ * @package UserCountry
  */
-class Piwik_UserCountry extends Piwik_Plugin
+class UserCountry extends \Piwik\Plugin
 {
-    const VISITS_BY_COUNTRY_RECORD_NAME = 'UserCountry_country';
-    const VISITS_BY_REGION_RECORD_NAME = 'UserCountry_region';
-    const VISITS_BY_CITY_RECORD_NAME = 'UserCountry_city';
-
-    const DISTINCT_COUNTRIES_METRIC = 'UserCountry_distinctCountries';
-
-    // separate region, city & country info in stored report labels
-    const LOCATION_SEPARATOR = '|';
-
-    public function getInformation()
-    {
-        $info = array(
-            'description'     => Piwik_Translate('UserCountry_PluginDescription'),
-            'author'          => 'Piwik',
-            'author_homepage' => 'http://piwik.org/',
-            'version'         => Piwik_Version::VERSION,
-            'TrackerPlugin'   => true,
-        );
-        return $info;
-    }
-
-    function getListHooksRegistered()
+    /**
+     * @see Piwik_Plugin::getListHooksRegistered
+     */
+    public function getListHooksRegistered()
     {
         $hooks = array(
-            'ArchiveProcessing_Day.compute'    => 'archiveDay',
-            'ArchiveProcessing_Period.compute' => 'archivePeriod',
-            'WidgetsList.add'                  => 'addWidgets',
-            'Menu.add'                         => 'addMenu',
-            'AdminMenu.add'                    => 'addAdminMenu',
-            'Goals.getReportsWithGoalMetrics'  => 'getReportsWithGoalMetrics',
-            'API.getReportMetadata'            => 'getReportMetadata',
-            'API.getSegmentsMetadata'          => 'getSegmentsMetadata',
-            'AssetManager.getCssFiles'         => 'getCssFiles',
-            'AssetManager.getJsFiles'          => 'getJsFiles',
-            'Tracker.getVisitorLocation'       => 'getVisitorLocation',
-            'TaskScheduler.getScheduledTasks'  => 'getScheduledTasks',
+            'WidgetsList.addWidgets'                 => 'addWidgets',
+            'Menu.Reporting.addItems'                => 'addMenu',
+            'Menu.Admin.addItems'                    => 'addAdminMenu',
+            'Goals.getReportsWithGoalMetrics'        => 'getReportsWithGoalMetrics',
+            'API.getReportMetadata'                  => 'getReportMetadata',
+            'API.getSegmentDimensionMetadata'        => 'getSegmentsMetadata',
+            'AssetManager.getStylesheetFiles'        => 'getStylesheetFiles',
+            'AssetManager.getJavaScriptFiles'        => 'getJsFiles',
+            'Tracker.newVisitorInformation'          => 'enrichVisitWithLocation',
+            'TaskScheduler.getScheduledTasks'        => 'getScheduledTasks',
+            'ViewDataTable.configure'                => 'configureViewDataTable',
+            'Translate.getClientSideTranslationKeys' => 'getClientSideTranslationKeys',
+            'Tracker.setTrackerCacheGeneral'         => 'setTrackerCacheGeneral'
         );
         return $hooks;
     }
 
-    /**
-     * @param Piwik_Event_Notification $notification  notification object
-     */
-    function getScheduledTasks($notification)
+    public function setTrackerCacheGeneral(&$cache)
     {
-        $tasks = & $notification->getNotificationObject();
+        $cache['currentLocationProviderId'] = LocationProvider::getCurrentProviderId();
+    }
 
+    public function getScheduledTasks(&$tasks)
+    {
         // add the auto updater task
-        $tasks[] = Piwik_UserCountry_GeoIPAutoUpdater::makeScheduledTask();
+        $tasks[] = GeoIPAutoUpdater::makeScheduledTask();
     }
 
-    /**
-     * @param Piwik_Event_Notification $notification  notification object
-     */
-    function getCssFiles($notification)
+    public function getStylesheetFiles(&$stylesheets)
     {
-        $cssFiles = & $notification->getNotificationObject();
-
-        $cssFiles[] = "plugins/UserCountry/templates/styles.css";
+        $stylesheets[] = "plugins/UserCountry/stylesheets/userCountry.less";
     }
 
-    /**
-     * @param Piwik_Event_Notification $notification  notification object
-     */
-    public function getJsFiles($notification)
+    public function getJsFiles(&$jsFiles)
     {
-        $jsFiles = & $notification->getNotificationObject();
-
-        $jsFiles[] = "plugins/UserCountry/templates/admin.js";
+        $jsFiles[] = "plugins/UserCountry/javascripts/userCountry.js";
     }
 
-    /**
-     * @param Piwik_Event_Notification $notification  notification object
-     */
-    public function getVisitorLocation($notification)
+    public function enrichVisitWithLocation(&$visitorInfo, \Piwik\Tracker\Request $request)
     {
         require_once PIWIK_INCLUDE_PATH . "/plugins/UserCountry/LocationProvider.php";
-        $location = & $notification->getNotificationObject();
-        $visitorInfo = $notification->getNotificationInfo();
 
-        $id = Piwik_Common::getCurrentLocationProviderId();
-        $provider = Piwik_UserCountry_LocationProvider::getProviderById($id);
+        $ipAddress = IP::N2P(Config::getInstance()->Tracker['use_anonymized_ip_for_visit_enrichment'] == 1 ? $visitorInfo['location_ip'] : $request->getIp());
+        $userInfo = array(
+            'lang' => $visitorInfo['location_browser_lang'],
+            'ip' => $ipAddress
+        );
+
+        $id = Common::getCurrentLocationProviderId();
+        $provider = LocationProvider::getProviderById($id);
         if ($provider === false) {
-            $id = Piwik_UserCountry_LocationProvider_Default::ID;
-            $provider = Piwik_UserCountry_LocationProvider::getProviderById($id);
-            printDebug("GEO: no current location provider sent, falling back to default '$id' one.");
+            $id = DefaultProvider::ID;
+            $provider = LocationProvider::getProviderById($id);
+            Common::printDebug("GEO: no current location provider sent, falling back to default '$id' one.");
         }
 
-        $location = $provider->getLocation($visitorInfo);
+        $location = $provider->getLocation($userInfo);
 
         // if we can't find a location, use default provider
         if ($location === false) {
-            $defaultId = Piwik_UserCountry_LocationProvider_Default::ID;
-            $provider = Piwik_UserCountry_LocationProvider::getProviderById($defaultId);
-            $location = $provider->getLocation($visitorInfo);
-            printDebug("GEO: couldn't find a location with Geo Module '$id', using Default '$defaultId' provider as fallback...");
+            $defaultId = DefaultProvider::ID;
+            $provider = LocationProvider::getProviderById($defaultId);
+            $location = $provider->getLocation($userInfo);
+            Common::printDebug("GEO: couldn't find a location with Geo Module '$id', using Default '$defaultId' provider as fallback...");
             $id = $defaultId;
         }
-        printDebug("GEO: Found IP location (provider '" . $id . "'): " . var_export($location, true));
-    }
+        Common::printDebug("GEO: Found IP $ipAddress location (provider '" . $id . "'): " . var_export($location, true));
 
-    function addWidgets()
-    {
-        $widgetContinentLabel = Piwik_Translate('UserCountry_WidgetLocation')
-            . ' (' . Piwik_Translate('UserCountry_Continent') . ')';
-        $widgetCountryLabel = Piwik_Translate('UserCountry_WidgetLocation')
-            . ' (' . Piwik_Translate('UserCountry_Country') . ')';
-        $widgetRegionLabel = Piwik_Translate('UserCountry_WidgetLocation')
-            . ' (' . Piwik_Translate('UserCountry_Region') . ')';
-        $widgetCityLabel = Piwik_Translate('UserCountry_WidgetLocation')
-            . ' (' . Piwik_Translate('UserCountry_City') . ')';
+        if (empty($location['country_code'])) { // sanity check
+            $location['country_code'] = \Piwik\Tracker\Visit::UNKNOWN_CODE;
+        }
 
-        Piwik_AddWidget('General_Visitors', $widgetContinentLabel, 'UserCountry', 'getContinent');
-        Piwik_AddWidget('General_Visitors', $widgetCountryLabel, 'UserCountry', 'getCountry');
-        Piwik_AddWidget('General_Visitors', $widgetRegionLabel, 'UserCountry', 'getRegion');
-        Piwik_AddWidget('General_Visitors', $widgetCityLabel, 'UserCountry', 'getCity');
-    }
-
-    function addMenu()
-    {
-        Piwik_AddMenu('General_Visitors', 'UserCountry_SubmenuLocations', array('module' => 'UserCountry', 'action' => 'index'));
+        // add optional location components
+        $this->updateVisitInfoWithLocation($visitorInfo, $location);
     }
 
     /**
-     * Event handler. Adds menu items to the Admin menu.
+     * Sets visitor info array with location info.
+     *
+     * @param array $visitorInfo
+     * @param array $location See LocationProvider::getLocation for more info.
      */
-    function addAdminMenu()
+    private function updateVisitInfoWithLocation(&$visitorInfo, $location)
     {
-        Piwik_AddAdminSubMenu('General_Settings', 'UserCountry_Geolocation',
+        static $logVisitToLowerLocationMapping = array(
+            'location_country' => LocationProvider::COUNTRY_CODE_KEY,
+        );
+
+        static $logVisitToLocationMapping = array(
+            'location_region'    => LocationProvider::REGION_CODE_KEY,
+            'location_city'      => LocationProvider::CITY_NAME_KEY,
+            'location_latitude'  => LocationProvider::LATITUDE_KEY,
+            'location_longitude' => LocationProvider::LONGITUDE_KEY,
+        );
+
+        foreach ($logVisitToLowerLocationMapping as $column => $locationKey) {
+            if (!empty($location[$locationKey])) {
+                $visitorInfo[$column] = strtolower($location[$locationKey]);
+            }
+        }
+
+        foreach ($logVisitToLocationMapping as $column => $locationKey) {
+            if (!empty($location[$locationKey])) {
+                $visitorInfo[$column] = $location[$locationKey];
+            }
+        }
+
+        // if the location has provider/organization info, set it
+        if (!empty($location[LocationProvider::ISP_KEY])) {
+            $providerValue = $location[LocationProvider::ISP_KEY];
+
+            // if the org is set and not the same as the isp, add it to the provider value
+            if (!empty($location[LocationProvider::ORG_KEY])
+                && $location[LocationProvider::ORG_KEY] != $providerValue
+            ) {
+                $providerValue .= ' - ' . $location[LocationProvider::ORG_KEY];
+            }
+        } else if (!empty($location[LocationProvider::ORG_KEY])) {
+            $providerValue = $location[LocationProvider::ORG_KEY];
+        }
+
+        if (isset($providerValue)) {
+            $visitorInfo['location_provider'] = $providerValue;
+        }
+    }
+
+    public function addWidgets()
+    {
+        $widgetContinentLabel = Piwik::translate('UserCountry_WidgetLocation')
+            . ' (' . Piwik::translate('UserCountry_Continent') . ')';
+        $widgetCountryLabel = Piwik::translate('UserCountry_WidgetLocation')
+            . ' (' . Piwik::translate('UserCountry_Country') . ')';
+        $widgetRegionLabel = Piwik::translate('UserCountry_WidgetLocation')
+            . ' (' . Piwik::translate('UserCountry_Region') . ')';
+        $widgetCityLabel = Piwik::translate('UserCountry_WidgetLocation')
+            . ' (' . Piwik::translate('UserCountry_City') . ')';
+
+        WidgetsList::add('General_Visitors', $widgetContinentLabel, 'UserCountry', 'getContinent');
+        WidgetsList::add('General_Visitors', $widgetCountryLabel, 'UserCountry', 'getCountry');
+        WidgetsList::add('General_Visitors', $widgetRegionLabel, 'UserCountry', 'getRegion');
+        WidgetsList::add('General_Visitors', $widgetCityLabel, 'UserCountry', 'getCity');
+    }
+
+    public function addMenu()
+    {
+        MenuMain::getInstance()->add('General_Visitors', 'UserCountry_SubmenuLocations', array('module' => 'UserCountry', 'action' => 'index'));
+    }
+
+    /**
+     * Event handler. Adds menu items to the MenuAdmin menu.
+     */
+    public function addAdminMenu()
+    {
+        MenuAdmin::getInstance()->add('General_Settings', 'UserCountry_Geolocation',
             array('module' => 'UserCountry', 'action' => 'adminIndex'),
             Piwik::isUserIsSuperUser(),
             $order = 8);
     }
 
-    /**
-     * @param Piwik_Event_Notification $notification  notification object
-     */
-    public function getSegmentsMetadata($notification)
+    public function getSegmentsMetadata(&$segments)
     {
-        $segments =& $notification->getNotificationObject();
         $segments[] = array(
             'type'           => 'dimension',
             'category'       => 'Visit Location',
-            'name'           => Piwik_Translate('UserCountry_Country'),
+            'name'           => Piwik::translate('UserCountry_Country'),
             'segment'        => 'countryCode',
             'sqlSegment'     => 'log_visit.location_country',
             'acceptedValues' => 'de, us, fr, in, es, etc.',
@@ -171,16 +214,16 @@ class Piwik_UserCountry extends Piwik_Plugin
         $segments[] = array(
             'type'           => 'dimension',
             'category'       => 'Visit Location',
-            'name'           => Piwik_Translate('UserCountry_Continent'),
+            'name'           => Piwik::translate('UserCountry_Continent'),
             'segment'        => 'continentCode',
             'sqlSegment'     => 'log_visit.location_country',
             'acceptedValues' => 'eur, asi, amc, amn, ams, afr, ant, oce',
-            'sqlFilter'      => array('Piwik_UserCountry', 'getCountriesForContinent'),
+            'sqlFilter'      => __NAMESPACE__ . '\UserCountry::getCountriesForContinent',
         );
         $segments[] = array(
             'type'           => 'dimension',
             'category'       => 'Visit Location',
-            'name'           => Piwik_Translate('UserCountry_Region'),
+            'name'           => Piwik::translate('UserCountry_Region'),
             'segment'        => 'regionCode',
             'sqlSegment'     => 'log_visit.location_region',
             'acceptedValues' => '01 02, OR, P8, etc.<br/>eg. region=A1;country=fr',
@@ -188,7 +231,7 @@ class Piwik_UserCountry extends Piwik_Plugin
         $segments[] = array(
             'type'           => 'dimension',
             'category'       => 'Visit Location',
-            'name'           => Piwik_Translate('UserCountry_City'),
+            'name'           => Piwik::translate('UserCountry_City'),
             'segment'        => 'city',
             'sqlSegment'     => 'log_visit.location_city',
             'acceptedValues' => 'Sydney, Sao Paolo, Rome, etc.',
@@ -196,7 +239,7 @@ class Piwik_UserCountry extends Piwik_Plugin
         $segments[] = array(
             'type'           => 'dimension',
             'category'       => 'Visit Location',
-            'name'           => Piwik_Translate('UserCountry_Latitude'),
+            'name'           => Piwik::translate('UserCountry_Latitude'),
             'segment'        => 'latitude',
             'sqlSegment'     => 'log_visit.location_latitude',
             'acceptedValues' => '-33.578, 40.830, etc.<br/>You can select visitors within a lat/long range using &segment=lat&gt;X;lat&lt;Y;long&gt;M;long&lt;N.',
@@ -204,281 +247,84 @@ class Piwik_UserCountry extends Piwik_Plugin
         $segments[] = array(
             'type'           => 'dimension',
             'category'       => 'Visit Location',
-            'name'           => Piwik_Translate('UserCountry_Longitude'),
+            'name'           => Piwik::translate('UserCountry_Longitude'),
             'segment'        => 'longitude',
             'sqlSegment'     => 'log_visit.location_longitude',
             'acceptedValues' => '-70.664, 14.326, etc.',
         );
     }
 
-    /**
-     * @param Piwik_Event_Notification $notification  notification object
-     */
-    public function getReportMetadata($notification)
+    public function getReportMetadata(&$reports)
     {
         $metrics = array(
-            'nb_visits'        => Piwik_Translate('General_ColumnNbVisits'),
-            'nb_uniq_visitors' => Piwik_Translate('General_ColumnNbUniqVisitors'),
-            'nb_actions'       => Piwik_Translate('General_ColumnNbActions'),
+            'nb_visits'        => Piwik::translate('General_ColumnNbVisits'),
+            'nb_uniq_visitors' => Piwik::translate('General_ColumnNbUniqVisitors'),
+            'nb_actions'       => Piwik::translate('General_ColumnNbActions'),
         );
 
-        $reports = & $notification->getNotificationObject();
-
         $reports[] = array(
-            'category'  => Piwik_Translate('General_Visitors'),
-            'name'      => Piwik_Translate('UserCountry_Country'),
+            'category'  => Piwik::translate('General_Visitors'),
+            'name'      => Piwik::translate('UserCountry_Country'),
             'module'    => 'UserCountry',
             'action'    => 'getCountry',
-            'dimension' => Piwik_Translate('UserCountry_Country'),
+            'dimension' => Piwik::translate('UserCountry_Country'),
             'metrics'   => $metrics,
             'order'     => 5,
         );
 
         $reports[] = array(
-            'category'  => Piwik_Translate('General_Visitors'),
-            'name'      => Piwik_Translate('UserCountry_Continent'),
+            'category'  => Piwik::translate('General_Visitors'),
+            'name'      => Piwik::translate('UserCountry_Continent'),
             'module'    => 'UserCountry',
             'action'    => 'getContinent',
-            'dimension' => Piwik_Translate('UserCountry_Continent'),
+            'dimension' => Piwik::translate('UserCountry_Continent'),
             'metrics'   => $metrics,
             'order'     => 6,
         );
 
         $reports[] = array(
-            'category'  => Piwik_Translate('General_Visitors'),
-            'name'      => Piwik_Translate('UserCountry_Region'),
+            'category'  => Piwik::translate('General_Visitors'),
+            'name'      => Piwik::translate('UserCountry_Region'),
             'module'    => 'UserCountry',
             'action'    => 'getRegion',
-            'dimension' => Piwik_Translate('UserCountry_Region'),
+            'dimension' => Piwik::translate('UserCountry_Region'),
             'metrics'   => $metrics,
             'order'     => 7,
         );
 
         $reports[] = array(
-            'category'  => Piwik_Translate('General_Visitors'),
-            'name'      => Piwik_Translate('UserCountry_City'),
+            'category'  => Piwik::translate('General_Visitors'),
+            'name'      => Piwik::translate('UserCountry_City'),
             'module'    => 'UserCountry',
             'action'    => 'getCity',
-            'dimension' => Piwik_Translate('UserCountry_City'),
+            'dimension' => Piwik::translate('UserCountry_City'),
             'metrics'   => $metrics,
             'order'     => 8,
         );
     }
 
-    /**
-     * @param Piwik_Event_Notification $notification  notification object
-     */
-    function getReportsWithGoalMetrics($notification)
+    public function getReportsWithGoalMetrics(&$dimensions)
     {
-        $dimensions =& $notification->getNotificationObject();
         $dimensions = array_merge($dimensions, array(
-                                                    array('category' => Piwik_Translate('General_Visit'),
-                                                          'name'     => Piwik_Translate('UserCountry_Country'),
+                                                    array('category' => Piwik::translate('General_Visit'),
+                                                          'name'     => Piwik::translate('UserCountry_Country'),
                                                           'module'   => 'UserCountry',
                                                           'action'   => 'getCountry',
                                                     ),
-                                                    array('category' => Piwik_Translate('General_Visit'),
-                                                          'name'     => Piwik_Translate('UserCountry_Continent'),
+                                                    array('category' => Piwik::translate('General_Visit'),
+                                                          'name'     => Piwik::translate('UserCountry_Continent'),
                                                           'module'   => 'UserCountry',
                                                           'action'   => 'getContinent',
                                                     ),
-                                                    array('category' => Piwik_Translate('General_Visit'),
-                                                          'name'     => Piwik_Translate('UserCountry_Region'),
+                                                    array('category' => Piwik::translate('General_Visit'),
+                                                          'name'     => Piwik::translate('UserCountry_Region'),
                                                           'module'   => 'UserCountry',
                                                           'action'   => 'getRegion'),
-                                                    array('category' => Piwik_Translate('General_Visit'),
-                                                          'name'     => Piwik_Translate('UserCountry_City'),
+                                                    array('category' => Piwik::translate('General_Visit'),
+                                                          'name'     => Piwik::translate('UserCountry_City'),
                                                           'module'   => 'UserCountry',
                                                           'action'   => 'getCity'),
                                                ));
-    }
-
-    /**
-     * @param Piwik_Event_Notification $notification  notification object
-     * @return mixed
-     */
-    function archivePeriod($notification)
-    {
-        /**
-         * @param Piwik_ArchiveProcessing_Period $archiveProcessing
-         */
-        $archiveProcessing = $notification->getNotificationObject();
-
-        if (!$archiveProcessing->shouldProcessReportsForPlugin($this->getPluginName())) return;
-
-        $dataTableToSum = array(
-            self::VISITS_BY_COUNTRY_RECORD_NAME,
-            self::VISITS_BY_REGION_RECORD_NAME,
-            self::VISITS_BY_CITY_RECORD_NAME,
-        );
-
-        $nameToCount = $archiveProcessing->archiveDataTable($dataTableToSum);
-        $archiveProcessing->insertNumericRecord(self::DISTINCT_COUNTRIES_METRIC,
-            $nameToCount[self::VISITS_BY_COUNTRY_RECORD_NAME]['level0']);
-    }
-
-    private $interestTables = null;
-    private $latLongForCities = null;
-
-    /**
-     * @param Piwik_Event_Notification $notification  notification object
-     * @return mixed
-     */
-    function archiveDay($notification)
-    {
-        /**
-         * @var Piwik_ArchiveProcessing
-         */
-        $archiveProcessing = $notification->getNotificationObject();
-
-        if (!$archiveProcessing->shouldProcessReportsForPlugin($this->getPluginName())) return;
-
-        $this->interestTables = array('location_country' => array(),
-                                      'location_region'  => array(),
-                                      'location_city'    => array());
-        $this->latLongForCities = array();
-
-        $this->archiveDayAggregateVisits($archiveProcessing);
-        $this->archiveDayAggregateGoals($archiveProcessing);
-        $this->archiveDayRecordInDatabase($archiveProcessing);
-
-        unset($this->interestTables);
-        unset($this->latLongForCities);
-    }
-
-    /**
-     * @param Piwik_ArchiveProcessing_Day $archiveProcessing
-     */
-    protected function archiveDayAggregateVisits($archiveProcessing)
-    {
-        $dimensions = array_keys($this->interestTables);
-        $query = $archiveProcessing->queryVisitsByDimension(
-            $dimensions,
-            $where = '',
-            $metrics = false,
-            $orderBy = false,
-            $rankingQuery = null,
-            $addSelect = 'MAX(log_visit.location_latitude) as location_latitude,
-						  MAX(log_visit.location_longitude) as location_longitude'
-        );
-
-        if ($query === false) {
-            return;
-        }
-
-        while ($row = $query->fetch()) {
-            // get latitude/longitude if there's a city
-            $lat = $long = false;
-            if (!empty($row['location_city'])) {
-                if (!empty($row['location_latitude'])) {
-                    $lat = $row['location_latitude'];
-                }
-                if (!empty($row['location_longitude'])) {
-                    $long = $row['location_longitude'];
-                }
-            }
-
-            // make sure regions & cities w/ the same name don't get merged
-            $this->setLongCityRegionId($row);
-
-            // store latitude/longitude, if we should
-            if ($lat !== false && $long !== false) {
-                $this->latLongForCities[$row['location_city']] = array($lat, $long);
-            }
-
-            // add the stats to each dimension's table
-            foreach ($this->interestTables as $dimension => &$table) {
-                $label = (string)$row[$dimension];
-
-                if (!isset($table[$label])) {
-                    $table[$label] = $archiveProcessing->getNewInterestRow();
-                }
-                $archiveProcessing->updateInterestStats($row, $table[$label]);
-            }
-        }
-    }
-
-    /**
-     * @param Piwik_ArchiveProcessing_Day $archiveProcessing
-     */
-    protected function archiveDayAggregateGoals($archiveProcessing)
-    {
-        $dimensions = array_keys($this->interestTables);
-        $query = $archiveProcessing->queryConversionsByDimension($dimensions);
-
-        if ($query === false) {
-            return;
-        }
-
-        while ($row = $query->fetch()) {
-            // make sure regions & cities w/ the same name don't get merged
-            $this->setLongCityRegionId($row);
-
-            $idGoal = $row['idgoal'];
-            foreach ($this->interestTables as $dimension => &$table) {
-                $label = (string)$row[$dimension];
-
-                if (!isset($table[$label][Piwik_Archive::INDEX_GOALS][$idGoal])) {
-                    $table[$label][Piwik_Archive::INDEX_GOALS][$idGoal] = $archiveProcessing->getNewGoalRow($idGoal);
-                }
-
-                $archiveProcessing->updateGoalStats($row, $table[$label][Piwik_Archive::INDEX_GOALS][$idGoal]);
-            }
-        }
-
-        foreach ($this->interestTables as &$table) {
-            $archiveProcessing->enrichConversionsByLabelArray($table);
-        }
-    }
-
-    /**
-     * @param Piwik_ArchiveProcessing_Day $archiveProcessing
-     */
-    protected function archiveDayRecordInDatabase($archiveProcessing)
-    {
-        $maximumRows = Piwik_Config::getInstance()->General['datatable_archiving_maximum_rows_standard'];
-
-        $tableCountry = Piwik_ArchiveProcessing_Day::getDataTableFromArray($this->interestTables['location_country']);
-        $archiveProcessing->insertBlobRecord(self::VISITS_BY_COUNTRY_RECORD_NAME, $tableCountry->getSerialized());
-        $archiveProcessing->insertNumericRecord(self::DISTINCT_COUNTRIES_METRIC, $tableCountry->getRowsCount());
-        destroy($tableCountry);
-
-        $tableRegion = Piwik_ArchiveProcessing_Day::getDataTableFromArray($this->interestTables['location_region']);
-        $serialized = $tableRegion->getSerialized($maximumRows, $maximumRows, Piwik_Archive::INDEX_NB_VISITS);
-        $archiveProcessing->insertBlobRecord(self::VISITS_BY_REGION_RECORD_NAME, $serialized);
-        destroy($tableRegion);
-
-        $tableCity = Piwik_ArchiveProcessing_Day::getDataTableFromArray($this->interestTables['location_city']);
-        $this->setLatitudeLongitude($tableCity);
-        $serialized = $tableCity->getSerialized($maximumRows, $maximumRows, Piwik_Archive::INDEX_NB_VISITS);
-        $archiveProcessing->insertBlobRecord(self::VISITS_BY_CITY_RECORD_NAME, $serialized);
-        destroy($tableCity);
-    }
-
-    /**
-     * Makes sure the region and city of a query row are unique.
-     *
-     * @param array $row
-     */
-    private function setLongCityRegionId(&$row)
-    {
-        static $locationColumns = array('location_region', 'location_country', 'location_city');
-
-        // to be on the safe side, remove the location separator from the region/city/country we
-        // get from the query
-        foreach ($locationColumns as $column) {
-            $row[$column] = str_replace(self::LOCATION_SEPARATOR, '', $row[$column]);
-        }
-
-        if (!empty($row['location_region'])) // do not differentiate between unknown regions
-        {
-            $row['location_region'] = $row['location_region'] . self::LOCATION_SEPARATOR . $row['location_country'];
-        }
-
-        if (!empty($row['location_city'])) // do not differentiate between unknown cities
-        {
-            $row['location_city'] = $row['location_city'] . self::LOCATION_SEPARATOR . $row['location_region'];
-        }
     }
 
     /**
@@ -491,7 +337,7 @@ class Piwik_UserCountry extends Piwik_Plugin
     {
         $result = array();
         $continent = strtolower($continent);
-        foreach (Piwik_Common::getCountriesList() as $countryCode => $continentCode) {
+        foreach (Common::getCountriesList() as $countryCode => $continentCode) {
             if ($continent == $continentCode) {
                 $result[] = $countryCode;
             }
@@ -500,24 +346,138 @@ class Piwik_UserCountry extends Piwik_Plugin
                      'bind' => '-'); // HACK: SegmentExpression requires a $bind, even if there's nothing to bind
     }
 
-    /**
-     * Utility method, appends latitude/longitude pairs to city table labels, if that data
-     * exists for the city.
-     */
-    private function setLatitudeLongitude($tableCity)
+    public function configureViewDataTable(ViewDataTable $view)
     {
-        foreach ($tableCity->getRows() as $row) {
-            $label = $row->getColumn('label');
-            if (isset($this->latLongForCities[$label])) {
-                // get lat/long for city
-                list($lat, $long) = $this->latLongForCities[$label];
-                $lat = round($lat, Piwik_UserCountry_LocationProvider::GEOGRAPHIC_COORD_PRECISION);
-                $long = round($long, Piwik_UserCountry_LocationProvider::GEOGRAPHIC_COORD_PRECISION);
-
-                // set latitude + longitude metadata
-                $row->setMetadata('lat', $lat);
-                $row->setMetadata('long', $long);
-            }
+        switch ($view->requestConfig->apiMethodToRequestDataTable) {
+            case 'UserCountry.getCountry':
+                $this->configureViewForGetCountry($view);
+                break;
+            case 'UserCountry.getContinent':
+                $this->configureViewForGetContinent($view);
+                break;
+            case 'UserCountry.getRegion':
+                $this->configureViewForGetRegion($view);
+                break;
+            case 'UserCountry.getCity':
+                $this->configureViewForGetCity($view);
+                break;
         }
+    }
+
+    private function configureViewForGetCountry(ViewDataTable $view)
+    {
+        $view->config->show_goals = true;
+        $view->config->show_exclude_low_population = false;
+        $view->config->addTranslation('label', Piwik::translate('UserCountry_Country'));
+        $view->config->documentation = Piwik::translate('UserCountry_getCountryDocumentation');
+
+        $view->requestConfig->filter_limit = 5;
+
+        if (LocationProvider::getCurrentProviderId() == DefaultProvider::ID) {
+            // if we're using the default location provider, add a note explaining how it works
+            $footerMessage = Piwik::translate("General_Note") . ': '
+                . Piwik::translate('UserCountry_DefaultLocationProviderExplanation',
+                    array('<a target="_blank" href="http://piwik.org/docs/geo-locate/">', '</a>'));
+
+            $view->config->show_footer_message = $footerMessage;
+        }
+    }
+
+    private function configureViewForGetContinent(ViewDataTable $view)
+    {
+        $view->config->show_exclude_low_population = false;
+        $view->config->show_goals = true;
+        $view->config->show_search = false;
+        $view->config->show_offset_information = false;
+        $view->config->show_pagination_control = false;
+        $view->config->show_limit_control = false;
+        $view->config->documentation = Piwik::translate('UserCountry_getContinentDocumentation');
+        $view->config->addTranslation('label', Piwik::translate('UserCountry_Continent'));
+    }
+
+    private function configureViewForGetRegion(ViewDataTable $view)
+    {
+        $view->config->show_exclude_low_population = false;
+        $view->config->show_goals = true;
+        $view->config->documentation = Piwik::translate('UserCountry_getRegionDocumentation') . '<br/>' . $this->getGeoIPReportDocSuffix();
+        $view->config->addTranslation('label', Piwik::translate('UserCountry_Region'));
+
+        $view->requestConfig->filter_limit = 5;
+
+        $this->checkIfNoDataForGeoIpReport($view);
+    }
+
+    private function configureViewForGetCity(ViewDataTable $view)
+    {
+        $view->config->show_exclude_low_population = false;
+        $view->config->show_goals = true;
+        $view->config->documentation = Piwik::translate('UserCountry_getCityDocumentation') . '<br/>' . $this->getGeoIPReportDocSuffix();
+        $view->config->addTranslation('label', Piwik::translate('UserCountry_City'));
+
+        $view->requestConfig->filter_limit = 5;
+
+        $this->checkIfNoDataForGeoIpReport($view);
+    }
+
+    private function getGeoIPReportDocSuffix()
+    {
+        return Piwik::translate('UserCountry_GeoIPDocumentationSuffix',
+            array('<a target="_blank" href="http://www.maxmind.com/?rId=piwik">',
+                  '</a>',
+                  '<a target="_blank" href="http://www.maxmind.com/en/city_accuracy?rId=piwik">',
+                  '</a>')
+        );
+    }
+
+    /**
+     * Checks if a datatable for a view is empty and if so, displays a message in the footer
+     * telling users to configure GeoIP.
+     */
+    private function checkIfNoDataForGeoIpReport(ViewDataTable $view)
+    {
+        $self = $this;
+        $view->config->filters[] = function ($dataTable) use ($self, $view) {
+            // if there's only one row whose label is 'Unknown', display a message saying there's no data
+            if ($dataTable->getRowsCount() == 1
+                && $dataTable->getFirstRow()->getColumn('label') == Piwik::translate('General_Unknown')
+            ) {
+                $footerMessage = Piwik::translate('UserCountry_NoDataForGeoIPReport1');
+
+                // if GeoIP is working, don't display this part of the message
+                if (!$self->isGeoIPWorking()) {
+                    $params = array('module' => 'UserCountry', 'action' => 'adminIndex');
+                    $footerMessage .= ' ' . Piwik::translate('UserCountry_NoDataForGeoIPReport2',
+                            array('<a target="_blank" href="' . Url::getCurrentQueryStringWithParametersModified($params) . '">',
+                                  '</a>',
+                                  '<a target="_blank" href="http://dev.maxmind.com/geoip/geolite?rId=piwik">',
+                                  '</a>'));
+                } else {
+                    $footerMessage .= ' ' . Piwik::translate('UserCountry_ToGeolocateOldVisits',
+                            array('<a target="_blank" href="http://piwik.org/faq/how-to/#faq_167">', '</a>'));
+                }
+
+                $view->config->show_footer_message = $footerMessage;
+            }
+        };
+    }
+
+    /**
+     * Returns true if a GeoIP provider is installed & working, false if otherwise.
+     *
+     * @return bool
+     */
+    public function isGeoIPWorking()
+    {
+        $provider = LocationProvider::getCurrentProvider();
+        return $provider instanceof GeoIp
+        && $provider->isAvailable() === true
+        && $provider->isWorking() === true;
+    }
+
+    public function getClientSideTranslationKeys(&$translationKeys)
+    {
+        $translationKeys[] = "UserCountry_FatalErrorDuringDownload";
+        $translationKeys[] = "UserCountry_SetupAutomaticUpdatesOfGeoIP";
+        $translationKeys[] = "General_Done";
     }
 }

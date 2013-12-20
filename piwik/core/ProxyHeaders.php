@@ -8,13 +8,15 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik;
+
 
 /**
  * Proxy headers
  *
  * @package Piwik
  */
-class Piwik_ProxyHeaders
+class ProxyHeaders
 {
     /**
      * Get protocol information, with the exception of HTTPS
@@ -23,7 +25,7 @@ class Piwik_ProxyHeaders
      */
     public static function getProtocolInformation()
     {
-        if (Piwik_Common::getRequestVar('clientProtocol', 'http', 'string') == 'https') {
+        if (Common::getRequestVar('clientProtocol', 'http', 'string') == 'https') {
             return 'https';
         }
 

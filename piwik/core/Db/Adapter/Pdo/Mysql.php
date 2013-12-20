@@ -8,17 +8,29 @@
  * @category Piwik
  * @package Piwik
  */
+namespace Piwik\Db\Adapter\Pdo;
+
+use Exception;
+use PDO;
+use PDOException;
+use Piwik\Config;
+use Piwik\Db\AdapterInterface;
+use Piwik\Piwik;
+use Zend_Config;
+use Zend_Db_Adapter_Pdo_Mysql;
+use Zend_Db_Select;
+use Zend_Db_Statement_Interface;
 
 /**
  * @package Piwik
  * @subpackage Piwik_Db
  */
-class Piwik_Db_Adapter_Pdo_Mysql extends Zend_Db_Adapter_Pdo_Mysql implements Piwik_Db_Adapter_Interface
+class Mysql extends Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface
 {
     /**
      * Constructor
      *
-     * @param array|Zend_Config $config  database configuration
+     * @param array|Zend_Config $config database configuration
      */
     public function __construct($config)
     {
@@ -83,9 +95,9 @@ class Piwik_Db_Adapter_Pdo_Mysql extends Zend_Db_Adapter_Pdo_Mysql implements Pi
     public function checkServerVersion()
     {
         $serverVersion = $this->getServerVersion();
-        $requiredVersion = Piwik_Config::getInstance()->General['minimum_mysql_version'];
+        $requiredVersion = Config::getInstance()->General['minimum_mysql_version'];
         if (version_compare($serverVersion, $requiredVersion) === -1) {
-            throw new Exception(Piwik_TranslateException('General_ExceptionDatabaseVersion', array('MySQL', $serverVersion, $requiredVersion)));
+            throw new Exception(Piwik::translate('General_ExceptionDatabaseVersion', array('MySQL', $serverVersion, $requiredVersion)));
         }
     }
 
@@ -102,7 +114,7 @@ class Piwik_Db_Adapter_Pdo_Mysql extends Zend_Db_Adapter_Pdo_Mysql implements Pi
         if (version_compare($serverVersion, '5.0.3') >= 0
             && version_compare($clientVersion, '5.0.3') < 0
         ) {
-            throw new Exception(Piwik_TranslateException('General_ExceptionIncompatibleClientServerVersions', array('MySQL', $clientVersion, $serverVersion)));
+            throw new Exception(Piwik::translate('General_ExceptionIncompatibleClientServerVersions', array('MySQL', $clientVersion, $serverVersion)));
         }
     }
 
@@ -187,14 +199,17 @@ class Piwik_Db_Adapter_Pdo_Mysql extends Zend_Db_Adapter_Pdo_Mysql implements Pi
         return null;
     }
 
+    /**
+     * @var \Zend_Db_Statement_Pdo[]
+     */
     private $cachePreparedStatement = array();
 
     /**
      * Prepares and executes an SQL statement with bound data.
      * Caches prepared statements to avoid preparing the same query more than once
      *
-     * @param string|Zend_Db_Select $sql   The SQL statement with placeholders.
-     * @param array $bind  An array of data to bind to the placeholders.
+     * @param string|Zend_Db_Select $sql The SQL statement with placeholders.
+     * @param array $bind An array of data to bind to the placeholders.
      * @return Zend_Db_Statement_Interface
      */
     public function query($sql, $bind = array())

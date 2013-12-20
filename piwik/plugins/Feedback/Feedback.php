@@ -6,64 +6,57 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  * @category Piwik_Plugins
- * @package Piwik_Feedback
+ * @package Feedback
  */
+namespace Piwik\Plugins\Feedback;
+use Piwik\Menu\MenuTop;
+use Piwik\Piwik;
+
 
 /**
  *
- * @package Piwik_Feedback
+ * @package Feedback
  */
-class Piwik_Feedback extends Piwik_Plugin
+class Feedback extends \Piwik\Plugin
 {
-    public function getInformation()
-    {
-        return array(
-            'description'     => Piwik_Translate('Feedback_PluginDescription'),
-            'author'          => 'Piwik',
-            'author_homepage' => 'http://piwik.org/',
-            'version'         => Piwik_Version::VERSION,
-        );
-    }
 
-    function getListHooksRegistered()
+    /**
+     * @see Piwik_Plugin::getListHooksRegistered
+     */
+    public function getListHooksRegistered()
     {
         return array(
-            'AssetManager.getCssFiles' => 'getCssFiles',
-            'AssetManager.getJsFiles'  => 'getJsFiles',
-            'TopMenu.add'              => 'addTopMenu',
+            'AssetManager.getStylesheetFiles'        => 'getStylesheetFiles',
+            'AssetManager.getJavaScriptFiles'        => 'getJsFiles',
+            'Menu.Top.addItems'                      => 'addTopMenu',
+            'Translate.getClientSideTranslationKeys' => 'getClientSideTranslationKeys'
         );
     }
 
     public function addTopMenu()
     {
-        Piwik_AddTopMenu(
+        MenuTop::addEntry(
             'General_GiveUsYourFeedback',
             array('module' => 'Feedback', 'action' => 'index', 'segment' => false),
             true,
             $order = 20,
             $isHTML = false,
-            $tooltip = Piwik_Translate('Feedback_TopLinkTooltip')
+            $tooltip = Piwik::translate('Feedback_TopLinkTooltip')
         );
     }
 
-    /**
-     * @param Piwik_Event_Notification $notification  notification object
-     */
-    function getCssFiles($notification)
+    public function getStylesheetFiles(&$stylesheets)
     {
-        $cssFiles = & $notification->getNotificationObject();
-
-        $cssFiles[] = "plugins/Feedback/templates/styles.css";
+        $stylesheets[] = "plugins/Feedback/stylesheets/feedback.less";
     }
 
-    /**
-     * @param Piwik_Event_Notification $notification  notification object
-     */
-    function getJsFiles($notification)
+    public function getJsFiles(&$jsFiles)
     {
-        $jsFiles = & $notification->getNotificationObject();
-
-        $jsFiles[] = "plugins/Feedback/templates/feedback.js";
+        $jsFiles[] = "plugins/Feedback/javascripts/feedback.js";
     }
 
+    public function getClientSideTranslationKeys(&$translationKeys)
+    {
+        $translationKeys[] = 'General_Loading';
+    }
 }
