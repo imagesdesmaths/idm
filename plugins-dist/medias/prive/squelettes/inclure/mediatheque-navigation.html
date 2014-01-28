@@ -22,7 +22,7 @@
 <ul class='statut'>
 [<li class='first'>(#GET{self}|parametre_url{statut,''}|lien_ou_expose{<:medias:documents_tous:>,#ENV{statut,.*}|=={.*},ajax})</li>]
 [<li>(#GET{self}|parametre_url{statut,publie}|lien_ou_expose{<:medias:documents_publies:>,#ENV{statut}|=={publie},ajax})</li>]
-[<li>(#GET{self}|parametre_url{statut,prepa|poubelle}|lien_ou_expose{<:medias:documents_non_publies:>,#ENV{statut}|=={prepa|poubelle},ajax})</li>]
+[<li>(#GET{self}|parametre_url{statut,prop|prepa|poubelle}|lien_ou_expose{<:medias:documents_non_publies:>,#ENV{statut}|=={prop|prepa|poubelle},ajax})</li>]
 </ul>
 
 <ul class='distant'>

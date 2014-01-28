@@ -50,7 +50,7 @@ function mediabox_config($public=null){
 
 function mediabox_insert_head_css($flux){
 	$config = mediabox_config();
-	if ($config['active']=='oui' AND $f = find_in_path((test_espace_prive()?"prive/":"")."colorbox/".$config['skin'].'/colorbox.css'))
+	if ($config['active']=='oui' AND $f = find_in_path((test_espace_prive()?"prive/":"")."colorbox/".$config['skin'].'/colorbox.css')) {
 		$flux .= '<link rel="stylesheet" href="'.direction_css($f).'" type="text/css" media="all" />';
 	/**
 	 * Initialiser la config de la mediabox
@@ -76,7 +76,7 @@ var box_settings = {tt_img:'.($config['traiter_toutes_images'] == 'oui'?'true':'
 .'",splash_url:"'.$config['splash_url']
 .'"};
 /* ]]> */</script>'."\n" . $flux;
-
+	}
 	return $flux;
 }
 

@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'កែប្រែ សៃថ៍នេះ',
 	'icone_referencer_nouveau_site' => 'យោង មួយសៃថ៍ថ្មី',
 	'icone_voir_sites_references' => 'មើល រាល់សៃថ៍យោង',
+	'info_1_site' => '១ សៃថ៍',
 	'info_a_valider' => '[​ត្រូវធ្វើ​អោយ​សុពលភាព​]',
 	'info_bloquer' => 'រារាំង',
 	'info_bloquer_lien' => 'រាំងខ្ទប់ តំណភ្ជាប់នេះ',

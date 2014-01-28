@@ -7,6 +7,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// B
+	'bouton_radio_activer_petition' => 'Aktiviraj peticiju',
+	'bouton_radio_pas_petition' => 'Bez peticije',
+	'bouton_radio_petition_activee' => 'Peticija je aktivirana',
+	'bouton_radio_supprimer_petition' => 'Izbrisi peticiju',
+
 	// F
 	'form_pet_adresse_site' => 'Adresa vase stranice', # MODIF
 	'form_pet_aucune_signature' => 'Nijedan potpis ne odgovara ovom kodu...', # MODIF

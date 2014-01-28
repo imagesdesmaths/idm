@@ -7,6 +7,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// B
+	'bouton_radio_activer_petition' => 'Включити клопотання',
+	'bouton_radio_pas_petition' => 'Немає клопотання',
+	'bouton_radio_petition_activee' => 'Активоване ( задіяне клопотання)',
+	'bouton_radio_supprimer_petition' => 'Видалити клопотання',
+
 	// F
 	'form_pet_adresse_site' => 'Адреса вашого сайту.', # MODIF
 	'form_pet_aucune_signature' => 'Ніякий підпис не відповідає цьому коду ...', # MODIF

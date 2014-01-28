@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -75,7 +75,7 @@ function install_etape_2_dist()
 
 		$hidden = (defined('_SPIP_CHMOD')
 		? ''
-		: ("\n<input type='hidden' name='chmod' value='".htmlspecialchars($chmod)."' />"))
+		: ("\n<input type='hidden' name='chmod' value='".spip_htmlspecialchars($chmod)."' />"))
 		. predef_ou_cache($adresse_db,$login_db,$pass_db, $server_db);
 
 		echo install_etape_2_form($hidden, $checked, $res, 3);

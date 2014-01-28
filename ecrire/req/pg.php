@@ -3,7 +3,7 @@
 /* *************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -1035,7 +1035,7 @@ function spip_pg_cite($v, $t){
 	if(is_null($v)) return 'NULL'; // null php se traduit en NULL SQL
 
 	if (sql_test_date($t)) {
-		if (strpos("0123456789", $v[0]) === false)
+		if ($v AND (strpos("0123456789", $v[0]) === false))
 			return spip_pg_frommysql($v);
 		else {
 			if (strncmp($v,'0000',4)==0)

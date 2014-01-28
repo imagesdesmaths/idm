@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		ako odoslanie hromadných e-mailov.',
 	'c_rubrique_publier' => 'Vytvorte článok',
 	'c_rubrique_publier_texte' => 'Rubrika je publikovaná, keď
-		sa v nej nachádza aspoň jeden publikovaný text. Napríklad publikovaný článok.
+		sa v nej nachádza aspoň jeden publikovaný text, napríklad publikovaný článok.
 		Takže vytvorte článok. Môžete to urobiť na tejto stránke pod opisom svojej rubriky.',
 	'c_rubriques_creer' => 'Vytvorte prvú rubriku!',
 	'c_rubriques_creer_texte' => 'Rubriky tvoria základnú štruktúru stránky.

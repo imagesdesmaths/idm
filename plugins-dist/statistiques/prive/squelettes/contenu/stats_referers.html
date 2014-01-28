@@ -10,7 +10,7 @@
 
 <div class="onglets_simple clearfix">
 	<ul>
-		<li>[(#URL_ECRIRE{stats_referers}|lien_ou_expose{<:info_tout_afficher:>,[(#ENV{jour,''}|non)],ajax})]</li>
+		<li>[(#URL_ECRIRE{stats_referers,jour=''}|lien_ou_expose{<:info_tout_afficher:>,[(#ENV{jour,''}|non)],ajax})]</li>
 		[(#ENV{id_article}|non)
 		<li>[(#URL_ECRIRE{stats_referers,jour=jour}|lien_ou_expose{<:date_aujourdhui|ucfirst:>,#ENV{jour,''}|=={jour},ajax})]</li>
 		<li>[(#URL_ECRIRE{stats_referers,jour=veille}|lien_ou_expose{<:date_hier|ucfirst:>,#ENV{jour,''}|=={veille},ajax})]</li>

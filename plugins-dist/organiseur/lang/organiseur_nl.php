@@ -23,8 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_date_avant_apres' => 'Geef een einddatum na de begindatum aan !',
 	'erreur_date_corrigee' => 'De datum werd verbeterd',
 	'erreur_destinataire_invalide' => 'De ontvanger @dest@ is niet geldig',
-	'erreur_heure' => 'Uur is ongeldig',
-	'erreur_heure_corrigee' => 'Het uur werd verbeterd',
+	'erreur_heure' => 'Tijdstip is ongeldig',
+	'erreur_heure_corrigee' => 'Het tijdstip werd verbeterd',
 
 	// I
 	'icone_ecrire_nouveau_message' => 'Een nieuwe boodschap opsturen',
@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_message_a' => 'Naar',
 	'info_message_date' => 'Datum',
 	'info_message_date_debut' => 'Begindatum',
-	'info_message_date_fin' => 'Eindtum',
+	'info_message_date_fin' => 'Einddatum',
 	'info_message_de' => 'Van',
 	'info_message_non_lu' => 'Nieuwe boodschap',
 	'info_message_objet' => 'Onderwerp',
@@ -65,11 +65,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'messages' => 'Boodschappen',
 
 	// N
-	'notification_annonce_lire_a_ladresse' => 'Je kan ze lezen op volgende address: @url@.',
+	'notification_annonce_lire_a_ladresse' => 'Je kan ze lezen op het volgende addres: @url@.',
 	'notification_annonce_publie_1' => '[@nom_site_spip@] Algemene aankondiging',
-	'notification_message_lire_a_ladresse' => 'Je kan het boodschap lezen en beantwoorden op het address: @url@.',
+	'notification_message_lire_a_ladresse' => 'Je kan de boodschap lezen en beantwoorden op het adres: @url@.',
 	'notification_message_publie_1' => '[@nom_site_spip@] Nieuwe boodschap',
-	'notification_message_recu_de' => 'Je hebt een nieuwe boodschap gekregen vanuit @nom@.',
+	'notification_message_recu_de' => 'Je hebt een nieuwe boodschap gekregen van @nom@.',
 
 	// T
 	'texte_message_brouillon' => 'Deze boodschapsontwerp werd opgeslagen.',

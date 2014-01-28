@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -45,7 +45,7 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 
 	if (!preg_match(',^\w+$,', $f)){
 		if ($continue) return false; //appel interne, on passe
-		die(htmlspecialchars($nom)." pas autorise");
+		die(spip_htmlspecialchars($nom)." pas autorise");
 	}
 
 	// passer en minuscules (cf les balises de formulaires)
@@ -66,7 +66,7 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 
 	include_spip('inc/minipres');
 	echo minipres(_T('forum_titre_erreur'),
-		 _T('fichier_introuvable', array('fichier'=> '<b>'.htmlentities($d).'</b>')));
+		 _T('fichier_introuvable', array('fichier'=> '<b>'.spip_htmlentities($d).'</b>')));
 	exit;
 }
 
@@ -406,11 +406,16 @@ function nettoyer_uri($reset = null)
 	return $propre = (preg_replace(',[?&]$,', '', $uri1));
 }
 
-//
-// donner l'URL de base d'un lien vers "soi-meme", modulo
-// les trucs inutiles
-//
-// http://doc.spip.org/@self
+
+/**
+ * Donner l'URL de base d'un lien vers "soi-meme", modulo les trucs inutiles
+ *
+ * @param string $amp
+ *    Style des esperluettes
+ * @param bool $root
+ * @return string
+ *    URL vers soi-même
+**/
 function self($amp = '&amp;', $root = false) {
 	$url = nettoyer_uri();
 	if (!$root
@@ -436,7 +441,8 @@ function self($amp = '&amp;', $root = false) {
 	}
 
 	// eviter les hacks
-	$url = htmlspecialchars($url);
+	include_spip('inc/filtres_mini');
+	$url = spip_htmlspecialchars($url);
 
 	// &amp; ?
 	if ($amp != '&amp;')
@@ -2142,7 +2148,7 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 		}
 
 		$page = pipeline('recuperer_fond',array(
-			'args'=>array('fond'=>$fond,'contexte'=>$contexte,'options'=>$options,'connect'=>$connect),
+			'args'=>array('fond'=>$f,'contexte'=>$contexte,'options'=>$options,'connect'=>$connect),
 			'data'=>$page
 		));
 		if (isset($options['ajax']) AND $options['ajax']){

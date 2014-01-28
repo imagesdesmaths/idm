@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2013                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -516,7 +516,7 @@ function traiter_raccourcis($t, $show_autobr = false) {
 		if (_request('var_mode') == 'wheel'
 		AND autoriser('debug')) {
 			$f = $wheel->compile();
-			echo "<pre>\n".htmlspecialchars($f)."</pre>\n";
+			echo "<pre>\n".spip_htmlspecialchars($f)."</pre>\n";
 			exit;
 		}
 		$notes = charger_fonction('notes', 'inc');

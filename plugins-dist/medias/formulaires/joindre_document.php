@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2013                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -208,6 +208,9 @@ function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=
 		if ($ancre)
 			$callback .= "jQuery('#doc$ancre a.editbox').eq(0).focus();";
 		if (count($sel)){
+			// passer les ids document selectionnes aux pipelines
+			$res['ids'] = $sel;
+
 			$sel = "#doc".implode(",#doc",$sel);
 		  $callback .= "jQuery('$sel').animateAppend();";
 		}

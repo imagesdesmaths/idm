@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -36,21 +36,22 @@ function expliquer_config($cfg){
 	$table = 'meta';
 	$casier = null;
 	$sous_casier = array();
-	$cfg = explode('/',$cfg);
-	// si le premier argument est vide, c'est une syntaxe /table/ ou un appel vide ''
-	if (!reset($cfg) AND count($cfg)>1) {
-		array_shift($cfg);
-		$table = array_shift($cfg);
-		if (!isset($GLOBALS[$table]))
-			lire_metas($table);
+	if (strlen($cfg)){
+		$cfg = explode('/',$cfg);
+		// si le premier argument est vide, c'est une syntaxe /table/ ou un appel vide ''
+		if (!reset($cfg) AND count($cfg)>1) {
+			array_shift($cfg);
+			$table = array_shift($cfg);
+			if (!isset($GLOBALS[$table]))
+				lire_metas($table);
+		}
+		// si on a demande #CONFIG{/meta,'',0}
+		if (count($cfg))
+			$casier = array_shift($cfg);
+
+		if (count($cfg))
+			$sous_casier = $cfg;
 	}
-	// si on a demande #CONFIG{/meta,'',0}
-	if (count($cfg))
-		$casier = array_shift($cfg);
-
-	if (count($cfg))
-		$sous_casier = $cfg;
-
 	return array($table,$casier,$sous_casier);
 }
 
@@ -379,6 +380,7 @@ function liste_metas()
 {
 	return pipeline('configurer_liste_metas', array(
 		'nom_site' => _T('info_mon_site_spip'),
+		'slogan_site' => '',
 		'adresse_site' => preg_replace(",/$,", "", url_de_base()),
 		'descriptif_site' => '',
 		'activer_logos' => 'oui',

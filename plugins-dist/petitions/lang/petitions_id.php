@@ -7,6 +7,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// B
+	'bouton_radio_activer_petition' => 'Aktifkan petisi',
+	'bouton_radio_pas_petition' => 'Tidak ada petisi',
+	'bouton_radio_petition_activee' => 'Petisi diaktifkan',
+	'bouton_radio_supprimer_petition' => 'Hapus petisi',
+
 	// F
 	'form_pet_adresse_site' => 'URL situs anda', # MODIF
 	'form_pet_aucune_signature' => 'Tidak ada tanda tangan yang cocok dengan kode ini...', # MODIF

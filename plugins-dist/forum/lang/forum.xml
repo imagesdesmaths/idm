@@ -98,6 +98,7 @@
 	<langue code="nb" url="http://trad.spip.net/tradlang_module/forum?lang_cible=nb" total="133" traduits="25" relire="0" modifs="20" nouveaux="88" pourcent="18.80">
 	</langue>
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/forum?lang_cible=nl" total="133" traduits="133" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>

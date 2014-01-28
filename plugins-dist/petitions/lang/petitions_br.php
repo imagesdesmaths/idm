@@ -7,6 +7,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// B
+	'bouton_radio_activer_petition' => 'Enaouiñ ar sinadeg',
+	'bouton_radio_pas_petition' => 'Sinadeg ebet',
+	'bouton_radio_petition_activee' => 'Sinadeg war-enaou',
+	'bouton_radio_supprimer_petition' => 'Dilemel ar sinadeg',
+
 	// F
 	'form_pet_adresse_site' => 'Chomlec’h ho lec’hienn', # MODIF
 	'form_pet_aucune_signature' => 'Sinadur ebet ne glot gant ar c’hod-mañ...', # MODIF
