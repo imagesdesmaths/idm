@@ -1,7 +1,7 @@
 <paquet
 	prefix="revisions"
 	categorie="edition"
-	version="1.7.6"
+	version="1.7.7"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/revision-32.png"

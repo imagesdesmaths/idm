@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2013                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -43,6 +43,15 @@ function medias_check_statuts($affiche = false){
  * @param string $version_cible
  */
 function medias_upgrade($nom_meta_base_version,$version_cible){
+
+	// ne pas installer tant qu'on est pas a jour sur version base SPIP
+	// cas typique d'un upgrade qui commence par suppression de connect.php
+	// SPIP lance la maj des plugins lors de la connexion, alors que l'upgrade SPIP
+	// a pas encore ete joue : ca casse cet upgrade quand on migre depuis un tres vieux SPIP
+	if (isset($GLOBALS['meta']['version_installee'])
+		AND ($GLOBALS['spip_version_base'] != (str_replace(',','.',$GLOBALS['meta']['version_installee']))))
+		return;
+
 	if (!isset($GLOBALS['meta'][$nom_meta_base_version])){
 		$trouver_table = charger_fonction('trouver_table','base');
 		if ($desc = $trouver_table('spip_documents')
@@ -134,6 +143,10 @@ function medias_upgrade($nom_meta_base_version,$version_cible){
 	);
 	$maj['1.2.4'] = array(
 		// ajout de tar
+		array('creer_base_types_doc')
+	);
+	$maj['1.2.5'] = array(
+		// ajout de json
 		array('creer_base_types_doc')
 	);
 	include_spip('base/upgrade');

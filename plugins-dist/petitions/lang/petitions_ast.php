@@ -7,6 +7,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// B
+	'bouton_radio_activer_petition' => 'Activar la solicitú',
+	'bouton_radio_pas_petition' => 'Ensin solicitú',
+	'bouton_radio_petition_activee' => 'Solicitú activada',
+	'bouton_radio_supprimer_petition' => 'Desaniciar la solicitú',
+
 	// F
 	'form_pet_adresse_site' => 'Señes del to sitiu', # MODIF
 	'form_pet_aucune_signature' => 'Denguna robla concasa con esi códigu...', # MODIF

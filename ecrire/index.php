@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2010                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -103,7 +103,7 @@ elseif (isset($GLOBALS['meta']["admin"])) {
 		if (tester_url_ecrire("base_$var_f"))
 			$var_f = "base_$var_f";
 		if ($var_f != $exec) {
-			spip_log("Le script $var_f lance par $n se substitue a $exec");
+			spip_log("Le script $var_f lance par auteur$n se substitue a l'exec $exec");
 			$exec = $var_f;
 			set_request('exec', $exec);
 		}

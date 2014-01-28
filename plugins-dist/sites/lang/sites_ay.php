@@ -32,6 +32,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Aka qamawi mayjt’ayaña',
 	'icone_referencer_nouveau_site' => 'Mä machaq qamawi aytaña',
 	'icone_voir_sites_references' => 'Aytat qamawinak uñjaña',
+	'info_1_site' => '1 qamawi
+',
 	'info_a_valider' => '[Iyaw saña]',
 	'info_bloquer' => 'jark’antaña',
 	'info_bloquer_lien' => 'Aka chinu jark’antaña',

@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -110,7 +110,7 @@ function admin_repair_tables() {
 			  AND $msg = join(" ", sql_fetch($result_repair)) . ' '
 				AND strpos($msg, ' OK ')==FALSE){
 				$class = " class='notice'";
-				$m .= "<br /><tt>".htmlentities($msg)."</tt>\n";
+				$m .= "<br /><tt>".spip_htmlentities($msg)."</tt>\n";
 			}
 			else
 				$m .= " "._T('texte_table_ok');

@@ -1,0 +1,12 @@
+<BOUCLE_B(BREVES){!par date}{statut=prop}{0,10}>
+$rss['[(#DATE|date_ical)]'] .= '
+	<item>
+		<title><:breves:titre_breve_proposee|texte_backendq:> : [(#TITRE|texte_backendq)]</title>
+		<link>[(#URL_ECRIRE{breve, id_breve=#ID_BREVE}|url_absolue|texte_backendq)]</link>
+		<guid isPermaLink="true">[(#URL_ECRIRE{breves_voir, id_breve=#ID_BREVE}|url_absolue|texte_backendq)]</guid>
+		<dc:date>[(#DATE|date_iso)]</dc:date>
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG|texte_backendq)</dc:language>]
+		<description>[(#TEXTE|texte_backendq)]</description>
+	</item>';
+</BOUCLE_B>

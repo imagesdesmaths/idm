@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Modificar aquel sit',
 	'icone_referencer_nouveau_site' => 'Referenciar un sit nòu',
 	'icone_voir_sites_references' => 'Veire los sits referenciats',
+	'info_1_site' => '1 sit',
 	'info_a_valider' => '[de validar]',
 	'info_bloquer' => 'blocar',
 	'info_bloquer_lien' => 'Blocar aqueu liam',

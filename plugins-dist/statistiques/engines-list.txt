@@ -344,6 +344,10 @@ pesquisa\.sapo\.pt
 q=
 (.*\.|)qwant\.com
 
+[Qone8]
+q=
+(.*\.|)qone8\.com
+
 #
 # Services de mail
 # 

@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -363,7 +363,8 @@ function entites_html($texte, $tout=false, $quote=true) {
 	OR strpbrk($texte, "&\"'<>")==false
 	) return $texte;
 	include_spip('inc/texte');
-	$texte = htmlspecialchars(echappe_retour(echappe_html($texte,'',true),'','proteger_amp'),$quote?ENT_QUOTES:(ENT_COMPAT|ENT_HTML401));
+	$flags = !defined('PHP_VERSION_ID') OR PHP_VERSION_ID < 50400 ? ENT_COMPAT : ENT_COMPAT|ENT_HTML401;
+	$texte = spip_htmlspecialchars(echappe_retour(echappe_html($texte, '', true), '', 'proteger_amp'), $quote?ENT_QUOTES:$flags);
 	if ($tout)
 		return corriger_toutes_entites_html($texte);
 	else
@@ -966,6 +967,7 @@ function affdate_base($numdate, $vue, $options = array()) {
 
 	switch ($vue) {
 	case 'saison':
+	case 'saison_annee':
 		$saison = '';
 		if ($mois > 0){
 			$saison = 1;
@@ -974,7 +976,10 @@ function affdate_base($numdate, $vue, $options = array()) {
 			if (($mois == 9 AND $jour >= 21) OR $mois > 9) $saison = 4;
 			if (($mois == 12 AND $jour >= 21) OR $mois > 12) $saison = 1;
 		}
-		return $saison?_T('date_saison_'.$saison):'';
+		if($vue == 'saison')
+			return $saison?_T('date_saison_'.$saison):'';
+		else
+			return $saison?trim(_T('date_fmt_saison_annee', array('saison'=>_T('date_saison_'.$saison), 'annee'=>$annee))) :'';
 
 	case 'court':
 		if ($avjc) return $annee;
@@ -1072,6 +1077,11 @@ function annee($numdate) {
 // http://doc.spip.org/@saison
 function saison($numdate) {
 	return affdate_base($numdate, 'saison');
+}
+
+// http://doc.spip.org/@saison_annee
+function saison_annee($numdate) {
+	return affdate_base($numdate, 'saison_annee');
 }
 
 // http://doc.spip.org/@affdate
@@ -1632,6 +1642,7 @@ function modulo($nb, $mod, $add=0) {
 
 /**
  * Vérifie qu'un nom (d'auteur) ne comporte pas d'autres tags que <multi>
+ * et ceux volontairement spécifiés dans la constante
  *
  * @param string $nom
  *      Nom (signature) proposé
@@ -1643,7 +1654,17 @@ function nom_acceptable($nom) {
 	if (!is_string($nom)) {
 		return false;
 	}
-	$v_nom = str_replace(array('@multi@','@/multi@'), array('<multi>','</multi>'), supprimer_tags(str_replace(array('<multi>','</multi>'), array('@multi@','@/multi@'), $nom)));
+	if (!defined('_TAGS_NOM_AUTEUR')) define('_TAGS_NOM_AUTEUR','');
+	$tags_acceptes = array_unique(explode(',', 'multi,' . _TAGS_NOM_AUTEUR));
+	foreach($tags_acceptes as $tag) {
+		if (strlen($tag)) {
+			$remp1[] = '<'.trim($tag).'>';
+			$remp1[] = '</'.trim($tag).'>';
+			$remp2[] = '\x60'.trim($tag).'\x61';
+			$remp2[] = '\x60/'.trim($tag).'\x61';
+		}
+	}	
+	$v_nom = str_replace($remp2, $remp1, supprimer_tags(str_replace($remp1, $remp2, $nom)));
 	return str_replace('&lt;', '<', $v_nom) == $nom;
 }
 
@@ -1712,9 +1733,9 @@ function enclosure2microformat($e) {
 	}
 	$fichier = basename($url);
 	return '<a rel="enclosure"'
-		. ($url? ' href="'.htmlspecialchars($url).'"' : '')
-		. ($type? ' type="'.htmlspecialchars($type).'"' : '')
-		. ($length? ' title="'.htmlspecialchars($length).'"' : '')
+		. ($url? ' href="'.spip_htmlspecialchars($url).'"' : '')
+		. ($type? ' type="'.spip_htmlspecialchars($type).'"' : '')
+		. ($length? ' title="'.spip_htmlspecialchars($length).'"' : '')
 		. '>'.$fichier.'</a>';
 }
 // La fonction inverse
@@ -1729,8 +1750,8 @@ function microformat2enclosure($tags) {
 			$length = intval(extraire_attribut($e, 'length')); # vieux data
 		$fichier = basename($url);
 		$enclosures[] = '<enclosure'
-			. ($url? ' url="'.htmlspecialchars($url).'"' : '')
-			. ($type? ' type="'.htmlspecialchars($type).'"' : '')
+			. ($url? ' url="'.spip_htmlspecialchars($url).'"' : '')
+			. ($type? ' type="'.spip_htmlspecialchars($type).'"' : '')
 			. ($length? ' length="'.$length.'"' : '')
 			. ' />';
 	}

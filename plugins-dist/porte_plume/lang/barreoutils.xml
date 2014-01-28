@@ -25,6 +25,7 @@
 		<traducteur nom="phante" lien="http://trad.spip.net/auteur/phante" />
 	</langue>
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/barreoutils?lang_cible=nl" total="81" traduits="81" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
 	<langue code="pt" url="http://trad.spip.net/tradlang_module/barreoutils?lang_cible=pt" total="81" traduits="81" relire="0" modifs="0" nouveaux="0" pourcent="100.00">

@@ -109,7 +109,7 @@ class SafeHTML
   return true;
  }
 
- function _writeAttrs ($attrs) 
+ function _writeAttrs ($attrs,$tag=null) 
  {
   if (is_array($attrs)) {
    foreach ($attrs as $name => $value) {
@@ -122,7 +122,7 @@ class SafeHTML
     if (strpos($name, 'data') === 0) {
      continue;
     }
-    if (in_array($name, $this->attributes)) {
+    if ($tag !='a' AND in_array($name, $this->attributes)) {
      continue;
     }
     if (!preg_match("/^[a-z0-9-]+$/i", $name)) {
@@ -249,7 +249,7 @@ class SafeHTML
   }
    
   $this->_xhtml .= '<' . $name;
-  $this->_writeAttrs($attrs);
+  $this->_writeAttrs($attrs,$name);
   $this->_xhtml .= '>';
   array_push($this->_stack,$name);
   $this->_counter[$name] = isset($this->_counter[$name]) ? $this->_counter[$name]+1 : 1;

@@ -7,6 +7,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// B
+	'bouton_radio_activer_petition' => 'Dùng thỉnh nguyện thư ',
+	'bouton_radio_pas_petition' => 'Không dùng',
+	'bouton_radio_petition_activee' => 'Thỉnh nguyện thư được mở lên',
+	'bouton_radio_supprimer_petition' => 'Xóa thỉnh nguyện thư',
+
 	// F
 	'form_pet_adresse_site' => 'URL của website bạn', # MODIF
 	'form_pet_aucune_signature' => 'Không ký hiệu nào phù hợp với mã số này...', # MODIF

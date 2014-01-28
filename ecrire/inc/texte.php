@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -69,7 +69,7 @@ function echappe_js($t,$class=' class="echappe-js"') {
 	if (preg_match_all(',<script.*?($|</script.),isS', $t, $r, PREG_SET_ORDER))
 	foreach ($r as $regs)
 		$t = str_replace($regs[0],
-			"<code$class>".nl2br(htmlspecialchars($regs[0])).'</code>',
+			"<code$class>".nl2br(spip_htmlspecialchars($regs[0])).'</code>',
 			$t);
 	return $t;
 }

@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2013                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -98,7 +98,7 @@ function formulaires_reviser_traiter_dist($objet,$id_objet,$id_version,$id_diff)
 	$id_diff = _request('id_diff');
 
 	if (_AJAX)
-		$res['message_ok'].="<script type='text/javascript'>if (window.jQuery) jQuery('#wysiwyg.revision').ajaxReload({args:{id_version:$id_version,id_diff:$id_diff}});</script>";
+		$res['message_ok'].="<script type='text/javascript'>if (window.jQuery) jQuery('#wysiwyg.revision').ajaxReload({args:{id_version:$id_version,id_diff:$id_diff},history:true});</script>";
 	else
 		$res['redirect'] = parametre_url(parametre_url(self(),'id_version',$id_version),'id_diff',$id_diff,'&');
 	return $res;

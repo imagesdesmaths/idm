@@ -88,6 +88,7 @@
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/mots?lang_cible=nl" total="61" traduits="61" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="ericdg10" lien="http://trad.spip.net/auteur/ericdg10" />
 		<traducteur nom="gerbrand" lien="http://trad.spip.net/auteur/gerbrand" />
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 	</langue>
 	<langue code="no" url="http://trad.spip.net/tradlang_module/mots?lang_cible=no" total="61" traduits="10" relire="0" modifs="1" nouveaux="50" pourcent="16.39">
@@ -118,7 +119,7 @@
 	</langue>
 	<langue code="ro" url="http://trad.spip.net/tradlang_module/mots?lang_cible=ro" total="61" traduits="44" relire="0" modifs="3" nouveaux="14" pourcent="72.13">
 	</langue>
-	<langue code="ru" url="http://trad.spip.net/tradlang_module/mots?lang_cible=ru" total="61" traduits="60" relire="0" modifs="1" nouveaux="0" pourcent="98.36">
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/mots?lang_cible=ru" total="61" traduits="61" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/mots?lang_cible=sk" total="61" traduits="61" relire="0" modifs="0" nouveaux="0" pourcent="100.00">

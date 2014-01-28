@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'A honlap módosítása',
 	'icone_referencer_nouveau_site' => 'Új honlap felvétele',
 	'icone_voir_sites_references' => 'Felvett honlapok nézete',
+	'info_1_site' => '1 honlap',
 	'info_a_valider' => '[érvényesítendő]',
 	'info_bloquer' => 'blokkol',
 	'info_bloquer_lien' => 'blokkolni a linket',

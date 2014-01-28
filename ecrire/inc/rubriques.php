@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -616,7 +616,7 @@ function inc_calcul_hierarchie_in_dist($id, $tout=true) {
 
 	if (isset($b[$id])) {
 		// Notre branche commence par la rubrique de depart si $tout=true
-		return $tout ? (strlen($b[$id]) ? $b[$id] . ",$id" : $id) : "";
+		return $tout ? (strlen($b[$id]) ? $b[$id] . ",$id" : $id) : $b[$id];
 	}
 
 	$hier = "";

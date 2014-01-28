@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -44,7 +44,7 @@ function resolve_path($url) {
 // http://doc.spip.org/@suivre_lien
 function suivre_lien($url, $lien) {
 
-	if (preg_match(',^(mailto|javascript):,iS', $lien))
+	if (preg_match(',^(mailto|javascript|data):,iS', $lien))
 		return $lien;
 	if (preg_match(';^((?:[a-z]{3,7}:)?//.*?)(/.*)?$;iS', $lien, $r))
 		return $r[1].resolve_path($r[2]);
@@ -130,5 +130,49 @@ function abs_url($texte, $base='') {
 		return liens_absolus($texte, $base);
 }
 
+/**
+* htmlspecialchars wrapper (PHP >= 5.4 compat issue)
+*
+* @param string $string
+* @param int $flags
+* @param string $encoding
+* @param bool $double_encode
+* @return string
+*/
+function spip_htmlspecialchars($string, $flags=null, $encoding='ISO-8859-1', $double_encode = true){
+	if (is_null($flags)) {
+		if (!defined('PHP_VERSION_ID') OR PHP_VERSION_ID < 50400)
+			$flags = ENT_COMPAT;
+		else
+			$flags = ENT_COMPAT|ENT_HTML401;
+	}
 
+	if (!defined('PHP_VERSION_ID') OR PHP_VERSION_ID < 50203)
+		return htmlspecialchars($string,$flags,$encoding);
+	else
+		return htmlspecialchars($string,$flags,$encoding,$double_encode);
+}
+
+/**
+* htmlentities wrapper (PHP >= 5.4 compat issue)
+*
+* @param string $string
+* @param int $flags
+* @param string $encoding
+* @param bool $double_encode
+* @return string
+*/
+function spip_htmlentities($string,$flags=null,$encoding = 'ISO-8859-1',$double_encode = true){
+	if (is_null($flags)) {
+		if (!defined('PHP_VERSION_ID') OR PHP_VERSION_ID < 50400)
+			$flags = ENT_COMPAT;
+		else
+			$flags = ENT_COMPAT|ENT_HTML401;
+	}
+
+	if (!defined('PHP_VERSION_ID') OR PHP_VERSION_ID < 50203)
+		return htmlentities($string,$flags,$encoding);
+	else
+		return htmlentities($string,$flags,$encoding,$double_encode);
+}
 ?>

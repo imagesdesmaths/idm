@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Bu siteyi değiştir',
 	'icone_referencer_nouveau_site' => 'Yeni bir siteye atıfta bulun',
 	'icone_voir_sites_references' => 'Atıfta bulunulan siteleri göster',
+	'info_1_site' => '1 site',
 	'info_a_valider' => '[onaylanacak]',
 	'info_bloquer' => 'engelle',
 	'info_bloquer_lien' => 'bu bağlantıyı engelle',

@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2013                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -131,14 +131,14 @@ function calculer_visites($t) {
 					if (count($noref))
 						sql_update('spip_articles',
 							array('visites' => "visites+$n",
-							 'popularite' => "popularite+".round($n*$b,2),
+							 'popularite' => "popularite+".number_format(round($n*$b,2), 2, '.', ''),
 							 'maj' => 'maj'),
 							sql_in('id_article',$noref));
 							   
 					if (count($ref))
 						sql_update('spip_articles',
 							   array('visites' => "visites+".($n+1),
-							 'popularite' => "popularite+".round($n*$b,2),
+							 'popularite' => "popularite+".number_format(round($n*$b,2), 2, '.', ''),
 							 'maj' => 'maj'),
 							sql_in('id_article',$ref));
 							   
