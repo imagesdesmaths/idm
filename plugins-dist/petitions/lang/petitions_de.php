@@ -16,6 +16,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_checkbox_indiquer_site' => 'Angabe einer Website erforderlich',
 	'bouton_checkbox_signature_unique_email' => 'eine einzige Unterzeichnung pro Email',
 	'bouton_checkbox_signature_unique_site' => 'nur ein Unterzeichner pro Website',
+	'bouton_radio_activer_petition' => 'Petitionen aktivieren',
+	'bouton_radio_pas_petition' => 'Keine Petition',
+	'bouton_radio_petition_activee' => 'Petition aktiviert',
+	'bouton_radio_supprimer_petition' => 'Petition löschen',
 
 	// F
 	'filtre' => 'Filter:',

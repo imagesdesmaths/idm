@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2013                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -38,7 +38,7 @@ function forum_declarer_tables_interfaces($interfaces){
 
 	$interfaces['table_statut']['spip_forum'][] = array('champ'=>'statut','publie'=>'publie','previsu'=>'publie,prop','exception'=>'statut');
 
-	$interfaces['table_des_traitements']['PARAMETRES_FORUM'][]= 'htmlspecialchars(%s)';
+	$interfaces['table_des_traitements']['PARAMETRES_FORUM'][]= 'spip_htmlspecialchars(%s)';
 	$interfaces['table_des_traitements']['TEXTE']['forums']= "liens_nofollow(safehtml(".str_replace("%s","interdit_html(%s)",_TRAITEMENT_RACCOURCIS)."))";
 	$interfaces['table_des_traitements']['TITRE']['forums']= "liens_nofollow(safehtml(".str_replace("%s","interdit_html(%s)",_TRAITEMENT_TYPO)."))";
 	$interfaces['table_des_traitements']['NOTES']['forums']= "liens_nofollow(safehtml(".str_replace("%s","interdit_html(%s)",_TRAITEMENT_RACCOURCIS)."))";

@@ -44,8 +44,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_gestion_colonne' => 'Aantal kolommen ',
 	'barre_gestion_cr_casse' => 'Letterkast respecteren',
 	'barre_gestion_cr_changercasse' => 'Letterkast veranderen',
-	'barre_gestion_cr_changercassemajuscules' => 'Hoofdletter zetten',
-	'barre_gestion_cr_changercasseminuscules' => 'Onderkast zetten',
+	'barre_gestion_cr_changercassemajuscules' => 'In hoofdletters zetten',
+	'barre_gestion_cr_changercasseminuscules' => 'In onderkast zetten',
 	'barre_gestion_cr_chercher' => 'Zoeken',
 	'barre_gestion_cr_entier' => 'Volledige woord',
 	'barre_gestion_cr_remplacer' => 'Vervangen',
@@ -79,7 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_preview' => 'Preview-modus',
 	'barre_quote' => '<quote>Een boodschap citeren</quote>',
 	'barre_stats' => 'Statistieken van de tekst wijzen',
-	'barre_tableau' => 'Een table (vooraf te selecteren) aanmaken/verbeteren',
+	'barre_tableau' => 'Een tabel (vooraf te selecteren) aanmaken/verbeteren',
 
 	// C
 	'config_info_enregistree' => 'Configuratie opgeslagen',

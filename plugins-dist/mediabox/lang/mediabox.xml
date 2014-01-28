@@ -33,6 +33,7 @@
 		<traducteur nom="jwander" lien="http://trad.spip.net/auteur/jwander" />
 	</langue>
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/mediabox?lang_cible=nl" total="34" traduits="34" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
 	<langue code="pt" url="http://trad.spip.net/tradlang_module/mediabox?lang_cible=pt" total="34" traduits="34" relire="0" modifs="0" nouveaux="0" pourcent="100.00">

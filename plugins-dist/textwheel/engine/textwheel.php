@@ -497,7 +497,7 @@ class TextWheelDebug extends TextWheel {
 				$total += $t;
 				if(intval($t*10))
 					echo "<tr>
-					<td class='number strong'>".number_format(round($t*10)/10,1)."</td><td> ".htmlspecialchars($r)."</td>
+					<td class='number strong'>".number_format(round($t*10)/10,1)."</td><td> ".spip_htmlspecialchars($r)."</td>
 					<td"
 					. (!$applications ? " class='zero'" : "")
 					.">".$applications."/".intval(TextWheelDebug::$w[$r])."</td>
@@ -528,7 +528,7 @@ class TextWheelDebug extends TextWheel {
 			} else {
 				echo "<tr class='prof-$profondeur'>
 					<td class='number'><b>".intval($duree)."</b>&nbsp;ms</td>
-					<td class='name'>".htmlspecialchars($cause)."</td>
+					<td class='name'>".spip_htmlspecialchars($cause)."</td>
 					</tr>\n";
 			}
 		}

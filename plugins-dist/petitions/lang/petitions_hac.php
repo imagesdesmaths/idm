@@ -7,6 +7,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// B
+	'bouton_radio_activer_petition' => 'چالاککەردەی قەواڵەی',
+	'bouton_radio_pas_petition' => 'هیچ قەۋاڵیـۋ نییا',
+	'bouton_radio_petition_activee' => 'قەۋاڵە چالاك کریان',
+	'bouton_radio_supprimer_petition' => 'قەۋاڵەکەی بسەڕۆ',
+
 	// F
 	'form_pet_adresse_site' => 'آدرس سايت تان', # MODIF
 	'form_pet_aucune_signature' => '...هيچ امضائى با اين كد مطابقت نميكند  ', # MODIF

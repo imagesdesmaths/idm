@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2013                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -149,22 +149,28 @@ function filtre_embarque_fichier ($src, $base="", $maxsize = 4096) {
 	static $mime = array();
 	$extension = substr(strrchr($src,'.'),1);
 	$filename = $base . $src;
-	#var_dump("$base:$src:$filename");
 
 	if (!file_exists($filename)
 		OR filesize($filename)>$maxsize
 		OR !lire_fichier($filename, $contenu))
 		return $src;
 
-	if (!isset($mime[$extension]))
+	if (!isset($mime[$extension])){
+		if (isset($GLOBALS['tables_mime']) AND isset($GLOBALS['tables_mime'][$extension]))
+			$mime[$extension] = $GLOBALS['tables_mime'][$extension];
+	}
+	if (!isset($mime[$extension])){
+		if (!function_exists("sql_getfetsel"))
+			include_spip("base/abstract_sql");
 		$mime[$extension] = sql_getfetsel('mime_type','spip_types_documents','extension='.sql_quote($extension));
+	}
 
 	$base64 = base64_encode($contenu);
 	$encoded = 'data:'.$mime[$extension].';base64,'.$base64;
-	#var_dump($encoded);
 
 	return $encoded;
 }
+
 
 /**
  * Embarquer le 'src' d'une balise html en URI Scheme

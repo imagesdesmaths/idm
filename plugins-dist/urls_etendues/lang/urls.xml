@@ -49,7 +49,8 @@
 	</langue>
 	<langue code="lb" url="http://trad.spip.net/tradlang_module/urls?lang_cible=lb" total="45" traduits="3" relire="0" modifs="0" nouveaux="42" pourcent="6.67">
 	</langue>
-	<langue code="nl" url="http://trad.spip.net/tradlang_module/urls?lang_cible=nl" total="45" traduits="3" relire="0" modifs="0" nouveaux="42" pourcent="6.67">
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/urls?lang_cible=nl" total="45" traduits="45" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 	</langue>
 	<langue code="pt" url="http://trad.spip.net/tradlang_module/urls?lang_cible=pt" total="45" traduits="45" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Cláudia Anjos Lopes" lien="http://trad.spip.net/auteur/claudia_a_lopes" />

@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -401,9 +401,9 @@ function balise_INTRODUCTION_dist($p) {
 function balise_LANG_dist ($p) {
 	$_lang = champ_sql('lang', $p);
 	if (!$p->etoile)
-		$p->code = "htmlentities($_lang ? $_lang : \$GLOBALS['spip_lang'])";
+		$p->code = "spip_htmlentities($_lang ? $_lang : \$GLOBALS['spip_lang'])";
 	else
-		$p->code = "htmlentities($_lang)";
+		$p->code = "spip_htmlentities($_lang)";
 	$p->interdire_scripts = false;
 	return $p;
 }

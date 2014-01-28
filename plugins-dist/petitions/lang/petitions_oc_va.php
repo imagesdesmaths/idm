@@ -7,6 +7,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// B
+	'bouton_radio_activer_petition' => 'Activar la peticion',
+	'bouton_radio_pas_petition' => 'Ges de peticion',
+	'bouton_radio_petition_activee' => 'Peticion activaa',
+	'bouton_radio_supprimer_petition' => 'Suprimir la peticion',
+
 	// F
 	'form_pet_adresse_site' => 'Adreiça de vòstre sit', # MODIF
 	'form_pet_aucune_signature' => 'Ges de signatura correspònd pas a aqueu còde...', # MODIF

@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -25,7 +25,7 @@ function install_etape_ldap3_dist()
 		? _INSTALL_BASE_LDAP
 		: "ou=users, dc=mon-domaine, dc=com";
 
-	echo install_debut_html();
+	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
 
 	echo info_etape(_T('info_chemin_acces_1'),info_progression_etape(3,'etape_ldap','install/')),_T('info_chemin_acces_2');
 
@@ -48,13 +48,13 @@ function install_etape_ldap3_dist()
 			if (is_array($names)) {
 				for ($j = 0; $j < $names["count"]; $j++) {
 					$n++;
-					$res .= "<li><input name=\"base_ldap\" value=\"".htmlspecialchars($names[$j])."\" type='radio' id='tab$n'";
+					$res .= "<li><input name=\"base_ldap\" value=\"".spip_htmlspecialchars($names[$j])."\" type='radio' id='tab$n'";
 					if (!$checked) {
 						$res .= " checked=\"checked\"";
 						$checked = true;
 					}
 					$res .= " />";
-					$res .= "<label for='tab$n'>".htmlspecialchars($names[$j])."</label></li>\n";
+					$res .= "<label for='tab$n'>".spip_htmlspecialchars($names[$j])."</label></li>\n";
 				}
 			}
 		}

@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'mi vɔ ɖyɔ gblogblojí',
 	'icone_referencer_nouveau_site' => 'dó àcɛ gblogblojí ',
 	'icone_voir_sites_references' => 'Mi kpɔn gblogblojí yè ná àcɛ ɔ',
+	'info_1_site' => 'gblogblojí ɖòkpó',
 	'info_a_valider' => '[sɔ kɛn ná]',
 	'info_bloquer_lien' => 'mi ján cácádó é lɔ',
 	'info_derniere_syndication' => 'Miná gùdó tɔn ɔ',

@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -22,19 +22,21 @@ function install_etape_3b_dist()
 	$pass = _request('pass');
 	$pass_verif = _request('pass_verif');
 
-	$server_db = defined('_INSTALL_SERVER_DB')
-		? _INSTALL_SERVER_DB
+	$server_db = defined('_INSTALL_SERVER_DB') ?
+		_INSTALL_SERVER_DB
 		: _request('server_db');
 
-	if (!defined('_PASS_LONGUEUR_MINI')) define('_PASS_LONGUEUR_MINI',6);
-	if($login) {
-		$echec = ($pass!=$pass_verif) ?
-		  _T('info_passes_identiques')
-		  : ((strlen($pass)<_PASS_LONGUEUR_MINI) ?
-		     _T('info_passe_trop_court_car_pluriel',array('nb'=>_PASS_LONGUEUR_MINI))
-		     : ((strlen($login)<3) ?
-			_T('info_login_trop_court')
-			: ''));
+	if (!defined('_PASS_LONGUEUR_MINI')) define('_PASS_LONGUEUR_MINI', 6);
+	if (!defined('_LOGIN_TROP_COURT')) define('_LOGIN_TROP_COURT', 4);
+
+		if($login) {
+			$echec = ($pass!=$pass_verif) ?
+				_T('info_passes_identiques')
+				: ((strlen($pass)<_PASS_LONGUEUR_MINI) ?
+					_T('info_passe_trop_court_car_pluriel', array('nb'=>_PASS_LONGUEUR_MINI))
+					: ((strlen($login)<_LOGIN_TROP_COURT) ?
+						_T('info_login_trop_court')
+						: ''));
 		include_spip('inc/filtres');
 		if (!$echec AND $email AND !email_valide($email))
 			$echec = _T('form_email_non_valide');
