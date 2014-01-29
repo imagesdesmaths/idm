@@ -9,7 +9,7 @@
     <div class="content artlist">
       <div class="page">
 
-        <!-- LOGO -->
+        [(#LOGO_RUBRIQUE|right||image_reduire{200,200})]
 
         <h1>
           <BOUCLE_parent(RUBRIQUES){id_rubrique=#ID_PARENT}{id_rubrique != 18}>
@@ -22,7 +22,7 @@
 
         <B_nav>
           <div class="formgrey">
-            <form action="#URL_SITE_SPIP/#URL_RUBRIQUE" method="post" name="nav_menu">
+            <form action="#URL_SITE_SPIP/#URL_RUBRIQUE" method="post" name="nav_menu" style="text-align:right;margin-bottom:1ex;">
               <select name="nav_url" onChange="document.location.href = document.nav_menu.nav_url.options[document.nav_menu.nav_url.selectedIndex].value">
                 <option value="#URL_SITE_SPIP/#URL_RUBRIQUE" selected>Navigation rapide :</option>
                 <BOUCLE_nav(ARTICLES) {id_rubrique} {par titre}>

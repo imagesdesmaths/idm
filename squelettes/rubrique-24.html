@@ -15,7 +15,7 @@
           <BOUCLE_parent(RUBRIQUES){id_rubrique=#ID_PARENT}{id_rubrique != 18}>
             <a href="#URL_RUBRIQUE">#TITRE</a> :
           </BOUCLE_parent>
-          #TITRE
+          <span[ class="script"(#ID_RUBRIQUE|=={34}|oui)]>#TITRE</span>
         </h1>
 
         [<div class="texte">(#TEXTE)</div>]
@@ -36,19 +36,19 @@
 
       <div class="eachart">
         <B_articles>
-        #PAGINATION{idm}
+        <div class="pagination">#PAGINATION{idm}</div>
         <BOUCLE_articles(ARTICLES) {id_rubrique} {par titre} {pagination 20}>
           [(#INCLURE{fond=inc/resume_list}{id_article})]
         </BOUCLE_articles>
-        #PAGINATION{idm}
+        <div class="pagination">#PAGINATION{idm}</div>
         </B_articles>
 
         <B_articles_hors>
-        #PAGINATION{idm}
+        <div class="pagination">#PAGINATION{idm}</div>
         <BOUCLE_articles_hors(ARTICLES) {branche} {par titre} {pagination 20}>
-        [(#INCLURE{fond=inc/resume_list}{id_article})]
+          [(#INCLURE{fond=inc/resume_list}{id_article})]
         </BOUCLE_articles_hors>
-        #PAGINATION{idm}
+        <div class="pagination">#PAGINATION{idm}</div>
         </B_articles_hors>
         <//B_articles>
       </div>
