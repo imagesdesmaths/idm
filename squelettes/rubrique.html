@@ -1,53 +1,60 @@
-#CACHE{3600} 
+#CACHE{3600}
 <BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
-  <INCLURE{fond=inc/head}{title=#TITRE}{id_rubrique=#ID_RUBRIQUE}{class=nopage}>    
-    <div id="art_head">         
-      <h2 class="home_hat">Rubrique</h2>         
-      <div id="art_social">[(#INCLURE{fond=inc/social_bar})]       
-      </div>    
+  <INCLURE{fond=inc/head}{title=#TITRE}{id_rubrique=#ID_RUBRIQUE}{class=nopage}>
+  <div id="art_head">
+    <h2 class="home_hat">Rubrique</h2>
+      <div id="art_social">[(#INCLURE{fond=inc/social_bar})]
+      </div>
     </div>
-    <div class="content artlist">       
+    <div class="content artlist">
       <div class="page">
+
+        <!-- LOGO -->
+
         <h1>
           <BOUCLE_parent(RUBRIQUES){id_rubrique=#ID_PARENT}{id_rubrique != 18}>
-  <a href="#URL_RUBRIQUE">#TITRE</a> :</BOUCLE_parent> <span[ class="script"(#ID_RUBRIQUE|=={34}|oui)]>#TITRE</span>
+            <a href="#URL_RUBRIQUE">#TITRE</a> :
+          </BOUCLE_parent>
+          <span[ class="script"(#ID_RUBRIQUE|=={34}|oui)]>#TITRE</span>
         </h1>
-        [<div class="texte">(#TEXTE)</div>]     
-      <B_nav>
-      <div class="formgrey">
-        <form action="#URL_SITE_SPIP/#URL_RUBRIQUE" method="post" name="nav_menu">  
-          <select name="nav_url" onChange="document.location.href = document.nav_menu.nav_url.options[document.nav_menu.nav_url.selectedIndex].value">    
-            <option value="#URL_SITE_SPIP/#URL_RUBRIQUE" selected>Navigation rapide :
-            </option>
-            <BOUCLE_nav(ARTICLES) {id_rubrique} {par titre}>    
-              <option value="#URL_SITE_SPIP/#URL_ARTICLE">- #TITRE
-              </option>
-            </BOUCLE_nav>  
-          </select>
-        </form>
-      </div>
-      </B_nav>
 
+        [<div class="texte">(#TEXTE)</div>]
+
+        <B_nav>
+          <div class="formgrey">
+            <form action="#URL_SITE_SPIP/#URL_RUBRIQUE" method="post" name="nav_menu">
+              <select name="nav_url" onChange="document.location.href = document.nav_menu.nav_url.options[document.nav_menu.nav_url.selectedIndex].value">
+                <option value="#URL_SITE_SPIP/#URL_RUBRIQUE" selected>Navigation rapide :</option>
+                <BOUCLE_nav(ARTICLES) {id_rubrique} {par titre}>
+                <option value="#URL_SITE_SPIP/#URL_ARTICLE">- #TITRE</option>
+                </BOUCLE_nav>
+              </select>
+            </form>
+          </div>
+        </B_nav>
       </div>
+
       <div class="eachart">
-      <B_articles>
-        <div class="pagination">#PAGINATION{idm}</div> 
+        <B_articles>
+        <div class="pagination">#PAGINATION{idm}</div>
         <BOUCLE_articles(ARTICLES) {id_rubrique} {par num titre} {!par date} {pagination 20}>
-          [(#INCLURE{fond=inc/resume_list}{id_article})] 
+          [(#INCLURE{fond=inc/resume_list}{id_article})]
         </BOUCLE_articles>
-        <div class="pagination">#PAGINATION{idm}</div> 
-      </B_articles>
-      <B_articles_hors>
-        <div class="pagination">#PAGINATION{idm}</div>  
+        <div class="pagination">#PAGINATION{idm}</div>
+        </B_articles>
+
+        <B_articles_hors>
+        <div class="pagination">#PAGINATION{idm}</div>
         <BOUCLE_articles_hors(ARTICLES) {branche} {par num titre} {!par date} {pagination 20}>
-          [(#INCLURE{fond=inc/resume_list}{id_article})] 
+          [(#INCLURE{fond=inc/resume_list}{id_article})]
         </BOUCLE_articles_hors>
-        <div class="pagination">#PAGINATION{idm}</div> 
-      </B_articles_hors>
-      <//B_articles>
+        <div class="pagination">#PAGINATION{idm}</div>
+        </B_articles_hors>
+        <//B_articles>
       </div>
     </div>
-    #INCLURE{fond=inc/foot} 
+
+#INCLURE{fond=inc/foot}
 </BOUCLE_rubrique>
 <INCLURE{fond=sommaire}>
-  <//B_rubrique>
+<//B_rubrique>
