@@ -50,6 +50,7 @@ function idm_autoriser() {}
 function autoriser_article_relire_dist ($faire, $type, $id, $qui, $opt) {
   if ($qui['id_auteur'] == 0) return false;
   if ($qui['statut'] == '0minirezo') return true;
+  if ((sql_getfetsel('statut', 'spip_articles', "id_article = $id") == "refuse") && ($qui['statut'] != '0minirezo')) return false;
 
   $id_auteur = $qui['id_auteur'];
   if (sql_countsel('spip_auteurs_liens', "objet = 'article' AND id_objet = $id AND id_auteur = $id_auteur")) return true;

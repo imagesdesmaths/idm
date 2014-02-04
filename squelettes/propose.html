@@ -1,5 +1,5 @@
 #CACHE{0}
-<BOUCLE_article(ARTICLES) {statut IN prop,publie} {id_article}>
+<BOUCLE_article(ARTICLES) {statut IN prop,publie,refuse} {id_article}>
   <BOUCLE_securite(CONDITION) {SI #AUTORISER{relire,article,#ID_ARTICLE}}>
     <INCLURE{fond=inc/head}{title=#TITRE - En cours de relecture}{id_rubrique}{id_article}>
     <h1>Article en cours de relecture</h1>
