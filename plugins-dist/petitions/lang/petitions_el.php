@@ -7,12 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// B
-	'bouton_radio_activer_petition' => 'Ενεργοποίηση της λίστας υπογραφών',
-	'bouton_radio_pas_petition' => 'Καμία αίτηση',
-	'bouton_radio_petition_activee' => 'Η αίτηση ενεργοποιήθηκε',
-	'bouton_radio_supprimer_petition' => 'Διαγράψτε την αίτηση',
-
 	// F
 	'form_pet_adresse_site' => 'Το URL της ιστοσελίδα σας', # MODIF
 	'form_pet_aucune_signature' => 'Καμία εγγραφή δεν αντιστοιχεί σε αυτόν τον κώδικα...', # MODIF

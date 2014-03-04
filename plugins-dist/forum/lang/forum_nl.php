@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_message_forum' => 'Geen bericht in het forum',
 
 	// B
-	'bouton_radio_articles_futurs' => 'alleen voor toekomstige artikels (geen bewerking op de databank).',
+	'bouton_radio_articles_futurs' => 'voor toekomstige artikels alleen (geen bewerking op de databank).',
 	'bouton_radio_articles_tous' => 'voor alle artikels zonder uitzondering.',
 	'bouton_radio_articles_tous_sauf_forum_desactive' => 'voor alle artikels, behalve deze waarvan het forum is gedesactiveerd.',
 	'bouton_radio_enregistrement_obligatoire' => 'Registratie verplicht (om bijdragen te kunnen

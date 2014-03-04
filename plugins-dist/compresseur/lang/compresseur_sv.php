@@ -10,7 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_compresseur_titre' => 'Optimering och komprimering',
 	'info_question_activer_compactage_css' => 'CSS',
-	'info_question_activer_compactage_js' => 'Vill du aktivera komprimering av  Javascript filer?' # MODIF
+	'info_question_activer_compactage_js' => 'Vill du aktivera komprimering av  Javascript filer?', # MODIF
+	'info_question_activer_compresseur' => 'Vill du aktivera komprimering av HTTP trafiken?' # MODIF
 );
 
 ?>

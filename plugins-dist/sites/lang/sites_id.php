@@ -33,7 +33,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Modifikasi situs ini',
 	'icone_referencer_nouveau_site' => 'Referensi sebuah situs baru',
 	'icone_voir_sites_references' => 'Tampilkan situs-situs referensi',
-	'info_1_site' => '1 situs',
 	'info_a_valider' => '[akan divalidasi]',
 	'info_bloquer' => 'blok',
 	'info_bloquer_lien' => 'Blokir tautan ini',

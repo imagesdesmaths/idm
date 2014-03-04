@@ -33,7 +33,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'שנה את האתר הזה',
 	'icone_referencer_nouveau_site' => 'ייחס אתר חדש',
 	'icone_voir_sites_references' => 'הצג אתרים עם מראי מקום',
-	'info_1_site' => 'אתר 1',
 	'info_a_valider' => '[לאישור]',
 	'info_bloquer' => 'חסום',
 	'info_bloquer_lien' => 'חסום את הקישור הזה',

@@ -7,12 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// B
-	'bouton_radio_activer_petition' => 'Zapnout petici',
-	'bouton_radio_pas_petition' => 'Bez petice',
-	'bouton_radio_petition_activee' => 'Petice zapnuta',
-	'bouton_radio_supprimer_petition' => 'Odstranit petici',
-
 	// F
 	'form_pet_adresse_site' => 'Zadejte adresu URL svého webu', # MODIF
 	'form_pet_aucune_signature' => 'Tomuto kódu neodpovídá žádný podpis...', # MODIF

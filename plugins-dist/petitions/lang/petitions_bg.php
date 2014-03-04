@@ -7,12 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// B
-	'bouton_radio_activer_petition' => 'Активиране на молбата',
-	'bouton_radio_pas_petition' => 'Без молба',
-	'bouton_radio_petition_activee' => 'Молбата е активирана',
-	'bouton_radio_supprimer_petition' => 'Изтриване на молбата',
-
 	// F
 	'form_pet_adresse_site' => 'URL на сайта', # MODIF
 	'form_pet_aucune_signature' => 'Кодът не отговаря на никой запис', # MODIF

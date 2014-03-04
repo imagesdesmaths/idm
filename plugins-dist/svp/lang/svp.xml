@@ -27,11 +27,7 @@
 	<langue code="it" url="http://trad.spip.net/tradlang_module/svp?lang_cible=it" total="239" traduits="238" relire="0" modifs="1" nouveaux="0" pourcent="99.58">
 		<traducteur nom="phante" lien="http://trad.spip.net/auteur/phante" />
 	</langue>
-	<langue code="nl" url="http://trad.spip.net/tradlang_module/svp?lang_cible=nl" total="239" traduits="239" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
-		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
-	</langue>
-	<langue code="ru" url="http://trad.spip.net/tradlang_module/svp?lang_cible=ru" total="239" traduits="239" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/svp?lang_cible=ru" total="239" traduits="238" relire="0" modifs="1" nouveaux="0" pourcent="99.58">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/svp?lang_cible=sk" total="239" traduits="239" relire="0" modifs="0" nouveaux="0" pourcent="100.00">

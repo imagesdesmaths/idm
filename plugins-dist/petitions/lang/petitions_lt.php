@@ -7,10 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// B
-	'bouton_radio_activer_petition' => 'Aktyvuoti prašymą',
-	'bouton_radio_supprimer_petition' => 'Ištrinti prašymą',
-
 	// F
 	'form_pet_adresse_site' => 'Jūsų interneto svetainės adresas', # MODIF
 	'form_pet_deja_signe' => 'Jūs jau pasirašėte šį tekstą',

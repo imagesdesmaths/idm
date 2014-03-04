@@ -28,13 +28,13 @@
 			<td class='titre principale'>[(#LOGO_MOT|image_reduire{20,20})]<a href="[(#ID_MOT|generer_url_entite{mot})]"
 																																						title="<:info_numero_abbreviation|attribut_html:> #ID_MOT">[(#RANG). ]#TITRE</a></td>
 			<td class='type secondaire'>#TYPE</td>
-			<td class='action'><button class="button link delete" name="supprimer_lien[mot-#ID_MOT-#OBJET-#ID_OBJET]" value="X"><:mots:info_retirer_mot:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></td>
+			<td class='action'><button type="submit" class="button link delete" name="supprimer_lien[mot-#ID_MOT-#OBJET-#ID_OBJET]" value="X"><:mots:info_retirer_mot:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></td>
 		</tr>
 	</BOUCLE_liste_mot>
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
-[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien#EVAL{chr(91)}mot-*-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:mots:info_retirer_mots:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></div>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien#EVAL{chr(91)}mot-*-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:mots:info_retirer_mots:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></div>]
 </div>
 </B_liste_mot>
 <div class="liste-objets liste-objets-lies mots caption-wrap">

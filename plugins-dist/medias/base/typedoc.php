@@ -115,6 +115,7 @@ $tables_documents = array(
 			'h' => 'C header',
 			'html' => 'HTML',
 			'jar' => 'Java Archive',
+			'json' => 'JSON',
 			'kml' => 'Keyhole Markup Language',
 			'kmz' => 'Google Earth Placemark File',
 			'lyx' => 'Lyx file',
