@@ -15,16 +15,16 @@
 				]<select name='change_petition' id='change_petition'>
 					<option value='off'[ (#GET{petition}|non)selected='selected']>
 					[(#GET{petition}|?{
-						[(#VAL{bouton_radio_supprimer_petition}|_T)]
+						[(#VAL{petitions:bouton_radio_supprimer_petition}|_T)]
 						,
-						[(#VAL{bouton_radio_pas_petition}|_T)]
+						[(#VAL{petitions:bouton_radio_pas_petition}|_T)]
 					})]
 					</option>
 					<option value='on'[ (#GET{petition}|oui)selected='selected']>
 					[(#GET{petition}|?{
-						[(#VAL{bouton_radio_petition_activee}|_T)]
+						[(#VAL{petitions:bouton_radio_petition_activee}|_T)]
 						,
-						[(#VAL{bouton_radio_activer_petition}|_T)]
+						[(#VAL{petitions:bouton_radio_activer_petition}|_T)]
 					})]
 					</option>
 				</select>

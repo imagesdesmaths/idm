@@ -33,7 +33,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Промяна на страницата',
 	'icone_referencer_nouveau_site' => 'Свързване на нов сайт',
 	'icone_voir_sites_references' => 'Показване на свързани сайтове',
-	'info_1_site' => '1 сайт',
 	'info_a_valider' => '[за одобрение]',
 	'info_bloquer' => 'блокиране',
 	'info_bloquer_lien' => 'блокиране на препратката',

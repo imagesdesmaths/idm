@@ -7,9 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// B
-	'bouton_radio_supprimer_petition' => 'Poista vetoomus',
-
 	// F
 	'form_pet_adresse_site' => 'Sivustosi URL-osoite', # MODIF
 	'form_pet_aucune_signature' => 'Mikään allekirjoitus ei sovi tähän koodiin...', # MODIF

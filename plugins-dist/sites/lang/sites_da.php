@@ -33,7 +33,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Ret dette websted',
 	'icone_referencer_nouveau_site' => 'Ny webstedshenvisning',
 	'icone_voir_sites_references' => 'Vis links',
-	'info_1_site' => '1 websted',
 	'info_a_valider' => '[at kontrollere]',
 	'info_bloquer_lien' => 'bloker dette link',
 	'info_derniere_syndication' => 'Sidste syndikering af dette websted blev udført den',

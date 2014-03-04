@@ -7,12 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// B
-	'bouton_radio_activer_petition' => 'សកម្ម បណ្តឹងជំទាស់',
-	'bouton_radio_pas_petition' => 'គ្មាន បណ្តឹងជំទាស់',
-	'bouton_radio_petition_activee' => 'បានសកម្ម បណ្តឹងជំទាស់',
-	'bouton_radio_supprimer_petition' => 'លុបចេញ បណ្តឹងជំទាស់',
-
 	// F
 	'form_pet_adresse_site' => 'អាសយដ្ឋានវ៉ែបសៃថ៍ របស់​អ្នក', # MODIF
 	'form_pet_aucune_signature' => 'គ្មាន​ហត្ថលេខា​ ត្រូវ​នឹងអក្សរ​កូដ​នេះ​...', # MODIF

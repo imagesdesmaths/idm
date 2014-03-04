@@ -89,8 +89,8 @@ function minifier_css ($contenu, $options='') {
 		// remplacer font-weight:normal par font-weight:400
 		$contenu = preg_replace("/font-weight:normal/ims","font-weight:400",$contenu);
 
-		// enlever le 0 des unites decimales
-		$contenu = preg_replace("/0[.]([0-9]+em)/ims",".$1",$contenu);
+		// si elle est 0, enlever la partie entière des unites decimales
+		$contenu = preg_replace("/\b0+\.(\d+em)/ims",".$1",$contenu);
 		// supprimer les declarations vides
 		$contenu = preg_replace(",(^|})([^{}]*){},Ums","$1",$contenu);
 		// zero est zero, quelle que soit l'unite

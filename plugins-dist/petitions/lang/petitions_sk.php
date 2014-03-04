@@ -16,10 +16,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_checkbox_indiquer_site' => 'povinne uviesť internetovú stránku',
 	'bouton_checkbox_signature_unique_email' => 'iba jeden podpis na e-mailovú adresu',
 	'bouton_checkbox_signature_unique_site' => 'iba jeden podpis na stránku',
-	'bouton_radio_activer_petition' => 'Aktivovať petíciu',
-	'bouton_radio_pas_petition' => 'Žiadne petície',
-	'bouton_radio_petition_activee' => 'Petícia aktivovaná',
-	'bouton_radio_supprimer_petition' => 'Odstrániť petíciu',
 
 	// F
 	'filtre' => 'Filter:',

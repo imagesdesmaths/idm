@@ -348,6 +348,10 @@ q=
 q=
 (.*\.|)qone8\.com
 
+[Ecosia]
+q=
+(.*\.|)ecosia\.org
+
 #
 # Services de mail
 # 

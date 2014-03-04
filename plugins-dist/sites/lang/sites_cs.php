@@ -33,7 +33,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Změnit web',
 	'icone_referencer_nouveau_site' => 'Zveřejnit odkaz na nový web',
 	'icone_voir_sites_references' => 'Zobrazit odkazovaný web',
-	'info_1_site' => '1 web',
 	'info_a_valider' => '[ke schválení]',
 	'info_bloquer' => 'zablokovat',
 	'info_bloquer_lien' => 'zablokovat tento odkaz',

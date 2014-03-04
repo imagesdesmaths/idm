@@ -7,12 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// B
-	'bouton_radio_activer_petition' => 'להפעיל את העצומה',
-	'bouton_radio_pas_petition' => 'אין עצומה',
-	'bouton_radio_petition_activee' => 'עצומה מופעלת',
-	'bouton_radio_supprimer_petition' => 'מחק את העצומה',
-
 	// F
 	'form_pet_adresse_site' => 'הכתובת הכללית של האתר שלך', # MODIF
 	'form_pet_aucune_signature' => 'שום חתימה לא מתאימה לקוד...', # MODIF

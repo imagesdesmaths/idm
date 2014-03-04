@@ -7,12 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// B
-	'bouton_radio_activer_petition' => 'Aktiverer anmodningen',
-	'bouton_radio_pas_petition' => 'Ingen anmodninger',
-	'bouton_radio_petition_activee' => 'Anmodning aktivert',
-	'bouton_radio_supprimer_petition' => 'Slett anmodning',
-
 	// F
 	'form_pet_adresse_site' => 'Nettstedets URI', # MODIF
 	'form_pet_aucune_signature' => 'Ingen signatur finnes for denne koden...', # MODIF
