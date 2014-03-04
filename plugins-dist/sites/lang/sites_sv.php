@@ -33,7 +33,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Editera sajten',
 	'icone_referencer_nouveau_site' => 'Länka en ny sajt',
 	'icone_voir_sites_references' => 'Visa länkade sajter',
-	'info_1_site' => '1 sajt',
 	'info_a_valider' => '[att godkännas]',
 	'info_bloquer' => 'Block',
 	'info_bloquer_lien' => 'blockera länken',

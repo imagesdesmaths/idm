@@ -579,6 +579,8 @@ function propre($t, $connect=null, $env=array()) {
 
 	if (!$t) return strval($t);
 
+	$t = pipeline('pre_echappe_html_propre', $t);
+
 	$t = echappe_html($t);
 	$t = expanser_liens($t,$connect, $env);
 	

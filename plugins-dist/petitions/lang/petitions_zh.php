@@ -7,12 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// B
-	'bouton_radio_activer_petition' => '激活请求',
-	'bouton_radio_pas_petition' => '没有请求',
-	'bouton_radio_petition_activee' => '激活请求',
-	'bouton_radio_supprimer_petition' => '删除请求',
-
 	// F
 	'form_pet_adresse_site' => '站点链接', # MODIF
 	'form_pet_aucune_signature' => '没有与该代码匹配的签名...', # MODIF

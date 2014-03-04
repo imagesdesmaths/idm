@@ -34,7 +34,6 @@ Verifica l’indirizzo del file per la syndication di (<b>@url_syndic@</b>) e pr
 	'icone_modifier_site' => 'Modifica il sito',
 	'icone_referencer_nouveau_site' => 'Inserisci un nuovo sito in repertorio',
 	'icone_voir_sites_references' => 'Vedi i siti in repertorio',
-	'info_1_site' => '1 sito',
 	'info_a_valider' => '[da convalidare]',
 	'info_bloquer' => 'bloccare',
 	'info_bloquer_lien' => 'bloccare questo link',

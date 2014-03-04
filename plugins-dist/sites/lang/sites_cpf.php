@@ -33,7 +33,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Sanz lo sitwèb-la',
 	'icone_referencer_nouveau_site' => 'Réfèrans inn nouvo sitwèb',
 	'icone_voir_sites_references' => 'Vwar bann sit an gatiraz dann référansman',
-	'info_1_site' => '1 sitwèb',
 	'info_a_valider' => '[pou konfirmasyon]',
 	'info_bloquer' => 'blok ali',
 	'info_bloquer_lien' => 'blok lo gatiraz-la',

@@ -149,6 +149,11 @@ function medias_upgrade($nom_meta_base_version,$version_cible){
 		// ajout de json
 		array('creer_base_types_doc')
 	);
+	$maj['1.2.6'] = array(
+		// ajout du champ titre pour json cf oubli dans http://zone.spip.org/trac/spip-zone/changeset/80059
+		array("sql_updateq","spip_types_documents",array('titre'=>'JSON'),"extension='json'"),
+		
+	);
 	include_spip('base/upgrade');
 	include_spip('base/medias');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

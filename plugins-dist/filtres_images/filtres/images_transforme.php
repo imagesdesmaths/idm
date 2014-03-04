@@ -1570,12 +1570,9 @@ function image_renforcement($im, $k=0.5)
 
 
 
-// 
-// alpha = 0: aucune transparence
-// alpha = 127: completement transparent
 /**
  * Transforme la couleur de fond de l'image en transparence
- * Le filtre ne g�re pas la notion de contiguite aux bords, et affectera tous les pixels de l'image dans la couleur visee
+ * Le filtre ne gere pas la notion de contiguite aux bords, et affectera tous les pixels de l'image dans la couleur visee
  * $background_color : couleur cible
  * $tolerance : distance L1 dans l'espace RGB des couleur autour de la couleur $background_color pour lequel la transparence sera appliquee
  * $alpha : transparence a appliquer pour les pixels de la couleur cibles avec la tolerance ci-dessus
@@ -1585,8 +1582,10 @@ function image_renforcement($im, $k=0.5)
  * @param string $background_color
  * @param int $tolerance
  * @param int $alpha
- * @param float $coeff_lissage
- * @return string
+ *   alpha = 0: aucune transparence
+ *   alpha = 127: completement transparent
+ * @param int $coeff_lissage
+ * @return mixed|null|string
  */
 function image_fond_transparent($im, $background_color, $tolerance=12, $alpha = 127, $coeff_lissage=7)
 {
@@ -1602,7 +1601,7 @@ function image_fond_transparent($im, $background_color, $tolerance=12, $alpha = 
 	
 	$creer = $image["creer"];
 	
-	if (true OR $creer) {
+	if ($creer) {
 		$bg = _couleur_hex_to_dec($background_color);
 		$bg_r = $bg['red'];
 		$bg_g = $bg['green'];
@@ -1647,7 +1646,7 @@ function image_fond_transparent($im, $background_color, $tolerance=12, $alpha = 
 		imagedestroy($im);
 		imagedestroy($im2);
 	}
-	
+
 	return _image_ecrire_tag($image,array('src'=>$dest));
 }
 ?>

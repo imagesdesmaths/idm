@@ -7,12 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// B
-	'bouton_radio_activer_petition' => 'Tillad appeller',
-	'bouton_radio_pas_petition' => 'Ingen appeller',
-	'bouton_radio_petition_activee' => 'Appelfunktion slået til',
-	'bouton_radio_supprimer_petition' => 'Slet appellen',
-
 	// F
 	'form_pet_adresse_site' => 'Dit websteds URL', # MODIF
 	'form_pet_aucune_signature' => 'Ingen signatur svarer til denne kode...', # MODIF

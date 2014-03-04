@@ -431,6 +431,8 @@ function texte_backend($texte) {
 	$texte = preg_replace('/\s{2,}/S'.$u, " ", $texte);
 	// ne pas echapper les sinqle quotes car certains outils de syndication gerent mal
 	$texte = entites_html($texte, false, false);
+	// mais bien echapper les double quotes !
+	$texte = str_replace('"','&#034;',$texte);
 
 	// verifier le charset
 	$texte = charset2unicode($texte);
@@ -1174,7 +1176,7 @@ function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
 			}
 		}else{
 			if($dtabbr && $dtstart)
-				$s = $dtstart.spip_ucfirst($s).$dabbr;
+				$s = $dtstart.spip_ucfirst($s).$dtabbr;
 			else
 				$s = spip_ucfirst($s);
 		}
@@ -1543,7 +1545,10 @@ function extraire_attribut($balise, $attribut, $complet = false) {
 		} else {
 			$r[4] = trim($r[2]); 
 		}
-		$att = filtrer_entites(str_replace("&#39;", "'", $r[4]));
+		$att = $r[4];
+		if (strpos($att,"&#")!==false)
+			$att = str_replace(array("&#039;","&#39;","&#034;","&#34;"), array("'","'",'"','"'), $att);
+		$att = filtrer_entites($att);
 	}
 	else
 		$att = NULL;
