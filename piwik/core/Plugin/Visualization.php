@@ -5,8 +5,6 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
- * @category Piwik
- * @package Piwik
  */
 
 namespace Piwik\Plugin;
@@ -165,7 +163,7 @@ class Visualization extends ViewDataTable
 
             $this->beforeLoadDataTable();
 
-            $this->loadDataTableFromAPI(array('disable_generic_filters' => 1, 'disable_queued_filters' => 1));
+            $this->loadDataTableFromAPI(array('disable_generic_filters' => 1));
             $this->postDataTableLoadedFromAPI();
 
             $requestPropertiesAfterLoadDataTable = $this->requestConfig->getProperties();
@@ -179,7 +177,7 @@ class Visualization extends ViewDataTable
         } catch (NoAccessException $e) {
             throw $e;
         } catch (\Exception $e) {
-            Log::warning("Failed to get data from API: " . $e->getMessage());
+            Log::warning("Failed to get data from API: " . $e->getMessage() . "\n" . $e->getTraceAsString());
 
             $loadingError = array('message' => $e->getMessage());
         }
@@ -422,7 +420,7 @@ class Visualization extends ViewDataTable
      * - etc.
      *
      * The values are loaded:
-     * - from the generic filters that are applied by default @see Piwik_API_DataTableGenericFilter.php::getGenericFiltersInformation()
+     * - from the generic filters that are applied by default @see Piwik\API\DataTableGenericFilter::getGenericFiltersInformation()
      * - from the values already available in the GET array
      * - from the values set using methods from this class (eg. setSearchPattern(), setLimit(), etc.)
      *

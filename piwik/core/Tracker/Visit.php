@@ -5,8 +5,6 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
- * @category Piwik
- * @package Piwik
  */
 
 namespace Piwik\Tracker;
@@ -29,8 +27,6 @@ use UserAgentParser;
  * Whether a visit is NEW or KNOWN we also save the action in the DB.
  * One request to the piwik.php script is associated to one action.
  *
- * @package Piwik
- * @subpackage Tracker
  */
 class Visit implements VisitInterface
 {
@@ -94,7 +90,7 @@ class Visit implements VisitInterface
          * Triggered after visits are tested for exclusion so plugins can modify the IP address
          * persisted with a visit.
          * 
-         * This event is primarily used by the **AnonymizeIP** plugin to anonymize IP addresses.
+         * This event is primarily used by the **PrivacyManager** plugin to anonymize IP addresses.
          * 
          * @param string &$ip The visitor's IP address.
          */
@@ -236,6 +232,8 @@ class Visit implements VisitInterface
         $valuesToUpdate = $this->getExistingVisitFieldsToUpdate($action, $visitIsConverted);
 
         $this->visitorInfo['time_spent_ref_action'] = $this->getTimeSpentReferrerAction();
+
+        $this->request->overrideLocation($valuesToUpdate);
 
         // update visitorInfo
         foreach ($valuesToUpdate AS $name => $value) {
@@ -609,7 +607,7 @@ class Visit implements VisitInterface
         $os = UserAgentParser::getOperatingSystem($userAgent);
         $os = $os === false ? 'UNK' : $os['id'];
 
-        $browserLang = $this->request->getBrowserLanguage();
+        $browserLang = substr($this->request->getBrowserLanguage(), 0, 20); // limit the length of this string to match db
         $configurationHash = $this->getConfigHash(
             $os,
             $browserName,

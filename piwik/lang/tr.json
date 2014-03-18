@@ -79,9 +79,6 @@
         "ViewAndAddAnnotations": "%s için notları göster ve yeni not ekle...",
         "YouCannotModifyThisNote": "Bunu değiştiremezsiniz. Bunun için bu siteye yönetici erişiminiz olması gerekli."
     },
-    "AnonymizeIP": {
-        "PluginDescription": "Yerel gizlilik kurallarına uymak için ziyaretçi IP adreslerini gizleyin."
-    },
     "API": {
         "GenerateVisits": "Eğer bugün için bir veri yoksa öncelikle %s eklentisiyle biraz veri oluşturabilirsiniz. %s eklentisini aktifleştirin, sonrasında Piwik Yönetim alanından 'Ziyaretçi Oluşturucu' menüsüne tıklayınız.",
         "KeepTokenSecret": "token_auth kullanıcı adı ve şifreniz kadar gizlidir, %s kimseyle paylaşmayınız%s!",
@@ -131,7 +128,6 @@
         "JSTrackingIntro4": "Eğer Javascript izleme kodu kullanmak istemiyorsanız aşağıdaki%2$s linke tıklayarak izleme resmi oluşturabilirsiniz%1$s.",
         "LatestBetaRelease": "En son beta sürümü",
         "LatestStableRelease": "En son kararlı sürüm",
-        "LogoNotWriteable": "Logoyu değiştirmek için, Piwik için tema dizinindeki logo dosyalarına yazma hakkı gerekir: %s",
         "LogoUpload": "Yüklemek için logo seçiniz",
         "MenuDiagnostic": "tehşis",
         "MenuGeneralSettings": "Genel Ayarlar",
@@ -701,6 +697,7 @@
         "LoginUseHttps": "https kullan"
     },
     "PrivacyManager": {
+        "AnonymizeIpInlineHelp": "Yerel gizlilik kurallarına uymak için ziyaretçi IP adreslerini gizleyin.",
         "TeaserHeadline": "Gizlilik Ayarları"
     },
     "Provider": {
@@ -1296,7 +1293,6 @@
         "ReportDateToLoadByDefault": "Varsayılarak yüklenen rapor tarihi",
         "ReportToLoadByDefault": "Varsayılan rapor yüklendi.",
         "TheLoginScreen": "Giriş ekranı",
-        "TheSuperUserAliasCannotBeChanged": "Süper Kullanıcı adı değiştirilemez.",
         "TypeYourPasswordAgain": "Yeni parolanizi yeniden yazınız",
         "User": "Kullanıcı",
         "UsersManagement": "Kullanıcı Yönetimleri",

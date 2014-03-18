@@ -5,8 +5,6 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
- * @category Piwik_Plugins
- * @package CoreVisualizations
  */
 
 namespace Piwik\Plugins\Goals\Visualizations;
@@ -33,7 +31,7 @@ class Goals extends HtmlTable
     {
         parent::beforeLoadDataTable();
 
-        if (!$this->config->disable_subtable_when_show_goals) {
+        if($this->config->disable_subtable_when_show_goals) {
             $this->config->subtable_controller_action = null;
         }
 

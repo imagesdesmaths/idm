@@ -5,8 +5,6 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
- * @category Piwik
- * @package Piwik
  */
 
 namespace Piwik;
@@ -22,8 +20,6 @@ use Piwik\ScheduledTime\Weekly;
  * to create ScheduledTime instances.
  *
  * @see \Piwik\ScheduledTask
- * @package Piwik
- * @subpackage ScheduledTime
  */
 abstract class ScheduledTime
 {
@@ -49,6 +45,8 @@ abstract class ScheduledTime
      * @var integer
      */
     protected $day = 1;
+
+    protected $timezone = null;
 
     /**
      * @param $period
@@ -116,6 +114,47 @@ abstract class ScheduledTime
         }
 
         $this->hour = $hour;
+    }
+
+    /**
+     * By setting a timezone you make sure the scheduled task will be run at the requested time in the
+     * given timezone. This is useful for instance in case you want to make sure a task runs at midnight in a website's
+     * timezone.
+     *
+     * @param string $timezone
+     */
+    public function setTimezone($timezone)
+    {
+        $this->timezone = $timezone;
+    }
+
+    protected function adjustTimezone($rescheduledTime)
+    {
+        if (is_null($this->timezone)) {
+            return $rescheduledTime;
+        }
+
+        $arbitraryDateInUTC = Date::factory('2011-01-01');
+        $dateInTimezone     = Date::factory($arbitraryDateInUTC, $this->timezone);
+
+        $midnightInTimezone = date('H', $dateInTimezone->getTimestamp());
+
+        if ($arbitraryDateInUTC->isEarlier($dateInTimezone)) {
+            $hoursDifference = 0 - $midnightInTimezone;
+        } else {
+            $hoursDifference = 24 - $midnightInTimezone;
+        }
+
+        $hoursDifference  = $hoursDifference % 24;
+
+        $rescheduledTime += (3600 * $hoursDifference);
+
+        if ($this->getTime() > $rescheduledTime) {
+            // make sure the rescheduled date is in the future
+            $rescheduledTime = (24 * 3600) + $rescheduledTime;
+        }
+        
+        return $rescheduledTime;
     }
 
     /**

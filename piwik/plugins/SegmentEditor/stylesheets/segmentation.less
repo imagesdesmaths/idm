@@ -438,7 +438,7 @@ div.scrollable {
   margin: 0 0 0 15px;
 }
 
-#segmentEditorPanel {
+.segmentEditorPanel {
   position: absolute;
   z-index: 121; /* Should be bigger than 'Dashboard widget selector' (z-index: 120) */
   background: #f7f7f7;
@@ -450,7 +450,7 @@ div.scrollable {
   font-size: 14px;
 }
 
-#segmentEditorPanel:hover {
+.segmentEditorPanel:hover {
   background: #f1f0eb;
   border-color: #a9a399;
 }
@@ -461,7 +461,7 @@ div.scrollable {
 
 .segmentationContainer .submenu {
   font-size: 13px;
-  min-width: 180px;
+  min-width: 200px;
 }
 
 .segmentationContainer .submenu ul {
@@ -501,13 +501,13 @@ div.scrollable {
 .segmentationContainer ul.submenu > li span.editSegment {
   display: block;
   float: right;
-  width: 45px;
   text-align: center;
+  margin-right:4px;
   font-weight: normal;
 }
 
 .segmentationContainer.visible {
-  width: 180px;
+  width: 200px;
 }
 
 .segmentationContainer.visible ul.submenu {
@@ -547,7 +547,7 @@ span.segmentationTitle {
   display: none;
 }
 
-#segmentList {
+.segmentListContainer {
   overflow: hidden; /* Create a BFC */
 }
 
@@ -617,7 +617,7 @@ a.metric_category {
   content: ".";
 }
 
-#available_segments a.dropdown {
+.available_segments a.dropdown {
   background: url("plugins/Zeitgeist/images/sort_subtable_desc.png") no-repeat scroll 100% -2px transparent !important;
   padding: 0 17px 0 0 !important;
 }

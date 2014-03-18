@@ -5,8 +5,6 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
- * @category Piwik
- * @package Piwik
  */
 
 namespace Piwik;
@@ -32,7 +30,6 @@ use Exception;
  *     $date->addHour(5);
  *     echo $date->getLocalized("%longDay% the %day% of %longMonth% at %time%");
  * 
- * @package Piwik
  * @api
  */
 class Date
@@ -287,6 +284,18 @@ class Date
     public function isEarlier(Date $date)
     {
         return $this->getTimestamp() < $date->getTimestamp();
+    }
+
+    /**
+     * Returns `true` if the current year is a leap year, false otherwise.
+     *
+     * @return bool
+     */
+    public function isLeapYear()
+    {
+        $currentYear = date('Y', $this->getTimestamp());
+
+        return ($currentYear % 400) == 0 || (($currentYear % 4) == 0 && ($currentYear % 100) != 0);
     }
 
     /**

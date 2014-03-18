@@ -5,8 +5,6 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
- * @category Piwik
- * @package Piwik
  */
 
 namespace Piwik;
@@ -20,6 +18,7 @@ use Piwik\DataTable\Renderer\Html;
 use Piwik\DataTable\Row;
 use Piwik\DataTable\Row\DataTableSummaryRow;
 use Piwik\DataTable\Simple;
+use Piwik\DataTable\TableNotFoundException;
 use ReflectionClass;
 
 /**
@@ -164,8 +163,6 @@ require_once PIWIK_INCLUDE_PATH . '/core/Common.php';
  *         return $dataTable;
  *     }
  * 
- * @package Piwik
- * @subpackage DataTable
  *
  * @api
  */
@@ -1102,7 +1099,16 @@ class DataTable implements DataTableInterface
         $aSerializedDataTable = array();
         foreach ($this->rows as $row) {
             if (($idSubTable = $row->getIdSubDataTable()) !== null) {
-                $subTable = Manager::getInstance()->getTable($idSubTable);
+                $subTable = null;
+                try {
+                    $subTable = Manager::getInstance()->getTable($idSubTable);
+                } catch(TableNotFoundException $e) {
+                    // This occurs is an unknown & random data issue. Catch Exception and remove subtable from the row.
+                    $row->removeSubtable();
+                    // Go to next row
+                    continue;
+                }
+
                 $depth++;
                 $aSerializedDataTable = $aSerializedDataTable + $subTable->getSerialized($maximumRowsInSubDataTable, $maximumRowsInSubDataTable, $columnToSortByBeforeTruncation);
                 $depth--;

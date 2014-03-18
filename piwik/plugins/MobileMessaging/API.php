@@ -5,8 +5,6 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
- * @category Piwik_Plugins
- * @package MobileMessaging
  */
 namespace Piwik\Plugins\MobileMessaging;
 
@@ -14,7 +12,6 @@ use Piwik\Common;
 use Piwik\Option;
 use Piwik\Piwik;
 use Piwik\Plugins\MobileMessaging\SMSProvider;
-use Piwik\Plugins\ScheduledReports\API as APIScheduledReports;
 
 /**
  * The MobileMessaging API lets you manage and access all the MobileMessaging plugin features including :
@@ -22,7 +19,6 @@ use Piwik\Plugins\ScheduledReports\API as APIScheduledReports;
  *  - activate phone numbers
  *  - check remaining credits
  *  - send SMS
- * @package MobileMessaging
  * @method static \Piwik\Plugins\MobileMessaging\API getInstance()
  */
 class API extends \Piwik\Plugin\API
@@ -208,44 +204,21 @@ class API extends \Piwik\Plugin\API
         unset($phoneNumbers[$phoneNumber]);
         $this->savePhoneNumbers($phoneNumbers);
 
-        // remove phone number from reports
-        $APIScheduledReports = APIScheduledReports::getInstance();
-        $reports = $APIScheduledReports->getReports(
-            $idSite = false,
-            $period = false,
-            $idReport = false,
-            $ifSuperUserReturnOnlySuperUserReports = $this->getDelegatedManagement()
-        );
-
-        foreach ($reports as $report) {
-            if ($report['type'] == MobileMessaging::MOBILE_TYPE) {
-                $reportParameters = $report['parameters'];
-                $reportPhoneNumbers = $reportParameters[MobileMessaging::PHONE_NUMBERS_PARAMETER];
-                $updatedPhoneNumbers = array();
-                foreach ($reportPhoneNumbers as $reportPhoneNumber) {
-                    if ($reportPhoneNumber != $phoneNumber) {
-                        $updatedPhoneNumbers[] = $reportPhoneNumber;
-                    }
-                }
-
-                if (count($updatedPhoneNumbers) != count($reportPhoneNumbers)) {
-                    $reportParameters[MobileMessaging::PHONE_NUMBERS_PARAMETER] = $updatedPhoneNumbers;
-
-                    // note: reports can end up without any recipients
-                    $APIScheduledReports->updateReport(
-                        $report['idreport'],
-                        $report['idsite'],
-                        $report['description'],
-                        $report['period'],
-                        $report['hour'],
-                        $report['type'],
-                        $report['format'],
-                        $report['reports'],
-                        $reportParameters
-                    );
-                }
-            }
-        }
+        /**
+         * Triggered after a phone number has been deleted. This event should be used to clean up any data that is
+         * related to the now deleted phone number. The ScheduledReports plugin, for example, uses this event to remove
+         * the phone number from all reports to make sure no text message will be sent to this phone number.
+         *
+         * **Example**
+         *
+         *     public function deletePhoneNumber($phoneNumber)
+         *     {
+         *         $this->unsubscribePhoneNumberFromScheduledReport($phoneNumber);
+         *     }
+         *
+         * @param string $phoneNumber The phone number that was just deleted.
+         */
+        Piwik::postEvent('MobileMessaging.deletePhoneNumber', array($phoneNumber));
 
         return true;
     }
@@ -385,7 +358,7 @@ class API extends \Piwik\Plugin\API
 
     private function checkCredentialManagementRights()
     {
-        $this->getDelegatedManagement() ? Piwik::checkUserIsNotAnonymous() : Piwik::checkUserIsSuperUser();
+        $this->getDelegatedManagement() ? Piwik::checkUserIsNotAnonymous() : Piwik::checkUserHasSuperUserAccess();
     }
 
     private function setUserSettings($user, $settings)
@@ -408,7 +381,7 @@ class API extends \Piwik\Plugin\API
 
     private function getCredentialManagerLogin()
     {
-        return $this->getDelegatedManagement() ? Piwik::getCurrentUserLogin() : Piwik::getSuperUserLogin();
+        return $this->getDelegatedManagement() ? Piwik::getCurrentUserLogin() : '';
     }
 
     private function getUserSettings($user)
@@ -442,7 +415,7 @@ class API extends \Piwik\Plugin\API
      */
     public function setDelegatedManagement($delegatedManagement)
     {
-        Piwik::checkUserIsSuperUser();
+        Piwik::checkUserHasSuperUserAccess();
         Option::set(MobileMessaging::DELEGATED_MANAGEMENT_OPTION, $delegatedManagement);
     }
 

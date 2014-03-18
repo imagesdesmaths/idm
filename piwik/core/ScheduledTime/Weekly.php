@@ -5,8 +5,6 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
- * @category Piwik
- * @package Piwik
  */
 namespace Piwik\ScheduledTime;
 
@@ -17,8 +15,6 @@ use Piwik\ScheduledTime;
  * Weekly class is used to schedule tasks every week.
  *
  * @see ScheduledTask
- * @package Piwik
- * @subpackage ScheduledTime
  *
  */
 class Weekly extends ScheduledTime
@@ -31,29 +27,29 @@ class Weekly extends ScheduledTime
     {
         $currentTime = $this->getTime();
 
-        // Adds 7 days
+        $daysFromNow = 7;
+
+        // Adjusts the scheduled day
+        if ($this->day !== null) {
+            $daysFromNow = ($this->day - date('N', $currentTime) + 7) % 7;
+
+            if ($daysFromNow == 0) {
+                $daysFromNow = 7;
+            }
+        }
+
+        // Adds correct number of days
         $rescheduledTime = mktime(date('H', $currentTime),
             date('i', $currentTime),
             date('s', $currentTime),
             date('n', $currentTime),
-            date('j', $currentTime) + 7,
+            date('j', $currentTime) + $daysFromNow,
             date('Y', $currentTime)
         );
-
+ 
         // Adjusts the scheduled hour
         $rescheduledTime = $this->adjustHour($rescheduledTime);
-
-        // Adjusts the scheduled day
-        if ($this->day !== null) {
-            // Removes or adds a number of days to set the scheduled day to the one specified with setDay()
-            $rescheduledTime = mktime(date('H', $rescheduledTime),
-                date('i', $rescheduledTime),
-                date('s', $rescheduledTime),
-                date('n', $rescheduledTime),
-                date('j', $rescheduledTime) - (date('N', $rescheduledTime) - $this->day),
-                date('Y', $rescheduledTime)
-            );
-        }
+        $rescheduledTime = $this->adjustTimezone($rescheduledTime);
 
         return $rescheduledTime;
     }

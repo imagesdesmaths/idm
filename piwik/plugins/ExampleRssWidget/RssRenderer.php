@@ -5,8 +5,6 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
- * @category Piwik_Plugins
- * @package ExampleRssWidget
  */
 
 namespace Piwik\Plugins\ExampleRssWidget;
@@ -14,7 +12,6 @@ use Piwik\Http;
 
 /**
  *
- * @package ExampleRssWidget
  */
 class RssRenderer
 {
@@ -56,7 +53,11 @@ class RssRenderer
         $output = '<div style="padding:10px 15px;"><ul class="rss">';
         $i = 0;
 
-        foreach ($rss->channel->item as $post) {
+        $items = array();
+        if(is_array($items)) {
+            $items = $rss->channel->item;
+        }
+        foreach ($items as $post) {
             $title = $post->title;
             $date = @strftime("%B %e, %Y", strtotime($post->pubDate));
             $link = $post->link;

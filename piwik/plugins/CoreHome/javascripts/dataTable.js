@@ -486,8 +486,8 @@ $.extend(DataTable.prototype, UIControl.prototype, {
                 // in the case there is a searched keyword we display the RESET image
                 if (currentPattern) {
                     var target = this;
-                    var clearImg = $('<span style="position: relative;">\
-							<img src="plugins/CoreHome/images/reset_search.png" style="position: absolute; top: 4px; left: -15px; cursor: pointer; display: inline;" title="Clear" />\
+                    var clearImg = $('<span class="searchReset">\
+							<img src="plugins/CoreHome/images/reset_search.png" title="Clear" />\
 							</span>')
                         .click(function () {
                             $('.searchInput', target).val('');
@@ -1097,6 +1097,11 @@ $.extend(DataTable.prototype, UIControl.prototype, {
             return;
         }
 
+        if(domElemToTruncate.find('.truncationDisabled').length > 0) {
+            return;
+        }
+
+
         // make the original text (before truncation) available for others.
         // the .truncate plugins adds a title to the dom element but the .tooltip
         // plugin removes that again.
@@ -1606,7 +1611,7 @@ $.extend(DataTable.prototype, UIControl.prototype, {
         }
 
         actions.height(tr.innerHeight() - 2);
-        actions.css('marginLeft', (td.width() + 5 - actions.outerWidth()) + 'px');
+        actions.css('marginLeft', (td.width() + 3 - actions.outerWidth()) + 'px');
     },
 
     _findReportHeader: function (domElem) {

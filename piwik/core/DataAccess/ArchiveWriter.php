@@ -5,8 +5,6 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
- * @category Piwik
- * @package Piwik
  */
 namespace Piwik\DataAccess;
 
@@ -67,7 +65,8 @@ class ArchiveWriter
         $this->idSite = $params->getSite()->getId();
         $this->segment = $params->getSegment();
         $this->period = $params->getPeriod();
-        $this->doneFlag = Rules::getDoneStringFlagFor($this->segment, $this->period->getLabel(), $params->getRequestedPlugin());
+        $idSites = array($this->idSite);
+        $this->doneFlag = Rules::getDoneStringFlagFor($idSites, $this->segment, $this->period->getLabel(), $params->getRequestedPlugin());
         $this->isArchiveTemporary = $isArchiveTemporary;
 
         $this->dateStart = $this->period->getDateStart();
@@ -152,7 +151,7 @@ class ArchiveWriter
     {
         $dbLockName = $this->getArchiveLockName();
         if (Db::getDbLock($dbLockName, $maxRetries = 30) === false) {
-            throw new Exception("allocateNewArchiveId: Cannot get named lock for table $numericTable.");
+            throw new Exception("allocateNewArchiveId: Cannot get named lock $dbLockName.");
         }
     }
 

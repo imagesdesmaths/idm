@@ -5,8 +5,6 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
- * @category Piwik_Plugins
- * @package Live
  */
 namespace Piwik\Plugins\Live;
 
@@ -51,7 +49,6 @@ require_once PIWIK_INCLUDE_PATH . '/plugins/Live/Visitor.php';
  * The method "getCounters" is used to return a simple counter: visits, number of actions, number of converted visits, in the last N minutes.
  *
  * See also the documentation about <a href='http://piwik.org/docs/real-time/' target='_blank'>Real time widget and visitor level reports</a> in Piwik.
- * @package Live
  * @method static \Piwik\Plugins\Live\API getInstance()
  */
 class API extends \Piwik\Plugin\API
@@ -117,9 +114,9 @@ class API extends \Piwik\Plugin\API
     {
         Piwik::checkUserHasViewAccess($idSite);
 
-        $numLastVisitorsToFetch = $filter_limit;
+        $countVisitorsToFetch = $filter_limit;
 
-        $table = $this->loadLastVisitorDetailsFromDatabase($idSite, $period = false, $date = false, $segment = false, $numLastVisitorsToFetch, $visitorId);
+        $table = $this->loadLastVisitorDetailsFromDatabase($idSite, $period = false, $date = false, $segment = false, $countVisitorsToFetch, $visitorId);
         $this->addFilterToCleanVisitors($table, $idSite, $flat);
 
         return $table;
@@ -133,23 +130,23 @@ class API extends \Piwik\Plugin\API
      * @param bool|string $period Period to restrict to when looking at the logs
      * @param bool|string $date Date to restrict to
      * @param bool|int $segment (optional) Number of visits rows to return
-     * @param bool|int $numLastVisitorsToFetch (optional) Only return the last X visits. By default the last GET['filter_offset']+GET['filter_limit'] are returned.
+     * @param bool|int $countVisitorsToFetch (optional) Only return the last X visits. By default the last GET['filter_offset']+GET['filter_limit'] are returned.
      * @param bool|int $minTimestamp (optional) Minimum timestamp to restrict the query to (useful when paginating or refreshing visits)
      * @param bool $flat
      * @param bool $doNotFetchActions
      * @return DataTable
      */
-    public function getLastVisitsDetails($idSite, $period = false, $date = false, $segment = false, $numLastVisitorsToFetch = false, $minTimestamp = false, $flat = false, $doNotFetchActions = false)
+    public function getLastVisitsDetails($idSite, $period = false, $date = false, $segment = false, $countVisitorsToFetch = false, $minTimestamp = false, $flat = false, $doNotFetchActions = false)
     {
-        if (false === $numLastVisitorsToFetch) {
+        if (false === $countVisitorsToFetch) {
             $filter_limit  = Common::getRequestVar('filter_limit', 10, 'int');
             $filter_offset = Common::getRequestVar('filter_offset', 0, 'int');
 
-            $numLastVisitorsToFetch = $filter_limit + $filter_offset;
+            $countVisitorsToFetch = $filter_limit + $filter_offset;
         }
 
         Piwik::checkUserHasViewAccess($idSite);
-        $dataTable = $this->loadLastVisitorDetailsFromDatabase($idSite, $period, $date, $segment, $numLastVisitorsToFetch, $visitorId = false, $minTimestamp);
+        $dataTable = $this->loadLastVisitorDetailsFromDatabase($idSite, $period, $date, $segment, $countVisitorsToFetch, $visitorId = false, $minTimestamp);
         $this->addFilterToCleanVisitors($dataTable, $idSite, $flat, $doNotFetchActions);
 
         return $dataTable;
@@ -521,7 +518,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getLastVisits($idSite, $filter_limit = 10, $minTimestamp = false)
     {
-        return $this->getLastVisitsDetails($idSite, $period = false, $date = false, $segment = false, $numLastVisitorsToFetch = $filter_limit, $minTimestamp, $flat = false);
+        return $this->getLastVisitsDetails($idSite, $period = false, $date = false, $segment = false, $countVisitorsToFetch = $filter_limit, $minTimestamp, $flat = false);
     }
 
     /**
@@ -579,7 +576,7 @@ class API extends \Piwik\Plugin\API
         });
     }
 
-    private function loadLastVisitorDetailsFromDatabase($idSite, $period, $date, $segment = false, $numLastVisitorsToFetch = 100, $visitorId = false, $minTimestamp = false)
+    private function loadLastVisitorDetailsFromDatabase($idSite, $period, $date, $segment = false, $countVisitorsToFetch = 100, $visitorId = false, $minTimestamp = false)
     {
         $where = $whereBind = array();
 
@@ -602,7 +599,7 @@ class API extends \Piwik\Plugin\API
 
         // If no other filter, only look at the last 24 hours of stats
         if (empty($visitorId)
-            && empty($numLastVisitorsToFetch)
+            && empty($countVisitorsToFetch)
             && empty($period)
             && empty($date)
         ) {
@@ -661,7 +658,7 @@ class API extends \Piwik\Plugin\API
         $from = "log_visit";
         $subQuery = $segment->getSelectQuery($select, $from, $where, $whereBind, $orderBy);
 
-        $sqlLimit = $numLastVisitorsToFetch >= 1 ? " LIMIT 0, " . (int)$numLastVisitorsToFetch : "";
+        $sqlLimit = $countVisitorsToFetch >= 1 ? " LIMIT 0, " . (int)$countVisitorsToFetch : "";
 
         // Group by idvisit so that a visitor converting 2 goals only appears once
         $sql = "

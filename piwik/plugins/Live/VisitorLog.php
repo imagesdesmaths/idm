@@ -5,8 +5,6 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
- * @category Piwik_Plugins
- * @package Live
  */
 namespace Piwik\Plugins\Live;
 
@@ -92,9 +90,11 @@ class VisitorLog extends Visualization
                     'hasEcommerce',
                     function ($actionDetails) use ($filterEcommerce) {
                         foreach ($actionDetails as $action) {
-                            if ($action['type'] == 'ecommerceOrder'
-                                || $filterEcommerce == 2
-                            ) {
+                            $isEcommerceOrder = $action['type'] == 'ecommerceOrder'
+                                       && $filterEcommerce == \Piwik\Plugins\Goals\Controller::ECOMMERCE_LOG_SHOW_ORDERS;
+                            $isAbandonedCart = $action['type'] == 'ecommerceAbandonedCart'
+                                       && $filterEcommerce == \Piwik\Plugins\Goals\Controller::ECOMMERCE_LOG_SHOW_ABANDONED_CARTS;
+                            if($isAbandonedCart || $isEcommerceOrder) {
                                 return true;
                             }
                         }

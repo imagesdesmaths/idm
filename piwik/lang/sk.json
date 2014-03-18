@@ -38,9 +38,6 @@
         "WidgetSearchCategories": "Kategórie hľadania",
         "WidgetSearchKeywords": "Kľúčové slová vyhladávania"
     },
-    "AnonymizeIP": {
-        "PluginDescription": "Anonymnosť posledný bajt IP adresy návštevníkov v súlade s miestnymi zákonmi na ochranu súkromia."
-    },
     "API": {
         "LoadedAPIs": "Úspešne načítané %s API",
         "QuickDocumentationTitle": "Rýchla dokumentácia k API",
@@ -594,7 +591,6 @@
         "Manually": "ručne",
         "ManuallyTriggeredUsingJavascriptFunction": "Cieľom je ručne spúšťa pomocou JavaScript API trackGoal()",
         "NewVisitorsConversionRateIs": "Noví návštevníci miera konverzie %s",
-        "NoGoalsNeedAccess": "Len správca alebo Super Užívateľ môže pridať ciele pre dané webové stránky. Prosím, opýtajte sa svojho správcu ako nastaviť ciele pre vaše webové stránky. <br> sledovanie cieľov je skvelý spôsob, ako pomôcť pochopiť a maximalizovať svoje webové stránky!",
         "Optional": "(nepovinné)",
         "OverallConversionRate": "%s celková miera konverzie (návštevy s cieľom dokončenia)",
         "OverallRevenue": "%s celkové príjmy",
@@ -641,7 +637,6 @@
         "SystemCheckExtensions": "Ostatné požadované rozšírenia",
         "SystemCheckFileIntegrity": "Integrita súborov",
         "SystemCheckFunctions": "Požadované funkcie",
-        "SystemCheckGD": "GD > 2.x (grafika)",
         "SystemCheckGDHelp": "„Sparklines“ (malé grafy) nebudú fungovať.",
         "SystemCheckMemoryLimit": "Pamäťový limit",
         "SystemCheckMemoryLimitHelp": "Na webstránkach s vysokou premávkou archivačný proces bude vyžadovať viac pamäte, než je to aktuálne povolené.<br \/> Pozrite si direktívu memory_limit vo vašom php.ini súbore, ak je to potrebné.",
@@ -670,7 +665,6 @@
     },
     "Login": {
         "ContactAdmin": "Možné dôvody: Váš server ma zakázanú funkciu mail().<br \/> Skontaktujte svojho administrátora Piwik.",
-        "ExceptionInvalidSuperUserAuthenticationMethod": "Super používateľ nemôže overiť pomocou '%s' mechanizmu.",
         "ExceptionPasswordMD5HashExpected": "Očakávajte že heslo bude v MD5 hash.",
         "InvalidOrExpiredToken": "Token je neplatný, alebo už vypršal.",
         "InvalidUsernameEmail": "Neplatné meno používateľa alebo e-mailová adresa",
@@ -680,7 +674,6 @@
         "LostYourPassword": "Zabudli ste heslo?",
         "PasswordRepeat": "Heslo (znovu)",
         "PasswordsDoNotMatch": "Heslá sa nezhodujú.",
-        "PluginDescription": "Prihlásiť pre overenie pluginu, čítanie poverenia z config \/ config.inc.php súbor pre super užívateľa, a z databázy pre ostatných užívateľov. Môže byť ľahko nahradený s cieľom vytvoriť nový mechanizmus autentifikácie (OpenID, htaccess, vlastné Auth, atď).",
         "RememberMe": "Zapamätať si ma"
     },
     "Mobile": {
@@ -699,6 +692,7 @@
     },
     "PrivacyManager": {
         "AnonymizeIpDescription": "Vyberte \"Áno\" ak chcete aby Piwik nesledoval plne kvalifikované IP adresy",
+        "AnonymizeIpInlineHelp": "Anonymnosť posledný bajt IP adresy návštevníkov v súlade s miestnymi zákonmi na ochranu súkromia.",
         "AnonymizeIpMaskLengtDescription": "Vyberte koľko bajtov IP adresy návštevníkov by malo byť maskovaných.",
         "AnonymizeIpMaskLength": "%s bajt(y) - napr. %s",
         "ClickHereSettings": "Kliknite sem pre prístup k %s nastaveniam.",
@@ -1288,7 +1282,6 @@
         "ExceptionInvalidEmail": "E-mailová adresa nemá platný formát.",
         "ExceptionInvalidLoginFormat": "Počet znakov pre Používateľ (login) musí byť medzi %1$s a %2$s a obsahovať iba písmená, číslice alebo znaky '_', '-', a '.'",
         "ExceptionLoginExists": "Používateľ (login) '%s' už existuje.",
-        "ExceptionSuperUser": "Požadovaný používateľ je superpoužívateľ, na ktorého nemôže byť odoslaná požiadavka, nemôže byť upravený alebo zmazaný cez API. Manuálne môžete upraviť detaily superpoužívateľa v Piwik konfiguračnom súbore.",
         "ExceptionUserDoesNotExist": "Používateľ '%s' neexistuje.",
         "MainDescription": "Rozhodnite sa, ktorí používatelia budú môcť pristupovať k jednotlivým stránkam. Tiež im môžete umožniť prístup na všetky vaše stránky.",
         "ManageAccess": "Správa prístupov",

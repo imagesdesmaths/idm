@@ -5,8 +5,6 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
- * @category Piwik_Plugins
- * @package SitesManager
  */
 namespace Piwik\Plugins\SitesManager;
 
@@ -25,7 +23,6 @@ use Piwik\View;
 
 /**
  *
- * @package SitesManager
  */
 class Controller extends \Piwik\Plugin\ControllerAdmin
 {
@@ -37,7 +34,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         $view = new View('@SitesManager/index');
 
         Site::clearCache();
-        if (Piwik::isUserIsSuperUser()) {
+        if (Piwik::hasUserSuperUserAccess()) {
             $sitesRaw = API::getInstance()->getAllSites();
         } else {
             $sitesRaw = API::getInstance()->getSitesWithAdminAccess();
@@ -156,24 +153,6 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         header('Content-type: text/php');
         header('Content-Disposition: attachment; filename="' . $filename . '"');
         return file_get_contents($path . $filename);
-    }
-
-    /**
-     * Used to generate the doc at http://piwik.org/docs/tracking-api/
-     */
-    function displayAlternativeTagsHelp()
-    {
-        $view = new View('@SitesManager/displayAlternativeTagsHelp');
-        $view->idSite = Common::getRequestVar('idSite');
-        $url = Common::getRequestVar('piwikUrl', '', 'string');
-        if (empty($url)
-            || !UrlHelper::isLookLikeUrl($url)
-        ) {
-            $url = $view->piwikUrl;
-        }
-        $view->piwikUrlRequest = $url;
-        $view->calledExternally = true;
-        return $view->render();
     }
 
     function getSitesForAutocompleter()

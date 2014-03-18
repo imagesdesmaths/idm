@@ -36,6 +36,23 @@ function formSetEditReport(idReport) {
     $('#report_hour').val(report.hour);
     $('[name=report_format].' + report.type + ' option[value=' + report.format + ']').prop('selected', 'selected');
 
+    var selectorReportFormat = 'select[name=report_format].' + $('#report_type').val();
+    $(selectorReportFormat).change( toggleDisplayOptionsByFormat );
+
+    // When CSV is selected, hide "Display options"
+    toggleDisplayOptionsByFormat();
+
+    function toggleDisplayOptionsByFormat() {
+        var format = $(selectorReportFormat).val();
+        var displayOptionsSelector = $('#row_report_display_options');
+        if (format == 'csv') {
+            displayOptionsSelector.hide();
+        } else {
+            displayOptionsSelector.show();
+        }
+    }
+
+
     $('[name=reportsList] input').prop('checked', false);
 
     var key;
@@ -160,7 +177,7 @@ function initManagePdf() {
         formSetEditReport(idReport);
         $('.entityAddContainer').show();
         $('#entityEditContainer').hide();
-        $(document).trigger('ScheduledRepot.edit', {});
+        $(document).trigger('ScheduledReport.edit', {});
     });
 
     // Switch Report Type

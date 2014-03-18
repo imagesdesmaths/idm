@@ -5,8 +5,6 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
- * @category Piwik_Plugins
- * @package Piwik_API
  */
 namespace Piwik\Plugins\API;
 
@@ -62,6 +60,74 @@ class ProcessedReport
             }
         }
         return false;
+    }
+
+    /**
+     * Verfies whether the given report exists for the given site.
+     *
+     * @param int $idSite
+     * @param string $apiMethodUniqueId  For example 'MultiSites_getAll'
+     *
+     * @return bool
+     */
+    public function isValidReportForSite($idSite, $apiMethodUniqueId)
+    {
+        $report = $this->getReportMetadataByUniqueId($idSite, $apiMethodUniqueId);
+
+        return !empty($report);
+    }
+
+    /**
+     * Verfies whether the given metric belongs to the given report.
+     *
+     * @param int $idSite
+     * @param string $metric     For example 'nb_visits'
+     * @param string $apiMethodUniqueId  For example 'MultiSites_getAll'
+     *
+     * @return bool
+     */
+    public function isValidMetricForReport($metric, $idSite, $apiMethodUniqueId)
+    {
+        $translation = $this->translateMetric($metric, $idSite, $apiMethodUniqueId);
+
+        return !empty($translation);
+    }
+
+    public function getReportMetadataByUniqueId($idSite, $apiMethodUniqueId)
+    {
+        $metadata = $this->getReportMetadata(array($idSite));
+
+        foreach ($metadata as $report) {
+            if ($report['uniqueId'] == $apiMethodUniqueId) {
+                return $report;
+            }
+        }
+    }
+
+    /**
+     * Translates the given metric in case the report exists and in case the metric acutally belongs to the report.
+     *
+     * @param string $metric     For example 'nb_visits'
+     * @param int    $idSite
+     * @param string $apiMethodUniqueId  For example 'MultiSites_getAll'
+     *
+     * @return null|string
+     */
+    public function translateMetric($metric, $idSite, $apiMethodUniqueId)
+    {
+        $report = $this->getReportMetadataByUniqueId($idSite, $apiMethodUniqueId);
+
+        if (empty($report)) {
+            return;
+        }
+
+        $properties = array('metrics', 'processedMetrics', 'processedMetricsGoal');
+
+        foreach ($properties as $prop) {
+            if (!empty($report[$prop]) && is_array($report[$prop]) && array_key_exists($metric, $report[$prop])) {
+                return $report[$prop][$metric];
+            }
+        }
     }
 
     /**

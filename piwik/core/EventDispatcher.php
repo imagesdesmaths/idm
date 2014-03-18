@@ -5,8 +5,6 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
- * @category Piwik
- * @package Piwik
  */
 
 namespace Piwik;
@@ -82,7 +80,7 @@ class EventDispatcher extends Singleton
             if (isset($hooks[$eventName])) {
                 list($pluginFunction, $callbackGroup) = $this->getCallbackFunctionAndGroupNumber($hooks[$eventName]);
 
-                $callbacks[$callbackGroup][] = array($plugin, $pluginFunction);
+                $callbacks[$callbackGroup][] = is_string($pluginFunction) ? array($plugin, $pluginFunction) : $pluginFunction;
             }
         }
 

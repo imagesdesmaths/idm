@@ -32,6 +32,7 @@
         "ExitPageTitles": "Naslovi odlaznih stranica",
         "ExitPageTitlesReportDocumentation": "Ovo izvješće sadrži podatke o naslovima odlaznih stranica koje su zabilježene u određenom razdoblju.",
         "LearnMoreAboutSiteSearchLink": "Saznajte više o načinima praćenja načina na koji vaši posjetitelji koriste tražilicu na vašoj stranici.",
+        "OneSearch": "1 pretraga",
         "OutlinkDocumentation": "Odlazna poveznica je poveznica koja odvodi vašeg posjetitelja sa vaše stranice (na drugu domenu).",
         "OutlinksReportDocumentation": "Ovo izvješće prikazuje hijerarhijski popis odlaznih URL adresa na koje su kliknuli vaši posjetitelji.",
         "PagesReportDocumentation": "Ovo izvješće sadrži informacije o linkovima stranica koje su posjećene. %s Tablica je organizirana hijerarhijski, URL-ovi su prikazani kao struktura mapa.",
@@ -39,33 +40,65 @@
         "PluginDescription": "Izvješća o pregledima stranica, vanjskim poveznicama i preuzimanjima. Praćenje vanjskih poveznica i preuzimanja je automatsko! Također, možete pratiti pretraživanja vaše vlastite tražilice.",
         "SiteSearchCategories1": "Ovo izvješće prikazuje kategorije koje su posjetitelji odabrali kod pretraživanja vaše web-stranice",
         "SiteSearchCategories2": "Web-stranice kataloške prodaje najčešće imaju omogućen odabir \"kategorija\" kako bi posjetitelji pretraživali proizvode u željenoj kategoriji.",
+        "SiteSearchKeyword": "Ključne riječi",
         "SubmenuPagesEntry": "Ulazne na stranice",
         "SubmenuPagesExit": "Izlazne stranice",
         "SubmenuPageTitles": "Naslovi stranica",
+        "SubmenuSitesearch": "Pretraga stranice",
+        "WidgetEntryPageTitles": "Naslovi ulaznih stranica",
+        "WidgetExitPageTitles": "Izlazni naslovi stranica",
+        "WidgetPagesEntry": "Ulazne stranice",
         "WidgetPagesExit": "Izlazne stranice",
         "WidgetPageTitles": "Naslovi stranica",
-        "WidgetPageTitlesFollowingSearch": "Naslovi stranica kod pretraživanja"
+        "WidgetPageTitlesFollowingSearch": "Naslovi stranica kod pretraživanja",
+        "WidgetSearchCategories": "Pretraži kategoije"
     },
     "Annotations": {
         "AddAnnotationsFor": "Dodaj bilješke za %s...",
         "AnnotationOnDate": "Interaktivne bilješke na %1$s: %2$s",
-        "Annotations": "Interaktivne bilješke"
+        "Annotations": "Interaktivne bilješke",
+        "ClickToDelete": "Kliknite izbrisati ovu obavijest.",
+        "ClickToEdit": "Klikni za urediti ovu obavijest.",
+        "EnterAnnotationText": "Unesi svoju bilješku",
+        "LoginToAnnotate": "Prijavi se za objaviti obavijest."
     },
     "CoreAdminHome": {
         "Administration": "Administracija",
         "EmailServerSettings": "Postavke email servera",
         "LogoUpload": "Odaberi logo za upload",
         "MenuGeneralSettings": "Opće postavke",
-        "PluginDescription": "Administratorsko područje PIWIK."
+        "PluginDescription": "Administratorsko područje PIWIK.",
+        "TrackingCode": "Kod za praćenje"
     },
     "CoreHome": {
+        "CheckForUpdates": "Provjeri nadogradnje",
         "PeriodDay": "dan",
+        "PeriodDays": "Dana",
         "PeriodMonth": "mjesec",
+        "PeriodMonths": "mjeseci",
         "PeriodWeek": "tjedan",
-        "PeriodYear": "godina"
+        "PeriodYear": "godina",
+        "PeriodYears": "godine"
+    },
+    "CorePluginsAdmin": {
+        "ActionInstall": "Instaliraj"
     },
     "Dashboard": {
-        "Dashboard": "Upravljačka ploča"
+        "AddAWidget": "Dodaj novi widget",
+        "AddPreviewedWidget": "Klikni za dodati widget na kontrolnu ploču",
+        "Dashboard": "Kontrolna ploča",
+        "DashboardName": "Naziv kontrolne ploče:",
+        "DashboardOf": "Kontrolna ploča %s",
+        "LoadingWidget": "Učitavanje widgeta, molimo pričekajte...",
+        "ManageDashboard": "Manage dashboard",
+        "Maximise": "Uvečaj",
+        "Minimise": "Smanji",
+        "PluginDescription": "Vaša kontrolna ploča analize posjete stranice. Možete podesiti nadzornu ploču: dodavanje novih widgeta, mijenjati redoslijed vaših widgeta. Svaki korisnik može pristupiti vlastitoj prilagođenoj nadzornoj ploči.",
+        "RemoveDashboard": "Ukloni kontrolnu ploču",
+        "RenameDashboard": "Preimenuj kontrolnu ploču",
+        "SelectWidget": "Odaberi widget za dodati na kontrolnu ploču",
+        "WidgetPreview": "Predpregled widgeta",
+        "WidgetsAndDashboard": "Wigeti i kontrolna ploča"
     },
     "General": {
         "AbandonedCarts": "Napuštene košarice",
@@ -261,6 +294,7 @@
         "Others": "Ostali",
         "Outlinks": "Odlazni linkovi",
         "Overview": "Pregled",
+        "Pages": "Stranice",
         "Period": "Razdoblje",
         "Piechart": "Pita",
         "PiwikXIsAvailablePleaseNotifyPiwikAdmin": "Dostupan je %s. Molimo vas da obavijestite administratora stranice.",
@@ -362,7 +396,17 @@
         "YourChangesHaveBeenSaved": "Tvoje su izmjene spremljene"
     },
     "Live": {
-        "VisitorLog": "Zapis posjetitelja"
+        "GoalType": "Vrsta",
+        "HideMap": "sakrij mapu",
+        "LoadMoreVisits": "Učitaj više posjeta",
+        "NbVisitor": "1 visitor",
+        "NextVisitor": "Slijedeći posjetitelj",
+        "PreviousVisitor": "Prijašnji posjetitelj",
+        "Referrer_URL": "Referrer URL",
+        "ShowMap": "pokaži mapu",
+        "VisitedPages": "Posjećene stranice",
+        "VisitorLog": "Zapis posjeta",
+        "VisitorsInRealTime": "Posjete u stvarnom vremenu"
     },
     "Mobile": {
         "SaveSuccessError": "Molim provjerite postavke"
@@ -640,6 +684,9 @@
         "Location": "Lokacija",
         "SubmenuLocations": "Lokacije"
     },
+    "UserCountryMap": {
+        "VisitorMap": "Mapa posjetitelja"
+    },
     "UserSettings": {
         "Browsers": "Pretraživači",
         "ColumnBrowserVersion": "Verzija pretraživača",
@@ -831,7 +878,8 @@
         "Language_za": "zhuang",
         "Language_zh": "kineski",
         "Language_zu": "zulu",
-        "VisitorSettings": "Postavke posjetitelja"
+        "VisitorSettings": "Postavke posjetitelja",
+        "WidgetBrowsers": "Pretraživać posjetitelja"
     },
     "UsersManager": {
         "ExceptionEmailExists": "Korisnik sa istim emailom '%s' već postoji.",
@@ -841,6 +889,17 @@
         "MenuUserSettings": "Korisničke postavke",
         "TypeYourPasswordAgain": "Ponovi novu lozinku.",
         "YourUsernameCannotBeChanged": "Korisničko ime se ne može promijeniti"
+    },
+    "VisitsSummary": {
+        "VisitsSummary": "Pregled posjeta",
+        "WidgetLastVisits": "Posjete kroz vrijeme",
+        "WidgetOverviewGraph": "Pregled posjeta (sa grafom)",
+        "WidgetVisits": "Pregled posjeta"
+    },
+    "VisitTime": {
+        "ColumnServerTime": "Vrijeme servera",
+        "LocalTime": "Posjete po lokalnom vremenu",
+        "WidgetServerTime": "Posjete po vremenu servera"
     },
     "Widgetize": {
         "OpenInNewWindow": "Otvori u novom prozoru"

@@ -160,8 +160,8 @@
     }
 }
 
-#available_segments a.dropdown  {
-    color: @brand-black;
+.available_segments a.dropdown  {
+    color: @brand-black !important;
     text-transform: uppercase;
     .font-default(10px, 12px);
 }
@@ -174,6 +174,10 @@
     &:hover {
         background: #fff;
         border-color: @silver-80;
+    }
+
+    select {
+      min-height: 0;
     }
 
     .calendar-icon {
@@ -347,7 +351,7 @@ table.dataTable tr td .dataTableRowActions {
   }
 }
 
-table.dataTable tr:nth-child(2n) td .dataTableRowActions {
+table.dataTable tr td.labeleven .dataTableRowActions {
   a.rightmost, a {
     background-color: #fff !important;
   }
@@ -355,9 +359,4 @@ table.dataTable tr:nth-child(2n) td .dataTableRowActions {
 
 table.dataTable th .columnDocumentation {
     color: @silver-90;
-}
-
-h2 .reportDocumentationIcon,
-table.dataTable th .columnDocumentationTitle {
-    background: no-repeat url('plugins/Morpheus/images/help.png');
 }

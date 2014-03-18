@@ -5,8 +5,6 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
- * @category Piwik
- * @package Piwik
  */
 namespace Piwik;
 
@@ -23,7 +21,6 @@ use Piwik\Session\SessionNamespace;
  *
  * Learn more about nonces [here](http://en.wikipedia.org/wiki/Cryptographic_nonce).
  * 
- * @package Piwik
  * @api
  */
 class Nonce
@@ -153,5 +150,26 @@ class Nonce
         }
 
         return $origins;
+    }
+
+    /**
+     * Verifies and discards a nonce.
+     * 
+     * @param string $nonceName The nonce's unique ID. See {@link getNonce()}.
+     * @param string|null $nonce The nonce from the client. If `null`, the value from the
+     *                           **nonce** query parameter is used.
+     * @throws Exception if the nonce is invalid. See {@link verifyNonce()}.
+     */
+    static public function checkNonce($nonceName, $nonce = null)
+    {
+        if ($nonce === null) {
+            $nonce = Common::getRequestVar('nonce', null, 'string');
+        }
+
+        if (!self::verifyNonce($nonceName, $nonce)) {
+            throw new \Exception(Piwik::translate('General_ExceptionNonceMismatch'));
+        }
+
+        self::discardNonce($nonceName);
     }
 }

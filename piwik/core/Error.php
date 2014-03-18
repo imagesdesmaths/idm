@@ -5,12 +5,10 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
- * @category Piwik
- * @package Piwik
  */
 namespace Piwik;
 
-require_once 'Log.php';
+require_once PIWIK_INCLUDE_PATH . '/core/Log.php';
 
 /**
  * Holds PHP error information (non-exception errors). Also contains log formatting logic
