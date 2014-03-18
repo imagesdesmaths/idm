@@ -8,7 +8,7 @@ if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},rss, #ENV{op}, #ENV{args}}|?{1,0})]) 
 	<link>[(#URL_ECRIRE{messages}|url_absolue|texte_backend)]</link>
 	<description></description>
 	<language>#LANG</language>
-<BOUCLE_A(messages auteurs_messages){doublons M}{auteurs_messages.id_auteur}
+<BOUCLE_A(messages auteurs_liens){doublons M}{auteurs_liens.id_auteur}
 	><BOUCLE_B(FORUMS ?){id_message}{doublons F}{tout}{statut=perso} /></BOUCLE_A>
 <?php $rss = array();
 <BOUCLE_RSS(messages auteurs){!par date_heure}{!doublons M}{0,10}>

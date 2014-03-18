@@ -45,8 +45,9 @@ function formulaires_ecrire_auteur_verifier_dist($id_auteur, $id_article, $mail)
 		session_set('email', $adres);
 	}
 
-	$sujet=_request('sujet_message_auteur');
-	if($sujet AND !(strlen($sujet)>3))
+	if (!$sujet=_request('sujet_message_auteur'))
+		$erreurs['sujet_message_auteur'] = _T("info_obligatoire");
+	elseif(!(strlen($sujet)>3))
 		$erreurs['sujet_message_auteur'] = _T('forum:forum_attention_trois_caracteres');
 
 	if (!$texte=_request('texte_message_auteur'))
