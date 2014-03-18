@@ -91,4 +91,14 @@ function autoriser_forumadmin_participer_dist($faire, $type, $id, $qui, $opts) {
 	return ($GLOBALS['meta']['forum_prive_admin'] == 'oui') && $qui['statut']=='0minirezo';
 }
 
+/**
+ * Autoriser a participer au forum privé d'un objet quelconque
+ * Afin de rester compatible avec l'existant cette autorisation est toujours vraie.
+ *
+ * @return bool
+ */
+function autoriser_participerforumprive_dist($faire, $type, $id, $qui, $opt) {
+	return true;
+}
+
 ?>

@@ -32,7 +32,7 @@ function formulaires_editer_url_objet_verifier($type,$id){
 		$erreurs['url'] = _T('info_obligatoire');
 	}
 	else {
-		$type_urls = $GLOBALS['meta']['type_urls'];
+		$type_urls = (isset($GLOBALS['type_urls'])?$GLOBALS['type_urls']:$GLOBALS['meta']['type_urls']);
 		if ($type_urls=='arbo' AND strpos($url,'/')!==false){
 			$url = explode('/',$url);
 			if (count($url)>2)
@@ -70,7 +70,7 @@ function formulaires_editer_url_objet_traiter($type,$id){
 	// les urls manuelles sont toujours permanentes
 	$set = array('url' => _request('url'), 'type' => $type, 'id_objet' => $id, 'perma'=>1);
 
-	$type_urls = $GLOBALS['meta']['type_urls'];
+	$type_urls = (isset($GLOBALS['type_urls'])?$GLOBALS['type_urls']:$GLOBALS['meta']['type_urls']);
 	if (include_spip("urls/$type_urls")
 		AND function_exists($renseigner_url = "renseigner_url_$type_urls")
 		AND $r = $renseigner_url($type,$id)

@@ -7,16 +7,17 @@
 require_once('lanceur_spip.php');
 
 class Test_barre_outil_markitup extends SpipTest{
-	
+
 	var $baseParamsBarre = array();
 	var $baseParamsBarreEtendue = array();
-	
-	function Test_barre_outil_markitup() {
 
-		$this->SpipTest("Test de la classe Barre_outils");
+	function __construct() {
+
+		parent::__construct("Test de la classe Barre_outils");
 
 		// instancier une barre d'outil
 		include_spip('porte_plume_fonctions');
+
 		$this->baseParamsBarre = array(
 			'nameSpace'    => 'spip',
 			'markupSet'    => array(
@@ -68,17 +69,18 @@ class Test_barre_outil_markitup extends SpipTest{
 		);
 		$this->baseParamsBarreEtendue = $p;
 	}
-	
+
 	// avant chaque appel de fonction test
 	function setUp() {
 
-    }
-    // apres chaque appel de fonction test
-    function tearDown() {
-        
-    }
+	}
 
-	
+	// apres chaque appel de fonction test
+	function tearDown() {
+
+	}
+
+
 	function testInitialisationBarre(){
 		// parametres inseres a leur bonne place
 		$b = new Barre_outils($this->baseParamsBarre);
@@ -86,7 +88,7 @@ class Test_barre_outil_markitup extends SpipTest{
 		$this->assertEqual('header1', $b->markupSet[0]['id']);
 		$this->assertEqual(7, count($b->markupSet[0]));
 	}
-	
+
 	function testInitialisationBarreEtendue(){	
 		// parametres inseres a leur bonne place,
 		// meme quand il y a des sous-menu d'icones
@@ -97,18 +99,23 @@ class Test_barre_outil_markitup extends SpipTest{
 		$this->assertEqual('couleurs', $b->markupSet[1]['id']);	
 		$this->assertEqual(3, count($b->markupSet[1]['dropMenu']));	
 	}
-	
+
 	function testOptionsIncorrectesNonIncluses(){
 		$p = $this->baseParamsBarre;
 		$p['fausseVariable'] = "je ne dois pas m'installer";
 		$p['markupSet'][0]['fauxParam'] = "je ne dois pas m'installer";
 		$b = new Barre_outils($p);
-		$this->assertEqual('spip',$b->nameSpace);
-		$this->assertNull($b->fausseVariable);
-		$this->assertNull($b->markupSet[0]['fauxParam']);
+		$this->assertEqual('spip', $b->nameSpace);
+
+		$this->expectError(new PatternExpectation("/Undefined property: Barre_outils::\\\$fausseVariable/i"));
+		$b->fausseVariable;
+
+		$this->expectError(new PatternExpectation("/Undefined index: fauxParam/i"));
+		$b->markupSet[0]['fauxParam'];
+
 		$this->assertEqual(7, count($b->markupSet[0]));
 	}
-	
+
 	function testRecuperationDeParametreAvecGet(){
 		// trouver des id de premier niveau
 		$p = $this->baseParamsBarre;
@@ -120,40 +127,40 @@ class Test_barre_outil_markitup extends SpipTest{
 		$b = new Barre_outils($p);
 		$this->assertEqual($b->get('header1'), $p['markupSet'][0]);
 		$this->assertEqual($b->get('couleurs'), $p['markupSet'][1]);
-		$this->assertEqual($b->get('couleur_jaune'), $p['markupSet'][1]['dropMenu'][0]);		
-		$this->assertEqual($b->get('couleur_orange'), $p['markupSet'][1]['dropMenu'][1]);		
+		$this->assertEqual($b->get('couleur_jaune'), $p['markupSet'][1]['dropMenu'][0]);
+		$this->assertEqual($b->get('couleur_orange'), $p['markupSet'][1]['dropMenu'][1]);
 		$this->assertEqual($b->get('couleur_rouge'), $p['markupSet'][1]['dropMenu'][2]);
-		
+
 		// ne pas trouver d'id inconnu
 		$this->assertFalse($b->get('je_nexiste_pas'));
 	}
-	
+
 	function testModificationDeParametresAvecSet(){
 		$p = $this->baseParamsBarre;
 		$b = new Barre_outils($p);
 		$p['markupSet'][0]['name'] = 'New';
 		$r = $p['markupSet'][0];
 		$x = $b->set('header1', array("name"=>"New"));
-		
+
 		$this->assertEqual($r, $x); // set retourne la chaine modifiee complete
 		$this->assertEqual($r, $b->get('header1'));
-		
+
 		// on ne peut ajouter de mauvais parametres
 		$x = $b->set('header1', array("Je Suis Pas Bon"=>"No no no"));
 		$this->assertEqual($r, $x); // set retourne la chaine modifiee complete
 		$this->assertEqual($r, $b->get('header1'));		
 	}
-	
+
 	function testAjoutDeParametresApres(){
 		$b = new Barre_outils($this->baseParamsBarre);
 		$p = $this->baseParamsBarreEtendue;
-		
+
 		// ajoutons la couleur apres
 		$b->ajouterApres('header1',$p['markupSet'][1]);
 		$this->assertEqual(2, count($b->markupSet)); // 2 boutons de premier niveau maintenant
 		$this->assertEqual($b->get('couleurs'), $p['markupSet'][1]); // get renvoie bien le bon ajout
 		$this->assertEqual($b->markupSet[1], $p['markupSet'][1]); // et l'ajout est au bon endroit
-		
+
 			// ajoutons une couleur dans l'ajout
 			$coul = $p['markupSet'][1]['dropMenu'][0];
 			$coul['id'] = 'couleur_violette';
@@ -161,7 +168,7 @@ class Test_barre_outil_markitup extends SpipTest{
 			$this->assertEqual(4, count($b->markupSet[1]['dropMenu'])); // sous boutons
 			$this->assertEqual($b->get('couleur_violette'), $coul);
 			$this->assertEqual($b->markupSet[1]['dropMenu'][2], $coul); // insertion au bon endroit
-			
+
 		// ajoutons un header2 encore apres
 		$p['markupSet'][0]['id'] = 'header2';
 		$b->ajouterApres('couleurs',$p['markupSet'][0]);
@@ -169,17 +176,17 @@ class Test_barre_outil_markitup extends SpipTest{
 		$this->assertEqual($b->get('header2'), $p['markupSet'][0]);
 		$this->assertEqual($b->markupSet[2], $p['markupSet'][0]);
 	}
-	
+
 	function testAjoutDeParametresAvant(){
 		$b = new Barre_outils($this->baseParamsBarre);
 		$p = $this->baseParamsBarreEtendue;
-		
+
 		// ajoutons la couleur apres
 		$b->ajouterAvant('header1',$p['markupSet'][1]);
 		$this->assertEqual(2, count($b->markupSet)); // 2 boutons de premier niveau maintenant
 		$this->assertEqual($b->get('couleurs'), $p['markupSet'][1]); // get renvoie bien le bon ajout
 		$this->assertEqual($b->markupSet[0], $p['markupSet'][1]); // et l'ajout est au bon endroit
-		
+
 			// ajoutons une couleur dans l'ajout
 			$coul = $p['markupSet'][1]['dropMenu'][0];
 			$coul['id'] = 'couleur_violette';
@@ -187,7 +194,7 @@ class Test_barre_outil_markitup extends SpipTest{
 			$this->assertEqual(4, count($b->markupSet[0]['dropMenu'])); // sous boutons
 			$this->assertEqual($b->get('couleur_violette'), $coul);
 			$this->assertEqual($b->markupSet[0]['dropMenu'][1], $coul); // insertion au bon endroit
-					
+
 		// ajoutons un header2 avant le 1
 		$p['markupSet'][0]['id'] = 'header2';
 		$b->ajouterAvant('header1',$p['markupSet'][0]);
@@ -195,7 +202,7 @@ class Test_barre_outil_markitup extends SpipTest{
 		$this->assertEqual($b->get('header2'), $p['markupSet'][0]);
 		$this->assertEqual($b->markupSet[1], $p['markupSet'][0]);
 	}
-	
+
 	function testAfficherEtCacher(){
 		$b = new Barre_outils($this->baseParamsBarre);
 		$b->cacher('header1');
@@ -203,47 +210,47 @@ class Test_barre_outil_markitup extends SpipTest{
 		$b->afficher('header1');
 		$this->assertTrue($b->markupSet[0]['display']);
 	}
-	
+
 	function testAfficherEtCacherTout(){
 		$b = new Barre_outils($this->baseParamsBarreEtendue);
 		$b->cacherTout();
 		$this->assertFalse($b->markupSet[0]['display']);
 		$this->assertFalse($b->markupSet[1]['dropMenu'][0]['display']);
-		
+
 		$b->afficherTout();
 		$this->assertTrue($b->markupSet[0]['display']);
 		$this->assertTrue($b->markupSet[1]['dropMenu'][0]['display']);
 	}
-	
+
 	function testAfficherEtCacherPlusieursBoutons(){
 		$b = new Barre_outils($this->baseParamsBarreEtendue);
 		$b->cacher(array('header1','couleur_jaune'));
 		$this->assertFalse($b->markupSet[0]['display']);
 		$this->assertFalse($b->markupSet[1]['dropMenu'][0]['display']);
 		$this->assertTrue($b->markupSet[1]['dropMenu'][1]['display']);
-		
+
 		$b->cacherTout();
 		$b->afficher(array('header1','couleur_jaune'));
 		$this->assertTrue($b->markupSet[0]['display']);
 		$this->assertTrue($b->markupSet[1]['dropMenu'][0]['display']);
 		$this->assertFalse($b->markupSet[1]['dropMenu'][1]['display']);
 	}
-	
+
 	function testSetAvecIdVideNeDoitRienModifier(){
 		$b = new Barre_outils($this->baseParamsBarreEtendue);
 		$b->set(array(),array('display'=>false));	
 		$this->assertTrue($b->markupSet[0]['display']);
-		$this->assertTrue($b->markupSet[1]['dropMenu'][0]['display']);		
+		$this->assertTrue($b->markupSet[1]['dropMenu'][0]['display']);
 	}
-	
+
 	function testSetAvecIdArrayDoitModifTousLesIds(){
 		$b = new Barre_outils($this->baseParamsBarreEtendue);
-		$b->set(array('header1','couleur_jaune'),array('display'=>false));	
+		$b->set(array('header1','couleur_jaune'),array('display'=>false));
 		$this->assertFalse($b->markupSet[0]['display']);
 		$this->assertFalse($b->markupSet[1]['dropMenu'][0]['display']);
-		$this->assertTrue($b->markupSet[1]['dropMenu'][1]['display']);			
-	}	
-	
+		$this->assertTrue($b->markupSet[1]['dropMenu'][1]['display']);
+	}
+
 	function testCreerJson(){
 		$b = new Barre_outils($this->baseParamsBarre);
 		$b->ajouterApres('header1', array(
@@ -258,7 +265,7 @@ class Test_barre_outil_markitup extends SpipTest{
 		$this->assertPattern(',\[{"name":",',$json);
 		$this->assertNoPattern(',eacute;,',$json);
 	}
-	
+
 	function testBoutonsDUneLangue(){
 		$b = new Barre_outils($this->baseParamsBarre);
 		$ico2 = $ico1 = array(
@@ -276,7 +283,7 @@ class Test_barre_outil_markitup extends SpipTest{
 		$b->ajouterApres('ico_fr1', $ico2);
 		$this->assertEqual($ico1, $b->get('ico_fr1'));
 		$this->assertEqual($ico2, $b->get('ico_fr2'));
-		
+
 		// verifier que ces nouveaux array()
 		// ne posent pas de problemes dans les recursions
 		$b->cacherTout();
@@ -286,13 +293,13 @@ class Test_barre_outil_markitup extends SpipTest{
 		$b->cacherTout();
 		$b->afficher(array('ico_fr1','ico_fr2'));
 		$this->assertTrue($b->markupSet[1]['display']);	
-		
+
 		// la langue est bien transmise au json
 		$json = $b->creer_json();
 		$this->assertPattern(',"lang":\[,', $json);
 	}
-	
-	
+
+
 	function testFonctionsJavacriptDansParametreNeDoitPasEtreEntreguillemetsDansJson(){
 		$b = new Barre_outils($this->baseParamsBarre);
 		$clean = array(
@@ -308,24 +315,25 @@ class Test_barre_outil_markitup extends SpipTest{
 		// pas de :"function(... ..."
 		$this->assertPattern('/:function\(/',$json);
 	}
-	
+
 	function testParametreFunctionsDansJson(){
 		$b = new Barre_outils($this->baseParamsBarre);
 		$b->functions = "function dido(){}";
 		$json = $b->creer_json();
 		// function n'est plus dans la barre
-		$this->assertFalse($b->functions);
+		$this->expectError(new PatternExpectation("/Undefined property: Barre_outils::\\\$functions/i"));
+		$b->functions;
 		// mais uniquement en fin du fichier json
-		$this->assertPattern('/function dido\(/', $json);		
+		$this->assertPattern('/function dido\(/', $json);
 	}
-	
+
 	function testAjouterFonctions(){
 		$b = new Barre_outils($this->baseParamsBarre);
 		$b->ajouterFonction("function dido(){}");
-		$this->assertPattern('/function dido\(/', $b->functions);		
+		$this->assertPattern('/function dido\(/', $b->functions);
 	}
-	
-	/*	
+
+	/*
 	function squeletteTest(){
 		$sq = new SqueletteTest("SimpleTest");
 		$sq->addInsertHead();
@@ -338,11 +346,11 @@ class Test_barre_outil_markitup extends SpipTest{
 		");	
 		return $sq;	
 	}
-	
+
 	function testPresenceBarreOutilPublique(){
 		include_spip('simpletest/browser');
 		include_spip('simpletest/web_tester');
-		
+
 		$sq = $this->squeletteTest();
 
 		$browser = &new SimpleBrowser();

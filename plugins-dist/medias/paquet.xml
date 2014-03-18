@@ -1,7 +1,7 @@
 <paquet
 	prefix="medias"
 	categorie="multimedia"
-	version="2.7.57"
+	version="2.7.58"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/portfolio-32.png"
