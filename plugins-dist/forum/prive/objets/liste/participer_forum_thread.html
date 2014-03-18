@@ -39,7 +39,9 @@ la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 				})]
 				</BOUCLE_doc>
 
-				[<p class="repondre"><a class='ajax' href="(#SELF|parametre_url{repondre,#ID_FORUM})" rel="noindex nofollow"><:forum:repondre_message:></a></p>]
+				[(#AUTORISER{participerforumprive,#OBJET,#ID_OBJET}|oui)
+					[<p class="repondre"><a class='ajax' href="(#SELF|parametre_url{repondre,#ID_FORUM})" rel="noindex nofollow"><:forum:repondre_message:></a></p>]
+				]
 			</div>
 		</div>
 
@@ -73,7 +75,9 @@ la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 				</BOUCLE_doc2>
 
 
-						[<p class="repondre"><a class='ajax' href="(#SELF|parametre_url{repondre,#ID_FORUM})" rel="noindex nofollow"><:forum:repondre_message:></a></p>]
+						[(#AUTORISER{participerforumprive,#OBJET,#ID_OBJET}|oui)
+							[<p class="repondre"><a class='ajax' href="(#SELF|parametre_url{repondre,#ID_FORUM})" rel="noindex nofollow"><:forum:repondre_message:></a></p>]
+						]
 					</div>
 				</div>
 
