@@ -65,7 +65,7 @@
 <BOUCLE_nodouble(ARTICLES) {titre_mot=double} {doublons}></BOUCLE_nodouble>
 
 <BOUCLE_edito(ARTICLES) {titre_mot=editorial} {par date} {inverse} {age_relatif < 14} {0,1} {doublons}>
-  <div id="edito" style="display:none;">
+<!--   <div id="edito" style="display:none;">
     <div class="article">
       <div class="titre"><h2>#TITRE</h2></div>
       <BOUCLE_auteur(AUTEURS) {id_article}>[(#SET{uniqueauteur,#ID_AUTEUR})]</BOUCLE_auteur>
@@ -77,9 +77,9 @@
       <h3 class="auteur">Le [(#DATE|affdate)], par (#LESAUTEURS)</h3>]
     </div>
   </div>
-
+ -->
   <div id="editolink">&Eacute;ditorial :
-    <a class="thickbox" href="#[(#REM)]TB_inline?width=700&amp;height=500&amp;inlineId=edito">#TITRE</a>
+    <a class="thickbox" href="#URL_ARTICLE">#TITRE</a>
   </div>
 </BOUCLE_edito>
 
