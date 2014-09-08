@@ -156,15 +156,15 @@
 
 <div id="home_bottom">
   <div id="hb_right">
-    <h2 class="home_hat"><a href="#URL_RUBRIQUE{34}">Courrier des lecteurs</a></h2>
+    <h2 class="home_hat"><a href="#URL_RUBRIQUE{55}">Le d&eacute;bat du 18</a></h2>
     <div class="resume bluelist">
       <ul>
-        <BOUCLE_courrier(ARTICLES) {id_rubrique=34} {age_relatif >= 0} {par date} {inverse} {0,5}>
+        <BOUCLE_debat(ARTICLES) {id_rubrique=55} {age_relatif >= 0} {par date} {inverse} {0,5}>
           <li>
             <span>[(#DATE|affdate) - ]</span>
             <a href="#URL_ARTICLE">[(#TITRE|trunctext{70})]</a>
           </li>
-        </BOUCLE_courrier>
+        </BOUCLE_debat>
       </ul>
     </div>
 
