@@ -1,7 +1,7 @@
 <paquet
 	prefix="tw"
 	categorie="edition"
-	version="0.8.23"
+	version="0.8.26"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="textwheel-32.png"
@@ -17,6 +17,6 @@
 	<pipeline nom="trig_purger" inclure="inc/textwheel.php" />
 	<pipeline nom="pre_echappe_html_propre" action="" />
 	<pipeline nom="pre_liens" action="autoliens" inclure="inc/autoliens.php" />
-	<utilise nom="yaml" compatibilite="[1.3;[" />
-	<utilise nom="memoization" compatibilite="[0.9;[" />
+	<utilise nom="yaml" compatibilite="[1.5.1;[" />
+	<utilise nom="memoization" compatibilite="[0.9.8;[" />
 </paquet>

@@ -118,19 +118,32 @@ function declarer_url_propre($type, $id_objet) {
 
 	// Recuperer une URL propre correspondant a l'objet.
 	// mais urls a 1 segment uniquement (pas d'urls /)
-	$row = sql_fetsel("U.url, U.date, U.perma, $champ_titre",
+	// de preference avec id_parent=0, puis perma, puis par date desc
+	$row = sql_fetsel("U.url, U.date, U.id_parent, U.perma, $champ_titre",
 	                  "$table AS O LEFT JOIN spip_urls AS U ON (U.type='$type' AND U.id_objet=O.$col_id)",
-	                  "O.$col_id=$id_objet AND (U.segments IS NULL OR U.segments=1)", '', 'U.date DESC', 1);
+	                  "O.$col_id=$id_objet AND (U.segments IS NULL OR U.segments=1)", '', 'U.id_parent=0 DESC, U.perma DESC, U.date DESC', 1);
 
 	// en SQLite le left join retourne du vide si il y a une url mais qui ne correspond pas pour la condition sur le segment
 	// on verifie donc que l'objet existe bien avant de sortir ou de creer une url pour cet objet
 	if (!$row)
-		$row = sql_fetsel("'' as url, '' as date, 0 as perma, $champ_titre",
+		$row = sql_fetsel("'' as url, '' as date, 0 as id_parent, 0 as perma, $champ_titre",
 		                  "$table AS O",
 		                  "O.$col_id=$id_objet");
+
 	if (!$row) return ""; # Quand $id_objet n'est pas un numero connu
 
 	$url_propre = $row['url'];
+
+	// si url_propre connue mais avec id_parent non nul, essayer de reinserer tel quel avec id_parent=0
+	if ($url_propre AND $row['id_parent']){
+		include_spip('action/editer_url');
+		$set = array('url' => $url_propre, 'type' => $type, 'id_objet' => $id_objet, 'perma' => $row['perma']);
+		// si on arrive pas a reinserer tel quel, on annule url_propre pour forcer un recalcul d'url
+		if (!url_insert($set,false,_url_propres_sep_id))
+			$url_propre = "";
+		else
+			$url_propre = $row['url'] = $set['url'];
+	}
 
 	// Se contenter de cette URL si elle existe ;
 	// sauf si on invoque par "voir en ligne" avec droit de modifier l'url

@@ -76,9 +76,8 @@ defined('CONFIRMER_MODIFIER_URL') || define('CONFIRMER_MODIFIER_URL', false);
  * 
  */
 
-include_spip('inc/xcache');
-if (!function_exists('Cache')) {
-	function Cache(){return null;}
+if (!function_exists('cache_me')) {
+	function cache_me(){return null;}
 }
 
 $config_urls_arbo = isset($GLOBALS['meta']['urls_arbo'])?unserialize($GLOBALS['meta']['urls_arbo']):array();
@@ -276,7 +275,7 @@ function renseigner_url_arbo($type,$id_objet){
 function declarer_url_arbo($type, $id_objet) {
 	static $urls=array();
 	// utiliser un cache memoire pour aller plus vite
-	if(!is_null($C=Cache())) return$C;
+	if(!is_null($C=cache_me())) return $C;
 	
 	// Se contenter de cette URL si elle existe ;
 	// sauf si on invoque par "voir en ligne" avec droit de modifier l'url
@@ -596,18 +595,35 @@ function urls_arbo_dist($i, $entite, $args='', $ancre='') {
 		}
 
 		if (count($url_arbo_new)){
-			foreach($url_arbo_new as $k=>$o)
-				if ($s = declarer_url_arbo($o['objet'],$o['id_objet']))
-					$url_arbo_new[$k] = $s;
-				else
-					$url_arbo_new[$k] = implode('/',$o['segment']);
-			$url_arbo_new = ltrim(implode('/',$url_arbo_new),'/');
-			
-			if ($url_arbo_new!==$url_propre){
-				$url_redirect = $url_arbo_new;
+			$caller = debug_backtrace();
+			$caller = $caller[1]['function'];
+			// si on est appele par un autre module d'url c'est du decodage d'une ancienne URL
+			// ne pas regenerer des segments arbo, mais rediriger vers la nouvelle URL
+			// dans la nouvelle forme
+			if (strncmp($caller,"urls_",5)==0 AND $caller!=="urls_decoder_url"){
 				// en absolue, car assembler ne gere pas ce cas particulier
 				include_spip('inc/filtres_mini');
-				$url_redirect = url_absolue($url_redirect);
+				$col_id = id_table_objet($entite);
+				$url_new = generer_url_entite($contexte[$col_id],$entite);
+				// securite contre redirection infinie
+				if ($url_new!==$url_propre
+					AND rtrim($url_new,"/")!==rtrim($url_propre,"/"))
+					$url_redirect = url_absolue($url_new);
+			}
+			else {
+				foreach($url_arbo_new as $k=>$o)
+					if ($s = declarer_url_arbo($o['objet'],$o['id_objet']))
+						$url_arbo_new[$k] = $s;
+					else
+						$url_arbo_new[$k] = implode('/',$o['segment']);
+				$url_arbo_new = ltrim(implode('/',$url_arbo_new),'/');
+
+				if ($url_arbo_new!==$url_propre){
+					$url_redirect = $url_arbo_new;
+					// en absolue, car assembler ne gere pas ce cas particulier
+					include_spip('inc/filtres_mini');
+					$url_redirect = url_absolue($url_redirect);
+				}
 			}
 		}
 

@@ -83,7 +83,7 @@ table#visites tr.c_recap th {background-color:#[(#GET{foncee}|couleur_foncer)];c
 .stats_referers .action.plus {text-align:right;font-size:1.5em;font-weight:bold;}
 
 .stats_repartition .couleur_cumul { background: #GET{foncee}; }
-.stats_repartition .couleur_nombre { background: #GET{claire}; }
+.stats_repartition .couleur_nombre { background: [#(#GET{foncee}|couleur_eclaircir)]; }
 .stats_repartition table h3,.stats_repartition table table {margin-bottom: 0;padding-bottom: 0;padding-top: 0;}
 .stats_repartition table h3 {font-size: inherit;margin-bottom: 3px;margin-top:3px;}
 .stats_repartition table {margin: 0;}

@@ -189,6 +189,39 @@ function filtrer($filtre) {
 	}
 }
 
+/*
+ *
+ * [(#CALCUL|set{toto})] enregistre le résultat de #CALCUL
+ *           dans la variable toto et renvoie vide
+ *
+ * [(#CALCUL|set{toto,1})] enregistre le résultat de #CALCUL
+ *           dans la variable toto et renvoie la valeur
+ *
+ */
+function filtre_set(&$Pile, $val, $key, $continue = null) {
+	$Pile['vars'][$key] = $val;
+	return $continue ? $val : '';
+}
+
+/*
+ * [(#TRUC|debug{avant}|calcul|debug{apres}|etc)] affiche
+ *   la valeur de #TRUC avant et après le calcul
+ */
+function filtre_debug($val, $key=null) {
+	$debug = (
+		is_null($key) ? '' :  (var_export($key,true)." = ")
+	) . var_export($val, true);
+
+	include_spip('inc/autoriser');
+	if (autoriser('webmestre'))
+		echo "<div class='spip_debug'>\n",$debug,"</div>\n";
+
+	spip_log($debug, 'debug');
+
+	return $val;
+}
+
+
 // fonction generique d'entree des filtres images
 // accepte en entree un texte complet, un img-log (produit par #LOGO_XX),
 // un tag <img ...> complet, ou encore un nom de fichier *local* (passer
@@ -378,7 +411,12 @@ function filtrer_entites($texte) {
 	// filtrer
 	$texte = html2unicode($texte);
 	// remettre le tout dans le charset cible
-	return unicode2charset($texte);
+	$texte = unicode2charset($texte);
+	// cas particulier des " et ' qu'il faut filtrer aussi
+	// (on le faisait deja avec un &quot;)
+	if (strpos($texte,"&#")!==false)
+		$texte = str_replace(array("&#039;","&#39;","&#034;","&#34;"), array("'","'",'"','"'), $texte);
+	return $texte;
 }
 
 // caracteres de controle - http://www.w3.org/TR/REC-xml/#charsets
@@ -470,7 +508,7 @@ function recuperer_numero($texte) {
 	if (preg_match(
 	",^[[:space:]]*([0-9]+)([.)]|".chr(194).'?'.chr(176).")[[:space:]]+,S",
 	$texte, $regs))
-		return intval($regs[1]);
+		return strval($regs[1]);
 	else
 		return '';
 }
@@ -1132,6 +1170,10 @@ function affdate_heure($numdate) {
  * @param string $date_fin
  * @param string $horaire
  * @param string $forme
+ *   abbr pour afficher le nom du jour en abbrege (Dim. au lieu de Dimanche)
+ *   annee pour forcer l'affichage de l'annee courante
+ *   jour pour forcer l'affichage du nom du jour
+ *   hcal pour pour avoir un markup microformat abbr
  * @return string
  */
 function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
@@ -1169,7 +1211,7 @@ function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
 			}else{
 				// Le <abbr...>lundi 20 fevrier de 18h00</abbr> a <abbr...>20h00</abbr>
 				if($dtabbr && $dtstart && $dtend)
-					$s = spip_ucfirst(_T('date_fmt_jour_heure_debut_fin_abbr',array('jour'=>$s,'heure_debut'=>$hd,'heure_fin'=>$hf,'dtstart'=>$dtstart,'dtend'=>$dtend,'dtabbr'=>$dtabbr)));
+					$s = _T('date_fmt_jour_heure_debut_fin_abbr',array('jour'=>spip_ucfirst($s),'heure_debut'=>$hd,'heure_fin'=>$hf,'dtstart'=>$dtstart,'dtend'=>$dtend,'dtabbr'=>$dtabbr));
 				// Le lundi 20 fevrier de 18h00 a 20h00
 				else
 					$s = spip_ucfirst(_T('date_fmt_jour_heure_debut_fin',array('jour'=>$s,'heure_debut'=>$hd,'heure_fin'=>$hf)));
@@ -1186,7 +1228,7 @@ function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
 		if(!$h)
 			$date_debut = jour($d);
 		else
-			$date_debut = $affdate($d);
+			$date_debut = affdate_jourcourt($d,date("Y",$date_fin));
 		$date_fin = $affdate($f);
 		if($jour){
 			$nomjour_debut = nom_jour($d,$abbr);
@@ -1204,13 +1246,13 @@ function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
 		$s = _T('date_fmt_periode',array('date_debut' => $date_debut,'date_fin'=>$date_fin));
 	}
 	else {
-		$date_debut = affdate($d);
-		$date_fin = affdate($f);
+		$date_debut = affdate_jourcourt($d,date("Y",$date_fin));
+		$date_fin = $affdate($f);
 		if($jour){
 			$nomjour_debut = nom_jour($d,$abbr);
-			$date_debut = _T('date_fmt_jour_periode',array('nomjour'=>$nomjour_debut,'jour' => $date_debut));
+			$date_debut = _T('date_fmt_jour',array('nomjour'=>$nomjour_debut,'jour' => $date_debut));
 			$nomjour_fin = nom_jour($f,$abbr);
-			$date_fin = _T('date_fmt_jour_periode',array('nomjour'=>$nomjour_fin,'jour' => $date_fin));
+			$date_fin = _T('date_fmt_jour',array('nomjour'=>$nomjour_fin,'jour' => $date_fin));
 		}
 		if ($h){
 			$date_debut = _T('date_fmt_jour_heure',array('jour'=>$date_debut,'heure'=>$hd)); 
@@ -2275,16 +2317,17 @@ function concat(){
 
 
 // http://doc.spip.org/@charge_scripts
-function charge_scripts($scripts) {
-  $flux = "";
-  $args = is_array($scripts)?$scripts:explode("|",$scripts);
-  foreach($args as $script) {
-    if(preg_match(",^\w+$,",$script)) {
-      $path = find_in_path("javascript/$script.js");
-      if($path) $flux .= spip_file_get_contents($path);
-    }
-  }
-  return $flux;
+// http://doc.spip.org/@charge_scripts
+function charge_scripts($files, $script = true) {
+	$flux = "";
+	foreach(is_array($files)?$files:explode("|",$files) as $file) {
+		if (!is_string($file)) continue;
+		if ($script)
+			$file = preg_match(",^\w+$,",$file) ? "javascript/$file.js" : '';
+		if ($file) $path = find_in_path($file);
+		if ($path) $flux .= spip_file_get_contents($path);
+	}
+	return $flux;
 }
 
 
@@ -2938,6 +2981,7 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile=""){
 	if (!$etoile
 		AND is_array($traitement)
 	  AND (isset($traitement[$table_sql]) OR isset($traitement[0]))){
+	  	include_spip('inc/texte');
 		$traitement = $traitement[isset($traitement[$table_sql]) ? $table_sql : 0];
 		$traitement = str_replace('%s', "'".texte_script($info_generee)."'", $traitement);
 		// FIXME: $connect et $Pile[0] font souvent partie des traitements.

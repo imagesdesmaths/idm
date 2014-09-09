@@ -55,8 +55,9 @@ function svp_ajouter_depot($url, &$erreur='') {
 		$erreur = _T('svp:message_nok_xml_non_conforme', array('fichier' => $url));
 		return false;
 	}
-	
-	$champs = array('titre' => filtrer_entites($infos['depot']['titre']),
+
+	$titre = filtrer_entites($infos['depot']['titre']);
+	$champs = array('titre' => $titre,
 					'descriptif' => filtrer_entites($infos['depot']['descriptif']),
 					'type' => $infos['depot']['type'],
 					'url_serveur' => $infos['depot']['url_serveur'],
@@ -68,11 +69,18 @@ function svp_ajouter_depot($url, &$erreur='') {
 					'nbr_paquets' => 0,
 					'nbr_plugins' => 0,
 					'nbr_autres' => 0);
-	if (!$id_depot = sql_insertq('spip_depots', $champs)) {
-		$erreur = _T('svp:message_nok_sql_insert_depot', array('objet' => $titre));
+
+	// verifier avant l'insertion que le depot n'existe pas deja
+	// car la recuperation pouvant etre longue on risque le probleme en cas de concurrence
+	if (sql_countsel('spip_depots','xml_paquets='.sql_quote($url))){
+		$erreur = _T('svp:message_nok_depot_deja_ajoute', array('url' => $url));
 		return false;
 	}
-	
+	elseif (!$id_depot = sql_insertq('spip_depots', $champs)) {
+		$erreur = _T('svp:message_nok_sql_insert_depot', array('objet' => "$titre ($url)"));
+		return false;
+	}
+
 	// Ajout des paquets dans spip_paquets et actualisation des plugins dans spip_plugins
 	$ok = svp_actualiser_paquets($id_depot, $infos['paquets'], $nb_paquets, $nb_plugins, $nb_autres);
 	if (!$ok OR ($nb_paquets == 0)) {
