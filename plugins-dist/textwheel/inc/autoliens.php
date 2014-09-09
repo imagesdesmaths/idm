@@ -33,8 +33,9 @@ function tw_traiter_autoliens($r) {
 	} else 	$protocol = 'http';
 	// valider le nom de domaine
 	if (!preg_match(_EXTRAIRE_DOMAINE, $l)) return $tout;
-	// supprimer les ponctuations a la fin d'une URL
-	preg_match('/^(.*?)([,.;?]?)$/', $l, $k);
+	// les ponctuations a la fin d'une URL n'en font certainement pas partie
+	// en particulier le "|" quand elles sont dans un tableau a la SPIP
+	preg_match('/^(.*?)([,.;?|]?)$/', $l, $k);
 	$url = $protocol.'://'.$k[1];
 	$lien = charger_fonction('lien', 'inc');
 	// deux fois <html> car inc_lien echappe un coup et restaure ensuite

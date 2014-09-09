@@ -386,10 +386,17 @@ jQuery.spip.on_ajax_loaded = function(blocfrag,c,href,history) {
 		history = false;
 	if (history)
 		jQuery.spip.setHistoryState(blocfrag);
-	
-	jQuery(blocfrag)
-	.html(c)
-	.endLoading();
+
+	if (jQuery(blocfrag).attr('data-loaded-callback')){
+		var callback = eval(jQuery(blocfrag).attr('data-loaded-callback'));
+		callback.call(blocfrag, c, href, history);
+	}
+	else {
+		jQuery(blocfrag)
+		.html(c)
+		.endLoading();
+	}
+
 	if (typeof href != undefined)
 		jQuery(blocfrag).attr('data-url',href);
 	if (history) {
@@ -430,6 +437,9 @@ jQuery.spip.setHistoryState = function(blocfrag){
 		id:blocfrag.attr('id'),
 		href: href
 	};
+	var ajaxid = blocfrag.attr('class').match(/\bajax-id-[\w-]+\b/);
+	if (ajaxid && ajaxid.length)
+		state["ajaxid"] = ajaxid[0];
 	// on remplace la variable qui decrit l'etat courant
 	// initialement vide
 	// -> elle servira a revenir dans l'etat courant
@@ -443,11 +453,22 @@ jQuery.spip.pushHistoryState = function(href, title){
 }
 
 window.onpopstate = function(popState){
-	if (popState.state && popState.state.id){
-		var blocfrag=jQuery('#'+popState.state.id);
-		if (blocfrag.length && popState.state.href) {
+	if (popState.state && popState.state.href){
+		var blocfrag=false;
+		if (popState.state.id){
+			blocfrag=jQuery('#'+popState.state.id);
+		}
+		if ((!blocfrag || !blocfrag.length) && popState.state.ajaxid){
+			blocfrag=jQuery('.ajaxbloc.'+popState.state.ajaxid);
+		}
+		if (blocfrag && blocfrag.length==1) {
 			jQuery.spip.ajaxClick(blocfrag,popState.state.href,{history:false});
 			return true;
+		}
+		// si on revient apres avoir rompu la chaine ajax, on a pu perdre l'id #ghsidxx ajoute en JS
+		// dans ce cas on redirige hors ajax
+		else {
+			window.location.href = popState.state.href;
 		}
 	}
 }
@@ -468,7 +489,13 @@ window.onpopstate = function(popState){
  */
 jQuery.spip.loadAjax = function(blocfrag,url, href, options){
 	var force = options.force || false;
-	jQuery(blocfrag).animateLoading();
+	if (jQuery(blocfrag).attr('data-loading-callback')){
+		var callback = eval(jQuery(blocfrag).attr('data-loading-callback'));
+		callback.call(blocfrag,url,href,options);
+	}
+	else {
+		jQuery(blocfrag).animateLoading();
+	}
 	if (jQuery.spip.preloaded_urls[url] && !force) {
 		// si on est deja en train de charger ce fragment, revenir plus tard
 		if (jQuery.spip.preloaded_urls[url]=="<!--loading-->"){
@@ -506,10 +533,32 @@ jQuery.spip.loadAjax = function(blocfrag,url, href, options){
  * @param string href
  * @param string ajax_env
  */
-jQuery.spip.makeAjaxUrl = function(href,ajax_env){
+jQuery.spip.makeAjaxUrl = function(href,ajax_env,origin){
 	var url = href.split('#');
 	url[0] = parametre_url(url[0],'var_ajax',1);
 	url[0] = parametre_url(url[0],'var_ajax_env',ajax_env);
+
+	// les arguments de origin qui ne sont pas dans href doivent etre explicitement fournis vides dans url
+	if (origin){
+		var p=origin.indexOf('?');
+		if (p!==-1){
+			// recuperer la base
+			var args = origin.substring(p+1).split('&');
+			var val;
+			var arg;
+			for(var n=0;n<args.length;n++){
+				arg = args[n].split('=');
+				arg = arg[0];
+				p = arg.indexOf('[');
+				if (p!==-1)
+					arg = arg.substring(0,p);
+				val = parametre_url(href,arg);
+				if (typeof val=="undefined")
+					url[0] = url[0] + '&' + arg + '=';
+			}
+		}
+	}
+
 	if (url[1])
 		url[0] = parametre_url(url[0],'var_ajax_ancre',url[1]);
 	return url[0];
@@ -522,13 +571,14 @@ jQuery.spip.makeAjaxUrl = function(href,ajax_env){
  * @param object blocfrag
  * @param object options
  *   callback : fonction appelee apres le rechargement
+ *   href : url to load instead of origin url
  *   args : arguments passes a l'url rechargee (permet une modif du contexte)
  *   history : bool to specify if navigation history is modified by reload or not (false if not provided)
  */
 jQuery.spip.ajaxReload = function(blocfrag, options){
 	var ajax_env = blocfrag.attr('data-ajax-env');
 	if (!ajax_env || ajax_env==undefined) return;
-	var href = blocfrag.attr('data-url') || blocfrag.attr('data-origin');
+	var href = options.href || blocfrag.attr('data-url') || blocfrag.attr('data-origin');
 	if (href && typeof href != undefined){
 		options == options || {};
 		var callback=options.callback || null;
@@ -536,7 +586,7 @@ jQuery.spip.ajaxReload = function(blocfrag, options){
 		var args = options.args || {};
 		for (var key in args)
 			href = parametre_url(href,key,args[key]==undefined?'':args[key],'&',args[key]==undefined?false:true);
-		var url = jQuery.spip.makeAjaxUrl(href,ajax_env);
+		var url = jQuery.spip.makeAjaxUrl(href,ajax_env,blocfrag.attr('data-origin'));
 		// recharger sans historisation dans l'url
 		jQuery.spip.loadAjax(blocfrag, url, href, {force:true, callback:callback, history:history});
 		return true;
@@ -565,7 +615,7 @@ jQuery.spip.ajaxClick = function(blocfrag, href, options){
 		if ((d.getTime()-ajax_confirm_date)<=2)
 			return false;
 	}
-	var url = jQuery.spip.makeAjaxUrl(href,ajax_env);
+	var url = jQuery.spip.makeAjaxUrl(href,ajax_env,blocfrag.attr('data-origin'));
 	jQuery.spip.loadAjax(blocfrag, url, href, options);
 	return false;
 }
@@ -604,7 +654,7 @@ jQuery.fn.ajaxbloc = function() {
 			.addClass('bind-ajax')
 			.filter('.preload').each(function(){
 				var href = this.href;
-				var url = jQuery.spip.makeAjaxUrl(href,ajax_env);
+				var url = jQuery.spip.makeAjaxUrl(href,ajax_env,blocfrag.attr('data-origin'));
 				if (!jQuery.spip.preloaded_urls[url]) {
 					jQuery.spip.preloaded_urls[url] = '<!--loading-->';
 					jQuery.ajax({url:url,onAjaxLoad:false,success:function(r){jQuery.spip.preloaded_urls[url]=r;},error:function(){jQuery.spip.preloaded_urls[url]='';}});
@@ -660,6 +710,7 @@ jQuery.fn.followLink = function(){
  * @param string ajaxid
  * @param object options
  *   callback : callback after reloading
+ *   href : url to load instead of origin url
  *   args : {arg:value,...} to pass tu the url
  *   history : bool to specify if navigation history is modified by reload or not (false if not provided)
  */
@@ -722,11 +773,16 @@ jQuery.fn.endLoading = function(hard) {
  */
 jQuery.fn.animateRemove = function(callback){
 	if (this.length){
+		var me=this;
 		var color = $("<div class='remove'></div>").css('background-color');
-		$(this).addClass('remove').css({backgroundColor: color}).animate({opacity: "0.0"}, 'fast',function(){
-			$(this).removeClass('remove').css({backgroundColor: ''});
+		var sel=$(this);
+		// if target is a tr, include td childrens cause background color on tr doesn't works in a lot of browsers
+		if (sel.is('tr'))
+			sel = sel.add('>td',sel);
+		sel.addClass('remove').css({backgroundColor: color}).animate({opacity: "0.0"}, 'fast',function(){
+			sel.removeClass('remove').css({backgroundColor: ''});
 			if (callback)
-				callback.apply(this);
+				callback.apply(me);
 		});
 	}
 	return this; // don't break the chain
@@ -751,7 +807,7 @@ jQuery.fn.animateAppend = function(callback){
 		var sel=$(this);
 		// if target is a tr, include td childrens cause background color on tr doesn't works in a lot of browsers
 		if (sel.is('tr'))
-			sel.add('>td',sel);
+			sel = sel.add('>td',sel);
 		sel.css('opacity','0.0').addClass('append').css({backgroundColor: color}).animate({opacity: "1.0"}, 1000,function(){
 			sel.animate({backgroundColor: origin}, 3000,function(){
 				sel.removeClass('append').css({backgroundColor: ''});
@@ -809,7 +865,7 @@ function parametre_url(url,c,v,sep,force_vide){
 	}
         else
             a=url;
-	var regexp = new RegExp('^(' + c.replace('[]','\[\]') + '\[?\]?)(=.*)?$');
+	var regexp = new RegExp('^(' + c.replace('[]','\\[\\]') + '\\[?\\]?)(=.*)?$');
 	var ajouts = [];
 	var u = (typeof(v)!=='object')?encodeURIComponent(v):v;
 	var na = [];
@@ -822,7 +878,7 @@ function parametre_url(url,c,v,sep,force_vide){
 		var r=val.match(regexp);
 		if (r && r.length){
 			if (v==null){
-				return (r.length>2)?r[2].substring(1):'';
+				return (r.length>2 && typeof r[2]!=='undefined')?r[2].substring(1):'';
 			}
 			// suppression
 			else if (!v.length) {

@@ -1,7 +1,7 @@
 <paquet
 	prefix="medias"
 	categorie="multimedia"
-	version="2.7.58"
+	version="2.7.59"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/portfolio-32.png"
@@ -39,8 +39,8 @@
 	<pipeline nom="ieconfig_metas" inclure="medias_ieconfig.php" />
 
 	<utilise nom="Z" compatibilite="[1.2.1;[" />
-	<utilise nom="mediabox" compatibilite="[0.5.0;[" />
-	<utilise nom="mots" compatibilite="[2.4.0;[" /> 
+	<utilise nom="mediabox" compatibilite="[0.8.1;[" />
+	<utilise nom="mots" compatibilite="[2.4.6;[" /> 
 
 	<menu nom="documents" titre="medias:info_documents" parent="menu_edition" icone="images/portfolio-16.png" />
 

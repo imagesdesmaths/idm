@@ -52,6 +52,9 @@ function urls_upgrade($nom_meta_base_version,$version_cible){
 	$maj['1.1.3'] = array(
 		array('sql_alter',"table spip_urls ADD perma TINYINT(1) DEFAULT '0' NOT NULL"),
 	);
+	$maj['1.1.4'] = array(
+		array('sql_alter',"table spip_urls CHANGE `type` `type` varchar(25) DEFAULT 'article' NOT NULL"),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

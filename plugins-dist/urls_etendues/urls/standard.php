@@ -12,6 +12,8 @@
 
 
 ## type d'URLs obsolete
+## depuis la 3.0.17 on ne la propose plus dans le menu de configuration
+## fichier sans doute à supprimer en 3.1
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
