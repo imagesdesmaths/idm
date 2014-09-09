@@ -85,6 +85,12 @@ puce:
   is_callback: Y
   priority: -20 # avant !paragraphes
 
+br-inutile:
+  match: "/(^|^\n|\n\n)_ +/S"
+  replace: "$1"
+  if_str: "_ "
+  priority: -20 # avant !paragraphes
+
 br:
   match: "/\n_ +/S"
   replace: "<br class='manualbr' />"
@@ -177,3 +183,15 @@ restaure-tags:
   match: ["\x1\x1", "\x1\x2", "\x1\x3", "\x1\x4"]
   replace: ['{', '}', '_', '-']
   type: str
+
+echappe-chevron-solitaire:
+  # un < qui n'est pas suivi d'une lettre ou d'un / est toujours echappe
+  type: preg
+  match: "/<(?=[^a-z\/!])/Uims"
+  replace: "&lt;"
+
+echappe-chevron-pas-ferme:
+  # un < suivi d'une lettre ou d'un / est echappe si il semble mal ferme
+  type: preg
+  match: "/<([^><\"'!]*)(?=<|$)/Uims"
+  replace: "&lt;$1"

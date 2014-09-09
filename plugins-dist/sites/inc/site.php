@@ -43,7 +43,7 @@ function analyser_site($url) {
 
 		if ($t = extraire_balise($header, 'title')) {
 			cdata_echappe_retour($t, $echappe_cdata);
-			$result['nom_site'] = supprimer_tags($t);
+			$result['nom_site'] = filtrer_entites(supprimer_tags($t));
 		}
 		if ($t = extraire_balises($header, 'link')) {
 			cdata_echappe_retour($t, $echappe_cdata);
@@ -65,7 +65,7 @@ function analyser_site($url) {
 		if ($a = extraire_balise($header, 'description')
 		OR $a = extraire_balise($header, 'tagline')) {
 			cdata_echappe_retour($a, $echappe_cdata);
-			$result['descriptif'] = supprimer_tags($a);
+			$result['descriptif'] = filtrer_entites(supprimer_tags($a));
 		}
 
 		if (preg_match(',<image.*<url.*>(.*)</url>.*</image>,Uims',

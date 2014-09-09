@@ -61,7 +61,7 @@ function formulaires_gestion_forum_traiter_dist($id_forum='', $id_rubrique='', $
 	$pagination_ancien = _request('pagination_ancien');
 
 	set_request('select_type',$select_type);
-	set_request('voir_staut',$select_statut);
+	set_request('voir_statut',$select_statut);
 	
 	if ($pagination != $pagination_ancien)
 		set_request('debut_forum','');

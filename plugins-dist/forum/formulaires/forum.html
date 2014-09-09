@@ -44,7 +44,6 @@
 <p class="spip_bouton"><input type="submit" class="submit" value="<:forum:forum_valider:>" /></p>]
 
 [(#ENV**{afficher_texte}|choixsiegal{'non', '',' '})
-
 	<INCLURE{fond=formulaires/inc-login_forum, env} />
 
 	<fieldset>
@@ -71,6 +70,28 @@
 	</li>
 })]
 	</ul></fieldset>
+  
+[(#CONFIG{forums_urlref}|!={non}|?{
+	<ul><li class='fieldset'>
+  <fieldset>
+  	<legend><:forum:forum_lien_hyper:></legend>
+  	<p class='explication'><:forum:forum_page_url:></p>
+  	<ul>
+  	<li class='editer saisie_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site}|oui)erreur]'>
+        <label for="nom_site"><:forum:forum_titre:></label>
+      	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_site})</span>]
+      	<input type="text" class="text" name="nom_site" id="nom_site" size="40" value="[(#ENV{nom_site})]" />
+    </li>
+  	<li class='editer saisie_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]'>
+      <label for="url_site"><:forum:forum_lien_hyper:></label>
+    	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>]
+    	<input type="text" class="text url" name="url_site" id="url_site" style="text-align: left;" dir="ltr" size="40" value="[(#ENV{url_site})]" autocapitalize="off" autocorrect="off" />
+    </li>
+    </ul>
+  </fieldset>    
+  </li>
+  </ul>
+})]  
 
 [
 	<fieldset>
@@ -113,7 +134,7 @@
 		<input type="text" class="text" name="nobot" id="nobot_forum" value="#ENV{nobot}" size="10" />
 	</p>
 	]
-	<p class="boutons"><input type="submit" class="submit" value="<:forum:forum_voir_avant:>" /></p>
+  <p class="boutons"><input type="submit" class="submit" value="<:forum:forum_voir_avant:>" /></p> 
 ]
 </div>
 </form>

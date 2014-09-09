@@ -23,5 +23,5 @@
 	<pipeline nom="configurer_liste_metas" inclure="compresseur_pipeline.php" />
 	<pipeline nom="ieconfig_metas" inclure="compresseur_ieconfig.php" />
 
-	<utilise nom="porte_plume" compatibilite="[1.6.3;[" />
+	<utilise nom="porte_plume" compatibilite="[1.11.5;[" />
 </paquet>

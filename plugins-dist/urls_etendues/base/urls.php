@@ -35,7 +35,7 @@ function urls_declarer_tables_auxiliaires($tables_auxiliaires){
 		"id_parent"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"url"			=> "VARCHAR(255) NOT NULL",
 		// la table cible
-		"type"			=> "varchar(15) DEFAULT 'article' NOT NULL",
+		"type"			=> "varchar(25) DEFAULT 'article' NOT NULL",
 		// l'id dans la table
 		"id_objet"		=> "bigint(21) NOT NULL",
 		// pour connaitre la plus recente.

@@ -425,7 +425,8 @@ function autoriser_rubrique_creerrubriquedans_dist($faire, $type, $id, $qui, $op
 function autoriser_rubrique_creerarticledans_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$id
-		AND autoriser('voir','rubrique',$id);
+		AND autoriser('voir','rubrique',$id)
+		AND autoriser('creer', 'article');
 }
 
 
@@ -889,7 +890,8 @@ function liste_rubriques_auteur($id_auteur, $raz=false) {
 	}
 
 	// Affecter l'auteur session le cas echeant
-	if ($GLOBALS['visiteur_session']['id_auteur'] == $id_auteur)
+	if (isset($GLOBALS['visiteur_session']['id_auteur'])
+	  AND $GLOBALS['visiteur_session']['id_auteur'] == $id_auteur)
 		$GLOBALS['visiteur_session']['restreint'] = $rubriques;
 
 

@@ -14,6 +14,22 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/forum');
 
+
+/**
+ * Identification du formulaire poste : ne pas tenir compte de la previsu et du retour
+ * @param $objet
+ * @param $id_objet
+ * @param $id_forum
+ * @param $ajouter_mot
+ * @param $ajouter_groupe
+ * @param $afficher_previsu
+ * @param $retour
+ * @return array
+ */
+function formulaires_forum_identifier_dist($objet, $id_objet, $id_forum,$ajouter_mot, $ajouter_groupe, $afficher_previsu, $retour){
+	return array($objet, $id_objet, $id_forum,$ajouter_mot, $ajouter_groupe);
+}
+
 /**
  * Charger l'env du squelette de #FORMULAIRE_FORUM
  * @param string $objet

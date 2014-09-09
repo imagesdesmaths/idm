@@ -70,7 +70,7 @@ body,
 .footer,
 .wrapper,
 .content,
-.aside { width: auto !important; margin: auto !important; padding: auto !important; }
+.aside { width: auto !important; margin: auto !important; }
 
 .page { margin: 0; padding: 5%; }
 
