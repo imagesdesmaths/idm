@@ -11,4 +11,8 @@ function trunctext($texte, $longeur_max) {
     return $texte;
 }
 
+function autoriser_previsualiser($faire, $type, $id, $qui, $opt) {
+	return true;
+}
+
 ?>
