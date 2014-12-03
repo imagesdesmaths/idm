@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -148,6 +148,22 @@ class API extends \Piwik\Plugin\API
         $dataTable = $this->getDataTable('DevicesDetection_browserVersions', $idSite, $period, $date, $segment);
         $dataTable->filter('ColumnCallbackAddMetadata', array('label', 'logo', __NAMESPACE__ . '\getBrowserLogoExtended'));
         $dataTable->filter('ColumnCallbackReplace', array('label', __NAMESPACE__ . '\getBrowserNameExtended'));
+        return $dataTable;
+    }
+
+    /**
+     * Gets datatable displaying number of visits by Browser engine (eg. Trident, Gecko, Blink,...)
+     * @param int $idSite
+     * @param string $period
+     * @param string $date
+     * @param bool|string $segment
+     * @return DataTable
+     */
+    public function getBrowserEngines($idSite, $period, $date, $segment = false)
+    {
+        $dataTable = $this->getDataTable('DevicesDetection_browserEngines', $idSite, $period, $date, $segment);
+        // use GroupBy filter to avoid duplicate rows if old (UserSettings) and new (DevicesDetection) reports were combined
+        $dataTable->filter('GroupBy', array('label',  __NAMESPACE__ . '\getBrowserEngineName'));
         return $dataTable;
     }
 }

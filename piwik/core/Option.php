@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -11,24 +11,24 @@ namespace Piwik;
 /**
  * Convenient key-value storage for user specified options and temporary
  * data that needs to be persisted beyond one request.
- * 
+ *
  * ### Examples
- * 
+ *
  * **Setting and getting options**
- * 
+ *
  *     $optionValue = Option::get('MyPlugin.MyOptionName');
  *     if ($optionValue === false) {
  *         // if not set, set it
  *         Option::set('MyPlugin.MyOptionName', 'my option value');
  *     }
- * 
+ *
  * **Storing user specific options**
- * 
+ *
  *     $userName = // ...
  *     Option::set('MyPlugin.MyOptionName.' . $userName, 'my option value');
- * 
+ *
  * **Clearing user specific options**
- * 
+ *
  *     Option::deleteLike('MyPlugin.MyOptionName.%');
  *
  * @api
@@ -37,13 +37,25 @@ class Option
 {
     /**
      * Returns the option value for the requested option `$name`.
-     * 
+     *
      * @param string $name The option name.
      * @return string|false The value or `false`, if not found.
      */
     public static function get($name)
     {
         return self::getInstance()->getValue($name);
+    }
+
+    /**
+     * Returns option values for options whose names are like a given pattern.
+     *
+     * @param string $namePattern The pattern used in the SQL `LIKE` expression
+     *                            used to SELECT options.
+     * @return array Array mapping option names with option values.
+     */
+    public static function getLike($namePattern)
+    {
+        return self::getInstance()->getNameLike($namePattern);
     }
 
     /**
@@ -56,7 +68,7 @@ class Option
      */
     public static function set($name, $value, $autoload = 0)
     {
-        return self::getInstance()->setValue($name, $value, $autoload);
+        self::getInstance()->setValue($name, $value, $autoload);
     }
 
     /**
@@ -67,7 +79,7 @@ class Option
      */
     public static function delete($name, $value = null)
     {
-        return self::getInstance()->deleteValue($name, $value);
+        self::getInstance()->deleteValue($name, $value);
     }
 
     /**
@@ -79,7 +91,12 @@ class Option
      */
     public static function deleteLike($namePattern, $value = null)
     {
-        return self::getInstance()->deleteNameLike($namePattern, $value);
+        self::getInstance()->deleteNameLike($namePattern, $value);
+    }
+
+    public static function clearCachedOption($name)
+    {
+        self::getInstance()->clearCachedOptionByName($name);
     }
 
     /**
@@ -110,19 +127,31 @@ class Option
      * Singleton instance
      * @var \Piwik\Option
      */
-    static private $instance = null;
+    private static $instance = null;
 
     /**
      * Returns Singleton instance
      *
      * @return \Piwik\Option
      */
-    static private function getInstance()
+    private static function getInstance()
     {
         if (self::$instance == null) {
             self::$instance = new self;
         }
+
         return self::$instance;
+    }
+
+    /**
+     * Sets the singleton instance. For testing purposes.
+     *
+     * @param mixed
+     * @ignore
+     */
+    public static function setSingletonInstance($instance)
+    {
+        self::$instance = $instance;
     }
 
     /**
@@ -132,18 +161,27 @@ class Option
     {
     }
 
+    protected function clearCachedOptionByName($name)
+    {
+        if (isset($this->all[$name])) {
+            unset($this->all[$name]);
+        }
+    }
+
     protected function getValue($name)
     {
         $this->autoload();
         if (isset($this->all[$name])) {
             return $this->all[$name];
         }
-        $value = Db::fetchOne('SELECT option_value ' .
-            'FROM `' . Common::prefixTable('option') . '`' .
-            'WHERE option_name = ?', $name);
+
+        $value = Db::fetchOne('SELECT option_value FROM `' . Common::prefixTable('option') . '` ' .
+                              'WHERE option_name = ?', $name);
+
         if ($value === false) {
             return false;
         }
+
         $this->all[$name] = $value;
         return $value;
     }
@@ -151,20 +189,24 @@ class Option
     protected function setValue($name, $value, $autoLoad = 0)
     {
         $autoLoad = (int)$autoLoad;
-        Db::query('INSERT INTO `' . Common::prefixTable('option') . '` (option_name, option_value, autoload) ' .
-            ' VALUES (?, ?, ?) ' .
-            ' ON DUPLICATE KEY UPDATE option_value = ?',
-            array($name, $value, $autoLoad, $value));
+
+        $sql  = 'INSERT INTO `' . Common::prefixTable('option') . '` (option_name, option_value, autoload) ' .
+                ' VALUES (?, ?, ?) ' .
+                ' ON DUPLICATE KEY UPDATE option_value = ?';
+        $bind = array($name, $value, $autoLoad, $value);
+
+        Db::query($sql, $bind);
+
         $this->all[$name] = $value;
     }
 
     protected function deleteValue($name, $value)
     {
-        $sql = 'DELETE FROM `' . Common::prefixTable('option') . '` WHERE option_name = ?';
+        $sql    = 'DELETE FROM `' . Common::prefixTable('option') . '` WHERE option_name = ?';
         $bind[] = $name;
 
         if (isset($value)) {
-            $sql .= ' AND option_value = ?';
+            $sql   .= ' AND option_value = ?';
             $bind[] = $value;
         }
 
@@ -175,17 +217,31 @@ class Option
 
     protected function deleteNameLike($name, $value = null)
     {
-        $sql = 'DELETE FROM `' . Common::prefixTable('option') . '` WHERE option_name LIKE ?';
+        $sql    = 'DELETE FROM `' . Common::prefixTable('option') . '` WHERE option_name LIKE ?';
         $bind[] = $name;
 
         if (isset($value)) {
-            $sql .= ' AND option_value = ?';
+            $sql   .= ' AND option_value = ?';
             $bind[] = $value;
         }
 
         Db::query($sql, $bind);
 
         $this->clearCache();
+    }
+
+    protected function getNameLike($name)
+    {
+        $sql  = 'SELECT option_name, option_value FROM `' . Common::prefixTable('option') . '` WHERE option_name LIKE ?';
+        $bind = array($name);
+        $rows = Db::fetchAll($sql, $bind);
+
+        $result = array();
+        foreach ($rows as $row) {
+            $result[$row['option_name']] = $row['option_value'];
+        }
+
+        return $result;
     }
 
     /**
@@ -199,9 +255,10 @@ class Option
             return;
         }
 
-        $all = Db::fetchAll('SELECT option_value, option_name
-								FROM `' . Common::prefixTable('option') . '`
-								WHERE autoload = 1');
+        $table = Common::prefixTable('option');
+        $sql   = 'SELECT option_value, option_name FROM `' . $table . '` WHERE autoload = 1';
+        $all   = Db::fetchAll($sql);
+
         foreach ($all as $option) {
             $this->all[$option['option_name']] = $option['option_value'];
         }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -57,7 +57,7 @@ class JScriptUIAssetMerger extends UIAssetMerger
     {
         $plugins = $this->getPlugins();
 
-        if(!empty($plugins)) {
+        if (!empty($plugins)) {
 
             /**
              * Triggered after all the JavaScript files Piwik uses are minified and merged into a

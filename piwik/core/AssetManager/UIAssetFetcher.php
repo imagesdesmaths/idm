@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -56,7 +56,7 @@ abstract class UIAssetFetcher
      */
     public function getCatalog()
     {
-        if($this->catalog == null)
+        if ($this->catalog == null)
             $this->createCatalog();
 
         return $this->catalog;

@@ -1,5 +1,5 @@
 /*!
- * Piwik - Web Analytics
+ * Piwik - free/libre analytics platform
  *
  * Real time visitors map
  * Using Kartograph.js http://kartograph.org/
@@ -142,7 +142,7 @@
                         'visitLocalTime', 'city', 'country', 'referrerType', 'referrerName',
                         'referrerTypeName', 'browserIcon', 'operatingSystemIcon',
                         'countryFlag', 'idVisit', 'actionDetails', 'continentCode',
-                        'actions', 'searches', 'goalConversions', 'visitorId'].join(','),
+                        'actions', 'searches', 'goalConversions', 'visitorId', 'userId'].join(','),
                     minTimestamp: firstRun ? -1 : lastTimestamp
                 });
             }
@@ -214,6 +214,8 @@
                 return '<h3>' + (r.city ? r.city + ' / ' : '') + r.country + '</h3>' +
                     // icons
                     ico(r.countryFlag) + ico(r.browserIcon) + ico(r.operatingSystemIcon) + '<br/>' +
+                    // User ID
+                    (r.userId ? _pk_translate('General_UserId') + ':&nbsp;' + r.userId + '<br/>' : '') +
                     // last action
                     (ad && ad.length && ad[ad.length - 1].pageTitle ? '<em>' + ad[ad.length - 1].pageTitle + '</em><br/>' : '') +
                     // time of visit
@@ -449,7 +451,7 @@
 
                         visitSymbols.layout().render();
 
-                        if (!enableAnimation) {
+                        if (enableAnimation) {
                             $.each(newSymbols, function (i, s) {
                                 if (i > 10) return false;
 

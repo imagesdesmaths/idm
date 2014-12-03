@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -8,6 +8,7 @@
  */
 namespace Piwik\DataTable\Filter;
 
+use Piwik\Common;
 use Piwik\DataTable;
 use Piwik\DataTable\Row;
 use Piwik\Site;
@@ -17,12 +18,12 @@ use Piwik\Site;
  * it to each row as a percentage.
  *
  * **This filter cannot be used as an argument to {@link Piwik\DataTable::filter()}** since
- * it requires corresponding data from another DataTable. Instead, 
+ * it requires corresponding data from another DataTable. Instead,
  * you must manually perform a binary filter (see the **MultiSites** API for an
  * example).
  *
  * The evolution metric is calculated as:
- * 
+ *
  *     ((currentValue - pastValue) / pastValue) * 100
  *
  * @api
@@ -34,12 +35,12 @@ class CalculateEvolutionFilter extends ColumnCallbackAddColumnPercentage
      *
      * @var DataTable
      */
-    private $pastDataTable;
+    protected $pastDataTable;
 
     /**
      * Tells if column being added is the revenue evolution column.
      */
-    private $isRevenueEvolution = null;
+    protected $isRevenueEvolution = null;
 
     /**
      * Constructor.
@@ -121,6 +122,9 @@ class CalculateEvolutionFilter extends ColumnCallbackAddColumnPercentage
     {
         $value = self::getPercentageValue($value, $divisor, $this->quotientPrecision);
         $value = self::appendPercentSign($value);
+
+        $value = Common::forceDotAsSeparatorForDecimalPoint($value);
+
         return $value;
     }
 
@@ -130,7 +134,7 @@ class CalculateEvolutionFilter extends ColumnCallbackAddColumnPercentage
      * @param Row $row The row in the 'current' DataTable.
      * @return bool|Row
      */
-    private function getPastRowFromCurrent($row)
+    protected function getPastRowFromCurrent($row)
     {
         return $this->pastDataTable->getRowFromLabel($row->getColumn('label'));
     }
@@ -152,6 +156,7 @@ class CalculateEvolutionFilter extends ColumnCallbackAddColumnPercentage
         if ($appendPercentSign) {
             $number = self::appendPercentSign($number);
         }
+
         return $number;
     }
 
@@ -165,6 +170,7 @@ class CalculateEvolutionFilter extends ColumnCallbackAddColumnPercentage
         if ($number > 0) {
             $number = '+' . $number;
         }
+
         return $number;
     }
 

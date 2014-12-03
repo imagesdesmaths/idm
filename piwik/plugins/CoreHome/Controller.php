@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -14,8 +14,10 @@ use Piwik\Common;
 use Piwik\Date;
 use Piwik\FrontController;
 use Piwik\Menu\MenuMain;
+use Piwik\Menu\MenuReporting;
 use Piwik\Notification\Manager as NotificationManager;
 use Piwik\Piwik;
+use Piwik\Plugin\Report;
 use Piwik\Plugins\CoreHome\DataTableRowAction\MultiRowEvolution;
 use Piwik\Plugins\CoreHome\DataTableRowAction\RowEvolution;
 use Piwik\Plugins\CorePluginsAdmin\MarketplaceApiClient;
@@ -25,15 +27,68 @@ use Piwik\Site;
 use Piwik\UpdateCheck;
 use Piwik\Url;
 use Piwik\View;
+use Piwik\ViewDataTable\Manager as ViewDataTableManager;
+use Piwik\Plugin\Widgets as PluginWidgets;
 
-/**
- *
- */
 class Controller extends \Piwik\Plugin\Controller
 {
     function getDefaultAction()
     {
         return 'redirectToCoreHomeIndex';
+    }
+
+    public function renderReportMenu($reportModule = null, $reportAction = null)
+    {
+        Piwik::checkUserHasSomeViewAccess();
+        $this->checkSitePermission();
+
+        $report = Report::factory($reportModule, $reportAction);
+
+        if (empty($report)) {
+            throw new Exception(Piwik::translate('General_ExceptionReportNotFound'));
+        }
+
+        $report->checkIsEnabled();
+
+        $menuTitle = $report->getMenuTitle();
+
+        if (empty($menuTitle)) {
+            throw new Exception('This report is not supposed to be displayed in the menu, please define a $menuTitle in your report.');
+        }
+
+        $menuTitle = Piwik::translate($menuTitle);
+        $content   = $this->renderReportWidget($reportModule, $reportAction);
+
+        return View::singleReport($menuTitle, $content);
+    }
+
+    public function renderReportWidget($reportModule = null, $reportAction = null)
+    {
+        Piwik::checkUserHasSomeViewAccess();
+        $this->checkSitePermission();
+
+        $report = Report::factory($reportModule, $reportAction);
+
+        if (empty($report)) {
+            throw new Exception(Piwik::translate('General_ExceptionReportNotFound'));
+        }
+
+        $report->checkIsEnabled();
+
+        return $report->render();
+    }
+
+    public function renderWidget($widgetModule = null, $widgetAction = null)
+    {
+        Piwik::checkUserHasSomeViewAccess();
+
+        $widget = PluginWidgets::factory($widgetModule, $widgetAction);
+
+        if (!empty($widget)) {
+            return $widget->$widgetAction();
+        }
+
+        throw new Exception(Piwik::translate('General_ExceptionWidgetNotFound'));
     }
 
     function redirectToCoreHomeIndex()
@@ -48,9 +103,11 @@ class Controller extends \Piwik\Plugin\Controller
         ) {
             $module = 'MultiSites';
         }
+
         if ($defaultReport == Piwik::getLoginPluginName()) {
             $module = Piwik::getLoginPluginName();
         }
+
         $idSite = Common::getRequestVar('idSite', false, 'int');
         parent::redirectToIndex($module, $action, $idSite);
     }
@@ -58,10 +115,12 @@ class Controller extends \Piwik\Plugin\Controller
     public function showInContext()
     {
         $controllerName = Common::getRequestVar('moduleToLoad');
-        $actionName = Common::getRequestVar('actionToLoad', 'index');
+        $actionName     = Common::getRequestVar('actionToLoad', 'index');
+
         if ($actionName == 'showInContext') {
             throw new Exception("Preventing infinite recursion...");
         }
+
         $view = $this->getDefaultIndexView();
         $view->content = FrontController::getInstance()->fetchDispatch($controllerName, $actionName);
         return $view->render();
@@ -77,7 +136,7 @@ class Controller extends \Piwik\Plugin\Controller
     {
         $view = new View('@CoreHome/getDefaultIndexView');
         $this->setGeneralVariablesView($view);
-        $view->menu = MenuMain::getInstance()->getMenu();
+        $view->menu = MenuReporting::getInstance()->getMenu();
         $view->dashboardSettingsControl = new DashboardManagerControl();
         $view->content = '';
         return $view;
@@ -91,12 +150,16 @@ class Controller extends \Piwik\Plugin\Controller
         ) {
             return;
         }
+
         $websiteId = Common::getRequestVar('idSite', false, 'int');
+
         if ($websiteId) {
+
             $website = new Site($websiteId);
-            $datetimeCreationDate = $website->getCreationDate()->getDatetime();
+            $datetimeCreationDate      = $website->getCreationDate()->getDatetime();
             $creationDateLocalTimezone = Date::factory($datetimeCreationDate, $website->getTimezone())->toString('Y-m-d');
-            $todayLocalTimezone = Date::factory('now', $website->getTimezone())->toString('Y-m-d');
+            $todayLocalTimezone        = Date::factory('now', $website->getTimezone())->toString('Y-m-d');
+
             if ($creationDateLocalTimezone == $todayLocalTimezone) {
                 Piwik::redirectToModule('CoreHome', 'index',
                     array('date'   => 'today',
@@ -182,32 +245,6 @@ class Controller extends \Piwik\Plugin\Controller
     }
 
     /**
-     * Renders and echo's the in-app donate form w/ slider.
-     */
-    public function getDonateForm()
-    {
-        $view = new View('@CoreHome/getDonateForm');
-        if (Common::getRequestVar('widget', false)
-            && Piwik::hasUserSuperUserAccess()
-        ) {
-            $view->footerMessage = Piwik::translate('CoreHome_OnlyForSuperUserAccess');
-        }
-        return $view->render();
-    }
-
-    /**
-     * Renders and echo's HTML that displays the Piwik promo video.
-     */
-    public function getPromoVideo()
-    {
-        $view = new View('@CoreHome/getPromoVideo');
-        $view->shareText = Piwik::translate('CoreHome_SharePiwikShort');
-        $view->shareTextLong = Piwik::translate('CoreHome_SharePiwikLong');
-        $view->promoVideoUrl = 'http://www.youtube.com/watch?v=OslfF_EH81g';
-        return $view->render();
-    }
-
-    /**
      * Redirects the user to a paypal so they can donate to Piwik.
      */
     public function redirectToPaypal()
@@ -224,7 +261,19 @@ class Controller extends \Piwik\Plugin\Controller
 
         $url = "https://www.paypal.com/cgi-bin/webscr?" . Url::getQueryStringFromParameters($parameters);
 
-        header("Location: $url");
+        Url::redirectToUrl($url);
         exit;
+    }
+
+    public function saveViewDataTableParameters()
+    {
+        Piwik::checkUserIsNotAnonymous();
+        $this->checkTokenInUrl();
+
+        $reportId   = Common::getRequestVar('report_id', null, 'string');
+        $parameters = (array) Common::getRequestVar('parameters', null, 'json');
+        $login      = Piwik::getCurrentUserLogin();
+
+        ViewDataTableManager::saveViewDataTableParameters($login, $reportId, $parameters);
     }
 }

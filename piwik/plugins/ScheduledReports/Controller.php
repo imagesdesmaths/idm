@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -66,7 +66,7 @@ class Controller extends \Piwik\Plugin\Controller
             }
         }
         $view->reports = $reports;
-        $view->reportsJSON = Common::json_encode($reportsById);
+        $view->reportsJSON = json_encode($reportsById);
 
         $view->downloadOutputType = API::OUTPUT_INLINE;
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -35,7 +35,7 @@ class Updates_2_0_b13 extends Updates
             }
 
         }
-        if(!empty($errors)) {
+        if (!empty($errors)) {
             throw new \Exception("Warnings during the update: <br>" . implode("<br>", $errors));
         }
    }

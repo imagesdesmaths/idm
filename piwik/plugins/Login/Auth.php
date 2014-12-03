@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -10,14 +10,10 @@ namespace Piwik\Plugins\Login;
 
 use Exception;
 use Piwik\AuthResult;
-use Piwik\Config;
-use Piwik\Cookie;
 use Piwik\Db;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\API;
 use Piwik\Plugins\UsersManager\Model;
-use Piwik\ProxyHttp;
 use Piwik\Session;
+use Piwik\Plugins\UsersManager\API as UsersManagerAPI;
 
 /**
  *
@@ -26,6 +22,7 @@ class Auth implements \Piwik\Auth
 {
     protected $login = null;
     protected $token_auth = null;
+    protected $md5Password = null;
 
     /**
      * Authentication module's name, e.g., "Login"
@@ -44,6 +41,10 @@ class Auth implements \Piwik\Auth
      */
     public function authenticate()
     {
+        if (!empty($this->md5Password)) { // favor authenticating by password
+            $this->token_auth = UsersManagerAPI::getInstance()->getTokenAuth($this->login, $this->getTokenAuthSecret());
+        }
+
         if (is_null($this->login)) {
             $model = new Model();
             $user  = $model->getUserByTokenAuth($this->token_auth);
@@ -58,7 +59,7 @@ class Auth implements \Piwik\Auth
             $user  = $model->getUser($this->login);
 
             if (!empty($user['token_auth'])
-                && (($this->getHashTokenAuth($this->login, $user['token_auth']) === $this->token_auth)
+                && ((SessionInitializer::getHashTokenAuth($this->login, $user['token_auth']) === $this->token_auth)
                     || $user['token_auth'] === $this->token_auth)
             ) {
                 $this->setTokenAuth($user['token_auth']);
@@ -72,35 +73,13 @@ class Auth implements \Piwik\Auth
     }
 
     /**
-     * Authenticates the user and initializes the session.
+     * Returns the login of the user being authenticated.
+     *
+     * @return string
      */
-    public function initSession($login, $md5Password, $rememberMe)
+    public function getLogin()
     {
-        $tokenAuth = API::getInstance()->getTokenAuth($login, $md5Password);
-
-        $this->setLogin($login);
-        $this->setTokenAuth($tokenAuth);
-        $authResult = $this->authenticate();
-
-        $authCookieName = Config::getInstance()->General['login_cookie_name'];
-        $authCookieExpiry = $rememberMe ? time() + Config::getInstance()->General['login_cookie_expire'] : 0;
-        $authCookiePath = Config::getInstance()->General['login_cookie_path'];
-        $cookie = new Cookie($authCookieName, $authCookieExpiry, $authCookiePath);
-        if (!$authResult->wasAuthenticationSuccessful()) {
-            $cookie->delete();
-            throw new Exception(Piwik::translate('Login_LoginPasswordNotCorrect'));
-        }
-
-        $cookie->set('login', $login);
-        $cookie->set('token_auth', $this->getHashTokenAuth($login, $authResult->getTokenAuth()));
-        $cookie->setSecure(ProxyHttp::isHttps());
-        $cookie->setHttpOnly(true);
-        $cookie->save();
-
-        @Session::regenerateId();
-
-        // remove password reset entry if it exists
-        Login::removePasswordResetInfo($login);
+        return $this->login;
     }
 
     /**
@@ -114,6 +93,16 @@ class Auth implements \Piwik\Auth
     }
 
     /**
+     * Returns the secret used to calculate a user's token auth.
+     *
+     * @return string
+     */
+    public function getTokenAuthSecret()
+    {
+        return $this->md5Password;
+    }
+
+    /**
      * Accessor to set authentication token
      *
      * @param string $token_auth authentication token
@@ -124,14 +113,27 @@ class Auth implements \Piwik\Auth
     }
 
     /**
-     * Accessor to compute the hashed authentication token
+     * Sets the password to authenticate with.
      *
-     * @param string $login user login
-     * @param string $token_auth authentication token
-     * @return string hashed authentication token
+     * @param string $password
      */
-    public function getHashTokenAuth($login, $token_auth)
+    public function setPassword($password)
     {
-        return md5($login . $token_auth);
+        $this->md5Password = md5($password);
+    }
+
+    /**
+     * Sets the password hash to use when authentication.
+     *
+     * @param string $passwordHash The password hash.
+     * @throws Exception if $passwordHash does not have 32 characters in it.
+     */
+    public function setPasswordHash($passwordHash)
+    {
+        if (strlen($passwordHash) != 32) {
+            throw new Exception("Invalid hash: incorrect length " . strlen($passwordHash));
+        }
+
+        $this->md5Password = $passwordHash;
     }
 }

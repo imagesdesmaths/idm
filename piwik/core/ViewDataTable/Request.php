@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -73,6 +73,11 @@ class Request
             'filter_excludelowpop_value',
             'filter_column',
             'filter_pattern',
+            'flat',
+            'expanded',
+            'pivotBy',
+            'pivotByColumn',
+            'pivotByColumnLimit'
         );
 
         foreach ($toSetEventually as $varToSet) {
@@ -114,8 +119,8 @@ class Request
         if (isset($_GET[$nameVar])) {
             return Common::sanitizeInputValue($_GET[$nameVar]);
         }
-        $default = $this->getDefault($nameVar);
-        return $default;
+
+        return $this->getDefault($nameVar);
     }
 
     /**

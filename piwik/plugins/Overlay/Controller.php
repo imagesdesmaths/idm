@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -8,6 +8,7 @@
  */
 namespace Piwik\Plugins\Overlay;
 
+use Piwik\API\CORSHandler;
 use Piwik\API\Request;
 use Piwik\Common;
 use Piwik\Config;
@@ -44,6 +45,7 @@ class Controller extends \Piwik\Plugin\Controller
 
         $view->ssl = ProxyHttp::isHttps();
 
+        $this->outputCORSHeaders();
         return $view->render();
     }
 
@@ -79,7 +81,7 @@ class Controller extends \Piwik\Plugin\Controller
             $row = $dataTable->getFirstRow();
 
             $translations = Metrics::getDefaultMetricTranslations();
-            $showMetrics = array('nb_hits', 'nb_visits', 'nb_uniq_visitors',
+            $showMetrics = array('nb_hits', 'nb_visits', 'nb_users', 'nb_uniq_visitors',
                                  'bounce_rate', 'exit_rate', 'avg_time_on_page');
 
             foreach ($showMetrics as $metric) {
@@ -117,6 +119,8 @@ class Controller extends \Piwik\Plugin\Controller
         $view->idSite = $idSite;
         $view->period = $period;
         $view->date = $date;
+
+        $this->outputCORSHeaders();
         return $view->render();
     }
 
@@ -126,14 +130,15 @@ class Controller extends \Piwik\Plugin\Controller
      */
     public function startOverlaySession()
     {
-        $idSite = Common::getRequestVar('idsite', 0, 'int');
+        $idSite = Common::getRequestVar('idSite', 0, 'int');
         Piwik::checkUserHasViewAccess($idSite);
 
         $sitesManager = APISitesManager::getInstance();
         $site = $sitesManager->getSiteFromId($idSite);
         $urls = $sitesManager->getSiteUrlsFromId($idSite);
 
-        @header('Content-Type: text/html; charset=UTF-8');
+        $this->outputCORSHeaders();
+        Common::sendHeader('Content-Type: text/html; charset=UTF-8');
         return '
 			<html><head><title></title></head><body>
 			<script type="text/javascript">
@@ -155,7 +160,7 @@ class Controller extends \Piwik\Plugin\Controller
 					var urlToRedirect = window.location.hash.substr(1);
 					var urlToRedirectWithoutPrefix = removeUrlPrefix(urlToRedirect);
 
-					var knownUrls = ' . Common::json_encode($urls) . ';
+					var knownUrls = ' . json_encode($urls) . ';
 					for (var i = 0; i < knownUrls.length; i++) {
 						var testUrl = removeUrlPrefix(knownUrls[i]);
 						if (urlToRedirectWithoutPrefix.substr(0, testUrl.length) == testUrl) {
@@ -204,6 +209,7 @@ class Controller extends \Piwik\Plugin\Controller
         $message = nl2br(htmlentities($message));
 
         $view = new View('@Overlay/showErrorWrongDomain');
+        $this->addCustomLogoInfo($view);
         $view->message = $message;
 
         if (Piwik::isUserHasAdminAccess($idSite)) {
@@ -217,6 +223,7 @@ class Controller extends \Piwik\Plugin\Controller
             $view->troubleshoot = htmlentities(Piwik::translate('Overlay_RedirectUrlErrorUser'));
         }
 
+        $this->outputCORSHeaders();
         return $view->render();
     }
 
@@ -231,6 +238,13 @@ class Controller extends \Piwik\Plugin\Controller
     public function notifyParentIframe()
     {
         $view = new View('@Overlay/notifyParentIframe');
+        $this->outputCORSHeaders();
         return $view->render();
+    }
+
+    protected function outputCORSHeaders()
+    {
+        $corsHandler = new CORSHandler();
+        $corsHandler->handle();
     }
 }

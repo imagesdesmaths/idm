@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -14,9 +14,9 @@ use Piwik\ArchiveProcessor;
 use Piwik\Common;
 use Piwik\DataAccess\LogAggregator;
 use Piwik\DataArray;
+use Piwik\DataTable;
 use Piwik\DataTable\Manager;
 use Piwik\DataTable\Row;
-use Piwik\DataTable;
 use Piwik\Metrics;
 use Piwik\Period;
 use Piwik\Piwik;
@@ -73,13 +73,13 @@ class API extends \Piwik\Plugin\API
         // prepare log aggregator
         $segment = new Segment($segment, $idSite);
         $site = new Site($idSite);
-        $period = Period::factory($period, $date);
+        $period = Period\Factory::build($period, $date);
         $params = new ArchiveProcessor\Parameters($site, $period, $segment);
         $logAggregator = new LogAggregator($params);
 
         // prepare the report
         $report = array(
-            'date' => Period::factory($period->getLabel(), $date)->getLocalizedShortString()
+            'date' => Period\Factory::build($period->getLabel(), $date)->getLocalizedShortString()
         );
 
         $partsArray = explode(',', $parts);
@@ -128,7 +128,6 @@ class API extends \Piwik\Plugin\API
      */
     private function deriveIdAction($actionName, $actionType)
     {
-        $actionsPlugin = new Actions;
         switch ($actionType) {
             case 'url':
                 $originalActionName = $actionName;
@@ -173,7 +172,6 @@ class API extends \Piwik\Plugin\API
      */
     private function addInternalReferrers($logAggregator, &$report, $idaction, $actionType, $limitBeforeGrouping)
     {
-
         $data = $this->queryInternalReferrers($idaction, $actionType, $logAggregator, $limitBeforeGrouping);
 
         if ($data['pageviews'] == 0) {
@@ -199,7 +197,6 @@ class API extends \Piwik\Plugin\API
      */
     private function addFollowingActions($logAggregator, &$report, $idaction, $actionType, $limitBeforeGrouping, $includeLoops = false)
     {
-
         $data = $this->queryFollowingActions(
             $idaction, $actionType, $logAggregator, $limitBeforeGrouping, $includeLoops);
 
@@ -226,7 +223,7 @@ class API extends \Piwik\Plugin\API
         if ($actionType != 'title') {
             // specific setup for page urls
             $types[Action::TYPE_PAGE_URL] = 'followingPages';
-            $dimension = 'IF( idaction_url IS NULL, idaction_name, idaction_url )';
+            $dimension = 'if ( idaction_url IS NULL, idaction_name, idaction_url )';
             // site search referrers are logged with url=NULL
             // when we find one, we have to join on name
             $joinLogActionColumn = $dimension;
@@ -409,7 +406,7 @@ class API extends \Piwik\Plugin\API
         if ($dimension == 'idaction_url_ref') {
             // site search referrers are logged with url_ref=NULL
             // when we find one, we have to join on name_ref
-            $dimension = 'IF( idaction_url_ref IS NULL, idaction_name_ref, idaction_url_ref )';
+            $dimension = 'if ( idaction_url_ref IS NULL, idaction_name_ref, idaction_url_ref )';
             $joinLogActionOn = $dimension;
         } else {
             $joinLogActionOn = $dimension;
@@ -515,7 +512,6 @@ class API extends \Piwik\Plugin\API
      */
     private function addExternalReferrers($logAggregator, &$report, $idaction, $actionType, $limitBeforeGrouping)
     {
-
         $data = $this->queryExternalReferrers(
             $idaction, $actionType, $logAggregator, $limitBeforeGrouping);
 

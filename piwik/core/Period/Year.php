@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -58,6 +58,7 @@ class Year extends Period
         if ($this->subperiodsProcessed) {
             return;
         }
+
         parent::generate();
 
         $year = $this->date->toString("Y");
@@ -78,10 +79,12 @@ class Year extends Period
     function toString($format = 'ignored')
     {
         $this->generate();
+
         $stringMonth = array();
         foreach ($this->subperiods as $month) {
             $stringMonth[] = $month->getDateStart()->toString("Y") . "-" . $month->getDateStart()->toString("m") . "-01";
         }
+
         return $stringMonth;
     }
 }

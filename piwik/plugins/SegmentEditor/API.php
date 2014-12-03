@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -13,6 +13,7 @@ use Piwik\Common;
 use Piwik\Date;
 use Piwik\Db;
 use Piwik\Piwik;
+use Piwik\Config;
 use Piwik\Segment;
 
 /**
@@ -22,8 +23,6 @@ use Piwik\Segment;
  */
 class API extends \Piwik\Plugin\API
 {
-    const DEACTIVATE_SEGMENT_EVENT = 'SegmentEditor.deactivate';
-
     protected function checkSegmentValue($definition, $idSite)
     {
         // unsanitize so we don't record the HTML entitied segment
@@ -78,18 +77,38 @@ class API extends \Piwik\Plugin\API
     protected function checkAutoArchive($autoArchive, $idSite)
     {
         $autoArchive = (int)$autoArchive;
-        if ($autoArchive) {
-            $exception = new Exception("To prevent abuse, autoArchive=1 requires Super User or ControllerAdmin access.");
-            if (empty($idSite)) {
-                if (!Piwik::hasUserSuperUserAccess()) {
-                    throw $exception;
-                }
-            } else {
-                if (!Piwik::isUserHasAdminAccess($idSite)) {
-                    throw $exception;
-                }
-            }
+        if (!$autoArchive) {
+            return $autoArchive;
         }
+
+        $exception = new Exception(
+            "Please contact Support to make these changes on your behalf. ".
+            " To modify a pre-processed segment, a user must have admin access or super user access. "
+        );
+
+        // Segment 'All websites' and pre-processed requires Super User
+        if (empty($idSite)) {
+            if (!Piwik::hasUserSuperUserAccess()) {
+                throw $exception;
+            }
+            return $autoArchive;
+        }
+
+        // if real-time segments are disabled, then allow user to create pre-processed report
+        $realTimeSegmentsDisabled = !Config::getInstance()->General['enable_create_realtime_segments'];
+        if($realTimeSegmentsDisabled) {
+            // User is at least view
+            if(!Piwik::isUserHasViewAccess($idSite)) {
+                throw $exception;
+            }
+            return $autoArchive;
+        }
+
+        // pre-processed segment for a given website requires admin access
+        if(!Piwik::isUserHasAdminAccess($idSite)) {
+            throw $exception;
+        }
+
         return $autoArchive;
     }
 
@@ -100,6 +119,7 @@ class API extends \Piwik\Plugin\API
         if (empty($segment)) {
             throw new Exception("Requested segment not found");
         }
+
         return $segment;
     }
 
@@ -110,12 +130,45 @@ class API extends \Piwik\Plugin\API
         }
     }
 
-    protected function checkUserCanModifySegment($segment)
+    protected function checkUserCanAddNewSegment($idSite)
     {
-        if(Piwik::hasUserSuperUserAccess()) {
+        if (empty($idSite)
+            && !SegmentEditor::isAddingSegmentsForAllWebsitesEnabled()
+        ) {
+            throw new Exception(Piwik::translate('SegmentEditor_AddingSegmentForAllWebsitesDisabled'));
+        }
+
+        if (!$this->isUserCanAddNewSegment($idSite)) {
+            throw new Exception(Piwik::translate('SegmentEditor_YouDontHaveAccessToCreateSegments'));
+        }
+    }
+
+    public function isUserCanAddNewSegment($idSite)
+    {
+        if (Piwik::isUserIsAnonymous()) {
+            return false;
+        }
+
+        $requiredAccess = Config::getInstance()->General['adding_segment_requires_access'];
+
+        $authorized =
+            ($requiredAccess == 'view' && Piwik::isUserHasViewAccess($idSite)) ||
+            ($requiredAccess == 'admin' && Piwik::isUserHasAdminAccess($idSite)) ||
+            ($requiredAccess == 'superuser' && Piwik::hasUserSuperUserAccess())
+        ;
+
+        return $authorized;
+    }
+
+    protected function checkUserCanEditOrDeleteSegment($segment)
+    {
+        if (Piwik::hasUserSuperUserAccess()) {
             return;
         }
-        if($segment['login'] != Piwik::getCurrentUserLogin()) {
+
+        $this->checkUserIsNotAnonymous();
+
+        if ($segment['login'] != Piwik::getCurrentUserLogin()) {
             throw new Exception($this->getMessageCannotEditSegmentCreatedBySuperUser());
         }
     }
@@ -128,17 +181,27 @@ class API extends \Piwik\Plugin\API
      */
     public function delete($idSegment)
     {
-        $this->checkUserIsNotAnonymous();
-
         $segment = $this->getSegmentOrFail($idSegment);
+        $this->checkUserCanEditOrDeleteSegment($segment);
 
-        $this->checkUserCanModifySegment($segment);
+        /**
+         * Triggered before a segment is deleted or made invisible.
+         *
+         * This event can be used by plugins to throw an exception
+         * or do something else.
+         *
+         * @param int $idSegment The ID of the segment being deleted.
+         */
+        Piwik::postEvent('SegmentEditor.deactivate', array($idSegment));
 
-        $this->sendSegmentDeactivationEvent($idSegment);
+        $this->getModel()->deleteSegment($idSegment);
 
-        $db = Db::get();
-        $db->delete(Common::prefixTable('segment'), 'idsegment = ' . $idSegment);
         return true;
+    }
+
+    private function getModel()
+    {
+        return new Model();
     }
 
     /**
@@ -155,20 +218,14 @@ class API extends \Piwik\Plugin\API
      */
     public function update($idSegment, $name, $definition, $idSite = false, $autoArchive = false, $enabledAllUsers = false)
     {
-        $this->checkUserIsNotAnonymous();
         $segment = $this->getSegmentOrFail($idSegment);
-
-        $this->checkUserCanModifySegment($segment);
+        $this->checkUserCanEditOrDeleteSegment($segment);
 
         $idSite = $this->checkIdSite($idSite);
         $this->checkSegmentName($name);
-        $definition = $this->checkSegmentValue($definition, $idSite);
+        $definition      = $this->checkSegmentValue($definition, $idSite);
         $enabledAllUsers = $this->checkEnabledAllUsers($enabledAllUsers);
-        $autoArchive = $this->checkAutoArchive($autoArchive, $idSite);
-
-        if ($this->segmentVisibilityIsReduced($idSite, $enabledAllUsers, $segment)) {
-            $this->sendSegmentDeactivationEvent($idSegment);
-        }
+        $autoArchive     = $this->checkAutoArchive($autoArchive, $idSite);
 
         $bind = array(
             'name'               => $name,
@@ -179,11 +236,18 @@ class API extends \Piwik\Plugin\API
             'ts_last_edit'       => Date::now()->getDatetime(),
         );
 
-        $db = Db::get();
-        $db->update(Common::prefixTable("segment"),
-            $bind,
-            "idsegment = $idSegment"
-        );
+        /**
+         * Triggered before a segment is modified.
+         *
+         * This event can be used by plugins to throw an exception
+         * or do something else.
+         *
+         * @param int $idSegment The ID of the segment which visibility is reduced.
+         */
+        Piwik::postEvent('SegmentEditor.update', array($idSegment, $bind));
+
+        $this->getModel()->updateSegment($idSegment, $bind);
+
         return true;
     }
 
@@ -200,14 +264,13 @@ class API extends \Piwik\Plugin\API
      */
     public function add($name, $definition, $idSite = false, $autoArchive = false, $enabledAllUsers = false)
     {
-        $this->checkUserIsNotAnonymous();
+        $this->checkUserCanAddNewSegment($idSite);
         $idSite = $this->checkIdSite($idSite);
         $this->checkSegmentName($name);
         $definition = $this->checkSegmentValue($definition, $idSite);
         $enabledAllUsers = $this->checkEnabledAllUsers($enabledAllUsers);
         $autoArchive = $this->checkAutoArchive($autoArchive, $idSite);
 
-        $db = Db::get();
         $bind = array(
             'name'               => $name,
             'definition'         => $definition,
@@ -218,8 +281,10 @@ class API extends \Piwik\Plugin\API
             'ts_created'         => Date::now()->getDatetime(),
             'deleted'            => 0,
         );
-        $db->insert(Common::prefixTable("segment"), $bind);
-        return $db->lastInsertId();
+
+        $id = $this->getModel()->createSegment($bind);
+
+        return $id;
     }
 
     /**
@@ -232,12 +297,12 @@ class API extends \Piwik\Plugin\API
     public function get($idSegment)
     {
         Piwik::checkUserHasSomeViewAccess();
+
         if (!is_numeric($idSegment)) {
             throw new Exception("idSegment should be numeric.");
         }
-        $segment = Db::get()->fetchRow("SELECT * " .
-            " FROM " . Common::prefixTable("segment") .
-            " WHERE idsegment = ?", $idSegment);
+
+        $segment = $this->getModel()->getSegment($idSegment);
 
         if (empty($segment)) {
             return false;
@@ -255,6 +320,7 @@ class API extends \Piwik\Plugin\API
         if ($segment['deleted']) {
             throw new Exception("This segment is marked as deleted. ");
         }
+
         return $segment;
     }
 
@@ -274,7 +340,7 @@ class API extends \Piwik\Plugin\API
 
         $userLogin = Piwik::getCurrentUserLogin();
 
-        $model = new Model();
+        $model = $this->getModel();
         if (empty($idSite)) {
             $segments = $model->getAllSegments($userLogin);
         } else {
@@ -282,38 +348,6 @@ class API extends \Piwik\Plugin\API
         }
 
         return $segments;
-    }
-
-    /**
-     * When deleting or making a segment invisible, allow plugins to throw an exception or propagate the action
-     *
-     * @param $idSegment
-     */
-    private function sendSegmentDeactivationEvent($idSegment)
-    {
-        /**
-         * Triggered before a segment is deleted or made invisible.
-         * 
-         * This event can be used by plugins to throw an exception
-         * or do something else.
-         * 
-         * @param int $idSegment The ID of the segment being deleted.
-         */
-        Piwik::postEvent(self::DEACTIVATE_SEGMENT_EVENT, array($idSegment));
-    }
-
-    /**
-     * @param $idSiteNewValue
-     * @param $enableAllUserNewValue
-     * @param $segment
-     * @return bool
-     */
-    private function segmentVisibilityIsReduced($idSiteNewValue, $enableAllUserNewValue, $segment)
-    {
-        $allUserVisibilityIsDropped = $segment['enable_all_users'] && !$enableAllUserNewValue;
-        $allWebsiteVisibilityIsDropped = !isset($segment['idSite']) && $idSiteNewValue;
-
-        return $allUserVisibilityIsDropped || $allWebsiteVisibilityIsDropped;
     }
 
     /**

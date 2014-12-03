@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -15,23 +15,17 @@
 
 $piwik_errorMessage = '';
 
-// Minimum requirement: stream_resolve_include_path in 5.3.2, namespaces in 5.3
-$piwik_minimumPHPVersion = '5.3.2';
+// Minimum requirement: stream_resolve_include_path, working json_encode in 5.3.3, namespaces in 5.3
+$piwik_minimumPHPVersion = '5.3.3';
 $piwik_currentPHPVersion = PHP_VERSION;
 $minimumPhpInvalid = version_compare($piwik_minimumPHPVersion, $piwik_currentPHPVersion) > 0;
 if ($minimumPhpInvalid) {
     $piwik_errorMessage .= "<p><strong>To run Piwik you need at least PHP version $piwik_minimumPHPVersion</strong></p>
 				<p>Unfortunately it seems your webserver is using PHP version $piwik_currentPHPVersion. </p>
-				<p>Please try to update your PHP version, Piwik is really worth it! Nowadays most web hosts 
+				<p>Please try to update your PHP version, Piwik is really worth it! Nowadays most web hosts
 				support PHP $piwik_minimumPHPVersion.</p>
 				<p>Also see the FAQ: <a href='http://piwik.org/faq/how-to-install/#faq_77'>My Web host supports PHP4 by default. How can I enable PHP5?</a></p>";
 } else {
-    if (!class_exists('ArrayObject')) {
-        $piwik_errorMessage .= "<p><strong>Piwik and Zend Framework require the SPL extension</strong></p>
-					<p>It appears your PHP was compiled with <pre>--disable-spl</pre>.
-					To enjoy Piwik, you need PHP compiled without that configure option.</p>";
-    }
-
     if (!extension_loaded('session')) {
         $piwik_errorMessage .= "<p><strong>Piwik and Zend_Session require the session extension</strong></p>
 					<p>It appears your PHP was compiled with <pre>--disable-session</pre>.
@@ -44,7 +38,14 @@ if ($minimumPhpInvalid) {
 					To enjoy Piwik, you need remove <pre>ini_set</pre> from your <pre>disable_functions</pre> directive in php.ini, and restart your webserver.</p>";
     }
 
-    if (!file_exists(PIWIK_INCLUDE_PATH . '/vendor/autoload.php') && !file_exists(PIWIK_INCLUDE_PATH . '/../../autoload.php')) {
+    if (!function_exists('json_encode')) {
+        $piwik_errorMessage .= "<p><strong>Piwik requires the php5-json extension which provides the functions <code>json_encode()</code> and <code>json_decode()</code></strong></p>
+					<p>It appears your PHP has not yet installed the php5-json extension.
+					To use Piwik, please ask your web host to install php5-json or install it yourself, for example on debian system: <code>sudo apt-get install php5-json</code>. <br/>Then restart your webserver and refresh this page.</p>";
+    }
+
+    if (!file_exists(PIWIK_INCLUDE_PATH . '/vendor/autoload.php')
+        && !file_exists(PIWIK_INCLUDE_PATH . '/../../autoload.php')) {
         $composerInstall = "In the piwik directory, run in the command line the following (eg. via ssh): \n\n"
             . "<pre> curl -sS https://getcomposer.org/installer | php \n\n php composer.phar install\n\n</pre> ";
         if (DIRECTORY_SEPARATOR === '\\' /* ::isWindows() */) {
@@ -55,12 +56,15 @@ if ($minimumPhpInvalid) {
                     "<br/>" . $composerInstall.
                     " This will initialize composer for Piwik and download libraries we use in vendor/* directory.".
                     "\n\n<br/><br/>Then reload this page to access your analytics reports." .
+                    "\n\n<br/><br/>For more information check out this FAQ: <a href='http://piwik.org/faq/how-to-install/faq_18271/' target='_blank'>How do I use Piwik from the Git repository?</a>." .
                     "\n\n<br/><br/>Note: if for some reasons you cannot install composer, instead install the latest Piwik release from ".
-                    "<a href='http://builds.piwik.org/latest.zip'>builds.piwik.org</a>.</p>";
+                    "<a href='http://builds.piwik.org/piwik.zip'>builds.piwik.org</a>.</p>";
     }
 }
 
-if (!function_exists('Piwik_ExitWithMessage')) {
+define('PAGE_TITLE_WHEN_ERROR', 'Piwik &rsaquo; Error');
+
+if (!function_exists('Piwik_GetErrorMessagePage')) {
     /**
      * Returns true if Piwik should print the backtrace with error messages.
      *
@@ -71,25 +75,51 @@ if (!function_exists('Piwik_ExitWithMessage')) {
     function Piwik_ShouldPrintBackTraceWithMessage()
     {
         $bool = (defined('PIWIK_PRINT_ERROR_BACKTRACE') && PIWIK_PRINT_ERROR_BACKTRACE)
-            || (defined('PIWIK_TRACKER_DEBUG') && PIWIK_TRACKER_DEBUG);
+                || !empty($GLOBALS['PIWIK_TRACKER_DEBUG']);
         return $bool;
     }
 
     /**
      * Displays info/warning/error message in a friendly UI and exits.
      *
+     * Note: this method should not be called by anyone other than FrontController.
+     *
      * @param string $message Main message, must be html encoded before calling
      * @param bool|string $optionalTrace Backtrace; will be displayed in lighter color
      * @param bool $optionalLinks If true, will show links to the Piwik website for help
      * @param bool $optionalLinkBack If true, displays a link to go back
+     * @param bool|string $logoUrl The URL to the logo to use.
+     * @param bool|string $faviconUrl The URL to the favicon to use.
+     * @return string
      */
-    function Piwik_ExitWithMessage($message, $optionalTrace = false, $optionalLinks = false, $optionalLinkBack = false)
+    function Piwik_GetErrorMessagePage($message, $optionalTrace = false, $optionalLinks = false, $optionalLinkBack = false,
+                                       $logoUrl = false, $faviconUrl = false, $isCli = null)
     {
-        @header('Content-Type: text/html; charset=utf-8');
+        if (!headers_sent()) {
+            header('Content-Type: text/html; charset=utf-8');
+
+            $isInternalServerError = preg_match('/(sql|database|mysql)/i', $message);
+            if($isInternalServerError) {
+                header('HTTP/1.1 500 Internal Server Error');
+            }
+        }
+
+        if (empty($logoUrl)) {
+            $logoUrl = "plugins/Morpheus/images/logo-header.png";
+        }
+
+        if (empty($faviconUrl)) {
+            $faviconUrl = "plugins/CoreHome/images/favicon.ico";
+        }
+
         if ($optionalTrace) {
             $optionalTrace = '<span class="exception-backtrace">Backtrace:<br /><pre>' . $optionalTrace . '</pre></span>';
         }
-        $isCli = PHP_SAPI == 'cli';
+
+        if ($isCli === null) {
+            $isCli = PHP_SAPI == 'cli';
+        }
+
         if ($optionalLinks) {
             $optionalLinks = '<ul>
                             <li><a target="_blank" href="http://piwik.org">Piwik.org homepage</a></li>
@@ -100,12 +130,16 @@ if (!function_exists('Piwik_ExitWithMessage')) {
                             </ul>';
         }
         if ($optionalLinkBack) {
-            $optionalLinkBack = '<a href="javascript:window.back();">Go Back</a><br/>';
+            $optionalLinkBack = '<a href="javascript:window.history.back();">Go Back</a><br/>';
         }
-        $headerPage = file_get_contents(PIWIK_INCLUDE_PATH . '/plugins/Zeitgeist/templates/simpleLayoutHeader.tpl');
-        $footerPage = file_get_contents(PIWIK_INCLUDE_PATH . '/plugins/Zeitgeist/templates/simpleLayoutFooter.tpl');
 
-        $headerPage = str_replace('{$HTML_TITLE}', 'Piwik &rsaquo; Error', $headerPage);
+        $headerPage = file_get_contents(PIWIK_INCLUDE_PATH . '/plugins/Morpheus/templates/simpleLayoutHeader.tpl');
+        $headerPage = str_replace('%logoUrl%', $logoUrl, $headerPage);
+        $headerPage = str_replace('%faviconUrl%', $faviconUrl, $headerPage);
+
+        $footerPage = file_get_contents(PIWIK_INCLUDE_PATH . '/plugins/Morpheus/templates/simpleLayoutFooter.tpl');
+
+        $headerPage = str_replace('{$HTML_TITLE}', PAGE_TITLE_WHEN_ERROR, $headerPage);
 
         $content = '<p>' . $message . '</p>
                     <p>'
@@ -116,18 +150,24 @@ if (!function_exists('Piwik_ExitWithMessage')) {
             . ' ' . (Piwik_ShouldPrintBackTraceWithMessage() ? $optionalTrace : '')
             . ' ' . $optionalLinks;
 
-        if($isCli) {
-            $message = str_replace(array("<br />", "<br>", "<br/>", "</p>"), "\n", $message);
-            $message = str_replace("\t", "", $message);
-            echo strip_tags($message);
-        } else {
-            echo $headerPage . $content . $footerPage;
+
+        $message = str_replace(array("<br />", "<br>", "<br/>", "</p>"), "\n", $message);
+        $message = str_replace("\t", "", $message);
+        $message = strip_tags($message);
+
+        if (!$isCli) {
+            $message = $headerPage . $content . $footerPage;
         }
-        echo "\n";
-        exit(1);
+
+        $message .= "\n";
+
+        error_log(sprintf("Error in Piwik: %s", str_replace("\n", " ", $message)));
+
+        return $message;
     }
 }
 
 if (!empty($piwik_errorMessage)) {
-    Piwik_ExitWithMessage($piwik_errorMessage, false, true);
+    echo Piwik_GetErrorMessagePage($piwik_errorMessage, false, true);
+    exit(1);
 }

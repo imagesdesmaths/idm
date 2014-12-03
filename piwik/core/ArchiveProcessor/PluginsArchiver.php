@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -11,11 +11,11 @@ namespace Piwik\ArchiveProcessor;
 
 use Piwik\Archive;
 use Piwik\ArchiveProcessor;
-use Piwik\DataAccess\ArchiveSelector;
 use Piwik\DataAccess\ArchiveWriter;
 use Piwik\DataTable\Manager;
 use Piwik\Metrics;
 use Piwik\Plugin\Archiver;
+use Piwik\Log;
 
 /**
  * This class creates the Archiver objects found in plugins and will trigger aggregation,
@@ -57,7 +57,7 @@ class PluginsArchiver
      */
     public function callAggregateCoreMetrics()
     {
-        if($this->isSingleSiteDayArchive) {
+        if ($this->isSingleSiteDayArchive) {
             $metrics = $this->aggregateDayVisitsMetrics();
         } else {
             $metrics = $this->aggregateMultipleVisitsMetrics();
@@ -81,24 +81,37 @@ class PluginsArchiver
      */
     public function callAggregateAllPlugins($visits, $visitsConverted)
     {
+        Log::debug("PluginsArchiver::%s: Initializing archiving process for all plugins [visits = %s, visits converted = %s]",
+            __FUNCTION__, $visits, $visitsConverted);
+
         $this->archiveProcessor->setNumberOfVisits($visits, $visitsConverted);
 
         $archivers = $this->getPluginArchivers();
 
-        foreach($archivers as $pluginName => $archiverClass) {
-
+        foreach ($archivers as $pluginName => $archiverClass) {
             // We clean up below all tables created during this function call (and recursive calls)
             $latestUsedTableId = Manager::getInstance()->getMostRecentTableId();
 
             /** @var Archiver $archiver */
             $archiver = new $archiverClass($this->archiveProcessor);
 
-            if($this->shouldProcessReportsForPlugin($pluginName)) {
-                if($this->isSingleSiteDayArchive) {
+            if (!$archiver->isEnabled()) {
+                Log::verbose("PluginsArchiver::%s: Skipping archiving for plugin '%s'.", __FUNCTION__, $pluginName);
+                continue;
+            }
+
+            if ($this->shouldProcessReportsForPlugin($pluginName)) {
+                if ($this->isSingleSiteDayArchive) {
+                    Log::debug("PluginsArchiver::%s: Archiving day reports for plugin '%s'.", __FUNCTION__, $pluginName);
+
                     $archiver->aggregateDayReport();
                 } else {
+                    Log::debug("PluginsArchiver::%s: Archiving period reports for plugin '%s'.", __FUNCTION__, $pluginName);
+
                     $archiver->aggregateMultipleReports();
                 }
+            } else {
+                Log::verbose("PluginsArchiver::%s: Not archiving reports for plugin '%s'.", __FUNCTION__, $pluginName);
             }
 
             Manager::getInstance()->deleteAll($latestUsedTableId);
@@ -121,7 +134,7 @@ class PluginsArchiver
     protected function getPluginArchivers()
     {
         if (empty(static::$archivers)) {
-            $pluginNames = \Piwik\Plugin\Manager::getInstance()->getLoadedPluginsName();
+            $pluginNames = \Piwik\Plugin\Manager::getInstance()->getActivatedPlugins();
             $archivers = array();
             foreach ($pluginNames as $pluginName) {
                 $archivers[$pluginName] = self::getPluginArchiverClass($pluginName);

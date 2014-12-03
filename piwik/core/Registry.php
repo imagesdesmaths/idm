@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -11,7 +11,8 @@ namespace Piwik;
 /**
  * Registry class.
  *
- * @method static \Piwik\Registry getInstance()
+ * @method static Registry getInstance()
+ * @api
  */
 class Registry extends Singleton
 {

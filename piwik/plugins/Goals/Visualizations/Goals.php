@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -24,14 +24,14 @@ use Piwik\View;
 class Goals extends HtmlTable
 {
     const ID = 'tableGoals';
-    const FOOTER_ICON       = 'plugins/Zeitgeist/images/goal.png';
+    const FOOTER_ICON       = 'plugins/Morpheus/images/goal.png';
     const FOOTER_ICON_TITLE = 'General_DisplayTableWithMoreMetrics';
 
     public function beforeLoadDataTable()
     {
         parent::beforeLoadDataTable();
 
-        if($this->config->disable_subtable_when_show_goals) {
+        if ($this->config->disable_subtable_when_show_goals) {
             $this->config->subtable_controller_action = null;
         }
 
@@ -191,7 +191,7 @@ class Goals extends HtmlTable
 
         // set columns to display (columns of same type but different goals will be next to each other,
         // ie, goal_0_nb_conversions, goal_1_nb_conversions, etc.)
-        foreach ($goalColumnTemplates as $idx => $columnTemplate) {
+        foreach ($goalColumnTemplates as $columnTemplate) {
             foreach ($idGoals as $idGoal) {
                 $this->config->columns_to_display[] = sprintf($columnTemplate, $idGoal);
             }

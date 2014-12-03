@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -9,6 +9,8 @@
 namespace Piwik\Tracker;
 
 use Piwik\Common;
+use Piwik\Config;
+use Piwik\DeviceDetectorFactory;
 use Piwik\IP;
 use Piwik\Piwik;
 
@@ -24,16 +26,16 @@ class VisitExcluded
      */
     public function __construct(Request $request, $ip = false, $userAgent = false)
     {
-        if ($ip === false) {
+        if (false === $ip) {
             $ip = $request->getIp();
         }
 
-        if ($userAgent === false) {
+        if (false === $userAgent) {
             $userAgent = $request->getUserAgent();
         }
 
-        $this->request = $request;
-        $this->idSite = $request->getIdSite();
+        $this->request   = $request;
+        $this->idSite    = $request->getIdSite();
         $this->userAgent = $userAgent;
         $this->ip = $ip;
     }
@@ -72,9 +74,9 @@ class VisitExcluded
 
         /**
          * Triggered on every tracking request.
-         * 
+         *
          * This event can be used to tell the Tracker not to record this particular action or visit.
-         * 
+         *
          * @param bool &$excluded Whether the request should be excluded or not. Initialized
          *                        to `false`. Event subscribers should set it to `true` in
          *                        order to exclude the request.
@@ -110,6 +112,14 @@ class VisitExcluded
             }
         }
 
+        // Check if Referrer URL is a known spam
+        if (!$excluded) {
+            $excluded = $this->isReferrerSpamExcluded();
+            if ($excluded) {
+                Common::printDebug("Referrer URL is blacklisted as spam.");
+            }
+        }
+
         if (!$excluded) {
             if ($this->isPrefetchDetected()) {
                 $excluded = true;
@@ -138,37 +148,27 @@ class VisitExcluded
      * As a result, these sophisticated bots exhibit characteristics of
      * browsers (cookies enabled, executing JavaScript, etc).
      *
+     * @see \DeviceDetector\Parser\Bot
+     *
      * @return boolean
      */
     protected function isNonHumanBot()
     {
         $allowBots = $this->request->getParam('bots');
 
-        return !$allowBots
-            // Seen in the wild
-        && (strpos($this->userAgent, 'Googlebot') !== false // Googlebot
-            || strpos($this->userAgent, 'Google Web Preview') !== false // Google Instant
-            || strpos($this->userAgent, 'AdsBot-Google') !== false // Google Adwords landing pages
-            || strpos($this->userAgent, 'Google Page Speed Insights') !== false // #4049
-            || strpos($this->userAgent, 'Google (+https://developers.google.com') !== false // Google Snippet https://developers.google.com/+/web/snippet/
-            || strpos($this->userAgent, 'facebookexternalhit') !== false // http://www.facebook.com/externalhit_uatext.php
-            || strpos($this->userAgent, 'baidu') !== false // Baidu
-            || strpos($this->userAgent, 'bingbot') !== false // Bingbot
-            || strpos($this->userAgent, 'YottaaMonitor') !== false // Yottaa
-            || strpos($this->userAgent, 'CloudFlare') !== false // CloudFlare-AlwaysOnline
+        $deviceDetector = DeviceDetectorFactory::getInstance($this->userAgent);
 
-            // Added as they are popular bots
-            || strpos($this->userAgent, 'pingdom') !== false // pingdom
-            || strpos($this->userAgent, 'yandex') !== false // yandex
-            || strpos($this->userAgent, 'exabot') !== false // Exabot
-            || strpos($this->userAgent, 'sogou') !== false // Sogou
-            || strpos($this->userAgent, 'soso') !== false // Soso
+        return !$allowBots
+        && ($deviceDetector->isBot()
             || IP::isIpInRange($this->ip, $this->getBotIpRanges()));
     }
 
-    protected function  getBotIpRanges()
+    protected function getBotIpRanges()
     {
         return array(
+            // Google
+            '66.249.0.0/16',
+            '64.233.172.0/24',
             // Live/Bing/MSN
             '64.4.0.0/18',
             '65.52.0.0/14',
@@ -199,6 +199,7 @@ class VisitExcluded
             Common::printDebug('Piwik ignore cookie was found, visit not tracked.');
             return true;
         }
+
         return false;
     }
 
@@ -210,12 +211,15 @@ class VisitExcluded
     protected function isVisitorIpExcluded()
     {
         $websiteAttributes = Cache::getCacheWebsiteAttributes($this->idSite);
+
         if (!empty($websiteAttributes['excluded_ips'])) {
-            if (IP::isIpInRange($this->ip, $websiteAttributes['excluded_ips'])) {
-                Common::printDebug('Visitor IP ' . IP::N2P($this->ip) . ' is excluded from being tracked');
+            $ip = \Piwik\Network\IP::fromBinaryIP($this->ip);
+            if ($ip->isInRanges($websiteAttributes['excluded_ips'])) {
+                Common::printDebug('Visitor IP ' . $ip->toString() . ' is excluded from being tracked');
                 return true;
             }
         }
+
         return false;
     }
 
@@ -231,6 +235,7 @@ class VisitExcluded
     protected function isUserAgentExcluded()
     {
         $websiteAttributes = Cache::getCacheWebsiteAttributes($this->idSite);
+
         if (!empty($websiteAttributes['excluded_user_agents'])) {
             foreach ($websiteAttributes['excluded_user_agents'] as $excludedUserAgent) {
                 // if the excluded user agent string part is in this visit's user agent, this visit should be excluded
@@ -239,6 +244,29 @@ class VisitExcluded
                 }
             }
         }
+
+        return false;
+    }
+
+    /**
+     * Returns true if the Referrer is a known spammer.
+     *
+     * @return bool
+     */
+    protected function isReferrerSpamExcluded()
+    {
+        $spamHosts = Config::getInstance()->Tracker['referrer_urls_spam'];
+        $spamHosts = explode(",", $spamHosts);
+
+        $referrerUrl = $this->request->getParam('urlref');
+
+        foreach($spamHosts as $spamHost) {
+            if ( strpos($referrerUrl, $spamHost) !== false) {
+                Common::printDebug('Referrer URL is a known spam: ' . $spamHost);
+                return true;
+            }
+        }
+
         return false;
     }
 }

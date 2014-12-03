@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -74,6 +74,7 @@ class MetadataLoader
             'license_homepage' => 'http://www.gnu.org/licenses/gpl.html',
             'version'          => Version::VERSION,
             'theme'            => false,
+            'require'          => array()
         );
     }
 
@@ -94,12 +95,13 @@ class MetadataLoader
             return array();
         }
 
-        $info = Common::json_decode($json, $assoc = true);
+        $info = json_decode($json, $assoc = true);
         if (!is_array($info)
             || empty($info)
         ) {
             throw new Exception("Invalid JSON file: $path");
         }
+
         return $info;
     }
 }

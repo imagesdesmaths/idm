@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -31,7 +31,25 @@ if (!Common::isPhpCliMode()) {
 
 $testmode = in_array('--testmode', $_SERVER['argv']);
 if ($testmode) {
-    Config::getInstance()->setTestEnvironment();
+    require_once PIWIK_INCLUDE_PATH . "/tests/PHPUnit/TestingEnvironment.php";
+    \Piwik_TestingEnvironment::addHooks();
+}
+
+
+function getPiwikDomain()
+{
+    foreach($_SERVER['argv'] as $param) {
+        $pattern = '--piwik-domain=';
+        if(false !== strpos($param, $pattern)) {
+            return substr($param, strlen($pattern));
+        }
+    }
+    return null;
+}
+
+$piwikDomain = getPiwikDomain();
+if($piwikDomain) {
+    Url::setHost($piwikDomain);
 }
 
 $token = Db::get()->fetchOne("SELECT token_auth
@@ -40,6 +58,9 @@ $token = Db::get()->fetchOne("SELECT token_auth
                               ORDER BY date_registered ASC");
 
 $filename = PIWIK_INCLUDE_PATH . '/tmp/cache/token.php';
+
+$filename = SettingsPiwik::rewriteTmpPathWithInstanceId($filename);
+
 $content  = "<?php exit; //\t" . $token;
 file_put_contents($filename, $content);
 echo $filename;

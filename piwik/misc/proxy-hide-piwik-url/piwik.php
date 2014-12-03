@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  * Piwik Proxy Hide URL
  *
  * @link http://piwik.org/faq/how-to/#faq_132
@@ -24,6 +24,18 @@ $TOKEN_AUTH = 'xyz';
 // Maximum time, in seconds, to wait for the Piwik server to return the 1*1 GIF
 $timeout = 5;
 
+function sendHeader($header, $replace = true)
+{
+    headers_sent() || header($header, $replace);
+}
+
+function arrayValue($array, $key, $value = null)
+{
+    if (!empty($array[$key])) {
+        $value = $array[$key];
+    }
+    return $value;
+}
 
 // DO NOT MODIFY BELOW
 // ---------------------------
@@ -41,33 +53,53 @@ if (empty($_GET)) {
     $lastModified = time() - 86400;
 
     // set HTTP response headers
-    header('Vary: Accept-Encoding');
+    sendHeader('Vary: Accept-Encoding');
 
     // Returns 304 if not modified since
     if (!empty($modifiedSince) && $modifiedSince < $lastModified) {
-        header(sprintf("%s 304 Not Modified", $_SERVER['SERVER_PROTOCOL']));
+        sendHeader(sprintf("%s 304 Not Modified", $_SERVER['SERVER_PROTOCOL']));
     } else {
-        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-        @header('Content-Type: application/javascript; charset=UTF-8');
+        sendHeader('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+        sendHeader('Content-Type: application/javascript; charset=UTF-8');
         if ($piwikJs = file_get_contents($PIWIK_URL . 'piwik.js')) {
             echo $piwikJs;
         } else {
-            header($_SERVER['SERVER_PROTOCOL'] . '505 Internal server error');
+            sendHeader($_SERVER['SERVER_PROTOCOL'] . '505 Internal server error');
         }
     }
     exit;
 }
 
+@ini_set('magic_quotes_runtime', 0);
+
 // 2) PIWIK.PHP PROXY: GET parameters found, this is a tracking request, we redirect it to Piwik
-$url = sprintf("%spiwik.php?cip=%s&token_auth=%s&", $PIWIK_URL, @$_SERVER['REMOTE_ADDR'], $TOKEN_AUTH);
+$url = sprintf("%spiwik.php?cip=%s&token_auth=%s&", $PIWIK_URL, getVisitIp(), $TOKEN_AUTH);
+
 foreach ($_GET as $key => $value) {
-    $url .= $key . '=' . urlencode($value) . '&';
+    $url .= urlencode($key ). '=' . urlencode($value) . '&';
 }
-header("Content-Type: image/gif");
+sendHeader("Content-Type: image/gif");
 $stream_options = array('http' => array(
-    'user_agent' => @$_SERVER['HTTP_USER_AGENT'],
-    'header'     => sprintf("Accept-Language: %s\r\n", @str_replace(array("\n", "\t", "\r"), "", $_SERVER['HTTP_ACCEPT_LANGUAGE'])),
+    'user_agent' => arrayValue($_SERVER, 'HTTP_USER_AGENT', ''),
+    'header'     => sprintf("Accept-Language: %s\r\n", str_replace(array("\n", "\t", "\r"), "", arrayValue($_SERVER, 'HTTP_ACCEPT_LANGUAGE', ''))),
     'timeout'    => $timeout
 ));
 $ctx = stream_context_create($stream_options);
 echo file_get_contents($url, 0, $ctx);
+
+function getVisitIp()
+{
+    $matchIp = '/^([0-9]{1,3}\.){3}[0-9]{1,3}$/';
+    $ipKeys = array(
+        'HTTP_X_FORWARDED_FOR',
+        'HTTP_CLIENT_IP',
+        'HTTP_CF_CONNECTING_IP',
+    );
+    foreach($ipKeys as $ipKey) {
+        if (isset($_SERVER[$ipKey])
+            && preg_match($matchIp, $_SERVER[$ipKey])) {
+            return $_SERVER[$ipKey];
+        }
+    }
+    return arrayValue($_SERVER, 'REMOTE_ADDR');
+}

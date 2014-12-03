@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -9,14 +9,13 @@
 
 namespace Piwik\Plugins\LanguagesManager\Commands;
 
-use Piwik\Plugin\ConsoleCommand;
 use Piwik\Plugins\LanguagesManager\API;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  */
-class LanguageNames extends ConsoleCommand
+class LanguageNames extends TranslationBase
 {
     protected function configure()
     {
@@ -29,7 +28,7 @@ class LanguageNames extends ConsoleCommand
         $languages = API::getInstance()->getAvailableLanguageNames();
 
         $languageNames = array();
-        foreach ($languages AS $languageInfo) {
+        foreach ($languages as $languageInfo) {
             $languageNames[] = $languageInfo['english_name'];
         }
 

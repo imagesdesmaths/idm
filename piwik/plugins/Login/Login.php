@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -31,8 +31,14 @@ class Login extends \Piwik\Plugin
             'Request.initAuthenticationObject' => 'initAuthenticationObject',
             'User.isNotAuthorized'             => 'noAccess',
             'API.Request.authenticate'         => 'ApiRequestAuthenticate',
+            'AssetManager.getJavaScriptFiles'  => 'getJsFiles'
         );
         return $hooks;
+    }
+
+    public function getJsFiles(&$jsFiles)
+    {
+        $jsFiles[] = "plugins/Login/javascripts/login.js";
     }
 
     /**
@@ -56,7 +62,7 @@ class Login extends \Piwik\Plugin
         \Piwik\Registry::get('auth')->setTokenAuth($tokenAuth);
     }
 
-    static protected function isModuleIsAPI()
+    protected static function isModuleIsAPI()
     {
         return Piwik::getModule() === 'API'
                 && (Piwik::getAction() == '' || Piwik::getAction() == 'index');
@@ -79,7 +85,7 @@ class Login extends \Piwik\Plugin
      */
     public static function initAuthenticationFromCookie(\Piwik\Auth $auth, $activateCookieAuth)
     {
-        if(self::isModuleIsAPI() && !$activateCookieAuth) {
+        if (self::isModuleIsAPI() && !$activateCookieAuth) {
             return;
         }
 
@@ -97,52 +103,4 @@ class Login extends \Piwik\Plugin
         $auth->setTokenAuth($defaultTokenAuth);
     }
 
-    /**
-     * Stores password reset info for a specific login.
-     *
-     * @param string $login The user login for whom a password change was requested.
-     * @param string $password The new password to set.
-     */
-    public static function savePasswordResetInfo($login, $password)
-    {
-        $optionName = self::getPasswordResetInfoOptionName($login);
-        $optionData = UsersManager::getPasswordHash($password);
-
-        Option::set($optionName, $optionData);
-    }
-
-    /**
-     * Removes stored password reset info if it exists.
-     *
-     * @param string $login The user login to check for.
-     */
-    public static function removePasswordResetInfo($login)
-    {
-        $optionName = self::getPasswordResetInfoOptionName($login);
-        Option::delete($optionName);
-    }
-
-    /**
-     * Gets password hash stored in password reset info.
-     *
-     * @param string $login The user login to check for.
-     * @return string|false The hashed password or false if no reset info exists.
-     */
-    public static function getPasswordToResetTo($login)
-    {
-        $optionName = self::getPasswordResetInfoOptionName($login);
-        return Option::get($optionName);
-    }
-
-    /**
-     * Gets the option name for the option that will store a user's password change
-     * request.
-     *
-     * @param string $login The user login for whom a password change was requested.
-     * @return string
-     */
-    public static function getPasswordResetInfoOptionName($login)
-    {
-        return $login . '_reset_password_info';
-    }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -9,7 +9,6 @@
 
 namespace Piwik\Plugins\LanguagesManager\Commands;
 
-use Piwik\Plugin\ConsoleCommand;
 use Piwik\Unzip;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -17,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  */
-class FetchFromOTrance extends ConsoleCommand
+class FetchFromOTrance extends TranslationBase
 {
     const DOWNLOADPATH = 'tmp/oTrance';
 
@@ -26,7 +25,8 @@ class FetchFromOTrance extends ConsoleCommand
         $this->setName('translations:fetch')
              ->setDescription('Fetches translations files from oTrance to '.self::DOWNLOADPATH)
              ->addOption('username', 'u', InputOption::VALUE_OPTIONAL, 'oTrance username')
-             ->addOption('password', 'p', InputOption::VALUE_OPTIONAL, 'oTrance password');
+             ->addOption('password', 'p', InputOption::VALUE_OPTIONAL, 'oTrance password')
+             ->addOption('keep-english', 'k', InputOption::VALUE_NONE, 'keep english file');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -126,7 +126,10 @@ class FetchFromOTrance extends ConsoleCommand
         $unzipper = Unzip::factory('tar.gz', self::getDownloadPath() . DIRECTORY_SEPARATOR . 'language_pack.tar.gz');
         $unzipper->extract(self::getDownloadPath());
 
-        @unlink(self::getDownloadPath() . DIRECTORY_SEPARATOR . 'en.php');
+        if (!$input->getOption('keep-english')) {
+            @unlink(self::getDownloadPath() . DIRECTORY_SEPARATOR . 'en.php');
+            @unlink(self::getDownloadPath() . DIRECTORY_SEPARATOR . 'en.json');
+        }
         @unlink(self::getDownloadPath() . DIRECTORY_SEPARATOR . 'language_pack.tar.gz');
 
         $filesToConvert = _glob(self::getDownloadPath() . DIRECTORY_SEPARATOR . '*.php');
@@ -136,7 +139,7 @@ class FetchFromOTrance extends ConsoleCommand
         $progress = $this->getHelperSet()->get('progress');
 
         $progress->start($output, count($filesToConvert));
-        foreach ($filesToConvert AS $filename) {
+        foreach ($filesToConvert as $filename) {
 
             require_once $filename;
             $basename = explode(".", basename($filename));

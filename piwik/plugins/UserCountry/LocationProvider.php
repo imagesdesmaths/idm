@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -30,8 +30,8 @@ require_once PIWIK_INCLUDE_PATH . '/plugins/UserCountry/LocationProvider/GeoIp.p
 /**
  * The base class of all LocationProviders.
  *
- * LocationProviders attempt to determine a visitor's location using other
- * visitor info. All LocationProviders require a visitor's IP address, some
+ * LocationProviders attempt to determine a visitor's location using
+ * visit information. All LocationProviders require a visitor's IP address, some
  * require more, such as the browser language.
  */
 abstract class LocationProvider
@@ -307,12 +307,19 @@ abstract class LocationProvider
     public static function getProviderById($providerId)
     {
         foreach (self::getAvailableProviders() as $provider) {
-            $info = $provider->getInfo();
-            if ($info['id'] == $providerId) {
+            if ($provider->getId() == $providerId) {
                 return $provider;
             }
         }
+
         return false;
+    }
+
+    public function getId()
+    {
+        $info = $this->getInfo();
+
+        return $info['id'];
     }
 
     /**
@@ -437,23 +444,17 @@ abstract class LocationProvider
 
     /**
      * Returns an IP address from an array that was passed into getLocation. This
-     * will return an IPv4 address or false if the address is IPv6 (IPv6 is not
+     * will return an IPv4 address or null if the address is IPv6 (IPv6 is not
      * supported yet).
      *
      * @param  array $info Must have 'ip' key.
-     * @return string|bool
+     * @return string|null
      */
     protected function getIpFromInfo($info)
     {
-        $ip = $info['ip'];
-        if (IP::isMappedIPv4($ip)) {
-            return IP::getIPv4FromMappedIPv6($ip);
-        } else if (IP::isIPv6($ip)) // IPv6 is not supported (yet)
-        {
-            return false;
-        } else {
-            return $ip;
-        }
+        $ip = \Piwik\Network\IP::fromStringIP($info['ip']);
+
+        return $ip->toIPv4String();
     }
 }
 

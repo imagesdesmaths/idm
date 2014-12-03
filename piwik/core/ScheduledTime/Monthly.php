@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -46,7 +46,6 @@ class Monthly extends ScheduledTime
         $day = Weekly::getDayIntFromString($dayNumberString) % 7;
 
         // get week number
-        $week = false;
         $weekNumberString = strtolower($weekNumberString);
         if (isset(self::$weekNumberStringToInt[$weekNumberString])) {
             $week = self::$weekNumberStringToInt[$weekNumberString];

@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -65,7 +65,7 @@ class MajesticClient
             'referrer_domains_count' => false
         );
 
-        $apiResponse = Common::json_decode($apiResponse, $assoc = true);
+        $apiResponse = json_decode($apiResponse, $assoc = true);
         if (!empty($apiResponse)
             && !empty($apiResponse['Data'])
         ) {

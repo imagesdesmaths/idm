@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -63,6 +63,7 @@ class Manager extends Singleton
         if (!isset($this->tables[$idTable])) {
             throw new TableNotFoundException(sprintf("This report has been reprocessed since your last click. To see this error less often, please increase the timeout value in seconds in Settings > General Settings. (error: id %s not found).", $idTable));
         }
+
         return $this->tables[$idTable];
     }
 
@@ -86,6 +87,7 @@ class Manager extends Singleton
                 $this->deleteTable($id);
             }
         }
+
         if ($deleteWhenIdTableGreaterThan == 0) {
             $this->tables = array();
             $this->nextTableId = 1;
@@ -103,6 +105,24 @@ class Manager extends Singleton
         if (isset($this->tables[$id])) {
             Common::destroy($this->tables[$id]);
             $this->setTableDeleted($id);
+        }
+    }
+
+    /**
+     * Deletes all tables starting from the $firstTableId to the most recent table id except the ones that are
+     * supposed to be ignored.
+     *
+     * @param int[] $idsToBeIgnored
+     * @param int $firstTableId
+     */
+    public function deleteTablesExceptIgnored($idsToBeIgnored, $firstTableId = 0)
+    {
+        $lastTableId = $this->getMostRecentTableId();
+
+        for ($index = $firstTableId; $index <= $lastTableId; $index++) {
+            if (!in_array($index, $idsToBeIgnored)) {
+                $this->deleteTable($index);
+            }
         }
     }
 

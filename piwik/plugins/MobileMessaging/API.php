@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -30,7 +30,7 @@ class API extends \Piwik\Plugin\API
      * @param string $provider
      * @return SMSProvider
      */
-    static private function getSMSProviderInstance($provider)
+    private static function getSMSProviderInstance($provider)
     {
         return SMSProvider::factory($provider);
     }
@@ -365,7 +365,7 @@ class API extends \Piwik\Plugin\API
     {
         Option::set(
             $user . MobileMessaging::USER_SETTINGS_POSTFIX_OPTION,
-            Common::json_encode($settings)
+            json_encode($settings)
         );
     }
 
@@ -392,7 +392,7 @@ class API extends \Piwik\Plugin\API
         if (empty($userSettings)) {
             $userSettings = array();
         } else {
-            $userSettings = Common::json_decode($userSettings, true);
+            $userSettings = json_decode($userSettings, true);
         }
 
         return $userSettings;

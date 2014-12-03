@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -13,6 +13,7 @@ use Piwik\Filesystem;
 class Output {
 
     private $tmpFile  = '';
+    private $outputId = null;
 
     public function __construct($outputId)
     {
@@ -21,8 +22,15 @@ class Output {
         }
 
         $dir = CliMulti::getTmpPath();
-        Filesystem::mkdir($dir, true);
-        $this->tmpFile = $dir . '/' . $outputId . '.output';
+        Filesystem::mkdir($dir);
+
+        $this->tmpFile  = $dir . '/' . $outputId . '.output';
+        $this->outputId = $outputId;
+    }
+
+    public function getOutputId()
+    {
+        return $this->outputId;
     }
 
     public function write($content)
@@ -33,6 +41,13 @@ class Output {
     public function getPathToFile()
     {
         return $this->tmpFile;
+    }
+
+    public function isAbnormal()
+    {
+        $size = Filesystem::getFileSize($this->tmpFile, 'MB');
+
+        return $size !== null && $size >= 100;
     }
 
     public function exists()

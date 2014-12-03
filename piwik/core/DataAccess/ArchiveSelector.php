@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -9,18 +9,14 @@
 namespace Piwik\DataAccess;
 
 use Exception;
-use Piwik\ArchiveProcessor\Rules;
 use Piwik\ArchiveProcessor;
+use Piwik\ArchiveProcessor\Rules;
 use Piwik\Common;
 use Piwik\Date;
 use Piwik\Db;
-use Piwik\Log;
-
 use Piwik\Period;
 use Piwik\Period\Range;
-use Piwik\Piwik;
 use Piwik\Segment;
-use Piwik\Site;
 
 /**
  * Data Access object used to query archives
@@ -42,49 +38,47 @@ class ArchiveSelector
 
     const NB_VISITS_CONVERTED_RECORD_LOOKED_UP = "nb_visits_converted";
 
-    static public function getArchiveIdAndVisits(Site $site, Period $period, Segment $segment, $minDatetimeArchiveProcessedUTC, $requestedPlugin)
+    private static function getModel()
     {
-        $dateStart = $period->getDateStart();
-        $bindSQL = array($site->getId(),
-                         $dateStart->toString('Y-m-d'),
-                         $period->getDateEnd()->toString('Y-m-d'),
-                         $period->getId(),
-        );
+        return new Model();
+    }
 
-        $timeStampWhere = '';
+    public static function getArchiveIdAndVisits(ArchiveProcessor\Parameters $params, $minDatetimeArchiveProcessedUTC)
+    {
+        $idSite       = $params->getSite()->getId();
+        $period       = $params->getPeriod()->getId();
+        $dateStart    = $params->getPeriod()->getDateStart();
+        $dateStartIso = $dateStart->toString('Y-m-d');
+        $dateEndIso   = $params->getPeriod()->getDateEnd()->toString('Y-m-d');
+
+        $numericTable = ArchiveTableCreator::getNumericTable($dateStart);
+
+        $minDatetimeIsoArchiveProcessedUTC = null;
         if ($minDatetimeArchiveProcessedUTC) {
-            $timeStampWhere = " AND ts_archived >= ? ";
-            $bindSQL[] = Date::factory($minDatetimeArchiveProcessedUTC)->getDatetime();
+            $minDatetimeIsoArchiveProcessedUTC = Date::factory($minDatetimeArchiveProcessedUTC)->getDatetime();
         }
 
-        $pluginOrVisitsSummary = array("VisitsSummary", $requestedPlugin);
-        $pluginOrVisitsSummary = array_unique($pluginOrVisitsSummary);
-        $sqlWhereArchiveName = self::getNameCondition($pluginOrVisitsSummary, $segment);
+        $requestedPlugin = $params->getRequestedPlugin();
+        $segment         = $params->getSegment();
+        $isSkipAggregationOfSubTables = $params->isSkipAggregationOfSubTables();
+        $plugins = array("VisitsSummary", $requestedPlugin);
 
-        $sqlQuery = "	SELECT idarchive, value, name, date1 as startDate
-						FROM " . ArchiveTableCreator::getNumericTable($dateStart) . "``
-						WHERE idsite = ?
-							AND date1 = ?
-							AND date2 = ?
-							AND period = ?
-							AND ( ($sqlWhereArchiveName)
-								  OR name = '" . self::NB_VISITS_RECORD_LOOKED_UP . "'
-								  OR name = '" . self::NB_VISITS_CONVERTED_RECORD_LOOKED_UP . "')
-							$timeStampWhere
-						ORDER BY idarchive DESC";
-        $results = Db::fetchAll($sqlQuery, $bindSQL);
+        $doneFlags      = Rules::getDoneFlags($plugins, $segment, $isSkipAggregationOfSubTables);
+        $doneFlagValues = Rules::getSelectableDoneFlagValues();
+
+        $results = self::getModel()->getArchiveIdAndVisits($numericTable, $idSite, $period, $dateStartIso, $dateEndIso, $minDatetimeIsoArchiveProcessedUTC, $doneFlags, $doneFlagValues);
+
         if (empty($results)) {
             return false;
         }
 
-        $idArchive = self::getMostRecentIdArchiveFromResults($segment, $requestedPlugin, $results);
-        $idArchiveVisitsSummary = self::getMostRecentIdArchiveFromResults($segment, "VisitsSummary", $results);
+        $idArchive = self::getMostRecentIdArchiveFromResults($segment, $requestedPlugin, $isSkipAggregationOfSubTables, $results);
+        $idArchiveVisitsSummary = self::getMostRecentIdArchiveFromResults($segment, "VisitsSummary", $isSkipAggregationOfSubTables, $results);
 
         list($visits, $visitsConverted) = self::getVisitsMetricsFromResults($idArchive, $idArchiveVisitsSummary, $results);
 
-        if ($visits === false
-            && $idArchive === false
-        ) {
+        if (false === $visits && false === $idArchive) {
+
             return false;
         }
 
@@ -95,9 +89,11 @@ class ArchiveSelector
     {
         $visits = $visitsConverted = false;
         $archiveWithVisitsMetricsWasFound = ($idArchiveVisitsSummary !== false);
+
         if ($archiveWithVisitsMetricsWasFound) {
             $visits = $visitsConverted = 0;
         }
+
         foreach ($results as $result) {
             if (in_array($result['idarchive'], array($idArchive, $idArchiveVisitsSummary))) {
                 $value = (int)$result['value'];
@@ -113,13 +109,15 @@ class ArchiveSelector
                 }
             }
         }
+
         return array($visits, $visitsConverted);
     }
 
-    protected static function getMostRecentIdArchiveFromResults(Segment $segment, $requestedPlugin, $results)
+    protected static function getMostRecentIdArchiveFromResults(Segment $segment, $requestedPlugin, $isSkipAggregationOfSubTables, $results)
     {
         $idArchive = false;
-        $namesRequestedPlugin = Rules::getDoneFlags(array($requestedPlugin), $segment);
+        $namesRequestedPlugin = Rules::getDoneFlags(array($requestedPlugin), $segment, $isSkipAggregationOfSubTables);
+
         foreach ($results as $result) {
             if ($idArchive === false
                 && in_array($result['name'], $namesRequestedPlugin)
@@ -128,6 +126,7 @@ class ArchiveSelector
                 break;
             }
         }
+
         return $idArchive;
     }
 
@@ -138,19 +137,25 @@ class ArchiveSelector
      * @param array $periods
      * @param Segment $segment
      * @param array $plugins List of plugin names for which data is being requested.
+     * @param bool $isSkipAggregationOfSubTables Whether we are selecting an archive that may be partial (no sub-tables)
      * @return array Archive IDs are grouped by archive name and period range, ie,
      *               array(
      *                   'VisitsSummary.done' => array(
      *                       '2010-01-01' => array(1,2,3)
      *                   )
      *               )
+     * @throws
      */
-    static public function getArchiveIds($siteIds, $periods, $segment, $plugins)
+    public static function getArchiveIds($siteIds, $periods, $segment, $plugins, $isSkipAggregationOfSubTables = false)
     {
+        if (empty($siteIds)) {
+            throw new \Exception("Website IDs could not be read from the request, ie. idSite=");
+        }
+
         $getArchiveIdsSql = "SELECT idsite, name, date1, date2, MAX(idarchive) as idarchive
                                FROM %s
                               WHERE %s
-                                AND " . self::getNameCondition($plugins, $segment) . "
+                                AND " . self::getNameCondition($plugins, $segment, $isSkipAggregationOfSubTables) . "
                                 AND idsite IN (" . implode(',', $siteIds) . ")
                            GROUP BY idsite, date1, date2";
 
@@ -193,8 +198,10 @@ class ArchiveSelector
 
             $sql = sprintf($getArchiveIdsSql, $table, $dateCondition);
 
+            $archiveIds = Db::fetchAll($sql, $bind);
+
             // get the archive IDs
-            foreach (Db::fetchAll($sql, $bind) as $row) {
+            foreach ($archiveIds as $row) {
                 $archiveName = $row['name'];
 
                 //FIXMEA duplicate with Archive.php
@@ -217,7 +224,7 @@ class ArchiveSelector
      * @throws Exception
      * @return array
      */
-    static public function getArchiveData($archiveIds, $recordNames, $archiveDataType, $loadAllSubtables)
+    public static function getArchiveData($archiveIds, $recordNames, $archiveDataType, $loadAllSubtables)
     {
         // create the SQL to select archive data
         $inNames = Common::getSqlStringFieldsArray($recordNames);
@@ -244,18 +251,23 @@ class ArchiveSelector
         // get data from every table we're querying
         $rows = array();
         foreach ($archiveIds as $period => $ids) {
+
             if (empty($ids)) {
                 throw new Exception("Unexpected: id archive not found for period '$period' '");
             }
+
             // $period = "2009-01-04,2009-01-04",
             $date = Date::factory(substr($period, 0, 10));
+
             if ($archiveDataType == 'numeric') {
                 $table = ArchiveTableCreator::getNumericTable($date);
             } else {
                 $table = ArchiveTableCreator::getBlobTable($date);
             }
-            $sql = sprintf($getValuesSql, $table, implode(',', $ids));
+
+            $sql      = sprintf($getValuesSql, $table, implode(',', $ids));
             $dataRows = Db::fetchAll($sql, $bind);
+
             foreach ($dataRows as $row) {
                 $rows[] = $row;
             }
@@ -270,86 +282,21 @@ class ArchiveSelector
      *
      * @param array $plugins
      * @param Segment $segment
+     * @param bool $isSkipAggregationOfSubTables
      * @return string
      */
-    static private function getNameCondition(array $plugins, $segment)
+    private static function getNameCondition(array $plugins, Segment $segment, $isSkipAggregationOfSubTables)
     {
         // the flags used to tell how the archiving process for a specific archive was completed,
         // if it was completed
-        $doneFlags = Rules::getDoneFlags($plugins, $segment);
-
+        $doneFlags    = Rules::getDoneFlags($plugins, $segment, $isSkipAggregationOfSubTables);
         $allDoneFlags = "'" . implode("','", $doneFlags) . "'";
 
+        $possibleValues = Rules::getSelectableDoneFlagValues();
+
         // create the SQL to find archives that are DONE
-        return "(name IN ($allDoneFlags)) AND " .
-        " (value = '" . ArchiveWriter::DONE_OK . "' OR " .
-        " value = '" . ArchiveWriter::DONE_OK_TEMPORARY . "')";
+        return "((name IN ($allDoneFlags)) AND (value IN (" . implode(',', $possibleValues) . ")))";
     }
 
-    static public function purgeOutdatedArchives(Date $dateStart)
-    {
-        $purgeArchivesOlderThan = Rules::shouldPurgeOutdatedArchives($dateStart);
-        if (!$purgeArchivesOlderThan) {
-            return;
-        }
 
-        $idArchivesToDelete = self::getTemporaryArchiveIdsOlderThan($dateStart, $purgeArchivesOlderThan);
-        if (!empty($idArchivesToDelete)) {
-            self::deleteArchiveIds($dateStart, $idArchivesToDelete);
-        }
-        self::deleteArchivesWithPeriodRange($dateStart);
-
-        Log::debug("Purging temporary archives: done [ purged archives older than %s in %s ] [Deleted IDs: %s]",
-            $purgeArchivesOlderThan, $dateStart->toString("Y-m"), implode(',', $idArchivesToDelete));
-    }
-
-    /*
-     * Deleting "Custom Date Range" reports after 1 day, since they can be re-processed and would take up un-necessary space
-     */
-    protected static function deleteArchivesWithPeriodRange(Date $date)
-    {
-        $query = "DELETE FROM %s WHERE period = ? AND ts_archived < ?";
-
-        $yesterday = Date::factory('yesterday')->getDateTime();
-        $bind = array(Piwik::$idPeriods['range'], $yesterday);
-        $numericTable = ArchiveTableCreator::getNumericTable($date);
-        Db::query(sprintf($query, $numericTable), $bind);
-        Log::debug("Purging Custom Range archives: done [ purged archives older than %s from %s / blob ]", $yesterday, $numericTable);
-        try {
-            Db::query(sprintf($query, ArchiveTableCreator::getBlobTable($date)), $bind);
-        } catch (Exception $e) {
-            // Individual blob tables could be missing
-        }
-    }
-
-    protected static function deleteArchiveIds(Date $date, $idArchivesToDelete)
-    {
-        $query = "DELETE FROM %s WHERE idarchive IN (" . implode(',', $idArchivesToDelete) . ")";
-
-        Db::query(sprintf($query, ArchiveTableCreator::getNumericTable($date)));
-        try {
-            Db::query(sprintf($query, ArchiveTableCreator::getBlobTable($date)));
-        } catch (Exception $e) {
-            // Individual blob tables could be missing
-        }
-    }
-
-    protected static function getTemporaryArchiveIdsOlderThan(Date $date, $purgeArchivesOlderThan)
-    {
-        $query = "SELECT idarchive
-                FROM " . ArchiveTableCreator::getNumericTable($date) . "
-                WHERE name LIKE 'done%'
-                    AND ((  value = " . ArchiveWriter::DONE_OK_TEMPORARY . "
-                            AND ts_archived < ?)
-                         OR value = " . ArchiveWriter::DONE_ERROR . ")";
-
-        $result = Db::fetchAll($query, array($purgeArchivesOlderThan));
-        $idArchivesToDelete = array();
-        if (!empty($result)) {
-            foreach ($result as $row) {
-                $idArchivesToDelete[] = $row['idarchive'];
-            }
-        }
-        return $idArchivesToDelete;
-    }
 }

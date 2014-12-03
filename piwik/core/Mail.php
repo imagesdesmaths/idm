@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -8,6 +8,7 @@
  */
 namespace Piwik;
 
+use Piwik\Plugins\CoreAdminHome\CustomLogo;
 use Zend_Mail;
 
 /**
@@ -30,6 +31,20 @@ class Mail extends Zend_Mail
         $this->initSmtpTransport();
     }
 
+    public function setDefaultFromPiwik()
+    {
+        $customLogo = new CustomLogo();
+
+        if ($customLogo->isEnabled()) {
+            $fromEmailName = Piwik::translate('CoreHome_WebAnalyticsReports');
+        } else {
+            $fromEmailName = Piwik::translate('ScheduledReports_PiwikReports');
+        }
+
+        $fromEmailAddress = Config::getInstance()->General['noreply_email_address'];
+        $this->setFrom($fromEmailAddress, $fromEmailName);
+    }
+
     /**
      * Sets the sender.
      *
@@ -39,20 +54,25 @@ class Mail extends Zend_Mail
      */
     public function setFrom($email, $name = null)
     {
-        $hostname = Config::getInstance()->mail['defaultHostnameIfEmpty'];
-        $piwikHost = Url::getCurrentHost($hostname);
+        return parent::setFrom(
+            $this->parseDomainPlaceholderAsPiwikHostName($email),
+            $name
+        );
+    }
 
-        // If known Piwik URL, use it instead of "localhost"
-        $piwikUrl = SettingsPiwik::getPiwikUrl();
-        $url = parse_url($piwikUrl);
-        if (isset($url['host'])
-            && $url['host'] != 'localhost'
-            && $url['host'] != '127.0.0.1'
-        ) {
-            $piwikHost = $url['host'];
-        }
-        $email = str_replace('{DOMAIN}', $piwikHost, $email);
-        return parent::setFrom($email, $name);
+    /**
+     * Set Reply-To Header
+     *
+     * @param string $email
+     * @param null|string $name
+     * @return Zend_Mail
+     */
+    public function setReplyTo($email, $name = null)
+    {
+        return parent::setReplyTo(
+            $this->parseDomainPlaceholderAsPiwikHostName($email),
+            $name
+        );
     }
 
     /**
@@ -61,23 +81,69 @@ class Mail extends Zend_Mail
     private function initSmtpTransport()
     {
         $mailConfig = Config::getInstance()->mail;
+
         if (empty($mailConfig['host'])
             || $mailConfig['transport'] != 'smtp'
         ) {
             return;
         }
+
         $smtpConfig = array();
-        if (!empty($mailConfig['type']))
+        if (!empty($mailConfig['type'])) {
             $smtpConfig['auth'] = strtolower($mailConfig['type']);
-        if (!empty($mailConfig['username']))
+        }
+
+        if (!empty($mailConfig['username'])) {
             $smtpConfig['username'] = $mailConfig['username'];
-        if (!empty($mailConfig['password']))
+        }
+
+        if (!empty($mailConfig['password'])) {
             $smtpConfig['password'] = $mailConfig['password'];
-        if (!empty($mailConfig['encryption']))
+        }
+
+        if (!empty($mailConfig['encryption'])) {
             $smtpConfig['ssl'] = $mailConfig['encryption'];
+        }
 
         $tr = new \Zend_Mail_Transport_Smtp($mailConfig['host'], $smtpConfig);
         Mail::setDefaultTransport($tr);
-        ini_set("smtp_port", $mailConfig['port']);
+        @ini_set("smtp_port", $mailConfig['port']);
+    }
+
+    public function send($transport = NULL)
+    {
+        if (defined('PIWIK_TEST_MODE')) { // hack
+            Piwik::postTestEvent("Test.Mail.send", array($this));
+        } else {
+            return parent::send($transport);
+        }
+    }
+
+    /**
+     * @param string $email
+     * @return string
+     */
+    protected function parseDomainPlaceholderAsPiwikHostName($email)
+    {
+        $hostname  = Config::getInstance()->mail['defaultHostnameIfEmpty'];
+        $piwikHost = Url::getCurrentHost($hostname);
+
+        // If known Piwik URL, use it instead of "localhost"
+        $piwikUrl = SettingsPiwik::getPiwikUrl();
+        $url      = parse_url($piwikUrl);
+        if ($this->isHostDefinedAndNotLocal($url)) {
+            $piwikHost = $url['host'];
+        }
+
+        return str_replace('{DOMAIN}', $piwikHost, $email);
+    }
+
+    /**
+     * @param array $url
+     * @return bool
+     */
+    protected function isHostDefinedAndNotLocal($url)
+    {
+        return isset($url['host']) && !in_array($url['host'], array('localhost', '127.0.0.1'), true);
     }
 }

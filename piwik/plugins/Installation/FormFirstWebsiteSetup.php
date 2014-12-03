@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -12,6 +12,8 @@ namespace Piwik\Plugins\Installation;
 use HTML_QuickForm2_DataSource_Array;
 use HTML_QuickForm2_Factory;
 use HTML_QuickForm2_Rule;
+use Piwik\Log;
+use Piwik\Access;
 use Piwik\Piwik;
 use Piwik\Plugins\SitesManager\API;
 use Piwik\QuickForm2;
@@ -31,7 +33,7 @@ class FormFirstWebsiteSetup extends QuickForm2
         HTML_QuickForm2_Factory::registerRule('checkTimezone', 'Piwik\Plugins\Installation\Rule_isValidTimezone');
 
         $urlExample = 'http://example.org';
-        $javascriptOnClickUrlExample = "javascript:if(this.value=='$urlExample'){this.value='http://';} this.style.color='black';";
+        $javascriptOnClickUrlExample = "javascript:if (this.value=='$urlExample'){this.value='http://';} this.style.color='black';";
 
         $timezones = API::getInstance()->getTimezonesList();
         $timezones = array_merge(array('No timezone' => Piwik::translate('SitesManager_SelectACity')), $timezones);
@@ -79,7 +81,9 @@ class Rule_isValidTimezone extends HTML_QuickForm2_Rule
         try {
             $timezone = $this->owner->getValue();
             if (!empty($timezone)) {
-                API::getInstance()->setDefaultTimezone($timezone);
+                Access::doAsSuperUser(function () use ($timezone) {
+                    API::getInstance()->setDefaultTimezone($timezone);
+                });
             }
         } catch (\Exception $e) {
             return false;

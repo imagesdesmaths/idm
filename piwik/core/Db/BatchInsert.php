@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -12,7 +12,6 @@ use Exception;
 use Piwik\AssetManager;
 use Piwik\Common;
 use Piwik\Config;
-
 use Piwik\Db;
 use Piwik\DbHelper;
 use Piwik\Log;
@@ -34,13 +33,12 @@ class BatchInsert
     public static function tableInsertBatchIterate($tableName, $fields, $values, $ignoreWhenDuplicate = true)
     {
         $fieldList = '(' . join(',', $fields) . ')';
-        $ignore = $ignoreWhenDuplicate ? 'IGNORE' : '';
+        $ignore    = $ignoreWhenDuplicate ? 'IGNORE' : '';
 
         foreach ($values as $row) {
-            $query = "INSERT $ignore
-					INTO " . $tableName . "
-					$fieldList
-					VALUES (" . Common::getSqlStringFieldsArray($row) . ")";
+            $query = "INSERT $ignore INTO " . $tableName . "
+					  $fieldList
+					  VALUES (" . Common::getSqlStringFieldsArray($row) . ")";
             Db::query($query, $row);
         }
     }
@@ -60,7 +58,7 @@ class BatchInsert
     public static function tableInsertBatch($tableName, $fields, $values, $throwException = false)
     {
         $filePath = PIWIK_USER_PATH . '/tmp/assets/' . $tableName . '-' . Common::generateUniqId() . '.csv';
-        $filePath = SettingsPiwik::rewriteTmpPathWithHostname($filePath);
+        $filePath = SettingsPiwik::rewriteTmpPathWithInstanceId($filePath);
 
         $loadDataInfileEnabled = Config::getInstance()->General['enable_load_data_infile'];
 
@@ -124,7 +122,7 @@ class BatchInsert
     {
         // Chroot environment: prefix the path with the absolute chroot path
         $chrootPath = Config::getInstance()->General['absolute_chroot_path'];
-        if(!empty($chrootPath)) {
+        if (!empty($chrootPath)) {
             $filePath = $chrootPath . $filePath;
         }
 
@@ -169,11 +167,12 @@ class BatchInsert
 
         /*
 		 * Second attempt: using the LOCAL keyword means the client reads the file and sends it to the server;
-		 * the LOCAL keyword may trigger a known PHP PDO_MYSQL bug when MySQL not built with --enable-local-infile
+		 * the LOCAL keyword may trigger a known PHP PDO\MYSQL bug when MySQL not built with --enable-local-infile
 		 * @see http://bugs.php.net/bug.php?id=54158
 		 */
         $openBaseDir = ini_get('open_basedir');
-        $safeMode = ini_get('safe_mode');
+        $safeMode    = ini_get('safe_mode');
+
         if (empty($openBaseDir) && empty($safeMode)) {
             // php 5.x - LOAD DATA LOCAL INFILE is disabled if open_basedir restrictions or safe_mode enabled
             $keywords[] = 'LOCAL ';
@@ -200,12 +199,13 @@ class BatchInsert
                 $exceptions[] = "\n  Try #" . (count($exceptions) + 1) . ': ' . $queryStart . ": " . $message;
             }
         }
+
         if (count($exceptions)) {
             throw new Exception(implode(",", $exceptions));
         }
+
         return false;
     }
-
 
     /**
      * Create CSV (or other delimited) files
@@ -215,13 +215,13 @@ class BatchInsert
      * @param array $rows Array of array corresponding to rows of values
      * @throws Exception  if unable to create or write to file
      */
-    static protected function createCSVFile($filePath, $fileSpec, $rows)
+    protected static function createCSVFile($filePath, $fileSpec, $rows)
     {
         // Set up CSV delimiters, quotes, etc
         $delim = $fileSpec['delim'];
         $quote = $fileSpec['quote'];
-        $eol = $fileSpec['eol'];
-        $null = $fileSpec['null'];
+        $eol   = $fileSpec['eol'];
+        $null  = $fileSpec['null'];
         $escapespecial_cb = $fileSpec['escapespecial_cb'];
 
         $fp = @fopen($filePath, 'wb');
@@ -248,6 +248,7 @@ class BatchInsert
                 throw new Exception('Error writing to the tmp file ' . $filePath);
             }
         }
+
         fclose($fp);
 
         @chmod($filePath, 0777);

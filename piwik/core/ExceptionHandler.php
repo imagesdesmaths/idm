@@ -1,6 +1,6 @@
 <?php
 /**
- * Piwik - Open source web analytics
+ * Piwik - free/libre analytics platform
  *
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -46,9 +46,7 @@ class ExceptionHandler
     public static function formatScreenMessage(&$message, $level, $tag, $datetime, $log)
     {
         if ($message instanceof \Exception) {
-            if (!Common::isPhpCliMode()) {
-                @header('Content-Type: text/html; charset=utf-8');
-            }
+            Common::sendHeader('Content-Type: text/html; charset=utf-8');
 
             $outputFormat = strtolower(Common::getRequestVar('format', 'html', 'string'));
             $response = new ResponseBuilder($outputFormat);
