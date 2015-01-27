@@ -1,0 +1,20 @@
+.block-random {
+    h2 {
+        padding-right: 0;
+    }
+    .content {
+        a {
+            display: block;
+            background: $red;
+            color: $white;
+            border-radius: $border_radius_default;
+            padding: 30px 25px;
+            box-shadow: inset 5px 0 0 0 rgba(0,0,0,0.2);
+            transition: box-shadow $transition_duration_default;
+
+            &:hover {
+                box-shadow: inset 500px 0 0 0 rgba(0,0,0,0.2);
+            }
+        }
+    }
+}

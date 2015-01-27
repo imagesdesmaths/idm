@@ -1,0 +1,30 @@
+<div class="block-user">
+
+    <ul>
+        [(#SESSION{id_auteur}|oui)
+            <li><a href="#URL_PAGE{perso}" title="Espace personnel"><i class="flaticon-user"></i><span>Espace personnel</span></a></li>
+        ]
+        <BOUCLE_moi(AUTEURS) {tous} {id_auteur=#SESSION{id_auteur}} {billettiste=oui}>
+            <li><a href="#URL_PAGE{billet}" title="Écrire un nouveau billet"><i class="flaticon-cat-contribute"></i><span>Écrire un nouveau billet</span></a></li>
+        </BOUCLE_moi>
+        <BOUCLE_relecteurs(spip_relecteurs_articles) {id_auteur=#SESSION{id_auteur}} {0,1}>
+            <li><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}" title="Un article à relire !" class="relecture"><i class="flaticon-cat-press"></i><span>Un article à relire !</span></a></li>
+        </BOUCLE_relecteurs>
+        <BOUCLE_articles(ARTICLES) {id_article}>
+            [(#SESSION{statut}|=={0minirezo}|oui)
+                <li><a href="#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE}" title="Modifier l'article" class="edition"><i class="flaticon-cat-contribute"></i><span>Modifier l'article</span></a></li>
+                <li><a href="#URL_ECRIRE{article,id_article=#ID_ARTICLE}" title="Modifier l'article" class="stats"><i class="flaticon-stats"></i><span>Visites : #VISITES<br>Popularité : #POPULARITE</span></a></li>
+            ]
+        </BOUCLE_articles>
+        [(#SESSION{statut}|=={0minirezo}|oui)
+            <li><a href="[(#SELF|parametre_url{var_mode,#ENV{calcul}})]"><i class="flaticon-refresh"></i><span>Recalculer la page</span>[(#ENV{use_cache})]</a></li>
+            <li><a href="ecrire/" title="Espace privé"><i class="flaticon-private"></i><span>Espace privé</span></a></li>
+        ]
+        [(#SESSION{statut}|=={1comite}|oui)
+            <li><a href="ecrire/" title="Espace de rédaction"><i class="flaticon-private"></i><span>Espace de rédaction</span></a></li>
+        ]
+        [(#SESSION{id_auteur}|oui)
+            <li><a href="#URL_LOGOUT{#URL_SITE_SPIP}" title="Se déconnecter"><i class="flaticon-logout"></i><span>Se déconnecter</span></a></li>
+        ]
+    </ul>
+</div>

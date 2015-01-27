@@ -1,0 +1,38 @@
+#debug-nav {
+    display: none;
+    position: absolute;
+    display: block;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    width: auto;
+    background: #efefef;
+    box-shadow: 0 0 0 20px $grey_dark;
+    opacity: 1;
+
+    caption {
+        background: $danger;
+        display: block;
+        width: 100%;
+        border: 1px solid $grey_dark;
+    }
+    tbody {
+        display: block;
+        width: 100%;
+    }
+    th {
+        padding: 2px 5px;
+        background: $grey_dark;
+        text-transform: capitalize;
+    }
+    td {
+        padding: 2px 5px;
+
+        &:nth-child(2) {
+            width: 70%;
+        }
+        &:nth-child(3) {
+            width: 30%;
+        }
+    }
+}

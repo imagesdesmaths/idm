@@ -1,0 +1,42 @@
+%success,
+.success {
+    color: $success;
+    border-color: $success;
+}
+%warning,
+.warning {
+    color: $warning;
+    border-color: $warning;
+}
+%error,
+.error,
+.danger {
+    color: $danger;
+    border-color: $danger;
+}
+
+%alert,
+.alert {
+    @extend %error;
+    border-width: 1px;
+    border-style: solid;
+    padding: 20px;
+    border-radius: $border_radius_default;
+    background: lighten($danger, 30%);
+
+    p:first-child {
+        margin-top: 0;
+    }
+    p:last-child {
+        margin-bottom: 0;
+    }
+
+    &.success {
+        @extend %success;
+        background: lighten($success, 30%);
+    }
+    &.warning {
+        @extend %warning;
+        background: lighten($warning, 30%);
+    }
+}

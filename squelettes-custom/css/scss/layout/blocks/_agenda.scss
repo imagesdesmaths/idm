@@ -1,0 +1,83 @@
+.block-agenda {
+    padding-bottom: $col_padding;
+
+    h2 {
+        padding-right: 0;
+    }
+    ul {
+        line-height: $block_lineheight;
+
+        li {
+            margin-bottom: 20px;
+
+            a {
+                overflow: hidden;
+                display: table;
+                height: 3 * $block_lineheight;
+            }
+            .image {
+                display: table-cell;
+                vertical-align: middle;
+                text-align: center;
+                width: 3 * $block_lineheight;
+
+                i {
+                    display: inline-block;
+                    border-radius: 50%;
+                    color: $red;
+                    font-size: 40px !important;
+                    line-height: 3 * $block_lineheight;
+                    height: 3 * $block_lineheight;
+                    width: 3 * $block_lineheight;
+                    transition:
+                        color $transition_duration_default,
+                        background $transition_duration_default,
+                        transform $transition_duration_default,
+                        -webkit-transform $transition_duration_default,
+                        font-size $transition_duration_default;
+                }
+            }
+            .resume {
+                display: table-cell;
+                vertical-align: middle;
+                padding-left: 25px;
+            }
+            .date {
+                color: $red;
+                display: inline-block;
+                width: 100%;
+            }
+
+            &:hover {
+                .image i {
+                    font-size: 26px !important;
+                    color: $white;
+                    background: $red;
+                }
+            }
+        }
+    }
+
+    @include media-min("tablet-up") {
+        background: $grey_lighter;
+        box-shadow:
+            -200px 0 0 0 $grey_lighter,
+            0 200px 0 0 $grey_lighter,
+            -200px 200px 0 0 $grey_lighter;
+    }
+    @include media-min("desktop-down") {
+        background: none;
+        box-shadow: none;
+
+        section.agenda &,
+        section.breve &,
+        section.mot &,
+        section.perso &,
+        section.recherche & {
+            display: none;
+        }
+    }
+    @include media-max("desktop-down") {
+        clear: both;
+    }
+}

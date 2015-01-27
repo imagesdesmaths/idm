@@ -1,0 +1,23 @@
+.block-tribune {
+    @extend %listing;
+
+    h2 {
+        padding-right: 0;
+    }
+    > ul li {
+        .details,
+        .link {
+            display: none;
+        }
+    }
+
+    @include media-min("tablet-up") {
+        padding-right: $col_padding / 2;
+    }
+    @include media-min("desktop-down") {
+        padding-right: 0;
+        padding-bottom: 0;
+        background: none;
+        box-shadow: none;
+    }
+}

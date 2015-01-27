@@ -1,0 +1,79 @@
+/*
+    Boostrap
+ */
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+ul, ol, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+img {
+    max-width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    @extend %font-light;
+}
+
+.clearfix,
+.clear,
+.cf {
+    @extend %clearfix;
+}
+
+.hide,
+.hidden {
+    @extend %hidden;
+}
+
+.piste-verte {
+    @extend .green-track;
+}
+.piste-bleue {
+    @extend .blue-track;
+}
+.piste-rouge {
+    @extend .red-track;
+}
+.piste-noire {
+    @extend .black-track;
+}
+.hors-piste  {
+    @extend .off-track;
+}
+
+[disabled] {
+    cursor: default;
+}
+
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+
+/*
+    General
+ */
+html {
+
+}
+
+body {
+    @extend %font-light;
+    color: $grey_dark;
+    border-color: $grey_dark;
+}

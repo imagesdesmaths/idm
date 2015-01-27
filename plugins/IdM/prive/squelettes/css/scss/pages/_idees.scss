@@ -1,0 +1,99 @@
+#box_idees {
+    margin-top: 0;
+    clear: both;
+}
+#recherche_idees,
+#edition_idee {
+    .col {
+        width: 50%;
+        float: left;
+        padding-right: 10px;
+
+        + .col {
+            padding-right: 0;
+            padding-left: 10px;
+        }
+    }
+    label {
+        clear: both;
+        display: inline-block;
+        margin-bottom: 5px;
+        width: 120px;
+        line-height: 27px;
+
+        &.top {
+            vertical-align: top;
+        }
+    }
+    input[type="text"],
+    select,
+    textarea {
+        width: 245px;
+    }
+    input[type="checkbox"] + label {
+        width: 300px;
+    }
+    textarea {
+        height: 200px;
+    }
+    button {
+        @extend %button-white;
+        width: 120px;
+        float: right;
+    }
+    input[type="submit"] {
+        @extend %button;
+        width: 120px;
+        float: right;
+        margin-left: 5px;
+    }
+    .buttons {
+        text-align: right;
+    }
+}
+
+.go_top {
+    float: right;
+    margin-bottom: 5px;
+    margin-top: -25px;
+}
+
+[id^="modal_idee"] {
+    @extend %modal;
+
+    .no-padding {
+        padding: 0px;
+    }
+    .col-left,
+    .col-right {
+        display: table-cell;
+        padding: 10px;
+
+        h3 {
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 0;
+            font-size: 14px;
+            background: #dcef77;
+        }
+        .content {
+            max-height: 400px;
+            overflow-y: scroll;
+        }
+    }
+    .col-left {
+        width: 560px;
+    }
+    .col-right {
+        border-left: 1px solid #ccc;
+        width: 220px;
+
+        .button,
+        .button-white {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+    }
+
+}

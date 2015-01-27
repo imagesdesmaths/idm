@@ -1,0 +1,95 @@
+<BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
+<h1>Billettistes en attente d'approbation</h1>
+
+<?php
+
+  function approve_billettistes() {
+    $reload = false;
+
+    if(isset($_POST['approve_billettistes'])) {
+      foreach($_POST as $key=>$value) {
+        if (preg_match('/^action_billettistes_([0-9]*)$/', $key, $matches)) {
+          $id = intval($matches[1]);
+          sql_updateq('spip_auteurs', array('billettiste'=>'oui'), "id_auteur = $id");
+          $reload = true;
+        }
+      }
+    }
+
+    if ($reload) {
+      $newpost = array(
+        'nom' => $_POST['nom'],
+        'num' => $_POST['num'],
+        'titre' => $_POST['titre']
+      );
+      $_POST = $newpost;
+      @header ("Location: #SELF");
+    }
+  }
+
+  approve_billettistes();
+
+?>
+
+<form action="#SELF" method="post">
+
+  <input type="submit" value="Rechercher" style="display:none">
+
+  <a href="/ecrire/?exec=idm_billettistes" class="button-white go_top">Retour à la gestion des billettistes</a>
+
+  <div id="box_billetistes" class="box simple">
+
+    <div class="inner">
+
+      <div class="hd titrem">
+        <h4>Rechercher par :</h4>
+      </div>
+
+      <div id="recherche_billetistes" class="bd">
+        <div class="col">
+          <label for="nom">Nom ou prénom :</label>
+          <input type="text" name="nom" id="nom" value="#ENV{nom}">
+        </div>
+        <div class="col">
+          <input type="submit" value="Rechercher">
+          <button class="empty-form">Effacer les filtres</button>
+        </div>
+      </div>
+
+      <div class="bd">
+        <table class="sortable" style="font-size : 90%">
+          <thead><tr>
+            <th><input type="checkbox" class="check_billettiste_all"></th>
+            <th>ID</th>
+            <th>Nom / prénom</th>
+            <th>Email</th>
+            <th>Statut</th>
+          </tr></thead>
+          <tbody>
+            <BOUCLE_new(AUTEURS) {statut == .} {billettiste=non} {nom LIKE %#ENV{nom}%} {par nom}>
+            <tr>
+              <td><input type="checkbox" class="check_billettiste" name="action_billettistes_#ID_AUTEUR"></td>
+              <td>#ID_AUTEUR</td>
+              <td>#NOM</td>
+              <td>#EMAIL</td>
+              <td>#STATUT</td>
+            </tr>
+            </BOUCLE_new>
+            </B_new>
+            <tr>
+              <td colspan="5">Aucun billettiste ne correspond aux critères</td>
+            </tr>
+            <//B_new>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bd">
+        <a href="/ecrire/?exec=idm_billettistes" class="button-white">Annuler</a>
+        <input type="submit" name="approve_billettistes" class="button" value="Approuver tous les billettistes sélectionnés">
+      </div>
+    </div>
+  </div>
+</form>
+
+</BOUCLE_securite>

@@ -1,0 +1,74 @@
+.block-participate {
+    margin-top: 50px;
+
+    h2 {
+        font-size: 26px;
+    }
+    li {
+        position: relative;
+        height: 100px;
+        width: 45%;
+        float: left;
+        margin-bottom: 15px;
+        margin-right: 10%;
+        line-height: 20px;
+        text-transform: uppercase;
+        border-radius: $border_radius_default;
+        background: $grey_dark;
+        overflow: hidden;
+
+        &:nth-child(2n) {
+            margin-right: 0;
+        }
+
+        a {
+            position: relative;
+            z-index: 60;
+            display: block;
+            color: $white;
+            padding: 30px 25px;
+            border-radius: $border_radius_default;
+            box-shadow: inset 5px 0 0 0 rgba(0, 0, 0, .2);
+            transition: box-shadow $transition_duration_default;
+
+            &:hover {
+                box-shadow: inset 300px 0 0 0 rgba(0, 0, 0, .2);
+            }
+        }
+        i {
+            position: absolute;
+            z-index: 50;
+            bottom: -64%;
+            right: -40%;
+            width: 100%;
+            height: 100%;
+            font-size: 100px !important;
+            color: rgba(255,255,255,0.2);
+        }
+
+        &.contribute {
+            background: $contribute;
+        }
+        &.participate {
+            background: $participate;
+        }
+        &.press {
+            background: $press;
+        }
+        &.contact {
+            background: $contact;
+        }
+
+        @include media-min("tablet-up") {
+            width: 23%;
+            margin-right: 2.66%;
+
+            &:nth-child(2n) {
+                margin-right: 2.66%;
+            }
+            &:nth-child(4n) {
+                margin-right: 0;
+            }
+        }
+    }
+}

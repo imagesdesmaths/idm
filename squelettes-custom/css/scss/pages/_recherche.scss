@@ -1,0 +1,117 @@
+.recherche #content {
+    @extend %separator-top;
+    position: relative;
+
+    > .category {
+        margin-top: -25px;
+    }
+    h1 {
+        margin: 20px 0;
+    }
+
+    .result {
+        margin-bottom: 30px;
+        position: relative;
+        display: table;
+        width: 100%;
+        padding: 20px;
+        background: $grey_lightest;
+        border-radius: $border_radius_default;
+
+        > a {
+            background: $white;
+            color: $grey;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            border-radius: $border_radius_default;
+            border: 1px solid $grey_light;
+            font-size: 40px;
+            z-index: 50;
+            transition: opacity .2s;
+
+            > span {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                -webkit-transform-origin: center center;
+                -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+        }
+        &:hover {
+            > a {
+                opacity: .9;
+            }
+        }
+
+        .icon {
+            display: table-cell;
+            width: 50px;
+            vertical-align: middle;
+            text-align: center;
+
+            i {
+                color: $grey_light;
+                font-size: 55px !important;
+            }
+        }
+        &.tribune {
+            .icon {
+                i {
+                    font-size: 37px !important;
+                }
+            }
+        }
+        .content {
+            display: table-cell;
+            font-size: 14px;
+            line-height: 20px;
+            padding-left: 20px;
+
+            .author {
+                color: $grey_dark;
+                margin: 0;
+            }
+            .title {
+                color: $red;
+                text-transform: uppercase;
+                font-size: 18px;
+                margin: 6px 0;
+            }
+            .resume {
+                margin: 12px 0;
+            }
+            .date {
+                color: $grey_light;
+                font-style: italic;
+                margin-right: 10px;
+            }
+            .category {
+                color: $red_light;
+                font-style: italic;
+            }
+            .keywords {
+                margin-top: 10px;
+            }
+            .keyword {
+                @extend %trackable-tag;
+
+                &:hover {
+                    box-shadow: none;
+                }
+            }
+        }
+        .image {
+            display: table-cell;
+            width: 120px;
+            vertical-align: middle;
+        }
+    }
+    [data-pagin] {
+        cursor: pointer;
+    }
+}

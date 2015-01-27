@@ -1,0 +1,62 @@
+<BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
+
+<BOUCLE_current(AUTEURS) {id_auteur=#ENV{id}}>
+<h1>Fiche du billettiste : #NOM</h1>
+
+<a href="/ecrire/?exec=idm_billettistes" class="button-white go_top">Retour à la gestion des billettistes</a>
+
+<div id="box_billetistes" class="box simple">
+
+  <div class="inner">
+
+    <div class="hd titrem">
+      <h4>Informations générales</h4>
+    </div>
+
+    <div id="recherche_billetistes" class="bd">
+      <label for="id">Identifiant :</label>
+      <input type="text" name="id" id="id" value="#ID_AUTEUR" disabled="disabled"><br>
+      <label for="nom">Nom :</label>
+      <input type="text" name="nom" id="nom" value="#NOM" disabled="disabled">
+    </div>
+
+  </div>
+
+  <div class="inner">
+
+    <div class="hd titrem">
+      <h4>Derniers billets publiés</h4>
+    </div>
+
+    <div class="bd">
+      <table class="sortable" style="font-size : 90%">
+        <thead>
+          <tr>
+            <th>Numéro</th>
+            <th>Date</th>
+            <th>Titre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <BOUCLE_billet(ARTICLES) {statut=publie} {id_auteur} {id_rubrique=6} {par date} {inverse}>
+            <tr>
+              <td>#ID_ARTICLE</td>
+              <td>[(#DATE*|affdate)]</td>
+              <td><a href="#URL_ARTICLE">#TITRE</a></td>
+            </tr>
+          </BOUCLE_billet>
+          </B_billet>
+          <tr>
+            <td colspan="3">Aucun billet publié</td>
+          </tr>
+          <//B_billet>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+</BOUCLE_current>
+
+</BOUCLE_securite>

@@ -1,0 +1,26 @@
+<BOUCLE_article(ARTICLES){id_article}>
+<li>
+    <div class="image">
+        <a href="#URL_ARTICLE" class="<BOUCLE_articles_piste(MOTS) {id_article}  {type=Difficulté} {0,1}>[(#TITRE|slug)]</BOUCLE_articles_piste>">
+        #SET{url, IMG/#LOGO_ARTICLE|fichier}
+
+        <BOUCLE_articles_auteur_logo(AUTEURS){id_article} {0,1}>
+            [(#LOGO_ARTICLE|fichier|non)
+                #SET{url, IMG/#LOGO_AUTEUR|fichier}
+                [(#LOGO_AUTEUR|fichier|non)
+                    #SET{url, #CHEMIN{img/nopic.jpg}}
+                ]
+            ]
+        </BOUCLE_articles_auteur_logo>
+        [(#GET{url}|image_reduire{#ENV{image_width},0}|image_recadre{#ENV{image_width},#ENV{image_height},center center,#GET{url}|color_dominant})]
+        </a>
+    </div>
+    <div class="resume">
+        <div class="title"><a href="#URL_ARTICLE">[(#TITRE)]</a></div>
+        <div class="date"><a href="#URL_ARTICLE">[(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</a></div>
+        <BOUCLE_articles_auteur_nom(AUTEURS){id_article} {0,1}>[<div class="author"><a href="#URL_AUTEUR">(#NOM)</a></div>]</BOUCLE_articles_auteur_nom>
+        <div class="details">[(#DESCRIPTIF|PtoBR|trunctext{150})]</div>
+        <a href="#URL_ARTICLE" class="link"><i class="flaticon-plus"></i><span> lire l'article</span></a>
+    </div>
+</li>
+</BOUCLE_article>

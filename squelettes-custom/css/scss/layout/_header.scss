@@ -1,0 +1,166 @@
+/*
+    Header
+ */
+header {
+    border-top: 3px solid $red;
+    overflow: hidden;
+    text-align: center;
+    background-color: $grey_lightest;
+    background-image: -webkit-linear-gradient(to right, $white, $grey_lightest);
+    background-image: linear-gradient(to right, $white, $grey_lightest);
+
+    @include media-min("tablet-up") {
+        margin-bottom: $menu_height_desktop;
+        height: $header_height_tablet;
+    }
+    @include media-min("desktop-up") {
+        height: $header_height_desktop;
+    }
+
+    .container {
+        @extend %edged;
+        position: relative;
+    }
+    h1 {
+        margin: 0;
+        float: left;
+        width: 100%;
+        text-align: center;
+
+        @include media-min("tablet-up") {
+            width: auto;
+            margin-bottom: -25px;
+        }
+    }
+
+    .header-descriptif {
+        display: table;
+        height: $search_height;
+        padding: 10px 50px;
+        font-style: italic;
+        font-size: 1.2em;
+        display: table;
+        width: 100%;
+        text-align: center;
+        clear: both;
+
+        p {
+            margin: 0;
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        @include media-min("tablet-up") {
+            padding: 0;
+            margin: 0 (($header_height - $search_height) / 2);
+        }
+        @include media-min("desktop-up") {
+            float: left;
+            clear: none;
+            width: 250px;
+            text-align: left;
+            margin: (($header_height - $search_height) / 2);
+        }
+        @include media-min("desktop-down") {
+            width: 450px;
+        }
+    }
+
+    .header-actions {
+        display: none;
+
+        @include media-min("tablet-up") {
+            float: right;
+            display: block;
+            margin: (($header_height - $search_height) / 2) 0 -20px;
+        }
+    }
+}
+
+.header-form-search {
+    display: block;
+    float: left;
+    font-size: 30px;
+
+    &:hover,
+    &:focus {
+       input[type="text"],
+       input[type="text"] + button {
+           border-color: $red_light;
+       }
+    }
+    input[type="text"] {
+        background-color: $white;
+        line-height: ($search_height - 20px - 2px);
+        padding: 10px;
+        border: 1px solid $white;
+        border-right: none;
+        border-top-left-radius: $border_radius_default;
+        border-bottom-left-radius: $border_radius_default;
+        float: left;
+        font-size: $font_size_default;
+        transition: border-color $transition_duration_default;
+
+        + button {
+            line-height: ($search_height - 2px); // remove 2px for border
+            border: 1px solid $white;
+            border-left: none;
+            border-radius: 0 $border_radius_default $border_radius_default 0;
+            transition: border-color $transition_duration_default;
+
+            &:hover,
+            &:focus {
+                color: $grey_light;
+                background: $white;
+            }
+        }
+    }
+    button,
+    a {
+        display: block;
+        border: none;
+        border-radius: $border_radius_default;
+        line-height: $search_height;
+        padding: 0;
+        width: $search_height;
+        background: $white;
+        color: $grey_light;
+        text-align: center;
+        float: left;
+        transition: background $transition_duration_default, color $transition_duration_default;
+
+        &:hover,
+        &:focus {
+            background: $red_light;
+            color: $white;
+        }
+    }
+}
+
+.header-search-adv,
+.header-private {
+    display: block;
+    float: left;
+    line-height: $search_height;
+    width: $search_height;
+    margin-left: 8px;
+    font-size: 25px;
+}
+.header-search-adv {
+    @extend %button;
+    padding: 0;
+    display: none;
+}
+.header-private {
+    @extend %button-red;
+    padding: 0;
+}
+.menu-mobile-toggle {
+    @extend %button-red;
+    padding: 15px 90px;
+    margin: 15px 0;
+
+    @include media-min("tablet-up") {
+        display: none;
+    }
+}

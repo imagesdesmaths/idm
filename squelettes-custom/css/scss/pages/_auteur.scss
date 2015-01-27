@@ -1,0 +1,55 @@
+.auteur-full {
+    @extend %separator-top;
+    position: relative;
+
+    .category {
+        margin-top: -25px;
+        margin-bottom: 20px;
+    }
+    &:before{
+        margin-top: 0;
+    }
+
+    .lui-ecrire {
+        @extend %separator-top;
+        @extend %custom-inputs;
+
+        fieldset {
+            @extend %fieldset;
+
+            .explication a[href*="logout"] {
+                float: right;
+            }
+        }
+        .boutons {
+            clear: both;
+            overflow: hidden;
+
+            input {
+                @extend %button-red;
+                padding: 15px 30px;
+                float: right;
+            }
+        }
+    }
+    .auteur-articles {
+        @extend %separator-top;
+        @extend %listing;
+        position: relative;
+
+        > ul li {
+            float: left;
+            width: 47%;
+
+            &:nth-child(2n+1) {
+                margin-right: 5%;
+                clear: both;
+            }
+
+            .details,
+            .link {
+                display: none;
+            }
+        }
+    }
+}

@@ -1,0 +1,70 @@
+.block-user {
+    $size: 30px;
+
+    ul {
+        text-align: center;
+
+        li {
+            a {
+                display: inline-block;
+                position: relative;
+                background: $grey_dark;
+                border: 1px solid $grey_dark;
+                border-right: none;
+                color: $white;
+                width: $size;
+                height: $size;
+                line-height: $size;
+                border-radius: $border_radius_default 0 0 $border_radius_default;
+                margin-bottom: 2px;
+
+                span {
+                    position: absolute;
+                    display: inline-block;
+                    top: -1px;
+                    left: $size;
+                    height: $size;
+                    line-height: ($size - 10px);
+                    width: 230px;
+                    padding: 5px 15px;
+                    color: inherit;
+                    background: inherit;
+                    text-align: left;
+                    border: 1px solid $grey_dark;
+                    border-radius: $border_radius_default 0 0 $border_radius_default;
+                    transition: all $transition_duration_default;
+                }
+                i {
+                    font-size: 16px !important;
+                }
+
+                &:hover {
+                    span {
+                        -webkit-transform-origin: center center;
+                        -webkit-transform: translate(-100%, 0);
+                        transform: translate(-100%, 0);
+                    }
+                }
+                &.relecture {
+                    background: $warning;
+                }
+                &.edition,
+                &.stats {
+                    background: $warning;
+                    display: none;
+
+                    section[role="main"].article & {
+                        display: block;
+                    }
+                }
+                &.stats {
+                    span {
+                        line-height: 11px;
+                        font-size: 11px;
+                        padding: 2px 15px;
+                    }
+                }
+            }
+        }
+    }
+}

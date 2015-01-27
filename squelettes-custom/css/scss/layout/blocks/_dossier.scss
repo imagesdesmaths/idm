@@ -1,0 +1,44 @@
+.block-dossier {
+    .dossier {
+        position: relative;
+        padding: 20px;
+        background: $red;
+        color: $white;
+        margin-bottom: 10px;
+        border-radius: $border_radius_default;
+
+        > span {
+            display: block;
+        }
+        .title {
+            font-size: 110%;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        > i {
+            position: absolute;
+            z-index: 50;
+            bottom: -30px;
+            right: -12px;
+            font-size: 140px !important;
+            color: rgba(255,255,255,0.2);
+        }
+        .link {
+            color: $white;
+            opacity: .5;
+
+            i {
+                box-shadow: inset 0 0 0 2px $white;
+
+                &:hover {
+                    color: $red;
+                    box-shadow: inset 0 0 0 17px $white;
+                }
+            }
+            &:hover i {
+                color: $red;
+                box-shadow: inset 0 0 0 17px $white;
+            }
+        }
+    }
+}

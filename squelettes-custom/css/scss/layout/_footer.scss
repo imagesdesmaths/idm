@@ -1,0 +1,62 @@
+/*
+    Pre-footer
+ */
+.cf-footer {
+    display: none;
+
+    @include media-min("desktop-down") {
+        display: block;
+    }
+}
+
+/*
+    Footer
+ */
+footer {
+    line-height: $footer_height;
+    background-color: $red;
+    overflow: hidden;
+
+    a {
+        color: $white;
+        transition: color $transition_duration_default;
+
+        &:hover {
+            text-decoration: underline;
+            color: $red_light;
+        }
+    }
+
+    .container {
+        @extend %edged;
+    }
+    .col-left {
+        @extend %block-left;
+        padding: 0 10px;
+        padding-top: 0;
+        padding-bottom: 0;
+
+        li {
+            float: left;
+            margin-right: 25px;
+        }
+    }
+    .col-right {
+        @extend %block-right;
+        padding: 0 10px;
+        padding-top: 0;
+        padding-bottom: 0;
+        background-color: $red;
+    }
+
+    @include media-min("tablet-up") {
+
+        .col-left,
+        .col-right {
+            padding: 0 0;
+        }
+    }
+    @include media-min("desktop-down") {
+        height: $footer_height;
+    }
+}

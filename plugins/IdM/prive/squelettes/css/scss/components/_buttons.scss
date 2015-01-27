@@ -1,0 +1,25 @@
+%button {
+    display: inline-block;
+    border: 1px solid $green_dark;
+    border-radius: $border_radius_default;
+    padding: 5px 8px;
+    cursor: pointer;
+    color: black;
+    line-height: 15px;
+    background: $green;
+    text-align: center;
+    transition: background $transition_duration_default;
+
+    &:hover,
+    &:focus {
+        background: $green_light;
+        text-decoration: none;
+    }
+    &.small {
+        padding: 1px 4px;
+    }
+}
+%button-white {
+    @extend %button;
+    background: $white;
+}

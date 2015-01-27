@@ -1,0 +1,34 @@
+#CACHE{3600}
+[(#INCLURE{fond=inc/head}{class=agenda}{env})]
+
+<B_breves>
+#ANCRE_PAGINATION
+
+<div id="content" class="block-left">
+
+    <h1>Agenda</h1>
+
+    <ul>
+        <BOUCLE_breves(BREVES) {id_rubrique in #RUBRIQUE_REVUE_DE_PRESSE,#RUBRIQUE_EVENEMENTS} {age_relatif >= 0} {par date} {inverse} {pagination 30}>
+        <li>
+            <div class="resume">
+                <a href="#URL_BREVE">
+                    <span class="date">[(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</span>
+                    <span class="title">[(#TITRE)]</span>
+                    <span class="link"><i class="flaticon-plus"></i></span>
+                </a>
+            </div>
+        </li>
+        </BOUCLE_breves>
+    </ul>
+
+    #PAGINATION{page}
+
+</div>
+</B_breves>
+
+[(#INCLURE{fond=inc/bloc_tribune})]
+[(#INCLURE{fond=inc/bloc_image})]
+[(#INCLURE{fond=inc/bloc_random})]
+
+[(#INCLURE{fond=inc/foot})]

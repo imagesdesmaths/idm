@@ -1,0 +1,35 @@
+.formulaire_login {
+    form {
+        @extend %custom-inputs;
+
+        label {
+            width: 50%;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 50%;
+            padding: 10px 15px;
+        }
+        input[type="submit"] {
+            @extend %button-red;
+            padding: 10px 15px;
+        }
+        input + em {
+            display: none !important;
+        }
+        .details {
+            margin-left: 50%;
+        }
+    }
+    fieldset {
+        @extend %fieldset;
+
+        .explication a[href*="logout"] {
+            float: right;
+        }
+    }
+    ul,
+    li {
+        list-style: none !important;
+    }
+}

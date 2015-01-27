@@ -18,8 +18,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     'planning'           => "Planning de publication",
 
+    'articles_edited'        => "Articles édités",
+    'articles_writing_mine'  => "Mes articles en cours de rédaction",
+
+    'billets_abandons'       => "Billets abandonnés",
+
+    'idee'         => "Idées d'articles",
+    'idee_all'     => "Idées d'articles proposées",
+    'idee_mine'    => "Mes idées d'articles proposées",
+    'idee_none'    => "Aucune idée d'article proposée",
+    'idee_edit'    => "Création/modification d'une idée d'article",
+
     'relecteurs'         => "Gestion relecteurs",
-    'relecture'          => "Art. en relecture",
+    'relecture'          => "Article en relecture",
     'relecture_aucun'    => "Aucun article proposé !",
 
     'tableau'            => "Tableau de bord",
@@ -73,6 +84,64 @@ Un nouveau commentaire a été posté dans un forum de relecture du site
 "Images des Mathématiques". Il faut maintenant le valider ici :
 
   http://images.math.cnrs.fr/ecrire/?exec=idm_moderation
+EOT
+,
+
+    'mail_article_cree' => <<<EOT
+Un article vient d'être créé dans “Images des Mathématiques”.
+Il s'intitule :
+
+  « @titre@ »
+
+Vous avez été désigné pour être l'auteur de cet article. Vous
+pouvez dès à présent vous identifier sur le site, et vous rendre à
+l'adresse suivante afin de commencer la rédaction de l'article :
+
+  http://images.math.cnrs.fr/ecrire/?exec=article&id_article=@id_article@
+
+Une fois sa rédaction terminée, l'article sera proposé à l'évaluation,
+des relecteurs échangeront alors avec vous via un forum de discussion
+afin de vérifier, corriger et valider son contenu.
+
+Merci pour votre aide !
+EOT
+,
+
+    'mail_article_propose' => <<<EOT
+Un article vient d'être proposé à l'évaluation dans “Images des
+Mathématiques”. Il s'intitule :
+
+  « @titre@ »
+
+Nous vous invitons à vous identifier sur le site, puis à vous rendre
+dans l'interface de gestion du processus éditorial afin de choisir
+les relecteurs qui seront chargés de réviser et valider cet article.
+Vous pouvez accéder à cette interface via le lien suivant :
+
+  http://images.math.cnrs.fr/ecrire/?exec=idm_relecture
+
+Une fois la relecture terminée, l'article sera validé pour la
+publication, laquelle se pourra se faire qu'avec l'aval de l'éditeur
+et du (de la) secrétaire de rédaction.
+
+Merci pour votre aide !
+EOT
+,
+
+    'mail_article_valide' => <<<EOT
+Un article vient d'être validé pour la publication dans “Images des
+Mathématiques”. Il s'intitule :
+
+  « @titre@ »
+
+En tant que secrétaire de rédaction, il vous revient de fixer la
+date à laquelle cet article sera publié. Vous pouvez dès à présent
+vous identifier sur le site et accéder à la page de l'article via
+le lien suivant :
+
+  http://images.math.cnrs.fr/ecrire/?exec=article&id_article=@id_article@
+
+Merci pour votre aide !
 EOT
 );
 

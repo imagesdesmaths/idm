@@ -1,0 +1,16 @@
+<BOUCLE_une(ARTICLES) {id_article=#ENV{id_une}}>
+    #SET{une_url, IMG/#LOGO_ARTICLE|fichier}
+    [(#LOGO_ARTICLE|fichier|non)
+        #SET{une_url, #CHEMIN{img/nopic.jpg}}
+    ]
+    <div class="block-une" style="border-top-color:[(#GET{une_url}|color_dominant)];background:[(#GET{une_url}|color_dominant)];color:[(#GET{une_url}|color_dominant)]"><a href="#URL_ARTICLE">
+        [<div class="image">
+            (#LOGO_ARTICLE|image_recadre{560,350,center center,[(#GET{une_url}|color_dominant)]})
+        </div>]
+        <div class="resume" style="color:#444">
+            <h3>#TITRE</h3>
+            <div class="details">[(#TEXTE|PtoBR|trunctext{200})]</div>
+            <i class="flaticon-plus"></i><span> lire l'article</span>
+        </div>
+    </a></div>
+</BOUCLE_une>

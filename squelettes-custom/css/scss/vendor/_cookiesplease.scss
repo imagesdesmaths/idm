@@ -1,0 +1,19 @@
+/*
+    Cookesplease
+ */
+#cookiesplease {
+    background-color: $grey_lighter;
+    border-top: none;
+    border-bottom: 1px solid $red_dark;
+    color: $grey_dark;
+
+    button {
+        background-color: $red;
+        color: $white;
+
+        &:hover,
+        &:focus {
+            background-color: darken($red, 10%);
+        }
+    }
+}

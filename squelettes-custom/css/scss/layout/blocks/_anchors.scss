@@ -1,0 +1,17 @@
+.block-anchors {
+    padding-top: 30px !important;
+
+    h3 {
+        margin: 0;
+        font-size: 18px;
+        line-height: 28px;
+        color: $red;
+        text-transform: uppercase;
+    }
+
+    .article-proposal ~ & {
+        .to-share {
+            display: none;
+        }
+    }
+}

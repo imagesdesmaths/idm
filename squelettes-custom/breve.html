@@ -1,0 +1,48 @@
+#CACHE{3600}
+[(#INCLURE{fond=inc/head}{class=breve}{env})]
+
+<div id="content" class="breve-full block-left #GET{track_slug}">
+
+    <BOUCLE_breves(BREVES) {id_breve}>
+
+        <div class="category">Agenda</div>
+        <h1>[(#TITRE)]</h1>
+
+        <BOUCLE_futur(BREVES) {id_breve} {id_rubrique=#RUBRIQUE_EVENEMENTS}>
+          <span class="date">Jusqu'au [(#DATE|affdate)]</span>
+        </BOUCLE_futur>
+          <span class="date">Le [(#DATE|affdate)]</span>
+        <//B_futur>
+
+        [<div class="details wysiwyg">(#TEXTE)</div>]
+        [<div class="notes"><h3>Notes</h3>(#NOTES)</div>]
+
+        [<p><a href="(#URL_SITE)">[(#NOM_SITE*|sinon{"Pour en savoir plus ..."})]</a></p>]
+
+        <div class="block-share">
+            <h2>Partager cette actualité</h2>
+            <ul class="share">
+                [<li>
+                    <a href="mailto:?subject=[(#TITRE)]&body=[(#TITRE|concat{" - ",#NOM_SITE_SPIP})] : (#SELF|url_absolue)" class="link-contact" title="Envoyer cette actualité à un ami"><i class="flaticon-contact"></i></a>
+                </li>]
+                [<li>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=(#SELF|url_absolue|urlencode)" class="link-facebook" title="Partager cette actualité sur Facebook" target="popup"><i class="flaticon-facebook"></i></a>
+                </li>]
+                [<li>
+                    <a href="https://twitter.com/share?url=(#SELF|url_absolue|urlencode)&text=[(#TITRE|concat{" - ",#NOM_SITE_SPIP}|urlencode)]" class="link-twitter" title="Partager cette actualité sur Twitter" target="popup"><i class="flaticon-twitter"></i></a>
+                </li>]
+                [<li>
+                    <a href="https://plus.google.com/share?url=(#SELF|url_absolue|urlencode)" class="link-googleplus" title="Partager cette actualité sur Google+" target="popup"><i class="flaticon-googleplus"></i></a>
+                </li>]
+            </ul>
+        </div>
+
+    </BOUCLE_breves>
+
+</div>
+
+[(#INCLURE{fond=inc/bloc_tribune})]
+[(#INCLURE{fond=inc/bloc_image})]
+[(#INCLURE{fond=inc/bloc_random})]
+
+[(#INCLURE{fond=inc/foot})]

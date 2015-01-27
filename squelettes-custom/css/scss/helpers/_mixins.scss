@@ -1,0 +1,20 @@
+@mixin media-min($_key) {
+    @media screen and (min-width: map-get($breakpoints, $_key)) {
+        &{ @content; }
+    }
+}
+@mixin media-max($_key) {
+    @media screen and (max-width: map-get($breakpoints, $_key) - 1) {
+        &{ @content; }
+    }
+}
+@mixin media-between($_keymin, $_keymax) {
+    @media screen and (min-width: map-get($breakpoints, $_keymin)) and (max-width: map-get($breakpoints, $_keymax) - 1) {
+        &{ @content; }
+    }
+}
+@mixin media($_key) {
+    @media screen and (min-width: map-get($breakpoints, $_key)) and (max-width: map-get($breakpoints, nth(map-keys($breakpoints), index(map-keys($breakpoints), $_key) + 1)) - 1) {
+        &{ @content; }
+    }
+}

@@ -1,0 +1,9 @@
+.block-tags {
+    li {
+        @extend %tag;
+
+        a {
+            display: block;
+        }
+    }
+}

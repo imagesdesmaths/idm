@@ -1,0 +1,43 @@
+#CACHE{3600}
+[(#INCLURE{fond=inc/head}{class=auteur}{env})]
+
+<div id="content" class="auteur-full block-left">
+    <BOUCLE_auteur(AUTEURS){id_auteur}>
+
+        <div class="category">Auteur</div>
+        <h1>#NOM</h1>
+
+        <div class="bio">
+            <div>#BIO*</div>
+            <br>
+            [<p><strong>Affiliation :</strong> (#AFFILIATION)</p>]
+            [<p><strong>Page web :</strong> <a href="(#URL_SITE)">#URL_SITE</a></p>]
+        </div>
+
+        <B_articles>
+        <div class="auteur-articles">
+            #ANCRE_PAGINATION
+
+            <h2>Tous ses articles (#GRAND_TOTAL) :</h2>
+            <ul>
+                <BOUCLE_articles(ARTICLES) {id_auteur} {id_secteur != 18} {par date} {inverse} {pagination}>
+                [(#INCLURE{fond=inc/resume_article}{id_article}{image_width=160}{image_height=90})]
+                </BOUCLE_articles>
+            </ul>
+
+            <p class="clear"></p>
+            #PAGINATION{page}
+        </div>
+        </B_articles>
+
+        <div class="lui-ecrire">
+            <h2>Lui écrire</h2>
+            #FORMULAIRE_ECRIRE_AUTEUR
+        </div>
+
+    </BOUCLE_auteur>
+</div>
+
+[(#INCLURE{fond=inc/bloc_image}{id_article})]
+
+[(#INCLURE{fond=inc/foot})]

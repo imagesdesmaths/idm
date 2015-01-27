@@ -1,0 +1,1 @@
+<th class="%class%" id="%id%">%value%</th>

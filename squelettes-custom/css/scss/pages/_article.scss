@@ -1,0 +1,227 @@
+/*
+    Article
+ */
+.article-full {
+    @extend %separator-top;
+    position: relative;
+
+    .alert {
+        margin: 20px 0;
+    }
+
+    h1,
+    h4 {
+        margin: 20px 0;
+    }
+    h4 + h1,
+    h1 + h4 {
+        margin-top: -20px;
+    }
+
+    .category {
+        margin-top: -25px;
+        transition: color $transition_duration_default;
+
+        .backlink {
+            position: relative;
+            float: right;
+            color: $grey_light;
+            transition: color $transition_duration_default;
+
+            &:after {
+                content: '';
+                background: $grey_light;
+                width: 0%;
+                height: 1px;
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transition: all $transition_duration_default;
+            }
+        }
+        &:hover {
+            .backlink {
+                color: $grey;
+
+                &:after {
+                    background: $grey;
+                    width: 100%;
+                    left: 0%;
+                }
+            }
+        }
+    }
+    .image {
+        position: relative;
+        border-top: 3px solid $grey_dark;
+        border-radius: $border_radius_default;
+        background: $grey_lighter;
+        overflow: hidden;
+        margin: 25px 0;
+
+        &:before {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            right: 0;
+            top: 0;
+            z-index: 50;
+            background: rgba(255,255,255,0.8);
+        }
+        img {
+            position: relative;
+            z-index: 60;
+            display: block;
+            margin: 0 auto;
+        }
+    }
+    .piste {
+        @extend %trackable-tag;
+    }
+    .date {
+        line-height: 30px;
+        font-style: italic;
+        font-size: 15px;
+
+        &:not(.relative):before {
+            content: "le ";
+        }
+    }
+    .author {
+        line-height: 30px;
+        font-style: italic;
+        font-size: 15px;
+
+        @include media-min("desktop-down") {
+            display: none;
+        }
+    }
+    .chapo {
+        @extend %font-bold;
+
+        a {
+            color: $red;
+        }
+    }
+    .details.wysiwyg,
+    .post-scriptum,
+    .notes {
+        @extend %separator-top-thin;
+        position: relative;
+
+        a {
+            color: $red;
+        }
+    }
+    .quote {
+        h3 {
+            @extend %font-bold;
+            float: left;
+        }
+        p {
+            @extend %font-light;
+            float: left;
+            margin-left: 15px;
+            line-height: 25px;
+        }
+    }
+
+    &:before {
+        margin-top: 0;
+    }
+    &.piste-verte:before {
+        background: $green-track;
+    }
+    &.piste-bleue:before {
+        background: $blue-track;
+    }
+    &.piste-rouge:before {
+        background: $red-track;
+    }
+    &.piste-noire:before {
+        background: $black-track;
+    }
+    &.hors-piste:before {
+        background: $off-track;
+    }
+}
+
+.block-related {
+    @extend %listing;
+    padding-bottom: 20px;
+    overflow: hidden;
+
+    > ul {
+        overflow: hidden;
+
+        li {
+            width: 100%;
+            float: left;
+
+            .details,
+            .link {
+                display: none;
+            }
+            .image {
+                display: block;
+                border-top: none;
+
+                &:before {
+                    display: none;
+                }
+                a {
+                    position: relative;
+                    display: block;
+                    width: 100%;
+                    border-radius: $border_radius_default;
+
+                    &:before {
+                        display: none;
+                    }
+                    img {
+                        border-top: 8px solid $grey;;
+                    }
+                    &.piste-verte img {
+                        border-top-color: $green-track;
+                    }
+                    &.piste-bleue img {
+                        border-top-color: $blue-track;
+                    }
+                    &.piste-rouge img {
+                        border-top-color: $red-track;
+                    }
+                    &.piste-noire img {
+                        border-top-color: $black-track;
+                    }
+                    &.hors-piste img {
+                        border-top-color: $off-track;
+                    }
+                }
+
+                img {
+                    height: 100%;
+                    display: block;
+                    border-radius: $border_radius_default;
+                }
+            }
+
+            @include media-min("tablet-up") {
+                width: 30%;
+
+                + li {
+                    margin-left: 5%;
+                }
+            }
+        }
+    }
+
+    @include media-min("tablet-up") {
+        padding-right: $col_padding / 2;
+    }
+    @include media-min("desktop-down") {
+        padding-right: $col_padding;
+        background: none;
+        box-shadow: none;
+    }
+}

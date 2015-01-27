@@ -1,0 +1,91 @@
+/*
+    Content
+ */
+section[role="main"] {
+    overflow: hidden;
+    background-color: $white;
+
+    .container {
+        @extend %edged;
+    }
+    aside {
+        display: none;
+        position: fixed;
+        top: 50%;
+        right: 0;
+        margin-top: 50px;
+        -webkit-transform-origin: center center;
+        -webkit-transform: translate(0, -50%);
+        transform: translate(0, -50%);
+
+        @include media-min("tablet-up") {
+            display: block;
+            z-index: 99;
+        }
+    }
+    @include media-max("phone-down") {
+        padding: 10px;
+    }
+}
+.col-right {
+    float: left;
+    width: 100%;
+    position: relative;
+    z-index: 50;
+
+    @include media-min("desktop-down") {
+       width: 360px;
+    }
+    @include media-min("widescreen-up") {
+       width: 415px;
+    }
+}
+
+#content {
+    background-color: $white;
+
+    @include media-min("desktop-down") {
+        box-shadow:
+            0 200px 0 0 $white,
+            820px 0 0 0 $grey_lightest,
+            820px 200px 0 0 $grey_lightest;
+        padding-bottom: 5030px;
+        margin-bottom: -5000px;
+    }
+}
+
+h1 {
+    font-size: 28px;
+    margin-top: 0;
+    text-transform: uppercase;
+}
+h2 {
+    position: relative;
+    color: $red;
+    font-size: 20px;
+    line-height: 23px;
+    margin-bottom: 20px;
+    padding-right: 45px;
+    text-transform: uppercase;
+
+    a.seemore {
+        position: relative;
+        display: block;
+
+        > span.icon {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translate(0, -50%);
+            -webkit-transform: translate(0, -50%);
+            -webkit-transform-origin: center center;
+
+            i {
+                box-shadow: inset 0 0 0 2px $red;
+            }
+        }
+        &:hover > span.icon i {
+            box-shadow: inset 0 0 0 17px $red;
+        }
+    }
+}

@@ -1,0 +1,26 @@
+#CACHE{3600}
+[(#INCLURE{fond=inc/head}{class=articles-recents}{env})]
+
+<div id="content" class="block-left">
+
+    <h1>Articles récents</h1>
+
+
+    <B_articles>
+    <ul>
+        <BOUCLE_articles(ARTICLES) {id_rubrique !in #RUBRIQUE_TRIBUNES,#RUBRIQUE_FIGURES_SANS_PAROLES} {par date} {age<30} {inverse} {0, 30}>
+        [(#INCLURE{fond=inc/resume_article}{id_article}{image_width=320}{image_height=180})]
+        </BOUCLE_articles>
+    </ul>
+    </B_articles>
+    <p>Aucun article publié ces 30 derniers jours.</p>
+    <//B_articles>
+
+</div>
+</B_articles>
+
+[(#INCLURE{fond=inc/bloc_tribune})]
+[(#INCLURE{fond=inc/bloc_image})]
+[(#INCLURE{fond=inc/bloc_random})]
+
+[(#INCLURE{fond=inc/foot})]

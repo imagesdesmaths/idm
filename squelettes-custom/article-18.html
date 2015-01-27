@@ -1,0 +1,28 @@
+#CACHE{3600}
+[(#INCLURE{fond=inc/head}{class=article}{env})]
+
+<div id="content" class="article-full block-left">
+
+    <BOUCLE_articles(ARTICLES) {id_article}>
+
+        <div class="category">Qui sommes nous ?</div>
+        <h1>[(#TITRE)]</h1>
+
+        #SET{image_url, IMG/#LOGO_ARTICLE|fichier}
+        [<div class="image"[ style="background:(#GET{image_url}|color_dominant);border-color:[(#GET{image_url}|color_dominant)]"]>
+            (#LOGO_ARTICLE|image_reduire{0,350})
+        </div>]
+
+        <div class="chapo">#CHAPO</div>
+        <div class="details wysiwyg">#TEXTE</div>
+        <div class="post-scriptum">#PS</div>
+
+    </BOUCLE_articles>
+
+</div>
+
+[(#INCLURE{fond=inc/bloc_tribune})]
+[(#INCLURE{fond=inc/bloc_image})]
+[(#INCLURE{fond=inc/bloc_random})]
+
+[(#INCLURE{fond=inc/foot})]

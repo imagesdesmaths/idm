@@ -1,0 +1,1 @@
+<tbody class="%class%">%items%</tbody>

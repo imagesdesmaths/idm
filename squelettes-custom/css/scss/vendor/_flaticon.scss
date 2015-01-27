@@ -1,0 +1,31 @@
+[class^="flaticon-"],
+[class*=" flaticon-"] {
+    font-size: inherit !important;
+
+    &:before,
+    &:after {
+        margin-left: 0 !important;
+        font-size: inherit !important;
+    }
+}
+button
+.button {
+    [class^="flaticon-"],
+    [class*=" flaticon-"] {
+        &:before,
+        &:after {
+            display: block;
+        }
+    }
+}
+
+i.flaticon-plus {
+    @extend %button-plus-animated;
+
+    .block-dossier & {
+        font-size: 18px !important;
+        width: 22px;
+        height: 22px;
+        line-height: 22px;
+    }
+}

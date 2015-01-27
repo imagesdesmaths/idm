@@ -1,0 +1,10 @@
+<div class="block-last-articles">
+    <h2>
+        <a class="seemore" href="#URL_PAGE{articles-recents}">Nos derniers articles <span class="icon"><i class="flaticon-plus"></i></span></a>
+    </h2>
+    <ul>
+        <BOUCLE_articles(ARTICLES) {id_article != #ENV{id_une}} {par date} {id_rubrique !in #RUBRIQUE_TRIBUNES,#RUBRIQUE_FIGURES_SANS_PAROLES} {age_relatif >= 0} {inverse} {1,5}>
+        [(#INCLURE{fond=inc/resume_article}{id_article}{image_width=#COMPTEUR_BOUCLE|=={1}|?{400, 160}}{image_height=#COMPTEUR_BOUCLE|=={1}|?{225, 90}})]
+        </BOUCLE_articles>
+    </ul>
+</div>

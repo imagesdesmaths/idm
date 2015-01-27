@@ -1,0 +1,28 @@
+.block-image {
+    h2 {
+        padding-right: 0;
+    }
+    img {
+        width: 100%;
+        border-top: 4px solid $grey_dark;
+        display: block;
+        border-radius: $border_radius_default $border_radius_default 0 0;
+    }
+    .title {
+        display: block;
+        background: $grey_dark;
+        color: $white;
+        border-radius: 0 0 $border_radius_default $border_radius_default;
+        padding: 25px;
+    }
+
+    @include media-min("tablet-up") {
+        padding-left: $col_padding / 2;
+    }
+    @include media-min("desktop-down") {
+        padding-left: $col_padding;
+        padding-bottom: 0;
+        background: none;
+        box-shadow: none;
+    }
+}

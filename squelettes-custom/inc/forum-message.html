@@ -1,0 +1,15 @@
+<BOUCLE_message(FORUMS) {id_forum} {statut IN publie,prive,rel}>
+  <li id="forum#ID_FORUM" class="comment[(#NOM|=={#ENV{author_name}}|?{" owner"})]">
+    <div class="content">
+        <div class="head">
+            <h3>#TITRE</h3>
+            <h4>[le (#DATE|affdate_jourcourt)][ à (#DATE|heures)][:(#DATE|minutes)][, par (#NOM)]</h4>
+        </div>
+        <div class="message">
+            [(#TEXTE)]
+            [<div class="notes">(#NOTES)</div>]
+            [<a href="(#SELF|parametre_url{id_forum,#ID_FORUM})#commenter" class="answer">Répondre à ce message</a>]
+        </div>
+    </div>
+</li>
+</BOUCLE_message>

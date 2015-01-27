@@ -1,0 +1,26 @@
+.block-comment {
+    @extend %separator-top;
+    @extend %custom-inputs;
+
+    fieldset {
+        @extend %fieldset;
+
+        .explication a[href*="logout"] {
+            float: right;
+        }
+    }
+    .boutons {
+        clear: both;
+        overflow: hidden;
+
+        input {
+            @extend %button-red;
+            padding: 15px 30px;
+            float: right;
+        }
+    }
+    input[type="submit"] {
+        @extend %button-red;
+        padding: 15px 30px;
+    }
+}

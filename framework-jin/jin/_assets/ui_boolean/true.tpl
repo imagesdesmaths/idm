@@ -1,0 +1,1 @@
+<img src="%asseturl%ui_boolean/true.png">

@@ -1,0 +1,204 @@
+<?php
+
+function notify_proposal_evaluation($id_article) {
+    $titre = sql_getfetsel("titre", "spip_articles", "id_article = $id_article");
+    $subject = "Proposition d'un article à l'évaluation pour Images des Maths";
+    $texte = _T('idm:mail_article_propose', array(
+        'titre'      => $titre
+    ));
+    idm_notify('relecture', $texte, $subject);
+    idm_notify('secretaire_redaction', $texte, $subject);
+}
+function notify_validate_review($id_article) {
+    $titre = sql_getfetsel("titre", "spip_articles", "id_article = $id_article");
+    $subject = "Validation d'un article sur Images des Maths";
+    $texte = _T('idm:mail_article_valide', array(
+        'titre'      => $titre,
+        'id_article' => $id_article
+    ));
+    idm_notify('secretaire_redaction', $texte, $subject);
+}
+
+if(isset($_POST['proposer_evaluation'])) {
+    sql_updateq('spip_articles', array('statut'=>'prop'), "id_article = #ENV{_id_objet}");
+    notify_proposal_evaluation($_GET['id_article']);
+    @header('Location: '.str_replace('&amp;','&',self()));
+}
+if(isset($_POST['terminer_relecture'])) {
+    sql_updateq('spip_articles', array('statut'=>'waiting'), "id_article = #ENV{_id_objet}");
+    notify_validate_review($_GET['id_article']);
+    @header('Location: '.str_replace('&amp;','&',self()));
+}
+if(isset($_POST['programmer_publication'])) {
+    $date = date_create_from_format('d/m/Y H:i:s', $_POST['date_jour'].' '.$_POST['date_heure'].':00');
+    sql_updateq('spip_articles', array(
+        'statut'=> 'publie',
+        'date'  => $date->format('Y-m-d H:i:s')
+    ), "id_article = #ENV{_id_objet}");
+    @header('Location: '.str_replace('&amp;','&',self()));
+}
+if(isset($_POST['abandonner'])) {
+    sql_updateq('spip_articles', array('statut'=>'poubelle'), "id_article = #ENV{_id_objet}");
+    @header('Location: '.str_replace('&amp;','&',self()));
+}
+if(isset($_POST['archiver'])) {
+    sql_updateq('spip_articles', array('statut'=>'archive'), "id_article = #ENV{_id_objet}");
+    @header('Location: '.str_replace('&amp;','&',self()));
+}
+if(isset($_POST['refuser'])) {
+    sql_updateq('spip_articles', array('statut'=>'refuse'), "id_article = #ENV{_id_objet}");
+    @header('Location: '.str_replace('&amp;','&',self()));
+}
+if(isset($_POST['recuperer'])) {
+    sql_updateq('spip_articles', array('statut'=>'prepa'), "id_article = #ENV{_id_objet}");
+    @header('Location: '.str_replace('&amp;','&',self()));
+}
+if(isset($_POST['desarchiver'])) {
+    sql_updateq('spip_articles', array('statut'=>'publie'), "id_article = #ENV{_id_objet}");
+    @header('Location: '.str_replace('&amp;','&',self()));
+}
+
+?>
+
+<div class="instituer_objet">
+    [(#REM) Statut de l'article ]
+    #SET{prefix_statut,'texte_statut_'}
+    <div class="current_status #ENV{statut}">[(#GET{prefix_statut}|concat{#ENV{statut}}|_T)]</div>
+
+    [(#REM) Actions possibles, selon le statut ]
+    #SET{is_auteur,0}
+    #SET{is_editeur,0}
+    #SET{is_secretaire,0}
+    <BOUCLE_auteur(AUTEURS) {id_article==#ENV{_id_objet}} {0,1}>
+        #SET{id_auteur, #ID_AUTEUR}
+        [(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{' '})
+            #SET{is_auteur,1}
+        ]
+    </BOUCLE_auteur>
+    <BOUCLE_editeur(ARTICLES) {statut!=tous} {id_article==#ENV{_id_objet}}>
+        [(#ID_EDITEUR|=={#SESSION{id_auteur}}|?{' '})
+            #SET{is_editeur,1}
+        ]
+        [(#ID_EDITEUR|=={0}|?{' '})
+            [(#GET{is_auteur}|=={1}|?{' '})
+                #SET{is_editeur,1}
+            ]
+        ]
+    </BOUCLE_editeur>
+    <BOUCLE_secretaire(spip_idm_teams) {id_auteur==#SESSION{id_auteur}} {team==secretaire_redaction}>
+        #SET{is_secretaire,1}
+        [(#REM) Donne tous les droits si on fait partie du groupe "secrétaire de rédaction"]
+        #SET{is_editeur,1}
+        #SET{is_auteur,1}
+    </BOUCLE_secretaire>
+    <form action="#SELF" method="post" class="ajax">
+    [(#ENV{statut}|=={idee}|?{' '})
+    ]
+    [(#ENV{statut}|=={prepa}|?{' '})
+        [(#GET{is_editeur}|=={1}|?{' '})
+            <span class="icone s24 horizontale preview-24">
+                <input type="hidden" name="article_author" value="#GET{id_auteur}">
+                <button type="submit" name="proposer_evaluation" value="1" class="simple-link">
+                    <img src="../prive/themes/spip/images/ok-24.png" alt="Proposer à l'évaluation" width="24" height="24">
+                    <b>Proposer à l'évaluation</b>
+                </button>
+            </span>
+            <span class="icone s24 horizontale preview-24">
+                <button type="submit" name="abandonner" value="1" class="simple-link">
+                    <img src="../prive/themes/spip/images/supprimer-24.png" alt="Abandonner" width="24" height="24">
+                    <b>Abandonner</b>
+                </button>
+            </span>
+        ]
+        [(#GET{is_editeur}|=={0}|?{' '})
+            [(#GET{is_auteur}|=={1}|?{' '})
+                <span class="icone s24 horizontale preview-24">
+                    <button type="submit" name="abandonner" value="1" class="simple-link">
+                        <img src="../prive/themes/spip/images/supprimer-24.png" alt="Abandonner" width="24" height="24">
+                        <b>Abandonner</b>
+                    </button>
+                </span>
+            ]
+        ]
+    ]
+    [(#ENV{statut}|=={prop}|?{' '})
+        [(#GET{is_editeur}|=={1}|?{' '})
+            <span class="icone s24 horizontale preview-24">
+                <button type="submit" name="terminer_relecture" value="1" class="simple-link">
+                    <img src="../prive/themes/spip/images/ok-24.png" alt="Terminer la relecture" width="24" height="24">
+                    <b>Terminer la relecture</b>
+                </button>
+            </span>
+            <span class="icone s24 horizontale preview-24">
+                <button type="submit" name="refuser" value="1" class="simple-link">
+                    <img src="../prive/themes/spip/images/supprimer-24.png" alt="Refuser l'article" width="24" height="24">
+                    <b>Refuser l'article</b>
+                </button>
+            </span>
+        ]
+    ]
+    [(#ENV{statut}|=={waiting}|?{' '})
+        [(#GET{is_secretaire}|=={1}|?{' '})
+            <span class="icone s24 horizontale preview-24">
+                <button type="submit" name="programmer_publication" value="1" class="simple-link">
+                    <img src="../prive/themes/spip/images/ok-24.png" alt="Progammer la publication" width="24" height="24">
+                    <b>Progammer la publication</b>
+                </button>
+            </span>
+            <span class="input datetime" style="overflow: hidden;">
+                <input type="text" class="text date" name="date_jour" id="date_jour" value="<?php echo date('d/m/Y') ?>" size="10">
+                <input type="text" class="text heure time" name="date_heure" id="date_heure" value="<?php echo date('H:00') ?>" size="3" autocomplete="OFF">
+            </span>
+        ]
+        [(#GET{is_auteur}|=={1}|?{' '})
+            <span class="icone s24 horizontale preview-24">
+                <button type="submit" name="abandonner" value="1" class="simple-link">
+                    <img src="../prive/themes/spip/images/supprimer-24.png" alt="Abandonner" width="24" height="24">
+                    <b>Abandonner</b>
+                </button>
+            </span>
+        ]
+    ]
+    [(#ENV{statut}|=={publie}|?{' '})
+        [(#GET{is_secretaire}|=={1}|?{' '})
+            <span class="icone s24 horizontale preview-24">
+                <button type="submit" name="archiver" value="1" class="simple-link">
+                    <img src="../prive/themes/spip/images/supprimer-24.png" alt="Archiver" width="24" height="24">
+                    <b>Archiver</b>
+                </button>
+            </span>
+        ]
+    ]
+    [(#ENV{statut}|=={refuse}|?{' '})
+        [(#GET{is_secretaire}|=={1}|?{' '})
+            <span class="icone s24 horizontale preview-24">
+                <button type="submit" name="recuperer" value="1" class="simple-link">
+                    <img src="../prive/themes/spip/images/ok-24.png" alt="Récupérer" width="24" height="24">
+                    <b>Récupérer</b>
+                </button>
+            </span>
+        ]
+    ]
+    [(#ENV{statut}|=={poubelle}|?{' '})
+        [(#GET{is_secretaire}|=={1}|?{' '})
+            <span class="icone s24 horizontale preview-24">
+                <button type="submit" name="recuperer" value="1" class="simple-link">
+                    <img src="../prive/themes/spip/images/ok-24.png" alt="Récupérer" width="24" height="24">
+                    <b>Récupérer</b>
+                </button>
+            </span>
+        ]
+    ]
+    [(#ENV{statut}|=={archive}|?{' '})
+        [(#GET{is_secretaire}|=={1}|?{' '})
+            <span class="icone s24 horizontale preview-24">
+                <button type="submit" name="desarchiver" value="1" class="simple-link">
+                    <img src="../prive/themes/spip/images/ok-24.png" alt="Désarchiver" width="24" height="24">
+                    <b>Désarchiver</b>
+                </button>
+            </span>
+        ]
+    ]
+    </form>
+
+</div>

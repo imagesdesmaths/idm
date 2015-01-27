@@ -71,7 +71,7 @@ $bugs[] = array ('\label outside {equation}', '|\$\$ *([^$]*\\\\label{[^}]*}[^$]
 $bugs[] = array ('HTML entity',               '/&[a-z]*;/ie',                                      'idm_lint_utf8("\0")',                    1, 1,
                  '/&(lt|gt);/');
 $bugs[] = array ('HTML italic',               ':<(i|em)>([^<]*)</(i|em)>:i',                       ' {\2} ',                                 0, 0, '');
-$bugs[] = array ('HTML bold',                 ':<(b|strong)>([^<]*)</(b|strong)>:i',               ' {{\2}} ',                               0, 0, '');
+$bugs[] = array ('HTML bold',                 ':<(b|strong)>([^<]*)</(b|strong)>|i',               ' {{\2}} ',                               0, 0, '');
 
 /* $bugs[] = array ('HTML tag (do not trust!)',  '|</?[0-9a-z ="]*>|i',                               '',                                       0, 0, */
 /*                  ':</?([a-z]+[0-9]+|sup|sub|intro|cadre|math|caption|hr|applet|param|small|embed|align|center|quote|code|div|a|html|pre|script|span|bloc|onglets|ul|li|table|thead|th|tbody|tr|td|tt|iframe|object|font|p|br|em|i|b|strong)[ 0-9>]:i'); */

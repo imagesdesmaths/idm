@@ -1,0 +1,1 @@
+<label for="%name%">%label%</label><input class="%class%" type="file" name="%name%" value="%value%">%error%

@@ -1,0 +1,48 @@
+.inner {
+    .titrem {
+        span {
+            float: right;
+            font-size: 12px;
+            font-weight: normal;
+            margin-left: 5px;
+        }
+        .counter {
+            line-height: 19px;
+        }
+        .button,
+        .button-white {
+            margin-top: -4px;
+        }
+    }
+    .bd {
+        overflow: hidden;
+        border-bottom: 1px solid #ccc;
+    }
+    .buttons {
+        background-color: #cedd80;
+    }
+    .closable-content {
+        display: none;
+    }
+    &.closable.open {
+        .closable-content {
+            display: block;
+        }
+    }
+}
+
+.button {
+    @extend %button;
+}
+.button-white {
+    @extend %button-white;
+}
+
+.danger {
+    font-weight: bold;
+    color: $danger;
+}
+.success {
+    font-weight: bold;
+    color: $success;
+}

@@ -1,0 +1,23 @@
+#CACHE{3600}
+[(#INCLURE{fond=inc/head}{class=sommaire}{env})]
+
+<div id="content" class="block-left">
+
+    <BOUCLE_une(ARTICLES) {id_mot=#MOT_FEATURED} {statut=publie} {par date} {age_relatif >= 0} {inverse} {0,1}>
+        #SET{id_une, #ID_ARTICLE}
+    </BOUCLE_une>
+
+    [(#INCLURE{fond=inc/bloc_une}{id_une=#GET{id_une}})]
+    [(#INCLURE{fond=inc/bloc_news})]
+    [(#INCLURE{fond=inc/bloc_last_articles}{id_une=#GET{id_une}})]
+    [(#INCLURE{fond=inc/bloc_tracks})]
+    [(#INCLURE{fond=inc/bloc_participate})]
+
+</div>
+
+[(#INCLURE{fond=inc/bloc_tribune})]
+[(#INCLURE{fond=inc/bloc_image})]
+[(#INCLURE{fond=inc/bloc_figure})]
+[(#INCLURE{fond=inc/bloc_random})]
+
+[(#INCLURE{fond=inc/foot})]

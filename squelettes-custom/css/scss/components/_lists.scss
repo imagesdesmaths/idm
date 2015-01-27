@@ -1,0 +1,129 @@
+%ul-default {
+    &,
+    & > li {
+        list-style-type: disc;
+        list-style-position: inside;
+    }
+    ul,
+    ul > li {
+       list-style-type: decimal;
+       list-style-position: inside;
+    }
+    ol,
+    ol > li {
+       list-style-type: lower-latin;
+       list-style-position: inside;
+       margin-left: 15px;
+    }
+}
+%ol-default {
+    &,
+    & > li {
+        list-style-type: decimal;
+        list-style-position: inside;
+    }
+    ul,
+    ul > li {
+        list-style-type: circle;
+        list-style-position: inside;
+        margin-left: 15px;
+    }
+    ol,
+    ol > li {
+        list-style-type: lower-latin;
+        list-style-position: inside;
+        margin-left: 15px;
+    }
+}
+
+%listing {
+    > ul {
+        line-height: $block_lineheight;
+
+        li {
+            margin-bottom: 20px;
+            overflow: hidden;
+
+            .image {
+                display: table-cell;
+                overflow: hidden;
+
+                a {
+                    @extend %trackable;
+                    position: relative;
+                    display: block;
+                    width: 160px;
+                    border-radius: $border_radius_default;
+
+                    &:before {
+                        border-radius: $border_radius_default;
+                    }
+                }
+
+                img {
+                    display: block;
+                    border-radius: $border_radius_default;
+                }
+            }
+            .resume {
+                display: table-cell;
+                padding-left: 10px;
+                vertical-align: middle;
+            }
+            .title {
+                color: $grey_dark;
+                text-transform: uppercase;
+                margin-bottom: 5px;
+                display: block;
+                transition: color $transition_duration_default;
+            }
+            .date {
+                font-style: italic;
+                color: $grey;
+                display: block;
+            }
+            .author {
+                color: $red;
+                display: block;
+            }
+            &:hover {
+                .title {
+                    color: $red;
+                }
+            }
+        }
+    }
+}
+%listing-large {
+    @extend %listing;
+
+    > ul {
+        line-height: 30px;
+
+        li {
+            margin-bottom: 25px;
+
+            .image {
+                a {
+                    width: 320px;
+                    height: 180px;
+                }
+            }
+            .resume {
+                padding-left: 25px;
+            }
+            .details {
+                line-height: 18px;
+                margin-bottom: 10px;
+            }
+            .link {
+                display: block;
+
+                span {
+                    font-style: italic;
+                    padding-left: 8px;
+                }
+            }
+        }
+    }
+}

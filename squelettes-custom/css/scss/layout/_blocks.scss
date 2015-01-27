@@ -1,0 +1,50 @@
+@import "blocks/anchors";
+@import "blocks/agenda";
+@import "blocks/author";
+@import "blocks/comment";
+@import "blocks/comments";
+@import "blocks/dossier";
+@import "blocks/figure";
+@import "blocks/image";
+@import "blocks/navigation";
+@import "blocks/newsletter";
+@import "blocks/participate";
+@import "blocks/random";
+@import "blocks/search";
+@import "blocks/social";
+@import "blocks/suivre";
+@import "blocks/tags";
+@import "blocks/tracks";
+@import "blocks/tribune";
+@import "blocks/user";
+
+
+.block {
+    margin-bottom: 40px;
+}
+
+.block-full {
+    @extend %block-full;
+    padding-top: $col_padding;
+}
+.block-left {
+    @extend %block-left;
+    padding-top: $col_padding;
+}
+.block-right {
+    @extend %block-right;
+    padding-top: $col_padding;
+
+    h2 {
+        margin-top: 0;
+        font-size: 26px;
+        line-height: 29px;
+    }
+
+    @include media-min("tablet-up") {
+        padding-bottom: $col_padding;
+    }
+    @include media-min("desktop-down") {
+        padding-bottom: 0;
+    }
+}

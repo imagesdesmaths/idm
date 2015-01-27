@@ -1,0 +1,122 @@
+[id^="modal_send_mail"],
+[id^="modal_relecteurs_"] {
+    @extend %modal;
+
+    .ariaformprop {
+        margin: -1px;
+    }
+    textarea {
+        width: 100%;
+        resize: vertical;
+    }
+
+    .no-padding {
+        padding: 0px;
+    }
+    .formulaire_spip {
+        border: 0;
+        padding: 0;
+        margin: 0;
+
+        .titrem {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+    }
+    .col-left,
+    .col-right {
+        float: left;
+
+        h3 {
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 0;
+            font-size: 14px;
+            background: #dcef77;
+        }
+        .content {
+            max-height: 400px;
+            overflow-y: scroll;
+        }
+    }
+    .col-left {
+        width: 560px;
+    }
+    .col-right {
+        border-left: 1px solid #ccc;
+        width: 220px;
+    }
+
+    .relecteur {
+        padding: 5px;
+        border-bottom: 1px solid #ccc;
+        transition: background .2s;
+
+        &:nth-child(even) {
+            background: #f3fad2;
+        }
+        &:hover {
+            background: #efefef;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .tooltip {
+            display: block;
+            display: none;
+            position: absolute;
+            top: -1px;
+            left: 0;
+            padding: 5px;
+            z-index: 999;
+            background: #f3fad2;
+            border: 1px solid #ccc;
+        }
+
+        [data-filter="nom"] {
+            position: relative;
+
+            &:hover {
+                .tooltip {
+                    display: block;
+                }
+            }
+        }
+    }
+    .liste-relecteurs-disponibles .affectes-only,
+    .liste-relecteurs-affectes .disponibles-only,
+    .liste-relecteurs-affectes thead {
+        display: none;
+    }
+
+    .recherche-relecteurs {
+        padding: 10px;
+
+        h4 {
+            margin: 0;
+            text-decoration: underline;
+        }
+        label {
+            display: inline-block;
+            width: 260px;
+        }
+        input + label {
+            width: 120px;
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 50px;
+            margin: 2px 0;
+
+            &[name="nom"] {
+                width: 228px;
+            }
+        }
+        .buttons {
+            margin: 10px -10px -10px;
+            padding: 5px 10px;
+            text-align: right;
+        }
+    }
+}

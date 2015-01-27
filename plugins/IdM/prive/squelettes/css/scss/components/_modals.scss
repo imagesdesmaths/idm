@@ -1,0 +1,37 @@
+%modal {
+    display: none;
+    position: fixed;
+    width: 780px;
+    max-height: 80%;
+    top: 50%;
+    left: 50%;
+    z-index: 99999;
+    -webkit-transform-origin: center center;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+    &.modal-open {
+        display: block;
+    }
+    > .mask {
+        background: rgba(0, 0, 0, .7);
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: -1;
+        -webkit-transform-origin: center center;
+        transform-origin: center center;
+        -webkit-transform: scale(10);
+        transform: scale(10);
+    }
+
+    > .box.simple {
+        margin: 0;
+
+        > .inner {
+            border: none;
+        }
+    }
+}

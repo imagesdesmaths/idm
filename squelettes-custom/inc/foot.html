@@ -1,0 +1,138 @@
+
+            [(#INCLURE{fond=inc/bloc_agenda})]
+
+            <br class="cf cf-footer">
+
+            <div class="block-right block-suivre">
+                <h2>Suivre IDM</h2>
+
+                <div class="block-newsletter">
+                    <div class="image">
+                        <i class="flaticon-plane"></i>
+                    </div>
+                    <fom action="#" method="post">
+                        <label for="newsletter_email">Newsletter IDM</label>
+                        <input type="text" name="newsletter_email" id="newsletter_email" placeholder="Adresse e-mail">
+                        <button type="submit"><i class="flaticon-check"></i></button>
+                    </form>
+                </div>
+
+                <ul class="block-social">
+                    <li>
+                        <a href="mailto:#EMAIL_WEBMASTER" class="link-contact" title="Contact"><i class="flaticon-contact"></i></a>
+                    </li>
+                    <!--
+                    <li>
+                        <a href="https://www.facebook.com/ImagesDesMathematiques" class="link-facebook" title="Facebook"><i class="flaticon-facebook"></i></a>
+                    </li>
+                    -->
+                    <li>
+                        <a href="https://twitter.com/imagesdesmaths" class="link-twitter" title="Twitter"><i class="flaticon-twitter"></i></a>
+                    </li>
+                    <!--
+                    <li>
+                        <a href="#" class="link-googleplus" title="Google Plus"><i class="flaticon-googleplus"></i></a>
+                    </li>
+                    -->
+                    <li>
+                        <a href="#URL_PAGE{backend}" class="link-rss" title="RSS"><i class="flaticon-rss"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="block-left block-navigation">
+                <ul>
+                    <li>
+                        <h3>En ce moment</h3>
+                        <nav>
+                            <ul>
+                                <li><a href="#URL_PAGE{articles-recents}">Articles récents</a></li>
+                                <li><a href="#URL_RUBRIQUE{#RUBRIQUE_TRIBUNES}">Tribunes</a></li>
+                                <li><a href="#URL_PAGE{agenda}">Agenda</a></li>
+                                <li><a href="#URL_RUBRIQUE{#RUBRIQUE_DEFIS_DES_MATHS}">Défis des maths</a></li>
+                                <li><a href="#URL_RUBRIQUE{#RUBRIQUE_DEBAT_DU_18}">Débat du 18</a></li>
+                                <li><a href="#URL_RUBRIQUE{#RUBRIQUE_REVUE_DE_PRESSE}">Revue de presse</a></li>
+                                <li><a href="#URL_PAGE{lexique}">Lexique</a></li>
+                            </ul>
+                        </nav>
+                    </li>
+                    <li>
+                        <h3>Différentes mathématiques</h3>
+                        <nav>
+                            <ul>
+                                <BOUCLE_rubriques(RUBRIQUES) {id_secteur IN 26,34,37,38,48} {id_rubrique !IN 28,29,37,#RUBRIQUE_DEBAT_DU_18,#RUBRIQUE_DEFIS_DES_MATHS,#RUBRIQUE_REVUE_DE_PRESSE,#RUBRIQUE_FIGURES_SANS_PAROLES} {par num titre, titre} {spip_articles.statut=publie}>
+                                <li><a href="#URL_RUBRIQUE">#TITRE</a></li>
+                                </BOUCLE_rubriques>
+                            </ul>
+                        </nav>
+                    </li>
+                    <li>
+                        <h3>Dossiers</h3>
+                        <nav>
+                            <ul>
+                                <BOUCLE_dossier(MOTS) {type=Dossiers thématiques} {par titre}>
+                                <li><a href="#URL_MOT">#TITRE</a></li>
+                                </BOUCLE_dossier>
+                            </ul>
+                        </nav>
+                    </li>
+                    <li>
+                        <h3>Qui sommes-nous&nbsp;?</h3>
+                        <nav>
+                            <ul>
+                                <li><a href="#URL_ARTICLE{#ARTICLE_PRESENTATION}">Présentation</a></li>
+                                <li><a href="#URL_ARTICLE{#ARTICLE_EQUIPE}">L'équipe</a></li>
+                                <li><a href="#URL_ARTICLE{#ARTICLE_FONCTIONNEMENT}">Fonctionnement du site</a></li>
+                                <li><a href="#URL_PAGE{agenda}">Notre actualité</a></li>
+                                <li><a href="#URL_ARTICLE{#ARTICLE_PARTENAIRES}">Partenaires</a></li>
+                                <li><a href="mailto:#EMAIL_WEBMASTER">Contact</a></li>
+                            </ul>
+                        </nav>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="noprint">
+        <div class="container">
+            <div class="col-left">
+                <nav role="navigation">
+                    <ul>
+                        <li><a href="#URL_PAGE{plan}">Plan du site</a></li>
+                        <li><a href="#URL_ARTICLES{#ARTICLE_MENTIONS_LEGALES}">Crédits et mentions légales</a></li>
+                        <li><a href="#URL_ARTICLE{#ARTICLE_PARTENAIRES}">Sites web utiles</a></li>
+                        <li><a href="mailto:#EMAIL_WEBMASTER">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-right">
+                [(#REM) <a id="copyright" href="http://www.diatem.net">Created by <strong>diatem</strong></a>]
+            </div>
+        </div>
+    </footer>
+
+    #SPIP_CRON
+
+    <script type="text/javascript" src="#CHEMIN{js/slides.min.jquery.js}"></script>
+    <script type="text/javascript" src="#CHEMIN{vendor/cookiesplease/cookiesplease.min.js}"></script>
+    <script type="text/javascript" src="#CHEMIN{js/app.min.js}"></script>
+
+    <script type="text/javascript">
+        var _paq = _paq || [];
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        _paq.push(['setTrackerUrl', '/piwik/piwik.php']);
+        _paq.push(['setSiteId', 1]);
+
+        (function() {
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.type='text/javascript'; g.defer=true; g.async=true; g.src='/piwik/piwik.js';
+            s.parentNode.insertBefore(g,s);
+        })();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+.block-suivre {
+    background: $grey_lighter;
+    box-shadow:
+        -200px 0 0 0 $grey_lighter,
+        200px 0 0 0 $grey_lighter;
+    padding-bottom: $col_padding;
+    z-index: 70;
+
+    @include media-min("tablet-up") {
+        margin-left: 0;
+        padding-left: $col_padding / 2;
+        box-shadow:
+            200px 0 0 0 $grey_lighter;
+    }
+    @include media-min("desktop-down") {
+        float: right;
+        box-shadow:
+            200px 0 0 0 $grey_lighter;
+    }
+}

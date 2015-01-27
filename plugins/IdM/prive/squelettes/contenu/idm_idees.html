@@ -1,0 +1,180 @@
+<BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
+<h1><:idm:idee:></h1>
+
+<?php
+
+function notify_creation($id_auteur, $id_article) {
+    $titre = sql_getfetsel ("titre", "spip_articles", "id_article = $id_article");
+    $subject = "Création d'un article pour Images des Maths";
+    $texte = _T('idm:mail_article_cree', array(
+        'titre'      => $titre,
+        'id_article' => $id_article)
+    );
+    idm_notify($id_auteur, $texte, $subject);
+}
+
+foreach($_POST as $key => $value) {
+
+    if(preg_match('/^validate_idea_(\d+)$/', $key, $matches)) {
+        $id = intval($matches[1]);
+        sql_updateq('spip_articles', array('statut'=>'prepa'), "id_article = $id");
+        notify_creation($_POST['article_author_'.$id], $id);
+        @header("Location: #SELF&validated=1");
+    }
+
+    elseif(preg_match('/^abandon_idea_(\d+)$/', $key, $matches)) {
+        $id = intval($matches[1]);
+        sql_updateq('spip_articles', array('statut'=>'poubelle'), "id_article = $id");
+        @header("Location: #SELF&abandoned=1");
+    }
+
+}
+
+?>
+
+<form action="#URL_ECRIRE{idm_idees}" method="post">
+
+    <?php
+    if(isset($_GET['added'])) {
+        echo '<p class="success">La nouvelle idée d\'article à bien été ajoutée.</p><br>';
+    } elseif(isset($_GET['edited'])) {
+        echo '<p class="success">L\'idée d\'article à bien été modifiée.</p><br>';
+    } elseif(isset($_GET['abandoned'])) {
+        echo '<p class="success">L\'idée d\'article à bien été abandonnée.</p><br>';
+    } elseif(isset($_GET['validated'])) {
+        echo '<p class="success">L\'idée d\'article à bien été validée.</p><br>';
+    }
+    ?>
+
+    <input type="submit" value="Rechercher" style="display:none">
+
+    <a href="#URL_ECRIRE{idm_idee_edition}" class="button-white go_top">Créer une nouvelle idée d'article</a>
+
+    <div id="box_idees" class="box simple">
+
+        <div class="inner">
+
+            <div class="hd titrem">
+                <h4>Rechercher par :</h4>
+            </div>
+
+            <div id="recherche_idees" class="bd">
+                <div class="col">
+                    <label for="titre">Titre :</label>
+                    <input type="text" name="titre" id="titre" value="#ENV{titre}">
+
+                    <label for="id_article">Numéro :</label>
+                    <input type="text" name="id_article" id="id_article" value="#ENV{id_article}">
+
+                    <label for="auteur">Auteur :</label>
+                    <input type="text" name="auteur" id="auteur" value="#ENV{auteur}">
+
+                    <label for="editeur">Éditeur :</label>
+                    <input type="text" name="editeur" id="editeur" value="#ENV{editeur}">
+
+                    <label for="categorie">Catégorie :</label>
+                    <input type="text" name="categorie" id="categorie" value="#ENV{categorie}">
+                </div>
+                <div class="col">
+                    <input type="checkbox" name="id_editeur" id="id_editeur" value="#SESSION{id_auteur}" [(#ENV{id_editeur}|=={#SESSION{id_auteur}}|?{checked="checked"})]>
+                    <label for="id_editeur">Afficher uniquement mes idées d'article</label>
+
+                    <br><br><br><br><br><br><br>
+
+                    <input type="submit" value="Rechercher">
+                    <button class="empty-form">Effacer les filtres</button>
+                </div>
+            </div>
+
+            <div class="bd">
+                <table class="sortable" style="font-size : 90%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Titre</th>
+                            <th>Auteur</th>
+                            <th>Éditeur</th>
+                            <th>Catégorie</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <BOUCLE_idee(ARTICLES) {statut=idee} {titre LIKE %#ENV{titre}%} {id_article ?== #ENV{id_article}} {id_editeur ?== #ENV{id_editeur}} {par titre}>
+                            <BOUCLE_auteur(AUTEURS) {id_article} {nom LIKE %#ENV{auteur}%}>
+                                <BOUCLE_editeur(AUTEURS) {id_auteur=#ID_EDITEUR} {nom LIKE %#ENV{editeur}%}>
+                                    <BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {titre LIKE %#ENV{categorie}%}>
+                                        <tr>
+                                            <td>#_idee:ID_ARTICLE</td>
+                                            <td>#_idee:TITRE</td>
+                                            <td>#_auteur:NOM</td>
+                                            <td>#_editeur:NOM</td>
+                                            <td>#_rubrique:TITRE</td>
+                                            <td><a href="javascript:;" data-modal-open="#modal_idee_#_idee:ID_ARTICLE" class="button">Fiche</a></td>
+                                    </tr>
+                                    </BOUCLE_rubrique>
+                                </BOUCLE_editeur>
+                            </BOUCLE_auteur>
+                        </BOUCLE_idee>
+                        </B_idee>
+                        <tr>
+                            <td colspan="5">Aucun idée d'article ne correspond aux critères</td>
+                        </tr>
+                        <//B_idee>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <BOUCLE_idee2(ARTICLES) {statut=idee} {titre LIKE %#ENV{titre}%} {id_article ?== #ENV{id_article}} {id_editeur ?== #ENV{id_editeur}} {par titre}>
+        <BOUCLE_auteur2(AUTEURS) {id_article} {nom LIKE %#ENV{auteur}%}>
+            <BOUCLE_editeur2(AUTEURS) {id_auteur=#ID_EDITEUR} {nom LIKE %#ENV{editeur}%}>
+                <BOUCLE_rubrique2(RUBRIQUES) {id_rubrique} {titre LIKE %#ENV{categorie}%}>
+                    <div id="modal_idee_#_idee2:ID_ARTICLE">
+                        <div class="box simple">
+                            <div class="inner">
+
+                                <div class="hd titrem">
+                                  <h2>Idée d'article : #_idee2:TITRE</h2>
+                                </div>
+
+                                <div class="bd no-padding">
+                                    <div class="col-left">
+                                        <p>
+                                            <b>Titre : </b>#_idee2:TITRE<br>
+                                            <b>Date de création : </b>[(#_idee2:DATE|affdate)]<br>
+                                            <b>Éditeur : </b>#_editeur2:NOM<br>
+                                            <b>Auteur : </b>#_auteur2:NOM<br>
+                                            <b>Catégorie : </b>#_rubrique2:TITRE
+                                        </p>
+                                        <p>
+                                            <b>Note d'intention :</b><br>
+                                            #_idee2:COMMENTAIRES
+                                        </p>
+                                    </div>
+                                    <div class="col-right">
+                                    <BOUCLE_feinte(ARTICLES){0,1}>[(#_idee2:ID_EDITEUR|=={#SESSION{id_auteur}}|?{' '})]</BOUCLE_feinte>
+                                        <input type="hidden" name="article_author_#_idee2:ID_ARTICLE" value="#_auteur2:ID_AUTEUR">
+                                        <input type="submit" name="validate_idea_#_idee2:ID_ARTICLE" class="button" value="Valider cette idée">
+                                        <a href="#URL_ECRIRE{idm_idee_edition, id_article=#_idee2:ID_ARTICLE}" class="button-white">Modifier</a>
+                                        <input type="submit" name="abandon_idea_#_idee2:ID_ARTICLE" class="button-white" value="Abandonner">
+                                    </B_feinte>
+                                    </div>
+                                </div>
+
+                                <div class="bd">
+                                    <a href="javascript:;" class="button" data-modal-close="#modal_idee_#_idee2:ID_ARTICLE">Fermer</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </BOUCLE_rubrique2>
+            </BOUCLE_editeur2>
+        </BOUCLE_auteur2>
+    </BOUCLE_idee2>
+
+</form>
+
+</BOUCLE_securite>

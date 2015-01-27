@@ -1,0 +1,137 @@
+<div class="formulaire_spip formulaire_affecter">
+
+    <form action="#SELF" method="post" class="no-auto-submit">
+
+        <div class="hd titrem">
+          <h2>Affecter des relecteurs</h2>
+        </div>
+
+        <div class="bd no-padding">
+            <div class="col-left">
+                <h3>Ajouter un relecteur</h3>
+                <div class="content">
+
+                    <div class="recherche-relecteurs">
+                        <h4>Rechercher par :</h4>
+
+                        <label for="nom">Nom ou prénom :</label>
+                        <input type="text" name="nom" id="nom_#ID_ARTICLE" value="#ENV{nom}">
+                        <br>
+
+                        <label for="affecte_a">Ayant été affecté à l'article numéro :</label>
+                        <input type="text" name="affecte_a" id="affecte_a_#ID_ARTICLE" value="#ENV{affecte_a}">
+                        <br>
+
+                        <label for="tx_lecture_sup_to">Taux de lecture supérieur à :</label>
+                        <input type="text" name="tx_lecture_sup_to" id="tx_lecture_sup_to_#ID_ARTICLE" value="#ENV{tx_lecture_sup_to}">
+                        <label for="tx_lecture_inf_to">et/ou inférieur à :</label>
+                        <input type="text" name="tx_lecture_inf_to" id="tx_lecture_inf_to_#ID_ARTICLE" value="#ENV{tx_lecture_inf_to}">
+                        <br>
+
+                        <label for="nb_lectures_sup_to">Nombre de lectures supérieur à :</label>
+                        <input type="text" name="nb_lectures_sup_to" id="nb_lectures_sup_to_#ID_ARTICLE" value="#ENV{nb_lectures_sup_to}">
+                        <label for="nb_lectures_inf_to">et/ou inférieur à :</label>
+                        <input type="text" name="nb_lectures_inf_to" id="nb_lectures_inf_to_#ID_ARTICLE" value="#ENV{nb_lectures_inf_to}">
+                        <br>
+
+                        <label for="nb_relectures_sup_to">Nombre de relectures en cours supérieur à :</label>
+                        <input type="text" name="nb_relectures_sup_to" id="nb_relectures_sup_to_#ID_ARTICLE" value="#ENV{nb_relectures_sup_to}">
+                        <label for="nb_relectures_inf_to">et/ou inférieur à :</label>
+                        <input type="text" name="nb_relectures_inf_to" id="nb_relectures_inf_to_#ID_ARTICLE" value="#ENV{nb_relectures_inf_to}">
+                        <br>
+
+                        <!--
+                        <label for="period_from">Période de :</label>
+                        <input type="text" name="period_from" id="period_from_#ID_ARTICLE" value="#ENV{period_from}">
+                        <label for="period_to">à :</label>
+                        <input type="text" name="period_to" id="period_to_#ID_ARTICLE" value="#ENV{period_to}">
+                        -->
+
+                        <div class="buttons">
+                            <span onclick="effacer_filtres_popup_relecteurs()" class="button-white">Effacer les filtres</span>
+                            <span onclick="rechercher_popup_relecteurs(#ID_ARTICLE)" class="button">Rechercher</span>
+                        </div>
+                    </div>
+
+                    <table class="liste-relecteurs-disponibles sortable" style="font-size : 90%">
+                        <thead><tr>
+                            <th>Nom / prénom</th>
+                            <th>Stats</th>
+                            <th>En cours</th>
+                            <th></th>
+                        </tr></thead>
+                        <tbody>
+                            <BOUCLE_relecteuraffectation(IDM_RELECTEURS spip_auteurs) {role = relecteur} {par nom}>
+                            <tr class="relecteur" data-relecteur="#ID_AUTEUR" data-articles=";<BOUCLE_allarticles(IDM_RELECTURE) {id_auteur=#ID_AUTEUR} {action=affected}>#ID_ARTICLE;</BOUCLE_allarticles>" data-origin-state="disponible">
+                                <td data-filter="nom">
+                                    #NOM
+                                    <div class="tooltip">
+                                        #NOM<br>
+                                        [<span><b>Email :</b> <a href="mailto:#EMAIL">(#EMAIL)</a></span><br>]
+                                        [<span><b>À propos :</b> (#BIO)</span><br>]
+                                    </div>
+                                </td>
+                                <td class="disponibles-only"><span data-filter="tx_lecture">[(#LUS|mult{100}|div{#COMBIEN}|arrondi)]</span>% (lus : <span data-filter="nb_lectures">#LUS</span> - non lus : [(#COMBIEN|moins{#LUS})])</td>
+                                <td class="disponibles-only" data-filter="nb_relectures"><BOUCLE_encours(IDM_RELECTEURS spip_auteurs spip_relecteurs_articles spip_articles) {id_auteur=#ID_AUTEUR} {!statut='publie'}><!-- [(#ID_ARTICLE)] --></BOUCLE_encours>#TOTAL_BOUCLE</B_encours>0<//B_encours></td>
+                                <td class="text-right"><span onclick="add_relecteur(#ID_ARTICLE, #ID_AUTEUR)" class="button small relecteur-add disponibles-only" title="Ajouter à la liste">&#9658;</span><span onclick="remove_relecteur(#ID_ARTICLE, #ID_AUTEUR)" class="button small relecteur-remove affectes-only" title="Supprimer de la liste">&#9668;</a></td>
+                            </tr>
+                            </BOUCLE_relecteuraffectation>
+                            </B_relecteuraffectation>
+                            <tr>
+                                <td colspan="4">Aucun relecteur ne correspond aux critères</td>
+                            </tr>
+                            <//B_relecteuraffectation>
+                      </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="col-right">
+                <B_relecteursaffectes>
+                <h3>Relecteurs affectés (<span class="nb_affectes">#TOTAL_BOUCLE</span>)</h3>
+                <div class="content">
+                    <table class="liste-relecteurs-affectes sortable" style="font-size : 90%">
+                        <thead><tr><th></th><th></th><th></th><th></th></tr></thead>
+                        <tbody>
+                            <BOUCLE_relecteursaffectes(RELECTEURS_ARTICLES spip_idm_relecteurs spip_auteurs) {id_article} {par nom}>
+                            <tr class="relecteur" data-relecteur="#ID_AUTEUR" data-articles=";<BOUCLE_allarticles2(IDM_RELECTURE) {id_auteur=#ID_AUTEUR} {action=affected}>#ID_ARTICLE;</BOUCLE_allarticles2>" data-origin-state="affecte">
+                                <td data-filter="nom">
+                                    #NOM
+                                    <div class="tooltip">
+                                        #NOM<br>
+                                        [<span>Email : <a href="mailto:#EMAIL">(#EMAIL)</a></span><br>]
+                                        [<span>À propos : (#BIO)</span><br>]
+                                    </div>
+                                </td>
+                                <td class="disponibles-only"><span data-filter="tx_lecture">[(#LUS|mult{100}|div{#COMBIEN}|arrondi)]</span>% (lus : <span data-filter="nb_lectures">#LUS</span> - non lus : [(#COMBIEN|moins{#LUS})])</td>
+                                <td class="disponibles-only"><BOUCLE_encours2(IDM_RELECTEURS spip_auteurs spip_relecteurs_articles spip_articles) {id_auteur=#ID_AUTEUR} {!statut='publie'}><!-- [(#ID_ARTICLE)] --></BOUCLE_encours2>#TOTAL_BOUCLE</B_encours2>0<//B_encours2></td>
+                                <td class="text-right"><span onclick="add_relecteur(#ID_ARTICLE, #ID_AUTEUR)" class="button small relecteur-add disponibles-only" title="Ajouter à la liste">&#9658;</span><span onclick="remove_relecteur(#ID_ARTICLE, #ID_AUTEUR)" class="button small relecteur-remove affectes-only" title="Supprimer de la liste">&#9668;</a></td>
+                                <td class="tooltip">
+                                    [<span>Email : <a href="mailto:#EMAIL">(#EMAIL)</a></span><br>]
+                                    [<span>À propos : (#BIO)</span><br>]
+                                </td>
+                            </tr>
+                            </BOUCLE_relecteursaffectes>
+                        </tbody>
+                    </table>
+                </div>
+                </B_relecteursaffectes>
+                <h3>Relecteurs affectés (<span class="nb_affectes">0</span>)</h3>
+                <div class="content">
+                    <table class="liste-relecteurs-affectes sortable" style="font-size : 90%">
+                        <thead><tr><th></th><th></th><th></th><th></th></tr></thead>
+                        <tbody><tr style="display:none"><td></td></tr></tbody>
+                    </table>
+                </div>
+                <//B_relecteursaffectes>
+            </div>
+        </div>
+
+        <div class="bd buttons">
+          <span class="button-white" onclick="reset_relecteurs(#ID_ARTICLE)">Annuler</span>
+          <input type="submit" name="affecter_relecteurs" value="Valider" class="button" onclick="affect_relecteurs(#ID_ARTICLE)">
+        </div>
+
+    </form>
+
+</div>

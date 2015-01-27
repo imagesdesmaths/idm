@@ -1,0 +1,1 @@
+<span class="%class%" id="%name%">%value%</span>

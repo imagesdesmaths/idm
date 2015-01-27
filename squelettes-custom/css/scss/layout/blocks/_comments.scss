@@ -1,0 +1,75 @@
+.block-comments {
+    @extend %separator-top;
+
+    .comment {
+        margin-bottom: 20px;
+
+        .head {
+            @extend %font-bold;
+            color: $red;
+            line-height: 30px;
+            padding: 10px 30px;
+            background: lighten($grey_dark, 60%);
+            border-radius: $border_radius_default $border_radius_default 0 0;
+
+            h3 {
+                margin: 0;
+                padding: 0;
+            }
+            h4 {
+                @extend %font-light;
+                color: $grey;
+                font-style: italic;
+                font-size: 80%;
+                margin: 0;
+            }
+        }
+        .message {
+            padding: 10px 20px 20px;
+            background: lighten($grey_dark, 70%);
+            border-radius: 0 0 $border_radius_default $border_radius_default;
+
+            .notes {
+                padding-top: 20px;
+                font-style: italic;
+            }
+            .answer {
+                @extend %button-red;
+                padding: 10px 20px;
+                margin-top: 20px;
+            }
+        }
+        + ul {
+            padding-left: 50px;
+        }
+
+        &.owner {
+            .head {
+                background: lighten($red, 40%);
+            }
+            .message {
+                background: lighten($red, 50%);
+            }
+        }
+    }
+
+    form {
+        @extend %custom-inputs;
+    }
+    fieldset {
+        @extend %fieldset;
+
+        .explication a[href*="logout"] {
+            float: right;
+        }
+    }
+    input[type="submit"] {
+        @extend %button-red;
+        padding: 15px 30px;
+    }
+    hr {
+        @extend %separator-top-thin;
+        position: relative;
+        border: 0;
+    }
+}

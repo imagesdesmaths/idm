@@ -50,7 +50,6 @@ function idm_autoriser() {}
 function autoriser_article_relire_dist ($faire, $type, $id, $qui, $opt) {
   if ($qui['id_auteur'] == 0) return false;
   if ($qui['statut'] == '0minirezo') return true;
-  if ((sql_getfetsel('statut', 'spip_articles', "id_article = $id") == "refuse") && ($qui['statut'] != '0minirezo')) return false;
 
   $id_auteur = $qui['id_auteur'];
   if (sql_countsel('spip_auteurs_liens', "objet = 'article' AND id_objet = $id AND id_auteur = $id_auteur")) return true;
@@ -92,6 +91,7 @@ function idm_notify ($ids, $message, $subject = "Un message du site \"Images des
                  $emails[] = sql_getfetsel ("email", "spip_auteurs", "id_auteur = ".$e['id_auteur']);
   }
 
+  // DEBUG
   $envoyer_mail = charger_fonction ('envoyer_mail', 'inc');
   foreach ($emails as $email) $envoyer_mail ($email, $subject, $message);
 }
@@ -260,7 +260,6 @@ function idm_texify ($texte) {
 
 function idm_prenom_nom ($texte) {
   $texte = preg_replace ('/([^,]+), ([^,]+)/s', '\2 \1', $texte);
-  $texte = preg_replace ('/ZZZZ/', '', $texte);
   return $texte;
 }
 
@@ -326,6 +325,11 @@ function idm_pre_edition ($flux) {
   }
 
   return $flux;
+}
+
+
+function filtre_arrondi($value, $precision = 0) {
+  return round($value, $precision);
 }
 
 ?>

@@ -1,0 +1,1 @@
+<span><input class="%class%" type="radio" %item_selected% name="%name%" value="%item_value%" id="%uid%" %attributes%><label for="%uid%">%item_label%</label></span>

@@ -1,0 +1,91 @@
+#CACHE{3600}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    [<meta name="description" content="(#ENV{desc}|sinon{#DESCRIPTIF_SITE_SPIP}|couper{150}|textebrut)"/>]
+
+    <title>[(#ENV*{title}|textebrut) - ]#NOM_SITE_SPIP</title>
+
+    <link rel="stylesheet" type="text/css" media="all" href="#CHEMIN{css/app.min.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="#CHEMIN{fonts/flaticon.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="#CHEMIN{mediaelement/mediaelementplayer.min.css}"/>
+
+    <!--[if lt IE 9]>
+        <link rel="stylesheet" href="#CHEMIN{css/ie8.min.css}" type="text/css" />
+        <script type="text/javascript" src="#CHEMIN{js/html5.js }"></script>
+    <![endif]-->
+
+    <link rel="alternate"  type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}"/>
+    <link rel="home"  title="Page principale" href="#URL_SITE_SPIP/"/>
+    <link rel="start" title="Page principale" href="#URL_SITE_SPIP/"/>
+    <link rel="index" title="Page principale" href="#URL_SITE_SPIP/"/>
+    <link rel="shortcut icon" href="#CHEMIN{favicon.ico}"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,600,400' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript" src="squelettes/svgweb/svg.patched.js" data-path="squelettes/svgweb" id="svgweb"></script>
+
+    #INSERT_HEAD
+</head>
+
+<body>
+    [(#ENV{date_default}|?{'',' '})
+    <div id="date">
+        Voici le contenu du site &laquo; #NOM_SITE_SPIP &raquo; tel qu'il &eacute;tait &agrave; la date du [(#DATE|affdate)] :
+    </div>]
+
+    <nav id="menu" role="navigation">
+        <div class="container">
+
+            <div class="header-actions">
+                <form class="header-form-search" action="#URL_PAGE{recherche}" method="post">
+                    <input type="text" size="10" name="recherche" placeholder="Recherche" id="recherchemobile" value="#ENV{recherche}">
+                    <button type="submit" title="Rechercher"><i class="flaticon-search"></i></button>
+                </form>
+
+                <a class="header-search-adv" href="#URL_PAGE{navigation}" class="button"><i class="flaticon-search-adv"></i></a>
+
+                <a class="header-private" class="button" href="#URL_PAGE{perso}" title="[(#SESSION{statut}|=={0minirezo}|?{'Espace privé',[(#SESSION{statut}|=={1comite}|?{'Espace de rédaction','Espace personnel'})]})]"><i class="flaticon-user"></i></a>
+            </div>
+
+            <INCLURE{fond=inc/menu}>
+
+        </div>
+    </nav>
+
+    <header class="noprint">
+        <div class="container">
+            <h1>
+                <a href="#URL_SITE_SPIP">
+                    <img src="#CHEMIN{img/logo-cnrs.png}" alt="CNRS" />
+                    <img src="#CHEMIN{img/logo_idm.png}" alt="#NOM_SITE_SPIP" />
+                </a>
+            </h1>
+
+            <div class="header-actions">
+                <form class="header-form-search" action="#URL_PAGE{recherche}" method="post">
+                    <input type="text" size="10" name="recherche" placeholder="Recherche" id="recherche" value="#ENV{recherche}">
+                    <button type="submit" title="Rechercher"><i class="flaticon-search"></i></button>
+                </form>
+
+                <a class="header-search-adv" href="#URL_PAGE{navigation}" class="button"><i class="flaticon-search-adv"></i></a>
+
+                <a class="header-private" class="button" href="#URL_PAGE{perso}" title="[(#SESSION{statut}|=={0minirezo}|?{'Espace privé',[(#SESSION{statut}|=={1comite}|?{'Espace de rédaction','Espace personnel'})]})]"><i class="flaticon-user"></i></a>
+            </div>
+
+            <div class="header-descriptif">#DESCRIPTIF_SITE_SPIP</div>
+
+            <a class="menu-mobile-toggle" href="#menu"><i class="flaticon-menu"></i> Menu</a>
+
+        </div>
+    </header>
+
+    <section class="[(#ENV{class}|sinon{page})] wrap main" role="main">
+
+        <aside>
+            [(#INCLURE{fond=inc/bloc_utilisateur}{id_article=#ENV{id_article}})]
+        </aside>
+
+        <div class="container">

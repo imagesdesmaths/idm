@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<documentTypes>
+    <documentType>
+        <documentTypeName>article</documentTypeName>
+        <fields>
+
+            <!-- TITRE -->
+            <field>
+                <fieldName>titre</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+                <option name="boost">3</option>
+            </field>
+            <field>
+                <fieldName>titre_exact</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">facetanalyzer</option>
+                <option name="boost">3</option>
+            </field>
+
+            <!-- CONTENU TEXTUEL -->
+            <field>
+                <fieldName>surtitre</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+            </field>
+            <field>
+                <fieldName>soustitre</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+            </field>
+            <field>
+                <fieldName>descriptif</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+            </field>
+            <field>
+                <fieldName>chapeau</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+            </field>
+            <field>
+                <fieldName>texte</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+                <option name="store">true</option>
+                <option name="term_vector">with_positions_offsets_payloads</option>
+            </field>
+            <field>
+                <fieldName>postscriptum</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+            </field>
+            <field>
+                <fieldName>credits</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+            </field>
+
+            <!-- DATE DE MISE EN LIGNE -->
+            <field>
+                <fieldName>date</fieldName>
+                <option name="type">string</option>
+            </field>
+
+            <!-- AUTEUR -->
+            <field>
+                <fieldName>auteur</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+            </field>
+            <field>
+                <fieldName>auteur_exact</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">facetanalyzer</option>
+            </field>
+
+            <!-- TAGS -->
+            <field>
+                <fieldName>piste</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">facetanalyzer</option>
+                <option name="boost">2</option>
+            </field>
+            <field>
+                <fieldName>mots</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">keyword</option>
+                <option name="boost">3</option>
+            </field>
+
+            <!-- RUBRIQUE -->
+            <field>
+                <fieldName>rubrique</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+                <option name="boost">2</option>
+            </field>
+            <field>
+                <fieldName>rubrique_exact</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">facetanalyzer</option>
+                <option name="boost">2</option>
+            </field>
+
+            <!-- URL -->
+            <field>
+                <fieldName>url</fieldName>
+                <option name="type">string</option>
+            </field>
+
+        </fields>
+    </documentType>
+    <documentType>
+        <documentTypeName>tribune</documentTypeName>
+        <fields>
+
+            <!-- TITRE -->
+            <field>
+                <fieldName>titre</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+                <option name="boost">3</option>
+            </field>
+            <field>
+                <fieldName>titre_exact</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">facetanalyzer</option>
+                <option name="boost">3</option>
+            </field>
+
+            <!-- CONTENU TEXTUEL -->
+            <field>
+                <fieldName>surtitre</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+            </field>
+            <field>
+                <fieldName>soustitre</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+            </field>
+            <field>
+                <fieldName>descriptif</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+            </field>
+            <field>
+                <fieldName>chapeau</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+            </field>
+            <field>
+                <fieldName>texte</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+                <option name="store">true</option>
+                <option name="term_vector">with_positions_offsets_payloads</option>
+            </field>
+            <field>
+                <fieldName>postscriptum</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+            </field>
+            <field>
+                <fieldName>credits</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+            </field>
+
+            <!-- DATE DE MISE EN LIGNE -->
+            <field>
+                <fieldName>date</fieldName>
+                <option name="type">string</option>
+            </field>
+
+            <!-- AUTEUR -->
+            <field>
+                <fieldName>auteur</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+            </field>
+            <field>
+                <fieldName>auteur_exact</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">facetanalyzer</option>
+            </field>
+
+            <!-- TAGS -->
+            <field>
+                <fieldName>piste</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">facetanalyzer</option>
+                <option name="boost">2</option>
+            </field>
+            <field>
+                <fieldName>mots</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">keyword</option>
+                <option name="boost">3</option>
+            </field>
+
+            <!-- RUBRIQUE -->
+            <field>
+                <fieldName>rubrique</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+                <option name="boost">2</option>
+            </field>
+            <field>
+                <fieldName>rubrique_exact</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">facetanalyzer</option>
+                <option name="boost">2</option>
+            </field>
+
+            <!-- URL -->
+            <field>
+                <fieldName>url</fieldName>
+                <option name="type">string</option>
+            </field>
+
+        </fields>
+    </documentType>
+    <documentType>
+        <documentTypeName>event</documentTypeName>
+        <fields>
+
+            <!-- TITRE -->
+            <field>
+                <fieldName>titre</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+                <option name="boost">3</option>
+            </field>
+            <field>
+                <fieldName>titre_exact</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">facetanalyzer</option>
+                <option name="boost">3</option>
+            </field>
+
+            <!-- CONTENU TEXTUEL -->
+            <field>
+                <fieldName>texte</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+                <option name="store">true</option>
+                <option name="term_vector">with_positions_offsets_payloads</option>
+            </field>
+            <field>
+                <fieldName>lientitre</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+            </field>
+            <field>
+                <fieldName>lienurl</fieldName>
+                <option name="type">string</option>
+            </field>
+
+            <!-- DATE DE MISE EN LIGNE -->
+            <field>
+                <fieldName>date</fieldName>
+                <option name="type">string</option>
+            </field>
+
+            <!-- AUTEUR -->
+            <field>
+                <fieldName>auteur</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">french</option>
+            </field>
+            <field>
+                <fieldName>auteur_exact</fieldName>
+                <option name="type">string</option>
+                <option name="analyzer">facetanalyzer</option>
+            </field>
+
+            <!-- URL -->
+            <field>
+                <fieldName>url</fieldName>
+                <option name="type">string</option>
+            </field>
+
+        </fields>
+    </documentType>
+</documentTypes>

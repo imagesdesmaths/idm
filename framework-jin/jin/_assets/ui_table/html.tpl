@@ -1,0 +1,1 @@
+<table class="%class%" id="%name%">%headers%%items%</table>

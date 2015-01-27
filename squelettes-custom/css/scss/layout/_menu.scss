@@ -1,0 +1,200 @@
+/*
+    Menu
+ */
+#menu {
+    height: 0;
+    overflow: hidden;
+    background-color: $red;
+    text-align: center;
+
+    &.active {
+        height: auto;
+    }
+    .container {
+        @extend %edged;
+        @include media("phone-down") {
+            width: 100%;
+        }
+    }
+    ul {
+        display: table;
+        position: relative;
+        white-space: nowrap;
+        width: 100%;
+        text-align: left;
+
+        li {
+            display: block;
+            text-transform: uppercase;
+            line-height: 21px;
+            font-size: 0.8em;
+            width: 100%;
+            color: $white;
+            background-color: transparent;
+            border-top: 1px solid $red_light;
+            transition: color $transition_duration_default, background-color $transition_duration_default;
+
+            &.expendable > a:after {
+                content: "+";
+                position: absolute;
+                right: 0;
+                top: 0;
+                padding: 14px 10px;
+                line-height: 21px;
+            }
+            a {
+                display: block;
+                position: relative;
+                padding: 14px 10px;
+
+                @include media("phone-down") {
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: (map-get($breakpoints, "phone-down") - 100px);
+                }
+            }
+            ul {
+                display: none;
+                font-size: 1.25em;
+                background-color: $grey_lightest;
+                border: 1px solid $grey_light;
+                border-top: 0;
+                display: none;
+                z-index: 99;
+
+                li {
+                    display: table;
+                    width: 100%;
+                    border-left: none;
+                    text-align: left;
+                    text-transform: none;
+                    white-space: normal;
+                    height: 35px;
+                    color: $red_dark;
+                    border-top: none;
+
+                    a {
+                        padding: 0 10px;
+                        line-height: 35px;
+                    }
+                }
+            }
+
+            @include media-max("tablet-up") {
+                &.active {
+                    background-color: rgba(0, 0, 0, .2);
+
+                    ul {
+                        display: block;
+                    }
+                }
+            }
+            @include media-min("tablet-up") {
+                border-bottom: none;
+                display: table-cell;
+                text-align: center;
+                padding: 0;
+                width: auto;
+
+                + li {
+                    border-left: 1px solid rgba(255, 255, 255, .7);
+                }
+                &:hover,
+                &:focus {
+                    background-color: rgba(0, 0, 0, .2);
+
+                    ul {
+                        display: block;
+                    }
+                }
+                &.expendable > a:after {
+                    display: none;
+                    padding: (($menu_height_desktop - 21) / 2px) 0;
+                }
+                a {
+                    padding: (($menu_height_desktop - 21) / 2px) 0;
+                }
+                ul {
+                    position: absolute;
+                    top: $menu_height_desktop;
+                    width: 230px;
+                    border-radius: 0 0 $border_radius_default $border_radius_default;
+
+                    li {
+                        height: $submenu_height_desktop;
+
+                        a {
+                            display: table-cell;
+                            padding: 0 15px;
+                            vertical-align: middle;
+                            line-height: 15px;
+                        }
+                    }
+                    &.columns-3 {
+                        width: 100%;
+                        left: 0;
+                        -webkit-column-count: 3;
+                        -moz-column-count: 3;
+                        column-count: 3;
+                        -webkit-column-gap: 0px;
+                        -moz-column-gap: 0px;
+                        column-gap: 0px;
+
+                        li {
+                            -webkit-column-break-inside: avoid;
+                            -moz-column-break-inside: avoid;
+                            column-break-inside: avoid;
+                        }
+                    }
+                }
+
+            }
+            @include media-min("tablet-down") {
+                font-size: 1em;
+
+                ul {
+                    font-size: 1em;
+                }
+            }
+        }
+    }
+
+    .header-actions {
+        display: inline-block;
+        margin: 35px auto;
+        overflow: hidden;
+
+        .header-private {
+            background-color: $red_light;
+        }
+        .header-private,
+        .header-search-adv {
+            &:hover,
+            &:focus {
+                background-color: $red_dark;
+            }
+
+        }
+
+        @include media-min("phone-down") {
+            input[type="text"] {
+                width: 240px;
+            }
+        }
+        @include media-min("tablet-up") {
+            display: none;
+        }
+    }
+
+    @include media-min("tablet-up") {
+        position: absolute;
+        top: $header_height_tablet;
+        left: 0;
+        right: 0;
+        height: $menu_height_desktop;
+        overflow: visible;
+    }
+    @include media-min("desktop-up") {
+        top: $header_height_desktop;
+    }
+}

@@ -1,0 +1,43 @@
+#box_billetistes {
+    margin-top: 0;
+    clear: both;
+}
+#recherche_billetistes {
+    .col {
+        width: 50%;
+        float: left;
+        padding-right: 10px;
+
+        + .col {
+            padding-right: 0;
+            padding-left: 10px;
+        }
+    }
+    label {
+        clear: both;
+        display: inline-block;
+        margin-bottom: 5px;
+        width: 120px;
+        line-height: 27px;
+    }
+    input[type="text"] {
+        width: 245px;
+    }
+    button {
+        @extend %button-white;
+        width: 120px;
+        float: right;
+    }
+    input[type="submit"] {
+        @extend %button;
+        width: 120px;
+        float: right;
+        margin-left: 5px;
+    }
+}
+
+.go_top {
+    float: right;
+    margin-bottom: 5px;
+    margin-top: -25px;
+}

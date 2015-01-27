@@ -1,89 +1,321 @@
 <h1><:idm:tableau:></h1>
 
-<h2><:idm:planning:></h2>
+<div class="box simple">
+  <div class="inner closable">
+    <B_article_edited>
+    <div class="hd titrem">
+      <h2>
+        <:idm:articles_edited:>
+        <span class="readmore button-white" data-alt-text="Masquer">Afficher</span>
+        <span class="counter">#TOTAL_BOUCLE article[(#TOTAL_BOUCLE|>{1}|?{s})]</span>
+      </h2>
+    </div>
 
-<table id="planning">
-  <thead>
-    <tr>
-      <th>Titre</th>
-      <th>Auteur(s)</th>
-      <th>Rubrique</th>
-      <th>Date</th>
-      <th>Éditeur</th>
-      <th>Modifier</th>
-    </tr>
-  </thead>
-<BOUCLE_deja(ARTICLES) {statut = publie} {id_secteur !IN 18} {age<=0} {par date}>
-  <tr>
-    <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
-    <td>#LESAUTEURS</td>
-    <td>#INFO_TITRE{rubrique,#ID_RUBRIQUE}</td>
-    <td>[(#DATE|affdate{Y.m.d})] (publié)</td>
-    <td>[<a href="(#ID_EDITEUR|generer_url_entite{auteur})">[(#INFO_TITRE{auteur,#ID_EDITEUR}|idm_prenom_nom)]</a>]</td>
-    <td>[<a href="(#VAL{idm_gerer}|generer_url_ecrire{id_article=#ID_ARTICLE})">Modifier</a>]</td>
-  </tr>
-</BOUCLE_deja>
-<BOUCLE_prevus(ARTICLES) {statut IN prop,prepa} {prevu = oui} {par date_prevue}>
-  <tr>
-    <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
-    <td>#LESAUTEURS</td>
-    <td>#INFO_TITRE{rubrique,#ID_RUBRIQUE}</td>
-    <td>[(#DATE_PREVUE|affdate{Y.m.d})]</td>
-    <td>[<a href="(#ID_EDITEUR|generer_url_entite{auteur})">[(#INFO_TITRE{auteur,#ID_EDITEUR}|idm_prenom_nom)]</a>]</td>
-    <td>[<a href="(#VAL{idm_gerer}|generer_url_ecrire{id_article=#ID_ARTICLE})">Modifier</a>]</td>
-  </tr>
-</BOUCLE_prevus>
-</table>
+    <div class="bd closable-content">
+      <table>
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Auteur(s)</th>
+            <th>Rubrique</th>
+            <th>Modifier</th>
+          </tr>
+        </thead>
+        <BOUCLE_article_edited(ARTICLES) {statut = prop} {prevu != oui} {par titre}>
+        <tr>
+          <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
+          <td>#LESAUTEURS</td>
+          <td>#INFO_TITRE{rubrique,#ID_RUBRIQUE}</td>
+          <td>[<a href="(#VAL{idm_gerer}|generer_url_ecrire{id_article=#ID_ARTICLE})">Modifier</a>]</td>
+        </tr>
+        </BOUCLE_article_edited>
+      </table>
+    </div>
+    </B_article_edited>
+    <div class="hd titrem">
+      <h2>
+        <:idm:articles_edited:>
+        <span class="counter">0 article</span>
+      </h2>
+    </div>
+    <//B_article_edited>
+  </div>
+</div>
 
-<B_article2>
-<h2><:idm:non_plan:></h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>Titre</th>
-      <th>Auteur(s)</th>
-      <th>Rubrique</th>
-      <th>Éditeur</th>
-      <th>Modifier</th>
-    </tr>
-  </thead>
-<BOUCLE_article2(ARTICLES) {statut = prop} {prevu != oui} {par titre}>
-  <tr>
-    <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
-    <td>#LESAUTEURS</td>
-    <td>#INFO_TITRE{rubrique,#ID_RUBRIQUE}</td>
-    <td>[<a href="(#ID_EDITEUR|generer_url_entite{auteur})">[(#INFO_TITRE{auteur,#ID_EDITEUR}|idm_prenom_nom)]</a>]</td>
-    <td>[<a href="(#VAL{idm_gerer}|generer_url_ecrire{id_article=#ID_ARTICLE})">Modifier</a>]</td>
-  </tr>
-</BOUCLE_article2>
-</table>
-</B_article2>
+<div class="box simple">
+  <div class="inner closable">
+    <B_articles_ideas>
+    <div class="hd titrem">
+      <h2>
+        <:idm:idee_all:>
+        <span class="readmore button-white" data-alt-text="Masquer">Afficher</span>
+        <span class="counter">#TOTAL_BOUCLE article[(#TOTAL_BOUCLE|>{1}|?{s})]</span>
+      </h2>
+    </div>
 
-<B_article3>
-<h2><:idm:non_plan_prepa:></h2>
+    <div class="bd closable-content">
+      <table>
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Auteur(s)</th>
+            <th>Rubrique</th>
+            <th>Éditeur</th>
+            <th>Fiche</th>
+          </tr>
+        </thead>
+        <BOUCLE_articles_ideas(ARTICLES) {statut = idee} {par titre}>
+        <tr>
+          <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
+          <td>#LESAUTEURS</td>
+          <td>#INFO_TITRE{rubrique,#ID_RUBRIQUE}</td>
+          <td>[<a href="(#ID_EDITEUR|generer_url_entite{auteur})">[(#INFO_TITRE{auteur,#ID_EDITEUR}|idm_prenom_nom)]</a>]</td>
+          <td><a href="#URL_ECRIRE{idm_idee_edition, id_article=#ID_ARTICLE}">Fiche</a></td>
+        </tr>
+        </BOUCLE_articles_ideas>
+      </table>
+    </div>
+    </B_articles_ideas>
+    <div class="hd titrem">
+      <h2>
+        <:idm:idee_all:>
+        <span class="counter">0 article</span>
+      </h2>
+    </div>
+    <//B_articles_ideas>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Titre</th>
-      <th>Auteur(s)</th>
-      <th>Rubrique</th>
-      <th>Éditeur</th>
-      <th>Modifier</th>
-    </tr>
-  </thead>
-<BOUCLE_article3(ARTICLES) {statut = prepa} {prevu != oui} {par titre}>
-  <tr>
-    <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
-    <td>#LESAUTEURS</td>
-    <td>#INFO_TITRE{rubrique,#ID_RUBRIQUE}</td>
-    <td>[<a href="(#ID_EDITEUR|generer_url_entite{auteur})">[(#INFO_TITRE{auteur,#ID_EDITEUR}|idm_prenom_nom)]</a>]</td>
-    <td>[<a href="(#VAL{idm_gerer}|generer_url_ecrire{id_article=#ID_ARTICLE})">Modifier</a>]</td>
-  </tr>
-</BOUCLE_article3>
-</table>
-</B_article3>
+<div class="box simple">
+  <div class="inner closable">
+    <B_articles_ideas_mine>
+    <div class="hd titrem">
+      <h2>
+        <:idm:idee_mine:>
+        <span class="readmore button-white" data-alt-text="Masquer">Afficher</span>
+        <span class="counter">#TOTAL_BOUCLE article[(#TOTAL_BOUCLE|>{1}|?{s})]</span>
+      </h2>
+    </div>
+
+    <div class="bd closable-content">
+      <table>
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Auteur(s)</th>
+            <th>Rubrique</th>
+            <th>Éditeur</th>
+            <th>Fiche</th>
+          </tr>
+        </thead>
+        <BOUCLE_articles_ideas_mine(ARTICLES) {statut = idee} {id_auteur=#SESSION{id_auteur}} {par titre}>
+        <tr>
+          <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
+          <td>#LESAUTEURS</td>
+          <td>#INFO_TITRE{rubrique,#ID_RUBRIQUE}</td>
+          <td>[<a href="(#ID_EDITEUR|generer_url_entite{auteur})">[(#INFO_TITRE{auteur,#ID_EDITEUR}|idm_prenom_nom)]</a>]</td>
+          <td><a href="#URL_ECRIRE{idm_idee_edition, id_article=#ID_ARTICLE}">Fiche</a></td>
+        </tr>
+        </BOUCLE_articles_ideas_mine>
+      </table>
+    </div>
+    </B_articles_ideas_mine>
+    <div class="hd titrem">
+      <h2>
+        <:idm:idee_mine:>
+        <span class="counter">0 article</span>
+      </h2>
+    </div>
+    <//B_articles_ideas_mine>
+  </div>
+</div>
+
+<div class="box simple">
+  <div class="inner closable">
+    <B_articles_writing_mine>
+    <div class="hd titrem">
+      <h2>
+        <:idm:articles_writing_mine:>
+        <span class="readmore button-white" data-alt-text="Masquer">Afficher</span>
+        <span class="counter">#TOTAL_BOUCLE article[(#TOTAL_BOUCLE|>{1}|?{s})]</span>
+      </h2>
+    </div>
+
+    <div class="bd closable-content">
+      <table>
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Auteur(s)</th>
+            <th>Rubrique</th>
+            <th>Éditeur</th>
+            <th>Modifier</th>
+          </tr>
+        </thead>
+        <BOUCLE_articles_writing_mine(ARTICLES) {statut = prepa} {id_auteur=#SESSION{id_auteur}} {par titre}>
+        <tr>
+          <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
+          <td>#LESAUTEURS</td>
+          <td>#INFO_TITRE{rubrique,#ID_RUBRIQUE}</td>
+          <td>[<a href="(#ID_EDITEUR|generer_url_entite{auteur})">[(#INFO_TITRE{auteur,#ID_EDITEUR}|idm_prenom_nom)]</a>]</td>
+          <td>[<a href="(#VAL{idm_gerer}|generer_url_ecrire{id_article=#ID_ARTICLE})">Modifier</a>]</td>
+        </tr>
+        </BOUCLE_articles_writing_mine>
+      </table>
+    </div>
+    </B_articles_writing_mine>
+    <div class="hd titrem">
+      <h2>
+        <:idm:articles_writing_mine:>
+        <span class="counter">0 article</span>
+      </h2>
+    </div>
+    <//B_articles_writing_mine>
+  </div>
+</div>
+
+<div class="box simple">
+  <div class="inner closable">
+    <BOUCLE_deja1(ARTICLES) {statut = publie} {id_secteur !IN 18} {age<=0} {par date}>
+    #SET{counter_deja, #TOTAL_BOUCLE}
+    </BOUCLE_deja1>
+    <BOUCLE_prevus1(ARTICLES) {statut IN prop,prepa} {prevu = oui} {par date_prevue}>
+    #SET{counter_prevus, #TOTAL_BOUCLE}
+    </BOUCLE_prevus1>
+    #SET{counter_planning, #GET{counter_deja}|plus{#GET{counter_prevus}}}
+    <div class="hd titrem">
+      <h2>
+        <:idm:planning:>
+        [(#GET{counter_planning}|>{0}|?{' '})<span class="readmore button-white" data-alt-text="Masquer">Afficher</span>]
+        <span class="counter">#GET{counter_planning}&nbsp;article[(#GET{counter_planning}|>{1}|?{s})]</span>
+      </h2>
+    </div>
+
+    <div class="bd closable-content">
+      <table id="planning">
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Auteur(s)</th>
+            <th>Rubrique</th>
+            <th>Date</th>
+            <th>Éditeur</th>
+            <th>Modifier</th>
+          </tr>
+        </thead>
+        <BOUCLE_deja(ARTICLES) {statut = publie} {id_secteur !IN 18} {age<=0} {par date}>
+        <tr>
+          <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
+          <td>#LESAUTEURS</td>
+          <td>#INFO_TITRE{rubrique,#ID_RUBRIQUE}</td>
+          <td>[(#DATE|affdate{Y.m.d})] (publié)</td>
+          <td>[<a href="(#ID_EDITEUR|generer_url_entite{auteur})">[(#INFO_TITRE{auteur,#ID_EDITEUR}|idm_prenom_nom)]</a>]</td>
+          <td>[<a href="(#VAL{idm_gerer}|generer_url_ecrire{id_article=#ID_ARTICLE})">Modifier</a>]</td>
+        </tr>
+        </BOUCLE_deja>
+        <BOUCLE_prevus(ARTICLES) {statut IN prop,prepa} {prevu = oui} {par date_prevue}>
+        <tr>
+          <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
+          <td>#LESAUTEURS</td>
+          <td>#INFO_TITRE{rubrique,#ID_RUBRIQUE}</td>
+          <td>[(#DATE_PREVUE|affdate{Y.m.d})]</td>
+          <td>[<a href="(#ID_EDITEUR|generer_url_entite{auteur})">[(#INFO_TITRE{auteur,#ID_EDITEUR}|idm_prenom_nom)]</a>]</td>
+          <td>[<a href="(#VAL{idm_gerer}|generer_url_ecrire{id_article=#ID_ARTICLE})">Modifier</a>]</td>
+        </tr>
+        </BOUCLE_prevus>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="box simple">
+  <div class="inner closable">
+    <B_article2>
+    <div class="hd titrem">
+      <h2>
+        <:idm:non_plan:>
+        <span class="readmore button-white" data-alt-text="Masquer">Afficher</span>
+        <span class="counter">#TOTAL_BOUCLE article[(#TOTAL_BOUCLE|>{1}|?{s})]</span>
+      </h2>
+    </div>
+
+    <div class="bd closable-content">
+      <table>
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Auteur(s)</th>
+            <th>Rubrique</th>
+            <th>Éditeur</th>
+            <th>Modifier</th>
+          </tr>
+        </thead>
+        <BOUCLE_article2(ARTICLES) {statut = prop} {prevu != oui} {par titre}>
+        <tr>
+          <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
+          <td>#LESAUTEURS</td>
+          <td>#INFO_TITRE{rubrique,#ID_RUBRIQUE}</td>
+          <td>[<a href="(#ID_EDITEUR|generer_url_entite{auteur})">[(#INFO_TITRE{auteur,#ID_EDITEUR}|idm_prenom_nom)]</a>]</td>
+          <td>[<a href="(#VAL{idm_gerer}|generer_url_ecrire{id_article=#ID_ARTICLE})">Modifier</a>]</td>
+        </tr>
+        </BOUCLE_article2>
+      </table>
+    </div>
+    </B_article2>
+    <div class="hd titrem">
+      <h2>
+        <:idm:non_plan:>
+        <span class="counter">0 article</span>
+      </h2>
+    </div>
+    <//B_article2>
+  </div>
+</div>
+
+<div class="box simple">
+  <div class="inner closable">
+    <B_article3>
+    <div class="hd titrem">
+      <h2>
+        <:idm:non_plan_prepa:>
+        <span class="readmore button-white" data-alt-text="Masquer">Afficher</span>
+        <span class="counter">#TOTAL_BOUCLE article[(#TOTAL_BOUCLE|>{1}|?{s})]</span>
+      </h2>
+    </div>
+
+    <div class="bd closable-content">
+      <table>
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Auteur(s)</th>
+            <th>Rubrique</th>
+            <th>Éditeur</th>
+            <th>Modifier</th>
+          </tr>
+        </thead>
+        <BOUCLE_article3(ARTICLES) {statut = prepa} {prevu != oui} {par titre}>
+        <tr>
+          <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
+          <td>#LESAUTEURS</td>
+          <td>#INFO_TITRE{rubrique,#ID_RUBRIQUE}</td>
+          <td>[<a href="(#ID_EDITEUR|generer_url_entite{auteur})">[(#INFO_TITRE{auteur,#ID_EDITEUR}|idm_prenom_nom)]</a>]</td>
+          <td>[<a href="(#VAL{idm_gerer}|generer_url_ecrire{id_article=#ID_ARTICLE})">Modifier</a>]</td>
+        </tr>
+        </BOUCLE_article3>
+      </table>
+    </div>
+    </B_article3>
+    <div class="hd titrem">
+      <h2>
+        <:idm:non_plan_prepa:>
+        <span class="counter">0 article</span>
+      </h2>
+    </div>
+    <//B_article3>
+  </div>
+</div>
 
 <script type="text/javascript">
   $("#planning").tablesorter( {sortList : [[3,0]]} );

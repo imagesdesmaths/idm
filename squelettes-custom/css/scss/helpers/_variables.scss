@@ -1,0 +1,55 @@
+$danger: tomato;
+$warning: orange;
+$success: #61b353;
+
+$grey_dark: #444444;
+$grey: #898989;
+$grey_light: #a4a4a4;
+$grey_lighter: #e1e1e1;
+$grey_lightest: #eaeaea;
+$white: #ffffff;
+
+$red_light: #d8756d;
+$red: #d13827;
+$red_dark: #6b190d;
+
+$green_track: #61b353;
+$blue_track: #49bcf7;
+$red_track: #d13827;
+$black_track: #242424;
+$off_track: #ce4ac9;
+
+$contribute: #836277;
+$participate: #f7ab49;
+$press: #626e83;
+$contact: #222222;
+$facebook: #3a6ab1;
+$twitter: #49bcf7;
+$googleplus: #d13827;
+$rss: #ef7f01;
+
+
+
+$breakpoints: (
+    "phone-down": 500px,
+    "tablet-up": 768px,
+    "tablet-down": 900px,
+    "desktop-up": 1024px,
+    "desktop-down": 1280px,
+    "widescreen-up": 1440px
+);
+
+
+$font_size_default: 16px;
+$transition_duration_default: .2s;
+$border_radius_default: 4px;
+
+$header_height: 100px;
+$footer_height: 50px;
+$menu_height_desktop: 50px;
+$submenu_height_desktop: 40px;
+$header_height_tablet: 135px;
+$header_height_desktop: 100px;
+$search_height: 50px;
+$col_padding: 50px;
+$block_lineheight: 18px;

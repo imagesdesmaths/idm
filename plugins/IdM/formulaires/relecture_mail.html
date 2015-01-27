@@ -1,0 +1,22 @@
+<div class="formulaire_spip formulaire_relecture_mail">
+
+  <form action="#SELF" method="post">
+
+    <div class="hd titrem">
+      <h2>Envoyer un email à tous les relecteurs</h2>
+    </div>
+
+    <div class="bd">
+      <p>Texte du message que vous souhaitez envoyer à l'ensemble des relecteurs de cet article (ainsi qu'à son auteur et son éditeur) :</p>
+      <input type="hidden" name="send_mail_billettistes" value="<BOUCLE_editeurmail(ARTICLES) {statut=prop} {id_article}>#ID_EDITEUR;</BOUCLE_editeurmail><BOUCLE_auteursmail(AUTEURS) {id_article}>#ID_AUTEUR;</BOUCLE_auteursmail><BOUCLE_relecteursmail(RELECTEURS_ARTICLES spip_idm_relecteurs spip_auteurs) {id_article}>#ID_AUTEUR;</BOUCLE_relecteursmail>">
+      <textarea name="send_mail_message" rows="10"></textarea>
+    </div>
+
+    <div class="bd buttons">
+      <a href="javascript:;" class="button-white" data-modal-close="#modal_send_mail_#ID_ARTICLE">Annuler</a>
+      <input type="submit" name="send_mail" value="Envoyer" class="button">
+    </div>
+
+  </form>
+
+</div>

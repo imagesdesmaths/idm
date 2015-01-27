@@ -1,0 +1,221 @@
+/*
+    Code de l'ancienne version.
+    Repris et adapté.
+ */
+.wysiwyg {
+    text-align: justify;
+
+    a {
+        color: inherit;
+
+        &:link,
+        &:visited {
+            color: $red;
+        }
+    }
+    blockquote {
+        color: black;
+        background: #F1F1F1;
+        padding: .5ex 1em;
+        border: 1px dashed #CDCDCD;
+    }
+    table {
+        margin: 0 auto;
+        text-align: center;
+        border: 1px solid $red;
+        border-collapse: collapse;
+
+        th {
+            @extend %font-bold;
+            border: 1px solid $red;
+            padding: 1px .5em;
+        }
+        td {
+            border: 1px solid $red;
+            padding: 1px .5em;
+        }
+    }
+    h1 {
+        @extend %font-bold;
+        color: $red;
+        font-size:30px;
+        font-size: 170%;
+    }
+    h2 {
+        @extend %font-bold;
+        color: $red;
+        font-size:25px;
+        font-size: 150%;
+    }
+    h3 {
+        @extend %font-bold;
+        color: $red;
+        font-size:20px;
+        font-size: 130%;
+    }
+    h4 {
+        @extend %font-bold;
+        color: $red;
+        font-style: italic;
+        text-decoration: underline;
+        padding-top: .5ex;
+        font-size: 110%;
+    }
+    h5 {
+        @extend %font-bold;
+        color: $red;
+        text-align: left;
+        font-style: italic;
+        text-decoration: none;
+        padding: .5ex 2em;
+        margin: 0px;
+        font-size: 110%;
+    }
+    h5 {
+        color: $red;
+        text-align: left;
+        font-style: italic;
+        font-size: 110%;
+    }
+    ul {
+        @extend %ul-default;
+    }
+    ol {
+        @extend %ol-default;
+    }
+    li {
+        margin-top: 1ex;
+    }
+    pre {
+        padding-left: 1em;
+        margin-left: 1em;
+        border-left: 1px solid #e20000;
+    }
+
+    div.figure {
+        width: 95%;
+        text-align: center;
+        margin: 1ex auto;
+    }
+    div.onglets_bloc {
+        .onglets_contenu {
+            display: none;
+            border: solid #e20000;
+            border-width: 0px 0px 1px 1px;
+            z-index: 10;
+            padding: 35px 0px 1ex 2ex;
+
+            &.selected {
+                display: block;
+            }
+        }
+        h2.onglets_titre {
+            background-color: #eeeeee;
+            height: 20px;
+            position: relative;
+            display: inline;
+            float: left;
+            margin: 1px -1px 0px 0px;
+            padding: 3px 1em 0px;
+            border: solid #e20000;
+            border-width: 1px 1px 1px;
+            z-index: 11;
+            white-space: nowrap;
+            text-align: center;
+            font-size: 90%;
+            top: -1px;
+
+            a {
+                text-decoration: none;
+            }
+            &.selected {
+                background-color: white;
+                border-width: 3px 1px 0px;
+                z-index: 11;
+                top: -3px;
+            }
+        }
+    }
+    div.preuve {
+        margin-left: 4em;
+        font-size: small;
+        font-style: italic;
+    }
+    div.thm {
+        border-left: 2px solid $red;
+        margin: 1ex 0em 1ex 1.5em;
+        padding-left: 1em;
+        padding-bottom: 1em;
+        font-style: italic;
+
+        span.titre {
+            @extend %font-bold;
+            font-style: normal;
+            margin-left: -2.5em;
+            background: white;
+            border-bottom: 2px solid $red;
+            border-top: 1px solid white;
+        }
+        ol {
+            margin: 0ex;
+            list-style-type: lower-roman;
+            padding-left: 1em;
+        }
+        ul {
+            margin: 0ex;
+        }
+        li {
+            margin-top: .2ex;
+            padding-left: 0px;
+        }
+    }
+    br.autobr {
+        display: none;
+    }
+}
+.spip_documents {
+    text-align: center;
+}
+.spip_documents_center {
+    width: 100%;
+    margin: auto;
+    clear: both;
+}
+.spip_documents_left {
+    float: left;
+    margin-right: 2em;
+    margin-bottom: 1ex;
+}
+.spip_documents_right {
+    float: right;
+    margin-left: 2em;
+    margin-bottom: 1ex;
+}
+.spip_documents_center {
+    display: block;
+    margin-top: 1em;
+}
+.spip_surligne {
+    color: $grey_lighter;
+    background: $red;
+}
+.spip_doc_titre {
+    font-weight: bold;
+    font-size: small;
+    margin: 1ex auto;
+}
+.spip_doc_descriptif {
+    clear: both;
+    font-size: small;
+    margin-left: auto;
+    margin-right: auto;
+}
+.spip_note_ref {
+    a {
+        color: $red;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

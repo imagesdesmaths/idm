@@ -1,0 +1,56 @@
+.block-newsletter {
+    display: table;
+    margin-bottom: $col_padding;
+    background: $grey_lightest;
+    border-radius: $border_radius_default;
+    padding: $col_padding / 2;
+
+    .image {
+        display: table-cell;
+        vertical-align: middle;
+        font-size: 60px !important;
+        -webkit-transform: scale(-1, 1);
+        -ms-transform: scale(-1, 1);
+        transform: scale(-1, 1);
+    }
+    label {
+        font-size: 16px;
+        line-height: 30px;
+        text-transform: uppercase;
+    }
+    form {
+        display: table-cell;
+        vertical-align: middle;
+    }
+    input[type="text"] {
+        background-color: $white;
+        height: 40px;
+        line-height: 18px;
+        padding: 10px;
+        width: 80%;
+        border: 1px solid $white;
+        border-right: none;
+        border-top-left-radius: $border_radius_default;
+        border-bottom-left-radius: $border_radius_default;
+        float: left;
+        font-size: $font_size_default;
+        transition: border-color $transition_duration_default;
+    }
+    button {
+        background-color: $success;
+        line-height: 20px;
+        padding: 10px;
+        width: 20%;
+        border: 0;
+        color: $white;
+        border-top-right-radius: $border_radius_default;
+        border-bottom-right-radius: $border_radius_default;
+        float: left;
+        font-size: $font_size_default;
+        transition: background $transition_duration_default;
+
+        &:hover {
+            background: darken($success, 10%);
+        }
+    }
+}

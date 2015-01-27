@@ -1,0 +1,21 @@
+section.cookies {
+    #content {
+        @extend %separator-top;
+        position: relative;
+
+        .category {
+            margin-top: -25px;
+            margin-bottom: 20px;
+        }
+        &:before{
+            margin-top: 0;
+        }
+
+        a {
+            color: $red;
+        }
+        ul {
+            @extend %ul-default;
+        }
+    }
+}

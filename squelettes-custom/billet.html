@@ -1,0 +1,20 @@
+<BOUCLE_moi(AUTEURS) {tous} {id_auteur=#SESSION{id_auteur}} {billettiste=oui}>
+#CACHE{0}
+[(#INCLURE{fond=inc/head}{class=billet}{env})]
+
+<div id="content" class="block-left">
+
+    <div class="category">Espace personnel</div>
+
+    <div class="ajax">#FORMULAIRE_BILLET</div>
+
+</div>
+</BOUCLE_moi>
+  <INCLURE{fond=sommaire}>
+<//B_moi>
+
+[(#INCLURE{fond=inc/bloc_tribune})]
+[(#INCLURE{fond=inc/bloc_image})]
+[(#INCLURE{fond=inc/bloc_random})]
+
+[(#INCLURE{fond=inc/foot})]

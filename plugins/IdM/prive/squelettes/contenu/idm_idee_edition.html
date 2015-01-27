@@ -1,0 +1,181 @@
+<BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
+<h1><:idm:idee_edit:></h1>
+
+<?php
+
+$idee = null;
+$message = '';
+$stop = false;
+
+if (isset($_GET['id_article']) && !empty($_GET['id_article'])) {
+    $idee = sql_fetch(sql_select(
+        "*",
+        "spip_articles a
+         LEFT JOIN spip_auteurs_liens al ON (al.objet = 'article' AND al.id_objet = a.id_article)",
+        "id_article = ".$_GET['id_article']
+    ));
+    if(!$idee) {
+        $stop = true;
+        $message = "Cette idée d'article est introuvable. Si vous pensez qu'il s'agit d'une erreur, veuillez contacter un administrateur.";
+    } else {
+        if($idee['statut'] != 'idee') {
+            $idee = null;
+            $stop = true;
+            $message = "Cette idée à déjà été traitée.";
+        } elseif($idee['id_editeur'] != #SESSION{id_auteur}) {
+            $idee = null;
+            $stop = true;
+            $message = "Seul l'éditeur de cette idée est autorisé à la modifier.";
+        }
+    }
+}
+
+if(!$stop) {
+
+    if (isset($_POST['form_idee_edit']) && !empty($_POST['form_idee_edit'])) {
+
+        if (!isset($_POST['categorie']) || empty($_POST['categorie'])) {
+            $message = 'Veuillez sélectionner une catégorie';
+        } else if (!isset($_POST['auteur']) || empty($_POST['auteur'])) {
+            $message = 'Veuillez sélectionner un auteur';
+        } else if (!isset($_POST['titre']) || empty($_POST['titre'])) {
+            $message = 'Veuillez entrer un titre';
+        } else {
+
+            if(!$idee) {
+
+                // Création d'une nouvelle idée
+                $id_article = sql_insertq("spip_articles",
+                    array (
+                        "id_rubrique" => $_POST['categorie'],
+                        "id_editeur" => #SESSION{id_auteur},
+                        "titre" => $_POST['titre'],
+                        "commentaires" => $_POST['note'],
+                        "statut" => "idee",
+                        "accepter_forum" => "abo",
+                        "date" => "NOW()"
+                    )
+                );
+                sql_insertq ("spip_auteurs_liens",
+                    array (
+                        "id_auteur" => $_POST['auteur'],
+                        "id_objet" => $id_article,
+                        "objet" => "article",
+                        "vu" => "non"
+                    )
+                );
+                $_POST = array();
+                @header ("Location: #URL_ECRIRE{idm_idees}&added=1");
+
+            } else {
+
+                // Modification d'une idée existante
+                sql_updateq("spip_articles",
+                    array (
+                        "id_rubrique" => $_POST['categorie'],
+                        "titre" => $_POST['titre'],
+                        "commentaires" => $_POST['note'],
+                    ),
+                    "id_article = ".$idee['id_article']
+                );
+                sql_updateq ("spip_auteurs_liens",
+                    array (
+                        "id_auteur" => $_POST['auteur'],
+                        "vu" => "non"
+                    ),
+                    "objet = 'article' AND id_objet = ".$idee['id_article']
+                );
+                $_POST = array();
+                @header ("Location: #URL_ECRIRE{idm_idees}&edited=1");
+
+            }
+
+        }
+    }
+
+}
+
+?>
+<BOUCLE_load(ARTICLES) {id_article} {statut=idee}>
+    #SET{categorie, #ID_RUBRIQUE}
+    #SET{auteur, #ID_AUTEUR}
+    #SET{titre, #TITRE}
+    #SET{note, #COMMENTAIRES}
+</BOUCLE_load>
+<BOUCLE_load_categorie(ARTICLES){0,1}>[(#ENV{form_idee_edit}|?{' '})]</BOUCLE_load_categorie>
+    #SET{categorie, #ENV{categorie}}
+    #SET{auteur, #ENV{auteur}}
+    #SET{titre, #ENV{titre}}
+    #SET{note, #ENV{note}}
+</B_load_categorie>
+
+<form action="#SELF" method="post">
+
+    <?php
+    if($message != '') {
+        echo '<p class="error">Erreur : '.$message.'</p><br>';
+    }
+    ?>
+    <a href="#URL_ECRIRE{idm_idees}" class="button-white go_top">Retour à la liste des idées d'articles</a>
+
+    <?php
+    if($message == '') {
+    ?>
+    <div id="box_idees">
+        <div id="edition_idee">
+            <div class="box simple">
+                <div class="inner">
+
+                    <div class="hd titrem">
+                        <h2>Informations générales</h2>
+                    </div>
+
+                    <div class="bd">
+                        <label for="categorie">Catégorie :</label>
+                        <select name="categorie" id="categorie">
+                            <BOUCLE_rubrique(RUBRIQUES) {par titre}>
+                                <option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|=={#GET{categorie}}|?{ selected="selected"})]>#TITRE</option>
+                            </BOUCLE_rubrique>
+                        </select><br>
+
+                        <label for="auteur">Auteur :</label>
+                        <select name="auteur" id="auteur">
+                            <BOUCLE_auteur(AUTEURS) {par nom}>
+                                <option value="#ID_AUTEUR"[(#ID_AUTEUR|=={#GET{auteur}}|?{ selected="selected"})]>#NOM</option>
+                            </BOUCLE_auteur>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="box simple">
+                <div class="inner">
+
+                    <div class="hd titrem">
+                        <h2>Description du projet</h2>
+                    </div>
+
+                    <div class="bd">
+                        <label for="titre">Titre :</label>
+                        <input type="text" name="titre" id="titre" value="#GET{titre}"><br>
+
+                        <label for="note" class="top">Note d'intention :</label>
+                        <textarea name="note" id="note">#GET{note}</textarea>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="buttons">
+                <a href="#URL_ECRIRE{idm_idees}" class="button-white">Annuler</a>
+                <input type="submit" class="button-green" name="form_idee_edit" value="Valider" />
+            </div>
+        </div>
+    </div>
+
+    <?php } ?>
+
+</form>
+
+</BOUCLE_securite>

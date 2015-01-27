@@ -1,7 +1,7 @@
 <paquet
     prefix        = "idm"
     categorie     = "edition"
-    version       = "1.2"
+    version       = "2.0"
     etat          = "stable"
     compatibilite = "[3.0.0-alpha2;3.0.*]"
     logo          = "prive/themes/spip/images/idm-logo-60.png"
@@ -10,17 +10,20 @@
   <nom>IdM</nom>
 
   <auteur mail="vbeffara@ens-lyon.fr">Vincent Beffara</auteur>
+  <auteur mail="smarchal@diatem.fr">Samuel Marchal</auteur>
   <licence>GPLv3</licence>
 
-  <menu nom="idm"              titre="idm:menu"         icone="images/idm-48.png" parent=""/>
-  <menu nom="idm_tableau"      titre="idm:tableau"      icone="images/idm-24.png" parent="idm"/>
-  <menu nom="idm_billettistes" titre="idm:billettistes" icone="images/idm-24.png" parent="idm"/>
-  <menu nom="idm_relecteurs"   titre="idm:relecteurs"   icone="images/idm-24.png" parent="idm"/>
-  <menu nom="idm_relecture"    titre="idm:relecture"    icone="images/idm-24.png" parent="idm"/>
-  <menu nom="idm_log"          titre="idm:log"          icone="images/idm-24.png" parent="idm"/>
-  <menu nom="idm_moderation"   titre="idm:moderation"   icone="images/idm-24.png" parent="idm"/>
-  <menu nom="idm_teams"        titre="idm:teams"        icone="images/idm-24.png" parent="idm"/>
-  <menu nom="idm_lint"         titre="idm:lint"         icone="images/idm-24.png" parent="idm"/>
+  <menu nom="idm"                     titre="idm:menu"                icone="images/idm-48.png" parent=""/>
+  <menu nom="idm_tableau"             titre="idm:tableau"             icone="images/idm-24.png" parent="idm"/>
+  <menu nom="idm_billettistes"        titre="idm:billettistes"        icone="images/idm-24.png" parent="idm"/>
+  <menu nom="idm_billets_abandons"    titre="idm:billets_abandons"    icone="images/idm-24.png" parent="idm"/>
+  <menu nom="idm_idees"               titre="idm:idee"                icone="images/idm-24.png" parent="idm"/>
+  <menu nom="idm_relecteurs"          titre="idm:relecteurs"          icone="images/idm-24.png" parent="idm"/>
+  <menu nom="idm_relecture"           titre="idm:relecture"           icone="images/idm-24.png" parent="idm"/>
+  <menu nom="idm_log"                 titre="idm:log"                 icone="images/idm-24.png" parent="idm"/>
+  <menu nom="idm_moderation"          titre="idm:moderation"          icone="images/idm-24.png" parent="idm"/>
+  <menu nom="idm_teams"               titre="idm:teams"               icone="images/idm-24.png" parent="idm"/>
+  <menu nom="idm_lint"                titre="idm:lint"                icone="images/idm-24.png" parent="idm"/>
 
   <pipeline nom="declarer_tables_interfaces"  inclure="base/idm.php" />
   <pipeline nom="declarer_tables_objets_sql"  inclure="base/idm.php" />

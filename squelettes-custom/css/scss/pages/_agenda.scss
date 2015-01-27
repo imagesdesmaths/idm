@@ -1,0 +1,40 @@
+section.agenda {
+    #content {
+        @extend %separator-top;
+        position: relative;
+
+        .category {
+            margin-top: -25px;
+            margin-bottom: 20px;
+        }
+        &:before{
+            margin-top: 0;
+        }
+
+        li {
+            .resume {
+                display: table;
+                width: 100%;
+                background: $grey_lightest;
+                border-radius: $border_radius_default;
+                margin-bottom: 5px;
+                padding: 8px 8px 8px 16px;
+
+                .date {
+                    display: table-cell;
+                    width: 25%;
+                    vertical-align: middle;
+                }
+                .title {
+                    display: table-cell;
+                    width: 100%;
+                    vertical-align: middle;
+                }
+                .link {
+                    display: table-cell;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+}

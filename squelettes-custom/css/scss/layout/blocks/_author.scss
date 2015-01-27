@@ -1,0 +1,32 @@
+.block-author {
+    .image {
+        display: table-cell;
+        width: 90px;
+        font-size: 40px;
+        color: $white;
+        vertical-align: middle;
+        text-align: center;
+        overflow: hidden;
+        border-radius: $border_radius_default;
+
+        &:empty {
+            width: 0px;
+        }
+
+        + a {
+            display: table-cell;
+            vertical-align: middle;
+            padding-left: 15px;
+        }
+    }
+    .name {
+        text-transform: uppercase;
+        margin: 0;
+    }
+    p {
+        margin: 0;
+    }
+    img {
+        border-radius: $border_radius_default;
+    }
+}

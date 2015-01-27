@@ -6,32 +6,40 @@
   <BOUCLE_cat(POUR) {tableau #ARRAY{1,nouveau,2,chercheur,3,enseignant,4,etudiant,5,lyceen,6,autre,7,non_classe,8,inactif}}>
 
     <B_relecteurs>
-      <h2><:idm:categorie{nom=#VALEUR}:></h2>
+    <div class="box simple">
+      <div class="inner">
 
-      <div class="formulaire_spip">
-        <table id="lesrelecteurs2_#VALEUR" class="sortable">
-          <thead>
-            <tr>
-              <th>Signature / Pseudo</th>
-              <th>E-mail</th>
-              <th>Nb</th>
-              <th>Lus</th>
-              <th>Faits</th>
-            </tr>
-          </thead>
-          <tbody>
-            <BOUCLE_relecteurs(IDM_RELECTEURS spip_auteurs) {role = relecteur} {categorie = #VALEUR}>
+        <div class="hd titrem">
+          <h2><:idm:categorie{nom=#VALEUR}:></h2>
+        </div>
+
+        <div class="bd">
+          <table id="lesrelecteurs2_#VALEUR" class="sortable">
+            <thead>
               <tr>
-                <td><span style="display:none">#NOM</span><a href="?exec=idm_relecteur&id_auteur=#ID_AUTEUR">#NOM</a></td>
-                <td><a href="mailto:#EMAIL*">#EMAIL</a></td>
-                <td>#COMBIEN</td>
-                <td>#LUS</td>
-                <td>#COMMENTS</td>
+                <th>Signature / Pseudo</th>
+                <th>E-mail</th>
+                <th>Nb</th>
+                <th>Lus</th>
+                <th>Faits</th>
               </tr>
-            </BOUCLE_relecteurs>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <BOUCLE_relecteurs(IDM_RELECTEURS spip_auteurs) {role = relecteur} {categorie = #VALEUR}>
+                <tr>
+                  <td><span style="display:none">#NOM</span><a href="?exec=idm_relecteur&id_auteur=#ID_AUTEUR">#NOM</a></td>
+                  <td><a href="mailto:#EMAIL*">#EMAIL</a></td>
+                  <td>#COMBIEN</td>
+                  <td>#LUS</td>
+                  <td>#COMMENTS</td>
+                </tr>
+              </BOUCLE_relecteurs>
+            </tbody>
+          </table>
+        </div>
+
       </div>
+    </div>
     </B_relecteurs>
 
     <script type="text/javascript">

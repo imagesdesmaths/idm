@@ -1,0 +1,69 @@
+<?php
+
+    $results = sql_select(
+        'id_objet',
+        'spip_random',
+        'type = "figure_sans_paroles" AND date_picked >= CURDATE()'
+    );
+    if($row = sql_fetch($results)) {
+        // La figure du jour est déjà définie aujourd'hui, on la récupère
+    } else {
+        // La figure du jour n'est pas encore définie, on la choisit aléatoirement
+        $results = sql_select(
+            'a.id_article',
+            'spip_articles AS a
+                LEFT JOIN spip_random AS r ON a.id_article = r.id_objet',
+            'r.id_objet IS NULL AND a.statut = "publie" AND a.id_rubrique = #RUBRIQUE_FIGURES_SANS_PAROLES',
+            '',
+            'RAND()',
+            '1'
+        );
+        if($row = sql_fetch($results)) {
+            // On stocke la figure du jour
+            sql_insertq('spip_random', array(
+                'objet' => 'article',
+                'id_objet' => $row['id_article'],
+                'type' => 'figure_sans_paroles',
+                'date_picked' => date('Y-m-d H:i:s')
+            ));
+        } else {
+            // Tout à été selectionné une fois, on vide les entrées de spip_random
+            sql_delete('spip_random', 'type = "figure_sans_paroles"');
+            // Et on sélectionne une nouvelle figure aléatoirement
+            $results = sql_select(
+                'id_article',
+                'spip_articles',
+                'statut = "publie" AND id_rubrique = #RUBRIQUE_FIGURES_SANS_PAROLES',
+                '',
+                'RAND()',
+                '1'
+            );
+            if($row = sql_fetch($results)) {
+                // On stocke la figure du jour
+                sql_insertq('spip_random', array(
+                    'objet' => 'article',
+                    'id_objet' => $row['id_article'],
+                    'type' => 'figure_sans_paroles',
+                    'date_picked' => date('Y-m-d H:i:s')
+                ));
+            } else {
+                // Une erreur est survenue (rubrique vide...)
+            }
+        }
+    }
+
+?>
+<B_random>
+    <div class="block-right block-figure">
+    <BOUCLE_random(spip_random) {type="figure_sans_paroles"} {par date_picked} {inverse} {0,1}>
+        <BOUCLE_figure(ARTICLES) {id_article=#ID_OBJET}>
+            <h2>
+                <a class="seemore" href="#URL_ARTICLE"><BOUCLE_rubrique(RUBRIQUES) {id_rubrique=#RUBRIQUE_FIGURES_SANS_PAROLES}>#TITRE</BOUCLE_rubrique> <span class="icon"><i class="flaticon-plus"></i></span></a>
+            </h2>
+            <div class="content">
+                <a class="seemore" href="#URL_ARTICLE">Cliquez pour découvrir la figure du jour !</a>
+            </div>
+        </BOUCLE_figure>
+    </BOUCLE_random>
+    </div>
+</B_random>

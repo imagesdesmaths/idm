@@ -1,0 +1,63 @@
+.current_status,
+.puce_status {
+    background: #eee;
+
+    &.idee { background: $idee; }
+    &.prepa { background: $prepa; }
+    &.prop { background: $prop; }
+    &.publie { background: $publie; }
+    &.waiting { background: $waiting; }
+    &.refuse { background: $refuse; }
+    &.poubelle { background: $poubelle; }
+    &.archive { background: $archive; }
+}
+#ui-datepicker-div {
+    z-index: 999 !important;
+}
+.current_status {
+    border-radius: $border_radius_default;
+    padding: 5px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+.puce_status {
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+.simple-link {
+    border: none;
+    background: none;
+    display: table-cell;
+    vertical-align: middle;
+    height: 28px;
+    width: auto;
+    padding: 0;
+    color: #666;
+    font-size: .9em;
+    cursor: pointer;
+    text-align: left;
+
+    &:hover {
+        color: #000;
+    }
+
+    img {
+        padding: 0;
+        border: 0;
+        background: none;
+        position: absolute;
+        left: 4px;
+        top: 50%;
+        margin-top: -12px;
+    }
+}
+.liste-objets.auteurs.editeurs {
+    .caption {
+        background-image: url("/prive/themes/spip/images/auteur-edit-24.png");
+    }
+}

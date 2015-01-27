@@ -1,0 +1,122 @@
+#CACHE{3600}
+[(#INCLURE{fond=inc/head}{class=article}{env})]
+
+<BOUCLE_articles_piste(MOTS) {id_article} {type=Difficulté} {0,1}>
+#SET{track_title, #TITRE}
+#SET{track_slug, #TITRE|slug}
+#SET{track_id, #ID_MOT}
+</BOUCLE_articles_piste>
+
+<BOUCLE_auteur(AUTEURS){id_article} {0,1}>
+#SET{author_id, #ID_AUTEUR}
+#SET{author_name, #NOM}
+#SET{author_email, #EMAIL}
+</BOUCLE_auteur>
+
+<div id="content" class="article-full block-left #GET{track_slug}">
+
+    <BOUCLE_articles(ARTICLES) {id_article}>
+
+        <BOUCLE_rubrique(RUBRIQUES){id_rubrique=#ID_RUBRIQUE} {0,1}>
+        #SET{rubrique_name, #TITRE}
+        </BOUCLE_rubrique>
+
+        <div class="category"><a href="#URL_RUBRIQUE">[(#GET{rubrique_name}|sinon{Article})]</a> [<a href="(#URL_RUBRIQUE)" class="backlink">Retour à la rubrique #NOM_RUBRIQUE</a>]</div>
+        [<h4>(#SURTITRE)</h4>]
+        <h1>#TITRE</h1>
+        [<h4>(#SOUSTITRE)</h4>]
+
+        [<a href="#URL_PAGE{mot,id_mot=#GET{track_id}}" class="piste #GET{track_slug}">(#GET{track_title})</a>]
+        <span class="date">[(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</span>
+        <a href="#URL_AUTEUR" class="author"> - Rédigé par #GET{author_name}</a>
+
+        #SET{image_url, IMG/#LOGO_ARTICLE|fichier}
+        <BOUCLE_articles_auteur_logo(AUTEURS){id_article} {0,1}>
+            [(#LOGO_ARTICLE|fichier|non)
+                #SET{image_url, IMG/#LOGO_AUTEUR|fichier}
+                [(#LOGO_AUTEUR|fichier|non)
+                    #SET{image_url, #CHEMIN{img/nopic.jpg}}
+                ]
+            ]
+        </BOUCLE_articles_auteur_logo>
+        [<div class="image"[ style="background:(#GET{image_url}|color_dominant);border-color:[(#GET{image_url}|color_dominant)]"]>
+            (#GET{image_url}|image_reduire{0,350})
+        </div>]
+
+        [<div class="chapo">(#CHAPO)</div>]
+        [<div class="details wysiwyg">(#TEXTE)</div>]
+        [<div class="post-scriptum"><strong>Post-scriptum :</strong> (#PS)</div>]
+        [<div class="notes">
+            <h2>Notes</h2>
+            (#NOTES)
+        </div>]
+
+
+        <div class="block-share" id="partager">
+            <h2><a href="#partager">Partager cet article</a></h2>
+            <ul class="share">
+                [<li>
+                    <a href="mailto:?subject=[(#TITRE)]&body=[(#TITRE|concat{" - ",#NOM_SITE_SPIP})] : (#SELF|url_absolue)" class="link-contact" title="Envoyer cet article à un ami"><i class="flaticon-contact"></i></a>
+                </li>]
+                [<li>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=(#SELF|url_absolue|urlencode)" class="link-facebook" title="Partager cet article sur Facebook" target="popup"><i class="flaticon-facebook"></i></a>
+                </li>]
+                [<li>
+                    <a href="https://twitter.com/share?url=(#SELF|url_absolue|urlencode)&text=[(#TITRE|concat{" - ",#NOM_SITE_SPIP}|urlencode)]" class="link-twitter" title="Partager cet article sur Twitter" target="popup"><i class="flaticon-twitter"></i></a>
+                </li>]
+                [<li>
+                    <a href="https://plus.google.com/share?url=(#SELF|url_absolue|urlencode)" class="link-googleplus" title="Partager cet article sur Google+" target="popup"><i class="flaticon-googleplus"></i></a>
+                </li>]
+            </ul>
+            <div class="quote">
+                <h3>Pour citer cet article :</h3>
+                <p>[(#GET{author_name})][, «(#TITRE)»] — Images des Mathématiques, CNRS[, (#DATE|annee)]</p>
+            </div>
+            <div class="credits">
+                #BLOC_TITRE
+                <h3>Crédits image :</h3>
+                #BLOC_DEBUT
+                [<a href="IMG/#LOGO_ARTICLE**">Image à la une</a> - (#CREDITS_LOGO|propre|PtoBR)<br/>]
+                <BOUCLE_credits(DOCUMENTS) {id_article} {credits == .} {statut == .}>
+                  <a href="#URL_DOCUMENT">[(#TITRE|sinon{img_#ID_DOCUMENT})]</a> - [(#CREDITS|propre|PtoBR)]<br/>
+                </BOUCLE_credits>
+                #BLOC_FIN
+            </div>
+        </div>
+
+        <div class="block-comments" id="commentaires">
+            <h2>Commentaire sur l'article</h2>
+            [(#INCLURE{fond=inc/forum}{id_article}{id_forum}{author_name=#GET{author_name}})]
+        </div>
+
+        <div class="block-comment" id="commenter">
+            <h2>Laisser un commentaire</h2>
+            #FORMULAIRE_FORUM
+        </div>
+
+        <B_lies>
+        <div class="block-related" id="suggestions">
+            <h2><a href="#suggestions">Articles suggérés</a></h2>
+            <p>Si vous avez aimé cet article, voici quelques suggestions automatiques qui pourraient vous intéresser :</p>
+            <ul>
+                <BOUCLE_lies(spip_liens){id_article}>
+                    <BOUCLE_lien(ARTICLES){id_article=#ID_TARGET}>
+                    [(#INCLURE{fond=inc/resume_article}{id_article}{image_width=320}{image_height=180})]
+                    </BOUCLE_lien>
+                </BOUCLE_lies>
+            </ul>
+        </div>
+        </B_lies>
+
+    </BOUCLE_articles>
+
+</div>
+
+[(#INCLURE{fond=inc/bloc_author}{id_article})]
+[(#INCLURE{fond=inc/bloc_anchors})]
+[(#INCLURE{fond=inc/bloc_tags}{id_article})]
+[(#INCLURE{fond=inc/bloc_dossier}{id_article})]
+[(#INCLURE{fond=inc/bloc_image})]
+[(#INCLURE{fond=inc/bloc_random})]
+
+[(#INCLURE{fond=inc/foot})]

@@ -1,0 +1,34 @@
+/*
+    SPIP
+ */
+.spip-admin-float {
+    display:none;
+}
+div.cs_blocs {
+    margin: 1ex 0em;
+
+    h4 {
+        text-align: left;
+        font-style: normal;
+        font-size: 100%;
+        font-weight: normal;
+        padding: 0pt 0pt 0pt 20px;
+
+        a:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        &.blocs_titre {
+            background: transparent url(../img/triangle-bottom.png) no-repeat scroll left center;
+        }
+        &.blocs_replie {
+            background: transparent url(../img/triangle-right.png) no-repeat scroll left center;
+        }
+    }
+    div.blocs_destination {
+        margin-left: 1em;
+        padding-left: 1em;
+        border-left: 2px solid $red;
+        font-style: italic;
+    }
+}

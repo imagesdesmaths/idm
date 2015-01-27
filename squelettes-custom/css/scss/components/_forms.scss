@@ -1,0 +1,55 @@
+%fieldset {
+    border: 1px solid $grey_lightest;
+    padding: 5px 25px 25px;
+    margin-bottom: 25px;
+    background: $white;
+    border-radius: $border_radius_default;
+
+    legend {
+        position: relative;
+        color: $red;
+        background: $white;
+        padding: 10px 20px;
+        border: 1px solid $grey_lightest;
+        border-radius: $border_radius_default;
+
+        &:after {
+            content: "";
+            border: 1px solid white;
+            border-top: none;
+            border-radius: 0 0 $border_radius_default $border_radius_default;
+            position: absolute;
+            bottom: -1px;
+            left: -1px;
+            right: -1px;
+            height: 50%;
+            z-index: 1;
+        }
+    }
+    a {
+        color: $red;
+
+        &:hover,
+        &:focus {
+            text-decoration: underline;
+        }
+    }
+    p {
+        margin: 0;
+    }
+}
+%custom-inputs {
+    label {
+        display: inline-block;
+        margin: 15px 0 5px;
+    }
+    input[type="text"],
+    input[type="password"],
+    textarea {
+        padding: 20px 15px;
+        width: 100%;
+        background: $white;
+        border: 1px solid $grey_light;
+        border-radius: $border_radius_default;
+    }
+}

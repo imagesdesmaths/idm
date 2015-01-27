@@ -1,0 +1,53 @@
+section.lexique {
+    #content {
+        @extend %separator-top;
+        position: relative;
+
+        .category {
+            margin-top: -25px;
+            margin-bottom: 20px;
+        }
+        &:before{
+            margin-top: 0;
+        }
+
+        .lexique {
+            a {
+                color: $red;
+            }
+            .heading {
+                @extend %font-bold;
+                text-align: center;
+                display: block;
+                background: $grey_lighter;
+                border-radius: $border_radius_default;
+                padding: 10px;
+                margin: 20px 0;
+            }
+            .mot {
+                @extend %font-bold;
+                color: $red;
+            }
+            .description {
+                font-style: italic;
+                color: $grey_light;
+            }
+            .lexique-letters {
+                text-align: right;
+                margin-top : 2ex;
+
+                a {
+                    @extend %font-bold;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+            li li + li {
+                @extend %separator-top-thin;
+                position: relative;
+            }
+        }
+    }
+}

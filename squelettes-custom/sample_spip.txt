@@ -1,0 +1,57 @@
+Test de syntaxe SPIP
+--------------------
+
+- Qu'est-ce que cela peut faire que je lutte pour la mauvaise cause
+puisque je suis de bonne foi?
+- Et qu'est-ce que ça peut faire que je sois de mauvaise foi
+puisque c'est pour la bonne cause. (Jacques
+Prévert)
+du texte {en italique} en
+du texte {{en gras}} en
+{{{Un titre de partie}}}
+----
+SPIP est une initiative du [minirézo->http://www.minirezo.net/].
+[->http://dmoz.org/World/Deutsch/Kultur/Literatur/Autoren_und_Autorinnen/P/Proust,_Marcel/]
+[Un site en français{fr}->http:///www.adresse.tld]
+[voir ici|Ce lien vous expliquera tout ce qu'il faut savoir->http:///www.adresse.tld]
+lien vers [l'article->342]
+lien vers [l'article->art342]
+lien vers [l'article->article 342]
+Une note[[Voici un complément d'information.]] de bas de page
+<quote>C'est drôlement bien, SPIP.</quote>
+
+Kikou, je suis bien d'accord :-)
+
+| {{Nom}} | {{Prénom}} | {{Age}} |
+| Marso | Ben | 23 ans |
+| Capitaine | | non connu |
+| Philant | Philippe | 46 ans |
+| Cadoc | Bébé | 4 mois |
+
+-* Ton cheval est:
+-** alezan;
+-** bai;
+-** noir;
+-* mais mon lapin est:
+-** blanc;
+-*** angora;
+-*** ou à poil ras.
+
+-# premier
+-# deuxieme
+-# troisieme
+
+[?read#man2]
+[direct<-]
+Une note «forcée»[[<xxx> Le texte de la note.]]
+vous pouvez utiliser les notes numérotées automatiques[[En plaçant le texte de la note entre crochets.]],
+- mais aussi forcer la numérotation de la note[[<23> En indiquant le numéro de la note entre les symboles «<» et «>».]],
+- utiliser des notes sous forme d'astérisques [[<*> En plaçant simplement une astérisque entre les symboles «<» et «>».]],
+- fabriquer des notes sans références (non numérotées); attention, de telles notes ne présentent plus de lien entre la note et l'appel de note[[<> En n'indiquant rien entre les symboles «<» et «>».]],
+- donner un nom (en toutes lettres) à une note; cet usage est très répandu pour les références bibliographiques[[<Rab> François Rabelais.]];
+- rappeler une note déjà existante[[<23>]] en indiquant le numéro de cette note entre les symboles «<» et «>» et en laissant vide le reste de la note.
+<HTML>texte à ne
+pas transformer; attention!</HTML>
+<code><?php     // ceci est du langage php
+      echo "bonjour";
+?></code>

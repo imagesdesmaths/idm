@@ -1,0 +1,25 @@
+#CACHE{3600}
+[(#INCLURE{fond=inc/head}{class=article}{env})]
+
+<div id="content" class="article-full block-left #GET{track_slug}">
+
+    <BOUCLE_img(DOCUMENTS){id_document=#ENV{id_document}}{tous}>
+
+        <div class="category">L'image du jour</div>
+        <h1>[(#TITRE)]</h1>
+
+        <div class="image" style="background:(#URL_DOCUMENT|color_dominant);border-color:[(#URL_DOCUMENT|color_dominant)]">
+            <img src="#URL_DOCUMENT"[ alt="(#TITRE)"] />
+        </div>
+
+        <div class="details">[(#DESCRIPTIF)]</div>
+        [<p class="copyright">Crédits : (#CREDITS)</p>]
+
+    </BOUCLE_img>
+
+</div>
+
+[(#INCLURE{fond=inc/bloc_tribune})]
+
+[(#INCLURE{fond=inc/foot})]
+

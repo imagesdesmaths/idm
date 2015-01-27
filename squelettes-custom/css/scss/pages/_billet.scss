@@ -1,0 +1,23 @@
+section.billet {
+    #content {
+        @extend %separator-top;
+        position: relative;
+
+        .category {
+            margin-top: -25px;
+            margin-bottom: 20px;
+        }
+        &:before{
+            margin-top: 0;
+        }
+
+        form {
+            @extend %custom-inputs;
+        }
+        input[type="submit"] {
+            @extend %button-red;
+            padding: 15px 30px;
+            float: right;
+        }
+    }
+}

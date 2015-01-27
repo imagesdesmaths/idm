@@ -1,0 +1,9 @@
+[(#REM) Si l'objet est un article, on utilise le nouvel affichage ]
+[(#ENV{_objet}|=={article}|?{' '})
+    <INCLURE{fond=formulaires/instituer_article, env}>
+]
+
+[(#REM) Si l'objet n'est pas un article, on garde l'ancien affichage ]
+[(#ENV{_objet}|!={article}|?{' '})
+    <INCLURE{fond=formulaires/instituer_autre, env}>
+]

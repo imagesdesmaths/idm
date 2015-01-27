@@ -1,0 +1,25 @@
+.pages {
+    @extend %separator-top;
+    margin-bottom: 30px;
+    display: block;
+
+    .lien_pagination {
+        @extend %button;
+        margin-right: 3px;
+    }
+    .sep {
+        display: none;
+    }
+    .tbc {
+        cursor: default;
+    }
+    .on {
+        @extend %button-red;
+        margin-right: 3px;
+        cursor: default;
+
+        &:hover {
+            background: $red !important;
+        }
+    }
+}

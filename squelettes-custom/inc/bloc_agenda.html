@@ -1,0 +1,22 @@
+<div class="block-right block-agenda">
+    <h2>
+        <a class="seemore" href="#URL_PAGE{agenda}">L'agenda des maths <span class="icon"><i class="flaticon-plus"></i></span></a>
+    </h2>
+    <div>
+        <ul>
+            <BOUCLE_agenda(BREVES) {id_rubrique in #RUBRIQUE_REVUE_DE_PRESSE,#RUBRIQUE_EVENEMENTS} {age_relatif >= 0} {par date} {inverse} {0,6}>
+            <li>
+                <a href="#URL_BREVE">
+                    <div class="image">
+                        <i class="flaticon-event"></i>
+                    </div>
+                    <div class="resume">
+                        <div class="date">[(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</div>
+                        <div class="title">#TITRE</div>
+                    </div>
+                </a>
+            </li>
+            </BOUCLE_agenda>
+        </ul>
+    </div>
+</div>

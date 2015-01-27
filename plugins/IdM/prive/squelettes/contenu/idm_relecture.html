@@ -1,8 +1,261 @@
+<?php
+
+include_spip('base/abstract_sql');
+
+function notify_user ($id_auteur, $id_article) {
+  $titre = sql_getfetsel ("titre", "spip_articles", "id_article = $id_article");
+  $subject = "Relecture d'un article pour Images des Maths";
+  $texte = _T('idm:mail_rel_article', array('titre'      => $titre,
+                                        'id_article' => $id_article));
+  idm_notify ($id_auteur, $texte, $subject);
+}
+
+function nettoie () {
+  $affectes = sql_allfetsel ( array("id_auteur","id_article"), "spip_relecteurs_articles" );
+  foreach ($affectes as $line) {
+    $id_auteur = $line["id_auteur"];
+    $id_article = $line["id_article"];
+    $statut = sql_getfetsel ("statut", "spip_articles", "id_article = $id_article");
+    $role = sql_getfetsel ("role", "spip_idm_relecteurs", "id_auteur = $id_auteur");
+    if (($statut != "prop") OR ($role != "relecteur"))
+      sql_delete ("spip_relecteurs_articles", "id_auteur = $id_auteur");
+  }
+}
+
+function affecte() {
+  $id_article = intval($_POST['affecter_relecteurs_a']);
+  $added = array();
+  $removed = array();
+  if(isset($_POST['add_relecteur']))
+    $added = array_map('intval', $_POST['add_relecteur']);
+  if(isset($_POST['remove_relecteur']))
+    $removed = array_map('intval', $_POST['remove_relecteur']);
+
+  foreach ($added as $id_auteur) {
+    sql_insertq ("spip_relecteurs_articles", array("id_auteur"=>$id_auteur, "id_article"=>$id_article, "status"=>"pas_vu"));
+    sql_insertq ("spip_idm_relecture", array("id_auteur"=>$id_auteur, "action"=>'affected', "id_article"=>$id_article));
+    sql_update ("spip_idm_relecteurs", array("combien"=>"combien+1"), "id_auteur = $id_auteur");
+    notify_user ($id_auteur, $id_article);
+  }
+  foreach ($removed as $id_auteur) {
+    sql_delete ("spip_relecteurs_articles", "id_auteur = $id_auteur AND id_article = $id_article");
+    sql_delete ("spip_idm_relecture", "id_auteur = $id_auteur AND id_article = $id_article");
+    sql_update ("spip_idm_relecteurs", array("combien"=>"combien-1"), "id_auteur = $id_auteur");
+  }
+
+  header('location: #SELF');
+}
+
+nettoie();
+if(isset($_POST['affecter_relecteurs_a'])) {
+  affecte();
+}
+
+?>
 <BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
 <h1><:idm:relecture:></h1>
 
-<BOUCLE_prop(ARTICLES) {statut = prop} {par date} {id_rubrique?} {lang = fr}>
-<div class="ajax">#FORMULAIRE_RELECTEURS_ARTICLE{#ID_ARTICLE}</div>
+<BOUCLE_prop(ARTICLES) {statut = prop} {par date} {id_rubrique?}>
+
+
+<div id="boxes">
+    <BOUCLE_article(ARTICLES) {statut=prop} {id_article}>
+
+    <div class="box_relecteurs box simple">
+        <div class="inner closable">
+
+            <div class="hd titrem">
+                <h2>
+                    <a href="#URL_ECRIRE{article,id_article=#ID_ARTICLE}">#TITRE</a>
+                    <span><a href="#URL_ECRIRE{article,id_article=#ID_ARTICLE}" class="button-white">Fiche article</a></span>
+                    <span><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}" class="button-white">Lire l'article</a></span>
+                </h2>
+            </div>
+
+            <div class="bd">
+                Auteur : <BOUCLE_auteur(AUTEURS){id_article} {0,1}><a href="#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}">#NOM</a></BOUCLE_auteur><br>
+                Date : [(#DATE|affdate)]
+            </div>
+
+            <div class="bd buttons">
+                <B_relecteurstotal>
+                <p>
+                    <strong>#TOTAL_BOUCLE relecteur[(#TOTAL_BOUCLE|>{1}|?{s})]</strong>
+                    (lu : <BOUCLE_relecteurslu(RELECTEURS_ARTICLES spip_idm_relecteurs spip_auteurs) {id_article} {status=vu}>#TOTAL_BOUCLE</BOUCLE_relecteurslu>, non lu : <BOUCLE_relecteursnonlu(RELECTEURS_ARTICLES spip_idm_relecteurs spip_auteurs) {id_article} {status=pas_vu}>#TOTAL_BOUCLE</BOUCLE_relecteursnonlu>)
+                </p>
+
+                <BOUCLE_relecteurstotal(RELECTEURS_ARTICLES spip_idm_relecteurs spip_auteurs) {id_article}><!-- do NOT delete --></BOUCLE_relecteurstotal>
+
+                <a href="javascript:;" class="button readmore" data-alt-text="Masquer le détail">Afficher le détail</a>
+                <a href="javascript:;" class="button" data-modal-open="#modal_relecteurs_#ID_ARTICLE">Gérer les relecteurs</a>
+                <a href="javascript:;>" class="button" data-modal-open="#modal_send_mail_#ID_ARTICLE">Envoyer un mail</a>
+
+                </B_relecteurstotal>
+                <p class="no-reviewer danger">Aucun relecteur n'a été associé à cet article</p>
+                <a href="javascript:;" class="button" data-modal-open="#modal_relecteurs_#ID_ARTICLE">Gérer les relecteurs</a>
+                <//B_relecteurstotal>
+            </div>
+
+            <B_relecteurs2>
+            <div class="bd closable-content">
+                <table id="assigned_#ID_ARTICLE" class="sortable">
+                    <thead>
+                        <tr>
+                            <th>Signature / Pseudo</th>
+                            <th>État</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <BOUCLE_relecteurs2(RELECTEURS_ARTICLES spip_idm_relecteurs spip_auteurs) {id_article}>
+                        <tr>
+                            <td><a href="mailto:#EMAIL*">#NOM</a></td>
+                            <td>#STATUS</td>
+                        </tr>
+                        </BOUCLE_relecteurs2>
+                    </tbody>
+                </table>
+            </div>
+            </B_relecteurs2>
+
+        </div>
+    </div>
+
+    <B_relecteursmail>
+    <div id="modal_send_mail_#ID_ARTICLE">
+        <div class="box simple">
+            <div class="inner">
+
+                #FORMULAIRE_RELECTURE_MAIL{#ID_ARTICLE}
+
+            </div>
+        </div>
+    </div>
+    </B_relecteursmail>
+
+    <B_relecteuraffectation>
+    <div id="modal_relecteurs_#ID_ARTICLE">
+
+        <script type="text/javascript">
+            function effacer_filtres_popup_relecteurs() {
+                event.preventDefault();
+                $('.recherche-relecteurs input[type="text"]').val('');
+                $('.liste-relecteurs-disponibles .relecteur').show();
+            }
+            function rechercher_popup_relecteurs(id_article) {
+                event.preventDefault();
+                var relecteurs = $('.liste-relecteurs-disponibles .relecteur');
+                relecteurs.hide();
+
+                var filter_nom = $('#nom_'+id_article).val();
+                var filter_affecte_a = $('#affecte_a_'+id_article).val();
+                var filter_tx_lecture_sup_to = $('#tx_lecture_sup_to_'+id_article).val();
+                var filter_tx_lecture_inf_to = $('#tx_lecture_inf_to_'+id_article).val();
+                var filter_nb_lectures_sup_to = $('#nb_lectures_sup_to_'+id_article).val();
+                var filter_nb_lectures_inf_to = $('#nb_lectures_inf_to_'+id_article).val();
+                var filter_nb_relectures_sup_to = $('#nb_relectures_sup_to_'+id_article).val();
+                var filter_nb_relectures_inf_to = $('#nb_relectures_inf_to_'+id_article).val();
+                var filter_period_from = $('#period_from_'+id_article).val();
+                var filter_period_to = $('#period_to_'+id_article).val();
+
+                relecteurs.filter(function() {
+                    if(filter_nom && $(this).find('[data-filter="nom"]:contains('+filter_nom+')').length == 0)
+                        return false;
+                    if(filter_affecte_a && $(this).is(':not([data-articles~=";'+filter_affecte_a+';"])'))
+                    return false;
+                    if(filter_tx_lecture_sup_to && $(this).find('[data-filter="tx_lecture"]').text() < filter_tx_lecture_sup_to)
+                        return false;
+                    if(filter_tx_lecture_inf_to && $(this).find('[data-filter="tx_lecture"]').text() > filter_tx_lecture_inf_to)
+                        return false;
+                    if(filter_nb_lectures_sup_to && $(this).find('[data-filter="nb_lectures"]').text() < filter_nb_lectures_sup_to)
+                        return false;
+                    if(filter_nb_lectures_inf_to && $(this).find('[data-filter="nb_lectures"]').text() > filter_nb_lectures_inf_to)
+                        return false;
+                    if(filter_nb_relectures_sup_to && $(this).find('[data-filter="nb_relectures"]').text() < filter_nb_relectures_sup_to)
+                        return false;
+                    if(filter_nb_relectures_inf_to && $(this).find('[data-filter="nb_relectures"]').text() > filter_nb_relectures_inf_to)
+                        return false;
+                    // if(filter_period_from && $(this).find('[data-filter="period_from"]').text() < filter_period_from)
+                    //     return false;
+                    // if(filter_period_to && $(this).find('[data-filter="period_to"]').text() > filter_period_to)
+                    //     return false;
+                    return true;
+                    }).show();
+            }
+
+            $(function() {
+                sort_relecteurs(#ID_ARTICLE);
+            });
+        </script>
+
+        <div class="box simple">
+            <div class="inner">
+                #FORMULAIRE_RELECTURE_AFFECTER{#ID_ARTICLE}
+            </div>
+        </div>
+    </div>
+    </B_relecteuraffectation>
+
+    </BOUCLE_article>
+</div>
+
+<script type="text/javascript">
+
+    function sort_relecteurs(id_article) {
+        $('#modal_relecteurs_'+id_article)
+        .find('.liste-relecteurs-disponibles, .liste-relecteurs-affectes')
+        .trigger('update')
+        .trigger('sorton', [[[0,0]]]);
+    }
+    function add_relecteur(id_article, id_relecteur) {
+        var disponibles = $('#modal_relecteurs_'+id_article+' .liste-relecteurs-disponibles tbody');
+        var affectes = $('#modal_relecteurs_'+id_article+' .liste-relecteurs-affectes tbody');
+        var relecteur = disponibles.find('[data-relecteur="'+id_relecteur+'"]').first();
+        relecteur.detach().appendTo(affectes);
+        sort_relecteurs(id_article);
+    }
+    function remove_relecteur(id_article, id_relecteur) {
+        var disponibles = $('#modal_relecteurs_'+id_article+' .liste-relecteurs-disponibles tbody');
+        var affectes = $('#modal_relecteurs_'+id_article+' .liste-relecteurs-affectes tbody');
+        var relecteur = affectes.find('[data-relecteur="'+id_relecteur+'"]').first();
+        relecteur.detach().appendTo(disponibles);
+        sort_relecteurs(id_article);
+    }
+    function affect_relecteurs(id_article) {
+        event.preventDefault();
+        var form = $('#modal_relecteurs_'+id_article+' form');
+        form.append('<input type="hidden" name="affecter_relecteurs_a" value="'+id_article+'">');
+        var added = form.find('.liste-relecteurs-affectes [data-origin-state="disponible"]');
+        var removed = form.find('.liste-relecteurs-disponibles [data-origin-state="affecte"]');
+        added.each(function() {
+            form.append('<input type="hidden" name="add_relecteur[]" value="'+$(this).data('relecteur')+'">');
+        });
+        removed.each(function() {
+            form.append('<input type="hidden" name="remove_relecteur[]" value="'+$(this).data('relecteur')+'">');
+        });
+        form.submit();
+    }
+    function reset_relecteurs(id_article) {
+        event.preventDefault();
+        var disponibles = $('#modal_relecteurs_'+id_article+' .liste-relecteurs-disponibles tbody');
+        var affectes = $('#modal_relecteurs_'+id_article+' .liste-relecteurs-affectes tbody');
+        if(disponibles.length > 0)
+            disponibles.find('[data-origin-state="affecte"]').detach().appendTo(affectes);
+        if(affectes.length > 0)
+            affectes.find('[data-origin-state="disponible"]').detach().appendTo(disponibles);
+        sort_relecteurs(id_article);
+        $('#modal_relecteurs_'+id_article).removeClass('modal-open').find('.mask').detach();
+    }
+
+    $(function() {
+        $('.no-reviewer').closest('.box_relecteurs').prependTo('#boxes');
+    });
+
+</script>
+
 </BOUCLE_prop>
-<h2><:idm:relecture_aucun:></h2><//B_prop>
+
+<h2><:idm:relecture_aucun:></h2>
+
+<//B_prop>
+
 </BOUCLE_securite>

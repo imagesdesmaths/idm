@@ -1,0 +1,54 @@
+div.onglets_bloc {
+    .onglets_liste {
+        h2.onglets_titre  {
+            border-radius: $border_radius_default $border_radius_default 0 0;
+            padding: 8px 16px;
+            margin: -1px 8px 0 0;
+            color: inherit;
+            height: auto;
+            background: $white;
+
+            a {
+                color: inherit;
+            }
+
+            &.selected {
+                height: auto;
+                margin: 0 8px -1px 0;
+                border-top: 3px solid $red;
+
+                a {
+                    color: inherit;
+                }
+            }
+            &:hover,
+            &:focus {
+                background-color: $grey_lightest;
+
+                &.selected {
+                    background-color: $white;
+                }
+            }
+        }
+    }
+    .onglets_contenu {
+        padding: 16px !important; // F*ck you, Spip.
+        border-radius: 0 $border_radius_default $border_radius_default $border_radius_default;
+
+        &.selected {
+            background: $white;
+        }
+        ul {
+            li {
+                list-style: inside disc;
+
+                &.heading {
+                    list-style: none;
+                    color: $red;
+                    font-weight: 500;
+                    margin: 5px 0;
+                }
+            }
+        }
+    }
+}

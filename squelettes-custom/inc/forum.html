@@ -1,0 +1,45 @@
+#CACHE{0}
+[(#PARAMETRES_FORUM|?)]
+
+<B_one_forum>
+  <h3><a href="#URL_PAGE{forum,id_article=#ID_ARTICLE}">Voir tous les messages</a> -
+    <a href="#URL_ARTICLE">Retourner &agrave; l'article</a></h3>
+
+  <ul class="forum">
+    <BOUCLE_one_forum(FORUMS) {id_article} {id_forum}>
+      <li id="forum#ID_FORUM" class="forum-fil">
+      <INCLURE {fond=inc/forum-message} {id_forum} {author_name=#ENV{author_name}}>
+      </li>
+    </BOUCLE_one_forum>
+  </ul>
+
+</B_one_forum>
+
+
+<B_forums>
+  <ul class="forum">
+    <BOUCLE_forums(FORUMS) {id_article} {par date}>
+      <li id="forum#ID_FORUM" class="forum-fil">
+      <INCLURE {fond=inc/forum-message} {id_forum} {author_name=#ENV{author_name}}>
+        <B_forums_fils>
+          <ul>
+            <BOUCLE_forums_fils(FORUMS){id_parent}{par date}>
+            <li id="forum#ID_FORUM">
+            <INCLURE {fond=inc/forum-message} {id_forum} {author_name=#ENV{author_name}}>
+              <BOUCLE_Forums_Boucle(boucle_forums_fils)></BOUCLE_Forums_Boucle>
+              </li>
+            </BOUCLE_forums_fils>
+          </ul>
+        </B_forums_fils>
+      </li>
+    </BOUCLE_forums>
+  </ul>
+</B_forums>
+
+<BOUCLE_mod(FORUMS) {id_article} {par date} {plat} {statut=prop} {id_auteur = #SESSION{id_auteur}}>
+  <p>Votre message du [(#DATE|affdate_jourcourt)] intitul&eacute;
+  <em>#TITRE</em> est bien pris en compte mais il doit &ecirc;tre
+  valid&eacute; par un mod&eacute;rateur avant d'appara&icirc;tre sur le
+  site. Cela devrait &ecirc;tre fait incessamment !</p>
+</BOUCLE_mod>
+<//B_one_forum>
