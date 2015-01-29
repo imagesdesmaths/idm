@@ -48,7 +48,7 @@ class IdmIndexer
 
                 // Connexion à la base de données
                 try{
-                    $this->dbcon = new PDO("mysql:host=localhost;dbname={DATABASE_NAME}", "{USERNAME}", "{PASSWORD}");
+                    $this->dbcon = new PDO($GLOBALS['db_config']['type'].":host=".$GLOBALS['db_config']['host'].";dbname=".$GLOBALS['db_config']['name'], $GLOBALS['db_config']['user'], $GLOBALS['db_config']['pass']);
                     $this->dbcon->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                     $this->initialized = true;
@@ -131,6 +131,11 @@ class IdmIndexer
                 if($row['id_rubrique'] == RUBRIQUE_TRIBUNES) {
                     $type = 'tribune';
                 }
+
+                $row = array_map(function($r) {
+                    $r = utf8_encode($r);
+                    return $r;
+                }, $row);
 
                 $status = $this->sherlockindexer->addDocument($type, $row['id_article'], array(
                     'url' => $row['url'],

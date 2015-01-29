@@ -20,7 +20,11 @@ $sherlock = new Sherlock(
     $GLOBALS['elasticsearch_config']['debug']
 );
 
-$recherche = isset($_POST['recherche']) ? $_POST['recherche'] : '';
+$recherche = isset($_POST['recherche'])
+    ? $_POST['recherche']
+    : (isset($_GET['recherche'])
+        ? $_GET['recherche']
+        : '');
 $pagination = 1;
 $pagination = isset($_POST['pagination']) ? $_POST['pagination'] : 1;
 
@@ -118,6 +122,13 @@ function interventionDivine($v) {
         foreach($resultats as $item){
             $resume = '';
 
+            $item = array_map(function($r) {
+                if(!is_array($r)) {
+                    $r = utf8_decode($r);
+                }
+                return $r;
+            }, $item);
+
             if($item['_type'] != 'event') {
                 $resume = preg_replace('/(\s+\S+)$/', '', substr(strip_tags($item['descriptif']), 0, 500));
                 if(strlen($resume) > 450) {
@@ -175,7 +186,7 @@ function interventionDivine($v) {
                                 $keywords = array_unique($item['mots']);
                                 foreach ($keywords as $keyword) {
                                     if($keyword) {
-                                        echo '<span class="keyword">'.$keyword.'</span>';
+                                        echo '<span class="keyword">'.utf8_decode($keyword).'</span>';
                                     }
                                 }
                             }
@@ -281,12 +292,12 @@ if(isset($resultats)){
         // Sélectionnés en premier
         foreach($facet_auteur as $f) {
             if($f['selected']) {
-                echo '<div data-facet="auteur" data-value="'.$f['key'].'" class="selected">'.$f['key'].' <span>&times;</span></div>';
+                echo '<div data-facet="auteur" data-value="'.$f['key'].'" class="selected">'.utf8_decode($f['key']).' <span>&times;</span></div>';
             }
         }
         foreach($facet_auteur as $f) {
             if(!$f['selected']) {
-                echo '<div data-facet="auteur" data-value="'.$f['key'].'" >'.$f['key'].' ('.$f['doc_count'].')</div>';
+                echo '<div data-facet="auteur" data-value="'.$f['key'].'" >'.utf8_decode($f['key']).' ('.$f['doc_count'].')</div>';
             }
         }
     }
@@ -297,7 +308,7 @@ if(isset($resultats)){
         foreach($facet_accessibilite as $f) {
             if($f['selected']) {
                 $class = '';
-                switch (strtolower($f['key'])) {
+                switch (strtolower(utf8_decode($f['key']))) {
                     case 'piste verte':
                         $class = 'green-track';
                         break;
@@ -314,13 +325,13 @@ if(isset($resultats)){
                         $class = 'off-track';
                         break;
                 }
-                echo '<div data-facet="accessibilite" data-value="'.$f['key'].'" class="selected '.$class.'">'.$f['key'].' <span>&times;</span></div>';
+                echo '<div data-facet="accessibilite" data-value="'.$f['key'].'" class="selected '.$class.'">'.utf8_decode($f['key']).' <span>&times;</span></div>';
             }
         }
         foreach($facet_accessibilite as $f) {
             if(!$f['selected']) {
                 $class = '';
-                switch (strtolower($f['key'])) {
+                switch (strtolower(utf8_decode($f['key']))) {
                     case 'piste verte':
                         $class = 'green-track';
                         break;
@@ -337,7 +348,7 @@ if(isset($resultats)){
                         $class = 'off-track';
                         break;
                 }
-                echo '<div data-facet="accessibilite" data-value="'.$f['key'].'" class="'.$class.'">'.$f['key'].' ('.$f['doc_count'].')</div>';
+                echo '<div data-facet="accessibilite" data-value="'.$f['key'].'" class="'.$class.'">'.utf8_decode($f['key']).' ('.$f['doc_count'].')</div>';
             }
         }
     }
@@ -347,12 +358,12 @@ if(isset($resultats)){
         // Sélectionnés en premier
         foreach($facet_mot as $f) {
             if($f['selected']) {
-                echo '<div data-facet="mot" data-value="'.$f['key'].'" class="selected">'.$f['key'].' <span>&times;</span></div>';
+                echo '<div data-facet="mot" data-value="'.$f['key'].'" class="selected">'.utf8_decode($f['key']).' <span>&times;</span></div>';
             }
         }
         foreach($facet_mot as $f) {
             if(!$f['selected']) {
-                echo '<div data-facet="mot" data-value="'.$f['key'].'" >'.$f['key'].' ('.$f['doc_count'].')</div>';
+                echo '<div data-facet="mot" data-value="'.$f['key'].'" >'.utf8_decode($f['key']).' ('.$f['doc_count'].')</div>';
             }
         }
     }

@@ -40,7 +40,8 @@
         <div class="container">
 
             <div class="header-actions">
-                <form class="header-form-search" action="#URL_PAGE{recherche}" method="post">
+                <form class="header-form-search" action="#URL_PAGE{recherche}" method="get">
+                    <input type="hidden" name="page" value="recherche">
                     <input type="text" size="10" name="recherche" placeholder="Recherche" id="recherchemobile" value="#ENV{recherche}">
                     <button type="submit" title="Rechercher"><i class="flaticon-search"></i></button>
                 </form>
@@ -65,7 +66,8 @@
             </h1>
 
             <div class="header-actions">
-                <form class="header-form-search" action="#URL_PAGE{recherche}" method="post">
+                <form class="header-form-search" action="#URL_PAGE{recherche}" method="get">
+                    <input type="hidden" name="page" value="recherche">
                     <input type="text" size="10" name="recherche" placeholder="Recherche" id="recherche" value="#ENV{recherche}">
                     <button type="submit" title="Rechercher"><i class="flaticon-search"></i></button>
                 </form>
