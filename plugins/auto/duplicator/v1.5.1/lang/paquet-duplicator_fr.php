@@ -1,13 +1,5 @@
 <?php
 
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file
-
-///  Fichier produit par PlugOnet
-// Module: paquet-duplicator
-// Langue: fr
-// Date: 18-07-2012 22:42:37
-// Items: 2
-
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(

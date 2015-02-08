@@ -1,12 +1,6 @@
 <?php
 
-/***************************************************************************\
- * Plugin Vider Rubrique pour Spip 3.0
- * Licence GPL (c) 2012 - Apsulis
- * Suppression de tout le contenu d'une rubrique
- *
-\***************************************************************************/
-
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function trim_value(&$value){$value = trim($value);}
 
@@ -16,31 +10,31 @@ function trim_value(&$value){$value = trim($value);}
  * - Conserve les logos de l'article source
  * - Conserve le statut de publication de l'article source
  */
-function dupliquer_article($article,$rubrique){
+function dupliquer_article($id_article,$rubrique){
 	include_spip('action/editer_article');
-	include_spip('inc/modifier_article');
-	include_spip('inc/modifier');
 	include_spip('inc/config');
 		
 	// On lit l'article qui va etre dupliqué
-	$champs = array('*');
-	$from = 'spip_articles';
-	$where = array( 
-		"id_article=".$article
-	);
-	$infos = sql_allfetsel($champs, $from, $where);
+	$infos = sql_fetsel("*", 'spip_articles', "id_article=".intval($id_article));
 
 	// On choisi les champs que l'on veut conserver
 	$champs_dupliques = explode(",", lire_config('duplicator/config/art_champs'));
 	array_walk($champs_dupliques, 'trim_value');
 	
 	if ($champs_dupliques[0]==''){ $champs_dupliques = array( 'surtitre','titre','soustitre','descriptif','chapo','texte','ps','accepter_forum','lang','langue_choisie','nom_site','url_site' ); }
-	foreach ($champs_dupliques as $key => $value) {
-		$infos_de_l_article[$value] = $infos[0][$value];
-	}
 	
+	// Si le plugin composition est présent
+	if (test_plugin_actif('compositions')) {
+		$champs_dupliques[] = 'composition';
+		$champs_dupliques[] = 'composition_lock';
+	}
+
+	foreach ($champs_dupliques as $key => $value) {
+		$infos_de_l_article[$value] = $infos[$value];
+	}
+
 	// On cherche ses mots clefs
-	$mots_clefs_de_l_article = lire_les_mots_clefs($article,'article');
+	$mots_clefs_de_l_article = lire_les_mots_clefs($id_article,'article');
 
 	//////////////
 	// ON DUPLIQUE
@@ -49,24 +43,26 @@ function dupliquer_article($article,$rubrique){
 	$id_article = insert_article($rubrique);
 	revision_article($id_article, $infos_de_l_article);
 	
-	// On lui rend son statut
-	$maj_statut_article = sql_updateq("spip_articles", array('statut' => $infos[0]['statut']), "id_article=".$id_article);
+	// Suivant la configuration, on lui rend son statut ou on le laisse en brouillon
+	if (strcmp(lire_config('duplicator/config/duplic_article_etat_pub'),"oui") == 0) {
+		$c = array('statut' => $infos['statut']);
+		article_instituer($id_article, $c);
+	}
 
 	// On lui remet ses mots clefs
 	remettre_les_mots_clefs($mots_clefs_de_l_article,$id_article,'article');
 	
 	// On lui copie ses logos
-	dupliquer_logo($article,$id_article,'article',false);
-	dupliquer_logo($article,$id_article,'article',true);
+	dupliquer_logo($id_article,$id_article,'article',false);
+	dupliquer_logo($id_article,$id_article,'article',true);
 	
 	/////////////////////////////////////
 	// Duplication des url dans spip_url
 	/////////////////////////////////////
 	$where = array( 
-		"id_objet=".$article,
+		"id_objet=".intval($id_article),
 		"type='article'",
 	);
-//	$infos_url = sql_allfetsel('*', 'spip_urls', $where, );
 	$infos_url = sql_fetsel('*', 'spip_urls', $where, 'date', 'date DESC');
 	
 	$infos_url['id_objet'] = $id_article;
@@ -85,62 +81,61 @@ function dupliquer_article($article,$rubrique){
  * - Conserve le contenu de la rubrique source
  * - Conserve les mots clefs de la rubrique source
  * - Conserve les articles de la rubrique source
+ * 
+ * @param int $id_rubrique
+ * 	Identifiant numérique de la rubrique à dupliquer
+ * @param int $cible null
+ * 	Identifiant numérique de la rubrique dans laquelle insérer la copie
+ * @param string $titre ' (copie)'
+ * 	Chaîne de texte qui sera ajouté au titre de la rubrique copiée
+ * @param bool $articles true
+ * 	Doit on dupliquer également les articles (true/false)
  */
-function dupliquer_rubrique($rubrique,$cible=null,$titre=' (copie)'){
+function dupliquer_rubrique($id_rubrique,$cible=null,$titre=' (copie)',$articles = true){
 	include_spip('action/editer_rubrique');
 	include_spip('inc/config');
-		
-	// On lit la rubrique qui va etre dupliquée
-	$champs = array('*');
-	$from = 'spip_rubriques';
-	$where = array( 
-		"id_rubrique=".$rubrique
-	);
-	$infos = sql_allfetsel($champs, $from, $where);
+	
 	// On choisi les champs que l'on veut conserver
 	$champs_dupliques = explode(",", lire_config('duplicator/config/rub_champs'));
 	array_walk($champs_dupliques, 'trim_value');
 	
-	if ($champs_dupliques[0]=="") $champs_dupliques = array('id_parent','titre','descriptif','texte','lang','langue_choisie');
-	foreach ($champs_dupliques as $key => $value) {
-		$infos_de_la_rubrique[$value] = $infos[0][$value];
+	if ($champs_dupliques[0]=="") $champs_dupliques = array('titre','descriptif','texte','lang','langue_choisie');
+	
+	// Si le plugin composition est présent
+	if (test_plugin_actif('compositions')) {
+		$champs_dupliques[] = 'composition';
+		$champs_dupliques[] = 'composition_lock';
+		$champs_dupliques[] = 'composition_branche_lock';
 	}
+	
+	if(isset($champs_dupliques['id_parent']))
+		unset($champs_dupliques['id_parent']);
+	
+	// On lit la rubrique qui va etre dupliquée
+	$infos_de_la_rubrique = sql_fetsel($champs_dupliques, 'spip_rubriques', "id_rubrique=".intval($id_rubrique));
+
 	// Si une cible est spécifiée, on ecrase le champ id_parent
-	if($cible) $infos_de_la_rubrique['id_parent'] = $cible;
+	if(!$cible) $cible = 0;
+
 	$infos_de_la_rubrique['titre'] .= $titre;
-
+	
 	// On cherche ses mots clefs
-	$mots_clefs_de_la_rubrique = lire_les_mots_clefs($rubrique,'rubrique');
-
-	// On cherche ses articles
-	$champs = array('id_article');
-	$from = 'spip_articles';
-	$where = array( 
-		"id_rubrique=".$rubrique
-	);
-	$articles_de_la_rubrique = sql_allfetsel($champs, $from, $where);
-
+	$mots_clefs_de_la_rubrique = lire_les_mots_clefs($id_rubrique,'rubrique');
+	
 	// On cherche ses sous-rubriques
-	$champs = array('id_rubrique');
-	$from = 'spip_rubriques';
-	$where = array( 
-		"id_parent=".$rubrique
-	);
-	$rubriques_de_la_rubrique = sql_allfetsel($champs, $from, $where);
+	$rubriques_de_la_rubrique = sql_allfetsel('id_rubrique', 'spip_rubriques', "id_parent=".intval($id_rubrique));
 
 	//////////////
 	// ON DUPLIQUE
 	//////////////
-	$id_nouvelle_rubrique = insert_rubrique($infos_de_la_rubrique['id_parent']);
-	revisions_rubriques($id_nouvelle_rubrique,$infos_de_la_rubrique);
-	// On la publie (pour activer l'aperçu)
-	$maj_statut_rubrique = sql_updateq("spip_rubriques", array('statut' => 'publie'), "id_rubrique=".$id_nouvelle_rubrique);
+	$id_nouvelle_rubrique = rubrique_inserer($cible);
+	rubrique_modifier($id_nouvelle_rubrique,$infos_de_la_rubrique);
 
 	/////////////////////////////////////
 	// Duplication des url dans spip_url
 	/////////////////////////////////////
 	$where = array( 
-		"id_objet=".$rubrique,
+		"id_objet=".intval($id_rubrique),
 		"type='rubrique'",
 	);
 	$infos_url = sql_fetsel('*', 'spip_urls', $where, 'date', 'date DESC');
@@ -153,23 +148,27 @@ function dupliquer_rubrique($rubrique,$cible=null,$titre=' (copie)'){
 	else $infos_url['url'] = $u.'-'.$id_nouvelle_rubrique;
 	sql_insertq('spip_urls', $infos_url);
 	
-	
 	// On lui remet ses mots clefs
 	remettre_les_mots_clefs($mots_clefs_de_la_rubrique,$id_nouvelle_rubrique,'rubrique');
 
 	// On lui remet ses articles
-	foreach($articles_de_la_rubrique as $champ => $valeur){
-		$id_article = dupliquer_article($valeur['id_article'],$id_nouvelle_rubrique);
+	if($articles){
+		// On cherche ses articles
+		$articles_de_la_rubrique = sql_allfetsel('id_article', 'spip_articles', "id_rubrique=".intval($id_rubrique));
+		foreach($articles_de_la_rubrique as $champ => $valeur){
+			$id_article = dupliquer_article($valeur['id_article'],$id_nouvelle_rubrique);
+		}
 	}
 
 	// On lui copie ses logos
-	dupliquer_logo($rubrique,$id_nouvelle_rubrique,'rubrique',false);
-	dupliquer_logo($rubrique,$id_nouvelle_rubrique,'rubrique',true);
+	dupliquer_logo($id_rubrique,$id_nouvelle_rubrique,'rubrique',false);
+	dupliquer_logo($id_rubrique,$id_nouvelle_rubrique,'rubrique',true);
 
+	pipeline('duplicator',array('objet'=>'rubrique','id_objet_origine' => $id_rubrique,'id_objet'=>$id_nouvelle_rubrique));
 	// On lui remet ses sous-rubrique (+ mots clefs + articles + sous rubriques)
 	foreach($rubriques_de_la_rubrique as $champ => $valeur){
-		$rubrique = $valeur['id_rubrique'];
-		$nouvelle_sous_rubrique = dupliquer_rubrique($rubrique,$id_nouvelle_rubrique,'');
+		$id_rubrique = $valeur['id_rubrique'];
+		$nouvelle_sous_rubrique = dupliquer_rubrique($id_rubrique,$id_nouvelle_rubrique,'',$articles);
 	}
 	
 	return $id_nouvelle_rubrique;
@@ -179,21 +178,22 @@ function lire_les_mots_clefs($id,$type){
 	$champs = array('id_mot');
 	$from = 'spip_mots_liens';
 	$where = array( 
-		"id_objet=".$id,
+		"id_objet=".intval($id),
 		"objet=".sql_quote($type)
 	);
 	$mots_clefs = sql_allfetsel($champs, $from, $where);
 	
 	return $mots_clefs;
 }
-function remettre_les_mots_clefs($mots,$id,$type){
+
+function remettre_les_mots_clefs($mots = array(),$id,$type){
 	foreach($mots as $champ => $valeur){
 		$n = sql_insertq(
 			'spip_mots_liens',
 			array(
 				'id_mot' => $valeur['id_mot'],
-				'id_objet' => $id,
-				'objet' => $type	
+				'id_objet' => intval($id),
+				'objet' => $type
 			)
 		);
 	}
@@ -208,8 +208,7 @@ function dupliquer_logo($id_source, $id_destination, $type='article', $bsurvol =
 	include_spip('action/iconifier');
 	global $formats_logos;
 
-	if ( $bsurvol == true )
-	{
+	if ( $bsurvol == true ){
 		$logo_type = 'off';	// logo survol
 	} else  $logo_type = 'on';	// logo 
 
@@ -230,3 +229,4 @@ function dupliquer_logo($id_source, $id_destination, $type='article', $bsurvol =
 	action_spip_image_ajouter_dist(substr($type,0,3). $logo_type .$id_destination, 'local', $source );
 	return true;
 }
+
