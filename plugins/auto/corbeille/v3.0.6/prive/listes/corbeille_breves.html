@@ -1,0 +1,18 @@
+<B_breves>
+<div class="liste corbeille-breves">
+[<h3 class="titrem">(#GRAND_TOTAL|singulier_ou_pluriel{corbeille:breves_corbeille_un,corbeille:breves_corbeille_tous})</h3>]
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class='liste-items checkables'>
+<BOUCLE_breves(breves){statut}{pagination 5}{!par date}{recherche ?}>
+<li class='item'>
+<label for='breve-#ID_BREVE'><:corbeille:selectionner:></label><input type='checkbox' name='elements[]' id="breve-#ID_BREVE" value='#ID_BREVE'[ (#ID_BREVE|in_any{#ENV{elements}}|oui)checked='checked']/>
+<h4>[##ID_BREVE - (#TITRE|sinon{<:info_sans_titre:>})]</h4>
+<small>[(#DATE|affdate)][ (#DATE|heures)]:[(#DATE|minutes)]</small>
+- #INTRODUCTION
+<p class='actions'>[<a href='#URL_ECRIRE{breve,id_breve=#ID_BREVE}'><:corbeille:voir_detail:></a>]</p>
+</li>
+</BOUCLE_breves>
+</ul>
+[<p class='pagination'>(#PAGINATION)</p>]
+</div>
+</B_breves>

@@ -1,0 +1,18 @@
+<B_forums_publics>
+<div class="liste corbeille-forum corbeille-forum-publics">
+[<h3 class="titrem">(#GRAND_TOTAL|singulier_ou_pluriel{corbeille:forums_publics_corbeille_un,corbeille:forums_publics_corbeille_tous})</h3>]
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class='liste-items checkables'>
+<BOUCLE_forums_publics(FORUMS){statut}{pagination 5}{!par date}{recherche ?}>
+<li class='item'>
+<label for='forumpub-#ID_FORUM'><:corbeille:selectionner:></label><input type='checkbox' name='elements[]' id="forumpub-#ID_FORUM" value='#ID_FORUM'[ (#ID_FORUM|in_any{#ENV{elements}}|oui)checked='checked']/>
+<h4>[##ID_FORUM - (#TITRE|sinon{<:info_sans_titre:>})]</h4>
+<small>[(#DATE|affdate)][ (#DATE|heures)]:[(#DATE|minutes)]</small>
+- #INTRODUCTION
+<p class='actions'>[<a href='#URL_ECRIRE{controler_forum,debut_forum=@#ID_FORUM}'><:corbeille:voir_detail:></a>]</p>
+</li>
+</BOUCLE_forums_publics>
+</ul>
+[<p class='pagination'>(#PAGINATION)</p>]
+</div>
+</B_forums_publics>
