@@ -38,13 +38,13 @@ function extras_log($contenu, $important=false) {
  *    Couples (table sql => description de l'objet éditorial)
  */
 function cextras_objets_valides(){
-	
+
 	$objets = array();
 	$tables = lister_tables_objets_sql();
 	ksort($tables);
-	
+
 	foreach($tables as $table => $desc) {
-		if ($desc['principale'] == 'oui') {
+		if (($desc['editable'] == 'oui') and ($desc['principale'] == 'oui')) {
 			$objets[$table] = $desc;
 		}
 	}
@@ -270,7 +270,9 @@ function cextras_api_vider_tables($declaration_champs_extras) {
 function extras_champs_utilisables($connect='') {
 	$tout = extras_champs_anormaux($connect);
 	$objets = cextras_objets_valides();
-	return array_intersect_key($tout, $objets);
+	$utilisables = array_intersect_key($tout, $objets);
+	ksort($utilisables);
+	return $utilisables;
 }
 
 /**

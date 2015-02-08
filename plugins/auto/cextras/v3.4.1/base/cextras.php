@@ -121,7 +121,7 @@ function cextras_declarer_tables_interfaces($interfaces){
 	foreach ($saisies_tables as $table=>$saisies) {
 		$saisies = saisies_lister_avec_sql($saisies);
 		$saisies = saisies_lister_avec_traitements($saisies);
-		
+
 		foreach ($saisies as $saisie) {
 			$traitement = $saisie['options']['traitements'];
 			$balise = strtoupper($saisie['options']['nom']);

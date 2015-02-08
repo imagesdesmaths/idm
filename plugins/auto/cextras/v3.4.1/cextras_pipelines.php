@@ -54,7 +54,7 @@ function champs_extras_autorisation($faire, $quoi='', $saisies=array(), $args=ar
 		if (!autoriser($faire . 'extra', $quoi, $id, '', array(
 			'type' => $quoi,
 			'id_objet' => $id,
-			'contexte' => $args['contexte'],
+			'contexte' => isset($args['contexte']) ? $args['contexte'] : array(),
 			'table' => table_objet_sql($quoi),
 			'saisie' => $saisie,
 			'champ' => $saisie['options']['nom'],
@@ -147,10 +147,16 @@ function cextras_editer_contenu_objet($flux){
  * @return array      Données du pipeline
 **/ 
 function cextras_pre_edition($flux){
-	
+
 	include_spip('inc/cextras');
+	include_spip('inc/saisies_lister');
 	$table = $flux['args']['table'];
 	if ($saisies = champs_extras_objet( $table )) {
+
+		// Restreindre les champs postés en fonction des autorisations de les modifier
+		// au cas où un malin voudrait en envoyer plus que le formulaire ne demande
+		$saisies = champs_extras_autorisation('modifier', objet_type($table), $saisies, $flux['args']);
+
 		$saisies = saisies_lister_avec_sql($saisies);
 		foreach ($saisies as $saisie) {
 			$nom = $saisie['options']['nom'];
@@ -195,6 +201,11 @@ function cextras_afficher_contenu_objet($flux){
 			// Dans ce cas, certains traitements peuvent être effectués 2 fois !
 			$saisies_traitees = saisies_lister_avec_traitements($saisies_sql);
 			unset($saisies_sql);
+
+			// Fournir $connect et $Pile[0] au traitement si besoin (l'evil eval)
+			$connect = '';
+			$Pile = array(0 => (isset($flux['args']['contexte']) ? $flux['args']['contexte'] : array()));
+
 			foreach ($saisies_traitees as $saisie) {
 				$traitement = $saisie['options']['traitements'];
 				$traitement = defined($traitement) ? constant($traitement) : $traitement;
@@ -204,7 +215,9 @@ function cextras_afficher_contenu_objet($flux){
 				$valeurs[$nom] = $val;
 			}
 		}
-		$contexte = array_merge($flux['args']['contexte'], $valeurs);
+
+		$contexte = isset($flux['args']['contexte']) ? $flux['args']['contexte'] : array();
+		$contexte = array_merge($contexte, $valeurs);
 
 		// restreindre la vue selon les autorisations
 		$saisies = champs_extras_autorisation('voir', $objet, $saisies, $flux['args']);
@@ -242,14 +255,16 @@ function cextras_formulaire_verifier($flux){
 		include_spip('inc/autoriser');
 		include_spip('inc/saisies');
 
-		$verifier   = charger_fonction('verifier', 'inc', true);
-		$saisies    = saisies_lister_avec_sql($saisies);
-
-		// restreindre la vue selon les autorisations
+		// restreindre les saisies selon les autorisations
 		$id_objet = $flux['args']['args'][0]; // ? vraiment toujours ?
 		$saisies = champs_extras_autorisation('modifier', $objet, $saisies, array_merge($flux['args'], array(
 			'id' => $id_objet,
 			'contexte' => array()))); // nous ne connaissons pas le contexte dans ce pipeline
+
+		// restreindre les vérifications aux saisies enregistrables
+		$saisies = saisies_lister_avec_sql($saisies);
+
+		$verifier = charger_fonction('verifier', 'inc', true);
 
 		foreach ($saisies as $saisie) {
 			// verifier obligatoire
@@ -283,7 +298,7 @@ function cextras_formulaire_verifier($flux){
 					// 
 					// Sauf que la donnée alors soumise à SQL sera une chaine vide,
 					// ce qui ne correspond pas toujours à ce qui est attendu.
-					if (is_string($valeur) and !strlen($valeur)
+					if ((is_string($valeur) and !strlen($valeur) or (is_array($valeur) and $saisie['saisie']=='date'))
 					  and isset($options['normaliser'])
 					  and $norme = $options['normaliser']) {
 						// Charger la fonction de normalisation théoriquement dans verifier/date
@@ -310,10 +325,29 @@ function cextras_formulaire_verifier($flux){
 			}
 		}
 	}
-
 	return $flux;
 }
 
-
+/**
+ * Insertion dans le pipeline revisions_chercher_label (Plugin révisions)
+ * Trouver le bon label à afficher sur les champs dans les listes de révisions
+ * 
+ * Si un champ est un champ extra, son label correspond au label défini du champs extra
+ * 
+ * @pipeline revisions_chercher_label
+ * @param array $flux Données du pipeline
+ * @return array      Données du pipeline
+**/ 
+function cextras_revisions_chercher_label($flux){
+	$table = table_objet_sql($flux['args']['objet']);
+	$saisies_tables = champs_extras_objet($table);
+	foreach($saisies_tables as $champ){
+		if($champ['options']['nom'] == $flux['args']['champ']){
+			$flux['data'] = $champ['options']['label'];
+			break;
+		}
+	}
+	return $flux;
+}
 
 ?>

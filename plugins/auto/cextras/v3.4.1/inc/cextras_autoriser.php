@@ -253,7 +253,7 @@ function restreindre_extras($objet, $noms=array(), $ids=array(), $cible='rubriqu
  * @param string $objet
  *     Objet possédant les extras
  * @param int $id_objet
- *     Nom des extras a restreindre
+ *     Identifiant de l'objet possédant les extras
  * @param array $opt
  *     Options des autorisations
  * @param mixed $ids
@@ -300,7 +300,7 @@ function _restreindre_extras_objet($objet, $id_objet, $opt, $ids, $cible='rubriq
  * @param string $objet
  *     Objet possédant les extras
  * @param int $id_objet
- *     Nom des extras a restreindre
+ *     Identifiant de l'objet possédant les extras
  * @param array $opt
  *     Options des autorisations
  * @param mixed $ids
@@ -366,7 +366,7 @@ function _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, $_id
  * @param string $objet
  *     Objet possédant les extras
  * @param int $id_objet
- *     Nom des extras a restreindre
+ *     Identifiant de l'objet possédant les extras
  * @param array $opt
  *     Options des autorisations
  * @param mixed $ids
@@ -387,7 +387,7 @@ function inc_restreindre_extras_objet_sur_branche_dist($objet, $id_objet, $opt, 
  * @param string $objet
  *     Objet possédant les extras
  * @param int $id_objet
- *     Nom des extras a restreindre
+ *     Identifiant de l'objet possédant les extras
  * @param array $opt
  *     Options des autorisations
  * @param mixed $ids
@@ -439,7 +439,7 @@ function inc_restreindre_extras_objet_sur_rubrique_dist($objet, $id_objet, $opt,
  * @param string $objet
  *     Objet possédant les extras
  * @param int $id_objet
- *     Nom des extras a restreindre
+ *     Identifiant de l'objet possédant les extras
  * @param array $opt
  *     Options des autorisations
  * @param mixed $ids
@@ -466,7 +466,7 @@ function inc_restreindre_extras_objet_sur_secteur_dist($objet, $id_objet, $opt, 
  * @param string $objet
  *     Objet possédant les extras
  * @param int $id_objet
- *     Nom des extras a restreindre
+ *     Identifiant de l'objet possédant les extras
  * @param array $opt
  *     Options des autorisations
  * @param mixed $ids
@@ -488,7 +488,7 @@ function inc_restreindre_extras_objet_sur_groupe_dist($objet, $id_objet, $opt, $
  * @param string $objet
  *     Objet possédant les extras
  * @param int $id_objet
- *     Nom des extras a restreindre
+ *     Identifiant de l'objet possédant les extras
  * @param array $opt
  *     Options des autorisations
  * @param mixed $ids
@@ -522,6 +522,37 @@ function inc_restreindre_extras_objet_sur_groupemot_dist($objet, $id_objet, $opt
 	}
 		  
     return false;
+}
+
+/**
+ * Fonction d'autorisation interne à la fonction restreindre_extras()
+ * spécifique au test de la présence d'une composition
+ *
+ * @param string $objet
+ *     Objet possédant les extras
+ * @param int $id_objet
+ *     Identifiant de l'objet possédant les extras
+ * @param array $opt
+ *     Options des autorisations
+ * @param mixed $ids
+ *     Identifiant(s) des compositions sur lesquelles s'appliquent les champs
+ * @param bool $recursif
+ *     Inutile, la récursivité est prise en charge par compositions_determiner()
+ * @return bool
+ *     Autorisé ou non
+ */
+function inc_restreindre_extras_objet_sur_composition_dist($objet, $id_objet, $opt, $ids, $recursif) {
+
+	if (!function_exists('compositions_determiner')) {
+		include_spip('compositions_fonctions');
+	}
+
+	if (function_exists('compositions_determiner')) {
+		$composition = compositions_determiner($objet, $id_objet);
+		return in_array($composition, $ids);
+	}
+
+	return false;
 }
 
 ?>
