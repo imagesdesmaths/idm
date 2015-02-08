@@ -1,11 +1,11 @@
 <paquet
 	prefix="iextras"
 	categorie="outil"
-	version="3.1.0"
+	version="3.1.2"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="images/iextras-64.png"
-	documentation="http://www.spip-contrib.net/?article4028"
+	documentation="http://contrib.spip.net/?article4028"
 	schema="1.0.0"
 >
 
@@ -20,14 +20,11 @@
 	<pipeline nom="autoriser" inclure="inc/iextras_autoriser.php" />
 	<pipeline nom="formulaire_verifier" inclure="inc/iextras.php" />
 
-	<necessite nom="cextras" compatibilite="[3.0.4;]" />
-	<necessite nom="saisies" compatibilite="[1.21.0;]" />
-	<necessite nom="verifier" compatibilite="[0.1.12;]" />
-	<necessite nom="yaml" compatibilite="[1.5.0;]" />
+	<necessite nom="cextras" compatibilite="[3.4.1;]" />
+	<necessite nom="saisies" compatibilite="[2.0.3;]" />
+	<necessite nom="verifier" compatibilite="[1.0.5;]" />
+	<necessite nom="yaml" compatibilite="[1.5.2;]" />
 
 	<menu nom="champs_extras" titre="iextras:champs_extras" parent="menu_configuration" icone="images/iextras-16.png" />
 
 </paquet>
-
-
-

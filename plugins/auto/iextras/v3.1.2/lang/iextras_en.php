@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_associer' => 'manage this field',
 	'action_associer_title' => 'Manage the display of this extra field',
 	'action_desassocier' => 'disassociate',
-	'action_desassocier_title' => 'Don\'t manage the display of this extra field',
+	'action_desassocier_title' => 'Don’t manage the display of this extra field',
 	'action_descendre' => 'down',
 	'action_descendre_title' => 'Move the field down one position lower',
 	'action_modifier' => 'edit',
@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_creer_champ_extra' => 'Create a new extra field',
 	'info_description_champ_extra' => 'This page is used to manage the extra fields, 
-						these being supplementary fields added to SPIP\'s default database tables,
+						these being supplementary fields added to SPIP’s default database tables,
 						taken into account in the object entry and modification forms.',
 	'info_description_champ_extra_creer' => 'You can create new fields which will then be displayed on this page
 						under the heading of "List of extra fields", as well as in the forms.',

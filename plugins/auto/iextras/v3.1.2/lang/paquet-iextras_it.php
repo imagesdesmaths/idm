@@ -8,8 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
-	'iextras_description' => 'Ajoute dans l\'espace privé une interface complète de gestion de champs supplémentaires
-							dans les objets éditoriaux.', # NEW
 	'iextras_nom' => 'Campi Extra (Interfaccia)',
 	'iextras_slogan' => 'Interfaccia per gestire i campi extra',
 	'iextras_titre' => 'Campi Extra (Interfaccia)'

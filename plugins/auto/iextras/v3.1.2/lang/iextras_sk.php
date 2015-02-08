@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'caracteres_autorises_champ' => 'Možné znaky: písmená bez diaktritiky, číslice, - a _',
-	'caracteres_interdits' => 'Niektoré znaky, ktoré ste použili, nie sú vhodné pre toto pole.',
+	'caracteres_interdits' => 'Niektoré použité znaky nie sú vhodné pre toto pole.',
 	'champ_deja_existant' => 'Rovnaké pole v tejto tabuľke už existuje.',
 	'champ_sauvegarde' => 'Doplnkové pole bolo uložené!',
 	'champs_extras' => 'Doplnkové polia',
@@ -89,7 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'precisions_pour_class' => 'Pridajte do objektu triedy CSS
 		a oddeľte ich medzerou. Napríklad: "inserer_barre_edition" pre blok
 		so zásuvným modulom Porte Plume',
-	'precisions_pour_datas' => 'Niektoré typy polí si vyžadujú zoznam akceptovaných hodnôt: každú zadajte na riadok, za ktorým dáte čiarku a popis.  Prázdny riadok znamená predvolenú hodnotu. Popis môže byť jazykový reťazec.',
+	'precisions_pour_datas' => 'Niektoré typy polí si vyžadujú zoznam akceptovaných hodnôt: na jeden riadok zadajte jednu hodnotu, oddeľte ju čiarkou a zadajte jej opis.  Prázdny riadok znamená predvolenú hodnotu. Opis môže byť jazykový reťazec.',
 	'precisions_pour_explication' => 'Môžete zadať viac informácií o vstupe 
 		Môže byť jazykový reťazec "plugin:chaine".',
 	'precisions_pour_label' => 'Môže byť jazykový reťazec «plugin:chaine».',
@@ -107,7 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'precisions_pour_restrictions_secteurs' => 'Identifikátory sektorov, ktoré sa majú obmedziť (oddeľovač ":")',
 	'precisions_pour_saisie' => 'Zobraziť vstup typu:',
 	'precisions_pour_traitements' => 'Automaticky spracovať výsledok tagu #NOM_DU_CHAMP:',
-	'precisions_pour_versionner' => 'Vytváranie verzií sa použije, iba ak je aktivovaný zásuvný modul "Opravy" ak sa vytvárajú verzie z redakčného objektu ďalšieho poľa',
+	'precisions_pour_versionner' => 'Vytváranie verzií sa použije, iba ak je aktivovaný zásuvný modul "Opravy" ak sa vytvárajú verzie a ak sa verzie vytvárajú aj z ďal­šie­ho redakčného objektu',
 
 	// R
 	'radio_restrictions_auteur_admin' => 'Iba administrátori',
