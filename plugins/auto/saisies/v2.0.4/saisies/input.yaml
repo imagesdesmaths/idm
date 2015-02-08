@@ -1,0 +1,156 @@
+
+titre: '<:saisies:saisie_input_titre:>'
+description: '<:saisies:saisie_input_explication:>'
+icone: 'images/saisies_input.png'
+options:
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'description'
+      label: '<:saisies:option_groupe_description:>'
+    saisies:
+      -
+        saisie: 'input'
+        options:
+          nom: 'label'
+          label: '<:saisies:option_label_label:>'
+          explication: '<:saisies:option_label_explication:>'
+          size: 50
+      -
+        saisie: 'input'
+        options:
+          nom: 'defaut'
+          label: '<:saisies:option_defaut_label:>'
+          size: 50
+      -
+        saisie: 'input'
+        options:
+          nom: 'explication'
+          label: '<:saisies:option_explication_label:>'
+          explication: '<:saisies:option_explication_explication:>'
+          size: 50
+      -
+        saisie: 'case'
+        options:
+          nom: 'type'
+          label_case: '<:saisies:option_type_password:>'
+          valeur_oui: 'password'
+          valeur_non: 'text'
+          defaut: 'text'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'utilisation'
+      label: '<:saisies:option_groupe_utilisation:>'
+    saisies:
+      -
+        saisie: 'input'
+        options:
+          nom: 'maxlength'
+          label: '<:saisies:option_maxlength_label:>'
+          explication: '<:saisies:option_maxlength_explication:>'
+        verifier:
+          type: 'entier'
+          options:
+            min: 1
+      -
+        saisie: 'case'
+        options:
+          nom: 'disable'
+          label_case: '<:saisies:option_disable_label:>'
+          explication: '<:saisies:option_disable_explication:>'
+      -
+        saisie: 'case'
+        options:
+          nom: 'disable_avec_post'
+          label_case: '<:saisies:option_disable_avec_post_label:>'
+          explication: '<:saisies:option_disable_avec_post_explication:>'
+      -
+        saisie: 'case'
+        options:
+          nom: 'readonly'
+          label_case: '<:saisies:option_readonly_label:>'
+          explication: '<:saisies:option_readonly_explication:>'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'affichage'
+      label: '<:saisies:option_groupe_affichage:>'
+    saisies:
+      -
+        saisie: 'textarea'
+        options:
+          nom: 'afficher_si'
+          label: '<:saisies:option_afficher_si_label:>'
+          explication: '<:saisies:option_afficher_si_explication:>'
+          rows: 5
+      -
+        saisie: 'textarea'
+        options:
+          nom: 'afficher_si_remplissage'
+          label: '<:saisies:option_afficher_si_remplissage_label:>'
+          explication: '<:saisies:option_afficher_si_remplissage_explication:>'
+          rows: 5
+      -
+        saisie: 'input'
+        options:
+          nom: 'attention'
+          label: '<:saisies:option_attention_label:>'
+          explication: '<:saisies:option_attention_explication:>'
+          size: 50
+      -
+        saisie: 'input'
+        options:
+          nom: 'info_obligatoire'
+          label: '<:saisies:option_info_obligatoire_label:>'
+          explication: '<:saisies:option_info_obligatoire_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'class'
+          label: '<:saisies:option_class_label:>'
+          size: 50
+      -
+        saisie: 'input'
+        options:
+          nom: 'size'
+          label: '<:saisies:option_size_label:>'
+          explication: '<:saisies:option_size_explication:>'
+        verifier:
+          type: 'entier'
+          options:
+            min: 1
+      -
+        saisie: 'radio'
+        options:
+          nom: 'autocomplete'
+          label: '<:saisies:option_autocomplete_label:>'
+          explication: '<:saisies:option_autocomplete_explication:>' 
+          datas:
+            defaut: '<:saisies:option_autocomplete_defaut:>'
+            on: '<:saisies:option_autocomplete_on:>'
+            off: '<:saisies:option_autocomplete_off:>'
+          defaut: 'defaut'
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'validation'
+      label: '<:saisies:option_groupe_validation:>'
+    saisies:
+      -
+        saisie: 'case'
+        options:
+          nom: 'obligatoire'
+          label_case: '<:saisies:option_obligatoire_label:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'erreur_obligatoire'
+          label: '<:saisies:option_erreur_obligatoire_label:>'
+          explication: '<:saisies:option_erreur_obligatoire_explication:>'
+defaut:
+  options:
+    label: '<:saisies:saisie_input_titre:>'
+    size: 40
+    # champs extras (definition du champ sql)
+    sql: "text DEFAULT '' NOT NULL"
