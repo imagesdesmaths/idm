@@ -1,11 +1,11 @@
 <paquet
 	prefix="verifier"
 	categorie="outil"
-	version="1.0.2"
-	etat="test"
-	compatibilite="[2.0.10;3.0.*]"
+	version="1.0.6"
+	etat="stable"
+	compatibilite="[2.0.10;3.1.*]"
 	logo="images/verifier-128.png"
-	documentation="http://www.spip-contrib.net/Verifier,1505"
+	documentation="http://contrib.spip.net/Verifier,1505"
 >
 
 	<nom>API de v&#233;rification</nom>

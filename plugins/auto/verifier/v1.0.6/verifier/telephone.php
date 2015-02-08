@@ -21,18 +21,22 @@ function verifier_telephone_dist($valeur, $options=array()){
 
 	// On accepte differentes notations, les points, les tirets, les espaces, les slashes
 	$tel = preg_replace("#\.|/|-| #i",'',$valeur);
-	
-	if (preg_match("/^\+33/", $tel)) {
+
+	// Pour les prefixes, on accepte les notations +33 et 0033
+	$prefixe_FR = "/^(\+|00)33/";
+	$prefixe_ES = "/^(\+|00)34/";
+	$prefixe_CH = "/^(\+|00)41/";
+	if (preg_match($prefixe_FR, $tel)) {
 		$options['pays'] = 'FR';
-		$tel = preg_replace('/^\+33/','0',$valeur);
+		$tel = preg_replace($prefixe_FR,'0',$tel);
 	}
-	if (preg_match("/^\+34/", $tel)) {
+	if (preg_match($prefixe_ES, $tel)) {
 		$options['pays'] = 'ES';
-		$tel = preg_replace('/^\+34/','',$valeur);
+		$tel = preg_replace($prefixe_ES,'',$tel);
 	}
-	if (preg_match("/^\+41/", $tel)) {
+	if (preg_match($prefixe_CH, $tel)) {
 		$options['pays'] = 'CH';
-		$tel = preg_replace('/^\+41/','0',$valeur);
+		$tel = preg_replace($prefixe_CH,'0',$tel);
 	}
 
 	switch($options['pays']){
@@ -46,8 +50,9 @@ function verifier_telephone_dist($valeur, $options=array()){
 			if (!preg_match("/^0[1-9][0-9]{8}$/",$tel)) return $erreur;
 		default:
 			// On interdit les 000 etc. mais je pense qu'on peut faire plus malin
+			// On interdit egalement les "numéros" tout en lettres
 			// TODO finaliser les numéros à la con
-			if($tel == '0000000000') return $erreur;
+			if(intval($tel) == 0) return $erreur;
 			break;
 	}
 	

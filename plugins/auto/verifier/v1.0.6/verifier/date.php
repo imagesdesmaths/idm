@@ -105,8 +105,7 @@ function verifier_date_dist($valeur, $options=array(), &$valeur_normalisee=null)
 **/
 function normaliser_date_datetime_dist($valeur, $options, &$erreur) {
 	$defaut = '0000-00-00 00:00:00';
-
-	if (!$valeur) {
+	if (!$valeur or $valeur==array('date'=>'','heure'=>'')) {
 		return $defaut;
 	}
 

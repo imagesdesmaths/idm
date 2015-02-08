@@ -102,7 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_regex' => 'Expresión regular',
 	'type_regex_description' => 'Comprueba que el valor corresponda al patrón indicado. Para el uso de los patrones, refiérase a <a href="http://php.net/manual/es/reference.pcre.pattern.syntax.php">la documentación en línea de PHP</a>.',
 	'type_siren_siret' => 'SIREN o SIRET',
-	'type_siren_siret_description' => 'Comprueba que el valor es un número valido del <a href="http://fr.wikipedia.org/wiki/SIREN">Sistema de Identificación del Repertorio de las Empresas</a> francés.',
+	'type_siren_siret_description' => 'Comprueba que el valor es un número valido del <a href="http://fr.wikipedia.org/wiki/SIREN">Sistema de Identificación del Directorio de las Empresas</a> francés.',
 	'type_taille' => 'Tamaño',
 	'type_taille_description' => 'Comprueba que el tamaño del valor corresponde al mínimo y/o al máximo indicado.',
 	'type_telephone' => 'Número de teléfono',

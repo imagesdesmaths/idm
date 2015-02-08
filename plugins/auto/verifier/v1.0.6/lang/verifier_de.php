@@ -9,13 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_code_postal' => 'Ungültige Postleitzahl',
-	'erreur_comparaison_egal' => 'La valeur doit être égale au champ "@nom_champ@"', # NEW
-	'erreur_comparaison_egal_type' => 'La valeur doit être égale et de même type que le champ "@nom_champ@"', # NEW
-	'erreur_comparaison_grand' => 'La valeur doit être supérieure au champ "@nom_champ@"', # NEW
-	'erreur_comparaison_grand_egal' => 'La valeur doit être supérieure ou égale au champ "@nom_champ@"', # NEW
-	'erreur_comparaison_petit' => 'La valeur doit être inférieure au champ "@nom_champ@"', # NEW
-	'erreur_comparaison_petit_egal' => 'La valeur doit être inférieure ou égale au champ "@nom_champ@"', # NEW
-	'erreur_couleur' => 'Le code couleur n\'est pas valide.', # NEW
 	'erreur_date' => 'Fromat des Datums ungültig',
 	'erreur_date_format' => 'Dieses Datumsformat wird nicht akzeptiert',
 	'erreur_decimal' => 'Der Wert muß einen Dezimalzahl sein',
@@ -26,17 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_entier_entre' => 'Der Wert muß zwischen  @min@ und @max@ liegen.',
 	'erreur_entier_max' => 'Der Wert muß kleiner als @max@ sein.',
 	'erreur_entier_min' => 'Der Wert muß größer als @min@ sein.',
-	'erreur_heure' => 'L’horaire indiquée n’existe pas.', # NEW
-	'erreur_heure_format' => 'Le format de l’heure n’est pas accepté.', # NEW
 	'erreur_id_document' => 'Diese Dokumenten-ID ist ungültig',
-	'erreur_inconnue_generique' => 'Le format n\'est pas correct.', # NEW
-	'erreur_isbn' => 'Le numéro ISBN n\'est pas valide (ex: 978-2-1234-5680-3 ou 2-1234-5680-X)', # NEW
-	'erreur_isbn_13_X' => 'Un numéro ISBN-13 ne peut pas se terminer par X.', # NEW
-	'erreur_isbn_G' => 'Le premier segment doit être égal à 978 ou 979.', # NEW
-	'erreur_isbn_nb_caracteres' => 'Le numéro ISBN doit comprendre 10 ou 13 caractères, sans compter les tirets (actuellement @nb@).', # NEW
-	'erreur_isbn_nb_segments' => 'Le numéro ISBN doit comprendre 4 ou 5 segments (actuellement @nb@).', # NEW
-	'erreur_isbn_segment' => 'Le segment "@segment@" comprend @nb@ chiffre(s) en trop.', # NEW
-	'erreur_isbn_segment_lettre' => 'Le segment "@segment@" ne doit pas contenir de lettre.', # NEW
 	'erreur_numerique' => 'Zahlenformat ungültig',
 	'erreur_regex' => 'Zeichenkettenformat ungültig',
 	'erreur_siren' => 'SIREN Nummer ungültig',
@@ -50,15 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_url_protocole' => 'Die eingegebene Adresse <em>(@url@)</em> muß mit @protocole@ beginnen.',
 	'erreur_url_protocole_exact' => 'Die eingegebene Adresse <em>(@url@)</em> beginnt nicht mit einem gültigen Protokoll (zum Beispiel http:// ).',
 
-	// N
-	'normaliser_option_date' => 'Normaliser la date ?', # NEW
-	'normaliser_option_date_aucune' => 'Non', # NEW
-	'normaliser_option_date_en_datetime' => 'Au format «Datetime» (pour SQL)', # NEW
-
 	// O
-	'option_couleur_normaliser_label' => 'Normaliser le code couleur ?', # NEW
-	'option_couleur_type_hexa' => 'Code couleur au format héxadécimal', # NEW
-	'option_couleur_type_label' => 'Type de vérification à effectuer', # NEW
 	'option_decimal_nb_decimales_label' => 'Dezimalstellen nach dem Komma',
 	'option_email_disponible_label' => 'Adresse verfügbar',
 	'option_email_disponible_label_case' => 'Überprüfen, ob die Adresse bereits verwendet wird.',
@@ -87,8 +62,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_url_type_protocole_web' => 'Web-Protokolle: http oder https',
 
 	// T
-	'type_couleur' => 'Couleur', # NEW
-	'type_couleur_description' => 'Vérifie que la valeur est un code couleur.', # NEW
 	'type_date' => 'Datum',
 	'type_date_description' => 'Überprüft den Wert auf das Datumsformat  JJ/MM/AAAA. Verschiedene Trenner sind möglich (".", "/", etc).',
 	'type_decimal' => 'Dezimalzahl',

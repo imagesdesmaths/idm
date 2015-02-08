@@ -26,17 +26,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_entier_entre' => 'مقدار بايد بين @min@ و @max@.',
 	'erreur_entier_max' => 'مقدار بايد كم‌تر از @max@ باشد.',
 	'erreur_entier_min' => 'مقدار بايد بيشتر از @min@ باشد.',
-	'erreur_heure' => 'L’horaire indiquée n’existe pas.', # NEW
-	'erreur_heure_format' => 'Le format de l’heure n’est pas accepté.', # NEW
 	'erreur_id_document' => 'اين شناسه‌ي سند معتبر نيست.',
 	'erreur_inconnue_generique' => 'فرمت صحيح نيست',
-	'erreur_isbn' => 'Le numéro ISBN n\'est pas valide (ex: 978-2-1234-5680-3 ou 2-1234-5680-X)', # NEW
-	'erreur_isbn_13_X' => 'Un numéro ISBN-13 ne peut pas se terminer par X.', # NEW
-	'erreur_isbn_G' => 'Le premier segment doit être égal à 978 ou 979.', # NEW
-	'erreur_isbn_nb_caracteres' => 'Le numéro ISBN doit comprendre 10 ou 13 caractères, sans compter les tirets (actuellement @nb@).', # NEW
-	'erreur_isbn_nb_segments' => 'Le numéro ISBN doit comprendre 4 ou 5 segments (actuellement @nb@).', # NEW
-	'erreur_isbn_segment' => 'Le segment "@segment@" comprend @nb@ chiffre(s) en trop.', # NEW
-	'erreur_isbn_segment_lettre' => 'Le segment "@segment@" ne doit pas contenir de lettre.', # NEW
 	'erreur_numerique' => 'فرمت عدد معتبر نيست.',
 	'erreur_regex' => 'فرمت رشته معتبر نيست.',
 	'erreur_siren' => 'فرمت SIREN معتبر نيست.',
@@ -100,7 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_entier' => 'عدد صحيح',
 	'type_entier_description' => 'چك كنيد كه مقدار يك عدد صحيح باشد،‌ با گزينه‌ي محدوديت بين دو مقدار.',
 	'type_regex' => 'عبارت عادي',
-	'type_regex_description' => '<چك كنيد كه مقدار با عبارت خواسته شد جور باشد. براي اطلاعات بيشتر در مورد استفاده از عبارت درخواست شده به اينجا رجوع كنيد: <a href="http://fr2.php.net/manual/fr/reference.pcre.pattern.syntax.php">l\'aide en ligne de PHP</a>.',
+	'type_regex_description' => '<چك كنيد كه مقدار با عبارت خواسته شد جور باشد. براي اطلاعات بيشتر در مورد استفاده از عبارت درخواست شده به اينجا رجوع كنيد: <a href="http://fr2.php.net/manual/fr/reference.pcre.pattern.syntax.php">l’aide en ligne de PHP</a>.',
 	'type_siren_siret' => 'شماره‌ي نظام ملي اطلاعات فهرست بنگاه‌ها يا شماره‌ي ملي فهرست بنگاه‌ها و تأسيسات (سرواژه به فرانسه:SIREN ياSIRET)',
 	'type_siren_siret_description' => 'چك كنيد كه مقدار يك شماره‌ي معتبر است <a href="http://fr.wikipedia.org/wiki/SIREN">نظامل اطلاعات بنگاه‌ها به فرانسه s</a> .',
 	'type_taille' => 'اندازه',
