@@ -69,28 +69,37 @@ function notifications_notifications_destinataires($flux){
 		include_spip('base/abstract_sql');
 		$t = sql_fetsel("id_rubrique", "spip_articles", "id_article=" . intval($id_article));
 		$id_rubrique = $t['id_rubrique'];
-
-		while ($id_rubrique){
-			$hierarchie[] = $id_rubrique;
-			$res = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=" . intval($id_rubrique));
-			if (!$res){ // rubrique inexistante
-				$id_rubrique = 0;
-				break;
-			}
-			$id_parent = $res['id_parent'];
-			$id_rubrique = $id_parent;
+		if ($GLOBALS['notifications']['limiter_rubriques']){
+			$limites = $GLOBALS['notifications']['limiter_rubriques'];
+			$limiter_rubriques = explode(",",$limites);
+		} else {
+			$limiter_rubriques = array($id_rubrique);
 		}
-		spip_log("Prop article > admin restreint de " . join(',', $hierarchie), 'notifications');
 
-		//les admins de la rub et de ses parents 
-		$result_email = sql_select(
-			"auteurs.email,auteurs.id_auteur,lien.id_objet as id_rubrique",
-			"spip_auteurs AS auteurs JOIN spip_auteurs_liens AS lien ON auteurs.id_auteur=lien.id_auteur ",
-			"lien.objet='rubrique' AND ".sql_in('lien.id_objet',sql_quote($hierarchie))." AND auteurs.statut='0minirezo'");
+		if (in_array($id_rubrique,$limiter_rubriques))
+		{
+			while ($id_rubrique){
+				$hierarchie[] = $id_rubrique;
+				$res = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=" . intval($id_rubrique));
+				if (!$res){ // rubrique inexistante
+					$id_rubrique = 0;
+					break;
+				}
+				$id_parent = $res['id_parent'];
+				$id_rubrique = $id_parent;
+			}
+			spip_log("Prop article > admin restreint de " . join(',', $hierarchie), 'notifications');
 
-		while ($qui = sql_fetch($result_email)){
-			spip_log($options['statut'] . " article > admin restreint " . $qui['id_auteur'] . " de la rubrique" . $qui['id_rubrique'] . " prevenu", 'notifications');
-			$flux['data'][] = $qui['email'];
+			//les admins de la rub et de ses parents 
+			$result_email = sql_select(
+				"auteurs.email,auteurs.id_auteur,lien.id_objet as id_rubrique",
+				"spip_auteurs AS auteurs JOIN spip_auteurs_liens AS lien ON auteurs.id_auteur=lien.id_auteur ",
+				"lien.objet='rubrique' AND ".sql_in('lien.id_objet',sql_quote($hierarchie))." AND auteurs.statut='0minirezo'");
+
+			while ($qui = sql_fetch($result_email)){
+				spip_log($options['statut'] . " article > admin restreint " . $qui['id_auteur'] . " de la rubrique" . $qui['id_rubrique'] . " prevenu", 'notifications');
+				$flux['data'][] = $qui['email'];
+			}
 		}
 
 	}
@@ -100,39 +109,57 @@ function notifications_notifications_destinataires($flux){
 		AND $GLOBALS['notifications']['prevenir_auteurs_articles']
 	){
 		$id_article = $flux['args']['id'];
-
-
 		include_spip('base/abstract_sql');
+		$t = sql_fetsel("id_rubrique", "spip_articles", "id_article=" . intval($id_article));
+		$id_rubrique = $t['id_rubrique'];
+		if ($GLOBALS['notifications']['limiter_rubriques']){
+			$limites = $GLOBALS['notifications']['limiter_rubriques'];
+			$limiter_rubriques = explode(",",$limites);
+		} else {
+			$limiter_rubriques = array($id_rubrique);
+		}
 
-		// Qui va-t-on prevenir en plus ?
-		$result_email = sql_select(
-			"auteurs.email",
-			"spip_auteurs AS auteurs JOIN spip_auteurs_liens AS lien ON auteurs.id_auteur=lien.id_auteur",
-			"lien.id_objet=".intval($id_article)." AND lien.objet='article'");
+		if (in_array($id_rubrique,$limiter_rubriques))
+		{
 
-		while ($qui = sql_fetch($result_email)){
-			$flux['data'][] = $qui['email'];
-			spip_log($options['statut'] . " article > auteur " . $qui['id_auteur'] . " prevenu", 'notifications');
+			include_spip('base/abstract_sql');
+
+			// Qui va-t-on prevenir en plus ?
+			$result_email = sql_select(
+				"auteurs.email",
+				"spip_auteurs AS auteurs JOIN spip_auteurs_liens AS lien ON auteurs.id_auteur=lien.id_auteur",
+				"lien.id_objet=".intval($id_article)." AND lien.objet='article'");
+
+			while ($qui = sql_fetch($result_email)){
+				$flux['data'][] = $qui['email'];
+				spip_log($options['statut'] . " article > auteur " . $qui['id_auteur'] . " prevenu", 'notifications');
+			}
 		}
 
 	}
 
-	// forum valide ou prive : prevenir les autres contributeurs du thread
+	// forum valide ou prive : prevenir les autres contributeurs du thread ou ceux qui ont déjà répondu à l'article
 	if (($quoi=='forumprive' AND $GLOBALS['notifications']['thread_forum_prive'])
-		OR ($quoi=='forumvalide' AND $GLOBALS['notifications']['thread_forum'])
+		OR ($quoi=='forumvalide' AND ($GLOBALS['notifications']['thread_forum'] OR $GLOBALS['notifications']['forum'] OR $GLOBALS['notifications']['forum_article']))
 	){
 
 		$id_forum = $flux['args']['id'];
-
 		if ($t = $options['forum']
 			OR $t = sql_fetsel("*", "spip_forum", "id_forum=" . intval($id_forum))
 		){
-
+            
 			// Tous les participants a ce *thread*, abonnes
 			// on prend les emails parmi notification_email (prioritaire si rempli) email_auteur ou email de l'auteur qd id_auteur connu
+			// note : on exclut les forums refusé ou marqué comme spam
 			$s = sql_select("F.email_auteur, F.notification_email, A.email",
 				"spip_forum AS F LEFT JOIN spip_auteurs AS A ON F.id_auteur=A.id_auteur",
-				"notification=1 AND id_thread=" . intval($t['id_thread']) . " AND (email_auteur != '' OR notification_email != '' OR A.email IS NOT NULL )");
+				"notification=1 AND id_thread=" . intval($t['id_thread']) . " AND (email_auteur != '' OR notification_email != '' OR A.email IS NOT NULL) AND F.statut NOT IN ('off','spam')") ;
+            // Eventuellement tout ceux qui ont répondu à cet article
+            if ($GLOBALS['notifications']['forum_article']){
+                $s = sql_select("F.email_auteur, F.notification_email, A.email",
+				"spip_forum AS F LEFT JOIN spip_auteurs AS A ON F.id_auteur=A.id_auteur",
+				"notification=1 AND objet=".sql_quote($t['objet'])." AND id_objet=" . intval($t['id_objet']) . " AND (email_auteur != '' OR notification_email != '' OR A.email IS NOT NULL) AND F.statut NOT IN ('off','spam')");                
+                }
 			while ($r = sql_fetch($s)){
 				if ($r['notification_email'])
 					$flux['data'][] = $r['notification_email'];
@@ -142,19 +169,6 @@ function notifications_notifications_destinataires($flux){
 					$flux['data'][] = $r['email'];
 			}
 
-			/*
-			// 3. Tous les auteurs des messages qui precedent (desactive egalement)
-			// (possibilite exclusive de la possibilite precedente)
-			// TODO: est-ce utile, par rapport au thread ?
-			else if (defined('_SUIVI_FORUMS_REPONSES')
-			AND _SUIVI_FORUMS_REPONSES) {
-				$id_parent = $id_forum;
-				while ($r = spip_fetch_array(spip_query("SELECT email_auteur, id_parent FROM spip_forum WHERE id_forum=$id_parent AND statut='publie'"))) {
-					$tous[] = $r['email_auteur'];
-					$id_parent = $r['id_parent'];
-				}
-			}
-			*/
 		}
 	}
 

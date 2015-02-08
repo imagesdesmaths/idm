@@ -80,7 +80,7 @@ function notifications_forumvalide_dist($quoi, $id_forum, $options) {
 	//
 	$email_notification_forum = charger_fonction('email_notification_forum','inc');
 	foreach ($destinataires as $email) {
-		$contexte = array('notification_email'=>$email);
+		$contexte = array('notification_email'=>$email,'indiquer_email_auteur'=>'non');
 		$texte = $email_notification_forum($t, $email, $contexte);
 		notifications_envoyer_mails_texte_ou_html($email, $texte);
 	}

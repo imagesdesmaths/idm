@@ -178,5 +178,5 @@ function notifications_where_abo($email, $id_auteur=null){
 	if ($id_auteur)
 		$where[] = "(notification_email=".sql_quote('')." AND email_auteur=".sql_quote('')." AND id_auteur=".intval($id_auteur).")";
 
-	return implode(" OR ",$where);
+	return "(".implode(" OR ",$where).")";
 }

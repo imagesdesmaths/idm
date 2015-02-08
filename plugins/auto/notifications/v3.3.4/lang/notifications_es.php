@@ -54,9 +54,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forums_prives' => 'Foros privados',
 	'forums_public' => 'Foros públicos',
 	'forums_public_a_noter' => 'Nota: en el caso de los foros moderados a priori, sólo aquellos autores que tienen derecho de aprobar los foros son notificados cuando se crea un foro; los otros destinatarios son notificados cuando el mensaje ha sido aprobado por el moderador.',
+	'forums_public_article' => '<strong>Respuesta al artículo</strong>: las personas que hayan respondido públicamente al artículos reciben notificaciones de los foros (públicos) del artículo (útil para los foros «planos»).', # MODIF
 	'forums_public_auteurs' => '<strong>Autores</strong>: los autores reciben notificaciones de aquellos foros derivados de sus artículos en en el sitio públicos.',
 	'forums_public_moderateur' => 'Indique a continuación el correo electrónico del moderador de los foros públicos (si son varios, separe con comas).',
-	'forums_public_thread' => '<strong>Hilo de discusión</strong>: los participantes de un mismo hilo de discusión reciben notificaciones de los foros (públicos).',
+	'forums_public_thread' => '<strong>Hilo de discusión</strong>: los participantes de un mismo hilo de discusión reciben notificaciones de los foros (públicos).', # MODIF
 
 	// I
 	'info_lien_publier_commentaire' => 'Publicar este comentario',
@@ -78,7 +79,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inscription_statut_webmestres' => 'Webmasters',
 
 	// L
-	'lien_documentation' => '<a href="http://www.spip-contrib.net/Notifications" class="spip_out">Cf. documentation</a>',
+	'lien_documentation' => '<a href="http://contrib.spip.net/Notifications" class="spip_out">Cf. documentation</a>',
+	'limiter_rubriques_explication' => 'Especifique aquí los identificadores de cada sección donde quiere activar las notificaciones, separados por una coma. Por ej. "11,26"',
+	'limiter_rubriques_label' => 'Limitar a estas secciones:',
 
 	// M
 	'message_a_valider' => 'Mensaje para aprobar:',

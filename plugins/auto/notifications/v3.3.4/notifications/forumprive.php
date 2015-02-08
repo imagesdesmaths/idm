@@ -35,7 +35,7 @@ function notifications_forumprive_dist($quoi, $id_forum, $options) {
 
 		// 1.1. Les auteurs du message (si c'est un message)
 		if ($t['objet']=='message' AND $t['id_objet']) {
-			$result = sql_select("auteurs.email","spip_auteurs AS auteurs, spip_auteurs_liens AS lien ON auteurs.id_auteur=lien.id_auteur","lien.objet='message' AND lien.id_objet=".intval($t['id_objet']));
+			$result = sql_select("auteurs.email","spip_auteurs AS auteurs JOIN spip_auteurs_liens AS lien ON auteurs.id_auteur=lien.id_auteur","lien.objet='message' AND lien.id_objet=".intval($t['id_objet']));
 
 			while ($qui = sql_fetch($result))
 				$tous[] = $qui['email'];
@@ -46,7 +46,7 @@ function notifications_forumprive_dist($quoi, $id_forum, $options) {
 
 		// 1.2. Les auteurs de l'article (si c'est un article)
 		elseif ($t['objet']=='article' AND $t['id_objet']) {
-			$result = sql_select("auteurs.email","spip_auteurs AS auteurs, spip_auteurs_liens AS lien ON auteurs.id_auteur=lien.id_auteur","lien.objet='article' AND lien.id_objet=".intval($t['id_objet']));
+			$result = sql_select("auteurs.email","spip_auteurs AS auteurs JOIN spip_auteurs_liens AS lien ON auteurs.id_auteur=lien.id_auteur","lien.objet='article' AND lien.id_objet=".intval($t['id_objet']));
 
 			while ($qui = sql_fetch($result))
 				$tous[] = $qui['email'];

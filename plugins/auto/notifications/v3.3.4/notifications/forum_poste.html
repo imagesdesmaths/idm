@@ -13,7 +13,7 @@ Mail HTML simplifie mis en forme complete par le filtre |facteur_email_wrap_to_h
 		[<p><strong><:forum:titre_cadre_forum_interne:></strong></p>(#STATUT|=={privrac}|oui)]
 		[<p><strong><:forum:titre_cadre_forum_administrateur:></strong></p>(#STATUT|=={priadm}|oui)]
 		[
-		(#ENV{par_auteur})
+		(#ENV{indiquer_email_auteur,oui}|=={non}|?{#ENV{par_auteur}|replace{'&lt;.+&gt; ','','U'},#ENV{par_auteur}})
 		<br />]
 		[<a href="(#ENV{url_site})">[(#NOM_SITE|sinon{#ENV{url_site}})]</a>]
 		<hr/>

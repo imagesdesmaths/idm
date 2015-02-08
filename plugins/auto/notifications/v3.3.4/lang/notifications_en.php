@@ -49,14 +49,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'form_forum_confirmer_email' => 'To confirm your email address, click the button below:',
 	'forum_prives_auteur' => '<strong>Authors</strong>: Authors get notified when comments are posted to their article(s) or comment(s) on the private area.',
-	'forum_prives_moderateur' => 'Please write here moderators\' email adress for private forums, coma separated.',
+	'forum_prives_moderateur' => 'Please indicate the moderator’s email address for private forums, (comma-separated in case of multiple addresses).',
 	'forum_prives_thread' => '<strong>Forum thread</strong>: Posters to the same thread get notified when a new comment is posted to the (private) thread.',
 	'forums_prives' => 'Forums in private area',
 	'forums_public' => 'Public forums',
 	'forums_public_a_noter' => 'Note: if forums are awaiting validation from moderators before publication, only authors with rights to validate forums get notified when the comment is posted ; other recipients get notified only when moderators validate the comment.',
+	'forums_public_article' => '<strong>Reply to an article</strong>: persons who have publicly replied to an article will receive forum notifications for that article (useful for «flat»  forums).', # MODIF
 	'forums_public_auteurs' => '<strong>Authors</strong>: Authors get notified when new comments are posted to their article(s) on the public area.',
-	'forums_public_moderateur' => 'Please write here moderators\' email adress for public forums, coma separated.',
-	'forums_public_thread' => '<strong>Forum thread</strong>: Posters to the same thread get notified when a new comment is posted to the (public) thread.',
+	'forums_public_moderateur' => 'Please indicate the moderator’s email address for public forums, (comma-separated in case of multiple addresses).',
+	'forums_public_thread' => '<strong>Forum thread</strong>: Posters to the same thread get notified when a new comment is posted to the (public) thread.', # MODIF
 
 	// I
 	'info_lien_publier_commentaire' => 'Publish this comment online',
@@ -78,14 +79,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inscription_statut_webmestres' => 'Webmaster',
 
 	// L
-	'lien_documentation' => '<a href="http://www.spip-contrib.net/Notifications" class="spip_out">View documentation</a>',
+	'lien_documentation' => '<a href="http://contrib.spip.net/Notifications" class="spip_out">View documentation</a>',
+	'limiter_rubriques_explication' => 'Specify the identifiers of each section where you want to activate the notifications, separated with a comma. example: "11,26"',
+	'limiter_rubriques_label' => 'Limit to these sections:',
 
 	// M
 	'message_a_valider' => 'Message to confirm:',
 	'message_spam_a_confirmer' => 'SPAM to confirm:',
 	'message_voir_configuration' => 'Look at the notification setup',
 	'messagerie_interne' => 'Private messages',
-	'messagerie_interne_signaler' => '<strong>Notify new private messages</strong>: activate this to get redactors notified when they haven\'t seen a Private Message had been sent to them. Redactors get notified 20 minutes after the Private Message is sent, in order to avoid spam, when the redactor is connected to the private area.',
+	'messagerie_interne_signaler' => '<strong>Notify new private messages</strong>: activate this to get redactors notified when they haven’t seen a Private Message had been sent to them. Redactors get notified 20 minutes after the Private Message is sent, in order to avoid spam, when the redactor is connected to the private area.',
 	'moderateur' => '<strong>Moderator</strong>',
 
 	// N
@@ -97,10 +100,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'signature_petition' => 'Petition signatures',
-	'signature_petition_moderateur' => 'Please write here moderator\'s email address for petitions, coma separated.',
+	'signature_petition_moderateur' => 'Please indicate the moderator’s email address for petitions, (comma-separated in case of multiple addresses).',
 	'suivi_texte_acces_page' => 'Change my subscriptions to discussions',
 	'suivis_perso' => 'Personnal notifications follow-up',
-	'suivis_perso_activer_option' => 'If you activate this option, each visitor clicking this follow-up URL will be registered in the <code>spip_auteurs</code> DB table, with status <code>6visiteur</code>. He\'ll be then able to view all the messages he posted on the website, configure his own notification options, ...',
+	'suivis_perso_activer_option' => 'If you activate this option, each visitor clicking this follow-up URL will be registered in the <code>spip_auteurs</code> DB table, with status <code>6visiteur</code>. He’ll be then able to view all the messages he posted on the website, configure his own notification options, ...',
 	'suivis_perso_non' => 'No follow-up',
 	'suivis_perso_oui' => 'Follow-up activated',
 	'suivis_perso_url_suivis' => '<strong>Add an URL for notifications follow-up</strong> in each notification email. CLicking on this URL will let the user configure his own notification preferences.',

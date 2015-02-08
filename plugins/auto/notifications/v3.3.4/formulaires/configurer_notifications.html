@@ -22,6 +22,11 @@
 								<label for="prevenir_admins_restreints"><:notifications:article_prive_admins_restreints:></label>
 							</div>
 						</li>
+						<li class='editer editer_limiter_rubriques'>
+							<label for="limiter_rubriques"><:notifications:limiter_rubriques_label:></label>
+							<p class="explication"><:notifications:limiter_rubriques_explication:></p>
+							<input type="text" name="limiter_rubriques" value="[(#ENV{limiter_rubriques}|entites_html)]" id="limiter_rubriques" class="text" />
+						</li>
 					</ul>
 				</fieldset>
 			</li>
@@ -41,6 +46,12 @@
 							<div class="choix">
 								<input type="checkbox" name="thread_forum"[(#ENV{thread_forum}|=={on}|oui)checked="checked"] id="thread_forum" class="checkbox" />
 								<label for="thread_forum"><:notifications:forums_public_thread:></label>
+							</div>
+						</li>
+						<li class="editer editer_forum_article">
+							<div class="choix">
+								<input type="checkbox" name="forum_article"[(#ENV{forum_article}|=={on}|oui)checked="checked"] id="forum_article" class="checkbox" />
+								<label for="forum_article"><:notifications:forums_public_article:></label>
 							</div>
 						</li>
 						<li class="editer editer_moderateurs_forum">
