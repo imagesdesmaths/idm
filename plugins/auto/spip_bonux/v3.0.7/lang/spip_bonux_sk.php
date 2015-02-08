@@ -9,8 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'afficher_calendrier' => 'Zobraziť kalendár',
-	'annee_precedente' => 'Minulý rok',
-	'annee_suivante' => 'Budúci rok',
+	'annee_precedente' => 'Predošlý rok',
+	'annee_suivante' => 'Nasledujúci rok',
 	'annuler_recherche' => 'Zrušiť vyhľadávanie',
 
 	// B

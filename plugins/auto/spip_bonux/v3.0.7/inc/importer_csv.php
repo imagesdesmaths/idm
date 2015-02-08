@@ -2,7 +2,7 @@
 /**
  * Plugin Spip-Bonux
  * Le plugin qui lave plus SPIP que SPIP
- * (c) 2008 Mathieu Marcillaud, Cedric Morin, Romy Tetue
+ * (c) 2008 Mathieu Marcillaud, Cedric Morin, Tetue
  * Licence GPL
  * 
  * Fonctions de lecture d'un fichier CSV pour transformation en array()

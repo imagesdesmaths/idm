@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'afficher_calendrier' => 'Show the calendar',
+	'afficher_calendrier' => 'Display the calendar',
 	'annee_precedente' => 'Previous year',
 	'annee_suivante' => 'Next year',
 	'annuler_recherche' => 'Cancel the search',

@@ -2,7 +2,7 @@
 /**
  * Plugin Spip-Bonux
  * Le plugin qui lave plus SPIP que SPIP
- * (c) 2008 Mathieu Marcillaud, Cedric Morin, Romy Tetue
+ * (c) 2008 Mathieu Marcillaud, Cedric Morin, Tetue
  * Licence GPL
  *
  * Fonctions d'export d'une requete sql ou d'un tableau

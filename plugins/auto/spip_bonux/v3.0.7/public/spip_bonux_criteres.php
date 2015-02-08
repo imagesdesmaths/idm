@@ -2,7 +2,7 @@
 /**
  * Plugin Spip-Bonux
  * Le plugin qui lave plus SPIP que SPIP
- * (c) 2008 Mathieu Marcillaud, Cedric Morin, Romy Tetue
+ * (c) 2008 Mathieu Marcillaud, Cedric Morin, Tetue
  * Licence GPL
  * 
  */
@@ -10,36 +10,65 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * http://www.spip-contrib.net/Classer-les-articles-par-nombre-de#forum409210
  * Permet de faire un comptage par table liee
- * exemple
- * <BOUCLE1(AUTEURS){compteur articles}{par compteur_articles}>
- * #ID_AUTEUR : #COMPTEUR{articles}
- * </BOUCLE1>
- * pour avoir les auteurs classes par articles et le nombre d'article de chacun
  *
- * @param unknown_type $idb
- * @param unknown_type $boucles
- * @param unknown_type $crit
+ * @syntaxe `{compteur table[, champ]}`
+ * @link http://www.spip-contrib.net/Classer-les-articles-par-nombre-de#forum409210
+ * 
+ * @example
+ *     Pour avoir les auteurs classes par articles et
+ *     le nombre d'article de chacun :
+ * 
+ *     ```
+ *     <BOUCLE1(AUTEURS){compteur articles}{par compteur_articles}>
+ *     #ID_AUTEUR : #COMPTEUR{articles}
+ *     </BOUCLE1>
+ *     ```
+ *
+ * @note
+ *     Avec un seul argument {compteur autre_table} le groupby est fait
+ *     implicitement sur la cle primaire de la boucle en cours.
+ *     Avec un second argument {compteur autre_table,champ_fusion}
+ *     le groupby est fait sur le champ_fusion"
+ * 
+ * @param string $idb
+ *     Identifiant de la boucle
+ * @param Boucle[] $boucles
+ *     AST du squelette
+ * @param Critere $crit
+ *     Paramètres du critère dans cette boucle
+ * @param bool $left
+ *     true pour utiliser un left join plutôt qu'un inner join.      
+ * @return void
  */
 function critere_compteur($idb, &$boucles, $crit, $left=false){
 	$boucle = &$boucles[$idb];
 
-	$_fusion = calculer_liste($crit->param[1], array(), $boucles, $boucle->id_parent);
+	if (isset($crit->param[1])) {
+		$_fusion = calculer_liste($crit->param[1], array(), $boucles, $boucle->id_parent);
+	} else {
+		$_fusion = "''";
+	}
 	$params = $crit->param;
 	$table = reset($params);
 	$table = $table[0]->texte;
 	$op = false;
-	if(preg_match(',^(\w+)([<>=])([0-9]+)$,',$table,$r)){
+	if (preg_match(',^(\w+)([<>=])([0-9]+)$,',$table,$r)){
 		$table=$r[1];
 		if (count($r)>=3) $op=$r[2];
 		if (count($r)>=4) $op_val=$r[3];
 	}
 	$type = objet_type($table);
 	$type_id = id_table_objet($type);
+	
+	/**
+	 * Si la clé primaire est une clé multiple, on prend la première partie
+	 * Utile pour compter les versions de spip_versions par exemple
+	 */
+	if (count($types = explode(',',$type_id)) > 1)
+		$type_id = $types[0];
 	$table_sql = table_objet_sql($type);
-	
-	
+
 	$trouver_table = charger_fonction('trouver_table','base');
 	$arrivee = array($table, $trouver_table($table, $boucle->sql_serveur));
 	$depart = array($boucle->id_table,$trouver_table($boucle->id_table, $boucle->sql_serveur));

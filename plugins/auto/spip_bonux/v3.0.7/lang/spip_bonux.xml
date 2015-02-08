@@ -1,0 +1,28 @@
+<traduction module="spip_bonux" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/spip-bonux-3/lang/" reference="fr">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/spip_bonux?lang_cible=ar" total="13" traduits="13" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
+	</langue>
+	<langue code="de" url="http://trad.spip.net/tradlang_module/spip_bonux?lang_cible=de" total="13" traduits="12" relire="0" modifs="1" nouveaux="0" pourcent="92.31">
+		<traducteur nom="Martin" lien="http://trad.spip.net/auteur/martin" />
+	</langue>
+	<langue code="en" url="http://trad.spip.net/tradlang_module/spip_bonux?lang_cible=en" total="13" traduits="13" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/spip_bonux?lang_cible=es" total="13" traduits="13" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
+	</langue>
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/spip_bonux?lang_cible=fa" total="13" traduits="13" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
+	</langue>
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/spip_bonux?lang_cible=fr" total="13" traduits="13" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/spip_bonux?lang_cible=nl" total="13" traduits="13" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
+	</langue>
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/spip_bonux?lang_cible=ru" total="13" traduits="12" relire="0" modifs="1" nouveaux="0" pourcent="92.31">
+		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
+	</langue>
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/spip_bonux?lang_cible=sk" total="13" traduits="13" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+	</langue>
+</traduction>
