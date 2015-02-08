@@ -39,6 +39,8 @@ include_once _DIR_RESTREINT."inc/envoyer_mail.php";
 function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = "") {
 	$message_html	= '';
 	$message_texte	= '';
+	$nom_envoyeur = $cc = $bcc = $repondre_a = '';
+	$pieces_jointes = array();
 
 	// si $corps est un tableau -> fonctionnalites etendues
 	// avec entrees possible : html, texte, pieces_jointes, nom_envoyeur, ...
@@ -53,8 +55,10 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		$repondre_a = $corps['repondre_a'];
 		$adresse_erreur = $corps['adresse_erreur'];
 		$headers = (isset($corps['headers'])?$corps['headers']:$headers);
-		if (is_string($headers))
+		if (is_string($headers)){
 			$headers = array_map('trim',explode("\n",$headers));
+			$headers = array_filter($headers);
+		}
 	}
 	// si $corps est une chaine -> compat avec la fonction native SPIP
 	// gerer le cas ou le corps est du html avec un Content-Type: text/html dans les headers
@@ -63,9 +67,42 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 			$message_html	= $corps;
 		}
 		else {
-			$message_texte	= nettoyer_caracteres_mail($corps);
+			// Autodetection : tester si le mail est en HTML
+			if (strpos($headers,"Content-Type:")===false
+				AND strpos($corps,"<")!==false // eviter les tests suivants si possible
+				AND $ttrim = trim($corps)
+				AND substr($ttrim,0,1)=="<"
+				AND substr($ttrim,-1,1)==">"
+				AND stripos($ttrim,"</html>")!==false){
+
+				if(!strlen($sujet)){
+					// dans ce cas on ruse un peu : extraire le sujet du title
+					if (preg_match(",<title>(.*)</title>,Uims",$corps,$m))
+						$sujet = $m[1];
+					else {
+						// fallback, on prend le body si on le trouve
+						if (preg_match(",<body[^>]*>(.*)</body>,Uims",$corps,$m))
+							$ttrim = $m[1];
+
+						// et on extrait la premiere ligne de vrai texte...
+						// nettoyer le html et les retours chariots
+						$ttrim = textebrut($ttrim);
+						$ttrim = str_replace("\r\n", "\r", $ttrim);
+						$ttrim = str_replace("\r", "\n", $ttrim);
+						// decouper
+						$ttrim = explode("\n",trim($ttrim));
+						// extraire la premiere ligne de texte brut
+						$sujet = array_shift($ttrim);
+					}
+				}
+				$message_html	= $corps;
+			}
+			// c'est vraiment un message texte
+			else
+				$message_texte	= nettoyer_caracteres_mail($corps);
 		}
 		$headers = array_map('trim',explode("\n",$headers));
+		$headers = array_filter($headers);
 	}
 	$sujet = nettoyer_titre_email($sujet);
 
@@ -73,6 +110,10 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	// pour garder le texte brut, il suffit de faire un modele qui renvoie uniquement #ENV*{texte}
 	if ($message_texte AND ! $message_html){
 		$message_html = recuperer_fond("emails/texte",array('texte'=>$message_texte,'sujet'=>$sujet));
+	}
+	// si le mail est en HTML sans alternative, la generer
+	if ($message_html AND !$message_texte){
+		$message_texte = facteur_mail_html2text($message_html);
 	}
 
 	// mode TEST : forcer l'email
@@ -87,10 +128,27 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	// c'est un format standard dans l'envoi de mail
 	// les passer au format array pour phpMailer
 	// mais ne pas casser si on a deja un array en entree
+	// si pas destinataire du courriel on renvoie false (eviter les warning PHP : ligne 464 de phpmailer-php5/class.phpmailer.php
+	// suppression des adresses de courriels invalides, si aucune valide, renvoyer false (eviter un warning PHP : ligne 464 de phpmailer-php5/class.phpmailer.php)
 	if (is_array($destinataire))
 		$destinataire = implode(", ",$destinataire);
-	$destinataire = array_map('trim',explode(",",$destinataire));
-	
+
+	if(strlen($destinataire) > 0){
+		$destinataire = array_map('trim',explode(",",$destinataire));
+		foreach ($destinataire as $key => $value) {
+			if(!email_valide($value))
+				unset($destinataire[$key]);
+		}
+		if(count($destinataire) == 0) {
+			spip_log("Aucune adresse email de destination valable pour l'envoi du courriel.", 'mail.' . _LOG_ERREUR);
+			return false;
+		}
+	}
+	else {
+		spip_log("Aucune adresse email de destination valable pour l'envoi du courriel.", 'mail.' . _LOG_ERREUR);
+		return false;
+	}
+
 	// On crée l'objet Facteur (PHPMailer) pour le manipuler ensuite
 	$facteur = new Facteur($destinataire, $sujet, $message_html, $message_texte);
 	
@@ -98,8 +156,11 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	if (empty($from) AND empty($facteur->From)) {
 		$from = $GLOBALS['meta']["email_envoi"];
 		if (empty($from) OR !email_valide($from)) {
-			spip_log("Meta email_envoi invalide. Le mail sera probablement vu comme spam.");
-			$from = $destinataire;
+			spip_log("Meta email_envoi invalide. Le mail sera probablement vu comme spam.", 'mail.' . _LOG_ERREUR);
+			if(is_array($destinataire) && count($destinataire) > 0)
+				$from = $destinataire[0];
+			else
+				$from = $destinataire;
 		}
 	}
 
@@ -142,7 +203,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 			$facteur->AddBCC($bcc);
 	}
 	
-	// S'il y a des copies cachées à envoyer
+	// S'il y a une adresse de reply-to
 	if ($repondre_a){
 		if (is_array($repondre_a))
 			foreach ($repondre_a as $courriel)
@@ -168,11 +229,18 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		$facteur->Sender = $adresse_erreur;
 
 	// si entetes personalises : les ajouter
-	// bug : semble ecraser les autres headers. A debug si on veut le rendre fonctionnel
-	//if (!empty($headers)) {
-	//	foreach($headers as $h)
-	//		$facteur->AddCustomHeader($h);
-	//}
+	// attention aux collisions : si on utilise l'option cc de $corps
+	// et qu'on envoie en meme temps un header Cc: xxx, yyy
+	// on aura 2 lignes Cc: dans les headers
+	if (!empty($headers)) {
+		foreach($headers as $h){
+			// verifions le format correct : il faut au moins un ":" dans le header
+			// et on filtre le Content-Type: qui sera de toute facon fourni par facteur
+			if (strpos($h,":")!==false
+			  AND strncmp($h,"Content-Type:",13)!==0)
+				$facteur->AddCustomHeader($h);
+		}
+	}
 	
 	// On passe dans un pipeline pour modifier tout le facteur avant l'envoi
 	$facteur = pipeline('facteur_pre_envoi', $facteur);
@@ -186,7 +254,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	$retour = $facteur->Send();
 	
 	if (!$retour)
-		spip_log("Erreur Envoi mail via Facteur : ".print_r($facteur->ErrorInfo,true),'facteur');
+		spip_log("Erreur Envoi mail via Facteur : ".print_r($facteur->ErrorInfo,true),'facteur.'._LOG_ERREUR);
 
 	return $retour ;
 }

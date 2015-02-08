@@ -7,22 +7,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// Z
-	'Z' => 'ZZzZZzzz',
-
 	// C
-	'config_info_enregistree' => 'La configuración del factor se ha registrado correctamente',
+	'config_info_enregistree' => 'La configuración del cartero fue guardada correctamente',
 	'configuration_adresse_envoi' => 'Configuración de la dirección de envío',
-	'configuration_facteur' => 'Factor',
+	'configuration_facteur' => 'Cartero',
 	'configuration_mailer' => 'Configuración del "mailer"',
 	'configuration_smtp' => 'Elección del método de envío del correo electrónico',
-	'configuration_smtp_descriptif' => 'Si no está seguro, elija la función de correo electrónico de PHP.',
+	'configuration_smtp_descriptif' => 'Si no estás seguro, elige la función de correo electrónico de PHP.',
 	'corps_email_de_test' => 'Éste es un mensaje de prueba acentuado',
 
 	// E
-	'email_test_envoye' => 'El correo electrónico de prueba se ha enviado correctamente. Si lo recibe, verifique la configuración de su servidor o contacte con un administrador del servicio. ',
+	'email_envoye_par' => 'Enviado por @site@',
+	'email_test_envoye' => 'El correo electrónico de prueba se ha enviado correctamente. Si no lo recibes, verifica la configuración de tu servidor o contacta a un administrador del servicio. ',
 	'erreur' => 'Error',
-	'erreur_dans_log' => ': consulte el archivo de registro para obtener más detalles',
+	'erreur_dans_log' => ': consulta el archivo de registro (log) para más detalles',
 	'erreur_generale' => 'Hay uno o más errores de configuración. Por favor, compruebe el contenido del formulario. ',
 	'erreur_invalid_host' => 'Este nombre de host es incorrecto',
 	'erreur_invalid_port' => 'Este número de puerto es incorrecto',
@@ -39,8 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_filtre_images' => 'Incorporar las imágenes de referencia en los correos electrónicos',
 	'facteur_filtre_iso_8859' => 'Convertir en ISO-8859-1',
 	'facteur_filtres' => 'Filtros',
-	'facteur_filtres_descriptif' => 'Los filtros pueden aplicarse en los correos electrónicos en el momento del envío.',
-	'facteur_smtp_auth' => 'Requiere autentificación:',
+	'facteur_filtres_descriptif' => 'Filtros pueden aplicarse a los correos electrónicos al ser enviados.',
+	'facteur_smtp_auth' => 'Requiere autenticación:',
 	'facteur_smtp_auth_non' => 'no',
 	'facteur_smtp_auth_oui' => 'sí',
 	'facteur_smtp_host' => 'Host:',
@@ -54,6 +52,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_sender_descriptif' => 'Indica en el encabezado del correo electrónico la dirección de correo electrónico de rebote de errores (o "Return-Path"), y en caso de un envío a través del método SMTP indica, también, la dirección del remitente.',
 	'facteur_smtp_username' => 'Nombre de usuario:',
 
+	// M
+	'message_identite_email' => 'La configuración del plugin "cartero" sobrecarga esta dirección de correo para el envío de correos.',
+
 	// N
 	'note_test_configuration' => 'Un correo electrónico se enviará a la dirección de envío definida (o aquélla del webmaster).',
 
@@ -61,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'personnaliser' => 'Personalizar esta configuración',
 
 	// T
-	'tester' => 'Testar',
+	'tester' => 'Probar',
 	'tester_la_configuration' => 'Testar la configuración',
 
 	// U

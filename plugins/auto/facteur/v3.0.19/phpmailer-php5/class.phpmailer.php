@@ -1158,7 +1158,7 @@ class PHPMailer {
     switch($this->message_type) {
       case 'plain':
         $result .= $this->HeaderLine('Content-Transfer-Encoding', $this->Encoding);
-        $result .= sprintf("Content-Type: %s; charset=\"%s\"", $this->ContentType, $this->CharSet);
+        $result .= sprintf("Content-Type: %s; charset=%s", $this->ContentType, $this->CharSet);
         break;
       case 'attachments':
       case 'alt_attachments':
@@ -1272,7 +1272,7 @@ class PHPMailer {
       $encoding = $this->Encoding;
     }
     $result .= $this->TextLine('--' . $boundary);
-    $result .= sprintf("Content-Type: %s; charset = \"%s\"", $contentType, $charSet);
+    $result .= sprintf("Content-Type: %s; charset=%s", $contentType, $charSet);
     $result .= $this->LE;
     $result .= $this->HeaderLine('Content-Transfer-Encoding', $encoding);
     $result .= $this->LE;
@@ -2024,7 +2024,7 @@ class PHPMailer {
     $this->Body = $message;
     $textMsg = trim(strip_tags(preg_replace('/<(head|title|style|script)[^>]*>.*?<\/\\1>/s','',$message)));
     if (!empty($textMsg) && empty($this->AltBody)) {
-      $this->AltBody = html_entity_decode($textMsg);
+      $this->AltBody = html_entity_decode($textMsg,ENT_COMPAT | ENT_HTML401, strtoupper($this->CharSet));
     }
     if (empty($this->AltBody)) {
       $this->AltBody = 'To view this email message, open it in a program that understands HTML!' . "\n\n";

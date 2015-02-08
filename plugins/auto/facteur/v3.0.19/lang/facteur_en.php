@@ -7,19 +7,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// Z
-	'Z' => 'ZZzZZzzz',
-
 	// C
-	'config_info_enregistree' => 'Postman\'s configuration is now saved',
-	'configuration_adresse_envoi' => 'Sender\'s address configuration',
+	'config_info_enregistree' => 'Postman’s configuration is now saved',
+	'configuration_adresse_envoi' => 'Sender’s address configuration',
 	'configuration_facteur' => 'Postman',
-	'configuration_mailer' => 'Mailer\'s configuration',
+	'configuration_mailer' => 'Mailer’s configuration',
 	'configuration_smtp' => 'Choose your mailer',
-	'configuration_smtp_descriptif' => 'If you\'re not sure about the settings, leave them set to "PHP mail".',
+	'configuration_smtp_descriptif' => 'If you’re not sure about the settings, leave them set to "PHP mail".',
 	'corps_email_de_test' => 'This is a test email',
 
 	// E
+	'email_envoye_par' => 'Sent by @site@',
 	'email_test_envoye' => 'The test email was successfully sent. If you do not receive it correctly, check the configuration of your server or contact a server administrator.',
 	'erreur' => 'Error',
 	'erreur_dans_log' => ': check the log file for more details',
@@ -51,8 +49,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_secure_ssl' => 'SSL',
 	'facteur_smtp_secure_tls' => 'TLS',
 	'facteur_smtp_sender' => 'Return-Path (optional)',
-	'facteur_smtp_sender_descriptif' => 'Define the Return-Path in the mail header, useful for error feedback, also in SMTP mode it defines the sender\'s email.',
+	'facteur_smtp_sender_descriptif' => 'Define the Return-Path in the mail header, useful for error feedback, also in SMTP mode it defines the sender’s email.',
 	'facteur_smtp_username' => 'Username:',
+
+	// M
+	'message_identite_email' => 'The configuration of the plugin "factor" preset this email address for sending emails.',
 
 	// N
 	'note_test_configuration' => 'A test email will be sent to the "sender".',
@@ -66,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// U
 	'utiliser_mail' => 'Use mail function from PHP',
-	'utiliser_reglages_site' => 'Use the site\'s settings: the email address is the webmaster\'s one and the name of the website is the name of the sender',
+	'utiliser_reglages_site' => 'Use the site’s settings: the email address is the webmaster’s one and the name of the website is the name of the sender',
 	'utiliser_smtp' => 'Use SMTP',
 
 	// V

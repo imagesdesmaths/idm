@@ -7,9 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// Z
-	'Z' => 'ZZzZZzzz',
-
 	// C
 	'config_info_enregistree' => 'Nastavenia Poštára sa uložili správne',
 	'configuration_adresse_envoi' => 'Nastavenie adresy odosielateľa',
@@ -20,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'corps_email_de_test' => 'Toto je testovací e-mail s diakritikou',
 
 	// E
+	'email_envoye_par' => 'Odoslané z @site@',
 	'email_test_envoye' => 'Testovací e-mail bol úspešne odoslaný. Ak ho nedostanete, skontrolujte nastavenia svojho servera alebo sa obráťte na administrátora servera.',
 	'erreur' => 'Chyba',
 	'erreur_dans_log' => ' : viac podrobností nájdete v súbore log',
@@ -53,6 +51,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_sender' => 'Vypísanie chýb (nepovinné)',
 	'facteur_smtp_sender_descriptif' => 'Zadané v hlavičke návratnej e-mailovej adresy pri chybe (alebo Return-Path) a pri jej odoslaní metódou SMTP je aj adresou odosielateľa.',
 	'facteur_smtp_username' => 'Používateľské meno:',
+
+	// M
+	'message_identite_email' => 'Nastavenia zásuvného modulu "Poštár" predvolili túto e-mailovú adresu na posielanie e-mailov.',
 
 	// N
 	'note_test_configuration' => 'E-mail bude odoslaný na uvedenú adresu (alebo webmasterovi).',

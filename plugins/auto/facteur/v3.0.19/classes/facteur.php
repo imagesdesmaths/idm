@@ -30,23 +30,16 @@ class Facteur extends PHPMailer {
 	 *
 	 */
 	function Facteur($email, $objet, $message_html, $message_texte, $options = array()) {
-		$defaut = array(
-			'adresse_envoi' => $GLOBALS['meta']['facteur_adresse_envoi'],
-			'adresse_envoi_email' => $GLOBALS['meta']['facteur_adresse_envoi_email'],
-			'adresse_envoi_nom' => $GLOBALS['meta']['facteur_adresse_envoi_nom'],
-			'cc' => $GLOBALS['meta']['facteur_cc'],
-			'bcc' => $GLOBALS['meta']['facteur_bcc'],
-			'smtp' => $GLOBALS['meta']['facteur_smtp'],
-			'smtp_host' => $GLOBALS['meta']['facteur_smtp_host'],
-			'smtp_port' => $GLOBALS['meta']['facteur_smtp_port'],
-			'smtp_auth' => $GLOBALS['meta']['facteur_smtp_auth'],
-			'smtp_username' => $GLOBALS['meta']['facteur_smtp_username'],
-			'smtp_password' => $GLOBALS['meta']['facteur_smtp_password'],
-			'smtp_secure' => $GLOBALS['meta']['facteur_smtp_secure'],
-			'smtp_sender' => $GLOBALS['meta']['facteur_smtp_sender'],
-			'filtre_images' => $GLOBALS['meta']['facteur_filtre_images'],
-			'filtre_iso_8859' => $GLOBALS['meta']['facteur_filtre_iso_8859'],
-		);
+		$defaut = array();
+		foreach (array(
+			'adresse_envoi', 'adresse_envoi_email', 'adresse_envoi_nom',
+			'cc', 'bcc',
+			'smtp', 'smtp_host', 'smtp_port', 'smtp_auth',
+			'smtp_username', 'smtp_password', 'smtp_secure', 'smtp_sender',
+			'filtre_images', 'filtre_iso_8859',
+		) as $config) {
+			$defaut[$config] = isset($GLOBALS['meta']["facteur_$config"]) ? $GLOBALS['meta']["facteur_$config"] : '';
+		}
 		$options = array_merge($defaut, $options);
 
 		if (defined('_FACTEUR_DEBUG_SMTP')) {
@@ -89,13 +82,15 @@ class Facteur extends PHPMailer {
 			$this->AddCustomHeader("Errors-To: ".$this->Sender);
 		}
 
-		if (!empty($options['cc'])) {
-			$this->AddCC( $options['cc'] );
+		if (!defined('_TEST_EMAIL_DEST')){
+			if (!empty($options['cc'])) {
+				$this->AddCC( $options['cc'] );
+			}
+			if (!empty($options['bcc'])) {
+				$this->AddBCC( $options['bcc'] );
+			}
 		}
-		if (!empty($options['bcc'])) {
-			$this->AddBCC( $options['bcc'] );
-		}
-		
+
 		if (isset($options['smtp']) AND $options['smtp'] == 'oui') {
 			$this->Mailer	= 'smtp';
 			$this->Host 	= $options['smtp_host'];
@@ -141,94 +136,15 @@ class Facteur extends PHPMailer {
 	}
 	
 	/*
-	 * Transforme du HTML en texte brut, mais proprement, c'est-à-dire en essayant
-	 * de garder les titrages, les listes, etc
+	 * Transforme du HTML en texte brut, mais proprement
+	 * utilise le filtre facteur_mail_html2text
+	 * @uses facteur_mail_html2text()
 	 *
 	 * @param string $html Le HTML à transformer
 	 * @return string Retourne un texte brut formaté correctement
 	 */
 	function html2text($html){
-		// On remplace tous les sauts de lignes par un espace
-		$html = str_replace("\n", ' ', $html);
-		
-		// Supprimer tous les liens internes
-		$texte = preg_replace("/\<a href=['\"]#(.*?)['\"][^>]*>(.*?)<\/a>/ims", "\\2", $html);
-	
-		// Supprime feuille style
-		$texte = preg_replace(";<style[^>]*>[^<]*</style>;i", "", $texte);
-	
-		// Remplace tous les liens	
-		$texte = preg_replace("/\<a[^>]*href=['\"](.*?)['\"][^>]*>(.*?)<\/a>/ims", "\\2 (\\1)", $texte);
-	
-		// Les titres
-		$texte = preg_replace(";<h1[^>]*>;i", "\n= ", $texte);
-		$texte = str_replace("</h1>", " =\n\n", $texte);
-		$texte = preg_replace(";<h2[^>]*>;i", "\n== ", $texte);
-		$texte = str_replace("</h2>", " ==\n\n", $texte);
-		$texte = preg_replace(";<h3[^>]*>;i", "\n=== ", $texte);
-		$texte = str_replace("</h3>", " ===\n\n", $texte);
-		
-		// Une fin de liste
-		$texte = preg_replace(";</(u|o)l>;i", "\n\n", $texte);
-		
-		// Une saut de ligne *après* le paragraphe
-		$texte = preg_replace(";<p[^>]*>;i", "\n", $texte);
-		$texte = preg_replace(";</p>;i", "\n\n", $texte);
-		// Les sauts de ligne interne
-		$texte = preg_replace(";<br[^>]*>;i", "\n", $texte);
-	
-		//$texte = str_replace('<br /><img class=\'spip_puce\' src=\'puce.gif\' alt=\'-\' border=\'0\'>', "\n".'-', $texte);
-		$texte = preg_replace (';<li[^>]*>;i', "\n".'- ', $texte);
-	
-	
-		// accentuation du gras
-		// <b>texte</b> -> **texte**
-		$texte = preg_replace (';<b[^>]*>;i','**' ,$texte);
-		$texte = str_replace ('</b>','**' ,$texte);
-	
-		// accentuation du gras
-		// <strong>texte</strong> -> **texte**
-		$texte = preg_replace (';<strong[^>]*>;i','**' ,$texte);
-		$texte = str_replace ('</strong>','**' ,$texte);
-	
-	
-		// accentuation de l'italique
-		// <em>texte</em> -> *texte*
-		$texte = preg_replace (';<em[^>]*>;i','/' ,$texte);
-		$texte = str_replace ('</em>','*' ,$texte);
-		
-		// accentuation de l'italique
-		// <i>texte</i> -> *texte*
-		$texte = preg_replace (';<i[^>]*>;i','/' ,$texte);
-		$texte = str_replace ('</i>','*' ,$texte);
-	
-		$texte = str_replace('&oelig;', 'oe', $texte);
-		$texte = str_replace("&nbsp;", " ", $texte);
-		$texte = filtrer_entites($texte);
-	
-		// On supprime toutes les balises restantes
-		$texte = supprimer_tags($texte);
-	
-		$texte = str_replace("\x0B", "", $texte); 
-		$texte = str_replace("\t", "", $texte) ;
-		$texte = preg_replace(";[ ]{3,};", "", $texte);
-	
-		// espace en debut de ligne
-		$texte = preg_replace("/(\r\n|\n|\r)[ ]+/", "\n", $texte);
-	
-		//marche po
-		// Bring down number of empty lines to 4 max
-		$texte = preg_replace("/(\r\n|\n|\r){3,}/m", "\n\n", $texte);
-	
-		//saut de lignes en debut de texte
-		$texte = preg_replace("/^(\r\n|\n|\r)*/", "\n\n", $texte);
-		//saut de lignes en debut ou fin de texte
-		$texte = preg_replace("/(\r\n|\n|\r)*$/", "\n\n", $texte);
-	
-		// Faire des lignes de 75 caracteres maximum
-		//$texte = wordwrap($texte);
-	
-		return $texte;
+		return facteur_mail_html2text($html);
 	}
 	
 	/**
