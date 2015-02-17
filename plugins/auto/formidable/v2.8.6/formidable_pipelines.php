@@ -20,6 +20,17 @@ define('_RACCOURCI_MODELE_FORMIDABLE',
        );
 
 /**
+ * Ajouter la protection NoSpam de base a formidable (jeton)
+ *
+ * @param $formulaires
+ * @return array
+ */
+function formidable_nospam_lister_formulaires($formulaires){
+	$formulaires[] = 'formidable';
+	return $formulaires;
+}
+
+/**
  * Trouver les liens <form
  * @param $texte
  * @return array

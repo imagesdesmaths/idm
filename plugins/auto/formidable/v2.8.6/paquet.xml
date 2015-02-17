@@ -1,7 +1,7 @@
 <paquet
 	prefix="formidable"
 	categorie="communication"
-	version="2.8.5"
+	version="2.8.6"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/formidable-64.png"
@@ -25,6 +25,7 @@
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/formidable_tables.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/formidable_tables.php" />
 
+	<pipeline nom="nospam_lister_formulaires" inclure="formidable_pipelines.php" />
 	<pipeline nom="affiche_droite" inclure="formidable_pipelines.php" />
 	<pipeline nom="post_edition" inclure="formidable_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="formidable_pipelines.php" />
