@@ -2,4 +2,15 @@ section.mot {
     #content {
         @extend %listing-large;
     }
+    .texte {
+        @extend %font-bold;
+        @extend %separator-top;
+
+        a {
+            color: $red;
+        }
+    }
+    .articles {
+        @extend %separator-top;
+    }
 }

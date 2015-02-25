@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'texte_statut_waiting'  => 'En attente de publication',
     'texte_statut_refuse'   => 'Refusé',
     'texte_statut_poubelle' => 'À la poubelle',
+    'texte_statut_archive'  => 'Archivé',
 );
 
 ?>

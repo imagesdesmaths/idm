@@ -18,7 +18,7 @@ function formulaires_billet_verifier () {
   if (!count($erreurs)) {
     if (!$id_article = _request("id_article")) {
       $id_article = sql_insertq ("spip_articles", array (
-        "id_rubrique" => 6,
+        "id_rubrique" => RUBRIQUE_TRIBUNES,
         "statut" => "tmp",
         "accepter_forum" => "abo",
         "date" => "NOW()"));

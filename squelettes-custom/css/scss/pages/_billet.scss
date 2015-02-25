@@ -18,6 +18,10 @@ section.billet {
             @extend %button-red;
             padding: 15px 30px;
             float: right;
+
+            &#confirm_billet {
+                float: none;
+            }
         }
     }
 }

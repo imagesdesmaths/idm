@@ -4,7 +4,7 @@ use \jin\lang\ColorTools;
 
 
 function filtre_color_dominant($v) {
-    return ColorTools::toHex(ColorTools::imageDominant($v));
+    return ColorTools::toHex(ColorTools::imageDominant($v, 100));
 }
 function filtre_color_visible_over($v) {
     return ColorTools::toHex(ColorTools::visibleOver($v, true));

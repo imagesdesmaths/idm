@@ -4,16 +4,49 @@
 
 <BOUCLE_preview(ARTICLES) {id_article = #GET{id_article}} {statut == .}>
   [(#STATUT|=={publie}|oui)
-  <p>Merci pour votre billet ! Il appara&icirc;tra automatiquement sur
-  la page d'accueil du site d'ici une heure, le temps que le cache soit
-  renouvel&eacute;. Son adresse d&eacute;finitive est la suivante (et
-  elle est d&eacute;j&agrave; valide) :</p>
-  <p style="text-align:center;"><a href="#URL_SITE_SPIP/#URL_ARTICLE">#URL_SITE_SPIP/#URL_ARTICLE</a></p>
-  <p>Le voici tel qu'il appara&icirc;tra sur le site.</p>
+  <div class="alert">
+      <p>Merci pour votre billet ! Il appara&icirc;tra automatiquement sur la page d'accueil du site d'ici 24 heures. Son adresse d&eacute;finitive sera la suivante (elle est d'ores et déjà valide) :</p>
+      <p style="text-align:center;"><a href="#URL_SITE_SPIP/#URL_ARTICLE">#URL_SITE_SPIP/#URL_ARTICLE</a></p>
+      <p>Le voici tel qu'il appara&icirc;tra sur le site.</p>
+  </div>
   </div><div class="page">]
 
-  [(#STATUT|=={tmp}|oui)<h3 style="margin-top:0;">Pr&eacute;visualisation :</h3>]
-  [(#INCLURE{fond=inc/article}{id_article})]
+  [(#STATUT|=={tmp}|oui)<div class="alert">Prévisualisation</div>]
+    <div class="article-full block-left #GET{track_slug}">
+
+        <BOUCLE_articles(ARTICLES) {statut == .} {id_article = #GET{id_article}}>
+
+            <BOUCLE_rubrique(RUBRIQUES){id_rubrique=#ID_RUBRIQUE} {0,1}>
+            #SET{rubrique_name, #TITRE}
+            </BOUCLE_rubrique>
+
+            <div class="category"><a href="#URL_RUBRIQUE">[(#GET{rubrique_name}|sinon{Article})]</a> [<a href="(#URL_RUBRIQUE)" class="backlink">Retour à la rubrique #NOM_RUBRIQUE</a>]</div>
+            [<h4>(#SURTITRE)</h4>]
+            <h1>#TITRE</h1>
+            [<h4>(#SOUSTITRE)</h4>]
+
+            [<a href="#URL_PAGE{mot,id_mot=#GET{track_id}}" class="piste #GET{track_slug}">(#GET{track_title})</a>]
+            <span class="date">[(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</span>
+            <a href="#URL_AUTEUR" class="author"> - Rédigé par #GET{author_name}</a>
+
+            #SET{image_url, IMG/#LOGO_ARTICLE|fichier}
+            <BOUCLE_articles_auteur_logo(AUTEURS){id_article} {0,1}>
+                [(#LOGO_ARTICLE|fichier|non)
+                    #SET{image_url, IMG/#LOGO_AUTEUR|fichier}
+                    [(#LOGO_AUTEUR|fichier|non)
+                        #SET{image_url, #CHEMIN{img/nopic.jpg}}
+                    ]
+                ]
+            </BOUCLE_articles_auteur_logo>
+            [<div class="image"[ style="background:(#GET{image_url}|color_dominant);border-color:[(#GET{image_url}|color_dominant)]"]>
+                (#GET{image_url}|image_reduire{0,350})
+            </div>]
+
+            [<div class="details wysiwyg">(#TEXTE)</div>]
+
+        </BOUCLE_articles>
+
+    </div>
   [(#STATUT|=={tmp}|oui)</div><div class="page">]
 </BOUCLE_preview>
 <h1>&Eacute;crire un nouveau billet</h1>
@@ -23,7 +56,7 @@
 <form action="#ENV{action}" method="post" class="billet">
   #ACTION_FORMULAIRE{#ENV{action}}
   <input name="id_article" type="hidden" value="#GET{id_article}" />
-  [(#GET{id_article}|oui)<p><input type="submit" name="ok" value="Confirmer et publier votre billet" /></p>]
+  [(#GET{id_article}|oui)<p><input type="submit" name="ok" id="confirm_billet" value="Confirmer et publier votre billet" /></p>]
   <p><label for="titre">Titre :</label><input type="text" name="titre" size="60" value="#ENV{titre}" /></p>  [<p class="erreur">(#ENV**{erreurs}|table_valeur{titre})</p>]
   <p><textarea name="texte" cols="75" rows="20">#ENV{texte}</textarea></p>                                   [<p class="erreur">(#ENV**{erreurs}|table_valeur{texte})</p>]
   <p><input type="submit" name="preview" value="[(#GET{id_article}|?{Mettre à jour,Prévisualiser})]" /></p>
