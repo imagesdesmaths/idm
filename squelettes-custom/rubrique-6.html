@@ -14,7 +14,7 @@
 </BOUCLE_rubrique>
 
     <ul>
-        <BOUCLE_articles(ARTICLES) {par date} {id_rubrique=#RUBRIQUE_TRIBUNES} {age_relatif >= 0} {inverse} {pagination}>
+        <BOUCLE_articles(ARTICLES) {par date} {id_rubrique=#RUBRIQUE_TRIBUNES} {age >= 0} {inverse} {pagination}>
         [(#INCLURE{fond=inc/resume_article}{id_article}{image_width=320}{image_height=180})]
         </BOUCLE_articles>
     </ul>

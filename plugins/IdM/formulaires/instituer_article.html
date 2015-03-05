@@ -79,15 +79,54 @@ if(isset($_POST['depublier'])) {
     <div class="current_status #ENV{statut}">[(#GET{prefix_statut}|concat{#ENV{statut}}|_T)]</div>
 
     [(#REM) Actions possibles, selon le statut ]
+    #SET{is_article,1}
     #SET{is_billet,0}
+    #SET{is_quickpublish,0}
     #SET{is_auteur,0}
     #SET{is_editeur,0}
     #SET{is_secretaire,0}
-    <BOUCLE_billet(ARTICLES) {statut!=tous} {id_article==#ENV{_id_objet}} {0,1}>
+    <BOUCLE_type(ARTICLES) {statut!=tous} {id_article==#ENV{_id_objet}} {0,1}>
         [(#ID_RUBRIQUE|=={#RUBRIQUE_TRIBUNES}|?{' '})
             #SET{is_billet,1}
+            #SET{is_article,0}
+            #SET{is_quickpublish,0}
         ]
-    </BOUCLE_billet>
+        [(#ID_RUBRIQUE|=={#RUBRIQUE_REVUE_DE_PRESSE}|?{' '})
+            #SET{is_billet,0}
+            #SET{is_article,0}
+            #SET{is_quickpublish,1}
+        ]
+        [(#ID_RUBRIQUE|=={#RUBRIQUE_DEBAT_DU_18}|?{' '})
+            #SET{is_billet,0}
+            #SET{is_article,0}
+            #SET{is_quickpublish,1}
+        ]
+        [(#ID_RUBRIQUE|=={#RUBRIQUE_DEFIS_DES_MATHS}|?{' '})
+            #SET{is_billet,0}
+            #SET{is_article,0}
+            #SET{is_quickpublish,1}
+        ]
+        [(#ID_RUBRIQUE|=={#RUBRIQUE_FIGURES_SANS_PAROLES}|?{' '})
+            #SET{is_billet,0}
+            #SET{is_article,0}
+            #SET{is_quickpublish,1}
+        ]
+        [(#ID_RUBRIQUE|=={#RUBRIQUE_PODCAST}|?{' '})
+            #SET{is_billet,0}
+            #SET{is_article,0}
+            #SET{is_quickpublish,1}
+        ]
+        [(#ID_RUBRIQUE|=={#RUBRIQUE_ARCHIVES}|?{' '})
+            #SET{is_billet,0}
+            #SET{is_article,0}
+            #SET{is_quickpublish,1}
+        ]
+        [(#ID_RUBRIQUE|=={#RUBRIQUE_EN_SORTANT_DE_L_ECOLE}|?{' '})
+            #SET{is_billet,0}
+            #SET{is_article,0}
+            #SET{is_quickpublish,1}
+        ]
+    </BOUCLE_type>
     <BOUCLE_auteur(AUTEURS) {id_article==#ENV{_id_objet}} {0,1}>
         #SET{id_auteur, #ID_AUTEUR}
         [(#ID_AUTEUR|=={#SESSION{id_auteur}}|?{' '})
@@ -111,6 +150,68 @@ if(isset($_POST['depublier'])) {
         #SET{is_auteur,1}
     </BOUCLE_secretaire>
     <form action="#SELF" method="post" class="ajax">
+
+    [(#REM) Gestion d'un article "court"]
+    [(#GET{is_quickpublish}|=={1}|?{' '})
+        [(#ENV{statut}|=={prepa}|?{' '})
+            [(#GET{is_auteur}|=={1}|?{' '})
+                <span class="icone s24 horizontale preview-24">
+                    <button type="submit" name="programmer_publication" value="1" class="simple-link">
+                        <img src="../prive/themes/spip/images/ok-24.png" alt="Progammer la publication" width="24" height="24">
+                        <b>Progammer la publication</b>
+                    </button>
+                </span>
+                <span class="input datetime" style="overflow: hidden;">
+                    <input type="text" class="text date" name="date_jour" id="date_jour" value="<?php echo date('d/m/Y') ?>" size="10">
+                    <input type="text" class="text heure time" name="date_heure" id="date_heure" value="<?php echo date('H:00') ?>" size="3" autocomplete="OFF">
+                </span>
+                <span class="icone s24 horizontale preview-24">
+                    <button type="submit" name="abandonner" value="1" class="simple-link">
+                        <img src="../prive/themes/spip/images/supprimer-24.png" alt="Abandonner l'article'" width="24" height="24">
+                        <b>Abandonner l'article</b>
+                    </button>
+                </span>
+            ]
+        ]
+        [(#ENV{statut}|=={publie}|?{' '})
+            [(#GET{is_secretaire}|=={1}|?{' '})
+                <span class="icone s24 horizontale preview-24">
+                    <button type="submit" name="depublier" value="1" class="simple-link">
+                        <img src="../prive/themes/spip/images/supprimer-24.png" alt="Annuler la publication" width="24" height="24">
+                        <b>Annuler la publication</b>
+                    </button>
+                </span>
+                <span class="icone s24 horizontale preview-24">
+                    <button type="submit" name="archiver" value="1" class="simple-link">
+                        <img src="../prive/themes/spip/images/supprimer-24.png" alt="Archiver" width="24" height="24">
+                        <b>Archiver</b>
+                    </button>
+                </span>
+            ]
+        ]
+        [(#ENV{statut}|=={poubelle}|?{' '})
+            [(#GET{is_secretaire}|=={1}|?{' '})
+                <span class="icone s24 horizontale preview-24">
+                    <button type="submit" name="recuperer" value="1" class="simple-link">
+                        <img src="../prive/themes/spip/images/ok-24.png" alt="Récupérer" width="24" height="24">
+                        <b>Récupérer</b>
+                    </button>
+                </span>
+            ]
+        ]
+        [(#ENV{statut}|=={archive}|?{' '})
+            [(#GET{is_secretaire}|=={1}|?{' '})
+                <span class="icone s24 horizontale preview-24">
+                    <button type="submit" name="desarchiver" value="1" class="simple-link">
+                        <img src="../prive/themes/spip/images/ok-24.png" alt="Désarchiver" width="24" height="24">
+                        <b>Désarchiver</b>
+                    </button>
+                </span>
+            ]
+        ]
+    ]
+
+    [(#REM) Gestion d'un billet]
     [(#GET{is_billet}|=={1}|?{' '})
         [(#ENV{statut}|=={prepa}|?{' '})
             [(#GET{is_auteur}|=={1}|?{' '})
@@ -166,7 +267,10 @@ if(isset($_POST['depublier'])) {
             ]
         ]
     ]
-    [(#GET{is_billet}|=={0}|?{' '})
+
+    [(#REM) Gestion d'un article]
+    [(#GET{is_article}|=={1}|?{' '})
+        <!-- ARTICLE -->
         [(#ENV{statut}|=={prepa}|?{' '})
             [(#GET{is_editeur}|=={1}|?{' '})
                 <span class="icone s24 horizontale preview-24">

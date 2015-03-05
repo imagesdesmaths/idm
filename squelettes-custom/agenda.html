@@ -9,7 +9,7 @@
     <h1>Agenda</h1>
 
     <ul>
-        <BOUCLE_breves(BREVES) {id_rubrique in #RUBRIQUE_REVUE_DE_PRESSE,#RUBRIQUE_EVENEMENTS} {age_relatif >= 0} {par date} {inverse} {pagination 30}>
+        <BOUCLE_breves(BREVES) {id_rubrique in #RUBRIQUE_REVUE_DE_PRESSE,#RUBRIQUE_EVENEMENTS} {age >= 0} {par date} {inverse} {pagination 30}>
         <li>
             <div class="resume">
                 <a href="#URL_BREVE">

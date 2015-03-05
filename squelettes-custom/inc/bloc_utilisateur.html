@@ -12,10 +12,15 @@
         </BOUCLE_relecteurs>
         <BOUCLE_articles(ARTICLES) {id_article}>
             [(#SESSION{statut}|=={0minirezo}|oui)
-                <li><a href="#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE}" title="Modifier l'article" class="edition"><i class="flaticon-cat-contribute"></i><span>Modifier l'article</span></a></li>
+                <li><a href="#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE}" title="Modifier l'article" class="edition-article"><i class="flaticon-cat-contribute"></i><span>Modifier l'article</span></a></li>
                 <li><a href="#URL_ECRIRE{article,id_article=#ID_ARTICLE}" title="Modifier l'article" class="stats"><i class="flaticon-stats"></i><span>Visites : #VISITES<br>Popularité : #POPULARITE</span></a></li>
             ]
         </BOUCLE_articles>
+        <BOUCLE_rubriques(RUBRIQUES) {id_rubrique}>
+            [(#SESSION{statut}|=={0minirezo}|oui)
+                <li><a href="#URL_ECRIRE{rubrique_edit,id_rubrique=#ID_RUBRIQUE}" title="Modifier la rubrique" class="edition-rubrique"><i class="flaticon-cat-contribute"></i><span>Modifier la rubrique</span></a></li>
+            ]
+        </BOUCLE_rubriques>
         [(#SESSION{statut}|=={0minirezo}|oui)
             <li><a href="[(#SELF|parametre_url{var_mode,#ENV{calcul}})]"><i class="flaticon-refresh"></i><span>Recalculer la page</span>[(#ENV{use_cache})]</a></li>
             <li><a href="ecrire/" title="Espace privé"><i class="flaticon-private"></i><span>Espace privé</span></a></li>

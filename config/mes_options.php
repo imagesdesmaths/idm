@@ -27,6 +27,9 @@ define('RUBRIQUE_SPECIAL', 18);                 // squelette lié : squelettes-c
 define('RUBRIQUE_TRIBUNES', 6);
 define('RUBRIQUE_DEBAT_DU_18', 55);
 define('RUBRIQUE_DEFIS_DES_MATHS', 54);
+define('RUBRIQUE_PODCAST', 38);
+define('RUBRIQUE_ARCHIVES', 2);
+define('RUBRIQUE_EN_SORTANT_DE_L_ECOLE', 50);
 define('RUBRIQUE_REVUE_DE_PRESSE', 26);
 define('RUBRIQUE_EVENEMENTS', 33);
 define('RUBRIQUE_FIGURES_SANS_PAROLES', 56);    // squelette lié : squelettes-custom/article-56.html
@@ -38,6 +41,8 @@ define('ARTICLE_FONCTIONNEMENT', 17);
 define('ARTICLE_PARTENAIRES', 100);
 define('ARTICLE_DEVENIR_CONTRIBUTEUR', 950);
 define('ARTICLE_MENTIONS_LEGALES', 1213);
+
+define('GROUPE_MOT_ACTUALITE_IMPORTANTE', 8);
 
 define('MOT_FEATURED', 25);
 define('MOT_PISTE_VERTE', 20);

@@ -48,12 +48,20 @@
                 &.relecture {
                     background: $warning;
                 }
-                &.edition,
+                &.edition-article,
                 &.stats {
                     background: $warning;
                     display: none;
 
                     section[role="main"].article & {
+                        display: block;
+                    }
+                }
+                &.edition-rubrique {
+                    background: $warning;
+                    display: none;
+
+                    section[role="main"].rubrique & {
                         display: block;
                     }
                 }

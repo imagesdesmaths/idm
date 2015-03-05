@@ -12,7 +12,7 @@
         [(#TEXTE|oui)<div class="texte">#TEXTE</div>]
 
         <ul class="articles">
-            <BOUCLE_articles(ARTICLES spip_mots_liens) {id_mot=#ID_MOT} {par date} {age_relatif >= 0} {inverse} {pagination}>
+            <BOUCLE_articles(ARTICLES spip_mots_liens) {id_mot=#ID_MOT} {par date} {age >= 0} {inverse} {pagination}>
             [(#INCLURE{fond=inc/resume_article}{id_article}{image_width=320}{image_height=180})]
             </BOUCLE_articles>
         </ul>

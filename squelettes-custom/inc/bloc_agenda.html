@@ -4,7 +4,7 @@
     </h2>
     <div>
         <ul>
-            <BOUCLE_agenda(BREVES) {id_rubrique in #RUBRIQUE_REVUE_DE_PRESSE,#RUBRIQUE_EVENEMENTS} {age_relatif >= 0} {par date} {inverse} {0,6}>
+            <BOUCLE_agenda(BREVES) {id_rubrique in #RUBRIQUE_REVUE_DE_PRESSE,#RUBRIQUE_EVENEMENTS} {age >= 0} {par date} {inverse} {0,6}>
             <li>
                 <a href="#URL_BREVE">
                     <div class="image">

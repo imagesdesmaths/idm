@@ -28,6 +28,9 @@ function balise_RUBRIQUE_SPECIAL($p) { $p->code = RUBRIQUE_SPECIAL; return $p; }
 function balise_RUBRIQUE_TRIBUNES($p) { $p->code = RUBRIQUE_TRIBUNES; return $p; }
 function balise_RUBRIQUE_DEBAT_DU_18($p) { $p->code = RUBRIQUE_DEBAT_DU_18; return $p; }
 function balise_RUBRIQUE_DEFIS_DES_MATHS($p) { $p->code = RUBRIQUE_DEFIS_DES_MATHS; return $p; }
+function balise_RUBRIQUE_PODCAST($p) { $p->code = RUBRIQUE_PODCAST; return $p; }
+function balise_RUBRIQUE_ARCHIVES($p) { $p->code = RUBRIQUE_ARCHIVES; return $p; }
+function balise_RUBRIQUE_EN_SORTANT_DE_L_ECOLE($p) { $p->code = RUBRIQUE_EN_SORTANT_DE_L_ECOLE; return $p; }
 function balise_RUBRIQUE_REVUE_DE_PRESSE($p) { $p->code = RUBRIQUE_REVUE_DE_PRESSE; return $p; }
 function balise_RUBRIQUE_EVENEMENTS($p) { $p->code = RUBRIQUE_EVENEMENTS; return $p; }
 function balise_RUBRIQUE_FIGURES_SANS_PAROLES($p) { $p->code = RUBRIQUE_FIGURES_SANS_PAROLES; return $p; }
@@ -39,6 +42,8 @@ function balise_ARTICLE_FONCTIONNEMENT($p) { $p->code = ARTICLE_FONCTIONNEMENT; 
 function balise_ARTICLE_PARTENAIRES($p) { $p->code = ARTICLE_PARTENAIRES; return $p; }
 function balise_ARTICLE_DEVENIR_CONTRIBUTEUR($p) { $p->code = ARTICLE_DEVENIR_CONTRIBUTEUR; return $p; }
 function balise_ARTICLE_MENTIONS_LEGALES($p) { $p->code = ARTICLE_MENTIONS_LEGALES; return $p; }
+
+function balise_GROUPE_MOT_ACTUALITE_IMPORTANTE($p) { $p->code = GROUPE_MOT_ACTUALITE_IMPORTANTE; return $p; }
 
 function balise_MOT_FEATURED($p) { $p->code = MOT_FEATURED; return $p; }
 function balise_MOT_PISTE_VERTE($p) { $p->code = MOT_PISTE_VERTE; return $p; }

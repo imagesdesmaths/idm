@@ -4,12 +4,12 @@
         <ul>
             <BOUCLE_actu_groupe_mots(GROUPES_MOTS) {type=Actualité importante} {0,1}>
             <BOUCLE_actu_mots(MOTS) {id_groupe}>
-            <BOUCLE_actu(ARTICLES) {id_mot} {age_relatif >= 0} {par date} {inverse} {0,3}>
+            <BOUCLE_actu(ARTICLES) {id_mot} {age >= 0} {par date} {inverse} {0,3}>
             [<li>
                 <div class="image">(#LOGO_MOT|image_reduire{60,60})</div>
                 <a href="#URL_ARTICLE" class="resume">
                     <h3>#TITRE</h3>
-                    <p>[(#TEXTE|PtoBR|trunctext{200})]</p>
+                    <p>[(#DESCRIPTIF|PtoBR|trunctext{200})]</p>
                 </a>
             </li>]
             </BOUCLE_actu>

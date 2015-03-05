@@ -3,8 +3,16 @@
         <a class="seemore" href="#URL_PAGE{articles-recents}">Nos derniers articles <span class="icon"><i class="flaticon-plus"></i></span></a>
     </h2>
     <ul>
-        <BOUCLE_articles(ARTICLES) {id_article != #ENV{id_une}} {par date} {id_rubrique !in #RUBRIQUE_TRIBUNES,#RUBRIQUE_FIGURES_SANS_PAROLES} {age_relatif >= 0} {inverse} {1,5}>
-        [(#INCLURE{fond=inc/resume_article}{id_article}{image_width=#COMPTEUR_BOUCLE|=={1}|?{400, 160}}{image_height=#COMPTEUR_BOUCLE|=={1}|?{225, 90}})]
+        #SET{epure,#ARRAY}
+        #SET{epure, #GET{epure}|push{#ENV{id_une}}}
+        <BOUCLE_epure_news(ARTICLES) {id_groupe = #GROUPE_MOT_ACTUALITE_IMPORTANTE} {age >= 0}>
+            #SET{epure, #GET{epure}|push{#ID_ARTICLE}}
+        </BOUCLE_epure_news>
+        <BOUCLE_epure_rubriques(ARTICLES) {id_rubrique in #RUBRIQUE_TRIBUNES,#RUBRIQUE_FIGURES_SANS_PAROLES} {age >= 0}>
+            #SET{epure, #GET{epure}|push{#ID_ARTICLE}}
+        </BOUCLE_epure_rubriques>
+        <BOUCLE_articles(ARTICLES) {id_article !in #GET{epure}} {age >= 0} {par date} {inverse} {0,5}>
+            [(#INCLURE{fond=inc/resume_article}{id_article}{image_width=#COMPTEUR_BOUCLE|=={1}|?{400, 160}}{image_height=#COMPTEUR_BOUCLE|=={1}|?{225, 90}})]
         </BOUCLE_articles>
     </ul>
 </div>
