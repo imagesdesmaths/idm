@@ -15,6 +15,9 @@ $(function(){
         $(this).toggleClass('active');
     });
 
+    /* Don't judge me... please. (_content.scss:53 alternative) */
+    $('#content').height($('#content').closest('.container').height());
+
     /* Homepage slides */
     $('#slides').slides({
         preload: true,

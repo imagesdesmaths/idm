@@ -6,45 +6,49 @@
     <div class="category">Espace personnel</div>
 
     <BOUCLE_moi(AUTEURS) {tous} {id_auteur=#SESSION{id_auteur}}>
-        <h1>Bonjour, #NOM !</h1>
 
+
+        <h1>Bonjour, #NOM !</h1>
         <p>Bienvenue dans votre espace personnel sur Images des
         Math&eacute;matiques.  C'est &agrave; partir de cette page que vous
         pouvez g&eacute;rer votre participation au site et acc&eacute;der
         &agrave; vos informations personnelles.</p>
+        <a href="#URL_ECRIRE" class="button-red-large">Accéder à l'espace privé</a>&nbsp;&nbsp;
+        <a href="#URL_ECRIRE{infos_perso}" class="button-red-large">Voir mes informations personnelles</a>
+
 
         [(#BILLETTISTE|=={oui}|oui) <h3>Vous &ecirc;tes billettiste.</h3>
-
-        <p>Pour &eacute;crire un billet, il vous suffit de cliquer ici
-        : <a href="#URL_PAGE{billet}">&eacute;crire un nouveau billet</a> (ou
-        sur le lien de m&ecirc;me titre dans le menu &quot;Mon IdM&quot;
-        ci-dessus).  Votre billet sera publi&eacute; aussit&ocirc;t que vous
+        <p>Pour &eacute;crire un billet, il vous suffit de cliquer sur bouton ci-dessous.
+        Votre billet sera publi&eacute; 24 heures apr&egrave;s que vous
         l'aurez valid&eacute;. Si toutefois nous constations que trop de
         billets sont soumis le m&ecirc;me jour, il se peut que nous le
         retirions ensuite de la page d'accueil pour l'y remettre quelques
         jours plus tard, afin de r&eacute;guler le flot de nouveaut&eacute;s ;
         ne vous inqui&eacute;tez donc pas si votre contribution
-        dispara&icirc;t, elle n'est pas perdue !</p>]
+        dispara&icirc;t, elle n'est pas perdue !</p>
+        <a href="#URL_ECRIRE{article_edit,id_rubrique=#RUBRIQUE_TRIBUNES}" class="button-red-large">Écrire un nouveau billet</a> ]
 
-        [(#STATUT|=={1comite}|oui) <h3>Vous &ecirc;tes r&eacute;dacteur.</h3>
 
+        #SET{redacteurs,#ARRAY{0,0minirezo,1,1comite}}
+        [(#GET{redacteurs}|find{#STATUT}|oui) <h3>Vous &ecirc;tes r&eacute;dacteur.</h3>
         <p>Vous pouvez acc&eacute;der &agrave; la partie priv&eacute;e du site
         (o&ugrave; vous pourrez &eacute;crire puis suivre le devenir de votre
-        article) en suivant le lien intitul&eacute; &quot;espace de
-        r&eacute;daction&quot; dans le menu &quot;Mon IdM&quot; ci-dessus. Une
+        article) en cliquant sur le bouton ci-dessous. Une
         fois votre article soumis, vous aurez &eacute;galement la
-        possibilit&eacute; de dialoguer avec ses relecteurs.</p>]
+        possibilit&eacute; de dialoguer avec ses relecteurs.</p>
+        <a href="#URL_ECRIRE{idm_tableau}" class="button-red-large">Accéder à l'espace de rédaction</a>]
+
 
         <div class="ajax">#FORMULAIRE_RELECTEURS_PERSO</div>
-
         <B_relecteurs>
-        <h3>Vous avez des articles à relire :</h3>
+        <h4><strong>Vous avez des articles à relire :</strong></h4>
         <ul>
         <BOUCLE_relecteurs(relecteurs_articles articles) {id_auteur=#SESSION{id_auteur}}>
             <li><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">#TITRE</a></li>
         </BOUCLE_relecteurs>
         </ul>
         </B_relecteurs>
+
 
     </BOUCLE_moi>
         <h1>Merci de vous identifier</h1>

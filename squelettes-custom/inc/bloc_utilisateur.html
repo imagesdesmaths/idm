@@ -4,25 +4,29 @@
         [(#SESSION{id_auteur}|oui)
             <li><a href="#URL_PAGE{perso}" title="Espace personnel"><i class="flaticon-user"></i><span>Espace personnel</span></a></li>
         ]
-        <BOUCLE_moi(AUTEURS) {tous} {id_auteur=#SESSION{id_auteur}} {billettiste=oui}>
-            <li><a href="#URL_PAGE{billet}" title="Écrire un nouveau billet"><i class="flaticon-cat-contribute"></i><span>Écrire un nouveau billet</span></a></li>
-        </BOUCLE_moi>
         <BOUCLE_relecteurs(spip_relecteurs_articles) {id_auteur=#SESSION{id_auteur}} {0,1}>
             <li><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}" title="Un article à relire !" class="relecture"><i class="flaticon-cat-press"></i><span>Un article à relire !</span></a></li>
         </BOUCLE_relecteurs>
         <BOUCLE_articles(ARTICLES) {id_article}>
             [(#SESSION{statut}|=={0minirezo}|oui)
                 <li><a href="#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE}" title="Modifier l'article" class="edition-article"><i class="flaticon-cat-contribute"></i><span>Modifier l'article</span></a></li>
-                <li><a href="#URL_ECRIRE{article,id_article=#ID_ARTICLE}" title="Modifier l'article" class="stats"><i class="flaticon-stats"></i><span>Visites : #VISITES<br>Popularité : #POPULARITE</span></a></li>
+                <li><a href="#URL_ECRIRE{article,id_article=#ID_ARTICLE}" title="Voir l'article" class="stats-article"><i class="flaticon-stats"></i><span>Visites : #VISITES<br>Popularité : #POPULARITE</span></a></li>
             ]
         </BOUCLE_articles>
         <BOUCLE_rubriques(RUBRIQUES) {id_rubrique}>
             [(#SESSION{statut}|=={0minirezo}|oui)
                 <li><a href="#URL_ECRIRE{rubrique_edit,id_rubrique=#ID_RUBRIQUE}" title="Modifier la rubrique" class="edition-rubrique"><i class="flaticon-cat-contribute"></i><span>Modifier la rubrique</span></a></li>
+                <li><a href="#URL_ECRIRE{rubrique,id_rubrique=#ID_RUBRIQUE}" title="Voir la rubrique" class="stats-rubrique"><i class="flaticon-stats"></i><span>Voir la rubrique</span></a></li>
             ]
         </BOUCLE_rubriques>
+        <BOUCLE_breves(BREVES) {id_breve}>
+            [(#SESSION{statut}|=={0minirezo}|oui)
+                <li><a href="#URL_ECRIRE{breve_edit,id_breve=#ID_RUBRIQUE}" title="Modifier la brève" class="edition-breve"><i class="flaticon-cat-contribute"></i><span>Modifier la brève</span></a></li>
+                <li><a href="#URL_ECRIRE{breve,id_breve=#ID_RUBRIQUE}" title="Voir la brève" class="stats-breve"><i class="flaticon-stats"></i><span>Voir la brève</span></a></li>
+            ]
+        </BOUCLE_breves>
         [(#SESSION{statut}|=={0minirezo}|oui)
-            <li><a href="[(#SELF|parametre_url{var_mode,#ENV{calcul}})]"><i class="flaticon-refresh"></i><span>Recalculer la page</span>[(#ENV{use_cache})]</a></li>
+            <li><a href="[(#SELF|parametre_url{var_mode,recalcul})]"><i class="flaticon-refresh"></i><span>Recalculer la page</span>[(#ENV{use_cache})]</a></li>
             <li><a href="ecrire/" title="Espace privé"><i class="flaticon-private"></i><span>Espace privé</span></a></li>
         ]
         [(#SESSION{statut}|=={1comite}|oui)

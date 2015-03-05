@@ -7,6 +7,7 @@ section[role="main"] {
 
     .container {
         @extend %edged;
+        position: relative;
     }
     aside {
         display: none;
@@ -49,8 +50,8 @@ section[role="main"] {
             0 200px 0 0 $white,
             820px 0 0 0 $grey_lightest,
             820px 200px 0 0 $grey_lightest;
-        padding-bottom: 5030px;
-        margin-bottom: -5000px;
+        // padding-bottom: 5030px;
+        // margin-bottom: -5000px;
     }
 }
 

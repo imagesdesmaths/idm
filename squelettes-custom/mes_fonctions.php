@@ -29,6 +29,7 @@ function balise_RUBRIQUE_TRIBUNES($p) { $p->code = RUBRIQUE_TRIBUNES; return $p;
 function balise_RUBRIQUE_DEBAT_DU_18($p) { $p->code = RUBRIQUE_DEBAT_DU_18; return $p; }
 function balise_RUBRIQUE_DEFIS_DES_MATHS($p) { $p->code = RUBRIQUE_DEFIS_DES_MATHS; return $p; }
 function balise_RUBRIQUE_PODCAST($p) { $p->code = RUBRIQUE_PODCAST; return $p; }
+function balise_RUBRIQUE_CONCOURS($p) { $p->code = RUBRIQUE_CONCOURS; return $p; }
 function balise_RUBRIQUE_ARCHIVES($p) { $p->code = RUBRIQUE_ARCHIVES; return $p; }
 function balise_RUBRIQUE_EN_SORTANT_DE_L_ECOLE($p) { $p->code = RUBRIQUE_EN_SORTANT_DE_L_ECOLE; return $p; }
 function balise_RUBRIQUE_REVUE_DE_PRESSE($p) { $p->code = RUBRIQUE_REVUE_DE_PRESSE; return $p; }

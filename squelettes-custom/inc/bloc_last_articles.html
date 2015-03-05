@@ -8,7 +8,7 @@
         <BOUCLE_epure_news(ARTICLES) {id_groupe = #GROUPE_MOT_ACTUALITE_IMPORTANTE} {age >= 0}>
             #SET{epure, #GET{epure}|push{#ID_ARTICLE}}
         </BOUCLE_epure_news>
-        <BOUCLE_epure_rubriques(ARTICLES) {id_rubrique in #RUBRIQUE_TRIBUNES,#RUBRIQUE_FIGURES_SANS_PAROLES} {age >= 0}>
+        <BOUCLE_epure_rubriques(ARTICLES) {id_rubrique in #RUBRIQUE_DEBAT_DU_18,#RUBRIQUE_DEFIS_DES_MATHS,#RUBRIQUE_CONCOURS,#RUBRIQUE_REVUE_DE_PRESSE,#RUBRIQUE_TRIBUNES,#RUBRIQUE_FIGURES_SANS_PAROLES} {age >= 0}>
             #SET{epure, #GET{epure}|push{#ID_ARTICLE}}
         </BOUCLE_epure_rubriques>
         <BOUCLE_articles(ARTICLES) {id_article !in #GET{epure}} {age >= 0} {par date} {inverse} {0,5}>

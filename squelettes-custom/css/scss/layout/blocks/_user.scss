@@ -49,7 +49,7 @@
                     background: $warning;
                 }
                 &.edition-article,
-                &.stats {
+                &.stats-article {
                     background: $warning;
                     display: none;
 
@@ -57,7 +57,8 @@
                         display: block;
                     }
                 }
-                &.edition-rubrique {
+                &.edition-rubrique,
+                &.stats-rubrique {
                     background: $warning;
                     display: none;
 
@@ -65,7 +66,16 @@
                         display: block;
                     }
                 }
-                &.stats {
+                &.edition-breve,
+                &.stats-breve {
+                    background: $warning;
+                    display: none;
+
+                    section[role="main"].breve & {
+                        display: block;
+                    }
+                }
+                &.stats-article {
                     span {
                         line-height: 11px;
                         font-size: 11px;

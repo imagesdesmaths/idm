@@ -88,7 +88,11 @@
             content: "le ";
         }
     }
-    .author {
+    .comments-top {
+        display: block;
+    }
+    .author-top,
+    .comments-top {
         line-height: 30px;
         font-style: italic;
         font-size: 15px;
