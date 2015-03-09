@@ -1,12 +1,8 @@
-section.perso {
+section.inscription {
     #content {
         @extend %separator-top;
         position: relative;
 
-        h3 {
-            @extend %separator-top-thin;
-            position: relative;
-        }
         .category {
             margin-top: -25px;
             margin-bottom: 20px;
@@ -14,20 +10,22 @@ section.perso {
         &:before{
             margin-top: 0;
         }
-        ul li {
-            @extend %ul-default;
+
+        form {
+            @extend %custom-inputs;
+
+            .explication {
+                @extend %alert;
+            }
         }
         input[type="submit"] {
             @extend %button-red;
             padding: 15px 30px;
         }
-        p, ul {
-            a {
-                color: $red;
-            }
-        }
-        .button-red-large {
-            margin-bottom: 5px;
+        .citer {
+            @extend %alert;
+            clear: both;
+            margin: 25px 0;
         }
     }
 }

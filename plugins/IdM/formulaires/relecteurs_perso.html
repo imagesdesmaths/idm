@@ -5,48 +5,16 @@
 #SET{role,#ROLE}
 </BOUCLE_role>
 
-[(#GET{role}|=={visiteur}|oui) <h3>Relire des articles.</h3>
+[(#GET{role}|=={visiteur}|oui) <h3>Devenez relecteur !</h3>
+<p>Tous les articles des revues mathématiques sont relus et vérifiés par des spécialistes avant leur publication. Ce site s'adressant au grand public, nous souhaitons faire relire nos articles par des relecteurs aussi variés que possible avant de les faire apparaître au public ; le but étant de s'assurer qu'ils sont non seulement corrects, mais surtout lisibles !</p>
+<p>Si cela vous intéresse de nous aider, et de nous donner votre avis de temps en temps (pas plus d'une fois par trimestre) sur des articles en préparation, nous vous en remercions par avance ! Vous n'avez qu'à cliquer sur le bouton ci-dessous, après avoir indiqué rapidement qui vous êtes (comptable, professeur à la retraite, étudiante en biologie...).</p>
+<p>Dès que les responsables de la relecture auront validé votre inscription, vous deviendrez un relecteur officiel de <em>Images des Mathématiques</em>. Vous recevrez alors par courriel un questionnaire destiné à mieux cerner vos attentes pour la relecture, puis une première demande de relecture sous forme d'un lien hypertexte. Les instructions pour celle-ci figureront en introduction de la page pointée par ce lien.</p>]
 
-<p>Tous les articles des revues mathématiques sont relus et vérifiés par 
-des spécialistes avant leur publication. Ce site s'adressant au grand 
-public, nous souhaitons faire relire nos articles par des relecteurs 
-aussi variés que possible avant de les faire apparaître au public ; le 
-but étant de s'assurer qu'ils sont non seulement corrects, mais surtout 
-lisibles. C'est bien le but d'une revue de vulgarisation !</p>
-
-<p>Nous cherchons donc des relecteurs. Si cela vous intéresse de nous 
-aider, et de nous donner votre avis de temps en temps sur des articles 
-en préparation, nous vous en remercions par avance ! Vous n'avez qu'à 
-cliquer sur le bouton ci-dessous, après avoir indiqué rapidement qui 
-vous êtes. Dès que le comité de rédaction aura validé votre 
-inscription, vous deviendrez un relecteur officiel de <em>Images des 
-  Mathématiques</em>.</p>
-
-<p>Bien entendu, même sans être relecteur, vous pouvez déjà répondre 
-aux articles et participer aux discussions qui les accompagnent ! Le 
-rôle des relecteurs se situe en amont, avant l'apparition d'un article 
-sur le site.</p>]
-
-
-[(#GET{role}|=={candidat}|oui) <h3>Relire des articles.</h3>
-
-<p>Nous avons bien enregistré votre inscription à la liste des 
-relecteurs, et nous vous en remercions. Dès que le comité de rédaction 
-aura validé votre inscription, vous ferez partie de l'équipe, et vous 
-commencerez à recevoir des articles sur lesquels vous pourrez donner 
-votre avis. Si toutefois vous ne souhaitez plus relire d'articles, vous 
-n'avez qu'à cliquer sur le bouton ci-dessous.</p>]
+[(#GET{role}|=={candidat}|oui) <h3>Vous êtes candidat relecteur.</h3>
+<p>Nous avons bien enregistré votre inscription à la liste des relecteurs, et nous vous en remercions. Dès que le comité de rédaction aura validé votre inscription, vous ferez partie de l'équipe, et vous commencerez à recevoir des articles sur lesquels vous pourrez donner votre avis. Si toutefois vous ne souhaitez plus relire d'articles, vous n'avez qu'à cliquer sur le bouton ci-dessous.</p>]
 
 [(#GET{role}|=={relecteur}|oui) <h3>Vous êtes relecteur.</h3>
-
-<p>Vous faites partie des relecteurs de ce site. Merci pour votre aide ! 
-Quand un nouvel article sera proposé, si vous êtes choisi(e) pour le 
-relire vous recevrez un courier électronique vous donnant plus 
-d'informations sur la marche à suivre ; vous aurez accès à un espace de 
-discussion pour dialoguer avec l'auteur, et vous pourrez donner votre 
-avis sur la publication de l'article ou les changements à y apporter. Si 
-toutefois vous ne souhaitez plus relire d'articles, vous n'avez qu'à 
-cliquer sur le bouton ci-dessous.</p>]
+<p>Vous faites partie des relecteurs de ce site. Merci pour votre aide ! Quand un nouvel article sera proposé, si vous êtes choisi(e) pour le relire vous recevrez un courier électronique vous donnant plus d'informations sur la marche à suivre ; vous aurez accès à un espace de discussion pour dialoguer avec l'auteur, et vous pourrez donner votre avis sur la publication de l'article ou les changements à y apporter. Si toutefois vous ne souhaitez plus relire d'articles, vous n'avez qu'à cliquer sur le bouton ci-dessous.</p>]
 
 <form action="#ENV{action}" method="post" class="billet">
   #ACTION_FORMULAIRE{#ENV{action}}

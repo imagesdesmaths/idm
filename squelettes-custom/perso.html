@@ -7,38 +7,23 @@
 
     <BOUCLE_moi(AUTEURS) {tous} {id_auteur=#SESSION{id_auteur}}>
 
+        #SET{role,visiteur}
+        <BOUCLE_role(IDM_RELECTEURS) {id_auteur=#SESSION{id_auteur}} {tous}>
+        #SET{role,#ROLE}
+        </BOUCLE_role>
 
+        [(#REM Général)]
         <h1>Bonjour, #NOM !</h1>
-        <p>Bienvenue dans votre espace personnel sur Images des
-        Math&eacute;matiques.  C'est &agrave; partir de cette page que vous
-        pouvez g&eacute;rer votre participation au site et acc&eacute;der
-        &agrave; vos informations personnelles.</p>
-        <a href="#URL_ECRIRE" class="button-red-large">Accéder à l'espace privé</a>&nbsp;&nbsp;
-        <a href="#URL_ECRIRE{infos_perso}" class="button-red-large">Voir mes informations personnelles</a>
+        <p>Bienvenue dans votre espace personnel. C'est à partir de cette page que vous pouvez gérer votre participation au site et accéder à vos informations personnelles.</p>
+        <a href="#URL_ECRIRE{infos_perso}" class="button-red-large">Accéder à mes informations personnelles</a>
 
+        [(#REM Visiteur)]
+        <h3>Vous êtes visiteur.</h3>
+        <p>Vous pouvez dès à présent participer aux forums de discussion, écrire un commentaire ou participer au débat. Attention, un commentaire trop long risque d'être modéré et prendra plus de temps pour apparaître en ligne.<br>
+        En cas de problème : <a href="mailto:#EMAIL_WEBMASTER">Contactez-nous</a></p>
+        <a href="#URL_SITE_SPIP" class="button-red-large">Retrouver nos articles sur la page d'accueil</a>
 
-        [(#BILLETTISTE|=={oui}|oui) <h3>Vous &ecirc;tes billettiste.</h3>
-        <p>Pour &eacute;crire un billet, il vous suffit de cliquer sur bouton ci-dessous.
-        Votre billet sera publi&eacute; 24 heures apr&egrave;s que vous
-        l'aurez valid&eacute;. Si toutefois nous constations que trop de
-        billets sont soumis le m&ecirc;me jour, il se peut que nous le
-        retirions ensuite de la page d'accueil pour l'y remettre quelques
-        jours plus tard, afin de r&eacute;guler le flot de nouveaut&eacute;s ;
-        ne vous inqui&eacute;tez donc pas si votre contribution
-        dispara&icirc;t, elle n'est pas perdue !</p>
-        <a href="#URL_ECRIRE{article_edit,id_rubrique=#RUBRIQUE_TRIBUNES}" class="button-red-large">Écrire un nouveau billet</a> ]
-
-
-        #SET{redacteurs,#ARRAY{0,0minirezo,1,1comite}}
-        [(#GET{redacteurs}|find{#STATUT}|oui) <h3>Vous &ecirc;tes r&eacute;dacteur.</h3>
-        <p>Vous pouvez acc&eacute;der &agrave; la partie priv&eacute;e du site
-        (o&ugrave; vous pourrez &eacute;crire puis suivre le devenir de votre
-        article) en cliquant sur le bouton ci-dessous. Une
-        fois votre article soumis, vous aurez &eacute;galement la
-        possibilit&eacute; de dialoguer avec ses relecteurs.</p>
-        <a href="#URL_ECRIRE{idm_tableau}" class="button-red-large">Accéder à l'espace de rédaction</a>]
-
-
+        [(#REM Relecteur)]
         <div class="ajax">#FORMULAIRE_RELECTEURS_PERSO</div>
         <B_relecteurs>
         <h4><strong>Vous avez des articles à relire :</strong></h4>
@@ -49,6 +34,29 @@
         </ul>
         </B_relecteurs>
 
+        [(#REM Billetiste)]
+        [(#BILLETTISTE|=={oui}|oui) <h3>Vous êtes billettiste.</h3>
+        <p>Vous pouvez accéder à la partie privée du site (où vous pourrez écrire puis suivre le devenir de votre billet). Votre billet sera publié 24h après que vous l'aurez validé. Toutefois nous régulons le flot des billets selon leur quantité ou par rapport à l'actualité ; il se peut donc que nous changions la date de publication.<br>
+        En cas de problème, vous pouvez contacter le secrétariat de rédaction</p>
+        <a href="#URL_ECRIRE{article_edit,id_rubrique=#RUBRIQUE_TRIBUNES}" class="button-red-large">Écrire un nouveau billet</a><br>
+        <a href="#URL_ECRIRE{articles,id_auteur=#SESSION{id_auteur}}" class="button-red-large">Accéder à votre espace de rédaction</a><br>
+        <a href="#URL_ECRIRE" class="button-red-large">Accéder à l'espace privé</a><br>
+        <a href="#URL_PAGE{article,id_article=#ARTICLE_MODE_EMPLOI_TECHNIQUE}" class="button-red-large">Accéder au Mode d'emploi</a>]
+
+        [(#REM Rédacteur)]
+        #SET{redacteurs,#ARRAY{0,0minirezo,1,1comite}}
+        [(#GET{redacteurs}|find{#STATUT}|oui) <h3>Vous êtes rédacteur.</h3>
+        <p>Vous pouvez accéder à la partie privée du site (où vous pourrez écrire puis suivre le devenir de votre article). Une fois votre article soumis, vous aurez également la possibilité de dialoguer avec ses relecteurs.<br>
+        En cas de problème, vous pouvez contacter le secrétariat de rédaction.</p>
+        <a href="#URL_ECRIRE{article_edit}" class="button-red-large">Écrire un nouvel article</a><br>
+        <a href="#URL_ECRIRE{articles,id_auteur=#SESSION{id_auteur}}" class="button-red-large">Accéder à votre espace de rédaction</a><br>
+        <a href="#URL_ECRIRE" class="button-red-large">Accéder à l'espace privé</a><br>
+        <a href="#URL_PAGE{article,id_article=#ARTICLE_MODE_EMPLOI_TECHNIQUE}" class="button-red-large">Accéder au Mode d'emploi</a>]
+
+        [(#REM Administrateur)]
+        [(#STATUT|=={0minirezo}|oui) <h3>Vous êtes administrateur.</h3>
+        <p>Vous  pouvez accéder à la partie privée du site (où vous pourrez suivre les articles dont vous êtes responsables).</p>
+        <a href="#URL_ECRIRE" class="button-red-large">Accéder à l'espace privé</a>]
 
     </BOUCLE_moi>
         <h1>Merci de vous identifier</h1>
@@ -57,9 +65,3 @@
     <//B_moi>
 
 </div>
-
-[(#INCLURE{fond=inc/bloc_tribune})]
-[(#INCLURE{fond=inc/bloc_image})]
-[(#INCLURE{fond=inc/bloc_random})]
-
-[(#INCLURE{fond=inc/foot})]

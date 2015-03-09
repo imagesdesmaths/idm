@@ -43,6 +43,7 @@ function balise_ARTICLE_FONCTIONNEMENT($p) { $p->code = ARTICLE_FONCTIONNEMENT; 
 function balise_ARTICLE_PARTENAIRES($p) { $p->code = ARTICLE_PARTENAIRES; return $p; }
 function balise_ARTICLE_DEVENIR_CONTRIBUTEUR($p) { $p->code = ARTICLE_DEVENIR_CONTRIBUTEUR; return $p; }
 function balise_ARTICLE_MENTIONS_LEGALES($p) { $p->code = ARTICLE_MENTIONS_LEGALES; return $p; }
+function balise_ARTICLE_MODE_EMPLOI_TECHNIQUE($p) { $p->code = ARTICLE_MODE_EMPLOI_TECHNIQUE; return $p; }
 
 function balise_GROUPE_MOT_ACTUALITE_IMPORTANTE($p) { $p->code = GROUPE_MOT_ACTUALITE_IMPORTANTE; return $p; }
 
