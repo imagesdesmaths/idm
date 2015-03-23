@@ -63,20 +63,18 @@
             text-align: right;
         }
         .tooltip {
-            display: block;
             display: none;
-            position: absolute;
-            top: -1px;
+            position: fixed;
+            top: 0;
             left: 0;
             padding: 5px;
+            width: 250px;
             z-index: 999;
             background: #f3fad2;
             border: 1px solid #ccc;
         }
 
-        [data-filter="nom"] {
-            position: relative;
-
+        [data-filter="texte"] {
             &:hover {
                 .tooltip {
                     display: block;
@@ -88,6 +86,12 @@
     .liste-relecteurs-affectes .disponibles-only,
     .liste-relecteurs-affectes thead {
         display: none;
+    }
+    td,
+    th {
+        &.hidden {
+            display: none;
+        }
     }
 
     .recherche-relecteurs {
@@ -109,7 +113,7 @@
             width: 50px;
             margin: 2px 0;
 
-            &[name="nom"] {
+            &[name="texte"] {
                 width: 228px;
             }
         }

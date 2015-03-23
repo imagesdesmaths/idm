@@ -45,6 +45,9 @@ section[role="main"] {
 #content {
     background-color: $white;
 
+    @include media-max("desktop-down") {
+        height: auto !important;
+    }
     @include media-min("desktop-down") {
         box-shadow:
             0 200px 0 0 $white,
@@ -72,6 +75,7 @@ h2 {
     a.seemore {
         position: relative;
         display: block;
+        padding-right: 45px;
 
         > span.icon {
             position: absolute;

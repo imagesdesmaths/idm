@@ -1,8 +1,9 @@
 /*
     SPIP
  */
-.spip-admin-float {
-    display:none;
+.spip-admin-float,
+.spip-previsu {
+    display:none !important;
 }
 div.cs_blocs {
     margin: 1ex 0em;

@@ -17,4 +17,7 @@
         box-shadow:
             200px 0 0 0 $grey_lighter;
     }
+    @include media-max("desktop-down") {
+        height: 600px;
+    }
 }

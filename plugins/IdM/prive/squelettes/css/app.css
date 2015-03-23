@@ -373,27 +373,29 @@
     text-align: right; }
   [id^="modal_send_mail"] .relecteur .tooltip,
   [id^="modal_relecteurs_"] .relecteur .tooltip {
-    display: block;
     display: none;
-    position: absolute;
-    top: -1px;
+    position: fixed;
+    top: 0;
     left: 0;
     padding: 5px;
+    width: 250px;
     z-index: 999;
     background: #f3fad2;
     border: 1px solid #ccc; }
-  [id^="modal_send_mail"] .relecteur [data-filter="nom"],
-  [id^="modal_relecteurs_"] .relecteur [data-filter="nom"] {
-    position: relative; }
-    [id^="modal_send_mail"] .relecteur [data-filter="nom"]:hover .tooltip,
-    [id^="modal_relecteurs_"] .relecteur [data-filter="nom"]:hover .tooltip {
-      display: block; }
+  [id^="modal_send_mail"] .relecteur [data-filter="texte"]:hover .tooltip,
+  [id^="modal_relecteurs_"] .relecteur [data-filter="texte"]:hover .tooltip {
+    display: block; }
 [id^="modal_send_mail"] .liste-relecteurs-disponibles .affectes-only,
 [id^="modal_send_mail"] .liste-relecteurs-affectes .disponibles-only,
 [id^="modal_send_mail"] .liste-relecteurs-affectes thead,
 [id^="modal_relecteurs_"] .liste-relecteurs-disponibles .affectes-only,
 [id^="modal_relecteurs_"] .liste-relecteurs-affectes .disponibles-only,
 [id^="modal_relecteurs_"] .liste-relecteurs-affectes thead {
+  display: none; }
+[id^="modal_send_mail"] td.hidden,
+[id^="modal_send_mail"] th.hidden,
+[id^="modal_relecteurs_"] td.hidden,
+[id^="modal_relecteurs_"] th.hidden {
   display: none; }
 [id^="modal_send_mail"] .recherche-relecteurs,
 [id^="modal_relecteurs_"] .recherche-relecteurs {
@@ -414,8 +416,8 @@
   [id^="modal_relecteurs_"] .recherche-relecteurs input[type="text"] {
     width: 50px;
     margin: 2px 0; }
-    [id^="modal_send_mail"] .recherche-relecteurs input[type="text"][name="nom"],
-    [id^="modal_relecteurs_"] .recherche-relecteurs input[type="text"][name="nom"] {
+    [id^="modal_send_mail"] .recherche-relecteurs input[type="text"][name="texte"],
+    [id^="modal_relecteurs_"] .recherche-relecteurs input[type="text"][name="texte"] {
       width: 228px; }
   [id^="modal_send_mail"] .recherche-relecteurs .buttons,
   [id^="modal_relecteurs_"] .recherche-relecteurs .buttons {

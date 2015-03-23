@@ -72,4 +72,12 @@ $(function() {
         return event.keyCode != 13;
     });
 
+    /* Make relecteur tooltip to follow mouse moves */
+    $(document).on('mousemove', '.relecteur [data-filter="texte"]', function(e){
+        $(this).find('.tooltip').css({
+           left:  e.pageX - $(this).closest('.ajaxbloc').offset().left,
+           top:   e.pageY - $(this).closest('.ajaxbloc').offset().top + 50
+        });
+    });
+
 });

@@ -1,21 +1,36 @@
 @font-face {
-  font-family: 'Open Sans', Arial;
-  font-style: normal;
-  font-weight: 300;
-  src: local('Open Sans Light'), local('OpenSans-Light'), url(http://fonts.gstatic.com/s/opensans/v11/DXI1ORHCpsQm3Vp6mXoaTTy24DTBG-RpCwXaYkM4aks.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+    font-family: 'Open Sans';
+    src: url('../fonts/opensans/OpenSans-Light-webfont.eot');
+    src: url('../fonts/opensans/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/opensans/OpenSans-Light-webfont.woff') format('woff'),
+         url('../fonts/opensans/OpenSans-Light-webfont.ttf') format('truetype'),
+         url('../fonts/opensans/OpenSans-Light-webfont.svg#open_sanslight') format('svg');
+    font-weight: 300;
+    font-style: normal;
+
 }
+
 @font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Open Sans'), local('OpenSans'), url(http://fonts.gstatic.com/s/opensans/v11/cJZKeOuBrn4kERxqtaUH3RJtnKITppOI_IvcXXDNrsc.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+    font-family: 'Open Sans';
+    src: url('../fonts/opensans/OpenSans-Regular-webfont.eot');
+    src: url('../fonts/opensans/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/opensans/OpenSans-Regular-webfont.woff') format('woff'),
+         url('../fonts/opensans/OpenSans-Regular-webfont.ttf') format('truetype'),
+         url('../fonts/opensans/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+    font-weight: 400;
+    font-style: normal;
+
 }
+
 @font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 600;
-  src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(http://fonts.gstatic.com/s/opensans/v11/MTP_ySUJH_bn48VBG8sNSjy24DTBG-RpCwXaYkM4aks.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+    font-family: 'Open Sans';
+    src: url('../fonts/opensans/OpenSans-Semibold-webfont.eot');
+    src: url('../fonts/opensans/OpenSans-Semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/opensans/OpenSans-Semibold-webfont.woff') format('woff'),
+         url('../fonts/opensans/OpenSans-Semibold-webfont.ttf') format('truetype'),
+         url('../fonts/opensans/OpenSans-Semibold-webfont.svg#open_sanssemibold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+
 }
+

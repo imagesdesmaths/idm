@@ -57,6 +57,57 @@ if(isset($_POST['affecter_relecteurs_a'])) {
 
 <BOUCLE_prop(ARTICLES) {statut = prop} {par date} {id_rubrique?}>
 
+<script type="text/javascript">
+
+    function sort_relecteurs(id_article) {
+        $('#modal_relecteurs_'+id_article)
+        .find('.liste-relecteurs-disponibles, .liste-relecteurs-affectes')
+        .trigger('update')
+        .trigger('sorton', [[[0,0]]]);
+    }
+    function add_relecteur(id_article, id_relecteur) {
+        var disponibles = $('#modal_relecteurs_'+id_article+' .liste-relecteurs-disponibles tbody');
+        var affectes = $('#modal_relecteurs_'+id_article+' .liste-relecteurs-affectes tbody');
+        var relecteur = disponibles.find('[data-relecteur="'+id_relecteur+'"]').first();
+        relecteur.detach().appendTo(affectes);
+        sort_relecteurs(id_article);
+    }
+    function remove_relecteur(id_article, id_relecteur) {
+        var disponibles = $('#modal_relecteurs_'+id_article+' .liste-relecteurs-disponibles tbody');
+        var affectes = $('#modal_relecteurs_'+id_article+' .liste-relecteurs-affectes tbody');
+        var relecteur = affectes.find('[data-relecteur="'+id_relecteur+'"]').first();
+        relecteur.detach().appendTo(disponibles);
+        sort_relecteurs(id_article);
+    }
+    function affect_relecteurs(id_article) {
+        var form = $('#modal_relecteurs_'+id_article+' form');
+        form.append('<input type="hidden" name="affecter_relecteurs_a" value="'+id_article+'">');
+        var added = form.find('.liste-relecteurs-affectes [data-origin-state="disponible"]');
+        var removed = form.find('.liste-relecteurs-disponibles [data-origin-state="affecte"]');
+        added.each(function() {
+            form.append('<input type="hidden" name="add_relecteur[]" value="'+$(this).data('relecteur')+'">');
+        });
+        removed.each(function() {
+            form.append('<input type="hidden" name="remove_relecteur[]" value="'+$(this).data('relecteur')+'">');
+        });
+        form.submit();
+    }
+    function reset_relecteurs(id_article) {
+        var disponibles = $('#modal_relecteurs_'+id_article+' .liste-relecteurs-disponibles tbody');
+        var affectes = $('#modal_relecteurs_'+id_article+' .liste-relecteurs-affectes tbody');
+        if(disponibles.length > 0)
+            disponibles.find('[data-origin-state="affecte"]').detach().appendTo(affectes);
+        if(affectes.length > 0)
+            affectes.find('[data-origin-state="disponible"]').detach().appendTo(disponibles);
+        sort_relecteurs(id_article);
+        $('#modal_relecteurs_'+id_article).removeClass('modal-open').find('.mask').detach();
+    }
+
+    $(function() {
+        $('.no-reviewer').closest('.box_relecteurs').prependTo('#boxes');
+    });
+
+</script>
 
 <div id="boxes">
     <BOUCLE_article(ARTICLES) {statut=prop} {id_article}>
@@ -67,8 +118,8 @@ if(isset($_POST['affecter_relecteurs_a'])) {
             <div class="hd titrem">
                 <h2>
                     <a href="#URL_ECRIRE{article,id_article=#ID_ARTICLE}">#TITRE</a>
-                    <span><a href="#URL_ECRIRE{article,id_article=#ID_ARTICLE}" class="button-white">Fiche article</a></span>
-                    <span><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}" class="button-white">Lire l'article</a></span>
+                    <span><a href="#URL_ECRIRE{article,id_article=#ID_ARTICLE}" class="button-white" target="_blank">Fiche article</a></span>
+                    <span><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}" class="button-white" target="_blank">Lire l'article</a></span>
                 </h2>
             </div>
 
@@ -137,16 +188,14 @@ if(isset($_POST['affecter_relecteurs_a'])) {
 
         <script type="text/javascript">
             function effacer_filtres_popup_relecteurs() {
-                event.preventDefault();
                 $('.recherche-relecteurs input[type="text"]').val('');
                 $('.liste-relecteurs-disponibles .relecteur').show();
             }
             function rechercher_popup_relecteurs(id_article) {
-                event.preventDefault();
                 var relecteurs = $('.liste-relecteurs-disponibles .relecteur');
                 relecteurs.hide();
 
-                var filter_nom = $('#nom_'+id_article).val();
+                var filter_texte = $('#texte_'+id_article).val();
                 var filter_affecte_a = $('#affecte_a_'+id_article).val();
                 var filter_tx_lecture_sup_to = $('#tx_lecture_sup_to_'+id_article).val();
                 var filter_tx_lecture_inf_to = $('#tx_lecture_inf_to_'+id_article).val();
@@ -158,7 +207,7 @@ if(isset($_POST['affecter_relecteurs_a'])) {
                 var filter_period_to = $('#period_to_'+id_article).val();
 
                 relecteurs.filter(function() {
-                    if(filter_nom && $(this).find('[data-filter="nom"]:contains('+filter_nom+')').length == 0)
+                    if(filter_texte && $(this).find('[data-filter="texte"]:contains('+filter_texte+')').length == 0)
                         return false;
                     if(filter_affecte_a && $(this).is(':not([data-articles~=";'+filter_affecte_a+';"])'))
                     return false;
@@ -197,60 +246,6 @@ if(isset($_POST['affecter_relecteurs_a'])) {
 
     </BOUCLE_article>
 </div>
-
-<script type="text/javascript">
-
-    function sort_relecteurs(id_article) {
-        $('#modal_relecteurs_'+id_article)
-        .find('.liste-relecteurs-disponibles, .liste-relecteurs-affectes')
-        .trigger('update')
-        .trigger('sorton', [[[0,0]]]);
-    }
-    function add_relecteur(id_article, id_relecteur) {
-        var disponibles = $('#modal_relecteurs_'+id_article+' .liste-relecteurs-disponibles tbody');
-        var affectes = $('#modal_relecteurs_'+id_article+' .liste-relecteurs-affectes tbody');
-        var relecteur = disponibles.find('[data-relecteur="'+id_relecteur+'"]').first();
-        relecteur.detach().appendTo(affectes);
-        sort_relecteurs(id_article);
-    }
-    function remove_relecteur(id_article, id_relecteur) {
-        var disponibles = $('#modal_relecteurs_'+id_article+' .liste-relecteurs-disponibles tbody');
-        var affectes = $('#modal_relecteurs_'+id_article+' .liste-relecteurs-affectes tbody');
-        var relecteur = affectes.find('[data-relecteur="'+id_relecteur+'"]').first();
-        relecteur.detach().appendTo(disponibles);
-        sort_relecteurs(id_article);
-    }
-    function affect_relecteurs(id_article) {
-        event.preventDefault();
-        var form = $('#modal_relecteurs_'+id_article+' form');
-        form.append('<input type="hidden" name="affecter_relecteurs_a" value="'+id_article+'">');
-        var added = form.find('.liste-relecteurs-affectes [data-origin-state="disponible"]');
-        var removed = form.find('.liste-relecteurs-disponibles [data-origin-state="affecte"]');
-        added.each(function() {
-            form.append('<input type="hidden" name="add_relecteur[]" value="'+$(this).data('relecteur')+'">');
-        });
-        removed.each(function() {
-            form.append('<input type="hidden" name="remove_relecteur[]" value="'+$(this).data('relecteur')+'">');
-        });
-        form.submit();
-    }
-    function reset_relecteurs(id_article) {
-        event.preventDefault();
-        var disponibles = $('#modal_relecteurs_'+id_article+' .liste-relecteurs-disponibles tbody');
-        var affectes = $('#modal_relecteurs_'+id_article+' .liste-relecteurs-affectes tbody');
-        if(disponibles.length > 0)
-            disponibles.find('[data-origin-state="affecte"]').detach().appendTo(affectes);
-        if(affectes.length > 0)
-            affectes.find('[data-origin-state="disponible"]').detach().appendTo(disponibles);
-        sort_relecteurs(id_article);
-        $('#modal_relecteurs_'+id_article).removeClass('modal-open').find('.mask').detach();
-    }
-
-    $(function() {
-        $('.no-reviewer').closest('.box_relecteurs').prependTo('#boxes');
-    });
-
-</script>
 
 </BOUCLE_prop>
 

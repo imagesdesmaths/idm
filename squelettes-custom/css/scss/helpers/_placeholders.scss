@@ -128,6 +128,34 @@
         box-shadow: inset 8px 0 0 0 $off_track;
     }
 }
+%trackable-top {
+    &:before {
+        content: " ";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        box-shadow: inset 0 8px 0 0 $grey_light;
+        border-radius: inherit;
+        z-index: 0;
+    }
+    &.green-track:before {
+        box-shadow: inset 0 8px 0 0 $green_track;
+    }
+    &.blue-track:before {
+        box-shadow: inset 0 8px 0 0 $blue_track;
+    }
+    &.red-track:before {
+        box-shadow: inset 0 8px 0 0 $red_track;
+    }
+    &.black-track:before {
+        box-shadow: inset 0 8px 0 0 $black_track;
+    }
+    &.off-track:before {
+        box-shadow: inset 0 8px 0 0 $off_track;
+    }
+}
 
 %separator-top {
     &:before {

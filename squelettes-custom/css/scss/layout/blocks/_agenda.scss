@@ -79,5 +79,6 @@
     }
     @include media-max("desktop-down") {
         clear: both;
+        height: 600px;
     }
 }

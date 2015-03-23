@@ -17,4 +17,16 @@
             }
         }
     }
+
+    @include media-min("tablet-up") {
+        padding-right: $col_padding / 2;
+        clear: left;
+    }
+    @include media-min("desktop-down") {
+        padding-right: 0;
+        padding-bottom: 0;
+        background: none;
+        box-shadow: none;
+        clear: none;
+    }
 }

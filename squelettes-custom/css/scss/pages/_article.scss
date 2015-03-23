@@ -149,6 +149,22 @@
     &.hors-piste:before {
         background: $off-track;
     }
+
+    &.article-proposal {
+        .comment {
+            .message {
+                .answer {
+                    background: $grey_lighter;
+                    color: $grey;
+
+                    &:hover,
+                    &:focus {
+                        background: darken($grey_lighter, 10%);
+                    }
+                }
+            }
+        }
+    }
 }
 
 .block-related {

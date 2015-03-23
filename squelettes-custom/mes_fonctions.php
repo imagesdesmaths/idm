@@ -24,6 +24,16 @@ function filtre_trunctext($texte, $longeur_max) {
     return $texte;
 }
 
+function balise_VARMODE($p) {
+    if (_request('var_mode')=='preview')
+        $p->code = "'preview'";
+    else
+        $p->code = "''";
+    $p->statut = 'html';
+    return $p;
+}
+
+
 function balise_RUBRIQUE_SPECIAL($p) { $p->code = RUBRIQUE_SPECIAL; return $p; }
 function balise_RUBRIQUE_TRIBUNES($p) { $p->code = RUBRIQUE_TRIBUNES; return $p; }
 function balise_RUBRIQUE_DEBAT_DU_18($p) { $p->code = RUBRIQUE_DEBAT_DU_18; return $p; }

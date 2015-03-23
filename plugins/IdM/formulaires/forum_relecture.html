@@ -3,8 +3,11 @@
 [(#ENV{message_ok}|non)
   <form action="#SELF" method="post" class="billet">
     #ACTION_FORMULAIRE{#ENV{action}}
-    <p><label for="titre">Titre :</label><input type="text" name="titre" size="60" value="#ENV{titre}" /></p>  [<p class="erreur">(#ENV**{erreurs}|table_valeur{titre})</p>]
-    <p><textarea name="texte" cols="75" rows="20">#ENV{texte}</textarea></p>                                   [<p class="erreur">(#ENV**{erreurs}|table_valeur{texte})</p>]
+    <p><label for="titre">Titre :</label><input type="text" name="titre" size="60" value="#ENV{titre}" /></p>
+    [<p class="erreur">(#ENV**{erreurs}|table_valeur{titre})</p>]
+    <p><textarea name="texte" cols="75" rows="20">#ENV{texte}</textarea></p>
+    <p class="explication forum_saisie_texte_info">Ce formulaire accepte les raccourcis SPIP <code>&#91;-&gt;url&#93; {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> et le code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Pour créer des paragraphes, laissez simplement des lignes vides.</p>
+    [<p class="erreur">(#ENV**{erreurs}|table_valeur{texte})</p>]
 
     <div id="previsu">
     [(#ENV**{erreurs}|table_valeur{preview}|=={preview}|oui)

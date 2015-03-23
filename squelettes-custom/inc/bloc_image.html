@@ -3,7 +3,10 @@
     $results = sql_select(
         'id_objet',
         'spip_random',
-        'type = "image_du_jour" AND date_picked >= CURDATE()'
+        'type = "image_du_jour" AND date_picked >= CURDATE()',
+        '',
+        '',
+        '1'
     );
     if($row = sql_fetch($results)) {
         // L'image du jour est déjà définie aujourd'hui, on la récupère
@@ -12,12 +15,11 @@
         $results = sql_select(
             'd.id_document',
             'spip_documents AS d
-                JOIN spip_documents_liens AS dl ON ( dl.id_document = d.id_document )
-                JOIN spip_articles AS a ON ( a.id_article = dl.id_objet AND dl.objet = "article" )
-                LEFT JOIN spip_random AS r ON ( d.id_document = r.id_objet AND r.objet = "document" )',
+                JOIN spip_documents_liens dl ON (dl.id_document = d.id_document)
+                LEFT JOIN spip_random r ON (d.id_document = r.id_objet AND r.objet = "document")',
             'r.id_objet IS NULL
-                AND d.statut = "publie"
-                AND a.id_article = #ARTICLE_IMAGES_DU_JOUR',
+                AND dl.objet = "article"
+                AND dl.id_objet = #ARTICLE_IMAGES_DU_JOUR',
             '',
             'RAND()',
             '1'
@@ -28,7 +30,7 @@
                 'objet' => 'document',
                 'id_objet' => $row['id_document'],
                 'type' => 'image_du_jour',
-                'date_picked' => date('Y-m-d H:i:s')
+                'date_picked' => date('Y-m-d 00:00:00')
             ));
         } else {
             // Tout à été selectionné une fois, on vide les entrées de spip_random
@@ -37,10 +39,11 @@
             $results = sql_select(
                 'd.id_document',
                 'spip_documents AS d
-                    JOIN spip_documents_liens AS dl ON ( dl.id_document = d.id_document )
-                    JOIN spip_articles AS a ON ( a.id_article = dl.id_objet AND dl.objet = "article" )',
-                'd.statut = "publie"
-                    AND a.id_article = #ARTICLE_IMAGES_DU_JOUR',
+                    JOIN spip_documents_liens dl ON (dl.id_document = d.id_document)
+                    LEFT JOIN spip_random r ON (d.id_document = r.id_objet AND r.objet = "document")',
+                'r.id_objet IS NULL
+                    AND dl.objet = "article"
+                    AND dl.id_objet = #ARTICLE_IMAGES_DU_JOUR',
                 '',
                 'RAND()',
                 '1'
@@ -51,7 +54,7 @@
                     'objet' => 'document',
                     'id_objet' => $row['id_document'],
                     'type' => 'image_du_jour',
-                    'date_picked' => date('Y-m-d H:i:s')
+                    'date_picked' => date('Y-m-d 00:00:00')
                 ));
             } else {
                 // Une erreur est survenue (rubrique vide...)
@@ -63,7 +66,7 @@
 <B_random>
     <div class="block-right block-image">
     <BOUCLE_random(spip_random) {type="image_du_jour"} {par date_picked} {inverse} {0,1}>
-        <BOUCLE_img(DOCUMENTS) {id_document=#ID_OBJET}>
+        <BOUCLE_img(DOCUMENTS) {tous} {id_document=#ID_OBJET}>
             <h2>
                 <a class="seemore" href="#URL_PAGE{image,id_document=#ID_DOCUMENT}">L'image du jour <span class="icon"><i class="flaticon-plus"></i></span></a>
             </h2>

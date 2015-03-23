@@ -109,8 +109,19 @@
                     height: 180px;
                 }
             }
+            .date {
+                float: left;
+                margin-right: 10px;
+                margin-bottom: 10px;
+                line-height: 20px;
+            }
+            .author {
+                line-height: 20px;
+                margin-bottom: 10px;
+            }
             .resume {
                 padding-left: 25px;
+                width: 100%;
             }
             .details {
                 line-height: 18px;

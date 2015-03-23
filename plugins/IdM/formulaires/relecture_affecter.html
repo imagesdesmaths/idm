@@ -14,8 +14,8 @@
                     <div class="recherche-relecteurs">
                         <h4>Rechercher par :</h4>
 
-                        <label for="nom">Nom ou prénom :</label>
-                        <input type="text" name="nom" id="nom_#ID_ARTICLE" value="#ENV{nom}">
+                        <label for="texte">Nom / prénom / catégorie /commentaire :</label>
+                        <input type="text" name="texte" id="texte_#ID_ARTICLE" value="#ENV{texte}">
                         <br>
 
                         <label for="affecte_a">Ayant été affecté à l'article numéro :</label>
@@ -55,7 +55,9 @@
 
                     <table class="liste-relecteurs-disponibles sortable" style="font-size : 90%">
                         <thead><tr>
+                            <th class="hidden"></th>
                             <th>Nom / prénom</th>
+                            <th>Catégorie</th>
                             <th>Stats</th>
                             <th>En cours</th>
                             <th></th>
@@ -63,15 +65,20 @@
                         <tbody>
                             <BOUCLE_relecteuraffectation(IDM_RELECTEURS spip_auteurs) {role = relecteur} {par nom}>
                             <tr class="relecteur" data-relecteur="#ID_AUTEUR" data-articles=";<BOUCLE_allarticles(IDM_RELECTURE) {id_auteur=#ID_AUTEUR} {action=affected}>#ID_ARTICLE;</BOUCLE_allarticles>" data-origin-state="disponible">
-                                <td data-filter="nom">
+                                <td class="hidden">#NOM</td>
+                                <td data-filter="texte">
                                     #NOM
                                     <div class="tooltip">
-                                        #NOM<br>
+                                        <u><b>#NOM</b></u><br>
                                         [<span><b>Email :</b> <a href="mailto:#EMAIL">(#EMAIL)</a></span><br>]
-                                        [<span><b>À propos :</b> (#BIO)</span><br>]
+                                        [<span><b>Commentaire :</b> (#COMMENT)</span><br>]
+                                        [<span><b>Dernière relecture :</b> (#QUAND)</span><br>]
+                                        <span><b>Taux de lecture :</b> [(#LUS|mult{100}|div{#COMBIEN}|arrondi)]% (#LUS/#COMBIEN)</span><br>
+                                        <span><b>Commentaires rédigés :</b> #COMMENTS</span><br>
                                     </div>
                                 </td>
-                                <td class="disponibles-only"><span data-filter="tx_lecture">[(#LUS|mult{100}|div{#COMBIEN}|arrondi)]</span>% (lus : <span data-filter="nb_lectures">#LUS</span> - non lus : [(#COMBIEN|moins{#LUS})])</td>
+                                <td class="disponibles-only"><span data-filter="texte">#CATEGORIE</td>
+                                <td class="disponibles-only"><span data-filter="tx_lecture">[(#LUS|mult{100}|div{#COMBIEN}|arrondi)]</span>% lus (<span data-filter="nb_lectures">#LUS</span>/#COMBIEN)<br>#COMMENTS commentaires</td>
                                 <td class="disponibles-only" data-filter="nb_relectures"><BOUCLE_encours(IDM_RELECTEURS spip_auteurs spip_relecteurs_articles spip_articles) {id_auteur=#ID_AUTEUR} {!statut='publie'}><!-- [(#ID_ARTICLE)] --></BOUCLE_encours>#TOTAL_BOUCLE</B_encours>0<//B_encours></td>
                                 <td class="text-right"><span onclick="add_relecteur(#ID_ARTICLE, #ID_AUTEUR)" class="button small relecteur-add disponibles-only" title="Ajouter à la liste">&#9658;</span><span onclick="remove_relecteur(#ID_ARTICLE, #ID_AUTEUR)" class="button small relecteur-remove affectes-only" title="Supprimer de la liste">&#9668;</a></td>
                             </tr>
@@ -95,15 +102,20 @@
                         <tbody>
                             <BOUCLE_relecteursaffectes(RELECTEURS_ARTICLES spip_idm_relecteurs spip_auteurs) {id_article} {par nom}>
                             <tr class="relecteur" data-relecteur="#ID_AUTEUR" data-articles=";<BOUCLE_allarticles2(IDM_RELECTURE) {id_auteur=#ID_AUTEUR} {action=affected}>#ID_ARTICLE;</BOUCLE_allarticles2>" data-origin-state="affecte">
-                                <td data-filter="nom">
+                                <td class="hidden">#NOM</td>
+                                <td data-filter="texte">
                                     #NOM
                                     <div class="tooltip">
-                                        #NOM<br>
-                                        [<span>Email : <a href="mailto:#EMAIL">(#EMAIL)</a></span><br>]
-                                        [<span>À propos : (#BIO)</span><br>]
+                                        <u><b>#NOM</b></u><br>
+                                        [<span><b>Email :</b> <a href="mailto:#EMAIL">(#EMAIL)</a></span><br>]
+                                        [<span><b>Commentaire :</b> (#COMMENT)</span><br>]
+                                        [<span><b>Dernière relecture :</b> (#QUAND)</span><br>]
+                                        <span><b>Taux de lecture :</b> [(#LUS|mult{100}|div{#COMBIEN}|arrondi)]% (#LUS/#COMBIEN)</span><br>
+                                        <span><b>Commentaires rédigés :</b> #COMMENTS</span><br>
                                     </div>
                                 </td>
-                                <td class="disponibles-only"><span data-filter="tx_lecture">[(#LUS|mult{100}|div{#COMBIEN}|arrondi)]</span>% (lus : <span data-filter="nb_lectures">#LUS</span> - non lus : [(#COMBIEN|moins{#LUS})])</td>
+                                <td class="disponibles-only"><span data-filter="texte">#CATEGORIE</td>
+                                <td class="disponibles-only"><span data-filter="tx_lecture">[(#LUS|mult{100}|div{#COMBIEN}|arrondi)]</span>% lus (<span data-filter="nb_lectures">#LUS</span>/#COMBIEN) - #COMMENTS commentaires</td>
                                 <td class="disponibles-only"><BOUCLE_encours2(IDM_RELECTEURS spip_auteurs spip_relecteurs_articles spip_articles) {id_auteur=#ID_AUTEUR} {!statut='publie'}><!-- [(#ID_ARTICLE)] --></BOUCLE_encours2>#TOTAL_BOUCLE</B_encours2>0<//B_encours2></td>
                                 <td class="text-right"><span onclick="add_relecteur(#ID_ARTICLE, #ID_AUTEUR)" class="button small relecteur-add disponibles-only" title="Ajouter à la liste">&#9658;</span><span onclick="remove_relecteur(#ID_ARTICLE, #ID_AUTEUR)" class="button small relecteur-remove affectes-only" title="Supprimer de la liste">&#9668;</a></td>
                                 <td class="tooltip">
@@ -131,6 +143,14 @@
           <span class="button-white" onclick="reset_relecteurs(#ID_ARTICLE)">Annuler</span>
           <input type="submit" name="affecter_relecteurs" value="Valider" class="button" onclick="affect_relecteurs(#ID_ARTICLE)">
         </div>
+
+        <script type="text/javascript">
+            $(function() {
+                $('.liste-relecteurs-affectes .relecteur').each(function() {
+                    $('.liste-relecteurs-disponibles [data-relecteur="'+$(this).data('relecteur')+'"]').detach();
+                });
+            });
+        </script>
 
     </form>
 

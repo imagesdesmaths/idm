@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'idee_edit'    => "Création/modification d'une idée d'article",
 
     'relecteurs'         => "Gestion relecteurs",
-    'relecture'          => "Article en relecture",
+    'relecture'          => "Articles en relecture",
     'relecture_aucun'    => "Aucun article proposé !",
 
     'tableau'            => "Tableau de bord",

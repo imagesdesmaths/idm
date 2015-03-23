@@ -1,12 +1,26 @@
 <div class="block-user">
 
     <ul>
+        [(#REM Général)]
         [(#SESSION{id_auteur}|oui)
             <li><a href="#URL_PAGE{perso}" title="Espace personnel"><i class="flaticon-user"></i><span>Espace personnel</span></a></li>
         ]
+
+        [(#REM Rédacteur)]
+        [(#SESSION{id_auteur}|oui)
+            #SET{redacteurs,#ARRAY{0,0minirezo,1,1comite}}
+            [(#GET{redacteurs}|find{#SESSION{statut}}|oui)
+                <li><a href="#URL_ECRIRE{articles,id_auteur=#SESSION{id_auteur}}" title="Espace de rédaction"><i class="flaticon-cat-contribute"></i><span>Espace de rédaction</span></a></li>
+            ]
+        ]
+
+        [(#REM Relecteur)]
         <BOUCLE_relecteurs(spip_relecteurs_articles) {id_auteur=#SESSION{id_auteur}} {0,1}>
-            <li><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}" title="Un article à relire !" class="relecture"><i class="flaticon-cat-press"></i><span>Un article à relire !</span></a></li>
+            <li><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}" title="Un article à relire !" class="relecture"><i class="flaticon-article"></i><span>Un article à relire !</span></a></li>
         </BOUCLE_relecteurs>
+
+        [(#REM Administrateur)]
+        #SET{administrateurs,#ARRAY{0,0minirezo}}
         <BOUCLE_articles(ARTICLES) {id_article}>
             [(#SESSION{statut}|=={0minirezo}|oui)
                 <li><a href="#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE}" title="Modifier l'article" class="edition-article"><i class="flaticon-cat-contribute"></i><span>Modifier l'article</span></a></li>
@@ -29,9 +43,8 @@
             <li><a href="[(#SELF|parametre_url{var_mode,recalcul})]"><i class="flaticon-refresh"></i><span>Recalculer la page</span>[(#ENV{use_cache})]</a></li>
             <li><a href="ecrire/" title="Espace privé"><i class="flaticon-private"></i><span>Espace privé</span></a></li>
         ]
-        [(#SESSION{statut}|=={1comite}|oui)
-            <li><a href="ecrire/" title="Espace de rédaction"><i class="flaticon-private"></i><span>Espace de rédaction</span></a></li>
-        ]
+
+        [(#REM Général)]
         [(#SESSION{id_auteur}|oui)
             <li><a href="#URL_LOGOUT{#URL_SITE_SPIP}" title="Se déconnecter"><i class="flaticon-logout"></i><span>Se déconnecter</span></a></li>
         ]

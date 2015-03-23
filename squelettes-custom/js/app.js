@@ -16,7 +16,10 @@ $(function(){
     });
 
     /* Don't judge me... please. (_content.scss:53 alternative) */
-    $('#content').height($('#content').closest('.container').height());
+    $(window).on('resize load', function(){
+        $('#content').delay(100).height('auto');
+        $('#content').delay(100).height($('#content').closest('.container').height());
+    });
 
     /* Homepage slides */
     $('#slides').slides({

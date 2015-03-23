@@ -1,4 +1,6 @@
 .block-author {
+    display: none;
+
     .image {
         display: table-cell;
         width: 90px;
@@ -28,5 +30,9 @@
     }
     img {
         border-radius: $border_radius_default;
+    }
+
+    @include media-min("desktop-down") {
+        display: block;
     }
 }

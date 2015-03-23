@@ -1,11 +1,15 @@
+<BOUCLE_articles_piste(MOTS) {id_article=#ENV{id_une}} {type=Difficulté} {0,1}>
+#SET{track_slug, #TITRE|slug}
+</BOUCLE_articles_piste>
+
 <BOUCLE_une(ARTICLES) {id_article=#ENV{id_une}}>
     #SET{une_url, IMG/#LOGO_ARTICLE|fichier}
     [(#LOGO_ARTICLE|fichier|non)
         #SET{une_url, #CHEMIN{img/nopic.jpg}}
     ]
-    <div class="block-une" style="border-top-color:[(#GET{une_url}|color_dominant)];background:[(#GET{une_url}|color_dominant)];color:[(#GET{une_url}|color_dominant)]"><a href="#URL_ARTICLE">
+    <div class="block-une #GET{track_slug}" style="background:[(#GET{une_url}|color_dominant)];color:[(#GET{une_url}|color_dominant)]"><a href="#URL_ARTICLE">
         [<div class="image">
-            (#LOGO_ARTICLE|image_recadre{560,350,center center,[(#GET{une_url}|color_dominant)]})
+            (#LOGO_ARTICLE|image_recadre{560,315,center center,[(#GET{une_url}|color_dominant)]})
         </div>]
         <div class="resume" style="color:#444">
             <h3>#TITRE</h3>

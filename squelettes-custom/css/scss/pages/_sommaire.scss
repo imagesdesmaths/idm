@@ -1,9 +1,9 @@
 .block-une {
+    @extend %trackable-top;
     display: none;
     position: relative;
     overflow: hidden;
     border-radius: $border_radius_default;
-    border-top: 5px solid rgba(0, 0, 0, .3);
 
     img {
         float: left;
@@ -21,16 +21,20 @@
         h3 {
             margin-top: 0;
             text-transform: uppercase;
+            margin-bottom: 10px;
         }
         span {
             font-style: italic;
             padding-left: 10px;
         }
         .details {
-            margin-bottom: 25px;
+            margin-bottom: 10px;
         }
     }
     &:before {
+        z-index: 60;
+    }
+    &:after {
         content: '';
         position: absolute;
         height: 100%;
@@ -41,7 +45,7 @@
         background: rgba(255, 255, 255, .8);
         transition: background $transition_duration_default;
     }
-    &:hover:before {
+    &:hover:after {
         background: rgba(255, 255, 255, .6);
     }
     @include media-min("tablet-up") {
