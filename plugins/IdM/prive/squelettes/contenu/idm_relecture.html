@@ -129,13 +129,22 @@ if(isset($_POST['affecter_relecteurs_a'])) {
             </div>
 
             <div class="bd buttons">
-                <B_relecteurstotal>
+                #SET{affectes, 0}
+                #SET{lus, 0}
+                #SET{non_lus, 0}
+                <BOUCLE_relecteurstotal(spip_idm_relecture) {id_article} {action=affected} {fusion id_auteur}>
+                    #SET{affectes, #GET{affectes}|plus{1}}
+                    #SET{non_lus, #GET{non_lus}|plus{1}}
+                    <BOUCLE_lus(spip_idm_relecture) {id_article} {action=read} {id_auteur=#_relecteurstotal:ID_AUTEUR} {fusion id_auteur}>
+                        #SET{lus, #GET{lus}|plus{1}}
+                        #SET{non_lus, #GET{non_lus}|moins{1}}
+                    </BOUCLE_lus>
+                </BOUCLE_relecteurstotal>
+
                 <p>
                     <strong>#TOTAL_BOUCLE relecteur[(#TOTAL_BOUCLE|>{1}|?{s})]</strong>
-                    (lu : <BOUCLE_relecteurslu(RELECTEURS_ARTICLES spip_idm_relecteurs spip_auteurs) {id_article} {status=vu}>#TOTAL_BOUCLE</BOUCLE_relecteurslu>, non lu : <BOUCLE_relecteursnonlu(RELECTEURS_ARTICLES spip_idm_relecteurs spip_auteurs) {id_article} {status=pas_vu}>#TOTAL_BOUCLE</BOUCLE_relecteursnonlu>)
+                    (lu : #GET{lus}, non lu : #GET{non_lus})
                 </p>
-
-                <BOUCLE_relecteurstotal(RELECTEURS_ARTICLES spip_idm_relecteurs spip_auteurs) {id_article}><!-- do NOT delete --></BOUCLE_relecteurstotal>
 
                 <a href="javascript:;" class="button readmore" data-alt-text="Masquer le détail">Afficher le détail</a>
                 <a href="javascript:;" class="button" data-modal-open="#modal_relecteurs_#ID_ARTICLE">Gérer les relecteurs</a>
@@ -207,8 +216,14 @@ if(isset($_POST['affecter_relecteurs_a'])) {
                 var filter_period_to = $('#period_to_'+id_article).val();
 
                 relecteurs.filter(function() {
-                    if(filter_texte && $(this).find('[data-filter="texte"]:contains('+filter_texte+')').length == 0)
-                        return false;
+                    if(filter_texte) {
+                        var parts = filter_texte.split(' ');
+                        for (var i = parts.length - 1; i >= 0; i--) {
+                            if($(this).find('[data-filter="texte"]:contains('+parts[i]+')').length == 0) {
+                                return false;
+                            }
+                        };
+                    }
                     if(filter_affecte_a && $(this).is(':not([data-articles~=";'+filter_affecte_a+';"])'))
                     return false;
                     if(filter_tx_lecture_sup_to && $(this).find('[data-filter="tx_lecture"]').text() < filter_tx_lecture_sup_to)

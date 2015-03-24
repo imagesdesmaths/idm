@@ -2579,8 +2579,7 @@ section.plan-du-site #content {
     color: #d13827; }
 
 .recherche #content {
-  position: relative;
-  box-sizing: content-box; }
+  position: relative; }
   .recherche #content > .category {
     margin-top: -25px; }
   .recherche #content h1 {

@@ -1,6 +1,7 @@
 .recherche #content {
     @extend %separator-top;
     position: relative;
+    //box-sizing: content-box;
 
     > .category {
         margin-top: -25px;

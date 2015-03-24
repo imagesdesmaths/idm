@@ -64,6 +64,21 @@
                         </tr></thead>
                         <tbody>
                             <BOUCLE_relecteuraffectation(IDM_RELECTEURS spip_auteurs) {role = relecteur} {par nom}>
+                            #SET{affectes, 0}
+                            #SET{lus, 0}
+                            #SET{non_lus, 0}
+                            #SET{commentes, 0}
+                            <BOUCLE_affectationtotal(spip_idm_relecture) {id_auteur} {action=affected} {fusion id_article}>
+                                #SET{affectes, #GET{affectes}|plus{1}}
+                                #SET{non_lus, #GET{non_lus}|plus{1}}
+                                <BOUCLE_affectationlus(spip_idm_relecture) {id_article} {action=read} {id_auteur=#_affectationtotal:ID_AUTEUR} {fusion id_auteur}>
+                                    #SET{lus, #GET{lus}|plus{1}}
+                                    #SET{non_lus, #GET{non_lus}|moins{1}}
+                                </BOUCLE_affectationlus>
+                                <BOUCLE_affectationcommentes(spip_idm_relecture) {id_article} {action=read} {id_auteur=#_affectationtotal:ID_AUTEUR} {fusion id_auteur}>
+                                    #SET{commentes, #GET{commentes}|plus{1}}
+                                </BOUCLE_affectationcommentes>
+                            </BOUCLE_affectationtotal>
                             <tr class="relecteur" data-relecteur="#ID_AUTEUR" data-articles=";<BOUCLE_allarticles(IDM_RELECTURE) {id_auteur=#ID_AUTEUR} {action=affected}>#ID_ARTICLE;</BOUCLE_allarticles>" data-origin-state="disponible">
                                 <td class="hidden">#NOM</td>
                                 <td data-filter="texte">
@@ -73,12 +88,12 @@
                                         [<span><b>Email :</b> <a href="mailto:#EMAIL">(#EMAIL)</a></span><br>]
                                         [<span><b>Commentaire :</b> (#COMMENT)</span><br>]
                                         [<span><b>Dernière relecture :</b> (#QUAND)</span><br>]
-                                        <span><b>Taux de lecture :</b> [(#LUS|mult{100}|div{#COMBIEN}|arrondi)]% (#LUS/#COMBIEN)</span><br>
-                                        <span><b>Commentaires rédigés :</b> #COMMENTS</span><br>
+                                        <span><b>Taux de lecture :</b> [(#GET{lus}|mult{100}|div{#GET{affectes}}|arrondi)]% (#GET{lus}/#GET{affectes})</span><br>
+                                        <span><b>Commentaires rédigés :</b> #GET{commentes}</span><br>
                                     </div>
                                 </td>
                                 <td class="disponibles-only"><span data-filter="texte">#CATEGORIE</td>
-                                <td class="disponibles-only"><span data-filter="tx_lecture">[(#LUS|mult{100}|div{#COMBIEN}|arrondi)]</span>% lus (<span data-filter="nb_lectures">#LUS</span>/#COMBIEN)<br>#COMMENTS commentaires</td>
+                                <td class="disponibles-only"><span data-filter="tx_lecture">[(#GET{lus}|mult{100}|div{#GET{affectes}}|arrondi)]</span>% lus (<span data-filter="nb_lectures">#GET{lus}</span>/#GET{affectes})<br>#GET{commentes}&nbsp;commentaires</td>
                                 <td class="disponibles-only" data-filter="nb_relectures"><BOUCLE_encours(IDM_RELECTEURS spip_auteurs spip_relecteurs_articles spip_articles) {id_auteur=#ID_AUTEUR} {!statut='publie'}><!-- [(#ID_ARTICLE)] --></BOUCLE_encours>#TOTAL_BOUCLE</B_encours>0<//B_encours></td>
                                 <td class="text-right"><span onclick="add_relecteur(#ID_ARTICLE, #ID_AUTEUR)" class="button small relecteur-add disponibles-only" title="Ajouter à la liste">&#9658;</span><span onclick="remove_relecteur(#ID_ARTICLE, #ID_AUTEUR)" class="button small relecteur-remove affectes-only" title="Supprimer de la liste">&#9668;</a></td>
                             </tr>
@@ -100,7 +115,22 @@
                     <table class="liste-relecteurs-affectes sortable" style="font-size : 90%">
                         <thead><tr><th></th><th></th><th></th><th></th></tr></thead>
                         <tbody>
-                            <BOUCLE_relecteursaffectes(RELECTEURS_ARTICLES spip_idm_relecteurs spip_auteurs) {id_article} {par nom}>
+                            <BOUCLE_relecteursaffectes(spip_idm_relecture spip_auteurs) {spip_idm_relecture.id_article=#ID_ARTICLE} {action=affected} {par nom} {fusion id_auteur}>
+                            #SET{affectes, 0}
+                            #SET{lus, 0}
+                            #SET{non_lus, 0}
+                            #SET{commentes, 0}
+                            <BOUCLE_affectatestotal(spip_idm_relecture) {id_auteur} {action=affected} {fusion id_article}>
+                                #SET{affectes, #GET{affectes}|plus{1}}
+                                #SET{non_lus, #GET{non_lus}|plus{1}}
+                                <BOUCLE_affectateslus(spip_idm_relecture) {id_article} {action=read} {id_auteur=#_affectatestotal:ID_AUTEUR} {fusion id_auteur}>
+                                    #SET{lus, #GET{lus}|plus{1}}
+                                    #SET{non_lus, #GET{non_lus}|moins{1}}
+                                </BOUCLE_affectateslus>
+                                <BOUCLE_affectatescommentes(spip_idm_relecture) {id_article} {action=read} {id_auteur=#_affectatestotal:ID_AUTEUR} {fusion id_auteur}>
+                                    #SET{commentes, #GET{commentes}|plus{1}}
+                                </BOUCLE_affectatescommentes>
+                            </BOUCLE_affectatestotal>
                             <tr class="relecteur" data-relecteur="#ID_AUTEUR" data-articles=";<BOUCLE_allarticles2(IDM_RELECTURE) {id_auteur=#ID_AUTEUR} {action=affected}>#ID_ARTICLE;</BOUCLE_allarticles2>" data-origin-state="affecte">
                                 <td class="hidden">#NOM</td>
                                 <td data-filter="texte">
@@ -110,12 +140,12 @@
                                         [<span><b>Email :</b> <a href="mailto:#EMAIL">(#EMAIL)</a></span><br>]
                                         [<span><b>Commentaire :</b> (#COMMENT)</span><br>]
                                         [<span><b>Dernière relecture :</b> (#QUAND)</span><br>]
-                                        <span><b>Taux de lecture :</b> [(#LUS|mult{100}|div{#COMBIEN}|arrondi)]% (#LUS/#COMBIEN)</span><br>
-                                        <span><b>Commentaires rédigés :</b> #COMMENTS</span><br>
+                                        <span><b>Taux de lecture :</b> [(#GET{lus}|mult{100}|div{#GET{affectes}}|arrondi)]% (#GET{lus}/#GET{affectes})</span><br>
+                                        <span><b>Commentaires rédigés :</b> #GET{commentes}</span><br>
                                     </div>
                                 </td>
                                 <td class="disponibles-only"><span data-filter="texte">#CATEGORIE</td>
-                                <td class="disponibles-only"><span data-filter="tx_lecture">[(#LUS|mult{100}|div{#COMBIEN}|arrondi)]</span>% lus (<span data-filter="nb_lectures">#LUS</span>/#COMBIEN) - #COMMENTS commentaires</td>
+                                <td class="disponibles-only"><span data-filter="tx_lecture">[(#GET{lus}|mult{100}|div{#GET{affectes}}|arrondi)]</span>% lus (<span data-filter="nb_lectures">#GET{lus}</span>/#GET{affectes}) - #GET{commentes}&nbsp;commentaires</td>
                                 <td class="disponibles-only"><BOUCLE_encours2(IDM_RELECTEURS spip_auteurs spip_relecteurs_articles spip_articles) {id_auteur=#ID_AUTEUR} {!statut='publie'}><!-- [(#ID_ARTICLE)] --></BOUCLE_encours2>#TOTAL_BOUCLE</B_encours2>0<//B_encours2></td>
                                 <td class="text-right"><span onclick="add_relecteur(#ID_ARTICLE, #ID_AUTEUR)" class="button small relecteur-add disponibles-only" title="Ajouter à la liste">&#9658;</span><span onclick="remove_relecteur(#ID_ARTICLE, #ID_AUTEUR)" class="button small relecteur-remove affectes-only" title="Supprimer de la liste">&#9668;</a></td>
                                 <td class="tooltip">

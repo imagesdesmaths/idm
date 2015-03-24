@@ -73,10 +73,10 @@ $(function() {
     });
 
     /* Make relecteur tooltip to follow mouse moves */
-    $(document).on('mousemove', '.relecteur [data-filter="texte"]', function(e){
+    $(document).on('mousemove', '.relecteur [data-filter="texte"]', function(event){
         $(this).find('.tooltip').css({
-           left:  e.pageX - $(this).closest('.ajaxbloc').offset().left,
-           top:   e.pageY - $(this).closest('.ajaxbloc').offset().top + 50
+           left:  event.pageX - $(window).scrollLeft() - $(this).closest('.ajaxbloc').offset().left,
+           top:   event.pageY - $(window).scrollTop() - $(this).closest('.ajaxbloc').offset().top + 50
         });
     });
 

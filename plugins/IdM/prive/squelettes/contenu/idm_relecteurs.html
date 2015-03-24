@@ -21,17 +21,32 @@
                 <th>E-mail</th>
                 <th>Nb</th>
                 <th>Lus</th>
-                <th>Faits</th>
+                <th>Commentés</th>
               </tr>
             </thead>
             <tbody>
               <BOUCLE_relecteurs(IDM_RELECTEURS spip_auteurs) {role = relecteur} {categorie = #VALEUR}>
+                #SET{affectes, 0}
+                #SET{lus, 0}
+                #SET{non_lus, 0}
+                #SET{commentes, 0}
+                <BOUCLE_relecteurstotal(spip_idm_relecture) {id_auteur} {action=affected} {fusion id_article}>
+                    #SET{affectes, #GET{affectes}|plus{1}}
+                    #SET{non_lus, #GET{non_lus}|plus{1}}
+                    <BOUCLE_lus(spip_idm_relecture) {id_article} {action=read} {id_auteur=#_relecteurstotal:ID_AUTEUR} {fusion id_auteur}>
+                        #SET{lus, #GET{lus}|plus{1}}
+                        #SET{non_lus, #GET{non_lus}|moins{1}}
+                    </BOUCLE_lus>
+                    <BOUCLE_commentes(spip_idm_relecture) {id_article} {action=read} {id_auteur=#_relecteurstotal:ID_AUTEUR} {fusion id_auteur}>
+                        #SET{commentes, #GET{commentes}|plus{1}}
+                    </BOUCLE_commentes>
+                </BOUCLE_relecteurstotal>
                 <tr>
                   <td><span style="display:none">#NOM</span><a href="?exec=idm_relecteur&id_auteur=#ID_AUTEUR">#NOM</a></td>
                   <td><a href="mailto:#EMAIL*">#EMAIL</a></td>
-                  <td>#COMBIEN</td>
-                  <td>#LUS</td>
-                  <td>#COMMENTS</td>
+                  <td>#GET{affectes}</td>
+                  <td>#GET{lus}</td>
+                  <td>#GET{commentes}</td>
                 </tr>
               </BOUCLE_relecteurs>
             </tbody>
