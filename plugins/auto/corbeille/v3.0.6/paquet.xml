@@ -1,0 +1,24 @@
+<paquet
+	prefix="corbeille"
+	categorie="maintenance"
+	version="3.0.6"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/trash-full-32.png"
+	documentation="http://contrib.spip.net/2855"
+>	
+
+	<nom>Corbeille</nom>
+	<!-- Gestion des documents mis &#224; la corbeille -->
+
+	<auteur lien="http://www.japanim.net/">Matthieu Onfray (Japanim)</auteur>
+	<credit>adapté en plugin avec tendresse par la communauté</credit>
+
+	<copyright>2005-2014</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+
+	<pipeline nom="corbeille_table_infos" />
+
+	<menu nom="corbeille" titre="corbeille:corbeille" parent="bando_administration" icone="images/trash-full-16.png" />
+</paquet>

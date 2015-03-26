@@ -1,0 +1,56 @@
+
+<div class="formulaire_spip formulaire_editer formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id,nouveau})]">
+	<p class="explication message_saisies_modifiees"><strong><:saisies:construire_attention_enregistrer:></strong></p>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	[(#ENV*{message_erreur}|non)
+	<div class="ajax">
+		#FORMULAIRE_CONSTRUIRE_FORMULAIRE{#ENV{saisie_id}, #ENV{_saisies}}
+	</div>
+	]
+
+	[(#ENV{editable}|oui)
+	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<p class="boutons">
+			<span class='image_loading'></span>
+
+			[(#ENV*{message_erreur}|oui)
+			<input type='submit' class='submit' name="annulation" value='<:bouton_annuler|attribut_html:>' />
+			<input type='submit' class='submit' name="enregistrer_confirmation" value='<:bouton_enregistrer|attribut_html:>' />
+			]
+			[(#ENV*{message_erreur}|non)
+			<input type='submit' class='submit revert' name="revert" value='<:formidable:bouton_revert_formulaire|attribut_html:>'
+			       onclick="return confirm('<:saisies:construire_reinitialiser_confirmer:>')" />
+			<input type='submit' class='submit' name="enregistrer" value='<:bouton_enregistrer|attribut_html:>' />
+			]
+
+		</p>
+	</div></form>
+	]
+</div>
+<style>
+	.formulaire_edit .formulaire_editer_formulaire_champs .message_reinitialiser,
+	.formulaire_edit .formulaire_editer_formulaire_champs #reinitialiser {display: none;}
+
+	.formulaire_spip .message_saisies_modifiees,input.revert {display: none;}
+	.modifie .message_saisies_modifiees,.modifie input.revert {display: block;}
+</style>
+<script type="text/javascript">
+	function update_modif_saisies(){
+		var is_modified = jQuery('.formulaire_[(#ENV{form})] .formulaire_construire_formulaire').is('.modifie');
+		if (is_modified)
+			jQuery('.formulaire_#ENV{form}').addClass('modifie');
+		else
+			jQuery('.formulaire_#ENV{form}').removeClass('modifie');
+	}
+	jQuery(function(){
+		update_modif_saisies();
+		onAjaxLoad(update_modif_saisies);
+		jQuery('.formulaire_[(#ENV{form})] .formulaire_construire_formulaire').bind('modifsaisies',update_modif_saisies);
+	});
+</script>

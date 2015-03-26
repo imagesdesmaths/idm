@@ -1,0 +1,70 @@
+[(#REM)
+
+Mail HTML simplifie mis en forme complete par le filtre |facteur_email_wrap_to_html
+
+
+]
+<title>[[(#NOM_SITE_SPIP|textebrut)]] [<:forum:forum_forum:>][ (#TITRE|nettoyer_titre_email)]</title>
+
+<intro>[*SPAM*(#STATUT|=={spam}|oui)][(#TEXTE|safehtml|couper{100})] | </intro>
+
+<body>
+	<div class="header">
+		[<p><strong><:forum:titre_cadre_forum_interne:></strong></p>(#STATUT|=={privrac}|oui)]
+		[<p><strong><:forum:titre_cadre_forum_administrateur:></strong></p>(#STATUT|=={priadm}|oui)]
+		[
+		(#ENV{indiquer_email_auteur,oui}|=={non}|?{#ENV{par_auteur}|replace{'&lt;.+&gt; ','','U'},#ENV{par_auteur}})
+		<br />]
+		[<a href="(#ENV{url_site})">[(#NOM_SITE|sinon{#ENV{url_site}})]</a>]
+		<hr/>
+	</div>
+	<h2>[<b>(SPAM)</b>(#STATUT|=={spam}|oui)]#TITRE</h2>
+	[
+	(#TEXTE|safehtml)
+	]
+	<B_doc>
+		<h4>[(#TOTAL_BOUCLE|singulier_ou_pluriel{medias:un_document,medias:des_documents})]</h4>
+		<ul>
+		<BOUCLE_doc(DOCUMENTS){id_forum}>
+			<li>
+				<a href="[(#URL_DOCUMENT|url_absolue)]">#URL_DOCUMENT</a>
+				<br /><small>([<abbr title="<:info_document:> #TYPE_DOCUMENT" class="ext">(#EXTENSION|strtoupper)</abbr> - ][<span>(#TAILLE|taille_en_octets)</span>])</small>
+			</li>
+		</BOUCLE_doc>
+		</ul>
+	</B_doc>
+
+	<div class="footer">
+		<hr/>
+		<h3><:notifications:titre_moderation:></h3>
+		<p>
+		[
+		(#STATUT|=={publie}|oui)<:forum:forum_ne_repondez_pas:>][
+		(#STATUT|=={prop}|oui)<:notifications:message_a_valider:>][
+		(#STATUT|=={spam}|oui)<:notifications:message_spam_a_confirmer:>][
+		<a href="(#ENV{url}|url_absolue)">[(#ENV{url}|url_absolue)]</a>]
+		<br />
+		<br />
+		</p>
+
+		[(#ENV{url_moderer_publie}|ou{#ENV{url_moderer_off}}|ou{#ENV{url_moderer_spam}})
+		<div style="text-align:center;"><center>
+		[(#ENV{url_moderer_publie}|oui)<span style="display: inline-block;margin-bottom: 1em">[(#INCLURE{fond=emails/inc-button,url=#ENV{url_moderer_publie},label=<:notifications:info_lien_publier_commentaire:>,bgcolor=#96A05B})]</span>]
+		[(#ENV{url_moderer_off}|oui)<span style="display: inline-block;margin-bottom: 1em">[(#INCLURE{fond=emails/inc-button,url=#ENV{url_moderer_off},label=<:notifications:info_lien_supprimer_commentaire:>,bgcolor=#BE4848})]</span>]
+		[(#ENV{url_moderer_spam}|oui)<span style="display: inline-block;margin-bottom: 1em">[(#INCLURE{fond=emails/inc-button,url=#ENV{url_moderer_spam},label=<:notifications:info_lien_signaler_spam_commentaire:>,bgcolor=#666666})]</span>]
+		</center></div>
+		]
+
+		[<p><strong><:forum:info_liens_texte:>&nbsp;:</strong><br />(#LIENS)</p>]
+
+
+		[
+		<br />
+		(#CONFIG{notifications/suivi}|oui)
+		[<p><a href="(#ENV{notification_email}|notifications_url_suivi)"><:notifications:suivi_texte_acces_page:></a></p>]
+		]
+	</div>
+
+</body>
+
+#FILTRE{facteur_email_wrap_to_html}

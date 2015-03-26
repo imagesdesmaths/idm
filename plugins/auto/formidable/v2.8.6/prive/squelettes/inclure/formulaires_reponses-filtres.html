@@ -1,0 +1,9 @@
+<div class='onglets_simple clearfix'>
+	<ul>
+		<li>[(#SELF|parametre_url{statut|id_formulaires_reponse,'XXX'}|replace{XXX,''}|lien_ou_expose{<:formidable:info_reponse_toutes:>,[(#ENV{statut}|non|et{#ENV{id_formulaires_reponse,''}|non})],ajax})]</li>
+		<li>[(#SELF|parametre_url{statut,'prop'}|lien_ou_expose{<:formidable:info_reponse_proposees:>,#ENV{statut}|=={prop},ajax})]</li>
+		<li>[(#SELF|parametre_url{statut,'publie'}|lien_ou_expose{<:formidable:info_reponse_publiees:>,#ENV{statut}|=={publie},ajax})]</li>
+		<li>[(#SELF|parametre_url{statut,'refuse'}|lien_ou_expose{<:formidable:info_reponse_supprimees:>,#ENV{statut}|=={refuse},ajax})]</li>
+	</ul>
+</div>
+<INCLURE{fond=prive/objets/liste/formulaires_reponses, env, ajax, nb=#ENV{nb,30}, sinon=<:formidable:info_aucune_reponse:>} />

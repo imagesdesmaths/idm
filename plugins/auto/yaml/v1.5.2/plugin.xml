@@ -1,0 +1,19 @@
+<plugin>
+	<nom>YAML</nom>
+	<slogan>Un format de fichier simple pour &#233;diter des listes de donn&#233;es.</slogan>
+	<auteur>format d&#233;fini par yaml.org, librairie php d&#233;velopp&#233;e par Fabien Potencier pour Symfony</auteur>
+	<licence>MIT</licence>
+	<version>1.5.2</version>
+	<etat>stable</etat>
+	<description>
+	Ce plugin fournit les fonctions de lecture/&#233;criture du format YAML.
+	<code>yaml_decode()</code> et <code>yaml_encode()</code>. Il fournit aussi le format yaml pour la boucle (DATA).
+	</description>
+	<prefix>YAML</prefix>
+	<lien>http://contrib.spip.net/Le-plugin-YAML</lien>
+	<icon>yaml.png</icon>
+	<fonctions>yaml_fonctions.php</fonctions>
+	<necessite id="SPIP" version="[2.0.10;3.1.99]" />
+	<categorie>outil</categorie>
+	<chemin dir='' />
+</plugin>

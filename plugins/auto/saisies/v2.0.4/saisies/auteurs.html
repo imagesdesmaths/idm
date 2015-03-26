@@ -1,0 +1,44 @@
+[(#REM)
+
+	Todo:
+			Faire fonctionner les images de statut avec SPIP 3...
+			Elles sont dans [(#CHEMIN_IMAGE{auteur-1comite-16.png})]
+	
+  Parametres :
+  - class : classe(s) css ajoutes au select
+  - multiple : si quelquechose est passe, le select est multiple, sinon, c'est un select simple
+  	Dans le cas multiple, defaut et valeur doivent etre un array, sinon un int
+  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+    (seulement si non multiple)
+  - option_statut: si quelque chose est passe on insere un bonhomme de statut a cote du nom, sinon rien
+    (defaut = rien)
+  - cacher_option_intro : pas de premier option vide  (defaut:"")
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - tri : trier la liste (par défaut par nom), la valeur peut être un tableau [(#ARRAY{statut,nom})] ou une chaine "nom"
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+  - webmestre : si oui, ne selectionne que les webmestres
+  
+  Exemple d'appel :
+	[(#SAISIE{auteurs,auteurs_site,
+		label=<:plugin:auteurs_du_site:>,
+		multiple=oui
+		statut=0minirezo})]
+]
+#SET{bonhomme_statut,#ARRAY}
+[(#ENV{option_statut}|oui)
+	#SET{bonhomme_statut, #ARRAY{0minirezo, admin-12.gif, 1comite, redac-12.gif, 6forum, visit-12.gif}}
+]
+[(#ENV{multiple}|oui)
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+]
+<select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"][ (#ENV*{attributs})]>
+	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
+		<option value="">[(#ENV{option_intro})]</option>]
+	<BOUCLE_auteurs(AUTEURS){statut ?}{statut != 5poubelle}{webmestre ?}{par #ENV{tri,#ARRAY{num nom, nom}}|is_array|?{#ENV{tri,#ARRAY{num nom, nom}}|implode{','},#ENV{tri,#ARRAY{num nom, nom}}}}{tout}>
+		#SET{image_statut, #GET{bonhomme_statut/#STATUT}}
+		[(#ENV{multiple}|oui)
+		<option value="#ID_AUTEUR"[(#ID_AUTEUR|in_array{#ENV{valeur_forcee,#GET{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"][(#GET{image_statut}|oui)[style="background:url((#CHEMIN{prive/images/#GET{image_statut}})) no-repeat left; padding-left: 20px;"]]>#NOM</option>]
+		[(#ENV{multiple}|non)
+		<option value="#ID_AUTEUR"[(#ID_AUTEUR|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"][(#GET{image_statut}|oui)[style="background:url((#CHEMIN{prive/images/#GET{image_statut}})) no-repeat left; padding-left: 20px;"]]>#NOM</option>]
+	</BOUCLE_auteurs>
+</select>

@@ -1,0 +1,33 @@
+<BOUCLE_formulaires_reponse(FORMULAIRES_REPONSES){tout}{id_formulaires_reponse}>
+<BOUCLE_autoriser(CONDITION){si #AUTORISER{voir, formulaires_reponse, #ID_FORMULAIRE}}>
+[(#BOITE_OUVRIR{
+	<h1><:formulaires_reponse:formulaires_reponse_numero{nb=#ID_FORMULAIRES_REPONSE}:></h1>
+,simple fiche_objet})]
+
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/formulaires_reponse,
+	id=#ID_FORMULAIRES_REPONSE,
+	id_formulaires_reponse=#ID_FORMULAIRES_REPONSE,
+	virtuel=oui,ajax=wysiwyg,wysiwyg=1} />
+</div>
+
+<div class='nettoyeur'></div>
+[(#BOITE_OUVRIR{<h3><:formulaires_reponse:reponses_donnees:></h3>,reponses})]
+#INCLURE{fond=modeles/formulaires_reponse,id_formulaires_reponse}
+#BOITE_FERMER
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,formulaires_reponse,id,#ID_FORMULAIRES_REPONSE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+#SET{enfants,''}
+[(#VAL{formulaires_reponse}|concat{-enfants}|trouver_fond{prive/objets/contenu/}|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/formulaires_reponse-enfants,id_objet,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,formulaires_reponse,objet,formulaires_reponse,id_objet,#ID_FORMULAIRES_REPONSE},data,#GET{enfants}})]})]
+
+</BOUCLE_autoriser>
+</BOUCLE_formulaires_reponse>

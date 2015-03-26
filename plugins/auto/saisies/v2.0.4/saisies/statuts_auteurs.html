@@ -1,0 +1,43 @@
+[(#REM)
+
+  Parametres :
+  - class : classe(s) css ajoutes au select
+  - multiple : si quelquechose est passe, le select est multiple, sinon, c'est un select simple
+  	Dans le cas multiple, defaut et valeur doivent être un array, sinon un int
+  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+    (seulement si non multiple)
+  - cacher_option_intro : pas de premier option vide  (defaut:"")
+  - afficher_tous : permet d'afficher une option de valeur "tous" correspondant à tous les utilisateurs
+  - poubelle : permet d'afficher le statut poubelle
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+  - size : dans le cas d'un select multiple, limite le nombre de lignes au chiffre passé
+  
+  Exemple d'appel :
+	[(#SAISIE{statuts_auteurs,statuts,
+		label=<:plugin:statuts_des_auteurs:>,
+		multiple=oui})]
+]
+
+<select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="[(#ENV{size,#ENV{afficher_tous}|?{4,3}})]"][ disabled="(#ENV{disable})"][ (#ENV*{attributs})]>
+	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
+		<option value="">[(#ENV{option_intro})]</option>]
+	[(#ENV{multiple}|oui)
+		<option value="0minirezo"[(#VAL{0minirezo}|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]><:info_administrateurs:></option>
+		<option value="1comite"[(#VAL{1comite}|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]><:info_redacteurs:></option>
+		<option value="6forum"[(#VAL{6forum}|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]><:info_visiteurs:></option>
+		[(#ENV{poubelle}|oui)
+		<option value="5poubelle"[(#VAL{5poubelle}|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]><:texte_statut_poubelle:></option>]
+		[(#ENV{afficher_tous}|oui)
+		<option value="tous"[(#VAL{tous}|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]><:saisies:tous_visiteurs:></option>]	]
+	[(#ENV{multiple}|non)
+		<option value="0minirezo"[(#VAL{0minirezo}|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]><:info_administrateurs:></option>
+		<option value="1comite"[(#VAL{1comite}|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]><:info_redacteurs:></option>
+		<option value="6forum"[(#VAL{6forum}|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]><:info_visiteurs:></option>
+		[(#ENV{poubelle}|oui)
+			<option value="5poubelle"[(#VAL{5poubelle}|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]><:texte_statut_poubelle:></option>]
+		[(#ENV{afficher_tous}|oui)
+		<option value="tous"[(#VAL{tous}|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]><:saisies:tous_visiteurs:></option>]
+	]
+</select>
+

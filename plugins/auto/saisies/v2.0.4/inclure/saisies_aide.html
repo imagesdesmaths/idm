@@ -1,0 +1,65 @@
+
+Sauter à : <a href="#liste_saisies">Toutes les saisies</a>, <a href="#liste_options_saisies">Toutes les options</a>
+
+<h2 class="h2 spip">Utilisation des options</h2>
+<B_options_tableau>
+<div style="overflow:auto;">
+<table class="spip">
+<thead>
+	<tr class="first_row">
+		<th>Options \ Saisies</th>
+		<BOUCLE_saisies_tableau_th(POUR){tableau #ENV{saisies}}>
+		<th><a href="#saisie_#CLE">#CLE</a></th>
+		</BOUCLE_saisies_tableau_th>
+	</tr>
+</thead>
+<tbody>
+	<BOUCLE_options_tableau(DATA){source tableau, #ENV{options}}>
+	<tr class="tr_liste [(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+		<th><a href="#option_#CLE">#CLE</a></th>
+		<BOUCLE_saisies_tableau(DATA){source tableau, #ENV{saisies}}>
+		<td>[(#CLE|in_array{#_options_tableau:UTILISEE_PAR}|?{'X','-'})]</td>
+		</BOUCLE_saisies_tableau>
+	</tr>
+	</BOUCLE_options_tableau>
+</tbody>
+</table>
+</div>
+</B_options_tableau>
+
+<h2 class="h2 spip" id="liste_saisies">Toutes les saisies</h2>
+<BOUCLE_saisies(DATA){source tableau, #ENV{saisies}}>
+<h3 class="h3 spip" id="saisie_#CLE">#TITRE (#CLE)</h3>
+<p class="description">
+	<strong>Description :</strong> #DESCRIPTION
+</p>
+<p class="options">
+	<strong>Options :</strong>
+	<BOUCLE_options_saisie(DATA){source tableau, #OPTIONS}{", "}><a href="#option_#CLE">#CLE</a></BOUCLE_options_saisie>
+</p>
+</BOUCLE_saisies>
+
+<h2 class="h2 spip" id="liste_options_saisies">Toutes les options</h2>
+<BOUCLE_options(DATA){source tableau, #ENV{options}}>
+[(#SET{label, #LABEL|sinon{#LABEL_CASE}})]
+<h3 class="h3 spip" id="option_#CLE">[(#GET{label}|?{#GET{label} [ ((#CLE))], #CLE})]</h3>
+[<p class="description">
+	<strong>Description :</strong> (#EXPLICATION|sinon{#LABEL|?{#LABEL_CASE}})
+</p>]
+<B_utilisee_par>
+<p class="utilisee_par">
+	<strong>Utilisée par :</strong>
+	<BOUCLE_utilisee_par(DATA){source tableau, #UTILISEE_PAR}{", "}><a href="#saisie_#VALEUR">#VALEUR</a></BOUCLE_utilisee_par>
+</p>
+</B_utilisee_par>
+<B_choix>
+<p class="choix_possibles">
+	<strong>Choix possibles :</strong>
+	<ul class="spip">
+		<BOUCLE_choix(DATA){source tableau, #DATAS}>
+		<li>"#CLE" : #VALEUR</li>
+		</BOUCLE_choix>
+	</ul>
+</p>
+</B_choix>
+</BOUCLE_options>

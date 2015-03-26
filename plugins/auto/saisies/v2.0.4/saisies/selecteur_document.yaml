@@ -1,0 +1,59 @@
+titre: '<:saisies:saisie_selecteur_document_titre:>'
+description: '<:saisies:saisie_selecteur_document:>'
+icone: 'images/saisies_selecteur_article.png'
+options:
+ -
+   saisie: 'fieldset'
+   options:
+     nom: 'description'
+     label: '<:saisies:option_groupe_description:>'
+   saisies:
+     -
+       saisie: 'input'
+       options:
+         nom: 'label'
+         label: '<:saisies:option_label_label:>'
+         explication: '<:saisies:option_label_explication:>'
+         size: 50
+     -
+       saisie: 'input'
+       options:
+         nom: 'explication'
+         label: '<:saisies:option_explication_label:>'
+         explication: '<:saisies:option_explication_explication:>'
+         size: 50
+ -
+   saisie: 'fieldset'
+   options:
+     nom: 'affichage'
+     label: '<:saisies:option_groupe_affichage:>'
+   saisies:
+     -
+       saisie: 'input'
+       options:
+         nom: 'attention'
+         label: '<:saisies:option_attention_label:>'
+         explication: '<:saisies:option_attention_explication:>'
+         size: 50
+     -
+       saisie: 'input'
+       options:
+         nom: 'info_obligatoire'
+         label: '<:saisies:option_info_obligatoire_label:>'
+         explication: '<:saisies:option_info_obligatoire_explication:>'
+ -
+   saisie: 'fieldset'
+   options:
+     nom: 'obligatoire'
+     label: '<:saisies:option_groupe_validation:>'
+   saisies:
+     -
+       saisie: 'oui_non'
+       options:
+         nom: 'obligatoire'
+         label: '<:saisies:option_obligatoire_label:>'
+defaut:
+ options:
+   label: '<:saisies:saisie_selecteur_document_titre:>'
+   # champs extras (definition du champ sql)
+   sql: "text DEFAULT '' NOT NULL"

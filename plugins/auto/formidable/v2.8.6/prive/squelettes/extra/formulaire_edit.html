@@ -1,0 +1,11 @@
+<BOUCLE_formulaire(FORMULAIRES) {id_formulaire}{tout}>
+#SET{configurer,#ENV{configurer}|in_array{#LISTE{formulaire,champs,traitements,auteurs}}|?{#ENV{configurer},champs}}
+
+<!--#extra-->
+[(#GET{configurer}|in_array{#LISTE{formulaire,traitements,champs}}|oui)
+#BOITE_OUVRIR{'','info'}
+	#INCLURE{fond=modeles/formulaire_aide_memoire, id_formulaire=#ID_FORMULAIRE}
+#BOITE_FERMER
+]
+<!--/#extra-->
+</BOUCLE_formulaire>
