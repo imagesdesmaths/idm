@@ -32,7 +32,7 @@
         <a href="#commentaires" class="comments-top">Voir les commentaires <B_forums>(#COMPTEUR_BOUCLE)<BOUCLE_forums(FORUMS){id_article}><!-- --></BOUCLE_forums></a>
 
         [(#VARMODE|=={"preview"}|oui)
-            <p class="alert">Vous êtes en mode Pévisualisation.<a href="#URL_ECRIRE{article,id_article=#ID_ARTICLE}" class="right">Retourner à l'article</a></p>
+            <p class="alert">Vous êtes en mode Prévisualisation.<a href="#URL_ECRIRE{article,id_article=#ID_ARTICLE}" class="right">Retourner à l'article</a></p>
         ]
 
         #SET{image_url, IMG/#LOGO_ARTICLE|fichier}
