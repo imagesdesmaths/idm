@@ -145,11 +145,6 @@ class IdmIndexer
                     $type = 'tribune';
                 }
 
-                $row = array_map(function($r) {
-                    $r = utf8_encode($r);
-                    return $r;
-                }, $row);
-
                 $status = $this->sherlockindexer->addDocument($type, $row['id_article'], array(
                     'url' => $row['url'],
                     'titre' => $row['titre'],
