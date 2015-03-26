@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '1.1.9'); // 2014-03-13
+define('_ECRAN_SECURITE', '1.2.2'); // 2014-12-01
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -26,8 +26,10 @@ if (!defined('_IS_BOT'))
 		AND preg_match(
 	    // mots generiques
 	    ',bot|slurp|crawler|spider|webvac|yandex|'
+	    // MSIE 6.0 est un botnet 99,9% du temps, on traite donc ce USER_AGENT comme un bot
+	    . 'MSIE 6\.0|'
 	    // UA plus cibles
-	    . '80legs|accoona|AltaVista|ASPSeek|Baidu|Charlotte|EC2LinkFinder|eStyle|Google|INA dlweb|Java VM|LiteFinder|Lycos|Rambler|Scooter|ScrubbyBloglines|Yahoo|Yeti'
+	    . '80legs|accoona|AltaVista|ASPSeek|Baidu|Charlotte|EC2LinkFinder|eStyle|Google|Genieo|INA dlweb|InfegyAtlas|Java VM|LiteFinder|Lycos|Rambler|Scooter|ScrubbyBloglines|Yahoo|Yeti'
 	    . ',i',(string) $_SERVER['HTTP_USER_AGENT'])
 	);
 
@@ -36,15 +38,19 @@ if (!defined('_IS_BOT'))
  * soit pas numérique (ce qui bloque l'exploitation de divers trous
  * de sécurité, dont celui de toutes les versions < 1.8.2f)
  * (sauf pour id_table, qui n'est pas numérique jusqu'à [5743])
+ * (id_base est une variable de la config des widgets de WordPress)
  */
 foreach ($_GET as $var => $val)
-	if ($_GET[$var] AND strncmp($var,"id_",3)==0 AND $var!='id_table')
+	if ($_GET[$var] AND strncmp($var,"id_",3)==0
+	AND !in_array($var, array('id_table','id_base')))
 		$_GET[$var] = is_array($_GET[$var])?@array_map('intval',$_GET[$var]):intval($_GET[$var]);
 foreach ($_POST as $var => $val)
-	if ($_POST[$var] AND strncmp($var,"id_",3)==0 AND $var!='id_table')
+	if ($_POST[$var] AND strncmp($var,"id_",3)==0
+	AND !in_array($var, array('id_table','id_base')))
 		$_POST[$var] = is_array($_POST[$var])?@array_map('intval',$_POST[$var]):intval($_POST[$var]);
 foreach ($GLOBALS as $var => $val)
-	if ($GLOBALS[$var] AND strncmp($var,"id_",3)==0 AND $var!='id_table')
+	if ($GLOBALS[$var] AND strncmp($var,"id_",3)==0
+	AND !in_array($var, array('id_table','id_base')))
 		$GLOBALS[$var] = is_array($GLOBALS[$var])?@array_map('intval',$GLOBALS[$var]):intval($GLOBALS[$var]);
 
 /*
@@ -223,6 +229,15 @@ if (count($_FILES)){
 		 AND preg_match(',\.php,i',$v['name']))
 		 	unset($_FILES[$k]);
 	}
+}
+/*
+ * et Contact trop laxiste avec une variable externe
+ * on bloque pas le post pour eviter de perdre des donnees mais on unset la variable et c'est tout
+ */
+if (isset($_REQUEST['pj_enregistrees_nom']) AND $_REQUEST['pj_enregistrees_nom']){
+	unset($_REQUEST['pj_enregistrees_nom']);
+	unset($_GET['pj_enregistrees_nom']);
+	unset($_POST['pj_enregistrees_nom']);
 }
 
 /*
