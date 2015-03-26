@@ -9,7 +9,7 @@ define ('_ID_WEBMESTRES', '1:41:2532:2494');
 #define ('_SPIP_LOCK_MODE', 0);
 #define ('_LOG_FILTRE_GRAVITE', 7);
 
-// ini_set('display_errors', '1');
+ini_set('display_errors', '0');
 
 $GLOBALS['dossier_squelettes'] = 'squelettes-custom';
 $GLOBALS['elasticsearch_config'] = array(
