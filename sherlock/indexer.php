@@ -1,5 +1,18 @@
 <?php
 
+define("_ECRIRE_INC_VERSION","fake");
+function spip_connect_db ($host,$port,$user,$pass,$db) {
+    echo "$host:$port $user($pass) $db\n";
+    $GLOBALS['db_config'] = array (
+        "type" => "mysql",
+        "host" => $host,
+        "name" => $db,
+        "user" => $user,
+        "pass" => $pass
+    );
+}
+include_once dirname(__FILE__).'/../config/connect.php';
+
 include_once dirname(__FILE__).'/../config/mes_options.php';
 include_once dirname(__FILE__).'/../framework-jin/jin/launcher.php';
 

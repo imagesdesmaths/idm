@@ -13,8 +13,8 @@ define ('_ID_WEBMESTRES', '1:41:2532:2494');
 
 $GLOBALS['dossier_squelettes'] = 'squelettes-custom';
 $GLOBALS['elasticsearch_config'] = array(
-    'host' => '',
-    'index' => '',
+    'host' => 'localhost',
+    'index' => 'idm',
     'port' => 9200,
     'debug' => false,
     'pagin' => 10
