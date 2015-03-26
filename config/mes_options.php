@@ -5,7 +5,7 @@ include realpath(dirname(__FILE__)) .'/../framework-jin/jin/launcher.php';
 
 date_default_timezone_set('Europe/Paris');
 ini_set('date.timezone','Europe/Paris');
-define ('_ID_WEBMESTRES', '1:41');
+define ('_ID_WEBMESTRES', '1:41:2532:2494');
 #define ('_SPIP_LOCK_MODE', 0);
 #define ('_LOG_FILTRE_GRAVITE', 7);
 
