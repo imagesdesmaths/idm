@@ -34,6 +34,8 @@ var confirm_changer_statut = '<:confirm_changer_statut|html2unicode|addslashes|u
 (#REM) Favicon
 -->][<link rel="shortcut icon" href="(#CHEMIN{spip.ico}|url_absolue)" type="image/x-icon" />]
 
+[<link rel="stylesheet" type="text/css" href="(#CHEMIN{plugins/IdM/prive/squelettes/css/app.css}|url_absolue)" />]
+
 <link rel="alternate" type="application/rss+xml" title="[(#NOM_SITE_SPIP|attribut_html)]" href="#URL_PAGE{backend}" />
 <link rel="help" type="text/html" title="<:icone_aide_ligne|attribut_html:>" href="#URL_PAGE{aide,var_lang=#LANG}" />
 [(#CONFIG{activer_breves}|=={non}|non)
@@ -44,3 +46,4 @@ var confirm_changer_statut = '<:confirm_changer_statut|html2unicode|addslashes|u
 [<script type="text/javascript" src="(#CHEMIN{prive/javascript/layer.js})"></script>]
 [<script type="text/javascript" src="(#CHEMIN{prive/javascript/presentation.js})"></script>]
 [<script type="text/javascript" src="(#CHEMIN{prive/javascript/gadgets.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{plugins/IdM/prive/squelettes/js/app.js}|url_absolue)"></script>]
