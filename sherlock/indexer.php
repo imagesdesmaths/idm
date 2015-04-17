@@ -2,7 +2,7 @@
 
 define("_ECRIRE_INC_VERSION","fake");
 function spip_connect_db ($host,$port,$user,$pass,$db) {
-    echo "$host:$port $user($pass) $db\n";
+#    echo "$host:$port $user($pass) $db\n";
     $GLOBALS['db_config'] = array (
         "type" => "mysql",
         "host" => $host,
@@ -61,7 +61,7 @@ class IdmIndexer
 
                 // Connexion à la base de données
                 try{
-                    $this->dbcon = new PDO($GLOBALS['db_config']['type'].":host=".$GLOBALS['db_config']['host'].";dbname=".$GLOBALS['db_config']['name'], $GLOBALS['db_config']['user'], $GLOBALS['db_config']['pass']);
+                    $this->dbcon = new PDO($GLOBALS['db_config']['type'].":host=".$GLOBALS['db_config']['host'].";dbname=".$GLOBALS['db_config']['name'].";charset=utf8", $GLOBALS['db_config']['user'], $GLOBALS['db_config']['pass']);
                     $this->dbcon->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                     $this->initialized = true;
