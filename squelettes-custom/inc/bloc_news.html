@@ -2,7 +2,7 @@
     <div id="slider-news">
         <a href="javascript:void();" class="previous"><i class="flaticon-arrow-left"></i></a>
         <ul>
-            <BOUCLE_actu_groupe_mots(GROUPES_MOTS) {type=Actualité importante} {0,1}>
+            <BOUCLE_actu_groupe_mots(GROUPES_MOTS) {id_groupe = 7} {0,1}>
             <BOUCLE_actu_mots(MOTS) {id_groupe}>
             <BOUCLE_actu(ARTICLES) {id_mot} {age >= 0} {par date} {inverse} {0,3}>
             [<li>
