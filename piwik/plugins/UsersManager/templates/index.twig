@@ -25,6 +25,8 @@
     </section>
 </div>
 
+{% block websiteAccessTable %}
+
 {% import 'ajaxMacros.twig' as ajax %}
 {{ ajax.errorDiv }}
 {{ ajax.loadingDiv }}
@@ -110,7 +112,7 @@
     {% import 'ajaxMacros.twig' as ajax %}
     {{ ajax.errorDiv('ajaxErrorUsersManagement') }}
     {{ ajax.loadingDiv('ajaxLoadingUsersManagement') }}
-    <div class="entityContainer" style="margin-bottom:50px;">
+    <div class="user entityContainer" style="margin-bottom:50px;">
         <table class="entityTable dataTable" id="users">
             <thead>
             <tr>
@@ -207,4 +209,6 @@
     </div>
 
 {% endif %}
+{% endblock %}
+
 {% endblock %}

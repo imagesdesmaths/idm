@@ -13,6 +13,7 @@ use Piwik\Metrics;
 
 class Archiver extends \Piwik\Plugin\Archiver
 {
+    const BROWSER_SEPARATOR = ';';
     const DEVICE_TYPE_RECORD_NAME = 'DevicesDetection_types';
     const DEVICE_BRAND_RECORD_NAME = 'DevicesDetection_brands';
     const DEVICE_MODEL_RECORD_NAME = 'DevicesDetection_models';
@@ -55,9 +56,18 @@ class Archiver extends \Piwik\Plugin\Archiver
             self::BROWSER_ENGINE_RECORD_NAME,
             self::BROWSER_VERSION_RECORD_NAME
         );
+
+        $columnsAggregationOperation = null;
+
         foreach ($dataTablesToSum as $dt) {
             $this->getProcessor()->aggregateDataTableRecords(
-                $dt, $this->maximumRows, $this->maximumRows, $columnToSort = "nb_visits");
+                $dt,
+                $this->maximumRows,
+                $this->maximumRows,
+                $columnToSort = 'nb_visits',
+                $columnsAggregationOperation,
+                $columnsToRenameAfterAggregation = null,
+                $countRowsRecursive = array());
         }
     }
 

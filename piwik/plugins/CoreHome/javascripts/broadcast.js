@@ -151,7 +151,7 @@ var broadcast = {
                 var handlerName = popoverParamParts[0];
                 popoverParamParts.shift();
                 var param = popoverParamParts.join(':');
-                if (typeof broadcast.popoverHandlers[handlerName] != 'undefined') {
+                if (typeof broadcast.popoverHandlers[handlerName] != 'undefined' && !broadcast.isLoginPage()) {
                     broadcast.popoverHandlers[handlerName](param);
                 }
             }
@@ -162,6 +162,14 @@ var broadcast = {
 
             $('.pageWrap #content:not(.admin)').empty();
         }
+    },
+
+    /**
+     * Returns if the current page is the login page
+     * @return {boolean}
+     */
+    isLoginPage: function() {
+        return !!$('body#loginPage').length;
     },
 
     /**
@@ -197,7 +205,7 @@ var broadcast = {
         // if the module is not 'Goals', we specifically unset the 'idGoal' parameter
         // this is to ensure that the URLs are clean (and that clicks on graphs work as expected - they are broken with the extra parameter)
         var action = broadcast.getParamValue('action', currentHashStr);
-        if (action != 'goalReport' && action != 'ecommerceReport') {
+        if (action != 'goalReport' && action != 'ecommerceReport' && action != 'products' && action != 'sales') {
             currentHashStr = broadcast.updateParamValue('idGoal=', currentHashStr);
         }
         // unset idDashboard if use doesn't display a dashboard

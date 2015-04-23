@@ -8,6 +8,9 @@
  */
 namespace Piwik;
 
+use Piwik\Container\StaticContainer;
+use Piwik\Intl\Data\Provider\RegionDataProvider;
+
 /**
  * Contains less commonly needed URL helper methods.
  *
@@ -72,7 +75,9 @@ class UrlHelper
     {
         static $countries;
         if (!isset($countries)) {
-            $countries = implode('|', array_keys(Common::getCountriesList(true)));
+            /** @var RegionDataProvider $regionDataProvider */
+            $regionDataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\RegionDataProvider');
+            $countries = implode('|', array_keys($regionDataProvider->getCountryList(true)));
         }
 
         return preg_replace(
@@ -226,7 +231,10 @@ class UrlHelper
         $parsedUrl = parse_url($url);
         $result = '';
         if (isset($parsedUrl['path'])) {
-            $result .= substr($parsedUrl['path'], 1);
+            if (substr($parsedUrl['path'], 0, 1) == '/') {
+                $parsedUrl['path'] = substr($parsedUrl['path'], 1);
+            }
+            $result .= $parsedUrl['path'];
         }
         if (isset($parsedUrl['query'])) {
             $result .= '?' . $parsedUrl['query'];
@@ -411,6 +419,7 @@ class UrlHelper
                             || strpos($query, sprintf('?%s=', $variableName)) !== false
 
                             // search engines with no keyword
+                            || $searchEngineName == 'Ixquick'
                             || $searchEngineName == 'Google Images'
                             || $searchEngineName == 'DuckDuckGo')
                     ) {

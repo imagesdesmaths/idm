@@ -11,12 +11,13 @@ namespace Piwik\Tracker;
 
 use Piwik\Common;
 use Piwik\Config;
-use Piwik\DataAccess\ArchiveInvalidator;
+use Piwik\Archive\ArchiveInvalidator;
 use Piwik\Date;
 use Piwik\Exception\UnexpectedWebsiteFoundException;
 use Piwik\Network\IPUtils;
 use Piwik\Piwik;
 use Piwik\Plugin\Dimension\VisitDimension;
+use Piwik\SettingsPiwik;
 use Piwik\Tracker;
 
 /**
@@ -383,10 +384,7 @@ class Visit implements VisitInterface
     protected function getSettingsObject()
     {
         if (is_null($this->userSettings)) {
-            // Note: this config settig is also checked in the InterSites plugin
-            $isSameFingerprintAcrossWebsites = (bool)Config::getInstance()->Tracker['enable_fingerprinting_across_websites'];
-
-            $this->userSettings = new Settings( $this->request, $this->getVisitorIp(), $isSameFingerprintAcrossWebsites );
+            $this->userSettings = new Settings( $this->request, $this->getVisitorIp(), SettingsPiwik::isSameFingerprintAcrossWebsites());
         }
 
         return $this->userSettings;
@@ -403,6 +401,33 @@ class Visit implements VisitInterface
         return isset($lastActionTime)
             && false !== $lastActionTime
             && ($lastActionTime > ($this->request->getCurrentTimestamp() - Config::getInstance()->Tracker['visit_standard_length']));
+    }
+
+    /**
+     * Returns true if the last action was not today.
+     * @param Visitor $visitor
+     * @return bool
+     */
+    private function wasLastActionNotToday(Visitor $visitor)
+    {
+        $lastActionTime = $visitor->getVisitorColumn('visit_last_action_time');
+
+        if (empty($lastActionTime)) {
+            return false;
+        }
+
+        $idSite   = $this->request->getIdSite();
+        $timezone = $this->getTimezoneForSite($idSite);
+
+        if (empty($timezone)) {
+            throw new UnexpectedWebsiteFoundException('An unexpected website was found, check idSite in the request');
+        }
+
+        $date = Date::factory((int) $lastActionTime, $timezone);
+        $now  = $this->request->getCurrentTimestamp();
+        $now  = Date::factory((int) $now, $timezone);
+
+        return $date->toString() !== $now->toString();
     }
 
     // is the referrer host any of the registered URLs for this website?
@@ -616,10 +641,21 @@ class Visit implements VisitInterface
      */
     public function isVisitNew(Visitor $visitor, Action $action = null)
     {
+        if (!$visitor->isVisitorKnown()) {
+            return true;
+        }
+
         $isLastActionInTheSameVisit = $this->isLastActionInTheSameVisit($visitor);
 
         if (!$isLastActionInTheSameVisit) {
             Common::printDebug("Visitor detected, but last action was more than 30 minutes ago...");
+
+            return true;
+        }
+
+        $wasLastActionYesterday = $this->wasLastActionNotToday($visitor);
+        if ($wasLastActionYesterday) {
+            Common::printDebug("Visitor detected, but last action was yesterday...");
 
             return true;
         }
@@ -629,7 +665,7 @@ class Visit implements VisitInterface
             return true;
         }
 
-        return !$visitor->isVisitorKnown();
+        return false;
     }
 
     private function markArchivedReportsAsInvalidIfArchiveAlreadyFinished()
@@ -637,20 +673,30 @@ class Visit implements VisitInterface
         $idSite = (int) $this->request->getIdSite();
         $time   = $this->request->getCurrentTimestamp();
 
+        $timezone = $this->getTimezoneForSite($idSite);
+
+        if (!isset($timezone)) {
+            return;
+        }
+
+        $date = Date::factory((int) $time, $timezone);
+
+        if (!$date->isToday()) { // we don't have to handle in case date is in future as it is not allowed by tracker
+            $invalidReport = new ArchiveInvalidator();
+            $invalidReport->rememberToInvalidateArchivedReportsLater($idSite, $date);
+        }
+    }
+
+    private function getTimezoneForSite($idSite)
+    {
         try {
             $site = Cache::getCacheWebsiteAttributes($idSite);
         } catch (UnexpectedWebsiteFoundException $e) {
             return;
         }
-        if(!isset($site['timezone'])) {
-            return;
-        }
 
-        $date = Date::factory((int) $time, $site['timezone']);
-
-        if (!$date->isToday()) { // we don't have to handle in case date is in future as it is not allowed by tracker
-            $invalidReport = new ArchiveInvalidator();
-            $invalidReport->rememberToInvalidateArchivedReportsLater($idSite, $date);
+        if (!empty($site['timezone'])) {
+            return $site['timezone'];
         }
     }
 }

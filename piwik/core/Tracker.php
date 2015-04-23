@@ -62,17 +62,14 @@ class Tracker
     public static function loadTrackerEnvironment()
     {
         SettingsServer::setIsTrackerApiRequest();
-        try {
-            $debug = (bool)TrackerConfig::getConfigValue('debug');
-        } catch(Exception $e) {
-            $debug = false;
-        }
-        $GLOBALS['PIWIK_TRACKER_DEBUG'] = $debug;
+        $GLOBALS['PIWIK_TRACKER_DEBUG'] = self::isDebugEnabled();
         PluginManager::getInstance()->loadTrackerPlugins();
     }
 
     private function init()
     {
+        $this->handleFatalErrors();
+
         \Piwik\FrontController::createConfigObject();
 
         if ($this->isDebugModeEnabled()) {
@@ -223,6 +220,16 @@ class Tracker
         }
     }
 
+    // for tests
+    public static function disconnectCachedDbConnection()
+    {
+        // code redundancy w/ above is on purpose; above disconnectDatabase depends on method that can potentially be overridden
+        if (!is_null(self::$db))  {
+            self::$db->disconnect();
+            self::$db = null;
+        }
+    }
+
     public static function setTestEnvironment($args = null, $requestMethod = null)
     {
         if (is_null($args)) {
@@ -292,4 +299,31 @@ class Tracker
         }
     }
 
+    private function handleFatalErrors()
+    {
+        register_shutdown_function(function () {
+            $lastError = error_get_last();
+            if (!empty($lastError) && $lastError['type'] == E_ERROR) {
+                Common::sendResponseCode(500);
+            }
+        });
+    }
+
+    private static function isDebugEnabled()
+    {
+        try {
+            $debug = (bool) TrackerConfig::getConfigValue('debug');
+            if ($debug) {
+                return true;
+            }
+
+            $debugOnDemand = (bool) TrackerConfig::getConfigValue('debug_on_demand');
+            if ($debugOnDemand) {
+                return (bool) Common::getRequestVar('debug', false);
+            }
+        } catch(Exception $e) {
+        }
+
+        return false;
+    }
 }

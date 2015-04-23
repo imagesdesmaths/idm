@@ -1,6 +1,8 @@
 {
     "DevicesDetection": {
+        "BrowserEngine": "Webbläsarmotor",
         "BrowserEngineDocumentation": "Detta diagram visar besökarnas webbläsare delas upp i webbläsarfamiljer. %s Den viktigaste informationen för webbutvecklare är vilken typ av renderingsmotorn deras besökare använder. Etiketterna innehåller namnen på de motorer som följt av den vanligaste webbläsaren med den motorn inom parentes.",
+        "BrowserEngines": "Webbläsarmotorer",
         "BrowserFamily": "Webbläsarfamilj",
         "Browsers": "Webbläsare",
         "BrowserVersion": "Webbläsarversion",
@@ -25,7 +27,7 @@
         "OperatingSystemFamily": "Operativsystemsfamilj",
         "OperatingSystems": "Operativsystem",
         "OperatingSystemVersions": "Nuvarande System version",
-        "PluginDescription": "Det här pluginet innehåller förlängd information om mobilverktyg, så som märke (tillvärkare), modell (modellens version), tv, konsol, smart phones, laptops och annat. Det här pluginet lägger till nya rapporter i 'Visitors > Verktyg'.",
+        "PortableMediaPlayer": "Portabel mediaspelare",
         "SmartDisplay": "Smart skärm",
         "Smartphone": "Smartphone",
         "submenu": "Utrustning",

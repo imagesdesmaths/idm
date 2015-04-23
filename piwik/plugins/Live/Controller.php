@@ -88,9 +88,9 @@ class Controller extends \Piwik\Plugin\Controller
     private function setCounters($view)
     {
         $segment = Request::getRawSegmentFromRequest();
-        $last30min = API::getInstance()->getCounters($this->idSite, $lastMinutes = 30, $segment);
+        $last30min = API::getInstance()->getCounters($this->idSite, $lastMinutes = 30, $segment, array('visits', 'actions'));
         $last30min = $last30min[0];
-        $today = API::getInstance()->getCounters($this->idSite, $lastMinutes = 24 * 60, $segment);
+        $today = API::getInstance()->getCounters($this->idSite, $lastMinutes = 24 * 60, $segment, array('visits', 'actions'));
         $today = $today[0];
         $view->visitorsCountHalfHour = $last30min['visits'];
         $view->visitorsCountToday = $today['visits'];
@@ -151,12 +151,14 @@ class Controller extends \Piwik\Plugin\Controller
                                                                                 'date'                    => false
                                                                            ));
 
+        $idSite = Common::getRequestVar('idSite', null, 'int');
+
         if (empty($nextVisits)) {
             return;
         }
 
         $view = new View('@Live/getVisitList.twig');
-        $view->idSite = Common::getRequestVar('idSite', null, 'int');
+        $view->idSite = $idSite;
         $view->startCounter = $startCounter + 1;
         $view->visits = $nextVisits;
         return $view->render();

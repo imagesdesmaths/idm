@@ -10,16 +10,17 @@ namespace Piwik\Plugin;
 
 use Piwik\API\Proxy;
 use Piwik\API\Request;
+use Piwik\Cache;
 use Piwik\CacheId;
 use Piwik\Columns\Dimension;
 use Piwik\DataTable;
+use Piwik\DataTable\Filter\Sort;
 use Piwik\Menu\MenuReporting;
 use Piwik\Metrics;
 use Piwik\Cache as PiwikCache;
 use Piwik\Piwik;
 use Piwik\Plugin\Manager as PluginManager;
 use Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
-use Piwik\Translate;
 use Piwik\WidgetsList;
 use Piwik\ViewDataTable\Factory as ViewDataTableFactory;
 use Exception;
@@ -182,6 +183,27 @@ class Report
     protected $order = 1;
 
     /**
+     * Separator for building recursive labels (or paths)
+     * @var string
+     * @api
+     */
+    protected $recursiveLabelSeparator = ' - ';
+
+    /**
+     * Default sort column. Either a column name or a column id.
+     *
+     * @var string|int
+     */
+    protected $defaultSortColumn = 'nb_visits';
+
+    /**
+     * Default sort desc. If true will sort by default desc, if false will sort by default asc
+     *
+     * @var bool
+     */
+    protected $defaultSortOrderDesc = true;
+
+    /**
      * @var array
      * @ignore
      */
@@ -196,7 +218,7 @@ class Report
         'Goals_Goals',
         'General_Visitors',
         'DevicesDetection_DevicesDetection',
-        'UserSettings_VisitorSettings',
+        'General_VisitorSettings',
         'API'
     );
 
@@ -271,6 +293,16 @@ class Report
     }
 
     /**
+     * Returns if the default viewDataTable type should always be used. e.g. the type won't be changeable through config or url params.
+     * Defaults to false
+     * @return bool
+     */
+    public function alwaysUseDefaultViewDataTable ()
+    {
+        return false;
+    }
+
+    /**
      * Here you can configure how your report should be displayed and which capabilities your report has. For instance
      * whether your report supports a "search" or not. EG `$view->config->show_search = false`. You can also change the
      * default request config. For instance you can change how many rows are displayed by default:
@@ -302,7 +334,8 @@ class Report
 
         $apiAction = $apiProxy->buildApiActionName($this->module, $this->action);
 
-        $view      = ViewDataTableFactory::build(null, $apiAction, $this->module . '.' . $this->action);
+        $view = ViewDataTableFactory::build(null, $apiAction, $this->module . '.' . $this->action);
+
         $rendered  = $view->render();
 
         return $rendered;
@@ -343,6 +376,15 @@ class Report
                                $this->order);
             }
         }
+    }
+
+    /**
+     * @ignore
+     * @see $recursiveLabelSeparator
+     */
+    public function getRecursiveLabelSeparator()
+    {
+        return $this->recursiveLabelSeparator;
     }
 
     /**
@@ -405,7 +447,7 @@ class Report
      * default metric translation for this metric using the {@hook Metrics.getDefaultMetricTranslations} event. If you
      * want to overwrite any default metric translation you should overwrite this method, call this parent method to
      * get all default translations and overwrite any custom metric translations.
-     * @return array
+     * @return array|mixed
      * @api
      */
     public function getProcessedMetrics()
@@ -549,6 +591,26 @@ class Report
         $report['order'] = $this->order;
 
         return $report;
+    }
+
+    /**
+     * @ignore
+     */
+    public function getDefaultSortColumn()
+    {
+        return $this->defaultSortColumn;
+    }
+
+    /**
+     * @ignore
+     */
+    public function getDefaultSortOrder()
+    {
+        if ($this->defaultSortOrderDesc) {
+            return Sort::ORDER_DESC;
+        }
+
+        return Sort::ORDER_ASC;
     }
 
     /**
@@ -724,7 +786,38 @@ class Report
      */
     public static function factory($module, $action)
     {
-        return ComponentFactory::factory($module, ucfirst($action), __CLASS__);
+        $listApiToReport = self::getMapOfModuleActionsToReport();
+        $api = $module . '.' . ucfirst($action);
+
+        if (!array_key_exists($api, $listApiToReport)) {
+            return null;
+        }
+
+        $klassName = $listApiToReport[$api];
+
+        return new $klassName;
+    }
+
+    private static function getMapOfModuleActionsToReport()
+    {
+        $cacheId = CacheId::pluginAware('ReportFactoryMap');
+
+        $cache = Cache::getEagerCache();
+        if ($cache->contains($cacheId)) {
+            $mapApiToReport = $cache->fetch($cacheId);
+        } else {
+            $reports = self::getAllReports();
+
+            $mapApiToReport = array();
+            foreach ($reports as $report) {
+                $key = $report->getModule() . '.' . ucfirst($report->getAction());
+                $mapApiToReport[$key] = get_class($report);
+            }
+
+            $cache->save($cacheId, $mapApiToReport);
+        }
+
+        return $mapApiToReport;
     }
 
     /**

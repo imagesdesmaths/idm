@@ -81,6 +81,7 @@ class ColumnCallbackReplace extends BaseFilter
             }
 
             foreach ($this->columnsToFilter as $column) {
+
                 // when a value is not defined, we set it to zero by default (rather than displaying '-')
                 $value = $this->getElementToReplace($row, $column);
                 if ($value === false) {
@@ -97,6 +98,11 @@ class ColumnCallbackReplace extends BaseFilter
                 $this->setElementToReplace($row, $column, $newValue);
                 $this->filterSubTable($row);
             }
+        }
+
+        if (in_array('label', $this->columnsToFilter)) {
+            // we need to force rebuilding the index
+            $table->setLabelsHaveChanged();
         }
     }
 

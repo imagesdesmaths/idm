@@ -8,8 +8,9 @@
  */
 namespace Piwik;
 
-use Piwik\Period\Factory as PeriodFactory;
+use Piwik\Container\StaticContainer;
 use Piwik\Period\Range;
+use Piwik\Translation\Translator;
 
 /**
  * Date range representation.
@@ -30,7 +31,7 @@ abstract class Period
 {
     /**
      * Array of subperiods
-     * @var \Piwik\Period[]
+     * @var Period[]
      */
     protected $subperiods = array();
     protected $subperiodsProcessed = false;
@@ -46,6 +47,11 @@ abstract class Period
     protected $date = null;
 
     /**
+     * @var Translator
+     */
+    protected $translator;
+
+    /**
      * Constructor.
      *
      * @param Date $date
@@ -54,17 +60,8 @@ abstract class Period
     public function __construct(Date $date)
     {
         $this->date = clone $date;
-    }
 
-    /**
-     * @deprecated Use Factory::build instead
-     * @param $period
-     * @param $date
-     * @return Period
-     */
-    public static function factory($period, $date)
-    {
-        return PeriodFactory::build($period, $date);
+        $this->translator = StaticContainer::get('Piwik\Translation\Translator');
     }
 
     /**

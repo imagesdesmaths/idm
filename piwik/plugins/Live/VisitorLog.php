@@ -41,13 +41,17 @@ class VisitorLog extends Visualization
             $this->requestConfig->filter_limit = 20;
         }
 
-        $this->requestConfig->filter_sort_column = 'lastActionTimestamp';
         $this->requestConfig->disable_generic_filters = true;
 
         $offset = Common::getRequestVar('filter_offset', 0);
         $limit  = Common::getRequestVar('filter_limit', $this->requestConfig->filter_limit);
 
         $this->config->filters[] = array('Limit', array($offset, $limit));
+    }
+
+    public function afterGenericFiltersAreAppliedToLoadedDataTable()
+    {
+        $this->requestConfig->filter_sort_column = 'lastActionTimestamp';
     }
 
     /**
@@ -74,6 +78,7 @@ class VisitorLog extends Visualization
         // set a very high row count so that the next link in the footer of the data table is always shown
         $this->config->custom_parameters['totalRows'] = 10000000;
         $this->config->custom_parameters['smallWidth'] = (1 == Common::getRequestVar('small', 0, 'int'));
+        $this->config->custom_parameters['hideProfileLink'] = (1 == Common::getRequestVar('hideProfileLink', 0, 'int'));
         $this->config->custom_parameters['pageUrlNotDefined'] = Piwik::translate('General_NotDefined', Piwik::translate('Actions_ColumnPageURL'));
 
         $this->config->footer_icons = array(

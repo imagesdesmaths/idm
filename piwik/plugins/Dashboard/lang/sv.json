@@ -18,7 +18,7 @@
         "Maximise": "Maximera",
         "Minimise": "Minimera",
         "NotUndo": "Du kommer inte kunna ångra den här åtgärden.",
-        "PluginDescription": "Din Webbanalys Instrumentpanel. Du kan anpassa din instrumentpanel: lägg till nya widgets, ändra ordningen på dina widgets. Varje användare har tillgång till sin egen anpassade instrumentpanel.",
+        "PluginDescription": "Ditt dashboard för webbanalys. Anpassa ditt dashboard genom att lägga till nya widgets, flytta runt dem och ändra kolumnindelning. Varje användare kan anpassa sin egen dashboard.",
         "RemoveDashboard": "Ta bort instrumentpanel",
         "RemoveDashboardConfirm": "Vill du verkligen radera instrumentpanelen \"%s\"?",
         "RenameDashboard": "Byt namn på instrumentpanelen",

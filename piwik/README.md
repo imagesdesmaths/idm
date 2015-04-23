@@ -21,6 +21,16 @@ Or in short:
 
 Piwik is released under the GPL v3 (or later) license, see [misc/gpl-3.0.txt](misc/gpl-3.0.txt)
 
+## We’re seeking a talented Software Engineer
+
+Are you looking for a new challenge? We are currently seeking a software engineer or software developer who is passionate about data processing, security, privacy, the open source and free/libre philosophy and usable interface design.
+
+[View Job Description](https://piwik.org/blog/2015/01/piwik-expanding-seeking-talented-software-engineer-new-zealand-poland/) - [Apply online](http://piwik.org/jobs/)
+
+This is for a full time position to work on the open source Piwik platform, either remotely or we can help the right candidate relocate to beautiful New Zealand (Wellington) or Poland (Wroclaw).
+
+We are grateful if you can share the job description with your friends and wider network! 
+
 ## Requirements
 
   * PHP 5.3.3 or greater
@@ -85,21 +95,11 @@ What makes Piwik unique from the competition:
 Documentation and more info on http://piwik.org
 
 
-
-## We’re seeking a talented Software Engineer
-
-Are you looking for a new challenge? We are currently seeking a software engineer or software developer who is passionate about data processing, security, privacy, the open source and free/libre philosophy and usable interface design.
-
-[View Job Description](http://piwik.org/blog/2014/05/piwik-expanding-seeking-talented-software-engineer-new-zealand-poland/) - [Apply online](http://piwik.org/jobs/)
-
-We are grateful if you can share the Job Description with your friends and colleagues. We can help the right candidate relocate to beautiful New Zealand.
-
-
 ## Code Status
 The Piwik project uses an ever-expanding comprehensive set of thousands of unit and integration tests and dozens of system [tests](https://github.com/piwik/piwik/tree/master/tests),
  running on the hosted distributed continuous integration platform Travis-CI.
 
-Build status (master branch) [![Build Status](https://travis-ci.org/piwik/piwik.svg?branch=master)](https://travis-ci.org/piwik/piwik) - Screenshot tests Build  [![Build Status](https://travis-ci.org/piwik/piwik-ui-tests.svg?branch=master)](https://travis-ci.org/piwik/piwik-ui-tests)
+Build status (master branch) [![Build Status](https://travis-ci.org/piwik/piwik.svg?branch=master)](https://travis-ci.org/piwik/piwik)
 
 Code Coverage: [![Code Coverage](https://scrutinizer-ci.com/g/piwik/piwik/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/piwik/piwik/?branch=master)
 

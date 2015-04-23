@@ -198,7 +198,9 @@ class RowEvolution
             $view->config->columns_to_display = array_keys($metrics ? : $this->graphMetrics);
         }
 
+        $view->requestConfig->request_parameters_to_modify['label'] = '';
         $view->config->show_goals = false;
+        $view->config->show_search = false;
         $view->config->show_all_views_icons = false;
         $view->config->show_active_view_icon = false;
         $view->config->show_related_reports  = false;

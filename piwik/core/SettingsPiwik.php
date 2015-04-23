@@ -9,7 +9,6 @@
 namespace Piwik;
 
 use Exception;
-use Piwik\Container\StaticContainer;
 use Piwik\Cache as PiwikCache;
 
 /**
@@ -268,21 +267,6 @@ class SettingsPiwik
     }
 
     /**
-     * If Piwik uses per-domain config file, also make tmp/ folder per-domain
-     * @param $path
-     * @return string
-     * @throws \Exception
-     *
-     * @deprecated Get the 'path.tmp' config from the container instead.
-     */
-    public static function rewriteTmpPathWithInstanceId($path)
-    {
-        $tmp = '/tmp/';
-        $path = self::rewritePathAppendPiwikInstanceId($path, $tmp);
-        return $path;
-    }
-
-    /**
      * If Piwik uses per-domain config file, make sure CustomLogo is unique
      * @param $path
      * @return mixed
@@ -442,6 +426,16 @@ class SettingsPiwik
     public static function isHttpsForced()
     {
         return Config::getInstance()->General['force_ssl'] == 1;
+    }
+
+    /**
+     * Note: this config settig is also checked in the InterSites plugin
+     *
+     * @return bool
+     */
+    public static function isSameFingerprintAcrossWebsites()
+    {
+        return (bool)Config::getInstance()->Tracker['enable_fingerprinting_across_websites'];
     }
 
 }

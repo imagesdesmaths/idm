@@ -9,6 +9,7 @@
 namespace Piwik;
 
 use Exception;
+use Piwik\DataAccess\TableMetadata;
 use Piwik\Db\Adapter;
 use Piwik\Tracker;
 
@@ -34,6 +35,8 @@ use Piwik\Tracker;
 class Db
 {
     private static $connection = null;
+
+    private static $logQueries = true;
 
     /**
      * Returns the database connection and creates it if it hasn't been already.
@@ -321,7 +324,7 @@ class Db
         $optimize = Config::getInstance()->General['enable_sql_optimize_queries'];
 
         if (empty($optimize)) {
-            return;
+            return false;
         }
 
         if (empty($tables)) {
@@ -332,22 +335,26 @@ class Db
             $tables = array($tables);
         }
 
-        // filter out all InnoDB tables
-        $myisamDbTables = array();
-        foreach (self::getTableStatus() as $row) {
-            if (strtolower($row['Engine']) == 'myisam'
-                && in_array($row['Name'], $tables)
-            ) {
-                $myisamDbTables[] = $row['Name'];
+        if (!self::isOptimizeInnoDBSupported()) {
+            // filter out all InnoDB tables
+            $myisamDbTables = array();
+            foreach (self::getTableStatus() as $row) {
+                if (strtolower($row['Engine']) == 'myisam'
+                    && in_array($row['Name'], $tables)
+                ) {
+                    $myisamDbTables[] = $row['Name'];
+                }
             }
+
+            $tables = $myisamDbTables;
         }
 
-        if (empty($myisamDbTables)) {
+        if (empty($tables)) {
             return false;
         }
 
         // optimize the tables
-        return self::query("OPTIMIZE TABLE " . implode(',', $myisamDbTables));
+        return self::query("OPTIMIZE TABLE " . implode(',', $tables));
     }
 
     private static function getTableStatus()
@@ -385,17 +392,12 @@ class Db
      *
      * @param string|array $table The name of the table you want to get the columns definition for.
      * @return \Zend_Db_Statement
+     * @deprecated since 2.11.0
      */
     public static function getColumnNamesFromTable($table)
     {
-        $columns = self::fetchAll("SHOW COLUMNS FROM `" . $table . "`");
-
-        $columnNames = array();
-        foreach ($columns as $column) {
-            $columnNames[] = $column['Field'];
-        }
-
-        return $columnNames;
+        $tableMetadataAccess = new TableMetadata();
+        return $tableMetadataAccess->getColumns($table);
     }
 
     /**
@@ -710,7 +712,43 @@ class Db
 
     private static function logSql($functionName, $sql, $parameters = array())
     {
+        if (self::$logQueries === false) {
+            return;
+        }
+
         // NOTE: at the moment we don't log parameters in order to avoid sensitive information leaks
         Log::debug("Db::%s() executing SQL: %s", $functionName, $sql);
+    }
+
+    /**
+     * @param bool $enable
+     */
+    public static function enableQueryLog($enable)
+    {
+        self::$logQueries = $enable;
+    }
+
+    /**
+     * @return boolean
+     */
+    public static function isQueryLogEnabled()
+    {
+        return self::$logQueries;
+    }
+
+    public static function isOptimizeInnoDBSupported($version = null)
+    {
+        if ($version === null) {
+            $version = Db::fetchOne("SELECT VERSION()");
+        }
+
+        $version = strtolower($version);
+
+        if (strpos($version, "mariadb") === false) {
+            return false;
+        }
+
+        $semanticVersion = strstr($version, '-', $beforeNeedle = true);
+        return version_compare($semanticVersion, '10.1.1', '>=');
     }
 }

@@ -203,7 +203,15 @@ class Model
     public function allocateNewArchiveId($numericTable)
     {
         $sequence  = new Sequence($numericTable);
-        $idarchive = $sequence->getNextId();
+
+        try {
+            $idarchive = $sequence->getNextId();
+        } catch(Exception $e) {
+            // edge case: sequence was not found, create it now
+            $sequence->create();
+
+            $idarchive = $sequence->getNextId();
+        }
 
         return $idarchive;
     }
@@ -235,6 +243,23 @@ class Model
         Db::query($query, $bindSql);
 
         return true;
+    }
+
+    /**
+     * Returns the site IDs for invalidated archives in an archive table.
+     *
+     * @param string $numericTable The numeric table to search through.
+     * @return int[]
+     */
+    public function getSitesWithInvalidatedArchive($numericTable)
+    {
+        $rows = Db::fetchAll("SELECT DISTINCT idsite FROM `$numericTable` WHERE name LIKE 'done%' AND value = " . ArchiveWriter::DONE_INVALIDATED);
+
+        $result = array();
+        foreach ($rows as $row) {
+            $result[] = $row['idsite'];
+        }
+        return $result;
     }
 
     /**

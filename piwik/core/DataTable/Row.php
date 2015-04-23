@@ -209,31 +209,7 @@ class Row implements \ArrayAccess, \IteratorAggregate
             return false;
         }
 
-        if ($this->isColumnValueCallable($this->c[self::COLUMNS][$name])) {
-            $value = $this->resolveCallableColumn($name);
-
-            if (!isset($value)) {
-                return false;
-            }
-
-            return $value;
-        }
-
         return $this->c[self::COLUMNS][$name];
-    }
-
-    private function isColumnValueCallable($name)
-    {
-        if (is_object($name) && ($name instanceof \Closure)) {
-            return true;
-        }
-
-        return is_array($name) && array_key_exists(0, $name) && is_object($name[0]) && is_callable($name);
-    }
-
-    private function resolveCallableColumn($columnName)
-    {
-        return call_user_func($this->c[self::COLUMNS][$columnName], $this);
     }
 
     /**
@@ -251,11 +227,6 @@ class Row implements \ArrayAccess, \IteratorAggregate
             return false;
         }
         return $this->c[self::METADATA][$name];
-    }
-
-    private function getColumnsRaw()
-    {
-        return $this->c[self::COLUMNS];
     }
 
     /**
@@ -283,16 +254,7 @@ class Row implements \ArrayAccess, \IteratorAggregate
      */
     public function getColumns()
     {
-        $values = array();
-        foreach ($this->c[self::COLUMNS] as $columnName => $val) {
-            if ($this->isColumnValueCallable($val)) {
-                $values[$columnName] = $this->resolveCallableColumn($columnName);
-            } else {
-                $values[$columnName] = $val;
-            }
-        }
-
-        return $values;
+        return $this->c[self::COLUMNS];
     }
 
     /**
@@ -508,13 +470,8 @@ class Row implements \ArrayAccess, \IteratorAggregate
      */
     public function sumRow(Row $rowToSum, $enableCopyMetadata = true, $aggregationOperations = false)
     {
-        foreach ($rowToSum->getColumnsRaw() as $columnToSumName => $columnToSumValue) {
+        foreach ($rowToSum->getColumns() as $columnToSumName => $columnToSumValue) {
             if (!$this->isSummableColumn($columnToSumName)) {
-                continue;
-            }
-
-            if ($this->isColumnValueCallable($columnToSumValue)) {
-                $this->setColumn($columnToSumName, $columnToSumValue);
                 continue;
             }
 

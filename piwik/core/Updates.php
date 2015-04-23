@@ -16,6 +16,21 @@ namespace Piwik;
 abstract class Updates
 {
     /**
+     * @deprecated since v2.12.0 use getMigrationQueries() instead
+     */
+    static function getSql()
+    {
+        return array();
+    }
+
+    /**
+     * @deprecated since v2.12.0 use doUpdate() instead
+     */
+    static function update()
+    {
+    }
+
+    /**
      * Return SQL to be executed in this update
      *
      * @return array(
@@ -24,16 +39,17 @@ abstract class Updates
      *                                       // and user will have to manually run the query
      *         )
      */
-    static function getSql()
+    public function getMigrationQueries(Updater $updater)
     {
-        return array();
+        return static::getSql();
     }
 
     /**
      * Incremental version update
      */
-    static function update()
+    public function doUpdate(Updater $updater)
     {
+        static::update();
     }
 
     /**
@@ -45,7 +61,7 @@ abstract class Updates
      *
      * @return bool
      */
-    static function isMajorUpdate()
+    public static function isMajorUpdate()
     {
         return false;
     }
@@ -53,10 +69,9 @@ abstract class Updates
     /**
      * Helper method to enable maintenance mode during large updates
      */
-    static function enableMaintenanceMode()
+    public static function enableMaintenanceMode()
     {
         $config = Config::getInstance();
-        $config->init();
 
         $tracker = $config->Tracker;
         $tracker['record_statistics'] = 0;
@@ -72,10 +87,9 @@ abstract class Updates
     /**
      * Helper method to disable maintenance mode after large updates
      */
-    static function disableMaintenanceMode()
+    public static function disableMaintenanceMode()
     {
         $config = Config::getInstance();
-        $config->init();
 
         $tracker = $config->Tracker;
         $tracker['record_statistics'] = 1;
@@ -91,7 +105,6 @@ abstract class Updates
     public static function deletePluginFromConfigFile($pluginToDelete)
     {
         $config = Config::getInstance();
-        $config->init();
         if (isset($config->Plugins['Plugins'])) {
             $plugins = $config->Plugins['Plugins'];
             if (($key = array_search($pluginToDelete, $plugins)) !== false) {
