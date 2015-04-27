@@ -1,12 +1,14 @@
-<BOUCLE_auteur(AUTEURS){id_article} {0,1}>
-[<div class="block-right block-author">
-    <h2><a href="#URL_AUTEUR">L'auteur</a></h2>
+<B_auteur>
+<div class="block-right block-author">
+    <h2>[(#TOTAL_BOUCLE|!={1}|?{"Les auteurs","L'auteur"})]</h2>
+    <BOUCLE_auteur(AUTEURS){id_article}>
     <div>
         [<div class="image"><a href="#URL_AUTEUR">(#LOGO_AUTEUR|image_reduire{90,0})</a></div>]
         <a href="#URL_AUTEUR">
-            <div class="name">(#NOM)</div>
+            <div class="name">#NOM</div>
             [<div class="bio">(#BIO)</div>]
         </a>
     </div>
-</div>]
-</BOUCLE_auteur>
+    </BOUCLE_auteur>
+</div>
+</B_auteur>

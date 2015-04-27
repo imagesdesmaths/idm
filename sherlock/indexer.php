@@ -122,6 +122,8 @@ class IdmIndexer
                 ON (rubrique.id_rubrique = article.id_rubrique)
             LEFT JOIN spip_urls url
                 ON (url.id_objet = article.id_article AND url.type = 'article')
+            WHERE article.lang = 'fr'
+              AND article.status = 'publie'
             GROUP BY article.id_article
         ");
         if($stmt->execute()) {
