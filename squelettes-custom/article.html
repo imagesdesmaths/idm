@@ -7,12 +7,6 @@
 #SET{track_id, #ID_MOT}
 </BOUCLE_articles_piste>
 
-<BOUCLE_auteur(AUTEURS){id_article} {0,1}>
-#SET{author_id, #ID_AUTEUR}
-#SET{author_name, #NOM}
-#SET{author_email, #EMAIL}
-</BOUCLE_auteur>
-
 <div id="content" class="article-full block-left #GET{track_slug}">
 
     <BOUCLE_articles(ARTICLES) {id_article}>
@@ -28,7 +22,13 @@
 
         [<a href="#URL_PAGE{mot,id_mot=#GET{track_id}}" class="piste #GET{track_slug}">(#GET{track_title})</a>]
         <span class="date">[(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</span>
-        <a href="#URL_AUTEUR" class="author-top"> - Rédigé par #GET{author_name}</a>
+        <B_auteur>
+        <span class="authors">&nbsp;-&nbsp;Rédigé par&nbsp;
+            <BOUCLE_auteur(AUTEURS){id_article=#ID_ARTICLE}>
+            <a href="#URL_AUTEUR">#NOM</a>[(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{', ',''})]
+            </BOUCLE_auteur>
+         </span>
+        </B_auteur>
         <a href="#commentaires" class="comments-top">Voir les commentaires <B_forums>(#COMPTEUR_BOUCLE)<BOUCLE_forums(FORUMS){id_article}><!-- --></BOUCLE_forums></a>
 
         [(#VARMODE|=={"preview"}|oui)
