@@ -1500,6 +1500,7 @@ return array(
     'Piwik\\Updates\\Updates_2_11_0_b5' => $baseDir . '/core/Updates/2.11.0-b5.php',
     'Piwik\\Updates\\Updates_2_11_1_b4' => $baseDir . '/core/Updates/2.11.1-b4.php',
     'Piwik\\Updates\\Updates_2_13_0_b3' => $baseDir . '/core/Updates/2.13.0-b3.php',
+    'Piwik\\Updates\\Updates_2_13_1' => $baseDir . '/core/Updates/2.13.1.php',
     'Piwik\\Updates\\Updates_2_1_1_b11' => $baseDir . '/core/Updates/2.1.1-b11.php',
     'Piwik\\Updates\\Updates_2_2_0_b15' => $baseDir . '/core/Updates/2.2.0-b15.php',
     'Piwik\\Updates\\Updates_2_2_3_b6' => $baseDir . '/core/Updates/2.2.3-b6.php',
