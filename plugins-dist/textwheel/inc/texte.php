@@ -86,7 +86,7 @@ function paragrapher($t, $toujours_paragrapher = null) {
  * il ne faut pas desactiver globalement la fonction dans l'espace prive car elle protege
  * aussi les balises des squelettes qui ne passent pas forcement par propre ou typo apres
  *
- * http://doc.spip.org/@interdire_scripts
+ * http://code.spip.net/@interdire_scripts
  *
  * @param string $arg
  * @return string
@@ -128,7 +128,7 @@ function interdire_scripts($arg) {
  * Typographie generale
  * avec protection prealable des balises HTML et SPIP
  *
- * http://doc.spip.org/@typo
+ * http://code.spip.net/@typo
  *
  * @param string $letexte
  * @param bool $echapper
@@ -189,7 +189,7 @@ define('_TYPO_PROTECTEUR', "\x1\x2\x3\x4\x5\x6\x7\x8");
 define('_TYPO_BALISE', ",</?[a-z!][^<>]*[".preg_quote(_TYPO_PROTEGER)."][^<>]*>,imsS");
 
 /**
- * http://doc.spip.org/@corriger_typo
+ * http://code.spip.net/@corriger_typo
  *
  * @param string $t
  * @param string $lang
@@ -249,7 +249,7 @@ function corriger_typo($t, $lang='') {
 define('_RACCOURCI_TH_SPAN', '\s*(:?{{[^{}]+}}\s*)?|<');
 
 /**
- * http://doc.spip.org/@traiter_tableau
+ * http://code.spip.net/@traiter_tableau
  *
  * @param sring $bloc
  * @return string
@@ -424,7 +424,7 @@ function traiter_tableau($bloc) {
  * Traitement des listes
  * on utilise la wheel correspondante
  *
- * http://doc.spip.org/@traiter_listes
+ * http://code.spip.net/@traiter_listes
  *
  * @param string $t
  * @return string
@@ -486,7 +486,7 @@ function personnaliser_raccourcis(&$ruleset){
 /**
  * Nettoie un texte, traite les raccourcis autre qu'URL, la typo, etc.
  *
- * http://doc.spip.org/@traiter_raccourcis
+ * http://code.spip.net/@traiter_raccourcis
  *
  * @param string $t
  * @param bool $show_autobr
@@ -557,7 +557,7 @@ function traiter_raccourcis($t, $show_autobr = false) {
 
 /**
  * Filtre a appliquer aux champs du type #TEXTE*
- * http://doc.spip.org/@propre
+ * http://code.spip.net/@propre
  *
  * @param string $t
  * @param string $connect

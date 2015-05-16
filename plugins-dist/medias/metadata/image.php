@@ -31,7 +31,7 @@ function metadata_image_dist($fichier){
  * @param bool $strict
  * @return string
  */
-// http://doc.spip.org/@decoder_type_image
+// http://code.spip.net/@decoder_type_image
 function decoder_type_image($type, $strict = false) {
 	switch ($type) {
 		case 1:

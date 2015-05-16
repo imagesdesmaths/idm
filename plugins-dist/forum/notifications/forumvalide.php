@@ -13,7 +13,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * dans ecrire/inc/forum_insert.php ; ici on va notifier ceux qui ne l'ont
  * pas ete a la notification forumposte (sachant que les deux peuvent se
  * suivre si le forum est valide directement ('pos' ou 'abo')
- * http://doc.spip.org/@notifications_forumvalide_dist
+ * http://code.spip.net/@notifications_forumvalide_dist
  *
  * @param string $quoi
  * @param int $id_forum

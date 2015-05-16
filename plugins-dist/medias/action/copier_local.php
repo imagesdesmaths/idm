@@ -18,7 +18,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Il s'agit de la partie logique, c'est a dire que cette fonction
  * realise la copie.
  *
- * http://doc.spip.org/@action_copier_local_dist
+ * http://code.spip.net/@action_copier_local_dist
  *
  * @param null $id_document
  * @return bool|mixed|string
@@ -43,7 +43,7 @@ function action_copier_local_dist($id_document=null) {
 }
 
 /**
- * http://doc.spip.org/@action_copier_local_post
+ * http://code.spip.net/@action_copier_local_post
  *
  * @param  $id_document
  * @return bool|mixed|string

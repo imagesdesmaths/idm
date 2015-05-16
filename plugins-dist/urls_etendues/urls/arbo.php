@@ -76,9 +76,6 @@ defined('CONFIRMER_MODIFIER_URL') || define('CONFIRMER_MODIFIER_URL', false);
  * 
  */
 
-if (!function_exists('cache_me')) {
-	function cache_me(){return null;}
-}
 
 $config_urls_arbo = isset($GLOBALS['meta']['urls_arbo'])?unserialize($GLOBALS['meta']['urls_arbo']):array();
 if (!defined('_debut_urls_arbo')) define('_debut_urls_arbo', '');
@@ -88,7 +85,7 @@ if (!defined('_terminaison_urls_arbo')) define('_terminaison_urls_arbo', '');
 if (!defined('_url_arbo_sep_id')) define('_url_arbo_sep_id',isset($config_urls_arbo['url_arbo_sep_id'])?$config_urls_arbo['url_arbo_sep_id']:'-');
 // option pour tout passer en minuscules
 if (!defined('_url_arbo_minuscules')) define('_url_arbo_minuscules',isset($config_urls_arbo['url_arbo_minuscules'])?$config_urls_arbo['url_arbo_minuscules']:1);
-if (!defined('_URLS_ARBO_MAX')) define('_URLS_ARBO_MAX', isset($config_urls_arbo['URLS_ARBO_MAX'])?$config_urls_arbo['URLS_ARBO_MAX']:35);
+if (!defined('_URLS_ARBO_MAX')) define('_URLS_ARBO_MAX', isset($config_urls_arbo['URLS_ARBO_MAX'])?$config_urls_arbo['URLS_ARBO_MAX']:80);
 if (!defined('_URLS_ARBO_MIN')) define('_URLS_ARBO_MIN', isset($config_urls_arbo['URLS_ARBO_MIN'])?$config_urls_arbo['URLS_ARBO_MIN']:3);
 
 if (!defined('_url_sep_id')) define('_url_sep_id',_url_arbo_sep_id);
@@ -176,7 +173,7 @@ function url_arbo_type($type){
  * precedent, un tableau indiquant le titre de l'objet, son type, son id,
  * et doit donner en retour une chaine d'url, sans se soucier de la
  * duplication eventuelle, qui sera geree apres
- * http://doc.spip.org/@creer_chaine_url
+ * http://code.spip.net/@creer_chaine_url
  *
  * @param array $x
  * @return array
@@ -201,7 +198,7 @@ function urls_arbo_creer_chaine_url($x) {
 
 /**
  * Boucler sur le parent pour construire l'url complete a partir des segments
- * http://doc.spip.org/@declarer_url_arbo_rec
+ * http://code.spip.net/@declarer_url_arbo_rec
  *
  * @param string $url
  * @param string $type
@@ -266,7 +263,7 @@ function renseigner_url_arbo($type,$id_objet){
 /**
  * Retrouver/Calculer l'ensemble des segments d'url d'un objet
  *
- * http://doc.spip.org/@declarer_url_arbo
+ * http://code.spip.net/@declarer_url_arbo
  *
  * @param string $type
  * @param int $id_objet
@@ -274,9 +271,7 @@ function renseigner_url_arbo($type,$id_objet){
  */
 function declarer_url_arbo($type, $id_objet) {
 	static $urls=array();
-	// utiliser un cache memoire pour aller plus vite
-	if(!is_null($C=cache_me())) return $C;
-	
+
 	// Se contenter de cette URL si elle existe ;
 	// sauf si on invoque par "voir en ligne" avec droit de modifier l'url
 
@@ -373,7 +368,7 @@ function declarer_url_arbo($type, $id_objet) {
 /**
  * Generer l'url arbo complete constituee des segments + debut + fin
  *
- * http://doc.spip.org/@_generer_url_arbo
+ * http://code.spip.net/@_generer_url_arbo
  *
  * @param string $type
  * @param int $id
@@ -422,7 +417,7 @@ function _generer_url_arbo($type, $id, $args='', $ancre='') {
  * ou decoder cette url si c'est une chaine
  * array([contexte],[type],[url_redirect],[fond]) : url decodee
  *
- * http://doc.spip.org/@urls_arbo_dist
+ * http://code.spip.net/@urls_arbo_dist
  *
  * @param string|int $i
  * @param string $entite
@@ -537,7 +532,9 @@ function urls_arbo_dist($i, $entite, $args='', $ancre='') {
 			// d'abord recherche avec prefixe parent, en une requete car aucun risque de colision
 			$row=sql_fetsel('id_objet, type, url',
 											'spip_urls',
-											is_null($type)?"url=".sql_quote($url_segment):sql_in('url',array("$type/$url_segment",$type)),
+											is_null($type)
+												? "url=".sql_quote($url_segment, '', 'TEXT')
+												: sql_in('url',array("$type/$url_segment",$type)),
 											'',
 											// en priorite celui qui a le bon parent et les deux segments
 											// puis le bon parent avec 1 segment

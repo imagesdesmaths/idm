@@ -49,7 +49,7 @@ function action_dissocier_document_dist($arg=null){
 	if ($id_objet=intval($id_objet)
 		AND (
 			($id_objet<0 AND $id_objet==-$GLOBALS['visiteur_session']['id_auteur'])
-			OR autoriser('modifier',$objet,$id_objet)
+			OR autoriser('dissocierdocuments',$objet,$id_objet)
 		))
 		dissocier_document($document, $objet, $id_objet, $suppr, $check);
 	else

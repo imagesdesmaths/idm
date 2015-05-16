@@ -61,22 +61,22 @@
 	#FORMULAIRE_RECHERCHE_ECRIRE{#GET{self},ajax}
 	[<h2><:resultats_recherche:> &#171;&nbsp;(#ENV{recherche})&nbsp;&#187;</h2>]
 
-<B_forum>
+<B_forums>
 	<h3>[(#GRAND_TOTAL|singulier_ou_pluriel{forum:info_1_message_forum,forum:info_nb_messages_forum}|sinon{<:forum:aucun_message_forum:>})]</h3>
 	<div class="clear"></div>
 
 	[<p class='pagination'>(#PAGINATION{prive})</p>]
 	<ul class='liste-items forums'>
-		<BOUCLE_forum(FORUMS){id_forum?}{id_objet?}{objet?}{id_auteur?}{auteur?}{email_auteur?}{ip?}{!par id_forum}{pagination #ENV{nb,10}}{statut?}{statut LIKE #GET{prive}}{statut !LIKE #GET{public}}{texte LIKE #GET{vide}}{recherche?}>
+		<BOUCLE_forums(FORUMS){id_forum?}{id_objet?}{id_secteur?}{objet?}{id_auteur?}{auteur?}{email_auteur?}{ip?}{!par id_forum}{pagination #ENV{nb,10}}{statut?}{statut LIKE #GET{prive}}{statut !LIKE #GET{public}}{texte LIKE #GET{vide}}{recherche?}>
 			<li class="item forum[ (#EXPOSE)] statut_#STATUT[ (#COMPTEUR_BOUCLE|alterner{'','odd'})]" id='forum#ID_FORUM' data-id='#ID_FORUM'
 							onclick="jQuery(this).toggleClass('hover');">
 			[(#INCLURE{fond=prive/modeles/forum, id_forum, self})]
 			</li>
-		</BOUCLE_forum>
+		</BOUCLE_forums>
 	</ul>
 	[<p class='pagination'>(#PAGINATION{prive})</p>]
-</B_forum>
+</B_forums>
 
 	<h3><:forum:aucun_message_forum:></h3>
 
-<//B_forum>
+<//B_forums>

@@ -23,15 +23,25 @@
 [(#GET{fin}|oui)
 	<h1><:dump:info_sauvegarde:></h1>
 
+	#SET{erreurs,''}
 	#SET{taille,#ENV{status}|dump_taille_sauvegarde}
 	[(#GET{taille}|non)
 	#SET{archive,#VAL{'<b>'}|concat{#ENV{status}|dump_nom_sauvegarde|joli_repertoire}|concat{'</b>'}}
+	#SET{erreurs,' '}
 
 	#BOITE_OUVRIR{'','error'}
 	<:dump:erreur_taille_sauvegarde{fichier=#GET{archive}}:>
 	#BOITE_FERMER
 	]
-	[(#GET{taille}|oui)
+
+	[
+	#BOITE_OUVRIR{'','error'}
+	#SET{erreurs,' '}
+	(#ENV{status}|dump_afficher_erreurs)
+	#BOITE_FERMER
+	]
+
+	[(#GET{erreurs}|non)
 	#BOITE_OUVRIR{'','success'}
 
 	[(#SET{archive,[(#VAL{'<b>'}|concat{#ENV{status}|dump_nom_sauvegarde|joli_repertoire}|concat{'</b> ('}|concat{[(#GET{taille}|taille_en_octets)]}|concat{')'})]})]

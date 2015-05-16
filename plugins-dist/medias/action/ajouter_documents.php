@@ -52,7 +52,7 @@ function action_ajouter_documents_dist($id_document, $files, $objet, $id_objet, 
 /**
  * Ajouter un document (au format $_FILES)
  *
- * http://doc.spip.org/@ajouter_un_document
+ * http://code.spip.net/@ajouter_un_document
  *
  * @param int $id_document
  *   document a remplacer, ou pour une vignette, l'id_document de maman

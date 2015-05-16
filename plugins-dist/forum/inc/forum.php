@@ -13,45 +13,50 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 
-// recuperer le critere SQL qui selectionne nos forums
-// http://doc.spip.org/@critere_statut_controle_forum
-function critere_statut_controle_forum($type, $id_rubrique=0, $recherche='') {
+/**
+ * recuperer le critere SQL qui selectionne nos forums
+ * http://code.spip.net/@critere_statut_controle_forum
+ *
+ * @param string $type
+ * @param int|array $id_secteur
+ * @param string $recherche
+ * @return array
+ */
+function critere_statut_controle_forum($type, $id_secteur=0, $recherche='') {
 
-	if (is_array($id_rubrique))   $id_rubrique = join(',',$id_rubrique);
-	if (!$id_rubrique) {
+	if (!$id_secteur) {
 		$from = 'spip_forum AS F';
 		$where = "";
 		$and = "";
 	} else {
-		if (strpos($id_rubrique,','))
-		  $eq = " IN ($id_rubrique)";
-		else $eq = "=$id_rubrique";
-	      
+		if (!is_array($id_secteur)){
+			$id_secteur = explode(',',$id_secteur);
+		}
 		$from = 'spip_forum AS F, spip_articles AS A';
-		$where = "A.id_secteur$eq AND F.objet='article' AND F.id_objet=A.id_article";
+		$where = sql_in("A.id_secteur",$id_secteur)." AND F.objet='article' AND F.id_objet=A.id_article";
 		$and = ' AND ';
 	}
    
 	switch ($type) {
-	case 'public':
-		$and .= "F.statut IN ('publie', 'off', 'prop', 'spam') AND F.texte!=''";
-		break;
-	case 'prop':
-		$and .= "F.statut='prop'";
-		break;
-	case 'spam':
-		$and .= "F.statut='spam'";
-		break;
-	case 'interne':
-		$and .= "F.statut IN ('prive', 'privrac', 'privoff', 'privadm') AND F.texte!=''";
-		break;
-	case 'vide':
-		$and .= "F.statut IN ('publie', 'off', 'prive', 'privrac', 'privoff', 'privadm') AND F.texte=''";
-		break;
-	default:
-		$where = '0=1';
-		$and ='';
-		break;
+		case 'public':
+			$and .= "F.statut IN ('publie', 'off', 'prop', 'spam') AND F.texte!=''";
+			break;
+		case 'prop':
+			$and .= "F.statut='prop'";
+			break;
+		case 'spam':
+			$and .= "F.statut='spam'";
+			break;
+		case 'interne':
+			$and .= "F.statut IN ('prive', 'privrac', 'privoff', 'privadm') AND F.texte!=''";
+			break;
+		case 'vide':
+			$and .= "F.statut IN ('publie', 'off', 'prive', 'privrac', 'privoff', 'privadm') AND F.texte=''";
+			break;
+		default:
+			$where = '0=1';
+			$and ='';
+			break;
 	}
 
 	if ($recherche) {
@@ -75,7 +80,7 @@ function critere_statut_controle_forum($type, $id_rubrique=0, $recherche='') {
 // obsolete, remplace par l'appel systematique a 2 invalideurs :
 // - forum/id_forum
 // - objet/id_objet
-// http://doc.spip.org/@calcul_index_forum
+// http://code.spip.net/@calcul_index_forum
 function calcul_index_forum($objet,$id_objet) {
 	return substr($objet,0,1).$id_objet;
 }
@@ -83,7 +88,7 @@ function calcul_index_forum($objet,$id_objet) {
 //
 // Recalculer tous les threads
 //
-// http://doc.spip.org/@calculer_threads
+// http://code.spip.net/@calculer_threads
 function calculer_threads() {
 	// fixer les id_thread des debuts de discussion
 	sql_update('spip_forum', array('id_thread'=>'id_forum'), "id_parent=0");
@@ -107,7 +112,7 @@ function calculer_threads() {
 }
 
 // Calculs des URLs des forums (pour l'espace public)
-// http://doc.spip.org/@racine_forum
+// http://code.spip.net/@racine_forum
 function racine_forum($id_forum){
 	if (!$id_forum = intval($id_forum)) return false;
 
@@ -123,7 +128,7 @@ function racine_forum($id_forum){
 } 
 
 
-// http://doc.spip.org/@parent_forum
+// http://code.spip.net/@parent_forum
 function parent_forum($id_forum) {
 	if (!$id_forum = intval($id_forum)) return;
 	$row = sql_fetsel("id_parent, objet, id_objet", "spip_forum", "id_forum=".$id_forum);
@@ -149,7 +154,7 @@ function generer_url_forum_dist($id_forum, $args='', $ancre='') {
 }
 
 
-// http://doc.spip.org/@generer_url_forum_parent
+// http://code.spip.net/@generer_url_forum_parent
 function generer_url_forum_parent($id_forum) {
 	if ($id_forum = intval($id_forum)) {
 		list($type, $id) = parent_forum($id_forum);
@@ -162,7 +167,7 @@ function generer_url_forum_parent($id_forum) {
 
 // Quand on edite un forum, on tient a conserver l'original
 // sous forme d'un forum en reponse, de statut 'original'
-// http://doc.spip.org/@conserver_original
+// http://code.spip.net/@conserver_original
 function conserver_original($id_forum) {
 	$s = sql_fetsel("id_forum", "spip_forum", "id_parent=".intval($id_forum)." AND statut='original'");
 
@@ -184,7 +189,7 @@ function conserver_original($id_forum) {
 }
 
 // appelle conserver_original(), puis modifie le contenu via l'API inc/modifier
-// http://doc.spip.org/@enregistre_et_modifie_forum
+// http://code.spip.net/@enregistre_et_modifie_forum
 function enregistre_et_modifie_forum($id_forum, $c=false) {
 	if ($err = conserver_original($id_forum)) {
 		spip_log("erreur de sauvegarde de l'original, $err");
@@ -242,7 +247,7 @@ function forum_recuperer_titre_dist($objet, $id_objet, $id_forum=0, $publie = tr
  * pri: a priori, doivent etre valides par un admin
  * abo: les personnes doivent au prealable etre identifiees
  *
- * http://doc.spip.org/@controler_forum
+ * http://code.spip.net/@controler_forum
  * 
  * @param string $objet
  *   objet a tester
@@ -266,7 +271,7 @@ function controler_forum($objet, $id_objet) {
 
 /**
  * Verifier la presence du jeton de secu post previsu
- * http://doc.spip.org/@forum_insert_noprevisu
+ * http://code.spip.net/@forum_insert_noprevisu
  * @return bool
  */
 function forum_insert_noprevisu(){
@@ -320,7 +325,7 @@ function forum_get_objets_depuis_env() {
 }
 
 
-// http://doc.spip.org/@reduce_strlen
+// http://code.spip.net/@reduce_strlen
 function reduce_strlen($n, $c)
 {
   return $n - (is_string($c) ? strlen($c) : 0);

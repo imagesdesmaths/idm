@@ -78,6 +78,18 @@ function base_lister_toutes_tables($serveur='', $tables=array(), $exclude = arra
 	return $res;
 }
 
+/**
+ * Retrouver le prefixe des tables
+ * @param string $serveur
+ * @return string
+ */
+function base_prefixe_tables($serveur=''){
+	spip_connect($serveur);
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$prefixe = $connexion['prefixe'];
+	return $prefixe;
+}
+
 
 /**
  * Fabrique la liste a cocher des tables a traiter (copie, delete, sauvegarde)
@@ -510,9 +522,13 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 	$trouver_table = charger_fonction('trouver_table','base');
 
 	foreach ($tables as $table){
-		// en principe, pas de spip_ dans le nom de table passe a trouver_table
-		$desc_source = $trouver_table(preg_replace(",^spip_,","",$table), $serveur_source, false);
-		if (!$desc_source)
+		// si table commence par spip_ c'est une table SPIP, renommer le prefixe si besoin
+		// sinon chercher la vraie table
+		$desc_source = false;
+		if (strncmp($table,"spip_",5)==0){
+			$desc_source = $trouver_table(preg_replace(",^spip_,","",$table), $serveur_source, true);
+		}
+		if (!$desc_source OR !isset($desc_source['exist']) OR !$desc_source['exist'])
 			$desc_source = $trouver_table($table, $serveur_source, false);
 
 		// verifier que la table est presente dans la base source
@@ -550,6 +566,9 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 						// mais si ca renvoie false c'est une erreur fatale => abandon
 						if ($inserer_copie($table,$rows,$desc_dest,$serveur_dest)===false) {
 							// forcer la sortie, charge a l'appelant de gerer l'echec
+							spip_log("Erreur fatale dans $inserer_copie table $table","dump"._LOG_ERREUR);
+							$status['errors'][] = "Erreur fatale  lors de la copie de la table $table";
+							ecrire_fichier($status_file,serialize($status));
 							// copie finie
 							return true;
 						}
@@ -621,14 +640,22 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 function base_inserer_copie($table,$rows,$desc_dest,$serveur_dest){
 
 	// verifier le nombre d'insertion
-	$nb1 = sql_countsel($table);
+	$nb1 = sql_countsel($table,'','','',$serveur_dest);
 	// si l'enregistrement est deja en base, ca fera un echec ou un doublon
 	$r = sql_insertq_multi($table,$rows,$desc_dest,$serveur_dest);
-	$nb = sql_countsel($table);
+	$nb = sql_countsel($table,'','','',$serveur_dest);
 	if ($nb-$nb1<count($rows)){
+		spip_log("base_inserer_copie : ".($nb-$nb1)." insertions au lieu de ".count($rows).". On retente 1 par 1","dump"._LOG_INFO_IMPORTANTE);
 		foreach($rows as $row){
 			// si l'enregistrement est deja en base, ca fera un echec ou un doublon
 			$r = sql_insertq($table,$row,$desc_dest,$serveur_dest);
+		}
+		// on reverifie le total
+		$r = 0;
+		$nb = sql_countsel($table,'','','',$serveur_dest);
+		if ($nb-$nb1<count($rows)){
+			spip_log("base_inserer_copie : ".($nb-$nb1)." insertions au lieu de ".count($rows)." apres insertion 1 par 1","dump"._LOG_ERREUR);
+			$r = false;
 		}
 	}
 	return $r;

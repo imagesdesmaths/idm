@@ -75,12 +75,8 @@ function code_echappement($rempl, $source='', $no_transform=false, $mode=NULL) {
 		$return .= "<$mode class=\"base64$source\" title=\"$base64\"></$mode>";
 	}
 
-	return $return
-		. ((!$no_transform AND $mode == 'div')
-			? "\n\n"
-			: ''
-		);
-;
+	return $return;
+
 }
 
 
@@ -156,7 +152,7 @@ function traiter_echap_math_dist($regs) {
 	return $t;
 }
 
-define('_PROTEGE_BLOCS', ',<(html|code|cadre|frame|script|math)(\s[^>]*)?>(.*)</\1>,UimsS');
+define('_PROTEGE_BLOCS', ',<(html|code|cadre|frame|script)(\s[^>]*)?>(.*)</\1>,UimsS');
 
 // - pour $source voir commentaire infra (echappe_retour)
 // - pour $no_transform voir le filtre post_autobr dans inc/filtres

@@ -3,7 +3,7 @@
 	<div class="liste">
 		<h4><:mots:titre_groupes_mots:></h4>
 		<ul class='liste-items'>
-		<BOUCLE_nav(GROUPES_MOTS){par multi titre}>[(#AUTORISER{voir,groupemots,#ID_GROUPE}|oui)
+		<BOUCLE_nav(GROUPES_MOTS){par num titre}{par multi titre}>[(#AUTORISER{voir,groupemots,#ID_GROUPE}|oui)
 		<li class="item"><a href='#groupe_mots-#ID_GROUPE'
 					 onclick='$(".groupe_mots").hide().filter("#groupe_mots-#ID_GROUPE").show();$(this).parent().addClass("on").siblings().removeClass("on").parent().siblings("a.tous").show();return false;'
 				>#TITRE</a></li>

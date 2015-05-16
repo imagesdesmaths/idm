@@ -84,7 +84,7 @@ function retrouver_champ_version_objet($objet,$id_objet,$id_version,$champ,&$cha
  *    - apercu => idem, mais en plus tres cout s'il y en a bcp
  *    - complet => tout, avec surlignage des modifications (page revision)
  *
- * http://doc.spip.org/@revision_comparee
+ * http://code.spip.net/@revision_comparee
  *
  * @param int $id_objet
  * @param string $objet

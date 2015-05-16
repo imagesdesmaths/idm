@@ -224,7 +224,7 @@ function _couleur_hsl2rgb ($H,$S,$L) {
 // renvoit sous la forme hexadecimale ("F26C4E" par exemple).
 // Par defaut, la couleur choisie se trouve un peu au-dessus du centre de l'image.
 // On peut forcer un point en fixant $x et $y, entre 0 et 20.
-// http://doc.spip.org/@image_couleur_extraire
+// http://code.spip.net/@image_couleur_extraire
 
 function _image_couleur_extraire($img, $x=10, $y=6) {
 	static $couleur_extraite = array();

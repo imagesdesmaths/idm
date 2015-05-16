@@ -1,11 +1,11 @@
 <paquet
 	prefix="mediabox"
 	categorie="multimedia"
-	version="0.8.5"
+	version="0.8.11"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/mediabox-32.png"
-	documentation="http://www.spip-contrib.net/MediaBox"
+	documentation="http://contrib.spip.net/MediaBox"
 >
 
 	<nom>MediaBox</nom>

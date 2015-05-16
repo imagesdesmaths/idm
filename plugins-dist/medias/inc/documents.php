@@ -24,7 +24,7 @@ if (!defined('CHARSET_JOINT')) define('CHARSET_JOINT', 'iso-8859-1');
 // Filtre pour #FICHIER permettant d'incruster le contenu d'un document
 // Si 2e arg fourni, conversion dans le charset du site si possible
 
-// http://doc.spip.org/@contenu_document
+// http://code.spip.net/@contenu_document
 function contenu_document($arg, $charset='')
 {
 	if (is_numeric($arg)) {
@@ -53,7 +53,7 @@ function contenu_document($arg, $charset='')
 	return $r;
 }
 
-// http://doc.spip.org/@generer_url_document_dist
+// http://code.spip.net/@generer_url_document_dist
 function generer_url_document_dist($id_document, $args='', $ancre='') {
 
 	include_spip('inc/autoriser');
@@ -94,7 +94,7 @@ function generer_url_document_dist($id_document, $args='', $ancre='') {
 //
 // A noter : dans le portfolio prive on pousse le vice jusqu'a reduire la taille
 // de la vignette -> c'est a ca que sert la variable $portfolio
-// http://doc.spip.org/@vignette_automatique
+// http://code.spip.net/@vignette_automatique
 function vignette_automatique($img, $doc, $lien, $x=0, $y=0, $align='', $class='spip_logos')
 {
 	include_spip('inc/distant');
@@ -150,7 +150,7 @@ function vignette_automatique($img, $doc, $lien, $x=0, $y=0, $align='', $class='
 function image_du_document($document)
 {
 	$e = $document['extension'];
-	if ((strpos($GLOBALS['meta']['formats_graphiques'], $e) !== false)
+	if ($e AND (strpos($GLOBALS['meta']['formats_graphiques'], $e) !== false)
 	  AND (!test_espace_prive() OR $GLOBALS['meta']['creer_preview']=='oui')
 	  AND $document['fichier']) {
 		if ($document['distant'] == 'oui') {

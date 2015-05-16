@@ -10,7 +10,7 @@
 			[(#VU|=={oui}|oui)
 			[<span class='vu'>(#CHEMIN_IMAGE{document-vu-24.png}|balise_img|inserer_attribut{title,<:medias:document_vu:>}|inserer_attribut{alt,<:medias:document_vu:>})</span>]
 			]
-			[(#AUTORISER{modifier,#OBJET,#ID_OBJET}|oui)
+			[(#AUTORISER{dissocierdocuments,#OBJET,#ID_OBJET}|oui)
 				[(#BOUTON_ACTION{<:medias:bouton_enlever_document:>,[(#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-#ID_DOCUMENT--safe,#SELF})],ajax,'',''})]
 			]
 			</li>

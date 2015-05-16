@@ -47,7 +47,7 @@ function medias_puce_statut_document($id_document, $statut){
 //
 // <BOUCLE(DOCUMENTS)>
 //
-// http://doc.spip.org/@boucle_DOCUMENTS_dist
+// http://code.spip.net/@boucle_DOCUMENTS_dist
 function boucle_DOCUMENTS($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;

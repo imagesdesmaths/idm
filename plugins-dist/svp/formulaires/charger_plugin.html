@@ -33,11 +33,11 @@
 						<label for="etat"><:svp:label_critere_etat:></label>
 						[<span class="erreur_message">(#ENV{erreurs}|table_valeur{etat})</span>]
 						<select name="etat" id="etat">
-							<option value="tout_etat"[ (#ENV{etat,stable}|=={tout_etat}|oui)selected="selected"]><:svp:option_etat_tout:></option>
-							<option value="stable"[ (#ENV{etat,stable}|=={stable}|oui)selected="selected"]><:plugin_etat_stable|ucfirst:></option>
-							<option value="test"[ (#ENV{etat,stable}|=={test}|oui)selected="selected"]><:plugin_etat_test|ucfirst:></option>
-							<option value="dev"[ (#ENV{etat,stable}|=={dev}|oui)selected="selected"]><:plugin_etat_developpement|ucfirst:></option>
-							<option value="experimental"[ (#ENV{etat,stable}|=={experimental}|oui)selected="selected"]><:plugin_etat_experimental|ucfirst:></option>
+							<option value="tout_etat"[ (#ENV{etat,tout_etat}|=={tout_etat}|oui)selected="selected"]><:svp:option_etat_tout:></option>
+							<option value="stable"[ (#ENV{etat,tout_etat}|=={stable}|oui)selected="selected"]><:plugin_etat_stable|ucfirst:></option>
+							<option value="test"[ (#ENV{etat,tout_etat}|=={test}|oui)selected="selected"]><:plugin_etat_test|ucfirst:></option>
+							<option value="dev"[ (#ENV{etat,tout_etat}|=={dev}|oui)selected="selected"]><:plugin_etat_developpement|ucfirst:></option>
+							<option value="experimental"[ (#ENV{etat,tout_etat}|=={experimental}|oui)selected="selected"]><:plugin_etat_experimental|ucfirst:></option>
 						</select>
 					</li>
 					<li class="editer_depot obligatoire[(#ENV{erreurs}|table_valeur{depot}|oui) erreur]">

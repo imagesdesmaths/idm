@@ -33,12 +33,12 @@
 		$essais = array (
   0 => 
   array (
-    0 => '739cc8',
+    0 => '759bc8',
     1 => url_absolue(find_in_path('tests/degrade-bleu.jpg'),$GLOBALS['meta']['adresse_site'].'/'),
   ),
   1 => 
   array (
-    0 => '739cc8',
+    0 => '759bc8',
     1 => find_in_path('tests/degrade-bleu.jpg'),
   ),
 );

@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@generer_url_ecrire_forum
+// http://code.spip.net/@generer_url_ecrire_forum
 function urls_generer_url_ecrire_forum_dist($id, $args='', $ancre='', $public=null, $connect='') {
 	$a = "id_forum=" . intval($id);
 	if (is_null($public) AND !$connect)

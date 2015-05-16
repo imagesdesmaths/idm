@@ -15,7 +15,7 @@ function autoriser_referers_menu_dist($faire, $type='', $id=0, $qui = NULL, $opt
 
 // Lire les stats ?
 // = tous les admins
-// http://doc.spip.org/@autoriser_voirstats_dist
+// http://code.spip.net/@autoriser_voirstats_dist
 function autoriser_voirstats_dist($faire, $type, $id, $qui, $opt) {
 	return (($GLOBALS['meta']["activer_statistiques"] != 'non')
 			AND ($qui['statut'] == '0minirezo'));

@@ -27,6 +27,7 @@ function forum_declarer_tables_interfaces($interfaces){
 	$interfaces['exceptions_des_tables']['forums']['email']='email_auteur';
 
 	// il ne faut pas essayer de chercher le forum du mot cle, mais bien le mot cle associe au forum
+	$interfaces['exceptions_des_jointures']['spip_forum']['id_secteur'] = array('spip_articles','id_secteur');
 	$interfaces['exceptions_des_jointures']['spip_forum']['id_mot'] = array('spip_mots','id_mot');
 	$interfaces['exceptions_des_jointures']['spip_forum']['titre_mot'] = array('spip_mots','titre');
 	$interfaces['exceptions_des_jointures']['spip_forum']['type_mot'] = array('spip_mots','type');
