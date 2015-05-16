@@ -84,15 +84,19 @@ AND @file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'ecran_secu
 	include $f;
 
 /*
- * detecteur de robot d'indexation
- * utilise en divers endroits, centralise ici si l'ecran l'a pas deja fait
+ * Détecteur de robot d'indexation
  */
-if (!defined('_IS_BOT'))
+if (!defined('_IS_BOT')){
 	define('_IS_BOT',
 		isset($_SERVER['HTTP_USER_AGENT'])
-		AND preg_match(',bot|slurp|crawler|spider|webvac|yandex|INA dlweb|EC2LinkFinder|80legs,i',
-			$_SERVER['HTTP_USER_AGENT'])
+		AND preg_match(
+		// mots generiques
+			',bot|slurp|crawler|spider|webvac|yandex|'
+			// UA plus cibles
+			. '80legs|accoona|AltaVista|ASPSeek|Baidu|Charlotte|EC2LinkFinder|eStyle|Google|Genieo|INA dlweb|InfegyAtlas|Java VM|LiteFinder|Lycos|Rambler|Scooter|ScrubbyBloglines|Yahoo|Yeti'
+			. ',i', (string)$_SERVER['HTTP_USER_AGENT'])
 	);
+}
 
 //
 // *** Parametrage par defaut de SPIP ***
@@ -290,7 +294,7 @@ $liste_des_authentifications = array(
 // pour specifier les versions de SPIP necessaires
 // il faut s'en tenir a un nombre de decimales fixe
 // ex : 2.0.0, 2.0.0-dev, 2.0.0-beta, 2.0.0-beta2
-$spip_version_branche = "3.0.17";
+$spip_version_branche = "3.0.19";
 // version des signatures de fonctions PHP
 // (= numero SVN de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
 $spip_version_code = 17873;

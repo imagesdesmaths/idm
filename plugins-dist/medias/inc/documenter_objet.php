@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@naviguer_doc
+// http://code.spip.net/@naviguer_doc
 function inc_documenter_objet_dist($id, $type) {
 	$serveur = '';
 	// avant de documenter un objet, on verifie que ses documents vus sont bien lies !

@@ -2,7 +2,7 @@
     ColorBox Core Style:
     The following CSS is consistent between example themes and should not be altered.
 */
-#colorbox {-webkit-box-sizing: content-box;-moz-box-sizing: content-box;box-sizing: content-box;}
+#colorbox, #cboxLoadedContent {-webkit-box-sizing: content-box;-moz-box-sizing: content-box;box-sizing: content-box;}
 #colorbox, #cboxOverlay, #cboxWrapper{position:absolute; top:0; left:0; z-index:4999; overflow:hidden;}
 #cboxOverlay{position:fixed; width:100%; height:100%;}
 #cboxMiddleLeft, #cboxBottomLeft{clear:left;}
@@ -28,10 +28,10 @@
 #cboxNext,
 #cboxSlideshow,
 #cboxClose { border: 0; background-color: transparent; background-repeat: no-repeat; background-position: 50% 50%; position: absolute; bottom: 8px; width: 20px; height: 20px; line-height: 20px; text-indent: -9999px; opacity: 0.2; }
-#cboxPrevious.hover,
-#cboxNext.hover,
-#cboxSlideshow.hover,
-#cboxClose.hover { opacity: 1 }
+#cboxPrevious:hover,
+#cboxNext:hover,
+#cboxSlideshow:hover,
+#cboxClose:hover { opacity: 1 }
 #cboxCurrent { position: absolute; bottom: 9px; left: 70px; color: #999; }
 #cboxPrevious { background-image: url(images/prev.png); left: 5px; }
 #cboxNext { background-image: url(images/next.png); left: 25px; }

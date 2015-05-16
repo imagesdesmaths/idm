@@ -13,7 +13,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/filtres');
-// http://doc.spip.org/@calendrier_categories
+// http://code.spip.net/@calendrier_categories
 function calendrier_categories($table, $num, $objet)
 {
   if (function_exists('generer_calendrier_class'))
@@ -28,7 +28,7 @@ function calendrier_categories($table, $num, $objet)
 
 // ici on prend en fait le jour, la veille et le lendemain
 
-// http://doc.spip.org/@quete_calendrier_jour
+// http://code.spip.net/@quete_calendrier_jour
 function quete_calendrier_jour($annee,$mois,$jour) {
 	$avant = "'" . date("Y-m-d", mktime(0,0,0,$mois,$jour-1,$annee)) . "'";
 	$apres = "'" . date("Y-m-d", mktime(1,1,1,$mois,$jour+1,$annee)) .
@@ -40,7 +40,7 @@ function quete_calendrier_jour($annee,$mois,$jour) {
 // - le premier indique les evenements du jour, sans indication de duree
 // - le deuxime indique les evenements commencant ce jour, avec indication de duree
 
-// http://doc.spip.org/@quete_calendrier_interval
+// http://code.spip.net/@quete_calendrier_interval
 function quete_calendrier_interval($limites) {
 	include_spip('inc/urls');
 	list($avant, $apres) = $limites;
@@ -51,7 +51,7 @@ function quete_calendrier_interval($limites) {
 	return array($evt, quete_calendrier_interval_rv($avant, $apres));
 }
 
-// http://doc.spip.org/@quete_calendrier_interval_forums
+// http://code.spip.net/@quete_calendrier_interval_forums
 function  quete_calendrier_interval_forums($limites, &$evenements) {
 	list($avant, $apres) = $limites;
 	$result=sql_select("DISTINCT titre, date_heure, id_forum",	"spip_forum", "date_heure >= $avant AND date_heure < $apres", '',  "date_heure");
@@ -75,7 +75,7 @@ function  quete_calendrier_interval_forums($limites, &$evenements) {
 # pour faciliter la navigation, ce qu'on obtient utilisant
 # le 4e argument des fonctions generer_url_ecrire_$table
 
-// http://doc.spip.org/@quete_calendrier_interval_articles
+// http://code.spip.net/@quete_calendrier_interval_articles
 function quete_calendrier_interval_articles($avant, $apres, &$evenements) {
 
   $result=sql_select('id_article, titre, date, descriptif, chapo,  lang', 'spip_articles', "statut='publie' AND date >= $avant AND date < $apres", '', "date");
@@ -100,7 +100,7 @@ function quete_calendrier_interval_articles($avant, $apres, &$evenements) {
 	}
 }
 
-// http://doc.spip.org/@quete_calendrier_interval_rubriques
+// http://code.spip.net/@quete_calendrier_interval_rubriques
 function quete_calendrier_interval_rubriques($avant, $apres, &$evenements) {
 
   $result=sql_select('DISTINCT R.id_rubrique, titre, descriptif, date', 'spip_rubriques AS R, spip_documents_liens AS L', "statut='publie' AND	date >= $avant AND	date < $apres AND	R.id_rubrique = L.id_objet AND L.objet='rubrique'",'', "date");
@@ -117,7 +117,7 @@ function quete_calendrier_interval_rubriques($avant, $apres, &$evenements) {
 	}
 }
 
-// http://doc.spip.org/@quete_calendrier_interval_breves
+// http://code.spip.net/@quete_calendrier_interval_breves
 function quete_calendrier_interval_breves($avant, $apres, &$evenements) {
   $result=sql_select("id_breve, titre, date_heure, id_rubrique", 'spip_breves',	"statut='publie' AND date_heure >= $avant AND date_heure < $apres", '', "date_heure");
 	while($row=sql_fetch($result)){
@@ -133,7 +133,7 @@ function quete_calendrier_interval_breves($avant, $apres, &$evenements) {
 	}
 }
 
-// http://doc.spip.org/@quete_calendrier_interval_rv
+// http://code.spip.net/@quete_calendrier_interval_rv
 function quete_calendrier_interval_rv($avant, $apres) {
 	include_spip('inc/session');
 	$connect_id_auteur = session_get('id_auteur');
@@ -201,7 +201,7 @@ function quete_calendrier_interval_rv($avant, $apres) {
   return $evenements;
 }
 
-// http://doc.spip.org/@quete_calendrier_agenda
+// http://code.spip.net/@quete_calendrier_agenda
 function quete_calendrier_agenda ($annee, $mois) {
 	include_spip('inc/session');
 	$connect_id_auteur = session_get('id_auteur');

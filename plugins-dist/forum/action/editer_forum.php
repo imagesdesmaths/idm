@@ -15,7 +15,7 @@ include_spip('inc/modifier');
 
 // Nota: quand on edite un forum existant, il est de bon ton d'appeler
 // au prealable conserver_original($id_forum)
-// http://doc.spip.org/@revision_forum
+// http://code.spip.net/@revision_forum
 if(!function_exists('revision_forum')){
 	function revision_forum($id_forum, $c=false) {
 

@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@supprimer_document
+// http://code.spip.net/@supprimer_document
 function action_supprimer_document_dist($id_document=0) {
 	if (!$id_document){
 		$securiser_action = charger_fonction('securiser_action','inc');

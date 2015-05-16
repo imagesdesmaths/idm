@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/filtres');
 
 // Editer (modification) d'un mot-cle
-// http://doc.spip.org/@action_editer_mot_dist
+// http://code.spip.net/@action_editer_mot_dist
 function action_editer_mot_dist($arg=null)
 {
 	if (is_null($arg)){

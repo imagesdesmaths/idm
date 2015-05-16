@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@action_editer_site_dist
+// http://code.spip.net/@action_editer_site_dist
 function action_editer_site_dist($arg=null) {
 
 	if (is_null($arg)){
@@ -42,7 +42,7 @@ function action_editer_site_dist($arg=null) {
 /**
  * Inserer un nouveau site en base
  *
- * http://doc.spip.org/@insert_syndic
+ * http://code.spip.net/@insert_syndic
  *
  * @param  $id_rubrique
  * @return bool
@@ -164,7 +164,7 @@ function insert_syndic($id_rubrique) {
 function syndic_set($id_syndic, $set=false) {
 	return site_modifier($id_syndic,$set);
 }
-// http://doc.spip.org/@revisions_sites
+// http://code.spip.net/@revisions_sites
 function revisions_sites($id_syndic, $set=false){
 	return site_modifier($id_syndic,$set);
 }

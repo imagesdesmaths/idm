@@ -74,7 +74,7 @@ function autoriser_document_tailler_dist($faire,$quoi,$id,$qui,$options) {
  * Il faut aussi que les documents aient ete actives sur les objets concernes
  * ou que ce soit un article, sur lequel on peut toujours uploader des images
  *
- * http://doc.spip.org/@autoriser_joindredocument_dist
+ * http://code.spip.net/@autoriser_joindredocument_dist
  *
  * @return bool
  */
@@ -191,7 +191,7 @@ function autoriser_document_supprimer_dist($faire, $type, $id, $qui, $opt){
 // si le document est lie a un element publie
 // (TODO: a revoir car c'est dommage de sortir de l'API true/false)
 //
-// http://doc.spip.org/@autoriser_document_voir_dist
+// http://code.spip.net/@autoriser_document_voir_dist
 function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
 
 	if (!isset($GLOBALS['meta']["creer_htaccess"])
@@ -241,4 +241,39 @@ function autoriser_orphelins_supprimer_dist($faire, $type, $id, $qui, $opt){
 	if ($qui['statut'] == '0minirezo'
 	AND !$qui['restreint'])
 		return true;
+}
+
+
+/**
+ * Autoriser a associer des documents a un objet :
+ * il faut avoir le droit de modifier cet objet
+ * @param $faire
+ * @param $type
+ * @param $id
+ * @param $qui
+ * @param $opt
+ * @return bool
+ */
+function autoriser_associerdocuments_dist($faire, $type, $id, $qui, $opt){
+	if ($type=='document') return false; // pas de document sur les documents
+	return autoriser('modifier',$type,$id,$qui,$opt);
+}
+
+/**
+ * Autoriser a dissocier des documents a un objet :
+ * il faut avoir le droit de modifier cet objet
+ * @param $faire
+ * @param $type
+ * @param $id
+ * @param $qui
+ * @param $opt
+ * @return bool
+ */
+function autoriser_dissocierdocuments_dist($faire, $type, $id, $qui, $opt){
+	if ($type=='document') return false; // pas de document sur les documents
+	// cas particulier
+	if (intval($id)<0 AND $id==-$qui['id_auteur']){
+		return true;
+	}
+	return autoriser('modifier',$type,$id,$qui,$opt);
 }

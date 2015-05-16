@@ -1,7 +1,7 @@
 <paquet
 	prefix="medias"
 	categorie="multimedia"
-	version="2.7.59"
+	version="2.7.64"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/portfolio-32.png"
@@ -12,7 +12,7 @@
 	<!-- Gestion des medias dans SPIP -->
 
 	<auteur>Collectif SPIP</auteur>
-	<credit>C&#233;dric Morin, Romy Duhem-Verdi&#232;re pour la m&#233;diath&#232;que</credit>
+	<credit>C&#233;dric Morin, Tetue pour la m&#233;diath&#232;que</credit>
 
 	<traduire module="medias" reference="fr" gestionnaire="salvatore" />
 
@@ -33,6 +33,7 @@
 	<pipeline nom="document_desc_actions" inclure="medias_pipelines.php" />
 	<pipeline nom="editer_document_actions" inclure="medias_pipelines.php" />
 	<pipeline nom="renseigner_document_distant" inclure="medias_pipelines.php" />
+	<pipeline nom="renseigner_document" action="" />
 	<pipeline nom="configurer_liste_metas" inclure="medias_pipelines.php" />
 	<pipeline nom="afficher_metas_document" action="" />
 	<pipeline nom="medias_documents_visibles" action="" />

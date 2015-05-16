@@ -18,7 +18,7 @@ include_spip('inc/filtres_images_mini');
 // Image typographique
 // Fonctions pour l'arabe
 
-// http://doc.spip.org/@rtl_mb_ord
+// http://code.spip.net/@rtl_mb_ord
 function rtl_mb_ord($char){
 
 	if (($c = ord($char)) < 216) return $c;
@@ -32,7 +32,7 @@ function rtl_mb_ord($char){
 }
 
 
-// http://doc.spip.org/@rtl_reverse
+// http://code.spip.net/@rtl_reverse
 function rtl_reverse($mot, $rtl_global) {
 	$rtl_prec = $rtl_global;
 
@@ -87,7 +87,7 @@ function rtl_reverse($mot, $rtl_global) {
 
 
 
-// http://doc.spip.org/@rtl_visuel
+// http://code.spip.net/@rtl_visuel
 function rtl_visuel($texte, $rtl_global) {
 	// hebreu + arabe: 54928 => 56767
 	// hebreu + presentation A: 15707294 => 15710140
@@ -395,7 +395,7 @@ function rtl_visuel($texte, $rtl_global) {
 }
 
 
-// http://doc.spip.org/@printWordWrapped
+// http://code.spip.net/@printWordWrapped
 function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text, $textSize, $align="left", $hauteur_ligne = 0) {
 	static $memps = array();
 
@@ -508,7 +508,7 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 //array imagefttext ( resource image, float size, float angle, int x, int y, int col, string font_file, string text [, array extrainfo] )
 //array imagettftext ( resource image, float size, float angle, int x, int y, int color, string fontfile, string text )
 
-// http://doc.spip.org/@produire_image_typo
+// http://code.spip.net/@produire_image_typo
 function produire_image_typo() {
 	/*
 	arguments autorises:

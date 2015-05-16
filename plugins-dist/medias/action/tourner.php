@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Tourner un document
  *
- * http://doc.spip.org/@action_tourner_dist
+ * http://code.spip.net/@action_tourner_dist
  *
  * lorsque les arguments sont passes dans arg en GET :
  * id_document-angle
@@ -46,7 +46,7 @@ function action_tourner_dist($id_document=null, $angle=null) {
 /**
  * Tourner un document
  *
- * http://doc.spip.org/@action_tourner_post
+ * http://code.spip.net/@action_tourner_post
  *
  * @param int $id_document
  * @param int $angle
@@ -131,7 +131,7 @@ function action_tourner_post($id_document,$angle)
 
 // Appliquer l'EXIF orientation
 // cf. http://trac.rezo.net/trac/spip/ticket/1494
-// http://doc.spip.org/@tourner_selon_exif_orientation
+// http://code.spip.net/@tourner_selon_exif_orientation
 function tourner_selon_exif_orientation($id_document, $fichier) {
 
 	if (function_exists('exif_read_data')

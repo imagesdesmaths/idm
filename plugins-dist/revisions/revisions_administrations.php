@@ -32,7 +32,7 @@ function revisions_upgrade($nom_meta_base_version,$version_cible){
 	if (!isset($GLOBALS['meta'][$nom_meta_base_version])){
 		$trouver_table = charger_fonction('trouver_table','base');
 		if ($desc = $trouver_table('spip_versions')
-		  AND isset($desc['exist'])){
+		  AND isset($desc['exist']) AND $desc['exist']){
 			ecrire_meta($nom_meta_base_version,'1.0.0');
 		}
 		// si pas de table en base, on fera une simple creation de base

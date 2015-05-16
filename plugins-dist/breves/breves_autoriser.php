@@ -28,7 +28,7 @@ function autoriser_brevecreer_menu_dist($faire, $type, $id, $qui, $opt){
 
 
 // Autoriser a creer une breve dans la rubrique $id
-// http://doc.spip.org/@autoriser_rubrique_creerbrevedans_dist
+// http://code.spip.net/@autoriser_rubrique_creerbrevedans_dist
 function autoriser_rubrique_creerbrevedans_dist($faire, $type, $id, $qui, $opt) {
 	$r = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=".intval($id));
 	return
@@ -42,7 +42,7 @@ function autoriser_rubrique_creerbrevedans_dist($faire, $type, $id, $qui, $opt) 
 // Autoriser a modifier la breve $id
 // = admins & redac si la breve n'est pas publiee
 // = admins de rubrique parente si publiee
-// http://doc.spip.org/@autoriser_breve_modifier_dist
+// http://code.spip.net/@autoriser_breve_modifier_dist
 function autoriser_breve_modifier_dist($faire, $type, $id, $qui, $opt) {
 	$r = sql_fetsel("id_rubrique,statut", "spip_breves", "id_breve=".intval($id));
 	return

@@ -29,7 +29,7 @@ include_spip('inc/forum');
  * #FORMULAIRE_FORUM_PRIVE seul calcule (objet, id_objet) depuis la boucle parente
  * #FORMULAIRE_FORUM_PRIVE{#SELF} pour forcer l'url de retour
  * #FORMULAIRE_FORUM_PRIVE{#SELF, article, 3} pour forcer l'objet et son identifiant
- * http://doc.spip.org/@balise_FORMULAIRE_FORUM_PRIVE
+ * http://code.spip.net/@balise_FORMULAIRE_FORUM_PRIVE
  *
  * @param Object $p
  * @return Object
@@ -79,7 +79,7 @@ function balise_FORMULAIRE_FORUM_PRIVE ($p) {
 /**
  * Chercher l'objet/id_objet et la configuration du forum
  *
- * http://doc.spip.org/@balise_FORMULAIRE_FORUM_PRIVE_stat
+ * http://code.spip.net/@balise_FORMULAIRE_FORUM_PRIVE_stat
  *
  * @param array $args
  * @param array $context_compil

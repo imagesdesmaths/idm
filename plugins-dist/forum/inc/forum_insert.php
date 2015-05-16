@@ -17,7 +17,7 @@ include_spip('inc/actions');
 
 // Ce fichier est inclus par dist/formulaires/forum.php
 
-// http://doc.spip.org/@mots_du_forum
+// http://code.spip.net/@mots_du_forum
 function mots_du_forum($ajouter_mot, $id_message)
 {
 	include_spip('action/editer_mot');
@@ -26,7 +26,7 @@ function mots_du_forum($ajouter_mot, $id_message)
 
 
 
-// http://doc.spip.org/@tracer_erreur_forum
+// http://code.spip.net/@tracer_erreur_forum
 function tracer_erreur_forum($type='') {
 	spip_log("erreur forum ($type): ".print_r($_POST, true));
 
@@ -43,7 +43,7 @@ function tracer_erreur_forum($type='') {
 /**
  * Un parametre permet de forcer le statut (exemple: plugin antispam)
  *
- * http://doc.spip.org/@inc_forum_insert_dist
+ * http://code.spip.net/@inc_forum_insert_dist
  *
  * @param $objet
  * @param $id_objet
@@ -98,7 +98,7 @@ function inc_forum_insert_dist($objet, $id_objet, $id_forum, $force_statut = NUL
 
 }
 
-// http://doc.spip.org/@forum_insert_base
+// http://code.spip.net/@forum_insert_base
 function forum_insert_base($c, $id_forum, $objet, $id_objet, $statut, $ajouter_mot = false)
 {
 
@@ -164,7 +164,7 @@ function forum_insert_base($c, $id_forum, $objet, $id_objet, $statut, $ajouter_m
 }
 
 
-// http://doc.spip.org/@forum_insert_statut
+// http://code.spip.net/@forum_insert_statut
 function forum_insert_statut($champs, $forcer_statut=NULL)
 {
 	include_spip('inc/forum');

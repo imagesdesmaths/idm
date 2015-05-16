@@ -35,7 +35,7 @@ blockquote.spip { min-height: 40px; background: url(img/quote.png) no-repeat; }
 .spip_code,
 .spip_cadre { font-family: 'Courier New', Courier, monospace; font-size: 1em; }
 
-/* Enluminures typo V3 / Cf.: http://www.spip-contrib.net/3118 */
+/* Enluminures typo V3 / Cf.: http://contrib.spip.net/3118 */
 sc, .sc { font-variant: small-caps; }
 .caractencadre-spip { background-color: #FFFFCC; color: purple; }
 .caractencadre2-spip { background-color: #FFFFCC; color: orange; }
