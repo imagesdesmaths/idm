@@ -86,7 +86,7 @@ function concatener_fichiers($files,$format='js', $callbacks = array()){
 
 					// preparer le contenu si necessaire
 					if ($callback_pre)
-						$contenu = $callback_pre($contenu, $url_base);
+						$contenu = $callback_pre($contenu, url_absolue(_DIR_RESTREINT?generer_url_public($file[0],$file[1]):$url_base));
 					// enlever le var_mode si present pour retrouver la css minifiee standard
 					if (strpos($file[1],'var_mode')!==false) {
 						if (!$files2) $files2 = $files;

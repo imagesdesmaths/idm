@@ -43,4 +43,13 @@ function dump_afficher_tables_sauvegardees($status_file) {
 	return $corps;
 }
 
+function dump_afficher_erreurs($status_file) {
+	$erreurs = "";
+	$status = dump_lire_status($status_file);
+	if (isset($status['errors'])){
+		$erreurs = implode("<br />",$status['errors']);
+	}
+
+	return $erreurs;
+}
 ?>

@@ -185,7 +185,7 @@ print_r (get_feed_from_url("http://willy.boerland.com/myblog/"));
 *****************************    Resultat *****************************************
 Array
 (
-    [0] => http://www.spip-contrib.net/backend.php
+    [0] => http://contrib.spip.net/backend.php
 )
 Array
 (

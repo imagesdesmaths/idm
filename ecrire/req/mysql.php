@@ -182,7 +182,7 @@ function spip_mysql_query($query, $serveur='',$requeter=true) {
 	// ajouter un debug utile dans log/mysql-slow.log ?
 	$debug = '';
 	if (defined('_DEBUG_SLOW_QUERIES') AND _DEBUG_SLOW_QUERIES){
-		if($GLOBALS['debug']['aucasou']){
+		if(isset($GLOBALS['debug']['aucasou'])){
 			list(,$id,, $infos) = $GLOBALS['debug']['aucasou'];
 			$debug .= " BOUCLE$id @ ".$infos[0] ." | ";
 		}
@@ -486,9 +486,9 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 		return;
 
 	$res = spip_mysql_query("SELECT version() as v");
-	if ($row = mysql_fetch_array($res)
-	 && (version_compare($row['v'],'5.0','>=')))
-		spip_mysql_query("SET sql_mode=''");
+	if (($row = mysql_fetch_array($res)) && (version_compare($row['v'],'5.0','>='))) {
+		spip_mysql_query("SET sql_mode=''", $serveur);
+	}
 
 	foreach($cles as $k => $v) {
 		$keys .= "$s\n\t\t$k ($v)";
@@ -639,6 +639,7 @@ function spip_mysql_repair($table, $serveur='',$requeter=true)
 	return spip_mysql_query("REPAIR TABLE `$table`", $serveur, $requeter);
 }
 
+define('_MYSQL_RE_SHOW_TABLE', '/^[^(),]*\(((?:[^()]*\((?:[^()]*\([^()]*\))?[^()]*\)[^()]*)*[^()]*)\)[^()]*$/');
 // Recupere la definition d'une table ou d'une vue MySQL
 // colonnes, indexes, etc.
 // au meme format que la definition des tables de SPIP
@@ -656,11 +657,11 @@ function spip_mysql_showtable($nom_table, $serveur='',$requeter=true)
 	if (!$requeter) return $s;
 
 	list(,$a) = mysql_fetch_array($s ,MYSQL_NUM);
-	if (preg_match("/^[^(),]*\((([^()]*\([^()]*\)[^()]*)*)\)[^()]*$/", $a, $r)){
+	if (preg_match(_MYSQL_RE_SHOW_TABLE, $a, $r)){
 		$desc = $r[1];
 		// extraction d'une KEY éventuelle en prenant garde de ne pas
 		// relever un champ dont le nom contient KEY (ex. ID_WHISKEY)
-		if (preg_match("/^(.*?),([^,]*KEY[ (].*)$/s", $desc, $r)) {
+		if (preg_match("/^(.*?),([^,]*\sKEY[ (].*)$/s", $desc, $r)) {
 		  $namedkeys = $r[2];
 		  $desc = $r[1];
 		}
@@ -674,8 +675,8 @@ function spip_mysql_showtable($nom_table, $serveur='',$requeter=true)
 		}
 		$keys = array();
 
-		foreach(preg_split('/\)\s*,?/',$namedkeys) as $v) {
-		  if (preg_match("/^\s*([^(]*)\((.*)$/",$v,$r)) {
+		foreach(preg_split('/\)\s*(,|$)/',$namedkeys) as $v) {
+		  if (preg_match("/^\s*([^(]*)\(([^(]*(\(\d+\))?)$/",$v,$r)) {
 			$k = str_replace("`", '', trim($r[1]));
 			$t = strtolower(str_replace("`", '', $r[2]));
 			if ($k && !isset($keys[$k])) $keys[$k] = $t; else $keys[] = $t;

@@ -1161,7 +1161,7 @@ function affdate_heure($numdate) {
  * - Du 20 fevrier 2007 au 30 mars 2008
  * $horaire='oui' ou true permet d'afficher l'horaire, toute autre valeur n'indique que le jour
  * $forme peut contenir une ou plusieurs valeurs parmi
- *  - abbr (afficher le nom des jours en abbrege)
+ *  - abbr (afficher le nom des jours en abrege)
  *  - hcal (generer une date au format hcal)
  *  - jour (forcer l'affichage des jours)
  *  - annee (forcer l'affichage de l'annee)
@@ -1170,10 +1170,10 @@ function affdate_heure($numdate) {
  * @param string $date_fin
  * @param string $horaire
  * @param string $forme
- *   abbr pour afficher le nom du jour en abbrege (Dim. au lieu de Dimanche)
+ *   abbr pour afficher le nom du jour en abrege (Dim. au lieu de Dimanche)
  *   annee pour forcer l'affichage de l'annee courante
  *   jour pour forcer l'affichage du nom du jour
- *   hcal pour pour avoir un markup microformat abbr
+ *   hcal pour avoir un markup microformat abbr
  * @return string
  */
 function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
@@ -2557,8 +2557,7 @@ function encoder_contexte_ajax($c,$form='', $emboite=NULL, $ajaxid='') {
 	if ($ajaxid AND is_string($ajaxid)){
 		$class .= ' ajax-id-'.$ajaxid;
 	}
-	$compl = "aria-live='polite' aria-atomic='true' ";
-	return "<div class='$class' ".$compl."data-ajax-env='$env'$r>\n$emboite</div><!--ajaxbloc-->\n";
+	return "<div class='$class' "."data-ajax-env='$env'$r>\n$emboite</div><!--ajaxbloc-->\n";
 }
 
 // la procedure inverse de encoder_contexte_ajax()

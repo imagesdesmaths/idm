@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-// http://doc.spip.org/@analyser_site
+// http://code.spip.net/@analyser_site
 function analyser_site($url) {
 	include_spip('inc/filtres');
 	include_spip('inc/distant');

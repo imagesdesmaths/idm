@@ -609,6 +609,53 @@ function svp_traduire_type_depot($type) {
 	return $traduction;
 }
 
+
+/**
+ * Calcule l'url exacte d'un lien de démo en fonction de son écriture
+ *
+ * @param string $url_demo
+ *     URL de démonstration telle que saisie dans le paquet.xml
+ * @param boolean $url_absolue
+ *     Indique que seules les url absolues doivent être retournées par la fonction.
+ *     Tous les autres types d'url renvoient une chaine vide
+ * @return string
+ *     URL calculée en fonction de l'URL d'entrée
+**/
+function svp_calculer_url_demo($url_demo, $url_absolue=false) {
+
+	$url_calculee = '';
+    $url_demo = trim($url_demo);
+    if (strlen($url_demo) > 0) {
+        $url_elements = @parse_url($url_demo);
+        if (isset($url_elements['scheme']) AND $url_elements['scheme']) {
+            // Cas 1 : http://xxxx. C'est donc une url absolue que l'on conserve telle qu'elle.
+            $url_calculee = $url_demo;
+        }
+        else {
+            if (!$url_absolue) {
+                if (isset($url_elements['query']) AND $url_elements['query']) {
+                    // Cas 2 : ?exec=xxx ou ?page=yyy. C'est donc une url relative que l'on transforme
+                    // en url absolue privée ou publique en fonction de la query.
+                    $egal = strpos($url_elements['query'], '=');
+                    $page = substr($url_elements['query'], $egal+1, strlen($url_elements['query']) - $egal - 1);
+                    if (strpos($url_elements['query'], 'exec=') !== false) {
+                        $url_calculee = generer_url_ecrire($page);
+                    }
+                    else {
+                        $url_calculee = generer_url_public($page);
+                    }
+                }
+                elseif (isset($url_elements['path']) AND $url_elements['path']) {
+                    // Cas 3 : xxx/yyy. C'est donc une url relative que l'on transforme
+                    $url_calculee = generer_url_public($url_demo);
+                }
+            }
+        }
+	}
+
+	return $url_calculee;
+}
+
 /**
  * Critère de compatibilité avec une version précise ou une branche de SPIP.
  * 

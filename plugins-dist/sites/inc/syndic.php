@@ -21,7 +21,7 @@ include_spip('genie/syndic');
 
 // prend un fichier backend et retourne un tableau des items lus,
 // et une chaine en cas d'erreur
-// http://doc.spip.org/@analyser_backend
+// http://code.spip.net/@analyser_backend
 function analyser_backend($rss, $url_syndic='') {
 	include_spip('inc/texte'); # pour couper()
 
@@ -290,7 +290,7 @@ function analyser_backend($rss, $url_syndic='') {
 
 // helas strtotime ne reconnait pas le format W3C
 // http://www.w3.org/TR/NOTE-datetime
-// http://doc.spip.org/@my_strtotime
+// http://code.spip.net/@my_strtotime
 function my_strtotime($la_date, $lang=null) {
 	// format complet
 	if (preg_match(
@@ -356,7 +356,7 @@ function my_strtotime($la_date, $lang=null) {
 }
 // A partir d'un <dc:subject> ou autre essayer de recuperer
 // le mot et son url ; on cree <a href="url" rel="tag">mot</a>
-// http://doc.spip.org/@creer_tag
+// http://code.spip.net/@creer_tag
 function creer_tag($mot,$type,$url) {
 	if (!strlen($mot = trim($mot))) return '';
 	$mot = "<a rel=\"tag\">$mot</a>";
@@ -368,7 +368,7 @@ function creer_tag($mot,$type,$url) {
 }
 
 
-// http://doc.spip.org/@ajouter_tags
+// http://code.spip.net/@ajouter_tags
 function ajouter_tags($matches, $item) {
 	include_spip('inc/filtres');
 	$tags = array();
@@ -430,7 +430,7 @@ function ajouter_tags($matches, $item) {
 
 
 // Lit contenu des blocs [[CDATA]] dans un flux
-// http://doc.spip.org/@cdata_echappe_retour
+// http://code.spip.net/@cdata_echappe_retour
 function cdata_echappe(&$rss, &$echappe_cdata) {
 	$echappe_cdata = array();
 	if (preg_match_all(',<!\[CDATA\[(.*)]]>,Uims', $rss,
@@ -446,7 +446,7 @@ function cdata_echappe(&$rss, &$echappe_cdata) {
 }
 
 // Retablit le contenu des blocs [[CDATA]] dans une chaine ou un tableau
-// http://doc.spip.org/@cdata_echappe_retour
+// http://code.spip.net/@cdata_echappe_retour
 function cdata_echappe_retour(&$x, &$echappe_cdata) {
 	if (is_string($x)) {
 		if (strpos($x, '@@@SPIP_CDATA') !== false

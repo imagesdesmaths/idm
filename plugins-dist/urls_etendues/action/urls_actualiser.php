@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@action_instituer_syndic_article_dist
+// http://code.spip.net/@action_instituer_syndic_article_dist
 function action_urls_actualiser_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');

@@ -39,7 +39,7 @@ function formulaires_editer_groupe_mot_identifier_dist($id_groupe='new',$retour=
 }
 
 // Choix par defaut des options de presentation
-// http://doc.spip.org/@articles_edit_config
+// http://code.spip.net/@articles_edit_config
 function groupes_mots_edit_config($row)
 {
 	global $spip_ecran, $spip_lang;
@@ -56,7 +56,7 @@ function formulaires_editer_groupe_mot_verifier_dist($id_groupe='new',$retour=''
 	return $erreurs;
 }
 
-// http://doc.spip.org/@inc_editer_groupe_mot_dist
+// http://code.spip.net/@inc_editer_groupe_mot_dist
 function formulaires_editer_groupe_mot_traiter_dist($id_groupe='new',$retour='', $config_fonc='groupes_mots_edit_config', $row=array(), $hidden=''){
 	set_request('redirect','');
 	// cas des checkbox : injecter la valeur non si rien de coche

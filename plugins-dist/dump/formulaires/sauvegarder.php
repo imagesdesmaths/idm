@@ -35,6 +35,9 @@ function formulaires_sauvegarder_charger_dist(){
 		'_tables' => "<ol class='spip'><li class='choix'>\n" . join("</li>\n<li class='choix'>",
 		  base_saisie_tables('tables', $tables, $exclude, _request('nom_sauvegarde')?(_request('tables')?_request('tables'):array()):null)
 			) . "</li></ol>\n",
+		/* Si la fonction n'existe pas (vieux plugin migration actif), on met 'spip', ca n'affichera rien
+		mais ne perturbe pas la sauvegarde qui utilisera bien le bon prefixe */
+		'_prefixe' => function_exists('base_prefixe_tables')?base_prefixe_tables(''):'spip',
 	);
 
 	return $valeurs;

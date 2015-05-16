@@ -125,7 +125,7 @@ function forum_afficher_fiche_objet($flux){
 		else
 			$n_forums = 0;
 		if ($n_forums)
-	  	$flux['data'] .= icone_verticale(_T('forum:icone_suivi_forum', array('nb_forums' => $n_forums)), generer_url_ecrire("controler_forum","objet=rubrique&id_objet=$id_rubrique"), "forum-24.png", "", 'center');
+	  	$flux['data'] .= icone_verticale(_T('forum:icone_suivi_forum', array('nb_forums' => $n_forums)), generer_url_ecrire("controler_forum","objet=article&id_secteur=$id_rubrique&statut=prop"), "forum-24.png", "", 'center');
 	}
 	return $flux;
 }

@@ -53,7 +53,7 @@ $config_urls_propres = isset($GLOBALS['meta']['urls_propres'])?unserialize($GLOB
 if (!defined('_url_propres_sep_id')) define('_url_propres_sep_id',isset($config_urls_propres['url_propres_sep_id'])?$config_urls_propres['url_propres_sep_id']:'-');
 // option pour tout passer en minuscules
 if (!defined('_url_minuscules')) define('_url_minuscules',isset($config_urls_propres['url_minuscules'])?$config_urls_propres['url_minuscules']:0);
-if (!defined('_URLS_PROPRES_MAX')) define('_URLS_PROPRES_MAX', isset($config_urls_propres['URLS_PROPRES_MAX'])?$config_urls_propres['URLS_PROPRES_MAX']:35);
+if (!defined('_URLS_PROPRES_MAX')) define('_URLS_PROPRES_MAX', isset($config_urls_propres['URLS_PROPRES_MAX'])?$config_urls_propres['URLS_PROPRES_MAX']:80);
 if (!defined('_URLS_PROPRES_MIN')) define('_URLS_PROPRES_MIN', isset($config_urls_propres['URLS_PROPRES_MIN'])?$config_urls_propres['URLS_PROPRES_MIN']:3);
 
 if (!defined('_url_sep_id')) define('_url_sep_id',_url_propres_sep_id);
@@ -68,7 +68,7 @@ if (!defined('_MARQUEUR_URL')) define('_MARQUEUR_URL', serialize(array('rubrique
 
 // Retire les marqueurs de type dans une URL propre ancienne maniere
 
-// http://doc.spip.org/@retirer_marqueurs_url_propre
+// http://code.spip.net/@retirer_marqueurs_url_propre
 function retirer_marqueurs_url_propre($url_propre) {
 	if (preg_match(',^[+][-](.*?)[-][+]$,', $url_propre, $regs)) {
 		return $regs[1];
@@ -85,7 +85,7 @@ function retirer_marqueurs_url_propre($url_propre) {
 // precedent, un tableau indiquant le titre de l'objet, son type, son id,
 // et doit donner en retour une chaine d'url, sans se soucier de la
 // duplication eventuelle, qui sera geree apres
-// http://doc.spip.org/@creer_chaine_url
+// http://code.spip.net/@creer_chaine_url
 function urls_propres_creer_chaine_url($x) {
 	// NB: ici url_old ne sert pas, mais un plugin qui ajouterait une date
 	// pourrait l'utiliser pour juste ajouter la 
@@ -104,7 +104,7 @@ function urls_propres_creer_chaine_url($x) {
 
 // Trouver l'URL associee a la n-ieme cle primaire d'une table SQL
 
-// http://doc.spip.org/@declarer_url_propre
+// http://code.spip.net/@declarer_url_propre
 function declarer_url_propre($type, $id_objet) {
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table(table_objet($type));
@@ -204,7 +204,7 @@ function declarer_url_propre($type, $id_objet) {
 	return $set['url'];
 }
 
-// http://doc.spip.org/@_generer_url_propre
+// http://code.spip.net/@_generer_url_propre
 function _generer_url_propre($type, $id, $args='', $ancre='') {
 
 	if ($generer_url_externe = charger_fonction("generer_url_$type",'urls',true)) {
@@ -260,7 +260,7 @@ function _generer_url_propre($type, $id, $args='', $ancre='') {
 // retrouve le fond et les parametres d'une URL propre
 // ou produit une URL propre si on donne un parametre
 // @return array([contexte],[type],[url_redirect],[fond]) : url decodee
-// http://doc.spip.org/@urls_propres_dist
+// http://code.spip.net/@urls_propres_dist
 function urls_propres_dist($i, $entite, $args='', $ancre='') {
 
 	if (is_numeric($i))
@@ -347,11 +347,11 @@ function urls_propres_dist($i, $entite, $args='', $ancre='') {
 
 	// Compatibilite avec les anciens marqueurs d'URL propres
 	// Tester l'entree telle quelle (avec 'url_libre' des sites ont pu avoir des entrees avec marqueurs dans la table spip_urls)
-	if (!$row = sql_fetsel('id_objet, type, date, url', 'spip_urls', 'url='.sql_quote($url_propre))) {
+	if (!$row = sql_fetsel('id_objet, type, date, url', 'spip_urls', 'url='.sql_quote($url_propre, '', 'TEXT'))) {
 		// Sinon enlever les marqueurs eventuels
 		$url_propre2 = retirer_marqueurs_url_propre($url_propre);
 
-		$row = sql_fetsel('id_objet, type, date, url', 'spip_urls', 'url='.sql_quote($url_propre2));
+		$row = sql_fetsel('id_objet, type, date, url', 'spip_urls', 'url='.sql_quote($url_propre2, '', 'TEXT'));
 	}
 
 	if ($row) {
@@ -362,9 +362,9 @@ function urls_propres_dist($i, $entite, $args='', $ancre='') {
 
 		// Si l'url est vieux, donner le nouveau
 		if ($recent = sql_fetsel('url, date', 'spip_urls',
-		'type='.sql_quote($row['type']).' AND id_objet='.sql_quote($row['id_objet'])
-		.' AND date>'.sql_quote($row['date'])
-		.' AND url<>'.sql_quote($row['url']), '', 'date DESC', 1)) {
+		'type='.sql_quote($row['type'], '', 'TEXT').' AND id_objet='.sql_quote($row['id_objet'])
+		.' AND date>'.sql_quote($row['date'], '', 'TEXT')
+		.' AND url<>'.sql_quote($row['url'], '', 'TEXT'), '', 'date DESC', 1)) {
 			// Mode compatibilite pour conserver la distinction -Rubrique-
 			if (_MARQUEUR_URL) {
 				$marqueur = unserialize(_MARQUEUR_URL);

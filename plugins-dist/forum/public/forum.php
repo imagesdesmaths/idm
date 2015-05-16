@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // <BOUCLE(FORUMS)>
 //
-// http://doc.spip.org/@boucle_FORUMS_dist
+// http://code.spip.net/@boucle_FORUMS_dist
 function boucle_FORUMS_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
@@ -36,7 +36,7 @@ function boucle_FORUMS_dist($id_boucle, &$boucles) {
 
 // {meme_parent}
 // http://www.spip.net/@meme_parent
-// http://doc.spip.org/@critere_meme_parent_dist
+// http://code.spip.net/@critere_meme_parent_dist
 function critere_FORUMS_meme_parent_dist($idb, &$boucles, $crit) {
 	global $exceptions_des_tables;
 	$boucle = &$boucles[$idb];
@@ -79,7 +79,7 @@ function public_critere_secteur_forums_dist($idb, &$boucles, $val, $crit)
 // par exemple en tete de inc-forums.html ; impossible donc de
 // savoir a quel objet elle va s'appliquer, ca dependra du contexte
 //
-// http://doc.spip.org/@balise_PARAMETRES_FORUM_dist
+// http://code.spip.net/@balise_PARAMETRES_FORUM_dist
 function balise_PARAMETRES_FORUM_dist($p) {
 
 	// s'il y a un id_article dans le contexte, regarder le statut
@@ -213,7 +213,7 @@ function quete_accepter_forum($id_article) {
 // pour une boucle forum sans id_article ou id_rubrique donne par le contexte
 // et c'est signale par un message d'erreur abscons: "table inconnue forum".
 //
-// http://doc.spip.org/@lang_parametres_forum
+// http://code.spip.net/@lang_parametres_forum
 function lang_parametres_forum($qs, $lang) {
 	if (is_array($lang) AND preg_match(',id_([a-z_]+)=([0-9]+),', $qs, $r)) {
 		$id = 'id_' . $r[1];
@@ -231,7 +231,7 @@ function lang_parametres_forum($qs, $lang) {
 // Pour que le compilo ajoute un invalideur a la balise #PARAMETRES_FORUM
 // Noter l'invalideur de la page contenant ces parametres,
 // en cas de premier post sur le forum
-// http://doc.spip.org/@code_invalideur_forums
+// http://code.spip.net/@code_invalideur_forums
 function code_invalideur_forums_dist($p, $code) {
 	return $code;
 }

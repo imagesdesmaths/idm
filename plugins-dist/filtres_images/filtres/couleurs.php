@@ -20,7 +20,7 @@ include_spip('inc/filtres_images_lib_mini');
  *  - sont chainables les unes derrieres les autres dans toutes les combinaisons possibles
  */
 
-// http://doc.spip.org/@couleur_extraire
+// http://code.spip.net/@couleur_extraire
 function couleur_extraire ($img, $x=10, $y=6) {
 	include_spip('filtres/images_lib');
 	return _image_couleur_extraire($img, $x, $y);
@@ -28,7 +28,7 @@ function couleur_extraire ($img, $x=10, $y=6) {
 
 
 
-// http://doc.spip.org/@couleur_web
+// http://code.spip.net/@couleur_web
 function couleur_web($couleur) {
 	include_spip('filtres/images_lib');
 	$rvb = _couleur_hex_to_dec($couleur);
@@ -38,7 +38,7 @@ function couleur_web($couleur) {
 	return _couleur_dec_to_hex($rvb['red'],$rvb['green'],$rvb['blue']);
 }
 
-// http://doc.spip.org/@couleur_4096
+// http://code.spip.net/@couleur_4096
 function couleur_4096($couleur) {
 	$r = (substr($couleur, 0, 1));
 	$v = (substr($couleur, 2, 1));
@@ -48,7 +48,7 @@ function couleur_4096($couleur) {
 }
 
 
-// http://doc.spip.org/@couleur_extreme
+// http://code.spip.net/@couleur_extreme
 function couleur_extreme ($couleur, $limite=0.5) {
 	// force la couleur au noir ou au blanc le plus proche
 	// -> donc couleur foncee devient noire
@@ -77,7 +77,7 @@ function couleur_extreme ($couleur, $limite=0.5) {
 	return $couleur_texte;
 }
 
-// http://doc.spip.org/@couleur_inverser
+// http://code.spip.net/@couleur_inverser
 function couleur_inverser ($couleur) {
 	$couleurs = _couleur_hex_to_dec($couleur);
 	$red = 255 - $couleurs["red"];
@@ -89,7 +89,7 @@ function couleur_inverser ($couleur) {
 	return $couleur;
 }
 
-// http://doc.spip.org/@couleur_foncer_si_claire
+// http://code.spip.net/@couleur_foncer_si_claire
 function couleur_foncer_si_claire ($couleur, $seuil=122) {
 	// ne foncer que les couleurs claires
 	// utile pour ecrire sur fond blanc, 
@@ -108,7 +108,7 @@ function couleur_foncer_si_claire ($couleur, $seuil=122) {
 	else return $couleur;
 }
 
-// http://doc.spip.org/@couleur_eclaircir_si_foncee
+// http://code.spip.net/@couleur_eclaircir_si_foncee
 function couleur_eclaircir_si_foncee ($couleur, $seuil=123) {
 	$couleurs = _couleur_hex_to_dec($couleur);
 	$red = $couleurs["red"];
@@ -124,7 +124,7 @@ function couleur_eclaircir_si_foncee ($couleur, $seuil=123) {
 	else return $couleur;
 }
 
-// http://doc.spip.org/@couleur_saturation
+// http://code.spip.net/@couleur_saturation
 function couleur_saturation($couleur, $val) {
 	if ($couleur == "ffffff") $couleur = "eeeeee";
 
@@ -145,7 +145,7 @@ function couleur_saturation($couleur, $val) {
 		
 }
 
-// http://doc.spip.org/@couleur_luminance
+// http://code.spip.net/@couleur_luminance
 function couleur_luminance($couleur, $val) {
 	include_spip('filtres/images_lib');
 
