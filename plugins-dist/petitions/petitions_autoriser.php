@@ -18,7 +18,7 @@ function petitions_autoriser() {}
 // Moderer la petition ?
 // = modifier l'article correspondant
 // = droits par defaut sinon (admin complet pour moderation de tout)
-// http://doc.spip.org/@autoriser_modererpetition_dist
+// http://code.spip.net/@autoriser_modererpetition_dist
 function autoriser_modererpetition_dist($faire, $type, $id, $qui, $opt) {
 	return
 		autoriser('modifier', $type, $id, $qui, $opt);
@@ -55,7 +55,7 @@ function autoriser_signature_relancer($faire, $type, $id, $qui, $opt) {
 
 // Modifier une signature ?
 // = jamais !
-// http://doc.spip.org/@autoriser_signature_modifier_dist
+// http://code.spip.net/@autoriser_signature_modifier_dist
 function autoriser_signature_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return
 		false;

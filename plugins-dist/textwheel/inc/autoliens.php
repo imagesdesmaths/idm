@@ -2,7 +2,7 @@
 
 
 // Les URLs brutes sont converties en <a href='url'>url</a>
-// http://doc.spip.org/@traiter_raccourci_liens
+// http://code.spip.net/@traiter_raccourci_liens
 function tw_autoliens($t) {
 
 	defined('_EXTRAIRE_LIENS') || define('_EXTRAIRE_LIENS', ',' . '\[[^\[\]]*(?:<-|->).*?\]' . '|<a\b.*?</a\b' . '|<\w.*?>' . '|((?:https?:/|www\.)[^"\'\s\[\]\}\)<>]*)' .',imsS');
@@ -21,7 +21,7 @@ function tw_autoliens($t) {
 
 
 // callback pour la fonction autoliens()
-// http://doc.spip.org/@autoliens_callback
+// http://code.spip.net/@autoliens_callback
 function tw_traiter_autoliens($r) {
 	if (count($r)<2) return reset($r);
 	list($tout, $l) = $r;

@@ -18,7 +18,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS['medias_liste_champs'][] = 'texte';
 $GLOBALS['medias_liste_champs'][] = 'chapo';
  
-// http://doc.spip.org/@marquer_doublons_documents
+// http://code.spip.net/@marquer_doublons_documents
 function inc_marquer_doublons_doc_dist($champs,$id,$type,$id_table_objet,$table_objet,$spip_table_objet, $desc=array(), $serveur=''){
 	$champs_selection=array();
 

@@ -2,7 +2,7 @@
 [(#AUTORISER{creer,groupemots}|oui)
 <p><:mots:info_creation_mots_cles|typo:> #AIDER{mots}</p>
 ]
-<BOUCLE_groupes(GROUPES_MOTS){par multi titre}>[(#AUTORISER{voir,groupemots,#ID_GROUPE}|oui)
+<BOUCLE_groupes(GROUPES_MOTS){par num titre}{par multi titre}>[(#AUTORISER{voir,groupemots,#ID_GROUPE}|oui)
 	<div class="groupe_mots" id="groupe_mots-#ID_GROUPE">
 		[(#BOITE_OUVRIR{[[(#RANG). ](#TITRE)[(#CHEMIN_IMAGE{groupe_mots-24.png}|balise_img{'',cadre-icone})]],'simple','titrem'})]
 			[(#AUTORISER{modifier,groupemots,#ID_GROUPE})

@@ -18,7 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * le texte de celle-ci sinon (et ' ' si il est vide)
  * cf FORMULAIRE_PETITION
  *
- * http://doc.spip.org/@balise_PETITION_dist
+ * http://code.spip.net/@balise_PETITION_dist
  *
  * @param $p
  * @return

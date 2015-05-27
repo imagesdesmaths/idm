@@ -1,7 +1,7 @@
 <paquet
 	prefix="organiseur"
 	categorie="date"
-	version="0.8.10"
+	version="0.8.11"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/calendrier-32.png"

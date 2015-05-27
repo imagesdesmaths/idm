@@ -195,7 +195,7 @@ function petition_instituer($id_petition, $c) {
 	return ''; // pas d'erreur
 }
 
-// http://doc.spip.org/@revision_petition
+// http://code.spip.net/@revision_petition
 function revision_petition($id_petition, $c=null) {
 	return petition_modifier($id_petition,$c);
 }

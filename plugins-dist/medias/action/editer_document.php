@@ -249,12 +249,22 @@ function medias_revision_document_parents($id_document, $parents=null, $ajout=fa
 	if (!$ajout){
 		foreach($liens as $k=>$lien)
 			if (!isset($objets_parents[$lien['objet']]) OR !in_array($lien['id_objet'],$objets_parents[$lien['objet']])) {
-				objet_dissocier(array('document'=>$id_document),array($lien['objet']=>$lien['id_objet']));
+				if (autoriser('dissocierdocuments',$lien['objet'],$lien['id_objet'])){
+					objet_dissocier(array('document'=>$id_document),array($lien['objet']=>$lien['id_objet']));
+				}
 				unset($liens[$k]);
 			}
 			else $deja_parents[$lien['objet']][] = $lien['id_objet'];
 	}
 
+	// verifier les droits d'associer
+	foreach($objets_parents as $objet=>$ids){
+		foreach($ids as $k=>$id){
+			if (!autoriser('associerdocuments',$objet,$id)){
+				unset($objets_parents[$objet][$k]);
+			}
+		}
+	}
 	objet_associer(array('document'=>$id_document),$objets_parents);
 
 }

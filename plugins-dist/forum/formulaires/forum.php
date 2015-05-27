@@ -162,7 +162,7 @@ function formulaires_forum_charger_dist($objet, $id_objet, $id_forum,
  * Ce systeme n'est pas fonctionnel pour les forums sans previsu (notamment
  * si $afficher_previsu = 'non')
  *
- * http://doc.spip.org/@forum_fichier_tmp
+ * http://code.spip.net/@forum_fichier_tmp
  *
  * @param $arg
  * @return int
@@ -211,6 +211,7 @@ function formulaires_forum_verifier_dist($objet, $id_objet, $id_forum,
 	include_spip('base/abstract_sql');
 
 	$erreurs = array();
+	$doc = array();
 
 	// desactiver id_rubrique si un id_article ou autre existe dans le contexte
 	// if ($id_article OR $id_breve OR $id_forum OR $id_syndic)
@@ -219,33 +220,34 @@ function formulaires_forum_verifier_dist($objet, $id_objet, $id_forum,
 	// stocker un eventuel document dans un espace temporaire
 	// portant la cle du formulaire ; et ses metadonnees avec
 
-	if (!isset($GLOBALS['visiteur_session']['tmp_forum_document']))
-		session_set('tmp_forum_document',
-			sous_repertoire(_DIR_TMP, 'documents_forum') . md5(uniqid(rand())));
-	$tmp = $GLOBALS['visiteur_session']['tmp_forum_document'];
-	$doc = &$_FILES['ajouter_document'];
 	if (isset($_FILES['ajouter_document'])
-		AND $_FILES['ajouter_document']['tmp_name']
-	){
-		// securite :
-		// verifier si on possede la cle (ie on est autorise a poster)
-		// (sinon tant pis) ; cf. charger.php pour la definition de la cle
-		if (_request('cle_ajouter_document')!=calculer_cle_action($a = "ajouter-document-$objet-$id_objet")){
+		AND $_FILES['ajouter_document']['tmp_name']){
+
+		$acceptes = forum_documents_acceptes();
+		if (
+			// si on a poste un $_FILES mais que l'option n'est pas active : cas produit par les bots qui spamment automatiquement
+			!count($acceptes)
+			// securite :
+			// verifier si on possede la cle (ie on est autorise a poster)
+			// (sinon tant pis) ; cf. charger.php pour la definition de la cle
+		  OR _request('cle_ajouter_document')!=calculer_cle_action($a = "ajouter-document-$objet-$id_objet")
+		){
 			$erreurs['document_forum'] = _T('forum:documents_interdits_forum');
 			unset($_FILES['ajouter_document']);
 		}
 		else {
+			if (!isset($GLOBALS['visiteur_session']['tmp_forum_document']))
+				session_set('tmp_forum_document', sous_repertoire(_DIR_TMP, 'documents_forum') . md5(uniqid(rand())));
+
+			$tmp = $GLOBALS['visiteur_session']['tmp_forum_document'];
+			$doc = &$_FILES['ajouter_document'];
+
 			include_spip('inc/joindre_document');
 			include_spip('action/ajouter_documents');
 			list($extension, $doc['name']) = fixer_extension_document($doc);
-			$acceptes = forum_documents_acceptes();
 
 			if (!in_array($extension, $acceptes)){
-				# normalement on n'arrive pas ici : pas d'upload si aucun format
-				if (!$formats = join(', ', $acceptes)){
-					$formats = '-'; //_L('aucun');
-				}
-				$erreurs['document_forum'] = _T('public:formats_acceptes', array('formats' => $formats));
+				$erreurs['document_forum'] = _T('public:formats_acceptes', array('formats' => join(', ', $acceptes)));
 			}
 			else {
 				include_spip('inc/getdocument');
@@ -261,19 +263,22 @@ function formulaires_forum_verifier_dist($objet, $id_objet, $id_forum,
 			if (isset($erreurs['document_forum'])){
 				spip_unlink($tmp . '.bin');
 				unset ($_FILES['ajouter_document']);
-			}
-			else {
+			} else {
 				$doc['tmp_name'] = $tmp . '.bin';
 				ecrire_fichier($tmp . '.txt', serialize($doc));
 			}
 		}
-	} // restaurer le document uploade au tour precedent
-	elseif (file_exists($tmp . '.bin')){
+	}
+	// restaurer/supprimer le document eventuellement uploade au tour precedent
+	elseif (isset($GLOBALS['visiteur_session']['tmp_forum_document'])
+	  AND $tmp = $GLOBALS['visiteur_session']['tmp_forum_document']
+	  AND file_exists($tmp . '.bin')){
 		if (_request('supprimer_document_ajoute')){
 			spip_unlink($tmp . '.bin');
 			spip_unlink($tmp . '.txt');
 		}
 		elseif (lire_fichier($tmp . '.txt', $meta)){
+			$doc = &$_FILES['ajouter_document'];
 			$doc = @unserialize($meta);
 		}
 	}
@@ -359,7 +364,7 @@ function forum_documents_acceptes(){
 /**
  * Preparer la previsu d'un message de forum
  *
- * http://doc.spip.org/@inclure_previsu
+ * http://code.spip.net/@inclure_previsu
  *
  * @param string $texte
  * @param string $titre

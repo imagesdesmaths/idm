@@ -352,6 +352,14 @@ q=
 q=
 (.*\.|)ecosia\.org
 
+[Wow]
+q=
+(.*\.|)wow\.com
+
+[Accentice]
+q=
+(.*\.|)accentice\.com
+
 #
 # Services de mail
 # 

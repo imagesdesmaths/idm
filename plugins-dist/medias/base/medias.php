@@ -183,7 +183,7 @@ function medias_declarer_tables_objets_sql($tables){
 /**
  * Creer la table des types de document
  *
- * http://doc.spip.org/@creer_base_types_doc
+ * http://code.spip.net/@creer_base_types_doc
  *
  * @param string $serveur
  * @return void

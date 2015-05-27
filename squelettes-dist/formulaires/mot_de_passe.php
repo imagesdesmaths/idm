@@ -52,7 +52,7 @@ function formulaires_mot_de_passe_charger_dist($id_auteur=null, $jeton=null){
 			$valeurs['_hidden'] = '<input type="hidden" name="p" value="'.$jeton.'" />';
 	}
 	else {
-		$valeurs['_hidden'] = _T('pass_erreur_code_inconnu');
+		$valeurs['message_erreur'] = _T('pass_erreur_code_inconnu');
 		$valeurs['editable'] =  false; // pas de saisie
 	}
 	$valeurs['oubli']='';
@@ -99,7 +99,8 @@ function formulaires_mot_de_passe_verifier_dist($id_auteur=null, $jeton=null){
  * @param int $id_auteur
  */
 function formulaires_mot_de_passe_traiter_dist($id_auteur=null, $jeton=null){
-	$message = '';
+	$res = array('message_ok'=>'');
+	refuser_traiter_formulaire_ajax(); // puisqu'on va loger l'auteur a la volee (c'est bonus)
 
 	// compatibilite anciens appels du formulaire
 	if (is_null($jeton)) $jeton = _request('p');
@@ -110,13 +111,20 @@ function formulaires_mot_de_passe_traiter_dist($id_auteur=null, $jeton=null){
 	 && ($oubli = _request('oubli'))) {
 		include_spip('action/editer_auteur');
 		include_spip('action/inscrire_auteur');
-		auteurs_set($id_auteur, array('pass'=>$oubli));
-		auteur_effacer_jeton($id_auteur);
+		if ($err = auteur_modifier($id_auteur, array('pass'=>$oubli))){
+			$res = array('message_erreur'=>$err);
+		}
+		else {
+			auteur_effacer_jeton($id_auteur);
+			$login = $row['login'];
+			$res['message_ok'] = "<b>" . _T('pass_nouveau_enregistre') . "</b>".
+			"<br />" . _T('pass_rappel_login', array('login' => $login));
 
-		$login = $row['login'];
-		$message = "<b>" . _T('pass_nouveau_enregistre') . "</b>".
-		"<br />" . _T('pass_rappel_login', array('login' => $login));
+			include_spip('inc/auth');
+			$row = sql_fetsel("*","spip_auteurs","id_auteur=".intval($id_auteur));
+			auth_loger($row);
+		}
 	}
-	return array('message_ok'=>$message);
+	return $res;
 }
 ?>

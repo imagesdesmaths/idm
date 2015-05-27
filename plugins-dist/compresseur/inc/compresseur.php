@@ -224,12 +224,14 @@ function &compresseur_callback_prepare_css(&$css, $is_inline = false, $fonctions
 	if (!preg_match(',\.css$,i', $css, $r)) return $css;
 
 	$url_absolue_css = url_absolue($css);
+	// retirer le protocole de $url_absolue_css
+	$url_absolue_css_implicite = protocole_implicite($url_absolue_css);
 
 	if (!$fonctions) $fonctions = compresseur_liste_fonctions_prepare_css();
 	elseif (is_string($fonctions)) $fonctions = array($fonctions);
 
 	$sign = implode(",",$fonctions);
-	$sign = substr(md5("$css-$sign"), 0,8);
+	$sign = substr(md5("$url_absolue_css_implicite-$sign"), 0,8);
 
 	$file = basename($css,'.css');
 	$file = sous_repertoire (_DIR_VAR, 'cache-css')
@@ -251,9 +253,7 @@ function &compresseur_callback_prepare_css(&$css, $is_inline = false, $fonctions
 	elseif (!lire_fichier($css, $contenu))
 		return $css;
 
-	// retirer le protocole de $url_absolue_css
-	$url_absolue_css = protocole_implicite($url_absolue_css);
-	$contenu = compresseur_callback_prepare_css_inline($contenu, $url_absolue_css, $fonctions);
+	$contenu = compresseur_callback_prepare_css_inline($contenu, $url_absolue_css_implicite, $fonctions);
 
 	// ecrire la css
 	if (!ecrire_fichier($file, $contenu))

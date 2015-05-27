@@ -159,7 +159,7 @@ function traiter_raccourci_notes($letexte, $marqueur_notes)
 }
 
 
-// http://doc.spip.org/@traiter_les_notes
+// http://code.spip.net/@traiter_les_notes
 function traiter_les_notes($notes,$ignorer_autobr) {
 	$mes_notes = '';
 	if ($notes) {

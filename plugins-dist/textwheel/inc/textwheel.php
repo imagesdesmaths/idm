@@ -86,7 +86,7 @@ class SPIPTextWheelRuleset extends TextWheelRuleSet {
 		$key = 'tw-'.md5(_WHEELS_VERSION."-".serialize($ruleset).$callback.$class._DIR_RACINE);
 
 		# lecture du cache
-		include_spip('inc/memoization');
+		include_spip('memoization_options');
 		if (!function_exists('cache_get')) include_spip('inc/memoization-mini');
 		if ((!defined('_VAR_MODE') OR _VAR_MODE!='recalcul')
 		  AND $cacheruleset = cache_get($key))

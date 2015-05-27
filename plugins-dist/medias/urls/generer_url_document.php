@@ -24,7 +24,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $connect
  * @return string
  *
- * http://doc.spip.org/@generer_url_ecrire_document
+ * http://code.spip.net/@generer_url_ecrire_document
  */
 function urls_generer_url_document_dist($id, $args='', $ancre='', $public=null, $connect='') {
 	include_spip('inc/documents');

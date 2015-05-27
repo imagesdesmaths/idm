@@ -25,7 +25,7 @@ define('URLS_LIBRES_CONFIG', 'propres');
 if (!defined('_MARQUEUR_URL'))
 	define('_MARQUEUR_URL', false);
 
-// http://doc.spip.org/@urls_libres_dist
+// http://code.spip.net/@urls_libres_dist
 function urls_libres_dist($i, &$entite, $args='', $ancre='') {
 	$f = charger_fonction('propres', 'urls');
 	return $f($i, $entite, $args, $ancre);

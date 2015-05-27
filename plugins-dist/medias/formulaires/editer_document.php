@@ -121,7 +121,7 @@ function formulaires_editer_document_verifier_dist($id_document='new', $id_paren
 	return $erreurs;
 }
 
-// http://doc.spip.org/@inc_editer_article_dist
+// http://code.spip.net/@inc_editer_article_dist
 function formulaires_editer_document_traiter_dist($id_document='new', $id_parent='', $retour='', $lier_trad=0, $config_fonc='documents_edit_config', $row=array(), $hidden=''){
 	if (is_null(_request('parents')))
 		set_request('parents',array());
@@ -134,6 +134,7 @@ function formulaires_editer_document_traiter_dist($id_document='new', $id_parent
 	}
 
 	$res = formulaires_editer_objet_traiter('document',$id_document,$id_parent,$lier_trad,$retour,$config_fonc,$row,$hidden);
+	set_request('parents');
 	$autoclose = "<script type='text/javascript'>if (window.jQuery) jQuery.modalboxclose();</script>";
 	if (_request('copier_local')
 	  OR _request('joindre_upload')

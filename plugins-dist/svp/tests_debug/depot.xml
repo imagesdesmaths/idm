@@ -29,7 +29,7 @@ D&eacute;p&ocirc;t de tests
 	compatibilite="[2.0.0;3.0.99]"
 	logo="prive/themes/spip/images/boussole_icone-64.png"
 	schema="0.1"
-	documentation="http://www.spip-contrib.net/Boussole,3688"
+	documentation="http://contrib.spip.net/Boussole,3688"
 >
 
 	<nom>Boussole &#224; jojo </nom>
@@ -166,7 +166,7 @@ cc by-nc-sa 2.5
 		[en]This plugin allows you to link items in a timely manner without having to use keywords of SPIP. It can be used to set up links such as "See also".
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/a2a</lien>
+	<lien>http://contrib.spip.net/a2a</lien>
 	<prefix>a2a</prefix>
 	<fonctions>a2a_fonctions.php</fonctions>
 	<options>a2a_options.php</options>
@@ -195,7 +195,7 @@ cc by-nc-sa 2.5
 <plugin>
 	<categorie>multimedia</categorie>
 	<version>0.6.1</version>
-	<lien>http://www.spip-contrib.net/FancyBox</lien>
+	<lien>http://contrib.spip.net/FancyBox</lien>
 	<prefix>fancybox</prefix>
 	<icon>images/fancybox-32.png</icon>
 	<etat>stable</etat>
@@ -226,7 +226,7 @@ cc by-nc-sa 2.5
 <plugin spip='[2.1.0-beta;2.1.99]' >
 	<categorie>multimedia</categorie>
 	<version>0.6.1</version>
-	<lien>http://www.spip-contrib.net/FancyBox</lien>
+	<lien>http://contrib.spip.net/FancyBox</lien>
 	<prefix>fancybox</prefix>
 	<icon>images/fancybox-32.png</icon>
 	<etat>stable</etat>
@@ -298,7 +298,7 @@ cc by-nc-sa 2.5
 	etat="test"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="images/logo_saisie_48.png"
-	documentation="http://www.spip-contrib.net/Saisies,1347"
+	documentation="http://contrib.spip.net/Saisies,1347"
 >
 	<nom>Saisies</nom>
 	<auteur lien="http://magraine.net">Matthieu Marcillaud</auteur>

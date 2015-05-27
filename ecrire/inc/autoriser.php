@@ -281,7 +281,12 @@ function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 				$champ = $c['champ'];
 				if (!isset($opt[$champ])) return false; // pas de champ passe a la demande => NIET
 				$previsu = explode(',',$c['previsu']);
-				if (!in_array($opt[$champ],$previsu)) // le statut n'est pas dans ceux definis par la previsu => NIET
+				// regarder si ce statut est autorise pour l'auteur
+				if (in_array($opt[$champ]."/auteur",$previsu)){
+					if (!sql_countsel("spip_auteurs_liens","id_auteur=".intval($qui['id_auteur'])." AND objet=".sql_quote($type)." AND id_objet=".intval($id)))
+						return false;  // pas auteur de cet objet => NIET
+				}
+				elseif (!in_array($opt[$champ],$previsu)) // le statut n'est pas dans ceux definis par la previsu => NIET
 					return false;
 			}
 		}
@@ -1042,14 +1047,30 @@ function autoriser_base_reparer_dist($faire, $type, $id, $qui, $opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_infosperso_onglet_dist($faire,$type,$id,$qui,$opt) {
+function autoriser_infosperso_dist($faire,$type,$id,$qui,$opt) {
+	return true;
+}
+
+/**
+ * Autorisation de voir le formulaire configurer_langage
+ *
+ * Toujours OK
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_langage_configurer_dist($faire,$type,$id,$qui,$opt) {
 	return true;
 }
 
 /**
  * Autorisation de voir l'onglet configurerlangage
  *
- * Toujours OK
+ * Calquée sur l'autorisation de voir le formulaire configurer_langage
  * 
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -1058,12 +1079,12 @@ function autoriser_infosperso_onglet_dist($faire,$type,$id,$qui,$opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_configurerlangage_onglet_dist($faire,$type,$id,$qui,$opt) {
-	return true;
+function autoriser_configurerlangage_dist($faire,$type,$id,$qui,$opt) {
+	return autoriser('configurer', '_langage', $id, $qui, $opt);
 }
 
 /**
- * Autorisation de voir l'onglet configurerpreferences
+ * Autorisation de voir le formulaire configurer_preferences
  *
  * Toujours OK
  * 
@@ -1074,8 +1095,24 @@ function autoriser_configurerlangage_onglet_dist($faire,$type,$id,$qui,$opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_configurerpreferences_onglet_dist($faire,$type,$id,$qui,$opt) {
+function autoriser_preferences_configurer_dist($faire,$type,$id,$qui,$opt) {
 	return true;
+}
+
+/**
+ * Autorisation de voir l'onglet configurerpreferences
+ *
+ * Calquée sur l'autorisation de voir le formulaire configurer_preferences
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_configurerpreferences_dist($faire,$type,$id,$qui,$opt) {
+	return autoriser('configurer', '_preferences', $id, $qui, $opt);
 }
 
 /**
