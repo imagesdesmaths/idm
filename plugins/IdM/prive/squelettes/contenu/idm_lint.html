@@ -64,6 +64,7 @@ $bugs[] = array ('Wrong guillemets (v3)',     '|``([^\']*)\'\'|Us',             
 $bugs[] = array ('Numerical \label/\ref',     '/\\\\(label|ref){([0-9]*)}/',                       '\\\\\1{equation_\2}',                    0, 0, '');
 $bugs[] = array ('Old-style math div',        '|<div class="math">(.*)</div>|Us',                  '$$\1$$',                                 0, 0, '');
 $bugs[] = array ('Old-style math span',       '|<span class="math">(.*)</span>|Us',                '$\1$',                                   0, 0, '');
+$bugs[] = array ('SPIP-style math',           '|<math>(.*)</math>|Us',                             '\1',                                     0, 0, '');
 $bugs[] = array ('Useless html tag',          '|<html>(.*)</html>|Us',                             '\1',                                     0, 0,
                  '/(<\/?(div|pre|p|span)>|<html>.<\/html>)/');
 $bugs[] = array ('\label outside {equation}', '|\$\$ *([^$]*\\\\label{[^}]*}[^$]*)\$\$|s',         '$$\\begin{equation}\1\\end{equation}$$', 0, 0,
