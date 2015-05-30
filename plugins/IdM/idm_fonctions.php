@@ -318,9 +318,15 @@ function idm_pre_edition ($flux) {
 
   $id_auteur = intval($GLOBALS['visiteur_session']['id_auteur']);
   $nb_spams  = sql_countsel ('spip_forum', "statut='spam' AND id_auteur=$id_auteur");
+  $nb_forum  = sql_countsel ('spip_forum', "statut='publie' AND id_auteur=$id_auteur");
 
   if ($nb_spams>0) {
     spip_log ("[IdM] There are $nb_spams spam(s) by author $id_auteur, moderating.");
+    $flux['data']['statut'] = 'prop';
+  }
+
+  if ($nb_forum==0) {
+    spip_log ("[IdM] There are no forum messages yet by author $id_auteur, moderating.");
     $flux['data']['statut'] = 'prop';
   }
 
