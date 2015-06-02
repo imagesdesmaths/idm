@@ -55,7 +55,7 @@ if(isset($_POST['affecter_relecteurs_a'])) {
 <BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
 <h1><:idm:relecture:></h1>
 
-<BOUCLE_prop(ARTICLES) {statut = prop} {par date} {id_rubrique?}>
+<BOUCLE_prop(ARTICLES) {statut = prop} {par date} {id_rubrique?} {lang == fr}>
 
 <script type="text/javascript">
 
