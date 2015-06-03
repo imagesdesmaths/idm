@@ -13,7 +13,7 @@
             'a.id_article',
             'spip_articles AS a
                 LEFT JOIN spip_random AS r ON a.id_article = r.id_objet',
-            'r.id_objet IS NULL AND a.statut = "publie" AND a.id_rubrique = #RUBRIQUE_FIGURES_SANS_PAROLES',
+            'r.id_objet IS NULL AND a.statut = "publie" AND a.id_rubrique = #RUBRIQUE_FIGURES_SANS_PAROLES AND a.date < CURDATE()',
             '',
             'RAND()',
             '1'
@@ -33,7 +33,7 @@
             $results = sql_select(
                 'id_article',
                 'spip_articles',
-                'statut = "publie" AND id_rubrique = #RUBRIQUE_FIGURES_SANS_PAROLES',
+                'statut = "publie" AND id_rubrique = #RUBRIQUE_FIGURES_SANS_PAROLES AND date < CURDATE()',
                 '',
                 'RAND()',
                 '1'
