@@ -18,7 +18,11 @@
     <div class="resume">
         <div class="title"><a href="#URL_ARTICLE">[(#TITRE)]</a></div>
         <div class="date"><a href="#URL_ARTICLE">[(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</a></div>
-        <BOUCLE_articles_auteur_nom(AUTEURS){id_article} {0,1}>[<div class="author"><a href="#URL_AUTEUR">(#NOM)</a></div>]</BOUCLE_articles_auteur_nom>
+        <B_articles_auteur_nom>
+        <div class="author">
+            <BOUCLE_articles_auteur_nom(AUTEURS){id_article}>[<a href="#URL_AUTEUR">(#NOM)</a>][(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{', ',''})]</BOUCLE_articles_auteur_nom>
+        </div>
+        </B_articles_auteur_nom>
         <div class="details">[(#DESCRIPTIF|PtoBR|trunctext{200})]</div>
         <a href="#URL_ARTICLE" class="link"><i class="flaticon-plus"></i><span> lire l'article</span></a>
     </div>
