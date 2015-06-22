@@ -1,0 +1,34 @@
+@media print {
+    .header-actions,
+    .header-descriptif,
+    .menu-mobile-toggle,
+    .block-right,
+    .block-share,
+    .block-comment,
+    .block-comments,
+    .block-related,
+    .backlink,
+    .comments-top,
+    footer,
+    .aaa {
+        display: none !important;
+    }
+    header {
+        background: none !important;
+        border: none !important;
+    }
+    #content {
+        height: 100% !important;
+
+        .image {
+            background :none !important;
+            border: none !important;
+        }
+        a:not([type^=image]):after {
+            content: ' (' attr(href) ')';
+            color: $grey_light;
+            font-style: italic;
+            font-weight: normal;
+        }
+    }
+}
