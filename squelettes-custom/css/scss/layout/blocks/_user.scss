@@ -66,6 +66,24 @@
                         display: block;
                     }
                 }
+                &.edition-mot,
+                &.stats-mot {
+                    background: $warning;
+                    display: none;
+
+                    section[role="main"].mot & {
+                        display: block;
+                    }
+                }
+                &.edition-auteur,
+                &.stats-auteur {
+                    background: $warning;
+                    display: none;
+
+                    section[role="main"].auteur & {
+                        display: block;
+                    }
+                }
                 &.edition-breve,
                 &.stats-breve {
                     background: $warning;
