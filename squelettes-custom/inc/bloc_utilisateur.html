@@ -35,8 +35,8 @@
         </BOUCLE_rubriques>
         <BOUCLE_breves(BREVES) {id_breve}>
             [(#SESSION{statut}|=={0minirezo}|oui)
-                <li><a href="#URL_ECRIRE{breve_edit,id_breve=#ID_RUBRIQUE}" title="Modifier la brève" class="edition-breve"><i class="flaticon-cat-contribute"></i><span>Modifier la brève</span></a></li>
-                <li><a href="#URL_ECRIRE{breve,id_breve=#ID_RUBRIQUE}" title="Voir la brève" class="stats-breve"><i class="flaticon-stats"></i><span>Voir la brève</span></a></li>
+                <li><a href="#URL_ECRIRE{breve_edit,id_breve=#ID_BREVE}" title="Modifier la brève" class="edition-breve"><i class="flaticon-cat-contribute"></i><span>Modifier la brève</span></a></li>
+                <li><a href="#URL_ECRIRE{breve,id_breve=#ID_BREVE}" title="Voir la brève" class="stats-breve"><i class="flaticon-stats"></i><span>Voir la brève</span></a></li>
             ]
         </BOUCLE_breves>
         [(#SESSION{statut}|=={0minirezo}|oui)
