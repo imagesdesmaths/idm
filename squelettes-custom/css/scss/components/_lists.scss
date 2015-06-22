@@ -45,15 +45,14 @@
             overflow: hidden;
 
             .image {
-                display: block;
+                display: table-cell;
                 overflow: hidden;
-                margin-bottom: 20px;
 
                 a {
                     @extend %trackable;
                     position: relative;
                     display: block;
-                    width: 100%;
+                    width: 160px;
                     border-radius: $border_radius_default;
 
                     &:before {
@@ -63,20 +62,7 @@
 
                 img {
                     display: block;
-                    width: 100%;
                     border-radius: $border_radius_default;
-                }
-
-                @include media-min("desktop-down") {
-                    display: table-cell;
-                    margin-bottom: 0;
-
-                    a {
-                        width: 160px;
-                    }
-                    img {
-                        width: auto;
-                    }
                 }
             }
             .resume {
@@ -119,13 +105,8 @@
 
             .image {
                 a {
+                    width: 320px;
                     height: 180px;
-                }
-
-                @include media-min("desktop-down") {
-                    a {
-                        width: 320px;
-                    }
                 }
             }
             .date {
