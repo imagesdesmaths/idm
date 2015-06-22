@@ -133,6 +133,12 @@ if(isset($_POST['depublier'])) {
             #SET{is_auteur,1}
         ]
     </BOUCLE_auteur>
+		<BOUCLE_adminrubrique(AUTEURS){tous}{id_auteur=#SESSION{id_auteur}}>
+			[(#STATUT|=={0minirezo}|?{' '})
+			      #SET{is_editeur,1}
+			]
+		</BOUCLE_adminrubrique>
+	 
     <BOUCLE_editeur(ARTICLES) {statut!=tous} {id_article==#ENV{_id_objet}}>
         [(#ID_EDITEUR|=={#SESSION{id_auteur}}|?{' '})
             #SET{is_editeur,1}
