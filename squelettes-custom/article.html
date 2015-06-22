@@ -75,7 +75,12 @@
             </ul>
             <div class="quote">
                 <h3>Pour citer cet article :</h3>
-                <p>[(#GET{author_name})][, «(#TITRE)»] — Images des Mathématiques, CNRS[, (#DATE|annee)]</p>
+                <p>
+                    <BOUCLE_auteurcite(AUTEURS){id_article=#ID_ARTICLE}>
+                    #NOM[(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{', ',''})]
+                    </BOUCLE_auteurcite>
+                    [ — «(#TITRE)»] — Images des Mathématiques, CNRS[, (#DATE|annee)]
+                </p>
             </div>
             <div class="credits">
                 #BLOC_TITRE
