@@ -143,12 +143,7 @@ if(isset($_POST['depublier'])) {
         [(#ID_EDITEUR|=={#SESSION{id_auteur}}|?{' '})
             #SET{is_editeur,1}
         ]
-        [(#ID_EDITEUR|=={0}|?{' '})
-            [(#GET{is_auteur}|=={1}|?{' '})
-                #SET{is_editeur,1}
-            ]
-        ]
-    </BOUCLE_editeur>
+		</BOUCLE_editeur>
     <BOUCLE_secretaire(spip_idm_teams) {id_auteur==#SESSION{id_auteur}} {team==secretaire_redaction}>
         #SET{is_secretaire,1}
         [(#REM) Donne tous les droits si on fait partie du groupe "secrétaire de rédaction"]
