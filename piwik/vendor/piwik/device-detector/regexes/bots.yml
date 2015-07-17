@@ -341,6 +341,14 @@
     name: 'Google Inc.'
     url: 'http://www.google.com'
 
+- regex: 'via ggpht.com GoogleImageProxy'
+  name: 'Gmail Image Proxy'
+  category: 'Crawler'
+  url: ''
+  producer:
+    name: 'Google Inc.'
+    url: 'http://www.google.com'
+
 - regex: 'Googlebot(-Mobile|-Image|-Video|-News)?|Feedfetcher-Google|Google-Test|Google-Site-Verification|Google Web Preview|AdsBot-Google(-Mobile)?|Mediapartners-Google|Google.*/\+/web/snippet|GoogleProducer'
   name: 'Googlebot'
   category: 'Search bot'
@@ -965,6 +973,23 @@
     name: 'Pinterest'
     url: 'http://www.pinterest.com/'
 
+- regex: 'Site24x7'
+  name: 'Site24x7 Website Monitoring'
+  category: 'Site Monitor'
+  url: 'https://www.site24x7.com/site24x7-faq.html'
+  producer:
+    name: 'Site24x7'
+    url: 'https://www.site24x7.com'
+
+- regex: 'www.monitor.us'
+  name: 'Monitor.Us'
+  category: 'Site Monitor'
+  url: 'http://www.monitor.us'
+  producer:
+    name: 'Monitor.Us'
+    url: 'http://www.monitor.us'
+
+
 - regex: 'lycos'
   name: 'Lycos'
 
@@ -1019,7 +1044,6 @@
 - regex: '(nuhk|TsolCrawler|Yammybot|Openbot|Gulper Web Bot|grub-client|Download Demon|SearchExpress|Microsoft URL Control|borg|altavista|teoma|blitzbot|oegp|furlbot|http%20client|polybot|htdig|mogimogi|larbin|scrubby|searchsight|seekbot|semanticdiscovery|snappy|vortex|zao|zeal|fast-webcrawler|converacrawler|dataparksearch|findlinks|BrowserMob|HttpMonitor|ThumbShotsBot|URL2PNG|ZooShot|GomezA|Catchpoint bot|Google SketchUp|Read%20Later|Minimo|RackspaceBot)'
   name: 'Bot'
 
-
 # Generic detections
 
 - regex: 'Nutch'
@@ -1030,5 +1054,5 @@
     name: 'The Apache Software Foundation'
     url: 'http://www.apache.org/foundation/'
 
-- regex: '[a-z0-9\-_]*(bot|crawler|archiver|transcoder|spider)'
+- regex: '[a-z0-9\-_]*((?<!cu)bot|crawler|archiver|transcoder|spider)'
   name: 'Generic Bot'

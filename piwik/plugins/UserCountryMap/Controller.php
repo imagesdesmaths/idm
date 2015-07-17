@@ -18,6 +18,8 @@ use Piwik\Site;
 use Piwik\Translation\Translator;
 use Piwik\View;
 
+require_once PIWIK_INCLUDE_PATH . '/plugins/UserCountry/functions.php';
+
 /**
  *
  */
@@ -105,6 +107,15 @@ class Controller extends \Piwik\Plugin\Controller
         $view->config = json_encode($config);
         $view->noData = empty($config['visitsSummary']['nb_visits']);
 
+        $view->continents = array(
+            'AF' => \Piwik\Plugins\UserCountry\continentTranslate('afr'),
+            'AS' => \Piwik\Plugins\UserCountry\continentTranslate('asi'),
+            'EU' => \Piwik\Plugins\UserCountry\continentTranslate('eur'),
+            'NA' => \Piwik\Plugins\UserCountry\continentTranslate('amn'),
+            'OC' => \Piwik\Plugins\UserCountry\continentTranslate('oce'),
+            'SA' => \Piwik\Plugins\UserCountry\continentTranslate('ams')
+        );
+
         return $view->render();
     }
 
@@ -151,11 +162,11 @@ class Controller extends \Piwik\Plugin\Controller
             'nb_actions'       => $this->translator->translate('VisitsSummary_NbActionsDescription'),
             'local_time'       => $this->translator->translate('VisitTime_ColumnLocalTime'),
             'from'             => $this->translator->translate('General_FromReferrer'),
-            'seconds'          => $this->translator->translate('UserCountryMap_Seconds'),
+            'seconds'          => $this->translator->translate('Intl_Seconds'),
             'seconds_ago'      => $this->translator->translate('UserCountryMap_SecondsAgo'),
-            'minutes'          => $this->translator->translate('UserCountryMap_Minutes'),
+            'minutes'          => $this->translator->translate('Intl_Minutes'),
             'minutes_ago'      => $this->translator->translate('UserCountryMap_MinutesAgo'),
-            'hours'            => $this->translator->translate('UserCountryMap_Hours'),
+            'hours'            => $this->translator->translate('Intl_Hours'),
             'hours_ago'        => $this->translator->translate('UserCountryMap_HoursAgo'),
             'days_ago'         => $this->translator->translate('UserCountryMap_DaysAgo'),
             'actions'          => $this->translator->translate('VisitsSummary_NbPageviewsDescription'),

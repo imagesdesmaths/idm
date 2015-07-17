@@ -3,7 +3,7 @@
         "Administration": "Amministrazione",
         "ArchivingSettings": "Impostazioni archiviazione",
         "BrandingSettings": "Impostazioni di immagine coordinata",
-        "CheckReleaseGetVersion": "Durante il controllo della nuova versione di Piwik, ottieni sempre",
+        "CheckReleaseGetVersion": "Utilizza l'ultima versione beta",
         "ClickHereToOptIn": "Clicca qui per parteciparvi.",
         "ClickHereToOptOut": "Clicca qui per uscirne.",
         "CustomLogoFeedbackInfo": "Se si personalizza il logo Piwik, si potrebbe anche essere interessati a nascondere il link %s nel menu in alto. A tale scopo, è possibile disattivare il plugin Feedback nella pagina %sGestione Plugin%s.",
@@ -67,10 +67,11 @@
         "PersonalPluginSettings": "Impostazioni Personali Plugin",
         "PluginSettingChangeNotAllowed": "Non sei abilitato a cambiare il valore dell'impostazione \"%s\" nel plugin \"%s\"",
         "PluginSettingReadNotAllowed": "Non sei abilitato a leggere il valore dell'impostazione \"%s\" nel plugin \"%s\"",
+        "PluginSettings": "Impostazioni plugin",
         "PluginSettingsIntro": "Qui puoi cambiare le impostazioni dei seguenti plugin di terze parti:",
         "PluginSettingsValueNotAllowed": "Il valore del campo \"%s\" nel plugin \"%s\" non è consentito",
         "PluginSettingsSaveFailed": "Salvataggio delle impostazioni del plugin fallito",
-        "SendPluginUpdateCommunication": "Inviami una notifica email quando è disponibile un aggiornamento dei plugin",
+        "SendPluginUpdateCommunication": "Manda un'email quando è disponibile l'aggiornamento di un plugin",
         "SendPluginUpdateCommunicationHelp": "Verrà inviata una email ai Super User quando è disponibile una nuova versione di un plugin.",
         "StableReleases": "Se Piwik rappresenta una parte fondamentale nella vostra attività, vi raccomandiamo di utilizzare l'ultima versione stabile. Se utilizzate l'ultima versione beta e riscontrate un bug o avete dei suggerimenti, per favore %sguardate qui%s.",
         "SystemPluginSettings": "Impostazioni di Sistema del Plugin",
@@ -85,6 +86,7 @@
         "YouAreOptedIn": "Stai attualmente partecipando al programma.",
         "YouAreOptedOut": "Non stai partecipando al programma.",
         "YouMayOptOut": "Puoi scegliere di non avere un cookie univoco di identificazione per web analytics assegnato al tuo computer al fine di evitare l'aggregazione e l'analisi dei dati raccolti su questo sito web.",
-        "YouMayOptOutBis": "Per fare questa scelta, clicca qui di seguito per ricevere un cookie di opt-out."
+        "YouMayOptOutBis": "Per fare questa scelta, clicca qui di seguito per ricevere un cookie di opt-out.",
+        "OptingYouOut": "Sto acquisendo la tua rinuncia, attendi..."
     }
 }

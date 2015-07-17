@@ -7,5 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     $vendorDir . '/mustangostang/spyc/Spyc.php',
-    $vendorDir . '/mnapoli/php-di/src/DI/functions.php',
+    $vendorDir . '/php-di/php-di/src/DI/functions.php',
 );

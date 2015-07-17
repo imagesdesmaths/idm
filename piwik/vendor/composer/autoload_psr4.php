@@ -12,9 +12,9 @@ return array(
     'Piwik\\Decompress\\' => array($vendorDir . '/piwik/decompress/src'),
     'Piwik\\Cache\\' => array($vendorDir . '/piwik/cache/src'),
     'Piwik\\' => array($baseDir . '/core'),
-    'MyCLabs\\Enum\\' => array($vendorDir . '/myclabs/php-enum/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
+    'Invoker\\' => array($vendorDir . '/php-di/invoker/src'),
     'Interop\\Container\\' => array($vendorDir . '/container-interop/container-interop/src/Interop/Container'),
     'DeviceDetector\\' => array($vendorDir . '/piwik/device-detector'),
-    'DI\\' => array($vendorDir . '/mnapoli/php-di/src/DI'),
+    'DI\\' => array($vendorDir . '/php-di/php-di/src/DI'),
 );

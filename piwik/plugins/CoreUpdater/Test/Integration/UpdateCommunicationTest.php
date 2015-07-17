@@ -16,8 +16,6 @@ use Piwik\Version;
 use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
- * Class Plugins_CoreUpdater_UpdateCommunicationTest
- *
  * @group Plugins
  */
 class UpdateCommunicationTest extends IntegrationTestCase
@@ -74,7 +72,7 @@ class UpdateCommunicationTest extends IntegrationTestCase
 CoreUpdater_ThereIsNewVersionAvailableForUpdate
 
 CoreUpdater_YouCanUpgradeAutomaticallyOrDownloadPackage
-index.php?module=CoreUpdater&action=newVersionAvailable
+http://localhost/tests/PHPUnit/proxy/index.php?module=CoreUpdater&action=newVersionAvailable
 
 CoreUpdater_ViewVersionChangelog
 http://piwik.org/changelog/piwik-33-0-0/
@@ -92,7 +90,7 @@ http://piwik.org/contact/';
 CoreUpdater_ThereIsNewVersionAvailableForUpdate
 
 CoreUpdater_YouCanUpgradeAutomaticallyOrDownloadPackage
-index.php?module=CoreUpdater&action=newVersionAvailable
+http://localhost/tests/PHPUnit/proxy/index.php?module=CoreUpdater&action=newVersionAvailable
 
 CoreUpdater_FeedbackRequest
 http://piwik.org/contact/';

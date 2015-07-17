@@ -288,11 +288,12 @@ class DataTablePostProcessor
         // after queued filters are run so processed metrics can be removed, too)
         $hideColumns = Common::getRequestVar('hideColumns', '', 'string', $this->request);
         $showColumns = Common::getRequestVar('showColumns', '', 'string', $this->request);
+        $showRawMetrics = Common::getRequestVar('showRawMetrics', 0, 'int', $this->request);
         if (!empty($hideColumns)
             || !empty($showColumns)
         ) {
             $dataTable->filter('ColumnDelete', array($hideColumns, $showColumns));
-        } else {
+        } else if ($showRawMetrics !== 1) {
             $this->removeTemporaryMetrics($dataTable);
         }
 
@@ -389,7 +390,7 @@ class DataTablePostProcessor
         // this is needed because Proxy uses Common::getRequestVar which in turn
         // uses Common::sanitizeInputValue. This causes the > that separates recursive labels
         // to become &gt; and we need to undo that here.
-        $label = Common::unsanitizeInputValues($label);
+        $label = str_replace( htmlentities('>'), '>', $label);
         return $label;
     }
 

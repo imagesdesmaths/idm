@@ -15,7 +15,7 @@ use Piwik\SettingsPiwik;
 use Piwik\View;
 
 /**
- *
+ * HTML report renderer
  */
 class Html extends ReportRenderer
 {
@@ -172,7 +172,6 @@ class Html extends ReportRenderer
 
         foreach ($processedReports as $processedReport) {
             if ($processedReport['displayGraph']) {
-
                 $additionalFiles[] = $this->getAttachment($report, $processedReport, $prettyDate);
             }
         }

@@ -1,6 +1,7 @@
 {
     "SitesManager": {
         "AddSite": "Aggiungi un nuovo sito web",
+        "AddMeasurable": "Aggiungi un nuovo sito",
         "AdvancedTimezoneSupportNotFound": "Non è stato trovato nel tuo PHP il supporto avanzato dei fusi orari (supportato in PHP> = 5.2). È comunque possibile scegliere manualmente un offset UTC.",
         "AliasUrlHelp": "E' raccomandato, ma non necessario, di specificare le diverse URL che i tuoi utenti usano per accedere al sito. Gli URL alias di un sito non compariranno tra i siti Referer. Nota che non è necessario specificare le URL con e senza 'www' perchè Piwik li considererà; entrambi automaticamente.",
         "ChangingYourTimezoneWillOnlyAffectDataForward": "Il cambio del fuso orario interesserà i prossimi report a partire da adesso, mentre quelli precedenti non saranno modificati.",
@@ -64,6 +65,9 @@
         "ShowTrackingTag": "Vedi codice Tracking",
         "Sites": "Siti web",
         "SiteSearchUse": "È possibile utilizzare Piwik per monitorare e creare reports su ciò che i visitatori stanno cercando nel motore di ricerca interno del tuo sito web.",
+        "SiteWithoutDataTitle": "Non è stato ancora registrato alcun dato",
+        "SiteWithoutDataDescription": "Per questo sito non sono ancora stati tracciati dati statistici.",
+        "SiteWithoutDataSetupTracking": "Imposta il %1$scodice di tracciamento JavaScript%2$s nel sito e ricarica la pagina.",
         "SuperUserAccessCan": "Un utente con accesso Super User può anche %sspecificare le impostazioni globali%s per i nuovi siti.",
         "Timezone": "Fuso orario",
         "TrackingSiteSearch": "Tracciamento Ricerca Interna Sito",
@@ -71,6 +75,8 @@
         "Urls": "Indirizzi",
         "UTCTimeIs": "Tempo UTC è %s.",
         "WebsitesManagement": "Gestisci siti web",
+        "XManagement": "Gestione %s",
+        "ChooseMeasurableTypeHeadline": "Cosa intendi misurare",
         "YouCurrentlyHaveAccessToNWebsites": "Al momento hai accesso a %s siti.",
         "YourCurrentIpAddressIs": "Il tuo indirizzo IP è %s"
     }

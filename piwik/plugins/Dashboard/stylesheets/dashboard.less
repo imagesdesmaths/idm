@@ -19,8 +19,8 @@
 
   .top_controls #periodString,
   .top_controls .dashboardSettings,
-  .top_controls #segmentEditorPanel {
-    position: static;
+  .top_controls .segmentEditorPanel {
+    position: static !important;
     margin: 0 0 10px;
     float: none;
   }
@@ -34,26 +34,8 @@
     padding-left: 7px;
 
     >.sortable {
-      padding: 5px 0;
+      padding: 5px 0 10px 0;
     }
-  }
-}
-
-.widget {
-  background: @theme-color-background-base;
-  border: 1px solid #bbb6ad;
-  border-radius: 4px;
-  overflow: hidden;
-  font-size: 14px;
-  z-index: 1;
-
-  h3 {
-    font-size: 15px;
-    margin: 0;
-    font-weight: normal;
-    color: #0D0D0D;
-    text-shadow: none;
-    padding: 15px 15px 10px;
   }
 }
 
@@ -73,35 +55,6 @@
   margin-left: 5px;
 }
 
-.widgetContent.hidden {
-  position: absolute;
-  top: -5000px;
-  height: 1000px;
-  overflow: hidden;
-}
-
-.widgetContent.loading {
-  opacity: 0.5;
-  background: url(plugins/Morpheus/images/loading-blue.gif) no-repeat top right;
-}
-
-.widget p {
-  margin-left: 10px;
-}
-
-.widgetTop {
-  cursor: move;
-  font-size: 10pt;
-  font-weight: normal;
-  padding-bottom: 4px;
-}
-
-.widgetNameOffScreen {
-  overflow: hidden;
-  width:1px;
-  height:1px;
-}
-
 // Overriding some dataTable css for better dashboard display
 .widget .dataTableWrapper {
   width: 100% !important;
@@ -109,12 +62,6 @@
     // Because of Bootstrap
     box-sizing: content-box;
   }
-}
-
-.widgetTop .button {
-  cursor: pointer;
-  float: right;
-  margin: 6px 6px 0 0;
 }
 
 .ui-confirm {
@@ -177,11 +124,6 @@
 
 .menu {
   display: none;
-}
-
-.widgetLoading {
-  cursor: wait;
-  text-align: center;
 }
 
 .widgetLoading, .widgetLoadingError, .dimensionLoadingError {
@@ -496,22 +438,18 @@ div.widgetpreview-preview {
 
 }
 
-.widgetTop .button {
-  display:none;
-}
-
-.widgetTop.widgetTopHover .button {
-  display:block;
-}
-
-.widget.hiddenContent .widgetTop.widgetTopHover {
-  .button#minimise,.button#refresh {
+.ui-dialog .widget {
+  .button#close,.button#maximise {
     display:none;
   }
 }
 
-.ui-dialog .widget {
-  .button#close,.button#maximise {
-    display:none;
+.ui-button, .ui-dialog-titlebar-close {
+  .btn;
+  color: @theme-color-brand-contrast !important;
+  background-color: @theme-color-brand !important;
+  &:hover {
+    background: none;
+    background-color: transparent;
   }
 }

@@ -54,9 +54,9 @@ var broadcast = {
         }
         broadcast._isInit = true;
 
-        // Initialize history plugin.
-        // The callback is called at once by present location.hash
-        $.history.init(broadcast.pageload, {unescape: true});
+        angular.element(document).injector().invoke(function (historyService) {
+            historyService.init();
+        });
 
         if(noLoadingMessage != true) {
             piwikHelper.showAjaxLoading();
@@ -222,7 +222,9 @@ var broadcast = {
         else {
             // Let history know about this new Hash and load it.
             broadcast.forceReload = true;
-            $.history.load(currentHashStr);
+            angular.element(document).injector().invoke(function (historyService) {
+                historyService.load(currentHashStr);
+            });
         }
     },
 
@@ -378,7 +380,9 @@ var broadcast = {
         }
 
         broadcast.forceReload = false;
-        $.history.load(newHash);
+        angular.element(document).injector().invoke(function (historyService) {
+            historyService.load(newHash);
+        });
     },
 
     /**
@@ -410,6 +414,13 @@ var broadcast = {
                 broadcast.getParamValue('action', urlAjax),
                 broadcast.getParamValue('idGoal', urlAjax) || broadcast.getParamValue('idDashboard', urlAjax)
             );
+        }
+
+        if(broadcast.getParamValue('module', urlAjax) == 'API') {
+            broadcast.lastUrlRequested = null;
+            $('#content').html("Loading content from the API and displaying it within Piwik is not allowed.");
+            piwikHelper.hideAjaxLoading();
+            return false;
         }
 
         piwikHelper.hideAjaxError('loadingError');

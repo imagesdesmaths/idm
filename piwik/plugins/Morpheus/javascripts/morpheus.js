@@ -20,10 +20,13 @@ $(document).ready(function () {
     $(document).bind('ScheduledReport.edit', initICheck);
     $(document).bind('Goals.edit', initICheck);
     $(broadcast).bind('locationChangeSuccess', initICheck);
+    $(broadcast).bind('updateICheck', initICheck);
 
     $('body').on('ifClicked', 'input', function () {
         $(this).trigger('click');
     }).on('ifChanged', 'input', function () {
-        $(this).trigger('change');
+        if(this.type != 'radio' || this.checked) {
+            $(this).trigger('change');
+        }
     });
 });

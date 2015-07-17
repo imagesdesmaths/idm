@@ -11,7 +11,6 @@ namespace Piwik\Tracker;
 
 use Piwik\Common;
 use Piwik\Segment\SegmentExpression;
-use Piwik\Tracker;
 
 /**
  * This class is used to query Action IDs from the log_action table.
@@ -35,7 +34,7 @@ class TableLogAction
     public static function loadIdsAction($actionsNameAndType)
     {
         // Add url prefix if not set
-        foreach($actionsNameAndType as &$action) {
+        foreach ($actionsNameAndType as &$action) {
             if (2 == count($action)) {
                 $action[] = null;
             }
@@ -178,10 +177,9 @@ class TableLogAction
             || $matchType == SegmentExpression::MATCH_NOT_EQUAL
         ) {
             $idAction = self::getModel()->getIdActionMatchingNameAndType($valueToMatch, $actionType);
-            // if the action is not found, we hack -100 to ensure it tries to match against an integer
-            // otherwise binding idaction_name to "false" returns some rows for some reasons (in case &segment=pageTitle==Větrnásssssss)
+            // Action is not found (eg. &segment=pageTitle==Větrnásssssss)
             if (empty($idAction)) {
-                $idAction = -100;
+                $idAction = null;
             }
             return $idAction;
         }
@@ -235,7 +233,7 @@ class TableLogAction
     /**
      * This function will sanitize or not if it's needed for the specified action type
      *
-     * URLs (Page URLs, Downloads, Outlinks) are stored raw (unsanitized)
+     * URLs (Download URL, Outlink URL) are stored raw (unsanitized)
      * while other action types are stored Sanitized
      *
      * @param $actionType
@@ -246,27 +244,24 @@ class TableLogAction
     {
         $actionString = Common::unsanitizeInputValue($actionString);
 
-        if (self::isActionTypeStoredSanitized($actionType)) {
-            return Common::sanitizeInputValue($actionString);
+        if (self::isActionTypeStoredUnsanitized($actionType)) {
+            return $actionString;
         }
-        return $actionString;
+
+        return Common::sanitizeInputValue($actionString);
     }
 
     /**
      * @param $actionType
      * @return bool
      */
-    private static function isActionTypeStoredSanitized($actionType)
+    private static function isActionTypeStoredUnsanitized($actionType)
     {
         $actionsTypesStoredUnsanitized = array(
-            $actionType == Action::TYPE_PAGE_URL,
             $actionType == Action::TYPE_DOWNLOAD,
             $actionType == Action::TYPE_OUTLINK,
         );
 
-        $isStoredUnsanitized = in_array($actionType, $actionsTypesStoredUnsanitized);
-        return !$isStoredUnsanitized;
+        return in_array($actionType, $actionsTypesStoredUnsanitized);
     }
-
 }
-

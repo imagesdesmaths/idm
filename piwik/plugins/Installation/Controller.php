@@ -119,7 +119,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         $view->showNextStep = !$view->diagnosticReport->hasErrors();
 
         // On the system check page, if all is green, display Next link at the top
-        $view->showNextStepAtTop = $view->showNextStep;
+        $view->showNextStepAtTop = $view->showNextStep && !$view->diagnosticReport->hasWarnings();
 
         return $view->render();
     }
@@ -229,12 +229,12 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
             'tablesCreation'
         );
 
+        $oldVersion = Option::get('version_core');
+
         $result = $this->updateComponents();
         if ($result === false) {
             $this->redirectToNextStep('tablesCreation');
         }
-
-        $oldVersion = Option::get('version_core');
 
         $view->coreError       = $result['coreError'];
         $view->warningMessages = $result['warnings'];
@@ -403,7 +403,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
          */
         Piwik::postEvent('Installation.defaultSettingsForm.init', array($form));
 
-        $form->addElement('submit', 'submit', array('value' => Piwik::translate('General_ContinueToPiwik') . ' »', 'class' => 'submit'));
+        $form->addElement('submit', 'submit', array('value' => Piwik::translate('General_ContinueToPiwik') . ' »', 'class' => 'btn btn-lg'));
 
         if ($form->validate()) {
             try {

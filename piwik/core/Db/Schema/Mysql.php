@@ -102,6 +102,14 @@ class Mysql implements SchemaInterface
                             ) ENGINE=$engine DEFAULT CHARSET=utf8
             ",
 
+            'site_setting'    => "CREATE TABLE {$prefixTables}site_setting (
+                          idsite INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+                          `setting_name` VARCHAR(255) NOT NULL,
+                          `setting_value` LONGTEXT NOT NULL,
+                              PRIMARY KEY(idsite, setting_name)
+                            ) ENGINE=$engine DEFAULT CHARSET=utf8
+            ",
+
             'site_url'    => "CREATE TABLE {$prefixTables}site_url (
                               idsite INTEGER(10) UNSIGNED NOT NULL,
                               url VARCHAR(255) NOT NULL,
@@ -346,7 +354,6 @@ class Mysql implements SchemaInterface
         if (is_null($this->tablesInstalled)
             || $forceReload === true
         ) {
-
             $db = $this->getDb();
             $prefixTables = $this->getTablePrefixEscaped();
 
@@ -483,7 +490,8 @@ class Mysql implements SchemaInterface
         return $this->getDbSettings()->getEngine();
     }
 
-    private function getDb(){
+    private function getDb()
+    {
         return Db::get();
     }
 

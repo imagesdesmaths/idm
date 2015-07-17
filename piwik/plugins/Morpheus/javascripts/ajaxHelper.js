@@ -359,7 +359,13 @@ function ajaxHelper() {
             async:    this.async !== false,
             url:      url,
             dataType: this.format || 'json',
-            error:    this.errorCallback,
+            error:    function () {
+                --globalAjaxQueue.active;
+
+                if (that.errorCallback) {
+                    that.errorCallback.apply(this, arguments);
+                }
+            },
             success:  function (response) {
                 if (that.loadingElement) {
                     $(that.loadingElement).hide();

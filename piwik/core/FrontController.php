@@ -11,15 +11,12 @@ namespace Piwik;
 
 use Exception;
 use Piwik\API\Request;
-use Piwik\API\ResponseBuilder;
 use Piwik\Container\StaticContainer;
 use Piwik\Exception\AuthenticationFailedException;
 use Piwik\Exception\DatabaseSchemaIsNewerThanCodebaseException;
 use Piwik\Http\ControllerResolver;
 use Piwik\Http\Router;
-use Piwik\Plugin\Report;
 use Piwik\Plugins\CoreAdminHome\CustomLogo;
-use Piwik\Session;
 
 /**
  * This singleton dispatches requests to the appropriate plugin Controller.
@@ -170,7 +167,7 @@ class FrontController extends Singleton
 
     public static function setUpSafeMode()
     {
-        register_shutdown_function(array('\\Piwik\\FrontController','triggerSafeModeWhenError'));
+        register_shutdown_function(array('\\Piwik\\FrontController', 'triggerSafeModeWhenError'));
     }
 
     public static function triggerSafeModeWhenError()
@@ -185,34 +182,6 @@ class FrontController extends Singleton
 
             echo $message;
         }
-    }
-
-    /**
-     * Loads the config file
-     * This is overridden in tests to ensure test config file is used
-     *
-     * @return Exception
-     */
-    public static function createConfigObject()
-    {
-        $exceptionToThrow = false;
-        try {
-            Config::getInstance()->database; // access property to check if the local file exists
-        } catch (Exception $exception) {
-            Log::debug($exception);
-
-            /**
-             * Triggered when the configuration file cannot be found or read, which usually
-             * means Piwik is not installed yet.
-             *
-             * This event can be used to start the installation process or to display a custom error message.
-             *
-             * @param Exception $exception The exception that was thrown by `Config::getInstance()`.
-             */
-            Piwik::postEvent('Config.NoConfigurationFile', array($exception), $pending = true);
-            $exceptionToThrow = $exception;
-        }
-        return $exceptionToThrow;
     }
 
     /**
@@ -234,8 +203,6 @@ class FrontController extends Singleton
         }
         $initialized = true;
 
-        $exceptionToThrow = self::createConfigObject();
-
         $tmpPath = StaticContainer::get('path.tmp');
 
         $directoriesToCheck = array(
@@ -255,10 +222,6 @@ class FrontController extends Singleton
 
         Plugin\Manager::getInstance()->loadPluginTranslations();
         Plugin\Manager::getInstance()->loadActivatedPlugins();
-
-        if ($exceptionToThrow) {
-            throw $exceptionToThrow;
-        }
 
         // try to connect to the database
         try {

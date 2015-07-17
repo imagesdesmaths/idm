@@ -1,6 +1,7 @@
 {
     "SitesManager": {
         "AddSite": "Añadir un nuevo Sitio",
+        "AddMeasurable": "Agregar una nueva medición",
         "AdvancedTimezoneSupportNotFound": "Soporte avanzado para zonas horarias no se encontró en su PHP (soportado en PHP>=5.2). Usted todavía puede elegir un corrimiento UTC manual.",
         "AliasUrlHelp": "Se recomienda, pero no es obligatorio, especificar las diferentes URLs que sus visitantes utilizan para acceder a este sitio web. Los alias de las URLs para un sitio web no aparecerán en el informe Referencias > Sitios web. Tenga en cuenta que no es necesario especificar las direcciones URL con y sin 'www' ya que Piwik considera automáticamente ambas.",
         "ChangingYourTimezoneWillOnlyAffectDataForward": "Cambiar su zona horaria sólo afectará a los datos en adelante, y no se aplicará con retroactivamente.",
@@ -49,6 +50,7 @@
         "OnlyOneSiteAtTime": "Puede editar un sitio de internet a la vez. Por favor guarde o cancele sus modificaciones actuales para el sitio de internet %s.",
         "PiwikOffersEcommerceAnalytics": "Piwik permite el rastreo avanzado de analítica Ecommerce y su posterior generación de informes. Aprenda más acerca de %s Analítica Ecommerce%s.",
         "PiwikWillAutomaticallyExcludeCommonSessionParameters": "Piwik automáticamente excluirá los parámetros de sesión (%s).",
+        "PluginDescription": "Administración de sitios de internet le permite agregar un nuevo sitio de internet y editar los existentes.",
         "SearchCategoryDesc": "Piwik puede seguir la categoría Buscar para cada palabra clave del buscador del sitio interno.",
         "SearchCategoryLabel": "Parámetro de categoría",
         "SearchCategoryParametersDesc": "Puede ingresar una lista de tipo separado por comas de parámetros de pregunta especificando la categoría de búsqueda.",
@@ -63,6 +65,9 @@
         "ShowTrackingTag": "mostrar código de seguimiento",
         "Sites": "Sitios",
         "SiteSearchUse": "Puede utilizar Piwik para rastrear y obtener un informe que están buscando en el motor de búsqueda interno de su sitio de internet",
+        "SiteWithoutDataTitle": "Aun no se han grabado datos",
+        "SiteWithoutDataDescription": "Aun no se han registrada datos analíticos para este sitio de internet.",
+        "SiteWithoutDataSetupTracking": "Por favor configure el %1$scódigo de seguimiento JavaScript%2$s para su sitio de internet y actualice la página.",
         "SuperUserAccessCan": "Un usuario con acceso Super User también puede %s especificar la configuración global%s para nuevos sitios web.",
         "Timezone": "Zona Horaria",
         "TrackingSiteSearch": "Búsqueda del rastreo interno del sitio",
@@ -70,6 +75,8 @@
         "Urls": "URLs",
         "UTCTimeIs": "La hora UTC es %s.",
         "WebsitesManagement": "Administración de Sitios",
+        "XManagement": "Administrar %s",
+        "ChooseMeasurableTypeHeadline": "Qué le gustaría medir?",
         "YouCurrentlyHaveAccessToNWebsites": "Actualmente tienes acceso a %s sitios web.",
         "YourCurrentIpAddressIs": "Su IP actual es %s"
     }

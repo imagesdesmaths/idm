@@ -297,7 +297,7 @@ class Report
      * Defaults to false
      * @return bool
      */
-    public function alwaysUseDefaultViewDataTable ()
+    public function alwaysUseDefaultViewDataTable()
     {
         return false;
     }
@@ -312,7 +312,6 @@ class Report
      */
     public function configureView(ViewDataTable $view)
     {
-
     }
 
     /**
@@ -433,7 +432,7 @@ class Report
         foreach ($restrictToColumns as $column) {
             if (isset($processedMetricsById[$column])) {
                 $metrics = array_merge($metrics, $processedMetricsById[$column]->getDependentMetrics());
-            } else if (isset($metricsSet[$column])) {
+            } elseif (isset($metricsSet[$column])) {
                 $metrics[] = $column;
             }
         }
@@ -498,7 +497,6 @@ class Report
             if (is_string($processedMetric) && !empty($translations[$processedMetric])) {
                 $documentation[$processedMetric] = $translations[$processedMetric];
             } elseif ($processedMetric instanceof ProcessedMetric) {
-
                 $name = $processedMetric->getName();
                 $metricDocs = $processedMetric->getDocumentation();
                 if (empty($metricDocs)) {
@@ -509,7 +507,6 @@ class Report
                     $documentation[$processedMetric->getName()] = $metricDocs;
                 }
             }
-
         }
 
         return $documentation;
@@ -680,6 +677,16 @@ class Report
     }
 
     /**
+     * Get the translation key of the category the report belongs to.
+     * @return string
+     * @ignore
+     */
+    public function getCategoryKey()
+    {
+        return $this->category;
+    }
+
+    /**
      * @return \Piwik\Columns\Dimension
      * @ignore
      */
@@ -833,6 +840,7 @@ class Report
         $reports = self::getAllReportClasses();
         $cacheId = CacheId::languageAware('Reports' . md5(implode('', $reports)));
         $cache   = PiwikCache::getTransientCache();
+
 
         if (!$cache->contains($cacheId)) {
             $instances = array();

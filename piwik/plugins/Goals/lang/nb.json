@@ -5,11 +5,14 @@
         "ChooseGoal": "Velg mål",
         "ColumnConversions": "Konvertering",
         "Contains": "inneholder %s",
-        "CreateNewGOal": "Opprett et nytt mål",
+        "Conversions": "%s konverteringer",
+        "DaysToConv": "Dager til konvertering",
         "DeleteGoalConfirm": "Er du sikker på at du vil slette målet %s?",
         "DocumentationRevenueGeneratedByProductSales": "Produktsalg. Ekskluderer skatt, frakt og rabatt",
         "Download": "Last ned en fil",
         "Filename": "filnavn",
+        "GoalConversion": "Målkonvertering",
+        "GoalConversions": "Målkonverteringer",
         "GoalName": "Målnavn",
         "Goals": "Mål",
         "GoalX": "Mål %s",
@@ -25,7 +28,7 @@
         "UpdateGoal": "Oppdater mål",
         "URL": "URL",
         "ViewAndEditGoals": "Vis og rediger mål",
-        "ViewGoalsBy": "Vis mål etter %s",
-        "WhenVisitors": "når besøkende"
+        "WhenVisitors": "når besøkende",
+        "WhereThe": "hvor"
     }
 }

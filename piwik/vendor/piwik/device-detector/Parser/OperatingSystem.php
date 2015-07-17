@@ -159,17 +159,19 @@ class OperatingSystem extends ParserAbstract
 
         foreach ($this->getRegexes() as $osRegex) {
             $matches = $this->matchUserAgent($osRegex['regex']);
-            if ($matches)
+            if ($matches) {
                 break;
+            }
         }
 
-        if (!$matches)
+        if (!$matches) {
             return $return;
+        }
 
         $name  = $this->buildByMatch($osRegex['name'], $matches);
         $short = 'UNK';
 
-        foreach (self::$operatingSystems AS $osShort => $osName) {
+        foreach (self::$operatingSystems as $osShort => $osName) {
             if (strtolower($name) == strtolower($osName)) {
                 $name  = $osName;
                 $short = $osShort;
@@ -179,7 +181,8 @@ class OperatingSystem extends ParserAbstract
         $return = array(
             'name'       => $name,
             'short_name' => $short,
-            'version'    => $this->buildVersion($osRegex['version'], $matches)
+            'version'    => $this->buildVersion($osRegex['version'], $matches),
+            'platform'   => $this->parsePlatform()
         );
 
         if (in_array($return['name'], self::$operatingSystems)) {
@@ -188,6 +191,20 @@ class OperatingSystem extends ParserAbstract
 
         return $return;
     }
+
+    protected function parsePlatform()
+    {
+        if ($this->matchUserAgent('arm')) {
+            return 'ARM';
+        } elseif ($this->matchUserAgent('WOW64|x64|win64|amd64|x86_64')) {
+            return 'x64';
+        } elseif ($this->matchUserAgent('i[0-9]86|i86pc')) {
+            return 'x86';
+        }
+
+        return '';
+    }
+
 
     /**
      * Returns the operating system family for the given operating system

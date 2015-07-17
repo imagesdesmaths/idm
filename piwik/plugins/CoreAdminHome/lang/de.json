@@ -3,7 +3,7 @@
         "Administration": "Administration",
         "ArchivingSettings": "Archivierungseinstellungen",
         "BrandingSettings": "Branding Einstellungen",
-        "CheckReleaseGetVersion": "Verwende für die Aktualisierung von Piwik",
+        "CheckReleaseGetVersion": "Das aktuelle Beta Release verwenden",
         "ClickHereToOptIn": "Klicken Sie hier, um Ihren Besuch wieder erfassen zu lassen.",
         "ClickHereToOptOut": "Klicken Sie hier, damit Ihr Besuch nicht mehr erfasst wird.",
         "CustomLogoFeedbackInfo": "Wenn Sie das Piwik-Logo anpassen, ist sicher auch das Verstecken des %s-Links in der Navigation von Interesse. Bitte dazu das Feedback Plugin auf der %sManage Plugins%s Seite deaktivieren.",
@@ -71,7 +71,7 @@
         "PluginSettingsIntro": "Hier können Sie die Einstellungen für folgende Drittanbieter Plugins ändern:",
         "PluginSettingsValueNotAllowed": "Der Wert für die Einstellung \"%s\" im Plugin \"%s\" ist nicht erlaubt.",
         "PluginSettingsSaveFailed": "Speichern der Plugin Einstellungen fehlgeschlagen.",
-        "SendPluginUpdateCommunication": "Sende mir eine E-Mail-Benachrichtigung wenn eine neue Plugin-Aktualisierung zur Verfügung steht.",
+        "SendPluginUpdateCommunication": "Sende mir eine E-Mail wenn eine neue Plugin-Aktualisierung zur Verfügung steht",
         "SendPluginUpdateCommunicationHelp": "Der Hauptadministrator wird per E-Mail benachrichtigt, sobald eine neue Version eines Plugins zur Verfügung steht.",
         "StableReleases": "Sollte Piwik eine wichtige Komponente Ihres Unternehmens sein, empfehlen wir Ihnen den letzen stabilen Release zu verwenden. Sollten Sie die letze Beta Version verwenden und einen Fehler finden oder einen Vorschlag haben, %slesen Sie bitte hier%s.",
         "SystemPluginSettings": "Globale Plugin Einstellungen",
@@ -86,6 +86,7 @@
         "YouAreOptedIn": "Ihr Besuch dieser Webseite wird aktuell von der Piwik Webanalyse erfasst.",
         "YouAreOptedOut": "Ihr Besuch dieser Webseite wird aktuell von der Piwik Webanalyse nicht erfasst.",
         "YouMayOptOut": "Sie können sich hier entscheiden, ob in Ihrem Browser ein eindeutiger Webanalyse-Cookie abgelegt werden darf, um dem Betreiber der Webseite die Erfassung und Analyse verschiedener statistischer Daten zu ermöglichen.",
-        "YouMayOptOutBis": "Wenn Sie sich dagegen entscheiden möchten, klicken Sie den folgenden Link, um den Piwik-Deaktivierungs-Cookie in Ihrem Browser abzulegen."
+        "YouMayOptOutBis": "Wenn Sie sich dagegen entscheiden möchten, klicken Sie den folgenden Link, um den Piwik-Deaktivierungs-Cookie in Ihrem Browser abzulegen.",
+        "OptingYouOut": "Deaktivierung wird durchgeführt, bitte warten..."
     }
 }

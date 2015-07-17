@@ -8,7 +8,6 @@
  */
 namespace Piwik;
 
-use Piwik\Archive\Chunk;
 use Piwik\Archive\Parameters;
 use Piwik\ArchiveProcessor\Rules;
 use Piwik\Archive\ArchiveInvalidator;
@@ -297,36 +296,6 @@ class Archive
         }
 
         return $result;
-    }
-
-    /**
-     * Queries and returns blob data in an array.
-     *
-     * Reports are stored in blobs as serialized arrays of {@link DataTable\Row} instances, but this
-     * data can technically be anything. In other words, you can store whatever you want
-     * as archive data blobs.
-     *
-     * If multiple sites were requested in {@link build()} or {@link factory()} the result will
-     * be indexed by site ID.
-     *
-     * If multiple periods were requested in {@link build()} or {@link factory()} the result will
-     * be indexed by period.
-     *
-     * The site ID index is always first, so if multiple sites & periods were requested, the result
-     * will be indexed by site ID first, then period.
-     *
-     * @param string|array $names One or more archive names, eg, `'Referrers_keywordBySearchEngine'`.
-     * @param null|string $idSubtable If we're returning serialized DataTable data, then this refers
-     *                                to the subtable ID to return. If set to 'all', all subtables
-     *                                of each requested report are returned.
-     * @return array An array of appropriately indexed blob data.
-     *
-     * @deprecated since Piwik 2.12. Use one of the getDatable* methods instead.
-     */
-    public function getBlob($names, $idSubtable = null)
-    {
-        $data = $this->get($names, 'blob', $idSubtable);
-        return $data->getIndexedArray($this->getResultIndices());
     }
 
     /**
@@ -889,9 +858,9 @@ class Archive
         if (in_array($report, Metrics::getVisitsMetricNames())) {
             $report = 'VisitsSummary_CoreMetrics';
         } // Goal_* metrics are processed by the Goals plugin (HACK)
-        else if (strpos($report, 'Goal_') === 0) {
+        elseif (strpos($report, 'Goal_') === 0) {
             $report = 'Goals_Metrics';
-        } else if (strrpos($report, '_returning') === strlen($report) - strlen('_returning')) { // HACK
+        } elseif (strrpos($report, '_returning') === strlen($report) - strlen('_returning')) { // HACK
             $report = 'VisitFrequency_Metrics';
         }
 
@@ -948,5 +917,13 @@ class Archive
         }
 
         return $idArchivesByMonth;
+    }
+
+    /**
+     * @internal
+     */
+    public static function clearStaticCache()
+    {
+        self::$cache = null;
     }
 }

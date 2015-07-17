@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * Piwik - free/libre analytics platform
+ *
+ * @link http://piwik.org
+ * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
+ *
+ */
 namespace Piwik\Plugins\Diagnostics\Diagnostic;
 
 use Piwik\Db\Adapter;
@@ -34,7 +40,7 @@ class DbAdapterCheck implements Diagnostic
     {
         $label = 'PDO ' . $this->translator->translate('Installation_Extension');
 
-        if (in_array('PDO', $this->getPhpExtensionsLoaded())) {
+        if (extension_loaded('PDO')) {
             $status = DiagnosticResult::STATUS_OK;
         } else {
             $status = DiagnosticResult::STATUS_WARNING;
@@ -65,11 +71,6 @@ class DbAdapterCheck implements Diagnostic
         }
 
         return $results;
-    }
-
-    private function getPhpExtensionsLoaded()
-    {
-        return @get_loaded_extensions();
     }
 
     private function getLongErrorMessage()

@@ -17,12 +17,37 @@ use DeviceDetector\Parser\Device\DeviceParserAbstract;
 use DeviceDetector\Parser\VendorFragment;
 use \Spyc;
 
+/**
+ * Class DeviceDetector
+ *
+ * Magic Device Type Methods
+ * @method boolean isSmartphone()
+ * @method boolean isFeaturePhone()
+ * @method boolean isTablet()
+ * @method boolean isPhablet()
+ * @method boolean isConsole()
+ * @method boolean isPortableMediaPlayer()
+ * @method boolean isCarBrowser()
+ * @method boolean isTV()
+ * @method boolean isSmartDisplay()
+ * @method boolean isCamera()
+ *
+ * Magic Client Type Methods
+ * @method boolean isBrowser()
+ * @method boolean isFeedReader()
+ * @method boolean isMobileApp()
+ * @method boolean isPIM()
+ * @method boolean isLibrary()
+ * @method boolean isMediaPlayer()
+ *
+ * @package DeviceDetector
+ */
 class DeviceDetector
 {
     /**
      * Current version number of DeviceDetector
      */
-    const VERSION = '3.1.1';
+    const VERSION = '3.3.0';
 
     /**
      * Holds all registered client types
@@ -121,6 +146,23 @@ class DeviceDetector
         $this->addDeviceParser('Camera');
         $this->addDeviceParser('PortableMediaPlayer');
         $this->addDeviceParser('Mobile');
+    }
+
+    public function __call($methodName, $arguments)
+    {
+        foreach (DeviceParserAbstract::getAvailableDeviceTypes() as $deviceName => $deviceType) {
+            if (strtolower($methodName) == 'is'.strtolower(str_replace(' ', '', $deviceName))) {
+                return $this->getDevice() == $deviceType;
+            }
+        }
+
+        foreach (self::$clientTypes as $client) {
+            if (strtolower($methodName) == 'is'.strtolower(str_replace(' ', '', $client))) {
+                return $this->getClient('type') == $client;
+            }
+        }
+
+        throw new \BadMethodCallException("Method $methodName not found");
     }
 
     /**
@@ -451,8 +493,9 @@ class DeviceDetector
         }
 
         $this->parseBot();
-        if ($this->isBot())
+        if ($this->isBot()) {
             return;
+        }
 
         $this->parseOs();
 
@@ -481,11 +524,11 @@ class DeviceDetector
     }
 
 
-    protected function parseClient() {
-
+    protected function parseClient()
+    {
         $parsers = $this->getClientParsers();
 
-        foreach ($parsers AS $parser) {
+        foreach ($parsers as $parser) {
             $parser->setCache($this->getCache());
             $parser->setUserAgent($this->getUserAgent());
             $client = $parser->parse();
@@ -496,11 +539,11 @@ class DeviceDetector
         }
     }
 
-    protected function parseDevice() {
-
+    protected function parseDevice()
+    {
         $parsers = $this->getDeviceParsers();
 
-        foreach ($parsers AS $parser) {
+        foreach ($parsers as $parser) {
             $parser->setCache($this->getCache());
             $parser->setUserAgent($this->getUserAgent());
             if ($parser->parse()) {
@@ -527,7 +570,7 @@ class DeviceDetector
         }
 
         /**
-         * Some user agents simply contain the fragment 'Android; Mobile;', so we assume those devices as tablets
+         * Some user agents simply contain the fragment 'Android; Mobile;', so we assume those devices as smartphones
          */
         if (is_null($this->device) && $this->hasAndroidMobileFragment()) {
             $this->device = DeviceParserAbstract::DEVICE_TYPE_SMARTPHONE;
@@ -548,7 +591,7 @@ class DeviceDetector
         if (is_null($this->device) && $osShortName == 'AND' && $osVersion != '') {
             if (version_compare($osVersion, '2.0') == -1) {
                 $this->device = DeviceParserAbstract::DEVICE_TYPE_SMARTPHONE;
-            } else if (version_compare($osVersion, '3.0') >= 0 AND version_compare($osVersion, '4.0') == -1) {
+            } elseif (version_compare($osVersion, '3.0') >= 0 and version_compare($osVersion, '4.0') == -1) {
                 $this->device = DeviceParserAbstract::DEVICE_TYPE_TABLET;
             }
         }
@@ -599,7 +642,21 @@ class DeviceDetector
         return false;
     }
 
-    static public function getInfoFromUserAgent($ua)
+    /**
+     * Parses a useragent and returns the detected data
+     *
+     * ATTENTION: Use that method only for testing or very small applications
+     * To get fast results from DeviceDetector you need to make your own implementation,
+     * that should use one of the caching mechanisms. See README.md for more information.
+     *
+     * @internal
+     * @deprecated
+     *
+     * @param string $ua UserAgent to parse
+     *
+     * @return array
+     */
+    public static function getInfoFromUserAgent($ua)
     {
         $deviceDetector = new DeviceDetector($ua);
         $deviceDetector->parse();

@@ -67,7 +67,6 @@ class Segment
      */
     protected function init()
     {
-
     }
 
     /**
@@ -124,6 +123,8 @@ class Segment
      * `array('Classname', 'methodName')` or by passing a closure. There will be four values passed to the given closure
      * or callable: `string $valueToMatch`, `string $segment` (see {@link setSegment()}), `string $matchType`
      * (eg SegmentExpression::MATCH_EQUAL or any other match constant of this class) and `$segmentName`.
+     *
+     * If the closure returns NULL, then Piwik assumes the segment sub-string will not match any visitor.
      *
      * @param string|\Closure $sqlFilter
      * @api
@@ -201,7 +202,8 @@ class Segment
      *
      * @param callable $suggestedValuesCallback
      */
-    public function setSuggestedValuesCallback($suggestedValuesCallback) {
+    public function setSuggestedValuesCallback($suggestedValuesCallback)
+    {
         $this->suggestedValuesCallback = $suggestedValuesCallback;
     }
 

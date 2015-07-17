@@ -19,7 +19,6 @@ use Piwik\Db;
 use Piwik\Tracker\Action;
 use Piwik\Tracker\Request;
 use Piwik\Tracker\Visitor;
-use Piwik\Translate;
 use Exception;
 
 /**
@@ -209,6 +208,7 @@ abstract class ActionDimension extends Dimension
 
     /**
      * Get all action dimensions that are defined by all activated plugins.
+     * @return ActionDimension[]
      * @ignore
      */
     public static function getAllDimensions()
@@ -217,7 +217,6 @@ abstract class ActionDimension extends Dimension
         $cache   = PiwikCache::getTransientCache();
 
         if (!$cache->contains($cacheId)) {
-
             $plugins   = PluginManager::getInstance()->getPluginsLoadedAndActivated();
             $instances = array();
 
@@ -250,5 +249,4 @@ abstract class ActionDimension extends Dimension
 
         return $instances;
     }
-
 }

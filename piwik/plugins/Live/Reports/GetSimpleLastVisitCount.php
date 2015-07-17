@@ -48,8 +48,8 @@ class GetSimpleLastVisitCount extends Base
             'visits'      => Piwik::translate('General_NVisits'),
             'one_action'  => Piwik::translate('General_OneAction'),
             'actions'     => Piwik::translate('VisitsSummary_NbActionsDescription'),
-            'one_minute'  => Piwik::translate('General_OneMinute'),
-            'minutes'     => Piwik::translate('General_NMinutes')
+            'one_minute'  => Piwik::translate('Intl_OneMinute'),
+            'minutes'     => Piwik::translate('Intl_NMinutes')
         );
 
         return $view->render();

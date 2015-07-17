@@ -25,8 +25,8 @@ use Piwik\Piwik;
 use Piwik\Plugin\Dimension\VisitDimension;
 use Piwik\Plugins\API\DataTable\MergeDataTables;
 use Piwik\Plugins\CoreAdminHome\CustomLogo;
-use Piwik\Segment\SegmentExpression;
 use Piwik\Translation\Translator;
+use Piwik\Measurable\Type\TypeManager;
 use Piwik\Version;
 
 require_once PIWIK_INCLUDE_PATH . '/core/Config.php';
@@ -92,6 +92,30 @@ class API extends \Piwik\Plugin\API
     public static function getDefaultMetricTranslations()
     {
         return Metrics::getDefaultMetricTranslations();
+    }
+
+    /**
+     * Returns all available measurable types.
+     * Marked as deprecated so it won't appear in API page. It won't be a public API for now.
+     * @deprecated
+     * @return array
+     */
+    public function getAvailableMeasurableTypes()
+    {
+        $typeManager = new TypeManager();
+        $types = $typeManager->getAllTypes();
+
+        $available = array();
+        foreach ($types as $type) {
+            $available[] = array(
+                'id' => $type->getId(),
+                'name' => Piwik::translate($type->getName()),
+                'description' => Piwik::translate($type->getDescription()),
+                'howToSetupUrl' => $type->getHowToSetupUrl()
+            );
+        }
+
+        return $available;
     }
 
     public function getSegmentsMetadata($idSites = array(), $_hideImplementationData = true)
@@ -161,11 +185,7 @@ class API extends \Piwik\Plugin\API
             'segment'        => 'userId',
             'acceptedValues' => 'any non empty unique string identifying the user (such as an email address or a username).',
             'sqlSegment'     => 'log_visit.user_id',
-            'sqlFilter'      => array($this, 'checkSegmentMatchTypeIsValidForUser'),
             'permission'     => $isAuthenticatedWithViewAccess,
-
-            // TODO specify that this segment is not compatible with some operators
-//            'unsupportedOperators' = array(MATCH_CONTAINS, MATCH_DOES_NOT_CONTAIN),
         );
 
         $segments[] = array(
@@ -239,32 +259,6 @@ class API extends \Piwik\Plugin\API
             }
         }
         return $compare;
-    }
-
-    /**
-     * Throw an exception if the User ID segment is used with an un-supported match type,
-     *
-     * @ignore
-     * @param $value
-     * @param $sqlSegment
-     * @param $matchType
-     * @param $name
-     * @return $value
-     * @throws \Exception
-     */
-    public function checkSegmentMatchTypeIsValidForUser($value, $sqlSegment, $matchType, $name)
-    {
-        $acceptedMatches = array(
-            SegmentExpression::MATCH_EQUAL,
-            SegmentExpression::MATCH_IS_NOT_NULL_NOR_EMPTY,
-            SegmentExpression::MATCH_IS_NULL_OR_EMPTY,
-            SegmentExpression::MATCH_NOT_EQUAL,
-        );
-        if (in_array($matchType, $acceptedMatches)) {
-            return $value;
-        }
-        $message = "Invalid Segment match type: try using 'userId' segment with one of the following match types: %s.";
-        throw new \Exception(sprintf($message, implode(", ", $acceptedMatches)));
     }
 
     /**
@@ -354,11 +348,12 @@ class API extends \Piwik\Plugin\API
 
     public function getProcessedReport($idSite, $period, $date, $apiModule, $apiAction, $segment = false,
                                        $apiParameters = false, $idGoal = false, $language = false,
-                                       $showTimer = true, $hideMetricsDoc = false, $idSubtable = false, $showRawMetrics = false)
+                                       $showTimer = true, $hideMetricsDoc = false, $idSubtable = false, $showRawMetrics = false,
+                                       $format_metrics = null)
     {
         $reporter = new ProcessedReport();
         $processed = $reporter->getProcessedReport($idSite, $period, $date, $apiModule, $apiAction, $segment,
-            $apiParameters, $idGoal, $language, $showTimer, $hideMetricsDoc, $idSubtable, $showRawMetrics);
+            $apiParameters, $idGoal, $language, $showTimer, $hideMetricsDoc, $idSubtable, $showRawMetrics, $format_metrics);
 
         return $processed;
     }

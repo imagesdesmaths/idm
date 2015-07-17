@@ -112,7 +112,6 @@ class Request
         $shouldAuthenticate = TrackerConfig::getConfigValue('tracking_requests_require_authentication');
 
         if ($shouldAuthenticate) {
-
             try {
                 $idSite = $this->getIdSite();
             } catch (Exception $e) {
@@ -143,7 +142,6 @@ class Request
             if ($this->isAuthenticated) {
                 Common::printDebug("token_auth is authenticated!");
             }
-
         } else {
             $this->isAuthenticated = true;
             Common::printDebug("token_auth authentication not required");
@@ -162,6 +160,8 @@ class Request
         $auth = StaticContainer::get('Piwik\Auth');
         $auth->setTokenAuth($tokenAuth);
         $auth->setLogin(null);
+        $auth->setPassword(null);
+        $auth->setPasswordHash(null);
         $access = $auth->authenticate();
 
         if (!empty($access) && $access->hasSuperUserAccess()) {
@@ -172,7 +172,7 @@ class Request
         if (!empty($idSite) && $idSite > 0) {
             $website = Cache::getCacheWebsiteAttributes($idSite);
 
-            if (array_key_exists('admin_token_auth', $website) && in_array($tokenAuth, $website['admin_token_auth'])) {
+            if (array_key_exists('admin_token_auth', $website) && in_array((string) $tokenAuth, $website['admin_token_auth'])) {
                 return true;
             }
         }
@@ -311,6 +311,7 @@ class Request
             'urlref'       => array('', 'string'),
             'res'          => array(self::UNKNOWN_RESOLUTION, 'string'),
             'idgoal'       => array(-1, 'int'),
+            'ping'         => array(0, 'int'),
 
             // other
             'bots'         => array(0, 'int'),
@@ -429,7 +430,7 @@ class Request
         $isTimestampRecent = $timeFromNow < self::CUSTOM_TIMESTAMP_DOES_NOT_REQUIRE_TOKENAUTH_WHEN_NEWER_THAN;
 
         if (!$isTimestampRecent) {
-            if(!$this->isAuthenticated()) {
+            if (!$this->isAuthenticated()) {
                 Common::printDebug(sprintf("Custom timestamp is %s seconds old, requires &token_auth...", $timeFromNow));
                 Common::printDebug("WARN: Tracker API 'cdt' was used with invalid token_auth");
                 return false;
@@ -739,7 +740,7 @@ class Request
      */
     public function getUserIdHashed($userId)
     {
-        return substr( sha1( $userId ), 0, 16);
+        return substr(sha1($userId), 0, 16);
     }
 
     /**

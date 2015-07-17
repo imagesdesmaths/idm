@@ -11,6 +11,8 @@ namespace Piwik;
 use Exception;
 use Piwik\Plugins\BulkTracking\Tracker\Requests;
 use Piwik\Plugins\PrivacyManager\Config as PrivacyManagerConfig;
+use Piwik\Config;
+use Piwik\Tests\Framework\TestingEnvironmentVariables;
 use Piwik\Tracker\Db as TrackerDb;
 use Piwik\Tracker\Db\DbException;
 use Piwik\Tracker\Handler;
@@ -69,8 +71,6 @@ class Tracker
     private function init()
     {
         $this->handleFatalErrors();
-
-        \Piwik\FrontController::createConfigObject();
 
         if ($this->isDebugModeEnabled()) {
             ErrorHandler::registerErrorHandler();
@@ -229,7 +229,7 @@ class Tracker
     public static function disconnectCachedDbConnection()
     {
         // code redundancy w/ above is on purpose; above disconnectDatabase depends on method that can potentially be overridden
-        if (!is_null(self::$db))  {
+        if (!is_null(self::$db)) {
             self::$db->disconnect();
             self::$db = null;
         }
@@ -245,7 +245,7 @@ class Tracker
 
         if (is_null($requestMethod) && array_key_exists('REQUEST_METHOD', $_SERVER)) {
             $requestMethod = $_SERVER['REQUEST_METHOD'];
-        } else if (is_null($requestMethod)) {
+        } elseif (is_null($requestMethod)) {
             $requestMethod = 'GET';
         }
 
@@ -280,13 +280,15 @@ class Tracker
 
         // Tests can force the enabling of IP anonymization
         if (Common::getRequestVar('forceIpAnonymization', false, null, $args) == 1) {
-
             self::getDatabase(); // make sure db is initialized
 
             $privacyConfig = new PrivacyManagerConfig();
             $privacyConfig->ipAddressMaskLength = 2;
 
             \Piwik\Plugins\PrivacyManager\IPAnonymizer::activate();
+
+            \Piwik\Tracker\Cache::deleteTrackerCache();
+            Filesystem::clearPhpCaches();
         }
 
         $pluginsDisabled = array('Provider');
@@ -328,7 +330,7 @@ class Tracker
             if ($debugOnDemand) {
                 return (bool) Common::getRequestVar('debug', false);
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
         }
 
         return false;

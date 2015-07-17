@@ -11,7 +11,10 @@ namespace Piwik\Plugins\SitesManager;
 use Exception;
 use Piwik\API\ResponseBuilder;
 use Piwik\Common;
+use Piwik\Exception\UnexpectedWebsiteFoundException;
 use Piwik\Piwik;
+use Piwik\Measurable\MeasurableSetting;
+use Piwik\Measurable\MeasurableSettings;
 use Piwik\SettingsPiwik;
 use Piwik\Site;
 use Piwik\Tracker\TrackerCodeGenerator;
@@ -33,8 +36,29 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         return $this->renderTemplate('index');
     }
 
-    public function getGlobalSettings() {
+    public function getMeasurableTypeSettings()
+    {
+        $idSite = Common::getRequestVar('idSite', 0, 'int');
+        $idType = Common::getRequestVar('idType', '', 'string');
 
+        if ($idSite >= 1) {
+            Piwik::checkUserHasAdminAccess($idSite);
+        } else if ($idSite === 0) {
+            Piwik::checkUserHasSomeAdminAccess();
+        } else {
+            throw new Exception('Invalid idSite parameter. IdSite has to be zero or higher');
+        }
+
+        $view = new View('@SitesManager/measurable_type_settings');
+
+        $propSettings   = new MeasurableSettings($idSite, $idType);
+        $view->settings = $propSettings->getSettingsForCurrentUser();
+
+        return $view->render();
+    }
+
+    public function getGlobalSettings()
+    {
         Piwik::checkUserHasSomeViewAccess();
 
         $response = new ResponseBuilder(Common::getRequestVar('format'));
@@ -126,6 +150,10 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
     {
         $javascriptGenerator = new TrackerCodeGenerator();
         $piwikUrl = Url::getCurrentUrlWithoutFileName();
+
+        if (!$this->site) {
+            throw new UnexpectedWebsiteFoundException('Invalid site ' . $this->idSite);
+        }
 
         return $this->renderTemplate('siteWithoutData', array(
             'siteName'     => $this->site->getName(),

@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Piwik - free/libre analytics platform
+ *
+ * @link http://piwik.org
+ * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
+ */
 namespace Piwik\Plugins\Diagnostics\Diagnostic;
 
 use Piwik\Translation\Translator;
@@ -60,7 +65,7 @@ class PhpSettingsCheck implements Diagnostic
             'session.auto_start=0',
         );
 
-        if ($this->isPhpVersionAtLeast56()) {
+        if ($this->isPhpVersionAtLeast56() && ! defined("HHVM_VERSION")) {
             // always_populate_raw_post_data must be -1
             $requiredSettings[] = 'always_populate_raw_post_data=-1';
         }

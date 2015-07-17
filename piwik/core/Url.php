@@ -9,9 +9,7 @@
 namespace Piwik;
 
 use Exception;
-
 use Piwik\Network\IPUtils;
-use Piwik\Session;
 
 /**
  * Provides URL related helper methods.
@@ -52,11 +50,6 @@ use Piwik\Session;
  */
 class Url
 {
-    /**
-     * List of hosts that are never checked for validity.
-     */
-    private static $alwaysTrustedHosts = array('localhost', '127.0.0.1', '::1', '[::1]');
-
     /**
      * Returns the current URL.
      *
@@ -217,13 +210,14 @@ class Url
 
         if ($host === false) {
             $host = @$_SERVER['HTTP_HOST'];
-            if (empty($host)) // if no current host, assume valid
-            {
+            if (empty($host)) {
+                // if no current host, assume valid
+
                 return true;
             }
         }
         // if host is in hardcoded whitelist, assume it's valid
-        if (in_array($host, self::$alwaysTrustedHosts)) {
+        if (in_array($host, self::getAlwaysTrustedHosts())) {
             return true;
         }
 
@@ -241,9 +235,12 @@ class Url
             return true;
         }
 
+        // Escape trusted hosts for preg_match call below
         foreach ($trustedHosts as &$trustedHost) {
             $trustedHost = preg_quote($trustedHost);
         }
+        $trustedHosts = str_replace("/", "\\/", $trustedHosts);
+
         $untrustedHost = Common::mb_strtolower($host);
         $untrustedHost = rtrim($untrustedHost, '.');
 
@@ -406,7 +403,7 @@ class Url
      * @return string eg, `"?param2=value2&param3=value3"`
      * @api
      */
-    static function getCurrentQueryStringWithParametersModified($params)
+    public static function getCurrentQueryStringWithParametersModified($params)
     {
         $urlValues = self::getArrayFromCurrentQueryString();
         foreach ($params as $key => $value) {
@@ -421,7 +418,7 @@ class Url
 
     /**
      * Converts an array of parameters name => value mappings to a query
-     * string.
+     * string. Values must already be URL encoded before you call this function.
      *
      * @param array $parameters eg. `array('param1' => 10, 'param2' => array(1,2))`
      * @return string eg. `"param1=10&param2[]=1&param2[]=2"`
@@ -667,6 +664,24 @@ class Url
             }
         }
 
-        return in_array($host, self::$alwaysTrustedHosts);
+        return in_array($host, self::getAlwaysTrustedHosts());
+    }
+
+    /**
+     * List of hosts that are never checked for validity.
+     *
+     * @return array
+     */
+    private static function getAlwaysTrustedHosts()
+    {
+        return self::getLocalHostnames();
+    }
+
+    /**
+     * @return array
+     */
+    public static function getLocalHostnames()
+    {
+        return array('localhost', '127.0.0.1', '::1', '[::1]');
     }
 }

@@ -99,7 +99,7 @@ class SettingsPiwik
      * cron archiving.
      *
      * @param int $idSite The ID of the site to get stored segments for.
-     * @return string The list of stored segments that apply to the requested site.
+     * @return string[] The list of stored segments that apply to the requested site.
      */
     public static function getKnownSegmentsToArchiveForSite($idSite)
     {
@@ -179,6 +179,9 @@ class SettingsPiwik
 
         $currentUrl = Common::sanitizeInputValue(Url::getCurrentUrlWithoutFileName());
 
+        // when script is called from /misc/cron/archive.php, Piwik URL is /index.php
+        $currentUrl = str_replace("/misc/cron", "", $currentUrl);
+
         if (empty($url)
             // if URL changes, always update the cache
             || $currentUrl != $url
@@ -224,7 +227,6 @@ class SettingsPiwik
             return false;
         }
         return true;
-
     }
 
     /**
@@ -437,5 +439,4 @@ class SettingsPiwik
     {
         return (bool)Config::getInstance()->Tracker['enable_fingerprinting_across_websites'];
     }
-
 }

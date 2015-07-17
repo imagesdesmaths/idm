@@ -116,7 +116,7 @@ class Mail extends Zend_Mail
         @ini_set("smtp_port", $mailConfig['port']);
     }
 
-    public function send($transport = NULL)
+    public function send($transport = null)
     {
         if (defined('PIWIK_TEST_MODE')) { // hack
             Piwik::postTestEvent("Test.Mail.send", array($this));
@@ -150,6 +150,6 @@ class Mail extends Zend_Mail
      */
     protected function isHostDefinedAndNotLocal($url)
     {
-        return isset($url['host']) && !in_array($url['host'], array('localhost', '127.0.0.1'), true);
+        return isset($url['host']) && !in_array($url['host'], Url::getLocalHostnames(), true);
     }
 }

@@ -6,6 +6,7 @@
  * @license http://www.gnu.org/licenses/lgpl.html LGPL v3 or later
  */
 namespace DeviceDetector\Parser\Client;
+
 use DeviceDetector\Parser\Client\Browser\Engine;
 
 /**
@@ -26,6 +27,7 @@ class Browser extends ClientParserAbstract
      * @var array
      */
     protected static $availableBrowsers = array(
+        '36' => '360 Phone Browser',
         'AA' => 'Avant Browser',
         'AB' => 'ABrowse',
         'AG' => 'ANTGalio',
@@ -118,7 +120,7 @@ class Browser extends ClientParserAbstract
         'PW' => 'Palm WebPro',
         'PX' => 'Phoenix',
         'PO' => 'Polaris',
-        'PS' => 'Project Spartan',
+        'PS' => 'Microsoft Edge',
         'QQ' => 'QQ Browser',
         'RK' => 'Rekonq',
         'RM' => 'RockMelt',
@@ -150,6 +152,8 @@ class Browser extends ClientParserAbstract
     protected static $browserFamilies = array(
         'Android Browser'    => array('AN', 'MU'),
         'BlackBerry Browser' => array('BB'),
+        'Baidu'              => array('BD', 'BS'),
+        'Amiga'              => array('AV', 'AW'),
         'Chrome'             => array('CH', 'CD', 'CM', 'CI', 'CF', 'CN', 'CR', 'CP', 'IR', 'RM', 'AO', 'VI'),
         'Firefox'            => array('FF', 'FE', 'SX', 'FB', 'PX', 'MB'),
         'Internet Explorer'  => array('IE', 'IM', 'PS'),
@@ -198,8 +202,9 @@ class Browser extends ClientParserAbstract
     {
         foreach ($this->getRegexes() as $regex) {
             $matches = $this->matchUserAgent($regex['regex']);
-            if ($matches)
+            if ($matches) {
                 break;
+            }
         }
 
         if (!$matches) {
@@ -208,7 +213,7 @@ class Browser extends ClientParserAbstract
 
         $name  = $this->buildByMatch($regex['name'], $matches);
 
-        foreach (self::getAvailableBrowsers() AS $browserShort => $browserName) {
+        foreach (self::getAvailableBrowsers() as $browserShort => $browserName) {
             if (strtolower($name) == strtolower($browserName)) {
                 $version = (string) $this->buildVersion($regex['version'], $matches);
                 $engine = $this->buildEngine(isset($regex['engine']) ? $regex['engine'] : array(), $version);
@@ -235,12 +240,11 @@ class Browser extends ClientParserAbstract
         }
         // check if engine is set for browser version
         if (array_key_exists('versions', $engineData) && is_array($engineData['versions'])) {
-            foreach($engineData['versions'] AS $version => $versionEngine) {
-                if(version_compare($browserVersion, $version) >= 0) {
+            foreach ($engineData['versions'] as $version => $versionEngine) {
+                if (version_compare($browserVersion, $version) >= 0) {
                     $engine = $versionEngine;
                 }
             }
-
         }
         // try to detect the engine using the regexes
         if (empty($engine)) {

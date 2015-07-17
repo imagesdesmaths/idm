@@ -199,20 +199,20 @@ abstract class Controller
         $availablePeriods = self::getEnabledPeriodsInUI();
         $periodNames = array(
             'day'   => array(
-                'singular' => Piwik::translate('CoreHome_PeriodDay'),
-                'plural' => Piwik::translate('CoreHome_PeriodDays')
+                'singular' => Piwik::translate('Intl_PeriodDay'),
+                'plural' => Piwik::translate('Intl_PeriodDays')
             ),
             'week'  => array(
-                'singular' => Piwik::translate('CoreHome_PeriodWeek'),
-                'plural' => Piwik::translate('CoreHome_PeriodWeeks')
+                'singular' => Piwik::translate('Intl_PeriodWeek'),
+                'plural' => Piwik::translate('Intl_PeriodWeeks')
             ),
             'month' => array(
-                'singular' => Piwik::translate('CoreHome_PeriodMonth'),
-                'plural' => Piwik::translate('CoreHome_PeriodMonths')
+                'singular' => Piwik::translate('Intl_PeriodMonth'),
+                'plural' => Piwik::translate('Intl_PeriodMonths')
             ),
             'year'  => array(
-                'singular' => Piwik::translate('CoreHome_PeriodYear'),
-                'plural' => Piwik::translate('CoreHome_PeriodYears')
+                'singular' => Piwik::translate('Intl_PeriodYear'),
+                'plural' => Piwik::translate('Intl_PeriodYears')
             ),
             // Note: plural is not used for date range
             'range' => array(
@@ -778,7 +778,7 @@ abstract class Controller
                                                                                     $validHost,
                                                                                     '</a>'
                                                                                ));
-            } else if (Piwik::isUserIsAnonymous()) {
+            } elseif (Piwik::isUserIsAnonymous()) {
                 $view->invalidHostMessage = $warningStart . ' '
                     . Piwik::translate('CoreHome_InjectedHostNonSuperUserWarning', array(
                         "<br/><a href=\"$validUrl\">",
@@ -860,7 +860,7 @@ abstract class Controller
     {
         try {
             $this->doRedirectToUrl($moduleToRedirect, $actionToRedirect, $websiteId, $defaultPeriod, $defaultDate, $parameters);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             // no website ID to default to, so could not redirect
         }
 
@@ -926,8 +926,9 @@ abstract class Controller
      */
     public static function getCalendarPrettyDate($period)
     {
-        if ($period instanceof Month) // show month name when period is for a month
-        {
+        if ($period instanceof Month) {
+            // show month name when period is for a month
+
             return $period->getLocalizedLongString();
         } else {
             return $period->getPrettyString();
@@ -976,7 +977,7 @@ abstract class Controller
         if ($evolutionPercent < 0) {
             $class = "negative-evolution";
             $img = "arrow_down.png";
-        } else if ($evolutionPercent == 0) {
+        } elseif ($evolutionPercent == 0) {
             $class = "neutral-evolution";
             $img = "stop.png";
         } else {
@@ -1008,7 +1009,7 @@ abstract class Controller
     {
         if (!empty($this->idSite) && empty($this->site)) {
             throw new NoAccessException(Piwik::translate('General_ExceptionPrivilegeAccessWebsite', array("'view'", $this->idSite)));
-        } else if (empty($this->site) || empty($this->idSite)) {
+        } elseif (empty($this->site) || empty($this->idSite)) {
             throw new Exception("The requested website idSite is not found in the request, or is invalid.
 				Please check that you are logged in Piwik and have permission to access the specified website.");
         }

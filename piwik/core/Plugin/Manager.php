@@ -9,12 +9,12 @@
 
 namespace Piwik\Plugin;
 
+use Piwik\Application\Kernel\PluginList;
 use Piwik\Cache;
 use Piwik\Columns\Dimension;
 use Piwik\Config as PiwikConfig;
 use Piwik\Config;
 use Piwik\Container\StaticContainer;
-use Piwik\Db;
 use Piwik\EventDispatcher;
 use Piwik\Filesystem;
 use Piwik\Log;
@@ -22,7 +22,6 @@ use Piwik\Option;
 use Piwik\Piwik;
 use Piwik\Plugin;
 use Piwik\PluginDeactivatedException;
-use Piwik\Singleton;
 use Piwik\Theme;
 use Piwik\Tracker;
 use Piwik\Translation\Translator;
@@ -35,11 +34,17 @@ require_once PIWIK_INCLUDE_PATH . '/core/EventDispatcher.php';
 
 /**
  * The singleton that manages plugin loading/unloading and installation/uninstallation.
- *
- * @method static Manager getInstance()
  */
-class Manager extends Singleton
+class Manager
 {
+    /**
+     * @return self
+     */
+    public static function getInstance()
+    {
+        return StaticContainer::get('Piwik\Plugin\Manager');
+    }
+
     protected $pluginsToLoad = array();
 
     protected $doLoadPlugins = true;
@@ -60,6 +65,7 @@ class Manager extends Singleton
     // These are always activated and cannot be deactivated
     protected $pluginToAlwaysActivate = array(
         'CoreHome',
+        'Diagnostics',
         'CoreUpdater',
         'CoreAdminHome',
         'CoreConsole',
@@ -68,32 +74,27 @@ class Manager extends Singleton
         'Installation',
         'SitesManager',
         'UsersManager',
+        'Intl',
         'API',
         'Proxy',
         'LanguagesManager',
+        'WebsiteMeasurable',
 
         // default Piwik theme, always enabled
         self::DEFAULT_THEME,
     );
 
-    // Plugins bundled with core package, disabled by default
-    protected $corePluginsDisabledByDefault = array(
-        'DBStats',
-        'ExampleCommand',
-        'ExampleSettingsPlugin',
-        'ExampleUI',
-        'ExampleVisualization',
-        'ExamplePluginTemplate',
-        'ExampleTracker',
-        'ExampleReport'
-    );
-
-    // Themes bundled with core package, disabled by default
-    protected $coreThemesDisabledByDefault = array(
-        'ExampleTheme'
-    );
-
     private $trackerPluginsNotToLoad = array();
+
+    /**
+     * @var PluginList
+     */
+    private $pluginList;
+
+    public function __construct(PluginList $pluginList)
+    {
+        $this->pluginList = $pluginList;
+    }
 
     /**
      * Loads plugin that are enabled
@@ -109,7 +110,7 @@ class Manager extends Singleton
      */
     public function loadCorePluginsDuringTracker()
     {
-        $pluginsToLoad = Config::getInstance()->Plugins['Plugins'];
+        $pluginsToLoad = $this->pluginList->getActivatedPlugins();
         $pluginsToLoad = array_diff($pluginsToLoad, $this->getTrackerPluginsNotToLoad());
         $this->loadPlugins($pluginsToLoad);
     }
@@ -125,7 +126,6 @@ class Manager extends Singleton
         if ($cache->contains($cacheId)) {
             $pluginsTracker = $cache->fetch($cacheId);
         } else {
-
             $this->unloadPlugins();
             $this->loadActivatedPlugins();
 
@@ -178,11 +178,6 @@ class Manager extends Singleton
         return $this->trackerPluginsNotToLoad;
     }
 
-    public function getCorePluginsDisabledByDefault()
-    {
-        return array_merge( $this->corePluginsDisabledByDefault, $this->coreThemesDisabledByDefault);
-    }
-
     // If a plugin hooks onto at least an event starting with "Tracker.", we load the plugin during tracker
     const TRACKER_EVENT_PREFIX = 'Tracker.';
 
@@ -208,7 +203,7 @@ class Manager extends Singleton
      */
     private function updatePluginsConfig($pluginsToLoad)
     {
-        $pluginsToLoad = $this->sortPluginsSameOrderAsGlobalConfig($pluginsToLoad);
+        $pluginsToLoad = $this->pluginList->sortPlugins($pluginsToLoad);
         $section = PiwikConfig::getInstance()->Plugins;
         $section['Plugins'] = $pluginsToLoad;
         PiwikConfig::getInstance()->Plugins = $section;
@@ -228,9 +223,8 @@ class Manager extends Singleton
 
     public function clearPluginsInstalledConfig()
     {
-        $this->updatePluginsInstalledConfig( array() );
+        $this->updatePluginsInstalledConfig(array());
         PiwikConfig::getInstance()->forceSave();
-        PiwikConfig::getInstance()->init();
     }
 
     /**
@@ -324,14 +318,14 @@ class Manager extends Singleton
      */
     public function deactivatePlugin($pluginName)
     {
+        $this->clearCache($pluginName);
+
         // execute deactivate() to let the plugin do cleanups
         $this->executePluginDeactivate($pluginName);
 
         $this->unloadPluginFromMemory($pluginName);
 
         $this->removePluginFromConfig($pluginName);
-
-        $this->clearCache($pluginName);
 
         /**
          * Event triggered after a plugin has been deactivated.
@@ -466,7 +460,7 @@ class Manager extends Singleton
      */
     public function activatePlugin($pluginName)
     {
-        $plugins = PiwikConfig::getInstance()->Plugins['Plugins'];
+        $plugins = $this->pluginList->getActivatedPlugins();
         if (in_array($pluginName, $plugins)) {
             throw new \Exception("Plugin '$pluginName' already activated.");
         }
@@ -592,7 +586,7 @@ class Manager extends Singleton
 
         $listPlugins = array_merge(
             $this->readPluginsDirectory(),
-            PiwikConfig::getInstance()->Plugins['Plugins']
+            $this->pluginList->getActivatedPlugins()
         );
         $listPlugins = array_unique($listPlugins);
         foreach ($listPlugins as $pluginName) {
@@ -653,8 +647,8 @@ class Manager extends Singleton
     public function isPluginBundledWithCore($name)
     {
         return $this->isPluginEnabledByDefault($name)
-                || in_array($name, $this->getCorePluginsDisabledByDefault())
-                || $name == self::DEFAULT_THEME;
+        || in_array($name, $this->pluginList->getCorePluginsDisabledByDefault())
+        || $name == self::DEFAULT_THEME;
     }
 
     protected function isPluginThirdPartyAndBogus($pluginName)
@@ -675,7 +669,7 @@ class Manager extends Singleton
 
     /**
      * Load AND activates the specified plugins. It will also overwrite all previously loaded plugins, so it acts
-     * as a setter. 
+     * as a setter.
      *
      * @param array $pluginsToLoad Array of plugins to load.
      */
@@ -803,7 +797,7 @@ class Manager extends Singleton
 
     public function getActivatedPluginsFromConfig()
     {
-        $plugins = @Config::getInstance()->Plugins['Plugins'];
+        $plugins = $this->pluginList->getActivatedPlugins();
 
         return $this->makePluginsToLoad($plugins);
     }
@@ -873,10 +867,11 @@ class Manager extends Singleton
      */
     public static function getAllPluginsNames()
     {
+        $pluginList = StaticContainer::get('Piwik\Application\Kernel\PluginList');
+
         $pluginsToLoad = array_merge(
-            PiwikConfig::getInstance()->Plugins['Plugins'],
             self::getInstance()->readPluginsDirectory(),
-            self::getInstance()->getCorePluginsDisabledByDefault()
+            $pluginList->getCorePluginsDisabledByDefault()
         );
         $pluginsToLoad = array_values(array_unique($pluginsToLoad));
         return $pluginsToLoad;
@@ -1024,7 +1019,7 @@ class Manager extends Singleton
      */
     public function getInstalledPluginsName()
     {
-        $pluginNames = PiwikConfig::getInstance()->PluginsInstalled['PluginsInstalled'];
+        $pluginNames = Config::getInstance()->PluginsInstalled['PluginsInstalled'];
         return $pluginNames;
     }
 
@@ -1038,17 +1033,17 @@ class Manager extends Singleton
     public function getMissingPlugins()
     {
         $missingPlugins = array();
-        if (isset(PiwikConfig::getInstance()->Plugins['Plugins'])) {
-            $plugins = PiwikConfig::getInstance()->Plugins['Plugins'];
-            foreach ($plugins as $pluginName) {
-                // if a plugin is listed in the config, but is not loaded, it does not exist in the folder
-                if (!self::getInstance()->isPluginLoaded($pluginName)
-                    && !$this->isPluginBogus($pluginName)
-                ) {
-                    $missingPlugins[] = $pluginName;
-                }
+
+        $plugins = $this->pluginList->getActivatedPlugins();
+        foreach ($plugins as $pluginName) {
+            // if a plugin is listed in the config, but is not loaded, it does not exist in the folder
+            if (!self::getInstance()->isPluginLoaded($pluginName)
+                && !$this->isPluginBogus($pluginName)
+            ) {
+                $missingPlugins[] = $pluginName;
             }
         }
+
         return $missingPlugins;
     }
 
@@ -1122,7 +1117,7 @@ class Manager extends Singleton
      */
     private function removePluginFromPluginsInstalledConfig($pluginName)
     {
-        $pluginsInstalled = PiwikConfig::getInstance()->PluginsInstalled['PluginsInstalled'];
+        $pluginsInstalled = Config::getInstance()->PluginsInstalled['PluginsInstalled'];
         $key = array_search($pluginName, $pluginsInstalled);
         if ($key !== false) {
             unset($pluginsInstalled[$key]);
@@ -1136,7 +1131,7 @@ class Manager extends Singleton
      */
     private function removePluginFromPluginsConfig($pluginName)
     {
-        $pluginsEnabled = PiwikConfig::getInstance()->Plugins['Plugins'];
+        $pluginsEnabled = $this->pluginList->getActivatedPlugins();
         $key = array_search($pluginName, $pluginsEnabled);
         if ($key !== false) {
             unset($pluginsEnabled[$key]);
@@ -1191,6 +1186,8 @@ class Manager extends Singleton
      */
     private function unloadPluginFromMemory($pluginName)
     {
+        $this->unloadPlugin($pluginName);
+
         $key = array_search($pluginName, $this->pluginsToLoad);
         if ($key !== false) {
             unset($this->pluginsToLoad[$key]);
@@ -1283,9 +1280,7 @@ class Manager extends Singleton
      */
     protected function getPluginsFromGlobalIniConfigFile()
     {
-        $pluginsBundledWithPiwik = PiwikConfig::getInstance()->getFromGlobalConfig('Plugins');
-        $pluginsBundledWithPiwik = $pluginsBundledWithPiwik['Plugins'];
-        return $pluginsBundledWithPiwik;
+        return $this->pluginList->getPluginsBundledWithPiwik();
     }
 
     /**
@@ -1295,8 +1290,7 @@ class Manager extends Singleton
     protected function isPluginEnabledByDefault($name)
     {
         $pluginsBundledWithPiwik = $this->getPluginsFromGlobalIniConfigFile();
-
-        if(empty($pluginsBundledWithPiwik)) {
+        if (empty($pluginsBundledWithPiwik)) {
             return false;
         }
         return in_array($name, $pluginsBundledWithPiwik);
@@ -1313,29 +1307,8 @@ class Manager extends Singleton
             $pluginsToLoad = array_merge($pluginsToLoad, $this->pluginToAlwaysActivate);
         }
         $pluginsToLoad = array_unique($pluginsToLoad);
-        $pluginsToLoad = $this->sortPluginsSameOrderAsGlobalConfig($pluginsToLoad);
+        $pluginsToLoad = $this->pluginList->sortPlugins($pluginsToLoad);
         return $pluginsToLoad;
-    }
-
-    private function sortPluginsSameOrderAsGlobalConfig(array $plugins)
-    {
-        $global = $this->getPluginsFromGlobalIniConfigFile();
-        if(empty($global)) {
-            return $plugins;
-        }
-        $global = array_values($global);
-        $plugins = array_values($plugins);
-
-        $defaultPluginsLoadedFirst = array_intersect($global, $plugins);
-
-        $otherPluginsToLoadAfterDefaultPlugins = array_diff($plugins, $defaultPluginsLoadedFirst);
-
-        // sort by name to have a predictable order for those extra plugins
-        sort($otherPluginsToLoadAfterDefaultPlugins);
-
-        $sorted = array_merge($defaultPluginsLoadedFirst, $otherPluginsToLoadAfterDefaultPlugins);
-
-        return $sorted;
     }
 
     public function loadPluginTranslations()

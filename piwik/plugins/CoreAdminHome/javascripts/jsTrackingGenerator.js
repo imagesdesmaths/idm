@@ -208,7 +208,7 @@
                 if ($('#image-tracking-goal-check').is(':checked')) {
                     generateDataParams.idGoal = $('#image-tracker-goal').val();
                     if (generateDataParams.idGoal) {
-                        generateDataParams.revenue = $('#image-tracker-advanced-options').find('.revenue').val();
+                        generateDataParams.revenue = $('#image-goal-picker-extra').find('.revenue').val();
                     }
                 }
 
@@ -271,9 +271,7 @@
             e.preventDefault();
 
             var newRow = '<tr>\
-			<td>&nbsp;</td>\
 			<td><input type="textbox" class="custom-variable-name"/></td>\
-			<td>&nbsp;</td>\
 			<td><input type="textbox" class="custom-variable-value"/></td>\
 		</tr>',
                 row = $(this).closest('tr');

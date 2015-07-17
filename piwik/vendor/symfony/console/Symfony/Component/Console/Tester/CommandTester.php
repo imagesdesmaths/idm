@@ -42,14 +42,14 @@ class CommandTester
     /**
      * Executes the command.
      *
-     * Available options:
+     * Available execution options:
      *
      *  * interactive: Sets the input interactive flag
      *  * decorated:   Sets the output decorated flag
      *  * verbosity:   Sets the output verbosity flag
      *
-     * @param array $input   An array of arguments and options
-     * @param array $options An array of options
+     * @param array $input   An array of command arguments and options
+     * @param array $options An array of execution options
      *
      * @return int The command exit code
      */
@@ -61,7 +61,7 @@ class CommandTester
             && (null !== $application = $this->command->getApplication())
             && $application->getDefinition()->hasArgument('command')
         ) {
-            $input['command'] = $this->command->getName();
+            $input = array_merge(array('command' => $this->command->getName()), $input);
         }
 
         $this->input = new ArrayInput($input);

@@ -48,6 +48,11 @@ class Controller extends \Piwik\Plugin\Controller
      */
     private $translator;
 
+    /**
+     * @var TranslationHelper
+     */
+    private $translationHelper;
+
     private function formatConversionRate($conversionRate, $columnName = 'conversion_rate')
     {
         if ($conversionRate instanceof DataTable) {
@@ -65,20 +70,15 @@ class Controller extends \Piwik\Plugin\Controller
         return $conversionRate;
     }
 
-    public function __construct(Translator $translator)
+    public function __construct(Translator $translator, TranslationHelper $translationHelper)
     {
         parent::__construct();
 
         $this->translator = $translator;
+        $this->translationHelper = $translationHelper;
 
         $this->idSite = Common::getRequestVar('idSite', null, 'int');
         $this->goals = API::getInstance()->getGoals($this->idSite);
-        foreach ($this->goals as &$goal) {
-            $goal['name'] = Common::sanitizeInputValue($goal['name']);
-            if (isset($goal['pattern'])) {
-                $goal['pattern'] = Common::sanitizeInputValue($goal['pattern']);
-            }
-        }
     }
 
     public function widgetGoalReport()
@@ -146,12 +146,6 @@ class Controller extends \Piwik\Plugin\Controller
         // unsanitize goal names and other text data (not done in API so as not to break
         // any other code/cause security issues)
         $goals = $this->goals;
-        foreach ($goals as &$goal) {
-            $goal['name'] = Common::unsanitizeInputValue($goal['name']);
-            if (isset($goal['pattern'])) {
-                $goal['pattern'] = Common::unsanitizeInputValue($goal['pattern']);
-            }
-        }
         $view->goalsJSON = json_encode($goals);
 
         $view->ecommerceEnabled = $this->site->isEcommerceEnabled();
@@ -339,11 +333,11 @@ class Controller extends \Piwik\Plugin\Controller
         $topDimensions = array();
         foreach ($topDimensionsToLoad as $dimensionName => $apiMethod) {
             $request = new Request("method=$apiMethod
-								&format=original
-								&filter_update_columns_when_show_all_goals=1
-								&idGoal=" . AddColumnsProcessedMetricsGoal::GOALS_FULL_TABLE . "
-								&filter_sort_order=desc
-								&filter_sort_column=$columnNbConversions" .
+                                &format=original
+                                &filter_update_columns_when_show_all_goals=1
+                                &idGoal=" . AddColumnsProcessedMetricsGoal::GOALS_FULL_TABLE . "
+                                &filter_sort_order=desc
+                                &filter_sort_column=$columnNbConversions" .
                 // select a couple more in case some are not valid (ie. conversions==0 or they are "Keyword not defined")
                 "&filter_limit=" . (self::COUNT_TOP_ROWS_TO_DISPLAY + 2));
             $datatable = $request->process();
@@ -451,9 +445,9 @@ class Controller extends \Piwik\Plugin\Controller
             $allReports = Goals::getReportsWithGoalMetrics();
             foreach ($allReports as $category => $reports) {
                 if ($ecommerce) {
-                    $categoryText = $this->translator->translate('Ecommerce_ViewSalesBy', $category);
+                    $categoryText = $this->translationHelper->translateEcommerceMetricCategory($category);
                 } else {
-                    $categoryText = $this->translator->translate('Goals_ViewGoalsBy', $category);
+                    $categoryText = $this->translationHelper->translateGoalMetricCategory($category);
                 }
 
                 foreach ($reports as $report) {

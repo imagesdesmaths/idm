@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Piwik - free/libre analytics platform
+ *
+ * @link http://piwik.org
+ * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
+ */
 namespace Piwik\Plugins\Diagnostics\Diagnostic;
 
 use Piwik\Filechecks;
@@ -46,6 +51,6 @@ class FileIntegrityCheck implements Diagnostic
         $comment .= '<br/><br/><pre style="overflow-x: scroll;max-width: 600px;">'
             . implode("\n", $messages) . '</pre>';
 
-        return array(DiagnosticResult::singleResult($label, DiagnosticResult::STATUS_ERROR, $comment));
+        return array(DiagnosticResult::singleResult($label, DiagnosticResult::STATUS_WARNING, $comment));
     }
 }

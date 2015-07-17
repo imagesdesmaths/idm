@@ -24,6 +24,12 @@ function languageTranslate($label)
         return Piwik::translate('General_Unknown');
     }
 
+    $language = Piwik::translate('Intl_Language_'.$label);
+
+    if ($language != 'Intl_Language_'.$label) {
+        return $language;
+    }
+
     $key = 'UserLanguage_Language_' . $label;
 
     $translation = Piwik::translate($key);
@@ -47,7 +53,11 @@ function languageTranslateWithCode($label)
 
     if (count($ex) == 2 && $ex[0] != $ex[1]) {
         $countryKey = 'UserCountry_country_' . $ex[1];
-        $country = Piwik::translate($countryKey);
+        $country = Piwik::translate('Intl_Country_'.strtoupper($ex[1]));
+
+        if ($country == 'Intl_Country_'.strtoupper($ex[1])) {
+            $country = Piwik::translate($countryKey);
+        }
 
         if ($country == $countryKey) {
             return sprintf("%s (%s)", $lang, $ex[0]);

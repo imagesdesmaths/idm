@@ -13,7 +13,6 @@ use Piwik\Container\StaticContainer;
 use Piwik\Intl\Data\Provider\LanguageDataProvider;
 use Piwik\Intl\Data\Provider\RegionDataProvider;
 use Piwik\Plugins\UserCountry\LocationProvider\DefaultProvider;
-use Piwik\Tracker;
 use Piwik\Tracker\Cache as TrackerCache;
 
 /**
@@ -269,8 +268,9 @@ class Common
         } elseif (is_string($value)) {
             $value = self::sanitizeString($value);
 
-            if (!$alreadyStripslashed) // a JSON array was already stripslashed, don't do it again for each value
-            {
+            if (!$alreadyStripslashed) {
+                // a JSON array was already stripslashed, don't do it again for each value
+
                 $value = self::undoMagicQuotes($value);
             }
         } elseif (is_array($value)) {
@@ -338,6 +338,7 @@ class Common
      *
      * @param string $value
      * @return string  unsanitized input
+     * @api
      */
     public static function unsanitizeInputValue($value)
     {
@@ -480,20 +481,25 @@ class Common
             if ($varType === 'string') {
                 if (is_string($value) || is_int($value)) {
                     $ok = true;
-                } else if (is_float($value)) {
+                } elseif (is_float($value)) {
                     $value = Common::forceDotAsSeparatorForDecimalPoint($value);
                     $ok    = true;
                 }
-
             } elseif ($varType === 'integer') {
-                if ($value == (string)(int)$value) $ok = true;
+                if ($value == (string)(int)$value) {
+                    $ok = true;
+                }
             } elseif ($varType === 'float') {
                 $valueToCompare = (string)(float)$value;
                 $valueToCompare = Common::forceDotAsSeparatorForDecimalPoint($valueToCompare);
 
-                if ($value == $valueToCompare) $ok = true;
+                if ($value == $valueToCompare) {
+                    $ok = true;
+                }
             } elseif ($varType === 'array') {
-                if (is_array($value)) $ok = true;
+                if (is_array($value)) {
+                    $ok = true;
+                }
             } else {
                 throw new Exception("\$varType specified is not known. It should be one of the following: array, int, integer, float, string");
             }
@@ -552,7 +558,6 @@ class Common
         if ($hashAlgorithm) {
             $hash = @hash($hashAlgorithm, $str, $raw_output);
             if ($hash !== false) {
-
                 return $hash;
             }
         }
@@ -818,7 +823,6 @@ class Common
         $searchEngines = $cache->fetch($cacheId);
 
         if (empty($searchEngines)) {
-
             require_once PIWIK_INCLUDE_PATH . '/core/DataFiles/SearchEngines.php';
 
             $searchEngines = $GLOBALS['Piwik_SearchEngines'];
@@ -845,7 +849,6 @@ class Common
         $nameToUrl = $cache->fetch($cacheId);
 
         if (empty($nameToUrl)) {
-
             $searchEngines = self::getSearchEngineUrls();
 
             $nameToUrl = array();
@@ -874,7 +877,6 @@ class Common
         $socialUrls = $cache->fetch($cacheId);
 
         if (empty($socialUrls)) {
-
             require_once PIWIK_INCLUDE_PATH . '/core/DataFiles/Socials.php';
 
             $socialUrls = $GLOBALS['Piwik_socialUrl'];
@@ -1025,12 +1027,12 @@ class Common
         $validLanguages = self::checkValidLanguagesIsSet($validLanguages);
         $languageRegionCode = self::extractLanguageAndRegionCodeFromBrowserLanguage($browserLanguage, $validLanguages);
 
-        if(strlen($languageRegionCode) == 2) {
+        if (strlen($languageRegionCode) == 2) {
             $languageCode = $languageRegionCode;
         } else {
             $languageCode = substr($languageRegionCode, 0, 2);
         }
-        if(in_array($languageCode, $validLanguages)) {
+        if (in_array($languageCode, $validLanguages)) {
             return $languageCode;
         }
         return self::LANGUAGE_CODE_INVALID;
@@ -1045,16 +1047,16 @@ class Common
      * @param array $validLanguages array of valid language codes. Note that if the array includes "fr" then it will consider all regional variants of this language valid, such as "fr-ca" etc.
      * @return string 2 letter ISO 639 code 'es' (Spanish) or if found, includes the region as well: 'es-ar'
      */
-    public static function extractLanguageAndRegionCodeFromBrowserLanguage($browserLanguage, $validLanguages = array() )
+    public static function extractLanguageAndRegionCodeFromBrowserLanguage($browserLanguage, $validLanguages = array())
     {
         $validLanguages = self::checkValidLanguagesIsSet($validLanguages);
 
-        if(!preg_match_all('/(?:^|,)([a-z]{2,3})([-][a-z]{2})?/', $browserLanguage, $matches, PREG_SET_ORDER)) {
+        if (!preg_match_all('/(?:^|,)([a-z]{2,3})([-][a-z]{2})?/', $browserLanguage, $matches, PREG_SET_ORDER)) {
             return self::LANGUAGE_CODE_INVALID;
         }
         foreach ($matches as $parts) {
             $langIso639 = $parts[1];
-            if(empty($langIso639)) {
+            if (empty($langIso639)) {
                 continue;
             }
 
@@ -1219,7 +1221,6 @@ class Common
                 && strlen($_SERVER['SERVER_PROTOCOL']) > 1) {
                 $key = $_SERVER['SERVER_PROTOCOL'];
             }
-
         } else {
             // FastCGI
             $key = 'Status:';
@@ -1261,11 +1262,10 @@ class Common
      * @todo This method is weird, it's debugging statements but seem to only work for the tracker, maybe it
      * should be moved elsewhere
      */
-    public static function  printDebug($info = '')
+    public static function printDebug($info = '')
     {
         if (isset($GLOBALS['PIWIK_TRACKER_DEBUG']) && $GLOBALS['PIWIK_TRACKER_DEBUG']) {
-
-            if(!headers_sent()) {
+            if (!headers_sent()) {
                 // prevent XSS in tracker debug output
                 header('Content-type: text/plain');
             }
@@ -1286,6 +1286,17 @@ class Common
                 }
             }
         }
+    }
+
+    /**
+     * Returns true if the request is an AJAX request.
+     *
+     * @return bool
+     */
+    public static function isXmlHttpRequest()
+    {
+        return isset($_SERVER['HTTP_X_REQUESTED_WITH'])
+            && (strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest');
     }
 
     /**

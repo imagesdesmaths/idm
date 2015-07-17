@@ -9,13 +9,12 @@
 namespace Piwik\Plugins\Login;
 
 use Exception;
+use Piwik\Common;
 use Piwik\Config;
 use Piwik\Container\StaticContainer;
 use Piwik\Cookie;
 use Piwik\FrontController;
-use Piwik\Option;
 use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\UsersManager;
 use Piwik\Session;
 
 /**
@@ -55,9 +54,14 @@ class Login extends \Piwik\Plugin
      */
     public function noAccess(Exception $exception)
     {
-        $exceptionMessage = $exception->getMessage();
+        $frontController = FrontController::getInstance();
 
-        echo FrontController::getInstance()->dispatch('Login', 'login', array($exceptionMessage));
+        if (Common::isXmlHttpRequest()) {
+            echo $frontController->dispatch('Login', 'ajaxNoAccess', array($exception->getMessage()));
+            return;
+        }
+
+        echo $frontController->dispatch('Login', 'login', array($exception->getMessage()));
     }
 
     /**
@@ -84,10 +88,7 @@ class Login extends \Piwik\Plugin
      */
     function initAuthenticationObject($activateCookieAuth = false)
     {
-        $auth = new Auth();
-        StaticContainer::getContainer()->set('Piwik\Auth', $auth);
-
-        $this->initAuthenticationFromCookie($auth, $activateCookieAuth);
+        $this->initAuthenticationFromCookie(StaticContainer::getContainer()->get('Piwik\Auth'), $activateCookieAuth);
     }
 
     /**

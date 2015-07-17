@@ -38,19 +38,24 @@ if ($minimumPhpInvalid) {
 					To enjoy Piwik, you need remove <pre>ini_set</pre> from your <pre>disable_functions</pre> directive in php.ini, and restart your webserver.</p>";
     }
 
+    if (ini_get('mbstring.func_overload')) {
+        $piwik_errorMessage .= "<p><strong>Piwik does not work when PHP is configured with <pre>mbstring.func_overload = " . ini_get('mbstring.func_overload') . "</pre></strong></p>
+					<p>It appears your mbstring extension in PHP is configured to override string functions.
+					To enjoy Piwik, you need to modify php.ini <pre>mbstring.func_overload = 0</pre>, and restart your webserver.</p>";
+    }
+
     if (!function_exists('json_encode')) {
         $piwik_errorMessage .= "<p><strong>Piwik requires the php5-json extension which provides the functions <code>json_encode()</code> and <code>json_decode()</code></strong></p>
 					<p>It appears your PHP has not yet installed the php5-json extension.
 					To use Piwik, please ask your web host to install php5-json or install it yourself, for example on debian system: <code>sudo apt-get install php5-json</code>. <br/>Then restart your webserver and refresh this page.</p>";
     }
 
-    if (!file_exists(PIWIK_INCLUDE_PATH . '/vendor/autoload.php')
-        && !file_exists(PIWIK_INCLUDE_PATH . '/../../autoload.php')) {
+    if (!file_exists(PIWIK_VENDOR_PATH . '/autoload.php')) {
         $composerInstall = "In the piwik directory, run in the command line the following (eg. via ssh): \n\n"
             . "<pre> curl -sS https://getcomposer.org/installer | php \n\n php composer.phar install\n\n</pre> ";
         if (DIRECTORY_SEPARATOR === '\\' /* ::isWindows() */) {
             $composerInstall = "Download and run <a href=\"https://getcomposer.org/Composer-Setup.exe\"><b>Composer-Setup.exe</b></a>, it will install the latest Composer version and set up your PATH so that you can just call composer from any directory in your command line. "
-                . " <br>Then run this command in a terminal in the piwik directory: <br> $ php composer.phar update ";
+                . " <br>Then run this command in a terminal in the piwik directory: <br> $ php composer.phar install ";
         }
         $piwik_errorMessage .= "<p>It appears the <a href='https://getcomposer.org/' rel='noreferrer' target='_blank'>composer</a> tool is not yet installed. You can install Composer in a few easy steps:\n\n".
                     "<br/>" . $composerInstall.
@@ -100,9 +105,16 @@ if (!function_exists('Piwik_GetErrorMessagePage')) {
             header('Content-Type: text/html; charset=utf-8');
 
             $isInternalServerError = preg_match('/(sql|database|mysql)/i', $message);
-            if($isInternalServerError) {
+            if ($isInternalServerError) {
                 header('HTTP/1.1 500 Internal Server Error');
             }
+        }
+
+        // We return only an HTML fragment for AJAX requests
+        if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])
+            && (strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')
+        ) {
+            return "<div class='alert alert-danger'><strong>Error:</strong> $message</div>";
         }
 
         if (empty($logoUrl)) {

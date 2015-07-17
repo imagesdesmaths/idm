@@ -57,7 +57,7 @@ except ImportError:
 ##
 
 STATIC_EXTENSIONS = set((
-    'gif jpg jpeg png bmp ico svg svgz ttf otf eot woff class swf css js xml robots.txt'
+    'gif jpg jpeg png bmp ico svg svgz ttf otf eot woff class swf css js xml robots.txt webp'
 ).split())
 
 DOWNLOAD_EXTENSIONS = set((
@@ -1165,9 +1165,14 @@ class Piwik(object):
 
         headers['User-Agent'] = 'Piwik/LogImport'
 
+        try:
+            timeout = config.options.request_timeout
+        except:
+            timeout = None # the config global object may not be created at this point
+
         request = urllib2.Request(url + path, data, headers)
         opener = urllib2.build_opener(Piwik.RedirectHandlerWithLogging())
-        response = opener.open(request, timeout = config.options.request_timeout)
+        response = opener.open(request, timeout = timeout)
         result = response.read()
         response.close()
         return result
@@ -1309,10 +1314,9 @@ class DynamicResolver(object):
             self._cache['sites'] = piwik.call_api('SitesManager.getAllSites')
 
     def _get_site_id_from_hit_host(self, hit):
-        main_url = 'http://' + hit.host
         return piwik.call_api(
             'SitesManager.getSitesIdFromSiteUrl',
-            url=main_url,
+            url=hit.host,
         )
 
     def _add_site(self, hit):
@@ -1469,7 +1473,12 @@ class Recorder(object):
 
     def _run_bulk(self):
         while True:
-            hits = self.queue.get()
+            try:
+                hits = self.queue.get()
+            except:
+                logging.info("Queue does not exist anymore, exception details: " + sys.exc_info()[0])
+                return
+
             if len(hits) > 0:
                 try:
                     self._record_hits(hits)

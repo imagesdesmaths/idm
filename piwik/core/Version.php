@@ -20,7 +20,7 @@ final class Version
      * The current Piwik version.
      * @var string
      */
-    const VERSION = '2.13.1';
+    const VERSION = '2.14.1';
 
     public function isStableVersion($version)
     {
@@ -36,5 +36,4 @@ final class Version
     {
         return (bool) preg_match('/^(\d+)\.(\d+)\.(\d+)-.{1,4}(\d+)$/', $version);
     }
-
 }

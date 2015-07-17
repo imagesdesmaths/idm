@@ -8,6 +8,7 @@
  */
 
 namespace Piwik\Settings;
+
 use Piwik\Piwik;
 use Piwik\SettingsServer;
 
@@ -152,7 +153,7 @@ abstract class Setting
      * @var StorageInterface
      */
     private $storage;
-    private $pluginName;
+    protected $pluginName;
 
     /**
      * Constructor.
@@ -265,11 +266,7 @@ abstract class Setting
      */
     public function setValue($value)
     {
-        $this->checkHasEnoughWritePermission();
-
-        if ($this->validate && $this->validate instanceof \Closure) {
-            call_user_func($this->validate, $value, $this);
-        }
+        $this->validateValue($value);
 
         if ($this->transform && $this->transform instanceof \Closure) {
             $value = call_user_func($this->transform, $value, $this);
@@ -278,6 +275,15 @@ abstract class Setting
         }
 
         return $this->storage->setValue($this, $value);
+    }
+
+    private function validateValue($value)
+    {
+        $this->checkHasEnoughWritePermission();
+
+        if ($this->validate && $this->validate instanceof \Closure) {
+            call_user_func($this->validate, $value, $this);
+        }
     }
 
     /**

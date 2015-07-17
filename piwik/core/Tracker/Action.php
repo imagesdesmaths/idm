@@ -206,6 +206,13 @@ abstract class Action
         }
     }
 
+    protected function setActionUrlWithoutExcludingParameters($url)
+    {
+        $url = PageUrl::getUrlIfLookValid($url);
+        $this->rawActionUrl = $url;
+        $this->actionUrl = $url;
+    }
+
     abstract protected function getActionsToLookup();
 
     protected function getUrlAndType()
@@ -241,7 +248,6 @@ abstract class Action
     public function getIdActionName()
     {
         if (!isset($this->actionIdsCached['idaction_name'])) {
-
             return false;
         }
 
@@ -295,7 +301,6 @@ abstract class Action
             $value = $dimension->onLookupAction($this->request, $this);
 
             if (false !== $value) {
-
                 if (is_float($value)) {
                     $value = Common::forceDotAsSeparatorForDecimalPoint($value);
                 }
@@ -352,7 +357,6 @@ abstract class Action
             $value = $dimension->onNewAction($this->request, $visitor, $this);
 
             if ($value !== false) {
-
                 if (is_float($value)) {
                     $value = Common::forceDotAsSeparatorForDecimalPoint($value);
                 }
