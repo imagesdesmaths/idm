@@ -420,36 +420,45 @@ class Decideur {
 	 *     tableau de description du paquet le plus récent sinon
 	 */
 	function chercher_plugin_compatible($prefixe, $version) {
-		
+		$plugin = array();
+
 		// on choisit en priorite dans les paquets locaux !
 		$locaux = $this->infos_courtes(array(
 			'pl.prefixe=' . sql_quote($prefixe),
 			'pa.obsolete=' . sql_quote('non'),
 			'pa.id_depot='.sql_quote(0)), true);
 		if ($locaux and isset($locaux['p'][$prefixe]) and count($locaux['p'][$prefixe]) > 0) {
+			$v = '000.000.000';
 			foreach ($locaux['p'][$prefixe] as $new) {
 				if (plugin_version_compatible($version, $new['v'])
-				and svp_verifier_compatibilite_spip($new['compatibilite_spip']) ){
-					return $new;
+				and svp_verifier_compatibilite_spip($new['compatibilite_spip'])
+				and ($new['v'] > $v)){
+					$plugin = $new;
+					$v = $new['v'];
 				}
 			}
 		}
-		
-		// sinon dans les paquets distants
-		$distants = $this->infos_courtes(array(
-			'pl.prefixe=' . sql_quote($prefixe),
-			'pa.obsolete=' . sql_quote('non'),
-			'pa.id_depot>'.sql_quote(0)), true);
-		if ($distants and isset($distants['p'][$prefixe]) and count($distants['p'][$prefixe]) > 0) {
-			foreach ($distants['p'][$prefixe] as $new) {
-				if (plugin_version_compatible($version, $new['v'])
-				and svp_verifier_compatibilite_spip($new['compatibilite_spip']) ){
-					return $new;
+
+		if (!$plugin) {
+			// sinon dans les paquets distants
+			$distants = $this->infos_courtes(array(
+				'pl.prefixe=' . sql_quote($prefixe),
+				'pa.obsolete=' . sql_quote('non'),
+				'pa.id_depot>'.sql_quote(0)), true);
+			if ($distants and isset($distants['p'][$prefixe]) and count($distants['p'][$prefixe]) > 0) {
+				$v = '000.000.000';
+				foreach ($distants['p'][$prefixe] as $new) {
+					if (plugin_version_compatible($version, $new['v'])
+					and svp_verifier_compatibilite_spip($new['compatibilite_spip'])
+					and ($new['v'] > $v)){
+						$plugin = $new;
+						$v = $new['v'];
+					}
 				}
 			}
 		}
-		
-		return false;
+
+		return ($plugin ? $plugin : false);
 	}
 
 

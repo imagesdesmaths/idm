@@ -87,6 +87,10 @@ function public_stats_dist() {
 
 		ecrire_fichier($fichier, serialize($content));
 	}
+	else {
+		$flood = sous_repertoire(_DIR_TMP, 'flood') . $GLOBALS['ip'];
+		@touch($flood);
+	}
 }
 
 ?>

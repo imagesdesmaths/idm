@@ -25,10 +25,8 @@ function formulaires_signature_charger_dist($id_article) {
 	$valeurs = array(
 		'id_petition' => $id_petition,
 		'id_article' => $id_article, # pour compat
-		'session_nom' => sinon($GLOBALS['visiteur_session']['session_nom'],
-			$GLOBALS['visiteur_session']['nom']),
-		'session_email'=> sinon($GLOBALS['visiteur_session']['session_email'],
-			$GLOBALS['visiteur_session']['email']),
+		'session_nom' => isset($GLOBALS['visiteur_session']['session_nom'])?$GLOBALS['visiteur_session']['session_nom']:(isset($GLOBALS['visiteur_session']['nom'])?$GLOBALS['visiteur_session']['nom']:''),
+		'session_email'=> isset($GLOBALS['visiteur_session']['session_email'])?$GLOBALS['visiteur_session']['session_email']:(isset($GLOBALS['visiteur_session']['email'])?$GLOBALS['visiteur_session']['email']:''),
 		'signature_nom_site'=>'',
 		'signature_url_site'=>'http://',
 		'_texte'=>$r['texte'],

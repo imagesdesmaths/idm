@@ -50,7 +50,7 @@ function inc_safehtml_dist($t) {
 		$t = entites_html($t); // tres laid, en cas d'erreur
 
 	// supprimer un <li></li> provenant d'un <li> ouvrant seul+safehtml
-	// cf http://core.spip.org/issues/2201
+	// cf https://core.spip.net/issues/2201
 	$t = str_replace("<li></li>","",$t);
 
 	return $t;

@@ -155,7 +155,7 @@ function mots_declarer_tables_objets_sql($tables){
 	$tables[]['tables_jointures'][]= 'mots';
 
 	// cas particulier des auteurs et mots : declarer explicitement mots_liens comme jointure privilegiee
-	// cf http://core.spip.org/issues/2329
+	// cf https://core.spip.net/issues/2329
 	$tables['spip_auteurs']['tables_jointures'][]= 'mots_liens';
 	$tables['spip_auteurs']['tables_jointures'][]= 'mots';
 	$tables['spip_mots']['tables_jointures'][]= 'mots_liens';

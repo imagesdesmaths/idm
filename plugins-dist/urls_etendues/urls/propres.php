@@ -382,7 +382,7 @@ function urls_propres_dist($i, $entite, $args='', $ancre='') {
 		} else {
 			// Si ca ressemble a une URL d'objet, ce n'est pas la home
 			// et on provoque un 404
-			if (preg_match(',^.*/[^\.]+(\.html)?$,', $url)) {
+			if (preg_match(',^[^\.]+(\.html)?$,', $url)) {
 				$entite = '404';
 				$contexte['erreur'] = '';
 
