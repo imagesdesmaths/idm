@@ -1,7 +1,7 @@
 <paquet
 	prefix="stats"
 	categorie="statistique"
-	version="0.4.27"
+	version="0.4.28"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/statistique-32.png"

@@ -518,9 +518,14 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	// generer le fichier _CACHE_PIPELINE
 	pipeline_precompile();
 
-	// lancer et initialiser les nouveaux crons !
-	include_spip('inc/genie');
-	genie_queue_watch_dist();
+	// attendre eventuellement l'invalidation du cache opcode
+	spip_attend_invalidation_opcode_cache();
+
+	if (spip_connect()) {
+		// lancer et initialiser les nouveaux crons !
+		include_spip('inc/genie');
+		genie_queue_watch_dist();
+	}
 
 	return ($GLOBALS['meta']['plugin'] != $actifs_avant);
 }
@@ -786,4 +791,4 @@ function ecrire_fichier_php($nom, $contenu, $comment='')
 	ecrire_fichier($nom, 
 		       '<'.'?php' . "\n" . $comment ."\nif (defined('_ECRIRE_INC_VERSION')) {\n". $contenu . "}\n?".'>');
 }
-?>
+

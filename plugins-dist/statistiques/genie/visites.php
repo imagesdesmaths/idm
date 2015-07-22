@@ -207,10 +207,32 @@ function calculer_visites($t) {
 	}
 }
 
-//
-// Calcule les stats en plusieurs etapes
-//
-// http://code.spip.net/@genie_visites_dist
+/**
+ * Nettoyer les IPs des flooders 24H apres leur dernier passage
+ */
+function visites_nettoyer_flood(){
+	if (is_dir($dir=_DIR_TMP.'flood/')){
+		include_spip('inc/invalideur');
+		if (!defined('_IP_FLOOD_TTL')) define('_IP_FLOOD_TTL',24*3600); // 24H par defaut
+		$options = array(
+			'mtime' => $_SERVER['REQUEST_TIME'] - _IP_FLOOD_TTL,
+		);
+		purger_repertoire($dir,$options);
+	}
+}
+
+
+/**
+ * Cron de calcul de statistiques des visites
+ * 
+ * Calcule les stats en plusieurs étapes
+ * @uses calculer_visites()
+ * 
+ * @param int $t
+ *     Timestamp de la dernière exécution de cette tâche
+ * @return int
+ *     Positif si la tâche a été terminée, négatif pour réexécuter cette tâche
+**/
 function genie_visites_dist($t) {
 	$encore = calculer_visites($t);
 
@@ -218,6 +240,9 @@ function genie_visites_dist($t) {
 	// pour etre prioritaire lors du cron suivant
 	if ($encore)
 		return (0 - $t);
+
+	// nettoyer les IP des floodeurs quand on a fini de compter les stats
+	visites_nettoyer_flood();
 
 	return 1;
 }
