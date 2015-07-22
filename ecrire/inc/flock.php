@@ -181,8 +181,7 @@ function ecrire_fichier ($fichier, $contenu, $ignorer_echec = false, $truncate=t
 		// liberer le verrou et fermer le fichier
 		@chmod($fichier, _SPIP_CHMOD & 0666);
 		if ($ok) {
-			if (!defined('_OPCACHE_BUG') AND function_exists('opcache_invalidate'))
-				opcache_invalidate($fichier, true);
+			spip_clear_opcode_cache(realpath($fichier));
 			return $ok;
 		}
 	}
@@ -294,11 +293,64 @@ function spip_unlink($f) {
  * @param null $filename
  */
 function spip_clearstatcache($clear_realpath_cache = false, $filename=null){
-	return (version_compare(PHP_VERSION, '5.3.0') >= 0)?
-		clearstatcache($clear_realpath_cache,$filename):clearstatcache();
+	if (!defined('PHP_VERSION_ID') || PHP_VERSION_ID < 50300) {
+   // Below PHP 5.3, clearstatcache does not accept any function parameters.
+   return clearstatcache();
+ }
+ else {
+	 return clearstatcache($clear_realpath_cache, $filename);
+ }
+
 }
 
-/*
+
+/**
+ * Invalidates a PHP file from any active opcode caches.
+ *
+ * If the opcode cache does not support the invalidation of individual files,
+ * the entire cache will be flushed.
+ * kudo : http://cgit.drupalcode.org/drupal/commit/?id=be97f50
+ *
+ * @param string $filepath
+ *   The absolute path of the PHP file to invalidate.
+ */
+function spip_clear_opcode_cache($filepath) {
+	spip_clearstatcache(TRUE, $filepath);
+
+  // Zend OPcache
+  if (function_exists('opcache_invalidate')) {
+    opcache_invalidate($filepath, TRUE);
+  }
+  // APC.
+  if (function_exists('apc_delete_file')) {
+    // apc_delete_file() throws a PHP warning in case the specified file was
+    // not compiled yet.
+    // @see http://php.net/apc-delete-file
+    @apc_delete_file($filepath);
+  }
+}
+
+/**
+ * si opcache est actif et en mode validate_timestamps
+ * le timestamp ne sera checke qu'apres revalidate_freq s
+ * il faut donc attendre ce temps la pour etre sur qu'on va bien beneficier de la recompilation
+ * NB c'est une config foireuse deconseillee de opcode cache mais malheureusement utilisee par Octave
+ * cf http://stackoverflow.com/questions/25649416/when-exactly-does-php-5-5-opcache-check-file-timestamp-based-on-revalidate-freq
+ * et http://wiki.mikejung.biz/PHP_OPcache
+ *
+ * Ne fait rien en dehors de ce cas
+ *
+ */
+function spip_attend_invalidation_opcode_cache(){
+	if (function_exists('opcache_get_configuration')
+	  AND @ini_get('opcache.enable')
+	  AND @ini_get('opcache.validate_timestamps')
+	  AND $duree = @ini_get('opcache.revalidate_freq') ) {
+		sleep($duree+1);
+	}
+}
+
+/**
  * Suppression complete d'un repertoire.
  *
  * http://www.php.net/manual/en/function.rmdir.php#92050

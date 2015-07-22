@@ -509,29 +509,37 @@ function svp_corriger_obsolete_paquets($ids_plugin = array()) {
 	if ($ids_plugin) {
 		$where[] = sql_in('pl.id_plugin', $ids_plugin);
 	}
-	
+
 	// comme l'on a de nouveaux paquets locaux...
 	// certains sont peut etre devenus obsoletes
 	// parmis tous les plugins locaux presents
 	// concernes par les memes prefixes que les plugins ajoutes.
 	$obsoletes = array();
 	$changements = array();
-	
+
 	$paquets = sql_allfetsel(
-		array('pa.id_paquet', 'pl.prefixe', 'pa.version', 'pa.etatnum', 'pa.obsolete'),
+		array('pa.id_paquet', 'pl.prefixe', 'pa.version', 'pa.etatnum', 'pa.obsolete', 'pa.compatibilite_spip'),
 		array('spip_paquets AS pa', 'spip_plugins AS pl'),
 		$where);
+
+	// L'obsolescence doit tenir compte de la compatibilité avec notre version de SPIP en cours
+	foreach ($paquets as $c => $p) {
+		$paquets[$c]['compatible'] = plugin_version_compatible($p['compatibilite_spip'], $GLOBALS['spip_version_branche'], 'spip');
+	}
 
 	foreach ($paquets as $c => $p) {
 
 		$obsoletes[$p['prefixe']][] = $c;
 
-		// si 2 paquet locaux ont le meme prefixe, mais pas la meme version,
+		// si 2 paquet locaux ont le meme prefixe,
+		// sont compatibles avec notre SPIP,
+		// mais pas la meme version,
 		// l'un est obsolete : la version la plus ancienne
 		// Si version et etat sont egaux, on ne decide pas d'obsolescence.
 		if (count($obsoletes[$p['prefixe']]) > 1) {
 			foreach ($obsoletes[$p['prefixe']] as $cle) {
 				if ($cle == $c) continue;
+				if (!$paquets[$c]['compatible']) continue;
 
 				// je suis plus petit qu'un autre
 				if (spip_version_compare($paquets[$c]['version'], $paquets[$cle]['version'], '<')) {
@@ -545,7 +553,7 @@ function svp_corriger_obsolete_paquets($ids_plugin = array()) {
 
 				// je suis plus grand ou egal a un autre...
 				else {
-					// je suis plus strictement plus grand a un autre...
+					// je suis strictement plus grand qu'un autre...
 					if (spip_version_compare($paquets[$c]['version'], $paquets[$cle]['version'], '>')) {
 						// si mon etat est meilleur, rendre obsolete les autres
 						if ($paquets[$c]['etatnum'] >= $paquets[$cle]['etatnum']) {

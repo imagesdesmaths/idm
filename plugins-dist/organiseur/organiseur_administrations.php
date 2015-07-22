@@ -34,18 +34,20 @@ function organiseur_upgrade($nom_meta_base_version,$version_cible){
 	
 	$maj = array();
 	$maj['create'] = array(
-		array('maj_tables',array('spip_messages')),
-		array('sql_alter','TABLE spip_auteurs ADD imessage VARCHAR(3)'),
-		array('sql_alter','TABLE spip_auteurs ADD messagerie VARCHAR(3)'),
+		array('maj_tables', array('spip_messages', 'spip_auteurs')),
 	);
 
 	$maj['1.1.0'] = array(
 		array('sql_updateq',"spip_messages",array('statut'=>'prepa'),"statut='redac'"),
-		array('sql_alter',"TABLE spip_messages ADD destinataires text DEFAULT '' NOT NULL"),
+		array('maj_tables', array('spip_messages')), // champ destinataires
 	);
 
 	$maj['1.1.1'] = array(
 		array('sql_alter',"TABLE spip_messages CHANGE id_auteur id_auteur bigint(21) DEFAULT 0 NOT NULL"),
+	);
+
+	$maj['1.1.2'] = array(
+		array('maj_tables', array('spip_auteurs')) // champs messagerie & imessage (parfois absents)
 	);
 
 	include_spip('base/upgrade');
