@@ -260,6 +260,7 @@ function idm_texify ($texte) {
 
 function idm_prenom_nom ($texte) {
   $texte = preg_replace ('/([^,]+), ([^,]+)/s', '\2 \1', $texte);
+  $texte = preg_replace ('/ZZZZ/', '', $texte);
   return $texte;
 }
 
