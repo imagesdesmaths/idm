@@ -1,0 +1,122 @@
+#CACHE{0}
+<BOUCLE_articles(ARTICLES) {statut IN prop,publie} {id_article}>
+    
+    <BOUCLE_securite(CONDITION) {SI #AUTORISER{relire,article,#ID_ARTICLE}}>
+        
+        [(#INCLURE{fond=inc/head}{class=propose}{env})]
+        
+        <BOUCLE_articles_piste(MOTS) {id_article} {type=Difficulté} {0,1}>
+            #SET{track_title, #TITRE}
+            #SET{track_slug, #TITRE|slug}
+            #SET{track_id, #ID_MOT}
+        </BOUCLE_articles_piste>
+        
+        <BOUCLE_auteur(AUTEURS){id_article} {0,1}>
+            #SET{author_id, #ID_AUTEUR}
+            #SET{author_name, #NOM}
+            #SET{author_email, #EMAIL}
+        </BOUCLE_auteur>
+        
+        <div id="content" class="article-full block-left #GET{track_slug}">
+            <BOUCLE_rubrique(RUBRIQUES){id_rubrique=#ID_RUBRIQUE} {0,1}>
+                #SET{rubrique_name, #TITRE}
+            </BOUCLE_rubrique>
+            
+            [<h4>(#SURTITRE)</h4>]
+            <h1>#TITRE</h1>
+            [<h4>(#SOUSTITRE)</h4>]
+            
+            
+            
+            <span class="date">[(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</span>
+            
+            
+            
+            <div class="block-comments" id="commentaires"
+                style="display:inline !important;">
+                <h2>Discussion sur l'article !</h2>
+                <B_reforums>
+                    <ul class="forum">
+                        <BOUCLE_reforums(FORUMS) {id_article} {par date} {statut IN rel}>
+                            <li class="forum-fil">
+                                <BOUCLE_message(FORUMS) {id_forum} {statut IN publie,prive,rel}>
+                                    <li id="forum#ID_FORUM" class="comment[(#NOM|=={#ENV{author_name}}|?{" owner"})]">
+                                        <div class="content">
+                                            <div class="head">
+                                                <h3>#TITRE</h3>
+                                                <h4>[le (#DATE|affdate_jourcourt)][ à (#DATE|heures)][:(#DATE|minutes)][, par (#NOM)]</h4>
+                                            </div>
+                                            <div class="message">
+                                                [(#TEXTE)]
+                                                [<div class="notes">(#NOTES)</div>]
+                                            <div>
+                                        </div>
+                                    </li>
+                                </BOUCLE_message>
+
+                                <B_reforums_fils>
+                                    <ul>
+                                        <BOUCLE_reforums_fils(FORUMS) {id_parent} {par date} {statut IN rel}>
+                                            <li>
+                                                [(#INCLURE {fond=inc/forum-message} {id_forum} {id_article} {author_name=#ENV{author_name}})]
+                                                <BOUCLE_reForums_Boucle(boucle_reforums_fils)></BOUCLE_reForums_Boucle>
+                                            </li>
+                                        </BOUCLE_reforums_fils>
+                                    </ul>
+                                </B_reforums_fils>
+                            </li>
+                        </BOUCLE_reforums>
+                    </ul>
+                </B_reforums>
+                </div>
+            
+        </div>
+        
+        [(#INCLURE{fond=inc/bloc_author}{id_article})]
+        [(#INCLURE{fond=inc/bloc_anchors})]
+        [(#INCLURE{fond=inc/bloc_tags}{id_article})]
+        [(#INCLURE{fond=inc/bloc_dossier}{id_article})]
+        
+        [(#INCLURE{fond=inc/foot})]
+        
+    </BOUCLE_securite>
+    </B_securite>
+    
+    [(#INCLURE{fond=inc/head}{class=acces-refuse}{env})]
+    
+    <div id="content" class="block-left">
+        
+        <h1>Accès refusé !</h1>
+        
+        <div class="alert">
+            [(#SESSION{id_auteur}|oui)
+            <p>Vous ne faites pas partie des relecteurs de cet article. Vous pourrez le lire quand il sera publié !</p>]
+            
+            [(#SESSION{id_auteur}|non)
+            <p>Avez-vous pensé à vous <a href="#URL_PAGE{perso}">identifier</a> ?</p>]
+        </div>
+        
+    </div>
+    
+    [(#INCLURE{fond=inc/foot})]
+    
+    <//B_securite>
+    
+</BOUCLE_articles>
+</B_articles>
+
+[(#INCLURE{fond=inc/head}{class=acces-refuse}{env})]
+
+<div id="content" class="block-left">
+    
+    <h1>Cet article n'est pas/plus proposé à la publication !</h1>
+    
+    <BOUCLE_reel(ARTICLES) {id_article=#ENV{id_article}}>
+        <p>L'article intitulé <a href="#URL_ARTICLE">#TITRE</a> a été accepté.</p>
+    </BOUCLE_reel>
+    
+</div>
+
+[(#INCLURE{fond=inc/foot})]
+
+<//B_articles>
