@@ -12,10 +12,11 @@
         #SET{role,#ROLE}
         </BOUCLE_role>
 
+    #SET{redacteurs,#ARRAY{0,0minirezo,1,1comite}}
         [(#REM Général)]
         <h1>Bonjour, #NOM !</h1>
-        <p>Bienvenue dans votre espace personnel. C'est à partir de cette page que vous pouvez gérer votre participation au site et accéder à vos informations personnelles.</p>
-        <a href="#URL_ECRIRE{infos_perso}" class="button-red-large">Accéder à mes informations personnelles</a>
+        <p>Bienvenue dans votre espace personnel. C'est à partir de cette page que vous pouvez gérer votre participation au site[(#GET{redacteurs}|find{#STATUT}|oui) et accéder à vos informations personnelles].</p>
+        [(#GET{redacteurs}|find{#STATUT}|oui)<a href="#URL_ECRIRE{infos_perso}" class="button-red-large">Accéder à mes informations personnelles</a>]
 
         [(#REM Visiteur)]
         <h3>Vous êtes visiteur.</h3>
