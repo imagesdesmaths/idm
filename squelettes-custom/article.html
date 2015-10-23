@@ -35,6 +35,13 @@
             <p class="alert">Vous êtes en mode Prévisualisation.<a href="#URL_ECRIRE{article,id_article=#ID_ARTICLE}" class="right">Retourner à l'article</a></p>
         ]
 
+        <BOUCLE_partenaire(MOTS) {id_article} {type=Partenariats}>
+            <a href="#URL_MOT" class="partenariat">
+                #LOGO_MOT
+                <p>Cet article a été écrit en partenariat avec #TITRE</p>
+            </a>
+        </BOUCLE_partenaire>
+
         #SET{image_url, IMG/#LOGO_ARTICLE|fichier}
         <BOUCLE_articles_auteur_logo(AUTEURS){id_article} {0,1}>
             [(#LOGO_ARTICLE|fichier|non)

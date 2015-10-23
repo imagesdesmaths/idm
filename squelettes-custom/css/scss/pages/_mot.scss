@@ -5,6 +5,7 @@ section.mot {
     .texte {
         @extend %font-bold;
         @extend %separator-top;
+        overflow: hidden;
 
         a {
             color: $red;
