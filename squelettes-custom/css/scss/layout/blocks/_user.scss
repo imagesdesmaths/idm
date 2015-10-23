@@ -53,7 +53,8 @@
                     background: $warning;
                     display: none;
 
-                    section[role="main"].article & {
+                    section[role="main"].article &,
+                    section[role="main"].propose & {
                         display: block;
                     }
                 }
