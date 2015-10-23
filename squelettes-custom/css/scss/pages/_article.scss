@@ -51,6 +51,35 @@
             }
         }
     }
+    .partenariat {
+        position: relative;
+        display: block;
+        border-radius: $border_radius_default;
+        background: $grey_lighter;
+        overflow: hidden;
+        margin: 25px 0;
+        padding: 15px;
+        transition: all $transition_duration_default;
+
+        img {
+            max-height: 70px;
+            width: auto;
+            display: inline;
+            vertical-align: middle;
+            margin-right: 15px;
+        }
+        p {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        &:hover,
+        &:focus {
+            background: $grey_light;
+        }
+        + .partenariat {
+            margin-top: -20px;
+        }
+    }
     .image {
         position: relative;
         border-top: 3px solid $grey_dark;
