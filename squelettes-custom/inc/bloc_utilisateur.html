@@ -18,12 +18,6 @@
         <BOUCLE_relecteursarticles(spip_relecteurs_articles) {id_auteur=#SESSION{id_auteur}} {0,1}>
             <li><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}" title="Un article à relire !" class="relecture"><i class="flaticon-article"></i><span>Un article à relire !</span></a></li>
         </BOUCLE_relecteursarticles>
-        <BOUCLE_relecteurs(spip_idm_relecteurs) {role=relecteur} {id_auteur=#SESSION{id_auteur}} {0,1}>
-            <BOUCLE_articlesprop(ARTICLES) {statut=prop} {id_article=#ID_ARTICLE}>
-                <li><a href="#URL_ECRIRE{article_edit,id_article=#_articlesprop:ID_ARTICLE}" title="Modifier votre article" class="edition-article"><i class="flaticon-cat-contribute"></i><span>Modifier l'article</span></a></li>
-                <li><a href="#URL_ECRIRE{article,id_article=#_articlesprop:ID_ARTICLE}" title="Voir votre article" class="stats-article"><i class="flaticon-stats"></i><span>Visites : #VISITES<br>Popularité : #POPULARITE</span></a></li>
-            </BOUCLE_articlesprop>
-        </BOUCLE_relecteurs>
 
 
         [(#REM Rédacteur)]
@@ -38,7 +32,7 @@
 
         [(#REM Administrateur)]
         #SET{administrateurs,#ARRAY{0,0minirezo}}
-        <BOUCLE_articles(ARTICLES) {id_article}>
+        <BOUCLE_articles(ARTICLES) {statut IN prop,prepa,publie,refuse,poubelle} {id_article}>
             [(#GET{self_article}|=={0}|oui)
                 [(#GET{administrateurs}|find{#SESSION{statut}}|oui)
                     <li><a href="#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE}" title="Modifier l'article" class="edition-article"><i class="flaticon-cat-contribute"></i><span>Modifier l'article</span></a></li>
