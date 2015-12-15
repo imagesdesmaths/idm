@@ -124,7 +124,6 @@ Une fois la relecture terminée, l'article sera validé pour la
 publication, laquelle se pourra se faire qu'avec l'aval de l'éditeur
 et du (de la) secrétaire de rédaction. L'article est directement
 accessible via le lien suivant :
-L'article est accessible via le lien suivant :
 
     http://images.math.cnrs.fr/spip.php?page=propose&id_article=@id_article@
 
