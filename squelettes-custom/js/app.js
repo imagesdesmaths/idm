@@ -65,4 +65,25 @@ $(function(){
     /* Media elements */
     $('video,audio').mediaelementplayer({features: ['playpause', 'progress', 'current', 'duration' /*,'fullscreen'*/]});
 
+    /* Newsletter inscription */
+    $('#register_newsletter').submit(function(event) {
+        event.preventDefault();
+        $.ajax({
+            url: '/squelettes-custom/newsletter_abonnement.php',
+            dataType: 'json',
+            data: {
+                email: $('#newsletter_email').val()
+            }
+        })
+        .always(function(data) {
+            var message = '<span class="error">Une erreur est survenue.</span>';
+            if(data.success) {
+                message = '<span class="success">'+data.success+'</span>';
+            } else if(data.error) {
+                message = '<span class="error">'+data.error+'</span>';
+            }
+            $('#register_newsletter').css({padding: '10px',width: '100%'}).html(message);
+        });
+    });
+
 });

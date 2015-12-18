@@ -24,6 +24,7 @@
   <menu nom="idm_moderation"          titre="idm:moderation"          icone="images/idm-24.png" parent="idm"/>
   <menu nom="idm_teams"               titre="idm:teams"               icone="images/idm-24.png" parent="idm"/>
   <menu nom="idm_lint"                titre="idm:lint"                icone="images/idm-24.png" parent="idm"/>
+  <menu nom="idm_abonnements"         titre="idm:abonnements"         icone="images/idm-24.png" parent="idm"/>
 
   <pipeline nom="declarer_tables_interfaces"  inclure="base/idm.php" />
   <pipeline nom="declarer_tables_objets_sql"  inclure="base/idm.php" />
