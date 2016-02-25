@@ -1,0 +1,25 @@
+<h1><:idm:abonnements:></h1>
+
+<a href="/plugins/IdM/prive/squelettes/contenu/idm_abonnements_export.php?all=1" class="button-white go_top" style="margin-left:5px">Tout exporter</a>
+<a href="/plugins/IdM/prive/squelettes/contenu/idm_abonnements_export.php" class="button-white go_top">Exporter les inscrits</a>
+
+<div class="bd">
+	<table class="sortable" style="font-size : 90%">
+		<thead>
+			<tr>
+				<th>Email</th>
+				<th>Date d'inscription</th>
+				<th>Date de désinscription</th>
+			</tr>
+		</thead>
+		<tbody>
+		<BOUCLE_eq(IDM_ABONNEMENTS) {par date_inscription}>
+			<tr>
+				<td>#EMAIL</td>
+				<td>#DATE_INSCRIPTION</td>
+				<td>#DATE_DESINSCRIPTION</td>
+			</tr>
+		</BOUCLE_eq>
+		</tbody>
+	</table>
+</div>

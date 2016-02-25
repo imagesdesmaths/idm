@@ -4,6 +4,7 @@ function idm_declarer_tables_interfaces ($interfaces) {
   $interfaces['table_des_tables']['idm_relecteurs']      = 'idm_relecteurs';
   $interfaces['table_des_tables']['idm_relecture']      = 'idm_relecture';
   $interfaces['table_des_tables']['idm_teams']           = 'idm_teams';
+  $interfaces['table_des_tables']['idm_abonnements']     = 'idm_abonnements';
   $interfaces['table_des_tables']['relecteurs_articles'] = 'relecteurs_articles';
   $interfaces['table_des_traitements']['NOM'][0] = str_replace ('%s', 'idm_prenom_nom(%s)', $interfaces['table_des_traitements']['NOM'][0]);
 
@@ -78,6 +79,18 @@ function idm_declarer_tables_auxiliaires ($tables) {
     'key' => array (
       'PRIMARY KEY' => "id_member",
       'KEY id_auteur' => 'id_auteur'
+    )
+  );
+
+  $tables['spip_idm_abonnements'] = array (
+    'field' => array (
+      'id_abonnement'       => "BIGINT(21) NOT NULL",
+      'email'               => "VARCHAR(50) NOT NULL",
+      'date_inscription'    => "TIMESTAMP NOT NULL default CURRENT_TIMESTAMP",
+      'date_desinscription' => "TIMESTAMP NULL default NULL"
+    ),
+    'key' => array (
+      'PRIMARY KEY' => "id_abonnement"
     )
   );
 

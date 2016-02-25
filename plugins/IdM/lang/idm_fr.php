@@ -37,6 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'teams'              => "Les équipes",
     'titre_relecteurs'   => "Relecteurs",
 
+    'abonnements'        => "Newsletter",
+
     'mail_billet_valide' => <<<EOT
 Un nouveau billet vient d'être validé pour Images des Maths.
 
