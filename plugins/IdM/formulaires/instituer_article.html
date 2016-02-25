@@ -4,7 +4,8 @@ function notify_proposal_evaluation($id_article) {
     $titre = sql_getfetsel("titre", "spip_articles", "id_article = $id_article");
     $subject = "Proposition d'un article à l'évaluation pour Images des Maths";
     $texte = _T('idm:mail_article_propose', array(
-        'titre'      => $titre
+        'titre'      => $titre,
+	'id_article' => $id_article
     ));
     idm_notify('relecture', $texte, $subject);
     idm_notify('secretaire_redaction', $texte, $subject);
