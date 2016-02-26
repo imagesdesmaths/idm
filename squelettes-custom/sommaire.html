@@ -3,7 +3,7 @@
 
 <div id="content" class="block-left">
 
-    <BOUCLE_une(ARTICLES) {id_mot=#MOT_FEATURED} {statut=publie} {par date} {age_relatif >= 0} {inverse} {0,1}>
+    <BOUCLE_une(ARTICLES) {statut=publie}{id_rubrique!=#RUBRIQUE_FIGURES_SANS_PAROLES} {par date} {age_relatif >= 0} {inverse} {0,1}>
         #SET{id_une, #ID_ARTICLE}
     </BOUCLE_une>
 
