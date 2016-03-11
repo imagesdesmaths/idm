@@ -1,0 +1,46 @@
+<select name="#ENV{nom}" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]">
+	#SET{tab,#ENV{formulaire}}
+	#SET{tab_par_nom,#ENV{formulaire}|saisies_lister_par_nom}
+	#SET{padding,0}
+	#SET{liste_parents,#ARRAY{0,''}}
+	<BOUCLE_parcours(DATA){source tableau, #GET{tab}}>
+	#SET{saisie,#VALEUR}
+	<option value="#GET{saisie/options/nom}" style="padding-left:#GET{padding}px" [(#ENV{valeur,#ENV{saisie_a_positionner}}|=={#GET{saisie/options/nom}}|oui)selected="selected"]>
+		[(#GET{saisie/options/label}
+			|sinon{#GET{saisie/options/nom}}
+			|couper{60})]
+	</option>
+		<BOUCLE_test_enfants(CONDITION){si #GET{saisie/options/nom}|!={#ENV{saisie_a_positionner}}|et{#GET{saisie/saisies}|is_array}}>
+		#SET{tab,#GET{saisie/saisies}}
+		#SET{padding,#GET{padding}|plus{20}}
+		#SET_PUSH{liste_parents,#GET{saisie/options/nom}}
+		<BOUCLE_parcours_recursif(BOUCLE_parcours)/>
+		#SET{padding,#GET{padding}|moins{20}}
+		#SET{liste_parents,#GET{liste_parents}|array_slice{0,-1}}
+		</BOUCLE_test_enfants>
+	</BOUCLE_parcours>
+	#SET{parent, #GET{liste_parents}|table_valeur{#GET{liste_parents}|count|moins{1}}}
+	<option value="[#GET{parent}]" style="padding-left:#GET{padding}px; font-style:italic;">
+		[(#GET{parent}|non)
+			<:saisies:construire_position_fin_formulaire:>
+		]
+		[(#GET{parent}|oui)
+			#SET{groupe,#GET{tab_par_nom/#GET{parent}}}
+			#SET{groupe,#GET{groupe/options/label}|sinon{#GET{groupe/options/nom}}|couper{60}}
+			<:saisies:construire_position_fin_groupe{groupe=#GET{groupe}}:>
+		]
+	</option>
+	</B_parcours>
+	#SET{parent, #GET{liste_parents}|table_valeur{#GET{liste_parents}|count|moins{1}}}
+	<option value="\[#GET{parent}\]" style="padding-left:#GET{padding}px; font-style:italic;">
+		[(#GET{parent}|non)
+			<:saisies:construire_position_fin_formulaire:>
+		]
+		[(#GET{parent}|oui)
+			#SET{groupe,#GET{tab_par_nom/#GET{parent}}}
+			#SET{groupe,#GET{groupe/options/label}|sinon{#GET{groupe/options/nom}}|couper{60}}
+			<:saisies:construire_position_fin_groupe{groupe=#GET{groupe}}:>
+		]
+	</option>
+	<//B_parcours>
+</select>

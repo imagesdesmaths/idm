@@ -1,0 +1,25 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 SPIP
+  Distribue sous licence GPL
+
+]
+<BOUCLE_art(ARTICLES){id_article}{statut?}{tout}>
+#SET{auteurs,#LESAUTEURS}
+<title>[(#VAL{notifications:article_publie_sujet}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE}}|nettoyer_titre_email)]</title>
+
+<body>
+<div class="header">
+<h1><:notifications:article_valide_titre|trim|trim{-}:></h1>
+<p>
+[(#SET{titre,[<a href="[(#URL_ARTICLE|url_absolue)]"><strong>(#TITRE)</strong></a>]})]
+[(#VAL{notifications:article_publie_detail}|_T{#ARRAY{titre,#GET{titre},connect_nom,#SESSION{nom}}})]
+</p>
+<hr />
+</div>
+
+<INCLURE{fond=notifications/inc-article,id_article} />
+</body>
+</BOUCLE_art>
+#FILTRE{facteur_email_wrap_to_html}

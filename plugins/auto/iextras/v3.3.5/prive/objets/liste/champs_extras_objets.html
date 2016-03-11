@@ -1,0 +1,39 @@
+<B_objets>
+<div class='champs_extras_objets'>
+	<table>
+		<thead>
+			<tr>
+				<th><:iextras:label_table:></th>
+				<th><:iextras:champs_extras:></th>
+			</tr>
+		</thead>
+		<tbody>
+<BOUCLE_objets(DATA){source tableau,#VAL|lister_tables_objets_sql}{par cle}{editable = oui}>
+<BOUCLE_cond(CONDITION){si #CLE|is_string}>
+	<tr>
+		<td>
+			[(#ENV{lien,#SELF}
+				|parametre_url{objet,[(#VALEUR{type})]}
+				|icone_horizontale{ [(#VALEUR{texte_objets}|_T)], [(#VALEUR{icone_objet})] })]
+		</td>
+		<td>
+			<B_saisies>
+			<ul class='saisies_objet'>
+			<BOUCLE_saisies(DATA){source tableau, #CLE|iextras_champs_extras_definis}>
+				<li class='item[(#TOTAL_BOUCLE|=={1}|oui)solo]'>
+					<span title="[(#VAL{saisies:saisie_#VALEUR{saisie}_titre}|_T|attribut_html)]">
+						[(#CHEMIN_IMAGE{saisies_#VALEUR{saisie}}|sinon{#CHEMIN{images/formulaire-saisie-defaut.png}}|balise_img{#VALEUR{saisie}}) ]
+						[(#VALEUR*{options/label}|sinon{#VALEUR*{options/label_case}}|sinon{#VALEUR*{options/texte}|_T_ou_typo|couper{30}}|_T_ou_typo)]
+					</span>
+				</li>
+			</BOUCLE_saisies>
+			</ul>
+			</B_saisies>
+		</td>
+	</tr>
+</BOUCLE_cond>
+</BOUCLE_objets>
+		</tbody>
+	</table>
+</div>
+</B_objets>

@@ -1,0 +1,41 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,-1,
+	titre,1,
+	id_formulaire,-1
+}})
+]<B_formulaires>
+#ANCRE_PAGINATION
+<div class="liste-objets formulaires">
+<table class="spip liste">
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{formidable:info_1_formulaire,formidable:info_nb_formulaires}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="statut" scope='col'></th>
+			<th class="titre" scope='col'>[(#TRI{titre,<:formidable:editer_titre:>,ajax})]</th>
+			<th class="identifiant" scope='col'>[(#TRI{identifiant,<:formidable:editer_identifiant:>,ajax})]</th>
+			<th class="reponses" scope='col'>[(#TRI{compteur_formulaires_reponses,<:formidable:titre_reponses:>,ajax})]</th>
+			<th class="id_formulaire id" scope='col'>[(#TRI{id_formulaire,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_formulaires(FORMULAIRES){id_formulaire?}{statut?}{compteur_left formulaires_reponses}{tri #ENV{par,compteur_formulaires_reponses},#GET{defaut_tri}}{recherche?}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)]">
+			<td class="statut">[(#STATUT|puce_statut{formulaire,#ID_FORMULAIRE})]</td>
+			<td class="titre"><a href="[(#ID_FORMULAIRE|generer_url_entite{formulaire})]">#TITRE</a></td>
+			<td class="identifiant">#IDENTIFIANT</td>
+			<td class="reponses">[<a href="#URL_ECRIRE{formulaires_reponses,id_formulaire=#ID_FORMULAIRE}">(#COMPTEUR{formulaires_reponses}|?{#COMPTEUR{formulaires_reponses},''})</a>]
+			<BOUCLE_pub(FORMULAIRES_REPONSES){id_formulaire}{statut=publie}/>[<span class="small"><br />(#TOTAL_BOUCLE|!={#COMPTEUR{formulaires_reponses}}|et{#COMPTEUR{formulaires_reponses}}|?{#TOTAL_BOUCLE})&nbsp;[(#TOTAL_BOUCLE|>{1}|?{<:formidable:info_reponse_publiees:>,<:formidable:info_reponse_publiee:>})]</span>]<//B_pub>
+			</td>
+			<td class="id_formulaire id">[(#AUTORISER{modifier,formulaire,#ID_FORMULAIRE}|?{
+							<a href="[(#URL_ECRIRE{formulaire_edit,id_formulaire=#ID_FORMULAIRE})]">#ID_FORMULAIRE</a>,
+							#ID_FORMULAIRE
+						})]</td>
+		</tr>
+	</BOUCLE_formulaires>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_formulaires>[
+<div class="liste-objets formulaires"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_formulaires>

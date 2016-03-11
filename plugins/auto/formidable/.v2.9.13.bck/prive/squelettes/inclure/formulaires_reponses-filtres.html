@@ -1,0 +1,24 @@
+<div class='onglets_simple clearfix'>
+	<ul>
+		<li>[(#SELF|parametre_url{statut|id_formulaires_reponse,'XXX'}|replace{XXX,''}|lien_ou_expose{<:formidable:info_reponse_toutes:>,[(#ENV{statut}|non|et{#ENV{id_formulaires_reponse,''}|non})],ajax})]</li>
+		<BOUCLE_repprop(FORMULAIRES_REPONSES){id_formulaire}{statut=prop} />
+		<li>[(#SELF|parametre_url{statut,'prop'}|lien_ou_expose{<:formidable:info_reponse_proposees:>[ \((#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE})\)],#ENV{statut}|=={prop},ajax})]</li>
+		<//B_repprop><BOUCLE_reppub(FORMULAIRES_REPONSES){id_formulaire}{statut=publie} />
+		<li>[(#SELF|parametre_url{statut,'publie'}|lien_ou_expose{<:formidable:info_reponse_publiees:>[ \((#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE})\)],#ENV{statut}|=={publie},ajax})]</li>
+		<//B_reppub><BOUCLE_repref(FORMULAIRES_REPONSES){id_formulaire}{statut=refuse} />
+		<li>[(#SELF|parametre_url{statut,'refuse'}|lien_ou_expose{<:formidable:info_reponse_supprimees:>[ \((#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE})\)],#ENV{statut}|=={refuse},ajax})]</li>
+		<//B_repref>
+	</ul>
+</div>
+<INCLURE{fond=prive/objets/liste/formulaires_reponses, env, ajax, nb=#ENV{nb,30}, sinon=<:formidable:info_aucune_reponse:>} />
+
+<BOUCLE_repall(FORMULAIRES_REPONSES){id_formulaire}{statut!=refuse}/>
+[(#ENV{statut}|non
+	|et{#ENV{id_formulaires_reponse,''}|non}
+	|et{#TOTAL_BOUCLE|>{10}}
+	|et{#AUTORISER{instituer,formulairesreponse,#ID_FORMULAIRE}})
+
+	[(#URL_ACTION_AUTEUR{vider_formulaire,#ID_FORMULAIRE}
+		|icone_verticale{<:formidable:reponses_supprimer:>,formulaire,formulaire-reponses-supprimer-24,'right danger',onclick="return confirm('<:formidable:reponses_supprimer_confirmation:>');"})]
+]
+<//B_repall>

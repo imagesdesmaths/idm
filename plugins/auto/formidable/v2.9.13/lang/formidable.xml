@@ -1,0 +1,33 @@
+<traduction module="formidable" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/formidable/trunk/lang/" reference="fr">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=ar" total="197" traduits="135" relire="0" modifs="1" nouveaux="61" pourcent="68.53">
+		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
+	</langue>
+	<langue code="de" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=de" total="197" traduits="98" relire="0" modifs="4" nouveaux="95" pourcent="49.75">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
+	</langue>
+	<langue code="en" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=en" total="197" traduits="196" relire="0" modifs="1" nouveaux="0" pourcent="99.49">
+		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
+		<traducteur nom="jack31" lien="http://trad.spip.net/auteur/jack31" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
+		<traducteur nom="twelf" lien="http://trad.spip.net/auteur/twelf" />
+	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=es" total="197" traduits="177" relire="0" modifs="1" nouveaux="19" pourcent="89.85">
+		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
+		<traducteur nom="tin" lien="http://trad.spip.net/auteur/tin" />
+	</langue>
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=fr" total="197" traduits="197" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="it" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=it" total="197" traduits="115" relire="0" modifs="3" nouveaux="79" pourcent="58.38">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=pt_br" total="197" traduits="189" relire="2" modifs="1" nouveaux="5" pourcent="95.94">
+		<traducteur nom="telopa" lien="http://trad.spip.net/auteur/telopa" />
+	</langue>
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=sk" total="197" traduits="136" relire="0" modifs="3" nouveaux="58" pourcent="69.04">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
+</traduction>

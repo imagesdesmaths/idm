@@ -1,0 +1,26 @@
+#SET{stats,#ARRAY}
+<BOUCLE_reponses(POUR){tableau #ENV{valeurs}}>
+	<BOUCLE_choix(POUR){tableau #VALEUR}>
+	#SET_MERGE{stats, #ARRAY{choix-#VALEUR, #GET{stats}|table_valeur{choix-#VALEUR}|sinon{0}|plus{1}}}
+	</BOUCLE_choix>
+</BOUCLE_reponses>
+
+[(#REM) datas peut être une chaine qu'on sait décomposer ]
+#SET{datas, #ENV*{datas}}
+#SET{datas, #GET{datas}|is_string|?{(#GET{datas}|saisies_chaine2tableau), #GET{datas}}}
+
+<BOUCLE_datas(POUR){tableau #GET{datas}}>
+[(#SET{nb,[(#GET{stats}|table_valeur{choix-#CLE}|sinon{0})]})]
+<tr class="tr_liste">
+	<td class="choix">#VALEUR</td>
+	<td class="stat"[ title="(#GET{nb}|titre_nb_reponses|attribut_html)"]>#GET{nb}</td>
+</tr>
+</BOUCLE_datas>
+
+#SET{diff, #ENV{reponses_total}|moins{#ENV{valeurs}|count}}
+[(#GET{diff}|>{0}|oui)
+<tr class="tr_liste">
+	<td class="choix"><:saisies:vue_sans_reponse:></td>
+	<td class="stat"[ title="(#GET{diff}|titre_nb_reponses|attribut_html)"]>#GET{diff}</td>
+</tr>
+]

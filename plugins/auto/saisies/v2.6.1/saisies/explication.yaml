@@ -1,0 +1,52 @@
+
+titre: '<:saisies:saisie_explication_titre:>'
+description: '<:saisies:saisie_explication_explication:>'
+icone: 'images/saisies_explication.png'
+options:
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'description'
+      label: '<:saisies:option_groupe_description:>'
+    saisies:
+      -
+        saisie: 'textarea'
+        options:
+          nom: 'texte'
+          label: '<:saisies:saisie_explication_titre:>'
+          explication: '<:saisies:saisie_explication_explication:>'
+          class: 'inserer_barre_edition'
+          cols: 40
+          rows: 5
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'affichage'
+      label: '<:saisies:option_groupe_affichage:>'
+    saisies:
+      -
+        saisie: 'textarea'
+        options:
+          nom: 'afficher_si'
+          label: '<:saisies:option_afficher_si_label:>'
+          explication: '<:saisies:option_afficher_si_explication:>'
+          rows: 5
+      -
+        saisie: 'textarea'
+        options:
+          nom: 'afficher_si_remplissage'
+          label: '<:saisies:option_afficher_si_remplissage_label:>'
+          explication: '<:saisies:option_afficher_si_remplissage_explication:>'
+          rows: 5
+      -
+        saisie: 'input'
+        options:
+          nom: 'conteneur_class'
+          label: '<:saisies:option_class_label:>'
+          size: 50
+defaut:
+  options:
+    texte: '<:saisies:saisie_explication_titre:>'
+    # champs extras (definition du champ sql)
+    # Non, cette saisie n'a rien à saisir en bdd !
+    # sql: "text DEFAULT '' NOT NULL"

@@ -1,0 +1,46 @@
+[(#REM)<style>]
+#SET{claire,#ENV{couleur_claire,edf3fe}}
+#SET{foncee,#ENV{couleur_foncee,3874b0}}
+
+body .formidable_analyse .progress-bar span {
+	background-color: ##GET{claire};
+	  background-image: -webkit-gradient(linear, left top, left bottom, from(##GET{claire}), to(##GET{foncee}));
+	  background-image: -webkit-linear-gradient(top, ##GET{claire}, ##GET{foncee});
+	  background-image: -moz-linear-gradient(top, ##GET{claire}, ##GET{foncee});
+	  background-image: -ms-linear-gradient(top, ##GET{claire}, ##GET{foncee});
+	  background-image: -o-linear-gradient(top, ##GET{claire}, ##GET{foncee});
+	  background-image: linear-gradient(top, ##GET{claire}, ##GET{foncee}); 
+}
+
+#navigation .navigation_resultats {
+	margin-top:1em;
+	padding-top:1em;
+	border-top:1px solid #eee;
+}
+
+#contenu .box.traitements ul.spip {margin-bottom:0;}
+
+#contenu .liste-objets.formulaires_reponses tr > .date {width:auto;}
+#contenu .liste-objets.formulaires_reponses tr > .auteur {width:auto;}
+
+.formulaire #wysiwyg .contenu_message_retour .label { display: block;}
+.formulaire #wysiwyg .contenu_apres .label { display: inline;}
+.formulaire #wysiwyg .contenu_url_redirect .label { display: inline;}
+.formulaire #wysiwyg .contenu_apres .apres { display: inline;}
+.formulaire #wysiwyg .contenu_url_redirect .url_redirect { display: inline;}
+
+.formulaire_edit .formulaire_editer_formulaire_champs .editer.saisies_disponibles {border-top:1px solid #ccc;padding-top:15px;margin-top: 15px;}
+.formulaire_edit .formulaire_editer_formulaire_champs .submit.revert {float: left;color: #8A1F11;opacity: 0.9;}
+
+.formulaires_reponse #contenu #wysiwyg {margin-top:1em;}
+.formulaires_reponse #contenu #wysiwyg .label {
+	width:140px; float:left; display:block;
+}
+.formulaires_reponse #contenu .fiche_objet .reponses .inner { border:none; }
+.formulaires_reponse #contenu .fiche_objet .reponses .hd {
+    padding-bottom: 3px; margin-bottom:10px; border-bottom:1px solid #ccc;
+}
+
+.formidable_liens .liste-items {margin: 0}
+.formidable_liens .liste-items .item {padding:2px 0;}
+.formidable_liens .liste-items .icone-objet {float:#ENV{left};margin-#ENV{right}:5px;}

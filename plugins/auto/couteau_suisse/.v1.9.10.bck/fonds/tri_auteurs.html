@@ -1,0 +1,28 @@
+#CACHE{0}
+[(#REM)
+	fond utilisable sous SPIP v2.x.x maxi
+	champ disponible : id_article
+	il faut 2 auteurs minimum
+]
+<BOUCLE_aut0(AUTEURS){id_article}{0,1}{doublons}> </BOUCLE_aut0>
+<BOUCLE_aut1(AUTEURS){id_article}{doublons}> </BOUCLE_aut1>
+#SET{nb,#TOTAL_BOUCLE|plus{1}}
+#SET{val,javascript:document.getElementsByName('bp_auteur')[0].value}
+#SET{desc, #EVAL{defined('_SPIP30000')?chemin_image('tri-asc-16.png'):_DIR_IMG_PACK.'descendre-16.png'}}
+#SET{mont, #EVAL{defined('_SPIP30000')?chemin_image('tri-desc-16.png'):_DIR_IMG_PACK.'monter-16.png'}}
+<BOUCLE_art(ARTICLES){id_article}{statut!='poubelle'}>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="text-align:left">
+	<BOUCLE_aut2(AUTEURS){id_article}>
+	<tr bgcolor="[(#COMPTEUR_BOUCLE|alterner{'#FFFFEE','#E5EFF8'})]" >
+	<td>#COMPTEUR_BOUCLE. #NOM</td><td style="text-align:center">
+	[(#COMPTEUR_BOUCLE|!={#GET{nb}}|oui)<input type="image" src="#GET{desc}" onclick="#GET{val}=-#ID_AUTEUR;" alt="v" title="<:couteau:tri_descendre:>" />
+	]
+	[(#COMPTEUR_BOUCLE|!={1}|oui)<input type="image" src="#GET{mont}" onclick="#GET{val}=#ID_AUTEUR;" alt="^" title="<:couteau:tri_monter:>" />
+	]</td></tr>
+	</BOUCLE_aut2>
+</table>
+<input type="hidden" name="bp_article" value="#ID_ARTICLE" />
+<input type="hidden" name="bp_auteur" value="" />
+
+</BOUCLE_art>
+</B_aut1>

@@ -1,0 +1,54 @@
+[(#REM) 
+
+  ### /!\ boucle POUR (spip Bonux) ###
+	
+  Parametres :
+  - ** datas : tableau de donnees
+               liste simple : cle=>valeur
+               liste avec groupes :  cle=> tableau (cle=>valeur)
+  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+  - cacher_option_intro : pas de premier option vide  (defaut:"")
+  - class : classe(s) css ajoutes au select
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+  
+  Exemples d'appels
+  pour une liste simple :
+	[(#SAISIE{selection,produits,
+		label=<:plugin:info_produits:>,
+		datas=#ARRAY{
+			cle1,valeur1,
+			cle2,valeur2,
+			cle3,valeur3}})]
+  pour une liste avec groupes :
+	[(#SAISIE{selection,produits,
+		label=<:plugin:info_produits:>,
+		datas=#ARRAY{
+			cle1,#ARRAY{
+				cle1,valeur1,
+				cle2,valeur2},
+			cle2,#ARRAY{
+				cle1,valeur1,
+				cle2,valeur2}}})] 
+]
+
+[(#REM) datas peut être une chaine qu'on sait décomposer ]
+#SET{datas, #ENV*{datas}|saisies_chaine2tableau}
+
+[(#REM) Attention, la valeur ou la valeur forcée peut être une chaine vide. On doit donc tester avec is_null. ]
+#SET{valeur,#ENV{valeur_forcee}|is_null|?{#ENV{valeur}|is_null|?{#ENV{defaut},#ENV{valeur}},#ENV{valeur_forcee}}}
+
+<select [(#HTML5|oui)[(#ENV{obligatoire}|et{#ENV{obligatoire}!={non}}|oui) required="required"]] name="#ENV{nom}" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ size="(#ENV{size})"][ (#ENV*{attributs})]>
+[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
+<BOUCLE_selection(POUR){tableau #GET{datas}}>
+	<B_cond>
+	<optgroup label="#CLE">
+	<BOUCLE_cond(CONDITION){si #VALEUR|is_array}><BOUCLE_optgroup(POUR){tableau #VALEUR}>
+		<option value="#CLE"[(#CLE|=={#GET{valeur}}|oui)selected="selected"]>#VALEUR</option>
+	</BOUCLE_optgroup></BOUCLE_cond>
+	</optgroup>
+	</B_cond>
+	<option value="#CLE"[(#CLE|=={#GET{valeur}}|oui)selected="selected"]>#VALEUR</option>
+	<//B_cond>
+</BOUCLE_selection>
+</select>

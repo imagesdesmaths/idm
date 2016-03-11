@@ -1,0 +1,60 @@
+<div class="ajax formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	<h3 class="titrem"><:abonnernotifications:titre_abonnements:><span class='image_loading'>&nbsp;</span></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) déclarer les hidden qui déclencheront le service du formulaire
+		paramêtre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		#SET{fl,abonnernotifications}
+		<fieldset>
+			<legend><:abonnernotifications:abonnement_forum_threads:></legend>
+			<p class="explication"><:abonnernotifications:explication_abonnements{email=#ENV{_email}}:></p>
+			<ul>
+				<!--EX10-->
+				#SET{name,id_threads}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]
+					<input type="hidden" name="#GET{name}#EVAL{chr(91)}#EVAL{chr(93)}" value="" />
+					<BOUCLE_threads(FORUMS){id_forum IN #ENV{_all_threads}}{par titre}>
+					#SET{val,#ID_THREAD}
+					<div class="choix">
+						<input type="checkbox" name="#GET{name}#EVAL{chr(91)}#EVAL{chr(93)}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|in_any{#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+						<label for="#GET{name}_#GET{val}">#TITRE (<a href="[(#URL_FORUM)]">Voir la discussion</a>)</label>
+					</div>
+					</BOUCLE_threads>
+					<p>
+					<a href="#" onclick="jQuery(this).closest('li').find('input.checkbox').prop('checked','checked');return false;">Tout cocher</a> |
+					<a href="#" onclick="jQuery(this).closest('li').find('input.checkbox').prop('checked',false);return false;">Tout décocher</a>
+					</p>
+				</li>
+			</ul>
+		</fieldset>
+		[(#REM) ajouter les saisies supplémentaires : extra et autre, à cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'>
+		<input type='submit' class='submit' name='modifabo' value='<:abonnernotifications:bouton_modifier_abonnements|attribut_html:>' /></p>
+
+		<fieldset>
+			<legend><:abonnernotifications:abonnement_modif_email:></legend>
+			<ul>
+				#SET{name,notification_email}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+					<p class="explication"><:abonnernotifications:explication_changer_email{email=#ENV{_email}}:></p>
+				</li>
+			</ul>
+		</fieldset>
+		[(#REM) ajouter les saisies supplémentaires : extra et autre, à cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'>
+		<input type='submit' class='submit' name='modifemail' value='<:abonnernotifications:bouton_changer_email|attribut_html:>' /></p>
+
+	</div></form>
+
+</div>

@@ -1,0 +1,8 @@
+#CACHE{0}
+[(#EVAL{define('_DEBUG_BLOCK_QUEUE',true); include_spip('inc/genie'); genie_queue_watch_dist();}|oui)]
+<BOUCLE_job(jobs){par date}{0,1}>#SET{next_date, #DATE}  </BOUCLE_job>
+<B_jobs>
+		[(#GRAND_TOTAL|singulier_ou_pluriel{queue_one_job_in_queue,queue_nb_jobs_in_queue})] : <BOUCLE_jobs(jobs){par date}{pagination 20}><strong>#FONCTION</strong> [<span class="small">((#DATE|date_relative))</span>]  / </BOUCLE_jobs>[(#GRAND_TOTAL|>{#TOTAL_BOUCLE}|oui) <strong>(...)</strong> / ]#SET{next, #GET{next_date}|strtotime|moins{#VAL{now}|strtotime}} [(#GET{next}|<{0}|non) <span style="color:green"><:queue_next_job_in_nb_sec{nb=#GET{next}}:></span>.][(#GET{next}|<{0}|oui) <span style="color:red">[(#GET{next_date}|date_relative|ucfirst)][(#GET{next}|<{-3600}|?{??,...})]</span>]
+</B_jobs>
+	<:queue_no_job_in_queue:>.
+<//B_jobs>

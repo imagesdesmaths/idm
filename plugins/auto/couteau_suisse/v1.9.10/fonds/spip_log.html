@@ -1,0 +1,67 @@
+[(#REM) fond issu des travaux de Luc Tech et Eric Lupinacci : 
+	http://zone.spip.org/trac/spip-zone/browser/_plugins_/simplog/trunk/prive/squelettes/contenu/simplog.html ]
+#CACHE{0}
+[(#AUTORISER{configurer, outil, 0, #SESSION{id_auteur}, spip_log}|sinon_interdire_acces)]
+#SET{log0, #ENV{log}|replace{'[.]\d+$',''}|concat{*}}
+#SET{bn, #ENV{log}|basename}
+
+<div class="ajax">
+<h1 class="grostitre"><:couteauprive:titre:> &gt; [(#VAL{spip_log:nom}|couteauprive_T)][ &gt; (#ENV{log})]</h1>
+
+[(#SET{defaut_tri, #ARRAY{
+	datelog, -1,
+	gravite, 1,
+	hit, 1,
+	ip, 1,
+	pid, 1
+}})]
+<B_lecture_log>
+	#ANCRE_PAGINATION
+	<div class="spip_code">
+		<div class="pagination tri"><div class="center">
+            <BOUCLE_logs(DATA){source glob, #GET{log0}}{par valeur}{valeur != ''}{' | '}> #SET{f,#VALEUR|basename}
+            [(#SELF|parametre_url{tri_lecture_log,''}|parametre_url{debut_lecture_log,''}|parametre_url{log,#GET{f}}|lien_ou_expose{#GET{f},#ENV{log}|basename|=={#GET{f}}})]
+            </BOUCLE_logs><br /></B_logs>
+			[(#TRI{'>', >>>, ajax}) | ]
+			[(#TRI{'<', <<<, ajax}) ]
+		[(#ENV{log}|oui)
+			|
+			<a href="[(#SELF|parametre_url{hasard,[(#VAL{1}|rand{10000000})]})]" class="ajax" style="text-align: right">
+				<:couteauprive:rss_actualiser:>
+			</a>
+		]
+		</div></div>
+		<table class="spip liste">
+			<thead>
+				<tr class="first_row">
+					<th class="datelog secondaire" scope="col">[(#TRI{datelog, <:date:>, ajax})]</th>
+					<th class="ip" scope="col">[(#TRI{ip, IP, ajax})]</th>
+					<th class="pid" scope="col">[(#TRI{pid, PID, ajax})]</th>
+					<th class="hit" scope="col">[(#TRI{hit, <:espace_prive:>, ajax})]</th>
+					<th class="gravite" scope="col">[(#TRI{gravite, <:couteauprive:log_gravite:>, ajax})]<!--<br/>\[0..#EVAL{defined('_LOG_FILTRE_GRAVITE')? _LOG_FILTRE_GRAVITE:_LOG_INFO_IMPORTANTE}\]--></th>
+					<th class="texte principale" scope="col"><:message:></th>
+				</tr>
+			</thead>
+			<tbody>
+<BOUCLE_lecture_log(DATA){source table, #ENV{log}|spip_log_phraser}{tri #ENV{par, datelog}, #GET{defaut_tri}}{pagination 100}>
+				<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
+					<td class="datelog secondaire">[(#DATELOG)]</td>
+					<td class="ip">[(#IP)]</td>
+					<td class="pid">[(#PID)]</td>
+					<td class="hit">[(#HIT)]</td>
+					<td class="gravite">[(#GRAVITE)]</td>
+					<td class="texte principale">[(#TEXTE*)]</td>
+				</tr>
+</BOUCLE_lecture_log>
+			</tbody> 
+		</table>
+	</div>
+	[<p class="pagination">(#PAGINATION{prive})</p>]
+</B_lecture_log>
+[(#ENV{log}|oui)
+	#BOITE_OUVRIR{'','error'}
+		<:couteauprive:maj_fichier_ko{file=#ENV{log}}:>
+	#BOITE_FERMER]
+<//B_lecture_log>
+
+</div>

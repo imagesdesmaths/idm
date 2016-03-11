@@ -1,0 +1,9 @@
+Installer ces deux fichiers dans les squelettes
+
+Puis appeler spip.php?page=yaml&id_article=X
+
+ou alors dans .htaccess ajouter :
+RewriteRule ^article([0-9]+)[\.,]yaml$	spip.php?page=yaml&id_article=$1 [QSA,L]
+
+puis appeler articleXXX,yaml
+

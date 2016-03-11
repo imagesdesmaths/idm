@@ -1,0 +1,21 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 SPIP
+  Distribue sous licence GPL
+
+]
+<title>[\[(#NOM_SITE_SPIP|concat{'\] ',<:pass_oubli_mot:>}|nettoyer_titre_email)]</title>
+<body>
+
+#SET{url_site,#URL_SITE_SPIP/}
+[(#SET{nom_site,[<a href="#GET{url_site}">(#NOM_SITE_SPIP)</a>]})]
+<p><:notifications:pass_mail_passcookie_1{nom_site_spip=#GET{nom_site}}:></p>
+<div>
+[<br><center>(#INCLURE{fond=emails/inc-button,url=[(#ENV{url_reset}|url_absolue)],label=<:notifications:bouton_changer_pass:>,width=250px})</center><br>]
+</div>
+
+<p><:notifications:pass_mail_passcookie_2:></p>
+</body>
+
+#FILTRE{facteur_email_wrap_to_html}

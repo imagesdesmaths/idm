@@ -1,0 +1,76 @@
+/*
+ a.cs_glossaire : concerne le glossaire en mode CSS 
+ #glossOverDiv : concerne le glossaire en mode JS
+*/
+
+/* Empecher la definition de s'afficher comme les autres liens, vous pouvez donner les attributs standards de votre texte */
+a.cs_glossaire, a.cs_glossaire:hover, #glossOverDiv {
+	color:#000000;
+	text-decoration:none;
+	z-index:998;
+}
+/*
+a.cs_glossaire:hover {
+	cursor:help;
+}
+*/
+
+/* Mode JS : des span discrets */
+a.cs_glossaire span.gl_js,
+a.cs_glossaire span.gl_jst,
+/* Mode CSS : l'effet de survol est obtenu grace aux proprietes display */
+a.cs_glossaire span.gl_dl,
+a.cs_glossaire span.gl_dt,
+a.cs_glossaire span.gl_dd {
+ 	display:none;
+	visibility:hidden;
+	z-index:999;
+	font-style:normal;
+}
+
+a.cs_glossaire span.gl_dd {
+	font-weight:normal;
+}
+
+a.cs_glossaire:hover span.gl_dt, #glossOverDiv span.gl_dt,
+a.cs_glossaire:hover span.gl_dd, #glossOverDiv span.gl_dd {
+	display:block;
+	visibility:visible;
+}
+
+a.cs_glossaire:hover span.gl_dl, #glossOverDiv span.gl_dl {
+	display:inline;
+	visibility:visible;
+	/* Placement de la definition dans la page. */
+	position:absolute;
+	width:180px;
+	margin-left:-120px;
+	margin-top:1.8em;
+	/* Decoration */
+	padding:4px;
+	border:1px solid #ffc300;
+	background-color:#FFFFFF;
+	font-size:85%;
+}
+a.cs_glossaire:hover span.gl_dt, #glossOverDiv span.gl_dt {
+	padding:3px;
+	background-color:#ffffbf;
+	font-weight:bold;
+	text-align:right;
+}
+a.cs_glossaire:hover span.gl_dd, #glossOverDiv span.gl_dd {
+	padding:3px;
+	text-align:left;
+	line-height:1.3em;
+}
+
+a.cs_glossaire span.gl_mot {
+	border-bottom:1px dotted gray;
+	font-size:inherit;
+/* cursor:help; */
+}
+
+/* exception sur le JS */	
+#glossOverDiv span.gl_dl {
+	margin-left:-60px;
+}

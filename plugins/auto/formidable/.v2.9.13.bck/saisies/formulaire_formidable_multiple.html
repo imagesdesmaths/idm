@@ -1,0 +1,26 @@
+[(#REM) 
+  Saisie permettant de sélectionner plusieurs formulaires par leur identifiant
+  
+  ### /!\ boucle POUR (spip Bonux) ###
+	
+  Parametres :
+  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+  - cacher_option_intro : pas de premier option vide  (defaut:"")
+  - class : classe(s) css ajoutes au select
+  
+  Exemple d'appel :
+	[(#SAISIE{formulaire_formidable_multiple,nom,
+		label=<:plugin:label:>,
+	})] 
+]
+
+[(#REM) defaut peut être une chaine (plusieurs valeurs ou pas) qu'on sait décomposer ]
+#SET{defaut, #ENV{defaut}}
+#SET{defaut, #GET{defaut}|is_string|?{(#GET{defaut}|saisies_chaine2tableau), (#GET{defaut}|sinon{#ARRAY})}}
+
+<select name="#ENV{nom}[]" id="champ_#ENV{nom}" multiple="multiple"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
+[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
+<BOUCLE_selection(FORMULAIRES){par titre}>
+	<option value="#IDENTIFIANT" [(#IDENTIFIANT|in_array{#ENV{valeur,#GET{defaut}}}|oui) selected="selected"]>[(#TITRE|typo)] (#IDENTIFIANT)</option>
+</BOUCLE_selection>
+</select>

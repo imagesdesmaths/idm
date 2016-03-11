@@ -1,0 +1,38 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 SPIP
+  Distribue sous licence GPL
+
+]
+<title>[\[(#NOM_SITE_SPIP|concat{'\] : ',<:form_forum_identifiants:>}|nettoyer_titre_email)]</title>
+
+<body>
+[(#SET{nom,[<strong>(#ENV{nom})</strong>]})]
+<p><:form_forum_bonjour{nom=#GET{nom}}:></p>
+
+
+
+<p><:notifications:form_forum_confirmer_email:></p>
+<div>
+[<br><center>(#INCLURE{fond=emails/inc-button,url=[(#ENV{url_confirm}|url_absolue)],label=<:notifications:bouton_finir_inscription:>,width=250px})</center><br>]
+</div>
+
+#SET{url_site,#URL_SITE_SPIP/}
+[(#SET{nom_site,[<a href="#GET{url_site}">(#NOM_SITE_SPIP)</a>]})]
+[(#ENV{mode}|=={6forum}|oui)
+[(#SET{url_login,[<a href="#GET{url_site}">(#URL_PAGE{login})</a>]})]
+<p><:form_forum_voici1{nom_site_spip=#GET{nom_site},adresse_site=#REM,adresse_login=#GET{url_login}}|replace{'\\(\\)',''}:></p>
+]
+[(#ENV{mode}|=={6forum}|non)
+[(#SET{url_login,[<a href="#GET{url_site}">(#URL_SITE_SPIP|concat{'/',#EVAL{_DIR_RESTREINT_ABS}})</a>]})]
+<p><:form_forum_voici2{nom_site_spip=#NOM_SITE_SPIP,adresse_site=#REM,adresse_login=#GET{url_login}}|replace{'\\(\\)',''}:></p>
+]
+
+<ul class="spip">
+<li><:form_forum_login:>[ (#ENV{email,email})]</li>
+<li><:form_forum_pass:>[ (#ENV{pass,pass})]</li>
+</ul>
+</body>
+
+#FILTRE{facteur_email_wrap_to_html}

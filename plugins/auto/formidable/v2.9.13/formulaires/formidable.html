@@ -1,0 +1,51 @@
+<BOUCLE_remplacer_le_formulaire(CONDITION){si #ENV{_remplacer_formulaire}}>
+	[(#REM) Afficher du HTML si prévu par un plugin ou pour les stats ]
+	[(#ENV**{_remplacer_formulaire})]
+</BOUCLE_remplacer_le_formulaire>
+<BOUCLE_formulaire(FORMULAIRES){id_formulaire=#ENV{id}}>
+	[(#SET{enregistrement,[(#TRAITEMENTS**|unserialize|table_valeur{'enregistrement'})]})]
+	[(#SET{anonymiser,[(#GET{enregistrement}|table_valeur{'anonymiser'})]})]
+	[(#GET{anonymiser}|=={on}|oui)<h3><:formidable:formulaire_anonyme_explication:></h3>]
+</BOUCLE_formulaire>
+<div class="formulaire_spip formulaire_[(#ENV{form})] formulaire_#ENV{form}_[(#ENV{_formidable}|table_valeur{id_formulaire})] formulaire_#ENV{form}_[(#ENV{_formidable}|table_valeur{identifiant})][ formulaire_#ENV{form}-(#ENV{id,nouveau})]" id="[formulaire_#ENV{form}-(#ENV{id,nouveau})]">
+	[<h3 class="titrem"><span>(#ENV{_titre})</span></h3>]
+	[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok}|propre)</div>]
+	[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur}|propre)</div>]
+
+	[(#ENV{editable}|oui)
+		[(#ENV{_saisies}|et{#ENV{_saisies}|count}|oui)
+    <form method='post' action='[(#ENV{action}|ancre_url{[formulaire_#ENV{form}-(#ENV{id,nouveau})]})]' enctype='multipart/form-data'><div>
+        [(#REM) declarer les hidden qui declencheront le service du formulaire
+        parametre : url d'action ]
+        #ACTION_FORMULAIRE{#ENV{action}}
+
+        <[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+            #GENERER_SAISIES{#ENV{_saisies}}
+            <[(#VAL{li}|saisie_balise_structure_formulaire)] style="display:none;">
+                <label for="mechantrobot-#ENV{id}"><:antispam_champ_vide:></label>
+                <input type="text" id="mechantrobot-#ENV{id}" name="mechantrobot" value="#ENV{mechantrobot}" />
+            </[(#VAL{li}|saisie_balise_structure_formulaire)]>
+        </[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+
+        [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+        <!--extra-->
+
+	      <INCLURE{fond=formulaires/inc-formidable-boutons} />
+    </div></form>
+    ]
+		[(#ENV{_saisies}|et{#ENV{_saisies}|count}|non)
+			<p class="notice"><:formidable:formulaires_aucun_champ:></p>
+		]
+	]
+	[(#ENV{editable}|non)
+		[(#ENV{formidable_afficher_apres}|=={valeurs}|oui)
+			#VOIR_SAISIES{#ENV*{_saisies},#ENV}
+		]
+		[(#ENV{formidable_afficher_apres}|=={rien}|oui)
+		]
+		[(#ENV{formidable_afficher_apres}|=={stats}|oui)
+			#MODELE{formulaire_analyse,id_formulaire=#ENV{id}}
+		]
+  ]
+</div>
+<//B_remplacer_le_formulaire>

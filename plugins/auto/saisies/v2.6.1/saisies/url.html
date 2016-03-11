@@ -1,0 +1,12 @@
+[(#REM) 
+		
+		Zone de saisie d'URL. Sur les sites en HTML5, utilise type="url"
+		sur le input (et donc class="url"), et type="text" par défaut
+		pour les autres (et donc class="text"). Dans ce dernier cas, on
+		renseigne quand même class="url" pour avoir une classe cohérente
+		avec ou sans HTML5.
+		
+][(#INCLURE{fond=saisies/input,
+			env,
+            type=#HTML5|?{url,text},
+            class=[(#HTML5|?{[(#ENV{class}) ],[(#ENV{class}) ]url})]})]

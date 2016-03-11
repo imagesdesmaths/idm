@@ -1,0 +1,27 @@
+[(#REM)
+/******************************************************************
+***  Ce plugin eva_geometrie, créé par Olivier Gautier  ***
+*** 		est mis à disposition sous un ***
+*** contrat GNU/GPL consultable à l'adresse                    ***
+***      http://www.april.org/gnu/gpl_french.html		     ***
+******************************************************************/
+]
+<BOUCLE_geonextdoc(DOCUMENTS){id_document=#ENV**{doc}}{mode=document}{extension==gxt}>
+	<applet id="xxx" code="geonext.Geonext.class" codebase="./" archive="#EVAL{_DIR_PLUGIN_EVA_GEOMETRIE}scripts/geonext.jar"
+	width="[(#ENV**{largeur}|?{#ENV**{largeur},"100%"})]"
+	height="[(#ENV**{hauteur}|?{#ENV**{hauteur},"500"})]"
+	MAYSCRIPT>
+	<param name="scriptable" value="true">
+	<param name="geonext" value="
+<?
+$Fichier = "#URL_DOCUMENT";
+if (is_file($Fichier)) {
+	if ($TabFich = file($Fichier)) {
+		for($i = 0; $i < count($TabFich); $i++)
+			echo $TabFich[$i];
+	}
+}
+?>
+	">
+	</applet>
+</BOUCLE_geonextdoc>

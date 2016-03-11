@@ -1,0 +1,10 @@
+<BOUCLE_fet(FORMS?){id_form}{si #PLUGIN{forms}}>#FORMS</BOUCLE_fet>
+<BOUCLE_f(FORMULAIRES){identifiant=form#ENV{id,#ENV{id_form}}}{0,1}>#SET{titre,#TITRE}[(#REM|test_espace_prive|oui)
+#FORMULAIRE_FORMIDABLE{#ID_FORMULAIRE,#ARRAY{_titre,#TITRE}}
+]</BOUCLE_f>
+<div><?php
+/* une fonction qui produit du php qui ne sera execute qu'au service final de la page */
+echo executer_balise_dynamique('FORMULAIRE_FORMIDABLE',[(#LISTE{form#ENV{id,#ENV{id_form}},#ARRAY{_titre,#GET{titre}}}|var_export{true})],array('','','','','[(#ENV{lang}|texte_script)]'));
+?></div>
+<//B_f>
+<//B_fet>

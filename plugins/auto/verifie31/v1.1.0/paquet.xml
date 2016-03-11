@@ -1,0 +1,18 @@
+<paquet
+	prefix="verifie31"
+	categorie="maintenance"
+	version="1.1.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/verifie31-64.png"
+	documentation="http://contrib.spip.net/4601"
+>
+
+	<nom>Vérifie les plugins pour passage à SPIP 3.1</nom>
+	<auteur lien='http://www.erational.org'>erational</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<menu nom="verifie31" parent="menu_administration" icone="images/verifie31-16.png" action="verifie31" titre="verifie31:titre_verifie31" />
+
+</paquet>

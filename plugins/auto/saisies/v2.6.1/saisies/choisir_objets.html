@@ -1,0 +1,21 @@
+[(#REM)
+	Saisie spécifique à SPIP 3
+	qui permet de choisir parmis des
+	objets éditoriaux éditables de SPIP,
+	les affichant avec des checkbox
+
+
+  Exemple d'appel :
+	[(#SAISIE{choisir_objets, gis_objets,
+		label=<:gis:cfg_lbl_activer_objets:>,
+		exclus=spip_gis})]
+
+]
+
+[(#REM) defaut peut être une chaine (plusieurs valeurs ou pas) qu'on sait décomposer ]
+#SET{defaut, #ENV{defaut}|saisies_chaine2tableau}
+
+[(#REM) valeur doit être un tableau ! ]
+#SET{valeur, #ENV{valeur}|saisies_valeur2tableau}
+
+#INCLURE{fond=formulaires/inc-choisir-objets,name=#ENV{nom},selected=#GET{valeur},exclus=#ENV{exclus}}

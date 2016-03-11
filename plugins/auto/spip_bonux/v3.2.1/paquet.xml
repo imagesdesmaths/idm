@@ -1,0 +1,22 @@
+<paquet
+	prefix="spip_bonux"
+	categorie="outil"
+	version="3.2.1"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="img_pack/spip-bonux.png"
+	documentation="http://contrib.spip.net/Bonux-pour-SPIP3"
+>
+
+	<nom>SPIP Bonux</nom>
+	<!-- Le plugin qui lave plus SPIP que SPIP, avec des chouettes cadeaux dedans -->
+
+	<auteur>Cedric Morin</auteur>
+	<auteur>Matthieu Marcillaud</auteur>
+	<auteur>romy.tetue.net</auteur>
+
+	<copyright>2008-2015</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+	<pipeline nom="affichage_final" />
+</paquet>

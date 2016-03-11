@@ -1,0 +1,32 @@
+<div class="cadre cadre-liste analyser analyser_#ENV{nom} saisie_#ENV{type_saisie}">
+<table class="liste" cellspacing="0" cellpadding="2" border="0" style="width:100%;" data-nombre="#ENV{reponses_total}">
+[<caption class="titrem"><strong class="caption">(#ENV{label_case,#ENV{label,#ENV{nom}}})</strong></caption>]
+	<tbody>
+	[(#CHEMIN{saisies-analyses/#ENV{type_saisie}.html}|oui)
+		#INCLURE{fond=saisies-analyses/#ENV{type_saisie},env}
+	]
+	[(#CHEMIN{saisies-analyses/#ENV{type_saisie}.html}|non)
+		#SET{plein,#ENV{valeurs}|array_filter}
+		#SET{vide,#ENV{valeurs}|array_diff_key{#GET{plein}}}
+		[(#GET{plein}|count|>{0}|oui)
+			#SET{moyenne,#VAL{str_word_count}|array_map{#GET{plein}}|array_sum|div{#GET{plein}|count}}
+		]
+		[(#GET{plein}|count|>{0}|non)
+			#SET{moyenne,0}
+		]
+		<tr class="tr_liste row_odd vide">
+			<td class="choix"><:formidable:analyse_sans_reponse:></td>
+			<td class="stat"[ title="(#GET{vide}|count|titre_nb_reponses|attribut_html)"]>[(#GET{vide}|count)]</td>
+		</tr>
+		<tr class="tr_liste row_even plein">
+			<td class="choix"><:formidable:analyse_avec_reponse:></td>
+			<td class="stat"[ title="(#GET{plein}|count|titre_nb_reponses|attribut_html)"]>[(#GET{plein}|count)]</td>
+		</tr>
+		<tr class="tr_liste row_odd moyenne">
+			<td class="choix"><:formidable:analyse_longueur_moyenne:></td>
+			<td class="stat ignore">#GET{moyenne}</td>
+		</tr>
+	]
+	</tbody>
+</table>
+</div>

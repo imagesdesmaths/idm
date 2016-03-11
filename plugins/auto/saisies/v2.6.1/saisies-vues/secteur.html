@@ -1,0 +1,10 @@
+[(#REM) valeur peut être une chaine qu'on sait décomposer ]
+#SET{valeur, #ENV{valeur}|saisies_chaine2tableau}
+
+<B_choix>
+<ul>
+	<BOUCLE_choix(RUBRIQUES){id_rubrique IN #GET*{valeur}}>
+	<li class="choix">#TITRE</li>
+	</BOUCLE_choix>
+</ul>
+</B_choix>

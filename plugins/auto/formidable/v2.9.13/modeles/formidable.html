@@ -1,0 +1,8 @@
+<BOUCLE_f(FORMULAIRES){id_formulaire=#ID}{si #REM|test_espace_prive}>
+#FORMULAIRE_FORMIDABLE{#ID_FORMULAIRE}
+</BOUCLE_f>
+<div><?php
+/* une fonction qui produit du php qui ne sera execute qu'au service final de la page */
+echo executer_balise_dynamique('FORMULAIRE_FORMIDABLE',[(#LISTE{#ENV{id}}|array_merge{#ENV{args}}|var_export{true})],array('','','','','[(#ENV{lang}|texte_script)]'));
+?></div>
+<//B_f>

@@ -1,0 +1,8 @@
+[(#ENV{icone}|oui)
+[(#REM) en SPIP 3 on cherche avant tout dans le chemin des images
+]#SET{icone,''}[(#SPIP_VERSION|version_compare{2.9, >}|oui)#SET{icone,#CHEMIN_IMAGE{#ENV{icone}}]
+[<img src="(#GET{icone}|sinon{#CHEMIN{#ENV{icone}}}
+					 |image_reduire{#ENV{taille_icone}|sinon{16}}
+					 |extraire_attribut{src})" alt="#ENV*{label}" /> ]
+]
+<span>#ENV*{label}</span>

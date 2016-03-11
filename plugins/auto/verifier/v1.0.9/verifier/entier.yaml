@@ -1,0 +1,18 @@
+
+titre: '<:verifier:type_entier:>'
+description: '<:verifier:type_entier_description:>'
+options:
+  -
+    saisie: 'input'
+    options:
+      nom: 'min'
+      label: '<:verifier:option_entier_min_label:>'
+    verifier:
+      type: 'entier'
+  -
+    saisie: 'input'
+    options:
+      nom: 'max'
+      label: '<:verifier:option_entier_max_label:>'
+    verifier:
+      type: 'entier'

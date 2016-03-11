@@ -1,0 +1,68 @@
+	#SET{type_choix, #ENV{type_choix,tous}}
+#SET{choix_destinataires, #ENV*{choix_destinataires,#ARRAY}}
+#SET{erreurs,#ENV**{erreurs/#ENV{nom}}}
+<BOUCLE_choix(CONDITION){si #GET{choix_destinataires}|count|<{2}|ou{#GET{type_choix}|=={tous}}}>
+<[(#ENV{saisies_base_conteneur,[(#VAL{li}|saisie_balise_structure_formulaire)]})] class="editer editer_[(#ENV{nom})][ (#ENV{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#ENV{conteneur_class,#ENV{li_class}})][ saisie_(#ENV{type_saisie})]" [(#ENV{tout_afficher}|!={oui}|?{style="display:none;"})][ data-id="(#ENV{id_saisie})"]>
+	#ENV*{inserer_debut}
+	[<label for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]">(#ENV*{label})[<span class='obligatoire'>(#ENV{obligatoire}|oui)[(#ENV*{info_obligatoire}|is_null|?{<:info_obligatoire_02:>,#ENV*{info_obligatoire}})]</span>]</label>]
+	[<span class='erreur_message'>(#GET{erreurs})</span>]
+	[<p class='explication'>(#ENV*{explication})</p>]
+	[<em class='attention'>(#ENV*{attention})</em>]
+	[(#REM) Si 0 ou 1 destinataire possible ou si c'est tous, le destinataire est défini automatiquement ]
+	<BOUCLE_tous(AUTEURS){tous}{id_auteur IN #GET*{choix_destinataires}}{par num nom,nom}>
+	[(#ENV{tout_afficher}|!={oui}|oui)
+	<input type="hidden" name="#ENV{nom}\[\]" value="#ID_AUTEUR" />
+	]
+	[(#ENV{tout_afficher}|!={oui}|non)
+	<div class="choix">
+		<input type="checkbox" name="#ENV{nom}\[\]" class="checkbox"
+			readonly="readonly" checked="checked"
+			id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_destinataire#ID_AUTEUR"
+			value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV{valeur_forcee,#ENV*{valeur,#ENV*{defaut,#ARRAY}}}}|oui)checked="checked"]
+		/>
+		<label for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_destinataire#ID_AUTEUR">#NOM</label>
+	</div>
+	]
+	</BOUCLE_tous>
+	<input [(#ENV{tout_afficher}|!={oui}|?{type="hidden",type="text" readonly="readonly"})] name="#ENV{nom}[]" value="1" />
+	<//B_tous>
+	#ENV*{inserer_fin}
+</[(#ENV{saisies_base_conteneur,[(#VAL{li}|saisie_balise_structure_formulaire)]})]>
+</BOUCLE_choix>
+
+[(#SET{valeur,[(#ENV*{valeur}|is_array|?{#ENV*{valeur},[(#ENV*{valeur}|explode{','})]})]})]
+<[(#ENV{saisies_base_conteneur,[(#VAL{li}|saisie_balise_structure_formulaire)]})] class="editer editer_[(#ENV{nom})][ (#ENV{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#ENV{conteneur_class,#ENV{li_class}})][ saisie_(#ENV{type_saisie})]">
+
+	#ENV*{inserer_debut}
+	[<label[(#GET{type_choix}|=={un}|ou{#GET{type_choix}|=={un_radio}}|oui)for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"]>(#ENV*{label})[<span class='obligatoire'>(#ENV{obligatoire}|oui)[(#ENV*{info_obligatoire}|is_null|?{<:info_obligatoire_02:>,#ENV*{info_obligatoire}})]</span>]</label>]
+	[<span class='erreur_message'>(#GET{erreurs})</span>]
+	[<p class='explication'>(#ENV*{explication})</p>]
+	[<em class='attention'>(#ENV*{attention})</em>]
+	[(#REM) Sinon on propose le choix, en select ou en checkbox suivant l'option "type_choix" ]
+	<B_destinataires>
+		[(#GET{type_choix}|=={un}|oui)
+			<select name="#ENV{nom}\[\]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]">
+				[<option value="">(#ENV{option_intro})</option>]
+		]
+		<BOUCLE_destinataires(AUTEURS){tous}{id_auteur IN #GET*{choix_destinataires}}{par num nom,nom}>
+			[(#GET{type_choix}|=={plusieurs}|ou{#GET{type_choix}|=={un_radio}}|oui)
+				<div class="choix">
+					<input type="[(#GET{type_choix}|=={plusieurs}|?{checkbox,radio})]" name="#ENV{nom}\[\]" class="checkbox"
+						id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_destinataire#ID_AUTEUR"
+						value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV*{valeur_forcee,#GET*{valeur,#ENV*{defaut,#ARRAY}}}}|oui)checked="checked"]
+					/>
+					<label for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_destinataire#ID_AUTEUR"[(#ID_AUTEUR|in_array{#ENV*{valeur_forcee,#GET*{valeur,#ENV*{defaut,#ARRAY}}}}|oui)class="on"]>#NOM</label>
+				</div>
+			]
+			[(#GET{type_choix}|=={un}|oui)
+				<option value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV{valeur_forcee,#GET*{valeur,#ENV*{defaut,#ARRAY}}}}|oui)selected="selected"]>#NOM</option>
+			]
+
+		</BOUCLE_destinataires>
+		[(#GET{type_choix}|=={un}|oui)
+			</select>
+		]
+	</B_destinataires>
+	#ENV*{inserer_fin}
+</[(#ENV{saisies_base_conteneur,[(#VAL{li}|saisie_balise_structure_formulaire)]})]>
+<//B_choix>

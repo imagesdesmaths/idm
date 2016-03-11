@@ -1,0 +1,13 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|oui}>
+	<B_sites_selectionnes>
+	<ul>
+	<BOUCLE_sites_selectionnes(SITES){id_syndic IN #ENV*{valeur}}>
+		<li class="choix">#NOM SITE (#ID_SYNDIC)</li>
+	</BOUCLE_sites_selectionnes>
+	</ul>
+	</B_sites_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_site_selectionne(SITES){id_syndic=#ENV{valeur}}>
+	  	<p>#NOM_SITE (#ID_SYNDIC)</p>
+	</BOUCLE_site_selectionne>
+<//B_test_multiple>

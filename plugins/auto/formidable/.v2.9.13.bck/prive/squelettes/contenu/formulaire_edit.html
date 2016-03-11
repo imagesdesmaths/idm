@@ -1,0 +1,41 @@
+#SET{objet,formulaire}
+#SET{id_objet,#VAL{id_formulaire}|_request|intval}
+<BOUCLE_autoriser(CONDITION){si #AUTORISER{editer, formulaire, #GET{id_objet}}}>
+#SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#GET{id_objet}}|?{#ENV{lier_trad,#GET{id_objet}}|generer_url_entite{#GET{objet}},#GET{id_rubrique}|?{#GET{id_rubrique}|generer_url_entite{rubrique},#URL_ECRIRE{rubriques}}}}}
+	
+<script type="text/javascript">/*<![CDATA[*/
+if (window.jQuery){
+function debloquer_prive(){ jQuery('input[required], textarea[required], select[required]').removeAttr('required'); }
+jQuery('document').ready(debloquer_prive);
+onAjaxLoad(debloquer_prive);
+}
+/*]]>*/</script>
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#GET{id_objet}|oui)
+	[(#GET{redirect}|icone_verticale{[(#GET{objet}|objet_info{texte_retour}|_T)],#GET{objet}|objet_info{icone_objet},'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#GET{objet}|objet_info{#GET{id_objet}|?{texte_modifier,texte_creer}}|_T)]
+		<h1>(#ENV{titre,#INFO_TITRE{#GET{objet},#GET{id_objet}}|sinon{#ENV{nouveau}|=={oui}|?{<:formidable:editer_nouveau:>,#VAL{id_menu}|_request}}})</h1>
+	]
+</div>
+	#SET{configurer,formulaire}
+	<BOUCLE_formulaire(FORMULAIRES){id_formulaire=#GET{id_objet}}{tout}>
+		#SET{configurer,#ENV{configurer}|in_array{#LISTE{formulaire,champs,traitements,auteurs}}|?{#ENV{configurer},champs}}
+	</BOUCLE_formulaire>
+	
+	[(#GET{configurer}|=={formulaire}|oui)
+		#FORMULAIRE_EDITER_FORMULAIRE{#GET{id_objet}, #VAL{nouveau}|_request|sinon{''}}
+	]
+	[(#GET{configurer}|=={auteurs}|oui)
+		#FORMULAIRE_EDITER_LIENS{formulaires,#GET{id_objet},auteurs}
+	]
+	[(#GET{configurer}|=={champs}|oui)
+		#FORMULAIRE_EDITER_FORMULAIRE_CHAMPS{#ENV{id_formulaire}}
+	]
+	[(#GET{configurer}|=={traitements}|oui)
+		#FORMULAIRE_EDITER_FORMULAIRE_TRAITEMENTS{#ENV{id_formulaire}}
+	]
+</div>
+</BOUCLE_autoriser>

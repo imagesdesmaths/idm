@@ -1,0 +1,18 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 SPIP
+  Distribue sous licence GPL
+
+][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+Inscription sur le site [(#NOM_SITE_SPIP|nettoyer_titre_email)]
+
+
+Nom : #NOM
+email : #EMAIL
+
+** [(#URL_AUTEUR|url_absolue)]
+
+</BOUCLE_auteur>
+#FILTRE{supprimer_tags|filtrer_entites|trim}

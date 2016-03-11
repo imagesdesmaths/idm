@@ -1,0 +1,19 @@
+[(#REM) 
+  
+  ### /!\ necessite le plugin YAML ###
+  
+  Genere l'intérieur d'un formulaire permettant de configurer une saisie.
+  
+  Par defaut, ne permet pas de configurer le "name" de la saisie car dans la
+  plupart des cas c'est une valeur qui sera automatique. On utilise le parametre
+  "avec_nom=oui" pour forcer le champ.
+  
+  Exemples d'appels :
+    #INCLURE{fond=inclure/configurer_saisie, env, saisie=input}
+    #INCLURE{fond=inclure/configurer_saisie, env, saisie=input, avec_nom=oui}
+
+]
+
+[(#SET{config, #ENV{saisie}|construire_configuration_saisie{#ENV{avec_nom}}})]
+
+#GENERER_SAISIES{#GET{config}}

@@ -1,0 +1,40 @@
+<paquet
+	prefix="formidable"
+	categorie="communication"
+	version="2.9.13"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="images/formidable-64.png"
+	schema="0.6.6"
+	documentation="http://contrib.spip.net/Formidable-le-generateur-de-formulaires"
+>
+
+	<nom>Formidable</nom>
+	<!-- Générateur de formulaires -->
+
+	<auteur>RastaPopoulos</auteur>
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="formidable_affiche_resume_reponse" action="" />
+
+	<pipeline nom="autoriser" inclure="formidable_autorisations.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/formidable_tables.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/formidable_tables.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/formidable_tables.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/formidable_tables.php" />
+
+	<pipeline nom="nospam_lister_formulaires" inclure="formidable_pipelines.php" />
+	<pipeline nom="affiche_droite" inclure="formidable_pipelines.php" />
+	<pipeline nom="post_edition" inclure="formidable_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="formidable_pipelines.php" />
+
+	<necessite nom="spip_bonux" compatibilite="[3.0.0;[" />
+	<necessite nom="saisies" compatibilite="[2.3.0;[" />
+	<necessite nom="verifier" compatibilite="[0.1.0;[" />
+	<necessite nom="yaml" compatibilite="[1.5.0;[" />
+	<necessite nom="facteur" compatibilite="[3.0.3;[" />
+
+	<menu nom="formulaires" titre="formidable:bouton_formulaires" parent="menu_edition" icone="images/formulaire-16.png" />
+</paquet>

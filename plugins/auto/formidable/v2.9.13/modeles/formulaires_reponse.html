@@ -1,0 +1,12 @@
+<BOUCLE_reponse(FORMULAIRES_REPONSES){tout}{id_formulaires_reponse}>
+
+#SET{valeurs,#ARRAY}
+<BOUCLE_champs(FORMULAIRES_REPONSES_CHAMPS){id_formulaires_reponse}>
+#SET_MERGE{valeurs,#ARRAY{#NOM,#VALEUR|tenter_unserialize}}
+</BOUCLE_champs>
+
+<BOUCLE_formulaire(FORMULAIRES){id_formulaire}>
+#VOIR_SAISIES{(#SAISIES|unserialize), #GET{valeurs}}
+</BOUCLE_formulaire>
+
+</BOUCLE_reponse>

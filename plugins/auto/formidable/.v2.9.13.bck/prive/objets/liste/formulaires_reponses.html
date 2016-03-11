@@ -1,0 +1,44 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,-1,
+	titre,1,
+	id_formulaires_reponse,1
+}})
+]<B_reponses>
+#ANCRE_PAGINATION
+<div class="liste-objets formulaires_reponses">
+<table class="liste spip">
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{formidable:info_1_reponse,formidable:info_nb_reponses}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="statut" scope='col'>[(#TRI{statut,<span>#</span>,ajax})]</th>
+			<th class="date" scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class="resume" scope='col'></th>
+			<th class="auteur" scope='col'>[(#TRI{id_auteur,<:formidable:reponses_auteur:>,ajax})]</th>
+			<th class="id" scope='col'>[(#TRI{id_formulaires_reponse,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire?}{id_formulaires_reponse?}{id_auteur?}{statut?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="statut">[(#ID_FORMULAIRES_REPONSE|puce_changement_statut{#STATUT, #ID_FORMULAIRE, formulaires_reponse})]</td>
+			<td class="date">[(#DATE|affdate_jourcourt|concat{#DATE|affdate{", H:i"}})]</td>
+			<td class="resume">[(#ID_FORMULAIRES_REPONSE|affiche_resume_reponse{#ID_FORMULAIRE}|sinon{[<a href="(#URL_ECRIRE{formulaires_reponse,id_formulaires_reponse=#ID_FORMULAIRES_REPONSE})"><:formidable:reponses_voir_detail:></a>]})]</td>
+			<td class="auteur">
+				<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+				<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a>
+				</BOUCLE_auteur>
+				[(#IP|match{\W}|?{#IP,#IP|couper{8}})]
+				<//B_auteur>
+			</td>
+			<td class="id_formulaire id">
+				<a href="[(#URL_ECRIRE{formulaires_reponse,id_formulaires_reponse=#ID_FORMULAIRES_REPONSE})]">#ID_FORMULAIRES_REPONSE</a>
+			</td>
+		</tr>
+	</BOUCLE_reponses>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_reponses>[
+<div class="liste-objets formulaires_reponses"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_reponses>

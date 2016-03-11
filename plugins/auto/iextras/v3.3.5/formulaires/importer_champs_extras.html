@@ -1,0 +1,39 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+	<h3 class='titrem'>[(#CHEMIN_IMAGE{iextras-upload-26.png}|balise_img{'',cadre-icone}) ]<:iextras:titre_iextras_importer:></h3>
+
+	[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
+	[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</div>]
+
+	<p class='explication'><:iextras:importer_explications:></p>
+
+	<BOUCLE_si_editable(CONDITION){si #ENV{editable}}>
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE
+
+		<div class='editer-groupe'>
+			[(#SAISIE{input,fichier,
+				type=file,
+				label=<:iextras:importer_fichier:>,
+				explication=<:iextras:importer_fichier_explication:>})]
+
+			[(#SAISIE{radio,fusionner,
+				label=<:iextras:importer_fusionner:>,
+				explication=<:iextras:importer_fusionner_explication:>,
+				datas=[(#ARRAY{
+					oui,<:iextras:importer_fusionner_oui:>,
+					non,<:iextras:importer_fusionner_non:>})]})]
+		</div>
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+
+		<p class="boutons">
+			<button type="submit" class="submit">
+				[(#CHEMIN_IMAGE{iextras-upload-26.png}|image_reduire{16}) ]
+				<:iextras:bouton_importer:>
+			</button>
+		</p>
+
+	</div></form>
+	</BOUCLE_si_editable>
+</div>

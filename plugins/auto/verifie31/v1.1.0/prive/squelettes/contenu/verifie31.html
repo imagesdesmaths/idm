@@ -1,0 +1,93 @@
+<h1><:verifie31:titre_verifie31:></h1>
+#SET{incompatible,0}
+#SET{total_plugin,0}
+#SET{vspip,3.1.0}
+<B_plugins_current>
+<div class="liste-objets plugins actifs">
+	<table class="spip">
+		<caption><strong class="caption"><:verifie31:liste_plugins:></strong></caption>
+		<thead>
+			<tr>
+				<th class="picto"> </th>
+				<th><:verifie31:plugin_nom:></th>
+				<th><:verifie31:plugin_borne:></th>
+				<th><:verifie31:plugin_compat31:></th>
+			</tr>
+		</thead>
+		<tbody>
+		<BOUCLE_plugins_current (PAQUETS plugins) {tout} {par multi nom, paquets.prefixe} {!par constante, actif} {id_depot=0} {constante !=_DIR_PLUGINS_DIST} {actif=oui}>
+		<tr>
+			<td class="picto"> </td>
+			<td>#NOM[ <small class="site">(<a href="(#LIEN_DOC)" class="spip_out"><:en_savoir_plus:></a>)</small>]</td>
+			<td>#COMPATIBILITE_SPIP</td>
+			<td>
+				[(#COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}|oui)  <span style="color:#090;"><:verifie31:plugin_compat31_ok:></span>]
+				[(#COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}|non)
+				<span style="color:#900;"><:verifie31:plugin_compat31_notok:></span>
+				#SET{incompatible,#GET{incompatible}|plus{1}}
+				]
+				[(#REM) si pas compatible, on regarde si le plugin du depot l'est]
+				<BOUCLE_plugins_current_item (PLUGINS){prefixe}{si #COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}|non}>
+				[(#COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}|oui)
+				<p style="margin-top:1em;">
+				<:verifie31:plugin_compat31_maj:>
+				<a href="#URL_ECRIRE{admin_plugin}"><:verifie31:plugin_compat31_maj_gestion:></a>
+				</p>]
+				</BOUCLE_plugins_current_item>
+			</td>
+		</tr>
+		</BOUCLE_plugins_current>
+		</tbody>
+	</table>
+</div>
+#SET{total_plugin,#TOTAL_BOUCLE}
+<p><:verifie31:bilan{total=#GET{total_plugin},total_notok=#GET{incompatible}}:></p>
+</B_plugins_current>
+[(#REM)
+	On vérifie aussi les plugins inactifs.
+	Ce n'est pas parce qu'un plugin est inactif aujourd'hui qu'il n'est pas du tout utile à la vie du site à un autre moment.
+]
+#SET{incompatible,0}
+#SET{total_plugin,0}
+#SET{vspip,3.1.0}
+<B_plugins_inactif>
+<div class="liste-objets plugins inactifs">
+	<table class="spip">
+		<caption><strong class="caption"><:verifie31:liste_plugins_inactifs:></strong></caption>
+		<thead>
+			<tr class="first_row">
+				<th class="picto"></th>
+				<th><:verifie31:plugin_nom:></th>
+				<th><:verifie31:plugin_borne:></th>
+				<th><:verifie31:plugin_compat31:></th>
+			</tr>
+		</thead>
+		<tbody>
+		<BOUCLE_plugins_inactif (PAQUETS plugins) {tout} {par multi nom, paquets.prefixe} {!par constante, actif} {id_depot=0} {constante IN _DIR_PLUGINS} {actif=non}>
+		<tr>
+			<td class="picto"> </td>
+			<td>#NOM[ <small class="site">(<a href="(#LIEN_DOC)" class="spip_out"><:en_savoir_plus:></a>)</small>]</td>
+			<td>#COMPATIBILITE_SPIP</td>
+			<td>
+				[(#COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}|oui)  <span style="color:#090;"><:verifie31:plugin_compat31_ok:></span>]
+				[(#COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}|non)
+				<span style="color:#900;"><:verifie31:plugin_compat31_notok:></span>
+				#SET{incompatible,#GET{incompatible}|plus{1}}
+				]
+				[(#REM) si pas compatible, on regarde si le plugin du depot l'est]
+				<BOUCLE_plugins_inactif_item (PLUGINS){prefixe}{si #COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}|non}>
+				[(#COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}|oui)
+				<p style="margin-top:1em;">
+				<:verifie31:plugin_compat31_maj:>
+				<a href="#URL_ECRIRE{admin_plugin}"><:verifie31:plugin_compat31_maj_gestion:></a>
+				</p>]
+				</BOUCLE_plugins_inactif_item>
+			</td>
+		</tr>
+		</BOUCLE_plugins_inactif>
+		</tbody>
+	</table>
+</div>
+#SET{total_plugin,#TOTAL_BOUCLE}
+<p><:verifie31:bilan_inactif{total=#GET{total_plugin},total_notok=#GET{incompatible}}:></p>
+</B_plugins_inactif>

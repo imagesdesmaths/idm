@@ -1,0 +1,16 @@
+[(#AUTORISER{configurer,champs_extras}|sinon_interdire_acces)]
+
+<h1><:iextras:titre_iextras:></h1>
+
+<div id="wysiwyg">
+[(#BOITE_OUVRIR{ <:iextras:liste_objets_applicables:>})]
+	<INCLURE{fond=prive/objets/liste/champs_extras_objets,lien=#URL_ECRIRE{champs_extras_edit}} />
+#BOITE_PIED
+	<a href="#URL_ECRIRE{champs_extras_exporter_importer}"><:iextras:titre_iextras_exporter_importer:></a>
+	[<a href="#URL_ECRIRE{champs_extras_exporter_importer}">(#CHEMIN_IMAGE{iextras-download-26.png}|image_reduire{16})</a> ]
+	[<a href="#URL_ECRIRE{champs_extras_exporter_importer}">(#CHEMIN_IMAGE{iextras-upload-26.png}|image_reduire{16})</a> ]
+#BOITE_FERMER
+
+<INCLURE{fond=prive/objets/contenu/champs_extras_possibles} />
+</div>
+

@@ -1,0 +1,56 @@
+[(#REM)
+
+	/!\ Cette saisie nécessite du javascript pour fonctionner.
+		En absence de JS, seul un champ de saisie texte est affiché.
+
+	Cette saisie cree 3 champs a partir d'une date au format datetime mysql.
+	A chaque modification, un champ cache est modifie, contenant la date au format datetime.
+
+	Options :
+	- label_(jour|mois|annee)
+	- size_(jour|mois|annee)
+	- maxlength_(jour|mois|annee)
+	- datetime, par défaut oui. Si pas oui, utilisera une date au format aaaa-mm-jj au lieu d'un datetime mysql
+
+	[(#SAISIE{date_jour_mois_annee, date_naissance,
+		label=Date de naissance
+	})]
+]
+#SET{valeur,#ENV{valeur,#ENV{defaut}}}
+[(#SET{id,[(#ENV**|md5|substr{0,6})]})]
+<input type='text' name="#ENV{nom}" id="#GET{id}" value="[(#GET{valeur}|sinon{0000-00-00[(#ENV{datetime,oui}|=={oui}|oui)00:00:00]})]" class='datetime' />
+
+<script type='text/javascript'>
+function activer_dateur_#GET{id}() {
+	jour = '\
+		<div class="choix">\
+			[<label for="champ_#ENV{nom}_jour">(#ENV{label_jour,<:saisies:label_jour:>})</label>]\
+			<input type="text" name="#ENV{nom}_jour" class="text date_jour[ (#ENV{class})]" id="champ_#ENV{nom}_jour"[ value="(#GET{valeur}|journum)"][ size="(#ENV{size_jour, 2})"][ maxlength="(#ENV{maxlength_jour, 2})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|et{#HTML5}|oui) required="required"] onChange="saisies_date_jour_mois_annee_changer_date(this, \'#ENV{datetime,oui}\');" onkeyup="if (this.value.length == 2 && jQuery.inArray(event.keyCode, [9,16]) == -1) {jQuery(this).parent().next().find(\'input\').focus();}" />\
+		</div>\
+	';
+
+	mois = '\
+		<div class="choix">\
+			[<label for="champ_#ENV{nom}_mois">(#ENV{label_mois,<:saisies:label_mois:>})</label>]\
+			<input type="text" name="#ENV{nom}_mois" class="text date_mois[ (#ENV{class})]" id="champ_#ENV{nom}_mois"[ value="(#GET{valeur}|mois)"][ size="(#ENV{size_mois, 2})"][ maxlength="(#ENV{maxlength_mois, 2})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|et{#HTML5}|oui) required="required"] onChange="saisies_date_jour_mois_annee_changer_date(this, \'#ENV{datetime,oui}\');" onkeyup="if (this.value.length == 2 && jQuery.inArray(event.keyCode, [9,16]) == -1) {jQuery(this).parent().next().find(\'input\').focus();}" />\
+		</div>\
+	';
+
+	annee = '\
+		<div class="choix">\
+			[<label for="champ_#ENV{nom}_annee">(#ENV{label_annee,<:saisies:label_annee:>})</label>]\
+			<input type="text" name="#ENV{nom}_annee" class="text date_annee[ (#ENV{class})]" id="champ_#ENV{nom}_annee"[ value="(#GET{valeur}|annee)"][ size="(#ENV{size_annee, 4})"][ maxlength="(#ENV{maxlength_annee, 4})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|et{#HTML5}|oui) required="required"] onChange="saisies_date_jour_mois_annee_changer_date(this, \'#ENV{datetime,oui}\');" />\
+		</div>\
+	';
+
+	if(!$.browser.msie || parseInt($.browser.version) >= 9)
+		jQuery('##GET{id}')[0].type = 'hidden';
+	else
+		jQuery('##GET{id}').css({'height':'0px','width':'0px','border':'none'});
+	jQuery('##GET{id}').after(jour + mois + annee);
+}
+
+jQuery(document).ready(function(){
+	activer_dateur_#GET{id}();
+});
+</script>

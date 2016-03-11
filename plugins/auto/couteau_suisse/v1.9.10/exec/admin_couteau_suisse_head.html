@@ -1,0 +1,424 @@
+<style type='text/css'>
+
+[(#VAL{_SPIP19300}|defined|non)
+	div.cadre-info a { background:none; padding:0; border:0; }
+	div.cadre-info { margin-bottom:1em; }
+	div.cadre-padding form{ padding:0; margin:0; }
+	div.cadre-padding .titrem { background-color:#EEEEEE; color:#000000; }
+]
+div.cadre_padding form { padding:0; margin:0; }
+[(#VAL{_SPIP20100}|defined|oui)
+	#contenu .cadre_padding .titrem { background-color:#EEEEEE !important; color:#000000 !important; padding:2px !important; }
+	#contenu .cadre_padding { padding:6px !important; }
+]
+[(#VAL{_SPIP30000}|defined|oui)
+	#SET{claire,##ENV{couleur_claire,edf3fe}}
+	#SET{foncee,##ENV{couleur_foncee,3874b0}}
+	div.cs_outils fieldset, div.cs_intros_inner { border:2px solid #GET{claire}; background:#fcfcfc;}
+	div.cs_infos fieldset { border: 1px threedface groove; padding: 0.3em; }
+	table.spip td,table.spip th,th,td,caption { padding: 0.20em 0.40em; }
+	div.cs_aide p { margin: 1em 0; }
+	div.cs_boite_rss ul { font-size: 95%; }
+]
+
+
+.cs_hidden { display:none; }
+
+div.cs-cadre{ padding:0.5em; margin:1px; /*width:100%;*/ border:1px solid #666666; }
+div.cs-cadre h3 { margin:0.2em 0; border-bottom:1px solid #666666; }
+div.cs_infos { overflow:hidden; }
+div.cs_infos p { margin:0.3em 1em 0.3em 0; padding:0; }
+div.cs_infos h3.titrem { border-bottom:solid 1px; font-weight:bold; display:block; background-color: #EEE;}
+div.cs_infos legend { font-weight:bold; }
+div.cs_infos fieldset {	margin:.8em 3.5em .5em 3.54em; }
+div.cs_infos fieldset fieldset { border:0; margin:0 0 0 4em; padding:0.3em; }
+div.cs_infos fieldset>div { margin:0; }
+div.cs_infos sup { font-size:85%; font-variant:normal; vertical-align:super; }
+div.cs_infos hr { border:0; border-top:1px solid #67707F; }
+div.cs_infos img { border:0; }
+div.cs_infos div.cs_bouton { margin-top: 0; text-align: right; }
+div.cs_infos div.cs_modif_ok { font-weight:bold; color:green; margin:0.4em; text-align:center; }
+div.cs_infos div.cs_menu_outil { text-align:right; font-size:85%; margin-bottom:0.8em; }
+div.cs_infos div.cs_details_outil { font-size:85%; margin-top:0.8em; border-top:solid 1px; }
+div.cs_infos fieldset ul { margin:0; padding:0; }
+div.cs_infos fieldset ul li { list-style:none; display:inline; }
+
+div.cs_action_rapide { border:1px dotted; margin-bottom:1em; padding-bottom:0.4em; background-color:#F0EEEE; }
+div.cs_action_rapide select.ar_select { width:auto; display:inline; }
+div.cs_action_rapide .ar_edit_info { font-size:85%; font-style:italic; }
+
+.cs_raccourcis {
+	list-style-type:none; padding:0; margin: 0; list-style-image: none; list-style-position: outside;
+}
+.cs_raccourcis b { color:darkRed; }
+
+.conteneur {
+	clear:both;
+	width:100%;
+	margin:0.8em 0 0 0;
+	padding:0;
+}
+
+a.cs_href {
+	font-weight:normal;
+}
+a.outil_on {
+	font-weight:bold;
+	border:1px dotted;
+}
+div.cs_liste {
+	float:left;
+	width:45%;
+	line-height:120%;
+}
+
+div.cs_outils {
+	clear:both;
+	float:none;
+	width:100%;
+}
+
+div.cs_actifs {
+	float:right;
+}
+div.cs_toggle {
+	float:left;
+	width:9.6%; /* pour IE6 */
+	text-align:center;
+	margin:50px 0 0 0;
+}
+
+div.categorie, div.cs_intros {
+	margin-top:.6em;
+	padding:2px;
+	font-weight:bold;
+	display:block;
+	cursor:pointer;
+	background-color:#EEE;
+}
+div.categorie span {
+	font-size:85%;
+}
+div.categorie span.light {
+	font-weight:normal;
+}
+
+div.cs_intros_inner {
+	margin-left:1em;
+	padding:0.4em;
+	font-size:90%;
+}
+
+ol, ul, li {
+	margin: 0; padding: 0; font-size: 100%; font: inherit; vertical-align: baseline;
+}
+ol, ul {
+	list-style: none;
+}
+
+.cs_sobre {
+	background:transparent none repeat scroll 0% !important;
+	border:medium none !important;
+	color:#000099 !important;
+	display:inline;
+	font-size:100%;
+	font-family: inherit;
+	font-weight:normal !important;
+	margin:0pt !important;
+	padding:0pt !important;
+	cursor:pointer;
+	text-align:left;
+	width:180px;
+}
+
+.cs_droite {
+	text-align:right;
+}
+
+.cs_rech {
+	font-size:85%;
+	width:75%;
+	padding:0;
+}
+#results {
+	font-size:85%;
+}
+
+/* rss */
+.cs_boite_rss li { padding-top:0.5em; }
+.cs_boite_rss ul { list-style-type:none; padding:0; margin:0; }
+.cs_boite_rss p.rss-small { font-size: 85%; border-top:solid gray thin; margin: 1em 0; }
+
+/* classes de description */
+.q1 { margin:0 2em; }
+.q2 { margin-left:2em; }
+.q3 { font-size:85%; }
+.q4 { font-size:85%; margin:0 2em; }
+
+</style>
+
+<script type="text/javascript"><!--
+var cs_selected, cs_descripted, cs_init_recherche;
+
+jQuery.fn.cs_show=function(){
+	return this.removeClass('cs_hidden');
+};
+jQuery.fn.cs_hide=function(){return this.addClass('cs_hidden');};
+jQuery.fn.cs_toggle=function(){return this.toggleClass('cs_hidden');};
+
+function set_selected() {
+	cs_selected = new Array();
+	jQuery('a.outil_on').each( function(i){cs_selected[i] = this.id;});
+	if(cs_selected.length) {
+			jQuery('div.cs_toggle div').show();
+			jQuery('#cs_toggle_p').html('('+cs_selected.length+')');
+		} else jQuery('div.cs_toggle div').hide();
+}
+
+function set_categ(id) {
+	// nombre d'outil en gras
+	var nb1 = jQuery('#'+id+' a').parent().not('.cs_hidden').length;
+	// nombre d'outil en gras
+	var nb2 = jQuery('#'+id+' a.outil_on').parent().not('.cs_hidden').length;
+	// titre de categorie en cours
+	var titre = jQuery('#'+id).prev();
+	// cacher son titre ?
+	if(nb1>0) titre.show();	else titre.hide();
+	// nombre d'outils dans la categorie
+	var cible = titre.children('span');
+	if(nb2>0) cible.removeClass('light');
+		else cible.addClass('light');
+	cible.html(' ('+nb1+')');
+}
+
+function outils_toggle() {
+	if(cs_selected.length>1) {
+		msg="<:couteauprive:outils_permuter_gras2|cs_javascript:>";
+		msg=msg.replace(/@nb@/, cs_selected.length);
+	} else {
+		msg="<:couteauprive:outil_permuter|cs_javascript:>";
+		msg=msg.replace(/@text@/, jQuery('a.outil_on').text());
+	}
+	if(!confirm(msg)) return false;
+	jQuery('#cs_selection').attr('value', cs_selected.join(','));
+	jQuery('#cs_infos').html('');
+	jQuery('.cs_patience').css('display','block');
+	document.csform.submit();
+}
+
+// clic sur un outil (fonction egalement utilisee par l'outil 'maj_auto')
+function cs_href_click(this_, force) {
+	var this_id = typeof(this_)=='string' ? this_ : this_.id.replace(/^href_/,'');
+	if(this_id=='') this_id = cs_descripted;
+	// on s'en va si l'outil est deja affiche
+	if(!force && cs_descripted==this_id) return false;
+	cs_descripted=this_id;
+	// on charge la nouvelle description
+	jQuery('#cs_infos')
+		.css('opacity', '0.5')
+		.parent()
+		.prepend(ajax_image_searching)
+		.load('[(#URL_ECRIRE{charger_description_outil}|parametre_url{source,#ENV{exec},&})]&outil='+this_id);
+	// annulation du clic
+	return false;
+}
+
+if(window.jQuery) jQuery(function(){
+	// Valeur initiale du champ de recherche d'outils 
+	cs_init_recherche = jQuery('#cs_rech')[0].value;
+	// decalage a supprimer sur FF2
+	if(jQuery.browser.mozilla) jQuery('input.cs_sobre').css('margin-left','-3px');
+	
+	jQuery('div.sous_liste').each(cs_Categorie2);
+	if(window.location.search.match(/cmd=pack/)!=null) 
+		jQuery("div.cs_aide a["+cs_sel_jQuery+"href*='cmd=pack']")
+			.click( function() { window.location.reload(true); return false; });
+	jQuery("div.cs_aide a["+cs_sel_jQuery+"href*='cmd=install']").click( function() { 
+		msg="<:couteauprive:pack_installer|cs_javascript:>\n\n<:couteauprive:cs_reset2|cs_javascript:>";
+		return window.confirm(msg.replace(/@pack@/,jQuery(this).text())); 
+	});
+	jQuery("div.cs_aide a["+cs_sel_jQuery+"href*='cmd=resetall']").click( function() { 
+		msg="<:couteauprive:cs_reset|cs_javascript:>\n\n<:couteauprive:cs_reset2|cs_javascript:>";
+		return window.confirm(msg); 
+	});
+
+	jQuery('div.cs_liste script').remove();
+	// clic sur un titre de categorie
+	jQuery('div.categorie, div.cs_intros').click( function() {
+		jQuery(this).children().cs_toggle();
+		next = jQuery(this).next();
+		next.cs_toggle();
+		cs_EcrireCookie(next[0].id, '+'+next[0].className, dixans);
+		// annulation du clic
+		return false;
+	});
+	jQuery('div.categorie').dblclick(function(){
+		id = '#'+this.nextSibling.id;
+		a = jQuery(id+' a.outil_on').length;
+		b = jQuery(id+' a.cs_href').length;
+		if(a==b) jQuery(id+' a.outil_on').removeClass('outil_on');
+		else jQuery(id+' a.cs_href').addClass('outil_on');
+		jQuery(this).children().cs_hide();
+		next = jQuery(this).next();
+		next.cs_show();
+		cs_EcrireCookie(next[0].id, '+'+next[0].className, dixans);
+		set_selected();
+		set_categ(this.nextSibling.id);
+		return false;
+	});
+
+	// clic sur un outil
+	jQuery('a.cs_href').click( function() {
+		jQuery(this).toggleClass('outil_on');
+		set_selected();
+		set_categ(this.parentNode.parentNode.parentNode.id); // div>ul>li>a
+		return cs_href_click(this, false);
+	})
+	.dblclick(function(){
+		jQuery('a.outil_on').removeClass('outil_on');
+		jQuery('div.categorie span').addClass('light');
+		jQuery(this).addClass('outil_on');
+		set_selected();
+		set_categ(this.parentNode.parentNode.parentNode.id); // div>ul>li>a
+		outils_toggle();
+		return false;
+	});
+	
+	// clic sur le bouton de permutation
+	jQuery('#cs_toggle_a').click( function() {
+		outils_toggle();
+		// annulation du clic
+		return false;
+	});
+
+	// clic sur le bouton de reset
+	jQuery('#cs_reset_a').click( function() {
+		jQuery('a.outil_on').removeClass('outil_on');
+		jQuery('div.cs_toggle div').hide();
+		jQuery('div.categorie span').addClass('light');
+		// annulation du clic
+		return false;
+	});
+
+	// clic sur le bouton 'tous les actifs'	
+	jQuery('#cs_tous_a').click( function() {
+		jQuery('div.cs_actifs a.cs_href').addClass('outil_on');
+		jQuery('div.categorie span').removeClass('light');
+		set_selected();
+		// annulation du clic
+		return false;
+	});
+
+	// masquage/demasquage des blocs <variable> liees a des checkbox
+	input_init.apply(document);
+
+	// verifier la version du CS
+	jQuery('span.cs_version').load('[(#URL_ECRIRE{cs_version}|parametre_url{version,#ENV*{cs_version},&}|parametre_url{force,#ENV*{force},&})]',
+		// afficher la boite rss, si elle existe
+		jQuery('div.cs_boite_rss').load('[(#URL_ECRIRE{cs_boite_rss}|parametre_url{force,#ENV*{force},&})]')
+	);
+
+});
+
+// masquage/demasquage des blocs <variable> liees a des checkbox
+// compatibilite Ajax : ajouter this dans jQuery()
+var input_init=function(){
+	// outil actif
+	jQuery('.cs_input_checkbox', this).cs_todo().click(bloc_variables);
+	jQuery('input.cs_input_checkbox:checked',this).each(bloc_variables);
+	// outil inactif
+	jQuery('.cs_hidden_checkbox', this).cs_todo().each(bloc_variables);
+}
+function bloc_variables(index, domElement) {
+//alert(this.name+' - '+this.value);
+	jQuery('.groupe_'+this.name).cs_hide();
+	jQuery('.valeur_'+this.name+'_'+this.value).cs_show();
+}
+if(typeof onAjaxLoad=='function') onAjaxLoad(input_init);
+
+// TODO : cookies en jQuery sous SPIP>=2.0 (plugin jquery.cookie.js)
+
+var dixans=new Date;
+dixans.setFullYear(dixans.getFullYear()+10);
+
+// ref : http://www.actulab.com/ecrire-les-cookies.php
+function cs_EcrireCookie(nom, valeur){
+	var argv=cs_EcrireCookie.arguments;
+	var argc=cs_EcrireCookie.arguments.length;
+	var expires=(argc > 2) ? argv[2] : null;
+	var path=(argc > 3) ? argv[3] : null;
+	var domain=(argc > 4) ? argv[4] : null;
+	var secure=(argc > 5) ? argv[5] : false;
+	document.cookie=nom+'='+escape(valeur)+
+	((expires==null) ? '' : ('; expires='+expires.toGMTString()))+
+	((path==null) ? '' : ('; path='+path))+
+	((domain==null) ? '' : ('; domain='+domain))+
+	((secure==true) ? '; secure' : '');
+}
+function cs_getCookieVal(offset){
+	var endstr=document.cookie.indexOf (';', offset);
+	if(endstr==-1) endstr=document.cookie.length;
+	return unescape(document.cookie.substring(offset, endstr)); 
+}
+function cs_LireCookie(nom){
+	var arg=nom+'=';
+	var alen=arg.length;
+	var clen=document.cookie.length;
+	var i=0;
+	while (i<clen){
+		var j=i+alen;
+		if(document.cookie.substring(i, j)==arg) return cs_getCookieVal(j);
+		i=document.cookie.indexOf(' ',i)+1;
+		if(i==0) break;
+	}
+	return null; 
+}
+function cs_EffaceCookie(nom){
+	date=new Date;
+	date.setFullYear(date.getFullYear()-1);
+	cs_EcrireCookie(nom,null,date); 
+}
+
+function cs_Categorie2(i,e){
+	var c=cs_LireCookie(this.id);
+	if(c===null || c.match('cs_hidden')) {
+		var j=jQuery(this);
+		j.cs_hide();
+		j.prev().children('span.light').cs_show();
+	}
+}
+
+function cs_Recherche(value){
+	if(value=='') {
+		jQuery('#cs_outils .sous_liste li').each(function(index) {jQuery(this).cs_show();});
+		jQuery('#results').text('');
+		jQuery('.sous_liste').each(function(i) {set_categ(this.id);});
+		return;
+	}
+	value = value.toLowerCase();
+	jQuery('#cs_reset_a').click();
+	var nb = 0;
+	var table = jQuery('#cs_outils .cs_href');
+	for(i=0; i<table.length; i++){
+		var pos = jQuery(table[i]).text();
+		pos = pos.toLowerCase().indexOf(value, 0);
+		var cible = jQuery(table[i].parentNode); // <li>/<li>
+		if(pos>=0) { cible.cs_show(); nb++; }
+		else cible.cs_hide();
+	}
+	jQuery('#results').text(' ('+nb+')');
+	jQuery('.sous_liste').each(function(i) {set_categ(this.id);});
+}
+
+// fonctions du grenier a remplacer par CVT sous SPIP 3.0
+function AjaxSqueeze2(trig, id, callback, event) {
+	var target = jQuery('#'+id);
+	// position du demandeur dans le DOM (le donner direct serait mieux)
+	if (!target.size()) return true;
+	return !AjaxSqueezeNode(trig, target, callback, event);
+}
+function AjaxNamedSubmit2(input) {
+	jQuery('<input type="hidden" />').attr('name', input.name).attr('value', input.value).insertAfter(input);
+	return true;
+}
+//--></script>

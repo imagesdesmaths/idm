@@ -1,0 +1,189 @@
+<div class="formulaire_spip formulaire_cfg forulaire_#FORM">
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	<p class="explication"><:notifications:evenement_notification:></p>
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			[(#REM) ------------------------ ARTICLES PRIVES ------------------------ ]
+			<li class="fieldset fieldset_article_prive">
+				<fieldset>
+					<h3 class="legend"><:notifications:article_prive:></h3>
+					<ul>
+						<li class="editer editer_prevenir_auteurs_articles">
+							<div class="choix">
+								<input type="checkbox" name="prevenir_auteurs_articles"[(#ENV{prevenir_auteurs_articles}|=={on}|oui)checked="checked"] id="prevenir_auteurs_articles" class="checkbox" />
+								<label for="prevenir_auteurs_articles"><:notifications:article_prive_auteurs:></label>
+							</div>
+						</li>
+						<li class="editer editer_prevenir_auteurs_articles_refus">
+							<div class="choix">
+								<input type="checkbox" name="prevenir_auteurs_articles_refus"[(#ENV{prevenir_auteurs_articles_refus}|=={on}|oui)checked="checked"] id="prevenir_auteurs_articles_refus" class="checkbox" />
+								<label for="prevenir_auteurs_articles_refus"><:notifications:article_prive_auteurs_refus:></label>
+							</div>
+						</li>
+						<li class="editer editer_pas_prevenir_publieur">
+							<div class="choix">
+								<input type="checkbox" name="pas_prevenir_publieur"[(#ENV{pas_prevenir_publieur}|=={on}|oui)checked="checked"] id="pas_prevenir_publieur" class="checkbox" />
+								<label for="pas_prevenir_publieur"><:notifications:article_prive_publieur:></label>
+							</div>
+						</li>
+						<li class="editer editer_prevenir_admins_restreints">
+							<div class="choix">
+								<input type="checkbox" name="prevenir_admins_restreints"[(#ENV{prevenir_admins_restreints}|=={on}|oui)checked="checked"] id="prevenir_admins_restreints" class="checkbox" />
+								<label for="prevenir_admins_restreints"><:notifications:article_prive_admins_restreints:></label>
+							</div>
+						</li>
+						<li class='editer editer_limiter_rubriques'>
+							<label for="limiter_rubriques"><:notifications:limiter_rubriques_label:></label>
+							<p class="explication"><:notifications:limiter_rubriques_explication:></p>
+							<input type="text" name="limiter_rubriques" value="[(#ENV{limiter_rubriques}|entites_html)]" id="limiter_rubriques" class="text" />
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+
+			[(#REM) ------------------------ FORUMS PUBLICS ------------------------ ]
+			<li class="fieldset fieldset_forums_public">
+				<fieldset>
+					<h3 class="legend"><:notifications:forums_public:></h3>
+					<ul>
+						<li class="editer editer_prevenir_auteurs">
+							<div class="choix">
+								<input type="checkbox" name="prevenir_auteurs"[(#ENV{prevenir_auteurs}|=={on}|oui)checked="checked"] id="prevenir_auteurs" class="checkbox" />
+								<label for="prevenir_auteurs"><:notifications:forums_public_auteurs:></label>
+							</div>
+						</li>
+						<li class="editer editer_thread_forum">
+							<div class="choix">
+								<input type="checkbox" name="thread_forum"[(#ENV{thread_forum}|=={on}|oui)checked="checked"] id="thread_forum" class="checkbox" />
+								<label for="thread_forum"><:notifications:forums_public_thread:></label>
+							</div>
+						</li>
+						<li class="editer editer_forum_article">
+							<div class="choix">
+								<input type="checkbox" name="forum_article"[(#ENV{forum_article}|=={on}|oui)checked="checked"] id="forum_article" class="checkbox" />
+								<label for="forum_article"><:notifications:forums_public_article:></label>
+							</div>
+						</li>
+						<li class="editer editer_moderateurs_forum">
+							<label for="moderateurs_forum"><:notifications:moderateur:></label>
+							<p class="explication"><:notifications:forums_public_moderateur:></p>
+							<input type="text" name="moderateurs_forum" value="[(#ENV{moderateurs_forum}|entites_html)]" id="moderateurs_forum" class="text" />
+							<p class="explication"><:notifications:forums_public_a_noter:></p>
+						</li>
+						<li class="editer editer_forums_admins_restreints">
+							<div class="choix">
+								<input type="checkbox" name="forums_admins_restreints"[(#ENV{forums_admins_restreints}|=={on}|oui)checked="checked"] id="forums_admins_restreints" class="checkbox" />
+								<label for="forums_admins_restreints"><:notifications:forums_admins_restreints:></label>
+							</div>
+						</li>
+						<li class='editer editer_forums_limiter_rubriques'>
+							<label for="limiter_rubriques"><:notifications:forums_limiter_rubriques_label:></label>
+							<p class="explication"><:notifications:forums_limiter_rubriques_explication:></p>
+							<input type="text" name="forums_limiter_rubriques" value="[(#ENV{forums_limiter_rubriques}|entites_html)]" id="forums_limiter_rubriques" class="text" />
+						</li>
+						<li class="editer editer_forums_public_liste">
+							<div class="choix">
+							<label for="forums_public_liste"><:notifications:forums_public_liste:></label>
+							<input type="text" name="forums_liste" value="[(#ENV{forums_liste}|entites_html)]" id="forums_liste" class="text" />
+							</div>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+
+			[(#REM) ------------------------ FORUMS PRIVES ------------------------ ]
+			<li class="fieldset fieldset_forums_prives">
+				<fieldset>
+					<h3 class="legend"><:notifications:forums_prives:></h3>
+					<ul>
+						<li class="editer editer_prevenir_auteurs_prive">
+							<div class="choix">
+								<input type="checkbox" name="prevenir_auteurs_prive"[(#ENV{prevenir_auteurs_prive}|=={on}|oui)checked="checked"] id="prevenir_auteurs_prive" class="checkbox" />
+								<label for="prevenir_auteurs_prive"><:notifications:forum_prives_auteur:></label>
+							</div>
+						</li>
+						<li class="editer editer_thread_forum_prive">
+							<div class="choix">
+								<input type="checkbox" name="thread_forum_prive"[(#ENV{thread_forum_prive}|=={on}|oui)checked="checked"] id="thread_forum_prive" class="checkbox" />
+								<label for="thread_forum_prive"><:notifications:forum_prives_thread:></label>
+							</div>
+						</li>
+						<li class="editer editer_moderateurs_forum_prive">
+							<label for="moderateurs_forum_prive"><:notifications:moderateur:></label>
+							<p class="explication"><:notifications:forum_prives_moderateur:></p>
+							<input type="text" name="moderateurs_forum_prive" value="[(#ENV{moderateurs_forum_prive}|entites_html)]" id="moderateurs_forum_prive" class="text" />
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+
+			[(#REM) ------------------------ Messagerie ------------------------ ]
+			<li class="fieldset fieldset_messagerie_interne">
+				<fieldset>
+					<h3 class="legend"><:notifications:messagerie_interne:></h3>
+					<ul>
+						<li class="editer editer_messagerie">
+							<div class="choix">
+								<input type="checkbox" name="messagerie"[(#ENV{messagerie}|=={on}|oui)checked="checked"] id="messagerie" class="checkbox" />
+								<label for="messagerie"><:notifications:messagerie_interne_signaler:></label>
+							</div>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+
+			[(#REM) ------------------------ SIGNATURES ------------------------ ]
+			<li class="fieldset fieldset_signature_petition">
+				<fieldset>
+					<h3 class="legend"><:notifications:signature_petition:></h3>
+					<ul>
+						<li class="editer editer_moderateurs_signatures">
+							<label for="moderateurs_signatures"><:notifications:moderateur:></label>
+							<p class="explication"><:notifications:signature_petition_moderateur:></p>
+							<input type="text" name="moderateurs_signatures" value="[(#ENV{moderateurs_signatures}|entites_html)]" id="moderateurs_signatures" class="text" />
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			
+			[(#REM) ------------------------ INSCRIPTIONS ------------------------ ]
+			<li class="fieldset fieldset_inscription">
+				<fieldset>
+					<h3 class="legend"><:notifications:inscription:></h3>
+					<ul>
+						<li class="editer editer_inscription">
+							<label for="inscription"><:notifications:inscription_label:></label>
+							<p class="explication"><:notifications:inscription_explication:></p>
+							<select name="inscription" id="inscription">
+								<option value=""><:notifications:inscription_statut_aucun:></option>
+								<option value="webmestres"[ selected="(#ENV{inscription}|=={webmestres}|?{selected})"]><:notifications:inscription_statut_webmestres:></option>
+								<option value="admins"[ selected="(#ENV{inscription}|=={admins}|?{selected})"]><:notifications:inscription_admins:></option>
+							</select>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			[(#REM) --------------- SUIVI PERSONNALISE ----------- ]
+			<li class="fieldset fieldset_suivis_perso">
+				<fieldset>
+					<h3 class="legend"><:notifications:suivis_perso:></h3>
+					<ul>
+						<li class="editer editer_suivi">
+							<p class="explication"><:notifications:suivis_perso_url_suivis:></p>
+							<select name="suivi" id="suivi">
+								<option value=""><:notifications:suivis_perso_non:></option>
+								<option value="1"[ selected="(#ENV{suivi}|?{selected})"]><:notifications:suivis_perso_oui:></option>
+							</select>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" value="<:bouton_valider:>" class="submit" />
+		</p>
+	</div>
+	</form>
+</div>

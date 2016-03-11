@@ -1,0 +1,118 @@
+#CACHE{0}
+<script language="JavaScript" type="text/javascript">
+var ar_type_urls = "#ENV*{type_urls}";
+var ar_var_vide = "<:couteauprive:variable_vide|html2unicode|addslashes:>";
+var ar_url_calculee = "<:couteauprive:urls_url_calculee|html2unicode|addslashes:>";
+var ar_edit_erreur = "<:couteauprive:urls_edit_erreur|html2unicode|addslashes:>";
+var ar_attente = "<:couteauprive:attente|html2unicode|addslashes:>";
+var ar_valeur_vide = "<:couteauprive:urls_valeur_vide|html2unicode|addslashes:>";
+
+function html_type_urls(selecteur, chaine, rempl) {
+	jQuery(selecteur).html(chaine.replace(/@type@/, rempl));
+}
+
+if (window.jQuery) jQuery(function(){
+	jQuery("#ar_chercher", this).click( function() {
+		jQuery("#ar_url_objet").val(ar_attente);
+		jQuery("#ar_titre, #ar_url_propre, #ar_url_calculee").html('');
+		html_type_urls("#label_url_calculee", ar_url_calculee, '...');
+		var num = /\d+/.exec(jQuery("#ar_num_objet").val());
+		if(num==null) {
+			jQuery("#ar_url_objet").val('');
+			return;
+		}
+		var val = jQuery("#ar_type_objet").val();
+		var url = "./?exec=action_rapide&script=admin_couteau_suisse&arg=type_urls|URL_objet&type_objet="+val+"&id_objet="+num;
+		jQuery("#ar_url_trouvee").load(url);
+	});
+
+	if(typeof onAjaxLoad=='function') onAjaxLoad(ar_load);
+});
+
+function ar_load() {
+	// on sort si le load ne nous concerne pas
+	if(this.id != "ar_url_trouvee") return;
+	var res = jQuery("#ar_url_trouvee").html();
+	jQuery("#ar_url_objet").val('');
+	if(!res) {
+		jQuery("#ar_url_objet, #url_objet_input, #ar_verrouiller").enable(false);
+		return;
+	}
+	res = res.split(/\|\|/);
+//	jQuery("#ar_url_propre").html(res[4]?res[4]:ar_var_vide);
+	jQuery("#ar_url_propre").html(res[6]?res[6]:ar_var_vide);
+	jQuery("#ar_titre").html(res[0]);
+	jQuery("#ar_url_calculee").html(res[1]?res[1]:res[4]);
+	jQuery("#ar_url_objet").val(res[3]);
+	jQuery('#ar_verrouiller').attr('checked', res[5]=='oui');
+	if(res[2]) ar_type_urls = res[2];
+	html_type_urls("#label_url_calculee", ar_url_calculee, ar_type_urls);
+	disab = (ar_type_urls=='page') || (ar_type_urls=='standard') || (ar_type_urls=='html');
+	jQuery("#ar_url_objet, #url_objet_input, #ar_verrouiller").enable(!disab);
+	if(disab) {
+		html_type_urls("#ar_edit_info", ar_edit_erreur, ar_type_urls);
+		jQuery("#url_objet_input").addClass("cs_hidden");
+	} else {
+		jQuery("#ar_edit_info").html(ar_valeur_vide);
+		jQuery("#url_objet_input").removeClass("cs_hidden");
+	}
+	jQuery("#ar_edit_info, #ar_edit_verrou").removeClass("cs_hidden");
+}
+
+</script>
+[(#SET{cpt, #VAL{couteauprive:urls_base_vide}|_T})]
+<BOUCLE_compte(URLS) />
+[(#TOTAL_BOUCLE|>{0}|oui)
+ [(#SET{total, #VAL{<a href="}|concat{#URL_ECRIRE{action_rapide,arg=type_urls|liste_urls&script=foo},'" target="_blank">',#TOTAL_BOUCLE,'</a>'}})]
+ [(#SET{cpt, #VAL{couteauprive:urls_base_total}|_T|replace{@nb@,#GET{total}}})]
+]
+<//B_compte>
+
+<div style='text-align: center; padding:0.4em;'>
+<!--	<input name="arg_input" type='hidden' value="" /> -->
+	<fieldset><legend><:couteauprive:urls_purger_tout:> </legend>
+	<div style="text-align:center"><input name="submit" class='fondo' type='submit' value="<:couteauprive:urls_purger:>" /> (#GET{cpt})</div>
+	</fieldset>
+</div>
+
+[(#REM) Ce separateur va permettre de commencer ici une deuxieme <form/> Ajax )]
+@@CS_FORM@@
+
+<div style='text-align: center; padding:0.4em;'>
+	<fieldset><legend><:couteauprive:urls_choix_objet:> </legend>
+     <div style="margin:0.3em 0;"><label><b><:couteauprive:urls_type_objet:></b>
+     <select class="forml ar_select" name="ar_type_objet" id="ar_type_objet">
+        <option value='article' [selected="(#ENV{ar_type_objet,article}|=={article}|?{selected})"] ><:couteau:objet_article:></option>
+        <option value='rubrique' [selected="(#ENV{ar_type_objet,article}|=={rubrique}|?{selected})"] ><:couteau:objet_rubrique:></option>
+        <option value='breve' [selected="(#ENV{ar_type_objet,article}|=={breve}|?{selected})"] ><:couteau:objet_breve:></option>
+        <option value='auteur' [selected="(#ENV{ar_type_objet,article}|=={auteur}|?{selected})"] ><:couteau:objet_auteur:></option>
+        <option value='mot' [selected="(#ENV{ar_type_objet,article}|=={mot}|?{selected})"] ><:couteau:objet_mot:></option>
+        <option value='site' [selected="(#ENV{ar_type_objet,article}|=={site}|?{selected})"] ><:couteau:objet_syndic:></option>
+		[<option value='#ENV{ar_type_objet}' selected="selected">(#ENV{ar_type_objet,article}|match{'^(article|rubrique|breve|auteur|mot|site)$'}|non)[(#ENV{ar_type_objet}|ucfirst)]</option>]
+<BOUCLE_tu(URLS){fusion type}{' - '}{!type IN article,rubrique,breve,auteur,mot,site,#ENV{ar_type_objet,article}}>
+        [<option value='#TYPE' [selected="(#ENV{ar_type_objet,article}|=={#TYPE}|?{selected})"] >(#TYPE|ucfirst)</option>]
+</BOUCLE_tu>
+     </select></label>
+	 &nbsp;
+	 <label for="ar_num_objet"><b><:couteauprive:urls_num_objet:></b>&nbsp;<input class="ar_num_objet" id="ar_num_objet" name="ar_num_objet" size="5" value="#ENV*{ar_num_objet}"/></label><img id="ar_chercher" style="vertical-align:bottom; cursor:pointer; margin-left:1em;" title="<:couteauprive:urls_rechercher:>" src="#EVAL{_DIR_PLUGIN_COUTEAU_SUISSE}/img/loupe.png" alt="<:bouton_chercher:>"/>
+</div>
+<div style="text-align:left; margin-top:1em;">
+	 <div style="font-weight:bold"><:couteauprive:urls_titre_objet:></div>
+     <div style="text-align:center;"><span id="ar_titre"> </span></div>
+	 <div style="font-weight:bold"><:couteauprive:urls_url_objet:></div>
+     <div style="text-align:center;"><span id="ar_url_propre"> </span></div>
+	 <div style="font-weight:bold"><span id="label_url_calculee" style="font-weight:bold;">[(#VAL{<:couteauprive:urls_url_calculee:>}|replace{@type@,#ENV*{type_urls}})]</span></div>
+     <div style="text-align:center;"><span id="ar_url_calculee"> </span></div>
+
+	 <div style="margin-top:1em;">
+     <label><b><:couteauprive:urls_nouvelle:></b><input style="width:100%;" id="ar_url_objet" name="ar_url_objet" value="" disabled="disabled"/></label>
+	 <div class="ar_edit_info cs_hidden" id="ar_edit_info">&nbsp;</div></div>
+	 <div class="cs_hidden" style="margin-top:1em;" id="ar_edit_verrou">
+     <label><input id="ar_verrouiller" name="ar_verrouiller" class="checkbox" type="checkbox" value="oui" disabled="disabled"/> [(#VAL{<:couteauprive:urls_verrouiller:>}|replace{@voir@,<:voir_en_ligne:>}|cs_propre)]</label>
+     </div>
+</div>
+
+	 <div style="text-align:right"><input name="submit" id='url_objet_input' class='fondo' type='submit' disabled="disabled" value="<:couteauprive:urls_enregistrer:>" /></div>
+	 <div id="ar_url_trouvee" class="cs_hidden">||</div>
+	</fieldset>
+</div>

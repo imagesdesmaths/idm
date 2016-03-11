@@ -1,0 +1,239 @@
+[(#ENV{erreurs/positionner}|oui)
+	<a name="ajax_ancre" href="[(#ENV{erreurs/positionner})]"></a>
+]
+<div class="formulaire_spip formulaire_editer formulaire_#ENV{form}[ (#ENV{formulaire_modifie}|oui) modifie]">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	<p id="message_attention" class="message_reinitialiser reponse_formulaire reponse_formulaire_ok">#ENV*{_message_attention}</p>
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input style="display:none;" type="submit" class="submit" name="enregistrer" value="<:bouton_enregistrer:>" />
+
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe" id="deplacable">
+			
+			<[(#VAL{li}|saisie_balise_structure_formulaire)] id="reinitialiser" class="actions_formulaire">
+				<button type="submit" class="submit" name="reinitialiser" value="oui" onclick="return confirm('<:saisies:construire_reinitialiser_confirmer:>')">
+					<img src="#CHEMIN{images/formulaire-reinitialiser-24.png}" alt="" />
+					<:saisies:construire_reinitialiser:>
+				</button>
+			</[(#VAL{li}|saisie_balise_structure_formulaire)]>
+
+			[(#REM)<!-- les choix de saisies -->]
+			<BOUCLE_contenu(DATA){source tableau, #ENV{_contenu}}>
+			[(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
+				[(#VALEUR**|formidable_generer_saisie_configurable{#ENV**|unserialize})]
+			]
+			</BOUCLE_contenu>
+			<[(#VAL{li}|saisie_balise_structure_formulaire)] class="aucun"><em class="attention"><:saisies:construire_aucun_champs:></em></[(#VAL{li}|saisie_balise_structure_formulaire)]>
+			<//B_contenu>
+			
+			<B_saisies_disponibles>
+			<[(#VAL{li}|saisie_balise_structure_formulaire)] class="editer haut saisies_disponibles" id="attrapable">
+				<label><:saisies:construire_ajouter_champ:></label>
+				<BOUCLE_saisies_disponibles(DATA){source tableau, #ENV{_saisies_disponibles}}{par cle}>
+				<button type="submit" name="ajouter_saisie" value="#CLE" class="submit ajouter_saisie"[ title="(#DESCRIPTION)"] [style="background-image:url((#ICONE|sinon{#CHEMIN{images/formulaire-saisie-defaut.png}}))"]>
+					<span>#TITRE</span>
+				</button>
+				</BOUCLE_saisies_disponibles>
+			</[(#VAL{li}|saisie_balise_structure_formulaire)]>
+			</B_saisies_disponibles>
+			
+			<B_saisies_groupes_disponibles>
+			<[(#VAL{li}|saisie_balise_structure_formulaire)] class="editer haut saisies_groupes_disponibles" id="attrapable_bis">
+				<label><:saisies:construire_ajouter_groupe:></label>
+				<BOUCLE_saisies_groupes_disponibles(DATA){source tableau, #ENV{_saisies_groupes_disponibles}}{par cle}>
+				<button type="submit" name="ajouter_groupe_saisie" value="#CLE" class="submit ajouter_saisie"[ title="(#DESCRIPTION)"] [style="background-image:url((#ICONE|sinon{#CHEMIN{images/formulaire-saisie-defaut.png}}))"]>
+					<span>#TITRE</span>
+				</button>
+				</BOUCLE_saisies_groupes_disponibles>
+			</[(#VAL{li}|saisie_balise_structure_formulaire)]>
+			</B_saisies_groupes_disponibles>
+			
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+
+		
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		
+		<span class='image_loading'></span>
+	</div></form>
+
+	<style>
+		.message_reinitialiser,#reinitialiser {display: none}
+		.modifie .message_reinitialiser,.modifie #reinitialiser {display: block}
+	</style>
+	<script type="text/javascript">
+	(function($){
+
+		function formulaire_configurer_onglets() {
+			var $formulaire_configurer = $('.formulaire_configurer');
+			var $onglets = $('<ul class="formulaire_configurer-onglets"></ul>');
+			var $contenus = $formulaire_configurer.find('> .editer-groupe > .fieldset');
+
+			// On ajoute le conteneur des onglets
+			$formulaire_configurer.prepend($onglets);
+
+			// On parcourt les contenus pour générer les onglets
+			$contenus.each(function(i){
+				// On ajoute un identifiant et une classe
+				$(this)
+					.attr('id', 'formulaire_configurer-contenu-'+i)
+					.addClass('formulaire_configurer-contenu');
+				// On récupère le titre (en le cachant au passage)
+				var titre = $(this).find('[(#GLOBALS{debut_intertitre,<h3>}|replace{"<(\S*).*>",$1,i})]').eq(0).hide().text();
+				// On crée un onglet
+				var $onglet = $('<li><a href="#formulaire_configurer-contenu-'+i+'">'+titre+'</a></li>');
+				$onglet
+					.click(function(){
+						$contenus.hide();
+						$(
+							$(this)
+								.siblings()
+									.removeClass('actif')
+								.end()
+								.addClass('actif')
+								.find('a')
+									.attr('href')
+						).show();
+						return false;
+					});
+
+				// On active le premier onglet au démarrage
+				if (i == 0) {
+					$onglet.addClass('actif');
+				}
+
+				// S'il y a des erreurs dans cette partie du contenu, on met une classe "erreurs" à l'onglet aussi
+				if ($(this).find('.editer.erreur').length > 0) {
+					$onglet.addClass('erreur');
+				}
+
+				// On ajoute l'onglet
+				$onglets.append($onglet);
+			})
+			.hide()
+			.eq(0)
+				.show();
+		}
+
+		/* enlever les required */
+		$('.formulaire_#FORM .editer.obligatoire').find('input, textarea, select').each(function(){
+			if ($(this).prop('required')) {
+				$(this).prop('required', false);
+			}
+		});
+
+		$('.formulaire_#FORM .configurable')
+			.hover(
+				function(){
+					$(this)
+						.addClass('hover')
+						.find('> .actions')
+							.show()
+						.end()
+						.parents('li.configurable:not(.en_configuration)')
+							.mouseout();
+				},
+				function(){
+					if (!$(this).is('.en_configuration'))
+						$(this)
+							.removeClass('hover')
+							.find('> .actions')
+								.hide()
+							.end()
+							.parents('.configurable').eq('0')
+								.mouseover();
+				}
+			)
+			.filter(':not(.en_configuration)')
+				.find('> .actions')
+					.hide()
+				.end()
+			.end();
+
+		// On lance la création des onglets
+		formulaire_configurer_onglets();
+
+		// Gérer la liste des vérifications
+		$('.liste_verifications').each(function(){
+			var $options = $(this).siblings('.options_verifier').hide();
+			var $select  = $(this).find('select');
+
+			$select
+				.change(function(){
+					var montrer = $(this).val() ? $(this).val() : 'soigfeg';
+					$options.hide().filter('.'+montrer).show();
+				})
+				.change();
+		});
+
+		// On déplie toujours les fieldsets plés par défaut
+		$('.fieldset.plie').each(function(){
+			$(this)
+				.removeClass('plie')
+				.find('> fieldset > .editer-groupe').show();
+		});
+
+		[(#ENV{erreurs}|non|et{#ENV{_chemin_ui}})
+			$.getScript("#CHEMIN{#ENV{_chemin_ui}core.js}", function(){
+			$.getScript("#CHEMIN{#ENV{_chemin_ui}widget.js}", function(){
+			$.getScript("#CHEMIN{#ENV{_chemin_ui}mouse.js}", function(){
+				$.getScript("#CHEMIN{#ENV{_chemin_ui}sortable.js}", function(){
+					if ($.fn.sortable) {
+						$( "#deplacable, #deplacable .editer-groupe" ).sortable({
+							revert: true,
+							containment: '#deplacable',
+							connectWith: "#deplacable, #deplacable .editer-groupe",
+							placeholder: "ui-state-highlight",
+							handle: '>.actions .deplacer_saisie',
+							start: function(event, ui) {
+								$('.ui-state-highlight')
+									.css('height', ui.item.css('height'))
+									.css('height', '+=20px');
+							},
+							update: function(event, ui) {
+								id = ui.item.data('id');
+								ou = ui.item.next().data('id');
+								// avant le suivant
+								if (!ou) {
+									// sinon dans le parent
+									ou = ui.item.closest('.fieldset').data('id');
+									if (ou) {
+										ou = '\[' + ou + '\]';
+									}
+								}
+								url = "#URL_ECRIRE";
+								$.get(url, {
+									session: '#ENV{_identifiant_session}',
+									action: 'deplacer_saisie',
+									saisie: id,
+									ou: ou
+								}, function() {
+									//$('input.vide').submit();
+									$('.formulaire_#ENV{form}').addClass('modifie').trigger('modifsaisies');
+								});
+							}
+						});
+					}
+				});
+				/*
+				$.getScript("#CHEMIN{#ENV{_chemin_ui}draggable.js}", function(){
+					if ($.fn.draggable) {
+						$( "#attrapable" ).draggable({
+							connectToSortable: "#deplacable, #deplacable ul",
+							helper: "clone"
+						});
+					}
+				});
+				*/
+			});});});
+		]
+
+	})(jQuery);
+	</script>
+	</BOUCLE_editable>
+</div>

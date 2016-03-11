@@ -1,0 +1,21 @@
+#SET{name,unicite}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+<B_champs_unicite>
+<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	<label for="#GET{name}"><:formidable:editer_unicite_label:></label>[
+	<span class='erreur_message'>(#GET{erreurs})</span>
+	]<p class="explication"><:formidable:editer_unicite_explication:></p>
+	<select name="#GET{name}" class="select" id="#GET{name}">
+		<option value=""></option>
+		<BOUCLE_champs_unicite(POUR){tableau #ENV*{saisies}|unserialize}>
+		<option value="[(#VALEUR|table_valeur{options}|table_valeur{nom})]"[(#ENV{unicite,#GET{defaut}}|=={#VALEUR|table_valeur{options}|table_valeur{nom}}|oui)selected="selected"]>[(#VALEUR|table_valeur{options}|table_valeur{label})]</option>
+		</BOUCLE_champs_unicite>
+	</select>
+</li>
+#SET{name,message_erreur_unicite}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	<label for="#GET{name}"><:formidable:editer_message_erreur_unicite_label:></label>[
+	<span class='erreur_message'>(#GET{erreurs})</span>
+	]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+	<p class="explication"><:formidable:editer_message_erreur_unicite_explication:></p>
+</li>
+</B_champs_unicite>

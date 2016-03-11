@@ -1,0 +1,8 @@
+[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+<B_destinataires>
+<ul>
+	<BOUCLE_destinataires(AUTEURS){tout}{id_auteur IN #GET*{valeur}}>
+	<li class="choix">#NOM</li>
+	</BOUCLE_destinataires>
+</ul>
+</B_destinataires>

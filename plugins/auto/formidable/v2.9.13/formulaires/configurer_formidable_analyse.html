@@ -1,0 +1,52 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:formidable:cfg_titre_parametrages_analyse:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		[(#SAISIE{input,classe,
+			label=<:formidable:cfg_analyse_classe_label:>,
+			explication=<:formidable:cfg_analyse_classe_explication:>
+			})]
+		[(#SAISIE{case,auteur,
+			li_class='pleine_largeur',
+			label_case=<:formidable:traiter_enregistrement_option_auteur:>,
+			explication=<:formidable:traiter_enregistrement_option_auteur_explication:>
+			})]
+		[(#SAISIE{case,admin_reponses_auteur,
+			li_class='pleine_largeur',
+			label_case=<:formidable:admin_reponses_auteur:>,
+			explication=<:formidable:admin_reponses_auteur_explication:>
+			})]
+		[(#SAISIE{case,activer_pages,
+			li_class='pleine_largeur',
+			label_case=<:formidable:activer_pages_label:>,
+			explication=<:formidable:activer_pages_explication:>
+			})]
+		[(#SAISIE{case,autoriser_admin_restreint,
+			li_class='pleine_largeur',
+			label_case=<:formidable:autoriser_admin_restreint:>,
+			explication=<:formidable:autoriser_admin_restreint_explication:>
+			})]
+
+		<input type="hidden" name="_meta_casier" value="formidable/analyse" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+	<script type="text/javascript">
+		$(function(){
+			if (!$('#champ_auteur').prop('checked')) {
+				$('.editer_admin_reponses_auteur').hide();
+			}
+			$('#champ_auteur').change(function() {
+				if ($(this).is(':checked')) $('.editer_admin_reponses_auteur').show(100);
+				else $('.editer_admin_reponses_auteur').hide(100);
+			});
+		});
+	</script>
+</div>

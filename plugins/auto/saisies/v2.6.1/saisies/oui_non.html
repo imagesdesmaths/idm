@@ -1,0 +1,23 @@
+[(#REM) 
+
+  Action :
+  - Rempli "on" si oui, "" si non.
+  
+  Parametres :
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+  
+  Exemple d'appel :
+	[(#SAISIE{oui_non, afficher_liste,
+		label=<:plugin:afficher_liste:>,
+		explication=<:plugin:explication_afficher_liste:>})]
+]
+#SET{valeur,#ENV{valeur_forcee,#ENV{valeur}}|is_null|?{#ENV{defaut},#ENV{valeur_forcee,#ENV{valeur}}}}
+<div class="choix">
+	<input type="radio" name="#ENV{nom}" class="radio" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_oui"[ (#GET{valeur}|=={#ENV{valeur_oui,on}}|oui)checked="checked"] value="#ENV{valeur_oui,on}" [ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ aria-describedby="(#ENV{describedby})"] />
+	<label for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_oui"[(#GET{valeur}|=={#ENV{valeur_oui,on}}|oui)class="on"]><:item_oui:></label>
+</div>
+<div class="choix">
+	<input type="radio" name="#ENV{nom}" class="radio" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_non"[ (#GET{valeur}|=={#ENV{valeur_non,''}}|ou{#GET{valeur}|non})checked="checked"] value="#ENV{valeur_non,''}" [ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ aria-describedby="(#ENV{describedby})"] />
+	<label for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_non"[(#GET{valeur}|=={#ENV{valeur_non,''}}|ou{#GET{valeur}|non})class="on"]><:item_non:></label>
+</div>

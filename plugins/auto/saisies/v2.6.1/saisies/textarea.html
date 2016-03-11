@@ -1,0 +1,22 @@
+[(#REM)
+
+  Parametres :
+  - class : classe(s) css ajoutes au textarea
+  - rows : nombre de ligne, par defaut : 20 
+  - cols : nombre de caracteres de large, par defaut : 40 (cela depend aussi et surtout du CSS)
+  - inserer_barre : barre d'outils du porte plume à insérer (forum ou edition par défaut)
+  - previsualisation : si égale à 'oui', ajoute l'onglet de prévisualisation
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+
+  Exemple d'appel :
+	[(#SAISIE{textarea, couleur_foncee,
+		label=<:spa:couleur_foncee:>,
+		obligatoire=non})]
+]
+
+[(#REM) Si la valeur est un tableau, le plugin sait le transformer en chaine, plutôt que d'afficher "Array" ]
+#SET{valeur, #ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}
+#SET{valeur, #GET{valeur}|is_array|?{(#GET{valeur}|saisies_tableau2chaine), #GET{valeur}}}
+<textarea name="#ENV{nom}" class="[(#ENV{class}) ][inserer_barre_(#ENV{inserer_barre}) ][(#ENV{previsualisation}|oui)inserer_previsualisation]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]" rows="[(#ENV{rows,20})]" cols="[(#ENV{cols,40})]"[ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ placeholder="(#ENV{placeholder})"][(#ENV{obligatoire}|et{#ENV{obligatoire}!={non}}|et{#HTML5}|oui) required="required"][ aria-describedby="(#ENV{describedby})"][ (#ENV*{attributs})]>
+#GET{valeur}</textarea>

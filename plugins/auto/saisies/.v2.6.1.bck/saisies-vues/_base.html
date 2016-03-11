@@ -1,0 +1,42 @@
+[(#SET{sans_reponse,#ENV{sans_reponse}|is_null|?{<:saisies:vue_sans_reponse:>,#ENV{sans_reponse}}})]
+
+#SET{valeur_uniquement,#ENV{valeur_uniquement}|et{#ENV{valeur_uniquement}|!={non}}|oui}
+#SET{enfants,#ENV*{saisies}|et{#ENV*{saisies}|is_array}}
+
+[(#REM) On génère la réponse et on l'enregistre dans une variable. Doit être VIDE s'il n'y a pas de réponse. ]
+	#SET{reponse,''}
+	[(#CHEMIN{saisies-vues/#ENV{type_saisie}.html}|oui)
+		#SET{reponse,#INCLURE{fond=saisies-vues/#ENV{type_saisie},env,sans_reponse=#GET{sans_reponse}}|trim}
+	]
+	[(#CHEMIN{saisies-vues/#ENV{type_saisie}.html}|non)
+		#SET{reponse,#ENV*{valeur}|saisie_traitement_vue{#ENV**}}
+	]
+
+[(#REM) Maintenant on affiche en encapsulant ou pas ]
+
+[(#REM) Cas normal avec présentation ]
+[(#GET{valeur_uniquement}|non)
+<div class="afficher[ afficher_(#ENV{nom})][ saisie_(#ENV{type_saisie})][ (#ENV{conteneur_class,#ENV{li_class}})][ (#GET{reponse}|non)sans_reponse vide]">
+	[(#REM) S'il y a des enfants on n'inclut que la vue ]
+	[(#GET{enfants}|oui)
+		#GET{reponse}
+	]
+	[(#GET{enfants}|non|et{#ENV{type_saisie}|!={explication}})
+		[<strong class="label">(#ENV{label_case,#ENV{label,#ENV{nom}}})</strong>]
+		<div class="valeur">
+		[(#GET{reponse}|sinon{#GET{sans_reponse}})]
+		</div>
+	]
+</div>
+]
+
+[(#REM) Cas où on demande uniquement la valeur ]
+[(#GET{valeur_uniquement}|oui)
+	[(#REM) S'il y a des enfants on inclut que la vue ]
+	[(#GET{enfants}|oui)
+		#GET{reponse}
+	]
+	[(#GET{enfants}|non)
+		[(#GET{reponse}|sinon{#GET{sans_reponse}})]
+	]
+]

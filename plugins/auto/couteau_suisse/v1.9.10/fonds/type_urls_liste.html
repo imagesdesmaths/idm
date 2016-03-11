@@ -1,0 +1,10 @@
+#SET{a,#VAL{91}|chr}
+#SET{b,#VAL{93}|chr}
+<:couteau:urls_propres_objet:>
+
+<B_u>#GET{a}<BOUCLE_u(URLS){fusion type}{' - '}>[ (#ENV{type}|=={#TYPE}|?{#TYPE})][(#ENV{type}|=={#TYPE}|non) #GET{a}#TYPE->[(#SELF|parametre_url{debut_urls,''}|parametre_url{type,#TYPE})]#GET{b}] </BOUCLE_u>[ - #GET{a}(#ENV{type}|?{<:couteauprive:tous|strtolower:>})->[(#SELF|parametre_url{type,''})]#GET{b}] #GET{b}</B_u>
+
+<BOUCLE_urls(URLS){type?=#ENV{type}}{par type,id_objet}{fusion concat(type,id_objet)}{pagination 50}>
+|[#TYPE ##ID_OBJET->[(#ID_OBJET|cs_url_publique{#TYPE})]]|<BOUCLE_urls2(URLS){type}{id_objet}{par date}{inverse}{'<br />'}>#URL[ (#DATE|>{#VAL{Y-m-d H:i:s}|date}|oui) (<:couteau:url_verrouillee:>)] [(#SET{del,#ID_OBJET|concat{',',#TYPE,',',#URL}|base64_encode})] [x|<:lien_supprimer:>->[(#SELF|replace{'\|',%7C}|parametre_url{suppr,#GET{del}})]]</BOUCLE_urls2>|<BOUCLE_urls3(URLS){type}{id_objet}{par date}{inverse}{'<br />'}>[(#DATE|affdate)]</BOUCLE_urls3>|</BOUCLE_urls>
+<html>#PAGINATION</html>
+</B_urls>

@@ -1,0 +1,67 @@
+[(#AUTORISER{configurer,champs_extras}|sinon_interdire_acces)]
+
+<h1><:iextras:titre_iextras_exporter_importer:></h1>
+
+<div id="wysiwyg">
+
+[(#BOITE_OUVRIR{ [(#CHEMIN_IMAGE{iextras-download-26.png}|image_reduire{26}|inserer_attribut{class,cadre-icone}) ]<:iextras:titre_iextras_exporter:>})]
+
+<B_objets>
+<div class='champs_extras_objets'>
+	<table>
+		<thead>
+			<tr>
+				<th><:iextras:label_table:></th>
+				<th><:iextras:champs_extras:></th>
+			</tr>
+		</thead>
+		<tbody>
+<BOUCLE_objets(DATA){source tableau,#VAL|lister_tables_objets_sql}{par cle}{editable = oui}>
+<BOUCLE_cond(CONDITION){si #CLE|is_string}>
+[(#SET{objet,[(#_objets:VALEUR{texte_objets}|_T)]})]
+[(#SET{title,#VAL{iextras:exporter_objet}|_T{#ARRAY{objet,#GET{objet}}}})]
+<B_saisies>
+	<tr>
+		<td>
+			[(#URL_ACTION_AUTEUR{iextras_exporter,yaml/objet/#VALEUR{type}/tous}
+				|icone_horizontale{#GET{objet}, #VALEUR{icone_objet}}
+				|inserer_attribut{title,#GET{title}})]
+		</td>
+		<td>
+
+			<ul class='saisies_objet'>
+			<BOUCLE_saisies(DATA){source tableau, #CLE|iextras_champs_extras_definis}>
+				<li class='item[(#TOTAL_BOUCLE|=={1}|oui)solo]'>
+					<a
+						href="[(#URL_ACTION_AUTEUR{iextras_exporter,[yaml/objet/(#_objets:VALEUR{type})/champ/#VALEUR{options/nom}]})]"
+						title="<:iextras:exporter_objet_champ{objet=#GET{objet}, nom=#VALEUR{options/nom}}|attribut_html:>"
+						>
+						[(#CHEMIN_IMAGE{saisies_#VALEUR{saisie}}|sinon{#CHEMIN{images/formulaire-saisie-defaut.png}}|balise_img) ]
+						[(#VALEUR{options/label}|sinon{#VALEUR{options/label_case}}|sinon{#VALEUR{options/texte}|couper{30}})]
+					</a>
+				</li>
+			</BOUCLE_saisies>
+			</ul>
+		</td>
+	</tr>
+</B_saisies>
+</BOUCLE_cond>
+</BOUCLE_objets>
+		</tbody>
+	</table>
+</div>
+</B_objets>
+#BOITE_PIED
+	<a href="[(#URL_ACTION_AUTEUR{iextras_exporter,yaml/tous})]" title="<:iextras:exporter_tous_explication|attribut_html:>"><:iextras:exporter_tous:></a>
+	<span class='sep'> | </span>
+	<a href="[(#URL_ACTION_AUTEUR{iextras_exporter,php/tous})]" title="<:iextras:exporter_tous_php_explication|attribut_html:>"><:iextras:exporter_tous_php:></a>
+#BOITE_FERMER
+
+
+
+<div class="ajax">
+#FORMULAIRE_IMPORTER_CHAMPS_EXTRAS
+</div>
+
+</div>
+

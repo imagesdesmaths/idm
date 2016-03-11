@@ -1,0 +1,9 @@
+<B_liens>
+[(#BOITE_OUVRIR{[(#TOTAL_BOUCLE|singulier_ou_pluriel{formidable:info_utilise_1_formulaire,formidable:info_utilise_nb_formulaires})],'simple formidable_liens'})]
+<ul class="liste-items">
+<BOUCLE_liens(formulaires_liens){id_objet}{objet}>[
+	<li class="item"><a href="[(#ID_FORMULAIRE|generer_url_entite{formulaire})]">[(#CHEMIN_IMAGE{[(#VAL{formulaire}|objet_info{icone_objet})-16]}|balise_img{[(#VAL{formulaire}|objet_info{texte_objet}|_T)],'icone-objet'})](#INFO_TITRE{formulaire,#ID_FORMULAIRE})</a></li>
+]</BOUCLE_liens>
+</ul>
+#BOITE_FERMER
+</B_liens>

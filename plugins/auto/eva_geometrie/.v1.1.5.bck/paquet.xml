@@ -1,0 +1,12 @@
+<paquet
+  prefix="eva_geometrie"
+  categorie="divers"
+  version="1.1.5"
+  etat="stable"
+  compatibilite="[2.0.0;3.0.*]"
+  documentation="http://evaweb.fr/spip.php?rubrique22"
+>
+  <nom>Int&#233;gration d'activit&#233;s de g&#233;om&#233;trie</nom>
+  <auteur>Olivier Gautier, d&#233;veloppeur EVA-web</auteur>
+  <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+</paquet>

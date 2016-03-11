@@ -1,0 +1,60 @@
+// compatibilite Ajax : ajouter "this" a "jQuery" pour mieux localiser les actions 
+// et tagger avec cs_done pour eviter de binder plrs fois le meme bloc
+function cs_auteur_forum() {
+    // ajouter les mentions obligatoires
+    var t = " <:info_obligatoire_02|cs_javascript:>";
+    if(cs_verif_deux) {
+    	jQuery('label[for=session_nom]').cs_todo().append(/*t+*/"<br /><i><:couteau:nom_email_forum|cs_javascript:></i>");
+        cs_verif_nom = cs_verif_email = 0;
+    } else {
+        if(cs_verif_nom) jQuery('label[for=session_nom]').cs_todo().append(t);
+        if(cs_verif_email) jQuery('label[for=session_email]').cs_todo().append(t);
+    }
+	// selecteur du bloc de previsualisation
+	var sel = jQuery('fieldset.previsu', this);
+	if(!sel.length) return;
+//	alert('previsu OK');
+	var form = sel.parents('form').eq(0);
+	if(!form.length) return;
+	// SPIP 2.0 remplace 'auteur' par 'session_nom'
+	var auteur = jQuery('#session_nom', this);
+	if(!auteur.length) auteur = jQuery('#auteur', this);
+	// SPIP 2.0 remplace 'email_auteur' par 'session_email'
+	var email = jQuery('#session_email', this);
+	if(!email.length) email = jQuery('#email_auteur', this);
+	if(auteur.length || email.length)
+	// eviter les forums anonymes
+	form.cs_todo().bind('submit', function(event){
+		var alert_nom = auteur.length && !auteur.val().length;
+		var alert_email = email.length && !email.val().length;
+		var alert_deux = cs_verif_deux && alert_nom && alert_email;
+		if(!cs_verif_deux) {
+			alert_nom = alert_nom && cs_verif_nom;
+			alert_email = alert_email && cs_verif_email;
+		} else if(!alert_deux)
+			alert_nom = alert_email = false;
+		auteur.css('background-color','').css('border','');
+		email.css('background-color','').css('border','');
+		if(alert_email) {
+			email.focus();
+			email.css('background-color','#FCC').css('border','solid #C30');
+		}
+		if(alert_nom) {
+			auteur.focus();
+			auteur.css('background-color','#FCC').css('border','solid #C30');
+		}
+		if(alert_deux) {
+			alert("<:couteau:nom_email_forum|cs_javascript:>");
+			return false;
+		}
+		if(alert_nom) {
+			alert("<:couteau:nom_forum|cs_javascript:>");
+			return false;
+		}
+		if(alert_email) {
+			alert("<:couteau:email_forum|cs_javascript:>");
+			return false;
+		}
+		return true;
+	});
+}

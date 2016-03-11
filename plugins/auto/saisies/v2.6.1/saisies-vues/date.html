@@ -1,0 +1,10 @@
+#SET{valeur,#ENV{valeur}|vider_date}
+#SET{date_mysql,([0-9][0-9][0-9][0-9])-([0-9][0-9])-([0-9][0-9])}
+[(#GET{valeur}|match{#GET{date_mysql}}|oui)
+	[(#ENV{horaire}|?{	
+		#SET{valeur,#ENV{valeur}|affdate{'d/m/Y H:i:s'}}
+		,
+		#SET{valeur,#ENV{valeur}|affdate{'d/m/Y'}}
+	})]
+]
+[<p class="date">(#GET{valeur})</p>]

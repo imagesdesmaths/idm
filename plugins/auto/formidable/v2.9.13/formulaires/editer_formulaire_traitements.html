@@ -1,0 +1,56 @@
+<div class="formulaire_spip formulaire_editer formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id,nouveau})]">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	[(#ENV{editable}|oui)
+	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+			#GENERER_SAISIES{#ENV{_configurer_traitements}}
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+		
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		
+		<p class="boutons"><span class="image_loading"></span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	<script type="text/javascript">
+		jQuery(function(){
+			// On commence par cacher toutes les options
+			jQuery('.options_traiter,.suite').hide()
+				.each(function(){
+					var me = this;
+					var check = jQuery(me).prev().find('input.checkbox');
+					check.bind('change',function(){
+						if (check.is(':checked')){
+							jQuery(me).show('fast');
+							check.closest('.editer').addClass('hover');
+						}
+						else {
+							jQuery(me).hide('fast');
+							check.closest('.editer').removeClass('hover');
+						}
+					})
+					// force update
+					.trigger('change');
+				})
+				.find('h3').hide();
+		});
+	</script>
+	<style>
+		.options_traiter {margin-left: 50px;border-bottom: 1px solid #ddd;}
+		.suite {margin-left: 50px;}
+		input.checkbox+label {font-weight: normal;}
+		input.checkbox+label strong {font-weight: normal;}
+		input.checkbox:checked+label {font-weight: bold;}
+		input.checkbox:checked+label strong {font-weight: bold;}
+		input.radio+label {font-weight: normal;}
+		input.radio+label strong {font-weight: normal;}
+		input.radio:checked+label {font-weight: bold;}
+		input.radio:checked+label strong {font-weight: bold;}
+	</style>
+	]
+</div>

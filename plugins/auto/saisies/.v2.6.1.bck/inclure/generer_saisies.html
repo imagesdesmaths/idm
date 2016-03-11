@@ -1,0 +1,46 @@
+[(#REM) 
+  
+  ### /!\ boucle POUR (spip Bonux) ###
+  
+  Génère le contenu (l'intérieur) d'un formulaire, à partir d'une description dans un tableau PHP.
+  Le tableau doit être de la forme suivante :
+  
+  // Chaque ligne est elle-même un tableau
+  array(
+  	// Ligne de type "explication"
+  	array(
+  		'explication' => 'Ceci est un bloc d'explication général.'
+  	),
+  	// Ligne classique, cad un champ de formulaire
+  	array(
+  		'saisie' => 'input',
+  		'options => array(
+  			'nom' => 'mon_champ',
+  			'label' => 'Un joli titre',
+  			'obligatoire' => 'oui'
+  		)
+  	),
+  	// Ligne contenant un fieldset
+  	array(
+  		'groupe' => 'Ceci est le titre du groupe de champs (fieldset)',
+  		'css' => 'eventuelles classes css',
+  		'contenu' => array(
+  			// On recommence ici suivant le même formalisme que le tableau général.
+  		)
+  	)
+  )
+  
+  
+  Exemples d'appels :
+    # INCLURE{fond=inclure/generer_saisies, env, saisies=#ENV{tableau}}
+
+]
+
+<BOUCLE_contenu(POUR){tableau #ENV{saisies}}>
+[(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
+[(#VALEUR**|saisies_generer_html{#ENV{_env}|sinon{#ENV**|unserialize}})]
+]
+</BOUCLE_contenu>
+
+[(#REM) Ajout du script js pour les options si des saisies ]
+[(#ENV{from_fieldset}|non|et{#ENV{saisies}|saisies_afficher_si|ou{#ENV{saisies}|saisies_afficher_si_remplissage}}) #INCLURE{fond=inclure/js_afficher_si,env}]

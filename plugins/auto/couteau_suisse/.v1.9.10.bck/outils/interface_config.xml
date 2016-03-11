@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--	--------- Tri des articles ---------	-->
+<variable>
+	<id>tri_articles</id>
+	<format>string</format>
+	<radio>
+		<item>
+			<valeur>date_modif DESC</valeur>
+			<label>couteauprive:tri_modif</label>
+		</item>
+		<item>
+			<valeur>0+titre,titre</valeur>
+			<label>couteauprive:tri_titre</label>
+		</item>
+		<item>
+			<valeur>date DESC</valeur>
+			<label>couteauprive:tri_publi</label>
+		</item>
+		<item>
+			<valeur>perso</valeur>
+			<label>couteauprive:tri_perso</label>
+		</item>
+		<par_ligne>1</par_ligne>
+	</radio>
+	<label>@_CS_CHOIX@</label>
+	<defaut_php>'date DESC'</defaut_php>
+	<code>
+		<!-- ![CDATA[ non encore supporte par SPIP ! -->
+		<condition_php>%s!='perso'</condition_php>
+		<script_php>define('_TRI_ARTICLES_RUBRIQUE', %s);\n</script_php>
+	</code>
+</variable>
+<variable>
+	<id>tri_perso</id>
+	<format>string</format>
+	<defaut_php>''</defaut_php>
+	<code>
+		<!-- ![CDATA[ non encore supporte par SPIP ! -->
+		<condition_php>strlen(%s)</condition_php>
+		<script_php>@define('_TRI_ARTICLES_RUBRIQUE', %s);\n</script_php>
+	</code>
+</variable>
+<variable>
+	<id>tri_groupes</id>
+	<format>string</format>
+	<radio>
+		<item>
+			<valeur>0+titre,titre</valeur>
+			<label>couteauprive:tri_titre</label>
+		</item>
+		<item>
+			<valeur>id_groupe</valeur>
+			<label>couteauprive:tri_groupe</label>
+		</item>
+		<item>
+			<valeur>perso</valeur>
+			<label>couteauprive:tri_perso</label>
+		</item>
+		<par_ligne>1</par_ligne>
+	</radio>
+	<label>@_CS_CHOIX@</label>
+	<defaut_php>'id_groupe'</defaut_php>
+	<code>
+		<!-- ![CDATA[ non encore supporte par SPIP ! -->
+		<condition_php>%s!='perso'</condition_php>
+		<script_php>define('_TRI_GROUPES_MOTS', %s);\n</script_php>
+	</code>
+</variable>
+<variable>
+	<id>tri_perso_groupes</id>
+	<format>string</format>
+	<defaut_php>''</defaut_php>
+	<code>
+		<!-- ![CDATA[ non encore supporte par SPIP ! -->
+		<condition_php>strlen(%s)</condition_php>
+		<script_php>@define('_TRI_GROUPES_MOTS', %s);</script_php>
+	</code>
+</variable>
+
+<outil>
+	<id>tri_articles</id>
+	<categorie>interface</categorie>
+	<code>
+		<type>spip_options</type>
+		<script_php>%%tri_articles%%%%tri_perso%%%%tri_groupes%%%%tri_perso_groupes%%</script_php>
+	</code>
+	<version>
+		<spip_min>1.9300</spip_min>
+	</version>
+</outil>
+
+
+<!--	--------- Largeur d'ecran ---------	
+<variable>
+	<id>spip_ecran</id>
+	<format>string</format>
+	<radio>
+		<item>
+			<valeur>defaut</valeur>
+			<label>couteauprive:par_defaut</label>
+		</item>
+		<item>
+			<valeur>large</valeur>
+			<label>spip:info_grand_ecran</label>
+		</item>
+		<item>
+			<valeur>etroit</valeur>
+			<label>spip:info_petit_ecran</label>
+		</item>
+	</radio>
+	<label>@_CS_CHOIX@</label>
+	<defaut_php>defaut</defaut_php>
+	<code>
+		<condition_php>%s!='defaut'</condition_php>
+		<script_php>$GLOBALS['spip_ecran']=$_COOKIE['spip_ecran']=%s;</script_php>
+	</code>
+</variable>
+<outil>
+	<id>spip_ecran</id>
+	<categorie>interface</categorie>
+	<code>
+		<type>spip_options</type>
+		<script_php>%%spip_ecran%%</script_php>
+	</code>
+</outil> -->
+
+<!--	--------- Allegement de l'interface privee ---------	-->
+<outil>
+	<id>simpl_interface</id>
+	<categorie>interface</categorie>
+	<code>
+		<type>spip_options</type>
+		<script_php>define('_ACTIVER_PUCE_RAPIDE', false);</script_php>
+	</code>
+	<version>
+		<spip_min>1.9300</spip_min>
+	</version>
+</outil>
+
+
+<!--	--------- Bouton "Visiter" ---------	-->
+<outil>
+	<id>icone_visiter</id>
+	<categorie>interface</categorie>
+	<pipeline>
+		<nom>header_prive</nom>
+		<fonction>icone_visiter_header_prive</fonction>
+	</pipeline>
+</outil>
+
+
+<!--	--------- Dans la meme rubique ---------	-->
+<variable>
+	<id>meme_rubrique</id>
+	<format>integer</format>
+	<defaut_php>10</defaut_php>
+	<code>
+		<condition_php>%s</condition_php>
+		<script_php>@define('_MAX_ART_AFFICHES', %s);\n</script_php>
+	</code>
+	<label>@_CS_CHOIX@</label>
+</variable>
+<outil>
+	<id>meme_rubrique</id>
+	<nom><:info_meme_rubrique:></nom>
+	<categorie>interface</categorie>
+	<code>
+		<type>spip_options</type>
+		<script_php>%%meme_rubrique%%</script_php>
+	</code>
+	<version>
+		<spip_min>1.9300</spip_min>
+	</version>
+</outil>

@@ -1,0 +1,31 @@
+[(#REM) 
+
+  Parametres :
+  - class : classe(s) css ajoutes au select
+  - multiple : si quelquechose est passe, le select est multiple, sinon, c'est un select simple
+  	Dans le cas multiple, defaut et valeur doivent etre un array, sinon un int
+  - recursif : si oui liste les rubriques de facon recursive, et pas uniquement les secteurs
+  - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+    (seulement si non multiple)
+  - cacher_option_intro : pas de premier option vide  (defaut:"")
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+  - size : la taille du sélecteur (seulement si multiple)
+	 
+  Exemple d'appel :
+	[(#SAISIE{secteur,secteur_region,
+		label=<:plugin:secteur_region:>,
+		multiple=oui})] 
+]
+<select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple"[ size="(#ENV{size})"]][ disabled="(#ENV{disable})"][ (#ENV*{attributs})]>
+	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
+		<option value="">[(#ENV{option_intro})]</option>]
+	<BOUCLE_secteurs(RUBRIQUES){racine}{par num titre, titre}{tout}>
+		[(#ENV{multiple}|oui)
+		<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>#TITRE</option>]
+		[(#ENV{multiple}|non)
+		<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>#TITRE</option>]
+		[(#ENV{recursif}|oui)
+		<INCLURE{fond=prive/listes/rubriques_recursives,valeur=#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}},id_rubrique=#ID_RUBRIQUE,multiple} />]
+	</BOUCLE_secteurs>
+</select>

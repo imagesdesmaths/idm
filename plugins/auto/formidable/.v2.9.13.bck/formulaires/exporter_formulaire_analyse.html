@@ -1,0 +1,29 @@
+[(#SET{type_export, #ARRAY{csv,<:formidable:reponses_exporter_format_csv:>,xls,<:formidable:reponses_exporter_format_xls:>}})]
+
+<div class="formulaire_spip formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id})]">
+	<h3 class="titrem">
+       [(#CHEMIN{images/formulaire-analyse-24.png}|balise_img{horizontale})] 
+      <:formidable:analyse_exporter:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	[(#ENV{editable}|oui)
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_formulaire" value="#ID_FORMULAIRE" />
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+			[(#SAISIE{selection, type_export,
+				label=<:formidable:exporter_formulaire_format_label:>,
+				datas=#GET{type_export},
+        defaut=csv,
+        cacher_option_intro=oui})]
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+		
+    
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		
+		<p class="boutons"><span class="image_loading"></span><input type="submit" class="submit" value="<:bouton_telecharger:>" /></p>
+	</div></form>
+	]
+</div>

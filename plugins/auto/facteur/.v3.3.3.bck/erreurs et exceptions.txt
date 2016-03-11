@@ -1,0 +1,42 @@
+Avril 2012
+Yffic
+
+Petit point sur la gestion des erreurs et les exceptions de phpMailer 5. "Parce que c'est pénible de ne pas savoir pourquoi ça ne marche pas"
+
+Constat :
+- Les problèmes de connexion smtp ne sont pas affichées dans l'interface privée de SPIP après un test d'envoi via la page de config de Facteur. On a juste le message "Erreur: consultez le fichier log pour plus de détails" dans un cadre rouge.
+
+- Dans formulaires/configurer_facteur.php, facteur_envoyer_mail_test() renvoie true/false. Donc on n'a pas accès aux messages d'erreurs de phpMailer dans l'espace privé.
+
+- La gestion des exceptions via la classe phpmailerException n'est pas activée par défaut dans phpMailer (Cf le constructeur). Elle sert surtout à faire remonter les messages d'erreur.
+
+- Après avoir activé la gestion des exceptions et le mode debug de la classe smtp (qui ne fait que des echo), on peut remarquer que les messages d'erreurs affichés par les exceptions dans phpMailer ne reprennent pas les vraies causes d'erreurs relevées dans la classe smtp. Si par exemple, on n'active pas ssl dans php, le debug "echo" affiche "SMTP -> ERROR: Failed to connect to server: Unable to find the socket transport "ssl" - did you forget to enable it when you configured PHP?", mais l'exception se contente d'un "SMTP Error: Could not connect to SMTP host" dans le fichier log. C'est quand même dommage de ne pas avoir accès au premier message d'erreur.
+
+- Voir aussi :
+http://code.google.com/a/apache-extras.org/p/phpmailer/issues/detail?id=50
+http://code.google.com/a/apache-extras.org/p/phpmailer/issues/detail?id=5
+
+En attendant une éventuelle amélioration de phpMailer, on peut :
+
+- Upgrader phpMailer 5.2.1. J'ai testé, ca ne change rien au niveau de la gestion des messages d'erreur, mais ça corrige d'autres trucs. 
+05/04/12 : Un cas foireux avec la version 5.2.1 : Si comme hôte on met un serveur ssl (ssl0.ovh.net), mais qu'on ne coche pas ssl au dessous, lors d'un test d'envoi, la roue Ajax tourne en rond indéfiniment... Pas de retour, aucune trace meme avec de simples echo... Je pense que ca tourne en rond au niveau de la fonction feof de get_lines. Cf les Notes de http://php.net/manual/fr/function.feof.php... Il n'est pas donc pas si urgent d'upgrader...
+
+- Redéfinir dans la classe Facteur, les fonctions Send, AddAttachment, AddReplyTo, AddBCC, AddCC, de la classe PhpMailer de cette façon :
+public function Send() {
+	ob_start();
+	parent::Send();
+	$error = ob_get_contents();
+	ob_end_clean();
+	if( !empty($error) ) {
+		spip_log("Erreur Facteur->Send : $error",'facteur.err');
+	}
+}
+Avec une constante pour activer ce mode et rajouter au début du constructeur de Facteur :
+if (defined('_FACTEUR_DEBUG_SMTP')) {
+	$this->SMTPDebug = _FACTEUR_DEBUG_SMTP ;
+}
+Ajouter la ligne qui suit dans mes_options.php permet donc de retrouver les erreurs dans le fichier facteur.err.log. 
+define('_FACTEUR_DEBUG_SMTP','5'); // Le niveau peut varier de 1 à 5, 5 affichant tout le dialogue lors de la connexion smtp avec le serveur
+
+
+

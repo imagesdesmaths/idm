@@ -1,0 +1,33 @@
+
+titre: '<:verifier:type_url:>'
+description: '<:verifier:type_url_description:>'
+options:
+  -
+    saisie: 'radio'
+    options:
+      nom: 'mode'
+      label: '<:verifier:option_url_mode_label:>'
+      datas:
+        protocole_seul: '<:verifier:option_url_mode_protocole_seul:>'
+        php_filter: '<:verifier:option_url_mode_php_filter:>'
+        complet: '<:verifier:option_url_mode_complet:>'
+      defaut: 'protocole_seul'
+  -
+    saisie: 'radio'
+    options:
+      nom: 'type_protocole'
+      label: '<:verifier:option_url_type_protocole_label:>'
+      datas:
+        tous: '<:verifier:option_url_type_protocole_tous:>'
+        web: '<:verifier:option_url_type_protocole_web:>'
+        mail: '<:verifier:option_url_type_protocole_mail:>'
+        ftp: '<:verifier:option_url_type_protocole_ftp:>'
+        exact: '<:verifier:option_url_type_protocole_exact:>'
+      defaut: 'web'
+  -
+    saisie: 'input'
+    options:
+      nom: 'protocole'
+      label: '<:verifier:option_url_protocole_label:>'
+
+

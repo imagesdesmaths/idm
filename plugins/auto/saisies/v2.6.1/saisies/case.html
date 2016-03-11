@@ -1,0 +1,21 @@
+[(#REM) 
+
+  Action :
+    - Rempli "on" si oui, "" si non.
+  
+  Parametres :
+    - label_case : pour un label a cote de la case (defaut:"")
+	- defaut : valeur par defaut si pas présente dans l'environnement
+    - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+  
+  Exemple d'appel :
+	[(#SAISIE{case, afficher_liste,
+		label=<:plugin:afficher_liste:>,
+		label_case=<:plugin:activer:>,
+		explication=<:plugin:explication_afficher_liste:>})]
+]#SET{valeur,#ENV{valeur_forcee,#ENV{valeur}}|is_null|?{#ENV{defaut},#ENV{valeur_forcee,#ENV{valeur}}}}
+<div class="choix[ (#ENV{class})]">
+	[(#ENV{disable}|non)<input type="hidden" name="#ENV{nom}" value="#ENV{valeur_non,''}" />]
+	<input type="checkbox" name="#ENV{nom}" class="checkbox" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ (#GET{valeur}|=={#ENV{valeur_oui,on}}|oui)checked="checked"] value="#ENV{valeur_oui,on}" [ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ aria-describedby="(#ENV{describedby})"][ (#ENV*{attributs})]/>
+	[<label for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[(#GET{valeur}|=={#ENV{valeur_oui,on}}|oui)class="on"]>(#ENV*{label_case})</label>]
+</div>
