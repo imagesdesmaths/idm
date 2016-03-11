@@ -1,8 +1,0 @@
-[(#SET{separateur,[(#ENV{separateur}|concat{&nbsp;&rsaquo;&nbsp;})]})]
-<BOUCLE_rubriques(RUBRIQUES){id_parent=#ENV{id_parent,#ENV{id_rubrique}}}{tout}>
-	[(#ENV{multiple}|oui)
-	<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#ENV{valeur,#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#GET{separateur}#TITRE</option>]
-	[(#ENV{multiple}|non)
-	<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>#GET{separateur}#TITRE</option>]
-	<INCLURE{fond=prive/listes/rubriques_recursives,env,id_rubrique=#ID_RUBRIQUE,separateur=#GET{separateur}} />
-</BOUCLE_rubriques>

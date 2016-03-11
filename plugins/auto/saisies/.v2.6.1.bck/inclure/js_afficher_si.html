@@ -1,7 +1,0 @@
-[(#REM) Ajout d'un marqueur unique pour identifier le formulaire]
-[(#SET{id_unique,#EVAL{'rand();'}})]
-
-<[(#VAL{li}|saisie_balise_structure_formulaire)] id="afficher_si_#GET{id_unique}" style="display:none;" >
-<script type="text/javascript">// <![CDATA[
-[(#ENV**{saisies}|saisies_generer_js_afficher_si{#GET{id_unique}})]
- //]]></script> </[(#VAL{li}|saisie_balise_structure_formulaire)]>
