@@ -1,9 +1,0 @@
-[(#REM) 
-  Exemple d'appel :
-    #INCLURE{fond=formulaires/inc-generer_saisies_configurables, env, fond_generer=formulaires/inc-generer_saisies_configurables, saisies=#ENV{tableau}}
-]
-<BOUCLE_contenu(POUR){tableau #ENV{saisies}}>
-[(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
-	[(#VALEUR**|formidable_generer_saisie_configurable{#ENV{_env}|sinon{#ENV**|unserialize}})]
-]
-</BOUCLE_contenu>

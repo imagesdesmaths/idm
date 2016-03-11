@@ -1,7 +1,0 @@
-[(#REM) S'il y a des options afficher_si, il faut vérifier que les conditions sont remplies ]
-[(#SET{saisies,#ENV{saisies}|saisies_verifier_afficher_si{#ENV**|unserialize}})]
-<BOUCLE_saisies(POUR){tableau #GET{saisies}}>
-[(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
-	[(#VALEUR|saisies_generer_vue{#ENV{_env}|sinon{#ENV**|unserialize}})]
-]
-</BOUCLE_saisies>

@@ -1,9 +1,0 @@
-
-titre: '<:verifier:type_regex:>'
-description: '<:verifier:type_regex_description:>'
-options:
-  -
-    saisie: 'input'
-    options:
-      nom: 'modele'
-      label: '<:verifier:option_regex_modele_label:>'
