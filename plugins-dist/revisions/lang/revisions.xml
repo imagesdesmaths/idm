@@ -70,7 +70,7 @@
 	<langue code="km" url="http://trad.spip.net/tradlang_module/revisions?lang_cible=km" total="30" traduits="11" relire="0" modifs="0" nouveaux="19" pourcent="36.67">
 	</langue>
 	<langue code="lb" url="http://trad.spip.net/tradlang_module/revisions?lang_cible=lb" total="30" traduits="30" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="jwander" lien="http://trad.spip.net/auteur/jwander" />
+		<traducteur nom="Jim Wanderscheid" lien="http://trad.spip.net/auteur/jwander" />
 	</langue>
 	<langue code="my" url="http://trad.spip.net/tradlang_module/revisions?lang_cible=my" total="30" traduits="10" relire="0" modifs="0" nouveaux="20" pourcent="33.33">
 	</langue>
@@ -89,6 +89,9 @@
 	</langue>
 	<langue code="oc_ni_la" url="http://trad.spip.net/tradlang_module/revisions?lang_cible=oc_ni_la" total="30" traduits="10" relire="0" modifs="0" nouveaux="20" pourcent="33.33">
 	</langue>
+	<langue code="oc_ni_mis" url="http://trad.spip.net/tradlang_module/revisions?lang_cible=oc_ni_mis" total="30" traduits="30" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="sylvain" lien="http://trad.spip.net/auteur/sylvain" />
+	</langue>
 	<langue code="oc_prv" url="http://trad.spip.net/tradlang_module/revisions?lang_cible=oc_prv" total="30" traduits="10" relire="0" modifs="0" nouveaux="20" pourcent="33.33">
 	</langue>
 	<langue code="oc_va" url="http://trad.spip.net/tradlang_module/revisions?lang_cible=oc_va" total="30" traduits="10" relire="0" modifs="0" nouveaux="20" pourcent="33.33">
@@ -98,11 +101,13 @@
 	<langue code="pt" url="http://trad.spip.net/tradlang_module/revisions?lang_cible=pt" total="30" traduits="30" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Cláudia Anjos Lopes" lien="http://trad.spip.net/auteur/claudia_a_lopes" />
 	</langue>
-	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/revisions?lang_cible=pt_br" total="30" traduits="11" relire="0" modifs="0" nouveaux="19" pourcent="36.67">
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/revisions?lang_cible=pt_br" total="30" traduits="30" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="telopa" lien="http://trad.spip.net/auteur/telopa" />
 	</langue>
 	<langue code="rn" url="http://trad.spip.net/tradlang_module/revisions?lang_cible=rn" total="30" traduits="6" relire="0" modifs="0" nouveaux="24" pourcent="20.00">
 	</langue>
-	<langue code="ro" url="http://trad.spip.net/tradlang_module/revisions?lang_cible=ro" total="30" traduits="11" relire="0" modifs="0" nouveaux="19" pourcent="36.67">
+	<langue code="ro" url="http://trad.spip.net/tradlang_module/revisions?lang_cible=ro" total="30" traduits="12" relire="0" modifs="0" nouveaux="18" pourcent="40.00">
+		<traducteur nom="telopa" lien="http://trad.spip.net/auteur/telopa" />
 	</langue>
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/revisions?lang_cible=ru" total="30" traduits="30" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
@@ -114,7 +119,8 @@
 	</langue>
 	<langue code="tr" url="http://trad.spip.net/tradlang_module/revisions?lang_cible=tr" total="30" traduits="11" relire="0" modifs="0" nouveaux="19" pourcent="36.67">
 	</langue>
-	<langue code="uk" url="http://trad.spip.net/tradlang_module/revisions?lang_cible=uk" total="30" traduits="6" relire="0" modifs="0" nouveaux="24" pourcent="20.00">
+	<langue code="uk" url="http://trad.spip.net/tradlang_module/revisions?lang_cible=uk" total="30" traduits="30" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="olly" lien="http://trad.spip.net/auteur/olly" />
 		<traducteur nom="Retenodus" lien="http://trad.spip.net/auteur/retenodus" />
 	</langue>
 	<langue code="vi" url="http://trad.spip.net/tradlang_module/revisions?lang_cible=vi" total="30" traduits="10" relire="0" modifs="0" nouveaux="20" pourcent="33.33">

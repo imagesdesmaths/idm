@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/compagnon?lang_cible=nl
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -17,9 +19,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'c_accueil_publication_texte' => 'Om een pagina te publiceren moet je een artikel scheppen.
 		Hiervoor moet je tenminste een rubriek aanmaken. Je mag dat doen in het « Uitgave » menu door op « Rubrieken » te klikken.',
 	'c_accueil_texte' => 'Je bent pas in het privé-ruimte van SPIP binnengekomen.',
-	'c_accueil_texte_revenir' => '		Deze pagina wijst je het laatste editoriaal activiteit op je site aan.
-		Je kan hier altijd terugkomen door op het huisje te klikken die zich aan de bovenkant
-		juist onder je naam bevindt.',
+	'c_accueil_texte_revenir' => '		Deze pagina toont je het laatste editoriaal activiteit op je site.
+		Je kunt hier altijd terugkomen door op het huisje te klikken dat zich aan de bovenzijde
+		bevindt, juist onder je naam.',
 	'c_article_redaction' => 'De redactie van het artikel is aan de gang.',
 	'c_article_redaction_redacteur' => 'De redactie van het artikel is aan de gang.',
 	'c_article_redaction_redacteur_texte' => 'Om je artikel aan de sitebeheerders en aan de anderen redacteurs voor te stellen,
@@ -39,6 +41,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'c_rubriques_creer' => 'Maak een eerste rubriek aan !',
 	'c_rubriques_creer_texte' => 'De rubrieken vormen het basisstructuur van je site. In ieder rubriek kan je artikels aanmaken.
 		Begin met het aanmaken van een eerste rubriek.',
+	'c_sites_creer' => 'Hoe je een site maakt of importeert?',
+	'c_sites_creer_texte' => 'Vanaf deze pagina kun pas een site maken of importeren
+		wanneer er tenminste één rubriek in de site bestaat.
+		Je kunt hem aanmaken via het menuVous pouvez la créer depuis le menu « Redactie » en vervolgens « Rubrieken ».',
 
 	// E
 	'explication_activer_compagnon' => 'De metgezel geeft raden op enkele paginas van het privé-ruimte om aan het in hand nemen van SPIP  te helpen. Wil je de metzegel activeren ?',

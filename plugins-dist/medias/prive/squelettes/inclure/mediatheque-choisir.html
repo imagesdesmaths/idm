@@ -58,7 +58,7 @@
 			<a href='#' onclick="jQuery(this).next().show();$(this).hide();return false;">[(#TOTAL_BOUCLE|singulier_ou_pluriel{medias:une_utilisation,medias:des_utilisations})]</a><div style='display: none;'>
 			]
 			<BOUCLE_liens(documents_liens){id_document}{'<br />'}>
-			[(#ID_OBJET|lien_objet{#OBJET}|inserer_attribut{target,_blank})]
+			[(#ID_OBJET|generer_lien_entite{#OBJET}|inserer_attribut{target,_blank})]
 			</BOUCLE_liens>
 			[(#TOTAL_BOUCLE|>{1}|oui)</div>]
 			</B_liens>

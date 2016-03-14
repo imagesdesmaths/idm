@@ -6,9 +6,11 @@
  * @plugin SVP pour SPIP
  * @license GPL
  * @package SPIP\SVP\Recherche
-**/
+ **/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 include_spip('inc/plugin');
 
 // ----------------------- Recherches de plugins ---------------------------------
@@ -22,6 +24,9 @@ include_spip('inc/plugin');
  * - est compatible avec la version SPIP installée sur le site
  * - ne liste pas ceux étant déjà installés (ces paquets peuvent toutefois être affichés)
  * - est triée par nom ou score
+ *
+ * @uses  liste_des_champs()
+ * @uses  recherche_en_base()
  *
  * @param string $phrase
  *     Texte de la recherche
@@ -43,18 +48,26 @@ include_spip('inc/plugin');
  *     ou seulement la plus récente (false) ?
  * @param string $tri
  *     Ordre du tri : nom | score
- * 
+ *
  * @return array
  *     Tableau classé par pertinence de résultat
  *     - 'prefixe' => tableau de description du paquet (si pas de doublons demandé)
  *     - n => tableau de descriptions du paquet (si doublons autorisés)
-**/
-function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $depot, $version_spip='',
-	$exclusions=array(), $afficher_exclusions=false, $doublon=false, $tri='nom')
-{
+ **/
+function svp_rechercher_plugins_spip(
+	$phrase,
+	$categorie,
+	$etat,
+	$depot,
+	$version_spip = '',
+	$exclusions = array(),
+	$afficher_exclusions = false,
+	$doublon = false,
+	$tri = 'nom'
+) {
 
 	include_spip('inc/rechercher');
-	
+
 	$plugins = array();
 	$scores = array();
 	$ids_paquets = array();
@@ -65,7 +78,7 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $depot, $versio
 		$liste = liste_des_champs();
 		$tables = array('plugin' => $liste['plugin']);
 		$options = array('jointures' => true, 'score' => true);
-	
+
 		// On cherche dans tous les enregistrements de ces tables des correspondances les plugins qui
 		// correspondent a la phrase recherchee
 		// -- On obtient une liste d'id de plugins et d'id de paquets
@@ -94,19 +107,18 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $depot, $versio
 				if (array_search($id_paquet, $ids_paquets) === false) {
 					$ids_paquets[] = $id_paquet;
 					$scores[$id_paquet] = intval($resultats['plugin'][$id_plugin]['score']);
-				}
-				else {
-					$scores[$id_paquet] = intval($resultats['paquet'][$id_paquet]['score']) 
-										+ intval($resultats['plugin'][$id_plugin]['score']);
+				} else {
+					$scores[$id_paquet] = intval($resultats['paquet'][$id_paquet]['score'])
+						+ intval($resultats['plugin'][$id_plugin]['score']);
 				}
 			}
 		}
-	}
-	else {
+	} else {
 		if ($ids_paquets = sql_allfetsel('id_paquet', 'spip_paquets')) {
 			$ids_paquets = array_map('reset', $ids_paquets);
-			foreach ($ids_paquets as $_id)
+			foreach ($ids_paquets as $_id) {
 				$scores[$_id] = 0;
+			}
 		}
 	}
 
@@ -116,24 +128,40 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $depot, $versio
 	// -- Preparation de la requete
 	if ($ids_paquets) {
 		$from = array('spip_plugins AS t1', 'spip_paquets AS t2', 'spip_depots AS t3');
-		$select = array('t1.nom AS nom', 't1.slogan AS slogan', 't1.prefixe AS prefixe', 't1.id_plugin AS id_plugin', 
-						't2.id_paquet AS id_paquet', 't2.description AS description', 't2.compatibilite_spip AS compatibilite_spip',
-						't2.lien_doc AS lien_doc',
-						't2.auteur AS auteur', 't2.licence AS licence', 't2.etat AS etat',
-						't2.logo AS logo', 't2.version AS version', 't2.nom_archive AS nom_archive',
-						't3.url_archives AS url_archives', );
+		$select = array(
+			't1.nom AS nom',
+			't1.slogan AS slogan',
+			't1.prefixe AS prefixe',
+			't1.id_plugin AS id_plugin',
+			't2.id_paquet AS id_paquet',
+			't2.description AS description',
+			't2.compatibilite_spip AS compatibilite_spip',
+			't2.lien_doc AS lien_doc',
+			't2.auteur AS auteur',
+			't2.licence AS licence',
+			't2.etat AS etat',
+			't2.logo AS logo',
+			't2.version AS version',
+			't2.nom_archive AS nom_archive',
+			't3.url_archives AS url_archives',
+		);
 		$where = array('t1.id_plugin=t2.id_plugin', 't2.id_depot=t3.id_depot');
-		if ($ids_paquets)
+		if ($ids_paquets) {
 			$where[] = sql_in('t2.id_paquet', $ids_paquets);
-		if (($categorie) AND ($categorie != 'toute_categorie'))
+		}
+		if (($categorie) and ($categorie != 'toute_categorie')) {
 			$where[] = 't1.categorie=' . sql_quote($categorie);
-		if (($etat) AND ($etat != 'tout_etat'))
+		}
+		if (($etat) and ($etat != 'tout_etat')) {
 			$where[] = 't2.etat=' . sql_quote($etat);
-		if (($depot) AND ($depot != 'tout_depot'))
+		}
+		if (($depot) and ($depot != 'tout_depot')) {
 			$where[] = 't2.id_depot=' . sql_quote($depot);
-		if ($exclusions AND !$afficher_exclusions)
+		}
+		if ($exclusions and !$afficher_exclusions) {
 			$where[] = sql_in('t2.id_plugin', $exclusions, 'NOT');
-	
+		}
+
 		if ($resultats = sql_select($select, $from, $where)) {
 			while ($paquets = sql_fetch($resultats)) {
 				$prefixe = $paquets['prefixe'];
@@ -148,43 +176,47 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $depot, $versio
 					$paquets['slogan'] = $slogan;
 					$paquets['description'] = $description;
 					// -- on ajoute le score si on a bien saisi une phrase
-					if ($phrase)
+					if ($phrase) {
 						$paquets['score'] = $scores[intval($paquets['id_paquet'])];
-					else
+					} else {
 						$paquets['score'] = 0;
+					}
 					// -- on construit l'url de l'archive
 					$paquets['url_archive'] = $paquets['url_archives'] . '/' . $paquets['nom_archive'];
 					// -- on gere les exclusions si elle doivent etre affichees
-					if ($afficher_exclusions AND in_array($paquets['id_plugin'], $exclusions))
+					if ($afficher_exclusions and in_array($paquets['id_plugin'], $exclusions)) {
 						$paquets['installe'] = true;
-					else
+					} else {
 						$paquets['installe'] = false;
+					}
 					// -- On traite les doublons (meme plugin, versions differentes)
-					if ($doublon)
-						// ajout systematique du paquet
+					if ($doublon) // ajout systematique du paquet
+					{
 						$plugins[] = $paquets;
-					else {
+					} else {
 						// ajout 
 						// - si pas encore trouve 
 						// - ou si sa version est inferieure (on garde que la derniere version)
 						if (!isset($plugins[$prefixe])
-						OR !$plugins[$prefixe]
-						OR ($plugins[$prefixe] AND spip_version_compare($plugins[$prefixe]['version'], $version, '<'))) {
+							or !$plugins[$prefixe]
+							or ($plugins[$prefixe] and spip_version_compare($plugins[$prefixe]['version'], $version, '<'))
+						) {
 							$plugins[$prefixe] = $paquets;
 						}
 					}
 				}
 			}
 		}
-		
+
 		// On trie le tableau par score décroissant ou nom croissant
 		$fonction = 'svp_trier_par_' . $tri;
-		if ($doublon)
+		if ($doublon) {
 			usort($plugins, $fonction);
-		else
+		} else {
 			uasort($plugins, $fonction);
+		}
 	}
-	
+
 	return $plugins;
 }
 
@@ -192,10 +224,11 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $depot, $versio
 /**
  * Récupère les identifiants des plugins déjà installés
  *
- * @return int[]
+ * @uses  liste_plugin_actifs()
+ * @return array
  *     Liste d'identifiants de plugins
  */
-function svp_lister_plugins_installes(){
+function svp_lister_plugins_installes() {
 
 	$ids = array();
 
@@ -220,6 +253,7 @@ function svp_lister_plugins_installes(){
  * Teste la compatibilité d'un intervalle de compatibilité avec une version
  * donnée de SPIP
  *
+ * @uses  plugin_version_compatible()
  * @param string $intervalle
  *     Intervalle de compatibilité, tel que [2.1;3.0]
  * @param string $version_spip
@@ -228,15 +262,17 @@ function svp_lister_plugins_installes(){
  *     true si l'intervalle est compatible, false sinon
  */
 function svp_verifier_compatibilite_spip($intervalle, $version_spip = '') {
-	if (!$version_spip)
-		$version_spip = $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'];
-	return plugin_version_compatible($intervalle, $version_spip,'spip');
+	if (!$version_spip) {
+		$version_spip = $GLOBALS['spip_version_branche'] . "." . $GLOBALS['spip_version_code'];
+	}
+
+	return plugin_version_compatible($intervalle, $version_spip, 'spip');
 }
 
 
 /**
  * Callback de tri pour trier les résultats de plugin par score décroissant.
- * 
+ *
  * Cette fonction est appelée par un usort ou uasort
  *
  * @param array $p1
@@ -245,19 +281,21 @@ function svp_verifier_compatibilite_spip($intervalle, $version_spip = '') {
  *     Plugin à comparer
  * @return int
  */
-function svp_trier_par_score($p1, $p2){
-	if ($p1['score'] == $p2['score']) 
+function svp_trier_par_score($p1, $p2) {
+	if ($p1['score'] == $p2['score']) {
 		$retour = 0;
-	else 
+	} else {
 		$retour = ($p1['score'] < $p2['score']) ? 1 : -1;
+	}
+
 	return $retour;
 }
 
 
- /**
+/**
  * Callback de tri pour trier les résultats de plugin par nom (alphabétique).
  *
- * Si le nom est identique on classe par version decroissante 
+ * Si le nom est identique on classe par version decroissante
  * Cette fonction est appelée par un usort ou uasort
  *
  * @param array $p1
@@ -266,15 +304,14 @@ function svp_trier_par_score($p1, $p2){
  *     Plugin à comparer
  * @return int
  */
-function svp_trier_par_nom($p1, $p2){
+function svp_trier_par_nom($p1, $p2) {
 	$c1 = strcasecmp($p1['nom'], $p2['nom']);
 	if ($c1 == 0) {
 		$c2 = spip_version_compare($p1['version'], $p1['version'], '<');
 		$retour = ($c2) ? 1 : -1;
-	}
-	else 
+	} else {
 		$retour = ($c1 < 0) ? -1 : 1;
+	}
+
 	return $retour;
 }
-
-?>

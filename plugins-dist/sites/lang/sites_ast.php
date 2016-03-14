@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=ast
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -33,12 +35,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Iguar esti sitiu',
 	'icone_referencer_nouveau_site' => 'Referenciar un nuevu sitiu',
 	'icone_voir_sites_references' => 'Ver los sitios referenciaos',
+	'info_1_article_syndique' => '1 artículu sindicáu',
+	'info_1_site' => '1 sitiu web',
 	'info_a_valider' => '[a validar]',
+	'info_aucun_article_syndique' => 'Dengún artículu sindicáu',
+	'info_aucun_site' => 'Dengún sitiu',
 	'info_bloquer' => 'bloquiar',
 	'info_bloquer_lien' => 'bloquiar esti enllace',
 	'info_derniere_syndication' => 'La cabera sindicación d’esti sitiu efeutuose el',
 	'info_liens_syndiques_1' => 'enllaces sindicaos',
 	'info_liens_syndiques_2' => 'tan esperando validación.',
+	'info_nb_articles_syndiques' => '@nb@ artículos sindicaos',
+	'info_nb_sites' => '@nb@ sitios',
 	'info_nom_site_2' => '<b>Nome del sitiu</b> [Obligatoriu]',
 	'info_panne_site_syndique' => 'Sitiu sindicau ensin serviciu',
 	'info_probleme_grave' => 'problema de',

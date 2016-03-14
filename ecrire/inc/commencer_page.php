@@ -3,46 +3,94 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+/**
+ * Présentation de l'interface privee (exec PHP), début du HTML
+ *
+ * @package SPIP\Core\Presentation
+ **/
 
-//
-// Presentation de l'interface privee, debut du HTML
-//
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-// http://doc.spip.org/@inc_commencer_page_dist
-function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $id_rubrique = "",$menu=true,$minipres=false, $alertes = true) {
-	global $connect_id_auteur;
+/**
+ * Débute une page HTML pour l'espace privé
+ *
+ * Préferer l'usage des squelettes prive/squelettes/.
+ *
+ * @uses init_entete()
+ * @uses init_body()
+ * @example
+ *     ```
+ *     $commencer_page = charger_fonction('commencer_page','inc');
+ *     echo $commencer_page($titre);
+ *     ```
+ *
+ * @param string $titre Titre de la page
+ * @param string $rubrique ?
+ * @param string $sous_rubrique ?
+ * @param string $id_rubrique ?
+ * @param bool $menu ?
+ * @param bool $minipres ?
+ * @param bool $alertes ?
+ * @return string Code HTML
+ **/
+function inc_commencer_page_dist(
+	$titre = "",
+	$rubrique = "accueil",
+	$sous_rubrique = "accueil",
+	$id_rubrique = "",
+	$menu = true,
+	$minipres = false,
+	$alertes = true
+) {
 
 	include_spip('inc/headers');
 
 	http_no_cache();
 
 	return init_entete($titre, $id_rubrique, $minipres)
-	. init_body($rubrique, $sous_rubrique, $id_rubrique,$menu)
+	. init_body($rubrique, $sous_rubrique, $id_rubrique, $menu)
 	. "<div id='page'>"
-	. auteurs_recemment_connectes($connect_id_auteur)
-	. ($alertes?alertes_auteur($connect_id_auteur):'')
+	. auteurs_recemment_connectes($GLOBALS['connect_id_auteur'])
+	. ($alertes ? alertes_auteur($GLOBALS['connect_id_auteur']) : '')
 	. '<div class="largeur">';
 }
 
-// envoi du doctype et du <head><title>...</head>
-// http://doc.spip.org/@init_entete
-function init_entete($titre='', $dummy=0, $minipres=false) {
+/**
+ * Envoi du DOCTYPE et du `<head><title>   </head>`
+ *
+ * @uses _DOCTYPE_ECRIRE
+ * @uses textebrut()
+ * @uses typo()
+ * @uses html_lang_attributes()
+ * @uses init_head()
+ *
+ * @param string $titre
+ *     Titre de la page
+ * @param integer $dummy
+ *     Valeur non utilisée…
+ * @param bool $minipres
+ * @return string
+ *     Entête du fichier HTML avec le DOCTYPE
+ */
+function init_entete($titre = '', $dummy = 0, $minipres = false) {
 	include_spip('inc/texte');
-	if (!$nom_site_spip = textebrut(typo($GLOBALS['meta']["nom_site"])))
-		$nom_site_spip=  _T('info_mon_site_spip');
+	if (!$nom_site_spip = textebrut(typo($GLOBALS['meta']["nom_site"]))) {
+		$nom_site_spip = _T('info_mon_site_spip');
+	}
 
 	$titre = "["
 		. $nom_site_spip
-		. "]" 
-	  . ($titre ? " ".textebrut(typo($titre)):"");
+		. "]"
+		. ($titre ? " " . textebrut(typo($titre)) : "");
 
 	return _DOCTYPE_ECRIRE
 	. html_lang_attributes()
@@ -51,29 +99,63 @@ function init_entete($titre='', $dummy=0, $minipres=false) {
 	. "</head>\n";
 }
 
-function init_head($titre='', $dummy=0, $minipres=false) {
-	return recuperer_fond("prive/squelettes/head/dist",array('titre'=>$titre,'minipres'=>$minipres?' ':''));
+/**
+ * Retourne le code HTML du head (intégration des JS et CSS) de l'espace privé
+ *
+ * Code HTML récupéré du squelette `prive/squelettes/head/dist`
+ *
+ * @param string $titre
+ * @param integer $dummy
+ * @param bool $minipres
+ * @return string
+ */
+function init_head($titre = '', $dummy = 0, $minipres = false) {
+	return recuperer_fond("prive/squelettes/head/dist", array('titre' => $titre, 'minipres' => $minipres ? ' ' : ''));
 }
 
-// fonction envoyant la double serie d'icones de redac
-// http://doc.spip.org/@init_body
-function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='',$menu=true) {
-	global $connect_id_auteur, $auth_can_disconnect;
+/**
+ * Fonction envoyant la double série d'icônes de rédac
+ *
+ * @uses init_body_class()
+ * @uses inc_bandeau_dist()
+ *
+ * @pipeline_appel body_prive
+ *
+ * @global mixed $connect_id_auteur
+ * @global mixed $auth_can_disconnect
+ *
+ * @param string $rubrique
+ * @param string $sous_rubrique
+ * @param integer $id_rubrique
+ * @param bool $menu
+ * @return string
+ */
+function init_body($rubrique = 'accueil', $sous_rubrique = 'accueil', $id_rubrique = '', $menu = true) {
 
-	$res = pipeline('body_prive',"<body class='"
-			. init_body_class()." "._request('exec')."'"
-			. ($GLOBALS['spip_lang_rtl'] ? " dir='rtl'" : "")
-			.'>');
+	$res = pipeline('body_prive', "<body class='"
+		. init_body_class() . " " . _request('exec') . "'"
+		. ($GLOBALS['spip_lang_rtl'] ? " dir='rtl'" : "")
+		. '>');
 
-	if (!$menu) return $res;
+	if (!$menu) {
+		return $res;
+	}
 
 
 	$bandeau = charger_fonction('bandeau', 'inc');
 
 	return $res
-	 . $bandeau();
+	. $bandeau();
 }
 
+/**
+ * Calcule les classes CSS à intégrer à la balise `<body>` de l'espace privé
+ *
+ * Les classes sont calculées en fonction des préférences de l'utilisateur,
+ * par exemple s'il choisit d'avoir ou non les icônes.
+ *
+ * @return string Classes CSS (séparées par des espaces)
+ */
 function init_body_class() {
 	$GLOBALS['spip_display'] = isset($GLOBALS['visiteur_session']['prefs']['display'])
 		? $GLOBALS['visiteur_session']['prefs']['display']
@@ -82,24 +164,28 @@ function init_body_class() {
 		? $GLOBALS['visiteur_session']['prefs']['display_navigation']
 		: 'navigation_avec_icones';
 	$spip_display_outils = isset($GLOBALS['visiteur_session']['prefs']['display_outils'])
-		? ($GLOBALS['visiteur_session']['prefs']['display_outils']?'navigation_avec_outils':'navigation_sans_outils')
+		? ($GLOBALS['visiteur_session']['prefs']['display_outils'] ? 'navigation_avec_outils' : 'navigation_sans_outils')
 		: 'navigation_avec_outils';
 	$GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? $_COOKIE['spip_ecran'] : "etroit";
 
-	$display_class=array(0=>'icones_img_texte'/*init*/,1=>'icones_texte',2=>'icones_img_texte',3=>'icones_img');
-	return $GLOBALS['spip_ecran'] . " $spip_display_navigation $spip_display_outils ".$display_class[$GLOBALS['spip_display']];
+	$display_class = array(
+		0 => 'icones_img_texte'
+		/*init*/,
+		1 => 'icones_texte',
+		2 => 'icones_img_texte',
+		3 => 'icones_img'
+	);
+
+	return $GLOBALS['spip_ecran'] . " $spip_display_navigation $spip_display_outils " . $display_class[$GLOBALS['spip_display']];
 }
 
 
-// http://doc.spip.org/@lien_change_var
-function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") {
-	$lien = parametre_url($lien, $set, $couleur);
-	return "\n<area shape='rect' href='$lien' coords='$coords' title=\"$titre\" alt=\"$titre\" $mouseOver />";
-}
-
-// http://doc.spip.org/@auteurs_recemment_connectes
-function auteurs_recemment_connectes($id_auteur){
+/**
+ * Afficher la liste des auteurs connectés à l'espace privé
+ *
+ * @param integer $id_auteur
+ * @return string
+ */
+function auteurs_recemment_connectes($id_auteur) {
 	return recuperer_fond('prive/objets/liste/auteurs_enligne');
 }
-
-?>

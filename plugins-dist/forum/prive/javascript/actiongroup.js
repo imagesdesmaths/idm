@@ -30,7 +30,7 @@ actiongroup.emptySelection = function(){
 actiongroup.selectAll = function(sel){
 	sel = sel || document;
 	$('input.actiongroup',sel)
-		.attr('checked',true)
+		.prop('checked',true)
 		.each(function(){
 			actiongroup.updateChecklist($(this).attr('value'),true,false);
 		});
@@ -42,7 +42,7 @@ actiongroup.selectAll = function(sel){
 actiongroup.unselectAll = function(sel){
 	sel = sel || document;
 	$('input.actiongroup',sel)
-		.attr('checked',false)
+		.prop('checked',false)
 		.each(function(){
 			actiongroup.updateChecklist($(this).attr('value'),false,false);
 		});
@@ -65,9 +65,9 @@ actiongroup.updateChecklist = function(value,checked,update_status){
 		jQuery.spip.log(actiongroup.countchecked);
 		if (actiongroup.countchecked==0){
 			$('#actiongroup .shortcut.empty,#actiongroup .shortcut.unselectall')
-				.addClass('hidden');
+				.addClass('none');
 			$('#actiongroup .shortcut.selectall')
-				.removeClass('hidden');
+				.removeClass('none');
 			$('#actiongroup .status .zero')
 				.show()
 				.siblings(':visible')
@@ -98,10 +98,10 @@ actiongroup.updateChecklist = function(value,checked,update_status){
 			var checked = $('input.actiongroup:checked').length;
 			if (checked)
 				$('#actiongroup .shortcut.unselectall')
-					.removeClass('hidden');
+					.removeClass('none');
 			else
 				$('#actiongroup .shortcut.unselectall')
-					.addClass('hidden');
+					.addClass('none');
 			if (actiongroup.countchecked>checked)
 				$('#actiongroup .shortcut.empty')
 					.removeClass('hidden');
@@ -110,10 +110,10 @@ actiongroup.updateChecklist = function(value,checked,update_status){
 					.addClass('hidden');
 			if (actiongroup.countCurrent>checked)
 				$('#actiongroup .shortcut.selectall')
-					.removeClass('hidden');
+					.removeClass('none');
 			else
 				$('#actiongroup .shortcut.selectall')
-					.addClass('hidden');
+					.addClass('none');
 		}
 		$('#actiongroup')
 			.siblings('.success:visible')
@@ -128,7 +128,7 @@ actiongroup.updateHtmlFromChecklist = function(){
 	actiongroup.countCurrent = $('input.actiongroup')
 		.each(function(){
 			$(this)
-			  .attr('checked',actiongroup.checkedItems[$(this).attr('value')] || false);
+			  .prop('checked',actiongroup.checkedItems[$(this).attr('value')] || false);
 		})
 		.length;
 	// forcer la mise a jour des messages

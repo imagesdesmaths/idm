@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/medias?lang_cible=ar
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -105,16 +107,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_heure' => 'الساعة',
 	'info_illustrations' => 'الرسوم التوضيحية',
 	'info_image_max_poids' => 'يحب ان يكون حجم الصور أقل من @maxi@ (حجم هذا الملف يبلغ @actuel@).',
+	'info_image_max_taille' => 'يحب ان يكون حجم الصور أقل من @maxi@ (حجم هذا الملف يبلغ @actuel@).',
 	'info_inclusion_directe' => 'ضم مباشر:',
 	'info_inclusion_vignette' => 'ضم المصغر:',
 	'info_installer_tous_documents' => 'تثبيت كل المستندات',
 	'info_largeur' => 'عرض',
 	'info_logo_max_taille' => 'يجب ألا يتعدى حجم الرموز @maxi@ (يبلغ حجم الملف الحالي @actuel@). ',
+	'info_mode' => 'الوضعية',
 	'info_modifier_document' => 'تعديل المستند',
 	'info_portfolio' => 'صالة العرض',
 	'info_referencer_doc_distant' => 'تبويب مستند على شبكة انترنت:',
 	'info_sans_vignette' => 'بدون مصغر',
 	'info_statut_document' => 'هذا المستند:',
+	'info_taille' => 'الحجم',
 	'info_telecharger' => 'تحميل من جهازك:',
 	'infos' => 'معلومات تقنية',
 	'item_autoriser_selectionner_date_en_ligne' => 'السماح بتعديل تاريخ كل مستند',

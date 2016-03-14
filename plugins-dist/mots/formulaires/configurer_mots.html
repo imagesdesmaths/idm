@@ -8,24 +8,28 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
+		<div class="editer-groupe">
 			#SET{name,articles_mots}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:mots:info_question_mots_cles:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<div class="choix">
 					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
-					onchange="if ($(this).prop('checked')) $('li.editer_articles_mots').siblings('li').show('fast');"
-					[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:mots:item_utiliser_mots_cles:></label>
+						onclick="$(this).blur();"
+						onchange="if ($(this).prop('checked')) $('li.editer_articles_mots').siblings('li').show('fast');"
+						[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"]
+					/><label for="#GET{name}_oui"><:mots:item_utiliser_mots_cles:></label>
 				</div>
 				<div class="choix">
 					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
-					onchange="if ($(this).prop('checked')) $('li.editer_articles_mots').siblings('li').hide('fast');"
-					[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:mots:item_non_utiliser_mots_cles:></label>
+						onclick="$(this).blur();"
+						onchange="if ($(this).prop('checked')) $('li.editer_articles_mots').siblings('li').hide('fast');"
+						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"]
+					/><label for="#GET{name}_non"><:mots:item_non_utiliser_mots_cles:></label>
 				</div>
-			</li>
+			</div>
 			#SET{name,config_precise_groupes}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]"[(#ENV{articles_mots}|=={oui}|non)style="display:none;"]>
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]"[(#ENV{articles_mots}|=={oui}|non)style="display:none;"]>
 				<label><:mots:titre_config_groupe_mots_cles:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<p class="explication"><:mots:texte_config_groupe_mots_cles:></p>
@@ -37,9 +41,9 @@
 					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
 					[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:mots:item_non_utiliser_config_groupe_mots_cles:></label>
 				</div>
-			</li>
+			</div>
 			#SET{name,mots_cles_forums}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]"[(#ENV{articles_mots}|=={oui}|non)style="display:none;"]>
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]"[(#ENV{articles_mots}|=={oui}|non)style="display:none;"]>
 				<label><:mots:titre_mots_cles_dans_forum:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<p class="explication"><:mots:texte_mots_cles_dans_forum:></p>
@@ -51,8 +55,8 @@
 					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
 					[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:mots:item_non_ajout_mots_cles:></label>
 				</div>
-			</li>
-		</ul>
+			</div>
+		</div>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>

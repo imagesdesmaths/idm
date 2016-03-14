@@ -18,9 +18,10 @@ if (!editbox_initialized){
 		 })(jQuery);
 	}
 }
-if (typeof multifile!="undefined" && typeof jQuery.MultiFile=="undefined"){
-jQuery.getScript(multifile,function(){
-	jQuery.MultiFile();
-	onAjaxLoad(function(){jQuery.MultiFile();});
-});
+var multifile_loader;
+if (typeof multifile_loader=="undefined" && typeof multifile!="undefined"){
+	multifile_loader = jQuery.getScript(multifile,function(){
+		jQuery("input[type=file].multi").MultiFile();
+		onAjaxLoad(function(){if (typeof jQuery!="undefined") jQuery("input[type=file].multi").MultiFile();});
+	});
 }

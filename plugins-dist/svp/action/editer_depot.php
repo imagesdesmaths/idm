@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -17,14 +17,16 @@
  * @license GPL
  * @package SPIP\SVP\Actions
  */
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 /**
- * Action de mise à jour des descriptions d'un dépot 
+ * Action de mise à jour des descriptions d'un dépot
  *
  * @return array
  *     Liste identifiant du dépot, texte d'erreur éventuel
-**/
+ **/
 function action_editer_depot_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -49,17 +51,22 @@ function action_editer_depot_dist() {
 		}
 
 		// On met a jour le depot avec les saisies
-		if (sql_updateq('spip_depots', 
-						array('titre'=> _request('titre'), 
-							'descriptif'=> _request('descriptif'),
-							'type'=> _request('type')),
-						'id_depot=' . sql_quote($id_depot)));
-			// Enregistre l'envoi dans la BD
-			// Dans le cas du depot rien n'est fait actuellement, on garde cette fonction
-			// par souci de coherence avec les autres editions d'objet et pour usage futur
-			$err = depots_set($id_depot);
-			if (!$err)
-				spip_log("ACTION MODIFIER DEPOT (manuel) : id_depot = ". $id_depot, 'svp_actions.' . _LOG_INFO);
+		if (sql_updateq('spip_depots',
+			array(
+				'titre' => _request('titre'),
+				'descriptif' => _request('descriptif'),
+				'type' => _request('type')
+			),
+			'id_depot=' . sql_quote($id_depot))) {
+			;
+		}
+		// Enregistre l'envoi dans la BD
+		// Dans le cas du depot rien n'est fait actuellement, on garde cette fonction
+		// par souci de coherence avec les autres editions d'objet et pour usage futur
+		$err = depots_set($id_depot);
+		if (!$err) {
+			spip_log("ACTION MODIFIER DEPOT (manuel) : id_depot = " . $id_depot, 'svp_actions.' . _LOG_INFO);
+		}
 	}
 
 	return array($id_depot, $err);
@@ -72,12 +79,12 @@ function action_editer_depot_dist() {
  *
  * @note
  *     Cette fonction ne fait rien actuellement !!
- * 
+ *
  * @param int $id_depot
  *     Identifiant du dépot
  * @return string
  *     Texte d'une eventuelle erreur
-**/
+ **/
 function depots_set($id_depot) {
 	$err = '';
 
@@ -92,5 +99,3 @@ function depots_set($id_depot) {
 
 	return $err;
 }
-
-?>

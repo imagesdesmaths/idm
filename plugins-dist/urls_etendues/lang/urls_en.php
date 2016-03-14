@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/urls?lang_cible=en
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -54,9 +56,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_type_html' => 'HTML objects URLs ',
 	'titre_type_libres' => 'Free URLs',
 	'titre_type_page' => 'Page URLs',
-	'titre_type_propres' => 'Clean URLs',
-	'titre_type_propres2' => 'Clean+<tt>.html</tt>',
-	'titre_type_propres_qs' => 'Clean in query-string URLs',
+	'titre_type_propres' => 'Friendly URLs',
+	'titre_type_propres2' => 'Friendly +<tt>.html</tt>',
+	'titre_type_propres_qs' => 'Friendly in query-string URLs',
 	'titre_type_simple' => 'Simple URLs',
 	'titre_type_standard' => 'Historical URLs',
 	'titre_type_urls' => 'Type of URL addresses',

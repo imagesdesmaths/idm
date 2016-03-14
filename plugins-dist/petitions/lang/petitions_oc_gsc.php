@@ -3,9 +3,17 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=oc_gsc
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// B
+	'bouton_radio_activer_petition' => 'Activar la peticion',
+	'bouton_radio_pas_petition' => 'Nada peticion',
+	'bouton_radio_petition_activee' => 'Peticion activada',
+	'bouton_radio_supprimer_petition' => 'Suprimir la peticion',
 
 	// F
 	'form_pet_adresse_site' => 'Adreiça deu vòste sit', # MODIF

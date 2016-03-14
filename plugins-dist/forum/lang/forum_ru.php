@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=ru
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -14,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_radio_articles_futurs' => 'только для новых материалов (текущие настройки не изменятся).',
 	'bouton_radio_articles_tous' => 'для всех статей без исключения.',
 	'bouton_radio_articles_tous_sauf_forum_desactive' => 'для всех статей, кроме тех, в которых комментарии отключены.',
-	'bouton_radio_enregistrement_obligatoire' => 'Только для зарегистрированных пользователей. Посетитель должен зарегистрироваться перед тем как оставить комментарий.',
+	'bouton_radio_enregistrement_obligatoire' => 'Только для зарегистрированных пользователей. Посетитель должен зарегистрироваться перед тем, как оставить комментарий.',
 	'bouton_radio_moderation_priori' => 'Комментарии публикуются на сайте после проверки администратором (пре-модерация).',
 	'bouton_radio_modere_abonnement' => 'только пользователи сайта',
 	'bouton_radio_modere_posteriori' => 'размещать без проверки',
@@ -26,6 +28,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_enregistrement_message' => 'Из-за технических проблем не получается сохранить ваш комментарий.',
+	'extensions_autorisees' => 'Авторизованные расширения:',
+	'extensions_autorisees_toutes' => 'все',
 
 	// F
 	'form_pet_message_commentaire' => 'Комментарии',
@@ -38,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_attention_trop_caracteres' => '<b>Внимание!</b> Ваше сообщение содержит @compte@ символов, мы можем добавить ваш комментарий только если его размер не превышает @max@ символов.',
 	'forum_avez_selectionne' => 'Вы выбрали:',
 	'forum_cliquer_retour' => 'Нажмите <a href=\'@retour_forum@\'>сюда</a> для продолжения.',
+	'forum_envoyer' => 'Отправить',
 	'forum_forum' => 'комментарий',
 	'forum_info_modere' => 'Все комментарии проверяются администрацией сайта. Ваше сообщение будет опубликовано после одобрения администратором.',
 	'forum_lien_hyper' => 'Ссылка',
@@ -47,9 +52,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_ne_repondez_pas' => 'Не отвечайте на это письмо - перейдите по ссылке:',
 	'forum_page_url' => '(Если ваше сообщение относится к материалу, размещенному в Интернете, укажите название этой статьи  и ссылку на нее).',
 	'forum_permalink' => 'Постоянная ссылка',
-	'forum_poste_par' => '@parauteur@ прокомментировал вашу статью « @titre@ ».',
+	'forum_poste_par' => '@parauteur@ прокомментировал вашу статью «@titre@».',
 	'forum_poste_par_court' => 'Комментарий разместил @parauteur@.',
-	'forum_poste_par_generique' => 'Комментарий разместил @parauteur@ (@objet@ « @titre@ »).',
+	'forum_poste_par_generique' => 'Комментарий разместил @parauteur@ (@objet@ «@titre@»).',
 	'forum_qui_etes_vous' => 'Кто вы?',
 	'forum_saisie_texte_info' => 'Вы можете использовать следующую разметку текста <code>[->ссылка] {{жирный}} {курсив} <quote> <code></code> и теги HTML <code><q> <del> <ins></code>. Что бы создать новый абзац два раза нажмите enter.',
 	'forum_texte' => 'Комментарий:',
@@ -84,8 +89,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_desactiver_forum_public' => 'Отключить комментарии по сайту. Вы можете отдельно разрешить комментировать конкретные статьи, но в целом комментарии на сайте отключены.',
 	'info_envoi_forum' => 'Отправлять комментарии авторам статей',
 	'info_fonctionnement_forum' => 'Модерация комментариев:',
-	'info_forums_liees_mot' => 'Комментарии относящиеся к этому ключу',
-	'info_gauche_suivi_forum_2' => 'На странице <i>управление комментариями</i>  вы можете управлять комментариями и сообщениями на сайте.',
+	'info_forcer_previsualisation_court' => 'Принудительный предпросмотр',
+	'info_forcer_previsualisation_long' => 'Принудительный предпросмотр перед отправкой сообщения',
+	'info_forums_liees_mot' => 'Комментарии, относящиеся к этому ключевому слову',
+	'info_gauche_suivi_forum_2' => 'На странице <i>управления комментариями</i>  вы можете управлять комментариями и сообщениями на сайте.',
 	'info_liens_syndiques_3' => 'комментария(ев)',
 	'info_liens_syndiques_4' => 'необходимо',
 	'info_liens_syndiques_5' => 'комментарий',
@@ -111,7 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_non_config_forums_prive_objets' => 'отключить эти форумы',
 
 	// L
-	'label_selectionner' => 'Выбрать :',
+	'label_selectionner' => 'Выбрать:',
 	'lien_reponse_article' => 'Комментарий к статье',
 	'lien_reponse_breve_2' => 'Комментарий к новости',
 	'lien_reponse_message' => 'Ответить на сообщение',
@@ -158,7 +165,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_cadre_forum_administrateur' => 'Форум для администраторов',
 	'titre_cadre_forum_interne' => 'Внутренний форум',
 	'titre_config_forums_prive' => 'Внутренние комментарии',
-	'titre_forum' => 'Комментарии',
+	'titre_forum' => 'Комментарии и форумы',
 	'titre_forum_suivi' => 'Управление комментариями',
 	'titre_page_forum_suivi' => 'Управление комментариями',
 	'titre_selection_action' => 'Выбрать',

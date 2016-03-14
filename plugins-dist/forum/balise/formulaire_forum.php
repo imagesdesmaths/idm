@@ -3,38 +3,53 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
+/**
+ * Gestion du formulaire Forum et de sa balise
+ *
+ * @package SPIP\Forum\Balises
+ **/
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}  #securite
 
 include_spip('inc/acces');
 include_spip('inc/texte');
 include_spip('inc/forum');
 
-/*******************************/
-/* GESTION DU FORMULAIRE FORUM */
-/*******************************/
-
 /**
- * Contexte du formulaire
- * Mots-cles dans les forums :
- * Si la variable de personnalisation $afficher_groupe[] est definie
- * dans le fichier d'appel, et si la table de reference est OK, proposer
- * la liste des mots-cles
- * #FORMULAIRE_FORUM seul calcule (objet, id_objet) depuis la boucle parente
- * #FORMULAIRE_FORUM{#SELF} pour forcer l'url de retour
- * #FORMULAIRE_FORUM{#SELF, article, 3} pour forcer l'objet et son identifiant
- * http://code.spip.net/@balise_FORMULAIRE_FORUM
+ * Compile la balise `#FORMULAIRE_FORUM` qui affiche un formulaire d'ajout
+ * de commentaire
  *
- * @param Object $p
- * @return Object
+ * Signature : `#FORMULAIRE_FORUM{[redirection[, objet, id_objet]]}`
+ *
+ * Particularité du contexte du formulaire pour permettre une saisie
+ * de mots-clés dans les forums : si la variable de personnalisation
+ * `$afficher_groupe[]` est définie dans le fichier d'appel, et si la table
+ * de référence est OK, la liste des mots-clés est alors proposée.
+ *
+ * @balise
+ * @link http://www.spip.net/3969 Balise `#FORMULAIRE_FORUM`
+ * @link http://www.spip.net/1827 Les formulaires
+ * @example
+ *     ```
+ *     #FORMULAIRE_FORUM seul calcule (objet, id_objet) depuis la boucle parente
+ *     #FORMULAIRE_FORUM{#SELF} pour forcer l'url de retour
+ *     #FORMULAIRE_FORUM{#SELF, article, 3} pour forcer l'objet et son identifiant
+ *     ```
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
  */
-function balise_FORMULAIRE_FORUM ($p) {
+function balise_FORMULAIRE_FORUM($p) {
 	/**
 	 * On recupere $objet et $id_objet depuis une boucle englobante si possible
 	 * Sinon, on essaie aussi de recuperer des id_xx dans l'URL qui pourraient indiquer
@@ -42,9 +57,13 @@ function balise_FORMULAIRE_FORUM ($p) {
 	 * Enfin, on pourra aussi forcer objet et id_objet depuis l'appel du formulaire
 	 */
 
-	$i_boucle  = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
-	$_id_objet = $p->boucles[$i_boucle]->primary;
-	$_type     = $p->boucles[$i_boucle]->id_table;
+	$i_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
+	if ($i_boucle) { // La balise peut aussi être utilisée hors boucle.
+		$_id_objet = $p->boucles[$i_boucle]->primary;
+		$_type = $p->boucles[$i_boucle]->id_table;
+	} else {
+		$_id_objet = $_type = null;
+	}
 
 	/**
 	 * On essaye de trouver les forums en fonction de l'environnement
@@ -58,14 +77,14 @@ function balise_FORMULAIRE_FORUM ($p) {
 		'id_forum',
 		'ajouter_mot',
 		'ajouter_groupe',
-		'afficher_texte'
+		'forcer_previsu'
 	);
-	
+
 	if ($ids) {
 		$obtenir = array_merge($obtenir, $ids);
 	}
 
-	$p = calculer_balise_dynamique($p,'FORMULAIRE_FORUM', $obtenir,
+	$p = calculer_balise_dynamique($p, 'FORMULAIRE_FORUM', $obtenir,
 		array("'$_type'", count($ids))
 	);
 
@@ -81,14 +100,12 @@ function balise_FORMULAIRE_FORUM ($p) {
 /**
  * Chercher l'objet/id_objet et la configuration du forum
  *
- * http://code.spip.net/@balise_FORMULAIRE_FORUM_stat
- *
  * @param array $args
  * @param array $context_compil
  * @return array|bool
  */
 function balise_FORMULAIRE_FORUM_stat($args, $context_compil) {
-	
+
 
 	// un arg peut contenir l'url sur lequel faire le retour
 	// exemple dans un squelette article.html : [(#FORMULAIRE_FORUM{#SELF})]
@@ -101,11 +118,12 @@ function balise_FORMULAIRE_FORUM_stat($args, $context_compil) {
 	$id_forum = intval(array_shift($args));
 	$ajouter_mot = array_shift($args);
 	$ajouter_groupe = array_shift($args);
-	$afficher_texte = array_shift($args);
+	$forcer_previsu = array_shift($args);
 
-	$r = balise_forum_retrouve_objet($ido,$id_forum,$args,$context_compil);
-	if (!$r)
+	$r = balise_forum_retrouve_objet($ido, $id_forum, $args, $context_compil);
+	if (!$r) {
 		return false;
+	}
 
 	list($objet, $id_objet, $retour) = $r;
 
@@ -114,15 +132,29 @@ function balise_FORMULAIRE_FORUM_stat($args, $context_compil) {
 	// pour conditionner l'affichage d'un titre le precedant
 	// (ie compatibilite)
 	$accepter_forum = controler_forum($objet, $id_objet);
-	if ($accepter_forum == 'non')
+	if ($accepter_forum == 'non') {
 		return false;
+	}
 
 	return
-		array($objet,
-		$id_objet, $id_forum, $ajouter_mot, $ajouter_groupe, $afficher_texte, $retour);
+		array(
+			$objet,
+			$id_objet,
+			$id_forum,
+			$ajouter_mot,
+			$ajouter_groupe,
+			$forcer_previsu,
+			$retour
+		);
 }
 
 /**
+ * Retrouve l'objet et id_objet d'un forum
+ *
+ * S'il n'est pas transmis, on le prend dans la boucle englobante, sinon
+ * dans l'environnement, sinon on tente de le retrouver depuis un autre
+ * message de forum
+ *
  * @param int $ido
  * @param int $id_forum
  * @param array $args
@@ -130,13 +162,13 @@ function balise_FORMULAIRE_FORUM_stat($args, $context_compil) {
  * @param bool $objet_obligatoire
  * @return array|bool
  */
-function balise_forum_retrouve_objet($ido,$id_forum,$args,$context_compil, $objet_obligatoire = true){
-	$_objet     = $context_compil[5]; // type le la boucle deja calcule
+function balise_forum_retrouve_objet($ido, $id_forum, $args, $context_compil, $objet_obligatoire = true) {
+	$_objet = $context_compil[5]; // type le la boucle deja calcule
 	$nb_ids_env = $context_compil[6]; // nombre d'elements id_xx recuperes
-	$nb         = $nb_ids_env;
-	$url        = isset($args[$nb]) ? $args[$nb] : '';
-	$objet      = isset($args[++$nb]) ? $args[$nb] : '';
-	$id_objet   = isset($args[++$nb]) ? $args[$nb] : 0;
+	$nb = $nb_ids_env;
+	$url = isset($args[$nb]) ? $args[$nb] : '';
+	$objet = isset($args[++$nb]) ? $args[$nb] : '';
+	$id_objet = isset($args[++$nb]) ? $args[$nb] : 0;
 
 	// pas d'objet force ? on prend le type de boucle calcule
 	if (!$objet) {
@@ -152,14 +184,15 @@ function balise_forum_retrouve_objet($ido,$id_forum,$args,$context_compil, $obje
 	// on tente de prendre l'objet issu de l'environnement si un n'a pas pu etre calcule
 	if (!$objet) {
 		$objets = forum_get_objets_depuis_env();
-		$ids = array(); $i = 0;
+		$ids = array();
+		$i = 0;
 		foreach ($objets as $o => $ido) {
 			if ($id = $args[$i]) {
 				$ids[$o] = $id;
 			}
 			$i++;
 		}
-		if (count($ids)>1) {
+		if (count($ids) > 1) {
 			if (isset($ids['rubrique'])) {
 				unset($ids['rubrique']);
 			}
@@ -172,20 +205,20 @@ function balise_forum_retrouve_objet($ido,$id_forum,$args,$context_compil, $obje
 	unset($i);
 
 	// et si on n'a toujours pas ce qu'on souhaite, on tente de le trouver dans un forum existant...
-	if (($objet=='forum' OR !$id_objet) and $id_forum){
+	if (($objet == 'forum' or !$id_objet) and $id_forum) {
 		if ($objet = sql_fetsel(array('id_objet', 'objet'), 'spip_forum', 'id_forum=' . intval($id_forum))) {
 			$id_objet = $objet['id_objet'];
 			$objet = $objet['objet'];
 		} else {
-			if ($objet_obligatoire)
+			if ($objet_obligatoire) {
 				return false;
+			}
 		}
 	}
 	// vraiment la... faut pas exagerer !
-	if ($objet_obligatoire AND !$id_objet) {
+	if ($objet_obligatoire and !$id_objet) {
 		return false;
 	}
 
-	return array($objet,$id_objet,$url);
+	return array($objet, $id_objet, $url);
 }
-?>

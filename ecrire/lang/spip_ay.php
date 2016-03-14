@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=ay
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -466,7 +468,6 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach’a qamawita (urunaka, phuqañ
 	'login_retour_public' => 'Jach’a qamaw utar kuttaña',
 	'login_retour_site' => 'Jach’a qamaw utar kuttaña',
 	'login_retoursitepublic' => 'jach’a qamaw uta',
-	'login_sans_cookiie' => 'Uñicht’aw jan \\&quot;cookie\\&quot;',
 	'login_sinscrire' => 'qillqayasiña',
 	'login_test_navigateur' => 'tuyur yant’a/mayamp yatiyt’awi',
 	'login_verifiez_navigateur' => '(Tuyurimax janiw imt’atam sum katkiti uk qhanstayam...)',

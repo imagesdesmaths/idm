@@ -3,34 +3,38 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 include_spip('inc/modifier');
 
 // Nota: quand on edite un forum existant, il est de bon ton d'appeler
 // au prealable conserver_original($id_forum)
 // http://code.spip.net/@revision_forum
-if(!function_exists('revision_forum')){
-	function revision_forum($id_forum, $c=false) {
+if (!function_exists('revision_forum')) {
+	function revision_forum($id_forum, $c = false) {
 
-		$t = sql_fetsel("*", "spip_forum", "id_forum=".intval($id_forum));
+		$t = sql_fetsel("*", "spip_forum", "id_forum=" . intval($id_forum));
 		if (!$t) {
 			spip_log("erreur forum $id_forum inexistant");
+
 			return;
 		}
 
 		// Calculer l'invalideur des caches lies a ce forum
 		if ($t['statut'] == 'publie') {
 			include_spip('inc/invalideur');
-			$invalideur = array("id='forum/$id_forum'","id='".$t['objet']."/".$t['id_objet']."'");
-		} else
+			$invalideur = array("id='forum/$id_forum'", "id='" . $t['objet'] . "/" . $t['id_objet'] . "'");
+		} else {
 			$invalideur = '';
+		}
 
 		// Supprimer 'http://' tout seul
 		if (isset($c['url_site'])) {
@@ -45,24 +49,26 @@ if(!function_exists('revision_forum')){
 			),
 			$c);
 
-		$id_thread = $t["id_thread"];
+		$id_thread = intval($t["id_thread"]);
 		$cles = array();
 		foreach (array('id_objet', 'objet') as $k) {
-			if (isset($c[$k]) AND $c[$k]) $cles[$k] = $c[$k];
+			if (isset($c[$k]) and $c[$k]) {
+				$cles[$k] = $c[$k];
+			}
 		}
 
 		// Modification des id_article etc
 		// (non autorise en standard mais utile pour des crayons)
 		// on deplace tout le thread {sauf les originaux}.
-		if (count($cles) AND $id_thread) {
-			spip_log("update thread id_thread=$id_thread avec ".var_export($cles,1),'forum.'. _LOG_INFO_IMPORTANTE);
-			sql_updateq("spip_forum", $cles, "id_thread=".$id_thread." AND statut!='original'");
+		if (count($cles) and $id_thread) {
+			spip_log("update thread id_thread=$id_thread avec " . var_export($cles, 1), 'forum.' . _LOG_INFO_IMPORTANTE);
+			sql_updateq("spip_forum", $cles, "id_thread=" . $id_thread . " AND statut!='original'");
 			// on n'affecte pas $r, car un deplacement ne change pas l'auteur
 		}
 
 		// s'il y a vraiment eu une modif et que le message est public
 		// on enregistre le nouveau date_thread
-		if ($err==='' AND $t['statut'] == 'publie') {
+		if ($err === '' and $t['statut'] == 'publie') {
 			// on ne stocke ni le numero IP courant ni le nouvel id_auteur
 			// dans le message modifie (trop penible a l'usage) ; mais du
 			// coup attention a la responsabilite editoriale
@@ -71,7 +77,7 @@ if(!function_exists('revision_forum')){
 			*/
 
 			// & meme ca ca pourrait etre optionnel
-			sql_updateq("spip_forum", array("date_thread" => date('Y-m-d H:i:s')), "id_thread=".$id_thread);
+			sql_updateq("spip_forum", array("date_thread" => date('Y-m-d H:i:s')), "id_thread=" . $id_thread);
 		}
 	}
 }

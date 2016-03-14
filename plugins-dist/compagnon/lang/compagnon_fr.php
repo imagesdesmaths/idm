@@ -1,7 +1,9 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_core_/plugins/compagnon/lang/
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -17,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'c_accueil_texte' => 'Vous venez d’entrer dans l’espace privé de SPIP.',
 	'c_accueil_texte_revenir' => '
 		Cette page présente l’activité éditoriale récente sur votre site.
-		Vous pouvez revenir sur cette page à tout instant en cliquant l’icône de maison,
+		Vous pouvez revenir sur cette page à tout instant en cliquant l’icone de maison,
 		sur la partie haute, sous votre nom.',
 	'c_article_redaction' => 'L’article est en cours de rédaction',
 	'c_article_redaction_redacteur' => 'L’article est en cours de rédaction',
@@ -41,6 +43,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'c_rubriques_creer' => 'Créez une première rubrique !',
 	'c_rubriques_creer_texte' => 'Les rubriques sont la structure de base du site ; vous pourrez créer des articles dans chacune d’entre elles.
 		Commencez par créer une première rubrique.',
+	'c_sites_creer' => 'Comment créer ou importer un site ?',
+	'c_sites_creer_texte' => 'Vous ne pourrez créer ou importer un site depuis cette page
+		qu’à partir du moment où il existe une rubrique dans votre site.
+		Vous pouvez la créer depuis le menu « Édition », puis « Rubriques ».',
 
 	// E
 	'explication_activer_compagnon' => 'Le compagnon ajoute des commentaires sur certaines pages

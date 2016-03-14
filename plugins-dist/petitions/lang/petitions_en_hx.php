@@ -3,9 +3,17 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=en_hx
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// B
+	'bouton_radio_activer_petition' => '4c71v471ng 7h3 p371710n',
+	'bouton_radio_pas_petition' => 'N0 p371710n',
+	'bouton_radio_petition_activee' => 'P371710n 4c71v473d',
+	'bouton_radio_supprimer_petition' => 'D31373 7h3 p371710n',
 
 	// F
 	'form_pet_adresse_site' => 'Y0ur 5173’5 UR1', # MODIF

@@ -3,14 +3,16 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 /**
  *
@@ -28,35 +30,34 @@ include_spip('inc/dump');
 
 /**
  * Sauvegarder par morceaux
- * 
+ *
  * @param string $arg
  */
-function action_sauvegarder_dist($arg=null){
+function action_sauvegarder_dist($arg = null) {
 	if (!$arg) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	}
 
 	$status_file = $arg;
-	$redirect = parametre_url(generer_action_auteur('sauvegarder',$status_file),"step",intval(_request('step')+1),'&');
+	$redirect = parametre_url(generer_action_auteur('sauvegarder', $status_file), "step", intval(_request('step') + 1),
+		'&');
 
 	// lancer export qui va se relancer jusqu'a sa fin
 	$sauvegarder = charger_fonction('sauvegarder', 'inc');
 	utiliser_langue_visiteur();
 	// quand on sort de $export avec true c'est qu'on a fini
-	if ($sauvegarder($status_file,$redirect)) {
-		dump_end($status_file,'sauvegarder');
+	if ($sauvegarder($status_file, $redirect)) {
+		dump_end($status_file, 'sauvegarder');
 		include_spip('inc/headers');
-		echo redirige_formulaire(generer_url_ecrire("sauvegarder",'status='.$status_file,'',true, true));
+		echo redirige_formulaire(generer_url_ecrire("sauvegarder", 'status=' . $status_file, '', true, true));
 	}
 
 	// forcer l'envoi du buffer par tous les moyens !
-	echo(str_repeat("<br />\r\n",256));
-	while (@ob_get_level()){
+	echo(str_repeat("<br />\r\n", 256));
+	while (@ob_get_level()) {
 		@ob_flush();
 		@flush();
 		@ob_end_flush();
 	}
 }
-
-?>

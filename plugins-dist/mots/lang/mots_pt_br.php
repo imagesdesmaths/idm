@@ -3,13 +3,15 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/mots?lang_cible=pt_br
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'avis_conseil_selection_mot_cle' => '<b>Grupo importante:</b> é fortemente aconselhável selecionar uma palavra-chave deste grupo.',
-	'avis_doublon_mot_cle' => 'Já existe uma palavra com esse título. Você quer realmente criá-la assim mesmo?', # MODIF
+	'avis_doublon_mot_cle' => 'Já existe uma palavra-chave com esse título. Quer criá-la mesmo assim?',
 
 	// B
 	'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'os administradores do site',
@@ -25,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modif_groupe_mots' => 'Editar este grupo de palavras',
 	'icone_modifier_mot' => 'Editar esta palavra-chave',
 	'icone_mots_cles' => 'Palavras-chave',
-	'icone_supprimer_groupe_mots' => 'Suprimir este grupo',
+	'icone_supprimer_groupe_mots' => 'Remover este grupo',
 	'icone_voir_groupe_mots' => 'Exibir este grupo de palavras-chave',
 	'icone_voir_tous_mots_cles' => 'Ver todas as palavras-chave',
 	'info_1_groupe_mots' => '1 grupo de palavras-chave',
@@ -67,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'texte_config_groupe_mots_cles' => 'Você deseja ativar a configuração avançada das palavras-chave, indicando, por exemplo, que se pode selecionar uma única palavra-chave por grupo, ou que um grupo é importante...?',
 	'texte_mots_cles' => 'As palavras-chave permitem criar links temáticos entre as suas matérias, independentemente de sua localização nas seções. Você poderá dessa forma enriquecer a navegação do seu site, utilizando essas propriedades para personalizar a apresentação das matérias nos seus templates.',
-	'texte_mots_cles_dans_forum' => 'Você deseja permitir a utilização de palavras-chaves, selecionáveis pelos visitantes, nos fóruns do site público? (Atenção: esta opção é relativamente complexa de se utilizar corretamente.)',
+	'texte_mots_cles_dans_forum' => 'Você deseja permitir a utilização de palavras-chave, selecionáveis pelos visitantes, nos fóruns do site público? (Atenção: esta opção é relativamente complexa de se utilizar corretamente.)',
 	'texte_nouveau_mot' => 'Nova palavra-chave',
 	'titre_config_groupe_mots_cles' => 'Configuração dos grupos de palavras-chave',
 	'titre_gauche_mots_edit' => 'PALAVRA-CHAVE NÚMERO:',

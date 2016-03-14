@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=de
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -31,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'Abbrechen',
 	'antispam_champ_vide' => 'Bitte lassen Sie dieses Feld leer:',
 	'articles_recents' => 'Die neuesten Artikel',
+	'avis_1_erreur_saisie' => 'Ihre Eingabe enthält einen Fehler, bitte überprüfen Sie die Informationen.',
 	'avis_archive_incorrect' => 'Die archivierte Datei ist keine SPIP-Datei',
 	'avis_archive_invalide' => 'Die archivierte Datei ist keine SPIP-Datei',
 	'avis_attention' => 'ACHTUNG!',
@@ -43,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_mysql' => 'SQL-Fehler',
 	'avis_erreur_sauvegarde' => 'Fehler in der Sicherung (@type@ @id_objet@) ! ',
 	'avis_erreur_visiteur' => 'Ein Problem beim Zugang zum Redaktionssystem ist aufgetreten.',
+	'avis_nb_erreurs_saisie' => 'Ihre Eingabe enthält @nb@ Fehler, bitte überprüfen Sie die Informationen.',
 
 	// B
 	'barre_a_accent_grave' => 'Grosses A mit accent grave einfügen',
@@ -110,8 +114,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_heures_minutes_court' => '@h@:@m@',
 	'date_fmt_jour' => '@nomjour@ @jour@',
 	'date_fmt_jour_heure' => '@jour@ um @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'am @jour@ von @heure_debut@ bis @heure_fin@',
-	'date_fmt_jour_heure_debut_fin_abbr' => 'am @dtstart@@jour@ von @heure_debut@@dtabbr@ bis @dtstart@@heure_fin@@dtend@',
+	'date_fmt_jour_heure_debut_fin' => '@jour@ von @heure_debut@ bis @heure_fin@',
+	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@ von @heure_debut@@dtabbr@ bis @dtend@@heure_fin@@dtabbr@',
 	'date_fmt_jour_mois' => '@jour@. @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@. @nommois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
@@ -121,6 +125,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_periode_abbr' => 'Vom @dtart@@date_debut@@dtabbr@ bis zum @dtend@@date_fin@@dtabbr@',
 	'date_fmt_periode_from' => 'Von',
 	'date_fmt_periode_to' => 'bis',
+	'date_fmt_saison_annee' => '@saison@ @annee@',
 	'date_heures' => 'Stunden',
 	'date_hier' => 'gestern',
 	'date_il_y_a' => 'vor @delai@',
@@ -233,6 +238,7 @@ Verzeichnisse zu setzen.Die Installationsanleitung erläutert die Details dazu.<
 	'envoi_via_le_site' => 'Gesendet über Website ',
 	'erreur' => 'Fehler',
 	'erreur_balise_non_fermee' => 'Letzter Tag nicht geschlossen:',
+	'erreur_technique_ajaxform' => 'Ups. Das Formular wurde aufgrund eines technischen Fehlers nicht abgeschickt. Sie können es erneut versuchen.',
 	'erreur_technique_enregistrement_champs' => 'Das Feld @champs@ konnte aufgrund eines technischen Problems nicht gespeichert werden.',
 	'erreur_technique_enregistrement_impossible' => 'Technisches Prolem: Speichern nicht möglich.',
 	'erreur_texte' => 'Fehler',
@@ -271,7 +277,7 @@ wird Ihre Adresse beibehalten):
 	'form_indiquer_nom_site' => 'Bitte geben Sie den Namen Ihrer Website an.',
 	'form_pet_deja_enregistre' => 'Diese Website wurde bereits erfasst',
 	'form_pet_signature_pasprise' => 'Ihre Signatur wird nicht berücksichtigt.',
-	'form_prop_confirmer_envoi' => 'Senden',
+	'form_prop_confirmer_envoi' => 'Endgültig senden',
 	'form_prop_description' => 'Beschreibung/Kommentar',
 	'form_prop_enregistre' => 'Ihr Vorschlag wurde gespeichert und wird nach Freigabe durch die Redaktion der Website angezeigt.',
 	'form_prop_envoyer' => 'Nachricht senden',
@@ -525,7 +531,7 @@ wird Ihre Adresse beibehalten):
 	'login_retour_public' => 'Zurück zur öffentlichen Website',
 	'login_retour_site' => 'Zurück zur öffentlichen Website',
 	'login_retoursitepublic' => 'Zurück zur öffentlichen Website',
-	'login_sans_cookiie' => 'Anmeldung ohne Cookies',
+	'login_sans_cookie' => 'Login ohne Cookie',
 	'login_securise' => 'Sicheres Login',
 	'login_sinscrire' => 'anmelden',
 	'login_test_navigateur' => 'Test Webbrowser/Verbindung',
@@ -580,7 +586,7 @@ Sie können auf dieser Seite ein neues Passwort eingeben und sich wieder bei der
 	'pass_nouveau_pass' => 'Neues Passwort',
 	'pass_ok' => 'O.K.',
 	'pass_oubli_mot' => 'Passwort vergessen',
-	'pass_procedure_changer' => 'Um Ihr Paßwort zu ändern, müssen wir zunächst Ihre Identität prüfen. Bitte geben Sie die Mailadresse Ihres Accounts an.',
+	'pass_procedure_changer' => 'Um Ihr Paßwort zu ändern, geben Sie bitte die Mailadresse Ihres Accounts an.',
 	'pass_quitter_fenetre' => 'Dieses Fenster verlassen',
 	'pass_rappel_login' => 'Erinnerung: Ihr Login ist «@login@».',
 	'pass_recevoir_mail' => 'Sie erhalten eine E-Mail mit allen Informationen um wieder Zugang zur Website zu erhalten.',
@@ -638,6 +644,7 @@ Sie können auf dieser Seite ein neues Passwort eingeben und sich wieder bei der
 	'titre_image_auteur_supprime' => 'gelöschter Autor',
 	'titre_image_redacteur' => 'Redakteur ohne Systemzugang',
 	'titre_image_redacteur_02' => 'Redakteur',
+	'titre_image_selecteur' => 'Liste anzeigen',
 	'titre_image_visiteur' => 'Besucher',
 	'titre_joindre_document' => 'DOKUMENT ANFÜGEN',
 	'titre_mots_cles' => 'SCHLAGWORTE',
@@ -648,6 +655,7 @@ Sie können auf dieser Seite ein neues Passwort eingeben und sich wieder bei der
 	'titre_statistiques' => 'Statistiken',
 	'titre_titre_document' => 'Titel des Dokuments:',
 	'todo' => 'demnächst',
+	'trad_definir_reference' => 'Wählen Sie "@titre@" als Referenz für Übersetzungen',
 	'trad_reference' => '(Referenzartikel)',
 
 	// Z
@@ -661,6 +669,7 @@ Sie können auf dieser Seite ein neues Passwort eingeben und sich wieder bei der
 	'zbug_champ_hors_motif' => 'Feld @champ@ befindet sich ausserhalb eines Kontexts @motif@',
 	'zbug_code' => 'Code',
 	'zbug_critere_inconnu' => 'Unbekanntes Kriterium @critere@',
+	'zbug_critere_sur_table_sans_cle_primaire' => '{@critere@} für eine Tabelle ohne eindeutigen Schlüssel',
 	'zbug_distant_interdit' => 'Extern unzulässig',
 	'zbug_doublon_table_sans_cle_primaire' => 'Dublette in einer Tabelle ohne eindeutigen Primärschlüssel',
 	'zbug_doublon_table_sans_index' => 'Dublette in Tabelle ohne Index',

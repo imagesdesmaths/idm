@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=gl
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -515,7 +517,6 @@ do web "@nom_site_spip@" (@adresse_site@):',
 	'login_retour_public' => 'Volver ao web público',
 	'login_retour_site' => 'Volver ao web público',
 	'login_retoursitepublic' => 'volver ao web público',
-	'login_sans_cookiie' => 'Identificación sen cookie',
 	'login_securise' => 'Inicio de sesión securizado',
 	'login_sinscrire' => 'Inscribirse',
 	'login_test_navigateur' => 'proba navegador/reconexión',

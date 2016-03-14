@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=da
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -33,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Ret dette websted',
 	'icone_referencer_nouveau_site' => 'Ny webstedshenvisning',
 	'icone_voir_sites_references' => 'Vis links',
+	'info_1_site' => '1 websted',
 	'info_a_valider' => '[at kontrollere]',
 	'info_bloquer_lien' => 'bloker dette link',
 	'info_derniere_syndication' => 'Sidste syndikering af dette websted blev udført den',

@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=sv
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -33,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Editera sajten',
 	'icone_referencer_nouveau_site' => 'Länka en ny sajt',
 	'icone_voir_sites_references' => 'Visa länkade sajter',
+	'info_1_site' => '1 sajt',
 	'info_a_valider' => '[att godkännas]',
 	'info_bloquer' => 'Block',
 	'info_bloquer_lien' => 'blockera länken',

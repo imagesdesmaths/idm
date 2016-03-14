@@ -3,14 +3,16 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 include_spip('inc/actions');
 
 /**
@@ -22,21 +24,21 @@ include_spip('inc/actions');
  * @param string $recherche
  * @return array
  */
-function critere_statut_controle_forum($type, $id_secteur=0, $recherche='') {
+function critere_statut_controle_forum($type, $id_secteur = 0, $recherche = '') {
 
 	if (!$id_secteur) {
 		$from = 'spip_forum AS F';
 		$where = "";
 		$and = "";
 	} else {
-		if (!is_array($id_secteur)){
-			$id_secteur = explode(',',$id_secteur);
+		if (!is_array($id_secteur)) {
+			$id_secteur = explode(',', $id_secteur);
 		}
 		$from = 'spip_forum AS F, spip_articles AS A';
-		$where = sql_in("A.id_secteur",$id_secteur)." AND F.objet='article' AND F.id_objet=A.id_article";
+		$where = sql_in("A.id_secteur", $id_secteur) . " AND F.objet='article' AND F.id_objet=A.id_article";
 		$and = ' AND ';
 	}
-   
+
 	switch ($type) {
 		case 'public':
 			$and .= "F.statut IN ('publie', 'off', 'prop', 'spam') AND F.texte!=''";
@@ -55,21 +57,22 @@ function critere_statut_controle_forum($type, $id_secteur=0, $recherche='') {
 			break;
 		default:
 			$where = '0=1';
-			$and ='';
+			$and = '';
 			break;
 	}
 
 	if ($recherche) {
 		# recherche par IP
 		if (preg_match(',^\d+\.\d+\.(\*|\d+\.(\*|\d+))$,', $recherche)) {
-			$and .= " AND ip LIKE ".sql_quote(str_replace('*', '%', $recherche));
+			$and .= " AND ip LIKE " . sql_quote(str_replace('*', '%', $recherche));
 		} else {
 			include_spip('inc/rechercher');
-			if ($a = recherche_en_base($recherche, 'forum'))
-				$and .= " AND ".sql_in('id_forum',
-					array_keys(array_pop($a)));
-			else
+			if ($a = recherche_en_base($recherche, 'forum')) {
+				$and .= " AND " . sql_in('id_forum',
+						array_keys(array_pop($a)));
+			} else {
 				$and .= " AND 0=1";
+			}
 		}
 	}
 
@@ -81,8 +84,8 @@ function critere_statut_controle_forum($type, $id_secteur=0, $recherche='') {
 // - forum/id_forum
 // - objet/id_objet
 // http://code.spip.net/@calcul_index_forum
-function calcul_index_forum($objet,$id_objet) {
-	return substr($objet,0,1).$id_objet;
+function calcul_index_forum($objet, $id_objet) {
+	return substr($objet, 0, 1) . $id_objet;
 }
 
 //
@@ -91,18 +94,20 @@ function calcul_index_forum($objet,$id_objet) {
 // http://code.spip.net/@calculer_threads
 function calculer_threads() {
 	// fixer les id_thread des debuts de discussion
-	sql_update('spip_forum', array('id_thread'=>'id_forum'), "id_parent=0");
+	sql_update('spip_forum', array('id_thread' => 'id_forum'), "id_parent=0");
 	// reparer les messages qui n'ont pas l'id_secteur de leur parent
 	do {
 		$discussion = "0";
 		$precedent = 0;
-		$r = sql_select("fille.id_forum AS id,	maman.id_thread AS thread", 'spip_forum AS fille, spip_forum AS maman', "fille.id_parent = maman.id_forum AND fille.id_thread <> maman.id_thread",'', "thread");
+		$r = sql_select("fille.id_forum AS id,	maman.id_thread AS thread", 'spip_forum AS fille, spip_forum AS maman',
+			"fille.id_parent = maman.id_forum AND fille.id_thread <> maman.id_thread", '', "thread");
 		while ($row = sql_fetch($r)) {
-			if ($row['thread'] == $precedent)
+			if ($row['thread'] == $precedent) {
 				$discussion .= "," . $row['id'];
-			else {
-				if ($precedent)
+			} else {
+				if ($precedent) {
 					sql_updateq("spip_forum", array("id_thread" => $precedent), "id_forum IN ($discussion)");
+				}
 				$precedent = $row['thread'];
 				$discussion = $row['id'];
 			}
@@ -113,31 +118,43 @@ function calculer_threads() {
 
 // Calculs des URLs des forums (pour l'espace public)
 // http://code.spip.net/@racine_forum
-function racine_forum($id_forum){
-	if (!$id_forum = intval($id_forum)) return false;
+function racine_forum($id_forum) {
+	if (!$id_forum = intval($id_forum)) {
+		return false;
+	}
 
-	$row = sql_fetsel("id_parent, objet, id_objet, id_thread", "spip_forum", "id_forum=".$id_forum);
+	$row = sql_fetsel("id_parent, objet, id_objet, id_thread", "spip_forum", "id_forum=" . $id_forum);
 
-	if (!$row) return false;
+	if (!$row) {
+		return false;
+	}
 
 	if ($row['id_parent']
-	AND $row['id_thread'] != $id_forum) // eviter boucle infinie
+		and $row['id_thread'] != $id_forum
+	) // eviter boucle infinie
+	{
 		return racine_forum($row['id_thread']);
+	}
 
 	return array($row['objet'], $row['id_objet'], $id_forum);
-} 
+}
 
 
 // http://code.spip.net/@parent_forum
 function parent_forum($id_forum) {
-	if (!$id_forum = intval($id_forum)) return;
-	$row = sql_fetsel("id_parent, objet, id_objet", "spip_forum", "id_forum=".$id_forum);
-	if(!$row) return array();
-	if ($row['id_parent'])
+	if (!$id_forum = intval($id_forum)) {
+		return;
+	}
+	$row = sql_fetsel("id_parent, objet, id_objet", "spip_forum", "id_forum=" . $id_forum);
+	if (!$row) {
+		return array();
+	}
+	if ($row['id_parent']) {
 		return array('forum', $row['id_parent']);
-	else
+	} else {
 		return array($row['objet'], $row['id_objet']);
-} 
+	}
+}
 
 
 /**
@@ -148,8 +165,9 @@ function parent_forum($id_forum) {
  * @param unknown_type $ancre
  * @return unknown
  */
-function generer_url_forum_dist($id_forum, $args='', $ancre='') {
-	$generer_url_forum = charger_fonction('generer_url_forum','urls');
+function generer_url_forum_dist($id_forum, $args = '', $ancre = '') {
+	$generer_url_forum = charger_fonction('generer_url_forum', 'urls');
+
 	return $generer_url_forum($id_forum, $args, $ancre);
 }
 
@@ -158,29 +176,34 @@ function generer_url_forum_dist($id_forum, $args='', $ancre='') {
 function generer_url_forum_parent($id_forum) {
 	if ($id_forum = intval($id_forum)) {
 		list($type, $id) = parent_forum($id_forum);
-		if ($type)
+		if ($type) {
 			return generer_url_entite($id, $type);
+		}
 	}
+
 	return '';
-} 
+}
 
 
 // Quand on edite un forum, on tient a conserver l'original
 // sous forme d'un forum en reponse, de statut 'original'
 // http://code.spip.net/@conserver_original
 function conserver_original($id_forum) {
-	$s = sql_fetsel("id_forum", "spip_forum", "id_parent=".intval($id_forum)." AND statut='original'");
+	$s = sql_fetsel("id_forum", "spip_forum", "id_parent=" . intval($id_forum) . " AND statut='original'");
 
-	if ($s)	return ''; // pas d'erreur
+	if ($s) {
+		return '';
+	} // pas d'erreur
 
 	// recopier le forum
-	$t = sql_fetsel("*", "spip_forum", "id_forum=".intval($id_forum));
+	$t = sql_fetsel("*", "spip_forum", "id_forum=" . intval($id_forum));
 
 	if ($t) {
 		unset($t['id_forum']);
 		$id_copie = sql_insertq('spip_forum', $t);
 		if ($id_copie) {
-			sql_updateq('spip_forum', array('id_parent'=> $id_forum, 'statut'=>'original'), "id_forum=$id_copie");
+			sql_updateq('spip_forum', array('id_parent' => $id_forum, 'statut' => 'original'), "id_forum=$id_copie");
+
 			return ''; // pas d'erreur
 		}
 	}
@@ -190,41 +213,44 @@ function conserver_original($id_forum) {
 
 // appelle conserver_original(), puis modifie le contenu via l'API inc/modifier
 // http://code.spip.net/@enregistre_et_modifie_forum
-function enregistre_et_modifie_forum($id_forum, $c=false) {
+function enregistre_et_modifie_forum($id_forum, $c = false) {
 	if ($err = conserver_original($id_forum)) {
 		spip_log("erreur de sauvegarde de l'original, $err");
+
 		return;
 	}
 
 	include_spip('action/editer_forum');
+
 	return revision_forum($id_forum, $c);
 }
 
 
 /**
  * Trouver le titre d'un objet publie
+ *
  * @param string $objet
  * @param int $id_objet
  * @param int $id_forum
  * @param bool $publie
  * @return bool|string
  */
-function forum_recuperer_titre_dist($objet, $id_objet, $id_forum=0, $publie = true) {
+function forum_recuperer_titre_dist($objet, $id_objet, $id_forum = 0, $publie = true) {
 	include_spip('inc/filtres');
 	$titre = "";
 
-	if ($f = charger_fonction($objet.'_forum_extraire_titre', 'inc', true)){
+	if ($f = charger_fonction($objet . '_forum_extraire_titre', 'inc', true)) {
 		$titre = $f($id_objet);
-	}
-	else {
+	} else {
 		include_spip('base/objets');
-		if ($publie AND !objet_test_si_publie($objet, $id_objet))
+		if ($publie and !objet_test_si_publie($objet, $id_objet)) {
 			return false;
+		}
 
-		$titre = generer_info_entite($id_objet, $objet,'titre','*');
+		$titre = generer_info_entite($id_objet, $objet, 'titre', '*');
 	}
 
-	if ($titre AND $id_forum){
+	if ($titre and $id_forum) {
 		$titre_m = sql_getfetsel('titre', 'spip_forum', "id_forum = " . intval($id_forum));
 		if (!$titre_m) {
 			return false; // URL fabriquee
@@ -248,7 +274,7 @@ function forum_recuperer_titre_dist($objet, $id_objet, $id_forum=0, $publie = tr
  * abo: les personnes doivent au prealable etre identifiees
  *
  * http://code.spip.net/@controler_forum
- * 
+ *
  * @param string $objet
  *   objet a tester
  * @param int $id_objet
@@ -261,7 +287,7 @@ function controler_forum($objet, $id_objet) {
 	$accepter_forum = $GLOBALS['meta']["forums_publics"];
 
 	// il y a un cas particulier pour l'acceptation de forum d'article...
-	if ($f = charger_fonction($objet . '_accepter_forums_publics', 'inc', true)){
+	if ($f = charger_fonction($objet . '_accepter_forums_publics', 'inc', true)) {
 		$accepter_forum = $f($id_objet);
 	}
 
@@ -272,9 +298,10 @@ function controler_forum($objet, $id_objet) {
 /**
  * Verifier la presence du jeton de secu post previsu
  * http://code.spip.net/@forum_insert_noprevisu
+ *
  * @return bool
  */
-function forum_insert_noprevisu(){
+function forum_insert_noprevisu() {
 	// simuler une action venant de l'espace public
 	// pour se conformer au cas general.
 	set_request('action', 'ajout_forum');
@@ -282,7 +309,7 @@ function forum_insert_noprevisu(){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	$file = _DIR_TMP ."forum_" . preg_replace('/[^0-9]/', '', $arg) .".lck";
+	$file = _DIR_TMP . "forum_" . preg_replace('/[^0-9]/', '', $arg) . ".lck";
 	if (!file_exists($file)) {
 		# ne pas tracer cette erreur, peut etre due a un double POST
 		# tracer_erreur_forum('session absente');
@@ -292,10 +319,12 @@ function forum_insert_noprevisu(){
 
 	// antispam : si le champ au nom aleatoire verif_$hash n'est pas 'ok'
 	// on meurt
-	if (_request('verif_'._request('hash')) != 'ok') {
-			tracer_erreur_forum('champ verif manquant');
-			return true;
+	if (_request('verif_' . _request('hash')) != 'ok') {
+		tracer_erreur_forum('champ verif manquant');
+
+		return true;
 	}
+
 	return false;
 }
 
@@ -326,8 +355,6 @@ function forum_get_objets_depuis_env() {
 
 
 // http://code.spip.net/@reduce_strlen
-function reduce_strlen($n, $c)
-{
-  return $n - (is_string($c) ? strlen($c) : 0);
+function reduce_strlen($n, $c) {
+	return $n - (is_string($c) ? strlen($c) : 0);
 }
-?>

@@ -2,23 +2,18 @@
     #
     # Si on nomme une regle, elle devient surchargeable
 
+math:
+  if_str: "<math>"
+  type: all
+  is_callback: y
+  replace: "replace_math"
+  priority: -50 # en tout premier : le contenu des formules math ne doit pas etre modifie
+
 traiter_retours_chariots_1:
   # Harmonise les retours chariots et mange les paragraphes html
   if_chars: "\r"
   match: ",\r\n?,S"
   replace: "\n"
-  priority: -40 # avant tout
-
-traiter_retours_chariots_2:
-  if_str: "<p"
-  match: ",<p[>[:space:]],iS"
-  replace: "\n\n$0"
-  priority: -40 # avant tout
-
-traiter_retours_chariots_3:
-  if_str: "</p"
-  match: ",</p[>[:space:]],iS"
-  replace: "$0\n\n"
   priority: -40 # avant tout
 
 init-trim:
@@ -65,6 +60,13 @@ echappe-tags:
       match: ['{', '}', '_', '-']
       replace: ["\x1\x1", "\x1\x2", "\x1\x3", "\x1\x4"]
       type: str
+
+echappe-raccourcis:
+  if_str: '\'
+  priority: -20 # avant !paragraphes
+  match: ['\{', '\}', '\_', '\-', '\[', '\]', '\|', '\<', '\>', '\\', '\*', '\#', '\+', '\~']
+  replace: ["\x1\x1", "\x1\x2", "\x1\x3", "\x1\x4", "\x1\x5", "\x1\x6", "\x1\x7", "\x1\x8", "\x1\x9", "\x1\x10", "\x1\x11", "\x1\x12", "\x1\x13", "\x1\x14"]
+  type: str
 
 ligne-horizontale:
   match: "/\n(----+|____+)/S"
@@ -120,6 +122,14 @@ intertitres:
   if_str: '{{{'
   type: str
 
+gras-vide:
+  # faux raccourcis vides en {{}}
+  # echappes
+  match: '{{}}'
+  replace: "\x1\x1\x1\x1\x1\x2\x1\x2"
+  type: str
+  if_str: '{{'
+
 gras:
   # raccourcis en {{..}}
   # strong
@@ -128,9 +138,17 @@ gras:
   type: str
   if_str: '{{'
 
+italiques-vide:
+  # faux raccourcis vides en {}
+  # echappes
+  match: '{}'
+  replace: "\x1\x1\x1\x2"
+  type: str
+  if_str: '{'
+
 italiques:
   # raccourcis en {..}
-  # strong
+  # i
   match: ['{', '}']
   replace: ['<i>', '</i>']
   type: str
@@ -147,7 +165,7 @@ paragraphes:
 quote:
   # raccourci <quote>
   match: ['<quote>', '</quote>']
-  replace: ['<blockquote class="spip"><p>', '</blockquote><p>']
+  replace: ['<blockquote class="spip"><p>', '</blockquote>']
   if_str: '<quote>'
   type: str
 
@@ -180,8 +198,8 @@ poesie:
 restaure-tags:
   # voir echappe-tags ci-dessus
   if_chars: "\x1"
-  match: ["\x1\x1", "\x1\x2", "\x1\x3", "\x1\x4"]
-  replace: ['{', '}', '_', '-']
+  match: ["\x1\x1", "\x1\x2", "\x1\x3", "\x1\x4", "\x1\x5", "\x1\x6", "\x1\x7", "\x1\x8", "\x1\x9", "\x1\x10", "\x1\x11", "\x1\x12", "\x1\x13", "\x1\x14"]
+  replace: ['{', '}', '_', '-', '[', ']', '|', '<', '>', '\', '*', '#', '+', '~']
   type: str
 
 echappe-chevron-solitaire:

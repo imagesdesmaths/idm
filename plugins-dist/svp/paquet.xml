@@ -1,11 +1,11 @@
 <paquet
 	prefix="svp"
 	categorie="maintenance"
-	version="0.80.26"
+	version="1.0.2"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.1.0;3.1.*]"
 	logo="svp-64.png"
-	schema="0.4.0"
+	schema="0.5.1"
 	documentation="http://blog.smellup.net/spip.php?rubrique1"
 >
 

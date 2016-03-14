@@ -1,66 +1,66 @@
 /*
-    ColorBox Core Style
-    The following rules are the styles that are consistant between themes.
-    Avoid changing this area to maintain compatability with future versions of ColorBox.
+    Colorbox Core Style:
+    The following CSS is consistent between example themes and should not be altered.
 */
-#colorbox, #cboxLoadedContent {-webkit-box-sizing: content-box;-moz-box-sizing: content-box;box-sizing: content-box;}
 #colorbox, #cboxOverlay, #cboxWrapper{position:absolute; top:0; left:0; z-index:4999; overflow:hidden;}
+#cboxWrapper {max-width:none;}
 #cboxOverlay{position:fixed; width:100%; height:100%;}
 #cboxMiddleLeft, #cboxBottomLeft{clear:left;}
-#cboxContent{position:relative; overflow:hidden;}
-#cboxLoadedContent{overflow:auto;}
-#cboxLoadedContent iframe{display:block; width:100%; height:100%; border:0;}
+#cboxContent{position:relative;}
+#cboxLoadedContent{overflow:auto; -webkit-overflow-scrolling: touch;}
 #cboxTitle{margin:0;}
-#cboxLoadingOverlay, #cboxLoadingGraphic{position:absolute; top:0; left:0; width:100%;}
+#cboxLoadingOverlay, #cboxLoadingGraphic{position:absolute; top:0; left:0; width:100%; height:100%;}
 #cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow{cursor:pointer;}
-.cboxPhoto{float:left; margin:auto; border:0; display:block;}
-.cboxIframe{width:100%; height:100%; display:block; border:0;}
+.cboxPhoto{float:left; margin:auto; border:0; display:block; max-width:none; -ms-interpolation-mode:bicubic;}
+.cboxIframe{width:100%; height:100%; display:block; border:0; padding:0; margin:0;}
+#colorbox, #cboxContent, #cboxLoadedContent{-webkit-box-sizing: content-box;-moz-box-sizing: content-box;box-sizing: content-box;}
 
 /* 
-    ColorBox example user style
-    The following rules are ordered and tabbed in a way that represents the
-    order/nesting of the generated HTML, so that the structure easier to understand.
+    User Style:
+    Change the following styles to modify the appearance of Colorbox.  They are
+    ordered & tabbed in a way that represents the nesting of the generated HTML.
 */
-#cboxOverlay{background:#fff;}
+#cboxOverlay{background:#fff; opacity: 0.9; filter: alpha(opacity = 90);}
+#colorbox{outline:0;}
+    #cboxTopLeft{width:25px; height:25px; background:url(images/border1.png) no-repeat 0 0;}
+    #cboxTopCenter{height:25px; background:url(images/border1.png) repeat-x 0 -50px;}
+    #cboxTopRight{width:25px; height:25px; background:url(images/border1.png) no-repeat -25px 0;}
+    #cboxBottomLeft{width:25px; height:25px; background:url(images/border1.png) no-repeat 0 -25px;}
+    #cboxBottomCenter{height:25px; background:url(images/border1.png) repeat-x 0 -75px;}
+    #cboxBottomRight{width:25px; height:25px; background:url(images/border1.png) no-repeat -25px -25px;}
+    #cboxMiddleLeft{width:25px; background:url(images/border2.png) repeat-y 0 0;}
+    #cboxMiddleRight{width:25px; background:url(images/border2.png) repeat-y -25px 0;}
+    #cboxContent{background:#fff; overflow:hidden;}
+        .cboxIframe{background:#fff;}
+        #cboxError{padding:50px; border:1px solid #ccc;}
+        #cboxLoadedContent{margin-bottom:20px;}
+        #cboxTitle{position:absolute; bottom:0px; left:0; text-align:center; width:100%; color:#999;}
+        #cboxCurrent{position:absolute; bottom:0px; left:150px; color:#999;}
+        #cboxLoadingOverlay{background:#fff url(images/loading.gif) no-repeat 5px 5px;}
 
-#colorBox{}
-    #cboxTopLeft{width:25px; height:25px; background:url(images/border1.png) 0 0 no-repeat;}
-    #cboxTopCenter{height:25px; background:url(images/border1.png) 0 -50px repeat-x;}
-    #cboxTopRight{width:25px; height:25px; background:url(images/border1.png) -25px 0 no-repeat;}
-    #cboxBottomLeft{width:25px; height:25px; background:url(images/border1.png) 0 -25px no-repeat;}
-    #cboxBottomCenter{height:25px; background:url(images/border1.png) 0 -75px repeat-x;}
-    #cboxBottomRight{width:25px; height:25px; background:url(images/border1.png) -25px -25px no-repeat;}
-    #cboxMiddleLeft{width:25px; background:url(images/border2.png) 0 0 repeat-y;}
-    #cboxMiddleRight{width:25px; background:url(images/border2.png) -25px 0 repeat-y;}
-    #cboxContent{background:#fff;}
-        #cboxLoadedContent{margin-bottom:20px;margin-top:20px;}
-        #cboxTitle{position:absolute; top:0px; right:0; text-align:center; width:100%; color:#999;}
-        #cboxCurrent{position:absolute; bottom:0px; right:120px; color:#999;}
-        #cboxSlideshow{position:absolute; bottom:0px; left:55px; color:#444;}
-        #cboxPrevious{position:absolute; bottom:0px; right:0; color:#444;}
-        #cboxNext{position:absolute; bottom:0px; right:70px; color:#444;}
-        #cboxLoadingOverlay{background:url(images/loading.gif) 5px 5px no-repeat #fff;}
-        #cboxClose{position:absolute; bottom:0; left:0; display:block; color:#444;}
+        /* these elements are buttons, and may need to have additional styles reset to avoid unwanted base styles */
+        #cboxPrevious, #cboxNext, #cboxSlideshow, #cboxClose {border:0; padding:0; margin:0; overflow:visible; width:auto; background:none; }
+        
+        /* avoid outlines on :active (mouseclick), but preserve outlines on :focus (tabbed navigating) */
+        #cboxPrevious:active, #cboxNext:active, #cboxSlideshow:active, #cboxClose:active {outline:0;}
+
+        #cboxSlideshow{position:absolute; bottom:0px; right:62px; color:#444;}
+        #cboxPrevious{position:absolute; bottom:0px; left:0; color:#444;}
+        #cboxNext{position:absolute; bottom:0px; left:83px; color:#444;}
+        #cboxClose{position:absolute; bottom:0; right:0; display:block; color:#444;}
 
 /*
-    The following fixes png-transparency for IE6.  
-    It is also necessary for png-transparency in IE7 & IE8 to avoid 'black halos' with the fade transition
-    
-    Since this method does not support CSS background-positioning, it is incompatible with CSS sprites.
-    Colorbox preloads navigation hover classes to account for this.
-    
-    !! Important Note: AlphaImageLoader src paths are relative to the HTML document,
-    while regular CSS background images are relative to the CSS document.
+  The following fixes a problem where IE7 and IE8 replace a PNG's alpha transparency with a black fill
+  when an alpha filter (opacity change) is set on the element or ancestor element.  This style is not applied to or needed in IE9.
+  See: http://jacklmoore.com/notes/ie-transparency-problems/
 */
-/* Modif Yffic : Mise en commentaire car de toute facon ca ne fonctionne pas 
-	avec ces url comme indique dans le commentaire ci dessus */
-/*
-.cboxIE #cboxTopLeft{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/internet_explorer/borderTopLeft.png, sizingMethod='scale');}
-.cboxIE #cboxTopCenter{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/internet_explorer/borderTopCenter.png, sizingMethod='scale');}
-.cboxIE #cboxTopRight{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/internet_explorer/borderTopRight.png, sizingMethod='scale');}
-.cboxIE #cboxBottomLeft{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/internet_explorer/borderBottomLeft.png, sizingMethod='scale');}
-.cboxIE #cboxBottomCenter{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/internet_explorer/borderBottomCenter.png, sizingMethod='scale');}
-.cboxIE #cboxBottomRight{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/internet_explorer/borderBottomRight.png, sizingMethod='scale');}
-.cboxIE #cboxMiddleLeft{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/internet_explorer/borderMiddleLeft.png, sizingMethod='scale');}
-.cboxIE #cboxMiddleRight{background:transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/internet_explorer/borderMiddleRight.png, sizingMethod='scale');}
-*/
+.cboxIE #cboxTopLeft,
+.cboxIE #cboxTopCenter,
+.cboxIE #cboxTopRight,
+.cboxIE #cboxBottomLeft,
+.cboxIE #cboxBottomCenter,
+.cboxIE #cboxBottomRight,
+.cboxIE #cboxMiddleLeft,
+.cboxIE #cboxMiddleRight {
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF,endColorstr=#00FFFFFF);
+}

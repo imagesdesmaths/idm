@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/compagnon?lang_cible=ar
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -43,6 +45,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'c_rubriques_creer' => 'إنشاء أول قسم!',
 	'c_rubriques_creer_texte' => 'الأقسام هي البنية الأساسية للموقع. يمكنك إنشاء مقالات في داخل كل منها.
 		فابدأ بإنشاء القسم الأول.',
+	'c_sites_creer' => 'كيف يتم إنشاء او اسيراد موقع؟',
+	'c_sites_creer_texte' => 'لا يمكنك إنشاء او اسيتراد موقع من هذه الصفحة الا لدى وجود قسم واحد على الاقل في الموقعك.
+يمكن إنشاء قسم جديد من قائمة «تحرير»، ثم «الأقسام».',
 
 	// E
 	'explication_activer_compagnon' => 'يضيف الرفيق تعليقات على بعض صفحات

@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=lb
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -110,8 +112,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_heures_minutes_court' => '@h@h@m@',
 	'date_fmt_jour' => '@nomjour@ @jour@',
 	'date_fmt_jour_heure' => '@jour@ um @heure@',
-	'date_fmt_jour_heure_debut_fin' => '@jour@ vu @heure_debut@ bis @heure_fin@ Auer',
-	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@ vu @heure_debut@@dtabbr@ bis @dtstart@@heure_fin@@dtend@',
+	'date_fmt_jour_heure_debut_fin' => '@jour@ vu @heure_debut@ bis @heure_fin@ Auer', # MODIF
+	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@ vu @heure_debut@@dtabbr@ bis @dtend@@heure_fin@@dtabbr@', # MODIF
 	'date_fmt_jour_mois' => '@jour@. @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@. @nommois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
@@ -121,6 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_periode_abbr' => 'Vum @dtart@@date_debut@@dtabbr@. bis den @dtend@@date_fin@@dtabbr@.',
 	'date_fmt_periode_from' => 'Vum',
 	'date_fmt_periode_to' => 'bis den',
+	'date_fmt_saison_annee' => '@saison@ @annee@',
 	'date_heures' => 'Stonnen',
 	'date_hier' => 'gëschter',
 	'date_il_y_a' => 'virun @delai@',
@@ -191,7 +194,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mois_2_abbr' => 'Feb.',
 	'date_mois_3' => 'März',
 	'date_mois_3_abbr' => 'März',
-	'date_mois_4' => 'Abrël',
+	'date_mois_4' => 'Abrëll',
 	'date_mois_4_abbr' => 'Abr.',
 	'date_mois_5' => 'Mee',
 	'date_mois_5_abbr' => 'Mee',
@@ -233,7 +236,7 @@ Dës Prozedur ass am Detail am Installatiouns-Guide beschriwwen.<p>
 	'envoi_via_le_site' => 'Via äre Site schécken',
 	'erreur' => 'Fehler',
 	'erreur_balise_non_fermee' => 'Läschten Tag dee net zou ass:',
-	'erreur_technique_ajaxform' => 'Oeps. Een onverwachte fout weerhield hem van het formulier indienen. U kunt het opnieuw proberen.', # RELIRE
+	'erreur_technique_ajaxform' => 'Oups. E Fehler verhennert d’Fortschécke vum Formulaire. Probéiert nach eng Kéier.',
 	'erreur_technique_enregistrement_champs' => 'En technesche Problem verhënnert d’Späichere vum Feld @champs@.',
 	'erreur_technique_enregistrement_impossible' => 'En technesche Problem verhënnert d’Späicheren.',
 	'erreur_texte' => 'Fehler(en)',
@@ -524,11 +527,10 @@ Wann dir net wëllt dat äert Passwuert ka um Internet ofgefaange ginn, aktivéi
 	'login_pass2' => 'Passwuert:',
 	'login_preferez_refuser' => '<b>Wann dir kee Cookie wëllt</b>, hei ass eng aner (manner sécher) Umeldungs-Method:',
 	'login_recharger' => 'dës Säit nei lueden',
-	'login_rester_identifie' => 'E puer Deo ugemellt bleiwen',
+	'login_rester_identifie' => 'E puer Deg ugemellt bleiwen',
 	'login_retour_public' => 'Zeréck op den ëffentleche Site',
 	'login_retour_site' => 'Zeréck op de Site',
 	'login_retoursitepublic' => 'zeréck op den ëffentleche Site',
-	'login_sans_cookiie' => 'Umeldung ouni Cookie',
 	'login_securise' => 'Séchere Login',
 	'login_sinscrire' => 'sech aschreiwen',
 	'login_test_navigateur' => 'Browser/Login-Test',
@@ -583,7 +585,7 @@ Dir kënnt do e neit Passwuert aginn an Iech um Site umellen.
 	'pass_nouveau_pass' => 'Neit Passwuert',
 	'pass_ok' => 'OK',
 	'pass_oubli_mot' => 'Vergiessen vum Passwuert',
-	'pass_procedure_changer' => 'Mir mussen är Identitéit kontrolléieren fir äert Passwuert ze änneren. Dofir gitt ons d’Email-Adress un déi zu ärem Login gehéiert.',
+	'pass_procedure_changer' => 'Mir mussen är Identitéit kontrolléieren fir äert Passwuert ze änneren. Dofir gitt ons d’Email-Adress un déi zu ärem Login gehéiert.', # MODIF
 	'pass_quitter_fenetre' => 'Dës Fënster zoumaachen',
 	'pass_rappel_login' => 'Rappel: äre Login ass "@login@".',
 	'pass_recevoir_mail' => 'Dir kritt e Message mat Instruktiounen fir den Zougang zum Site erëm ze kréien.',
@@ -665,6 +667,7 @@ Probéiert ',
 	'zbug_champ_hors_motif' => 'Feld @champ@ ausserhalb vun engem Kontext @motif@',
 	'zbug_code' => '-Code-',
 	'zbug_critere_inconnu' => 'Onbekannte Critère @critere@',
+	'zbug_critere_sur_table_sans_cle_primaire' => '{@critere@} ob enger Tafel ouni atomare Primärschlessel',
 	'zbug_distant_interdit' => 'Extern verbueden',
 	'zbug_doublon_table_sans_cle_primaire' => 'Duebel Valeuren an enger Tabell ouni atomare primäre Schlëssel',
 	'zbug_doublon_table_sans_index' => 'Verdueblung an enger Tabell ouni Index',

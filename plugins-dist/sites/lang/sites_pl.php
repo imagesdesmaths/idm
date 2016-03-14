@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=pl
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -33,7 +35,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Zmień tę stronę',
 	'icone_referencer_nouveau_site' => 'Nowy link do strony',
 	'icone_voir_sites_references' => 'Pokaż zlinkowane strony',
+	'info_1_article_syndique' => '1 artykuł konsorcjalny',
+	'info_1_site' => '1 strona',
 	'info_a_valider' => '[do zatwierdzenia]',
+	'info_aucun_article_syndique' => 'Brak artykułów syndykatowych',
+	'info_aucun_site' => 'Brak powiązanych stron',
 	'info_bloquer' => 'zablokuj',
 	'info_bloquer_lien' => 'zablokuj ten link',
 	'info_derniere_syndication' => 'Ostatnia syndykacja tego serwisu została dokonana',

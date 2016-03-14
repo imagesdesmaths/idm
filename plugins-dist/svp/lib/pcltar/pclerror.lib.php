@@ -1,4 +1,4 @@
-<?
+<?php
 // --------------------------------------------------------------------------------
 // PhpConcept Library (PCL) Error 1.0
 // --------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ if (!defined("PCLERROR_LIB"))
   // Description :
   // Parameters :
   // --------------------------------------------------------------------------------
-  function PclErrorLog($p_error_code=0, $p_error_string="")
+  function PclErrorLog($p_error_code = 0, $p_error_string = "")
   {
     global $g_pcl_error_string;
     global $g_pcl_error_code;
@@ -70,7 +70,7 @@ if (!defined("PCLERROR_LIB"))
   // Description :
   // Parameters :
   // --------------------------------------------------------------------------------
-  function PclErrorFatal($p_file, $p_line, $p_error_string="")
+  function PclErrorFatal($p_file, $p_line, $p_error_string = "")
   {
     global $g_pcl_error_string;
     global $g_pcl_error_code;

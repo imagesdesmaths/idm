@@ -3,14 +3,16 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // inclure les fonctions bases du core
 include_once _DIR_RESTREINT . "inc/documents.php";
@@ -19,24 +21,28 @@ include_spip('inc/actions'); // *action_auteur et determine_upload
 
 // Constante indiquant le charset probable des documents non utf-8 joints
 
-if (!defined('CHARSET_JOINT')) define('CHARSET_JOINT', 'iso-8859-1');
+if (!defined('CHARSET_JOINT')) {
+	define('CHARSET_JOINT', 'iso-8859-1');
+}
 
 // Filtre pour #FICHIER permettant d'incruster le contenu d'un document
 // Si 2e arg fourni, conversion dans le charset du site si possible
 
 // http://code.spip.net/@contenu_document
-function contenu_document($arg, $charset='')
-{
+function contenu_document($arg, $charset = '') {
+	include_spip('inc/distant');
 	if (is_numeric($arg)) {
-		$r = sql_fetsel("fichier,distant", "spip_documents", "id_document=".intval($arg));
-		if (!$r) return '';
+		$r = sql_fetsel("fichier,distant", "spip_documents", "id_document=" . intval($arg));
+		if (!$r) {
+			return '';
+		}
 		$f = $r['fichier'];
-		$f = ($r['distant'] =='oui') ? _DIR_RACINE . copie_locale($f) : get_spip_doc($f);
-	}
-	else {
-		if (!@file_exists($f=$arg)){
-			if (!$f = copie_locale($f))
+		$f = ($r['distant'] == 'oui') ? _DIR_RACINE . copie_locale($f) : get_spip_doc($f);
+	} else {
+		if (!@file_exists($f = $arg)) {
+			if (!$f = copie_locale($f)) {
 				return '';
+			}
 			$f = _DIR_RACINE . $f;
 		}
 	}
@@ -47,42 +53,50 @@ function contenu_document($arg, $charset='')
 		include_spip('inc/charset');
 		if ($charset !== 'auto') {
 			$r = importer_charset($r, $charset);
-		} elseif ($GLOBALS['meta']['charset'] == 'utf-8' AND !is_utf8($r))
+		} elseif ($GLOBALS['meta']['charset'] == 'utf-8' and !is_utf8($r)) {
 			$r = importer_charset($r, CHARSET_JOINT);
+		}
 	}
+
 	return $r;
 }
 
 // http://code.spip.net/@generer_url_document_dist
-function generer_url_document_dist($id_document, $args='', $ancre='') {
+function generer_url_document_dist($id_document, $args = '', $ancre = '') {
 
 	include_spip('inc/autoriser');
-	if (!autoriser('voir', 'document', $id_document)) return '';
+	if (!autoriser('voir', 'document', $id_document)) {
+		return '';
+	}
 
-	$r = sql_fetsel("fichier,distant", "spip_documents", "id_document=".intval($id_document));
+	$r = sql_fetsel("fichier,distant", "spip_documents", "id_document=" . intval($id_document));
 
-	if (!$r) return '';
+	if (!$r) {
+		return '';
+	}
 
 	$f = $r['fichier'];
 
-	if ($r['distant'] == 'oui') return $f;
+	if ($r['distant'] == 'oui') {
+		return $f;
+	}
 
 	// Si droit de voir tous les docs, pas seulement celui-ci
 	// il est inutilement couteux de rajouter une protection
 	$r = (autoriser('voir', 'document'));
-	if (($r AND $r !== 'htaccess'))
+	if (($r and $r !== 'htaccess')) {
 		return get_spip_doc($f);
+	}
 
 	include_spip('inc/securiser_action');
 
 	// cette action doit etre publique !
 	return generer_url_action('acceder_document',
 		$args . ($args ? "&" : '')
-			. 'arg='.$id_document
-			. ($ancre ? "&ancre=$ancre" : '')
-			. '&cle=' . calculer_cle_action($id_document.','.$f)
-			. '&file=' . rawurlencode($f)
-			,true,true);
+		. 'arg=' . $id_document
+		. ($ancre ? "&ancre=$ancre" : '')
+		. '&cle=' . calculer_cle_action($id_document . ',' . $f)
+		. '&file=' . rawurlencode($f), true, true);
 }
 
 //
@@ -95,45 +109,48 @@ function generer_url_document_dist($id_document, $args='', $ancre='') {
 // A noter : dans le portfolio prive on pousse le vice jusqu'a reduire la taille
 // de la vignette -> c'est a ca que sert la variable $portfolio
 // http://code.spip.net/@vignette_automatique
-function vignette_automatique($img, $doc, $lien, $x=0, $y=0, $align='', $class='spip_logos')
-{
+function vignette_automatique($img, $doc, $lien, $x = 0, $y = 0, $align = '', $class = 'spip_logo spip_logos') {
 	include_spip('inc/distant');
 	include_spip('inc/texte');
 	include_spip('inc/filtres_images_mini');
 	$e = $doc['extension'];
 	if (!$img) {
 		if ($img = image_du_document($doc)) {
-			if (!$x AND !$y) // eviter une double reduction
+			if (!$x and !$y) // eviter une double reduction
+			{
 				$img = image_reduire($img);
-		}
-		else{
-			$f = charger_fonction('vignette','inc');
+			}
+		} else {
+			$f = charger_fonction('vignette', 'inc');
 			$img = $f($e, false);
 			$size = @getimagesize($img);
-			$img = "<img src='$img' ".$size[3]." />";
+			$img = "<img src='$img' " . $size[3] . " />";
 		}
-	}
-	else{
+	} else {
 		$size = @getimagesize($img);
-		$img = "<img src='$img' ".$size[3]." />";
+		$img = "<img src='$img' " . $size[3] . " />";
 	}
 	// on appelle image_reduire independamment de la presence ou non
 	// des librairies graphiques
 	// la fonction sait se debrouiller et faire de son mieux dans tous les cas
-	if ($x OR $y) {
+	if ($x or $y) {
 		$img = image_reduire($img, $x, $y);
 	}
 	$img = inserer_attribut($img, 'alt', '');
 	$img = inserer_attribut($img, 'class', $class);
-	if ($align) $img = inserer_attribut($img, 'align', $align);
+	if ($align) {
+		$img = inserer_attribut($img, 'align', $align);
+	}
 
-	if (!$lien) return $img;
+	if (!$lien) {
+		return $img;
+	}
 
 	$titre = supprimer_tags(typo($doc['titre']));
-	$titre = " - " .taille_en_octets($doc['taille'])
-	  . ($titre ? " - $titre" : "");
+	$titre = " - " . taille_en_octets($doc['taille'])
+		. ($titre ? " - $titre" : "");
 
-	$type = sql_fetsel('titre, mime_type','spip_types_documents', "extension = " . sql_quote($e));
+	$type = sql_fetsel('titre, mime_type', 'spip_types_documents', "extension = " . sql_quote($e));
 
 	$mime = $type['mime_type'];
 	$titre = attribut_html(couper($type['titre'] . $titre, 80));
@@ -147,22 +164,25 @@ function vignette_automatique($img, $doc, $lien, $x=0, $y=0, $align='', $class='
 // Autrement retourner la vignette fournie par SPIP pour ce type MIME
 // Resultat: un fichier local existant
 
-function image_du_document($document)
-{
-	$e = $document['extension'];
-	if ($e AND (strpos($GLOBALS['meta']['formats_graphiques'], $e) !== false)
-	  AND (!test_espace_prive() OR $GLOBALS['meta']['creer_preview']=='oui')
-	  AND $document['fichier']) {
+function image_du_document($document) {
+	if ($e = $document['extension']
+		and isset($GLOBALS['meta']['formats_graphiques'])
+		and (strpos($GLOBALS['meta']['formats_graphiques'], $e) !== false)
+		and (!test_espace_prive() or $GLOBALS['meta']['creer_preview'] == 'oui')
+		and $document['fichier']
+	) {
 		if ($document['distant'] == 'oui') {
-			$image = _DIR_RACINE.copie_locale($document['fichier']);
-		}
-		else
+			$image = _DIR_RACINE . copie_locale($document['fichier']);
+		} else {
 			$image = get_spip_doc($document['fichier']);
-		if (@file_exists($image)) return $image;
+		}
+		if (@file_exists($image)) {
+			return $image;
+		}
 	}
+
 	return '';
 }
-
 
 /**
  * Afficher un document dans la colonne de gauche
@@ -181,8 +201,8 @@ function image_du_document($document)
  * @return string
  *     Code HTML permettant de gérer des documents
  */
-function afficher_documents_colonne($id, $type="article", $script=NULL) {
-	return recuperer_fond('prive/objets/editer/colonne_document', array('objet'=>$type,'id_objet'=>$id));
+function afficher_documents_colonne($id, $type = "article", $script = null) {
+	return recuperer_fond('prive/objets/editer/colonne_document', array('objet' => $type, 'id_objet' => $id));
 }
 
 
@@ -190,30 +210,29 @@ function afficher_documents_colonne($id, $type="article", $script=NULL) {
  * Affiche le code d'un raccourcis de document, tel que <doc123|left>
  *
  * Affiche un code de raccourcis de document, et l'insère
- * dans le textarea principal de l'objet (champ 'texte') sur un double-clic 
+ * dans le textarea principal de l'objet (champ 'texte') sur un double-clic
  *
  * @param string $doc
- * 		Type de raccourcis : doc,img,emb...
+ *    Type de raccourcis : doc,img,emb...
  * @param int $id
- * 		Identifiant du document
+ *    Identifiant du document
  * @param string $align
- * 		Alignement du document : left,center,right
- * 
+ *    Alignement du document : left,center,right
+ *
  * @return string
- * 		Texte du raccourcis
-**/
+ *    Texte du raccourcis
+ **/
 function affiche_raccourci_doc($doc, $id, $align) {
 	static $num = 0;
 	$pipe = $onclick = "";
 
 	if ($align) {
 		$pipe = "|$align";
-		$onclick = "\nondblclick=\"barre_inserer('\\x3C$doc$id$pipe&gt;', $('textarea[name=texte]')[0]);\"\ntitle=\"". str_replace('&amp;', '&', entites_html(_T('medias:double_clic_inserer_doc')))."\"";
+		$onclick = "\nondblclick=\"barre_inserer('\\x3C$doc$id$pipe&gt;', $('textarea[name=texte]')[0]);\"\ntitle=\"" . str_replace('&amp;',
+				'&', entites_html(_T('medias:double_clic_inserer_doc'))) . "\"";
 	} else {
-		$align='center';
+		$align = 'center';
 	}
 
 	return "\n<div style='text-align: $align'$onclick>&lt;$doc$id$pipe&gt;</div>\n";
 }
-
-?>

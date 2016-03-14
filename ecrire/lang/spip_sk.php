@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=sk
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -31,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'Zrušiť',
 	'antispam_champ_vide' => 'Toto pole, prosím, nevypĺňajte:',
 	'articles_recents' => 'Najnovšie články',
+	'avis_1_erreur_saisie' => 'Vo vašom zadaní je 1 chyba, skontrolujte si údaje.', # MODIF
 	'avis_archive_incorrect' => 'archívny súbor nie je platný súbor SPIPu',
 	'avis_archive_invalide' => 'archívny súbor nie je platný',
 	'avis_attention' => 'POZOR!',
@@ -43,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_mysql' => 'Chyba SQL',
 	'avis_erreur_sauvegarde' => 'Chyba v zálohe (@type@ @id_objet@)!',
 	'avis_erreur_visiteur' => 'Problém pri vstupe do súkromnej zóny',
+	'avis_nb_erreurs_saisie' => 'Vo vašom zadaní je @nb@ chýb, skontrolujte si údaje.',
 
 	// B
 	'barre_a_accent_grave' => 'Vložiť veľké A s opačným dĺžňom',
@@ -110,8 +114,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_heures_minutes_court' => '@h@h:@m@',
 	'date_fmt_jour' => '@nomjour@ @jour@',
 	'date_fmt_jour_heure' => '@jour@ o @heure@',
-	'date_fmt_jour_heure_debut_fin' => '@jour@ od @heure_debut@ do @heure_fin@',
-	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@ od @heure_debut@@dtabbr@ do @dtstart@@heure_fin@@dtend@',
+	'date_fmt_jour_heure_debut_fin' => '@jour@ o @heure_debut@ do @heure_fin@',
+	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@ o @heure_debut@@dtabbr@ do @dtend@@heure_fin@@dtabbr@',
 	'date_fmt_jour_mois' => '@jour@ @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ @nommois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
@@ -121,6 +125,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_periode_abbr' => 'Od @dtart@@date_debut@@dtabbr@ do @dtend@@date_fin@@dtabbr@',
 	'date_fmt_periode_from' => 'Od',
 	'date_fmt_periode_to' => 'do',
+	'date_fmt_saison_annee' => '@saison@ @annee@',
 	'date_heures' => 'hodinami',
 	'date_hier' => 'včera',
 	'date_il_y_a' => 'pred @delai@',
@@ -531,7 +536,7 @@ stránku "@nom_site_spip@" (@adresse_login@):',
 	'login_retour_public' => 'Späť na verejne prístupnú stránku',
 	'login_retour_site' => 'Späť na verejne prístupnú stránku',
 	'login_retoursitepublic' => 'Späť na verejne prístupnú stránku',
-	'login_sans_cookiie' => 'Identifikácia bez cookie',
+	'login_sans_cookie' => 'Identifikácia bez cookie',
 	'login_securise' => 'Zabezpečené prihlásenie',
 	'login_sinscrire' => 'Zaregistrovať sa',
 	'login_test_navigateur' => 'Testuje sa prehliadač/nové pripojenie',
@@ -594,7 +599,7 @@ a znova sa prihlásiť na stránku.
 	'pass_nouveau_pass' => 'Nové heslo',
 	'pass_ok' => 'OK',
 	'pass_oubli_mot' => 'Zabudnuté heslo',
-	'pass_procedure_changer' => 'Ak si chcete zmeniť heslo, musíme overiť vašu identitu. Použijeme na to e-mailovú adresu priradenú k vášmu účtu.',
+	'pass_procedure_changer' => 'Ak si chcete zmeniť heslo, musíme overiť vašu identitu. Použijeme na to e-mailovú adresu priradenú k vášmu účtu.', # MODIF
 	'pass_quitter_fenetre' => 'Zatvoriť toto okno',
 	'pass_rappel_login' => 'Na pripomenutie: váš identifikátor (prihlasovacie meno) je "@login@".',
 	'pass_recevoir_mail' => 'Dostanete e-mail, ktorý vám vysvetlí, ako znova získať prístup na stránku.',
@@ -674,6 +679,7 @@ a znova sa prihlásiť na stránku.
 	'titre_statistiques' => 'Štatistiky stránok',
 	'titre_titre_document' => 'Názov dokumentu:',
 	'todo' => 'nasleduje',
+	'trad_definir_reference' => 'Vybrať "@titre@" ako referenciu pre preklady',
 	'trad_reference' => '(referencia pre preklady)',
 
 	// Z
@@ -687,6 +693,7 @@ a znova sa prihlásiť na stránku.
 	'zbug_champ_hors_motif' => 'Pole @champ@ mimo kontextu @motif@',
 	'zbug_code' => 'kód',
 	'zbug_critere_inconnu' => 'neznáme kritérium @critere@',
+	'zbug_critere_sur_table_sans_cle_primaire' => '{@critere@} v tabuľke bez je­di­neč­né­ho pri­már­ne­ho kľúča',
 	'zbug_distant_interdit' => 'Externé dáta sú zakázané',
 	'zbug_doublon_table_sans_cle_primaire' => 'V tabuľke, ktorá nemá jednoduchý primárny kľúč, sú duplicitné položky',
 	'zbug_doublon_table_sans_index' => 'Duplicitné údaje v tabuľke bez indexu',

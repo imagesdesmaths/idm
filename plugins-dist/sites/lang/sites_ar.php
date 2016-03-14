@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=ar
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -55,14 +57,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_valider_article' => 'التصديق على هذا المقال',
 	'icone_valider_articles' => 'التصديق على هذه المقالات',
 	'icone_voir_sites_references' => 'عرض المواقع المبوبة',
+	'info_1_article_syndique' => 'مقال مرخص واحد',
+	'info_1_site' => 'موقع واحد',
 	'info_1_site_importe' => 'تم جلب موقع واحد',
 	'info_a_valider' => '[بانتظار التصديق]',
+	'info_aucun_article_syndique' => 'لا مقال مرخص',
+	'info_aucun_site' => 'لا موقع',
 	'info_aucun_site_importe' => 'لم يتم جلب اي موقع',
 	'info_bloquer' => 'إيقاف',
 	'info_bloquer_lien' => 'صد هذه الوصلة',
 	'info_derniere_syndication' => 'تم تنفيذ آخر ترخيص لهذا الموقع في',
 	'info_liens_syndiques_1' => 'وصلة مرخصة',
 	'info_liens_syndiques_2' => 'تنتظر التصديق.',
+	'info_nb_articles_syndiques' => '@nb@ مقال مرخص',
+	'info_nb_sites' => '@nb@ موقع',
 	'info_nb_sites_importes' => 'تم جلب @nb@ موقع',
 	'info_nom_site_2' => '<b>إسم الموقع</b> [إجباري]',
 	'info_panne_site_syndique' => 'موقع مرخص معطل',

@@ -6,28 +6,40 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+/**
+ * Notification de message de forum posté
+ *
+ * @package SPIP\Forum\Notifications
+ **/
+
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 /**
- * cette notification s'execute quand un message est poste,
+ * Cette notification s'exécute quand un message est posté
  *
  * @param string $quoi
  * @param int $id_forum
+ * @param array $options
  */
 function notifications_forumposte_dist($quoi, $id_forum, $options) {
-	$t = sql_fetsel("*", "spip_forum", "id_forum=".intval($id_forum));
-	if (!$t)
+	$t = sql_fetsel("*", "spip_forum", "id_forum=" . intval($id_forum));
+	if (!$t) {
 		return;
+	}
 
 	// plugin notification si present
-	$prevenir_auteurs = isset($GLOBALS['notifications']['prevenir_auteurs']) AND $GLOBALS['notifications']['prevenir_auteurs'];
+	$prevenir_auteurs = isset($GLOBALS['notifications']['prevenir_auteurs']) and $GLOBALS['notifications']['prevenir_auteurs'];
 	// sinon voie normale
-	if ($t['objet']=='article' AND !$prevenir_auteurs){
-		$s = sql_getfetsel('accepter_forum','spip_articles',"id_article=" . $t['id_objet']);
-		if (!$s)  $s = substr($GLOBALS['meta']["forums_publics"],0,3);
+	if ($t['objet'] == 'article' and !$prevenir_auteurs) {
+		$s = sql_getfetsel('accepter_forum', 'spip_articles', "id_article=" . $t['id_objet']);
+		if (!$s) {
+			$s = substr($GLOBALS['meta']["forums_publics"], 0, 3);
+		}
 
-		$prevenir_auteurs = (strpos(@$GLOBALS['meta']['prevenir_auteurs'],",$s,")!==false
-			OR @$GLOBALS['meta']['prevenir_auteurs'] === 'oui'); // compat
+		$prevenir_auteurs = (strpos(@$GLOBALS['meta']['prevenir_auteurs'], ",$s,") !== false
+			or @$GLOBALS['meta']['prevenir_auteurs'] === 'oui'); // compat
 	}
 
 	include_spip('inc/texte');
@@ -41,30 +53,32 @@ function notifications_forumposte_dist($quoi, $id_forum, $options) {
 	// seulement s'ils ont le droit de le moderer (les autres seront
 	// avertis par la notifications_forumvalide).
 	if ($prevenir_auteurs) {
-		$result = sql_select("auteurs.*","spip_auteurs AS auteurs, spip_auteurs_liens AS lien","lien.objet=".sql_quote($t['objet'])." AND lien.id_objet=".intval($t['id_objet'])." AND auteurs.id_auteur=lien.id_auteur");
+		$result = sql_select("auteurs.*", "spip_auteurs AS auteurs, spip_auteurs_liens AS lien",
+			"lien.objet=" . sql_quote($t['objet']) . " AND lien.id_objet=" . intval($t['id_objet']) . " AND auteurs.id_auteur=lien.id_auteur");
 
 		while ($qui = sql_fetch($result)) {
-			if ($qui['email'] AND autoriser('modererforum', $t['objet'], $t['id_objet'], $qui['id_auteur']))
+			if ($qui['email'] and autoriser('modererforum', $t['objet'], $t['id_objet'], $qui['id_auteur'])) {
 				$tous[] = $qui['email'];
+			}
 		}
 	}
 
 	$options['forum'] = $t;
 	$destinataires = pipeline('notifications_destinataires',
 		array(
-			'args'=>array('quoi'=>$quoi,'id'=>$id_forum,'options'=>$options)
-		,
-			'data'=>$tous)
+			'args' => array('quoi' => $quoi, 'id' => $id_forum, 'options' => $options),
+			'data' => $tous
+		)
 	);
 
 	// Nettoyer le tableau
 	// Ne pas ecrire au posteur du message !
-	notifications_nettoyer_emails($destinataires,array($t['email_auteur']));
+	notifications_nettoyer_emails($destinataires, array($t['email_auteur']));
 
 	//
 	// Envoyer les emails
 	//
-	$email_notification_forum = charger_fonction('email_notification_forum','inc');
+	$email_notification_forum = charger_fonction('email_notification_forum', 'inc');
 	foreach ($destinataires as $email) {
 		$texte = $email_notification_forum($t, $email);
 		notifications_envoyer_mails($email, $texte);
@@ -77,4 +91,3 @@ function notifications_forumposte_dist($quoi, $id_forum, $options) {
 		$notifications('forumvalide', $id_forum);
 	}
 }
-?>

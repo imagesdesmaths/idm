@@ -7,23 +7,23 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		#SET{fl,organiseur}
-		<ul>
+		<div class="editer-groupe">
 			[(#ENV{_destiner}|oui)
 			#SET{name,destinataires}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
 				#INCLURE{fond=formulaires/inc-destinataires-message,name=#GET{name},env}
-			</li>
+			</div>
 			]
 			#SET{name,titre}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
-			</li>
-			<li class="editer editer_rv[ (#ENV**{erreurs}|table_valeur{rv}|oui)erreur]">
+			</div>
+			<div class="editer editer_rv[ (#ENV**{erreurs}|table_valeur{rv}|oui)erreur]">
 				<div class="choix">
 					<input type='checkbox' name='rv' id='rv' value='oui' [(#ENV{rv}|=={oui}|oui)checked='checked']
 												onclick="if (this.checked==true) { $('li.editer_date_debut_fin').show('fast');} else {$('li.editer_date_debut_fin').hide('fast');}" />
@@ -31,35 +31,35 @@
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{rv})</span>
 				]
 				</div>
-			</li>
-			<li class="editer editer_date_debut editer_date_debut_fin[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur][(#ENV{rv}|=={oui}|non)none]">
+			</div>
+			<div class="editer editer_date_debut editer_date_debut_fin[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur][(#ENV{rv}|=={oui}|non)none]">
 				<label for="date_debut"><:organiseur:info_message_date_debut:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</span>
 				]<input type='text' class='text date' name='date_debut' id='date_debut' size='10' maxlength='10' value="[(#ENV{date_debut})]" />
 				<input type='text' class='text heure' name='heure_debut' id='heure_debut' size='4' maxlength='5' value="[(#ENV{heure_debut})]"
 				/>
-			</li>
-			<li class="editer editer_date_fin editer_date_debut_fin[ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur][(#ENV{rv}|=={oui}|non)none]">
+			</div>
+			<div class="editer editer_date_fin editer_date_debut_fin[ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur][(#ENV{rv}|=={oui}|non)none]">
 				<label for="date_fin" class='date_fin'><:organiseur:info_message_date_fin:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span>
 				]<input type='text' class='text date' name='date_fin' id='date_fin' size='10' maxlength='10' value="[(#ENV{date_fin})]" />
 				<input type='text' class='text heure' name='heure_fin' id='heure_fin' size='4' maxlength='5' value="[(#ENV{heure_fin})]" />
-			</li>
+			</div>
 			#SET{name,texte}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<textarea class="textarea" name="#GET{name}" rows="10">
 #ENV*{#GET{name}}</textarea>
-			</li>
+			</div>
 			[(#REM) Piege a robots spammeurs ]
 			#SET{name,antispam}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer none editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<div class="editer none editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="nobotnobot-#ID"><:antispam_champ_vide:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name}}" id="nobotnobot-#ID" />
-			</li>
-		</ul>
+			</div>
+		</div>
 	  <!--extra-->
 	  <p class='boutons'><span class='image_loading'>&nbsp;</span>
 			[(#ENV{statut}|=={publie}|non)
@@ -76,9 +76,13 @@
 	if (typeof formulaire_editer_message_init=="undefined"){
 		var formulaire_editer_message_init=''; // eviter double dl si plusieurs forms dans la page
 		var url_trouver_destinataire = '[(#URL_ACTION_AUTEUR{quete_autocomplete,#SESSION{id_auteur}}|replace{&amp;,&})]';
-		jQuery.getScript('#CHEMIN{javascript/jquery.autocomplete.js}',function(){
-			jQuery.getScript('#CHEMIN{formulaires/editer_message.js}');
-		});
+		jQuery.getScript('[(#CHEMIN{prive/javascript/ui/widget.js}|timestamp)]',function(){
+		jQuery.getScript('[(#CHEMIN{prive/javascript/ui/position.js}|timestamp)]',function(){
+		jQuery.getScript('[(#CHEMIN{prive/javascript/ui/menu.js}|timestamp)]',function(){
+			jQuery.getScript('[(#CHEMIN{prive/javascript/ui/autocomplete.js}|timestamp)]',function(){
+				jQuery.getScript('[(#CHEMIN{formulaires/editer_message.js}|timestamp)]');
+			});
+		});});});
 	}
 </script>
 ]

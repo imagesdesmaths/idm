@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/organiseur?lang_cible=sk
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -32,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_ecrire_nouvelle_annonce' => 'Poslať nový oznam',
 	'icone_effacer_message' => 'Vymazať túto správu',
 	'icone_modifier_annonce' => 'Upraviť tento oznam',
+	'icone_modifier_message' => 'Upraviť túto správu',
 	'icone_modifier_pensebete' => 'Upraviť túto pripomienku',
 	'icone_supprimer_message' => 'Odstrániť túto správu',
 	'info_1_message_envoye' => '1 odoslaná správa',

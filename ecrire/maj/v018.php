@@ -3,17 +3,29 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+/**
+ * Gestion des mises à jour de SPIP, versions 1.8*
+ *
+ * @package SPIP\Core\SQL\Upgrade
+ **/
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function maj_v018_dist($version_installee, $version_cible)
-{
+/**
+ * Mises à jour de SPIP n°018
+ *
+ * @param float $version_installee Version actuelle
+ * @param float $version_cible Version de destination
+ **/
+function maj_v018_dist($version_installee, $version_cible) {
 	if (upgrade_vers(1.801, $version_installee, $version_cible)) {
 		spip_query("ALTER TABLE spip_rubriques	ADD statut_tmp VARCHAR(10) NOT NULL,	ADD date_tmp datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
 		include_spip('inc/rubriques');
@@ -41,9 +53,9 @@ function maj_v018_dist($version_installee, $version_cible)
 	}
 	if (upgrade_vers(1.803, $version_installee, $version_cible)) {
 
-	#	27 AOUT 2004 : conservons cette table pour autoriser les retours
-	#	de SPIP 1.8a6 CVS vers 1.7.2
-	#	spip_query("DROP TABLE spip_forum_cache");
+		#	27 AOUT 2004 : conservons cette table pour autoriser les retours
+		#	de SPIP 1.8a6 CVS vers 1.7.2
+		#	spip_query("DROP TABLE spip_forum_cache");
 
 		spip_query("DROP TABLE spip_inclure_caches");
 		maj_version(1.803);
@@ -55,23 +67,28 @@ function maj_v018_dist($version_installee, $version_cible)
 		maj_version(1.804);
 	}
 
-	//
-	// Recalculer tous les threads
-	// function du plugin forum recopiee ici pour assurer la montee de version dans tous les cas de figure
+	/**
+	 * Recalculer tous les threads
+	 *
+	 * Fonction du plugin forum recopiee ici pour assurer la montee
+	 * de version dans tous les cas de figure
+	 **/
 	function maj_v018_calculer_threads() {
 		// fixer les id_thread des debuts de discussion
-		sql_update('spip_forum', array('id_thread'=>'id_forum'), "id_parent=0");
+		sql_update('spip_forum', array('id_thread' => 'id_forum'), "id_parent=0");
 		// reparer les messages qui n'ont pas l'id_secteur de leur parent
 		do {
 			$discussion = "0";
 			$precedent = 0;
-			$r = sql_select("fille.id_forum AS id,	maman.id_thread AS thread", 'spip_forum AS fille, spip_forum AS maman', "fille.id_parent = maman.id_forum AND fille.id_thread <> maman.id_thread",'', "thread");
+			$r = sql_select("fille.id_forum AS id,	maman.id_thread AS thread", 'spip_forum AS fille, spip_forum AS maman',
+				"fille.id_parent = maman.id_forum AND fille.id_thread <> maman.id_thread", '', "thread");
 			while ($row = sql_fetch($r)) {
-				if ($row['thread'] == $precedent)
+				if ($row['thread'] == $precedent) {
 					$discussion .= "," . $row['id'];
-				else {
-					if ($precedent)
+				} else {
+					if ($precedent) {
 						sql_updateq("spip_forum", array("id_thread" => $precedent), "id_forum IN ($discussion)");
+					}
 					$precedent = $row['thread'];
 					$discussion = $row['id'];
 				}
@@ -79,6 +96,7 @@ function maj_v018_dist($version_installee, $version_cible)
 			sql_updateq("spip_forum", array("id_thread" => $precedent), "id_forum IN ($discussion)");
 		} while ($discussion != "0");
 	}
+
 	if (upgrade_vers(1.805, $version_installee, $version_cible)) {
 		spip_query("ALTER TABLE spip_forum ADD id_thread bigint(21) DEFAULT '0' NOT NULL");
 		maj_v018_calculer_threads();
@@ -133,7 +151,7 @@ function maj_v018_dist($version_installee, $version_cible)
 		spip_query("ALTER TABLE spip_syndic ADD extra longblob NULL");
 		maj_version(1.811);
 	}
-	
+
 	if (upgrade_vers(1.812, $version_installee, $version_cible)) {
 		spip_query("ALTER TABLE spip_documents ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
 		maj_version(1.812);
@@ -219,6 +237,3 @@ function maj_v018_dist($version_installee, $version_cible)
 		maj_version(1.826);
 	}
 }
-
-
-?>

@@ -3,19 +3,21 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 // http://code.spip.net/@action_editer_signature_dist
-function action_editer_signature_dist($arg=null) {
+function action_editer_signature_dist($arg = null) {
 
-	if (is_null($arg)){
+	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	}
@@ -24,50 +26,59 @@ function action_editer_signature_dist($arg=null) {
 	// mais on verifie qu'on a toutes les donnees qu'il faut.
 	if (!$id_signature = intval($arg)) {
 		$id_petition = _request('id_petition');
-		if (!($id_petition))
-			return array(0,'');
+		if (!($id_petition)) {
+			return array(0, '');
+		}
 		$id_signature = signature_inserer($id_petition);
 	}
 
 	// Enregistre l'envoi dans la BD
-	if ($id_signature > 0)
+	if ($id_signature > 0) {
 		$err = signature_modifier($id_signature);
+	}
 
-	return array($id_signature,$err);
+	return array($id_signature, $err);
 }
 
 /**
  * Mettre a jour une signature existante
- * 
+ *
  * @param int $id_signature
  * @param array $set
  * @return string
  */
-function signature_modifier($id_signature, $set=null) {
+function signature_modifier($id_signature, $set = null) {
 	$err = '';
 
 	include_spip('inc/modifier');
 	$c = collecter_requests(
-		// white list
+	// white list
 		array(
-		 "nom_email","ad_email",
-		 "nom_site","url_site","message","statut"
+			"nom_email",
+			"ad_email",
+			"nom_site",
+			"url_site",
+			"message",
+			"statut"
 		),
 		// black list
-		array('statut','id_petition','date_time'),
+		array('statut', 'id_petition', 'date_time'),
 		// donnees eventuellement fournies
 		$set
 	);
 
 	if ($err = objet_modifier_champs('signature', $id_signature,
 		array(
+			'data' => $set,
 			'nonvide' => array('nom_email' => _T('info_sans_titre'))
 		),
-		$c))
+		$c)
+	) {
 		return $err;
+	}
 
 	// Modification de statut
-	$c = collecter_requests(array('statut','id_petition','date_time'),array(),$set);
+	$c = collecter_requests(array('statut', 'id_petition', 'date_time'), array(), $set);
 	$err .= signature_instituer($id_signature, $c);
 
 	return $err;
@@ -75,19 +86,27 @@ function signature_modifier($id_signature, $set=null) {
 
 /**
  * Inserer une signature en base
+ *
  * @param int $id_petition
+ * @param array|null $set
  * @return int
  */
-function signature_inserer($id_petition) {
+function signature_inserer($id_petition, $set = null) {
 
 	// Si $id_petition vaut 0 ou n'est pas definie, echouer
-	if (!$id_petition = intval($id_petition))
+	if (!$id_petition = intval($id_petition)) {
 		return 0;
+	}
 
 	$champs = array(
 		'id_petition' => $id_petition,
-		'statut' =>  'prepa',
-		'date_time' => date('Y-m-d H:i:s'));
+		'statut' => 'prepa',
+		'date_time' => date('Y-m-d H:i:s')
+	);
+
+	if ($set) {
+		$champs = array_merge($champs, $set);
+	}
 
 	// Envoyer aux plugins
 	$champs = pipeline('pre_insertion',
@@ -118,21 +137,23 @@ function signature_inserer($id_petition) {
 // $c est un array ('statut', 'id_petition' = changement de petition)
 // il n'est pas autoriser de deplacer une signature
 // http://code.spip.net/@signature_instituer
-function signature_instituer($id_signature, $c, $calcul_rub=true) {
+function signature_instituer($id_signature, $c, $calcul_rub = true) {
 
 	include_spip('inc/autoriser');
 	include_spip('inc/modifier');
 
-	$row = sql_fetsel("S.statut, S.date_time, P.id_article", "spip_signatures AS S JOIN spip_petitions AS P ON S.id_petition=P.id_petition", "S.id_signature=".intval($id_signature));
+	$row = sql_fetsel("S.statut, S.date_time, P.id_article",
+		"spip_signatures AS S JOIN spip_petitions AS P ON S.id_petition=P.id_petition",
+		"S.id_signature=" . intval($id_signature));
 	$statut_ancien = $statut = $row['statut'];
 	$date_ancienne = $date = $row['date_time'];
 	$champs = array();
 
-	$d = isset($c['date_time'])?$c['date_time']:null;
-	$s = isset($c['statut'])?$c['statut']:$statut;
+	$d = isset($c['date_time']) ? $c['date_time'] : null;
+	$s = isset($c['statut']) ? $c['statut'] : $statut;
 
 	// cf autorisations dans inc/signature_instituer
-	if ($s != $statut OR ($d AND $d != $date)) {
+	if ($s != $statut or ($d and $d != $date)) {
 		$statut = $champs['statut'] = $s;
 
 		// En cas de publication, fixer la date a "maintenant"
@@ -140,14 +161,15 @@ function signature_instituer($id_signature, $c, $calcul_rub=true) {
 		// ou si l'signature est deja date dans le futur
 		// En cas de proposition d'un signature (mais pas depublication), idem
 		if ($champs['statut'] == 'publie') {
-			if ($d)
+			if ($d) {
 				$champs['date_time'] = $date = $d;
-			else
+			} else {
 				$champs['date_time'] = $date = date('Y-m-d H:i:s');
-		}
-		// on peut redater une signature qu'on relance
-		elseif($d)
+			}
+		} // on peut redater une signature qu'on relance
+		elseif ($d) {
 			$champs['date_time'] = $date = $d;
+		}
 	}
 
 	// Envoyer aux plugins
@@ -156,22 +178,24 @@ function signature_instituer($id_signature, $c, $calcul_rub=true) {
 			'args' => array(
 				'table' => 'spip_signatures',
 				'id_objet' => $id_signature,
-				'action'=>'instituer',
+				'action' => 'instituer',
 				'statut_ancien' => $statut_ancien,
 			),
 			'data' => $champs
 		)
 	);
 
-	if (!count($champs)) return;
+	if (!count($champs)) {
+		return;
+	}
 
 	// Envoyer les modifs.
-	sql_updateq('spip_signatures',$champs,'id_signature='.intval($id_signature));
+	sql_updateq('spip_signatures', $champs, 'id_signature=' . intval($id_signature));
 
 	// Invalider les caches
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='signature/$id_signature'");
-	suivre_invalideur("id='article/".$row['id_article']."'");
+	suivre_invalideur("id='article/" . $row['id_article'] . "'");
 
 	// Pipeline
 	pipeline('post_edition',
@@ -179,7 +203,7 @@ function signature_instituer($id_signature, $c, $calcul_rub=true) {
 			'args' => array(
 				'table' => 'spip_signatures',
 				'id_objet' => $id_signature,
-				'action'=>'instituer',
+				'action' => 'instituer',
 				'statut_ancien' => $statut_ancien,
 			),
 			'data' => $champs
@@ -189,7 +213,7 @@ function signature_instituer($id_signature, $c, $calcul_rub=true) {
 	// Notifications
 	if ($notifications = charger_fonction('notifications', 'inc')) {
 		$notifications('instituersignature', $id_signature,
-			array('statut' => $statut, 'statut_ancien' => $statut_ancien, 'date'=>$date)
+			array('statut' => $statut, 'statut_ancien' => $statut_ancien, 'date' => $date)
 		);
 	}
 
@@ -210,21 +234,21 @@ function signature_instituer($id_signature, $c, $calcul_rub=true) {
  * @param string $where
  * @return array
  */
-function signature_entrop($where)
-{
+function signature_entrop($where) {
 	$entrop = array();
 	$where .= " AND statut='publie'";
-	$res = sql_select('id_signature', 'spip_signatures', $where,'',"date_time desc");
+	$res = sql_select('id_signature', 'spip_signatures', $where, '', "date_time desc");
 	$n = sql_count($res);
-	if ($n>1) {
-		while($r=sql_fetch($res))
-			$entrop[]=$r['id_signature'];
+	if ($n > 1) {
+		while ($r = sql_fetch($res)) {
+			$entrop[] = $r['id_signature'];
+		}
 		// garder la premiere signature
 		array_shift($entrop);
 	}
 	sql_free($res);
 
-	if (count($entrop)){
+	if (count($entrop)) {
 		sql_delete('spip_signatures', sql_in('id_signature', $entrop));
 	}
 
@@ -232,8 +256,6 @@ function signature_entrop($where)
 }
 
 // obsolete
-function revision_signature($id_signature, $c=false) {
-	return signature_modifier($id_signature,$c);
+function revision_signature($id_signature, $c = false) {
+	return signature_modifier($id_signature, $c);
 }
-
-?>

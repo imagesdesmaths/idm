@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=nl
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -55,14 +57,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_valider_article' => 'Artikel goedkeuren',
 	'icone_valider_articles' => 'Deze artikels goedkeuren ',
 	'icone_voir_sites_references' => 'Gekoppelde sites zien',
+	'info_1_article_syndique' => 'Gesyndiceerde 1 artikel',
+	'info_1_site' => '1 site',
 	'info_1_site_importe' => '1 site werd geïmporteerd',
 	'info_a_valider' => '[ter goedkeuring]',
+	'info_aucun_article_syndique' => 'Geen gesyndiceerde artikel',
+	'info_aucun_site' => 'Geen site',
 	'info_aucun_site_importe' => 'Geen enkele site kon worden geïmporteerd',
 	'info_bloquer' => 'blokkeren',
 	'info_bloquer_lien' => 'deze koppeling blokkeren',
 	'info_derniere_syndication' => 'De laatste syndicatie van deze site heeft plaatsgevonden op ',
 	'info_liens_syndiques_1' => 'gesyndiceerde koppelingen',
 	'info_liens_syndiques_2' => 'wachten op goedkeuring.',
+	'info_nb_articles_syndiques' => '@nb@ gesyndiceerde artikelen',
+	'info_nb_sites' => '@nb@ sites',
 	'info_nb_sites_importes' => '@nb@ sites werden geïmporteerd',
 	'info_nom_site_2' => '<b>Naam van de website</b> [verplicht]',
 	'info_panne_site_syndique' => 'Gesyndiceerde site is niet bereikbaar',

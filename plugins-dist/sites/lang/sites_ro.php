@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=ro
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -33,7 +35,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Modificaţi acest site',
 	'icone_referencer_nouveau_site' => 'Referenţiaţi un nou site',
 	'icone_voir_sites_references' => 'Vedeţi site-urile referenţiate',
+	'info_1_article_syndique' => '1 articol sindicat',
+	'info_1_site' => '1 site',
 	'info_a_valider' => '[de validat]',
+	'info_aucun_article_syndique' => 'Nici un articol sindicalizat',
+	'info_aucun_site' => 'Nici un site',
 	'info_bloquer' => 'blocaţi',
 	'info_bloquer_lien' => 'blocaţi această legătură',
 	'info_derniere_syndication' => 'Ultima sindicalizare a acestui site a fost făcuta la data de',

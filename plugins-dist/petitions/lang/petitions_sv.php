@@ -3,9 +3,17 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=sv
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// B
+	'bouton_radio_activer_petition' => 'Aktivera namninsamlingen',
+	'bouton_radio_pas_petition' => 'Inga namninsamlingar',
+	'bouton_radio_petition_activee' => 'Namninsamling aktiverad',
+	'bouton_radio_supprimer_petition' => 'Radera namninsamlingen',
 
 	// F
 	'form_pet_adresse_site' => 'Din sajts URL', # MODIF

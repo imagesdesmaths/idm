@@ -8,9 +8,9 @@
 <div>
 #ACTION_FORMULAIRE{#ENV{action}}
 
-<ul>
+<div class="editer-groupe">
 	#SET{name,qui}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-	<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+	<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 		<label for="#GET{name}"><:compagnon:label_reinitialiser_compagnon:></label>
 		<div class="explication"><:compagnon:explication_reinitialiser_compagnon:></div>
 		[<span class='erreur_message'>(#GET{erreurs})</span>
@@ -22,8 +22,8 @@
 			<input type="radio" name="#GET{name}" id="#GET{name}_tous" value="tous"
 			[(#ENV{#GET{name}}|=={tous}|oui)checked="checked"] /><label for="#GET{name}_tous"><:compagnon:reinitialiser_tous:></label>
 		</div>
-	</li>	
-</ul>
+	</div>
+</div>
 
 <input type="hidden" name="_meta_casier" value="compagnon/config" />
 <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:compagnon:reinitialiser:>' /></p>

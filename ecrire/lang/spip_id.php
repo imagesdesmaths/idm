@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=id
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -466,7 +468,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_retour_public' => 'Kembali ke situs umum',
 	'login_retour_site' => 'Kembali ke situs umum',
 	'login_retoursitepublic' => 'kembali ke situs umum',
-	'login_sans_cookiie' => 'Identifikasi tanpa cookie',
 	'login_sinscrire' => 'daftar',
 	'login_test_navigateur' => 'mencoba browser/koneksi',
 	'login_verifiez_navigateur' => '(Bagaimana pun, verifikasi bahwasanya browser anda tidak menyimpan kata sandi anda...)',

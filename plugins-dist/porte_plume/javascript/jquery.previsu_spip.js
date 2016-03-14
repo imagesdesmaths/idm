@@ -6,7 +6,8 @@
 			previewParserPath:	'' ,
 			previewParserVar:	'data',
 			textEditer:	'Editer',
-			textVoir:	'Voir'
+			textVoir:	'Voir',
+			textFullScreen: 'Plein écran'
 		};
 		$.extend(options, settings);
 
@@ -21,69 +22,114 @@
 				$$.addClass("pp_previsualisation");
 				tabs = $('<div class="markItUpTabs"></div>').prependTo($$.parent());
 				$(tabs).append(
+					'<a href="#fullscreen" class="fullscreen">' + options.textFullScreen + '</a>' +
 					'<a href="#previsuVoir" class="previsuVoir">' + options.textVoir + '</a>' +
 					'<a href="#previsuEditer" class="previsuEditer on">' + options.textEditer + '</a>'
 				);
 				
 				preview = $('<div class="markItUpPreview"></div>').insertAfter(tabs);
 				preview.hide();
-				
-				$('.previsuVoir').click(function(){
-					mark = $(this).parent().parent();
-					objet = mark.parents('.formulaire_spip')[0].className.match(/formulaire_editer_(\w+)/);
-					champ = mark.parents('li')[0].className.match(/editer_(\w+)/);
-					$(mark).find('.markItUpPreview').height(
-						  $(mark).find('.markItUpHeader').height()
-						+ $(mark).find('.markItUpEditor').height()
-						+ $(mark).find('.markItUpFooter').height()
+
+				var is_full_screen = false;
+				var mark = $$.parent();
+				var objet = mark.parents('.formulaire_spip')[0].className.match(/formulaire_editer_(\w+)/);
+				objet = (objet ? objet[1] : '');
+				var champ = mark.parents('.editer')[0].className.match(/editer_(\w+)/);
+				champ = (champ ? champ[1].toUpperCase() : '');
+				var textarea = mark.find('textarea.pp_previsualisation');
+				var preview = mark.find('.markItUpPreview'); 
+				var dir = textarea.attr('dir');
+				if(dir){
+					preview.attr('dir',dir);
+				}
+
+				tabs.find('.fullscreen').click(function(){
+					mark.toggleClass('fullscreen');
+					if (mark.is('.fullscreen')){
+						is_full_screen = true;
+						if (!mark.is('.livepreview')){
+							var original_texte="";
+							
+							function refresh_preview(){
+								var texte = textarea.val();
+								if (original_texte == texte){
+									return;
+								}
+								renderPreview(preview.addClass('ajaxLoad'),texte,champ,objet);
+								original_texte = texte;
+							}
+							
+							var timerPreview=null;
+							mark.addClass('livepreview').find('.markItUpEditor').bind('keyup click change focus refreshpreview',function(e){
+								if (is_full_screen){
+									if (timerPreview) clearTimeout(timerPreview);
+									timerPreview = setTimeout(refresh_preview,500);
+								}
+							});
+							
+							$(window).bind('keyup',function(e){
+								if (is_full_screen) {
+									// Touche Echap pour sortir du mode fullscreen
+									if (e.type=='keyup' && e.keyCode==27){
+										mark.removeClass('fullscreen');
+										is_full_screen = false;
+									}
+								}
+							});
+						}
+						mark.find('.markItUpEditor').trigger('refreshpreview');
+					}
+					else {
+						is_full_screen = false;
+					}
+					
+					return false;
+				});
+
+				tabs.find('.previsuVoir').click(function(){
+					preview.height(
+						  mark.find('.markItUpHeader').height()
+						+ mark.find('.markItUpEditor').height()
+						+ mark.find('.markItUpFooter').height()
 					);
 
-					$(mark).find('.markItUpHeader').hide();
-					$(mark).find('.markItUpEditor').hide();
-					$(mark).find('.markItUpFooter').hide();
+					mark.find('.markItUpHeader,.markItUpEditor,.markItUpFooter').hide();
 					$(this).addClass('on').next().removeClass('on');
-					$(mark).find('.markItUpPreview').show()
-						.addClass('ajaxLoad')
-						.html(renderPreview(
-							$(mark).find('textarea.pp_previsualisation').val(),
-							champ[1].toUpperCase(),
-							(objet ? objet[1] : ''))
-						)
-						.removeClass('ajaxLoad');
-					
-					//ouvre un nouvel onglet lorsqu'on clique sur un lien dans la prévisualisation
-					$(".markItUpPreview a").attr("target","blank");
+					renderPreview(
+						preview.show().addClass('ajaxLoad'),
+						mark.find('textarea.pp_previsualisation').val(),
+						champ,
+						objet,
+						false
+					);
 
 					return false;
 				});
-				$('.previsuEditer').click(function(){
-					mark = $(this).parent().parent();
-					$(mark).find('.markItUpPreview').hide();
-					$(mark).find('.markItUpHeader').show();
-					$(mark).find('.markItUpEditor').show();
-					$(mark).find('.markItUpFooter').show();
+				tabs.find('.previsuEditer').click(function(){
+					mark.find('.markItUpPreview').hide();
+					mark.find('.markItUpHeader,.markItUpEditor,.markItUpFooter').show();
 					$(this).addClass('on').prev().removeClass('on');
+					
 					return false;
 				});
 			}
 
-
-			function renderPreview(val, champ, objet) {
-				var phtml;
+			function renderPreview(node, val, champ, objet, async) {
 				if (options.previewParserPath !== '') {
 					$.ajax( {
 						type: 'POST',
-						async: false,
+						async: typeof (async)=="undefined"?true:async,
 						url: options.previewParserPath,
 						data: 'champ='+champ
 							+'&objet='+objet
 							+'&' + options.previewParserVar+'='+encodeURIComponent(val),
 						success: function(data) {
-							phtml = data; 
+							node.html(data).removeClass('ajaxLoad');
+							//ouvre un nouvel onglet lorsqu'on clique sur un lien dans la prévisualisation
+							$("a",node).attr("target","blank");
 						}
 					} );
 				}
-				return phtml;
 			}
 	
 			init();

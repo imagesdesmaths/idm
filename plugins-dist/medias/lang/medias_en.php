@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/medias?lang_cible=en
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -37,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_remplacer_image' => 'Replace this image',
 	'bouton_remplacer_image_document' => 'Replace by an image or a document',
 	'bouton_supprimer' => 'Delete',
-	'bouton_supprimer_tous_orphelins' => 'Delete all unused',
+	'bouton_supprimer_tous_orphelins' => 'Delete all orphans',
 	'bouton_supprimer_tous_orphelins_confirmation' => 'Do you really want to delete @nb@ orphans documents?',
 	'bouton_upload' => 'Upload',
 
@@ -104,16 +106,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_heure' => 'Time',
 	'info_illustrations' => 'Illustrations',
 	'info_image_max_poids' => 'Images must necessarily be less than @maxi@ (this file is @actuel@).',
+	'info_image_max_taille' => 'Images must necessarily be less than @maxi@ (this file is @actuel@).',
 	'info_inclusion_directe' => 'Direct inclusion:',
 	'info_inclusion_vignette' => 'Include vignette:',
 	'info_installer_tous_documents' => 'Install all the documents',
 	'info_largeur' => 'Width',
 	'info_logo_max_taille' => 'Logos must be less than @maxi@ (this file is @actuel@).',
+	'info_mode' => 'Mode',
 	'info_modifier_document' => 'Modify the document',
 	'info_portfolio' => 'Portfolio',
 	'info_referencer_doc_distant' => 'Reference a document on Internet:',
 	'info_sans_vignette' => 'Without thumbnail',
 	'info_statut_document' => 'This document is:',
+	'info_taille' => 'Weight',
 	'info_telecharger' => 'Upload from your computer:',
 	'infos' => 'Technical infos',
 	'item_autoriser_selectionner_date_en_ligne' => 'Allow changes to the date of each document',

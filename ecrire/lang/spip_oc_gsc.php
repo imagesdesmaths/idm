@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=oc_gsc
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -436,7 +438,6 @@ deu sit "@nom_site_spip@" (@adresse_site@):', # MODIF
 	'login_retour_public' => 'Tornar au sit public',
 	'login_retour_site' => 'Tornar au sit public',
 	'login_retoursitepublic' => 'tornar au sit public',
-	'login_sans_cookiie' => 'Identificacion shens cookie',
 	'login_sinscrire' => 'inscrive’s',
 	'login_test_navigateur' => 'Ensai navigader/tornar connectar',
 	'login_verifiez_navigateur' => '(totun verificatz que lo vòste navigader n’aja pas servat lo vòste mot de santa Clara en memòria...)',

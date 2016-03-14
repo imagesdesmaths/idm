@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=fa
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -31,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'باطل شود',
 	'antispam_champ_vide' => 'خواهشمند است اين قسمت را خالى بگذاريد:',
 	'articles_recents' => 'تازه ترين مقاله ها',
+	'avis_1_erreur_saisie' => 'يك خطا در حساب شما هست، دوست داريد اطلاعات را تأييد كنيد.',
 	'avis_archive_incorrect' => 'فايل بايگاني فايل اسپيپ نيست',
 	'avis_archive_invalide' => 'فايل بايگانى معتبر نميباشد',
 	'avis_attention' => 'توجه !',
@@ -108,13 +111,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_demain' => 'فردا',
 	'date_fmt_heures_minutes' => '@h@h@m@min',
 	'date_fmt_heures_minutes_court' => '@h@h@m@',
+	'date_fmt_jour' => '@nomjour@ @jour@',
 	'date_fmt_jour_heure' => ' @heure@ @jour@ ',
+	'date_fmt_jour_heure_debut_fin' => ' @jour@ از @heure_debut@ تا @heure_fin@', # MODIF
+	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@ از @heure_debut@@dtabbr@ تا @dtstart@@heure_fin@@dtend@', # MODIF
 	'date_fmt_jour_mois' => '@jour@ @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ @nommois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
+	'date_fmt_nomjour' => '@nomjour@ @date@',
 	'date_fmt_nomjour_date' => '@nomjour@ @date@',
+	'date_fmt_periode' => 'از @date_debut@ تا @date_fin@',
+	'date_fmt_periode_abbr' => ' از @dtart@@date_debut@@dtabbr@ تا@dtend@@date_fin@@dtabbr@',
 	'date_fmt_periode_from' => 'از ',
 	'date_fmt_periode_to' => 'تا',
+	'date_fmt_saison_annee' => '@saison@ @annee@',
 	'date_heures' => 'ساعت',
 	'date_hier' => 'ديروز',
 	'date_il_y_a' => '@delai@ پيش',
@@ -222,6 +232,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'ارسال از طريق سايت',
 	'erreur' => 'اشتباه',
 	'erreur_balise_non_fermee' => 'آخرین برچسب (Tag) بسته نشده:',
+	'erreur_technique_ajaxform' => 'واي! يك خطاي غيرمنتظره مانع از ارايه اين فرم مي‌شود. دوباره سعي كنيد. ',
 	'erreur_technique_enregistrement_champs' => 'يك خطاي فني از حق ثبت نام ميدان @champs@ جلوگيري كرده است.',
 	'erreur_technique_enregistrement_impossible' => 'يك خطاي فني مانع از ثبت نام است. ',
 	'erreur_texte' => 'اشتباه',
@@ -372,8 +383,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_requete' => ': اشتباه در درخواست',
 	'info_erreur_squelette2' => 'هيچ اسكلتي <b>@fichier@</b>در دسترس نميباشد',
 	'info_erreur_systeme' => 'اشتباه در سيستم(errno @errsys@)',
-	'info_erreur_systeme2' => 'يا ديسك رايانه پر شده يا پایگاه داده‌ها صدمه ديده اند.<br />
-<font color=’red’>يا پایگاه داده‌ها را <a href=\'@script@\'> درست كنيد</a>, يا با ميزبانتان تماس بگيريد.</font>', # MODIF
+	'info_erreur_systeme2' => 'شايد هارد ديسك پر شده باشد، يا پايگاه داده‌ها آسيب ديده باشد<br />
+<span style="color:red;">سعي كنيد <a href=\'@script@\'>پايگاه داده‌ها را تعمير كنيد base</a>, يا با ميزبان خود تماس بگيريد.</span>',
 	'info_fini' => 'پايان!',
 	'info_format_image' => 'اندازه هاى تصاويرى كه ميتوانند براى ساختن همان تصاوير ولى بصورت كوچك مورد استفاده قرار بگيرند: @gd_formats@.',
 	'info_format_non_defini' => 'اندازه مشخص نشده',
@@ -409,7 +420,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_mois_courant' => ':در ماه جارى',
 	'info_mot_cle_ajoute' => 'كليد-واژه بعدى اضافه شده به',
 	'info_multi_herit' => ' زبان اصلی',
-	'info_multi_langues_soulignees' => 'نماى سايت بطور كامل به <u>زبانهاى مشخص شده</u>,  ترجمه شده. هنگامي كه شما اين زبانها را انتخاب مي‌كنيد شمارى از اجزاى سايت مانند تاريخ, بطور خودكار برگردان ميشوند. براى زبانهاى مشخص نشده اين اجزا به زبان اصلى سايت نمايان خواهند شد.', # MODIF
+	'info_multi_langues_soulignees' => '<u>زبان‌هاي مشخص شده</u> ترجمه تمام يا بخشي از متن‌هاي نرم‌افزار واسط را ارايه مي‌دهد. اگر اين زبان‌ها را انتخاب كنيد، بعضي از عناصر سايت عمومي (تاريخ‌ها، فرم‌ها) به صورت خود به خودي ترجمه مي‌شود. براي زبان‌هايي كه مشخص نشده‌اند، اين عناصر باز زبان پيش‌گزيده سايت نمايش داده مي‌شوند. ',
 	'info_multilinguisme' => 'چند زبانه گى',
 	'info_nom_non_utilisateurs_connectes' => 'نامتان در فهرست كاربران متصل به تارنما نميباشد',
 	'info_nom_utilisateurs_connectes' => 'نامتان در فهرست كاربران متصل به تارنما ميباشد',
@@ -513,7 +524,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_retour_public' => 'بازگشت به سايت همگانى',
 	'login_retour_site' => 'بازگشت به سايت همگانى',
 	'login_retoursitepublic' => 'بازگشت به سايت همگانى',
-	'login_sans_cookiie' => 'شناسائى بدون كوكى cookie',
 	'login_securise' => 'لاگين امن ',
 	'login_sinscrire' => 'ثبت نام ',
 	'login_test_navigateur' => 'آزمايش مرورگر/ ارتباط دوباره',
@@ -560,7 +570,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pass_nouveau_pass' => 'كلمه ورودى جديد',
 	'pass_ok' => 'OK',
 	'pass_oubli_mot' => 'فراموشى كلمه ورودى ',
-	'pass_procedure_changer' => 'براي تغيير گذرواژه‌ي خود، ما بايد اول شما را شناسايي كنيم. براي اين كار نشاني ايميل مربوط به حساب خود را به ما اعلام كنيد. ',
+	'pass_procedure_changer' => 'براي تغيير گذرواژه‌ي خود، ما بايد اول شما را شناسايي كنيم. براي اين كار نشاني ايميل مربوط به حساب خود را به ما اعلام كنيد. ', # MODIF
 	'pass_quitter_fenetre' => 'اين پنجره را ترك كنيد',
 	'pass_rappel_login' => '(login)شما : « @login@ ».',
 	'pass_recevoir_mail' => ' شما ايميلى دريافت خواهيد كرد كه شامل راهنماى ورودتان به سايت ميباشد',
@@ -618,6 +628,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_image_auteur_supprime' => 'نويسنده حذف شده',
 	'titre_image_redacteur' => 'نويسنده بدون حق دسترسى',
 	'titre_image_redacteur_02' => 'نويسنده',
+	'titre_image_selecteur' => 'نشان دادن ليست',
 	'titre_image_visiteur' => 'بازديد كننده',
 	'titre_joindre_document' => 'يك سند اضافه كنيد',
 	'titre_mots_cles' => 'واژه-كليدها',

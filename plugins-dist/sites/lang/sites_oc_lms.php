@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=oc_lms
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -33,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Modificar queu sit',
 	'icone_referencer_nouveau_site' => 'Referenciar un sit nuòu',
 	'icone_voir_sites_references' => 'Veire los sits referenciats',
+	'info_1_site' => '1 sit',
 	'info_a_valider' => '[de validar]',
 	'info_bloquer' => 'blocar',
 	'info_bloquer_lien' => 'Blocar queu liam',

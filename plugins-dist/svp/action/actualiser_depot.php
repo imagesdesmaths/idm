@@ -6,12 +6,12 @@
  * @license GPL
  * @package SPIP\SVP\Actions
  */
- 
+
 /**
  * Action de mise à jour en base de données de la liste des plugins
  * d'un ou de tous les dépots
  */
-function action_actualiser_depot_dist(){
+function action_actualiser_depot_dist() {
 
 	// Securisation: aucun argument attendu
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -32,17 +32,17 @@ function action_actualiser_depot_dist(){
 	if ($arg === 'tout') {
 		if ($ids_depots = sql_allfetsel('id_depot', 'spip_depots')) {
 			$ids_depots = array_map('reset', $ids_depots);
-			foreach ($ids_depots as $_id_depot)
+			foreach ($ids_depots as $_id_depot) {
 				svp_actualiser_depot($_id_depot);
+			}
 			// On consigne l'action
 			spip_log("ACTION ACTUALISER TOUS LES DEPOTS (manuel)", 'svp_actions.' . _LOG_INFO);
 		}
-	}
-	else if ($id_depot = intval($arg)) {
-		svp_actualiser_depot($id_depot);
-		// On consigne l'action
-		spip_log("ACTION ACTUALISER DEPOT (manuel) : id_depot = ". $id_depot, 'svp_actions.' . _LOG_INFO);
+	} else {
+		if ($id_depot = intval($arg)) {
+			svp_actualiser_depot($id_depot);
+			// On consigne l'action
+			spip_log("ACTION ACTUALISER DEPOT (manuel) : id_depot = " . $id_depot, 'svp_actions.' . _LOG_INFO);
+		}
 	}
 }
-
-?>

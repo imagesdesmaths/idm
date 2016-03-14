@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/medias?lang_cible=fa
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -104,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_heure' => 'ساعت',
 	'info_illustrations' => 'ترسيم‌ها',
 	'info_image_max_poids' => 'تصويرها بايد الزام كم‌تر از @maxi@ باشند(اين پرونده @actuel@ است).',
+	'info_image_max_taille' => 'تصويرها بايد الزام كم‌تر از @maxi@ باشند(اين پرونده @actuel@ است).',
 	'info_inclusion_directe' => ': گنجاندن مستقيم',
 	'info_inclusion_vignette' => ': گنجاندن تصاوير كوچك شده',
 	'info_installer_tous_documents' => 'تمام اسناد را مستقر كنيد',
@@ -112,6 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_modifier_document' => 'اصلاح سند ',
 	'info_portfolio' => 'كارنامه',
 	'info_referencer_doc_distant' => 'يك پرونده را در اينترنت ضبط كنيد:',
+	'info_sans_vignette' => 'بدون صورتك ',
 	'info_statut_document' => 'اين سند :',
 	'info_telecharger' => ':با رايانه خودتان بارگذارى كنيد',
 	'infos' => ' نمايش اطلاعات روي تمام بخش‌ها (اگرمي‌خواهيد استفاده‌ي متفاوتي از آن بشود)',
@@ -125,6 +129,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_credits' => 'اعتبارها',
 	'label_fichier' => 'پرونده',
 	'label_fichier_vignette' => 'ويگنت',
+	'label_paginer_par' => 'شماره صفحه‌گذاري با: ',
 	'label_parents' => 'اين سند پيوند خورده به ',
 	'label_refdoc_joindre' => 'شماره‌ي سند',
 	'lien_tout_enlever' => 'حذف همه',

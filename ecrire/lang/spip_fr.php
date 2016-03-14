@@ -1,7 +1,9 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Fichier source, a modifier dans svn://trac.rezo.net/spip/spip/ecrire/lang/
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -29,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'Annuler',
 	'antispam_champ_vide' => 'Veuillez laisser ce champ vide :',
 	'articles_recents' => 'Articles les plus récents',
+	'avis_1_erreur_saisie' => 'Il y a 1 erreur dans votre saisie, veuillez vérifier les informations.',
 	'avis_archive_incorrect' => 'le fichier archive n’est pas un fichier SPIP',
 	'avis_archive_invalide' => 'le fichier archive n’est pas valide',
 	'avis_attention' => 'ATTENTION !',
@@ -41,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_mysql' => 'Erreur SQL',
 	'avis_erreur_sauvegarde' => 'Erreur dans la sauvegarde (@type@ @id_objet@) !',
 	'avis_erreur_visiteur' => 'Problème d’accès à l’espace privé',
+	'avis_nb_erreurs_saisie' => 'Il y a @nb@ erreurs dans votre saisie, veuillez vérifier les informations.',
 
 	// B
 	'barre_a_accent_grave' => 'Insérer un A accent grave majuscule',
@@ -119,7 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@',
 	'date_fmt_periode_from' => 'Du',
 	'date_fmt_periode_to' => 'au',
-	'date_fmt_saison_annee' => '@saison@ @annee@', // Retour du filtre saison_annee "été 2014", reçoit comme argument 'saison' (string) et année (int)
+	'date_fmt_saison_annee' => '@saison@ @annee@',
 	'date_heures' => 'heures',
 	'date_hier' => 'hier',
 	'date_il_y_a' => 'il y a @delai@',
@@ -530,7 +534,7 @@ le site "@nom_site_spip@" (@adresse_login@) :',
 	'login_retour_public' => 'Retour au site public',
 	'login_retour_site' => 'Retour au site public',
 	'login_retoursitepublic' => 'retour au site public',
-	'login_sans_cookiie' => 'Identification sans cookie',
+	'login_sans_cookie' => 'Identification sans cookie',
 	'login_securise' => 'Login sécurisé',
 	'login_sinscrire' => 's’inscrire',
 	'login_test_navigateur' => 'test navigateur/reconnexion',
@@ -594,7 +598,7 @@ et vous reconnecter au site.
 	'pass_nouveau_pass' => 'Nouveau mot de passe',
 	'pass_ok' => 'OK',
 	'pass_oubli_mot' => 'Oubli du mot de passe',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d’abord vérifier votre identité. Pour cela indiquez-nous l’adresse email associée à votre compte.',
+	'pass_procedure_changer' => 'Pour modifier votre mot de passe, merci d’indiquer l’adresse email associée à votre compte.',
 	'pass_quitter_fenetre' => 'Quitter cette fenêtre',
 	'pass_rappel_login' => 'Rappel : votre identifiant (login) est « @login@ ».',
 	'pass_recevoir_mail' => 'Vous allez recevoir un email vous indiquant comment retrouver votre accès au site.',
@@ -674,8 +678,8 @@ et vous reconnecter au site.
 	'titre_statistiques' => 'Statistiques du site',
 	'titre_titre_document' => 'Titre du document :',
 	'todo' => 'à venir',
-	'trad_reference' => '(référence des traductions)',
 	'trad_definir_reference' => 'Choisir "@titre@" comme référence des traductions',
+	'trad_reference' => '(référence des traductions)',
 
 	// Z
 	'zbug_balise_b_aval' => ' : balise B en aval',

@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=en_hx
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -33,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'M0d1fy 7h15 5173',
 	'icone_referencer_nouveau_site' => 'R3f3r3nc3 4 n3w 5173',
 	'icone_voir_sites_references' => '5h0w r3f3r3nc3d 51735',
+	'info_1_site' => '1 5173',
 	'info_a_valider' => '[70 b3 v411d473d]',
 	'info_bloquer_lien' => 'b10ck 7h15 11nk',
 	'info_derniere_syndication' => '7h3 1457 5ynd1c4710n 0f 7h15 5173 w45 c4rr13d 0u7 0n',

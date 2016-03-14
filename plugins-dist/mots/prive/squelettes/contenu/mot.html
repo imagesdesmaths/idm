@@ -3,7 +3,7 @@
 	[(#AUTORISER{modifier,mot,#ID_MOT})
 	[(#URL_ECRIRE{mot_edit,id_mot=#ID_MOT}|icone_verticale{<:mots:icone_modifier_mot:>,mot,edit,right ajax preload})]
 	]
-	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{mot-24.png}|balise_img{mot,cadre-icone})]</h1>
+	<h1[ class='(#EDIT{titre})']>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{mot-24.png}|balise_img{mot,cadre-icone})]</h1>
 ],simple fiche_objet})]
 
 <div id="wysiwyg">

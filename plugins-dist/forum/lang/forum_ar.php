@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=ar
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -32,6 +34,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_enregistrement_message' => 'لم يتم تسجيل مشاركتك بسبب مشكلة تقنية',
+	'extensions_autorisees' => 'اللواحق المسموح بها:',
+	'extensions_autorisees_toutes' => 'الكل',
 
 	// F
 	'form_pet_message_commentaire' => 'أي رسالة أو تعليق؟',
@@ -44,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_attention_trop_caracteres' => '<b>تحذير!</b> رسالتك طويلة جداً (@compte@ حرف): لكي يتم تسجيلها، لا يجب ان تتعدى @max@ حرف.',
 	'forum_avez_selectionne' => 'لقد حددت:',
 	'forum_cliquer_retour' => 'انقر <a href=\'@retour_forum@\'>هنا</a> للمتابعة.',
+	'forum_envoyer' => 'إرسال',
 	'forum_forum' => 'منتدى',
 	'forum_info_modere' => 'هذا المنتدى مراقب استباقياً: لن تظهر مشاركتك إلا بعد التصديق عليها من قبل أحد المدراء.',
 	'forum_lien_hyper' => 'رابط هايبرتكست',
@@ -57,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_poste_par_court' => 'مشاركة مرسلة@parauteur@.',
 	'forum_poste_par_generique' => 'مشاركة مرسلة@parauteur@ (@objet@ « @titre@ »).',
 	'forum_qui_etes_vous' => 'من أنت؟',
-	'forum_saisie_texte_info' => 'تدعم هذه الاستمارة اختصارات SPIP <code>[-&gt;url] {{أسود}} {مائل} &lt;quote&gt; &lt;code&gt;</code> وعلامات HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. لإنشاء فقرات أترك اسطر فارغة.',
+	'forum_saisie_texte_info' => 'تدعم هذه الاستمارة اختصارات SPIP <code>[-&gt;عنوان] {{أسود}} {مائل} &lt;اقتباس&gt; &lt;برمجة&gt;</code> وعلامات HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. لإنشاء فقرات أترك اسطر فارغة.',
 	'forum_texte' => 'نص المشاركة',
 	'forum_titre' => 'الموضوع',
 	'forum_url' => 'موقعك',
@@ -96,6 +101,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 للمقالات؛ وستكون محظورة في الأقسام والأخبار الخ.',
 	'info_envoi_forum' => 'إرسال المنتديات الى مؤلفي المقالات',
 	'info_fonctionnement_forum' => 'تشغيل المنتدى:',
+	'info_forcer_previsualisation_court' => 'فرض المعاينة المسبقة',
+	'info_forcer_previsualisation_long' => 'فرض المعاينة المسبقة قبل إرسال المشاركة',
 	'info_forums_liees_mot' => 'مشاركات المنتدى المرتبطة بهذا المفتاح',
 	'info_gauche_suivi_forum_2' => 'صفحة <i>متابعة المنتديات</i> هي أداة إدارية في موقعك (وليست للنقاش او التحرير). وتعرض هذه الصفحة كل مشاركات منتديات الموقع، العمومية منها كما الخاصة وتتيح لك التحكم بهذه المشاركات.',
 	'info_liens_syndiques_3' => 'منتدى',

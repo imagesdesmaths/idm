@@ -2,7 +2,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -13,10 +13,12 @@
 /**
  * Ce fichier ne sert plus
  * Il est maintenu pour assurer la compatibilite des anciens scripts
- *  
+ *
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 // prise en charge des renomage de fonction
 include_spip('inc/filtres_images_compat');
@@ -29,5 +31,3 @@ include_spip('filtres/images_typo');
 
 // prise en charge des fonctions de transformation de couleur
 include_spip('filtres/couleurs');
-
-?>

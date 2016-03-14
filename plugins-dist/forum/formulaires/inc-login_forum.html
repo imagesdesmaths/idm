@@ -8,22 +8,22 @@
 <fieldset class="qui[ (#SESSION{auth}|?{session_qui,saisie_qui})]">
 <legend><:forum:forum_qui_etes_vous:></legend>
 [(#SESSION{auth}|oui)
-	[<p class='explication'><:forum:forum_votre_nom:> <strong>(#SESSION{nom}|typo)</strong> <span class="details"><a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a></span></p>]
+	[<p class='explication'><:forum:forum_votre_nom:> <strong>(#SESSION{nom}|supprimer_numero|typo)</strong> <span class="details"><a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a></span></p>]
 	
 ]
 [(#SESSION{auth}|non)
-	<ul>
-		<li class='editer saisie_session_nom'>
+	<div class="editer-groupe">
+		<div class='editer saisie_session_nom'>
 			<label for="session_nom"><:forum:forum_votre_nom:></label>
 			<input type="text" class="text" name="session_nom" id="session_nom" value="[(#SESSION**{nom}|sinon{#SESSION**{session_nom}}|entites_html)]" size="40" autocapitalize="off" autocorrect="off" />
 			[(#CONFIG{accepter_inscriptions}|=={oui}|?{' '})
 			<span class="details"><a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]" rel="nofollow"><:lien_connecter:></a></span>
 			]
-		</li>
-		<li class='editer saisie_session_email'>
+		</div>
+		<div class='editer saisie_session_email'>
 			<label for="session_email"><:forum:forum_votre_email:></label>
 			<input type="[(#HTML5|?{email,text})]" class="text email" name="session_email" id="session_email" value="[(#SESSION**{email}|sinon{#SESSION**{session_email}}|entites_html)]" size="40" autocapitalize="off" autocorrect="off" />
-		</li>
-	</ul>
+		</div>
+	</div>
 ]
 </fieldset>

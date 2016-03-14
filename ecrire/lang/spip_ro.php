@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=ro
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -519,7 +521,6 @@ site-ul "@nom_site_spip@" (@adresse_login@):',
 	'login_retour_public' => 'Înapoi la site-ul public',
 	'login_retour_site' => 'Înapoi la site-ul public',
 	'login_retoursitepublic' => 'înapoi la site-ul public',
-	'login_sans_cookiie' => 'Identificare fără cookie',
 	'login_securise' => 'Login securizat',
 	'login_sinscrire' => 'înscrieţi-vă',
 	'login_test_navigateur' => 'test de navigator/reconectare',

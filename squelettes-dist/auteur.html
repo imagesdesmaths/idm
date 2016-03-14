@@ -7,11 +7,10 @@
 <!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
 <head>
-<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
-<title>[(#NOM|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-<INCLURE{fond=inclure/head} />
-<meta name="robots" content="none" />
-<link rel="alternate" type="application/rss+xml" title="[(#NOM|textebrut)]" href="[(#URL_PAGE{backend}|parametre_url{id_auteur,#ID_AUTEUR})]" />
+	<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+	<title>[(#NOM|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+	<INCLURE{fond=inclure/head,robots=none} />
+	<link rel="alternate" type="application/rss+xml" title="[(#NOM|textebrut)]" href="[(#URL_PAGE{backend}|parametre_url{id_auteur,#ID_AUTEUR})]" />
 </head>
 
 <body class="pas_surlignable page_auteur">
@@ -19,6 +18,7 @@
 
 	<INCLURE{fond=inclure/header} />
 	<INCLURE{fond=inclure/nav,env} />
+
 
 	<div class="main">
 		[(#REM) Contenu principal : affichage de l'auteur ]
@@ -28,7 +28,7 @@
 	
 			<div class="vcard">[(#REM) microformat vcard]
 			<div class="cartouche">
-				[(#LOGO_AUTEUR|image_reduire{40,*})]
+				[(#LOGO_AUTEUR|image_reduire{224,*})]
 				<h1 class="#EDIT{qui} fn">#NOM</h1>
 			</div>
 	

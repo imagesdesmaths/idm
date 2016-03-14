@@ -3,9 +3,17 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=he
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// B
+	'bouton_radio_activer_petition' => 'להפעיל את העצומה',
+	'bouton_radio_pas_petition' => 'אין עצומה',
+	'bouton_radio_petition_activee' => 'עצומה מופעלת',
+	'bouton_radio_supprimer_petition' => 'מחק את העצומה',
 
 	// F
 	'form_pet_adresse_site' => 'הכתובת הכללית של האתר שלך', # MODIF

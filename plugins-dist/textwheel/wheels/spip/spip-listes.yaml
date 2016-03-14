@@ -32,7 +32,7 @@
               # capture * deuxieme parenthese : ul
               # capture # deuxieme parenthese : ol
               # nombre de car dans la 2eme  parenthese = profondeur
-              match: ",(\n-)(\*+|\#+)([^*#].*)(?=(?:\z|\n-)),UsS"
+              match: ",(\n-)(\*+|\#+)([^*#].*)?(?=(?:\z|\n-)),UsS"
               replace: tw_liste_item
               is_callback: Y
             liste-p-close:
@@ -40,9 +40,11 @@
               replace: tw_liste_close
               is_callback: Y
 
--
+# Feu les dl/dt/dd via -? -! cf https://core.spip.net/issues/1934
+definitions-disabled:
   if_match: "/\n-(&nbsp;)?[\?!]\s/S"
   type: all
+  disabled: Y
   is_wheel: Y
   replace:
     listes-decoupe-para2:

@@ -7,13 +7,13 @@
 <!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
 <head>
-<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
-<title>[(#TITRE|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
-[<link rel="canonical" href="(#URL_BREVE|url_absolue)" />]
-<INCLURE{fond=inclure/head} />
-[(#REM) Lien vers le flux RSS des breves ]
-<link rel="alternate" type="application/rss+xml" title="<:dernieres_breves:>" href="#URL_PAGE{backend-breves}" />
+	<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+	<title>[(#TITRE|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
+	[<link rel="canonical" href="(#URL_BREVE|url_absolue)" />]
+	<INCLURE{fond=inclure/head} />
+	[(#REM) Lien vers le flux RSS des breves ]
+	<link rel="alternate" type="application/rss+xml" title="<:dernieres_breves:>" href="#URL_PAGE{backend-breves}" />
 </head>
 
 <body class="pas_surlignable page_breve">
@@ -29,7 +29,7 @@
 			<p class="arbo"><a href="#URL_SITE_SPIP/" ><:accueil_site:></a><BOUCLE_ariane(RUBRIQUES){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
 	
 			<div class="cartouche">
-				<h1 class="#EDIT{titre}">[(#LOGO_BREVE_RUBRIQUE|image_reduire{40,*}) ]#TITRE</h1>
+				<h1 class="#EDIT{titre} surlignable">[(#LOGO_BREVE_RUBRIQUE|image_reduire{240,240}) ]#TITRE</h1>
 				<p class="info-publi"><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr></p>
 			</div>
 			

@@ -3,38 +3,53 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
+/**
+ * Gestion du formulaire Forum Privé et de sa balise
+ *
+ * @package SPIP\Forum\Balises
+ **/
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}  #securite
 
 include_spip('inc/acces');
 include_spip('inc/texte');
 include_spip('inc/forum');
 
-/*******************************/
-/* GESTION DU FORMULAIRE FORUM */
-/*******************************/
 
 /**
- * Contexte du formulaire
- * Mots-cles dans les forums :
- * Si la variable de personnalisation $afficher_groupe[] est definie
- * dans le fichier d'appel, et si la table de reference est OK, proposer
- * la liste des mots-cles
- * #FORMULAIRE_FORUM_PRIVE seul calcule (objet, id_objet) depuis la boucle parente
- * #FORMULAIRE_FORUM_PRIVE{#SELF} pour forcer l'url de retour
- * #FORMULAIRE_FORUM_PRIVE{#SELF, article, 3} pour forcer l'objet et son identifiant
- * http://code.spip.net/@balise_FORMULAIRE_FORUM_PRIVE
+ * Compile la balise `#FORMULAIRE_FORUM_PRIVE` qui affiche un formulaire d'ajout
+ * de commentaire pour l'espace privé
  *
- * @param Object $p
- * @return Object
+ * Signature : `#FORMULAIRE_FORUM_PRIVE{[redirection[, objet, id_objet]]}`
+ *
+ * Particularité du contexte du formulaire pour permettre une saisie
+ * de mots-clés dans les forums : si la variable de personnalisation
+ * `$afficher_groupe[]` est définie dans le fichier d'appel, et si la table
+ * de référence est OK, la liste des mots-clés est alors proposée.
+ *
+ * @balise
+ * @see balise_FORMULAIRE_FORUM()
+ * @example
+ *     ```
+ *     #FORMULAIRE_FORUM_PRIVE seul calcule (objet, id_objet) depuis la boucle parente
+ *     #FORMULAIRE_FORUM_PRIVE{#SELF} pour forcer l'url de retour
+ *     #FORMULAIRE_FORUM_PRIVE{#SELF, article, 3} pour forcer l'objet et son identifiant
+ *     ```
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
  */
-function balise_FORMULAIRE_FORUM_PRIVE ($p) {
+function balise_FORMULAIRE_FORUM_PRIVE($p) {
 
 	/**
 	 * On recupere $objet et $id_objet depuis une boucle englobante si possible
@@ -42,10 +57,10 @@ function balise_FORMULAIRE_FORUM_PRIVE ($p) {
 	 * sur quoi le formulaire porte.
 	 * Enfin, on pourra aussi forcer objet et id_objet depuis l'appel du formulaire
 	 */
-	$i_boucle  = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
+	$i_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
 	if (isset($p->boucles[$i_boucle])) {
 		$_id_objet = $p->boucles[$i_boucle]->primary;
-		$_type     = $p->boucles[$i_boucle]->id_table;
+		$_type = $p->boucles[$i_boucle]->id_table;
 	} else {
 		$_id_objet = $_type = '';
 	}
@@ -60,7 +75,7 @@ function balise_FORMULAIRE_FORUM_PRIVE ($p) {
 	$obtenir = array(
 		$_id_objet,
 		'id_forum',
-		'afficher_texte',
+		'forcer_previsu',
 		'statut',
 	);
 
@@ -69,7 +84,7 @@ function balise_FORMULAIRE_FORUM_PRIVE ($p) {
 		$obtenir = array_merge($obtenir, $ids);
 	}
 
-	$p = calculer_balise_dynamique($p,'FORMULAIRE_FORUM_PRIVE', $obtenir,
+	$p = calculer_balise_dynamique($p, 'FORMULAIRE_FORUM_PRIVE', $obtenir,
 		array("'$_type'", count($ids))
 	);
 
@@ -78,8 +93,6 @@ function balise_FORMULAIRE_FORUM_PRIVE ($p) {
 
 /**
  * Chercher l'objet/id_objet et la configuration du forum
- *
- * http://code.spip.net/@balise_FORMULAIRE_FORUM_PRIVE_stat
  *
  * @param array $args
  * @param array $context_compil
@@ -96,19 +109,19 @@ function balise_FORMULAIRE_FORUM_PRIVE_stat($args, $context_compil) {
 	// $args = (obtenir) + (ids) + (url, objet, id_objet)
 	$ido = array_shift($args);
 	$id_forum = intval(array_shift($args));
-	$afficher_texte = array_shift($args);
+	$forcer_previsu = array_shift($args);
 	$statut = array_shift($args);
 
 	include_spip('balise/formulaire_forum');
 	// si statut privrac ou privadm, pas besoin d'objet !
-	$r = balise_forum_retrouve_objet($ido,$id_forum,$args,$context_compil,!in_array($statut,array('privrac','privadm')));
-	if (!$r)
+	$r = balise_forum_retrouve_objet($ido, $id_forum, $args, $context_compil,
+		!in_array($statut, array('privrac', 'privadm')));
+	if (!$r) {
 		return false;
+	}
 
 	list($objet, $id_objet, $retour) = $r;
 
 	return
-		array($objet, $id_objet, $id_forum, $afficher_texte, $statut, $retour);
+		array($objet, $id_objet, $id_forum, $forcer_previsu, $statut, $retour);
 }
-
-?>

@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/mediabox?lang_cible=ru
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -20,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'explication_selecteur' => 'Укажите элемент, который вызовет окно. (JQuery или CSS)',
 	'explication_selecteur_galerie' => 'Выберите элементы, которые нужно сгруппировать в галерее. (jQuery или CSS)',
-	'explication_splash_url' => 'Укажите URL к медиа файлу, который будет отображаться в сплывающем окне при первом входе на сайт.',
+	'explication_splash_url' => 'Укажите URL к медиа файлу, который будет отображаться во всплывающем окне при первом входе на сайт.',
 	'explication_traiter_toutes_images' => 'Вставить рамку вокруг всех изображений?',
 
 	// L
@@ -41,7 +43,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_slideshow_speed' => 'Время демонстрации картинки  в слайдоу (ms)',
 	'label_speed' => 'Скорость смены кадров (ms)',
 	'label_splash' => 'Всплывающее Окно',
+	'label_splash_height' => 'Высота (% или px)',
 	'label_splash_url' => 'Ссылка для просмотра',
+	'label_splash_width' => 'Ширина (% или px)',
 	'label_traiter_toutes_images' => 'Изображения',
 	'label_transition' => 'Смена изображений',
 

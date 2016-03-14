@@ -3,14 +3,16 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 // Correction typographique francaise
 
@@ -20,15 +22,16 @@ function typographie_fr($t) {
 
 	if (!isset($trans)) {
 		$trans = array(
-		"&nbsp;" => '~',
-		"&raquo;" => '&#187;',
-		"&laquo;" => '&#171;',
-		"&rdquo;" => '&#8221;',
-		"&ldquo;" => '&#8220;',
-		"&deg;" => '&#176;',
-		"'" => '&#8217;'
+			"&nbsp;" => '~',
+			"&raquo;" => '&#187;',
+			"&laquo;" => '&#171;',
+			"&rdquo;" => '&#8221;',
+			"&ldquo;" => '&#8220;',
+			"&deg;" => '&#176;',
+			"'" => '&#8217;'
 		);
-		switch ($GLOBALS['meta']['charset']) {
+		$charset = isset($GLOBALS['meta']['charset']) ? $GLOBALS['meta']['charset'] : '';
+		switch ($charset) {
 			case 'utf-8':
 				$trans["\xc2\xa0"] = '~';
 				$trans["\xc2\xbb"] = '&#187;';
@@ -60,13 +63,8 @@ function typographie_fr($t) {
 		$t = preg_replace(',(&#?[0-9a-z]+)~;,iS', '$1;', $t);
 	}
 
-	/* 2 ; ajout d'insecable */
-	$t = preg_replace('/&#187;| --?,|(?::| %)(?:\W|$)/S', '~$0', $t);
-
-	// {»} guillemet en italiques : ne pas doubler l'insecable 
-	$t = str_replace('~{~', '~{', $t);
-	$t = str_replace('~}~', '}~', $t);
-
+	/* 2 */
+	$t = preg_replace('/&#187;| --?,|(?::(?!:)| %)(?:\W|$)/S', '~$0', $t);
 
 	/* 3 */
 	$t = preg_replace('/[!?][!?\.]*/S', "$pro~$0", $t, -1, $c);
@@ -78,8 +76,13 @@ function typographie_fr($t) {
 	/* 4 */
 	$t = preg_replace('/&#171;|M(?:M?\.|mes?|r\.?|&#176;) |[nN]&#176; /S', '$0~', $t);
 
-	if (strpos($t, '~') !== false)
+	if (strpos($t, '\~') !== false) {
+		$t = str_replace('\~', "\x1\x14", $t);
+	}
+
+	if (strpos($t, '~') !== false) {
 		$t = preg_replace("/ *~+ */S", "~", $t);
+	}
 
 	$t = preg_replace("/--([^-]|$)/S", "$pro&mdash;$1", $t, -1, $c);
 	if ($c) {
@@ -87,8 +90,12 @@ function typographie_fr($t) {
 		$t = str_replace($pro, '', $t);
 	}
 
-	$t = preg_replace(',(' ._PROTOCOLES_STD . ')~((://[^"\'\s\[\]\}\)<>]+)~([?]))?,S', '$1$3$4', $t);
+	$t = preg_replace(',(' . _PROTOCOLES_STD . ')~((://[^"\'\s\[\]\}\)<>]+)~([?]))?,S', '$1$3$4', $t);
 	$t = str_replace('~', '&nbsp;', $t);
+
+	if (strpos($t, "\x1") !== false) {
+		$t = str_replace("\x1\x14", '~', $t);
+	}
 
 	return $t;
 }

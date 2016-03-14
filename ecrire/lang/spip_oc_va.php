@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=oc_va
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -435,7 +437,6 @@ dau sit "@nom_site_spip@" (@adresse_site@):',
 	'login_retour_public' => 'Tornar au sit public',
 	'login_retour_site' => 'Tornar au sit public',
 	'login_retoursitepublic' => 'tornar au sit public',
-	'login_sans_cookiie' => 'Identificacion sensa cookie',
 	'login_sinscrire' => 's’inscriure',
 	'login_test_navigateur' => 'Assai navigaor/tornar connectar',
 	'login_verifiez_navigateur' => '(pasmens verificatz que vòstre navigaor aia pas servat vòstre mot de santa Clara en memòria...)',

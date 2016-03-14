@@ -3,9 +3,28 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/statistiques?lang_cible=de
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// A
+	'archiver' => 'Archivieren',
+	'archiver_concatener_explications' => 'Diese Operation führt die Besuchstatistiken der Artikel zusammen:',
+	'archiver_concatener_ignorer' => 'Besuche, die weniger als @nb@ Jahre zurückliegen werden nicht mit einbezogen.',
+	'archiver_concatener_par_an' => 'Besuche, die mehr als @nb@ Jahre zurückliegen, werden für jeden Artikel, am ersten Tag des  jeweiligen Jahres zusammengefasst',
+	'archiver_concatener_par_mois' => 'Besuche, die mehr als @nb@ Jahre zurückliegen werden, pro Artikel, am ersten Tag eines Monats. zusammengefasst.',
+	'archiver_conseil_sauvegarde' => 'Es wird empfohlen zuerst ein Backup der Datenbank zu machen.',
+	'archiver_description' => 'Diese Seite liefert die Werkzeuge um die Statistiken der Website zu archivieren und aufzuräumen',
+	'archiver_et_nettoyer' => 'Archivieren und Aufräumen',
+	'archiver_nettoyer' => 'Aufräumen',
+	'archiver_nettoyer_explications' => 'Referrer und Besuche von Artikeln  die nicht (mehr) in der Datenbank sind löschen.',
+	'archiver_nettoyer_referers_articles' => 'Referrer der Artikel zurücksetzen',
+	'archiver_nettoyer_visites_articles' => 'Besuche der Artikel zurücksetzen',
+	'archiver_nombre_lignes' => 'Anzahl der Zeilen',
+	'archiver_operation_longue' => 'Diese Operation kann bei der ersten Ausführung sehr lange dauern.',
+	'archiver_operations_irreversibles' => 'Diese Operationen können nicht rückgängig gemacht werden!',
 
 	// B
 	'bouton_effacer_referers' => 'Nur eingehende Links löschen',
@@ -22,12 +41,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_affichier_visites_articles_plus_visites' => 'Besuche der <b>beliebtesten Artikel seit Start der Website</b> anzeigen:',
 	'info_comment_lire_tableau' => 'Interpretation der Tabelle',
 	'info_forum_statistiques' => 'Besucherstatistiken',
+	'info_graphiques' => 'Grafik',
 	'info_popularite_2' => 'Beliebtheit der Website: ',
 	'info_popularite_3' => 'Beliebtheit: @popularite@ ; Besuche: @visites@',
 	'info_popularite_5' => 'Beliebtheit:',
 	'info_previsions' => 'Vorschau:',
 	'info_question_vignettes_referer' => 'Sie können die Besucherstatistiken mit Thumbnails der Herkunftswebsites (referer) ergänzen',
 	'info_question_vignettes_referer_oui' => 'Thumbnails der Herkunftswebsites anzeigen',
+	'info_tableaux' => 'Tabelle',
 	'info_visites' => 'Besuche:',
 	'info_visites_plus_populaires' => 'Seitenabrufe für die <b>beliebtesten Artikel</b> und die <b>letzten veröffentlichten Artikel:</b>',
 	'info_zoom' => 'Zoom',

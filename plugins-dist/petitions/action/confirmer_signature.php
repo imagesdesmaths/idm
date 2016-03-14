@@ -3,15 +3,16 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 
 /**
@@ -23,30 +24,34 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  * @staticvar string $confirm
  * @param <type> $var_confirm
- * @return string 
+ * @return string
  */
-function action_confirmer_signature_dist($var_confirm=null) {
+function action_confirmer_signature_dist($var_confirm = null) {
 	static $confirm = null;
 
 	// reponse mise en cache dans la session ?
-	$code_message = 'signature_message_'.strval($var_confirm);
-	if (isset($GLOBALS['visiteur_session'][$code_message]))
+	$code_message = 'signature_message_' . strval($var_confirm);
+	if (isset($GLOBALS['visiteur_session'][$code_message])) {
 		return $GLOBALS['visiteur_session'][$code_message];
+	}
 
 	// reponse deja calculee depuis public/assembler.php
-	if (isset($confirm))
+	if (isset($confirm)) {
 		return $confirm;
+	}
 
 	if (is_null($var_confirm)) {
-		$securiser_action = charger_fonction('securiser_action','inc');
+		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$var_confirm = $securiser_action();
 	}
 
-	if (!$var_confirm OR $var_confirm == 'publie' OR $var_confirm == 'poubelle')
+	if (!$var_confirm or $var_confirm == 'publie' or $var_confirm == 'poubelle') {
 		return '';
+	}
 
 	if (!spip_connect()) {
 		$confirm = _T('petitions:form_pet_probleme_technique');
+
 		return '';
 	}
 	include_spip('inc/texte');
@@ -59,15 +64,19 @@ function action_confirmer_signature_dist($var_confirm=null) {
 		// l'id_signature est dans var_confirm
 		include_spip('inc/securiser_action');
 		if ($id_signature = intval($var_confirm)
-		    AND (
-			$_GET['refus'] == _action_auteur("supprimer signature $id_signature", '', '', 'alea_ephemere')
-				OR
-			$_GET['refus'] == _action_auteur("supprimer signature $id_signature", '', '', 'alea_ephemere_ancien')
-			)) {
+			and (
+				$_GET['refus'] == _action_auteur("supprimer signature $id_signature", '', '', 'alea_ephemere')
+				or
+				$_GET['refus'] == _action_auteur("supprimer signature $id_signature", '', '', 'alea_ephemere_ancien')
+			)
+		) {
 			include_spip('action/editer_signature');
-			signature_modifier($id_signature,array("statut" => 'poubelle'));
+			signature_modifier($id_signature, array("statut" => 'poubelle'));
 			$confirm = _T('petitions:info_signature_supprimee');
-		} else $confirm = _T('petitions:info_signature_supprimee_erreur');
+		} else {
+			$confirm = _T('petitions:info_signature_supprimee_erreur');
+		}
+
 		return '';
 	}
 
@@ -75,6 +84,7 @@ function action_confirmer_signature_dist($var_confirm=null) {
 
 	if (!$row) {
 		$confirm = _T('petitions:form_pet_aucune_signature');
+
 		return '';
 	}
 
@@ -83,25 +93,27 @@ function action_confirmer_signature_dist($var_confirm=null) {
 	$adresse_email = $row['ad_email'];
 	$url_site = $row['url_site'];
 
-	$row = sql_fetsel('email_unique, site_unique, id_article', 'spip_petitions', "id_petition=".intval($id_petition));
+	$row = sql_fetsel('email_unique, site_unique, id_article', 'spip_petitions', "id_petition=" . intval($id_petition));
 
-	$email_unique = $row['email_unique']  == "oui";
-	$site_unique = $row['site_unique']  == "oui";
+	$email_unique = $row['email_unique'] == "oui";
+	$site_unique = $row['site_unique'] == "oui";
 	$id_article = $row['id_article'];
 
 	include_spip('action/editer_signature');
-	signature_modifier($id_signature,array('statut' => 'publie'));
+	signature_modifier($id_signature, array('statut' => 'publie'));
 
 	if ($email_unique) {
-		$r = "id_petition=".intval($id_petition)." AND ad_email=" . sql_quote($adresse_email);
-		if (signature_entrop($r))
-			  $confirm =  _T('petitions:form_pet_deja_signe');
+		$r = "id_petition=" . intval($id_petition) . " AND ad_email=" . sql_quote($adresse_email);
+		if (signature_entrop($r)) {
+			$confirm = _T('petitions:form_pet_deja_signe');
+		}
 	}
 
 	if ($site_unique) {
-		$r = "id_petition=".intval($id_petition)." AND url_site=" . sql_quote($url_site);
-		if (signature_entrop($r))
+		$r = "id_petition=" . intval($id_petition) . " AND url_site=" . sql_quote($url_site);
+		if (signature_entrop($r)) {
 			$confirm = _T('petitions:form_pet_site_deja_enregistre');
+		}
 	}
 
 	include_spip('inc/session');
@@ -121,8 +133,7 @@ function action_confirmer_signature_dist($var_confirm=null) {
 	}
 
 	// Conserver la reponse dans la session du visiteur
-	if ($confirm)
+	if ($confirm) {
 		session_set($code_message, $confirm);
+	}
 }
-
-?>

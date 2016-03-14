@@ -17,7 +17,7 @@
 	</div>
 
 	[
-		(#INCLURE{fond=formulaires/inc-lister-sauvegardes,env,ajax,name='',id=sauvegarde,titre=<:dump:sauvegardes_existantes:>,download=#AUTORISER{webmestre}})
+		(#INCLURE{fond=formulaires/inc-lister-sauvegardes,env,ajax,name='',id=sauvegarde,titre=<:dump:sauvegardes_existantes:>,download=#AUTORISER{webmestre},delete=#AUTORISER{webmestre},env,ajax})
 	]
 ]
 [(#GET{fin}|oui)

@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=zh
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -471,7 +473,6 @@ Zhen QIN (zhen_q@21cn.com)',
 	'login_retour_public' => '返回公共站点',
 	'login_retour_site' => '返回公共站点',
 	'login_retoursitepublic' => '返回公共站点',
-	'login_sans_cookiie' => '无COOKIE的标识',
 	'login_sinscrire' => '注册',
 	'login_test_navigateur' => '测试浏览/重新连接',
 	'login_verifiez_navigateur' => '(无论如何, 请确认你的浏览器不会记住你的密码...)',

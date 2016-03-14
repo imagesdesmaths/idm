@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=lb
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -55,14 +57,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_valider_article' => 'Dësen Artikel bestätegen',
 	'icone_valider_articles' => 'Dës Artikele bestätegen',
 	'icone_voir_sites_references' => 'Verlinkte Websäite weisen',
+	'info_1_article_syndique' => '1 Artikel verlinkt',
+	'info_1_site' => '1 Site',
 	'info_1_site_importe' => '1 Websäit ass importéiert',
 	'info_a_valider' => '[ze validéieren]',
+	'info_aucun_article_syndique' => 'Keen Artikel verlinkt',
+	'info_aucun_site' => 'Kee Site',
 	'info_aucun_site_importe' => 'Et konnt kéng Websäit importéiert ginn',
 	'info_bloquer' => 'blockéieren',
 	'info_bloquer_lien' => 'Link blockéieren',
 	'info_derniere_syndication' => 'Läscht Syndicatioun vun dëser Websäit den',
 	'info_liens_syndiques_1' => 'Syndicéiert Linken',
 	'info_liens_syndiques_2' => 'waarden ob eng Validatioun.',
+	'info_nb_articles_syndiques' => '@nb@ verlinkten Artikelen',
+	'info_nb_sites' => '@nb@ Websiten',
 	'info_nb_sites_importes' => '@nb@ Websäite sinn importéiert ginn',
 	'info_nom_site_2' => '<b>Numm vun ärer Websäit</b> [Obligatoresch]',
 	'info_panne_site_syndique' => 'Pann vun der syndicéierter Websäit',

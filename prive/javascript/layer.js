@@ -1,41 +1,5 @@
-var memo_obj = new Array();
 var url_chargee = new Array();
 var xhr_actifs = {};
-
-function findObj_test_forcer(n, forcer) { 
-	var p,i,x;
-
-	// Voir si on n'a pas deja memorise cet element
-	if (memo_obj[n] && !forcer) {
-		return memo_obj[n];
-	}
-
-	var d = document; 
-	if((p = n.indexOf("?"))>0 && parent.frames.length) {
-		d = parent.frames[n.substring(p+1)].document; 
-		n = n.substring(0,p);
-	}
-	if(!(x = d[n]) && d.all) {
-		x = d.all[n]; 
-	}
-	for (i = 0; !x && i<d.forms.length; i++) {
-		x = d.forms[i][n];
-	}
-	for(i=0; !x && d.layers && i<d.layers.length; i++) x = findObj(n,d.layers[i].document);
-	if(!x && document.getElementById) x = document.getElementById(n); 
-
-	// Memoriser l'element
-	if (!forcer) memo_obj[n] = x;
-	return x;
-}
-
-function findObj(n) { 
-	return findObj_test_forcer(n, false);
-}
-// findObj sans memorisation de l'objet - avec Ajax, les elements se deplacent dans DOM
-function findObj_forcer(n) { 
-	return findObj_test_forcer(n, true);
-}
 
 //
 // Fonctions pour mini_nav
@@ -43,9 +7,10 @@ function findObj_forcer(n) {
 
 function slide_horizontal (couche, slide, align, depart, etape ) {
 
-	var obj = findObj_forcer(couche);
+	var obj = jQuery("#"+couche);
 	
-	if (!obj) return;
+	if (!obj.length) return;
+	obj = obj.get(0);
 	if (!etape) {
 		if (align == 'left') depart = obj.scrollLeft;
 		else depart = obj.firstChild.offsetWidth - obj.scrollLeft;
@@ -70,10 +35,10 @@ function changerhighlight (couche) {
 }
 
 function aff_selection (arg, idom, url, event) {
-	noeud = findObj_forcer(idom);
-	if (noeud) {
-		noeud.style.display = "none";
-		charger_node_url(url+arg, noeud, '','',event);
+	var noeud = jQuery("#"+idom);
+	if (noeud.length) {
+		noeud.hide();
+		charger_node_url(url+arg, noeud.get(0), '','',event);
 	}
 	return false;
 }
@@ -88,6 +53,7 @@ function aff_selection_titre(titre, id, idom, nid)
 	p.find('#'+nid).attr('value',id).trigger('change'); // declencher le onchange
 	p.find("#"+idom).hide('fast');
 	if (p.is('.submit_plongeur')) p.get(p.length-1).submit();
+	else p.find("#"+idom).prev('div').find('a').eq(0).focus();
 }
 
 
@@ -101,17 +67,22 @@ function aff_selection_titre(titre, id, idom, nid)
  * @param informer
  * @param event
  */
-function aff_selection_provisoire(id, racine, url, col, sens,informer,event)
-{
-    charger_id_url(url.href,
-		   racine + '_col_' + (col+1),
-		   function() {
-		     slide_horizontal(racine + '_principal', ((col-1)*150), sens);
-		     aff_selection (id, racine + "_selection", informer);
-		   },
-		   event);
-  // empecher le chargement non Ajax
-  return false;
+function aff_selection_provisoire(id, racine, url, col, sens,informer,event) {
+	if(url.href == 'javascript:void(0)'){
+		slide_horizontal(racine + '_principal', ((col-1)*150), sens);
+		aff_selection (id, racine + "_selection", informer);
+	}
+	else{
+		charger_id_url(url.href,
+			racine + '_col_' + (col+1),
+			function() {
+				slide_horizontal(racine + '_principal', ((col-1)*150), sens);
+				aff_selection (id, racine + "_selection", informer);
+			},
+			event);
+	}
+	// empecher le chargement non Ajax
+	return false;
 }
 
 /**
@@ -128,25 +99,25 @@ function aff_selection_provisoire(id, racine, url, col, sens,informer,event)
  * @param init
  */
 function onkey_rechercher(valeur, rac, url, img, nid, init) {
-	var Field = findObj_forcer(rac);
+	var Field = jQuery("#"+rac).get(0);
 	if (!valeur.length) {	
-		init = findObj_forcer(init);
+		init = jQuery("#"+init).get(0);
 		if (init && init.href) { charger_node_url(init.href, Field);}
 	} else {	
-	  charger_node_url(url+valeur,
-			 Field,
-			 function () {
-			   	var n = Field.childNodes.length - 1;
+		charger_node_url(url+valeur,
+			Field,
+			function () {
+				var n = Field.childNodes.length - 1;
 				// Safari = 0  & Firefox  = 1 !
 				// et gare aux negatifs en cas d'abort
 				if ((n == 1)) {
-				  noeud = Field.childNodes[n].firstChild;
-				  if (noeud.title)
-				    // cas de la rubrique, pas des auteurs
-					  aff_selection_titre(noeud.firstChild.nodeValue, noeud.title, rac, nid);
+					noeud = Field.childNodes[n].firstChild;
+					if (noeud.title)
+						// cas de la rubrique, pas des auteurs
+						aff_selection_titre(noeud.firstChild.nodeValue, noeud.title, rac, nid);
 				}
-			   },
-			   img);
+			},
+			img);
 	}
 	return false;
 }
@@ -202,9 +173,7 @@ function verifForm(racine) {
 // Son premier argument est deja le noeud du DOM
 // et son resultat booleen est inverse ce qui lui permet de retourner 
 // le gestionnaire Ajax comme valeur non fausse
-
-function AjaxSqueezeNode(trig, target, f, event)
-{
+function AjaxSqueezeNode(trig, target, f, event) {
 	var i, callback;
 
 	// retour std si pas precise: affecter ce noeud avec ce retour
@@ -236,12 +205,12 @@ function AjaxSqueezeNode(trig, target, f, event)
 			"url":trig,
 			"complete": function(r,s) {
 				AjaxRet(r,s,target, callback);
+				jQuery(target).endLoading();
 			}
 		});
 		return res;
-		
 	}
-	
+
 	if(valid) {
 		//open a blank window
 		var doc = window.open("","valider").document;
@@ -289,22 +258,21 @@ function AjaxRet(res,status, target, callback) {
 // (utile surtout a la frappe interactive au clavier)
 // De plus, la fonction optionnelle n'a pas besoin de greffer la reponse.
 
-function charger_id_url(myUrl, myField, jjscript, event) 
-{
-	var Field = findObj_forcer(myField);
-	if (!Field) return true;
+function charger_id_url(myUrl, myField, jjscript, event) {
+	var Field = jQuery("#"+myField);
+	if (!Field.length) return true;
 
 	if (!myUrl) {
-		jQuery(Field).empty();
-		retour_id_url(Field, jjscript);
+		Field.empty();
+		retour_id_url(Field.get(0), jjscript);
 		return true; // url vide, c'est un self complet
-	} else  return charger_node_url(myUrl, Field, jjscript, findObj_forcer('img_' + myField), event);
+	}
+	else
+		return charger_node_url(myUrl, Field.get(0), jjscript, jQuery('#'+'img_' + myField).get(0), event);
 }
 
 // La suite
-
-function charger_node_url(myUrl, Field, jjscript, img, event) 
-{
+function charger_node_url(myUrl, Field, jjscript, img, event) {
 	// disponible en cache ?
 	if (url_chargee[myUrl]) {
 			var el = jQuery(Field).html(url_chargee[myUrl])[0];
@@ -323,21 +291,20 @@ function charger_node_url(myUrl, Field, jjscript, img, event)
 					url_chargee[myUrl] = r;
 					retour_id_url(Field, jjscript);
 					slide_horizontal($(Field).children().attr("id")+'_principal', $(Field).width() , $(Field).css("text-align"));
-						    },
+				},
 				event);
 		return false;
 	}
 }
 
-function retour_id_url(Field, jjscript)
-{
+function retour_id_url(Field, jjscript) {
 	jQuery(Field).css({'visibility':'visible','display':'block'});
 	if (jjscript) jjscript();
 }
 
 function charger_node_url_si_vide(url, noeud, gifanime, jjscript,event) {
 
-	if  (noeud.style.display !='none') {
+	if (noeud.style.display !='none') {
 		noeud.style.display='none';}
 	else {
 		if (noeud.innerHTML != "") {
@@ -347,7 +314,7 @@ function charger_node_url_si_vide(url, noeud, gifanime, jjscript,event) {
 			charger_node_url(url, noeud,'',gifanime,event);
 		}
 	}
-  return false;
+	return false;
 }
 
 // Lancer verifForm

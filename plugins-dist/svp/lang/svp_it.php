@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/svp?lang_cible=it
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -68,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_autoriser_activer_paquets_obsoletes_explication' => 'Pacchetti obsoleti sono pacchetti locali che sono più vecchi rispetto agli altri pacchetti locali. L’obsolescenza di un pacchetto è stabilita sulla base dello stato (stable, testing, dev) del pacchetto e in base della sua versione. Attivare questa opzione se si vuole attivare questi plugin obsoleti.',
 	'config_depot_editable' => 'Consentire la modifica dei repository?',
 	'config_depot_editable_explication' => 'Questo rende modificabili le informazioni di un repository e abilitata eventualmente l’associazione di parole chiave o documenti ad esso. Questa opzione non dovrebbe interessanre nessuno! Quindi lasciate "no"!',
+	'confirmer_desinstaller' => 'Attenzione, la disinstallazione di un plug-in ne <b>cancella</b> i dati dal database ed è irreversibile.<br />Se non sei sicuro, disattiva semplicemente il plug-in.', # MODIF
 	'confirmer_telecharger_dans' => 'Il plugin sarà caricato nella directory (@dir@) che esiste già.
 Questo sovrascriverà il contenuto della directory.
 Una copia dei vecchi file saranno salvati in "@dir_backup@".
@@ -81,7 +84,7 @@ Devi confermare questa azione.',
 	'erreur_dir_plugins_auto' => 'La directory "plugins/auto" che permette il download dei pacchetti non esiste oppure non è scrivibile
 <strong>Dovete crearla per consentire l’installazione di nuovi plugin a partire da questa interfaccia.</strong>',
 	'erreur_dir_plugins_auto_ecriture' => 'La directory dei pacchetti @dir@ non è accessibile e scrivibile. Impossibile caricare un pacchetto!',
-	'erreur_dir_plugins_auto_indefini' => 'La directory _DIR_PLUGIN_AUTO non è definita. Impossibile caricare il pacchetto in essa.',
+	'erreur_dir_plugins_auto_indefini' => 'La directory _DIR_PLUGIN_AUTO non è definita. Impossibile caricarvi un pacchetto !',
 	'erreur_dir_plugins_auto_titre' => '"plugins/auto" non è accessibile!',
 	'erreur_teleporter_chargement_source_impossible' => 'Impossibile caricare la sorgente @source@',
 	'erreur_teleporter_destination_erreur' => 'La directory @dir@ non è accessibile',
@@ -109,7 +112,7 @@ Devi confermare questa azione.',
 	'info_admin_plugin_verrou_non' => 'La pagina mostra tutti i plugin non bloccati del sito, sia attivi che non.',
 	'info_admin_plugin_verrou_tous' => 'La pagina lista tutti i plugin del sito.',
 	'info_admin_plugin_verrouille' => 'Questa pagina mostra la lista dei plugin attivi e bloccati (posizionati in <code>@dir_plugins_dist@</code>).
-Se vuoi disabilitarla, per favore contatta il webmaster del sito oppure controlla <a href="http://programmer.spip.org/directory_extensions">la documentazione</a>.', # MODIF
+Se vuoi disabilitarla, per favore contatta il webmaster del sito oppure controlla <a href="http://programmer.spip.net/repertoire_plugins-dist">la documentazione</a>.',
 	'info_adresse_spipzone' => 'SPIP-Zone - Plugins',
 	'info_ajouter_depot' => 'Aggiungendo dei repository hai la possibilità di ottenere informazione e cercare su tutti i pacchetti gestiti dai repository aggiunti<br />Un repository è descritto da un file XML contenente le informazioni del deposito e di tutti i suoi pacchetti.',
 	'info_aucun_depot' => 'nessun repository',
@@ -172,6 +175,8 @@ Se vuoi disabilitarla, per favore contatta il webmaster del sito oppure controll
 	'label_xml_plugin' => 'XML',
 	'legende_installer_plugins' => 'Installa plugin',
 	'legende_rechercher_plugins' => 'Cerca plugin',
+	'lien_demo' => 'Dimostrazione',
+	'lien_documentation' => 'Documentazione',
 
 	// M
 	'message_action_finale_get_fail' => 'Il plugin "@plugin@" (versione: @version@) non può essere scaricato con successo',
@@ -220,6 +225,7 @@ Se vuoi disabilitarla, per favore contatta il webmaster del sito oppure controll
 	'message_nok_maj_introuvable' => 'L’aggiornamento del plugin @plugin@ non è stato trovato.',
 	'message_nok_plugin_inexistant' => 'Il plugin richiesto non esiste (@plugin@).',
 	'message_nok_sql_insert_depot' => 'Errore SQL aggiungendo il repository @objet@',
+	'message_nok_url_archive' => 'L’URL dell’archivio non è valido',
 	'message_nok_url_depot_incorrecte' => 'L’indirizzo « @url@ » è sbagliato',
 	'message_nok_xml_non_conforme' => 'Il file XML di descrizione "@fichier@" » del repository non è conforme',
 	'message_nok_xml_non_recupere' => 'Il file XML « @fichier@ » non può essere recuperato',
@@ -261,7 +267,7 @@ Se vuoi disabilitarla, per favore contatta il webmaster del sito oppure controll
 	'titre_form_charger_plugin' => 'Cerca e aggiungi i plugin',
 	'titre_form_charger_plugin_archive' => 'Scarica il plugin usando l’url dell’archivio',
 	'titre_form_configurer_svp' => 'Configurazione del server dei plugin',
-	'titre_liste_autres_contributions' => 'Template, libreria, set di icone',
+	'titre_liste_autres_contributions' => 'Template, libreria, set di icone', # MODIF
 	'titre_liste_autres_depots' => 'Altri repository',
 	'titre_liste_depots' => 'Lista dei repository disponibili',
 	'titre_liste_paquets_plugin' => 'Lista dei pacchetti del plugin',

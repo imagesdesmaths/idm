@@ -3,13 +3,15 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/mots?lang_cible=de
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'avis_conseil_selection_mot_cle' => '<b>Wichtige Kategorie:</b> Bitte wählen Sie ein Schlüsselwort dieser Gruppe.',
-	'avis_doublon_mot_cle' => 'Ein Schlagwort mit dieser Bezeichung gibt es bereits. Wollen sie es wirklich erneut anlegen?', # MODIF
+	'avis_doublon_mot_cle' => 'Ein Schlagwort mit dieser Bezeichung gibt es bereits. Wollen sie es wirklich erneut anlegen?',
 
 	// B
 	'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'Administratoren der Website',

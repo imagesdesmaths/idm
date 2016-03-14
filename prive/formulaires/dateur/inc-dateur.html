@@ -55,7 +55,7 @@ if (window.jQuery){
 	jQuery(function(){
 		if (jQuery('input.date,input.heure').length
 			&& typeof date_picker_loading=="undefined"){
-			date_picker_loading = jQuery.getScript('#PRODUIRE{fond=formulaires/dateur/jquery.dateur.js}');
+			date_picker_loading = jQuery.getScript('[(#PRODUIRE{fond=formulaires/dateur/jquery.dateur.js}|timestamp)]');
 			date_picker_loading.done(function(){
 				date_picker_init();
 				onAjaxLoad(date_picker_init);
@@ -66,7 +66,7 @@ if (window.jQuery){
 /*]]>*/</script>
 <style type="text/css">
 [(#INCLURE{formulaires/dateur/time_picker.css}|compacte{css})]
-img.ui-datepicker-trigger { display: inline-block; padding: 0; margin: 0px 0 0 -19px; vertical-align: middle; }
+img.ui-datepicker-trigger { display: inline-block; padding: 0; margin: 0px 0 0 -19px; vertical-align: middle; z-index:2 }
 div.time-picker {font-size:11px;  width:5em; /* needed for IE */}
 .formulaire_spip input.date {width:9em;padding-right:25px;}
 .formulaire_spip input.heure {width:7em;}

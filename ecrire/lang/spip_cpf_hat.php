@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=cpf_hat
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -100,11 +102,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@ @nommois@',
 	'date_demain' => 'demen',
 	'date_fmt_heures_minutes' => '@h@h@m@min',
+	'date_fmt_jour' => '@nomjour@ @jour@',
 	'date_fmt_jour_heure' => '@jour@ a @heure@',
+	'date_fmt_jour_heure_debut_fin' => '@jour@ de @heure_debut@ a @heure_fin@',
+	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@ de @heure_debut@@dtabbr@ a @dtend@@heure_fin@@dtabbr@',
 	'date_fmt_jour_mois' => '@jour@ @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ @nommois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
+	'date_fmt_nomjour' => '@nomjour@ @date@',
 	'date_fmt_nomjour_date' => 'nan jou ki te @nomjour@ @date@ -a',
+	'date_fmt_periode' => 'Del @date_debut@ fins @date_fin@',
+	'date_fmt_periode_abbr' => 'Del @dtart@@date_debut@@dtabbr@ fins @dtend@@date_fin@@dtabbr@',
 	'date_heures' => 'èr (yo)',
 	'date_hier' => 'yè',
 	'date_il_y_a' => ' genyen @delai@',
@@ -456,7 +464,6 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 	'login_retour_public' => 'Tounyen sou sit piblik',
 	'login_retour_site' => 'Tounyen sou sit piblik',
 	'login_retoursitepublic' => 'tounyen dèyè sou sit piblik',
-	'login_sans_cookiie' => 'Idantifikasyon ki gen pa pa oken gatomakro',
 	'login_sinscrire' => 'enskri w',
 	'login_test_navigateur' => 'test navigatè/rekoneksyon',
 	'login_verifiez_navigateur' => '(Gad pou si navigatè ou li te pa raple modpas ou...)',

@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=ru
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -11,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'articles_dispo' => 'На рассмотрении',
 	'articles_meme_auteur' => 'Все статьи этого автора',
 	'articles_off' => 'Удалено',
-	'articles_publie' => 'Опубликованные',
+	'articles_publie' => 'Опубликовано',
 	'articles_refuse' => 'Удалено',
 	'articles_tous' => 'Все',
 	'aucun_article_syndic' => 'Нет ни одной импортированной статьи',
@@ -55,14 +57,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_valider_article' => 'Утвердить статью',
 	'icone_valider_articles' => 'Утвердить статьи',
 	'icone_voir_sites_references' => 'Каталог сайтов',
+	'info_1_article_syndique' => '1 загруженная статья',
+	'info_1_site' => '1 сайт',
 	'info_1_site_importe' => '1 сайт был импортирован',
 	'info_a_valider' => '[проверяется]',
+	'info_aucun_article_syndique' => 'Нет загруженных статей',
+	'info_aucun_site' => 'Нет сайтов',
 	'info_aucun_site_importe' => 'Не был импортирован ни один сайт',
-	'info_bloquer' => 'блок',
-	'info_bloquer_lien' => 'удалить',
+	'info_bloquer' => 'блокировать',
+	'info_bloquer_lien' => 'блокировать эту ссылку',
 	'info_derniere_syndication' => 'Дата последнего импорта материалов ',
-	'info_liens_syndiques_1' => 'импортированных статей',
+	'info_liens_syndiques_1' => 'ссылки (синдикация)',
 	'info_liens_syndiques_2' => 'ожидают утверждения.',
+	'info_nb_articles_syndiques' => '@nb@ RSS статей',
+	'info_nb_sites' => '@nb@ сайтов',
 	'info_nb_sites_importes' => 'Было импортировано @nb@ сайтов',
 	'info_nom_site_2' => '<b>Название сайта</b> [обязательно]',
 	'info_panne_site_syndique' => 'Сайт недоступен',
@@ -83,9 +91,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_statut_site_4' => 'Удалено',
 	'info_syndication' => 'RSS:',
 	'info_syndication_articles' => 'статья(и)',
-	'item_bloquer_liens_syndiques' => 'Все сайты требуют проверки перед добавлением',
+	'item_bloquer_liens_syndiques' => 'Блокировать ссылки синдицированных сайтов до утверждения',
 	'item_gerer_annuaire_site_web' => 'Включить каталог сайтов и импорт статей по RSS',
-	'item_non_bloquer_liens_syndiques' => 'По умолчанию разрешать добавлять материалы',
+	'item_non_bloquer_liens_syndiques' => 'Не блокировать ссылки с синдицированных сайтов',
 	'item_non_gerer_annuaire_site_web' => 'Отключить  каталог сайтов и импорт статей по RSS',
 	'item_non_utiliser_syndication' => 'Выключить функцию импорта статей по RSS',
 	'item_utiliser_syndication' => 'Включить функцию импорта статей по RSS',
@@ -124,7 +132,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_liens_sites_syndiques' => 'Вы можете модерировать все материалы, импортированные с других сайтов. Эта настройка устанавливает правило по умолчанию для вновь добавленных сайтов. В любом случае вы можете задавать правила отдельно для каждого сайта.',
 	'texte_messages_publics' => 'Комментарии к статье:',
 	'texte_non_fonction_referencement' => 'Вы можете задать название сайта и его описание самостоятельно.',
-	'texte_referencement_automatique' => '<b>Укажите адрес сайта. </b> <br /> SPIP автоматически определит название сайта и информацию о нем.',
+	'texte_referencement_automatique' => '<b>Автоматическое реферирование сайта.</b> <br /> Вы можете сослаться на веб-сайт, указав ниже его URL или адрес его файла синдикации. SPIP автоматически определит информацию о сайте (название, описание и т.д.).',
 	'texte_referencement_automatique_verifier' => 'Информация о сайте <tt>@url@</tt> была импортирована автоматически. Проверьте её перед добавлением сайта.',
 	'texte_syndication' => 'Если на другом сайте есть экспорт материалов через RSS, вы можете автоматически импортировать последние статьи на ваш сайт. Для этого необходимо активировать импорт статей на вашем сайте. 
   <blockquote> <i> Необходимо отметить, что на части сайтов нет автоматического экспорта материалов через RSS ленту. В таком случае вы не сможете получать информацию с таких сайтов в автоматическом режиме. </i> </blockquote>',

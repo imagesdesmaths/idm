@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -12,14 +12,16 @@
 
 /**
  * Fonctions de minification
- * 
+ *
  * @package SPIP\Compresseur\Minifier
  */
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 /**
  * Minifier un contenu CSS
- * 
+ *
  * Si $options est vide on utilise la methode regexp simple
  *
  * Si $options est une chaine non vide elle definit un media à appliquer
@@ -33,7 +35,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * - string media : media qui seront utilisés pour encapsuler par @media
  *   les selecteurs sans media
  * - string template : format de sortie parmi 'low','default','high','highest'
- * 
+ *
  * @param string $contenu
  *     Contenu CSS
  * @param mixed $options
@@ -41,106 +43,140 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return string
  *     Contenu CSS minifié
  */
-function minifier_css ($contenu, $options='') {
-	if (is_string($options) AND $options){
-		if ($options=="all") // facile : media all => ne rien preciser
+function minifier_css($contenu, $options = '') {
+	if (is_string($options) and $options) {
+		if ($options == "all") // facile : media all => ne rien preciser
+		{
 			$options = "";
-		elseif (
-					strpos($contenu,"@media")==false
-			AND strpos($contenu,"@import")==false
-			AND strpos($contenu,"@font-face")==false
-			){
+		} elseif (
+			strpos($contenu, "@media") == false
+			and strpos($contenu, "@import") == false
+			and strpos($contenu, "@font-face") == false
+		) {
 			$contenu = "@media $options {\n$contenu\n}\n";
-			$options="";
+			$options = "";
+		} else {
+			$options = array('media' => $options);
 		}
-		else
-			$options = array('media'=>$options);
 	}
-	if (!is_array($options)){
+	if (!is_array($options)) {
 
 		// nettoyer la css de tout ce qui sert pas
 		// pas de commentaires
-		$contenu = preg_replace(",/\*.*\*/,Ums","",$contenu);
-		$contenu = preg_replace(",\s//[^\n]*\n,Ums","",$contenu);
+		$contenu = preg_replace(",/\*.*\*/,Ums", "", $contenu);
+		$contenu = preg_replace(",\s//[^\n]*\n,Ums", "", $contenu);
 		// espaces autour des retour lignes
-		$contenu = str_replace("\r\n","\n",$contenu);
-		$contenu = preg_replace(",\s+\n,ms","\n",$contenu);
-		$contenu = preg_replace(",\n\s+,ms","\n",$contenu);
+		$contenu = str_replace("\r\n", "\n", $contenu);
+		$contenu = preg_replace(",\s+\n,ms", "\n", $contenu);
+		$contenu = preg_replace(",\n\s+,ms", "\n", $contenu);
 		// pas d'espaces consecutifs
-		$contenu = preg_replace(",\s(?=\s),Ums","",$contenu);
+		$contenu = preg_replace(",\s(?=\s),Ums", "", $contenu);
 		// pas d'espaces avant et apres { ; ,
-		$contenu = preg_replace("/\s?({|;|,)\s?/ms","$1",$contenu);
+		$contenu = preg_replace("/\s?({|;|,)\s?/ms", "$1", $contenu);
 		// supprimer les espaces devant : sauf si suivi d'une lettre (:after, :first...)
-		$contenu = preg_replace("/\s:([^a-z])/ims",":$1",$contenu);
+		$contenu = preg_replace("/\s:([^a-z])/ims", ":$1", $contenu);
 		// supprimer les espaces apres :
-		$contenu = preg_replace("/:\s/ms",":",$contenu);
+		$contenu = preg_replace("/:\s/ms", ":", $contenu);
 		// pas d'espaces devant }
-		$contenu = preg_replace("/\s}/ms","}",$contenu);
+		$contenu = preg_replace("/\s}/ms", "}", $contenu);
 
 		// ni de point virgule sur la derniere declaration
-		$contenu = preg_replace("/;}/ms","}",$contenu);
+		$contenu = preg_replace("/;}/ms", "}", $contenu);
 		// pas d'espace avant !important
-		$contenu = preg_replace("/\s!\s?important/ms","!important",$contenu);
+		$contenu = preg_replace("/\s!\s?important/ms", "!important", $contenu);
 		// passser les codes couleurs en 3 car si possible
 		// uniquement si non precedees d'un [="'] ce qui indique qu'on est dans un filter(xx=#?...)
-		$contenu = preg_replace(";([:\s,(])#([0-9a-f])(\\2)([0-9a-f])(\\4)([0-9a-f])(\\6)(?=[^\w\-]);i","$1#$2$4$6",$contenu);
+		$contenu = preg_replace(";([:\s,(])#([0-9a-f])(\\2)([0-9a-f])(\\4)([0-9a-f])(\\6)(?=[^\w\-]);i", "$1#$2$4$6",
+			$contenu);
 		// remplacer font-weight:bold par font-weight:700
-		$contenu = preg_replace("/font-weight:bold(?!er)/ims","font-weight:700",$contenu);
+		$contenu = preg_replace("/font-weight:bold(?!er)/ims", "font-weight:700", $contenu);
 		// remplacer font-weight:normal par font-weight:400
-		$contenu = preg_replace("/font-weight:normal/ims","font-weight:400",$contenu);
+		$contenu = preg_replace("/font-weight:normal/ims", "font-weight:400", $contenu);
 
 		// si elle est 0, enlever la partie entière des unites decimales
-		$contenu = preg_replace("/\b0+\.(\d+em)/ims",".$1",$contenu);
+		$contenu = preg_replace("/\b0+\.(\d+em)/ims", ".$1", $contenu);
 		// supprimer les declarations vides
-		$contenu = preg_replace(",(^|})([^{}]*){},Ums","$1",$contenu);
-		// zero est zero, quelle que soit l'unite
-		$contenu = preg_replace("/([^0-9.]0)(em|px|pt|%)/ms","$1",$contenu);
+		$contenu = preg_replace(",(^|})([^{}]*){},Ums", "$1", $contenu);
+		// zero est zero, quelle que soit l'unite (sauf pour % car casse les @keyframes cf https://core.spip.net/issues/3128)
+		$contenu = preg_replace("/([^0-9.]0)(em|px|pt)/ms", "$1", $contenu);
 
 		// renommer les couleurs par leurs versions courtes quand c'est possible
 		$colors = array(
-			'source'=>array('black','fuchsia','white','yellow','#800000','#ffa500','#808000','#800080','#008000','#000080','#008080','#c0c0c0','#808080','#f00'),
-			'replace'=>array('#000' ,'#F0F'   ,'#FFF' ,'#FF0'  ,'maroon' ,'orange' ,'olive'  ,'purple' ,'green'  ,'navy'   ,'teal'   ,'silver' ,'gray'   ,'red')
+			'source' => array(
+				'black',
+				'fuchsia',
+				'white',
+				'yellow',
+				'#800000',
+				'#ffa500',
+				'#808000',
+				'#800080',
+				'#008000',
+				'#000080',
+				'#008080',
+				'#c0c0c0',
+				'#808080',
+				'#f00'
+			),
+			'replace' => array(
+				'#000',
+				'#F0F',
+				'#FFF',
+				'#FF0',
+				'maroon',
+				'orange',
+				'olive',
+				'purple',
+				'green',
+				'navy',
+				'teal',
+				'silver',
+				'gray',
+				'red'
+			)
 		);
-		foreach($colors['source'] as $k=>$v){
-			$colors['source'][$k]=";([:\s,(])".$v."(?=[^\w\-]);ms";
-			$colors['replace'][$k] = "$1".$colors['replace'][$k];
+		foreach ($colors['source'] as $k => $v) {
+			$colors['source'][$k] = ";([:\s,(])" . $v . "(?=[^\w\-]);ms";
+			$colors['replace'][$k] = "$1" . $colors['replace'][$k];
 		}
-		$contenu = preg_replace($colors['source'],$colors['replace'],$contenu);
+		$contenu = preg_replace($colors['source'], $colors['replace'], $contenu);
 
 		// raccourcir les padding qui le peuvent (sur 3 ou 2 valeurs)
-		$contenu = preg_replace(",padding:([^\s;}]+)\s([^\s;}]+)\s([^\s;}]+)\s(\\2),ims","padding:$1 $2 $3",$contenu);
-		$contenu = preg_replace(",padding:([^\s;}]+)\s([^\s;}]+)\s(\\1)([;}!]),ims","padding:$1 $2$4",$contenu);
+		$contenu = preg_replace(",padding:([^\s;}]+)\s([^\s;}]+)\s([^\s;}]+)\s(\\2),ims", "padding:$1 $2 $3", $contenu);
+		$contenu = preg_replace(",padding:([^\s;}]+)\s([^\s;}]+)\s(\\1)([;}!]),ims", "padding:$1 $2$4", $contenu);
 
 		// raccourcir les margin qui le peuvent (sur 3 ou 2 valeurs)
-		$contenu = preg_replace(",margin:([^\s;}]+)\s([^\s;}]+)\s([^\s;}]+)\s(\\2),ims","margin:$1 $2 $3",$contenu);
-		$contenu = preg_replace(",margin:([^\s;}]+)\s([^\s;}]+)\s(\\1)([;}!]),ims","margin:$1 $2$4",$contenu);
+		$contenu = preg_replace(",margin:([^\s;}]+)\s([^\s;}]+)\s([^\s;}]+)\s(\\2),ims", "margin:$1 $2 $3", $contenu);
+		$contenu = preg_replace(",margin:([^\s;}]+)\s([^\s;}]+)\s(\\1)([;}!]),ims", "margin:$1 $2$4", $contenu);
 
 		$contenu = trim($contenu);
 
 		return $contenu;
-	}
-	else {
+	} else {
 		// compression avancee en utilisant csstidy
 		// beaucoup plus lent, mais necessaire pour placer des @media la ou il faut
 		// si il y a deja des @media ou des @import
 
 		// modele de sortie plus ou moins compact
 		$template = 'high';
-		if (isset($options['template']) AND in_array($options['template'],array('low','default','high','highest')))
+		if (isset($options['template']) and in_array($options['template'], array('low', 'default', 'high', 'highest'))) {
 			$template = $options['template'];
+		}
 		// @media eventuel pour prefixe toutes les css
 		// et regrouper plusieurs css entre elles
 		$media = "";
-		if (isset($options['media']))
-			$media = "@media ".$options['media']." ";
+		if (isset($options['media'])) {
+			$media = "@media " . $options['media'] . " ";
+		}
 
 		include_spip("lib/csstidy/class.csstidy");
 		$css = new csstidy();
 
 		// essayer d'optimiser les font, margin, padding avec des ecritures raccourcies
-		$css->set_cfg('optimise_shorthands',2);
-		$css->set_cfg('template',$template);
+		$css->set_cfg('optimise_shorthands', 1);
+		$css->set_cfg('template', $template);
 		$css->parse($contenu);
+
 		return $css->print->plain($media);
 	}
 }
@@ -177,24 +213,27 @@ function minifier_css ($contenu, $options='') {
  *     Contenu JS minifié
  */
 function minifier_js($flux) {
-	if (!strlen($flux))
+	if (!strlen($flux)) {
 		return $flux;
+	}
 
 	include_spip('lib/JavascriptPacker/class.JavaScriptPacker');
 	$packer = new JavaScriptPacker($flux, 0, true, false);
 
 	// en cas d'echec (?) renvoyer l'original
 	if (!strlen($t = $packer->pack())) {
-		spip_log('erreur de minifier_js',_LOG_INFO_IMPORTANTE);
+		spip_log('erreur de minifier_js', _LOG_INFO_IMPORTANTE);
+
 		return $flux;
 	}
+
 	return $t;
 }
 
 
 /**
  * Minification additionnelle de JS
- * 
+ *
  * Compacter du javascript plus intensivement
  * grâce au google closure compiler
  *
@@ -206,114 +245,123 @@ function minifier_js($flux) {
  * @return string
  *     Contenu JS compressé
  */
-function minifier_encore_js($content,$file=false) {
+function minifier_encore_js($content, $file = false) {
 	# Closure Compiler n'accepte pas des POST plus gros que 200 000 octets
 	# au-dela il faut stocker dans un fichier, et envoyer l'url du fichier
 	# dans code_url ; en localhost ca ne marche evidemment pas
 	if ($file) {
 		$nom = $content;
 		lire_fichier($nom, $content);
-		$dest = dirname($nom).'/'.md5($content.$file).'.js';
-		if (file_exists($dest) AND (!is_string($file) OR file_exists($file)))
-			if (filesize($dest))
-				return is_string($file)?$file:$dest;
-			else {
-				spip_log("minifier_encore_js: Fichier $dest vide",_LOG_INFO);
+		$dest = dirname($nom) . '/' . md5($content . $file) . '.js';
+		if (file_exists($dest) and (!is_string($file) or file_exists($file))) {
+			if (filesize($dest)) {
+				return is_string($file) ? $file : $dest;
+			} else {
+				spip_log("minifier_encore_js: Fichier $dest vide", _LOG_INFO);
+
 				return $nom;
 			}
+		}
 	}
 
-	if (!$file AND strlen($content)>200000)
+	if (!$file and strlen($content) > 200000) {
 		return $content;
+	}
 
 	include_spip('inc/distant');
 
-	$datas=array(
+	$datas = array(
 		'output_format' => 'text',
 		'output_info' => 'compiled_code',
-		'compilation_level' => 'SIMPLE_OPTIMIZATIONS', // 'SIMPLE_OPTIMIZATIONS', 'WHITESPACE_ONLY', 'ADVANCED_OPTIMIZATIONS'
+		'compilation_level' => 'SIMPLE_OPTIMIZATIONS',
+		// 'SIMPLE_OPTIMIZATIONS', 'WHITESPACE_ONLY', 'ADVANCED_OPTIMIZATIONS'
 	);
-	if (!$file OR strlen($content) < 200000)
+	if (!$file or strlen($content) < 200000) {
 		$datas['js_code'] = $content;
-	else
+	} else {
 		$datas['url_code'] = url_absolue($nom);
+	}
 
 	$cc = recuperer_page('http://closure-compiler.appspot.com/compile',
-		$trans=false, $get_headers=false,
+		$trans = false, $get_headers = false,
 		$taille_max = null,
 		$datas,
 		$boundary = -1);
 
-	if ($cc AND !preg_match(',^\s*Error,', $cc)) {
+	if ($cc and !preg_match(',^\s*Error,', $cc)) {
 		spip_log('Closure Compiler: success');
-		$cc = "/* $nom + Closure Compiler */\n".$cc;
-		if ($file){
-			ecrire_fichier ($dest, $cc, true);
-			ecrire_fichier ("$dest.gz", $cc, true);
+		$cc = "/* $nom + Closure Compiler */\n" . $cc;
+		if ($file) {
+			ecrire_fichier($dest, $cc, true);
+			ecrire_fichier("$dest.gz", $cc, true);
 			$content = $dest;
-		  if (is_string($file)){
-			  ecrire_fichier ($file, $cc, true);
-			  spip_clearstatcache(true,$file);
-			  ecrire_fichier ("$file.gz", $cc, true);
-		    $content = $file;
-		  }
-		}
-		else
+			if (is_string($file)) {
+				ecrire_fichier($file, $cc, true);
+				spip_clearstatcache(true, $file);
+				ecrire_fichier("$file.gz", $cc, true);
+				$content = $file;
+			}
+		} else {
 			$content = &$cc;
+		}
 	} else {
-		if ($file){
-			spip_log("minifier_encore_js:Echec appel Closure Compiler. Ecriture fichier $dest vide",_LOG_INFO_IMPORTANTE);
-			ecrire_fichier ($dest, '', true);
+		if ($file) {
+			spip_log("minifier_encore_js:Echec appel Closure Compiler. Ecriture fichier $dest vide", _LOG_INFO_IMPORTANTE);
+			ecrire_fichier($dest, '', true);
 		}
 	}
+
 	return $content;
 }
 
 
 /**
  * Une callback applicable sur chaque balise link qui minifie un fichier CSS
- * 
+ *
  * @param string $contenu
  * @param  string $balise
  * @return string
  */
-function callback_minifier_css_file($contenu, $balise){
-	return minifier_css($contenu, extraire_attribut($balise,'media'));
+function callback_minifier_css_file($contenu, $balise) {
+	return minifier_css($contenu, extraire_attribut($balise, 'media'));
 }
 
 /**
  * Une callback applicable sur chaque balise script qui minifie un JS
- * 
+ *
  * @param string $contenu
  * @param  string $balise
  * @return string
  */
-function callback_minifier_js_file($contenu, $balise){
+function callback_minifier_js_file($contenu, $balise) {
 	return minifier_js($contenu);
 }
 
 
 /**
  * Minifier du HTML
- * 
- * @param string $flux  HTML à compresser
+ *
+ * @param string $flux HTML à compresser
  * @return string       HTML compressé
  */
-function minifier_html($flux){
+function minifier_html($flux) {
 
 	// si pas de contenu ni de balise html, ne rien faire
-	if (!strlen($flux) OR strpos($flux,"<")===FALSE)
+	if (!strlen($flux) or strpos($flux, "<") === false) {
 		return $flux;
+	}
 
 	static $options = null;
-	if (is_null($options)){
+	if (is_null($options)) {
 		$options = array();
-		if ($GLOBALS['meta']['auto_compress_css'] == 'oui')
+		if ($GLOBALS['meta']['auto_compress_css'] == 'oui') {
 			$options['cssMinifier'] = 'minifier_css';
-		if ($GLOBALS['meta']['auto_compress_js'] == 'oui')
+		}
+		if ($GLOBALS['meta']['auto_compress_js'] == 'oui') {
 			$options['jsMinifier'] = 'minifier_js';
+		}
 		include_spip('lib/minify_html/class.minify_html');
 	}
 
-	return Minify_HTML_SPIP::minify($flux,$options);
+	return Minify_HTML_SPIP::minify($flux, $options);
 }

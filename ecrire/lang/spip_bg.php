@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=bg
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -444,7 +446,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_retour_public' => 'Обратно към публичния сайт',
 	'login_retour_site' => 'Обратно към публичния сайт',
 	'login_retoursitepublic' => 'обратно към публичния сайт',
-	'login_sans_cookiie' => 'Идентификация без cookie',
 	'login_sinscrire' => 'регистрирация',
 	'login_test_navigateur' => 'тест на навигатор/повторно свързване',
 	'login_verifiez_navigateur' => '(Въпреки това, убедете се, че навигаторът не е запаметил Вашата парола...)',

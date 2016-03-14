@@ -15,7 +15,14 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
+.liste-objets.syndic_articles tr td { vertical-align: top; }
+.liste-objets.syndic_articles .titre a { display: inline; }
 .liste-objets.syndic_articles .action button {vertical-align: top;}
+
+.liste-objets.syndic_articles tr > .action {width: 50px;}
+.liste-objets.syndic_articles td .tags,
+.liste-objets.syndic_articles td .source {display:block;}
+.liste-objets.syndic_articles td .tags a {color:#666;}
 
 .onglets_simple ul.statut_syndic_articles li.publie strong,.onglets_simple ul.statut_syndic_articles li.publie a {background-image:url(#CHEMIN_IMAGE{syndic-statut-publie-24.png});padding-#ENV{left}:27px;}
 .onglets_simple ul.statut_syndic_articles li.off strong,.onglets_simple ul.statut_syndic_articles li.off a {background-image:url(#CHEMIN_IMAGE{syndic-statut-off-24.png});padding-#ENV{left}:27px;}

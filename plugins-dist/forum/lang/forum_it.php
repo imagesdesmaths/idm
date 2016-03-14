@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=it
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -30,6 +32,7 @@ cancellarli successivamente).',
 
 	// E
 	'erreur_enregistrement_message' => 'Il tuo messaggio non può essere salvato a causa di un problema tecnico.',
+	'extensions_autorisees' => 'Estensioni autorizzate :',
 
 	// F
 	'form_pet_message_commentaire' => 'Un messaggio, un commento?',
@@ -42,6 +45,7 @@ cancellarli successivamente).',
 	'forum_attention_trop_caracteres' => '<b>Attenzione!</b> il messaggio è troppo lungo (@compte@ caratteri): per poter essere registrato esso non deve essere più lungo di @max@ caratteri.',
 	'forum_avez_selectionne' => 'Hai selezionato:',
 	'forum_cliquer_retour' => 'Clicca <a href=\'@retour_forum@\'>qui</a> per continuare.',
+	'forum_envoyer' => 'Invia',
 	'forum_forum' => 'forum',
 	'forum_info_modere' => 'Questo forum è moderato a priori: il tuo contributo apparirà solo dopo essere stato approvato da un amministratore del sito.',
 	'forum_lien_hyper' => 'Link ipertestuale',
@@ -92,6 +96,8 @@ I forum pubblici potranno essere autorizzati di volta in volta
 sui singoli articoli; saranno invece proibiti nelle rubriche, nelle brevi, ecc',
 	'info_envoi_forum' => 'Notifica dei forum agli autori degli articoli',
 	'info_fonctionnement_forum' => 'Funzionamento del forum:',
+	'info_forcer_previsualisation_court' => 'Mostra un’anteprima',
+	'info_forcer_previsualisation_long' => 'Mostra un’anteprima prima di inviare un messaggio',
 	'info_forums_liees_mot' => 'Messaggi del forum collegati a questa parola chiave',
 	'info_gauche_suivi_forum_2' => 'La pagina di <i>monitoraggio dei forum</i> è uno strumento di gestione del sito e non uno spazio di discussione o di redazione. In essa sono pubblicati tutti i contributi dei forum del sito, sia quelli del sito pubblico che quelli dell’area riservata, permettendone la gestione.',
 	'info_liens_syndiques_3' => 'forum',

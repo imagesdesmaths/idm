@@ -3,7 +3,7 @@
 	num titre,1,
 	id_article,1,
 	points,-1
-}})
+}|defaut_tri_defined})
 ]<B_liste_art>
 #ANCRE_PAGINATION
 <div class="liste-objets articles">
@@ -12,21 +12,24 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
-			<th class='titre principale' scope='col'>[(#TRI{num titre,<:info_titre:>,ajax})]</th>
+			<th class='titre principale' scope='col' colspan='2'>[(#TRI{num titre,<:info_titre:>,ajax})]</th>
 			<th class='auteur' scope='col'><:auteur:></th>
 			<th class='date secondaire' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
 			<th class='id' scope='col'>[(#TRI{id_article,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_art(ARTICLES){id_article?}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}{!lang_select}>
+	<BOUCLE_liste_art(ARTICLES){id_article?}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,date}|defaut_tri_par{#GET{defaut_tri}},#GET{defaut_tri},session_liste_art}{par titre}{pagination #ENV{nb,10}}{!lang_select}>
 		[(#LANG|changer_typo)]
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})]</td>
-			<td class='titre principale'>[(#LOGO_ARTICLE|image_reduire{20,26})]<a href="[(#ID_ARTICLE|generer_url_entite{article})]"
-																																						title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[(#RANG). ]#TITRE</a> [(#ENV{lang}|=={#LANG}|non) &#40;#LANG&#41;]</td>
+			<td class='titre principale'[(#LOGO_ARTICLE_NORMAL|non)colspan='2']><a href="[(#ID_ARTICLE|generer_url_entite{article})]"
+						[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
+						title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[<span
+						class="surtitre">(#SURTITRE|image_reduire{150,70})</span>][(#RANG). ]<strong>#TITRE</strong>[<span class="soustitre">(#SOUSTITRE)</span>]</a></td>
+			[<td class='logo'>(#LOGO_ARTICLE_NORMAL|image_reduire{90,70})</td>]
 			<td class='auteur'><div class="inner"><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></div></td>
-			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='date secondaire'>[<span title="[(#DATE|heures_minutes)]">(#DATE|affdate_jourcourt)</span>]</td>
 			<td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
 				<a href="[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE})]">#ID_ARTICLE</a>,
 				#ID_ARTICLE

@@ -7,20 +7,14 @@
 	<form action="#ENV{action}#formulaire_configurer_forums_prives" method="post"><div>
 		[(#ACTION_FORMULAIRE{#ENV{action}})]
 		<p class='explication'><:forum:info_config_forums_prive:></p>
-		<ul>
-			<li class='editer long_label configurer_forum_prive_objets[ (#ENV**{erreurs}|table_valeur{forum_prive_objets}|oui)erreur]'>
-				<label><:forum:info_config_forums_prive_objets:></label>[
-				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{forum_prive_objets})</span>
-				]<div class='choix'>
-					<input class='radio' type="radio" name="forum_prive_objets" value='oui' [checked="(#ENV{forum_prive_objets}|=={oui}?{checked})"] id="forum_prive_objets_oui"/>
-					<label for="forum_prive_objets_oui"><:forum:item_config_forums_prive_objets:></label>
-				</div>
-				<div class='choix'>
-					<input class='radio' type="radio" name="forum_prive_objets" value='non' [checked="(#ENV{forum_prive_objets}|=={oui}?{'',checked})"] id="forum_prive_objets_non"/>
-					<label for="forum_prive_objets_non"><:forum:item_non_config_forums_prive_objets:></label>
-				</div>
-			</li>
-			<li class='editer long_label configurer_forum_prive[ (#ENV**{erreurs}|table_valeur{forum_prive}|oui)erreur]'>
+		<div class="editer-groupe">
+			#SET{name,forum_prive_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label><:forum:item_config_forums_prive_objets:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},selected=#ENV**{#GET{name}},exclus=spip_forum}
+			</div>
+			<div class='editer long_label configurer_forum_prive[ (#ENV**{erreurs}|table_valeur{forum_prive}|oui)erreur]'>
 				<label><:forum:info_config_forums_prive_global:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{forum_prive})</span>
 				]<div class='choix'>
@@ -31,8 +25,8 @@
 					<input class='radio' type="radio" name="forum_prive" value='non' [checked="(#ENV{forum_prive}|=={oui}?{'',checked})"] id="forum_prive_non"/>
 					<label for="forum_prive_non"><:forum:item_non_config_forums_prive_global:></label>
 				</div>
-			</li>
-			<li class='editer long_label configurer_forum_prive_admin[ (#ENV**{erreurs}|table_valeur{forum_prive_admin}|oui)erreur]'>
+			</div>
+			<div class='editer long_label configurer_forum_prive_admin[ (#ENV**{erreurs}|table_valeur{forum_prive_admin}|oui)erreur]'>
 				<label><:forum:info_config_forums_prive_admin:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{forum_prive_admin})</span>
 				]<div class='choix'>
@@ -43,8 +37,8 @@
 					<input class='radio' type="radio" name="forum_prive_admin" value='non' [checked="(#ENV{forum_prive_admin}|=={oui}?{'',checked})"] id="forum_prive_admin_non"/>
 					<label for="forum_prive_admin_non"><:forum:item_desactiver_forum_administrateur:></label>
 				</div>
-			</li>
-		</ul>
+			</div>
+		</div>
 		<p class='boutons'><input class='submit' type="submit" name="ok" value="<:bouton_enregistrer:>"/></p>
 	</div></form>
 	

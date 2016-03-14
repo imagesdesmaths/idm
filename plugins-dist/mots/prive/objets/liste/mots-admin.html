@@ -11,7 +11,7 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='picto' scope='col'></th>
-			<th class='titre' scope='col'>[(#TRI{multi titre,<:info_titre:>,ajax})]</th>
+			<th class='titre' scope='col' colspan='2'>[(#TRI{multi titre,<:info_titre:>,ajax})]</th>
 			<th class='utilisations' scope='col'></th>
 			<th class='action' scope='col'></th>
 			<th class='id' scope='col'>[(#TRI{id_mot,<:info_numero_abbreviation:>,ajax})]</th>
@@ -19,10 +19,12 @@
 	</thead>
 	<tbody>
 	<BOUCLE_liste_mot(MOTS){id_mot?}{id_groupe?}{id_rubrique?}{id_article?}{where?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
-		#SET{url_edit,#AUTORISER{modifier,mot,#ID_MOT}|?{#ID_MOT|generer_url_entite{mot}|parametre_url{redirect,#ENV{retour}},''}}
+		#SET{url_voir,#AUTORISER{voir,mot,#ID_MOT}|?{#ID_MOT|generer_url_entite{mot}|parametre_url{redirect,#ENV{retour}},''}}
+		#SET{url_edit,#AUTORISER{modifier,mot,#ID_MOT}|?{#URL_ECRIRE{mot_edit,id_mot=#ID_MOT}|parametre_url{redirect,#ENV{retour}},''}}
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='picto'>[(#VAL|puce_statut{mot,#ID_MOT,#ID_GROUPE})]</td>
-			<td class='titre principale'>[(#LOGO_MOT|image_reduire{20,26})][<a href="(#GET{url_edit})">][(#RANG). ]#TITRE[</a>(#GET{url_edit}|oui)]</td>
+			<td class='titre principale'[(#LOGO_MOT|non) colspan='2']>[<a href="(#GET{url_voir})">][(#RANG). ]#TITRE[</a>(#GET{url_voir}|oui)]</td>
+			[<td class='logo'>(#LOGO_MOT|image_reduire{40,40})</td>]
 			<td class='utilisations secondaire'>#SET{utilise,#ID_MOT|objets_associes_mot{#ID_GROUPE}|implode{', '}}#GET{utilise}</td>
 			<td class='action'>
 				[(#GET{utilise}|non)

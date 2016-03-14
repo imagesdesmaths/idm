@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=da
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -450,7 +452,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_retour_public' => 'Tilbage til det offentlige websted',
 	'login_retour_site' => 'Tilbage til den offentlige websted',
 	'login_retoursitepublic' => 'tilbage til den offentlige websted',
-	'login_sans_cookiie' => 'Identifikation uden cookie',
 	'login_sinscrire' => 'tilmelding',
 	'login_test_navigateur' => 'test af browser/nyt login',
 	'login_verifiez_navigateur' => '(Men kontroller, at din browser ikke har gemt adgangskoden...)',

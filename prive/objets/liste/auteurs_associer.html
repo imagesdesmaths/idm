@@ -42,7 +42,7 @@ a mis a jour la valeur avec la page reelle]
 		[<tr><td colspan="5"><p class='pagination'>(#GET{p})</p></td></tr>]
 		<tr class='first_row'>
 			<th class='statut' scope='col'>[(#TRI{statut,#CHEMIN_IMAGE{auteur-0minirezo-16.png}|balise_img{<:lien_trier_statut|attribut_html:>},ajax})]</th>
-			<th class='nom' scope='col'>[(#TRI{multi nom,<:info_nom:>,ajax})]</th>
+			<th class='nom' scope='col' colspan='2'>[(#TRI{multi nom,<:info_nom:>,ajax})]</th>
 			<th class='email' scope='col'>[(#TRI{email,<:email:>,ajax})]</th>
 			<th class='action' scope='col'>&nbsp;</th>
 		</tr>
@@ -51,9 +51,10 @@ a mis a jour la valeur avec la page reelle]
 	<BOUCLE_liste_aut(AUTEURS){!id_auteur IN #GET{exclus}}{tout}{where?}{recherche?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} auta}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|initiale|=={#ENV{i}}|?{on}|unique)]">
 			<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
-			<td class='nom[ (#NOM|non)vide]'>[(#LOGO_AUTEUR|image_reduire{20,20})]<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|sinon{<:texte_vide:>})]</a></td>
+			<td class='nom[ (#NOM|non)vide]'[(#LOGO_AUTEUR|non)colspan='2']><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|sinon{<:texte_vide:>})]</a></td>
+			[<td class='logo'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]" style="background-image:url\((#LOGO_AUTEUR|image_passe_partout{30,30}|extraire_attribut{src}))"></a></td>]
 			<td class='email'>[<a href='mailto:(#EMAIL)'>[(#EMAIL|couper{30})]</a>]</td>
-			<td class='action'><button type="submit" class="button" name="ajouter_lien[auteur-#ID_AUTEUR-#OBJET-#ID_OBJET]" value="+"><:lien_ajouter_auteur:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>
+			<td class='action'><button type="submit" class="button link" name="ajouter_lien[auteur-#ID_AUTEUR-#OBJET-#ID_OBJET]" value="+"><:lien_ajouter_auteur:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>
 		</tr>
 	</BOUCLE_liste_aut>
 	</tbody>

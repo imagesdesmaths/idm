@@ -9,15 +9,15 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
+		<div class="editer-groupe">
 			#SET{name,documents_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<div class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:medias:label_activer_document_objets:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},selected=#ENV**{#GET{name}},exclus=spip_documents}
-			</li>
+			</div>
 			#SET{name,documents_date}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<div class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<div class="choix">
@@ -28,8 +28,8 @@
 						<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
 						[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] /><label for="#GET{name}_non"><:medias:item_non_autoriser_selectionner_date_en_ligne:></label>
 					</div>
-			</li>
-		</ul>
+			</div>
+		</div>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>

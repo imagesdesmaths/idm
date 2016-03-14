@@ -2,7 +2,7 @@
 <div class="nav clearfix[ (#TOTAL_BOUCLE|=={1}|oui)none]" id="nav">
 	<ul>
 		<BOUCLE_nav(RUBRIQUES) {racine} {par num titre, titre}>
-		<li[ class="(#EXPOSE)"]><a href="#URL_RUBRIQUE">#TITRE</a></li>
+		<li class="nav-item[ (#EXPOSE)][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)last]"><a href="#URL_RUBRIQUE">#TITRE</a></li>
 		</BOUCLE_nav>
 	</ul>
 </div>

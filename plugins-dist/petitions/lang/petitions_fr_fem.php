@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=fr_fem
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -16,6 +18,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_checkbox_indiquer_site' => 'indiquer obligatoirement un site web',
 	'bouton_checkbox_signature_unique_email' => 'une seule signature par adresse email',
 	'bouton_checkbox_signature_unique_site' => 'une seule signature par site web',
+	'bouton_radio_activer_petition' => 'Activer la pétition',
+	'bouton_radio_pas_petition' => 'Pas de pétition',
+	'bouton_radio_petition_activee' => 'Pétition activée',
+	'bouton_radio_supprimer_petition' => 'Supprimer la pétition',
 
 	// F
 	'filtre' => 'Filtre :',

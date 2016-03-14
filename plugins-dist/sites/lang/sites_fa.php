@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=fa
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -55,14 +57,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_valider_article' => 'ثبت اين مقاله',
 	'icone_valider_articles' => 'ثبت اين مقاله‌ها',
 	'icone_voir_sites_references' => 'به سايتهاى ارجاعي نگاه كنيد',
+	'info_1_article_syndique' => 'مقاله‌ي اشتراكي 1',
+	'info_1_site' => '١ سايت',
 	'info_1_site_importe' => '1 يك سايت وارد شده ',
 	'info_a_valider' => '[معتبر شود]',
+	'info_aucun_article_syndique' => 'هيچ مقاله‌ي به اشتراك‌گذاشته‌ شده‌اي وجود ندارد',
+	'info_aucun_site' => 'هيچ سايتي موجود نيست',
 	'info_aucun_site_importe' => 'هيچ سايتي وارد نشده ',
 	'info_bloquer' => 'ببندید',
 	'info_bloquer_lien' => 'اين پيوند را مسدود كنيد',
 	'info_derniere_syndication' => ':آخرين پيوند سايتى انجام شده در تاريخ ',
 	'info_liens_syndiques_1' => 'پيوند‌هاي مشترك‌سازي شده',
 	'info_liens_syndiques_2' => 'در انتظار تأئيد شدن هستند.',
+	'info_nb_articles_syndiques' => '@nb@ مقاله‌ به اشتراك‌گذاشته شده',
+	'info_nb_sites' => '@nb@ سايت',
 	'info_nb_sites_importes' => ' @nb@ سايت وارد شده ',
 	'info_nom_site_2' => ' [اجبارى] <b>نام سايت</b>',
 	'info_panne_site_syndique' => 'سايت پيوندى خراب است',

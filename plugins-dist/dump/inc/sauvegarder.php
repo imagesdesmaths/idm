@@ -3,37 +3,49 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 include_spip('inc/dump');
 
-function inc_sauvegarder_dist($status_file, $redirect='') {
-	$status_file = _DIR_TMP.basename($status_file).".txt";
+/**
+ * Fonction principale de sauvegarde
+ * En mode sqlite on passe par une copie de base a base (dans l'API de SPIP)
+ *
+ * @param string $status_file Nom du fichier de status (stocke dans _DIR_TMP)
+ * @param string $redirect Redirection apres la sauvegarde
+ * @return bool
+ */
+function inc_sauvegarder_dist($status_file, $redirect = '') {
+	$status_file = _DIR_TMP . basename($status_file) . ".txt";
 	if (!lire_fichier($status_file, $status)
-		OR !$status = unserialize($status)) {
-	}
-	else {
+		or !$status = unserialize($status)
+	) {
+	} else {
 		$timeout = ini_get('max_execution_time');
 		// valeur conservatrice si on a pas reussi a lire le max_execution_time
-		if (!$timeout) $timeout=30; // parions sur une valeur tellement courante ...
-		$max_time = time()+$timeout/2;
-		
-		include_spip('inc/minipres');
-		@ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
+		if (!$timeout) {
+			$timeout = 30;
+		} // parions sur une valeur tellement courante ...
+		$max_time = time() + $timeout / 2;
 
-		$titre = _T('dump:sauvegarde_en_cours') . " (".count($status['tables']).") ";
+		include_spip('inc/minipres');
+		@ini_set("zlib.output_compression", "0"); // pour permettre l'affichage au fur et a mesure
+
+		$titre = _T('dump:sauvegarde_en_cours') . " (" . count($status['tables']) . ") ";
 		$balise_img = chercher_filtre('balise_img');
 		$titre .= $balise_img(chemin_image('searching.gif'));
-		echo ( install_debut_html($titre));
+		echo(install_debut_html($titre));
 		// script de rechargement auto sur timeout
-		echo http_script("window.setTimeout('location.href=\"".$redirect."\";',".($timeout*1000).")");
+		echo http_script("window.setTimeout('location.href=\"" . $redirect . "\";'," . ($timeout * 1000) . ")");
 		echo "<div style='text-align: left'>\n";
 
 		dump_serveur($status['connect']);
@@ -46,22 +58,20 @@ function inc_sauvegarder_dist($status_file, $redirect='') {
 				'callback_progression' => 'dump_afficher_progres',
 				'max_time' => $max_time,
 				'no_erase_dest' => lister_tables_noerase(),
-				'where' => $status['where']?$status['where']:array(),
+				'where' => $status['where'] ? $status['where'] : array(),
 			);
 			$res = base_copier_tables($status_file, $status['tables'], '', 'dump', $options);
 		}
-		
-		echo ( "</div>\n");
 
-		if (!$res AND $redirect)
+		echo("</div>\n");
+
+		if (!$res and $redirect) {
 			echo dump_relance($redirect);
-		echo (install_fin_html());
+		}
+		echo(install_fin_html());
 		ob_end_flush();
 		flush();
 
 		return $res;
 	}
 }
-
-
-?>

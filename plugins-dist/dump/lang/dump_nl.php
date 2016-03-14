@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/dump?lang_cible=nl
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -17,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'confirmer_ecraser_base' => 'Ja, ik wil mijn database overschrijven met de back-up',
 	'confirmer_ecraser_tables_selection' => 'Ja, ik wil de geselecteerde tabellen met de back-up overschrijven',
+	'confirmer_supprimer_sauvegarde' => 'Wil je deze backup echt verwijderen?',
 
 	// D
 	'details_sauvegarde' => 'Details van de back-up:',

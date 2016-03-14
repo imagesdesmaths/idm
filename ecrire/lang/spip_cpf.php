@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=cpf
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -109,10 +111,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@ @nommois@',
 	'date_demain' => 'domin',
 	'date_fmt_heures_minutes' => '@h@èr@m@min',
+	'date_fmt_jour' => '@nomjour@ @jour@',
 	'date_fmt_jour_heure' => '@jour@ a @heure@',
 	'date_fmt_jour_mois' => '@jour@ @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ @nommois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
+	'date_fmt_nomjour' => '@nomjour@ @date@',
 	'date_fmt_nomjour_date' => 'lo @nomjour@ @date@',
 	'date_heures' => 'èr',
 	'date_hier' => 'yèr',
@@ -473,7 +477,6 @@ dann out navigatèr é',
 	'login_retour_public' => 'Artourn sir figirwèb',
 	'login_retour_site' => 'Artourn sir figirwèb',
 	'login_retoursitepublic' => 'artourn sir figirwèb',
-	'login_sans_cookiie' => 'Lidantifikasyon san lo gatomakro',
 	'login_sinscrire' => 'inskri aou',
 	'login_test_navigateur' => 'test navigatèr/nouvo lakostaz',
 	'login_verifiez_navigateur' => '(Somansa gét byin out navigatèr la pa gardantèt out modpass...)',

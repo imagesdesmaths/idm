@@ -3,14 +3,16 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+} // securiser
 
 /*
 Ce jeu d'URLs est une variation de inc-urls-propres, qui ajoute
@@ -22,13 +24,13 @@ define('URLS_PROPRES2_EXEMPLE', 'Titre-de-l-article.html -Rubrique-.html');
 # specifier le form de config utilise pour ces urls
 define('URLS_PROPRES2_CONFIG', 'propres');
 
-if (!defined('_terminaison_urls_propres'))
-	define ('_terminaison_urls_propres', '.html');
-
-// http://code.spip.net/@urls_propres2_dist
-function urls_propres2_dist($i, &$entite, $args='', $ancre='') {
-	$f = charger_fonction('propres', 'urls');
-	return $f($i, $entite, $args, $ancre);
+if (!defined('_terminaison_urls_propres')) {
+	define('_terminaison_urls_propres', '.html');
 }
 
-?>
+// http://code.spip.net/@urls_propres2_dist
+function urls_propres2_dist($i, &$entite, $args = '', $ancre = '') {
+	$f = charger_fonction('propres', 'urls');
+
+	return $f($i, $entite, $args, $ancre);
+}

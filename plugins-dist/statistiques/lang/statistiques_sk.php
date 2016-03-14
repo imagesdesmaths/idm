@@ -3,9 +3,17 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/statistiques?lang_cible=sk
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// A
+	'archiver' => 'Archivovať',
+	'archiver_concatener_explications' => 'Táto operácia zreťazí štatistiky návštev článkov:',
+	'archiver_nombre_lignes' => 'Počet riadkov',
+	'archiver_operations_irreversibles' => 'Tieto operácie sa nedajú vrátiť späť!',
 
 	// B
 	'bouton_effacer_referers' => 'Odstrániť len prichádzajúce odkazy',
@@ -22,12 +30,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_affichier_visites_articles_plus_visites' => 'Prehľad počtu návštev pre <b>najviac navštevované články od začiatku:</b>',
 	'info_comment_lire_tableau' => 'Ako čítať tento graf',
 	'info_forum_statistiques' => 'Štatistiky návštev',
+	'info_graphiques' => 'Grafika',
 	'info_popularite_2' => 'popularita stránky:',
 	'info_popularite_3' => 'popularita: @popularite@, návštev: @visites@',
 	'info_popularite_5' => 'popularita:',
 	'info_previsions' => 'predpovede:',
 	'info_question_vignettes_referer' => 'Keď sa pozriete do štatistiky, uvidíte ukážku každej stránky, z ktorej prišiel nejaký návštevník. ',
 	'info_question_vignettes_referer_oui' => 'Zobraziť obrázky odkazujúcich stránok',
+	'info_tableaux' => 'Tabuľky',
 	'info_visites' => 'Návštev:',
 	'info_visites_plus_populaires' => 'Prehľad počtu návštev   <b>najpopulárnejších</b> a <b>najnovších článkov:</b>',
 	'info_zoom' => 'lupa',

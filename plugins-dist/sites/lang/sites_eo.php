@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=eo
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -33,12 +35,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Modifi tiun ĉi retejon',
 	'icone_referencer_nouveau_site' => 'Referencigi novan retejon',
 	'icone_voir_sites_references' => 'Vidi la referencigitajn retejojn',
+	'info_1_article_syndique' => '1 abonligita artikolo',
+	'info_1_site' => '1 retejo',
 	'info_a_valider' => '[validigenda]',
+	'info_aucun_article_syndique' => 'Neniu abonligita artikolo',
+	'info_aucun_site' => 'Neniu retejo',
 	'info_bloquer' => 'bloki',
 	'info_bloquer_lien' => 'bloki tiun ligilon',
 	'info_derniere_syndication' => 'La lasta abonĝisdatigo de tiu retejo estis farita la ',
 	'info_liens_syndiques_1' => 'abonligiloj',
 	'info_liens_syndiques_2' => 'estas validigotaj.',
+	'info_nb_articles_syndiques' => '@nb@ abonligitaj artikoloj',
+	'info_nb_sites' => '@nb@ retejoj',
 	'info_nom_site_2' => '<b>Nomo de la retejo</b> [Deviga]',
 	'info_panne_site_syndique' => 'Abonligita retejo paneas',
 	'info_probleme_grave' => 'problemo de',

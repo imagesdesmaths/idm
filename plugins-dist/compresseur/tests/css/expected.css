@@ -81,3 +81,5 @@ th{background-color:#FADD31;background-repeat:repeat-x;color:#68685E;font-size:1
 .clear{clear:both}
 .degrade{background-color:#777;background:-webkit-gradient(linear,left top,left bottom,from(#999),to(#666));background-image:-moz-linear-gradient(top,#999,#666);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#999999',endColorstr='#666666');filter:progid:DXImageTransform.Microsoft.Shadow(color=#666666,direction=146,Strength=5);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#999999',endColorstr='#666666')";filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ff999999',endColorstr='#ff666666')}
 @media print{.degrade{background:none}}
+@keyframes NAME-YOUR-ANIMATION{0%{opacity:0}
+100%{opacity:1}}

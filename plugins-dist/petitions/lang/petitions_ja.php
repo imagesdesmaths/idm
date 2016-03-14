@@ -3,9 +3,17 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=ja
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// B
+	'bouton_radio_activer_petition' => '署名機能を使う',
+	'bouton_radio_pas_petition' => '署名機能なし',
+	'bouton_radio_petition_activee' => '署名機能を使用中',
+	'bouton_radio_supprimer_petition' => '署名機能を無効にする',
 
 	// F
 	'form_pet_adresse_site' => 'あなたのサイトのURL', # MODIF

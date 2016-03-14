@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=it
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -55,14 +57,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_valider_article' => 'Conferma questo articolo',
 	'icone_valider_articles' => 'Conferma questo articolo',
 	'icone_voir_sites_references' => 'Vedi i siti in repertorio',
+	'info_1_article_syndique' => '1 articolo in syndication',
+	'info_1_site' => '1 sito',
 	'info_1_site_importe' => '1 sito è stato importato',
 	'info_a_valider' => '[da convalidare]',
+	'info_aucun_article_syndique' => 'Nessun articolo in syndication',
+	'info_aucun_site' => 'Nessun sito',
 	'info_aucun_site_importe' => 'Nessun sito è stato importato',
 	'info_bloquer' => 'bloccare',
 	'info_bloquer_lien' => 'bloccare questo link',
 	'info_derniere_syndication' => 'L’ultima <em>syndication</em> di questo sito è stata effettuata il',
 	'info_liens_syndiques_1' => 'link in syndication',
 	'info_liens_syndiques_2' => 'sono in attesa di convalida.',
+	'info_nb_articles_syndiques' => '@nb@ articoli in syndication',
+	'info_nb_sites' => '@nb@ siti',
 	'info_nb_sites_importes' => '@nb@ siti sono stati importati',
 	'info_nom_site_2' => '<b>Nome del sito</b> [Obbligatorio]',
 	'info_panne_site_syndique' => 'Il sito in syndication non funziona',

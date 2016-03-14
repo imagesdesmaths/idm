@@ -7,38 +7,38 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <input type='hidden' name='id_groupe' value='#ENV{id_groupe}' />
-	  <ul>
-	    <li class='editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur] editer_type_input'>
+	  <div class="editer-groupe">
+	    <div class='editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur] editer_type_input'>
 				<label for='titre'><:mots:info_changer_nom_groupe:><em class='aide'>#AIDER{titre}</em></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
 				]<input type='text' class='text' name='titre' id='titre' value='[(#ENV**{titre})]'
 				placeholder='<:mots:titre_nouveau_groupe|attribut_html:>' />
-	    </li>	
-	    <li class='editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur] editer_type_textarea'>
+	    </div>
+	    <div class='editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur] editer_type_textarea'>
 				<label for='descriptif'><:texte_descriptif_rapide:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
 				]<textarea name='descriptif' id='descriptif' rows='4' cols='40'>[(#ENV**{descriptif})]</textarea>
-	    </li>
-	    <li class='editer editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur] editer_type_textarea'>
+	    </div>
+	    <div class='editer editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur] editer_type_textarea'>
 				<label for='text_area'><:info_texte_explicatif:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
 				][(#ENV**{_texte_trop_long,''})
 				]<textarea name='texte' id='text_area' cols='40' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]'>[(#ENV**{texte})]</textarea>
-	    </li>
-	    <li class="fieldset fieldset_config">
+	    </div>
+	    <div class="fieldset fieldset_config">
 	      <fieldset>
-	      <ul>
-					<li class="editer editer_groupe_mots_associer">
+	      <div class="editer-groupe">
+					<div class="editer editer_groupe_mots_associer">
 						<label><:mots:info_mots_cles_association:></label>
 						<INCLURE{fond=formulaires/inc-choisir-groupemots-tables-liees,selected=#ENV*{tables_liees},name=tables_liees} />
-	    		</li>
+	    		</div>
 		    	[(#ENV{config}|table_valeur{config_precise_groupes}|=={oui}|ou{#ENV{unseul}|=={oui}}|ou{#ENV{obligatoire}|=={oui}}|oui)
-					<li class="editer editer_groupe_mots_reglage_avance">
+					<div class="editer editer_groupe_mots_reglage_avance">
 						<div class='choix'><input type='checkbox' class='checkbox' name='unseul' value='oui'[(#ENV{unseul}|=={oui}|oui)checked='checked'] id='unseul' /><label for='unseul'><:mots:info_selection_un_seul_mot_cle:></label></div>
 						<div class='choix'><input type='checkbox' class='checkbox' name='obligatoire' value='oui'[(#ENV{obligatoire}|=={oui}|oui)checked='checked'] id='obligatoire' /><label for='obligatoire'><:mots:avis_conseil_selection_mot_cle:></label></div>
-					</li>
+					</div>
   	  		]
-					<li class="editer editer_groupe_mots_editeur">
+					<div class="editer editer_groupe_mots_editeur">
 						<label><:mots:info_qui_attribue_mot_cle:></label>
 						<div class='choix'><input type='checkbox' class='checkbox' name='minirezo' value='oui'[(#ENV{minirezo}|=={oui}|oui)checked='checked'] id='acces_minirezo' /><label for='acces_minirezo'><:mots:bouton_checkbox_qui_attribue_mot_cle_administrateurs:></label></div>
 						<div class='choix'><input type='checkbox' class='checkbox' name='comite' value='oui'[(#ENV{comite}|=={oui}|oui)checked='checked'] id='acces_comite' /><label for='acces_comite'><:mots:bouton_checkbox_qui_attribue_mot_cle_redacteurs:></label></div>
@@ -48,10 +48,10 @@
 							]
 						]
 					<!--choix_acces-->
-  	  		</li>
-    		</ul></fieldset>
-	    </li>
-	  </ul>
+  	  		</div>
+    		</div></fieldset>
+	    </div>
+	  </div>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>

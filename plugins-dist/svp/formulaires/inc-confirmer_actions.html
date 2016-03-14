@@ -6,21 +6,24 @@
 </div>]
 
 [<div id="charger_plugin_confirm">
+	[<div class="reponse_formulaire notice">
+		(#ENV**{_notices/decideur_warning})
+	</div>]
 
 	<div class="reponse_formulaire reponse_formulaire_ok">
 		<strong><:svp:actions_demandees:></strong>
-		<ul>(#ENV**{erreurs/decideur_demandes}|foreach{svp_presenter_actions})</ul>
+		<ul>(#ENV**{_libelles_actions/decideur_demandes}|foreach{svp_presenter_actions})</ul>
 	</div>
 	[<div class="reponse_formulaire reponse_formulaire_ok">
 		<strong><:svp:actions_necessaires:></strong>
-		<ul>(#ENV**{erreurs/decideur_propositions}|foreach{svp_presenter_actions})</ul>
+		<ul>(#ENV**{_libelles_actions/decideur_propositions}|foreach{svp_presenter_actions})</ul>
 	</div>]
 	<p class="boutons">
 		<input type="submit" name="annuler_actions" class="submit annuler_actions" value="<:bouton_annuler:>" />
 		<input type="submit" name="valider_actions" class="submit valider_actions" value="<:bouton_valider:>" />
 	</p>
-	<script type="text/javascript">
-		[(#REM)
+	<script type="text/javascript">/*<!\[CDATA\[*/
+		/*[(#REM)
 			Fonctionnement du JS.
 				- overlayClose // pas de click en dehors des éléments prévus
 				
@@ -34,8 +37,7 @@
 
 				- onClose	   // apres la fermeture, on clique le bouton ayant 'fire'
 						
-		]
-		<!--
+		]*/
 		(function($){
 			$(function(){
 				if ($.modalbox !== 'undefined') {
@@ -57,6 +59,6 @@
 				}
 			});
 		})(jQuery);
-		-->
+		/*\]\]>*/
 	</script>
 </div>]

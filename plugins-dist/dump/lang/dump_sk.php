@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/dump?lang_cible=sk
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -17,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'confirmer_ecraser_base' => 'Áno, chcem prepísať svoju databázu so zálohou',
 	'confirmer_ecraser_tables_selection' => 'Áno, chcem prepísať vybrané tabuľky so zálohou',
+	'confirmer_supprimer_sauvegarde' => 'Určite chcete vymazať túto zálohu?',
 
 	// D
 	'details_sauvegarde' => 'Podrobnosti o zálohe:',

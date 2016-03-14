@@ -94,7 +94,7 @@
 	<langue code="la" url="http://trad.spip.net/tradlang_module/breves?lang_cible=la" total="29" traduits="8" relire="0" modifs="0" nouveaux="21" pourcent="27.59">
 	</langue>
 	<langue code="lb" url="http://trad.spip.net/tradlang_module/breves?lang_cible=lb" total="29" traduits="29" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="jwander" lien="http://trad.spip.net/auteur/jwander" />
+		<traducteur nom="Jim Wanderscheid" lien="http://trad.spip.net/auteur/jwander" />
 	</langue>
 	<langue code="lt" url="http://trad.spip.net/tradlang_module/breves?lang_cible=lt" total="29" traduits="13" relire="0" modifs="3" nouveaux="13" pourcent="44.83">
 	</langue>
@@ -121,6 +121,9 @@
 	<langue code="oc_ni" url="http://trad.spip.net/tradlang_module/breves?lang_cible=oc_ni" total="29" traduits="18" relire="0" modifs="7" nouveaux="4" pourcent="62.07">
 	</langue>
 	<langue code="oc_ni_la" url="http://trad.spip.net/tradlang_module/breves?lang_cible=oc_ni_la" total="29" traduits="18" relire="0" modifs="7" nouveaux="4" pourcent="62.07">
+	</langue>
+	<langue code="oc_ni_mis" url="http://trad.spip.net/tradlang_module/breves?lang_cible=oc_ni_mis" total="29" traduits="29" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="sylvain" lien="http://trad.spip.net/auteur/sylvain" />
 	</langue>
 	<langue code="oc_prv" url="http://trad.spip.net/tradlang_module/breves?lang_cible=oc_prv" total="29" traduits="18" relire="0" modifs="7" nouveaux="4" pourcent="62.07">
 	</langue>
@@ -154,7 +157,8 @@
 	</langue>
 	<langue code="tr" url="http://trad.spip.net/tradlang_module/breves?lang_cible=tr" total="29" traduits="18" relire="0" modifs="7" nouveaux="4" pourcent="62.07">
 	</langue>
-	<langue code="uk" url="http://trad.spip.net/tradlang_module/breves?lang_cible=uk" total="29" traduits="6" relire="0" modifs="1" nouveaux="22" pourcent="20.69">
+	<langue code="uk" url="http://trad.spip.net/tradlang_module/breves?lang_cible=uk" total="29" traduits="29" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="olly" lien="http://trad.spip.net/auteur/olly" />
 		<traducteur nom="Retenodus" lien="http://trad.spip.net/auteur/retenodus" />
 	</langue>
 	<langue code="vi" url="http://trad.spip.net/tradlang_module/breves?lang_cible=vi" total="29" traduits="18" relire="0" modifs="7" nouveaux="4" pourcent="62.07">

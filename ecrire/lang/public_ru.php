@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/public?lang_cible=ru
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -29,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bonjour' => 'Привет',
 
 	// C
-	'commenter_site' => 'Коментарии к этому сайту',
+	'commenter_site' => 'Комментарии к этому сайту',
 	'contact' => 'Контакты',
 	'copie_document_impossible' => 'Невозможно скопировать документ',
 
@@ -83,11 +85,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_precedente' => 'предыдущая страница',
 	'page_suivante' => 'следующая страница',
 	'par_auteur' => ' ',
-	'participer_site' => 'Вы можете принять активное участие в жизни этого сайта и писать ваши собственные статьи. Все, что надо сделать - зарегистрироваться.',
+	'participer_site' => 'Вы можете принять активное участие в жизни этого сайта и писать ваши собственные статьи. Все, что надо сделать, - зарегистрироваться.',
 	'plan_site' => 'Карта сайта',
 	'popularite' => 'Популярность',
 	'poster_message' => 'Отправить сообщение',
-	'proposer_site' => 'Вы можете предложить добавить сайт к этому разделу:',
+	'proposer_site' => 'Вы можете добавить ссылку на сайт в этот раздел:',
 
 	// R
 	'repondre_article' => 'Оставить комментарий ',
@@ -103,7 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sites_web' => 'Сайты',
 	'sous_rubriques' => 'Подразделы',
 	'spam' => 'Спам',
-	'suite' => 'далее',
+	'suite' => 'продолжить',
 	'sur_web' => 'В интернете',
 	'syndiquer_rubrique' => 'RSS этого раздела',
 	'syndiquer_site' => 'RSS всего сайта',
@@ -115,7 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'ver_imprimer' => 'Версия для печати',
 	'voir_en_ligne' => 'См. онлайн',
-	'voir_squelette' => 'Показать шаблон этой страницы'
+	'voir_squelette' => 'показать шаблон этой страницы'
 );
 
 ?>

@@ -3,9 +3,17 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=cpf_hat
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// B
+	'bouton_radio_activer_petition' => 'Mèt yon pétisyon',
+	'bouton_radio_pas_petition' => 'Okenn petisyon',
+	'bouton_radio_petition_activee' => 'Petisyon ka mache',
+	'bouton_radio_supprimer_petition' => 'Kraez petisyon nan',
 
 	// F
 	'form_pet_adresse_site' => 'Ladrès sit ou', # MODIF

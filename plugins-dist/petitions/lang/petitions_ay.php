@@ -3,9 +3,17 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=ay
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// B
+	'bouton_radio_activer_petition' => 'Mayiwix naktayaña',
+	'bouton_radio_pas_petition' => 'Jan mayiyawimpi',
+	'bouton_radio_petition_activee' => 'Mayiyaw naktata',
+	'bouton_radio_supprimer_petition' => 'Mayiwi apaqaña',
 
 	// F
 	'form_pet_adresse_site' => 'Qamawimat utjawipa', # MODIF

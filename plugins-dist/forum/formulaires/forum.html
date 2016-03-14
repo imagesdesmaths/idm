@@ -26,78 +26,73 @@
 	<input type='hidden' name='nom_site' value="#ENV{nom_site}" />
 	[<input type="hidden" name="id_forum" value="(#ENV*{id_forum})" />]
 	[(#INCLURE{fond=formulaires/inc-forum_ajouter_mot, ajouter_mot})]
-	(#ENV*{erreurs}|table_valeur{previsu})
+	(#ENV**{erreurs}|table_valeur{previsu})
 	</div>
 </form>]
 
 
 <form action="#ENV{action}#formulaire_forum" method="post" enctype='multipart/form-data'><div>
-[(#ACTION_FORMULAIRE{#ENV{action}})]
-[<input type="hidden" name="id_forum" value="(#ENV*{id_forum})" />]
-[<fieldset class="moderation_info info">
-	<legend><:forum:bouton_radio_modere_priori:></legend>
-	<p class="explication">(#ENV{modere})<:forum:forum_info_modere:></p>
-</fieldset>]
+	[(#ACTION_FORMULAIRE{#ENV{action}})]
+	[<input type="hidden" name="id_forum" value="(#ENV*{id_forum})" />]
+	[<fieldset class="moderation_info info">
+		<legend><:forum:bouton_radio_modere_priori:></legend>
+		<p class="explication">(#ENV{modere})<:forum:forum_info_modere:></p>
+	</fieldset>]
 
-[(#ENV**{afficher_texte}|choixsiegal{'non', ' ',''})
-[<input type="hidden" name="titre" value="(#ENV{titre})" />]
-<p class="spip_bouton"><input type="submit" class="submit" value="<:forum:forum_valider:>" /></p>]
-
-[(#ENV**{afficher_texte}|choixsiegal{'non', '',' '})
 	<INCLURE{fond=formulaires/inc-login_forum, env} />
 
 	<fieldset>
 	<legend><:forum:forum_message:></legend>[
 	(#CONFIG{forums_titre}|!={non}|non)
 		<input type="hidden" name="titre" id="titre"[ value="(#ENV{titre})"] />
-	]<ul>
-	[<li class='editer saisie_mots_forum'>(#INCLURE{fond=formulaires/inc-forum_bloc_choix_mots, table=#ENV*{table}, ajouter_mot})</li>]
+	]<div class="editer-groupe">
+	[<div class='editer saisie_mots_forum'>(#INCLURE{fond=formulaires/inc-forum_bloc_choix_mots, table=#ENV*{table}, ajouter_mot})</div>]
 
 [(#CONFIG{forums_titre}|!={non}|oui)
-	<li class='editer saisie_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]'>
+	<div class='editer saisie_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]'>
 		<label for="titre"><:forum:forum_titre:> <:info_obligatoire_02:></label>
 		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
 		<input type="text" class="text" name="titre" id="titre"[ value="(#ENV{titre})"] size="60" />
-	</li>
+	</div>
 ]
 
 [(#CONFIG{forums_texte}|!={non}|?{
-	<li class='editer saisie_texte obligatoire[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]'>
+	<div class='editer saisie_texte obligatoire[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]'>
 		<label for='texte'><:forum:forum_texte|typo:> <:info_obligatoire_02:></label>
 		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]
 		<textarea name="texte" id="texte" rows="10" cols="60"[(#CONFIG{forums_afficher_barre}|=={non}|oui) class="no_barre"]>[(#ENV{texte})]</textarea>
         [(#ENV**{config}|table_valeur{afficher_barre}|?{<p class='explication'><:info_creation_paragraphe:></p>,<p class="explication forum_saisie_texte_info"><:forum:forum_saisie_texte_info:></p>})]
-	</li>
+	</div>
 })]
-	</ul></fieldset>
+	</div></fieldset>
   
 [(#CONFIG{forums_urlref}|!={non}|?{
-	<ul><li class='fieldset'>
+	<div class="editer-groupe"><div class='fieldset'>
   <fieldset>
   	<legend><:forum:forum_lien_hyper:></legend>
   	<p class='explication'><:forum:forum_page_url:></p>
-  	<ul>
-  	<li class='editer saisie_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site}|oui)erreur]'>
+  	<div class="editer-groupe">
+  	<div class='editer saisie_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site}|oui)erreur]'>
         <label for="nom_site"><:forum:forum_titre:></label>
       	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_site})</span>]
       	<input type="text" class="text" name="nom_site" id="nom_site" size="40" value="[(#ENV{nom_site})]" />
-    </li>
-  	<li class='editer saisie_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]'>
+    </div>
+  	<div class='editer saisie_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]'>
       <label for="url_site"><:forum:forum_lien_hyper:></label>
     	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>]
     	<input type="text" class="text url" name="url_site" id="url_site" style="text-align: left;" dir="ltr" size="40" value="[(#ENV{url_site})]" autocapitalize="off" autocorrect="off" />
-    </li>
-    </ul>
-  </fieldset>    
-  </li>
-  </ul>
+    </div>
+    </div>
+  </fieldset>
+  </div>
+  </div>
 })]  
 
 [
 	<fieldset>
 	<legend><:medias:bouton_ajouter_document:></legend>
-	<ul>
-	<li class='editer saisie_document_forum[ (#ENV**{erreurs}|table_valeur{document_forum}|oui)erreur]'>
+	<div class="editer-groupe">
+	<div class='editer saisie_document_forum[ (#ENV**{erreurs}|table_valeur{document_forum}|oui)erreur]'>
 		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{document_forum})</span>]
 		<input type="hidden" name="cle_ajouter_document" value="(#ENV{cle_ajouter_document})" />
 		[<div id="ajouter_document_up">(#ENV{ajouter_document})
@@ -105,22 +100,12 @@
 		<:lien_supprimer:></label>
 		</div>]
 		<div>
-		[<label for="ajouter_document">(#ENV{formats_documents_forum}|join{', '})</label>]
+		[<label for="ajouter_document"><:forum:extensions_autorisees:> (#ENV{formats_documents_forum}|is_array|?{#ENV{formats_documents_forum}|join{', '},#ENV{formats_documents_forum}})</label>]
 		<input class='file' type="file" name="ajouter_document" id="ajouter_document"[
-		accept="(#ENV{formats_documents_forum}|join{','})"] />
+		accept="(#ENV{formats_documents_forum}|is_array|?{#ENV{formats_documents_forum}|join{', '},''})"] />
 		</div>
-
-		<script type='text/javascript'>/*<!\[CDATA\[*/
-		if (window.jQuery) jQuery(function(){
-			jQuery('#ajouter_document_up')
-			.next().hide()
-			.prev().find(':checkbox').bind('change', function(){
-				jQuery('#ajouter_document_up').hide().next().show();
-			});
-		});
-		/*\]\]>*/</script>
-	</li>
-	</ul></fieldset>
+	</div>
+	</div></fieldset>
 ]
 
 	[(#REM) Piege a robots spammeurs, dont on change le nom a chaque fois,
@@ -134,8 +119,8 @@
 		<input type="text" class="text" name="nobot" id="nobot_forum" value="#ENV{nobot}" size="10" />
 	</p>
 	]
-  <p class="boutons"><input type="submit" class="submit" value="<:forum:forum_voir_avant:>" /></p> 
-]
+	<p class="boutons"><input type="submit" class="submit" name="previsualiser_message" value="<:forum:forum_voir_avant:>" />[
+	(#ENV{forcer_previsu}|=={non}|et{#ENV*{erreurs}|table_valeur{previsu}|non}|oui)<input type="submit" class="submit" name="envoyer_message" value="<:forum:forum_envoyer:>" />]</p>
 </div>
 </form>
 

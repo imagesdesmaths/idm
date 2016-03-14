@@ -47,7 +47,7 @@
 				<td class="intervalle">[(#COMPATIBILITE_SPIP|svp_afficher_intervalle{SPIP}|sinon{--})]</td>
 				<td class="numero">[(#_liste_paquets:VERSION)]</td>
 				<td class="lien">
-					<a class="mediabox boxIframe boxWidth-800px boxHeight-600px"[ href="(#URL_PAGE{xml,url=#URL_ARCHIVES|concat{/}|concat{#NOM_ARCHIVE|basename{.zip}}|concat{.xml}})"] title="<:svp:bulle_afficher_xml_plugin:>">
+					<a class="mediabox boxIframe boxWidth-800px boxHeight-600px"[ href="(#URL_PAGE{paquet_xml,id_paquet=#ID_PAQUET})"] title="<:svp:bulle_afficher_xml_plugin:>">
 						[(#CHEMIN_IMAGE{plugin-16.png}|balise_img{'', icone})]
 					</a>
 				</td>

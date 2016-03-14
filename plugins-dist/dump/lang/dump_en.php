@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/dump?lang_cible=en
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -17,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'confirmer_ecraser_base' => 'Yes, I want to overwrite my database with the backup',
 	'confirmer_ecraser_tables_selection' => 'Yes, I want to overwrite the selected tables with the backup',
+	'confirmer_supprimer_sauvegarde' => 'Do you really want to delete this backup?',
 
 	// D
 	'details_sauvegarde' => 'Details of the backup:',

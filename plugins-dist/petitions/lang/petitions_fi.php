@@ -3,9 +3,14 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=fi
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// B
+	'bouton_radio_supprimer_petition' => 'Poista vetoomus',
 
 	// F
 	'form_pet_adresse_site' => 'Sivustosi URL-osoite', # MODIF

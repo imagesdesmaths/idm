@@ -40,9 +40,9 @@
 		]
 	]
 	[<div class='id_rubrique'>(#GET{textes}|table_valeur{id_rubrique})</div>]
-	[<h4 class='surtitre'>(#GET{textes}|table_valeur{surtitre})</h4>]
-	<h1>[(#INFO_STATUT{#OBJET,#ID_OBJET}|puce_statut{#OBJET}) ][(#GET{textes}|table_valeur{titre}|sinon{<:info_sans_titre:>})]</h1>
-	[<h2 class='soustitre'>(#GET{textes}|table_valeur{soustitre})</h2>]
+	[<h4 class='surtitre'>(#GET{textes}|table_valeur{surtitre}|interdire_scripts)</h4>]
+	<h1>[(#INFO_STATUT{#OBJET,#ID_OBJET}|puce_statut{#OBJET}) ][(#GET{textes}|table_valeur{titre}|sinon{<:info_sans_titre:>}|interdire_scripts)]</h1>
+	[<h2 class='soustitre'>(#GET{textes}|table_valeur{soustitre}|interdire_scripts)</h2>]
 
 	<div class="nettoyeur"></div>
 	<div id="wysiwyg" class="revision">

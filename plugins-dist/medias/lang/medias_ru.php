@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/medias?lang_cible=ru
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -22,11 +24,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_ajouter_image_document' => 'Добавить изображение или документ',
 	'bouton_attacher_document' => 'Добавить',
 	'bouton_copier_local' => 'Добавить на сайт',
-	'bouton_download_depuis' => 'добавить файлы с:',
-	'bouton_download_local' => 'моего компьютера',
-	'bouton_download_par_ftp' => 'сервера',
+	'bouton_download_depuis' => 'добавить файлы:',
+	'bouton_download_local' => 'с моего компьютера',
+	'bouton_download_par_ftp' => 'с сервера',
 	'bouton_download_par_mediatheque' => 'из добавленных',
-	'bouton_download_sur_le_web' => 'интернета',
+	'bouton_download_sur_le_web' => 'из интернета',
 	'bouton_enlever_document' => 'Убрать',
 	'bouton_enlever_supprimer_document' => 'Удалить',
 	'bouton_enlever_supprimer_document_confirmation' => 'Вы уверенны, что хотите удалить документ (файл)?',
@@ -71,9 +73,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_aucun_fichier' => 'Файл не найден',
 	'erreur_chemin_distant' => 'Файл @nom@ с другого сайт не найден',
 	'erreur_chemin_ftp' => 'Не удалось найти указанный файл на сервере',
-	'erreur_copie_fichier' => 'Не возможно скопировать файл @nom@ в указанную папку',
+	'erreur_copie_fichier' => 'Невозможно скопировать файл @nom@ в указанную папку',
 	'erreur_dossier_tmp_manquant' => 'Не удается создать временную папку для загрузки файлов',
-	'erreur_ecriture_fichier' => 'Ошибка при попытка записать на диск',
+	'erreur_ecriture_fichier' => 'Ошибка при попытке записать на диск',
 	'erreur_format_fichier_image' => 'Формат файла @nom@ не похож на формат изображения',
 	'erreur_indiquez_un_fichier' => 'Укажите файл!',
 	'erreur_insertion_document_base' => 'Не получается добавить документ @fichier@ в базу данных',
@@ -87,7 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fichier_distant' => 'Файл на другом сайте',
 	'fichier_manquant' => 'Файл не найден',
 	'fichier_modifie' => 'Файл был изменен. Нажмите кнопку Сохранить.',
-	'format_date_incorrect' => 'Не правильная дата или время',
+	'format_date_incorrect' => 'Неправильная дата или время',
 
 	// I
 	'icone_creer_document' => 'Добавить документ (файл)',
@@ -95,7 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'image_tourner_180' => 'Повернуть на 180°',
 	'image_tourner_droite' => 'Повернуть на 90° вправо',
 	'image_tourner_gauche' => 'Поворот на 90° влево',
-	'info_doc_max_poids' => 'Размер файла должен быль не больше @maxi@ (текущий размер @actuel@).',
+	'info_doc_max_poids' => 'Размер файла должен быть не больше @maxi@ (текущий размер @actuel@).',
 	'info_document' => 'Документ',
 	'info_document_indisponible' => 'Этот документ недоступен',
 	'info_documents' => 'Файлы',
@@ -104,16 +106,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_heure' => 'Время',
 	'info_illustrations' => 'Фотографии в материале',
 	'info_image_max_poids' => 'Размер файла изображения должен быть меньше @maxi@ (сейчас @actuel@).',
+	'info_image_max_taille' => 'Размер файла изображения должен быть меньше @maxi@ (сейчас @actuel@).',
 	'info_inclusion_directe' => 'Прямое включение:',
 	'info_inclusion_vignette' => 'Добавить миниатюру:',
 	'info_installer_tous_documents' => 'Добавить все файлы (документы)',
 	'info_largeur' => 'Ширина',
-	'info_logo_max_taille' => 'Логотипы должны быть меньше чем @maxi@ (размер этого файла @actuel@).',
+	'info_logo_max_taille' => 'Логотипы должны быть меньше, чем @maxi@ (размер этого файла @actuel@).',
+	'info_mode' => 'Режим (Mode)',
 	'info_modifier_document' => 'Изменить файл',
 	'info_portfolio' => 'Галерея фотографий и документов',
 	'info_referencer_doc_distant' => 'Ссылка на файл (URL):',
 	'info_sans_vignette' => 'Нет миниатюры',
 	'info_statut_document' => 'Статус документа:',
+	'info_taille' => 'Вес',
 	'info_telecharger' => 'Загрузить с вашего компьютера:',
 	'infos' => 'Техническая информация',
 	'item_autoriser_selectionner_date_en_ligne' => 'Разрешить изменять дату добавления документа',
@@ -156,7 +161,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'par_titre' => 'Название',
 
 	// T
-	'texte_documents_joints' => 'Вы можете включить возможность добавлять файлы и документы (аудио, видео, офисные файлы) к ко всем материалам сайта.',
+	'texte_documents_joints' => 'Вы можете включить возможность добавлять файлы и документы (аудио, видео, офисные файлы) ко всем материалам сайта.',
 	'texte_documents_joints_2' => 'Укажите, к каким материалам можно добавлять документы.',
 	'titre_documents_joints' => 'Добавление документов (файлов) к материалам',
 	'titre_page_documents_edit' => 'Изменить документ: @titre@',
@@ -172,7 +177,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'un_video' => '1 видео',
 	'une_utilisation' => 'Используется 1 раз',
 	'upload_fichier_zip' => 'ZIP файл',
-	'upload_fichier_zip_texte' => 'Вы ходите добавить файл с архивом (zip).',
+	'upload_fichier_zip_texte' => 'Вы хотите добавить файл с архивом (zip).',
 	'upload_fichier_zip_texte2' => 'Этот файл может быть:',
 	'upload_info_mode_document' => 'Добавить в галерею',
 	'upload_info_mode_image' => 'Убрать из галереи',

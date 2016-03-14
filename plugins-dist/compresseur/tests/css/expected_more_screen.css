@@ -52,7 +52,7 @@ th{background-color:#FADD31;background-repeat:repeat-x;color:#68685E;font-size:1
 .forumline{background:#FFF}
 .gensmall{font-size:10px}
 .h1-font{color:#069;display:inline;font:bold 13px Verdana,Arial,Helvetica,sans-serif;margin:.3em;text-decoration:none}
-.h2-font{display:inline;font:11px Verdana,Arial,Helvetica,sans-serif}
+.h2-font{display:inline;font-family:Verdana,Arial,Helvetica,sans-serif;font-size:11px}
 .height1{height:1px}
 .height22{height:22px}
 .height25{height:25px}
@@ -88,4 +88,8 @@ th{background-color:#FADD31;background-repeat:repeat-x;color:#68685E;font-size:1
 }
 @media print {
 .degrade{background:none}
+}
+@keyframes NAME-YOUR-ANIMATION {
+0%{opacity:0}
+100%{opacity:1}
 }

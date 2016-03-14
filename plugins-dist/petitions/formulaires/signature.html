@@ -13,33 +13,33 @@
 	</fieldset>]
 	<fieldset>
 		<legend><:form_forum_identifiants:></legend>
-		<ul>
-			<li class='editer saisie_nom_email[ (#ENV*{erreurs}|table_valeur{session_nom}|oui)erreur] obligatoire'>
+		<div class="editer-groupe">
+			<div class='editer saisie_nom_email[ (#ENV*{erreurs}|table_valeur{session_nom}|oui)erreur] obligatoire'>
 				<label for="session_nom"><:petitions:form_pet_votre_nom:> <:info_obligatoire_02:></label>
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{session_nom})</span>]
 				<input type="text" class="text" name="session_nom" id="session_nom" value="#ENV{session_nom}" size="30" />
-			</li>
-			<li class='editer saisie_adresse_email[ (#ENV*{erreurs}|table_valeur{session_email}|oui)erreur] obligatoire'>
+			</div>
+			<div class='editer saisie_adresse_email[ (#ENV*{erreurs}|table_valeur{session_email}|oui)erreur] obligatoire'>
 				<label for="session_email"><:petitions:form_pet_votre_email:> <:info_obligatoire_02:></label>
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{session_email})</span>]
 				<input type="text" class="text" name="session_email" id="session_email" value="#ENV{session_email}" size="30" />
-			</li>
-		</ul>
+			</div>
+		</div>
 	</fieldset>
 	<fieldset>
 		<legend><:info_lien_hypertexte:></legend>
-		<ul>
-			<li class='editer saisie_signature_nom_site[ (#ENV*{erreurs}|table_valeur{signature_nom_site}|oui)erreur][(#ENV{site_obli})obligatoire]'>
+		<div class="editer-groupe">
+			<div class='editer saisie_signature_nom_site[ (#ENV*{erreurs}|table_valeur{signature_nom_site}|oui)erreur][(#ENV{site_obli})obligatoire]'>
 				<label for="signature_nom_site"><:petitions:form_pet_nom_site2:>[(#ENV{site_obli}) <:info_obligatoire_02:>]</label>
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{signature_nom_site})</span>]
 				<input type="text" class="text" name="signature_nom_site" id="signature_nom_site" value="#ENV{signature_nom_site}" size="30" />
-			</li>
-				<li class='editer saisie_signature_url_site[ (#ENV*{erreurs}|table_valeur{signature_url_site}|oui)erreur][(#ENV{site_obli})obligatoire]'>
+			</div>
+				<div class='editer saisie_signature_url_site[ (#ENV*{erreurs}|table_valeur{signature_url_site}|oui)erreur][(#ENV{site_obli})obligatoire]'>
 				<label for="signature_url_site"><:petitions:form_pet_adresse_site:>[(#ENV{site_obli}) <:info_obligatoire_02:>]</label>
 				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{signature_url_site})</span>]
 				<input type="text" class="text" name="signature_url_site" id="signature_url_site" value="#ENV{signature_url_site}" size="30" />
-			</li>
-		</ul>
+			</div>
+		</div>
 	</fieldset>
 
 	[(#REM) Piege a robots spammeurs ]
@@ -51,12 +51,12 @@
 	[(#ENV{_message})
 	<fieldset>
 		<legend><:petitions:form_pet_message_commentaire:></legend>
-		<ul>
-			<li class='editer saisie_message'>
+		<div class="editer-groupe">
+			<div class='editer saisie_message'>
 				<label for="message"><:petitions:info_texte_message:></label>
 				<textarea name="message" id="message" rows="6" cols="60">#ENV{message}</textarea>
-			</li>
-		</ul>
+			</div>
+		</div>
 	</fieldset>]
 
 	<p class="boutons"><input type="submit" class="submit" value="<:bouton_valider:>" /></p>

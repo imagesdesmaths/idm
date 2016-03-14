@@ -46,14 +46,15 @@
 	width:22px; height:5px;
 	margin-left:auto;
 	margin-right:auto;
-	background-image:url(images/handle.png);
+	background-image:url(img/handle.png);
 	cursor:ns-resize;
 }
 
 /***************************/
 /* tabs */
 .markItUp .markItUpTabs {
-	text-align:right; 
+	font-size:12px;
+	text-align:right;
 	padding:1px 1px 0;
 	margin-bottom: -2px;
 	top: 6px;
@@ -73,8 +74,8 @@
 	background:#EEE;
 	border-radius: 5px 5px 0 0;
 }
-.markItUp .markItUpTabs a.on { background: #fff; border-bottom: 1px solid #fff; box-shadow: 1px 1px #eee inset; }
-.markItUp .markItUpTabs a:hover {background:#fff;}
+.markItUp .markItUpTabs a.on { background-color: #fff; border-bottom: 1px solid #fff; box-shadow: 1px 1px #eee inset; }
+.markItUp .markItUpTabs a:hover {background-color:#fff;}
 
 /***************************/
 /* previsu */
@@ -86,7 +87,7 @@
 	padding:1em;
 	/* decaler de la hauteur de .markItUpTabs */
 	position:relative;
-	top:2.2em; 
+	top:31px; 
 }
 
 /* correction des styles spip_formulaires appliques par defaut (grr) */
@@ -142,7 +143,7 @@
 }
 
 .markItUp .markItUpHeader ul .markItUpDropMenu {
-	/*background:inherit url(images/menu.png) no-repeat 100% 80%;
+	/*background:inherit url(img/menu.png) no-repeat 100% 80%;
 	padding-right:10px;*/
 	
 }
@@ -162,7 +163,7 @@
 	position:absolute;
 	top: 29px; left:-1px;	
 	width:150px;
-	z-index:2;
+	z-index:3;
 	padding-top:2px;
 }
 /* le padding rompt la continuite du hover sous IE7&8 */
@@ -172,7 +173,7 @@
 	float:left;
 }
 .markItUp .markItUpHeader ul ul .markItUpDropMenu {
-	background:#F5F5F5 url(images/submenu.png) no-repeat 50% 50%;
+	background:#F5F5F5 url(img/submenu.png) no-repeat 50% 50%;
 }
 .markItUp .markItUpHeader ul .separateur {
 	border-left: 1px solid #d2d2d2;
@@ -195,6 +196,75 @@
 	background-repeat:no-repeat;
 	width:16px; height:16px;
 	text-indent:-10000px;
+}
+
+/******************************************************************************/
+/* Fullscreen */
+.markItUp .markItUpContainer.fullscreen {
+    position: fixed;
+    top:0;
+    left:0;
+    height: 100%;
+    width: 100%;
+    background: #DDD;
+	  z-index:1002; /* par dessus le bandeau nav */
+}
+.markItUp .fullscreen .markItUpHeader{
+    position: absolute;
+    top:0;
+    right: 50%;
+    width: 50%;
+    max-width: 40em;
+    display: block !important;
+}
+.markItUp .fullscreen .markItUpEditor{
+    position: absolute !important;
+    top:0;
+    right: 50%;
+    width: 50%;
+    max-width: 40em;
+    height: 95% !important;
+    margin-top: 30px;
+    display: block !important;
+}
+.markItUp .fullscreen .markItUpPreview{
+    position: absolute;
+    top:0;
+    left: 50%;
+    width: 50%;
+    max-width: 40em;
+    height: 95% !important;
+    margin-top: 30px;
+    display: block !important;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.markItUp .fullscreen .markItUpTabs {
+    position: absolute;
+    left: 50%;
+    width: 50%;
+    max-width: 40em;
+}
+.markItUp .fullscreen .markItUpTabs .previsuVoir,
+.markItUp .fullscreen .markItUpTabs .previsuEditer,
+.markItUp .fullscreen .markItUpFooter {
+    display: none;
+}
+.markItUp .markItUpTabs .fullscreen {
+	text-indent: -1000em;
+	text-align: left;
+	background-image: url(img/arrow_out.png) !important;
+	background-position:center center !important;
+	background-repeat:no-repeat !important;
+	-moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+	width: 16px;
+}
+.markItUp .fullscreen .markItUpTabs .fullscreen {
+	background-image: url(img/arrow_in.png) !important;
 }
 
 /* end */

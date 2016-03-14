@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=pl
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -504,7 +506,6 @@ serwisie "@nom_site_spip@" (@adresse_login@):',
 	'login_retour_public' => 'Powrót do strony publicznej',
 	'login_retour_site' => 'Powrót do strony publicznej',
 	'login_retoursitepublic' => 'Powrót do strony publicznej',
-	'login_sans_cookiie' => 'Identyfikacja bez cookie',
 	'login_sinscrire' => 'rejestracja',
 	'login_test_navigateur' => 'test przeglądarki/łącz ponownie',
 	'login_verifiez_navigateur' => '(Sprawdź czy Twoja przeglądarka nie zapamiętała hasła...)',

@@ -27,7 +27,11 @@
 <br class="clear" />
 <script type="text/javascript">/*<![CDATA[*/
 if (window.jQuery){ jQuery(function(){
-	jQuery(window).unload(function() { alert('<:forum:forum_attention_message_non_poste|texte_script:>');jQuery(window).unbind();});
-	jQuery(window).on('beforeunload', function(){		jQuery(window).unbind();return '<:forum:forum_attention_message_non_poste|texte_script:>';	});
+	var confirm_quit = true;
+	jQuery(window).unload(function() { if (confirm_quit) alert('<:forum:forum_attention_message_non_poste|texte_script:>');jQuery(window).unbind();});
+	jQuery(window).on('beforeunload', function(e){ jQuery(window).unbind();if (!confirm_quit) return;e.returnValue='<:forum:forum_attention_message_non_poste|texte_script:>';return e.returnValue;	});
+	jQuery('fieldset.previsu').closest('form').next('form').bind('submit',function(){
+		confirm_quit=false;
+	});
 });}
 /*]]>*/</script>

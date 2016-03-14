@@ -6,8 +6,8 @@
 
 	<form action="#ENV{action}#formulaire_configurer_contenu_forums" method="post"><div>
 		[(#ACTION_FORMULAIRE{#ENV{action}})]
-		<ul>
-			<li class='editer long_label configurer_objets_versions[ (#ENV**{erreurs}|table_valeur{objets_versions}|oui)erreur]'>
+		<div class="editer-groupe">
+			<div class='editer long_label configurer_objets_versions[ (#ENV**{erreurs}|table_valeur{objets_versions}|oui)erreur]'>
 				<label><:revisions:label_config_revisions_objets:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{objets_versions})</span>]
 				#SET{name,objets_versions}
@@ -19,8 +19,8 @@
 				</div>
 				]</BOUCLE_objets>
 				<input type="hidden" name="#ENV{name}[]" value="" />
-			</li>
-		</ul>
+			</div>
+		</div>
 		<p class='boutons'><span class="image_loading"></span><input class='submit' type="submit" name="ok" value="<:bouton_enregistrer:>"/></p>
 	</div></form>
 

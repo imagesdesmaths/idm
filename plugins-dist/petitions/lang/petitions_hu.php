@@ -3,9 +3,17 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=hu
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// B
+	'bouton_radio_activer_petition' => 'Az aláírásgyűjtés aktiválása',
+	'bouton_radio_pas_petition' => 'Nincs aláírásgyűjtés',
+	'bouton_radio_petition_activee' => 'Aláírásgyűjtés aktiválása',
+	'bouton_radio_supprimer_petition' => 'Törölni az aláírásgyűjtést',
 
 	// F
 	'form_pet_adresse_site' => 'Honlapjának címe', # MODIF

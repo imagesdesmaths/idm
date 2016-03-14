@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=ast
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -503,7 +505,6 @@ sitiu "@nom_site_spip@" (@adresse_login@):',
 	'login_retour_public' => 'Tornar pal sitiu públicu',
 	'login_retour_site' => 'Tornar pal sitiu públicu',
 	'login_retoursitepublic' => 'tornar pal sitiu públicu',
-	'login_sans_cookiie' => 'Identificación ensin cookie',
 	'login_securise' => 'Conexón asegurada',
 	'login_sinscrire' => 'inscribise',
 	'login_test_navigateur' => 'preba de ñavegador/reconexón',

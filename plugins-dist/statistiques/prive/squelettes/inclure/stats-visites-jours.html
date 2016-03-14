@@ -7,11 +7,11 @@
 		<a href="[(#URL_PAGE{transmettre,[(#VAL{statistiques}|param_low_sec{#GET{args}, '', 'transmettre'})]})]" class="noajax"><:statistiques:csv:></a>
 	</span>
 	|
-	[<span class="duree">(#GET{duree}) <:info_jours:></span>] |
-	<a href="[(#SELF|parametre_url{duree,#GET{duree}|duree_zoom{moins}})]"
-		 class="ajax">[(#CHEMIN_IMAGE{zoomout-24.png}|balise_img{<:statistiques:info_zoom:> -})]</a>
-	<a href="[(#SELF|parametre_url{duree,#GET{duree}|duree_zoom{plus}})]"
-		 class="ajax">[(#CHEMIN_IMAGE{zoomin-24.png}|balise_img{<:statistiques:info_zoom:> +})]</a>
+	[<span class="duree">(#GET{duree}) <:info_jours:></span>]
+	[(#ENV{duree,0}|non)<a href="[(#SELF|parametre_url{duree,-1})]" title="<:lien_tout_afficher:>">+</a>]
+	|
+	<a href="#" class="noajax" onclick="jQuery('.statistiques_visites_quotidiennes .visites').show(); jQuery('.statistiques_visites_quotidiennes .graphResult-wrap, .statistiques_visites_quotidiennes .graphInfo').hide(); return false;"><:statistiques:info_tableaux:></a> |
+	<a href="#" class="noajax" onclick="jQuery('.statistiques_visites_quotidiennes .visites').hide(); jQuery('.statistiques_visites_quotidiennes .graphResult-wrap, .statistiques_visites_quotidiennes .graphInfo').show(); return false;"><:statistiques:info_graphiques:></a>
 </div>
 #SET{max,0}
 #SET{moy,0}
@@ -32,12 +32,12 @@
 			</tr>
 			<tr class="even">
 				<th><a href="#URL_ECRIRE{stats_referers,jour=jour}"
-								title="<:info_moyenne|trim{':'}|trim|attribut_html:>"><:info_aujourdhui|trim{':'}|trim|ucfirst:></a></th>
+								title="<:statistiques:titre_liens_entrants|trim{':'}|trim|attribut_html:>: <:info_aujourdhui|trim{':'}|trim|attribut_html:>"><:info_aujourdhui|trim{':'}|trim|ucfirst:></a></th>
 				<td class='num'>#GET{last}</td>
 			</tr>
 			<tr class="even">
 				<th><a href="#URL_ECRIRE{stats_referers,jour=veille}"
-								title="<:info_moyenne|trim{':'}|trim|attribut_html:>"><:info_hier|trim{':'}|trim|ucfirst:></a></th>
+								title="<:statistiques:titre_liens_entrants|trim{':'}|trim|attribut_html:>: <:info_hier|trim{':'}|trim|attribut_html:>"><:info_hier|trim{':'}|trim|ucfirst:></a></th>
 				<td class='num'>#GET{lastlast}</td>
 			</tr>
 			<BOUCLE_art(ARTICLES){id_article}{statut?}>

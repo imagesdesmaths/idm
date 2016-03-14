@@ -7,13 +7,13 @@
 <!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
 <head>
-<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
-<title>[(#TITRE|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-[<meta name="description" content="(#DESCRIPTIF|couper{150}|attribut_html)" />]
-[<link rel="canonical" href="(#URL_MOT|url_absolue)" />]
-<INCLURE{fond=inclure/head} />
-[(#REM) Lien vers le flux RSS des articles du mot cle ]
-<link rel="alternate" type="application/rss+xml"[ title="(#TITRE|attribut_html)"] href="[(#URL_PAGE{backend}|parametre_url{id_mot,#ID_MOT})]" />
+	<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+	<title>[(#TITRE|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#DESCRIPTIF|couper{150}|attribut_html)" />]
+	[<link rel="canonical" href="(#URL_MOT|url_absolue)" />]
+	<INCLURE{fond=inclure/head} />
+	[(#REM) Lien vers le flux RSS des articles du mot cle ]
+	<link rel="alternate" type="application/rss+xml"[ title="(#TITRE|attribut_html)"] href="[(#URL_PAGE{backend}|parametre_url{id_mot,#ID_MOT})]" />
 </head>
 
 <body class="pas_surlignable page_mot">
@@ -22,15 +22,15 @@
 	<INCLURE{fond=inclure/header} />
 	<INCLURE{fond=inclure/nav,env} />
 
-    <div class="main">
+	<div class="main">
 		[(#REM) Contenu principal : contenu du mot-cle ]
 		<div class="wrapper">
 		<div class="content" id="content">
 			<p class="arbo"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:mots_clefs:><BOUCLE_ariane(GROUPES_MOTS){id_groupe}> &gt; [(#TITRE|couper{80})]</BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
 	
 			<div class="cartouche">
-				[(#LOGO_MOT|image_reduire{40,*})]
-				<h1 class="#EDIT{titre}">#TITRE</h1>
+				[(#LOGO_MOT|image_reduire{224,*})]
+				<h1 class="#EDIT{titre} surlignable">#TITRE</h1>
 			</div>
 	
 			[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
@@ -42,9 +42,10 @@
 				<h2><:articles:></h2>
 				<ul>
 					<BOUCLE_articles(ARTICLES) {id_mot} {!par popularite} {pagination 10}>
-					<li>
-						<strong><a href="#URL_ARTICLE">[(#LOGO_ARTICLE_RUBRIQUE|image_reduire{40,*}) ]#TITRE</a></strong>
+					<li dir="#LANG_DIR" class="hentry clearfix text-#LANG_LEFT">
+						<strong><a href="#URL_ARTICLE">[(#LOGO_ARTICLE_RUBRIQUE|image_reduire{150,*}) ]#TITRE</a></strong>
 						<br /><small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS|supprimer_tags)]</small>
+						[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION)</div>]
 					</li>
 					</BOUCLE_articles>
 				</ul>

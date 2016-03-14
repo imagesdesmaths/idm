@@ -3,16 +3,32 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+/**
+ * Gestion de l'action debloquer_edition
+ *
+ * @package SPIP\Core\Edition
+ */
 
-// http://doc.spip.org/@action_instituer_collaboration_dist
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
+
+/**
+ * Lever les blocages d'édition pour l'utilisateur courant
+ *
+ * @uses debloquer_tous()
+ * @uses debloquer_edition()
+ *
+ * @global array visiteur_session
+ * @return void
+ */
 function action_debloquer_edition_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -22,12 +38,10 @@ function action_debloquer_edition_dist() {
 		include_spip('inc/drapeau_edition');
 		if ($arg == 'tous') {
 			debloquer_tous($GLOBALS['visiteur_session']['id_auteur']);
-		}
-		else {
-			$arg = explode("-",$arg);
-			list($objet,$id_objet) = $arg;
+		} else {
+			$arg = explode("-", $arg);
+			list($objet, $id_objet) = $arg;
 			debloquer_edition($GLOBALS['visiteur_session']['id_auteur'], $id_objet, $objet);
 		}
 	}
 }
-?>

@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/medias?lang_cible=lb
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -104,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_heure' => 'Zäit',
 	'info_illustrations' => 'Illustratiounen',
 	'info_image_max_poids' => 'D’Maximalgréisst vun de Biller ass @maxi@ (dëse Fichier huet @actuel@).',
+	'info_image_max_taille' => 'D’Maximalgréisst vun de Biller ass @maxi@ (dëse Fichier huet @actuel@).',
 	'info_inclusion_directe' => 'Direkt Abannung:',
 	'info_inclusion_vignette' => 'Ubannen vun der Vignette:',
 	'info_installer_tous_documents' => 'All d’Dokumenter eroplueden',

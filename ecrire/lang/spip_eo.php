@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=eo
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -110,8 +112,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_heures_minutes_court' => '@h@h@m@',
 	'date_fmt_jour' => '@nomjour@ la @jour@a',
 	'date_fmt_jour_heure' => '@jour@ je la @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'la @jour@ de @heure_debut@ ĝis @heure_fin@',
-	'date_fmt_jour_heure_debut_fin_abbr' => 'la @dtstart@@jour@a de @heure_debut@@dtabbr@ ĝis @dtstart@@heure_fin@@dtend@',
+	'date_fmt_jour_heure_debut_fin' => 'la @jour@ de @heure_debut@ ĝis @heure_fin@', # MODIF
+	'date_fmt_jour_heure_debut_fin_abbr' => 'la @dtstart@@jour@a de @heure_debut@@dtabbr@ ĝis @dtstart@@heure_fin@@dtend@', # MODIF
 	'date_fmt_jour_mois' => '@jour@a @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@a @nommois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
@@ -529,7 +531,6 @@ aŭ kontaktu vian retgastiganton.</span>',
 	'login_retour_public' => 'Reen al la publika spaco',
 	'login_retour_site' => 'Reen al la publika spaco',
 	'login_retoursitepublic' => 'reen al la publika spaco',
-	'login_sans_cookiie' => 'Ensaluto sen kuketo',
 	'login_securise' => 'Sekura salutnomo',
 	'login_sinscrire' => 'registriĝi',
 	'login_test_navigateur' => 'testo retumilo/rekonektiĝo',
@@ -593,7 +594,7 @@ kaj ensaluti.
 	'pass_nouveau_pass' => 'Nova pasvorto',
 	'pass_ok' => 'JES',
 	'pass_oubli_mot' => 'Pasvorto-forgeso',
-	'pass_procedure_changer' => 'Por ŝanĝi vian pasvorton, ni unue devas kontroli vian identecon. Por tio, specifu al ni la asociitan retpoŝtadreson el via konto.',
+	'pass_procedure_changer' => 'Por ŝanĝi vian pasvorton, ni unue devas kontroli vian identecon. Por tio, specifu al ni la asociitan retpoŝtadreson el via konto.', # MODIF
 	'pass_quitter_fenetre' => 'Forlasi tiun fenestron',
 	'pass_rappel_login' => 'Memoru : via ensalutilo (salutnomo) estas « @login@ ».',
 	'pass_recevoir_mail' => 'Vi ricevos retmesaĝon indikantan al vi kiel retrovi vian aliron al la retejo.',

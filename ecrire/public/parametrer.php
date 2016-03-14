@@ -3,14 +3,16 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/lang');
 
@@ -25,8 +27,9 @@ if (@is_readable(_CACHE_PLUGINS_FCT)) {
 	// chargement optimise precompile
 	include_once(_CACHE_PLUGINS_FCT);
 }
-if (test_espace_prive ())
+if (test_espace_prive()) {
 	include_spip('inc/filtres_ecrire');
+}
 
 # Determine le squelette associe a une requete 
 # et l'applique sur le contexte, le nom du cache et le serveur
@@ -41,25 +44,31 @@ if (test_espace_prive ())
 
 # En cas d'erreur process_ins est absent et texte est un tableau de 2 chaines
 
-// http://doc.spip.org/@public_parametrer_dist
-function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
-	static $composer,$styliser,$notes=null;
+// http://code.spip.net/@public_parametrer_dist
+function public_parametrer_dist($fond, $contexte = '', $cache = '', $connect = '') {
+	static $composer, $styliser, $notes = null;
 	$page = tester_redirection($fond, $contexte, $connect);
-	if ($page) return $page;
+	if ($page) {
+		return $page;
+	}
 
-	if (isset($contexte['lang']))
+	if (isset($contexte['lang'])) {
 		$lang = $contexte['lang'];
-	elseif (!isset($lang))
+	} elseif (!isset($lang)) {
 		$lang = $GLOBALS['meta']['langue_site'];
+	}
 
-	$select = ((!isset($GLOBALS['forcer_lang']) OR !$GLOBALS['forcer_lang']) AND $lang <> $GLOBALS['spip_lang']);
-	if ($select) $select = lang_select($lang);
+	$select = ((!isset($GLOBALS['forcer_lang']) or !$GLOBALS['forcer_lang']) and $lang <> $GLOBALS['spip_lang']);
+	if ($select) {
+		$select = lang_select($lang);
+	}
 
 	$debug = (defined('_VAR_MODE') && _VAR_MODE == 'debug');
 
-	if (!$styliser)
+	if (!$styliser) {
 		$styliser = charger_fonction('styliser', 'public');
-	list($skel,$mime_type, $gram, $sourcefile) =
+	}
+	list($skel, $mime_type, $gram, $sourcefile) =
 		$styliser($fond, $contexte, $GLOBALS['spip_lang'], $connect);
 
 	if ($skel) {
@@ -74,27 +83,29 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 		// charger le squelette en specifiant les langages cibles et source
 		// au cas il faudrait le compiler (source posterieure au resultat)
 
-		if (!$composer)
+		if (!$composer) {
 			$composer = charger_fonction('composer', 'public');
+		}
 		$fonc = $composer($skel, $mime_type, $gram, $sourcefile, $connect);
-	}
-	else
+	} else {
 		$fonc = '';
+	}
 
 	if (!$fonc) { // squelette inconnu (==='') ou faux (===false)
 		$page = $fonc;
-	}
-	else {
+	} else {
 		// Preparer l'appel de la fonction principale du squelette 
 
-		spip_timer($a = 'calcul page '.rand(0,1000));
+		spip_timer($a = 'calcul page ' . rand(0, 1000));
 
 		// On cree un marqueur de notes unique lie a cette composition
 		// et on enregistre l'etat courant des globales de notes...
-		if (is_null($notes))
+		if (is_null($notes)) {
 			$notes = charger_fonction('notes', 'inc', true);
-		if ($notes)
-			$notes('','empiler');
+		}
+		if ($notes) {
+			$notes('', 'empiler');
+		}
 
 		// Rajouter d'office ces deux parametres
 		// (mais vaudrait mieux que le compilateur sache le simuler
@@ -102,80 +113,92 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 		if (!isset($contexte['date'])) {
 			$contexte['date'] = date("Y-m-d H:i:s");
 			$contexte['date_default'] = true;
-		} else $contexte['date'] = normaliser_date($contexte['date'], true);
+		} else {
+			$contexte['date'] = normaliser_date($contexte['date'], true);
+		}
 
 		if (!isset($contexte['date_redac'])) {
 			$contexte['date_redac'] = date("Y-m-d H:i:s");
 			$contexte['date_redac_default'] = true;
-		} else $contexte['date_redac'] = normaliser_date($contexte['date_redac'], true);
+		} else {
+			$contexte['date_redac'] = normaliser_date($contexte['date_redac'], true);
+		}
 
-	// Passer le nom du cache pour produire sa destruction automatique
+		// Passer le nom du cache pour produire sa destruction automatique
 		$page = $fonc(array('cache' => $cache), array($contexte));
 
-	// Restituer les globales de notes telles qu'elles etaient avant l'appel
-	// Si l'inclus n'a pas affiche ses notes, tant pis (elles *doivent*
-	// etre dans son resultat, autrement elles ne seraient pas prises en
-	// compte a chaque calcul d'un texte contenant un modele, mais seulement
-	// quand le modele serait calcule, et on aurait des resultats incoherents)
-		if ($notes)
-			$notes('','depiler');
+		// Restituer les globales de notes telles qu'elles etaient avant l'appel
+		// Si l'inclus n'a pas affiche ses notes, tant pis (elles *doivent*
+		// etre dans son resultat, autrement elles ne seraient pas prises en
+		// compte a chaque calcul d'un texte contenant un modele, mais seulement
+		// quand le modele serait calcule, et on aurait des resultats incoherents)
+		if ($notes) {
+			$notes('', 'depiler');
+		}
 
 		// reinjecter en dynamique la pile des notes
 		// si il y a des inclure dynamiques
 		// si la pile n'est pas vide
 		// la generalisation de cette injection permettrait de corriger le point juste au dessus
 		// en faisant remonter les notes a l'incluant (A tester et valider avant application)
-		if ($notes)
-			$page['notes'] = $notes('','sauver_etat');
+		if ($notes) {
+			$page['notes'] = $notes('', 'sauver_etat');
+		}
 
 		// spip_log: un joli contexte
 		$infos = array();
 		foreach (array_filter($contexte) as $var => $val) {
-			if (is_array($val)) $val = serialize($val);
-			if (strlen("$val") > 30)
-				$val = substr("$val", 0,27).'..';
-			if (strstr($val,' '))
+			if (is_array($val)) {
+				$val = serialize($val);
+			}
+			if (strlen("$val") > 30) {
+				$val = substr("$val", 0, 27) . '..';
+			}
+			if (strstr($val, ' ')) {
 				$val = "'$val'";
-			$infos[] = $var.'='.$val;
+			}
+			$infos[] = $var . '=' . $val;
 		}
 		$profile = spip_timer($a);
 		spip_log("calcul ($profile) [$skel] "
 			. join(', ', $infos)
-			.' ('.strlen($page['texte']).' octets)');
+			. ' (' . strlen($page['texte']) . ' octets)');
 
 		if ($debug) {
-		// si c'est ce que demande le debusqueur, lui passer la main
+			// si c'est ce que demande le debusqueur, lui passer la main
 			$t = strlen($page['texte']) ? $page['texte'] : " ";
 			$GLOBALS['debug_objets']['resultat'][$fonc . 'tout'] = $t;
 			$GLOBALS['debug_objets']['courant'] = $courant;
 			$GLOBALS['debug_objets']['profile'][$sourcefile] = $profile;
 			if ($GLOBALS['debug_objets']['sourcefile']
-			AND (_request('var_mode_objet') == $fonc)
-			AND (_request('var_mode_affiche') == 'resultat')) {
+				and (_request('var_mode_objet') == $fonc)
+				and (_request('var_mode_affiche') == 'resultat')
+			) {
 				erreur_squelette();
 			}
 		}
 		// Si #CACHE{} n'etait pas la, le mettre a $delais
-		if (!isset($page['entetes']['X-Spip-Cache'])){
+		if (!isset($page['entetes']['X-Spip-Cache'])) {
 			// Dans l'espace prive ou dans un modeles/ on pose un cache 0 par defaut
-			// si aucun #CACHE{} spécifié
+			// si aucun #CACHE{} spÃ©cifiÃ©
 			// le contexte implicite qui conditionne le cache assure qu'on retombe pas sur le meme
 			// entre public et prive
-			if (test_espace_prive() OR strncmp($fond,'modeles/',8)==0)
+			if (test_espace_prive() or strncmp($fond, 'modeles/', 8) == 0) {
 				$page['entetes']['X-Spip-Cache'] = 0;
-			else
-				$page['entetes']['X-Spip-Cache'] = isset($GLOBALS['delais'])?$GLOBALS['delais']:36000;
+			} else {
+				$page['entetes']['X-Spip-Cache'] = isset($GLOBALS['delais']) ? $GLOBALS['delais'] : 36000;
+			}
 		}
 
 		$page['contexte'] = $contexte;
-	  
+
 		// faire remonter le fichier source
 		static $js_inclus = false;
-		if (defined('_VAR_INCLURE') AND _VAR_INCLURE){
+		if (defined('_VAR_INCLURE') and _VAR_INCLURE) {
 			$page['sourcefile'] = $sourcefile;
 			$page['texte'] =
-				"<div class='inclure_blocs'><h6>".$page['sourcefile']."</h6>".$page['texte']."</div>"
-				. ($js_inclus?"":"<script type='text/javascript'>jQuery(function(){jQuery('.inclure_blocs > h6:first-child').hover(function(){jQuery(this).parent().addClass('hover')},function(){jQuery(this).parent().removeClass('hover')})});</script>");
+				"<div class='inclure_blocs'><h6>" . $page['sourcefile'] . "</h6>" . $page['texte'] . "</div>"
+				. ($js_inclus ? "" : "<script type='text/javascript'>jQuery(function(){jQuery('.inclure_blocs > h6:first-child').hover(function(){jQuery(this).parent().addClass('hover')},function(){jQuery(this).parent().removeClass('hover')})});</script>");
 			$js_inclus = true;
 		}
 
@@ -186,7 +209,9 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 		}
 	}
 
-	if ($select) lang_select();
+	if ($select) {
+		lang_select();
+	}
 
 	return $page;
 }
@@ -197,45 +222,48 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
  * avec un eventuel raccourci Spip
  * si le raccourci a un titre il sera pris comme corps du 302
  *
- * http://doc.spip.org/@tester_redirection
+ * http://code.spip.net/@tester_redirection
  *
  * @param string $fond
  * @param array $contexte
  * @param string $connect
  * @return array|bool
  */
-function tester_redirection($fond, $contexte, $connect)
-{
+function tester_redirection($fond, $contexte, $connect) {
 	if ($fond == 'article'
-	  AND $id_article = intval($contexte['id_article'])) {
+		and $id_article = intval($contexte['id_article'])
+	) {
 		include_spip('public/quete'); // pour quete_virtuel et ses dependances
 		$m = quete_virtuel($id_article, $connect);
 		if (strlen($m)) {
 			include_spip('inc/texte');
 			// les navigateurs pataugent si l'URL est vide
-			if ($url = virtuel_redirige($m, true)){
+			if ($url = virtuel_redirige($m, true)) {
 				// passer en url absolue car cette redirection pourra
 				// etre utilisee dans un contexte d'url qui change
 				// y compris url arbo
 				$status = 302;
-				if (defined('_STATUS_REDIRECTION_VIRTUEL'))
-					$status=_STATUS_REDIRECTION_VIRTUEL;
+				if (defined('_STATUS_REDIRECTION_VIRTUEL')) {
+					$status = _STATUS_REDIRECTION_VIRTUEL;
+				}
 				if (!preg_match(',^\w+:,', $url)) {
 					include_spip('inc/filtres_mini');
 					$url = url_absolue($url);
 				}
 				$url = str_replace('&amp;', '&', $url);
-				return array('texte' => "<"
-				. "?php include_spip('inc/headers');redirige_par_entete('"
-				. texte_script($url)
-				. "','',$status);"
-				. "?" . ">",
+
+				return array(
+					'texte' => "<"
+						. "?php include_spip('inc/headers');redirige_par_entete('"
+						. texte_script($url)
+						. "','',$status);"
+						. "?" . ">",
 					'process_ins' => 'php',
-				  'status' => $status);
+					'status' => $status
+				);
 			}
 		}
 	}
+
 	return false;
 }
-
-?>

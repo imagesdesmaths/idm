@@ -3,13 +3,15 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/urls?lang_cible=ru
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'actualiser_toutes' => 'Обновить все URL',
-	'actualiser_toutes_explication' => 'Вы можете перегенерировать URLы.
+	'actualiser_toutes_explication' => 'Вы можете переписать URLы.
 		Если URL был изменен, то будет создан новый (предыдущий URL сохранится, а ссылки, заданные вручную, не изменятся).',
 
 	// B
@@ -18,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_arbo_2_segments_max' => 'Нельзя использовать более 2 URL для одного объекта',
 	'erreur_config_url_forcee' => 'Настройки формата URL хранятся в файле <tt>mes_options.php</tt>.',
-	'explication_editer' => 'Расширенные настройки позволяют редактировать URL всех материалов сайта, а так же отслеживать историю их изменений.',
+	'explication_editer' => 'Расширенные настройки позволяют редактировать URL всех материалов сайта, а также отслеживать историю их изменений.',
 
 	// I
 	'icone_configurer_urls' => 'Настройки URL страниц',
@@ -35,8 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_url' => 'Новый URL',
 	'label_url_minuscules_0' => 'Сохранять регистр букв',
 	'label_url_minuscules_1' => 'Выводить URL  в нижнем регистре',
-	'label_url_permanente' => 'Запретить изменения URL ( ссылка не меняется после изменения материала)',
-	'label_url_sep_id' => 'Разделитель между дополнительными цифрами, который добавляются, что бы избежать дублирования URL',
+	'label_url_permanente' => 'Запретить изменения URL (ссылка не меняется после изменения материала)',
+	'label_url_sep_id' => 'Разделитель между цифрами, которые добавляются, чтобы избежать дублирования URL',
 	'label_urls_activer_controle_oui' => 'Расширенные настройки генерации URL',
 	'label_urls_nb_max_car' => 'Максимальное количество символов',
 	'label_urls_nb_min_car' => 'Минимальное количество символов',

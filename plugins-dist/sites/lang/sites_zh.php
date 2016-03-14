@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=zh
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -33,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => '修改站点',
 	'icone_referencer_nouveau_site' => '引用一个新站点',
 	'icone_voir_sites_references' => '查看参考站点',
+	'info_1_site' => '1个站点',
 	'info_a_valider' => '[使有效]',
 	'info_bloquer_lien' => '阻止这个连接',
 	'info_derniere_syndication' => '站点的最近联合己移出',

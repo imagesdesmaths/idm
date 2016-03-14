@@ -7,4 +7,7 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/334?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/334?lang_cible=nl" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
+	</langue>
 </traduction>

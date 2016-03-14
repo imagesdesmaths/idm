@@ -3,12 +3,14 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/paquet-breves?lang_cible=nl
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'breves_description' => 'Nieuwsberiechten zijn kortnieuws zonder auteur.',
+	'breves_description' => 'Nieuwsberichten zijn kort nieuws zonder auteur.',
 	'breves_slogan' => 'Beheer van nieuwsberichten in SPIP'
 );
 

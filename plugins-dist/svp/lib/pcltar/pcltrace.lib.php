@@ -1,4 +1,4 @@
-<?
+<?php
 // --------------------------------------------------------------------------------
 // PhpConcept Library (PCL) Trace 1.0
 // --------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ if (!defined("PCLTRACE_LIB"))
   //                        TrDisplay() function. (default)
   //             'log'    : messages are writed in the file $p_filename
   // --------------------------------------------------------------------------------
-  function TrOn($p_level=1, $p_mode="memory", $p_filename="trace.txt")
+  function TrOn($p_level = 1, $p_mode = "memory", $p_filename = "trace.txt")
   {
     global $g_pcl_trace_level;
     global $g_pcl_trace_mode;
@@ -139,7 +139,7 @@ if (!defined("PCLTRACE_LIB"))
   // Parameters :
   //   $p_level : Level of trace required.
   // --------------------------------------------------------------------------------
-  function TrFctStart($p_file, $p_line, $p_name, $p_param="", $p_message="")
+  function TrFctStart($p_file, $p_line, $p_name, $p_param = "", $p_message = "")
   {
     global $g_pcl_trace_level;
     global $g_pcl_trace_mode;
@@ -197,7 +197,7 @@ if (!defined("PCLTRACE_LIB"))
   // Parameters :
   //   $p_level : Level of trace required.
   // --------------------------------------------------------------------------------
-  function TrFctEnd($p_file, $p_line, $p_return=1, $p_message="")
+  function TrFctEnd($p_file, $p_line, $p_return = 1, $p_message = "")
   {
     global $g_pcl_trace_level;
     global $g_pcl_trace_mode;
@@ -259,7 +259,7 @@ if (!defined("PCLTRACE_LIB"))
   // Description :
   // Parameters :
   // --------------------------------------------------------------------------------
-  function TrFctMessage($p_file, $p_line, $p_level, $p_message="")
+  function TrFctMessage($p_file, $p_line, $p_level, $p_message = "")
   {
     global $g_pcl_trace_level;
     global $g_pcl_trace_mode;
@@ -292,7 +292,7 @@ if (!defined("PCLTRACE_LIB"))
   // Description :
   // Parameters :
   // --------------------------------------------------------------------------------
-  function TrMessage($p_file, $p_line, $p_level, $p_message="")
+  function TrMessage($p_file, $p_line, $p_level, $p_message = "")
   {
     global $g_pcl_trace_level;
     global $g_pcl_trace_mode;

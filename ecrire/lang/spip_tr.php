@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=tr
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -466,7 +468,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_retour_public' => 'Kamusal siteye dön',
 	'login_retour_site' => 'Kamusal siteye dön',
 	'login_retoursitepublic' => 'Kamusal siteye dön',
-	'login_sans_cookiie' => 'Çerezsiz tanımlanma',
 	'login_sinscrire' => 'Kayıt ol',
 	'login_test_navigateur' => 'Gezgini dene / Tekrar bağlan',
 	'login_verifiez_navigateur' => '(Ancak gezginin şifrenizi belleğe almadığından emin olunuz...)',

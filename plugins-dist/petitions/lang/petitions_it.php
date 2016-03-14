@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=it
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -16,6 +18,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_checkbox_indiquer_site' => 'devi inserire il nome di un sito web',
 	'bouton_checkbox_signature_unique_email' => 'solo un’adesione per email',
 	'bouton_checkbox_signature_unique_site' => 'solo una adesione per sito web',
+	'bouton_radio_activer_petition' => 'Attiva la petizione',
+	'bouton_radio_pas_petition' => 'Nessuna petizione',
+	'bouton_radio_petition_activee' => 'Petizione attivata',
+	'bouton_radio_supprimer_petition' => 'Elimina la petizione',
 
 	// F
 	'filtre' => 'Filtro:',

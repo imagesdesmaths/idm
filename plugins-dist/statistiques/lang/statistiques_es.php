@@ -3,9 +3,28 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/statistiques?lang_cible=es
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// A
+	'archiver' => 'Archivar',
+	'archiver_concatener_explications' => 'Esta operación va a concatenar las estadísticas de visitas de los artículos:',
+	'archiver_concatener_ignorer' => 'Las visitas de menos de @nb@ años no se han tocado.',
+	'archiver_concatener_par_an' => 'Las visitas de más de @nb@ años serán concatenadas, para cada artículo, durante el primer día de cada año. ',
+	'archiver_concatener_par_mois' => 'Las visitas de más de @nb@ años serán concatenadas, para cada artículo, durante el primer día de cada mes.',
+	'archiver_conseil_sauvegarde' => 'Es aconsejable hacer una copia de seguridad previa de la base de datos.',
+	'archiver_description' => 'Esta página proporciona herramientas para limpiar o archivar las estadísticas del sitio.',
+	'archiver_et_nettoyer' => 'Archivar y limpiar',
+	'archiver_nettoyer' => 'Limpiar',
+	'archiver_nettoyer_explications' => 'Elimina las líneas de "referenciadores" o de "visitas" cuyos artículos no existen (o ya no existen) en la base de datos.',
+	'archiver_nettoyer_referers_articles' => 'Limpiar referers_articles',
+	'archiver_nettoyer_visites_articles' => 'Limpiar visites_articles',
+	'archiver_nombre_lignes' => 'Número de líneas',
+	'archiver_operation_longue' => 'Esta operación puede ser muy larga, sobre todo durante la primera ejecución.',
+	'archiver_operations_irreversibles' => '¡Estas operaciones son irreversibles!',
 
 	// B
 	'bouton_effacer_referers' => 'Eliminar sólo los enlaces entrantes',
@@ -22,12 +41,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_affichier_visites_articles_plus_visites' => 'Mostrar las visitas de <b>los artículos más visitados desde el inicio:</b>',
 	'info_comment_lire_tableau' => 'Como leer este cuadro',
 	'info_forum_statistiques' => 'Estadísticas de las visitas',
+	'info_graphiques' => 'Gráficos',
 	'info_popularite_2' => 'Popularidad del sitio:',
 	'info_popularite_3' => 'Popularidad: @popularite@  Visitas: @visites@',
 	'info_popularite_5' => 'Popularidad:',
-	'info_previsions' => 'pronósticos :',
+	'info_previsions' => 'pronósticos:',
 	'info_question_vignettes_referer' => 'Cuando consultes las estadísticas, puedes tener una vista de los sitios de origen de las visitas',
 	'info_question_vignettes_referer_oui' => 'Mostrar las capturas de los sitios de origen de las visitas',
+	'info_tableaux' => 'Tablas',
 	'info_visites' => 'visitas:',
 	'info_visites_plus_populaires' => 'Mostrar las visitas de <b>los artículos más populares</b> y de <b>los últimos artículos publicados</b>',
 	'info_zoom' => 'zoom',

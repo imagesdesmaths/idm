@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=vi
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -464,7 +466,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_retour_public' => 'Trở lại trang web công cộng',
 	'login_retour_site' => 'Trở lại trang web công cộng',
 	'login_retoursitepublic' => 'trở lại trang web công cộng',
-	'login_sans_cookiie' => 'Nhận diện không cần cookie',
 	'login_sinscrire' => 'ghi danh',
 	'login_test_navigateur' => 'thử browser/nối lại',
 	'login_verifiez_navigateur' => '(Tuy nhiên, kiểm lại để biết là browser không có nhớ mật mã của bạn...)',

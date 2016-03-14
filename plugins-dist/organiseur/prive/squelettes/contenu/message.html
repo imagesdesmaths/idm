@@ -14,7 +14,7 @@
 		#BOITE_FERMER
 	]
 	<div id="wysiwyg">
-	<INCLURE{fond=prive/objets/contenu/message,id=#ID_MESSAGE,wysiwyg=1}>
+	<INCLURE{fond=prive/objets/contenu/message,id=#ID_MESSAGE,id_message=#ID_MESSAGE,wysiwyg=1}>
 	</div>
 
 
@@ -26,7 +26,7 @@
 	[(#VAL{message-enfants}|trouver_fond{prive/objets/contenu/}|oui)
 		[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/message-enfants,id_objet=#ID_MESSAGE,env})]})]
 	]
-	[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{objet,message,id_objet,#ID_MESSAGE},data,#GET{enfants}})]})]
+	[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,message,objet,message,id_objet,#ID_MESSAGE},data,#GET{enfants}})]})]
 
 	[(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('[(#OBJET|objet_info{url_voir})]','#navigation,#chemin');/*\]\]>*/</script>

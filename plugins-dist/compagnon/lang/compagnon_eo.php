@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/compagnon?lang_cible=eo
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -19,7 +21,7 @@ Por tio, estas necesa krei almenaŭ unu rubrikon. Vi povas fari tion en la menuo
 	'c_accueil_texte' => 'Vi ĵus eniris en la SPIP privata spaco.',
 	'c_accueil_texte_revenir' => 'Tiu paĝo prezentas la freŝa ĉefartikola aktiveco en via retejo.
 Vi povas reveni al tiu paĝo ĉiumomente klakante la domvigneton,
-sur la supra parto sub via nomo.',
+sur la supra parto sub via nomo.', # MODIF
 	'c_article_redaction' => 'La artikolo estas redaktata',
 	'c_article_redaction_redacteur' => 'La artikolo estas redaktata',
 	'c_article_redaction_redacteur_texte' => 'Por proponi vian artikolon al la retej-mastrumantoj kaj al aliaj redakantoj, en la flanka kadro, ŝanĝu « redaktataj » ĝis « proponita por taksado ».

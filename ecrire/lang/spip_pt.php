@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=pt
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -110,8 +112,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_heures_minutes_court' => '@h@:@m@',
 	'date_fmt_jour' => '@nomjour@ @jour@',
 	'date_fmt_jour_heure' => '@jour@ a @heure@',
-	'date_fmt_jour_heure_debut_fin' => '@jour@ de @heure_debut@ a @heure_fin@',
-	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@ de @heure_debut@@dtabbr@ a @dtstart@@heure_fin@@dtend@',
+	'date_fmt_jour_heure_debut_fin' => '@jour@ de @heure_debut@ a @heure_fin@', # MODIF
+	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@ de @heure_debut@@dtabbr@ a @dtstart@@heure_fin@@dtend@', # MODIF
 	'date_fmt_jour_mois' => '@jour@ de @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ de @nommois@ de @annee@',
 	'date_fmt_mois_annee' => '@nommois@ de @annee@',
@@ -529,7 +531,6 @@ Pediu para alterar o seu endereço e-mail. Para confirmar o seu novo endereço, 
 	'login_retour_public' => 'Regresso ao sítio público',
 	'login_retour_site' => 'Regresso ao sítio público',
 	'login_retoursitepublic' => 'Regresso ao sítio público',
-	'login_sans_cookiie' => 'identificação sem cookie',
 	'login_securise' => 'Login seguro',
 	'login_sinscrire' => 'inscrever-se',
 	'login_test_navigateur' => 'teste navegação/nova ligação',
@@ -589,7 +590,7 @@ Poderá então introduzir uma nova palavra-passe e reconectar-se ao sítio.
 	'pass_nouveau_pass' => 'Nova palavra-passe',
 	'pass_ok' => 'OK',
 	'pass_oubli_mot' => 'Palavra-passe esquecida',
-	'pass_procedure_changer' => 'Para alterar a sua palavra-passe, temos primeiro de verificar a sua identidade. Por favor escreva o endereço e-mail associado a esta conta.',
+	'pass_procedure_changer' => 'Para alterar a sua palavra-passe, temos primeiro de verificar a sua identidade. Por favor escreva o endereço e-mail associado a esta conta.', # MODIF
 	'pass_quitter_fenetre' => 'Fechar esta janela',
 	'pass_rappel_login' => 'Recorde : o seu identificador (login) é « @login@ ».',
 	'pass_recevoir_mail' => 'Vai receber um email que indica como recuperar o seu acesso ao sítio.',

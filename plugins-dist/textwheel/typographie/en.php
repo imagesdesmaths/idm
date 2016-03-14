@@ -3,14 +3,16 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 // Correction typographique anglaise
 
@@ -19,10 +21,11 @@ function typographie_en($t) {
 
 	if (!isset($trans)) {
 		$trans = array(
-		"&nbsp;" => '~',
-		"'" => '&#8217;'
+			"&nbsp;" => '~',
+			"'" => '&#8217;'
 		);
-		switch ($GLOBALS['meta']['charset']) {
+		$charset = isset($GLOBALS['meta']['charset']) ? $GLOBALS['meta']['charset'] : '';
+		switch ($charset) {
 			case 'utf-8':
 				$trans["\xc2\xa0"] = '~';
 				break;
@@ -44,8 +47,13 @@ function typographie_en($t) {
 	/* 4 */
 	$t = preg_replace('/Mr\.? /S', '$0~', $t);
 
-	if (strpos($t, '~') !== false)
+	if (strpos($t, '\~') !== false) {
+		$t = str_replace('\~', "\x1\x14", $t);
+	}
+
+	if (strpos($t, '~') !== false) {
 		$t = preg_replace("/ *~+ */S", "~", $t);
+	}
 
 	$t = preg_replace("/--([^-]|$)/S", "$pro&mdash;$1", $t, -1, $c);
 	if ($c) {
@@ -54,6 +62,10 @@ function typographie_en($t) {
 	}
 
 	$t = str_replace('~', '&nbsp;', $t);
+
+	if (strpos($t, "\x1") !== false) {
+		$t = str_replace("\x1\x14", '~', $t);
+	}
 
 	return $t;
 }

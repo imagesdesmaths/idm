@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/compagnon?lang_cible=lb
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -18,7 +20,7 @@ Wann dir drop klickt kënnt dir de Numm änneren, an him och e Logo oder Slogan 
 Duerfir musst dir op mannst eng Rubrik bäiflécken. Dir kënnt dat am Menu "Editioun" maachen andeem dir op "Rubrike" klickt.',
 	'c_accueil_texte' => 'Dir sidd elo am privaten Deel vu SPIP.',
 	'c_accueil_texte_revenir' => 'Dës Säit weist déi rezent editorial Aktivitéit op ärem Site.
-Dir kënnt op dës Säit zeréck andeem dir op d’Haus-Symbol, uewen ënnert ärem Numm, klickt.',
+Dir kënnt op dës Säit zeréck andeem dir op d’Haus-Symbol, uewen ënnert ärem Numm, klickt.', # MODIF
 	'c_article_redaction' => 'Den Artikel ass an der Redaktioun',
 	'c_article_redaction_redacteur' => 'Den Artikel ass an der Redaktioun',
 	'c_article_redaction_redacteur_texte' => 'Fir ären Artikel den Administrateure vum Site an deenen anere Redakteren virzeschloën, ännert am Cadre lénks "an der Aarbecht" op "virgeschloën".',

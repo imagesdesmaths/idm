@@ -19,6 +19,7 @@
 #SET{foncee,#ENV{couleur_foncee,3874b0}}
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+#SET{abs,#ENV{ltr}|choixsiegal{left,-10,483}}
 
 /* ----- compagnon (extends box) ----- */
 .compagnon {position:relative;}
@@ -26,11 +27,14 @@
 	border:2px solid ##GET{foncee};
 	border-radius:10px;
 	color:#333;
-	background:#fcfcfc url([(#CHEMIN_IMAGE{compagnon_gris-64.png}|image_sepia{#GET{foncee}|couleur_eclaircir}|extraire_attribut{src})]) -10px -10px no-repeat;
+	background-color:#fcfcfc;
+	background-image:url([(#CHEMIN_IMAGE{compagnon_gris-64.png}|image_sepia{#GET{foncee}|couleur_eclaircir}|extraire_attribut{src})]);
+	background-position: #GET{abs}px -10px;
+	background-repeat: no-repeat;
 	
 }
-.compagnon .inner .hd {padding-left:60px;}
-.compagnon .inner .bd {padding-left:60px;}
+.compagnon .inner .hd {padding-#GET{left}:60px;}
+.compagnon .inner .bd {padding-#GET{left}:60px;}
 .compagnon b{}
 .compagnon .act {
 	background-color: transparent;
@@ -42,21 +46,23 @@
 .compagnon button.submit {
 	font-size:100%;
 	border:2px solid ##GET{foncee};
-	border-width:2px 0 0 2px;
-	border-radius:9px 0 9px 0;
-	box-shadow:0 0 2px ##GET{foncee};
+	border-top-width:2px;
+	border-#GET{left}-width:2px;
+	border-#GET{right}-width:0px;
+	border-bottom-width:0px;
+	border-top-#GET{left}-radius:9px;
+	border-top-#GET{right}-radius:0;
+	border-bottom-#GET{right}-radius:9px;
+	border-bottom-#GET{left}-radius:0;
 	background: [#(#GET{foncee}|couleur_eclaircir|couleur_eclaircir)];
 	padding:3px 4px 4px 3px;
 	cursor:pointer;
 	margin:0;
 	color: #444;
 }
-.compagnon button.submit:hover {
-	box-shadow:none;
-	background:#fcfcfc;
-}
+
 .compagnon .target {
-	position:absolute; bottom:5px; left:5px;
+	position:absolute; bottom:5px; #GET{left}:5px;
 	display:block; width:32px; height:32px;
 	background:url([(#CHEMIN_IMAGE{target-32.png}|image_sepia{#GET{foncee}|couleur_eclaircir}|extraire_attribut{src})]);
 	cursor:crosshair;

@@ -6,8 +6,8 @@
 
 	<form action="#ENV{action}#formulaire_configurer_forums_participants" method="post"><div>
 		[(#ACTION_FORMULAIRE{#ENV{action}})]
-		<ul>
-			<li class='editer configurer_forums_publics[ (#ENV**{erreurs}|table_valeur{forums_publics}|oui)erreur]'>
+		<div class="editer-groupe">
+			<div class='editer configurer_forums_publics[ (#ENV**{erreurs}|table_valeur{forums_publics}|oui)erreur]'>
 				[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{forums_publics})</span>
 				]<div class='choix'>
@@ -27,12 +27,12 @@
 					<input class='radio' type="radio" name="forums_publics" value='abo' [checked="(#ENV{forums_publics}|=={abo}|?{checked})"] id="forums_publics_4"/>
 					<label for="forums_publics_4"><:forum:bouton_radio_enregistrement_obligatoire:></label>
 				</div>
-			</li>
-			<li id='config-options-' class='fieldset'>
+			</div>
+			<div id='config-options-' class='fieldset'>
 				<fieldset>
 					<legend><:info_options_avancees:></legend>
-					<ul>
-						<li class='editer configurer_forums_publics_appliquer[ (#ENV**{erreurs}|table_valeur{forums_publics_appliquer}|oui)erreur]'>
+					<div class="editer-groupe">
+						<div class='editer configurer_forums_publics_appliquer[ (#ENV**{erreurs}|table_valeur{forums_publics_appliquer}|oui)erreur]'>
 							<label><:forum:info_appliquer_choix_moderation:></label>[
 							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{forums_publics_appliquer})</span>
 							]
@@ -48,18 +48,18 @@
 								<input class='radio' type="radio" name="forums_publics_appliquer" value='tous' id="forums_appliquer_tous"/>
 								<label for="forums_appliquer_tous"><:forum:bouton_radio_articles_tous:></label>
 							</div>
-						</li>
-					</ul>
+						</div>
+					</div>
 				</fieldset>
-			</li>
-		</ul>
+			</div>
+		</div>
 		<p class='boutons'><input class='submit' type="submit" name="ok" value="<:bouton_enregistrer:>"/></p>
 	</div></form>
 
 </div>
 <script type='text/javascript'>
 jQuery(document).ready(function(){
-	jQuery('li.configurer_forums_publics input').each(function(){
+	jQuery('.editer.configurer_forums_publics input').each(function(){
 		var checked = jQuery(this).prop('checked');
 		jQuery(this).bind('change',function(){
 			if (jQuery(this).prop('checked')==checked)

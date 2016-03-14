@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/svp?lang_cible=sk
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -34,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_actualiser_tout_depot' => 'Aktualizovať balíky vo všetkých depozitároch',
 	'bulle_afficher_xml_plugin' => 'Obsah súboru XML zásuvného modulu',
 	'bulle_ajouter_spipzone' => 'Pridať depozitár SPIP-Zone',
+	'bulle_aller_demonstration' => 'Prejdete na stránku s ukážkou',
 	'bulle_aller_depot' => 'Prejsť na stránku tohto depozitára',
 	'bulle_aller_documentation' => 'Prejsť na stránku dokumentácie',
 	'bulle_aller_plugin' => 'Prejsť na stránku zásuvného modulu',
@@ -61,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_activer_log_verbeux' => 'Aktivovať podrobné protokoly?',
 	'config_activer_log_verbeux_explication' => 'Táto možnosť zabezpečí, že protokoly SVP bud podrobnejšie…',
 	'config_activer_pas_a_pas' => 'Aktivovať režim Krok za krokom?',
-	'config_activer_pas_a_pas_explication' => 'Ak aktivujete tento režim, po vykonaní každej akcie sa zobrazí záznam  namiesto súhrnného prehľadu všetkých vykonaných zmien po vykonaní všetkých akcií',
+	'config_activer_pas_a_pas_explication' => 'Ak aktivujete tento režim, po vykonaní každej akcie sa zobrazí záznam  namiesto súhrnného prehľadu všetkých vykonaných zmien po vykonaní všetkých akcií.',
 	'config_activer_runtime' => 'Aktivovať režim runtime?',
 	'config_activer_runtime_explication' => '		V režime runtime (áno) spúšťa iba zásuvné moduly kompatibilné s vašou verziou SPIPu,
 		čo sa veľmi odporúča pre väčšinu využití programu.
@@ -80,6 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_depot_editable' => 'Umožniť upravovanie depozitárov?',
 	'config_depot_editable_explication' => 'Umožňuje upravovať údaje v depozitári a priradiť k ním kľúčové slová alebo dokumenty.
 		Táto možnosť by mala zaujať každého! Radšej preto nenechajte možnosť "nie"!',
+	'confirmer_desinstaller' => 'Pozor, odinštalovanie zásuvného modulu – <b>vymazanie</b> jeho údajov z databázy sa nedá vrátiť späť.<br />Ak si týmto krokom nie ste istý, zásuvný modul len deaktivujte.', # MODIF
 	'confirmer_telecharger_dans' => 'Zásuvný modul, ktorý bude nahraný do priečonka (@dir@), už existuje.
 	Prepíšete tak obsah tohto priečinka.
 	Kópia starého obsahu bude uložená v priečinku "@dir_backup@".
@@ -187,6 +191,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_xml_plugin' => 'XML',
 	'legende_installer_plugins' => 'Nainštalovať zásuvné moduly',
 	'legende_rechercher_plugins' => 'Hľadať zásuvné moduly',
+	'lien_demo' => 'Ukážka',
+	'lien_documentation' => 'Dokumentácia',
 
 	// M
 	'message_action_finale_get_fail' => 'Zásuvný modul "@plugin@" (verzia: @version@) sa nepodarilo správne obnoviť',
@@ -236,6 +242,7 @@ alebo vytvoriť tento priečinok a nastaviť mu povolenie na zápis.',
 	'message_nok_maj_introuvable' => 'Aktualizácia zásuvného modulu @plugin@ sa nenašla.',
 	'message_nok_plugin_inexistant' => 'Požadovaný zásuvný modul neexistuje (@plugin@).',
 	'message_nok_sql_insert_depot' => 'Pri pridávaní depozitára @objet@ sa vyskytla chyba SQL',
+	'message_nok_url_archive' => 'URL archívu je neplatná',
 	'message_nok_url_depot_incorrecte' => 'Adresa "@url@" je nesprávna',
 	'message_nok_xml_non_conforme' => 'Súbor XML, ktorý je opisom depozitára  "@fichier@",  nie je kompatibilný',
 	'message_nok_xml_non_recupere' => 'Súbor XML " @fichier@ " sa nepodarilo získať',
@@ -278,7 +285,7 @@ alebo vytvoriť tento priečinok a nastaviť mu povolenie na zápis.',
 	'titre_form_charger_plugin' => 'Vyhľadať a pridať zásuvné moduly',
 	'titre_form_charger_plugin_archive' => 'Stiahnuť zásuvný modul z archívu',
 	'titre_form_configurer_svp' => 'Nastaviť server zásuvných modulov',
-	'titre_liste_autres_contributions' => 'Šablóny, knižnice, sady ikon, atď.',
+	'titre_liste_autres_contributions' => 'Šablóny, knižnice, sady ikon...',
 	'titre_liste_autres_depots' => 'Ostatné depozitáre',
 	'titre_liste_depots' => 'Zoznam dostupných depozitárov',
 	'titre_liste_paquets_plugin' => 'Zoznam balíkov zásuvného modulu',

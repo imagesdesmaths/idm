@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=km
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -33,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'កែប្រែ សៃថ៍នេះ',
 	'icone_referencer_nouveau_site' => 'យោង មួយសៃថ៍ថ្មី',
 	'icone_voir_sites_references' => 'មើល រាល់សៃថ៍យោង',
+	'info_1_site' => '១ សៃថ៍',
 	'info_a_valider' => '[​ត្រូវធ្វើ​អោយ​សុពលភាព​]',
 	'info_bloquer' => 'រារាំង',
 	'info_bloquer_lien' => 'រាំងខ្ទប់ តំណភ្ជាប់នេះ',

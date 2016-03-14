@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=sk
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -29,6 +31,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_enregistrement_message' => 'Váš príspevok sa z technických príčin nepodarilo uložiť.',
+	'extensions_autorisees' => 'Povolené prípony:',
+	'extensions_autorisees_toutes' => 'všetky',
 
 	// F
 	'form_pet_message_commentaire' => 'Nejaký príspevok alebo komentáre?',
@@ -41,6 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_attention_trop_caracteres' => '<b>Pozor!</b> váš príspevok je pridlhý (@compte@ znamkov): aby ste ho mohli uložiť, príspevok nesmie mať viac ako @max@ znakov.',
 	'forum_avez_selectionne' => 'Vybrali ste:',
 	'forum_cliquer_retour' => 'Kliknite <a href=\'@retour_forum@\'>sem,</a> aby ste mohli pokračovať.',
+	'forum_envoyer' => 'Poslať',
 	'forum_forum' => 'diskusné fórum',
 	'forum_info_modere' => 'Toto diskusné fórum sa kontroluje pred zverejnením: váš príspevok sa zobrazí až potom, čo ho potvrdí administrátor stránky.',
 	'forum_lien_hyper' => 'Hypertextový odkaz',
@@ -91,6 +96,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  pri článkoch; budú zakázané pre rubriky, novinky a pod.',
 	'info_envoi_forum' => 'Posielať príspevky z diskusného fóra príslušným autorom',
 	'info_fonctionnement_forum' => 'Nastavenie diskusného fóra:',
+	'info_forcer_previsualisation_court' => 'Nanútiť zobrazenie ukážky',
+	'info_forcer_previsualisation_long' => 'Pred odoslaním správy zobraziť ukážku',
 	'info_forums_liees_mot' => 'Príspevky v diskusnom fóre s týmto slovom',
 	'info_gauche_suivi_forum_2' => 'Stránka na <i>sledovanie diskusných fór</i> je nástroj na riadenie vašej stránky (nie diskusií alebo úprav). Zobrazuje všetky príspevky do diskusných fór (tak na verejnej stránke, ako aj v súkromnej zóne) a umožňuje vám o týchto príspevkoch rozhodovať.',
 	'info_liens_syndiques_3' => 'diskusné fóra',

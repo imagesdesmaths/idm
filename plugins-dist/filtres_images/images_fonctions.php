@@ -3,14 +3,16 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 
 //
@@ -67,7 +69,6 @@ $GLOBALS['spip_matrice']['_image_decale_composante_127'] = 'filtres/images_lib.p
  */
 
 
-
 /**
  * Extraire une couleur d'une image
  *
@@ -76,8 +77,9 @@ $GLOBALS['spip_matrice']['_image_decale_composante_127'] = 'filtres/images_lib.p
  * @param int $y
  * @return string
  */
-function extraire_image_couleur($img, $x=10, $y=6) {
+function extraire_image_couleur($img, $x = 10, $y = 6) {
 	include_spip('filtres/images_lib');
+
 	return _image_couleur_extraire($img, $x, $y);
 }
 
@@ -89,7 +91,6 @@ function extraire_image_couleur($img, $x=10, $y=6) {
 function image_typo() {
 	include_spip('filtres/images_typo');
 	$tous = func_get_args();
+
 	return call_user_func_array('produire_image_typo', $tous);
 }
-
-?>

@@ -1,11 +1,11 @@
 <paquet
 	prefix="sites"
 	categorie="edition"
-	version="1.7.13"
+	version="1.9.22"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.1.0;3.1.*]"
 	logo="prive/themes/spip/images/site-32.png"
-	schema="1.0.0"
+	schema="1.1.1"
 >	
 
 	<nom>Sites</nom>

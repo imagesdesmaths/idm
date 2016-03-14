@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=hu
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -63,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_changer' => 'Módosítás',
 	'bouton_chercher' => 'Keresés',
 	'bouton_choisir' => 'Kiválasztás',
-	'bouton_download' => 'Download', # MODIF
+	'bouton_download' => 'Letöltés',
 	'bouton_enregistrer' => 'Mentés',
 	'bouton_radio_desactiver_messagerie_interne' => 'Belső üzenetek letiltása',
 	'bouton_radio_envoi_annonces' => 'Szerkesztői közlemény küldése',
@@ -466,7 +468,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_retour_public' => 'Vissza a nyilvános honlapra',
 	'login_retour_site' => 'Vissza a nyilvános honlapra',
 	'login_retoursitepublic' => 'vissza a nyilvános honlapra',
-	'login_sans_cookiie' => 'Süti (cookie) nélküli azonosítás',
 	'login_sinscrire' => 'beíratkozás',
 	'login_test_navigateur' => 'böngésző teszt/újracsatlakozás',
 	'login_verifiez_navigateur' => '(Azonban ellenőrizze, hogy a bongészó nem memorizálta-e a jelszót...)',

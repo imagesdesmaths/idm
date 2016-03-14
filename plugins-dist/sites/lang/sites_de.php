@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=de
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -55,14 +57,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_valider_article' => 'Diesen Artikel freischalten',
 	'icone_valider_articles' => 'Diese Artikel freischalten',
 	'icone_voir_sites_references' => 'Verlinkte Websites anzeigen',
+	'info_1_article_syndique' => '1 syndizierte Artikel',
+	'info_1_site' => '1 Website',
 	'info_1_site_importe' => '1 Website wurde importiert',
 	'info_a_valider' => '[zu bestätigen]',
+	'info_aucun_article_syndique' => 'Kein syndizierter Artikel',
+	'info_aucun_site' => 'Keine Website',
 	'info_aucun_site_importe' => 'Es wurde keine Website importiert',
 	'info_bloquer' => 'sperren',
 	'info_bloquer_lien' => 'Link sperren',
 	'info_derniere_syndication' => 'Datum der letzten Syndikation dieser Website: ',
 	'info_liens_syndiques_1' => 'Links (Syndikation)',
 	'info_liens_syndiques_2' => 'warten auf Freigabe.',
+	'info_nb_articles_syndiques' => '@nb@ syndizierte Artikel',
+	'info_nb_sites' => '@nb@ Websites',
 	'info_nb_sites_importes' => '@nb@ Websites wurden importiert',
 	'info_nom_site_2' => '<b>Name der Website</b> [Pflichtfeld]',
 	'info_panne_site_syndique' => 'Syndizierte Website defekt',

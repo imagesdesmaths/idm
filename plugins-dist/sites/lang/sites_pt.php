@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=pt
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -55,14 +57,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_valider_article' => 'Validar este artigo',
 	'icone_valider_articles' => 'Validar estes artigos',
 	'icone_voir_sites_references' => 'Ver os sítios referenciados',
+	'info_1_article_syndique' => '1 artigo redifundido',
+	'info_1_site' => '1 sítio',
 	'info_1_site_importe' => '1 sítio foi importado',
 	'info_a_valider' => '[a validar]',
+	'info_aucun_article_syndique' => 'Sem artigos redifundidos',
+	'info_aucun_site' => 'Nenhum sítio ',
 	'info_aucun_site_importe' => 'Nenhum sítio web foi importado',
 	'info_bloquer' => 'bloquear',
 	'info_bloquer_lien' => 'bloquear esta ligação',
 	'info_derniere_syndication' => 'A última vinculação deste sítio foi efectuada a',
 	'info_liens_syndiques_1' => 'laços vinculados',
 	'info_liens_syndiques_2' => 'estão à espera de validação',
+	'info_nb_articles_syndiques' => '@nb@ artigos redifundidos',
+	'info_nb_sites' => '@nb@ sítios',
 	'info_nb_sites_importes' => '@nb@ sítios web foram importados',
 	'info_nom_site_2' => '<b>Nome do sítio</b> [Obrigatório]',
 	'info_panne_site_syndique' => 'Sítio vinculado não disponível',

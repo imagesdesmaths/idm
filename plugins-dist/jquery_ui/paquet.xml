@@ -1,9 +1,9 @@
 <paquet
 	prefix="jqueryui"
 	categorie="outil"
-	version="1.8.21"
+	version="1.11.4"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.1.0;3.1.*]"
 	logo="images/jqueryui-128.png"
 >
 
@@ -17,6 +17,7 @@
 
 	<pipeline nom="jquery_plugins" inclure="jqueryui_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="jqueryui_pipelines.php" />
+	<pipeline nom="header_prive" inclure="jqueryui_pipelines.php" />
 	<pipeline nom="header_prive_css" inclure="jqueryui_pipelines.php" />
 
 	<chemin path="prive" />

@@ -18,8 +18,8 @@
 /* **************** EXEC ADMIN PLUGIN ***************** */
 .box .inner .hd h3 img.close { float: #ENV{right}; }
 .box .inner .hd h3 img.close:hover { cursor: pointer; }
-.onglets_simple.second ul.verrouille li.first {margin-#ENV{left}:30px;}
-.onglets_simple.second ul li span.off {
+.admin_plugin .onglets_simple.second ul.verrouille li.first {margin-#ENV{left}:30px;}
+.admin_plugin .onglets_simple.second ul li span.off {
 	display: block;
 	float: left;
 	padding: 4px 7px;
@@ -30,10 +30,12 @@
 	background-color: #eeeeee;
 	color: #6c6c6c;
 	opacity: 0.6;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
 }
 
-.actions_multiples .boutons { }
-.actions_multiples .action { width: 30%; }
+.admin_plugin .actions_multiples .boutons { }
+.admin_plugin .actions_multiples .action { width: 30%; }
 
 .liste-plugins fieldset,
 .liste-plugins .liste.plugins,
@@ -73,23 +75,23 @@
 
 /* Styles des etats provoquant un affichage specifique des plugins */
 /* -- installe (donc actif) */
-.installe { color: #999; background: url(#CHEMIN_IMAGE{fond-installe.png}) repeat fixed 0 0 !important; }
-.installe:hover {	background-color:#F0F0F0 !important; }
+.admin_plugin .installe { color: #999; background: url(#CHEMIN_IMAGE{fond-installe.png}) repeat fixed 0 0 !important; }
+.admin_plugin .installe:hover {	background-color:#F0F0F0 !important; }
 /* -- non stable (tous les états différents de stable : à confirmer si on met test aussi dans les non stables) */
 .charger_plugin .nonstable { opacity: 0.5; }
 /* -- verrouille (plugins_dist)
-.verrou { background:url(#CHEMIN_IMAGE{fond-verrou.png}) repeat fixed 0 0 #FDFDFD !important;}
-.verrou:hover {	background-color:#F0F0F0 !important; }
+.admin_plugin .verrou { background:url(#CHEMIN_IMAGE{fond-verrou.png}) repeat fixed 0 0 #FDFDFD !important;}
+.admin_plugin .verrou:hover {	background-color:#F0F0F0 !important; }
 */
 /* -- obsolete, incompatible */
-.disabled,.disabled { background:url(#CHEMIN_IMAGE{fond-obsolete.png}) repeat fixed 0 0 #ddd !important;}
-.disabled:hover {	background-color:#ccc !important; }
+.admin_plugin .disabled { background:url(#CHEMIN_IMAGE{fond-obsolete.png}) repeat fixed 0 0 #ddd !important;}
+.admin_plugin .disabled:hover {	background-color:#ccc !important; }
 .liste-plugins .liste-items .item.disabled:hover .actions {background:url(#CHEMIN_IMAGE{fond-obsolete.png}) repeat fixed 0 0 #ccc !important}
 
 .liste-plugins .liste-items .item.disabled h3 a { color: #aaa; }
 .liste-plugins .liste-items .item.disabled .icon {filter: alpha(opacity=60); -moz-opacity: 0.6; opacity: 0.6; }
 /* -- Notice d'information sur le plugin */
-.liste-plugins .liste-items .item .information { color: #8A1F11;font-weight: bold;}
+.liste-plugins .liste-items .item .svp_message { color: #8A1F11; font-weight: bold; }
 
 /* Liste des depots */
 .liste-objets.depots .caption {

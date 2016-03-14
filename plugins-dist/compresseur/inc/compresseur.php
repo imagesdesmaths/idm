@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -12,14 +12,16 @@
 
 /**
  * Fonctions d'aide pour le compresseur
- * 
+ *
  * @package SPIP\Compresseur\Fonctions
  */
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 /**
  * Ecrire la balise javascript pour insérer le fichier compressé
- * 
+ *
  * C'est cette fonction qui décide où il est le plus pertinent
  * d'insérer le fichier, et dans quelle forme d'ecriture
  *
@@ -34,15 +36,28 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return string
  *   Code HTML de la balise <script>
  */
-function compresseur_ecrire_balise_js_dist(&$flux, $pos, $src, $comments = ""){
-	$comments .= "<script type='text/javascript' src='$src'></script>";
-  $flux = substr_replace($flux,$comments,$pos,0);
-  return $flux;
+function compresseur_ecrire_balise_js_dist(&$flux, $pos, $src, $comments = "") {
+	$src = timestamp($src);
+	// option chargement JS async par jQl
+	if (defined('_JS_ASYNC_LOAD') and !test_espace_prive()) {
+		lire_fichier(find_in_path("lib/jQl/jQl.min.js"), $jQl);
+		if ($jQl) {
+			$comments .= "<script type='text/javascript'>\n$jQl\njQl.loadjQ('$src')\n</script>";
+		} else {
+			$comments .= "<script type='text/javascript' src='$src'></script>";
+		}
+	} else {
+		$comments .= "<script type='text/javascript' src='$src'></script>";
+	}
+
+	$flux = substr_replace($flux, $comments, $pos, 0);
+
+	return $flux;
 }
 
 /**
  * Ecrire la balise CSS pour insérer le fichier compressé
- * 
+ *
  * C'est cette fonction qui décide ou il est le plus pertinent
  * d'insérer le fichier, et dans quelle forme d'écriture
  *
@@ -59,56 +74,67 @@ function compresseur_ecrire_balise_js_dist(&$flux, $pos, $src, $comments = ""){
  * @return string
  *   Code HTML de la balise <link>
  */
-function compresseur_ecrire_balise_css_dist(&$flux, $pos, $src, $comments = "", $media=""){
-	$comments .= "<link rel='stylesheet'".($media?" media='$media'":"")." href='$src' type='text/css' />";
-  $flux = substr_replace($flux,$comments,$pos,0);
+function compresseur_ecrire_balise_css_dist(&$flux, $pos, $src, $comments = "", $media = "") {
+	$src = timestamp($src);
+	$comments .= "<link rel='stylesheet'" . ($media ? " media='$media'" : "") . " href='$src' type='text/css' />";
+	// Envoyer aussi un entete http pour demarer le chargement de la CSS plus tot
+	// Link: <http://href.here/to/resource.html>;rel="stylesheet prefetch"
+	$comments .= "<" . "?php header('Link: <' . url_de_base() . (_DIR_RACINE ? _DIR_RESTREINT_ABS : '') . '$src>;rel=\"stylesheet prefetch\"'); ?>";
+	$flux = substr_replace($flux, $comments, $pos, 0);
+
 	return $flux;
 }
 
 /**
  * Extraire les balises CSS à compacter
- * 
+ *
  * @param string $flux
  *     Contenu HTML dont on extrait les balises CSS
  * @param string $url_base
  * @return array
  *     Couples (balise => src)
  */
-function compresseur_extraire_balises_css_dist($flux, $url_base){
-	$balises = extraire_balises($flux,'link');
+function compresseur_extraire_balises_css_dist($flux, $url_base) {
+	$balises = extraire_balises($flux, 'link');
 	$files = array();
-	foreach ($balises as $s){
+	foreach ($balises as $s) {
 		if (extraire_attribut($s, 'rel') === 'stylesheet'
-			AND (!($type = extraire_attribut($s, 'type'))
-				OR $type == 'text/css')
-			AND is_null(extraire_attribut($s, 'name')) # css nommee : pas touche
-			AND is_null(extraire_attribut($s, 'id'))   # idem
-			AND !strlen(strip_tags($s))
-			AND $src = preg_replace(",^$url_base,",_DIR_RACINE,extraire_attribut($s, 'href')))
+			and (!($type = extraire_attribut($s, 'type'))
+				or $type == 'text/css')
+			and is_null(extraire_attribut($s, 'name')) # css nommee : pas touche
+			and is_null(extraire_attribut($s, 'id'))   # idem
+			and !strlen(strip_tags($s))
+			and $src = preg_replace(",^$url_base,", _DIR_RACINE, extraire_attribut($s, 'href'))
+		) {
 			$files[$s] = $src;
+		}
 	}
+
 	return $files;
 }
 
 /**
  * Extraire les balises JS à compacter
- * 
+ *
  * @param string $flux
  *     Contenu HTML dont on extrait les balises CSS
  * @param string $url_base
  * @return array
  *     Couples (balise => src)
  */
-function compresseur_extraire_balises_js_dist($flux, $url_base){
-	$balises = extraire_balises($flux,'script');
+function compresseur_extraire_balises_js_dist($flux, $url_base) {
+	$balises = extraire_balises($flux, 'script');
 	$files = array();
-	foreach ($balises as $s){
+	foreach ($balises as $s) {
 		if (extraire_attribut($s, 'type') === 'text/javascript'
-			AND is_null(extraire_attribut($s, 'id')) # script avec un id : pas touche
-			AND $src = extraire_attribut($s, 'src')
-			AND !strlen(strip_tags($s)))
+			and is_null(extraire_attribut($s, 'id')) # script avec un id : pas touche
+			and $src = extraire_attribut($s, 'src')
+			and !strlen(strip_tags($s))
+		) {
 			$files[$s] = $src;
+		}
 	}
+
 	return $files;
 }
 
@@ -126,40 +152,42 @@ function compresseur_extraire_balises_js_dist($flux, $url_base){
  * @return string
  *    Contenu compressé du <head> de la page html
  */
-function compacte_head_files($flux,$format) {
+function compacte_head_files($flux, $format) {
 	$url_base = url_de_base();
 	$url_page = substr(generer_url_public('A'), 0, -1);
-	$dir = preg_quote($url_page,',').'|'.preg_quote(preg_replace(",^$url_base,",_DIR_RACINE,$url_page),',');
+	$dir = preg_quote($url_page, ',') . '|' . preg_quote(preg_replace(",^$url_base,", _DIR_RACINE, $url_page), ',');
 
-	if (!$extraire_balises = charger_fonction("compresseur_extraire_balises_$format",'',true))
+	if (!$extraire_balises = charger_fonction("compresseur_extraire_balises_$format", '', true)) {
 		return $flux;
+	}
 
 	$files = array();
-	$flux_nocomment = preg_replace(",<!--.*-->,Uims","",$flux);
-	foreach ($extraire_balises($flux_nocomment, $url_base) as $s=>$src) {
+	$flux_nocomment = preg_replace(",<!--.*-->,Uims", "", $flux);
+	foreach ($extraire_balises($flux_nocomment, $url_base) as $s => $src) {
 		if (
-			preg_match(',^('.$dir.')(.*)$,', $src, $r)
-			OR (
+			preg_match(',^(' . $dir . ')(.*)$,', $src, $r)
+			or (
 				// ou si c'est un fichier
-				$src = preg_replace(',^'.preg_quote(url_de_base(),',').',', '', $src)
+				$src = preg_replace(',^' . preg_quote(url_de_base(), ',') . ',', '', $src)
 				// enlever un timestamp eventuel derriere un nom de fichier statique
-				AND $src2 = preg_replace(",[.]{$format}[?].+$,",".$format",$src)
+				and $src2 = preg_replace(",[.]{$format}[?].+$,", ".$format", $src)
 				// verifier qu'il n'y a pas de ../ ni / au debut (securite)
-				AND !preg_match(',(^/|\.\.),', substr($src,strlen(_DIR_RACINE)))
+				and !preg_match(',(^/|\.\.),', substr($src, strlen(_DIR_RACINE)))
 				// et si il est lisible
-				AND @is_readable($src2)
+				and @is_readable($src2)
 			)
 		) {
-			if ($r)
+			if ($r) {
 				$files[$s] = explode('&', str_replace('&amp;', '&', $r[2]), 2);
-			else
+			} else {
 				$files[$s] = $src;
+			}
 		}
 	}
 
-	$callbacks = array('each_min'=>'callback_minifier_'.$format.'_file');
+	$callbacks = array('each_min' => 'callback_minifier_' . $format . '_file');
 
-	if ($format=="css"){
+	if ($format == "css") {
 		$callbacks['each_pre'] = 'compresseur_callback_prepare_css';
 		$callbacks['all_min'] = 'css_regroup_atimport';
 		// ce n'est pas une callback, mais en injectant l'url de base ici
@@ -168,20 +196,21 @@ function compacte_head_files($flux,$format) {
 		// on exclue le protocole car la compression se fait en url relative au protocole
 		$callbacks[] = protocole_implicite($url_base);
 	}
-	if ($format=='js' AND $GLOBALS['meta']['auto_compress_closure']=='oui'){
+	if ($format == 'js' and $GLOBALS['meta']['auto_compress_closure'] == 'oui') {
 		$callbacks['all_min'] = 'minifier_encore_js';
 	}
 
 	include_spip('inc/compresseur_concatener');
 	include_spip('inc/compresseur_minifier');
-	if (list($src,$comms) = concatener_fichiers($files, $format, $callbacks)
-		AND $src){
-		$compacte_ecrire_balise = charger_fonction("compresseur_ecrire_balise_$format",'');
+	if (list($src, $comms) = concatener_fichiers($files, $format, $callbacks)
+		and $src
+	) {
+		$compacte_ecrire_balise = charger_fonction("compresseur_ecrire_balise_$format", '');
 		$files = array_keys($files);
 		// retrouver la position du premier fichier compacte
-		$pos = strpos($flux,reset($files));
+		$pos = strpos($flux, reset($files));
 		// supprimer tous les fichiers compactes du flux
-		$flux = str_replace($files,"",$flux);
+		$flux = str_replace($files, "", $flux);
 		// inserer la balise (deleguer a la fonction, en lui donnant le necessaire)
 		$flux = $compacte_ecrire_balise($flux, $pos, $src, $comms);
 	}
@@ -193,94 +222,121 @@ function compacte_head_files($flux,$format) {
 /**
  * Lister les fonctions de préparation des feuilles css
  * avant minification
- * 
+ *
  * @return array
  *     Liste des fonctions à appliquer sur les feuilles CSS
  */
-function compresseur_liste_fonctions_prepare_css(){
+function compresseur_liste_fonctions_prepare_css() {
 	static $fonctions = null;
 
-	if (is_null($fonctions)){
-		$fonctions = array('css_resolve_atimport','urls_absolues_css');
+	if (is_null($fonctions)) {
+		$fonctions = array('css_resolve_atimport', 'urls_absolues_css');
 		// les fonctions de preparation aux CSS peuvent etre personalisees
 		// via la globale $compresseur_filtres_css sous forme de tableau de fonctions ordonnees
-		if (isset($GLOBALS['compresseur_filtres_css']) AND is_array($GLOBALS['compresseur_filtres_css']))
+		if (isset($GLOBALS['compresseur_filtres_css']) and is_array($GLOBALS['compresseur_filtres_css'])) {
 			$fonctions = $GLOBALS['compresseur_filtres_css'] + $fonctions;
+		}
 	}
+
 	return $fonctions;
 }
 
 
 /**
  * Préparer un fichier CSS avant sa minification
- * 
+ *
  * @param string $css
  * @param bool|string $is_inline
  * @param string $fonctions
  * @return bool|int|null|string
  */
-function &compresseur_callback_prepare_css(&$css, $is_inline = false, $fonctions=null) {
-	if ($is_inline) return compresseur_callback_prepare_css_inline($css,$is_inline);
-	if (!preg_match(',\.css$,i', $css, $r)) return $css;
+function &compresseur_callback_prepare_css(&$css, $is_inline = false, $fonctions = null) {
+	if ($is_inline) {
+		return compresseur_callback_prepare_css_inline($css, $is_inline);
+	}
+	if (!preg_match(',\.css$,i', $css, $r)) {
+		return $css;
+	}
 
 	$url_absolue_css = url_absolue($css);
 	// retirer le protocole de $url_absolue_css
 	$url_absolue_css_implicite = protocole_implicite($url_absolue_css);
 
-	if (!$fonctions) $fonctions = compresseur_liste_fonctions_prepare_css();
-	elseif (is_string($fonctions)) $fonctions = array($fonctions);
+	if (!$fonctions) {
+		$fonctions = compresseur_liste_fonctions_prepare_css();
+	} elseif (is_string($fonctions)) {
+		$fonctions = array($fonctions);
+	}
 
-	$sign = implode(",",$fonctions);
-	$sign = substr(md5("$url_absolue_css_implicite-$sign"), 0,8);
+	$sign = implode(",", $fonctions);
+	$sign = substr(md5("$url_absolue_css_implicite-$sign"), 0, 8);
 
-	$file = basename($css,'.css');
-	$file = sous_repertoire (_DIR_VAR, 'cache-css')
-		. preg_replace(",(.*?)(_rtl|_ltr)?$,","\\1-f-" . $sign . "\\2",$file)
+	$file = basename($css, '.css');
+	$file = sous_repertoire(_DIR_VAR, 'cache-css')
+		. preg_replace(",(.*?)(_rtl|_ltr)?$,", "\\1-f-" . $sign . "\\2", $file)
 		. '.css';
 
 	if ((@filemtime($file) > @filemtime($css))
-		AND (!defined('_VAR_MODE') OR _VAR_MODE != 'recalcul'))
+		and (!defined('_VAR_MODE') or _VAR_MODE != 'recalcul')
+	) {
 		return $file;
-
-	if ($url_absolue_css==$css){
-		if (strncmp($GLOBALS['meta']['adresse_site']."/",$css,$l=strlen($GLOBALS['meta']['adresse_site']."/"))!=0
-		 OR !lire_fichier(_DIR_RACINE . substr($css,$l), $contenu)){
-		 		include_spip('inc/distant');
-		 		if (!$contenu = recuperer_page($css))
-					return $css;
-		}
 	}
-	elseif (!lire_fichier($css, $contenu))
-		return $css;
 
-	$contenu = compresseur_callback_prepare_css_inline($contenu, $url_absolue_css_implicite, $fonctions);
+	if ($url_absolue_css == $css) {
+		if (strncmp($GLOBALS['meta']['adresse_site'] . "/", $css, $l = strlen($GLOBALS['meta']['adresse_site'] . "/")) != 0
+			or !lire_fichier(_DIR_RACINE . substr($css, $l), $contenu)
+		) {
+			include_spip('inc/distant');
+			if (!$contenu = recuperer_page($css)) {
+				return $css;
+			}
+		}
+	} elseif (!lire_fichier($css, $contenu)) {
+		return $css;
+	}
+
+	$contenu = compresseur_callback_prepare_css_inline($contenu, $url_absolue_css_implicite, $css, $fonctions);
 
 	// ecrire la css
-	if (!ecrire_fichier($file, $contenu))
+	if (!ecrire_fichier($file, $contenu)) {
 		return $css;
+	}
 
 	return $file;
 }
 
 /**
  * Préparer du contenu CSS inline avant minification
- * 
+ *
  * @param string $contenu
+ *   contenu de la CSS
  * @param string $url_base
+ *   url de la CSS ou de la page si c'est un style inline
+ * @param string $filename
+ *   nom du fichier de la CSS (ou vide si c'est un style inline)
  * @param array $fonctions
+ *   liste des fonctions appliquees a la CSS
  * @return string
  */
-function &compresseur_callback_prepare_css_inline(&$contenu, $url_base, $fonctions=null) {
-	if (!$fonctions) $fonctions = compresseur_liste_fonctions_prepare_css();
-	elseif (is_string($fonctions)) $fonctions = array($fonctions);
+function &compresseur_callback_prepare_css_inline(&$contenu, $url_base, $filename = '', $fonctions = null) {
+	if (!$fonctions) {
+		$fonctions = compresseur_liste_fonctions_prepare_css();
+	} elseif (is_string($fonctions)) {
+		$fonctions = array($fonctions);
+	}
 
 	// retirer le protocole de $url_base
 	$url_base = protocole_implicite(url_absolue($url_base));
 
-	foreach($fonctions as $f)
-		if (function_exists($f))
-			$contenu = $f($contenu, $url_base);
-	
+	foreach ($fonctions as $f) {
+		if (!function_exists($f)) {
+			$f = chercher_filtre($f);
+		}
+		if ($f and function_exists($f)) {
+			$contenu = $f($contenu, $url_base, $filename);
+		}
+	}
+
 	return $contenu;
 }
 
@@ -292,36 +348,34 @@ function &compresseur_callback_prepare_css_inline(&$contenu, $url_base, $fonctio
  * @param string $url_base
  * @return string
  */
-function css_resolve_atimport($contenu, $url_base){
+function css_resolve_atimport($contenu, $url_base) {
 	// vite si rien a faire
-	if (strpos($contenu,"@import")===false)
+	if (strpos($contenu, "@import") === false) {
 		return $contenu;
+	}
 
 	$imports_non_resolvables = array();
-	preg_match_all(",@import ([^;]*);,UmsS",$contenu,$matches,PREG_SET_ORDER);
+	preg_match_all(",@import ([^;]*);,UmsS", $contenu, $matches, PREG_SET_ORDER);
 
-	if ($matches AND count($matches)){
-		foreach($matches as $m){
+	if ($matches and count($matches)) {
+		foreach ($matches as $m) {
 			$url = $media = $erreur = "";
-			if (preg_match(",^\s*url\s*\(\s*['\"]?([^'\"]*)['\"]?\s*\),Ums",$m[1],$r)){
+			if (preg_match(",^\s*url\s*\(\s*['\"]?([^'\"]*)['\"]?\s*\),Ums", $m[1], $r)) {
 				$url = $r[1];
-				$media = trim(substr($m[1],strlen($r[0])));
-			}
-			elseif(preg_match(",^\s*['\"]([^'\"]+)['\"],Ums",$m[1],$r)){
+				$media = trim(substr($m[1], strlen($r[0])));
+			} elseif (preg_match(",^\s*['\"]([^'\"]+)['\"],Ums", $m[1], $r)) {
 				$url = $r[1];
-				$media = trim(substr($m[1],strlen($r[0])));
+				$media = trim(substr($m[1], strlen($r[0])));
 			}
-			if (!$url){
-				$erreur = "Compresseur : <tt>".$m[0].";</tt> non resolu dans <tt>$url_base</tt>";
-			}
-			else {
-				$url = suivre_lien($url_base,$url);
+			if (!$url) {
+				$erreur = "Compresseur : <tt>" . $m[0] . ";</tt> non resolu dans <tt>$url_base</tt>";
+			} else {
+				$url = suivre_lien($url_base, $url);
 				// url relative ?
-				$root = protocole_implicite($GLOBALS['meta']['adresse_site']."/");
-				if (strncmp($url,$root,strlen($root))==0){
-					$url = _DIR_RACINE . substr($url,strlen($root));
-				}
-				else {
+				$root = protocole_implicite($GLOBALS['meta']['adresse_site'] . "/");
+				if (strncmp($url, $root, strlen($root)) == 0) {
+					$url = _DIR_RACINE . substr($url, strlen($root));
+				} else {
 					// si l'url a un protocole http(s):// on ne considère qu'on ne peut pas
 					// résoudre le stockage. Par exemple
 					// @import url(https://fonts.googleapis.com/css?family=Ubuntu);
@@ -339,21 +393,21 @@ function css_resolve_atimport($contenu, $url_base){
 					// on renvoit dans la boucle pour que le fichier inclus
 					// soit aussi processe (@import, url absolue etc...)
 					$css = compresseur_callback_prepare_css($url);
-					if ($css==$url
-						OR !lire_fichier($css,$contenu_imported)){
-						$erreur = "Compresseur : url $url de <tt>".$m[0].";</tt> non resolu dans <tt>$url_base</tt>";
-					}
-					else {
-						if ($media){
+					if ($css == $url
+						or !lire_fichier($css, $contenu_imported)
+					) {
+						$erreur = "Compresseur : url $url de <tt>" . $m[0] . ";</tt> non resolu dans <tt>$url_base</tt>";
+					} else {
+						if ($media) {
 							$contenu_imported = "@media $media{\n$contenu_imported\n}\n";
 						}
-						$contenu = str_replace($m[0],$contenu_imported,$contenu);
+						$contenu = str_replace($m[0], $contenu_imported, $contenu);
 					}
 				}
 			}
 
-			if ($erreur){
-				$contenu = str_replace($m[0],"/* erreur @ import ".$m[1]."*/",$contenu);
+			if ($erreur) {
+				$contenu = str_replace($m[0], "/* erreur @ import " . $m[1] . "*/", $contenu);
 				erreur_squelette($erreur);
 			}
 		}
@@ -369,17 +423,19 @@ function css_resolve_atimport($contenu, $url_base){
  * @param string $nom
  * @return bool|string
  */
-function css_regroup_atimport($nom_tmp, $nom){
-	lire_fichier($nom_tmp,$contenu);
-	if (!$contenu OR strpos($contenu,"@import")===false) return false; // rien a faire
+function css_regroup_atimport($nom_tmp, $nom) {
+	lire_fichier($nom_tmp, $contenu);
+	if (!$contenu or strpos($contenu, "@import") === false) {
+		return false;
+	} // rien a faire
 
-	preg_match_all(",@import ([^;]*);,UmsS",$contenu,$matches,PREG_SET_ORDER);
-	$imports = array_map("reset",$matches);
-	$contenu = str_replace($imports,"",$contenu);
-	$contenu = implode("\n",$imports)."\n".$contenu;
-	ecrire_fichier($nom,$contenu,true);
+	preg_match_all(",@import ([^;]*);,UmsS", $contenu, $matches, PREG_SET_ORDER);
+	$imports = array_map("reset", $matches);
+	$contenu = str_replace($imports, "", $contenu);
+	$contenu = implode("\n", $imports) . "\n" . $contenu;
+	ecrire_fichier($nom, $contenu, true);
 	// ecrire une version .gz pour content-negociation par apache, cf. [11539]
-	ecrire_fichier("$nom.gz",$contenu,true);
+	ecrire_fichier("$nom.gz", $contenu, true);
 
 	return $nom;
 }

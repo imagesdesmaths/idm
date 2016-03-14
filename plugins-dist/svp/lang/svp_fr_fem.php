@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/svp?lang_cible=fr_fem
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -34,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_actualiser_tout_depot' => 'Actualiser les paquets de tous les dépôts',
 	'bulle_afficher_xml_plugin' => 'Contenu du fichier XML du plugin',
 	'bulle_ajouter_spipzone' => 'Ajouter le dépôt SPIP-Zone',
+	'bulle_aller_demonstration' => 'Se rendre sur la page de démonstration',
 	'bulle_aller_depot' => 'Se rendre sur la page de ce dépôt',
 	'bulle_aller_documentation' => 'Se rendre sur la page de documentation',
 	'bulle_aller_plugin' => 'Se rendre sur la page du plugin',
@@ -68,6 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_autoriser_activer_paquets_obsoletes_explication' => 'Les paquets obsolètes sont des paquets locaux présents qui sont plus anciens que d’autres paquets locaux. L’obsolescence est établie sur la base de l’état (stable, test, dev) du paquet ainsi que sur la base de sa version. Activez cette option si vous souhaitez malgré tout pouvoir activer ces plugins obsolètes.',
 	'config_depot_editable' => 'Permettre l’édition des dépôts ?',
 	'config_depot_editable_explication' => 'Cela rend éditable les informations d’un dépôt et permet ainsi de lui joindre éventuellement des mots-clés ou documents. Cette option ne devrait intéresser personne ! Préférez laisser « non » !',
+	'confirmer_desinstaller' => 'Attention, la désinstallation d’un plugin <b>efface</b> ses données de la base et est irréversible.<br />Si vous n’êtes pas certaine, désactivez simplement le plugin.',
 	'confirmer_telecharger_dans' => 'Le plugin sera chargé dans un répertoire (@dir@) qui existe déjà.
 	Cela écrasera le contenu de ce répertoire.
 	Une copie de l’ancien contenu sera sauvegardé dans « @dir_backup@ ».
@@ -174,6 +178,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_xml_plugin' => 'XML',
 	'legende_installer_plugins' => 'Installer des plugins',
 	'legende_rechercher_plugins' => 'Rechercher des plugins',
+	'lien_demo' => 'Démonstration',
+	'lien_documentation' => 'Documentation',
 
 	// M
 	'message_action_finale_get_fail' => 'Le plugin « @plugin@ » (version : @version@) n’a pu être correctement récupéré',
@@ -222,6 +228,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_maj_introuvable' => 'Mise à jour du plugin @plugin@ introuvable.',
 	'message_nok_plugin_inexistant' => 'Le plugin demandé est inexistant (@plugin@).',
 	'message_nok_sql_insert_depot' => 'Erreur SQL lors de l’ajout du dépôt @objet@',
+	'message_nok_url_archive' => 'L’URL de l’archive est invalide',
 	'message_nok_url_depot_incorrecte' => 'L’adresse « @url@ » est incorrecte',
 	'message_nok_xml_non_conforme' => 'Le fichier XML « @fichier@ » de description du dépôt n’est pas conforme',
 	'message_nok_xml_non_recupere' => 'Le fichier XML « @fichier@ » n’a pas pu être récupéré',
@@ -264,7 +271,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_form_charger_plugin' => 'Rechercher et ajouter des plugins',
 	'titre_form_charger_plugin_archive' => 'Télécharger un plugin depuis son archive',
 	'titre_form_configurer_svp' => 'Configurer le Serveur de Plugins',
-	'titre_liste_autres_contributions' => 'Squelettes, bibliothèques, jeux d’icônes...',
+	'titre_liste_autres_contributions' => 'Squelettes, bibliothèques, jeux d’icones...',
 	'titre_liste_autres_depots' => 'Autres dépôts',
 	'titre_liste_depots' => 'Liste des dépôts disponibles',
 	'titre_liste_paquets_plugin' => 'Liste des paquets du plugin',

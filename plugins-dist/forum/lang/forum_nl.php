@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=nl
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -11,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_message_forum' => 'Geen bericht in het forum',
 
 	// B
-	'bouton_radio_articles_futurs' => 'voor toekomstige artikels alleen (geen bewerking op de databank).',
+	'bouton_radio_articles_futurs' => 'alleen voor toekomstige artikels (geen bewerking op de databank).',
 	'bouton_radio_articles_tous' => 'voor alle artikels zonder uitzondering.',
 	'bouton_radio_articles_tous_sauf_forum_desactive' => 'voor alle artikels, behalve deze waarvan het forum is gedesactiveerd.',
 	'bouton_radio_enregistrement_obligatoire' => 'Registratie verplicht (om bijdragen te kunnen
@@ -30,6 +32,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_enregistrement_message' => 'Wegens technische problemen kon je bericht niet opgeslaagd worden',
+	'extensions_autorisees' => 'Toegestane extensies:',
+	'extensions_autorisees_toutes' => 'alles',
 
 	// F
 	'form_pet_message_commentaire' => 'Een bericht, een commentaar?',
@@ -42,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_attention_trop_caracteres' => '<b>Opgelet !</b> uw bericht is te lang (@compte@ karakters) : om opgeslagen te worden, mag het niet meer dan @max@ karakters tellen.',
 	'forum_avez_selectionne' => 'Je hebt gekozen:',
 	'forum_cliquer_retour' => 'Klik <a href=\'@retour_forum@\'>hier</a> om door te gaan.',
+	'forum_envoyer' => 'Verzenden',
 	'forum_forum' => 'forum',
 	'forum_info_modere' => 'Dit forum wordt vooraf gemodereerd: je bijdrage zal pas verschijnen nadat een redacteur van de website het heeft goedgekeurd.',
 	'forum_lien_hyper' => 'webverwijzing',
@@ -94,6 +99,8 @@ De publieke forums kunnen per artikel toegestaan worden
 ; Ze worden niet toegestaan op de rubrieken en berichten, enz.',
 	'info_envoi_forum' => 'Versturen van de forums aan de auteurs van de artikels',
 	'info_fonctionnement_forum' => 'Werking van het forum:',
+	'info_forcer_previsualisation_court' => 'Forceer een vooruitblik',
+	'info_forcer_previsualisation_long' => 'Forceer een vooruitblik voordat een bericht verzonden wordt',
 	'info_forums_liees_mot' => 'De forumboodschappen met dit trefwoord',
 	'info_gauche_suivi_forum_2' => 'De pagina <i>Forums opvolgen/beheren</i> is een werktuig van beleid van uw site (en niet een ruimte van discussie of opstellen). Zij geeft alle bijdragen van de forums van de site te kennen, evengoed laten deze van de openbare site als van de particuliere ruimte toe en u om deze bijdragen te beheren.', # A revoir
 	'info_liens_syndiques_3' => 'forums',

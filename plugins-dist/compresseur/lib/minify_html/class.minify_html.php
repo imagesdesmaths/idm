@@ -67,9 +67,12 @@ class Minify_HTML_SPIP extends Minify_HTML {
  * This is a heavy regex-based removal of whitespace, unnecessary comments and
  * tokens. IE conditional comments are preserved. There are also options to have
  * STYLE and SCRIPT blocks compressed by callback functions.
- * https://github.com/mrclay/minify/blob/master/min/lib/Minify/HTML.php
- *
+ * 
  * A test suite is available.
+ * 
+ * @link https://github.com/mrclay/minify/blob/master/min/lib/Minify/HTML.php
+ * @version 9e4176f1
+ * @note Librairie modifiée pour prendre en compte les attributs avec multilignes.
  *
  * @package Minify
  * @author Stephen Clay <steve@mrclay.org>
@@ -121,8 +124,6 @@ class Minify_HTML {
      *
      * 'xhtml' : (optional boolean) should content be treated as XHTML1.0? If
      * unset, minify will sniff for an XHTML doctype.
-     *
-     * @return null
      */
     public function __construct($html, $options = array())
     {
@@ -199,7 +200,7 @@ class Minify_HTML {
 
         // remove ws around block/undisplayed elements
         $this->_html = preg_replace('/\\s+(<\\/?(?:area|base(?:font)?|blockquote|body'
-            .'|caption|center|cite|col(?:group)?|dd|dir|div|dl|dt|fieldset|form'
+            .'|caption|center|col(?:group)?|dd|dir|div|dl|dt|fieldset|form'
             .'|frame(?:set)?|h[1-6]|head|hr|html|legend|li|link|map|menu|meta'
             .'|ol|opt(?:group|ion)|p|param|t(?:able|body|head|d|h||r|foot|itle)'
             .'|ul)\\b[^>]*>)/i', '$1', $this->_html);

@@ -1,15 +1,19 @@
 <?php
 /**
- * Gestion du téléporteur GIT. 
+ * Gestion du téléporteur GIT.
  *
  * @plugin SVP pour SPIP
  * @license GPL
  * @package SPIP\SVP\Teleporteur
  */
- 
+
+if (!defined('_GIT_COMMAND')) {
+	define('_GIT_COMMAND', 'git');
+} // Securite : on peut indiquer le chemin absolu dans mes_options.php
+
 /**
  * Téléporter et déballer un composant GIT
- * 
+ *
  * Déployer un repository GIT depuis une source et une révision données
  *
  * @param string $methode
@@ -25,53 +29,52 @@
  * @return bool
  *     True si l'opération réussie, false sinon.
  */
-function teleporter_git_dist($methode,$source,$dest,$options=array()){
+function teleporter_git_dist($methode, $source, $dest, $options = array()) {
 
-	$branche = (isset($options['branche'])?$options['branche']:'master');
-	if (is_dir($dest)){
-		$infos = teleporter_git_read($dest,array('format'=>'assoc'));
-		if (!$infos){
-			spip_log("Suppression de $dest qui n'est pas au format GIT","teleport");
+	$branche = (isset($options['branche']) ? $options['branche'] : 'master');
+	if (is_dir($dest)) {
+		$infos = teleporter_git_read($dest, array('format' => 'assoc'));
+		if (!$infos) {
+			spip_log("Suppression de $dest qui n'est pas au format GIT", "teleport");
 			$old = teleporter_nettoyer_vieille_version($dest);
-		}
-		elseif ($infos['source']!==$source) {
-			spip_log("Suppression de $dest qui n'est pas sur le bon repository GIT","teleport");
+		} elseif ($infos['source'] !== $source) {
+			spip_log("Suppression de $dest qui n'est pas sur le bon repository GIT", "teleport");
 			$old = teleporter_nettoyer_vieille_version($dest);
-		}
-		elseif (!isset($options['revision'])
-		  OR $options['revision']!=$infos['revision']){
-			$command = "git checkout ".escapeshellarg($branche);
-			teleporter_git_exec($dest,$command);
-			$command = "git pull --all";
-			teleporter_git_exec($dest,$command);
+		} elseif (!isset($options['revision'])
+			or $options['revision'] != $infos['revision']
+		) {
+			$command = _GIT_COMMAND . " checkout " . escapeshellarg($branche);
+			teleporter_git_exec($dest, $command);
+			$command = _GIT_COMMAND . " pull --all";
+			teleporter_git_exec($dest, $command);
 
-			if (isset($options['revision'])){
-				$command = "git checkout ".escapeshellarg($options['revision']);
-				teleporter_git_exec($dest,$command);
+			if (isset($options['revision'])) {
+				$command = _GIT_COMMAND . " checkout " . escapeshellarg($options['revision']);
+				teleporter_git_exec($dest, $command);
+			} else {
+				$command = _GIT_COMMAND . " checkout " . escapeshellarg($branche);
+				teleporter_git_exec($dest, $command);
 			}
-			else {
-				$command = "git checkout ".escapeshellarg($branche);
-				teleporter_git_exec($dest,$command);
-			}
-		}
-		else {
-			spip_log("$dest deja sur GIT $source Revision ".$options['revision'],"teleport");
+		} else {
+			spip_log("$dest deja sur GIT $source Revision " . $options['revision'], "teleport");
 		}
 	}
 
-	if (!is_dir($dest)){
-		$command = "git clone ";
-		$command .= escapeshellarg($source)." ".escapeshellarg($dest);
-		teleporter_git_exec($dest,$command);
-		if (isset($options['revision'])){
-			$command = "git checkout ".escapeshellarg($options['revision']);
-			teleporter_git_exec($dest,$command);
+	if (!is_dir($dest)) {
+		$command = _GIT_COMMAND . " clone ";
+		$command .= escapeshellarg($source) . " " . escapeshellarg($dest);
+		teleporter_git_exec($dest, $command);
+		if (isset($options['revision'])) {
+			$command = _GIT_COMMAND . " checkout " . escapeshellarg($options['revision']);
+			teleporter_git_exec($dest, $command);
 		}
 	}
 
 	// verifier que tout a bien marche
 	$infos = teleporter_git_read($dest);
-	if (!$infos) return false;
+	if (!$infos) {
+		return false;
+	}
 
 	return true;
 }
@@ -80,7 +83,7 @@ function teleporter_git_dist($methode,$source,$dest,$options=array()){
  * Lire l'état GIT du repository
  *
  * Retourne les informations GIT d'un répertoire donné
- * 
+ *
  * @param string $dest
  *     Chemin du répertoire à tester
  * @param array $options
@@ -93,43 +96,47 @@ function teleporter_git_dist($methode,$source,$dest,$options=array()){
  *     -- revision : Révision du dépot
  *     -- dest : Répertoire du dépot.
  */
-function teleporter_git_read($dest, $options=array()) {
+function teleporter_git_read($dest, $options = array()) {
 
-	if (!is_dir("$dest/.git"))
+	if (!is_dir("$dest/.git")) {
 		return "";
+	}
 
 	$curdir = getcwd();
 	chdir($dest);
 
-	exec("git remote -v",$output);
-	$output = implode("\n",$output);
+	exec(_GIT_COMMAND . " remote -v", $output);
+	$output = implode("\n", $output);
 
 	$source = "";
-	if (preg_match(",(\w+://.*)\s+\(fetch\)$,Uims",$output,$m))
+	if (preg_match(",(\w+://.*)\s+\(fetch\)$,Uims", $output, $m)) {
 		$source = $m[1];
-	elseif (preg_match(",([^@\s]+@[^:\s]+:.*)\s+\(fetch\)$,Uims",$output,$m))
+	} elseif (preg_match(",([^@\s]+@[^:\s]+:.*)\s+\(fetch\)$,Uims", $output, $m)) {
 		$source = $m[1];
+	}
 
-	if (!$source){
+	if (!$source) {
 		chdir($curdir);
+
 		return "";
 	}
 
 	$source = $m[1];
 
-	exec("git log -1",$output);
-	$hash = explode(" ",reset($output));
+	exec(_GIT_COMMAND . " log -1", $output);
+	$hash = explode(" ", reset($output));
 	$hash = end($hash);
 
 	// [TODO] lire la branche ?
 	chdir($curdir);
 
-	if (preg_match(",[^0-9a-f],i",$hash))
+	if (preg_match(",[^0-9a-f],i", $hash)) {
 		return false;
+	}
 
 	return array(
 		'source' => $source,
-		'revision' => substr($hash,0,7),
+		'revision' => substr($hash, 0, 7),
 		'dest' => $dest
 	);
 }
@@ -144,10 +151,26 @@ function teleporter_git_read($dest, $options=array()) {
  *     Commande à exécuter
  * @return void
  */
-function teleporter_git_exec($dest,$command) {
-	spip_log("{$dest}:{$command}","teleport");
+function teleporter_git_exec($dest, $command) {
+	spip_log("{$dest}:{$command}", "teleport");
 	$curdir = getcwd();
 	chdir($dest);
 	exec($command);
 	chdir($curdir);
+}
+
+
+/**
+ * Tester si la commande 'git' est disponible
+ *
+ * @return bool
+ *     true si on peut utiliser la commande svn
+ **/
+function teleporter_git_tester() {
+	static $erreurs = null;
+	if (is_null($erreurs)) {
+		exec(_GIT_COMMAND . " --version", $output, $erreurs);
+	}
+
+	return !$erreurs;
 }

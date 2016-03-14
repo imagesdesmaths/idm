@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/dump?lang_cible=fr_tu
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -17,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'confirmer_ecraser_base' => 'Oui, je veux écraser ma base avec cette sauvegarde',
 	'confirmer_ecraser_tables_selection' => 'Oui, je veux écraser les tables sélectionnées avec cette sauvegarde',
+	'confirmer_supprimer_sauvegarde' => 'Es-tu sûr de vouloir supprimer cette sauvegarde ?',
 
 	// D
 	'details_sauvegarde' => 'Détails de la sauvegarde :',

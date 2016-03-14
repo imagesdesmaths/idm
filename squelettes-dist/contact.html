@@ -7,17 +7,18 @@
 <!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
 <head>
-<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
-<title><:contact:> - [(#NOM_SITE_SPIP|textebrut)]</title>
-<INCLURE{fond=inclure/head} />
-<meta name="robots" content="none" />
+	<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+	<title><:contact:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+	<INCLURE{fond=inclure/head,robots=none} />
 </head>
 
 <body class="pas_surlignable page_contact">
 <div class="page">
 
 	<INCLURE{fond=inclure/header} />
-	<INCLURE{fond=inclure/nav,env} />
+	<div class="nav clearfix" id="nav">
+		<INCLURE{fond=inclure/nav,env} />
+	</div>
 
 	<div class="main">
 		<div class="wrapper">

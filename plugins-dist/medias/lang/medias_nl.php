@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/medias?lang_cible=nl
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -104,16 +106,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_heure' => 'Uur',
 	'info_illustrations' => 'Illustraties',
 	'info_image_max_poids' => 'De beelden moeten verplicht minder dan @maxi@ wegen (huidige bestand is @actuel@).',
+	'info_image_max_taille' => 'De beelden moeten verplicht minder dan @maxi@ wegen (huidige bestand is @actuel@).',
 	'info_inclusion_directe' => 'Directe insluiting:',
 	'info_inclusion_vignette' => 'Insluiten van de miniatuurafbeelding:',
 	'info_installer_tous_documents' => 'Alle documenten installeren',
 	'info_largeur' => 'Breedte',
 	'info_logo_max_taille' => 'Logo’s mogen maximaal @maxi@ zijn (dit bestand is @actuel@).',
+	'info_mode' => 'Modus',
 	'info_modifier_document' => 'Document veranderen',
 	'info_portfolio' => 'Portfolio',
 	'info_referencer_doc_distant' => 'Naar een document op internet verwijzen :',
 	'info_sans_vignette' => 'Zonder verkleining',
 	'info_statut_document' => 'Deze document is :',
+	'info_taille' => 'Gewicht',
 	'info_telecharger' => 'Opladen vanf je computer:',
 	'infos' => 'Technische infos',
 	'item_autoriser_selectionner_date_en_ligne' => 'Het mogelijk maken om de datum van elk document te wijzigen',

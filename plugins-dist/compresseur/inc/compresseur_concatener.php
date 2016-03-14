@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -12,10 +12,12 @@
 
 /**
  * Fonctions pour concaténer plusieurs fichiers en un
- * 
+ *
  * @package SPIP\Compresseur\Concatener
  */
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 
 /**
@@ -24,7 +26,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * puis sur le fichier final
  *
  * Gestion d'un cache : le fichier concaténé n'est produit que si il n'existe pas
- * pour la liste de fichiers fournis en entrée  
+ * pour la liste de fichiers fournis en entrée
  *
  *
  * @param array $files
@@ -41,114 +43,123 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return array
  *     Tableau a 2 entrées retournant le nom du fichier et des commentaires HTML à insérer dans la page initiale
  */
-function concatener_fichiers($files,$format='js', $callbacks = array()){
+function concatener_fichiers($files, $format = 'js', $callbacks = array()) {
 	$nom = "";
-	if (!is_array($files) && $files) $files = array($files);
-	if (count($files)){
-		$callback_min = isset($callbacks['each_min'])?$callbacks['each_min']:'concatener_callback_identite';
-		$callback_pre = isset($callbacks['each_pre'])?$callbacks['each_pre']:'';
-	  $url_base = self('&');
+	if (!is_array($files) && $files) {
+		$files = array($files);
+	}
+	if (count($files)) {
+		$callback_min = isset($callbacks['each_min']) ? $callbacks['each_min'] : 'concatener_callback_identite';
+		$callback_pre = isset($callbacks['each_pre']) ? $callbacks['each_pre'] : '';
+		$url_base = self('&');
 
 		// on trie la liste de files pour calculer le nom
 		// necessaire pour retomber sur le meme fichier
 		// si on renome une url a la volee pour enlever le var_mode=recalcul
 		// mais attention, il faut garder l'ordre initial pour la minification elle meme !
-		$dir = sous_repertoire(_DIR_VAR,'cache-'.$format);
-		$nom = $dir . md5(serialize($files).serialize($callbacks)) . ".$format";
+		$dir = sous_repertoire(_DIR_VAR, 'cache-' . $format);
+		$nom = $dir . md5(serialize($files) . serialize($callbacks)) . ".$format";
 		if (
-			(defined('_VAR_MODE') AND _VAR_MODE=='recalcul')
-			OR !file_exists($nom)
+			(defined('_VAR_MODE') and _VAR_MODE == 'recalcul')
+			or !file_exists($nom)
 		) {
 			$fichier = "";
 			$comms = array();
 			$total = 0;
 			$files2 = false;
-			foreach($files as $key=>$file){
+			foreach ($files as $key => $file) {
 				if (!is_array($file)) {
 					// c'est un fichier
 					$comm = $file;
 					// enlever le timestamp si besoin
-					$file = preg_replace(",[?].+$,",'',$file);
+					$file = preg_replace(",[?].+$,", '', $file);
 
 					// preparer le fichier si necessaire
-					if ($callback_pre)
+					if ($callback_pre) {
 						$file = $callback_pre($file);
-					
+					}
+
 					lire_fichier($file, $contenu);
-				}
-				else {
+				} else {
 					// c'est un squelette
-					if (!isset($file[1])) $file[1] = '';
+					if (!isset($file[1])) {
+						$file[1] = '';
+					}
 					$comm = _SPIP_PAGE . "=$file[0]"
-						. (strlen($file[1])?"($file[1])":'');
-					parse_str($file[1],$contexte);
-					$contenu = recuperer_fond($file[0],$contexte);
+						. (strlen($file[1]) ? "($file[1])" : '');
+					parse_str($file[1], $contexte);
+					$contenu = recuperer_fond($file[0], $contexte);
 
 					// preparer le contenu si necessaire
-					if ($callback_pre)
-						$contenu = $callback_pre($contenu, url_absolue(_DIR_RESTREINT?generer_url_public($file[0],$file[1]):$url_base));
+					if ($callback_pre) {
+						$contenu = $callback_pre($contenu,
+							url_absolue(_DIR_RESTREINT ? generer_url_public($file[0], $file[1]) : $url_base));
+					}
 					// enlever le var_mode si present pour retrouver la css minifiee standard
-					if (strpos($file[1],'var_mode')!==false) {
-						if (!$files2) $files2 = $files;
+					if (strpos($file[1], 'var_mode') !== false) {
+						if (!$files2) {
+							$files2 = $files;
+						}
 						$old_key = $key;
-						$key = preg_replace(',(&(amp;)?)?var_mode=[^&\'"]*,','',$key);
-						$file[1] = preg_replace(',&?var_mode=[^&\'"]*,','',$file[1]);
-						if (!strlen($file[1]))
+						$key = preg_replace(',(&(amp;)?)?var_mode=[^&\'"]*,', '', $key);
+						$file[1] = preg_replace(',&?var_mode=[^&\'"]*,', '', $file[1]);
+						if (!strlen($file[1])) {
 							unset($file[1]);
-						$files2 = array_replace_key($files2,$old_key,$key,$file);
+						}
+						$files2 = array_replace_key($files2, $old_key, $key, $file);
 					}
 				}
 				// passer la balise html initiale en second argument
-				$fichier .= "/* $comm */\n". $callback_min($contenu, $key) . "\n\n";
+				$fichier .= "/* $comm */\n" . $callback_min($contenu, $key) . "\n\n";
 				$comms[] = $comm;
 				$total += strlen($contenu);
 			}
 
 			// calcul du % de compactage
-			$pc = intval(1000*strlen($fichier)/$total)/10;
-			$comms = "compact [\n\t".join("\n\t", $comms)."\n] $pc%";
-			$fichier = "/* $comms */\n\n".$fichier;
+			$pc = intval(1000 * strlen($fichier) / $total) / 10;
+			$comms = "compact [\n\t" . join("\n\t", $comms) . "\n] $pc%";
+			$fichier = "/* $comms */\n\n" . $fichier;
 
 			// si on a nettoye des &var_mode=recalcul : mettre a jour le nom
 			// on ecrit pas dans le nom initial, qui est de toute facon recherche qu'en cas de recalcul
 			// donc jamais utile
 			if ($files2) {
-				$files=$files2;
-				$nom = $dir . md5(serialize($files).serialize($callbacks)) . ".$format";
+				$files = $files2;
+				$nom = $dir . md5(serialize($files) . serialize($callbacks)) . ".$format";
 			}
 
 			$nom_tmp = $nom;
-		  $final_callback = (isset($callbacks['all_min'])?$callbacks['all_min']:false);
-		  if ($final_callback){
-			  unset($callbacks['all_min']);
-		    $nom_tmp = $dir . md5(serialize($files).serialize($callbacks)) . ".$format";
-		  }
+			$final_callback = (isset($callbacks['all_min']) ? $callbacks['all_min'] : false);
+			if ($final_callback) {
+				unset($callbacks['all_min']);
+				$nom_tmp = $dir . md5(serialize($files) . serialize($callbacks)) . ".$format";
+			}
 			// ecrire
-			ecrire_fichier($nom_tmp,$fichier,true);
-			spip_clearstatcache(true,$nom_tmp);
+			ecrire_fichier($nom_tmp, $fichier, true);
+			spip_clearstatcache(true, $nom_tmp);
 			// ecrire une version .gz pour content-negociation par apache, cf. [11539]
-			ecrire_fichier("$nom_tmp.gz",$fichier,true);
+			ecrire_fichier("$nom_tmp.gz", $fichier, true);
 
-		  if ($final_callback){
+			if ($final_callback) {
 				// closure compiler ou autre super-compresseurs
 				// a appliquer sur le fichier final
 				$encore = $final_callback($nom_tmp, $nom);
-		    // si echec, on se contente de la compression sans cette callback
-			  if ($encore!==$nom){
+				// si echec, on se contente de la compression sans cette callback
+				if ($encore !== $nom) {
 					// ecrire
-					ecrire_fichier($nom,$fichier,true);
-				  spip_clearstatcache(true,$nom);
+					ecrire_fichier($nom, $fichier, true);
+					spip_clearstatcache(true, $nom);
 					// ecrire une version .gz pour content-negociation par apache, cf. [11539]
-					ecrire_fichier("$nom.gz",$fichier,true);
-			  }
-		  }
+					ecrire_fichier("$nom.gz", $fichier, true);
+				}
+			}
 		}
 
 
 	}
 
 	// Le commentaire detaille n'apparait qu'au recalcul, pour debug
-	return array($nom, (isset($comms) AND $comms) ? "<!-- $comms -->\n" : '');
+	return array($nom, (isset($comms) and $comms) ? "<!-- $comms -->\n" : '');
 }
 
 /**
@@ -156,10 +167,10 @@ function concatener_fichiers($files,$format='js', $callbacks = array()){
  *
  * Mais justement, par défaut on ne minifie rien !
  *
- * @param string $contenu  Contenu à minifier
+ * @param string $contenu Contenu à minifier
  * @return string          Contenu à minifier
  */
-function &concatener_callback_identite(&$contenu){
+function &concatener_callback_identite(&$contenu) {
 	return $contenu;
 }
 
@@ -167,7 +178,7 @@ function &concatener_callback_identite(&$contenu){
  * Une callback pour ?
  *
  * @param array $tableau
- *     
+ *
  * @param string $orig_key
  *     Index dont on cherche la valeur actuelle
  * @param string $new_key
@@ -176,18 +187,19 @@ function &concatener_callback_identite(&$contenu){
  *     Si rempli, la nouvelle clé prend cette valeur à la place
  *     de la valeur de la clé d'origine
  * @return array
- *     
+ *
  */
-function &array_replace_key($tableau,$orig_key,$new_key,$new_value=null){
+function &array_replace_key($tableau, $orig_key, $new_key, $new_value = null) {
 	$t = array();
-	foreach($tableau as $k=>$v) {
-		if ($k==$orig_key) {
-			$k=$new_key;
+	foreach ($tableau as $k => $v) {
+		if ($k == $orig_key) {
+			$k = $new_key;
 			if (!is_null($new_value)) {
 				$v = $new_value;
 			}
 		}
 		$t[$k] = $v;
 	}
+
 	return $t;
 }

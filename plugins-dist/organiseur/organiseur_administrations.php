@@ -3,14 +3,16 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Installation/maj des tables messagerie
@@ -18,32 +20,33 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $nom_meta_base_version
  * @param string $version_cible
  */
-function organiseur_upgrade($nom_meta_base_version,$version_cible){
+function organiseur_upgrade($nom_meta_base_version, $version_cible) {
 	// cas particulier :
 	// si plugin pas installe mais que la table existe
 	// considerer que c'est un upgrade depuis v 1.0.0
 	// pour gerer l'historique des installations SPIP <=2.1
-	if (!isset($GLOBALS['meta'][$nom_meta_base_version])){
-		$trouver_table = charger_fonction('trouver_table','base');
+	if (!isset($GLOBALS['meta'][$nom_meta_base_version])) {
+		$trouver_table = charger_fonction('trouver_table', 'base');
 		if ($desc = $trouver_table('spip_messages')
-		  AND isset($desc['exist']) AND $desc['exist']){
-			ecrire_meta($nom_meta_base_version,'1.0.0');
+			and isset($desc['exist']) and $desc['exist']
+		) {
+			ecrire_meta($nom_meta_base_version, '1.0.0');
 		}
 		// si pas de table en base, on fera une simple creation de base
 	}
-	
+
 	$maj = array();
 	$maj['create'] = array(
 		array('maj_tables', array('spip_messages', 'spip_auteurs')),
 	);
 
 	$maj['1.1.0'] = array(
-		array('sql_updateq',"spip_messages",array('statut'=>'prepa'),"statut='redac'"),
+		array('sql_updateq', "spip_messages", array('statut' => 'prepa'), "statut='redac'"),
 		array('maj_tables', array('spip_messages')), // champ destinataires
 	);
 
 	$maj['1.1.1'] = array(
-		array('sql_alter',"TABLE spip_messages CHANGE id_auteur id_auteur bigint(21) DEFAULT 0 NOT NULL"),
+		array('sql_alter', "TABLE spip_messages CHANGE id_auteur id_auteur bigint(21) DEFAULT 0 NOT NULL"),
 	);
 
 	$maj['1.1.2'] = array(
@@ -69,7 +72,3 @@ function organiseur_vider_tables($nom_meta_base_version) {
 
 	effacer_meta($nom_meta_base_version);
 }
-
-
-
-?>

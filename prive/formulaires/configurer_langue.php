@@ -3,32 +3,35 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function formulaires_configurer_langue_charger_dist(){
+function formulaires_configurer_langue_charger_dist() {
 	$valeurs = array();
 
 	include_spip('inc/lang');
 	$l_site = $GLOBALS['meta']['langue_site'];
 	$langue_site = traduire_nom_langue($l_site);
 
-	$langues = explode(",",$GLOBALS['meta']['langues_proposees']);
-	if (!in_array($l_site, $langues))
-	 $langues[] = $l_site;
+	$langues = explode(",", $GLOBALS['meta']['langues_proposees']);
+	if (!in_array($l_site, $langues)) {
+		$langues[] = $l_site;
+	}
 	sort($langues);
 
 	$res = "";
 	foreach ($langues as $l) {
 		$res .= "<option value='$l'"
-			. ($l==$l_site ? " selected='selected'":"")
-			.">".traduire_nom_langue($l)."</option>\n";
+			. ($l == $l_site ? " selected='selected'" : "")
+			. ">" . traduire_nom_langue($l) . "</option>\n";
 	}
 
 	$valeurs = array(
@@ -41,8 +44,8 @@ function formulaires_configurer_langue_charger_dist(){
 }
 
 
-function formulaires_configurer_langue_traiter_dist(){
-	$res = array('editable'=>true);
+function formulaires_configurer_langue_traiter_dist() {
+	$res = array('editable' => true);
 
 	if ($lang = _request('changer_langue_site')) {
 		include_spip('inc/lang');
@@ -58,7 +61,9 @@ function formulaires_configurer_langue_traiter_dist(){
 		// le test a defait ca:
 		utiliser_langue_visiteur();
 	}
-	if (!$res['message_ok'])
+	if (!$res['message_ok']) {
 		$res['message_erreur'] = _L('erreur');
+	}
+
 	return $res;
 }

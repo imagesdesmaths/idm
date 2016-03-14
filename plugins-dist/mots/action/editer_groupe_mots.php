@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -15,7 +15,9 @@
  *
  * @package SPIP\Mots\Actions
  */
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 include_spip('inc/filtres');
 
@@ -26,16 +28,15 @@ include_spip('inc/filtres');
  *
  * Si aucun identifiant n'est donné, on crée alors un nouveau groupe de
  * mots clés.
- * 
+ *
  * @param null|int $id_groupe
  *     Identifiant du groupe de mot-clé. En absence utilise l'argument
  *     de l'action sécurisée.
  * @return array
  *     Liste (identifiant du groupe de mot clé, Texte d'erreur éventuel)
-**/
-function action_editer_groupe_mots_dist($id_groupe=null)
-{
-	if (is_null($id_groupe)){
+ **/
+function action_editer_groupe_mots_dist($id_groupe = null) {
+	if (is_null($id_groupe)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$id_groupe = $securiser_action();
 	}
@@ -44,10 +45,11 @@ function action_editer_groupe_mots_dist($id_groupe=null)
 		$id_groupe = groupe_mots_inserer();
 	}
 
-	if ($id_groupe>0)
+	if ($id_groupe > 0) {
 		$err = groupe_mots_modifier($id_groupe);
+	}
 
-	return array($id_groupe,$err);
+	return array($id_groupe, $err);
 }
 
 
@@ -56,22 +58,38 @@ function action_editer_groupe_mots_dist($id_groupe=null)
  *
  * @pipeline_appel pre_insertion
  * @pipeline_appel post_insertion
- * 
- * @param string $table
- *     Tables sur lesquels des mots de ce groupe pourront être liés
+ *
+ * @param int $id_parent
+ *     inutilise, pour consistance de l'API
+ * @param null|array $set
  * @return int|bool
  *     Identifiant du nouveau groupe de mots clés.
  */
-function groupe_mots_inserer($table='') {
+function groupe_mots_inserer($id_parent = null, $set = null) {
+
+	// support de la signature derogatoire pour compat
+	// groupe_mots_inserer($table='')
+	if (is_string($id_parent) and strlen($id_parent)) {
+		if (is_null($set)) {
+			$set = array();
+		}
+		$set['tables_liees'] = $id_parent;
+	}
+
+
 	$champs = array(
 		'titre' => '',
 		'unseul' => 'non',
 		'obligatoire' => 'non',
-		'tables_liees' => $table,
-		'minirezo' =>  'oui',
-		'comite' =>  'non',
+		'tables_liees' => '',
+		'minirezo' => 'oui',
+		'comite' => 'non',
 		'forum' => 'non'
 	);
+
+	if ($set) {
+		$champs = array_merge($champs, $set);
+	}
 
 	// Envoyer aux plugins
 	$champs = pipeline('pre_insertion',
@@ -83,7 +101,7 @@ function groupe_mots_inserer($table='') {
 		)
 	);
 
-	$id_groupe = sql_insertq("spip_groupes_mots", $champs) ;
+	$id_groupe = sql_insertq("spip_groupes_mots", $champs);
 
 	pipeline('post_insertion',
 		array(
@@ -101,7 +119,7 @@ function groupe_mots_inserer($table='') {
 
 /**
  * Modifier un groupe de mot
- * 
+ *
  * @param int $id_groupe
  *     Identifiant du grope de mots clés à modifier
  * @param array|null $set
@@ -113,16 +131,22 @@ function groupe_mots_inserer($table='') {
  *     Null si aucun champ à modifier,
  *     Chaîne contenant un texte d'erreur sinon.
  */
-function groupe_mots_modifier($id_groupe, $set=null) {
+function groupe_mots_modifier($id_groupe, $set = null) {
 	$err = '';
 
 	include_spip('inc/modifier');
 	$c = collecter_requests(
-		// white list
+	// white list
 		array(
-		 'titre', 'descriptif', 'texte', 'tables_liees',
-		 'obligatoire', 'unseul',
-		 'comite', 'forum', 'minirezo',
+			'titre',
+			'descriptif',
+			'texte',
+			'tables_liees',
+			'obligatoire',
+			'unseul',
+			'comite',
+			'forum',
+			'minirezo',
 		),
 		// black list
 		array(),
@@ -131,17 +155,24 @@ function groupe_mots_modifier($id_groupe, $set=null) {
 	);
 	// normaliser les champ oui/non
 	foreach (array(
-		'obligatoire', 'unseul',
-		'comite', 'forum', 'minirezo'
-	) as $champ)
-		if (isset($c[$champ]))
-			$c[$champ] = ($c[$champ]=='oui'?'oui':'non');
+		         'obligatoire',
+		         'unseul',
+		         'comite',
+		         'forum',
+		         'minirezo'
+	         ) as $champ) {
+		if (isset($c[$champ])) {
+			$c[$champ] = ($c[$champ] == 'oui' ? 'oui' : 'non');
+		}
+	}
 
-	if (isset($c['tables_liees']) AND is_array($c['tables_liees']))
-		$c['tables_liees'] = implode(',',array_diff($c['tables_liees'],array('')));
+	if (isset($c['tables_liees']) and is_array($c['tables_liees'])) {
+		$c['tables_liees'] = implode(',', array_diff($c['tables_liees'], array('')));
+	}
 
 	$err = objet_modifier_champs('groupe_mot', $id_groupe,
 		array(
+			'data' => $set,
 			'nonvide' => array('titre' => _T('info_sans_titre'))
 		),
 		$c);
@@ -157,7 +188,7 @@ function groupe_mots_modifier($id_groupe, $set=null) {
  *
  * @deprecated Utiliser groupe_mots_modifier()
  * @see groupe_mots_modifier()
- * 
+ *
  * @param int $id_groupe
  *     Identifiant du grope de mots clés à modifier
  * @param array|null $c
@@ -169,8 +200,8 @@ function groupe_mots_modifier($id_groupe, $set=null) {
  *     Null si aucun champ à modifier,
  *     Chaîne contenant un texte d'erreur sinon.
  */
-function revision_groupe_mot($id_groupe, $c=false) {
-	return groupe_mots_modifier($id_groupe,$c);
+function revision_groupe_mot($id_groupe, $c = false) {
+	return groupe_mots_modifier($id_groupe, $c);
 }
 
 
@@ -179,14 +210,15 @@ function revision_groupe_mot($id_groupe, $c=false) {
  *
  * @deprecated Utiliser groupe_mots_inserer() ou objet_inserer()
  * @see groupe_mots_inserer()
- * 
+ *
  * @param string $table
  *     Tables sur lesquels des mots de ce groupe pourront être liés
+ * @param null|array $set
  * @return int|bool
  *     Identifiant du nouveau groupe de mots clés.
  */
-function groupemots_inserer($table='') {
-	return groupe_mots_inserer($table);
+function groupemots_inserer($table = '', $set = null) {
+	return groupe_mots_inserer($table, $set);
 }
 
 /**
@@ -194,7 +226,7 @@ function groupemots_inserer($table='') {
  *
  * @deprecated Utiliser groupe_mots_modifier() ou objet_modifier()
  * @see groupe_mots_modifier()
- * 
+ *
  * @param int $id_groupe
  *     Identifiant du grope de mots clés à modifier
  * @param array|null $set
@@ -206,7 +238,6 @@ function groupemots_inserer($table='') {
  *     Null si aucun champ à modifier,
  *     Chaîne contenant un texte d'erreur sinon.
  */
-function groupemots_modifier($id_groupe, $set=null) {
+function groupemots_modifier($id_groupe, $set = null) {
 	return groupe_mots_modifier($id_groupe, $set);
 }
-?>

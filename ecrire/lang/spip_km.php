@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=km
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -469,7 +471,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_retour_public' => 'ត្រលប់ទៅ វ៉ែបសៃថ៍ សាធារណៈ',
 	'login_retour_site' => 'ត្រលប់ទៅ វ៉ែបសៃថ៍ សាធារណៈ',
 	'login_retoursitepublic' => 'ត្រលប់ទៅ វ៉ែបសៃថ៍ សាធារណៈ',
-	'login_sans_cookiie' => 'ការសំគាល់ អត្ដសញា គ្មានខូកឃី',
 	'login_sinscrire' => 'ចុះ​ឈ្មោះ',
 	'login_test_navigateur' => 'សា​ល្បង​ឧបកររាវរក​/​​ភ្ជាប់​ឡើង​វិញ',
 	'login_verifiez_navigateur' => '(ផ្ទៀងផ្ទាត់​ គ្រប់ពេល ដែលឧបកររាវរក របស់អ្នក មិនបាន​ចង​ចាំ ពាក្យសំងាត់ របស់​អ្នក...)',

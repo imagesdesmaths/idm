@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=es
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -55,14 +57,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_valider_article' => 'Validar este artículo',
 	'icone_valider_articles' => 'Validar estos artículos',
 	'icone_voir_sites_references' => 'Ver los sitios referenciados',
+	'info_1_article_syndique' => '1 artículo sindicado',
+	'info_1_site' => '1 sitio',
 	'info_1_site_importe' => '1  sitio fue importado',
 	'info_a_valider' => '[a validar]',
+	'info_aucun_article_syndique' => 'Ningún artículo sindicado',
+	'info_aucun_site' => 'Ningún sitio',
 	'info_aucun_site_importe' => 'Ningún sitio pudo ser importado',
 	'info_bloquer' => 'bloquear',
 	'info_bloquer_lien' => 'bloquear este enlace',
 	'info_derniere_syndication' => 'La última sindicación de este sitio fue realizada el',
 	'info_liens_syndiques_1' => 'enlaces sindicados',
 	'info_liens_syndiques_2' => 'están en espera de validación.',
+	'info_nb_articles_syndiques' => '@nb@ artículos sindicados',
+	'info_nb_sites' => '@nb@ sitios',
 	'info_nb_sites_importes' => '@nb@ sitios fueron importados',
 	'info_nom_site_2' => '<b>Nombre del sitio</b> [Obligatorio]',
 	'info_panne_site_syndique' => 'El sitio sindicado tiene problemas',

@@ -3,9 +3,17 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=ro
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// B
+	'bouton_radio_activer_petition' => 'Activaţi petiţia',
+	'bouton_radio_pas_petition' => 'Fără petiţie',
+	'bouton_radio_petition_activee' => 'Petiţie activată',
+	'bouton_radio_supprimer_petition' => 'Ştergeţi petiţia',
 
 	// F
 	'form_pet_adresse_site' => 'Adresa site-ului dumneavoastră', # MODIF

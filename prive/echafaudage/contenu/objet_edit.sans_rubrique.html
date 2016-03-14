@@ -12,7 +12,7 @@
 	]
 	[
 		[(#OBJET|objet_info{#ID_OBJET|?{texte_modifier,texte_creer}}|_T)]
-		<h1>(#ENV*{titre,#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{<:info_sans_titre:>}})</h1>
+		<h1>(#ENV{titre,#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{<:info_sans_titre:>}})</h1>
 	]
 </div>
 
@@ -24,6 +24,6 @@
 		[(#FORMULAIRE_{[editer_(#OBJET)],#ENV{id_objet,oui},#GET{redirect},#ENV{lier_trad}})]
 [(#ENV{retourajax,''}|oui)
 	</div>
-	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\]\]>*/</script>
 ]
 </div>

@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=vi
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -33,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Sửa liên kết này',
 	'icone_referencer_nouveau_site' => 'Thêm một điểm nối vào trang Web khác',
 	'icone_voir_sites_references' => 'Xem những liên kết',
+	'info_1_site' => '1 trang web',
 	'info_a_valider' => '[chờ thông qua]',
 	'info_bloquer' => 'ngăn chận',
 	'info_bloquer_lien' => 'chặn điểm nối này',

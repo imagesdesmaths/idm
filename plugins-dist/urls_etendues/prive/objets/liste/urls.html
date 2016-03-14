@@ -34,7 +34,7 @@
 			<td class='objet'><a href="[(#ID_OBJET|generer_url_entite{#TYPE})]">[(#TYPE|objet_info{texte_objet}|_T)]&nbsp;#ID_OBJET</a></td>
 			<td class='parent'>[(#ID_PARENT|?{#ID_PARENT})]</td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
-			<td class='action'>[(#AUTORISER{modifier,#TYPE,#ID_OBJET})[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{supprimer-12}|balise_img{<:urls:bouton_supprimer_url:>})],[(#URL_ACTION_AUTEUR{supprimer_url,[(#ID_PARENT)-#URL],#SELF})],ajax})]]</td>
+			<td class='action'>[(#AUTORISER{modifierurl,#TYPE,#ID_OBJET})[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{supprimer-12}|balise_img{<:urls:bouton_supprimer_url:>})],[(#URL_ACTION_AUTEUR{supprimer_url,[(#ID_PARENT)-#URL],#SELF})],ajax})]]</td>
 		</tr>
 	</BOUCLE_liste_urls>
 	</tbody>

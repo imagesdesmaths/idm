@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=es
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -31,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'Cancelar',
 	'antispam_champ_vide' => 'Por favor, deje este campo vacío :',
 	'articles_recents' => 'Los artículos más recientes',
+	'avis_1_erreur_saisie' => 'Hay 1 error en su entrada, verifique por favor la información.',
 	'avis_archive_incorrect' => 'El archivo de respaldo no es un archivo SPIP.',
 	'avis_archive_invalide' => 'el archivo de respaldo no es válido',
 	'avis_attention' => '¡ATENCIÓN!',
@@ -43,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_mysql' => 'Error SQL',
 	'avis_erreur_sauvegarde' => 'Error al hacer la copia de respaldo (@type@ @id_objet@)!',
 	'avis_erreur_visiteur' => 'Probleme de acceso al espacio privado',
+	'avis_nb_erreurs_saisie' => 'Hay @nb@ errores en su entrada, verifique por favor la información.',
 
 	// B
 	'barre_a_accent_grave' => 'Insertar una A mayúscula con acento grave',
@@ -110,8 +114,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_heures_minutes_court' => '@h@h@m@',
 	'date_fmt_jour' => '@nomjour@ @jour@',
 	'date_fmt_jour_heure' => '@jour@ a las @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'el @jour@ de las @heure_debut@ a las @heure_fin@',
-	'date_fmt_jour_heure_debut_fin_abbr' => 'el @dtstart@@jour@ de las @heure_debut@@dtabbr@ a las @dtstart@@heure_fin@@dtend@',
+	'date_fmt_jour_heure_debut_fin' => '@jour@ de las @heure_debut@ a las @heure_fin@',
+	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@ de las @heure_debut@@dtabbr@ a las @dtend@@heure_fin@@dtabbr@',
 	'date_fmt_jour_mois' => '@jour@ de @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ de @nommois@ de @annee@',
 	'date_fmt_mois_annee' => '@nommois@ de @annee@',
@@ -121,6 +125,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_periode_abbr' => 'Del @dtart@@date_debut@@dtabbr@ al @dtend@@date_fin@@dtabbr@',
 	'date_fmt_periode_from' => 'Del',
 	'date_fmt_periode_to' => 'al',
+	'date_fmt_saison_annee' => '@saison@ @annee@',
 	'date_heures' => 'horas',
 	'date_hier' => 'ayer',
 	'date_il_y_a' => 'hace @delai@',
@@ -528,7 +533,7 @@ en el sitio "@nom_site_spip@" (@adresse_login@):',
 	'login_retour_public' => 'Volver al sitio público',
 	'login_retour_site' => 'Volver al sitio público',
 	'login_retoursitepublic' => 'volver al sitio público',
-	'login_sans_cookiie' => 'Identificación sin "cookie"',
+	'login_sans_cookie' => 'Identificación sin "cookie"',
 	'login_securise' => 'Conexión segura',
 	'login_sinscrire' => 'inscribirse',
 	'login_test_navigateur' => 'prueba de navegador/reconexión',
@@ -586,7 +591,7 @@ volver a conectarte al sitio.
 	'pass_nouveau_pass' => 'Nueva contraseña',
 	'pass_ok' => 'OK',
 	'pass_oubli_mot' => 'Contraseña olvidada',
-	'pass_procedure_changer' => 'Para cambiar tu contraseña, primero es necesario verificar tu identidad. Para eso, indica la dirección email asociada a tu cuenta.',
+	'pass_procedure_changer' => 'Para cambiar su contraseña, indique por favor el correo electrónico asociado a su cuenta.',
 	'pass_quitter_fenetre' => 'Abandonar esta ventana',
 	'pass_rappel_login' => 'Recuerda: tu identificador (login) es «@login@».',
 	'pass_recevoir_mail' => 'Recibirás un mensaje de correo electrónico indicando como recuperar tu acceso al sitio.',
@@ -656,6 +661,7 @@ Intenta',
 	'titre_statistiques' => 'Estadísticas del sitio',
 	'titre_titre_document' => 'Título del documento',
 	'todo' => 'a continuación',
+	'trad_definir_reference' => 'Elegir "@titre@" como referencia de las traducciones',
 	'trad_reference' => '(referencia de las traducciones)',
 
 	// Z
@@ -669,6 +675,7 @@ Intenta',
 	'zbug_champ_hors_motif' => 'El campo @champ@ está fuera de contexto @motif@',
 	'zbug_code' => 'código',
 	'zbug_critere_inconnu' => 'Criterio @critere@ desconocido ',
+	'zbug_critere_sur_table_sans_cle_primaire' => '{@critere@} en una tabla sin clave primaria simple',
 	'zbug_distant_interdit' => 'Acceso externo prohibido',
 	'zbug_doublon_table_sans_cle_primaire' => 'Doublons en una tabla sin clave primaria simple',
 	'zbug_doublon_table_sans_index' => 'Doublons en una tabla sin índice',

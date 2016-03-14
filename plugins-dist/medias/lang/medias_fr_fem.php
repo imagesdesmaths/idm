@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/medias?lang_cible=fr_fem
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -104,16 +106,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_heure' => 'Heure',
 	'info_illustrations' => 'Illustrations',
 	'info_image_max_poids' => 'Les images doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
+	'info_image_max_taille' => 'Les images doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
 	'info_inclusion_directe' => 'Inclusion directe :',
 	'info_inclusion_vignette' => 'Inclusion de la vignette :',
 	'info_installer_tous_documents' => 'Installer tous les documents',
 	'info_largeur' => 'Largeur',
 	'info_logo_max_taille' => 'Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
+	'info_mode' => 'Mode',
 	'info_modifier_document' => 'Modifier le document',
 	'info_portfolio' => 'Portfolio',
 	'info_referencer_doc_distant' => 'Référencer un document sur l’internet :',
 	'info_sans_vignette' => 'Sans vignette',
 	'info_statut_document' => 'Ce document est :',
+	'info_taille' => 'Poids',
 	'info_telecharger' => 'Télécharger depuis votre ordinateur :',
 	'infos' => 'Infos techniques',
 	'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document',

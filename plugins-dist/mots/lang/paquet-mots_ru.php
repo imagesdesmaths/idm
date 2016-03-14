@@ -3,13 +3,15 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/paquet-mots?lang_cible=ru
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'mots_description' => 'Ключи и группы ключей',
-	'mots_slogan' => 'Настройка групп ключей и ключей в SPIP'
+	'mots_slogan' => 'Настройка ключей и групп ключей в SPIP'
 );
 
 ?>

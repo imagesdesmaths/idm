@@ -3,9 +3,17 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=gl
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// B
+	'bouton_radio_activer_petition' => 'Activar a petición',
+	'bouton_radio_pas_petition' => 'Sen petición',
+	'bouton_radio_petition_activee' => 'Petición activada',
+	'bouton_radio_supprimer_petition' => 'Eliminar a petición',
 
 	// F
 	'form_pet_adresse_site' => 'Enderezo do seu web', # MODIF

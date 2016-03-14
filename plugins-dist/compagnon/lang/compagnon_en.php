@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/compagnon?lang_cible=en
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -35,6 +37,10 @@ In the block on the side column, change "editing in progress" by "published onli
 So create an article. You can do it from this page under the description of your section.',
 	'c_rubriques_creer' => 'Create a first section !',
 	'c_rubriques_creer_texte' => 'Sections are the basic structure of the site, you can create articles in each of them. Start by creating a first section.',
+	'c_sites_creer' => 'How to create or import a site?',
+	'c_sites_creer_texte' => 'Vous ne pourrez créer ou importer un site depuis cette page
+		qu’à partir du moment où il existe une rubrique dans votre site.
+		Vous pouvez la créer depuis le menu « Édition », puis « Rubriques ».',
 
 	// E
 	'explication_activer_compagnon' => 'The companion adds comments on some pages of the private area to assist in taking SPIP in hand. Would you like to activate it?',

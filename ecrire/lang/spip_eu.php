@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=eu
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -110,8 +112,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_heures_minutes_court' => '@h@h@m@',
 	'date_fmt_jour' => '@nomjour@ @jour@',
 	'date_fmt_jour_heure' => '@jour@@heure@-etan',
-	'date_fmt_jour_heure_debut_fin' => '@jour@-an @heure_debut@-tik @heure_fin@-ra',
-	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@-an @heure_debut@@dtabbr@-tik @dtstart@@heure_fin@@dtend@-ra',
+	'date_fmt_jour_heure_debut_fin' => '@jour@-an @heure_debut@-tik @heure_fin@-ra', # MODIF
+	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@-an @heure_debut@@dtabbr@-tik @dtstart@@heure_fin@@dtend@-ra', # MODIF
 	'date_fmt_jour_mois' => '@nommois@ren @jour@a',
 	'date_fmt_jour_mois_annee' => '@annee@-ko @nommois@ren @jour@a',
 	'date_fmt_mois_annee' => '@annee@-ko @nommois@',
@@ -528,7 +530,6 @@ Zure pasahitza sarean atzeman ahal izatea nahi ez baduzu, JavaScript-a aktibatu 
 	'login_retour_public' => 'Eremu publikora itzuli',
 	'login_retour_site' => 'Eremu publikora itzuli',
 	'login_retoursitepublic' => 'eremu publikora itzuli',
-	'login_sans_cookiie' => 'Identifikazioa "cookie" barik',
 	'login_securise' => 'Login segurua',
 	'login_sinscrire' => 'inskribatu',
 	'login_test_navigateur' => 'nabigatzaile proba/berkonexioa',
@@ -581,7 +582,7 @@ Orduan pasahitza berri bat jarri eta gunera berriz konektatzen ahalko zara. ',
 	'pass_nouveau_pass' => 'Pasahitz berria',
 	'pass_ok' => 'OK',
 	'pass_oubli_mot' => 'Pasahitza ahaztu dut',
-	'pass_procedure_changer' => 'Pasahitza aldatu aitzin, zure nortasuna baieztatu behar dugu. Horregatik zure kontuari lotutako helbide elektronikoa jakinarazi behar diguzu.',
+	'pass_procedure_changer' => 'Pasahitza aldatu aitzin, zure nortasuna baieztatu behar dugu. Horregatik zure kontuari lotutako helbide elektronikoa jakinarazi behar diguzu.', # MODIF
 	'pass_quitter_fenetre' => 'Leiho honetatik irten',
 	'pass_rappel_login' => 'Gogoan izan: zure identifikatzailea (logina) hau da : «@login@».',
 	'pass_recevoir_mail' => 'Gunerako sarbidea nola berreskuratzen ahal duzun zehazten duen mezu bat jasoko duzu.',

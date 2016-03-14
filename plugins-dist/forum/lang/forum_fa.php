@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=fa
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -34,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_acces_refuse' => '.شما ديگر اجازه استفاده از اين سخنگاه را نداريد',
 	'forum_attention_dix_caracteres' => '</b>! توجه<b>   پيامتان بايد بيش از ده حرف باشد.',
 	'forum_attention_message_non_poste' => 'تنبيه، لم تبعث برسالتك!',
+	'forum_attention_nb_caracteres_mini' => '<b>توجه!</b> پيام شكا بايد دست كم بايد @min@ كاراكتر داشته باشد.',
 	'forum_attention_trois_caracteres' => '</b>! توجه<b> عنوانتان بايد بيش از سه حرف باشد. ',
 	'forum_attention_trop_caracteres' => '<b>توجه!</b>(@compte@ كاراكتر براي آنكه ثبت شود، نبايد از @max@ كاراكتر بيشتر شود. )  پيام شما زياد طولاني است ',
 	'forum_avez_selectionne' => ': شما انتخاب كرده ايد',

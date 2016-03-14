@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=ca
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -33,12 +35,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Modificar aquest lloc',
 	'icone_referencer_nouveau_site' => 'Referenciar un nou lloc',
 	'icone_voir_sites_references' => 'Mostrar els llocs referenciats',
+	'info_1_article_syndique' => '1 article sindicat',
+	'info_1_site' => '1 lloc',
 	'info_a_valider' => '[per validar]',
+	'info_aucun_article_syndique' => 'Cap article sindicat',
+	'info_aucun_site' => 'Cap lloc',
 	'info_bloquer' => 'blocar',
 	'info_bloquer_lien' => 'blocar aquest enllaç',
 	'info_derniere_syndication' => 'La última sindicació d’aquest lloc ha estat realitzada el',
 	'info_liens_syndiques_1' => 'enllaços sindicats',
 	'info_liens_syndiques_2' => 'estan pendents de validació.',
+	'info_nb_articles_syndiques' => '@nb@ articles sindicats',
+	'info_nb_sites' => '@nb@ llocs',
 	'info_nom_site_2' => '<b>Nom del lloc</b> [Obligatori]',
 	'info_panne_site_syndique' => 'Lloc sindicat en pana',
 	'info_probleme_grave' => 'problema de',

@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/organiseur?lang_cible=de
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -32,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_ecrire_nouvelle_annonce' => 'Neue Ankündigung veröffentlichen',
 	'icone_effacer_message' => 'Nachricht löschen',
 	'icone_modifier_annonce' => 'Ankündigung bearbeiten',
+	'icone_modifier_message' => 'Diese Nachricht bearbeiten',
 	'icone_modifier_pensebete' => 'Notiz ändern',
 	'icone_supprimer_message' => 'Nachricht löschen',
 	'info_1_message_envoye' => '1 Nachricht gesendet',

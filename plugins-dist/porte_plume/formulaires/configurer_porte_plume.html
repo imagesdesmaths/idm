@@ -10,8 +10,8 @@
 		
 		<p class='explication'><:barreoutils:explication_barre_outils_public:></p>
 		<p class='explication'><:barreoutils:explication_barre_outils_public_2:></p>
-		<ul>
-			<li class='editer configurer_barre_outils_public[ (#ENV**{erreurs}|table_valeur{barre_outils_public}|oui)erreur]'>
+		<div class="editer-groupe">
+			<div class='editer configurer_barre_outils_public[ (#ENV**{erreurs}|table_valeur{barre_outils_public}|oui)erreur]'>
 				<label><:barreoutils:info_barre_outils_public:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{barre_outils_public})</span>]
 				<div class='choix'>
@@ -22,8 +22,8 @@
 					<input class='radio' type="radio" name="barre_outils_public" value='non'[ (#ENV{barre_outils_public}|=={non}|oui)checked="checked"] id="barre_outils_public_non"/>
 					<label for="barre_outils_public_non"><:barreoutils:label_barre_outils_public_non:></label>
 				</div>
-			</li>
-		</ul>
+			</div>
+		</div>
 		<p class='boutons'><input class='submit' type="submit" name="ok" value="<:bouton_enregistrer:>"/></p>
 	</div></form>
 

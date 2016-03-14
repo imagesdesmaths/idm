@@ -84,13 +84,16 @@ if (typeof(box_settings)!='undefined')
 			onComplete: (options && options.onShow) || null,
 			onClosed: (options && options.onClose) || null
 		};
-		
-		return this.colorbox($.extend(cbox_options,options));
+
+		if (!this.length)
+			return $.colorbox($.extend(cbox_options,options));
+		else
+			return this.colorbox($.extend(cbox_options,options));
 	};
 	$.mediaboxClose = function () {$.fn.colorbox.close();};
 
 	// API modalbox
-	$.modalbox = function (href, options) {$.fn.mediabox($.extend({href:href,inline:href.match(/^#/),overlayClose:true},options));};
+	$.modalbox = function (href, options) {$.fn.mediabox($.extend({href:href,inline:href.match(/^#/)?true:false,overlayClose:true},options));};
 	$.modalboxload = function (url, options) { $.modalbox(url,options); };
 	$.modalboxclose = $.mediaboxClose;
 

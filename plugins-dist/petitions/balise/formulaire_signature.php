@@ -3,14 +3,16 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}  #securite
 
 //
 // Formulaire de signature d'une petition
@@ -25,8 +27,8 @@ include_spip('base/abstract_sql');
 // si une petition est attachee a l'article.
 
 // http://code.spip.net/@balise_FORMULAIRE_SIGNATURE
-function balise_FORMULAIRE_SIGNATURE ($p) {
-	return calculer_balise_dynamique($p,'FORMULAIRE_SIGNATURE', array('id_article','petition'));
+function balise_FORMULAIRE_SIGNATURE($p) {
+	return calculer_balise_dynamique($p, 'FORMULAIRE_SIGNATURE', array('id_article', 'petition'));
 }
 
 // Verification des arguments (contexte + filtres)
@@ -35,18 +37,25 @@ function balise_FORMULAIRE_SIGNATURE_stat($args, $context_compil) {
 
 	// pas d'id_article => erreur de contexte
 	if (!$args[0]) {
-		$msg = array('zbug_champ_hors_motif',
-				array ('champ' => 'FORMULAIRE_SIGNATURE',
-				       'motif' => 'ARTICLES'));
+		$msg = array(
+			'zbug_champ_hors_motif',
+			array(
+				'champ' => 'FORMULAIRE_SIGNATURE',
+				'motif' => 'ARTICLES'
+			)
+		);
 		erreur_squelette($msg, $context_compil);
+
 		return '';
+	} // article sans petition => pas de balise
+	else {
+		if (!$args[1]) {
+			return '';
+		}
 	}
-	// article sans petition => pas de balise
-	else if (!$args[1])
-		return '';
 
 	// on envoie pas cet argument dans le CVT
 	unset($args[1]);
+
 	return $args;
 }
-?>

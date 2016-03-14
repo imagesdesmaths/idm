@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -11,11 +11,13 @@
 \***************************************************************************/
 
 /**
- * Fonctions de modifications des rubriques
+ * Gestion de l'action editer_rubrique et de l'API d'édition des rubriques
  *
- * @package SPIP\Rubriques\Modifications
+ * @package SPIP\Core\Rubriques\Edition
  */
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/rubriques');
 
@@ -34,9 +36,9 @@ include_spip('inc/rubriques');
  *     Liste : identifiant de la rubrique, message d'erreur éventuel.
  *
  */
-function action_editer_rubrique_dist($arg=null) {
+function action_editer_rubrique_dist($arg = null) {
 
-	if (is_null($arg)){
+	if (is_null($arg)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	}
@@ -55,12 +57,12 @@ function action_editer_rubrique_dist($arg=null) {
 		$redirect = parametre_url(
 			urldecode(_request('redirect')),
 			'id_rubrique', $id_rubrique, '&');
-	
+
 		include_spip('inc/headers');
 		redirige_par_entete($redirect);
 	}
 
-	return array($id_rubrique,$err);
+	return array($id_rubrique, $err);
 }
 
 
@@ -70,15 +72,21 @@ function action_editer_rubrique_dist($arg=null) {
  * @param int $id_parent
  *     Identifiant de la rubrique parente.
  *     0 pour la racine.
+ * @param array|null $set
  * @return int
  *     Identifiant de la rubrique crée
  */
-function rubrique_inserer($id_parent) {
+function rubrique_inserer($id_parent, $set = null) {
 	$champs = array(
 		'titre' => _T('item_nouvelle_rubrique'),
 		'id_parent' => intval($id_parent),
-		'statut' => 'new');
-	
+		'statut' => 'prepa'
+	);
+
+	if ($set) {
+		$champs = array_merge($champs, $set);
+	}
+
 	// Envoyer aux plugins
 	$champs = pipeline('pre_insertion',
 		array(
@@ -88,7 +96,7 @@ function rubrique_inserer($id_parent) {
 			'data' => $champs
 		)
 	);
-	
+
 	$id_rubrique = sql_insertq("spip_rubriques", $champs);
 	pipeline('post_insertion',
 		array(
@@ -101,12 +109,13 @@ function rubrique_inserer($id_parent) {
 	);
 	propager_les_secteurs();
 	calculer_langues_rubriques();
+
 	return $id_rubrique;
 }
 
 /**
  * Modifier une rubrique en base
- * 
+ *
  * @param int $id_rubrique
  *     Identifiant de la rubrique modifiée
  * @param array|null $set
@@ -116,14 +125,14 @@ function rubrique_inserer($id_parent) {
  *     - chaîne vide : Vide si tout s'est bien passé
  *     - chaîne : Texte d'un message d'erreur
  */
-function rubrique_modifier($id_rubrique, $set=null) {
+function rubrique_modifier($id_rubrique, $set = null) {
 	include_spip('inc/autoriser');
 	include_spip('inc/filtres');
 
 	include_spip('inc/modifier');
 	$c = collecter_requests(
-		// white list
-		objet_info('rubrique','champs_editables'),
+	// white list
+		objet_info('rubrique', 'champs_editables'),
 		// black list
 		array('id_parent', 'confirme_deplace'),
 		// donnees eventuellement fournies
@@ -132,12 +141,15 @@ function rubrique_modifier($id_rubrique, $set=null) {
 
 	if ($err = objet_modifier_champs('rubrique', $id_rubrique,
 		array(
-			'nonvide' => array('titre' => _T('titre_nouvelle_rubrique')." "._T('info_numero_abbreviation').$id_rubrique)
+			'data' => $set,
+			'nonvide' => array('titre' => _T('titre_nouvelle_rubrique') . " " . _T('info_numero_abbreviation') . $id_rubrique)
 		),
-		$c))
+		$c)
+	) {
 		return $err;
+	}
 
-	$c = collecter_requests(array('id_parent', 'confirme_deplace'),array(),$set);
+	$c = collecter_requests(array('id_parent', 'confirme_deplace'), array(), $set);
 	// Deplacer la rubrique
 	if (isset($c['id_parent'])) {
 		$err = rubrique_instituer($id_rubrique, $c);
@@ -148,16 +160,17 @@ function rubrique_modifier($id_rubrique, $set=null) {
 	suivre_invalideur("id='rubrique/$id_rubrique'");
 	// et celui de menu_rubriques 
 	effacer_meta("date_calcul_rubriques");
+
 	return $err;
 }
 
 /**
  * Déplace les brèves d'une rubrique dans le secteur d'un nouveau parent
- * 
+ *
  * Si c'est une rubrique-secteur contenant des brèves, on ne deplace
  * que si $confirme_deplace == 'oui', et change alors l'id_rubrique des
  * brèves en question
- * 
+ *
  * @todo À déporter dans le plugin brèves via un pipeline ?
  *
  * @param int $id_rubrique
@@ -170,17 +183,20 @@ function rubrique_modifier($id_rubrique, $set=null) {
  *     true si le déplacement est fait ou s'il n'y a rien à faire
  *     false si la confirmation du déplacement n'est pas présente
  */
-function editer_rubrique_breves($id_rubrique, $id_parent, $c=array())
-{
-	if (!sql_countsel('spip_breves', "id_rubrique=$id_rubrique"))
+function editer_rubrique_breves($id_rubrique, $id_parent, $c = array()) {
+	if (!sql_countsel('spip_breves', "id_rubrique=$id_rubrique")) {
 		return true;
+	}
 
-	if ($c['confirme_deplace'] != 'oui')
+	if ($c['confirme_deplace'] != 'oui') {
 		return false;
+	}
 
 	if ($id_secteur = sql_getfetsel("id_secteur",
-	"spip_rubriques", "id_rubrique=$id_parent"))
+		"spip_rubriques", "id_rubrique=$id_parent")
+	) {
 		sql_updateq("spip_breves", array("id_rubrique" => $id_secteur), "id_rubrique=$id_rubrique");
+	}
 
 	return true;
 }
@@ -188,18 +204,19 @@ function editer_rubrique_breves($id_rubrique, $id_parent, $c=array())
 
 /**
  * Instituer une rubrique (changer son parent)
- * 
+ *
  * Change le parent d'une rubrique, si les autorisations sont correctes,
  * mais n'accèpte pas de déplacer une rubrique dans une de ses filles, tout de même !
  *
  * Recalcule les secteurs, les langues et déplace les brèves au passage.
- * 
+ *
  * @param int $id_rubrique
  *     Identifiant de la rubrique à instituer
  * @param array $c
  *     Informations pour l'institution (id_rubrique, confirme_deplace)
+ * @global array $GLOBALS ['visiteur_session']
  * @return string
- *     Chaine vide : aucune erreur
+ *     Chaîne vide : aucune erreur
  *     Chaîne : Texte du message d'erreur
  */
 function rubrique_instituer($id_rubrique, $c) {
@@ -207,96 +224,69 @@ function rubrique_instituer($id_rubrique, $c) {
 	// interdiction de deplacer vers ou a partir d'une rubrique
 	// qu'on n'administre pas.
 
-	if (NULL !== ($id_parent = $c['id_parent'])) {
+	if (null !== ($id_parent = $c['id_parent'])) {
 		$id_parent = intval($id_parent);
 		$filles = calcul_branche_in($id_rubrique);
-		if (strpos(",$id_parent,", ",$filles,") !== false)
+		if (strpos(",$id_parent,", ",$filles,") !== false) {
 			spip_log("La rubrique $id_rubrique ne peut etre fille de sa descendante $id_parent");
-		else {
+		} else {
 			$s = sql_fetsel("id_parent, statut", "spip_rubriques", "id_rubrique=$id_rubrique");
 			$old_parent = $s['id_parent'];
 
 			if (!($id_parent != $old_parent
-			AND autoriser('publierdans', 'rubrique', $id_parent)
-			AND autoriser('creerrubriquedans', 'rubrique', $id_parent)
-			AND autoriser('publierdans', 'rubrique', $old_parent)
-			      )) {
+				and autoriser('publierdans', 'rubrique', $id_parent)
+				and autoriser('creerrubriquedans', 'rubrique', $id_parent)
+				and autoriser('publierdans', 'rubrique', $old_parent)
+			)
+			) {
 				if ($s['statut'] != 'new') {
-					spip_log("deplacement de $id_rubrique vers $id_parent refuse a " . $GLOBALS['visiteur_session']['id_auteur'] . ' '.  $GLOBALS['visiteur_session']['statut']);
+					spip_log("deplacement de $id_rubrique vers $id_parent refuse a " . $GLOBALS['visiteur_session']['id_auteur'] . ' ' . $GLOBALS['visiteur_session']['statut']);
 				}
-			}
-			elseif (editer_rubrique_breves($id_rubrique, $id_parent, $c)) {
-
-				$champs = array('id_parent' => $id_parent);
+			} elseif (editer_rubrique_breves($id_rubrique, $id_parent, $c)) {
 				$statut_ancien = $s['statut'];
+				sql_updateq('spip_rubriques', array('id_parent' => $id_parent), "id_rubrique=$id_rubrique");
 
-				// Envoyer aux plugins
-				$champs = pipeline('pre_edition',
-					array(
-						'args' => array(
-							'table' => 'spip_rubriques',
-							'id_objet' => $id_rubrique,
-							'action'=>'instituer',
-							'statut_ancien' => $statut_ancien,
-						),
-						'data' => $champs
-					)
-				);
-
-				if (!count($champs)) return '';
-
-				sql_updateq('spip_rubriques', $champs, "id_rubrique=$id_rubrique");
 
 				propager_les_secteurs();
 
 				// Deplacement d'une rubrique publiee ==> chgt general de leur statut
-				if ($statut_ancien == 'publie')
+				if ($statut_ancien == 'publie') {
 					calculer_rubriques_if($old_parent, array('id_rubrique' => $id_parent), $statut_ancien);
+				}
 				// Creation ou deplacement d'une rubrique non publiee
 				// invalider le cache de leur menu
-				elseif (!$statut_ancien || $old_parent!=$id_parent)
+				elseif (!$statut_ancien || $old_parent != $id_parent) {
 					effacer_meta("date_calcul_rubriques");
+				}
 
 				calculer_langues_rubriques();
-
-				// Pipeline
-				pipeline('post_edition',
-					array(
-						'args' => array(
-							'table' => 'spip_rubriques',
-							'id_objet' => $id_rubrique,
-							'action'=>'instituer',
-							'statut_ancien' => $statut_ancien,
-						),
-						'data' => $champs
-					)
-				);
 			}
 		}
 	}
+
 	return ''; // pas d'erreur
 }
 
 /**
- * Crée une rubrique 
+ * Crée une rubrique
  *
  * @deprecated
  *     Utiliser rubrique_inserer()
  * @see rubrique_inserer()
- * 
+ *
  * @param int $id_parent
  *     Identifiant de la rubrique parente.
  *     0 pour la racine.
  * @return int
  *     Identifiant de la rubrique crée
-**/
+ **/
 function insert_rubrique($id_parent) {
 	return rubrique_inserer($id_parent);
 }
 
 
 /**
- * Modifie les contenus d'une rubrique 
+ * Modifie les contenus d'une rubrique
  *
  * @deprecated
  *     Utiliser rubrique_modifier()
@@ -310,9 +300,9 @@ function insert_rubrique($id_parent) {
  *     - false  : Aucune modification, aucun champ n'est à modifier
  *     - chaîne vide : Vide si tout s'est bien passé
  *     - chaîne : Texte d'un message d'erreur
-**/
-function revisions_rubriques($id_rubrique, $set=null) {
-	return rubrique_modifier($id_rubrique,$set);
+ **/
+function revisions_rubriques($id_rubrique, $set = null) {
+	return rubrique_modifier($id_rubrique, $set);
 }
 
 /**
@@ -321,7 +311,7 @@ function revisions_rubriques($id_rubrique, $set=null) {
  * @deprecated
  *     Utiliser rubrique_instituer()
  * @see rubrique_instituer()
- * 
+ *
  * @param int $id_rubrique
  *     Identifiant de la rubrique à instituer
  * @param array $c
@@ -329,7 +319,7 @@ function revisions_rubriques($id_rubrique, $set=null) {
  * @return string
  *     Chaine vide : aucune erreur
  *     Chaîne : Texte du message d'erreur
-**/
+ **/
 function instituer_rubrique($id_rubrique, $c) {
 	return rubrique_instituer($id_rubrique, $c);
 }

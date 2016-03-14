@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=bs
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -430,7 +432,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_retour_public' => 'Nazad na javnu stranicu',
 	'login_retour_site' => 'Nazad na javnu stranicu',
 	'login_retoursitepublic' => 'nazad na javnu stranicu',
-	'login_sans_cookiie' => 'Identifikacija bez cookie',
 	'login_sinscrire' => 'registruj se',
 	'login_test_navigateur' => 'test navigatora/ponovna konekcija',
 	'login_verifiez_navigateur' => '(Svakako se uvjerite da vas navigator nije zapamtio vasu lozinku...)',

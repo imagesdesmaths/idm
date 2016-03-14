@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/public?lang_cible=oc_ni_mis
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -76,13 +78,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom' => 'Noum',
 	'nouveautes' => 'Li nouvità',
 	'nouveautes_web' => 'Nouvità soubre lou web',
-	'nouveaux_articles' => 'Article nòu',
+	'nouveaux_articles' => 'Nouvèl article',
 	'nouvelles_breves' => 'Brèva nouvèli',
 
 	// P
 	'page_precedente' => 'pàgina anterioura',
 	'page_suivante' => 'pàgina seguenta',
-	'par_auteur' => 'per ',
+	'par_auteur' => 'da',
 	'participer_site' => 'Poudès participà a la vida d’estou sit e proupausà lu vouòstre article en v’inscrivant aquì souta. Receverès un e-mail que v’endiquerà lu vouòstre code d’achès a l’espaci privat dóu sit.',
 	'plan_site' => 'Plan dóu sit',
 	'popularite' => 'Poupularità',
@@ -93,7 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'repondre_article' => 'Respouòndre en aquel article',
 	'repondre_breve' => 'Respouòndre en aquela brèva',
 	'resultats_recherche' => 'Resultat de la recerca',
-	'retour_debut_forums' => 'Retour au principi dei fòrou',
+	'retour_debut_forums' => 'Retour au principi dai fòrou',
 	'rubrique' => 'Rùbrica',
 	'rubriques' => 'Rùbrica',
 

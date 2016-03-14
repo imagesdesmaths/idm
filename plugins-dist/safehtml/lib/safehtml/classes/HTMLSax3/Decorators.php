@@ -2,7 +2,7 @@
 class XML_HTMLSax3_Trim {
  var $orig_obj;
  var $orig_method;
- function XML_HTMLSax3_Trim(&$orig_obj, $orig_method) {
+ function __construct(&$orig_obj, $orig_method) {
   $this->orig_obj =& $orig_obj;
   $this->orig_method = $orig_method;
  }
@@ -17,12 +17,12 @@ class XML_HTMLSax3_CaseFolding {
  var $orig_obj;
  var $orig_open_method;
  var $orig_close_method;
- function XML_HTMLSax3_CaseFolding(&$orig_obj, $orig_open_method, $orig_close_method) {
+ function __construct(&$orig_obj, $orig_open_method, $orig_close_method) {
   $this->orig_obj =& $orig_obj;
   $this->orig_open_method = $orig_open_method;
   $this->orig_close_method = $orig_close_method;
  }
- function foldOpen(&$parser, $tag, $attrs=array(), $empty = FALSE) {
+ function foldOpen(&$parser, $tag, $attrs = array(), $empty = FALSE) {
   $this->orig_obj->{$this->orig_open_method}($parser, strtoupper($tag), $attrs, $empty);
  }
  function foldClose(&$parser, $tag, $empty = FALSE) {
@@ -32,7 +32,7 @@ class XML_HTMLSax3_CaseFolding {
 class XML_HTMLSax3_Linefeed {
  var $orig_obj;
  var $orig_method;
- function XML_HTMLSax3_LineFeed(&$orig_obj, $orig_method) {
+ function __construct(&$orig_obj, $orig_method) {
   $this->orig_obj =& $orig_obj;
   $this->orig_method = $orig_method;
  }
@@ -46,7 +46,7 @@ class XML_HTMLSax3_Linefeed {
 class XML_HTMLSax3_Tab {
  var $orig_obj;
  var $orig_method;
- function XML_HTMLSax3_Tab(&$orig_obj, $orig_method) {
+ function __construct(&$orig_obj, $orig_method) {
   $this->orig_obj =& $orig_obj;
   $this->orig_method = $orig_method;
  }
@@ -60,7 +60,7 @@ class XML_HTMLSax3_Tab {
 class XML_HTMLSax3_Entities_Parsed {
  var $orig_obj;
  var $orig_method;
- function XML_HTMLSax3_Entities_Parsed(&$orig_obj, $orig_method) {
+ function __construct(&$orig_obj, $orig_method) {
   $this->orig_obj =& $orig_obj;
   $this->orig_method = $orig_method;
  }
@@ -73,7 +73,7 @@ class XML_HTMLSax3_Entities_Parsed {
  }
 }
 if (version_compare(phpversion(), '4.3', '<') && !function_exists('html_entity_decode') ) {
- function html_entity_decode($str, $style=ENT_NOQUOTES) {
+ function html_entity_decode($str, $style = ENT_NOQUOTES) {
   return strtr($str,
    array_flip(get_html_translation_table(HTML_ENTITIES,$style)));
  }
@@ -81,7 +81,7 @@ if (version_compare(phpversion(), '4.3', '<') && !function_exists('html_entity_d
 class XML_HTMLSax3_Entities_Unparsed {
  var $orig_obj;
  var $orig_method;
- function XML_HTMLSax3_Entities_Unparsed(&$orig_obj, $orig_method) {
+ function __construct(&$orig_obj, $orig_method) {
   $this->orig_obj =& $orig_obj;
   $this->orig_method = $orig_method;
  }
@@ -96,7 +96,7 @@ class XML_HTMLSax3_Entities_Unparsed {
 class XML_HTMLSax3_Escape_Stripper {
  var $orig_obj;
  var $orig_method;
- function XML_HTMLSax3_Escape_Stripper(&$orig_obj, $orig_method) {
+ function __construct(&$orig_obj, $orig_method) {
   $this->orig_obj =& $orig_obj;
   $this->orig_method = $orig_method;
  }

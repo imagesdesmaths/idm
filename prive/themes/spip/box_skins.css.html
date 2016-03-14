@@ -37,7 +37,7 @@
 .info b{}
 /* ----- note (extends box) ----- */
 .note,.note .inner{border:1px solid #c2c2c2;}
-.note .inner{border-color:#fff; border-width:4px; background-color:[#(#ENV{claire}|couleur_eclaircir{0.85})];}
+.note .inner{border-color:#eee; border-width:4px; background-color:[#(#ENV{claire}|couleur_eclaircir{0.85})];}
 .note .inner .hd {}
 
 /* ----- raccourcis (extends box) ----- */
@@ -79,7 +79,7 @@
 
 
 /* ====== Background blocks ====== */
-.highlight .inner{background-color:#ENV{claire};}
+.highlight > .inner{background-color:#ENV{claire}; border: 0; box-shadow: 0 0 15px #ccc;}
 .inverse .inner{background-color:#ENV{foncee};color:#ffffff}
 
 /* ====== Block headers and footers ====== */
@@ -108,7 +108,7 @@ background-color: #fff; color: #4A4A4A;font-size:1.2em; position:relative;}
 
 /* Cas particuliers */
 .simple.sous-rub .inner .hd {padding:0}
-.simple.sous-rub .inner .hd .logo {float:#ENV{right};margin:4px 5px 0;margin-#ENV{right}:-5px;}
+.simple.sous-rub .inner .hd .logo {float:#ENV{right};margin: 1px 5px 0;margin-#ENV{right}: -9px;z-index:2;position:relative;}
 .simple.sous-rub .sous-sous-rub {margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;}
 
 /* vieilles boites depliables/repliables

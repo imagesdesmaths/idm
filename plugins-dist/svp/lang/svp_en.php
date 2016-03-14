@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/svp?lang_cible=en
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -15,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'actions_necessaires' => 'The following additional actions will be performed:',
 	'actions_non_traitees' => 'Actions not processed',
 	'actions_realises' => 'Actions processed',
-	'afficher_les_plugins_incompatibles' => 'Display incompatible plugins',
+	'afficher_les_plugins_incompatibles' => 'Show incompatible plugins',
 	'alerte_compatibilite' => 'Forced compatibiliy',
 
 	// B
@@ -34,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_actualiser_tout_depot' => 'Refresh packages of all repositories',
 	'bulle_afficher_xml_plugin' => 'Content of the plugin XML file',
 	'bulle_ajouter_spipzone' => 'Add the SPIP-Zone repository',
+	'bulle_aller_demonstration' => 'Go to the demo page',
 	'bulle_aller_depot' => 'Go to the page of the repository',
 	'bulle_aller_documentation' => 'Go to the documentation page',
 	'bulle_aller_plugin' => 'Go to the plugin page',
@@ -68,6 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_autoriser_activer_paquets_obsoletes_explication' => 'Obsolete packages are local packages that are older than other local packages. Obsolescence is established on the basis of the status (stable, testing, dev) of the package and on the basis of its version. Enable this option if you still want to activate these outdatedplugins.',
 	'config_depot_editable' => 'Allow repository edition?',
 	'config_depot_editable_explication' => 'This makes editable the informations of a repository and enable eventually to associate keywords or documents to it. This option shouldn’t interest anyone! Rather leave "no"!',
+	'confirmer_desinstaller' => 'Warning, uninstalling a plugin <b>wipes out</b> its data from the database and it is irreversible.<br />If you are not absolutely sure, just disable the plugin.',
 	'confirmer_telecharger_dans' => 'The plugin will be loaded into a directory (@dir@) which already exists.
 This will overwrite the content of this directory.
 A copy of the old files will be saved in "@dir_backup@".
@@ -172,6 +176,8 @@ is not created or is not writable.
 	'label_xml_plugin' => 'XML',
 	'legende_installer_plugins' => 'Install plugins',
 	'legende_rechercher_plugins' => 'Search plugins',
+	'lien_demo' => 'Demo',
+	'lien_documentation' => 'Documentation',
 
 	// M
 	'message_action_finale_get_fail' => 'The plugin "@plugin@" (Version : @version@) couldn’t be successfully downloaded',
@@ -220,6 +226,7 @@ is not created or is not writable.
 	'message_nok_maj_introuvable' => 'Update of the plugin "@plugin@" not found.',
 	'message_nok_plugin_inexistant' => 'The requested plugin does not exist(@plugin@).',
 	'message_nok_sql_insert_depot' => 'SQL error when adding the repository @objet@',
+	'message_nok_url_archive' => 'The archive’s URL is invalid',
 	'message_nok_url_depot_incorrecte' => 'The address "@url@" is incorrect',
 	'message_nok_xml_non_conforme' => 'The description XML file "@fichier@" of the repository doesn’t conform',
 	'message_nok_xml_non_recupere' => 'The XML file "@fichier@" could not be recovered',

@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=cs
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -33,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Změnit web',
 	'icone_referencer_nouveau_site' => 'Zveřejnit odkaz na nový web',
 	'icone_voir_sites_references' => 'Zobrazit odkazovaný web',
+	'info_1_site' => '1 web',
 	'info_a_valider' => '[ke schválení]',
 	'info_bloquer' => 'zablokovat',
 	'info_bloquer_lien' => 'zablokovat tento odkaz',

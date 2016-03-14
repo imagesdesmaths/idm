@@ -3,17 +3,29 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+/**
+ * Gestion des mises à jour de SPIP, versions 1.2*
+ *
+ * @package SPIP\Core\SQL\Upgrade
+ **/
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function maj_v012_dist($version_installee, $version_cible)
-{
+/**
+ * Mises à jour de SPIP n°012
+ *
+ * @param float $version_installee Version actuelle
+ * @param float $version_cible Version de destination
+ **/
+function maj_v012_dist($version_installee, $version_cible) {
 	// Correction de l'oubli des modifs creations depuis 1.04
 	if (upgrade_vers(1.204, $version_installee, $version_cible)) {
 		spip_query("ALTER TABLE spip_articles ADD accepter_forum VARCHAR(3) NOT NULL");
@@ -22,7 +34,7 @@ function maj_v012_dist($version_installee, $version_cible)
 		spip_query("ALTER TABLE spip_auteurs ADD en_ligne datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
 		spip_query("ALTER TABLE spip_auteurs ADD imessage VARCHAR(3) not null");
 		spip_query("ALTER TABLE spip_auteurs ADD messagerie VARCHAR(3) not null");
-		maj_version (1.204);
+		maj_version(1.204);
 	}
 
 	if (upgrade_vers(1.207, $version_installee, $version_cible)) {
@@ -32,7 +44,7 @@ function maj_v012_dist($version_installee, $version_cible)
 		// Declencher le calcul des rubriques publiques
 		include_spip('inc/rubriques');
 		calculer_rubriques();
-		maj_version (1.207);
+		maj_version(1.207);
 	}
 
 	if (upgrade_vers(1.208, $version_installee, $version_cible)) {
@@ -50,14 +62,14 @@ function maj_v012_dist($version_installee, $version_cible)
 		}
 
 		spip_query("ALTER TABLE spip_auteurs_messages DROP statut");
-		maj_version (1.208);
+		maj_version(1.208);
 	}
 
 	if (upgrade_vers(1.209, $version_installee, $version_cible)) {
 		spip_query("ALTER TABLE spip_syndic ADD maj TIMESTAMP");
 		spip_query("ALTER TABLE spip_syndic_articles ADD maj TIMESTAMP");
 		spip_query("ALTER TABLE spip_messages ADD maj TIMESTAMP");
-		maj_version (1.209);
+		maj_version(1.209);
 	}
 
 	if (upgrade_vers(1.210, $version_installee, $version_cible)) {
@@ -74,9 +86,6 @@ function maj_v012_dist($version_installee, $version_cible)
 		stripslashes_base('spip_signatures', array('nom_email', 'nom_site', 'message'));
 		stripslashes_base('spip_syndic', array('nom_site', 'descriptif'));
 		stripslashes_base('spip_syndic_articles', array('titre', 'lesauteurs'));
-		maj_version (1.210);
+		maj_version(1.210);
 	}
 }
-
-
-?>

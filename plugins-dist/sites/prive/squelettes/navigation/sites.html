@@ -1,8 +1,8 @@
 #SET{open,#BOITE_OUVRIR{'',raccourcis}}
-[(#AUTORISER{importer,sites})
+[(#AUTORISER{importer,_sites})
 	[(#GET{open}|unique)]
 [(#URL_ECRIRE{sites_import}|icone_horizontale{<:sites:titre_importer_bookmarks:>,site-24.png})]
-][(#AUTORISER{exporter,sites})
+][(#AUTORISER{exporter,_sites})
 	[(#GET{open}|unique)]
 [(#URL_ECRIRE{sites_export}|icone_horizontale{<:sites:titre_exporter_bookmarks:>,site-24.png})]
 ]

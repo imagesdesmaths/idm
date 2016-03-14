@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/compagnon?lang_cible=ca
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -17,7 +19,7 @@ També cal que creïs almenys una secció per a poder fer-ho. Pots continuar fen
 	'c_accueil_texte' => 'Acabes d’entrar a la zona privada d’SPIP.',
 	'c_accueil_texte_revenir' => 'Aquesta pàgina mostra la última activitat editorial de la teva pàgina.
 Pots visitar aquesta pàgina en qualsevol moment fent clic al botó de la casa,
-a la part superior, a sota del teu nom.',
+a la part superior, a sota del teu nom.', # MODIF
 	'c_article_redaction' => 'L’article s’està escrivint.',
 	'c_article_redaction_redacteur' => 'L’edició d’aquest article està en curs.',
 	'c_article_redaction_redacteur_texte' => 'Per a proposar el teu article als administradors de la pàgina i als altres editors, canvia, dins el bloc de la columna del costat, "edició en curs" per "enviat per avaluar".',

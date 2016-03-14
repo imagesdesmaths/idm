@@ -3,9 +3,17 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=eo
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// B
+	'bouton_radio_activer_petition' => 'Aktivigi la petskribon',
+	'bouton_radio_pas_petition' => 'Neniu petskribo',
+	'bouton_radio_petition_activee' => 'Aktivigita petskribo',
+	'bouton_radio_supprimer_petition' => 'Forviŝi la petskribon',
 
 	// F
 	'form_pet_adresse_site' => 'Retadreso de via retejo', # MODIF

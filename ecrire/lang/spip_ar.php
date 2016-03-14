@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=ar
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -31,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'إلغاء',
 	'antispam_champ_vide' => 'الرجاء الإبقاء على هذا الحقل فارغاً:',
 	'articles_recents' => 'أحدث المقالات',
+	'avis_1_erreur_saisie' => 'هناك خطأ في إدخالك، الرجاء التدقيق في المعلومات.',
 	'avis_archive_incorrect' => 'ملف الأرشيف ليس ملف SPIP',
 	'avis_archive_invalide' => 'ملف الأرشيف غير صالح',
 	'avis_attention' => 'تحذير!',
@@ -43,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_mysql' => 'خطأ SQL ',
 	'avis_erreur_sauvegarde' => 'خطأ في النسخة الاحتياطية (@type@ @id_objet@)!',
 	'avis_erreur_visiteur' => 'هناك مشكلة في الدخول إلى المجال الخاص',
+	'avis_nb_erreurs_saisie' => 'هناك @nb@ خطأ في إدخالك، الرجاء التدقيق في المعلومات.',
 
 	// B
 	'barre_a_accent_grave' => 'إدراج حرف A كبير مع نبر الإطالة',
@@ -111,7 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_jour' => '@nomjour@ @jour@',
 	'date_fmt_jour_heure' => '@jour@ الساعة @heure@',
 	'date_fmt_jour_heure_debut_fin' => 'في @jour@ من @heure_debut@ الى @heure_fin@',
-	'date_fmt_jour_heure_debut_fin_abbr' => 'في @dtstart@@jour@ من @heure_debut@@dtabbr@ الى @dtstart@@heure_fin@@dtend@',
+	'date_fmt_jour_heure_debut_fin_abbr' => 'في @dtstart@@jour@ من @heure_debut@@dtabbr@ الى @dtend@@heure_fin@@dtabbr@',
 	'date_fmt_jour_mois' => '@jour@ @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ @nommois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
@@ -121,6 +125,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_periode_abbr' => 'من @dtart@@date_debut@@dtabbr@ الى @dtend@@date_fin@@dtabbr@',
 	'date_fmt_periode_from' => 'من',
 	'date_fmt_periode_to' => 'الى',
+	'date_fmt_saison_annee' => '@saison@ @annee@',
 	'date_heures' => 'ساعة',
 	'date_hier' => 'البارحة',
 	'date_il_y_a' => 'منذ @delai@',
@@ -156,7 +161,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_jnum8' => '8',
 	'date_jnum9' => '9',
 	'date_jour_1' => 'الأحد',
-	'date_jour_1_abbr' => 'الأحد',
+	'date_jour_1_abbr' => 'أحد',
 	'date_jour_1_initiale' => 'أحد',
 	'date_jour_2' => 'الاثنين',
 	'date_jour_2_abbr' => 'اثنين',
@@ -530,7 +535,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_retour_public' => 'عودة إلى الموقع العام',
 	'login_retour_site' => 'عودة إلى الموقع العام',
 	'login_retoursitepublic' => 'عودة إلى الموقع العام',
-	'login_sans_cookiie' => 'تعريف بدون الكعكة',
+	'login_sans_cookie' => 'تعريف بدون الكعكة',
 	'login_securise' => 'تعريف مؤمّن',
 	'login_sinscrire' => 'تسجيل',
 	'login_test_navigateur' => 'تجربة المتصفح/إعادة الاتصال',
@@ -594,7 +599,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pass_nouveau_pass' => 'كلمة السر الجديدة',
 	'pass_ok' => 'موافق',
 	'pass_oubli_mot' => 'نسيان كلمة السر',
-	'pass_procedure_changer' => 'من أجل تغيير كلمة السر يتحتم اولاً التأكد من هويتك. لذلك، قم بأدخال عنوان البريد الالكتروني المرتبط بهذا الحساب.',
+	'pass_procedure_changer' => 'من أجل تغيير كلمة السر، قم بأدخال عنوان البريد الالكتروني المرتبط بحسابك.',
 	'pass_quitter_fenetre' => 'إقفال هذه النافذة',
 	'pass_rappel_login' => 'تذكير: معرّفك هو «@login@».',
 	'pass_recevoir_mail' => 'ستحصل على رسالة تفسر لك كيف تستعيد دخولك إلى الموقع.',
@@ -674,6 +679,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_statistiques' => 'إحصاءات الموقع',
 	'titre_titre_document' => 'اسم المستند: ',
 	'todo' => 'قريباً',
+	'trad_definir_reference' => 'اختيار "@titre@" كمرجع للترجمات',
 	'trad_reference' => '(مرجع الترجمات)',
 
 	// Z
@@ -687,6 +693,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zbug_champ_hors_motif' => 'الحقل @champ@ خارج سياق @motif@',
 	'zbug_code' => 'الرموز البرمجية',
 	'zbug_critere_inconnu' => 'معيار غير معروف @critere@',
+	'zbug_critere_sur_table_sans_cle_primaire' => '{@critere@} على جدول دون مفتاح اساسي افرادي',
 	'zbug_distant_interdit' => 'عملية خارجية ممنوعة',
 	'zbug_doublon_table_sans_cle_primaire' => 'قيمة مكررة في جدول لا يملك مفتاح أساسي',
 	'zbug_doublon_table_sans_index' => 'تكرار في جدول غير مفهرس',

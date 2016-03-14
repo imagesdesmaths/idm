@@ -10,8 +10,8 @@
 			[(#URL_ECRIRE{site_edit,id_syndic=#ID_SYNDIC}|icone_verticale{#ID_SYNDIC|afficher_qui_edite{site},warning-24.png,'',right edition_deja ajax preload})]
 		]
 	]
-	<h1>[(#RANG). ](#NOM_SITE|sinon{<:info_sans_titre_2:>})[(#CHEMIN_IMAGE{site-24.png}|balise_img{site,cadre-icone})]</h1>
-	[(#URL_SITE|propre|inserer_attribut{class,url_site})]
+	<h1[ class="(#EDIT{nom_site})"]>[(#RANG). ](#NOM_SITE|sinon{<:info_sans_titre_2:>})[(#CHEMIN_IMAGE{site-24.png}|balise_img{site,cadre-icone})]</h1>
+	[<div class="#EDIT{url_site}">(#URL_SITE|propre|inserer_attribut{class,url_site})</div>]
 ],simple fiche_objet})]
 
 <div id="wysiwyg">
@@ -58,6 +58,7 @@
 
 <BOUCLE_test(SYNDIC_ARTICLES){id_syndic=#ID_SYNDIC}{0,1}{si #SYNDICATION|=={non}}>
 	[(#AUTORISER{purger,site,#ID_SITE}|oui)
+		<INCLURE{fond=prive/objets/liste/syndic_articles,id_syndic,titre=<:sites:titre_articles_syndiques:>,par=date,ajax} />
 		<div class='purger_syndic'>
 			[(#BOUTON_ACTION{<:sites:lien_purger_syndication:>,#URL_ACTION_AUTEUR{purger_site,#ID_SYNDIC,#SELF},ajax,<:sites:confirmer_purger_syndication:>})]
 		</div>

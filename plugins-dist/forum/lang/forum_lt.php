@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/forum?lang_cible=lt
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -27,13 +29,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_page_url' => 'Jeigu jūsų pranešimas remesi internete publikuojamu pranešimu arba tinklalapiu teikiančiu daugiau informacijos, jūs galite nurodyti žemiau tinklalapio pavadinimą ir adresą',
 	'forum_poste_par' => 'Įdėtas pranešimas @parauteur@ atitinkantis straipsniu « @titre@ ».', # MODIF
 	'forum_qui_etes_vous' => '<b>Kas jūs esate?</b> (pasirinktinai)', # MODIF
-	'forum_texte' => 'Jūsų pranešimo tekstas:', # MODIF
-	'forum_titre' => 'Pavadinimas:', # MODIF
-	'forum_url' => 'URL adresas:', # MODIF
+	'forum_texte' => 'Jūsų žinutės tekstas',
+	'forum_titre' => 'Pavadinimas', # RELIRE
+	'forum_url' => 'URL adresas', # RELIRE
 	'forum_valider' => 'Patvirtinti šį pasirinkimą',
 	'forum_voir_avant' => 'Peržiūrėti pranešimą iki siuntimo', # MODIF
-	'forum_votre_email' => 'Jūsų el. pašto adresas:', # MODIF
-	'forum_votre_nom' => 'Jūsų vardas (arba pseudonimas) :', # MODIF
+	'forum_votre_email' => 'Jūsų el. pašto adresas',
+	'forum_votre_nom' => 'Jūsų vardas', # RELIRE
 	'forum_vous_enregistrer' => 'Kad galėtumėte dalyvauti  šiame forume, jūs turite iš anksto užsiregistruoti. Prašome
   nurodyti žemiau jūsų duomenis, kuriuos jūs  esate įvedę. Jeigu jūs nesate užregistruoti, jūs turite',
 	'forum_vous_inscrire' => 'jūs įrašyti',

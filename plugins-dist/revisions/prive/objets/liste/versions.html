@@ -25,11 +25,11 @@
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 				<td class='statut'>[(#INFO_STATUT{#OBJET,#ID_OBJET}|puce_statut{#OBJET})]</td>
 				<td class="type">[(#OBJET|objet_icone{16})]</td>
-				<td class='diff'>#SET{diff,#ID_OBJET|revisions_diff{#OBJET,#ID_VERSION}}
+				<td class='diff'>[(#REM) desactive/ perf issue #SET{diff,#ID_OBJET|revisions_diff{#OBJET,#ID_VERSION}} ]
 				[<a href="#" onclick="$(this).parent().next().find('.diff').toggle('fast');return false;" title="<:revisions:voir_differences|attribut_html:>">[(#CHEMIN_IMAGE{diff-16.png}|balise_img{<:revisions:voir_differences:>})]</a>
 				(#GET{diff}|oui)]
 				</td>
-				<td class='titre principale'><a #SET{titre,#INFO_TITRE{#OBJET,#ID_OBJET}}
+				<td class='titre principale'><a [(#SET{titre,[(#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{[(#VAL{info_sans_titre}|_T)] ([(#OBJET)][ #(#ID_OBJET)])})]})]
 					href="[(#ENV{url_modif,#URL_ECRIRE{revision}}|parametre_url{id_objet,#ID_OBJET}|parametre_url{objet,#OBJET}|parametre_url{id_version,#ID_VERSION})]" 
 					title="<:revisions:voir_revisions{objet=#OBJET,id_objet=#ID_OBJET,titre=#GET{titre}}|attribut_html:>">#GET{titre}</a>[ ((#TITRE_VERSION))]
 					[<div class="none-js diff">

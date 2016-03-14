@@ -1,9 +1,9 @@
 <paquet
 	prefix="petitions"
 	categorie="communication"
-	version="1.4.6"
+	version="1.5.4"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.1.0;3.1.*]"
 	logo="prive/themes/spip/images/petition-32.png"
 	schema="1.1.6"
 >	

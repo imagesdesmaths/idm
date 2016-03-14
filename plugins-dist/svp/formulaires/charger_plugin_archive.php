@@ -7,19 +7,21 @@
  * @license GPL
  * @package SPIP\SVP\Formulaires
  */
- 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 /**
  * Chargement du formulaire de téléchargement de plugin
  *
  * @return array
  *     Environnement du formulaire
-**/
+ **/
 function formulaires_charger_plugin_archive_charger_dist() {
 	return array(
-		'archive' =>'',
-		'destination' =>''
+		'archive' => '',
+		'destination' => ''
 	);
 }
 
@@ -28,11 +30,11 @@ function formulaires_charger_plugin_archive_charger_dist() {
  *
  * Vérifie qu'une archive est saisie, et si la destination existe
  * demande à confirmer l'écrasement
- * 
+ *
  * @return array
  *     Tableau des erreurs
-**/
-function formulaires_charger_plugin_archive_verifier_dist(){
+ **/
+function formulaires_charger_plugin_archive_verifier_dist() {
 	include_spip('inc/plugin'); // _DIR_PLUGINS_AUTO
 	$erreurs = array();
 	if (!$archive = _request('archive')) {
@@ -42,8 +44,7 @@ function formulaires_charger_plugin_archive_verifier_dist(){
 		$infos_archive = pathinfo($archive);
 		if (!isset($infos_archive['extension'])) {
 			$erreurs['archive'] = _T('svp:message_nok_url_archive');
-		}
-		else {
+		} else {
 			// calcul du répertoire de destination
 			if (!$destination = _request('destination')) {
 				$destination = $infos_archive['filename'];
@@ -59,7 +60,8 @@ function formulaires_charger_plugin_archive_verifier_dist(){
 				$backup = "$base/.$nom.bck";
 				$erreurs['confirmer'] = _T("svp:confirmer_telecharger_dans", array(
 					'dir' => joli_repertoire($dir),
-					'dir_backup' => joli_repertoire($backup)));
+					'dir_backup' => joli_repertoire($backup)
+				));
 			}
 		}
 	}
@@ -71,11 +73,11 @@ function formulaires_charger_plugin_archive_verifier_dist(){
  * Traitement du formulaire de téléchargement de plugin
  *
  * Télécharge le plugin via le téléporteur et rend la main.
- * 
+ *
  * @return array
  *     Retours du traitement
-**/
-function formulaires_charger_plugin_archive_traiter_dist(){
+ **/
+function formulaires_charger_plugin_archive_traiter_dist() {
 	$retour = array();
 
 	$archive = _request('archive');
@@ -88,11 +90,9 @@ function formulaires_charger_plugin_archive_traiter_dist(){
 		$retour['message_erreur'] = $ok;
 	} else {
 		$retour['message_ok'] = _T('svp:message_telechargement_archive_effectue',
-			array('dir' => joli_repertoire( _DIR_PLUGINS_AUTO . $dest )));
+			array('dir' => joli_repertoire(_DIR_PLUGINS_AUTO . $dest)));
 	}
 	$retour['editable'] = true;
+
 	return $retour;
 }
-
-
-?>

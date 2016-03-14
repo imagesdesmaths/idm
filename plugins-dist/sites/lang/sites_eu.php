@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=eu
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -33,12 +35,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Leku hau aldatu',
 	'icone_referencer_nouveau_site' => 'Leku berri bat aipatu',
 	'icone_voir_sites_references' => 'Aipatutako lekuak ikusi',
+	'info_1_article_syndique' => 'Artikulu 1 sindikatua',
+	'info_1_site' => 'Toki bat',
 	'info_a_valider' => '[egiaztatzeko]',
+	'info_aucun_article_syndique' => 'Sindikatutako artikulurik ez',
+	'info_aucun_site' => 'Gunerik ez',
 	'info_bloquer' => 'Blokatu',
 	'info_bloquer_lien' => 'Lotura hau blokatu',
 	'info_derniere_syndication' => 'Gune honen azken sindikazioa egin zen eguna:',
 	'info_liens_syndiques_1' => 'esteka sindikatuak',
 	'info_liens_syndiques_2' => 'balidazioaren zain daude.',
+	'info_nb_articles_syndiques' => '@nb@ sindikatutako artikulu',
+	'info_nb_sites' => '@nb@ gune',
 	'info_nom_site_2' => 'Gunearen izena [Nahitaezkoa]',
 	'info_panne_site_syndique' => 'Sindikatutako guneak arazoak dauzka',
 	'info_probleme_grave' => '-ren arazoa',

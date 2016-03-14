@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -13,9 +13,11 @@
 /**
  * Fonctions utilisées au calcul des squelette du privé.
  *
- * @package SPIP\Filtres
+ * @package SPIP\Core\Filtres
  */
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/filtres_boites');
 include_spip('inc/boutons');
@@ -24,7 +26,7 @@ include_spip('inc/pipelines_ecrire');
 
 /**
  * Retourne les paramètres de personnalisation css de l'espace privé
- * 
+ *
  * Ces paramètres sont (ltr et couleurs) ce qui permet une écriture comme :
  * generer_url_public('style_prive', parametres_css_prive())
  * qu'il est alors possible de récuperer dans le squelette style_prive.html avec
@@ -36,28 +38,28 @@ include_spip('inc/pipelines_ecrire');
  *
  * @return string
  */
-function parametres_css_prive(){
-	global $visiteur_session;
+function parametres_css_prive() {
 
 	$args = array();
 	$args['v'] = $GLOBALS['spip_version_code'];
-	$args['p'] = substr(md5($GLOBALS['meta']['plugin']),0,4);
-	$args['themes'] = implode(',',lister_themes_prives());
+	$args['p'] = substr(md5($GLOBALS['meta']['plugin']), 0, 4);
+	$args['themes'] = implode(',', lister_themes_prives());
 	$args['ltr'] = $GLOBALS['spip_lang_left'];
 	// un md5 des menus : si un menu change il faut maj la css
-	$args['md5b'] = (function_exists('md5_boutons_plugins')?md5_boutons_plugins():'');
+	$args['md5b'] = (function_exists('md5_boutons_plugins') ? md5_boutons_plugins() : '');
 
-	$c = (is_array($visiteur_session)
-		AND is_array($visiteur_session['prefs']))
-		? $visiteur_session['prefs']['couleur']
-		: 1;
+	$c = (is_array($GLOBALS['visiteur_session'])
+		and is_array($GLOBALS['visiteur_session']['prefs']))
+		? $GLOBALS['visiteur_session']['prefs']['couleur']
+		: 9;
 
 	$couleurs = charger_fonction('couleurs', 'inc');
-	parse_str($couleurs($c),$c);
+	parse_str($couleurs($c), $c);
 	$args = array_merge($args, $c);
 
-	if (_request('var_mode')=='recalcul' OR (defined('_VAR_MODE') AND _VAR_MODE=='recalcul'))
+	if (_request('var_mode') == 'recalcul' or (defined('_VAR_MODE') and _VAR_MODE == 'recalcul')) {
 		$args['var_mode'] = 'recalcul';
+	}
 
 	return http_build_query($args);
 }
@@ -67,6 +69,8 @@ function parametres_css_prive(){
  * Afficher le sélecteur de rubrique
  *
  * Il permet de placer un objet dans la hiérarchie des rubriques de SPIP
+ *
+ * @uses inc_chercher_rubrique_dist()
  *
  * @param string $titre
  * @param int $id_objet
@@ -79,54 +83,80 @@ function parametres_css_prive(){
  * @param bool $retour_sans_cadre
  * @return string
  */
-function chercher_rubrique($titre,$id_objet, $id_parent, $objet, $id_secteur, $restreint,$actionable = false, $retour_sans_cadre=false){
-	global $spip_lang_right;
-	include_spip('inc/autoriser');
-	if (intval($id_objet) && !autoriser('modifier', $objet, $id_objet))
-		return "";
-	if (!sql_countsel('spip_rubriques'))
-		return "";
-	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
-	$form = $chercher_rubrique($id_parent, $objet, $restreint, ($objet=='rubrique')?$id_objet:0);
+function chercher_rubrique(
+	$titre,
+	$id_objet,
+	$id_parent,
+	$objet,
+	$id_secteur,
+	$restreint,
+	$actionable = false,
+	$retour_sans_cadre = false
+) {
 
-	if ($id_parent == 0) $logo = "racine-24.png";
-	elseif ($id_secteur == $id_parent) $logo = "secteur-24.png";
-	else $logo = "rubrique-24.png";
+	include_spip('inc/autoriser');
+	if (intval($id_objet) && !autoriser('modifier', $objet, $id_objet)) {
+		return "";
+	}
+	if (!sql_countsel('spip_rubriques')) {
+		return "";
+	}
+	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
+	$form = $chercher_rubrique($id_parent, $objet, $restreint, ($objet == 'rubrique') ? $id_objet : 0);
+
+	if ($id_parent == 0) {
+		$logo = "racine-24.png";
+	} elseif ($id_secteur == $id_parent) {
+		$logo = "secteur-24.png";
+	} else {
+		$logo = "rubrique-24.png";
+	}
 
 	$confirm = "";
-	if ($objet=='rubrique') {
+	if ($objet == 'rubrique') {
 		// si c'est une rubrique-secteur contenant des breves, demander la
 		// confirmation du deplacement
-		$contient_breves = sql_countsel('spip_breves', "id_rubrique=".intval($id_objet));
+		$contient_breves = sql_countsel('spip_breves', "id_rubrique=" . intval($id_objet));
 
 		if ($contient_breves > 0) {
-			$scb = ($contient_breves>1? 's':'');
+			$scb = ($contient_breves > 1 ? 's' : '');
 			$scb = _T('avis_deplacement_rubrique',
-				array('contient_breves' => $contient_breves,
-				      'scb' => $scb));
+				array(
+					'contient_breves' => $contient_breves,
+					'scb' => $scb
+				));
 			$confirm .= "\n<div class='confirmer_deplacement verdana2'>"
-			            ."<div class='choix'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace' /><label for='confirme-deplace'>"
-			            . $scb .
-			            "</label></div></div>\n";
-		} else
+				. "<div class='choix'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace' /><label for='confirme-deplace'>"
+				. $scb .
+				"</label></div></div>\n";
+		} else {
 			$confirm .= "<input type='hidden' name='confirme_deplace' value='oui' />\n";
+		}
 	}
 	$form .= $confirm;
-	if ($actionable){
-		if (strpos($form,'<select')!==false) {
-			$form .= "<div style='text-align: $spip_lang_right;'>"
-				. '<input class="fondo" type="submit" value="'._T('bouton_choisir').'"/>'
+	if ($actionable) {
+		if (strpos($form, '<select') !== false) {
+			$form .= "<div style='text-align: " . $GLOBALS['spip_lang_right'] . ";'>"
+				. '<input class="fondo" type="submit" value="' . _T('bouton_choisir') . '"/>'
 				. "</div>";
 		}
 		$form = "<input type='hidden' name='editer_$objet' value='oui' />\n" . $form;
-		$form = generer_action_auteur("editer_$objet", $id_objet, self(), $form, " method='post' class='submit_plongeur'");
+		if ($action = charger_fonction("editer_$objet", "action", true)) {
+			$form = generer_action_auteur("editer_$objet", $id_objet, self(), $form,
+				" method='post' class='submit_plongeur'");
+		} else {
+			$form = generer_action_auteur("editer_objet", "$objet/$id_objet", self(), $form,
+				" method='post' class='submit_plongeur'");
+		}
 	}
 
-	if ($retour_sans_cadre)
+	if ($retour_sans_cadre) {
 		return $form;
+	}
 
 	include_spip('inc/presentation');
-	return debut_cadre_couleur($logo, true, "", $titre) . $form .fin_cadre_couleur(true);
+
+	return debut_cadre_couleur($logo, true, "", $titre) . $form . fin_cadre_couleur(true);
 
 }
 
@@ -140,13 +170,22 @@ function chercher_rubrique($titre,$id_objet, $id_parent, $objet, $id_secteur, $r
  * @param bool $accepter
  * @return bool
  */
-function avoir_visiteurs($past=false, $accepter=true) {
-	if ($GLOBALS['meta']["forums_publics"] == 'abo') return true;
-	if ($accepter AND $GLOBALS['meta']["accepter_visiteurs"] <> 'non') return true;
-	if (sql_countsel('spip_articles', "accepter_forum='abo'"))return true;
-	if (!$past) return false;
+function avoir_visiteurs($past = false, $accepter = true) {
+	if ($GLOBALS['meta']["forums_publics"] == 'abo') {
+		return true;
+	}
+	if ($accepter and $GLOBALS['meta']["accepter_visiteurs"] <> 'non') {
+		return true;
+	}
+	if (sql_countsel('spip_articles', "accepter_forum='abo'")) {
+		return true;
+	}
+	if (!$past) {
+		return false;
+	}
+
 	return sql_countsel('spip_auteurs',
-	                    "statut NOT IN ('0minirezo','1comite', '5poubelle')
+		"statut NOT IN ('0minirezo','1comite', '5poubelle')
 	                    AND (statut<>'nouveau' OR prefs NOT IN ('0minirezo','1comite', '5poubelle'))");
 }
 
@@ -158,18 +197,19 @@ function avoir_visiteurs($past=false, $accepter=true) {
  * en testant un à un les status présents en base
  *
  * On mémorise en static pour éviter de refaire plusieurs fois.
- * 
+ *
  * @param string $statut_auteur
  * @return array
  */
-function statuts_articles_visibles($statut_auteur){
+function statuts_articles_visibles($statut_auteur) {
 	static $auth = array();
-	if (!isset($auth[$statut_auteur])){
+	if (!isset($auth[$statut_auteur])) {
 		$auth[$statut_auteur] = array();
-		$statuts = array_map('reset',sql_allfetsel('distinct statut','spip_articles'));
-		foreach($statuts as $s){
-			if (autoriser('voir','article',0,array('statut'=>$statut_auteur),array('statut'=>$s)))
+		$statuts = array_map('reset', sql_allfetsel('distinct statut', 'spip_articles'));
+		foreach ($statuts as $s) {
+			if (autoriser('voir', 'article', 0, array('statut' => $statut_auteur), array('statut' => $s))) {
 				$auth[$statut_auteur][] = $s;
+			}
 		}
 	}
 
@@ -178,7 +218,7 @@ function statuts_articles_visibles($statut_auteur){
 
 /**
  * Traduire le statut technique de l'auteur en langage compréhensible
- * 
+ *
  * Si $statut=='nouveau' et que le statut en attente est fourni,
  * le prendre en compte en affichant que l'auteur est en attente
  *
@@ -186,29 +226,34 @@ function statuts_articles_visibles($statut_auteur){
  * @param string $attente
  * @return string
  */
-function traduire_statut_auteur($statut,$attente=""){
+function traduire_statut_auteur($statut, $attente = "") {
 	$plus = "";
-	if ($statut=='nouveau') {
+	if ($statut == 'nouveau') {
 		if ($attente) {
 			$statut = $attente;
-			$plus = " ("._T('info_statut_auteur_a_confirmer').")";
+			$plus = " (" . _T('info_statut_auteur_a_confirmer') . ")";
+		} else {
+			return _T('info_statut_auteur_a_confirmer');
 		}
-		else return _T('info_statut_auteur_a_confirmer');
 	}
 
-	$recom = array("info_administrateurs" => _T('item_administrateur_2'),
-		       "info_redacteurs" =>  _T('intem_redacteur'),
-		       "info_visiteurs" => _T('item_visiteur'),
-		       '5poubelle' => _T('texte_statut_poubelle'), // bouh
-		       );
-	if (isset($recom[$statut]))
-		return $recom[$statut].$plus;
+	$recom = array(
+		"info_administrateurs" => _T('item_administrateur_2'),
+		"info_redacteurs" => _T('intem_redacteur'),
+		"info_visiteurs" => _T('item_visiteur'),
+		'5poubelle' => _T('texte_statut_poubelle'), // bouh
+	);
+	if (isset($recom[$statut])) {
+		return $recom[$statut] . $plus;
+	}
 
 	// retrouver directement par le statut sinon
-	if ($t = array_search($statut, $GLOBALS['liste_des_statuts'])){
-	  if (isset($recom[$t]))
-			return $recom[$t].$plus;
-		return _T($t).$plus;
+	if ($t = array_search($statut, $GLOBALS['liste_des_statuts'])) {
+		if (isset($recom[$t])) {
+			return $recom[$t] . $plus;
+		}
+
+		return _T($t) . $plus;
 	}
 
 	// si on a pas reussi a le traduire, retournons la chaine telle quelle
@@ -223,23 +268,28 @@ function traduire_statut_auteur($statut,$attente=""){
  * @param string $objet
  * @return string
  */
-function afficher_qui_edite($id_objet,$objet){
+function afficher_qui_edite($id_objet, $objet) {
 	static $qui = array();
-	if (isset($qui[$objet][$id_objet]))
+	if (isset($qui[$objet][$id_objet])) {
 		return $qui[$objet][$id_objet];
+	}
 
-	if ($GLOBALS['meta']['articles_modif'] == 'non')
+	if ($GLOBALS['meta']['articles_modif'] == 'non') {
 		return $qui[$objet][$id_objet] = '';
-	
+	}
+
 	include_spip('inc/drapeau_edition');
 	$modif = mention_qui_edite($id_objet, $objet);
-	if (!$modif) return $qui[$objet][$id_objet] = '';
+	if (!$modif) {
+		return $qui[$objet][$id_objet] = '';
+	}
 
 	include_spip('base/objets');
 	$infos = lister_tables_objets_sql(table_objet_sql($objet));
-	if (isset($infos['texte_signale_edition']))
+	if (isset($infos['texte_signale_edition'])) {
 		return $qui[$objet][$id_objet] = _T($infos['texte_signale_edition'], $modif);
-	
+	}
+
 	return $qui[$objet][$id_objet] = _T('info_qui_edite', $modif);
 }
 
@@ -247,49 +297,58 @@ function afficher_qui_edite($id_objet,$objet){
  * Lister les statuts des auteurs
  *
  * @param string $quoi
- *   redacteurs : retourne les statuts des auteurs au moins redacteur, tels que defini par AUTEURS_MIN_REDAC
- *   visiteurs : retourne les statuts des autres auteurs, cad les visiteurs et autres statuts perso
- *   tous : retourne tous les statuts connus
+ *   - redacteurs : retourne les statuts des auteurs au moins redacteur,
+ *     tels que defini par AUTEURS_MIN_REDAC
+ *   - visiteurs : retourne les statuts des autres auteurs, cad les visiteurs
+ *     et autres statuts perso
+ *   - tous : retourne tous les statuts connus
  * @param bool $en_base
  *   si true, ne retourne strictement que les status existants en base
  *   dans tous les cas, les statuts existants en base sont inclus
  * @return array
  */
-function auteurs_lister_statuts($quoi='tous',$en_base=true) {
-	if (!defined('AUTEURS_MIN_REDAC')) define('AUTEURS_MIN_REDAC', "0minirezo,1comite,5poubelle");
+function auteurs_lister_statuts($quoi = 'tous', $en_base = true) {
+	if (!defined('AUTEURS_MIN_REDAC')) {
+		define('AUTEURS_MIN_REDAC', "0minirezo,1comite,5poubelle");
+	}
 
-	switch($quoi){
+	switch ($quoi) {
 		case "redacteurs":
 			$statut = AUTEURS_MIN_REDAC;
-			$statut = explode(',',$statut);
+			$statut = explode(',', $statut);
 			if ($en_base) {
-				$check = array_map('reset',sql_allfetsel('DISTINCT statut','spip_auteurs',sql_in('statut',$statut)));
-				$retire = array_diff($statut,$check);
-				$statut = array_diff($statut,$retire);
+				$check = array_map('reset', sql_allfetsel('DISTINCT statut', 'spip_auteurs', sql_in('statut', $statut)));
+				$retire = array_diff($statut, $check);
+				$statut = array_diff($statut, $retire);
 			}
+
 			return array_unique($statut);
 			break;
 		case "visiteurs":
 			$statut = array();
 			$exclus = AUTEURS_MIN_REDAC;
-			$exclus = explode(',',$exclus);
-			if (!$en_base){
+			$exclus = explode(',', $exclus);
+			if (!$en_base) {
 				// prendre aussi les statuts de la table des status qui ne sont pas dans le define
-				$statut = array_diff(array_values($GLOBALS['liste_des_statuts']),$exclus);
+				$statut = array_diff(array_values($GLOBALS['liste_des_statuts']), $exclus);
 			}
-			$s_complement = array_map('reset',sql_allfetsel('DISTINCT statut','spip_auteurs',sql_in('statut',$exclus,'NOT')));
-			return array_unique(array_merge($statut,$s_complement));
+			$s_complement = array_map('reset',
+				sql_allfetsel('DISTINCT statut', 'spip_auteurs', sql_in('statut', $exclus, 'NOT')));
+
+			return array_unique(array_merge($statut, $s_complement));
 			break;
 		default:
 		case "tous":
 			$statut = array_values($GLOBALS['liste_des_statuts']);
-			$s_complement = array_map('reset',sql_allfetsel('DISTINCT statut','spip_auteurs',sql_in('statut',$statut,'NOT')));
-			$statut = array_merge($statut,$s_complement);
+			$s_complement = array_map('reset',
+				sql_allfetsel('DISTINCT statut', 'spip_auteurs', sql_in('statut', $statut, 'NOT')));
+			$statut = array_merge($statut, $s_complement);
 			if ($en_base) {
-				$check = array_map('reset',sql_allfetsel('DISTINCT statut','spip_auteurs',sql_in('statut',$statut)));
-				$retire = array_diff($statut,$check);
-				$statut = array_diff($statut,$retire);
+				$check = array_map('reset', sql_allfetsel('DISTINCT statut', 'spip_auteurs', sql_in('statut', $statut)));
+				$retire = array_diff($statut, $check);
+				$statut = array_diff($statut, $retire);
 			}
+
 			return array_unique($statut);
 			break;
 	}
@@ -300,21 +359,21 @@ function auteurs_lister_statuts($quoi='tous',$en_base=true) {
 
 /**
  * Déterminer la rubrique pour la création d'un objet heuristique
- * 
+ *
  * Rubrique courante si possible,
  * - sinon rubrique administrée pour les admin restreint
  * - sinon première rubrique de premier niveau autorisée que l'on trouve
  *
  * @param int $id_rubrique Identifiant de rubrique (si connu)
- * @param string $objet    Objet en cours de création
+ * @param string $objet Objet en cours de création
  * @return int             Identifiant de la rubrique dans laquelle créer l'objet
  */
-function trouver_rubrique_creer_objet($id_rubrique,$objet){
-	global $connect_id_rubrique;
-	if (!$id_rubrique AND defined('_CHOIX_RUBRIQUE_PAR_DEFAUT') AND _CHOIX_RUBRIQUE_PAR_DEFAUT){
-		$in = !count($connect_id_rubrique)
+function trouver_rubrique_creer_objet($id_rubrique, $objet) {
+
+	if (!$id_rubrique and defined('_CHOIX_RUBRIQUE_PAR_DEFAUT') and _CHOIX_RUBRIQUE_PAR_DEFAUT) {
+		$in = !count($GLOBALS['connect_id_rubrique'])
 			? ''
-			: (" AND ".sql_in('id_rubrique', $connect_id_rubrique));
+			: (" AND " . sql_in('id_rubrique', $GLOBALS['connect_id_rubrique']));
 
 		// on tente d'abord l'ecriture a la racine dans le cas des rubriques uniquement
 		if ($objet == 'rubrique') {
@@ -322,57 +381,66 @@ function trouver_rubrique_creer_objet($id_rubrique,$objet){
 		} else {
 			$id_rubrique = sql_getfetsel('id_rubrique', 'spip_rubriques', "id_parent=0$in", '', "id_rubrique DESC", 1);
 		}
-		
-		if (!autoriser("creer{$objet}dans", 'rubrique', $id_rubrique)){
+
+		if (!autoriser("creer{$objet}dans", 'rubrique', $id_rubrique)) {
 			// manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
 			$res = sql_select("id_rubrique", "spip_rubriques", "id_parent=0");
-			while (!autoriser("creer{$objet}dans", 'rubrique', $id_rubrique) && $row_rub = sql_fetch($res)){
+			while (!autoriser("creer{$objet}dans", 'rubrique', $id_rubrique) && $row_rub = sql_fetch($res)) {
 				$id_rubrique = $row_rub['id_rubrique'];
 			}
 		}
 	}
-  return $id_rubrique;
+
+	return $id_rubrique;
 }
 
 /**
  * Afficher le lien de redirection d'un article virtuel si il y a lieu
  * (rien si l'article n'est pas redirige)
- * 
+ *
  * @param string $virtuel
  * @return string
  */
-function lien_article_virtuel($virtuel){
+function lien_article_virtuel($virtuel) {
 	include_spip('inc/lien');
-  if (!$virtuel = virtuel_redirige($virtuel))
-	  return '';
-  return propre("[->".$virtuel."]");
+	if (!$virtuel = virtuel_redirige($virtuel)) {
+		return '';
+	}
+
+	return propre("[->" . $virtuel . "]");
 }
 
 
 /**
- * Filtre pour generer un bouton RSS prive
- * protege par un hash de faible securite
+ * Filtre pour générer un lien vers un flux RSS privé
  *
- * http://doc.spip.org/@bouton_spip_rss
+ * Le RSS est protegé par un hash de faible sécurité
  *
+ * @example
+ *     - `[(#VAL{a_suivre}|bouton_spip_rss)]`
+ *     - `[(#VAL{signatures}|bouton_spip_rss{#ARRAY{id_article,#ID_ARTICLE}})]`
+ *
+ * @filtre
+ * @uses param_low_sec()
  * @param string $op
  * @param array $args
  * @param string $lang
+ * @param string $title
  * @return string
+ *     Code HTML du lien
  */
-function bouton_spip_rss($op, $args=array(), $lang='', $title='RSS') {
+function bouton_spip_rss($op, $args = array(), $lang = '', $title = 'RSS') {
 	include_spip('inc/acces');
 	$clic = http_img_pack('feed.png', 'RSS', '', $title);
 	$args = param_low_sec($op, $args, $lang, 'rss');
 	$url = generer_url_public('rss', $args);
-	return "<a style='float: ".$GLOBALS['spip_lang_right'].";' href='$url'>$clic</a>";
+
+	return "<a style='float: " . $GLOBALS['spip_lang_right'] . ";' href='$url'>$clic</a>";
 }
 
 
 /**
- * Verifier la presence d'alertes pour les auteur
- *
- * http://doc.spip.org/@alertes_auteur
+ * Vérifier la présence d'alertes pour les auteur
  *
  * @param int $id_auteur
  * @return string
@@ -383,73 +451,84 @@ function alertes_auteur($id_auteur) {
 
 	// si on n'est plus compatible avec php4 : le dire a tous ceux qui passent
 	// dans l'espace prive
-	if (version_compare(phpversion(), _PHP_MIN) == -1)
-		$alertes[] = _L('SPIP n&#233;cessite PHP&nbsp;@min@, votre version est @version@.', array('min'=> _PHP_MIN, 'version' => phpversion()));
+	if (version_compare(phpversion(), _PHP_MIN) == -1) {
+		$alertes[] = _L('SPIP n&#233;cessite PHP&nbsp;@min@, votre version est @version@.',
+			array('min' => _PHP_MIN, 'version' => phpversion()));
+	}
 
 	if (isset($GLOBALS['meta']['message_crash_tables'])
-	AND autoriser('detruire', null, null, $id_auteur)) {
+		and autoriser('detruire', null, null, $id_auteur)
+	) {
 		include_spip('genie/maintenance');
-		if ($msg = message_crash_tables())
+		if ($msg = message_crash_tables()) {
 			$alertes[] = $msg;
+		}
 	}
 
 	if (isset($GLOBALS['meta']['message_crash_plugins'])
-	  AND $GLOBALS['meta']['message_crash_plugins']
-	  AND autoriser('configurer', '_plugins', null, $id_auteur)
-	  AND is_array($msg = unserialize($GLOBALS['meta']['message_crash_plugins']))) {
-			$msg = implode(', ',array_map('joli_repertoire',array_keys($msg)));
-			$alertes[] = _T('plugins_erreur', array('plugins' => $msg));
+		and $GLOBALS['meta']['message_crash_plugins']
+		and autoriser('configurer', '_plugins', null, $id_auteur)
+		and is_array($msg = unserialize($GLOBALS['meta']['message_crash_plugins']))
+	) {
+		$msg = implode(', ', array_map('joli_repertoire', array_keys($msg)));
+		$alertes[] = _T('plugins_erreur', array('plugins' => $msg));
 	}
 
 	$a = isset($GLOBALS['meta']['message_alertes_auteurs']) ? $GLOBALS['meta']['message_alertes_auteurs'] : '';
 	if ($a
-		AND is_array($a = unserialize($a))
-	  AND count($a)){
+		and is_array($a = unserialize($a))
+		and count($a)
+	) {
 		$update = false;
-		if (isset($a[$GLOBALS['visiteur_session']['statut']])){
-			$alertes = array_merge($alertes,$a[$GLOBALS['visiteur_session']['statut']]);
+		if (isset($a[$GLOBALS['visiteur_session']['statut']])) {
+			$alertes = array_merge($alertes, $a[$GLOBALS['visiteur_session']['statut']]);
 			unset($a[$GLOBALS['visiteur_session']['statut']]);
 			$update = true;
 		}
-		if (isset($a[''])){
-			$alertes = array_merge($alertes,$a['']);
+		if (isset($a[''])) {
+			$alertes = array_merge($alertes, $a['']);
 			unset($a['']);
 			$update = true;
 		}
-		if ($update)
-			ecrire_meta("message_alertes_auteurs",serialize($a));
+		if ($update) {
+			ecrire_meta("message_alertes_auteurs", serialize($a));
+		}
 	}
 
 	if (isset($GLOBALS['meta']['plugin_erreur_activation'])
-	  AND autoriser('configurer', '_plugins', null, $id_auteur)) {
+		and autoriser('configurer', '_plugins', null, $id_auteur)
+	) {
 		include_spip('inc/plugin');
 		$alertes[] = plugin_donne_erreurs();
 	}
 
 	$alertes = pipeline(
 		'alertes_auteur',
-			array(
+		array(
 			'args' => array(
 				'id_auteur' => $id_auteur,
 				'exec' => _request('exec'),
-				),
+			),
 			'data' => $alertes
-			)
-		);
+		)
+	);
 
-	if ($alertes = array_filter($alertes))
-		return "<div class='wrap-messages-alertes'><div class='messages-alertes'>".
-			join(' | ', $alertes)
-			."</div></div>";
+	if ($alertes = array_filter($alertes)) {
+		return "<div class='wrap-messages-alertes'><div class='messages-alertes'>" .
+		join(' | ', $alertes)
+		. "</div></div>";
+	}
 }
 
 /**
  * Filtre pour afficher les rubriques enfants d'une rubrique
+ *
  * @param int $id_rubrique
  * @return string
  */
-function filtre_afficher_enfant_rub_dist($id_rubrique){
+function filtre_afficher_enfant_rub_dist($id_rubrique) {
 	include_spip('inc/presenter_enfants');
+
 	return afficher_enfant_rub(intval($id_rubrique));
 }
 
@@ -457,32 +536,32 @@ function filtre_afficher_enfant_rub_dist($id_rubrique){
  * Afficher un petit "i" pour lien vers autre page
  *
  * @param string $lien
- * 		URL du lien desire
+ *    URL du lien desire
  * @param string $titre
- * 		Titre au survol de l'icone pointant le lien
+ *    Titre au survol de l'icone pointant le lien
  * @param string $titre_lien
- * 		Si present, ajoutera en plus apres l'icone
- * 		un lien simple, vers la meme URL,
- * 		avec le titre indique
- * 
+ *    Si present, ajoutera en plus apres l'icone
+ *    un lien simple, vers la meme URL,
+ *    avec le titre indique
+ *
  * @return string
  */
-function afficher_plus_info($lien, $titre="+", $titre_lien="") {
+function afficher_plus_info($lien, $titre = "+", $titre_lien = "") {
 	$titre = attribut_html($titre);
 	$icone = "\n<a href='$lien' title='$titre' class='plus_info'>" .
-		http_img_pack("information-16.png", $titre) ."</a>";
+		http_img_pack("information-16.png", $titre) . "</a>";
 
 	if (!$titre_lien) {
 		return $icone;
 	} else {
-		return $icone .  "\n<a href='$lien'>$titre_lien</a>";
+		return $icone . "\n<a href='$lien'>$titre_lien</a>";
 	}
 }
 
 /**
  * Lister les id objet_source associés à l'objet id_objet
  * via la table de lien objet_lien
- * 
+ *
  * Utilisé pour les listes de #FORMULAIRE_EDITER_LIENS
  *
  * @param string $objet_source
@@ -491,19 +570,18 @@ function afficher_plus_info($lien, $titre="+", $titre_lien="") {
  * @param string $objet_lien
  * @return array
  */
-function lister_objets_lies($objet_source,$objet,$id_objet,$objet_lien){
+function lister_objets_lies($objet_source, $objet, $id_objet, $objet_lien) {
 	include_spip('action/editer_liens');
 	$l = array();
 	// quand $objet == $objet_lien == $objet_source on reste sur le cas par defaut de $objet_lien == $objet_source
-	if ($objet_lien==$objet AND $objet_lien!==$objet_source){
-		$res = objet_trouver_liens(array($objet=>$id_objet),array($objet_source=>'*'));
+	if ($objet_lien == $objet and $objet_lien !== $objet_source) {
+		$res = objet_trouver_liens(array($objet => $id_objet), array($objet_source => '*'));
+	} else {
+		$res = objet_trouver_liens(array($objet_source => '*'), array($objet => $id_objet));
 	}
-	else{
-		$res = objet_trouver_liens(array($objet_source=>'*'),array($objet=>$id_objet));
-	}
-	while ($row = array_shift($res))
+	while ($row = array_shift($res)) {
 		$l[] = $row[$objet_source];
+	}
 
 	return $l;
 }
-?>

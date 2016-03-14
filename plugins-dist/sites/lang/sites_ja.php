@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=ja
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -33,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'このサイトを修正',
 	'icone_referencer_nouveau_site' => '新しいサイトを参照する',
 	'icone_voir_sites_references' => '参照したサイトの表示',
+	'info_1_site' => '1 サイト',
 	'info_a_valider' => '[検査済み]',
 	'info_bloquer' => 'ブロック',
 	'info_bloquer_lien' => 'このリンクをブロック',

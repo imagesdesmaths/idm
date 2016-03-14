@@ -3,19 +3,25 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=nl
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'alerte_confirmer_suppression_signatures' => 'Je zal alle hadtekening van deze petutie uitwissen. Wil je echt verder gaan ?',
+	'alerte_confirmer_suppression_signatures' => 'Je zal alle handtekening van deze petitie uitwissen. Wil je echt verder gaan?',
 	'aucune_signature' => 'Geen handtekening',
 
 	// B
-	'bouton_checkbox_envoi_message' => 'mogelijkheid om een boodschap te laten',
+	'bouton_checkbox_envoi_message' => 'mogelijkheid om een bericht te zenden',
 	'bouton_checkbox_indiquer_site' => 'verplicht een website aan te geven',
-	'bouton_checkbox_signature_unique_email' => 'enkel een handtekening per email address',
-	'bouton_checkbox_signature_unique_site' => 'een enkel handtekening per website',
+	'bouton_checkbox_signature_unique_email' => 'slechts één handtekening per email adres',
+	'bouton_checkbox_signature_unique_site' => 'één enkele handtekening per website',
+	'bouton_radio_activer_petition' => 'Petitie activeren',
+	'bouton_radio_pas_petition' => 'Geen petitie',
+	'bouton_radio_petition_activee' => 'Petitie geactiveerd',
+	'bouton_radio_supprimer_petition' => 'De petitie verwijderen',
 
 	// F
 	'filtre' => 'Filter :',
@@ -23,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_pet_aucune_signature' => 'Geen enkele naam komt overeen met deze code ...',
 	'form_pet_confirmation' => 'Gelieve je handtekening te bevestigen :',
 	'form_pet_deja_signe' => 'Je hebt deze tekst al ondertekend.',
-	'form_pet_envoi_mail_confirmation' => 'Een elektronische bevestigingspost is zojuist naar @email@ verzonden. U zult het Web adres moeten bezoeken dat in deze post wordt vermeld om uw handtekening te valideren.',
+	'form_pet_envoi_mail_confirmation' => 'Een elektronisch bevestigingsbericht is zojuist naar @email@ verzonden. U zult het Web adres moeten bezoeken dat in dit bericht wordt vermeld om uw handtekening te valideren.',
 	'form_pet_mail_confirmation' => 'Hallo,
 
 Je hebt gevraagd om deze petitie te ondertekenen :
@@ -36,14 +42,14 @@ Je hebt ons de volgende informatie bezorgd :
 
 BELANGRIJK...
 Om je gegevens te valideren, volstaat het het onderstaande adres
- aan te klikken (in het andere geval, zal je aanvraag verworpen worden) :
+ aan te klikken (anders zal je aanvraag verworpen worden):
 
     @url@
 
 
 Bedankt voor je deelname
 ',
-	'form_pet_message_commentaire' => 'Een boodscap, een commentaar ?',
+	'form_pet_message_commentaire' => 'Een boodschap, een commentaar ?',
 	'form_pet_nom_site2' => 'Naam van je website',
 	'form_pet_probleme_liens' => 'Gelieve uw bericht te herbeginnen zonder internet links.',
 	'form_pet_probleme_technique' => 'Technisch probleem. Inloggen is momenteel niet mogelijk.',
@@ -55,13 +61,13 @@ Bedankt voor je deelname
 	'form_pet_votre_site' => 'Als je een website hebt, kan je ze hier vermelden',
 
 	// I
-	'icone_relancer_signataire' => 'Handtekenersbevestiging ervragen',
-	'icone_relancer_signataires' => 'Handtekenersbevestigingen ervragen',
+	'icone_relancer_signataire' => 'Bevestiging handtekening opnieuw versturen',
+	'icone_relancer_signataires' => 'Bevestigingen handtekening opnieuw versturen',
 	'icone_suivi_petitions' => 'Petities volgen/beheren',
 	'icone_supprimer_signature' => 'Handtekening uitwissen',
 	'icone_supprimer_signatures' => 'Handtekeningen uitwissen',
 	'icone_valider_signature' => 'Handtekening bevstigen',
-	'icone_valider_signatures' => 'Handtekeningen bvestigen',
+	'icone_valider_signatures' => 'Handtekeningen bevestigen',
 	'info_adresse_email' => 'E-MAIL ADRES:',
 	'info_fonctionnement_petition' => 'Werkwijze van de petitie',
 	'info_signature_supprimee' => 'Handtekening verwijderd',
@@ -85,6 +91,7 @@ Bedankt voor je deelname
 	'signatures_prop' => 'In afwachting',
 	'signatures_publie' => 'Bevestigde',
 	'signatures_recherche_label' => 'Handtekeningen opzoeken:',
+	'signatures_selection' => 'Handtekeningen kiezen:',
 	'signatures_toutes' => 'Alles',
 	'statut_poubelle' => 'Uitgewist',
 	'statut_prop' => 'In afwachting van bevestiging',
@@ -92,7 +99,7 @@ Bedankt voor je deelname
 
 	// T
 	'texte_descriptif_petition' => 'Beschrijving van de petitie',
-	'titre_page_controle_petition' => 'Gevolg van de petities',
+	'titre_page_controle_petition' => 'Opvolgen van petities',
 	'titre_petition' => 'Petitie',
 	'titre_petitions' => 'Petities',
 	'titre_selection_action' => 'Selectie',

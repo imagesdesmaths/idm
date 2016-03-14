@@ -4,8 +4,8 @@
 	[(#ENV{editable})	
 	<form action="#ENV{action}#formulaire_illustrer_document-#ENV{id,new}" method="post" enctype='multipart/form-data'><div>
 		[(#ACTION_FORMULAIRE{#ENV{action}})]
-		<ul>
-			<li class="editer editer_fichier[ (#ENV**{erreurs}|table_valeur{fichier}|oui)erreur]">
+		<div class="editer-groupe">
+			<div class="editer editer_fichier[ (#ENV**{erreurs}|table_valeur{fichier}|oui)erreur]">
 				<label for="fichier"><:medias:label_fichier_vignette:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>
 				][
@@ -21,8 +21,8 @@
 				<div id='illustrer_document' style='display:none;'>
 				[(#INCLURE{fond=formulaires/inc-upload_document, env, joindre_upload=oui})]
 				</div>
-	    </li>
-		</ul>
+	    </div>
+		</div>
 	</div></form>
 	]
 </div>

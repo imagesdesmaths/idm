@@ -3,17 +3,29 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+/**
+ * Gestion des mises à jour de SPIP, versions 1.9*
+ *
+ * @package SPIP\Core\SQL\Upgrade
+ **/
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function v019_pre193($version_installee, $version_cible)
-{
+/**
+ * Mises à jour de SPIP n°019
+ *
+ * @param float $version_installee Version actuelle
+ * @param float $version_cible Version de destination
+ **/
+function v019_pre193($version_installee, $version_cible) {
 	// Syndication : ajout de l'option resume=oui/non et de la langue
 	if (upgrade_vers(1.901, $version_installee, $version_cible)) {
 		spip_query("ALTER TABLE spip_syndic ADD `resume` VARCHAR(3) DEFAULT 'oui'");
@@ -55,47 +67,47 @@ function v019_pre193($version_installee, $version_cible)
 		spip_query("ALTER TABLE spip_meta CHANGE `valeur` `valeur` TEXT");
 		// table des correspondances table->id_table
 		$liste_tables = array();
-		$liste_tables[1]='spip_articles';
-		$liste_tables[2]='spip_auteurs';
-		$liste_tables[3]='spip_breves';
-		$liste_tables[4]='spip_documents';
-		$liste_tables[5]='spip_forum';
-		$liste_tables[6]='spip_mots';
-		$liste_tables[7]='spip_rubriques';
-		$liste_tables[8]='spip_signatures';
-		$liste_tables[9]='spip_syndic';
+		$liste_tables[1] = 'spip_articles';
+		$liste_tables[2] = 'spip_auteurs';
+		$liste_tables[3] = 'spip_breves';
+		$liste_tables[4] = 'spip_documents';
+		$liste_tables[5] = 'spip_forum';
+		$liste_tables[6] = 'spip_mots';
+		$liste_tables[7] = 'spip_rubriques';
+		$liste_tables[8] = 'spip_signatures';
+		$liste_tables[9] = 'spip_syndic';
 
 		ecrire_meta('index_table', serialize($liste_tables));
 
 ## devenu inutile car suppression totale de l'indexation
-/*
-		spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_article` as id_objet,'1' as id_table FROM spip_index_articles");
-		spip_query("DROP TABLE IF EXISTS spip_index_articles");
+		/*
+				spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_article` as id_objet,'1' as id_table FROM spip_index_articles");
+				spip_query("DROP TABLE IF EXISTS spip_index_articles");
 
-		spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_auteur` as id_objet,'2' as id_table FROM spip_index_auteurs");
-		spip_query("DROP TABLE IF EXISTS spip_index_auteurs");
+				spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_auteur` as id_objet,'2' as id_table FROM spip_index_auteurs");
+				spip_query("DROP TABLE IF EXISTS spip_index_auteurs");
 
-		spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_breve` as id_objet,'3' as id_table FROM spip_index_breves");
-		spip_query("DROP TABLE IF EXISTS spip_index_breves");
+				spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_breve` as id_objet,'3' as id_table FROM spip_index_breves");
+				spip_query("DROP TABLE IF EXISTS spip_index_breves");
 
-		spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_document` as id_objet,'4' as id_table FROM spip_index_documents");
-		spip_query("DROP TABLE IF EXISTS spip_index_documents");
+				spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_document` as id_objet,'4' as id_table FROM spip_index_documents");
+				spip_query("DROP TABLE IF EXISTS spip_index_documents");
 
-		spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_forum` as id_objet,'5' as id_table FROM spip_index_forum");
-		spip_query("DROP TABLE IF EXISTS spip_index_forum");
+				spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_forum` as id_objet,'5' as id_table FROM spip_index_forum");
+				spip_query("DROP TABLE IF EXISTS spip_index_forum");
 
-		spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_mot` as id_objet,'6' as id_table FROM spip_index_mots");
-		spip_query("DROP TABLE IF EXISTS spip_index_mots");
+				spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_mot` as id_objet,'6' as id_table FROM spip_index_mots");
+				spip_query("DROP TABLE IF EXISTS spip_index_mots");
 
-		spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_rubrique` as id_objet,'7' as id_table FROM spip_index_rubriques");
-		spip_query("DROP TABLE IF EXISTS spip_index_rubriques");
+				spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_rubrique` as id_objet,'7' as id_table FROM spip_index_rubriques");
+				spip_query("DROP TABLE IF EXISTS spip_index_rubriques");
 
-		spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_signature` as id_objet,'8' as id_table FROM spip_index_signatures");
-		spip_query("DROP TABLE IF EXISTS spip_index_signatures");
+				spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_signature` as id_objet,'8' as id_table FROM spip_index_signatures");
+				spip_query("DROP TABLE IF EXISTS spip_index_signatures");
 
-		spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_syndic` as id_objet,'9' as `id_table FROM spip_index_syndic");
-		spip_query("DROP TABLE IF EXISTS spip_index_syndic");
-*/
+				spip_query("INSERT INTO spip_index (`hash`,`points`,`id_objet`,`id_table`) SELECT `hash`,`points`,`id_syndic` as id_objet,'9' as `id_table FROM spip_index_syndic");
+				spip_query("DROP TABLE IF EXISTS spip_index_syndic");
+		*/
 		maj_version(1.905);
 	}
 
@@ -155,12 +167,12 @@ function v019_pre193($version_installee, $version_cible)
 	// Le logo du site n'est plus le logo par defaut des rubriques
 	// mais pour assurer la compatibilite ascendante, on le duplique
 	if (upgrade_vers(1.912, $version_installee, $version_cible)) {
-		@copy(_DIR_LOGOS.'rubon0.gif', _DIR_LOGOS.'siteon0.gif');
-		@copy(_DIR_LOGOS.'ruboff0.gif', _DIR_LOGOS.'siteoff0.gif');
-		@copy(_DIR_LOGOS.'rubon0.jpg', _DIR_LOGOS.'siteon0.jpg');
-		@copy(_DIR_LOGOS.'ruboff0.jpg', _DIR_LOGOS.'siteoff0.jpg');
-		@copy(_DIR_LOGOS.'rubon0.png', _DIR_LOGOS.'siteon0.png');
-		@copy(_DIR_LOGOS.'ruboff0.png', _DIR_LOGOS.'siteoff0.png');
+		@copy(_DIR_LOGOS . 'rubon0.gif', _DIR_LOGOS . 'siteon0.gif');
+		@copy(_DIR_LOGOS . 'ruboff0.gif', _DIR_LOGOS . 'siteoff0.gif');
+		@copy(_DIR_LOGOS . 'rubon0.jpg', _DIR_LOGOS . 'siteon0.jpg');
+		@copy(_DIR_LOGOS . 'ruboff0.jpg', _DIR_LOGOS . 'siteoff0.jpg');
+		@copy(_DIR_LOGOS . 'rubon0.png', _DIR_LOGOS . 'siteon0.png');
+		@copy(_DIR_LOGOS . 'ruboff0.png', _DIR_LOGOS . 'siteoff0.png');
 		maj_version(1.912);
 	}
 
@@ -220,18 +232,44 @@ function v019_pre193($version_installee, $version_cible)
 	}
 	if (upgrade_vers(1.922, $version_installee, $version_cible)) {
 		spip_query("ALTER TABLE spip_meta ADD `impt` ENUM('non', 'oui') DEFAULT 'oui' NOT NULL AFTER `valeur`");
-		$meta_serveur = array('version_installee','adresse_site','alea_ephemere_ancien','alea_ephemere','alea_ephemere_date','langue_site','langues_proposees','date_calcul_rubriques','derniere_modif','optimiser_table','drapeau_edition','creer_preview','taille_preview','creer_htpasswd','creer_htaccess','gd_formats_read','gd_formats',
-		'netpbm_formats','formats_graphiques','image_process','plugin_header','plugin');
-		foreach($meta_serveur as $nom)
-			spip_query("UPDATE spip_meta SET `impt`='non' WHERE `nom`="._q($nom));
+		$meta_serveur = array(
+			'version_installee',
+			'adresse_site',
+			'alea_ephemere_ancien',
+			'alea_ephemere',
+			'alea_ephemere_date',
+			'langue_site',
+			'langues_proposees',
+			'date_calcul_rubriques',
+			'derniere_modif',
+			'optimiser_table',
+			'drapeau_edition',
+			'creer_preview',
+			'taille_preview',
+			'creer_htpasswd',
+			'creer_htaccess',
+			'gd_formats_read',
+			'gd_formats',
+			'netpbm_formats',
+			'formats_graphiques',
+			'image_process',
+			'plugin_header',
+			'plugin'
+		);
+		foreach ($meta_serveur as $nom) {
+			spip_query("UPDATE spip_meta SET `impt`='non' WHERE `nom`=" . _q($nom));
+		}
 		maj_version('1.922');
 	}
 	if (upgrade_vers(1.923, $version_installee, $version_cible)) {
-		if (isset($GLOBALS['meta']['IMPORT_tables_noimport'])){
+		if (isset($GLOBALS['meta']['IMPORT_tables_noimport'])) {
 			$IMPORT_tables_noimport = unserialize($GLOBALS['meta']['IMPORT_tables_noimport']);
-			foreach ($IMPORT_tables_noimport as $key=>$table)
-				if ($table=='spip_meta') unset($IMPORT_tables_noimport[$key]);
-			ecrire_meta('IMPORT_tables_noimport',serialize($IMPORT_tables_noimport),'non');
+			foreach ($IMPORT_tables_noimport as $key => $table) {
+				if ($table == 'spip_meta') {
+					unset($IMPORT_tables_noimport[$key]);
+				}
+			}
+			ecrire_meta('IMPORT_tables_noimport', serialize($IMPORT_tables_noimport), 'non');
 		}
 		maj_version('1.923');
 	}
@@ -246,49 +284,51 @@ function v019_pre193($version_installee, $version_cible)
 		/* deplacement des sessions */
 		$f_session = preg_files('data', 'session_');
 		$repertoire = _DIR_SESSIONS;
-		if(!@file_exists($repertoire)) {
-			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
+		if (!@file_exists($repertoire)) {
+			$repertoire = preg_replace(',' . _DIR_TMP . ',', '', $repertoire);
 			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
 		}
-		foreach($f_session as $f) {
+		foreach ($f_session as $f) {
 			$d = basename($f);
-			@copy($f, $repertoire.$d);
+			@copy($f, $repertoire . $d);
 		}
 		/* deplacement des visites */
 		$f_visites = preg_files('data/visites');
 		$repertoire = sous_repertoire(_DIR_TMP, 'visites');
-		foreach($f_visites as $f) {
+		foreach ($f_visites as $f) {
 			$d = basename($f);
-			@copy($f, $repertoire.$d);
+			@copy($f, $repertoire . $d);
 		}
 		/* deplacement des upload */
 		$auteurs = array();
 		$req = spip_query("SELECT `login` FROM spip_auteurs WHERE `statut` = '0minirezo'");
-		while($row = sql_fetch($req))
-			$auteurs[] = $row['login']; 
+		while ($row = sql_fetch($req)) {
+			$auteurs[] = $row['login'];
+		}
 		$f_upload = preg_files('upload', -1, 10000, $auteurs);
 		$repertoire = _DIR_TRANSFERT;
-		if(!@file_exists($repertoire)) {
-			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
+		if (!@file_exists($repertoire)) {
+			$repertoire = preg_replace(',' . _DIR_TMP . ',', '', $repertoire);
 			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
 		}
-		foreach($auteurs as $login) {
-			if(is_dir('upload/'.$login))
+		foreach ($auteurs as $login) {
+			if (is_dir('upload/' . $login)) {
 				$sous_repertoire = sous_repertoire(_DIR_TRANSFERT, $login);
+			}
 		}
-		foreach($f_upload as $f) {
-			@copy($f, _DIR_TMP.$f);
+		foreach ($f_upload as $f) {
+			@copy($f, _DIR_TMP . $f);
 		}
 		/* deplacement des dumps */
 		$f_session = preg_files('data', 'dump');
 		$repertoire = _DIR_DUMP;
-		if(!@file_exists($repertoire)) {
-			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
+		if (!@file_exists($repertoire)) {
+			$repertoire = preg_replace(',' . _DIR_TMP . ',', '', $repertoire);
 			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
 		}
-		foreach($f_session as $f) {
+		foreach ($f_session as $f) {
 			$d = basename($f);
-			@copy($f, $repertoire.$d);
+			@copy($f, $repertoire . $d);
 		}
 		maj_version('1.925');
 	}
@@ -299,4 +339,3 @@ function v019_pre193($version_installee, $version_cible)
 		maj_version('1.926');
 	}
 }
-?>

@@ -3,9 +3,17 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=my
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// B
+	'bouton_radio_activer_petition' => 'တောင်းဆိုမှုကို အသက်ဝင်စေသည်',
+	'bouton_radio_pas_petition' => 'လျှောက်လဲချက်မလို',
+	'bouton_radio_petition_activee' => 'လျှောက်လဲချက် ​အတည်ပြုခဲ့ပြီးဖြစ်သည်',
+	'bouton_radio_supprimer_petition' => 'လျှောက်လဲချက် ပယ်ဖျက်ရန်',
 
 	// F
 	'form_pet_adresse_site' => 'သင့်ဝက်ဘ်ဆိုက်လိပ်စာ', # MODIF

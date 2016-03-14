@@ -6,7 +6,7 @@
 		<h3>[(#TOTAL_BOUCLE|singulier_ou_pluriel{medias:une_utilisation,medias:des_utilisations})]</h3>
 		<ul class='liste_items'>
 			<BOUCLE_liens(documents_liens){id_document}>
-			<li class='item #OBJET'>[(#CHEMIN_IMAGE{#OBJET|objet_info{icone_objet}|concat{-16.png}}|balise_img) ][(#ID_OBJET|lien_objet{#OBJET})]
+			<li class='item #OBJET'>[(#CHEMIN_IMAGE{#OBJET|objet_info{icone_objet}|concat{-16.png}}|balise_img) ][(#ID_OBJET|generer_lien_entite{#OBJET})]
 			[(#VU|=={oui}|oui)
 			[<span class='vu'>(#CHEMIN_IMAGE{document-vu-24.png}|balise_img|inserer_attribut{title,<:medias:document_vu:>}|inserer_attribut{alt,<:medias:document_vu:>})</span>]
 			]

@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=cs
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -463,7 +465,6 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 	'login_retour_public' => 'Zpět na veřejné stránky',
 	'login_retour_site' => 'Zpět na veřejné stránky',
 	'login_retoursitepublic' => 'zpět na veřejné stránky',
-	'login_sans_cookiie' => 'Identifikace bez použití cookies',
 	'login_sinscrire' => 'registrovat',
 	'login_test_navigateur' => 'test prohlížeče/opakované připojení',
 	'login_verifiez_navigateur' => '(Přesvědčte se však, zda si prohlížeč nezapamatoval vaše heslo...)',

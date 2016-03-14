@@ -24,7 +24,7 @@ la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 				[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 				<B_doc><div class="comment-doc"><BOUCLE_doc(DOCUMENTS){id_forum}>
 				[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
-					[(#MODELE{emb}|image_reduire{500,*})]
+					[(#MODELE{emb}|image_reduire{672,*})]
 				,
 					#LOGO_DOCUMENT{#URL_DOCUMENT}
 				})]
@@ -49,7 +49,7 @@ la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 						[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 						<B_doc2><div class="comment-doc"><BOUCLE_doc2(DOCUMENTS){id_forum}>
 						[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
-							[(#MODELE{emb}|image_reduire{500,*})]
+							[(#MODELE{emb}|image_reduire{672,*})]
 						,
 							#LOGO_DOCUMENT{#URL_DOCUMENT}
 						})]

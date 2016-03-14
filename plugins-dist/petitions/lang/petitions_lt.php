@@ -3,9 +3,15 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=lt
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// B
+	'bouton_radio_activer_petition' => 'Aktyvuoti prašymą',
+	'bouton_radio_supprimer_petition' => 'Ištrinti prašymą',
 
 	// F
 	'form_pet_adresse_site' => 'Jūsų interneto svetainės adresas', # MODIF
@@ -17,7 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_pet_votre_nom' => 'Jūsų vardas arba pseudonimas', # MODIF
 
 	// I
-	'info_adresse_email' => 'el. paštas:'
+	'info_adresse_email' => 'el. paštas:',
+	'info_texte_message' => 'Jūsų žinutės tekstas:'
 );
 
 ?>

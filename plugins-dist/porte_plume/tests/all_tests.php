@@ -8,5 +8,3 @@ class AllTests_barre_outil_markitup extends SpipTestSuite {
 		#$this->addFile(find_in_path('tests/barre_outil_markitup.php'));
 	}
 }
-
-?>

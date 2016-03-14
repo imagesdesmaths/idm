@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=sk
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -55,14 +57,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_valider_article' => 'Schváliť tento článok',
 	'icone_valider_articles' => 'Schváliť tieto články',
 	'icone_voir_sites_references' => 'Zobraziť linky',
+	'info_1_article_syndique' => '1 syndikovaný článok',
+	'info_1_site' => '1 stránka',
 	'info_1_site_importe' => '1 stránka sa nahrala',
 	'info_a_valider' => '[čaká na schválenie]',
+	'info_aucun_article_syndique' => 'Žiadne syndikované články',
+	'info_aucun_site' => 'Žiadne odkazy na stránky',
 	'info_aucun_site_importe' => 'Nenahrala sa žiadna stránka',
 	'info_bloquer' => 'zablokovať',
 	'info_bloquer_lien' => 'Zablokovať tento odkaz',
 	'info_derniere_syndication' => 'Posledná syndikácia bola vykonaná',
 	'info_liens_syndiques_1' => 'syndikované odkazy',
 	'info_liens_syndiques_2' => 'čaká na schválenie.',
+	'info_nb_articles_syndiques' => 'syndikovaných článkov: @nb@',
+	'info_nb_sites' => 'stránok: @nb@ ',
 	'info_nb_sites_importes' => '@nb@ stránok sa nahralo',
 	'info_nom_site_2' => '<b>Názov stránky</b> [Povinné]',
 	'info_panne_site_syndique' => 'Syndikovaná stránka mimo prevádzky',

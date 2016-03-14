@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=fi
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -28,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_prop_nom_site' => 'Sivuston nimi',
 
 	// I
+	'info_1_site' => '1 sivusto',
 	'info_a_valider' => '[varmennettava]',
 	'info_bloquer_lien' => 'estä tämä linkki',
 	'info_nom_site_2' => '<b>Sivuston nimi</b> [Pakollinen]',

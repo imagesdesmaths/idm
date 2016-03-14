@@ -3,14 +3,16 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/urls?lang_cible=pt
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'actualiser_toutes' => 'Actualizar todos os URLs',
 	'actualiser_toutes_explication' => 'Pode re-calcular os URLs.
-Se um URL mudou, uma nova entrada será criada (sem perder os URLs já presentes e sem os URLs definidos manualmente).',
+Se um URL mudou, uma nova entrada será criada (sem perder os URLs já presentes e sem os URLs definidos manualmente).', # MODIF
 
 	// B
 	'bouton_supprimer_url' => 'Eliminar este URL',

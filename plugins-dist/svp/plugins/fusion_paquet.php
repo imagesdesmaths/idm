@@ -7,9 +7,11 @@
  * @plugin SVP pour SPIP
  * @license GPL
  * @package SPIP\SVP\Plugins
-**/
+ **/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 include_spip('inc/plugin');
 include_spip('inc/svp_outiller');
 
@@ -17,10 +19,10 @@ include_spip('inc/svp_outiller');
 /**
  * Fusion des informations de chaque balise spip d'un paquet.xml en
  * considérant la compatibilité SPIP
- * 
+ *
  * Pour les balises paquets sans balise spip cette fonction permet de générer
  * une structure identique pour les balises dites techniques
- * 
+ *
  * @param array $plugins
  *     Arbre de description du paquet.xml
  * @return array
@@ -31,8 +33,9 @@ function plugins_fusion_paquet($plugins) {
 	global $balises_techniques;
 
 	$fusion = array();
-	if (!$plugins)
+	if (!$plugins) {
 		return $fusion;
+	}
 
 	// On initialise les informations a retourner avec l'index 0 du tableau qui contient les donnees communes
 	// de la balise paquet
@@ -52,16 +55,16 @@ function plugins_fusion_paquet($plugins) {
 					$fusion[$_btech][0] = $balise;
 				}
 			}
-		}
-		else {
+		} else {
 			// Balise spip
 			// On merge les balises techniques existantes en les rangeant dans un sous tableau indexe par
 			// la compatibilite et ce pour chaque balise
 			foreach ($_paquet_spip as $_index => $_balise) {
-				if ($_index AND $_index != 'balise') {
+				if ($_index and $_index != 'balise') {
 					$fusion[$_index][$_compatibilite] = $_balise;
-					if (!isset($fusion[$_index][0]))
+					if (!isset($fusion[$_index][0])) {
 						$fusion[$_index][0] = array();
+					}
 				}
 			}
 		}
@@ -69,5 +72,3 @@ function plugins_fusion_paquet($plugins) {
 
 	return $fusion;
 }
-
-?>

@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/medias?lang_cible=sk
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -104,16 +106,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_heure' => 'Čas',
 	'info_illustrations' => 'Ilustrácie',
 	'info_image_max_poids' => 'Obrázky musia mať nevyhnutne menej ako @maxi@ (tento súbor má @actuel@).',
+	'info_image_max_taille' => 'Obrázky musia mať nevyhnutne menej ako @maxi@ (tento súbor má @actuel@).',
 	'info_inclusion_directe' => 'Priame zaradenie:',
 	'info_inclusion_vignette' => 'Zaradiť miniatúru:',
 	'info_installer_tous_documents' => 'Nainštalovať všetky dokumenty',
 	'info_largeur' => 'Šírka',
 	'info_logo_max_taille' => 'Logá musia mať menej ako @maxi@ (tento súbor má @actuel@).',
+	'info_mode' => 'Režim',
 	'info_modifier_document' => 'Upraviť dokument',
 	'info_portfolio' => 'Portfólio',
 	'info_referencer_doc_distant' => 'Odkázať na dokument na internete:',
 	'info_sans_vignette' => 'Žiadna miniatúra',
 	'info_statut_document' => 'Tento dokument je:',
+	'info_taille' => 'Veľkosť',
 	'info_telecharger' => 'Nahrať z vášho počítača:',
 	'infos' => 'Technické údaje',
 	'item_autoriser_selectionner_date_en_ligne' => 'Povoliť zmeniť dátum každého dokumentu',

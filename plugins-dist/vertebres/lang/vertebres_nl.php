@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/vertebres?lang_cible=nl
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -11,7 +13,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'1_donnee' => '1 record',
 
 	// N
-	'nb_donnees' => '@nb@ records '
+	'nb_donnees' => '@nb@ records ',
+
+	// T
+	'titre_tables' => 'Tabellen van de database'
 );
 
 ?>

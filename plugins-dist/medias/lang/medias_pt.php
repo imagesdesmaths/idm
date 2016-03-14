@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/medias?lang_cible=pt
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -104,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_heure' => 'Hora',
 	'info_illustrations' => 'Ilustrações',
 	'info_image_max_poids' => 'A imagens devem obrigatoriamente ter menos de @maxi@ (este ficheiro tem @actuel@).',
+	'info_image_max_taille' => 'A imagens devem obrigatoriamente ter menos de @maxi@ (este ficheiro tem @actuel@).',
 	'info_inclusion_directe' => 'Inclusão directa :',
 	'info_inclusion_vignette' => 'Inclusão da miniatura :',
 	'info_installer_tous_documents' => 'Instalar todos os documentos',

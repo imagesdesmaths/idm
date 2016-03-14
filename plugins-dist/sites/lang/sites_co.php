@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=co
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -34,12 +36,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Mudificà u situ',
 	'icone_referencer_nouveau_site' => 'Riferisce un novu situ',
 	'icone_voir_sites_references' => 'Vede i siti riferiti',
+	'info_1_site' => '1 situ',
 	'info_a_valider' => '[Da cunvalidà]',
+	'info_aucun_site' => 'Nisun situ',
 	'info_bloquer' => 'bluccà',
 	'info_bloquer_lien' => 'bluccà sta lea',
 	'info_derniere_syndication' => 'L’ùltima <em>sindicazione</em> di stu situ hè stata fatta ',
 	'info_liens_syndiques_1' => 'lee sindicate',
 	'info_liens_syndiques_2' => 'stanu in attesa di cunvalidazione.',
+	'info_nb_sites' => '@nb@ siti',
 	'info_nom_site_2' => '<b>Nome di u situ</b> [Ubbligatoriu]',
 	'info_panne_site_syndique' => 'Situ sindicatu for’d’adopru',
 	'info_probleme_grave' => 'prublemu di',

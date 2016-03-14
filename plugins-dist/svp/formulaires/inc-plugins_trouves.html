@@ -24,7 +24,7 @@
 				<h3 class="nom"><a href="#" rel="info">[(#VALEUR{nom}|extraire_multi)]</a></h3>
 				<span class="version">[(#VALEUR{version}|denormaliser_version)]</span>
 				<span class="etat">[ - (#VALEUR{etat})]</span>
-				[<span class="information"> - (#VALEUR{installe}|oui)<:svp:info_plugin_installe:></span>]
+				[<span class="svp_message"> - (#VALEUR{installe}|oui)<:svp:info_plugin_installe:></span>]
 				<div class="short">[(#VALEUR{slogan}|extraire_multi)]</div>
 				<div class="icon">[(#VALEUR{logo}|image_reduire{32})]</div>
 			</div>
@@ -35,7 +35,7 @@
 					<dd class="desc">
 						[(#VALEUR{description}|extraire_multi|propre)]
 						[<em class="site">
-							<a href="(#LIEN_DOC)" class="spip_out" title="<:svp:bulle_aller_documentation:>"><:en_savoir_plus:></a>
+							<a href="(#LIEN_DOC)" class="spip_out" title="<:svp:bulle_aller_documentation:>"><:svp:lien_documentation:></a>
 						</em>]
 					</dd>
 					[<dt class="auteurs"><:public:par_auteur:></dt>
@@ -51,7 +51,7 @@
 </B_plugins_trouves>
 
 <script type="text/javascript">
-//<![CDATA[
+/*<![CDATA[*/
 	jQuery(function(){
 		jQuery('.plugins li.item a[rel=info]').click(function(){
 			var li = jQuery(this).parents('li').eq(0);
@@ -74,5 +74,5 @@
 			}
 		}); 
 	});
-//]]>
+/*]]>*/
 </script>

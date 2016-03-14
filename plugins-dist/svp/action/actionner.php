@@ -7,8 +7,10 @@
  * @license GPL
  * @package SPIP\SVP\Actions
  */
- 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 /**
  * Action effectuant 1 action dans la liste des actions à réaliser
@@ -29,6 +31,7 @@ function action_actionner_dist() {
 	include_spip('inc/headers');
 	$actionneur = new Actionneur();
 	$actionneur->get_actions();
+
 	if ($actionneur->one_action()) {
 		// si SVP a été enlevé des actifs, on redirige sur la fin...
 		// sinon cette page d'action/actionner devient introuvable.
@@ -37,7 +40,7 @@ function action_actionner_dist() {
 		if ($actionneur->tester_si_svp_desactive()) {
 			$url = _request('redirect');
 		} else {
-			$url = generer_action_auteur('actionner', '',  _request('redirect'));
+			$url = generer_action_auteur('actionner', '', _request('redirect'));
 		}
 
 		// en mode pas à pas, on affiche un bilan entre chaque action
@@ -54,21 +57,31 @@ function action_actionner_dist() {
 				#minipres #actionner ul {margin-left: 0.5em;}
 				#minipres #actionner li {list-style-type:square; margin-left: 0.5em;}
 				</style>";
-			echo minipres( _T('svp:installation_en_cours'), $pres . '<br /><br />' . $btn . $styles);
+			echo minipres(_T('svp:installation_en_cours'), $pres . '<br /><br />' . $btn . $styles);
 			die();
 		}
 
-		redirige_par_entete(str_replace('&amp;','&', $url));
+		redirige_par_entete(str_replace('&amp;', '&', $url));
 	}
-	
+
+	foreach ($actionneur->done as $done) {
+		if ($done['todo'] == 'on') {
+			if ($voir = session_get('svp_admin_plugin_voir')
+				and $voir == 'inactif'
+			) {
+				session_set('svp_admin_plugin_voir', 'actif');
+			}
+			break;
+		}
+	}
+
 	include_spip('inc/svp_depoter_local');
 	svp_actualiser_paquets_locaux();
 
-	if (!_request('redirect'))
+	if (!_request('redirect')) {
 		$GLOBALS['redirect'] = generer_url_ecrire('admin_plugin');
-	else
-		$GLOBALS['redirect'] = str_replace('&amp;','&', _request('redirect'));
+	} else {
+		$GLOBALS['redirect'] = str_replace('&amp;', '&', _request('redirect'));
+	}
 
 }
-
-?>

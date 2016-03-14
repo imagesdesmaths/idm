@@ -1,7 +1,9 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_core_/plugins/dump/lang/
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -15,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'confirmer_ecraser_base' => 'Oui, je veux écraser ma base avec cette sauvegarde',
 	'confirmer_ecraser_tables_selection' => 'Oui, je veux écraser les tables sélectionnées avec cette sauvegarde',
+	'confirmer_supprimer_sauvegarde' => 'Êtes-vous sûr de vouloir supprimer cette sauvegarde ?',
 
 	// D
 	'details_sauvegarde' => 'Détails de la sauvegarde :',

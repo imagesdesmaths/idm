@@ -3,16 +3,18 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-function formulaires_configurer_langage_charger_dist(){
+function formulaires_configurer_langage_charger_dist() {
 
 	include_spip('inc/lang');
 	$GLOBALS['meta']['langues_proposees'] = '';
@@ -21,37 +23,37 @@ function formulaires_configurer_langage_charger_dist(){
 
 
 	$valeurs = array(
-		'var_lang_ecrire'=>$GLOBALS['spip_lang'],
-		'_langues'=>$langues
+		'var_lang_ecrire' => $GLOBALS['spip_lang'],
+		'_langues' => $langues
 	);
 
 	return $valeurs;
 }
 
 
-function formulaires_configurer_langage_traiter_dist(){
+function formulaires_configurer_langage_traiter_dist() {
 	include_spip('action/converser');
 	action_converser_changer_langue(true);
-	
+
 	refuser_traiter_formulaire_ajax();
 
 	// on ne peut pas changer la langue pour tout le hit ici,
 	// car CVT repasse derriere et retablit la langue avant l'appel a traiter()
 	// il faut rediriger !
-	return array('message_ok'=>_T('config_info_enregistree'),'editable'=>true,'redirect'=>self());
+	return array('message_ok' => _T('config_info_enregistree'), 'editable' => true, 'redirect' => self());
 }
 
-function afficher_langues_choix($langues,$name,$id,$selected){
+function afficher_langues_choix($langues, $name, $id, $selected) {
 	include_spip('inc/lang');
 	$ret = '';
 	sort($langues);
 	foreach ($langues as $l) {
 		$checked = ($l == $selected) ? ' checked=\'checked\'' : '';
 		$ret .= "<div class='choix'>"
-		 . "<input type='radio' name='$name' id='{$id}_$l' value='$l'$checked />"
-		 . "<label for='{$id}_$l'>" . traduire_nom_langue($l)."</label>"
-		 . "</div>";
+			. "<input type='radio' name='$name' id='{$id}_$l' value='$l'$checked />"
+			. "<label for='{$id}_$l'>" . traduire_nom_langue($l) . "</label>"
+			. "</div>";
 	}
+
 	return $ret;
 }
-?>

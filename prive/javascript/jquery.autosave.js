@@ -1,7 +1,7 @@
 /**
  * autosave plugin
  *
- * Copyright (c) 2009-2014 Fil (fil@rezo.net)
+ * Copyright (c) 2009-2016 Fil (fil@rezo.net)
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
@@ -27,7 +27,7 @@
 					var contenu = $(this).serialize();
 					// ajoutons un timestamp
 					var d=new Date();
-					contenu = contenu + "&__timestamp=" + d.getTime();
+					contenu = contenu + "&__timestamp=" + Math.round(d.getTime()/1000);
 					$.post(opt.url, {
 						'action': 'session',
 						'var': 'autosave_' + $('input[name=autosave]', this).val(),

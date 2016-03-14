@@ -3,53 +3,110 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+/**
+ * Ce fichier gère la balise dynamique `#FORMULAIRE_ADMIN`
+ *
+ * @package SPIP\Core\Formulaires
+ **/
 
-// http://doc.spip.org/@balise_FORMULAIRE_ADMIN
-function balise_FORMULAIRE_ADMIN ($p) {
-	return calculer_balise_dynamique($p,'FORMULAIRE_ADMIN', array());
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
 }
 
-# on ne peut rien dire au moment de l'execution du squelette
+/**
+ * Compile la balise dynamique `#FORMULAIRE_ADMIN` qui des boutons
+ * d'administration dans l'espace public
+ *
+ * Cette balise permet de placer les boutons d'administrations dans un
+ * endroit spécifique du site. Si cette balise n'est pas présente, les boutons
+ * seront automatiquement ajoutés par SPIP si l'auteur a activé le
+ * cookie de correspondance.
+ *
+ * @balise
+ * @see f_admin()
+ * @example
+ *     ```
+ *     #FORMULAIRE_ADMIN
+ *     ```
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée du code compilé
+ **/
+function balise_FORMULAIRE_ADMIN($p) {
+	return calculer_balise_dynamique($p, 'FORMULAIRE_ADMIN', array());
+}
 
-// http://doc.spip.org/@balise_FORMULAIRE_ADMIN_stat
+/**
+ * Calculs de paramètres de contexte automatiques pour la balise FORMULAIRE_ADMIN
+ *
+ * On ne peut rien dire au moment de l'execution du squelette
+ *
+ * @param array $args
+ *   - Classe CSS éventuelle
+ * @param array $context_compil
+ *   Tableau d'informations sur la compilation
+ * @return array|string
+ *   - Liste (statut, id) si un mode d'inscription est possible
+ *   - chaîne vide sinon.
+ */
 function balise_FORMULAIRE_ADMIN_stat($args, $context_compil) {
 	return $args;
 }
 
-# les boutons admin sont mis d'autorite si absents
-# donc une variable statique controle si FORMULAIRE_ADMIN a ete vu.
-# Toutefois, si c'est le debuger qui appelle,
-# il peut avoir recopie le code dans ses donnees et il faut le lui refounir.
-# Pas question de recompiler: ca fait boucler !
-# Le debuger transmet donc ses donnees, et cette balise y retrouve son petit.
 
-// http://doc.spip.org/@balise_FORMULAIRE_ADMIN_dyn
-function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
+/**
+ * Retourne le squelette d'affichage et le contexte de la balise FORMULAIRE_ADMIN
+ *
+ * @note
+ *   Les boutons admin sont mis d'autorité si absents
+ *   donc une variable statique contrôle si FORMULAIRE_ADMIN a été vu.
+ *
+ *   Toutefois, si c'est le debuger qui appelle, il peut avoir recopié
+ *   le code dans ses données et il faut le lui refournir.
+ *   Pas question de recompiler: ca fait boucler !
+ *   Le debuger transmet donc ses données, et cette balise y retrouve son petit.
+ *
+ * @param string $float
+ *     Classe CSS éventuelle
+ * @param string|array $debug
+ *     Informations sur la page contenant une erreur de compilation
+ * @return array
+ *     Liste : Chemin du squelette, durée du cache, contexte
+ **/
+function balise_FORMULAIRE_ADMIN_dyn($float = '', $debug = '') {
 
-	global $use_cache;
 	static $dejafait = false;
 
-	if (!@$_COOKIE['spip_admin'])
+	if (!@$_COOKIE['spip_admin']) {
 		return '';
+	}
 
 	if (!is_array($debug)) {
-		if ($dejafait)
+		if ($dejafait) {
 			return '';
+		}
 	} else {
 		if ($dejafait) {
-			if (empty($debug['sourcefile'])) return '';
-			foreach($debug['sourcefile'] as $k => $v) {
-				if (strpos($v,'administration.') !== false)
-					return $debug['resultat'][$k . 'tout'];
+			if (empty($debug['sourcefile'])) {
+				return '';
 			}
+			foreach ($debug['sourcefile'] as $k => $v) {
+				if (strpos($v, 'administration.') !== false) {
+					if (isset($debug['resultat'][$k . 'tout'])) {
+						return $debug['resultat'][$k . 'tout'];
+					}
+				}
+			}
+
 			return '';
 		}
 	}
@@ -65,138 +122,178 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	$env = admin_objet();
 
 	// Pas de "modifier ce..." ? -> donner "acces a l'espace prive"
-	if (!$env)
+	if (!$env) {
 		$env['ecrire'] = _DIR_RESTREINT_ABS;
+	}
 
 	$env['divclass'] = $float;
 	$env['lang'] = admin_lang();
 	$env['calcul'] = (_request('var_mode') ? 'recalcul' : 'calcul');
-	$env['debug'] = ((defined('_VAR_PREVIEW') AND _VAR_PREVIEW) ? "" : admin_debug());
-	$env['analyser'] = (!$env['debug'] AND !$GLOBALS['xhtml']) ? '' : admin_valider();
-	$env['inclure'] = ((defined('_VAR_INCLURE') AND _VAR_INCLURE)?'inclure':'');
+	$env['debug'] = ((defined('_VAR_PREVIEW') and _VAR_PREVIEW) ? "" : admin_debug());
+	$env['analyser'] = (!$env['debug'] and !$GLOBALS['xhtml']) ? '' : admin_valider();
+	$env['inclure'] = ((defined('_VAR_INCLURE') and _VAR_INCLURE) ? 'inclure' : '');
 
-	if (!$use_cache)
+	if (!$GLOBALS['use_cache']) {
 		$env['use_cache'] = ' *';
-		
+	}
+
 	if (isset($debug['validation'])) {
 		$env['xhtml_error'] = $debug['validation'];
 	}
-	
-	$env['_pipelines']['formulaire_admin']=array();
+
+	$env['_pipelines']['formulaire_admin'] = array();
 
 	return array('formulaires/administration', 0, $env);
 }
 
-// Afficher le bouton 'Modifier ce...' 
-// s'il y a un $id_XXX defini globalement par spip_register_globals
-// Attention a l'ordre dans la boucle:
-//	on ne veut pas la rubrique si un autre bouton est possible
 
-// http://doc.spip.org/@admin_objet
-function admin_objet()
-{
+/**
+ * Préparer le contexte d'environnement pour les boutons
+ *
+ * Permettra d'afficher le bouton 'Modifier ce...' s'il y a un
+ * `$id_XXX` défini globalement par `spip_register_globals`
+ *
+ * @note
+ *   Attention à l'ordre dans la boucle:
+ *   on ne veut pas la rubrique si un autre bouton est possible
+ *
+ * @return array
+ *     Tableau de l'environnement calculé
+ **/
+function admin_objet() {
 	include_spip('inc/urls');
 	$env = array();
 
-	$trouver_table = charger_fonction('trouver_table','base');
+	$trouver_table = charger_fonction('trouver_table', 'base');
 	$objets = urls_liste_objets(false);
 	$objets = array_diff($objets, array('rubrique'));
 	$objets = array_reverse($objets);
 	array_unshift($objets, 'rubrique');
 	foreach ($objets as $obj) {
 		$type = $obj;
-		if ($type==objet_type($type,false)
-			AND $_id_type = id_table_objet($type)
-			AND isset($GLOBALS['contexte'][$_id_type])
-			AND $id = $GLOBALS['contexte'][$_id_type]
-			AND !is_array($id)
-			AND $id=intval($id)) {
-			$id = sql_getfetsel($_id_type, table_objet_sql($type), "$_id_type=".intval($id));
+		if ($type == objet_type($type, false)
+			and $_id_type = id_table_objet($type)
+			and isset($GLOBALS['contexte'][$_id_type])
+			and $id = $GLOBALS['contexte'][$_id_type]
+			and !is_array($id)
+			and $id = intval($id)
+		) {
+			$id = sql_getfetsel($_id_type, table_objet_sql($type), "$_id_type=" . intval($id));
 			if ($id) {
 				$env[$_id_type] = $id;
 				$env['objet'] = $type;
 				$env['id_objet'] = $id;
-				$env['voir_'.$obj] =
-				  str_replace('&amp;', '&', generer_url_entite($id,$obj,'','',false));
+				$env['voir_' . $obj] =
+					str_replace('&amp;', '&', generer_url_entite($id, $obj, '', '', false));
 				if ($desc = $trouver_table(table_objet_sql($type))
-					AND isset($desc['field']['id_rubrique'])
-					AND $type != 'rubrique') {
+					and isset($desc['field']['id_rubrique'])
+					and $type != 'rubrique'
+				) {
 					unset($env['id_rubrique']);
 					unset($env['voir_rubrique']);
-					if (admin_preview($type, $id, $desc))
-						$env['preview']=parametre_url(self(),'var_mode','preview','&');
+					if (admin_preview($type, $id, $desc)) {
+						$env['preview'] = parametre_url(self(), 'var_mode', 'preview', '&');
+					}
 				}
 			}
 		}
 	}
+
 	return $env;
 }
 
 
-// http://doc.spip.org/@admin_preview
-function admin_preview($type, $id, $desc=null)
-{
-	if (defined('_VAR_PREVIEW') AND _VAR_PREVIEW) return '';
+/**
+ * Détermine si l'élément est previsualisable
+ *
+ * @param string $type
+ *     Type d'objet
+ * @param int $id
+ *     Identifinant de l'objet
+ * @param array|null $desc
+ *     Description de la table
+ * @return string|array
+ *     - Chaine vide si on est déjà en prévisu ou si pas de previsualisation possible
+ *     - Tableau d'un élément sinon.
+ **/
+function admin_preview($type, $id, $desc = null) {
+	if (defined('_VAR_PREVIEW') and _VAR_PREVIEW) {
+		return '';
+	}
 
 	if (!$desc) {
-		$trouver_table = charger_fonction('trouver_table','base');
+		$trouver_table = charger_fonction('trouver_table', 'base');
 		$desc = $trouver_table(table_objet_sql($type));
 	}
-	if (!$desc OR !isset($desc['field']['statut']))
+	if (!$desc or !isset($desc['field']['statut'])) {
 		return '';
+	}
 
 	include_spip('inc/autoriser');
-	if (!autoriser('previsualiser')) return '';
+	if (!autoriser('previsualiser')) {
+		return '';
+	}
 
 	$notpub = sql_in("statut", array('prop', 'prive'));
 
-	if  ($type == 'article' AND $GLOBALS['meta']['post_dates'] != 'oui')
-		$notpub .= " OR (statut='publie' AND date>".sql_quote(date('Y-m-d H:i:s')).")";
+	if ($type == 'article' and $GLOBALS['meta']['post_dates'] != 'oui') {
+		$notpub .= " OR (statut='publie' AND date>" . sql_quote(date('Y-m-d H:i:s')) . ")";
+	}
 
-	return sql_fetsel('1', table_objet_sql($type), id_table_objet($type)."=".$id." AND ($notpub)");
+	return sql_fetsel('1', table_objet_sql($type), id_table_objet($type) . "=" . $id . " AND ($notpub)");
 }
 
-//
-// Regler les boutons dans la langue de l'admin (sinon tant pis)
-//
 
-// http://doc.spip.org/@admin_lang
-function admin_lang()
-{
-	$alang = sql_getfetsel('lang', 'spip_auteurs', "login=" . sql_quote(preg_replace(',^@,','',@$_COOKIE['spip_admin'])));
-	if (!$alang) return '';
+/**
+ * Régler les boutons dans la langue de l'admin (sinon tant pis)
+ *
+ * @return string
+ *     Code de langue
+ **/
+function admin_lang() {
+	$alang = sql_getfetsel('lang', 'spip_auteurs',
+		"login=" . sql_quote(preg_replace(',^@,', '', @$_COOKIE['spip_admin'])));
+	if (!$alang) {
+		return '';
+	}
 
 	$l = lang_select($alang);
 	$alang = $GLOBALS['spip_lang'];
-	if ($l) lang_select();
+	if ($l) {
+		lang_select();
+	}
+
 	return $alang;
 }
 
-// http://doc.spip.org/@admin_valider
-function admin_valider()
-{
-	global $xhtml;
+/**
+ * Retourne une URL vers un validateur
+ *
+ * @return string
+ **/
+function admin_valider() {
 
-	return ((@$xhtml !== 'true') ?
+	return ((!isset($GLOBALS['xhtml']) or $GLOBALS['xhtml'] !== 'true') ?
 		(parametre_url(self(), 'var_mode', 'debug', '&')
-			.'&var_mode_affiche=validation') :
+			. '&var_mode_affiche=validation') :
 		('http://validator.w3.org/check?uri='
-		 . rawurlencode("http://" . $_SERVER['HTTP_HOST'] . nettoyer_uri())));
+			. rawurlencode("http://" . $_SERVER['HTTP_HOST'] . nettoyer_uri())));
 }
 
-// http://doc.spip.org/@admin_debug
-function admin_debug()
-{
+/**
+ * Retourne une URL vers le mode debug, si l'utilisateur a le droit, et si c'est utile
+ *
+ * @return string
+ **/
+function admin_debug() {
 	return ((
-			(isset($GLOBALS['forcer_debug']) AND $GLOBALS['forcer_debug'])
-			OR (isset($GLOBALS['bouton_admin_debug']) AND $GLOBALS['bouton_admin_debug'])
-			OR (
-				defined('_VAR_MODE') AND _VAR_MODE == 'debug'
-				AND $_COOKIE['spip_debug']
+			(isset($GLOBALS['forcer_debug']) and $GLOBALS['forcer_debug'])
+			or (isset($GLOBALS['bouton_admin_debug']) and $GLOBALS['bouton_admin_debug'])
+			or (
+				defined('_VAR_MODE') and _VAR_MODE == 'debug'
+				and isset($_COOKIE['spip_debug']) and $_COOKIE['spip_debug']
 			)
-		) AND autoriser('debug')
-	  )
-	  ? parametre_url(self(),'var_mode', 'debug', '&'): '';
+		) and autoriser('debug')
+	)
+		? parametre_url(self(), 'var_mode', 'debug', '&') : '';
 }
-
-?>

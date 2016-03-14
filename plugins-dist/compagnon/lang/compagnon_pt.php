@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/compagnon?lang_cible=pt
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -16,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'c_accueil_publication' => 'Publique !',
 	'c_accueil_publication_texte' => 'Para publicar uma página, precisa de criar um artigo. Para tal é necessário criar pelo menos uma rubrica. Pode fazê-lo clicando no menu "Edição" e depois em "Rubricas".',
 	'c_accueil_texte' => 'Acabou de entrar na área privda de SPIP.',
-	'c_accueil_texte_revenir' => 'Esta página apresenta a última actividade editorial no seu sítio. Pode visitá-la a qualquer momento, clicando no "ícone casa", no topo, abaixo do seu nome de utilizador.',
+	'c_accueil_texte_revenir' => 'Esta página apresenta a última actividade editorial no seu sítio. Pode visitá-la a qualquer momento, clicando no "ícone casa", no topo, abaixo do seu nome de utilizador.', # MODIF
 	'c_article_redaction' => 'O artigo está em edição',
 	'c_article_redaction_redacteur' => 'O artigo está em edição',
 	'c_article_redaction_redacteur_texte' => 'Para propor o seu artigo aos administradores do sítio e aos outros redactores, no bloco ao lado da coluna, altere "Redacção em curso" para "Proposto para avaliação".',

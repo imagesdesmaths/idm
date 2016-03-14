@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=ja
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -471,7 +473,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_retour_public' => 'パブリックなサイトへ戻る',
 	'login_retour_site' => 'パブリックなサイトへ戻る',
 	'login_retoursitepublic' => 'パブリックなサイトへ戻る',
-	'login_sans_cookiie' => 'クッキーなしで認証',
 	'login_sinscrire' => '登録',
 	'login_test_navigateur' => 'ブラウザが再接続を試みている',
 	'login_verifiez_navigateur' => '(しかし、あなたのブラウザがあなたのパスワードを記憶しなかったかどうか確かめて下さい...)',

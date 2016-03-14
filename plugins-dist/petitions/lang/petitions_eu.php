@@ -3,9 +3,17 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=eu
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// B
+	'bouton_radio_activer_petition' => 'Eskaera aktibatu',
+	'bouton_radio_pas_petition' => 'Eskaerarik gabe',
+	'bouton_radio_petition_activee' => 'Eskaera aktibaturik',
+	'bouton_radio_supprimer_petition' => 'Eskaera ezabatu',
 
 	// F
 	'form_pet_adresse_site' => 'Zure gunearen helbidea', # MODIF

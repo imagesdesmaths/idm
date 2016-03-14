@@ -17,19 +17,19 @@
 			<fieldset>
 				<legend><:svp:legende_rechercher_plugins:></legend>
 				<p class="explication"><:svp:info_charger_plugin{version=#SPIP_VERSION}:></p>
-				<ul>
-					<li class="editer_phrase obligatoire[(#ENV{erreurs}|table_valeur{phrase}|oui) erreur]">
+				<div class="editer-groupe">
+					<div class="editer editer_phrase obligatoire[(#ENV{erreurs}|table_valeur{phrase}|oui) erreur]">
 						<label for="phrase"><:svp:label_critere_phrase:></label>
 						<p class="explication"><:svp:info_critere_phrase:></p>
 						[<span class="erreur_message">(#ENV{erreurs}|table_valeur{phrase})</span>]
 						<input type="text" name="phrase" id="phrase" value="#ENV{phrase}" class="text" placeholder="<:svp:placeholder_phrase:>" />
-					</li>
-					<li class="editer_categorie obligatoire[(#ENV{erreurs}|table_valeur{categorie}|oui) erreur]">
+					</div>
+					<div class="editer editer_categorie obligatoire[(#ENV{erreurs}|table_valeur{categorie}|oui) erreur]">
 						<label for="categorie"><:svp:label_critere_categorie:></label>
 						[<span class="erreur_message">(#ENV{erreurs}|table_valeur{categorie})</span>]
 						<INCLURE{fond=formulaires/inc-select_categorie, categorie=#ENV{categorie}, env} />
-					</li>
-					<li class="editer_etat obligatoire[(#ENV{erreurs}|table_valeur{etat}|oui) erreur]">
+					</div>
+					<div class="editer editer_etat obligatoire[(#ENV{erreurs}|table_valeur{etat}|oui) erreur]">
 						<label for="etat"><:svp:label_critere_etat:></label>
 						[<span class="erreur_message">(#ENV{erreurs}|table_valeur{etat})</span>]
 						<select name="etat" id="etat">
@@ -39,21 +39,21 @@
 							<option value="dev"[ (#ENV{etat,tout_etat}|=={dev}|oui)selected="selected"]><:plugin_etat_developpement|ucfirst:></option>
 							<option value="experimental"[ (#ENV{etat,tout_etat}|=={experimental}|oui)selected="selected"]><:plugin_etat_experimental|ucfirst:></option>
 						</select>
-					</li>
-					<li class="editer_depot obligatoire[(#ENV{erreurs}|table_valeur{depot}|oui) erreur]">
+					</div>
+					<div class="editer editer_depot obligatoire[(#ENV{erreurs}|table_valeur{depot}|oui) erreur]">
 						<label for="depot"><:svp:label_critere_depot:></label>
 						[<span class="erreur_message">(#ENV{erreurs}|table_valeur{depot})</span>]
 						<INCLURE{fond=formulaires/inc-select_depot, env} />
-					</li>
-					<li class="editer_doublon obligatoire[(#ENV{erreurs}|table_valeur{doublon}|oui) erreur]">
+					</div>
+					<div class="editer editer_doublon obligatoire[(#ENV{erreurs}|table_valeur{doublon}|oui) erreur]">
 						<label for="doublon"><:svp:label_critere_doublon:></label>
 						[<span class="erreur_message">(#ENV{erreurs}|table_valeur{doublon})</span>]
 						<select name="doublon" id="doublon">
 							<option value="non"[ (#ENV{doublon}|=={non}|oui)selected="selected"]><:svp:option_doublon_non:></option>
 							<option value="oui"[ (#ENV{doublon}|=={oui}|oui)selected="selected"]><:svp:option_doublon_oui:></option>
 						</select>
-					</li>
-				</ul>
+					</div>
+				</div>
 			</fieldset>
 
 		<p class="boutons recherche"><input type="submit" name="rechercher" class="submit" value="<:info_rechercher:>" /></p>

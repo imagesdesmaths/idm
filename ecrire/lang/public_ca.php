@@ -3,12 +3,14 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/public?lang_cible=ca
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accueil_site' => 'Arrel de la web', # MODIF
+	'accueil_site' => 'Inici',
 	'article' => 'Article',
 	'articles' => 'Articles',
 	'articles_auteur' => 'Articles d’aquest autor',

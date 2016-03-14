@@ -8,8 +8,8 @@
 [(#ENV{editable})
 	<form action="#ENV{action}#formulaire_configurer_forums_article_moderation" method="post"><div>
 		[(#ACTION_FORMULAIRE{#ENV{action}})]
-		<ul>
-			<li class='editer configurer_accepter_forum[ (#ENV**{erreurs}|table_valeur{accepter_forum}|oui)erreur]'>
+		<div class="editer-groupe">
+			<div class='editer configurer_accepter_forum[ (#ENV**{erreurs}|table_valeur{accepter_forum}|oui)erreur]'>
 				<label for='accepter_forum'><:forum:info_fonctionnement_forum:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{accepter_forum})</span>
 				]<select name='accepter_forum' id='accepter_forum'>
@@ -18,8 +18,8 @@
 					<option value='abo'[ (#ENV{accepter_forum}|=={abo}|oui)selected='selected']><:forum:bouton_radio_modere_abonnement:></option>
 					<option value='non'[ (#ENV{accepter_forum}|=={non}|oui)selected='selected']><:forum:info_pas_de_forum:></option>
 				</select>
-			</li>
-		</ul>
+			</div>
+		</div>
 		<p class='boutons'><input class='submit' type="submit" name="ok" value="<:bouton_enregistrer:>"/></p>
 	</div></form>
 ]

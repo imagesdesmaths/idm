@@ -3,14 +3,26 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+/**
+ * Gestion d'affichage des pages privées en squelette
+ *
+ * Chargé depuis ecrire/index.php lorsqu'une page demandée est présente
+ * en tant que squelettes dans `prive/squelettes/contenu` ou que le
+ * squelette peut être échaffaudé
+ *
+ * @package SPIP\Core\Exec
+ */
+
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 $fond = _request('exec');
@@ -18,31 +30,37 @@ $GLOBALS['delais'] = 0;// pas de cache !
 // Securite
 if (strstr($fond, '/')) {
 	if (!include_spip('inc/autoriser')
-		OR !autoriser('webmestre')) {
+		or !autoriser('webmestre')
+	) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}
-}
-else
+} else {
 	$fond = "prive/squelettes/$fond";
+}
 
 // quelques inclusions et ini prealables
 include_spip('inc/commencer_page');
 
-function shutdown_error(){
-
+/**
+ * Fonction appelée en cas d'arrêt de php sur une erreur
+ *
+ * @todo supprimer cette fonction vide ?
+ **/
+function shutdown_error() {
 	// si on arrive ici avec un tampon non ferme : erreur fatale
-/*	if (ob_get_level()){
-		// envoyer tous les tampons
-		while (ob_get_level())
-			ob_end_flush();
+	/*	if (ob_get_level()){
+			// envoyer tous les tampons
+			while (ob_get_level())
+				ob_end_flush();
 
-		var_dump(error_get_last());
-		#echo "<hr />"."Erreur fatale (memoire ?)<hr />";
-		@flush();
-	}*/
+			var_dump(error_get_last());
+			#echo "<hr />"."Erreur fatale (memoire ?)<hr />";
+			@flush();
+		}*/
 }
+
 register_shutdown_function('shutdown_error');
 
 
@@ -56,13 +74,12 @@ ob_start();
 include "public.php";
 // flushons si cela ne l'a pas encore ete
 ob_end_flush();
+
 /**
- * Un exec generique qui branche sur un squelette Z pour ecrire
- * La fonction ne fait rien, c'est l'inclusion du fichier qui declenche le traitement
+ * Un exec générique qui branche sur un squelette Z pour écrire
  *
+ * La fonction ne fait rien, c'est l'inclusion du fichier qui déclenche le traitement
  */
-function exec_fond_dist(){
+function exec_fond_dist() {
 
 }
-
-?>

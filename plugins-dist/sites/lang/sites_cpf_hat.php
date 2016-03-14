@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=cpf_hat
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -33,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Chanje sit la',
 	'icone_referencer_nouveau_site' => 'Referans yon nouvo sit',
 	'icone_voir_sites_references' => 'Gad sit referanse yo',
+	'info_1_site' => '1 sitwèb',
 	'info_a_valider' => '[pou konfime]',
 	'info_bloquer' => 'bloké',
 	'info_bloquer_lien' => 'blok lyen nan',

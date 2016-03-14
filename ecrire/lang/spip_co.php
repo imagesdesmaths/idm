@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=co
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -109,12 +111,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@ di @nommois@',
 	'date_demain' => 'dumane',
 	'date_fmt_heures_minutes' => '@h@h@m@min',
+	'date_fmt_jour' => '@nomjour@ @jour@',
 	'date_fmt_jour_heure' => '@jour@ à @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'u @jour@ da @heure_debut@ à @heure_fin@',
-	'date_fmt_jour_heure_debut_fin_abbr' => 'u @dtstart@@jour@ da @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@',
+	'date_fmt_jour_heure_debut_fin' => '@jour@ de @heure_debut@ a @heure_fin@',
+	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@ da @heure_debut@@dtabbr@ a @dtstart@@heure_fin@@dtend@',
 	'date_fmt_jour_mois' => '@jour@ @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ @nommois@ di u @annee@',
 	'date_fmt_mois_annee' => '@nommois@ di u @annee@',
+	'date_fmt_nomjour' => '@nomjour@ @date@',
 	'date_fmt_nomjour_date' => 'u @nomjour@ @date@',
 	'date_fmt_periode' => 'Da u @date_debut@ à u @date_fin@',
 	'date_fmt_periode_abbr' => 'Da u @dtart@@date_debut@@dtabbr@ à u @dtend@@date_fin@@dtabbr@',
@@ -513,7 +517,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_retour_public' => 'Ritornu à u situ pùbblicu',
 	'login_retour_site' => 'Ritornu à u situ pùbblicu',
 	'login_retoursitepublic' => 'ritornu à u situ pùbblicu',
-	'login_sans_cookiie' => 'Identificazione senza cookie',
 	'login_sinscrire' => 'iscrive si',
 	'login_test_navigateur' => 'prova navigatore/ricunnessione',
 	'login_verifiez_navigateur' => '(Verificate quantunque chì u vostru navigatore ùn abbia memurizatu u vostru password...)',

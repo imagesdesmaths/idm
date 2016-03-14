@@ -3,9 +3,28 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/statistiques?lang_cible=fr_fem
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// A
+	'archiver' => 'Archiver',
+	'archiver_concatener_explications' => 'Cette opération va concaténer les statistiques de visites des articles :',
+	'archiver_concatener_ignorer' => 'Les visites de moins de @nb@ ans ne sont pas touchées.',
+	'archiver_concatener_par_an' => 'Les visites de plus de @nb@ ans seront concaténées, pour chaque article, dans le premier jour de chaque année.',
+	'archiver_concatener_par_mois' => 'Les visites de plus de @nb@ ans seront concaténées, pour chaque article, dans le premier jour de chaque mois.',
+	'archiver_conseil_sauvegarde' => 'Il est conseillé de faire une sauvegarde préalable de la base de données.',
+	'archiver_description' => 'Cette page fournit des outils pour nettoyer ou archiver les statistiques du site.',
+	'archiver_et_nettoyer' => 'Archiver et nettoyer',
+	'archiver_nettoyer' => 'Nettoyer',
+	'archiver_nettoyer_explications' => 'Enlève les lignes de "réferers" ou de "visites" dont les articles n’existent pas (ou plus) dans la base de données.',
+	'archiver_nettoyer_referers_articles' => 'Nettoyer referers_articles',
+	'archiver_nettoyer_visites_articles' => 'Nettoyer visites_articles',
+	'archiver_nombre_lignes' => 'Nombre de lignes',
+	'archiver_operation_longue' => 'Cette opération peut être très longue, surtout lors de la première exécution.',
+	'archiver_operations_irreversibles' => 'Ces opérations sont irréversibles !',
 
 	// B
 	'bouton_effacer_referers' => 'Effacer seulement les liens entrants',
@@ -22,12 +41,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_affichier_visites_articles_plus_visites' => 'Afficher les visites pour <b>les articles les plus visités depuis le début :</b>',
 	'info_comment_lire_tableau' => 'Comment lire ce tableau',
 	'info_forum_statistiques' => 'Statistiques des visites',
+	'info_graphiques' => 'Graphiques',
 	'info_popularite_2' => 'popularité du site :',
 	'info_popularite_3' => 'popularité : @popularite@ ; visites : @visites@',
 	'info_popularite_5' => 'popularité :',
 	'info_previsions' => 'prévisions :',
 	'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d’origine des visites',
 	'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d’origine des visites',
+	'info_tableaux' => 'Tableaux',
 	'info_visites' => 'visites :',
 	'info_visites_plus_populaires' => 'Afficher les visites pour <b>les articles les plus populaires</b> et pour <b>les derniers articles publiés :</b>',
 	'info_zoom' => 'zoom',
@@ -49,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_evolution_visite' => 'Évolution des visites',
 	'titre_liens_entrants' => 'Liens entrants',
 	'titre_page_statistiques' => 'Statistiques par rubriques',
+	'titre_page_statistiques_visites' => 'Statistiques des visites',
 
 	// V
 	'visites_journalieres' => 'Nombre de visites par jour',

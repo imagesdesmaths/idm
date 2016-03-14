@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=fa
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -16,6 +18,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_checkbox_indiquer_site' => 'معرفي الزامي يك وب سايت',
 	'bouton_checkbox_signature_unique_email' => 'فقط يك امضا براي نشاني ايميل ',
 	'bouton_checkbox_signature_unique_site' => 'فقط يك امضا براي يك وب سايت',
+	'bouton_radio_activer_petition' => 'درخواست را فعال كنيد',
+	'bouton_radio_pas_petition' => 'بدون درخواست',
+	'bouton_radio_petition_activee' => 'درخواست، فعال شده',
+	'bouton_radio_supprimer_petition' => 'حذف درخواست',
 
 	// F
 	'filtre' => 'فيتلر:',

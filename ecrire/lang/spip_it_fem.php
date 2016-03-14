@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=it_fem
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -472,7 +474,6 @@ devi attivare Javascript nel tuo browser e',
 	'login_retour_public' => 'Ritorna al sito pubblico',
 	'login_retour_site' => 'Ritorna al sito pubblico',
 	'login_retoursitepublic' => 'ritorna al sito pubblico',
-	'login_sans_cookiie' => 'Identificazione senza cookie',
 	'login_sinscrire' => 'registrati',
 	'login_test_navigateur' => 'test browser/riconnessione',
 	'login_verifiez_navigateur' => '(Verifica comunque se il tuo browser ha memorizzato la password...)',

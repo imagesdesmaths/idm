@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/compagnon?lang_cible=fa
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -21,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'c_accueil_texte_revenir' => 'اين صفحه فعاليت‌ سردبيري اخير سايت را نشان مي‌دهد.
 مي‌توانيد با كليك كردن صورتك خانه در قسمت بالاي نام خود، هر لحظه به اين صفحه بازگرديد. 
 
-',
+', # MODIF
 	'c_article_redaction' => 'مقاله در دست نگارش است',
 	'c_article_redaction_redacteur' => 'مقاله‌ي در دست ترجمه',
 	'c_article_redaction_redacteur_texte' => 'براي اريه‌ي مقاله‌هاي خود به مديران و به نويسندگان ديگر، 

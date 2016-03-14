@@ -7,13 +7,13 @@
 <!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
 <head>
-<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
-<title>[(#TITRE|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-[<meta name="description" content="(#INTRODUCTION{150}|textebrut)" />]
-[<link rel="canonical" href="(#URL_RUBRIQUE|url_absolue)" />]
-<INCLURE{fond=inclure/head} />
-[(#REM) Lien vers le flux RSS des articles la rubrique ]
-<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+	<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+	<title>[(#TITRE|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
+	[<link rel="canonical" href="(#URL_RUBRIQUE|url_absolue)" />]
+	<INCLURE{fond=inclure/head} />
+	[(#REM) Lien vers le flux RSS des articles la rubrique ]
+	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
 </head>
 
 <body class="pas_surlignable page_rubrique">
@@ -29,10 +29,10 @@
 			<p class="arbo"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p><!--.arbo-->
 	
 			<div class="cartouche">
-				<h1 class="#EDIT{titre} surlignable">[(#LOGO_RUBRIQUE|image_reduire{40,*}) ]#TITRE</h1>
+				<h1 class="#EDIT{titre} surlignable">[(#LOGO_RUBRIQUE|image_reduire{224,*}) ]#TITRE</h1>
 			</div>
 	
-			[<div class="#EDIT{texte} texte surlignable">(#TEXTE|image_reduire{500,*})</div>]
+			[<div class="#EDIT{texte} texte surlignable">(#TEXTE|image_reduire{672,*})</div>]
 	
 			[(#REM) Articles de la rubrique ]
 			<B_articles>
@@ -40,9 +40,10 @@
 				#ANCRE_PAGINATION
 				<ul>
 					<BOUCLE_articles(ARTICLES) {id_rubrique} {!par date} {pagination}>
-					<li>
-						<strong><a href="#URL_ARTICLE">[(#LOGO_ARTICLE_RUBRIQUE|image_reduire{40,*}) ]#TITRE</a></strong>
+					<li dir="#LANG_DIR" class="hentry clearfix text-#LANG_LEFT">  
+						<strong><a href="#URL_ARTICLE">[(#LOGO_ARTICLE_RUBRIQUE|image_reduire{150,*}) ]#TITRE</a></strong>
 						<br /><small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS|supprimer_tags)]</small>
+						[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION)</div>]
 					</li>
 					</BOUCLE_articles>
 				</ul>
@@ -82,7 +83,7 @@
 	
 			[(#REM) Documents joints a la rubrique ]
 			<B_documents_joints>
-			<div class="menu" id="documents_joints">
+			<div class="menu documents_joints" id="documents_joints">
 				<h2><:medias:titre_documents_joints:></h2>
 				<ul class="spip">
 					<BOUCLE_documents_joints(DOCUMENTS) {id_rubrique} {mode=document} {par num titre, date} {doublons}>

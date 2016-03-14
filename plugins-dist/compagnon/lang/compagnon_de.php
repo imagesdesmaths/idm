@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/compagnon?lang_cible=de
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -35,6 +37,8 @@ Legen Sie einen Artikel an. Sie können das auf dieser Seite unterhalb der Besch
 	'c_rubriques_creer' => 'Legen Sie eine erste Rubrik an!',
 	'c_rubriques_creer_texte' => 'Die Website setzt sich aus Rubriken zusammen. Artikel legen sie innerhalb der Rubriken an.
 Beginnen Sie, indem Sie eine erste Rubrik anlegen.',
+	'c_sites_creer' => 'So erstellen oder importieren Sie eine Website?',
+	'c_sites_creer_texte' => 'Sie können eine Website nicht erstellen oder importieren auf dieser Seite bis zu dem Moment, wo es einen Theme in Ihrer Website existiert. Sie können es aus dem Menü ’Bearbeiten’, dann ’Themen’ erstellen.',
 
 	// E
 	'explication_activer_compagnon' => 'Der Begleiter fügt manchen internen Seiten von SPIP Erläuterungen

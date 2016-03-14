@@ -3,9 +3,17 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=tr
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// B
+	'bouton_radio_activer_petition' => 'İmza kampanyasını aç',
+	'bouton_radio_pas_petition' => 'Dilekçe yok',
+	'bouton_radio_petition_activee' => 'Etkinleştirilmiş dilekçe',
+	'bouton_radio_supprimer_petition' => 'Dilekçeyi sil',
 
 	// F
 	'form_pet_adresse_site' => 'Sitenizin adresi', # MODIF

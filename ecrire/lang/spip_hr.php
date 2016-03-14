@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=hr
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -529,7 +531,6 @@ Kako biste potvrdili svoju novu adresu, potrebno je samo pristupiti niže navede
 	'login_retour_public' => 'natrag u javni dio weba',
 	'login_retour_site' => 'natrag u javni dio weba',
 	'login_retoursitepublic' => 'natrag u javni dio weba',
-	'login_sans_cookiie' => 'identifikacija bez cookie',
 	'login_securise' => 'Sigurnosna prijava',
 	'login_sinscrire' => 'prijava',
 	'login_test_navigateur' => 'ispitivanje browsera / ponovno spajanje',
@@ -591,7 +592,7 @@ ponovo dobiti pristup web stranicama.
 	'pass_nouveau_pass' => 'nova lozinka',
 	'pass_ok' => 'OK',
 	'pass_oubli_mot' => 'lozinka zaboravljena',
-	'pass_procedure_changer' => 'Kako bismo promjenili vašu lozinku, moramo prvo provjeriti vaš identitet. Stoga nam morate navesti mail adresu pridruženu vašem korisničkom računu.',
+	'pass_procedure_changer' => 'Kako bismo promjenili vašu lozinku, moramo prvo provjeriti vaš identitet. Stoga nam morate navesti mail adresu pridruženu vašem korisničkom računu.', # MODIF
 	'pass_quitter_fenetre' => 'napustiti ovaj prozor',
 	'pass_rappel_login' => 'podsjetnik: Vaše korisničko ime za prijavu (login) je "@login@".',
 	'pass_recevoir_mail' => 'Primit ćete mail sa uputama za povrat pristupa web stranicama.',

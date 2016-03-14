@@ -9,7 +9,7 @@
 		<ol class='classement'>
 		<BOUCLE_pluspop(ARTICLES){id_article IN #GET{c}}{0,30}{doublons}>
 			<li[ class="(#EXPOSE)"]><a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]#contenu" class="ajax"
-						title="<:statistiques:info_popularite_3{visites=#VISITES,popularite=#POPULARITE}|attribut_html:>">#TITRE</a></li>
+						title="<:statistiques:info_popularite_3{visites=#VISITES,popularite=#POPULARITE_ABSOLUE}|attribut_html:>">#TITRE</a></li>
 		</BOUCLE_pluspop>
 		</ol>
 		<B_derniers>
@@ -17,7 +17,7 @@
 			<ol class='classement'>
 			<BOUCLE_derniers(ARTICLES){popularite>0}{!par date}{0,10}{doublons}>
 				<li value="[(#ID_ARTICLE|array_search{#GET{c}}|plus{1})]"[ class="(#EXPOSE)"]><a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]#contenu" class="ajax"
-							title="<:statistiques:info_popularite_3{visites=#VISITES,popularite=#POPULARITE}|attribut_html:>">#TITRE</a></li>
+							title="<:statistiques:info_popularite_3{visites=#VISITES,popularite=#POPULARITE_ABSOLUE}|attribut_html:>">#TITRE</a></li>
 			</BOUCLE_derniers>
 			</ol>
 		</B_derniers>
@@ -33,7 +33,7 @@
 			<ol class='classement'>
 			<BOUCLE_plusvisites(ARTICLES){popularite>0}{!par visites}{0,30}>
 				<li value="[(#ID_ARTICLE|array_search{#GET{c}}|plus{1})]"[ class="(#EXPOSE)"]><a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]#contenu" class="ajax"
-							title="<:statistiques:info_popularite_3{visites=#VISITES,popularite=#POPULARITE}|attribut_html:>">#TITRE</a></li>
+							title="<:statistiques:info_popularite_3{visites=#VISITES,popularite=#POPULARITE_ABSOLUE}|attribut_html:>">#TITRE</a></li>
 			</BOUCLE_plusvisites>
 			</ol>
 		</B_plusvisites>

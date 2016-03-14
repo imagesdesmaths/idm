@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/mediabox?lang_cible=de
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -41,7 +43,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_slideshow_speed' => 'Anzeigedauer der Diaschau-Bilder (ms)',
 	'label_speed' => 'Dauer des Übergangseffekts (ms)',
 	'label_splash' => 'Splash Box',
+	'label_splash_height' => 'Höhe (% oder px)',
 	'label_splash_url' => 'URL anzeigen',
+	'label_splash_width' => 'Breite (% oder px)',
 	'label_traiter_toutes_images' => 'Bilder',
 	'label_transition' => 'Übergang zwischen zwei Elementen',
 

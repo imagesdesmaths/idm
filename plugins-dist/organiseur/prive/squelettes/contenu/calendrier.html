@@ -17,15 +17,15 @@ jQuery(document).ready(function() {
 				right: [(#LANG_DIR|=={ltr}|?{"'agendaDay,agendaWeek,month'","'today nextYear,next,prev,prevYear'"})]
 			},
 			firstDay: 1,
-			monthNames:['<:date_mois_1|attribut_html:>','<:date_mois_2|attribut_html:>','<:date_mois_3|attribut_html:>','<:date_mois_4|attribut_html:>','<:date_mois_5|attribut_html:>','<:date_mois_6|attribut_html:>','<:date_mois_7|attribut_html:>','<:date_mois_8|attribut_html:>','<:date_mois_9|attribut_html:>','<:date_mois_10|attribut_html:>','<:date_mois_11|attribut_html:>','<:date_mois_12|attribut_html:>'],
-			monthNamesShort:['<:date_mois_1_abbr|attribut_html:>','<:date_mois_2_abbr|attribut_html:>','<:date_mois_3_abbr|attribut_html:>','<:date_mois_4_abbr|attribut_html:>','<:date_mois_5_abbr|attribut_html:>','<:date_mois_6_abbr|attribut_html:>','<:date_mois_7_abbr|attribut_html:>','<:date_mois_8_abbr|attribut_html:>','<:date_mois_9_abbr|attribut_html:>','<:date_mois_10_abbr|attribut_html:>','<:date_mois_11_abbr|attribut_html:>','<:date_mois_12_abbr|attribut_html:>'],
-			dayNames:['<:date_jour_1|attribut_html:>','<:date_jour_2|attribut_html:>','<:date_jour_3|attribut_html:>','<:date_jour_4|attribut_html:>','<:date_jour_5|attribut_html:>','<:date_jour_6|attribut_html:>','<:date_jour_7|attribut_html:>'],
-			dayNamesShort:['<:date_jour_1_abbr|attribut_html:>','<:date_jour_2_abbr|attribut_html:>','<:date_jour_3_abbr|attribut_html:>','<:date_jour_4_abbr|attribut_html:>','<:date_jour_5_abbr|attribut_html:>','<:date_jour_6_abbr|attribut_html:>','<:date_jour_7_abbr|attribut_html:>'],
+			monthNames:['<:date_mois_1|texte_script:>','<:date_mois_2|texte_script:>','<:date_mois_3|texte_script:>','<:date_mois_4|texte_script:>','<:date_mois_5|texte_script:>','<:date_mois_6|texte_script:>','<:date_mois_7|texte_script:>','<:date_mois_8|texte_script:>','<:date_mois_9|texte_script:>','<:date_mois_10|texte_script:>','<:date_mois_11|texte_script:>','<:date_mois_12|texte_script:>'],
+			monthNamesShort:['<:date_mois_1_abbr|texte_script:>','<:date_mois_2_abbr|texte_script:>','<:date_mois_3_abbr|texte_script:>','<:date_mois_4_abbr|texte_script:>','<:date_mois_5_abbr|texte_script:>','<:date_mois_6_abbr|texte_script:>','<:date_mois_7_abbr|texte_script:>','<:date_mois_8_abbr|texte_script:>','<:date_mois_9_abbr|texte_script:>','<:date_mois_10_abbr|texte_script:>','<:date_mois_11_abbr|texte_script:>','<:date_mois_12_abbr|texte_script:>'],
+			dayNames:['<:date_jour_1|texte_script:>','<:date_jour_2|texte_script:>','<:date_jour_3|texte_script:>','<:date_jour_4|texte_script:>','<:date_jour_5|texte_script:>','<:date_jour_6|texte_script:>','<:date_jour_7|texte_script:>'],
+			dayNamesShort:['<:date_jour_1_abbr|texte_script:>','<:date_jour_2_abbr|texte_script:>','<:date_jour_3_abbr|texte_script:>','<:date_jour_4_abbr|texte_script:>','<:date_jour_5_abbr|texte_script:>','<:date_jour_6_abbr|texte_script:>','<:date_jour_7_abbr|texte_script:>'],
 			buttonText: {
-					today: '<:date_aujourdhui|attribut_html:>',
-					month: '<:organiseur:cal_par_mois|attribut_html:>',
-					day: '<:organiseur:cal_par_jour|attribut_html:>',
-					week: '<:organiseur:cal_par_semaine|attribut_html:>'
+					today: '<:date_aujourdhui|texte_script:>',
+					month: '<:organiseur:cal_par_mois|texte_script:>',
+					day: '<:organiseur:cal_par_jour|texte_script:>',
+					week: '<:organiseur:cal_par_semaine|texte_script:>'
 			},
 			weekMode : 'liquid',
 			loading: function(bool) {
@@ -39,7 +39,7 @@ jQuery(document).ready(function() {
 				'': "H'h'(mm)" // 19h
 			},
 			axisFormat: "H'h'(mm)",
-			allDayText:'<:organiseur:cal_jour_entier|attribut_html:>',
+			allDayText:'<:organiseur:cal_jour_entier|texte_script:>',
 			columnFormat: {
 				month: 'ddd',    // Mon
 				week: 'ddd d/M', // Mon 9/7

@@ -3,9 +3,14 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/revisions?lang_cible=ro
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// B
+	'bouton_comparer' => 'Voir les différences',
 
 	// D
 	'diff_para_ajoute' => 'Paragraf adăugat',

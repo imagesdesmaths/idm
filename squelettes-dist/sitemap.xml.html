@@ -17,7 +17,7 @@
 ]#CACHE{0}
 #HTTP_HEADER{Content-Type: text/xml; charset=utf-8}
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
 [(#REM) Accueil]
 <url>
@@ -26,17 +26,36 @@
 </url>
 
 [(#REM) Rubriques ]
-<BOUCLE_r(RUBRIQUES){!par date}{0,1000}>[
-<url><loc>(#URL_RUBRIQUE|url_absolue)</loc></url>]</BOUCLE_r>
+<BOUCLE_r(RUBRIQUES){!par date}{0,1000}>
+<url>
+	[<loc>(#URL_RUBRIQUE|url_absolue)</loc>]
+	<BOUCLE_r_trad(RUBRIQUES){traduction}>
+		<xhtml:link rel="alternate" hreflang="[(#LANG)]" href="[(#URL_RUBRIQUE|url_absolue)]" />
+	</BOUCLE_r_trad>
+</url>
+</BOUCLE_r>
 
 [(#REM) Articles ]
 [(#SET{recent,[(#VAL{Y-m-d H:i:s}|date{#VAL{"-1 day"}|strtotime})]})]
-<BOUCLE_a(ARTICLES){!par date_modif}{!par date}{0,2000}>[
-<url><loc>(#URL_ARTICLE|url_absolue)</loc>[(#DATE_MODIF**|>{#GET{recent}}
-|?{[<lastmod>(#DATE_MODIF**|date_iso)</lastmod>]})]</url>]</BOUCLE_a>
+<BOUCLE_a(ARTICLES){!par date_modif}{!par date}{0,2000}>
+<url>
+	[<loc>(#URL_ARTICLE|url_absolue)</loc>]
+	<BOUCLE_a_trad(ARTICLES){traduction}>
+		<xhtml:link rel="alternate" hreflang="[(#LANG)]" href="[(#URL_ARTICLE|url_absolue)]" />
+	</BOUCLE_a_trad>
+	[(#DATE_MODIF**|>{#GET{recent}}
+|?{[<lastmod>(#DATE_MODIF**|date_iso)</lastmod>]})]
+</url>
+</BOUCLE_a>
 
 [(#REM) Breves ]
 <BOUCLE_b(BREVES){!par date}{0,1000}>[
 <url><loc>(#URL_BREVE|url_absolue)</loc></url>]</BOUCLE_b>
+
+[(#REM) Extensions de sitemap par des plugins ]
+<BOUCLE_objets(DATA){source table,#REM|lister_tables_objets_sql}>
+	#SET{fond,#VAL{sitemap-}|concat{#VALEUR{table_objet}}}
+	[(#GET{fond}|trouver_fond|oui)#INCLURE*{fond=#GET{fond}}]
+</BOUCLE_objets>
 
 </urlset>

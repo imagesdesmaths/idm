@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/spip?lang_cible=fon
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -421,7 +423,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_retour_public' => 'Mi lɛkɔ yì gblogblojí ɔ ',
 	'login_retour_site' => 'Mi lɛkɔ yì gblogblojí ɔ ',
 	'login_retoursitepublic' => 'Mi lɛkɔ yì gblogblojí ɔ ',
-	'login_sans_cookiie' => 'Mi sɔ xlɛ bó jò koki lɛ ɖó',
 	'login_sinscrire' => 'Ná nyíkɔ ',
 	'login_test_navigateur' => 'ɖèxlɛtɔ/àlɔwlí ɖévó',
 	'login_verifiez_navigateur' => '(mi kpɔn ɖɔ ɖèxlɛtɔ yí gbètákɛn à jí ...)',

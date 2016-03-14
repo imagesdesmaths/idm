@@ -1,7 +1,7 @@
 #SET{p,pr_#ID_RUBRIQUE}<B_enfants>
 [<p class='pagination'>(#PAGINATION)</p>]
 <ul class='items'>
-<BOUCLE_enfants(RUBRIQUES){id_parent=#ID_RUBRIQUE}{statut?}{pagination 100 #GET{p}}><li
+<BOUCLE_enfants(RUBRIQUES){id_parent=#ID_RUBRIQUE}{statut?}{pagination 100 #GET{p}}{par num titre, titre}><li
 	class='rubrique'>[(#ENV{rubriques,0}|oui)<a
 	href='#' onclick="jQuery(this).item_pick('rubrique|#ID_RUBRIQUE','#ENV{name,id_item}','[(#TITRE*|extraire_multi|attribut_html|texte_script|replace{'&#039;',#VAL{'\\'}|concat{#EVAL{chr(39)}}})]','rubrique');return false;"
 ><img

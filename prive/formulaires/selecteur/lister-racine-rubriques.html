@@ -11,7 +11,7 @@
 			title="<:bouton_choisir:> : [(#TITRE|attribut_html|couper{80})]"
 			class="choisir"
 			href="#"
-			onclick="jQuery(this).item_pick('rubrique|#ID_RUBRIQUE','#ENV{name,id_item}','#TITRE','rubrique');return false;"
+			onclick="jQuery(this).item_pick('rubrique|#ID_RUBRIQUE','#ENV{name,id_item}','[(#TITRE|textebrut|texte_script)]','rubrique');return false;"
 		><:bouton_choisir:></a>]
 	</li>
 </BOUCLE_enfants>

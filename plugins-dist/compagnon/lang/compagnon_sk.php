@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/compagnon?lang_cible=sk
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -17,9 +19,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'c_accueil_publication_texte' => 'Na publikovanie stránky musíte vytvoriť článok.
 		Môžete to urobiť v menu "Upraviť stránku" kliknutím na "Rubriky".',
 	'c_accueil_texte' => 'Práve ste sa dostali do súkromnej zóny SPIPu.',
-	'c_accueil_texte_revenir' => '		Táto stránka uvádza najnovšiu redakčnú aktivitu na vašej stránke.
+	'c_accueil_texte_revenir' => '		Táto stránka predstavuje najnovšiu redakčnú aktivitu na vašej stránke.
 		Na túto stránku sa môžete kedykoľvek vrátiť kliknutím na ikonu domčeka 
-                            na vrchu pod svojím menom.',
+                            v hornej časti stránky pod svojím menom .',
 	'c_article_redaction' => 'Článok sa upravuje',
 	'c_article_redaction_redacteur' => 'Článok sa upravuje',
 	'c_article_redaction_redacteur_texte' => 'Na to, aby bol váš článok odoslaný administrátorom stránky a iným redaktorom,
@@ -37,12 +39,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		ako odoslanie hromadných e-mailov.',
 	'c_rubrique_publier' => 'Vytvorte článok',
 	'c_rubrique_publier_texte' => 'Rubrika je publikovaná, keď
-		sa v nej nachádza aspoň jeden publikovaný text. Napríklad publikovaný článok.
+		sa v nej nachádza aspoň jeden publikovaný text, napríklad publikovaný článok.
 		Takže vytvorte článok. Môžete to urobiť na tejto stránke pod opisom svojej rubriky.',
 	'c_rubriques_creer' => 'Vytvorte prvú rubriku!',
 	'c_rubriques_creer_texte' => 'Rubriky tvoria základnú štruktúru stránky.
 		V každej z nich môžete vytvárať články.
 		Začnite vytvárať prvú rubriku.',
+	'c_sites_creer' => 'Ako vytvoriť alebo nahrať stránku?',
+	'c_sites_creer_texte' => 'Vytvoriť alebo nahrať stránku nemôžete na tejto stránke,
+		kým na svojom webe nemáte rubriku.
+		Tú môžete vytvoriť pomocou menu Upraviť, potom Rubriky.',
 
 	// E
 	'explication_activer_compagnon' => 'Asistent pridáva komentáre na niektoré stránky

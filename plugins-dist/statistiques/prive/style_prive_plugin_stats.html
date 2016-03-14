@@ -25,7 +25,7 @@ ol.classement {list-style:decimal;margin:0;padding:0;padding-#GET{left}:40px;mar
 
 
 table.visites caption, h3.caption {font-size:1.3em;font-weight:bold;text-align: center;margin:0.5em auto; clear:both;}
-.stats_visites #contenu h3.caption {float:#GET{left};margin:0.5em auto;}
+.stats_visites #contenu h3.caption {float:#GET{left};margin:0.1em auto 0.5em;}
 table.visites {width: 80%; margin-bottom: 1em; border-collapse: collapse; border-spacing: 0; line-height: normal;border:1px solid #999;}
 table.visites a {color:#[(#GET{foncee}|couleur_foncer)];}
 
@@ -56,7 +56,7 @@ table#visites tr.c_recap th {background-color:#[(#GET{foncee}|couleur_foncer)];c
 .graphResult{}
 .graphInfo{float:#GET{left}; clear:#GET{left};margin-#GET{left}:20px;}
 .graphInfo td {padding: 5px;}
-.graphInfo td.legendLabel { padding-left:0; padding-right:1em; vertical-align: top;}
+.graphInfo td.legendLabel { padding-#GET{left}:0; padding-#GET{right}:1em; vertical-align: top;}
 .graphLegend{margin-top:0.5em; }
 .graphVignette{}
 .graphique .tickLabels {font-size: 11px !important;line-height: 14px;}
@@ -75,12 +75,12 @@ table#visites tr.c_recap th {background-color:#[(#GET{foncee}|couleur_foncer)];c
 
 .stats_referers .liste-items.referers li.referer {padding-left:150px;background-image: url("#CHEMIN_IMAGE{deplierhaut.gif}");background-position: 0.6925em 0.6925em;background-repeat: no-repeat;}
 .stats_referers .liste-items.referers li.referer.open {background-image: url("#CHEMIN_IMAGE{deplierbas.gif}");}
-.stats_referers .liste-items.referers li.referer span.visites {float:left;text-align:right;width:140px;margin-left:-150px;}
-.stats_referers .liste-items.referers li.referer .miniature {float:right;}
+.stats_referers .liste-items.referers li.referer span.visites {float:left;text-align:#GET{right};width:140px;margin-left:-150px;}
+.stats_referers .liste-items.referers li.referer .miniature {float:#GET{right};}
 .stats_referers .liste-items.referers li.referer .miniature img {max-width:60px;height: auto;}
 .stats_referers .liste-items.referers li.referer ul {margin-left:0;padding-left:0;}
 .stats_referers .liste-items.referers li.referer ul li {margin-left:0px;padding-left:0;}
-.stats_referers .action.plus {text-align:right;font-size:1.5em;font-weight:bold;}
+.stats_referers .action.plus {text-align:#GET{right};font-size:1.5em;font-weight:bold;}
 
 .stats_repartition .couleur_cumul { background: #GET{foncee}; }
 .stats_repartition .couleur_nombre { background: [#(#GET{foncee}|couleur_eclaircir)]; }
@@ -92,4 +92,7 @@ table#visites tr.c_recap th {background-color:#[(#GET{foncee}|couleur_foncer)];c
 .stats_repartition table table td {padding: 0;}
 .stats_lang .couleur_langue { background: #GET{foncee}; }
 .stats_lang table p {padding-left:10px;margin:2px 0;}
+
+.stats-articles .size1of2 {padding-#GET{right}:1%;}
+.stats-articles .lastUnit {padding-#GET{left}:1%;border-#GET{left}:1px solid;}
 [(#REM)	</style>]

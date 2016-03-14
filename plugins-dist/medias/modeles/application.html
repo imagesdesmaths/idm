@@ -11,7 +11,7 @@
  (#ENV{controls}=={PositionSlider}|?{#SET{hauteur,25},''})][
  (#ENV{controls}=={PositionSlider}|?{#SET{largeur,#GET{largeur}|moins{40}},''})
 ][(#INCLUS|=={embed}|?{[(#ENV{controls,''}|non)
-<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]'[
+<div class='spip_document_#ID_DOCUMENT spip_document_application spip_documents[ spip_documents_(#ENV{align})]'[
 style='[(#ENV{align}|match{^(left|right)$}|oui)float:#ENV{align};] (#ENV{align,center}|=={center}|non)[width:(#GET{largeur}|max{120})px]']>
 ]})
 ][(#EXTENSION|=={swf}|oui)

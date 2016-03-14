@@ -3,14 +3,16 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 /**
  * Tourner un document
@@ -25,22 +27,22 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *   angle de rotation en degre>0
  * @return void
  */
-function action_tourner_dist($id_document=null, $angle=null) {
-	if (is_null($id_document) OR is_null($angle)){
+function action_tourner_dist($id_document = null, $angle = null) {
+	if (is_null($id_document) or is_null($angle)) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 
 		if (!preg_match(",^\W*(\d+)\W?(-?\d+)$,", $arg, $r)) {
 			spip_log("action_tourner_dist $arg pas compris");
-		}
-		else{
+		} else {
 			array_shift($r);
-			list($id_document,$angle) = $r;
+			list($id_document, $angle) = $r;
 		}
 
 	}
-	if ($id_document AND autoriser('modifier','document',$id_document))
-		action_tourner_post($id_document,$angle);
+	if ($id_document and autoriser('modifier', 'document', $id_document)) {
+		action_tourner_post($id_document, $angle);
+	}
 }
 
 /**
@@ -53,42 +55,43 @@ function action_tourner_dist($id_document=null, $angle=null) {
  *   angle de rotation en degre>0
  * @return
  */
-function action_tourner_post($id_document,$angle)
-{
-	$row = sql_fetsel("fichier,extension", "spip_documents", "id_document=".intval($id_document));
+function action_tourner_post($id_document, $angle) {
+	$row = sql_fetsel("fichier,extension", "spip_documents", "id_document=" . intval($id_document));
 
-	if (!$row) return;
+	if (!$row) {
+		return;
+	}
 
-	include_spip('inc/charsets');	# pour le nom de fichier
-	include_spip('inc/documents'); 
+	include_spip('inc/charsets');  # pour le nom de fichier
+	include_spip('inc/documents');
 	// Fichier destination : on essaie toujours de repartir de l'original
 	$var_rot = $angle;
+	$effacer = false;
 
 	include_spip('inc/distant'); # pour copie_locale
 	$src = _DIR_RACINE . copie_locale(get_spip_doc($row['fichier']));
 	if (preg_match(',^(.*)-r(90|180|270)\.([^.]+)$,', $src, $match)) {
 		$effacer = $src;
-		$src = $match[1].'.'.$match[3];
+		$src = $match[1] . '.' . $match[3];
 		$var_rot += intval($match[2]);
 	}
 	$var_rot = ((360 + $var_rot) % 360); // 0, 90, 180 ou 270
 
 	if ($var_rot > 0) {
-		$dest = preg_replace(',\.[^.]+$,', '-r'.$var_rot.'$0', $src);
+		$dest = preg_replace(',\.[^.]+$,', '-r' . $var_rot . '$0', $src);
 		spip_log("rotation $var_rot $src : $dest");
 
 		include_spip('inc/filtres');
 		include_spip('public/parametrer'); // charger les fichiers fonctions #bugfix spip 2.1.0
-		$res = filtrer('image_rotation',$src,$var_rot);
-		$res = filtrer('image_format',$res,$row['extension']);
+		$res = filtrer('image_rotation', $src, $var_rot);
+		$res = filtrer('image_format', $res, $row['extension']);
 
-		list($hauteur,$largeur) = taille_image($res);
-		$res = extraire_attribut($res,'src');
+		list($hauteur, $largeur) = taille_image($res);
+		$res = extraire_attribut($res, 'src');
 
 		include_spip('inc/getdocument');
-		deplacer_fichier_upload($res,$dest);
-	}
-	else {
+		deplacer_fichier_upload($res, $dest);
+	} else {
 		$dest = $src;
 		$size_image = @getimagesize($dest);
 		$largeur = $size_image[0];
@@ -96,15 +99,17 @@ function action_tourner_post($id_document,$angle)
 	}
 
 	// succes !
-	if ($largeur>0 AND $hauteur>0) {
+	if ($largeur > 0 and $hauteur > 0) {
 		$set = array(
 			'fichier' => set_spip_doc($dest),
-			'largeur'=>$largeur, 'hauteur'=>$hauteur,
-			'distant'=>'non' // le document n'est plus distant apres une transformation
-			);
-		if ($taille = @filesize($dest))
+			'largeur' => $largeur,
+			'hauteur' => $hauteur,
+			'distant' => 'non' // le document n'est plus distant apres une transformation
+		);
+		if ($taille = @filesize($dest)) {
 			$set['taille'] = $taille;
-		sql_updateq('spip_documents', $set, "id_document=".intval($id_document));
+		}
+		sql_updateq('spip_documents', $set, "id_document=" . intval($id_document));
 		if ($effacer) {
 			spip_log("rotation : j'efface $effacer");
 			spip_unlink($effacer);
@@ -116,11 +121,10 @@ function action_tourner_post($id_document,$angle)
 					'table' => 'spip_documents',
 					'table_objet' => 'documents',
 					'spip_table_objet' => 'spip_documents',
-					'type' =>'document',
+					'type' => 'document',
 					'id_objet' => $id_document,
-					'champs' => array('rotation'=>$angle,'orientation'=>$var_rot,'fichier'=>$row['fichier']),
-					'serveur' => $serveur,
-					'action'=>'tourner',
+					'champs' => array('rotation' => $angle, 'orientation' => $var_rot, 'fichier' => $row['fichier']),
+					'action' => 'tourner',
 				),
 				'data' => $set
 			)
@@ -135,12 +139,12 @@ function action_tourner_post($id_document,$angle)
 function tourner_selon_exif_orientation($id_document, $fichier) {
 
 	if (function_exists('exif_read_data')
-	AND $exif = exif_read_data($fichier)
-	AND (
-		$ort = $exif['IFD0']['Orientation']
-		OR $ort = $exif['Orientation'])
+		and $exif = exif_read_data($fichier)
+		and (
+			$ort = $exif['IFD0']['Orientation']
+			or $ort = $exif['Orientation'])
 	) {
-	spip_log("rotation: $ort");
+		spip_log("rotation: $ort");
 		$rot = null;
 		switch ($ort) {
 			case 3:
@@ -150,9 +154,8 @@ function tourner_selon_exif_orientation($id_document, $fichier) {
 			case 8:
 				$rot = -90;
 		}
-		if ($rot)
-			action_tourner_post(array(null,$id_document, $rot));
+		if ($rot) {
+			action_tourner_post(array(null, $id_document, $rot));
+		}
 	}
 }
-
-?>

@@ -3,9 +3,17 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=co
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// B
+	'bouton_radio_activer_petition' => 'Attivà a petizione',
+	'bouton_radio_pas_petition' => 'Nisuna petizione',
+	'bouton_radio_petition_activee' => 'Petizione attivata',
+	'bouton_radio_supprimer_petition' => 'Toglie a petizione',
 
 	// F
 	'form_pet_adresse_site' => 'Indirizzu di u vostru situ', # MODIF

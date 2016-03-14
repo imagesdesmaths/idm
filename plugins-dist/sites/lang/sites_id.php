@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=id
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -33,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Modifikasi situs ini',
 	'icone_referencer_nouveau_site' => 'Referensi sebuah situs baru',
 	'icone_voir_sites_references' => 'Tampilkan situs-situs referensi',
+	'info_1_site' => '1 situs',
 	'info_a_valider' => '[akan divalidasi]',
 	'info_bloquer' => 'blok',
 	'info_bloquer_lien' => 'Blokir tautan ini',

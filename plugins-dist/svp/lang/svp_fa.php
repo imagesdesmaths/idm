@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/svp?lang_cible=fa
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -272,7 +274,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_form_charger_plugin' => 'جستجو و افزودن پلاگين‌ها',
 	'titre_form_charger_plugin_archive' => 'بارگذاري يك پلاگين از پوشه‌اش',
 	'titre_form_configurer_svp' => 'پيكربندي سرور پلاگين‌ها',
-	'titre_liste_autres_contributions' => 'اسكلت‌ها، كتابخانه‌ها، سري آيكون‌ها',
+	'titre_liste_autres_contributions' => 'اسكلت‌ها، كتابخانه‌ها، سري آيكون‌ها', # MODIF
 	'titre_liste_autres_depots' => 'سپرده‌هاي ديگر',
 	'titre_liste_depots' => 'فهرست مخازن در دسترس',
 	'titre_liste_paquets_plugin' => 'فهرست پاكت‌هاي پلاگين',

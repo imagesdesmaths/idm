@@ -3,9 +3,17 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/petitions?lang_cible=fon
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+	// B
+	'bouton_radio_activer_petition' => 'mi sɔ kɛn ',
+	'bouton_radio_pas_petition' => 'Tajijla ɖé dé  a ',
+	'bouton_radio_petition_activee' => 'Tajijla ɖé ',
+	'bouton_radio_supprimer_petition' => 'mi sunsùn Tajijla ',
 
 	// F
 	'form_pet_adresse_site' => 'gèsí gblogblojí mí tɔn tɔn', # MODIF

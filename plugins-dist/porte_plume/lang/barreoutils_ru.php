@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/barreoutils?lang_cible=ru
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -72,7 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_lorem_ipsum' => 'Вставить пустой абзац',
 	'barre_lorem_ipsum_3' => 'Вставить три пустых абзаца',
 	'barre_miseenevidence' => '[*Подсветить*] текст',
-	'barre_note' => 'Сдлать [[сноску]]',
+	'barre_note' => 'Сделать [[сноску]]',
 	'barre_paragraphe' => 'Создать абзац',
 	'barre_petitescapitales' => 'Написать &lt;sc&gt;строчными &lt;/sc&gt;',
 	'barre_poesie' => 'Форматирование для &lt;poesie&gt;поэзии&lt;/poesie&gt;',
@@ -86,12 +88,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'editer' => 'Редактировать',
-	'explication_barre_outils_public' => 'Файлы CSS и Javascript для панели инструментов будут загружены на сайте и панель форматирования текста будет выводится в модуле комментариев, редактирования текста на фронтэнде сайта. 
-	(extension Porte Plume) sont chargés sur l’espace public
-	et permettent d’utiliser ces barres sur les formulaires de forums,
-	les crayons publics ou pour d’autres plugins, si leurs configurations
-	respectives le permettent.',
-	'explication_barre_outils_public_2' => 'Что бы максимально облегчить сайт и ускорить время его загрузки вы можете отключить добавление этих файлов. Тогда пользователи не смогут форматировать текст при добавлении комментариев и прочих модулях.',
+	'explication_barre_outils_public' => 'Файлы CSS и Javascript для панели инструментов (extension Porte Plume) будут загружены на сайте и панель форматирования текста будет выводится в модуле комментариев, на форумах и в других местах редактирования текста на фронтэнде сайта, если это разрешено их конфигурацией. ',
+	'explication_barre_outils_public_2' => 'Чтобы максимально облегчить сайт и ускорить время его загрузки, вы можете отключить добавление этих файлов. Тогда пользователи не смогут форматировать текст при добавлении комментариев и в других модулях.',
 
 	// I
 	'info_barre_outils_public' => 'Панель инструментов на сайте',

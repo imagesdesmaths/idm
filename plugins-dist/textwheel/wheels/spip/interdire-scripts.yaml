@@ -19,7 +19,8 @@ securite-script-php:
   replace: "&lt;$1"
 
 securite-js:
-  if_str: "<script"
+  if_str: "<"
+  if_match: "/<(?:script|iframe|embed|object|img|image|body|bgsound|meta)/iS"
   type: all
   replace: "echappe_js"
   is_callback: Y

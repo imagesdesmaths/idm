@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/compagnon?lang_cible=pt_br
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -17,7 +19,7 @@ Atualmente, ele se chama « @nom@ ». O nome do site é exibido no alto desta 
 Para isso, é necessário que você crie pelo menos uma seção. Você pode fazê-lo no menu « Edição », clicando em « Seções ».',
 	'c_accueil_texte' => 'Você acaba de entrar na área privada do SPIP.',
 	'c_accueil_texte_revenir' => 'Esta página exibe a atividade editorial recente no seu site.
-Você pode voltar a esta página a qualquer momento clicando no ícone da casa, no cabeçalho, sob o seu nome.',
+Você pode voltar a esta página a qualquer momento clicando no ícone da casa, no cabeçalho, sob o seu nome.', # MODIF
 	'c_article_redaction' => 'A matéria está em fase de redação',
 	'c_article_redaction_redacteur' => 'A matéria está em fase de redação',
 	'c_article_redaction_redacteur_texte' => 'Para propor a sua matéria aos administradores do site e aos outros redatores, no box ao lado, altere «em fase de redação» por «proposta para publicação».',
@@ -31,6 +33,8 @@ Você pode criá-la a partir do  menu « Edição » e, em seguida « Seçõe
 	'c_rubrique_publier_texte' => 'Uma seção só é exibida na área pública a partir do momento em que ela contenha pelo menos um conteúdo publicado. Crie então uma matéria. Você pode fazê-lo a partir desta página, abaixo da descrição da sua seção.',
 	'c_rubriques_creer' => 'Crie uma primeira seção!',
 	'c_rubriques_creer_texte' => 'As seções são a estrutura básica do site; você pode criar matérias em cada uma delas. Comece criando uma primeira seção.',
+	'c_sites_creer' => 'Como criar ou importar um site?',
+	'c_sites_creer_texte' => 'Você só poderá criar ou importar um site a partir desta página a partir do momento em que exista uma seção no seu site. Você poderá criá-la a partir do menu  «Edição», na opção «Seções».',
 
 	// E
 	'explication_activer_compagnon' => 'O companheiro inclui comentários em certas páginas da área restrita para ajudar a se familiarizar com o SPIP. Você quer ativá-lo?',

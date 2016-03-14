@@ -3,136 +3,160 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2016                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+/**
+ * Fonctions d'appel aux serveurs SQL presentes dans le code compile
+ *
+ * NB : à l'exception des fonctions pour les balises dynamiques
+ *
+ * @package SPIP\Core\Compilateur\Quetes
+ **/
 
-//
-// Fonctions d'appel aux serveurs SQL presentes dans le code compile
-//
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
-# NB : a l'exception des fonctions pour les balises dynamiques
 
 include_spip('base/abstract_sql');
 
 /**
- * retourne l'url de redirection d'un article virtuel, seulement si il est publié
- * http://doc.spip.org/@quete_chapo
+ * Retourne l'URL de redirection d'un article virtuel, seulement si il est publié
  *
  * @param $id_article
  * @param $connect
  * @return array|bool|null
  */
 function quete_virtuel($id_article, $connect) {
-	return sql_getfetsel('virtuel', 'spip_articles', array("id_article=".intval($id_article), "statut='publie'"), '','','','',$connect);
+	return sql_getfetsel('virtuel', 'spip_articles', array("id_article=" . intval($id_article), "statut='publie'"), '',
+		'', '', '', $connect);
 }
 
 /**
- * Retourne le couple parent,lang pour toute table
- * en pratique id_rubrique si present (ou id_parent pour table rubriques)
- * et champ lang si present
+ * Retourne le couple `parent,lang` pour toute table
+ *
+ * En pratique `id_rubrique` si présent (ou `id_parent` pour table rubriques)
+ * et champ `lang` si présent
  *
  * @param string $table
  * @param int $id
  * @param string $connect
  * @return array
  */
-function quete_parent_lang($table,$id,$connect=''){
+function quete_parent_lang($table, $id, $connect = '') {
 	static $cache_quete = array();
 
 	if (!isset($cache_quete[$connect][$table][$id])) {
-		if (!isset($cache_quete[$connect][$table]['_select'])){
-			$trouver_table = charger_fonction('trouver_table','base');
-			if (!$desc=$trouver_table($table,$connect) OR !isset($desc['field']['id_rubrique']))
-				// pas de parent rubrique, on passe
-				$cache_quete[$connect][$table]['_select'] = false; 
-			else {
-				$select = ($table=='spip_rubriques'?'id_parent':'id_rubrique');
-				$select .= isset($desc['field']['lang'])?", lang":"";
+		if (!isset($cache_quete[$connect][$table]['_select'])) {
+			$trouver_table = charger_fonction('trouver_table', 'base');
+			if (!$desc = $trouver_table($table,
+					$connect) or !isset($desc['field']['id_rubrique'])
+			) // pas de parent rubrique, on passe
+			{
+				$cache_quete[$connect][$table]['_select'] = false;
+			} else {
+				$select = ($table == 'spip_rubriques' ? 'id_parent' : 'id_rubrique');
+				$select .= isset($desc['field']['lang']) ? ", lang" : "";
 				$cache_quete[$connect][$table]['_select'] = $select;
 				$cache_quete[$connect][$table]['_id'] = id_table_objet(objet_type($table));
 			}
 		}
-		if ($cache_quete[$connect][$table]['_select'])
-			$cache_quete[$connect][$table][$id] = sql_fetsel($cache_quete[$connect][$table]['_select'], $table,$cache_quete[$connect][$table]['_id']."=".intval($id),'','','','',$connect);
+		if ($cache_quete[$connect][$table]['_select']) {
+			$cache_quete[$connect][$table][$id] = sql_fetsel($cache_quete[$connect][$table]['_select'], $table,
+				$cache_quete[$connect][$table]['_id'] . "=" . intval($id), '', '', '', '', $connect);
+		}
 	}
+
 	return isset($cache_quete[$connect][$table][$id]) ? $cache_quete[$connect][$table][$id] : null;
 }
 
 
 /**
- * retourne le parent d'une rubrique
- * repose sur la fonction quete_parent_lang pour la mutualisation
- * +mise en cache sql des requetes
+ * Retourne le parent d'une rubrique
  *
- * http://doc.spip.org/@quete_parent
+ * Repose sur la fonction quete_parent_lang pour la mutualisation
+ * +mise en cache SQL des requêtes
+ *
+ * @uses quete_parent_lang()
  *
  * @param int $id_rubrique
  * @param string $connect
  * @return int
  */
-function quete_parent($id_rubrique, $connect='') {
-	if (!$id_rubrique = intval($id_rubrique))
+function quete_parent($id_rubrique, $connect = '') {
+	if (!$id_rubrique = intval($id_rubrique)) {
 		return 0;
-	$id_parent = quete_parent_lang('spip_rubriques',$id_rubrique,$connect);
+	}
+	$id_parent = quete_parent_lang('spip_rubriques', $id_rubrique, $connect);
+
 	return $id_parent['id_parent'];
 }
 
 /**
- * retourne la rubrique d'un article
- * repose sur la fonction quete_parent_lang pour la mutualisation
- * +mise en cache sql des requetes
+ * Retourne la rubrique d'un article
  *
- * http://doc.spip.org/@quete_rubrique
+ * Repose sur la fonction quete_parent_lang pour la mutualisation
+ * +mise en cache SQL des requêtes
+ *
+ * @uses quete_parent_lang()
  *
  * @param int $id_article
  * @param $serveur
- * @return
+ * @return int
  */
 function quete_rubrique($id_article, $serveur) {
-	$id_parent = quete_parent_lang('spip_articles',$id_article,$serveur);
+	$id_parent = quete_parent_lang('spip_articles', $id_article, $serveur);
+
 	return $id_parent['id_rubrique'];
 }
 
 
 /**
- * retourne la profondeur d'une rubrique
+ * Retourne la profondeur d'une rubrique
  *
- * http://doc.spip.org/@quete_profondeur
+ * @uses quete_parent()
  *
  * @param int $id
  * @param string $connect
  * @return int
  */
-function quete_profondeur($id, $connect='') {
+function quete_profondeur($id, $connect = '') {
 	$n = 0;
 	while ($id) {
 		$n++;
 		$id = quete_parent($id, $connect);
 	}
+
 	return $n;
 }
 
 
 /**
- * retourne la condition sur la date lorsqu'il y a des post-dates
+ * Retourne la condition sur la date lorsqu'il y a des post-dates
+ *
  * @param string $champ_date
+ *     Nom de la colonne de date dans la table SQL
  * @param string $serveur
+ * @param bool $ignore_previsu
+ *     true pour forcer le test même en prévisu
  * @return string
+ *     Morceau de la requête SQL testant la date
  */
-function quete_condition_postdates($champ_date, $serveur='', $ignore_previsu=false) {
-	if (defined('_VAR_PREVIEW') AND _VAR_PREVIEW AND !$ignore_previsu)
+function quete_condition_postdates($champ_date, $serveur = '', $ignore_previsu = false) {
+	if (defined('_VAR_PREVIEW') and _VAR_PREVIEW and !$ignore_previsu) {
 		return "1=1";
+	}
+
 	return
-	  (isset($GLOBALS['meta']['date_prochain_postdate'])
-	     AND $GLOBALS['meta']['date_prochain_postdate'] > time())
-			? "$champ_date<".sql_quote(date('Y-m-d H:i:s',$GLOBALS['meta']['date_prochain_postdate']),$serveur)
-	    : "1=1" ;
+		(isset($GLOBALS['meta']['date_prochain_postdate'])
+			and $GLOBALS['meta']['date_prochain_postdate'] > time())
+			? "$champ_date<" . sql_quote(date('Y-m-d H:i:s', $GLOBALS['meta']['date_prochain_postdate']), $serveur)
+			: "1=1";
 }
 
 
@@ -140,75 +164,85 @@ function quete_condition_postdates($champ_date, $serveur='', $ignore_previsu=fal
  * Calculer la condition pour filtrer les status,
  *
  * @param string $mstatut
- *  le champ de la table sur lequel porte la condition
+ *   Le champ de la table sur lequel porte la condition
  * @param string $previsu
- *  mode previsu : statut ou liste des statuts separes par une virgule
+ *   Mode previsu : statut ou liste des statuts séparés par une virgule
  * @param string $publie
- *  mode publie : statut ou liste des statuts separes par une virgule
+ *   Mode publie : statut ou liste des statuts séparés par une virgule
  * @param string $serveur
- *  serveur de BDD
+ *   Serveur de BDD
+ * @param bool $ignore_previsu
+ *   true pour forcer le test même en prévisu
  * @return array
  */
-function quete_condition_statut($mstatut,$previsu,$publie, $serveur='', $ignore_previsu=false){
+function quete_condition_statut($mstatut, $previsu, $publie, $serveur = '', $ignore_previsu = false) {
 	static $cond = array();
 	$key = func_get_args();
-	$key = implode("-",$key);
-	if (isset($cond[$key])) return $cond[$key];
+	$key = implode("-", $key);
+	if (isset($cond[$key])) {
+		return $cond[$key];
+	}
 
 	$liste = $publie;
-	if (defined('_VAR_PREVIEW') AND _VAR_PREVIEW AND !$ignore_previsu)
+	if (defined('_VAR_PREVIEW') and _VAR_PREVIEW and !$ignore_previsu) {
 		$liste = $previsu;
+	}
 	$not = false;
-	if (strncmp($liste,'!',1)==0){
+	if (strncmp($liste, '!', 1) == 0) {
 		$not = true;
-	  $liste = substr($liste,1);
+		$liste = substr($liste, 1);
 	}
 	// '' => ne rien afficher, '!'=> ne rien filtrer
-	if (!strlen($liste))
-		return $cond[$key]=($not?"1=1":"'0=1'");
+	if (!strlen($liste)) {
+		return $cond[$key] = ($not ? "1=1" : "'0=1'");
+	}
 
-	$liste = explode(',',$liste);
+	$liste = explode(',', $liste);
 	$where = array();
-	foreach($liste as $k=>$v) {
+	foreach ($liste as $k => $v) {
 		// filtrage /auteur pour limiter les objets d'un statut (prepa en general)
 		// a ceux de l'auteur identifie
-		if (strpos($v,"/")!==false){
-			$v = explode("/",$v);
+		if (strpos($v, "/") !== false) {
+			$v = explode("/", $v);
 			$filtre = end($v);
 			$v = reset($v);
-			$v = preg_replace(",\W,","",$v);
-			if ($filtre=="auteur"
-				AND isset($GLOBALS['visiteur_session']['id_auteur'])
-				AND intval($GLOBALS['visiteur_session']['id_auteur'])
-				AND (strpos($mstatut,".")!==false)
-			  AND $objet = explode(".",$mstatut)
-				AND $id_table = reset($objet)
-			  AND $objet = objet_type($id_table)){
+			$v = preg_replace(",\W,", "", $v);
+			if ($filtre == "auteur"
+				and isset($GLOBALS['visiteur_session']['id_auteur'])
+				and intval($GLOBALS['visiteur_session']['id_auteur'])
+				and (strpos($mstatut, ".") !== false)
+				and $objet = explode(".", $mstatut)
+				and $id_table = reset($objet)
+				and $objet = objet_type($id_table)
+			) {
 				$primary = id_table_objet($objet);
-				$where[] = "($mstatut<>".sql_quote($v)." OR $id_table.$primary IN (".sql_get_select("ssss.id_objet","spip_auteurs_liens AS ssss","ssss.objet=".sql_quote($objet)." AND ssss.id_auteur=".intval($GLOBALS['visiteur_session']['id_auteur']),'','','','',$serveur)."))";
-			}
-			// ignorer ce statut si on ne sait pas comment le filtrer
-			else
+				$where[] = "($mstatut<>" . sql_quote($v) . " OR $id_table.$primary IN (" . sql_get_select("ssss.id_objet",
+						"spip_auteurs_liens AS ssss",
+						"ssss.objet=" . sql_quote($objet) . " AND ssss.id_auteur=" . intval($GLOBALS['visiteur_session']['id_auteur']),
+						'', '', '', '', $serveur) . "))";
+			} // ignorer ce statut si on ne sait pas comment le filtrer
+			else {
 				$v = "";
+			}
 		}
 		// securite
-		$liste[$k] = preg_replace(",\W,","",$v);
+		$liste[$k] = preg_replace(",\W,", "", $v);
 	}
 	$liste = array_filter($liste);
-  if (count($liste)==1){
-		$where[] = array('=', $mstatut, sql_quote(reset($liste),$serveur));
-  }
-  else {
-	  $where[] = sql_in($mstatut,$liste,$not,$serveur);
-  }
+	if (count($liste) == 1) {
+		$where[] = array('=', $mstatut, sql_quote(reset($liste), $serveur));
+	} else {
+		$where[] = sql_in($mstatut, $liste, $not, $serveur);
+	}
 
-	while (count($where)>1){
-		$and = array('AND',array_pop($where),array_pop($where));
+	while (count($where) > 1) {
+		$and = array('AND', array_pop($where), array_pop($where));
 		$where[] = $and;
 	}
 	$cond[$key] = reset($where);
-	if ($not)
-		$cond[$key] = array('NOT',$cond[$key]);
+	if ($not) {
+		$cond[$key] = array('NOT', $cond[$key]);
+	}
 
 	return $cond[$key];
 }
@@ -216,14 +250,15 @@ function quete_condition_statut($mstatut,$previsu,$publie, $serveur='', $ignore_
 /**
  * retourne le fichier d'un document
  *
- * http://doc.spip.org/@quete_fichier
+ * http://code.spip.net/@quete_fichier
  *
  * @param int $id_document
  * @param string $serveur
  * @return array|bool|null
  */
-function quete_fichier($id_document, $serveur='') {
-	return sql_getfetsel('fichier', 'spip_documents', ("id_document=" . intval($id_document)),	'',array(), '', '', $serveur);
+function quete_fichier($id_document, $serveur = '') {
+	return sql_getfetsel('fichier', 'spip_documents', ("id_document=" . intval($id_document)), '', array(), '', '',
+		$serveur);
 }
 
 /**
@@ -233,14 +268,14 @@ function quete_fichier($id_document, $serveur='') {
  * @param string $serveur
  * @return array|bool
  */
-function quete_document($id_document, $serveur='') {
-	return sql_fetsel('*', 'spip_documents', ("id_document=" . intval($id_document)),	'',array(), '', '', $serveur);
+function quete_document($id_document, $serveur = '') {
+	return sql_fetsel('*', 'spip_documents', ("id_document=" . intval($id_document)), '', array(), '', '', $serveur);
 }
 
 /**
  * recuperer une meta sur un site distant (en local il y a plus simple)
  *
- * http://doc.spip.org/@quete_meta
+ * http://code.spip.net/@quete_meta
  *
  * @param $nom
  * @param $serveur
@@ -248,79 +283,110 @@ function quete_document($id_document, $serveur='') {
  */
 function quete_meta($nom, $serveur) {
 	return sql_getfetsel("valeur", "spip_meta", "nom=" . sql_quote($nom),
-			     '','','','',$serveur);
+		'', '', '', '', $serveur);
 }
 
 /**
- * Retourne le logo d'un objet, eventuellement par heritage
- * Si flag <> false, retourne le chemin du fichier
- * sinon retourne un tableau de 3 elements:
- * le chemin du fichier, celui du logo de survol, l'attribut style=w/h
+ * Retourne le logo d'un objet, éventuellement par héritage
+ *
+ * Si flag != false, retourne le chemin du fichier, sinon retourne un tableau
+ * de 3 elements :
+ * le chemin du fichier, celui du logo de survol, l'attribut style=w/h.
  *
  * @param string $type
+ *     Type de l'objet dont on veut chercher le logo.
  * @param string $onoff
+ *     Sélectionne quel(s) logo(s) : "on" pour le logo normal, "off" pour le logo de survol, ou "ON" pour l'ensemble.
  * @param int $id
+ *     Identifiant de l'objet dont on veut chercher le logo.
  * @param int $id_rubrique
+ *     Identifiant de la rubrique parente si l'on veut aller chercher son logo
+ *     dans le cas où l'objet demandé n'en a pas.
  * @param bool $flag
+ *     Lorsque le drapeau est évalué comme "true", la fonction ne renvoie
+ *     que le chemin du fichier, sinon elle renvoie le tableau plus complet.
  * @return array|string
+ *     Retourne soit un tableau, soit le chemin du fichier.
  */
 function quete_logo($type, $onoff, $id, $id_rubrique, $flag) {
 	static $chercher_logo;
-	if (is_null($chercher_logo))
+	if (is_null($chercher_logo)) {
 		$chercher_logo = charger_fonction('chercher_logo', 'inc');
+	}
 	$nom = strtolower($onoff);
 
 	while (1) {
 		$on = $chercher_logo($id, $type, $nom);
 		if ($on) {
-			if ($flag)
+			if ($flag) {
 				return "$on[2].$on[3]";
-			else {
+			} else {
 				$taille = @getimagesize($on[0]);
 				$off = ($onoff != 'ON') ? '' :
 					$chercher_logo($id, $type, 'off');
 				// on retourne une url du type IMG/artonXX?timestamp
 				// qui permet de distinguer le changement de logo
 				// et placer un expire sur le dossier IMG/
-				return array ($on[0].($on[4]?"?$on[4]":""),
-					($off ? $off[0] . ($off[4]?"?$off[4]":"") : ''),
-					(!$taille ? '' : (" ".$taille[3])));
+				$res = array(
+					$on[0] . ($on[4] ? "?$on[4]" : ""),
+					($off ? $off[0] . ($off[4] ? "?$off[4]" : "") : ''),
+					(!$taille ? '' : (" " . $taille[3]))
+				);
+				$res['src'] = $res[0];
+				$res['logo_on'] = $res[0];
+				$res['logo_off'] = $res[1];
+				$res['width'] = ($taille ? $taille[0] : '');
+				$res['height'] = ($taille ? $taille[1] : '');
+
+				return $res;
+			}
+		} else {
+			if (defined('_LOGO_RUBRIQUE_DESACTIVER_HERITAGE')) {
+				return '';
+			} else {
+				if ($id_rubrique) {
+					$type = 'id_rubrique';
+					$id = $id_rubrique;
+					$id_rubrique = 0;
+				} else {
+					if ($id and $type == 'id_rubrique') {
+						$id = quete_parent($id);
+					} else {
+						return '';
+					}
+				}
 			}
 		}
-        else if (defined('_LOGO_RUBRIQUE_DESACTIVER_HERITAGE'))
-            return '';
-		else if ($id_rubrique) {
-			$type = 'id_rubrique';
-			$id = $id_rubrique;
-			$id_rubrique = 0;
-		} else if ($id AND $type == 'id_rubrique')
-			$id = quete_parent($id);
-		else return '';
 	}
 }
 
 /**
  * fonction appelee par la balise #LOGO_DOCUMENT
  *
- * http://doc.spip.org/@calcule_logo_document
+ * http://code.spip.net/@calcule_logo_document
  *
  * @param array $row
  * @param string $connect
  * @return bool|string
  */
-function quete_logo_file($row, $connect=NULL) {
+function quete_logo_file($row, $connect = null) {
 	include_spip('inc/documents');
 	$logo = vignette_logo_document($row, $connect);
-	if (!$logo) $logo = image_du_document($row);
-	if (!$logo){
-		$f = charger_fonction('vignette','inc');
+	if (!$logo) {
+		$logo = image_du_document($row);
+	}
+	if (!$logo) {
+		$f = charger_fonction('vignette', 'inc');
 		$logo = $f($row['extension'], false);
 	}
 	// si c'est une vignette type doc, la renvoyer direct
-	if (strcmp($logo,_DIR_PLUGINS)==0
-		OR strcmp($logo,_DIR_PLUGINS_DIST)==0
-		OR strcmp($logo,_DIR_RACINE.'prive/')==0)
+	if (strcmp($logo, _DIR_PLUGINS) == 0
+		or strcmp($logo, _DIR_PLUGINS_DIST) == 0
+		or strcmp($logo, _DIR_RACINE . 'prive/') == 0
+	) {
 		return $logo;
+	}
+
 	return get_spip_doc($logo);
 }
 
@@ -347,16 +413,20 @@ function quete_logo_file($row, $connect=NULL) {
  *   serveur
  * @return string
  */
-function quete_logo_document($row, $lien, $align, $mode_logo, $x, $y, $connect=NULL) {
+function quete_logo_document($row, $lien, $align, $mode_logo, $x, $y, $connect = null) {
 	include_spip('inc/documents');
 	$logo = '';
-	if (!in_array($mode_logo,array('icone','apercu')))
+	if (!in_array($mode_logo, array('icone', 'apercu'))) {
 		$logo = vignette_logo_document($row, $connect);
+	}
 	// si on veut explicitement la vignette, ne rien renvoyer si il n'y en a pas
-	if ($mode_logo == 'vignette' AND !$logo)
+	if ($mode_logo == 'vignette' and !$logo) {
 		return '';
-	if ($mode_logo == 'icone')
+	}
+	if ($mode_logo == 'icone') {
 		$row['fichier'] = '';
+	}
+
 	return vignette_automatique($logo, $row, $lien, $x, $y, $align);
 }
 
@@ -369,26 +439,33 @@ function quete_logo_document($row, $lien, $align, $mode_logo, $x, $y, $connect=N
  * @param string $connect
  * @return string
  */
-function vignette_logo_document($row, $connect='')
-{
-	if (!$row['id_vignette']) return '';
+function vignette_logo_document($row, $connect = '') {
+	if (!$row['id_vignette']) {
+		return '';
+	}
 	$fichier = quete_fichier($row['id_vignette'], $connect);
 	if ($connect) {
 		$site = quete_meta('adresse_site', $connect);
 		$dir = quete_meta('dir_img', $connect);
+
 		return "$site/$dir$fichier";
 	}
 	$f = get_spip_doc($fichier);
-	if ($f AND @file_exists($f)) return $f;
-	if ($row['mode'] !== 'vignette') return '';
-	return generer_url_entite($row['id_document'], 'document','','', $connect);
+	if ($f and @file_exists($f)) {
+		return $f;
+	}
+	if ($row['mode'] !== 'vignette') {
+		return '';
+	}
+
+	return generer_url_entite($row['id_document'], 'document', '', '', $connect);
 }
 
 /**
  * Calcul pour savoir si un objet est expose dans le contexte
  * fournit par $reference
- * 
- * http://doc.spip.org/@calcul_exposer
+ *
+ * http://code.spip.net/@calcul_exposer
  *
  * @param int $id
  * @param string $prim
@@ -398,59 +475,67 @@ function vignette_logo_document($row, $connect='')
  * @param string $connect
  * @return bool|string
  */
-function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
+function calcul_exposer($id, $prim, $reference, $parent, $type, $connect = '') {
 	static $exposer = array();
 
 	// Que faut-il exposer ? Tous les elements de $reference
 	// ainsi que leur hierarchie ; on ne fait donc ce calcul
 	// qu'une fois (par squelette) et on conserve le resultat
 	// en static.
-	if (!isset($exposer[$m=md5(serialize($reference))][$prim])) {
-		$principal = isset($reference[$type])?$reference[$type]:
+	if (!isset($exposer[$m = md5(serialize($reference))][$prim])) {
+		$principal = isset($reference[$type]) ? $reference[$type] :
 			// cas de la pagination indecte @xx qui positionne la page avec l'id xx
 			// et donne la reference dynamique @type=xx dans le contexte
-			(isset($reference["@$type"])?$reference["@$type"]:'');
+			(isset($reference["@$type"]) ? $reference["@$type"] : '');
 		// le parent fournit en argument est le parent de $id, pas celui de $principal
 		// il n'est donc pas utile
 		$parent = 0;
 		if (!$principal) { // regarder si un enfant est dans le contexte, auquel cas il expose peut etre le parent courant
-			$enfants = array('id_rubrique'=>array('id_article'),'id_groupe'=>array('id_mot'));
-			if (isset($enfants[$type]))
-				foreach($enfants[$type] as $t)
+			$enfants = array('id_rubrique' => array('id_article'), 'id_groupe' => array('id_mot'));
+			if (isset($enfants[$type])) {
+				foreach ($enfants[$type] as $t) {
 					if (isset($reference[$t])
 						// cas de la reference donnee dynamiquement par la pagination
-						OR isset($reference["@$t"])) {
+						or isset($reference["@$t"])
+					) {
 						$type = $t;
-						$principal = isset($reference[$type])?$reference[$type]:$reference["@$type"];
+						$principal = isset($reference[$type]) ? $reference[$type] : $reference["@$type"];
 						continue;
 					}
+				}
+			}
 		}
 		$exposer[$m][$type] = array();
 		if ($principal) {
-			$principaux = is_array($principal)?$principal:array($principal);
-			foreach($principaux as $principal){
+			$principaux = is_array($principal) ? $principal : array($principal);
+			foreach ($principaux as $principal) {
 				$exposer[$m][$type][$principal] = true;
-				if ($type == 'id_mot'){
+				if ($type == 'id_mot') {
 					if (!$parent) {
-						$parent = sql_getfetsel('id_groupe','spip_mots',"id_mot=" . intval($principal), '','','','',$connect);
+						$parent = sql_getfetsel('id_groupe', 'spip_mots', "id_mot=" . intval($principal), '', '', '', '', $connect);
 					}
-					if ($parent)
+					if ($parent) {
 						$exposer[$m]['id_groupe'][$parent] = true;
-				}
-				else if ($type != 'id_groupe') {
-				  if (!$parent) {
-				  	if ($type == 'id_rubrique')
-				  		$parent = $principal;
-				  	if ($type == 'id_article') {
-						$parent = quete_rubrique($principal,$connect);
-				  	}
-				  }
-				  do { $exposer[$m]['id_rubrique'][$parent] = true; }
-				  while ($parent = quete_parent($parent, $connect));
+					}
+				} else {
+					if ($type != 'id_groupe') {
+						if (!$parent) {
+							if ($type == 'id_rubrique') {
+								$parent = $principal;
+							}
+							if ($type == 'id_article') {
+								$parent = quete_rubrique($principal, $connect);
+							}
+						}
+						do {
+							$exposer[$m]['id_rubrique'][$parent] = true;
+						} while ($parent = quete_parent($parent, $connect));
+					}
 				}
 			}
 		}
 	}
+
 	// And the winner is...
 	return isset($exposer[$m][$prim]) ? isset($exposer[$m][$prim][$id]) : '';
 }
@@ -466,21 +551,22 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
  * @param objetc $iter
  * @return int
  */
-function quete_debut_pagination($primary,$valeur,$pas,$iter){
+function quete_debut_pagination($primary, $valeur, $pas, $iter) {
 	// on ne devrait pas arriver ici si la cle primaire est inexistante
 	// ou composee, mais verifions
-	if (!$primary OR preg_match('/[,\s]/',$primary))
+	if (!$primary or preg_match('/[,\s]/', $primary)) {
 		return 0;
+	}
 
 	$pos = 0;
-	while ($row = $iter->fetch() AND $row[$primary]!=$valeur){
+	while ($row = $iter->fetch() and $row[$primary] != $valeur) {
 		$pos++;
 	}
 	// si on a pas trouve
-	if ($row[$primary]!=$valeur)
+	if ($row[$primary] != $valeur) {
 		return 0;
+	}
 
 	// sinon, calculer le bon numero de page
-	return floor($pos/$pas)*$pas;
+	return floor($pos / $pas) * $pas;
 }
-?>

@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=my
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -33,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'ဤဝက်ဘ်ဆိုက်ကို ပြန်လည်မွမ်းမံပါ',
 	'icone_referencer_nouveau_site' => 'ဝက်ဘ်ဆိုက် အသစ်တခုကို ကိုးကားပါ',
 	'icone_voir_sites_references' => 'ကိုးကားဝက်ဘ်ဆိုက်များကို ပြပါ',
+	'info_1_site' => '၁ ဝက်ဘ်ဆိုက်',
 	'info_a_valider' => '[ထပ်မံအတည်ပြုရန်]',
 	'info_bloquer' => 'အကွက်',
 	'info_bloquer_lien' => 'ဤဆက်သွယ်မှုကို ပိတ်ပင်ရန်',

@@ -3,42 +3,44 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/medias?lang_cible=es
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aucun_audio' => 'No hay pista de sonido',
-	'aucun_document' => 'No hay documento',
-	'aucun_file' => 'No hay documento',
-	'aucun_image' => 'No hay imagen',
-	'aucun_video' => 'No hay secuencia',
+	'aucun_audio' => 'Ninguna pista de sonido',
+	'aucun_document' => 'Ningún documento',
+	'aucun_file' => 'Ningún documento',
+	'aucun_image' => 'Ninguna imagen',
+	'aucun_video' => 'Ninguna secuencia',
 	'aucune_utilisation' => 'Este documento no se utiliza',
-	'aucune_vignette' => 'No hay miniatura',
+	'aucune_vignette' => 'Ninguna miniatura',
 
 	// B
 	'bouton_ajouter_document' => 'Añadir un documento',
 	'bouton_ajouter_image' => 'Añadir una imagen',
 	'bouton_ajouter_image_document' => 'Añadir una imagen o un documento',
 	'bouton_attacher_document' => 'Adjuntar',
-	'bouton_copier_local' => 'Copia en el sitio',
+	'bouton_copier_local' => 'Copiar en el sitio',
 	'bouton_download_depuis' => 'desde:',
-	'bouton_download_local' => 'Mi computadora',
+	'bouton_download_local' => 'Mi ordenador',
 	'bouton_download_par_ftp' => 'el servidor',
 	'bouton_download_par_mediatheque' => 'la mediateca',
-	'bouton_download_sur_le_web' => 'internet',
-	'bouton_enlever_document' => 'Separar',
+	'bouton_download_sur_le_web' => 'Internet',
+	'bouton_enlever_document' => 'Desprender',
 	'bouton_enlever_supprimer_document' => 'Eliminar',
-	'bouton_enlever_supprimer_document_confirmation' => '¿Estás seguro de querer suprimir el documento?',
+	'bouton_enlever_supprimer_document_confirmation' => '¿Está seguro de querer eliminar el documento?',
 	'bouton_modifier_document' => 'Modificar',
-	'bouton_parcourir' => 'Recorrer...',
+	'bouton_parcourir' => 'Examinar...',
 	'bouton_refresh_document' => 'Actualizar el documento',
 	'bouton_remplacer_document' => 'Sustituir este documento',
 	'bouton_remplacer_image' => 'Sustituir esta imagen',
-	'bouton_remplacer_image_document' => 'Sustituye por una imagen o documento',
+	'bouton_remplacer_image_document' => 'Sustituir por una imagen o documento',
 	'bouton_supprimer' => 'Eliminar',
 	'bouton_supprimer_tous_orphelins' => 'Eliminar todos documentos no utilizados',
-	'bouton_supprimer_tous_orphelins_confirmation' => '¿Estás seguro que quieres eliminar @nb@ orfelinos?',
+	'bouton_supprimer_tous_orphelins_confirmation' => '¿Está seguro de querer eliminar @nb@ documentos no utilizados?',
 	'bouton_upload' => 'Subir',
 
 	// D
@@ -57,34 +59,34 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'documents_brises' => 'Rotos',
 	'documents_distants' => 'Remoto',
 	'documents_locaux' => 'Local',
-	'documents_non_publies' => 'Inedito',
+	'documents_non_publies' => 'No publicados',
 	'documents_orphelins' => 'No utilizados',
 	'documents_publies' => 'Publicado',
 	'documents_tous' => 'Todo',
 	'double_clic_inserer_doc' => 'Haga doble clic para insertar este atajo en el texto',
 
 	// E
-	'entree_dimensions' => 'Dimensiones',
-	'entree_titre_document' => 'Título del documento',
-	'entree_titre_image' => 'Título de la imagen',
+	'entree_dimensions' => 'Dimensiones:',
+	'entree_titre_document' => 'Título del documento:',
+	'entree_titre_image' => 'Título de la imagen:',
 	'erreur_aucun_document' => 'Este documento no existe en la mediateca',
 	'erreur_aucun_fichier' => 'No se encontraron archivos',
 	'erreur_chemin_distant' => 'No se encontró el archivo remoto @nom@',
-	'erreur_chemin_ftp' => 'El archivo especificado no se encuentra en el servidor',
+	'erreur_chemin_ftp' => 'El archivo indicado no se encuentra en el servidor',
 	'erreur_copie_fichier' => 'No se puede copiar el archivo @nom@',
-	'erreur_dossier_tmp_manquant' => 'Falta una carpeta temporaria para poder subir los archivos',
-	'erreur_ecriture_fichier' => 'Error durante la escritura del archivo en disco.',
+	'erreur_dossier_tmp_manquant' => 'Falta una carpeta temporal para poder subir los archivos',
+	'erreur_ecriture_fichier' => 'Error durante la escritura del archivo en disco',
 	'erreur_format_fichier_image' => 'El formato de @nom@ no es adecuado para una imagen',
 	'erreur_indiquez_un_fichier' => 'Especifique un archivo!',
 	'erreur_insertion_document_base' => 'Imposible guardar el documento @fichier@ en la base de datos',
-	'erreur_suppression_vignette' => 'Erreur al suprimir la miniatura',
-	'erreur_upload_type_interdit' => '	La descarga de archivos de tipo @nom@ no permitido',
+	'erreur_suppression_vignette' => 'Error al eliminar la miniatura',
+	'erreur_upload_type_interdit' => 'Descarga de archivos de tipo @nom@ no permitida',
 	'erreur_upload_vignette' => 'Error al cargar miniatura @nom@',
 	'erreurs' => '@nb@ errores',
 	'erreurs_voir' => 'Ver los @nb@ errores',
 
 	// F
-	'fichier_distant' => 'Archivo distante',
+	'fichier_distant' => 'Archivo remoto',
 	'fichier_manquant' => 'Falta el archivo',
 	'fichier_modifie' => 'El archivo ha sido modificado. Haga clic en Guardar.',
 	'format_date_incorrect' => 'La fecha o la hora son incorrectas',
@@ -104,24 +106,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_heure' => 'Hora',
 	'info_illustrations' => 'Ilustraciones',
 	'info_image_max_poids' => 'Las imágenes deben obligatoriamente pesar menos de @maxi@ (este archivo pesa @actuel@).',
+	'info_image_max_taille' => 'Las imágenes deben obligatoriamente pesar menos de @maxi@ (este archivo pesa @actuel@).',
 	'info_inclusion_directe' => 'Inclusión directa:',
-	'info_inclusion_vignette' => 'Inclusión de la miniatura',
+	'info_inclusion_vignette' => 'Inclusión de la miniatura:',
 	'info_installer_tous_documents' => 'Instalar todos los documentos',
 	'info_largeur' => 'Ancho',
 	'info_logo_max_taille' => 'Los logos deben obligatoriamente tener un tamaño menor de @maxi@ (el archivo es de @actuel@).',
+	'info_mode' => 'Modo',
 	'info_modifier_document' => 'Editar el documento',
 	'info_portfolio' => 'Portafolio',
-	'info_referencer_doc_distant' => 'Referenciar un documento de Internet:',
+	'info_referencer_doc_distant' => 'Referenciar un documento en Internet:',
 	'info_sans_vignette' => 'Sin miniatura',
 	'info_statut_document' => 'Este documento es:',
+	'info_taille' => 'Tamaño',
 	'info_telecharger' => 'Subir desde tu equipo:',
 	'infos' => 'Información técnica',
 	'item_autoriser_selectionner_date_en_ligne' => 'Permitir la modificación de la fecha de cada documento',
-	'item_non_autoriser_selectionner_date_en_ligne' => 'La fecha de los documentos es la de cuando fueron subidos al sitio web',
+	'item_non_autoriser_selectionner_date_en_ligne' => 'La fecha de los documentos corresponde al momento en que fueron subidos al sitio web',
 
 	// L
 	'label_activer_document_objets' => 'Activar el poder subir archivos para los contenidos:',
-	'label_apercu' => 'Vistazo',
+	'label_apercu' => 'Vista previa',
 	'label_caracteristiques' => 'Características',
 	'label_credits' => 'Créditos',
 	'label_fichier' => 'Archivo',
@@ -140,8 +145,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'miniature_automatique_active' => 'SPIP genera automáticamente una miniatura de la imagen',
 
 	// N
-	'nb_documents_attache_succes' => '@nb@ documentos fueron agregados correctamente',
-	'nb_documents_installe_succes' => '@nb@ los archivos cargados con exito',
+	'nb_documents_attache_succes' => '@nb@ documentos se han añadido correctamente',
+	'nb_documents_installe_succes' => '@nb@ los archivos cargados con éxito',
 
 	// O
 	'objet_document' => 'Documento',
@@ -156,9 +161,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'par_titre' => 'Titulo',
 
 	// T
-	'texte_documents_joints' => 'Puedes activar la interfaz para añadir documentos (archivos de ofimática, imágenes, multimedia, etc.) a los artículos, las secciones y otros. Después, estos archivos
- pueden ser incluídos en el texto,
- o mostrados por separado.',
+	'texte_documents_joints' => 'Puede activar la interfaz para añadir documentos (archivos de ofimática, imágenes, multimedia, etc.) a los artículos, las secciones y otros. Estos archivos pueden ser incluirse después en el texto, o mostrarse por separado.',
 	'texte_documents_joints_2' => 'Este ajuste no impide subir imágenes a los artículos ni la inserción de documentos en los textos de contenido.',
 	'titre_documents_joints' => 'Documentos adjuntos',
 	'titre_page_documents_edit' => 'Modificar el documento: @titre@',
@@ -174,16 +177,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'un_video' => '1 secuencia',
 	'une_utilisation' => '1 utilización',
 	'upload_fichier_zip' => 'Archivo ZIP',
-	'upload_fichier_zip_texte' => 'El archivo que te propones instalar es un archivo Zip.',
+	'upload_fichier_zip_texte' => 'El archivo que propone instalar es un archivo Zip.',
 	'upload_fichier_zip_texte2' => 'Este archivo puede ser:',
-	'upload_info_mode_document' => 'Enviar a el portfolio',
-	'upload_info_mode_image' => 'Eliminar del portfolio',
+	'upload_info_mode_document' => 'Enviar a el portafolio',
+	'upload_info_mode_image' => 'Eliminar del portafolio',
 	'upload_limit' => 'Este archivo es demasiado grande para el servidor; el tamaño máximo autorizado en <i>upload</i> es de @max@.',
 	'upload_zip_conserver' => 'Conservar el archivo tras la extracción',
 	'upload_zip_decompacter' => 'descomprimido y cada elemento que contiene instalado en el sitio. Los archivos que se van a instalar en el sitio son:',
 	'upload_zip_mode_document' => 'Depositar todas las imágenes en el portafolio',
 	'upload_zip_telquel' => 'instalado tal cual, como archivo Zip comprimido;',
-	'upload_zip_titrer' => 'Titular como el nombre de los archivos',
+	'upload_zip_titrer' => 'Titular según el nombre de los archivos',
 
 	// V
 	'verifier_documents_brises' => 'Verificar los archivos que faltan',

@@ -1,23 +1,26 @@
 <?php
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 /**
  * Ajout des scripts de jQuery UI pour les pages publiques et privées
- * 
- * @param: $plugins 
- * @return: $plugins
+ *
+ * @param array $plugins
+ * @return array $plugins
  */
-function jqueryui_jquery_plugins($plugins){
+function jqueryui_jquery_plugins($plugins) {
 
 	// Modules demandés par le pipeline jqueryui_plugins
 	is_array($jqueryui_plugins = pipeline('jqueryui_plugins', array())) || $jqueryui_plugins = array();
+
 	// gestion des dépendances des modules demandés
 	is_array($jqueryui_plugins = jqueryui_dependances($jqueryui_plugins)) || $jqueryui_plugins = array();
 
 	// insérer les scripts nécessaires
 	foreach ($jqueryui_plugins as $val) {
-		$plugins[] = "javascript/ui/".$val.".js";
+		$plugins[] = "javascript/ui/" . $val . ".js";
 	}
 
 	return $plugins;
@@ -25,46 +28,55 @@ function jqueryui_jquery_plugins($plugins){
 
 /**
  * Ajout des css de jQuery UI pour les pages publiques
- * 
- * @param: $flux 
+ *
+ * @param: $flux
  * @return: $flux
  */
 function jqueryui_insert_head_css($flux) {
 	/**
 	 * Doit on ne pas insérer les css (défini depuis un autre plugin) ?
 	 */
-	if(defined('_JQUERYUI_CSS_NON'))
+	if (defined('_JQUERYUI_CSS_NON')) {
 		return $flux;
-	
+	}
+
+
 	// Modules demandés par le pipeline jqueryui_plugins
 	is_array($jqueryui_plugins = pipeline('jqueryui_plugins', array())) || $jqueryui_plugins = array();
 	// gestion des dépendances des modules demandés
 	is_array($jqueryui_plugins = jqueryui_dependances($jqueryui_plugins)) || $jqueryui_plugins = array();
 
 	// ajouter le thème si nécessaire
-	if ($jqueryui_plugins AND !in_array('jquery.ui.theme', $jqueryui_plugins))
-		$jqueryui_plugins[] = 'jquery.ui.theme';
+	if ($jqueryui_plugins and !in_array('jquery.ui.theme', $jqueryui_plugins)) {
+		$jqueryui_plugins[] = 'theme';
+	}
 
 	// les css correspondantes aux plugins
 	$styles = array(
-						'jquery.ui.accordion',
-						'jquery.ui.autocomplete',
-						'jquery.ui.button',
-						'jquery.ui.core',
-						'jquery.ui.datepicker',
-						'jquery.ui.dialog',
-						'jquery.ui.progressbar',
-						'jquery.ui.resizable',
-						'jquery.ui.selectable',
-						'jquery.ui.slider',
-						'jquery.ui.tabs',
-						'jquery.ui.theme'
-						);
+		'accordion',
+		'autocomplete',
+		'button',
+		'core',
+		'datepicker',
+		'dialog',
+		'draggable',
+		'menus',
+		'progressbar',
+		'resizable',
+		'selectable',
+		'selectmenu',
+		'slider',
+		'sortable',
+		'spinner',
+		'tabs',
+		'tooltip',
+		'theme'
+	);
 
 	// insérer les css nécessaires
 	foreach ($jqueryui_plugins as $plugin) {
 		if (in_array($plugin, $styles)) {
-			$flux .= "<link rel='stylesheet' type='text/css' media='all' href='".find_in_path('css/'.$plugin.'.css')."' />\n";
+			$flux .= "<link rel='stylesheet' type='text/css' media='all' href='" . find_in_path('css/ui/' . $plugin . '.css') . "' />\n";
 		}
 	}
 
@@ -73,14 +85,27 @@ function jqueryui_insert_head_css($flux) {
 
 /**
  * Ajout de la css de jQuery UI pour les pages privées
- * 
- * @param: $flux 
+ *
+ * @param: $flux
  * @return: $flux
  */
 function jqueryui_header_prive_css($flux) {
-	
-	$flux .= "<link rel='stylesheet' type='text/css' media='all' href='".find_in_path('css/jquery-ui.css')."' />\n";
-	
+
+	$flux .= "<link rel='stylesheet' type='text/css' media='all' href='" . find_in_path('css/ui/jquery-ui.css') . "' />\n";
+
+	return $flux;
+}
+
+/**
+ * Ajout du script effect de jQuery UI pour les pages privées
+ *
+ * @param: $flux
+ * @return: $flux
+ */
+function jqueryui_header_prive($flux) {
+
+	$flux .= "\n" . '<script src="' . find_in_path('prive/javascript/ui/effect.js') . '" type="text/javascript"></script>';
+
 	return $flux;
 }
 
@@ -90,15 +115,26 @@ function jqueryui_header_prive_css($flux) {
  * @param array $plugins tableau des plugins demandés
  * @return array $plugins tableau des plugins nécessaires ou false
  */
-function jqueryui_dependances($plugins){
+function jqueryui_dependances($plugins) {
+
+	// Gestion des renommages de plugins jqueryui
+	foreach ($plugins as $nb => $val) {
+		if (0 === strpos($val, 'jquery.effects.')) {
+			$plugins[$nb] = str_replace('jquery.effects.', 'jquery.ui.effect-', $val);
+		}
+		if (0 === strpos($val, 'jquery.ui.')) {
+			$plugins[$nb] = str_replace('jquery.ui.', '', $val);
+		}
+	}
 
 	/**
 	 * Gestion des dépendances inter plugins
 	 */
 	$dependance_core = array(
-							'jquery.ui.mouse',
-							'jquery.ui.widget',
-							'jquery.ui.datepicker'
+		'mouse',
+		'widget',
+		'datepicker',
+		'selectmenu'
 	);
 
 	/**
@@ -106,47 +142,70 @@ function jqueryui_dependances($plugins){
 	 * Si un autre plugin est dépendant d'un de ceux là, on ne les ajoute pas
 	 */
 	$dependance_widget = array(
-							'jquery.ui.mouse',
-							'jquery.ui.accordion',
-							'jquery.ui.autocomplete',
-							'jquery.ui.button',
-							'jquery.ui.dialog',
-							'jquery.ui.tabs',
-							'jquery.ui.progressbar'
-							);
+		'accordion',
+		'autocomplete',
+		'button',
+		'dialog',
+		'mouse',
+		'menu',
+		'progressbar',
+		'tabs',
+		'tooltip',
+		'selectmenu'
+	);
 
 	$dependance_mouse = array(
-							'jquery.ui.draggable',
-							'jquery.ui.droppable',
-							'jquery.ui.resizable',
-							'jquery.ui.selectable',
-							'jquery.ui.sortable',
-							'jquery.ui.slider'
-						);
+		'draggable',
+		'droppable',
+		'resizable',
+		'selectable',
+		'slider',
+		'sortable'
+	);
 
 	$dependance_position = array(
-							'jquery.ui.autocomplete',
-							'jquery.ui.dialog',
-							);
+		'autocomplete',
+		'dialog',
+		'menu',
+		'tooltip',
+		'selectmenu'
+	);
+
+	$dependance_button = array(
+		'dialog',
+		'spinner'
+	);
+
+	$dependance_menu = array(
+		'autocomplete',
+		'selectmenu'
+	);
 
 	$dependance_draggable = array(
-							'jquery.ui.droppable'
-							);
+		'droppable'
+	);
+
+	$dependance_resizable = array(
+		'dialog'
+	);
 
 	$dependance_effects = array(
-							'jquery.effects.blind',
-							'jquery.effects.bounce',
-							'jquery.effects.clip',
-							'jquery.effects.drop',
-							'jquery.effects.explode',
-							'jquery.effects.fold',
-							'jquery.effects.highlight',
-							'jquery.effects.pulsate',
-							'jquery.effects.scale',
-							'jquery.effects.shake',
-							'jquery.effects.slide',
-							'jquery.effects.transfer'
-						);
+		'effect-blind',
+		'effect-bounce',
+		'effect-clip',
+		'effect-drop',
+		'effect-explode',
+		'effect-fade',
+		'effect-fold',
+		'effect-highlight',
+		'effect-puff',
+		'effect-pulsate',
+		'effect-scale',
+		'effect-shake',
+		'effect-size',
+		'effect-slide',
+		'effect-transfer'
+	);
 
 	/**
 	 * Vérification des dépendances
@@ -154,6 +213,8 @@ function jqueryui_dependances($plugins){
 	 * Pour éviter le cas où un pipeline demanderait un plugin dans le mauvais sens de la dépendance par exemple
 	 *
 	 * On commence par le bas de l'échelle :
+	 * - button
+	 * - menu
 	 * - draggable
 	 * - position
 	 * - mouse
@@ -161,33 +222,43 @@ function jqueryui_dependances($plugins){
 	 * - core
 	 * - effects
 	 */
-	if(count($intersect = array_intersect($plugins,$dependance_draggable)) > 0){
+	if (count($intersect = array_intersect($plugins, $dependance_resizable)) > 0) {
 		$keys = array_keys($intersect);
-		array_splice($plugins,$keys[0], 0, "jquery.ui.draggable");
+		array_splice($plugins, $keys[0], 0, "resizable");
 	}
-	if(count($intersect = array_intersect($plugins,$dependance_position)) > 0){
+	if (count($intersect = array_intersect($plugins, $dependance_button)) > 0) {
 		$keys = array_keys($intersect);
-		array_splice($plugins,$keys[0], 0, "jquery.ui.position");
+		array_splice($plugins, $keys[0], 0, "button");
 	}
-	if(count($intersect = array_intersect($plugins,$dependance_mouse)) > 0){
+	if (count($intersect = array_intersect($plugins, $dependance_menu)) > 0) {
 		$keys = array_keys($intersect);
-		array_splice($plugins,$keys[0], 0, "jquery.ui.mouse");
+		array_splice($plugins, $keys[0], 0, "menu");
 	}
-	if(count($intersect = array_intersect($plugins,$dependance_widget)) > 0){
+	if (count($intersect = array_intersect($plugins, $dependance_draggable)) > 0) {
 		$keys = array_keys($intersect);
-		array_splice($plugins,$keys[0], 0, "jquery.ui.widget");
+		array_splice($plugins, $keys[0], 0, "draggable");
 	}
-	if(count($intersect = array_intersect($plugins,$dependance_core)) > 0){
+	if (count($intersect = array_intersect($plugins, $dependance_position)) > 0) {
 		$keys = array_keys($intersect);
-		array_splice($plugins,$keys[0], 0, "jquery.ui.core");
+		array_splice($plugins, $keys[0], 0, "position");
 	}
-	if(count($intersect = array_intersect($plugins,$dependance_effects)) > 0){
+	if (count($intersect = array_intersect($plugins, $dependance_mouse)) > 0) {
 		$keys = array_keys($intersect);
-		array_splice($plugins,$keys[0], 0, "jquery.effects.core");
+		array_splice($plugins, $keys[0], 0, "mouse");
+	}
+	if (count($intersect = array_intersect($plugins, $dependance_widget)) > 0) {
+		$keys = array_keys($intersect);
+		array_splice($plugins, $keys[0], 0, "widget");
+	}
+	if (count($intersect = array_intersect($plugins, $dependance_core)) > 0) {
+		$keys = array_keys($intersect);
+		array_splice($plugins, $keys[0], 0, "core");
+	}
+	if (count($intersect = array_intersect($plugins, $dependance_effects)) > 0) {
+		$keys = array_keys($intersect);
+		array_splice($plugins, $keys[0], 0, "effect");
 	}
 	$plugins = array_unique($plugins);
 
 	return $plugins;
 }
-
-?>

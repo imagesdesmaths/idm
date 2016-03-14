@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=en
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -49,20 +51,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_controler_syndication' => 'Publication of syndicated articles',
 	'icone_modifier_site' => 'Edit this site',
 	'icone_referencer_nouveau_site' => 'Reference a new site',
-	'icone_site_reference' => 'Referenced Web sites',
+	'icone_site_reference' => 'Referenced web sites',
 	'icone_supprimer_article' => 'Delete this article',
 	'icone_supprimer_articles' => 'Delete these articles',
 	'icone_valider_article' => 'Confirm this article',
 	'icone_valider_articles' => 'Confirm these articles',
 	'icone_voir_sites_references' => 'Show referenced websites',
+	'info_1_article_syndique' => '1 syndicated article',
+	'info_1_site' => '1 site',
 	'info_1_site_importe' => '1 site has been imported',
 	'info_a_valider' => '[awaiting validation]',
-	'info_aucun_site_importe' => 'No Web site has been imported',
+	'info_aucun_article_syndique' => 'No syndicated articles',
+	'info_aucun_site' => 'No linked sites',
+	'info_aucun_site_importe' => 'No web site has been imported',
 	'info_bloquer' => 'block',
 	'info_bloquer_lien' => 'block this link',
 	'info_derniere_syndication' => 'The last syndication of this site was on',
 	'info_liens_syndiques_1' => 'syndicated links',
 	'info_liens_syndiques_2' => 'awaiting validation.',
+	'info_nb_articles_syndiques' => '@nb@ syndicated articles',
+	'info_nb_sites' => '@nb@ sites',
 	'info_nb_sites_importes' => '@nb@ web sites have been imported',
 	'info_nom_site_2' => '<b>Site name</b> [Required]',
 	'info_panne_site_syndique' => 'Syndicated site unavailable',

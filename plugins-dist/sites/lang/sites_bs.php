@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=bs
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -33,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Izmijeni ovu stranicu',
 	'icone_referencer_nouveau_site' => 'Preporuciti novu stranicu',
 	'icone_voir_sites_references' => 'Pogledaj preporucene stranice',
+	'info_1_site' => '1. stranica',
 	'info_a_valider' => '[za ovjeriti]',
 	'info_bloquer' => 'blokirati',
 	'info_bloquer_lien' => 'blokiraj ovaj link',

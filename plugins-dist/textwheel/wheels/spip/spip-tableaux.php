@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 include_spip('inc/texte');
 
@@ -10,6 +12,6 @@ include_spip('inc/texte');
  * @param array $m
  * @return string
  */
-function replace_tableaux($m){
+function replace_tableaux($m) {
 	return $m[1] . traiter_tableau($m[2]) . $m[3];
 }

@@ -9,16 +9,16 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 
-		<ul>
-			[<li class="editer editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
+		<div class="editer-groupe">
+			[<div class="editer editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
 			 <label for="titreparent"><:sites:label_exporter_id_parent:>[
 			 <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
 			 ]
 			 </label>(#VAL|chercher_rubrique{0,#ENV{id_parent},'site',#ENV{id_secteur},'',0,form_simple})
-			</li>]
+			</div>]
 			#SET{fl,sites}
 			#SET{name,exporter_publie_seulement}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
 				#SET{val,1}
@@ -26,9 +26,9 @@
 					<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
 					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 				</div>
-			</li>
+			</div>
 			#SET{name,exporter_avec_mots_cles}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+			<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
 				#SET{val,1}
@@ -36,8 +36,8 @@
 					<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
 					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 				</div>
-			</li>
-	  </ul>
+			</div>
+	  </div>
 
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->

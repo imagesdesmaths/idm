@@ -3,12 +3,14 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/svp?lang_cible=de
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'action_patienter' => 'Die AKtionen werden ausgeführt. Bitte warten …',
+	'action_patienter' => 'Die Aktionen werden ausgeführt. Bitte warten …',
 	'actions_a_faire' => 'Auszuführende Aktionen',
 	'actions_demandees' => 'Angeforderte Aktionen:',
 	'actions_en_erreur' => 'Aufgetretene Fehler',
@@ -34,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_actualiser_tout_depot' => 'Pakete aller Softwaredepots aktualisieren',
 	'bulle_afficher_xml_plugin' => 'Inhalt der XML-Date des Plugins',
 	'bulle_ajouter_spipzone' => 'Das Softwaredepot SPIP-Zone hinzufügen',
+	'bulle_aller_demonstration' => 'Demoseite öffnen',
 	'bulle_aller_depot' => 'Seite des Softwaredepots öffnen',
 	'bulle_aller_documentation' => 'Dokumentationsseite öffnen',
 	'bulle_aller_plugin' => 'Seite des Plugins öffnen',
@@ -46,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cacher_les_plugins_incompatibles' => 'Inkompatible Plugins ausblenden',
 	'categorie_aucune' => 'Ohne Kategorie',
 	'categorie_auteur' => 'Authentifikation, Autor, Autorisation',
-	'categorie_communication' => 'Kommunication, Interactivität, Nachrichtensysteme',
+	'categorie_communication' => 'Kommunication, Interaktivität, Nachrichtensysteme',
 	'categorie_date' => 'Termine, Kalender, Datum',
 	'categorie_divers' => 'Neue Objekte, externe Services',
 	'categorie_edition' => 'Textbearbeitung, Drucken, Redaktion',
@@ -64,10 +67,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_activer_pas_a_pas_explication' => 'In diesem Modus wird nicht nur eine Zusammenfassung nach Abschluss aller Aktionen sondern das Ergebnis einzeln nach jeder Aktion angezeigt.',
 	'config_activer_runtime' => 'Runtime-Modus aktivieren?',
 	'config_activer_runtime_explication' => 'Im Runtime-Modus (oui) werden nur mit der gerade ausgeführten Version von SPIP kompatible Plugins geladen. Diese Einstellung empfiehlt sich so gut wie immer. Im abgeschalteten Runtime-Modus (non) werden unabhängig von der jeweiligen SPIP-Version alle Plugins eines Depots geladen. Die einzige sinnvolle Anwendung dieser Einstellung besteht darin, mit SVP alle vorhandenen Plugins anzuzeigen, wie im Fall der Website SPIP-Plugins (plugins.spip.net).',
-	'config_autoriser_activer_paquets_obsoletes' => 'Aktivierung überflüssiger Pakete erlauben?',
-	'config_autoriser_activer_paquets_obsoletes_explication' => 'Überflüssige Pakete sind lokal vorhandene, die älter als gleichartige lokal installierte sind. Ob ein Paket überflüssig ist, wird anhand seines Status (stabil, test, dev) und aufgrund seiner Version ermittelt. Aktivieren sie diese Option, falls sie solche veralteten Pakete aktivieren möchten.',
+	'config_autoriser_activer_paquets_obsoletes' => 'Aktivierung veralteter Pakete erlauben?',
+	'config_autoriser_activer_paquets_obsoletes_explication' => 'Veraltete Pakete sind lokal vorhandene, die älter als gleichartige lokal installierte sind. Ob ein Paket veraltet ist, wird anhand seines Status (stabil, test, dev) und aufgrund seiner Version ermittelt. Aktivieren sie diese Option, falls sie solche veralteten Pakete aktivieren möchten.',
 	'config_depot_editable' => 'Bearbeitung der Depots erlauben?',
 	'config_depot_editable_explication' => 'Hiermit können die Informationen über ein Depot bearbeitet werden und dem Depot z.B. Schlagworte zugeordnet werden. Diese Option sollte in der Regel ohne Nutzen sein! Die Einstellung «non» sollte beibehalten werden!',
+	'confirmer_desinstaller' => 'Achtung, das Entfernen eines Plugins <b>löscht</b> alle seine Daten aus der Datenbank und kann nicht rückgängig gemacht werden.<br /> Wenn sie sich nicht sicher sind, wählen sie <i>Deaktivieren</i>.',
 	'confirmer_telecharger_dans' => 'Das Plugin wird in das vorhandene Verzeichnis (@dir@) geladen.
 	Der Inhalt dieses Verzeichnis wird dabei überschrieben.
 	Eine Kopie des Verzeichnisinhalts wird in « @dir_backup@ » angelegt.
@@ -75,6 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_actions_non_traitees' => 'Manche Aktionen konnten nicht ausgefühert werden. Die Ursache kann entweder ein Ausführungsfehler sein, oder diese Seite wurde neu geladen, währen die Aktionen noch nicht abgeschlossen waren. Die Aktionen wurden von @auteur@ am @date@ ausgelöst.',
+	'erreur_auth_plugins_ajouter_lib' => 'Sie haben nicht die erforderlichen Rechte, um eine Bibliothek hinzuzufügen.',
 	'erreur_dir_dib_ecriture' => 'In das Verzeichnis für Bibliotheken @dir@ kann nicht geschrieben werden. Bibliotheken können nicht geladen werden!',
 	'erreur_dir_dib_indefini' => 'Das Verzeichnis _DIR_LIB wurde nicht definiert. Bibliotheken können dadurch nicht geladen werden !',
 	'erreur_dir_plugins_auto' => 'Das Verzeichnis « plugins/auto », in das Pakete geladen werden,
@@ -109,11 +114,11 @@ existiert nicht oder hat keinen Schreibrechte.
 	'info_admin_plugin_verrou_tous' => 'Diese Seite zeigt alle Plugins der Website an.',
 	'info_admin_plugin_verrouille' => 'Diese Seite zeigt alle aktiven und verriegelten  (im Verzeichnis <code>@dir_plugins_dist@</code> gespeicherten) Plugins.
 	Wenn sie sie deaktivieren möchten, wenden sie sich bitte an den Webmaster,
-	oder ziehen sie die Informationen in <a href="http://programmer.spip.org/repertoire_plugins_dist">zu Rate.</a>.', # MODIF
+	oder ziehen sie die Informationen in <a href="http://programmer.spip.net/repertoire_plugins_dist">zu Rate.</a>.',
 	'info_adresse_spipzone' => 'SPIP-Zone - Plugins',
 	'info_ajouter_depot' => 'Wenn sie Depots in ihre Datenbank eintragen, können sie auf die Informationen über alle dort gespeicherten Pakete zugreifen und gezielt in den im Depot vorhandenen Paketen suchen.<br />Ein Depot wird durch eine XML-Datei beschrieben, die Informationen über das Depot selbst und die in ihm gespeicherten Pakete enthält.',
 	'info_aucun_depot' => 'Kein Depot',
-	'info_aucun_depot_ajoute' => 'Kein Depot verfügbar!<br /> Verwenden sie das Formular, um das Depot «SPIP-Zone - Plugins» in die Datenbank einzutragen. Sein URL steht bereits im Formular, sie können aber auch ein anderes Depot ihrer Wahl eintragen.',
+	'info_aucun_depot_ajoute' => 'Kein Depot verfügbar!<br /> Verwenden sie das Formular, um das Depot «SPIP-Zone - Plugins» in die Datenbank einzutragen. Sein URL steht bereits im Formular, sie können aber auch ein anderes Depot ihrer Wahl eintragen. Das Depot wird zunächst analysiert. Bitte warten sie solange.',
 	'info_aucun_paquet' => 'Kein Paket',
 	'info_aucun_plugin' => 'Kein Plugin',
 	'info_boite_charger_plugin' => '<strong>Diese Seite ist nur für den Webmaster der Site zugänglich.</strong><p>Sie ermöglicht ihnen, in den eingetragenen Depots nach Plugins zu suchen und diese auf ihrem Server zu installieren.</p>',
@@ -172,12 +177,14 @@ existiert nicht oder hat keinen Schreibrechte.
 	'label_xml_plugin' => 'XML',
 	'legende_installer_plugins' => 'Plugins installieren',
 	'legende_rechercher_plugins' => 'Plugins suchen',
+	'lien_demo' => 'Demonstration',
+	'lien_documentation' => 'Dokumentation',
 
 	// M
 	'message_action_finale_get_fail' => 'Das Plugin « @plugin@ » (Version: @version@) konnte nicht geladen werden.',
 	'message_action_finale_get_ok' => 'Das Plugin « @plugin@ » (Version: @version@) wurde erfolgreich übertragen.',
 	'message_action_finale_getlib_fail' => 'Die Installation der Bibliothek « @plugin@ » ist fehlgeschlagen.',
-	'message_action_finale_getlib_ok' => 'Die Biiliothek « @plugin@ » wurde erfolgreich installiert.',
+	'message_action_finale_getlib_ok' => 'Die Bibliothek « @plugin@ » wurde erfolgreich installiert.',
 	'message_action_finale_geton_fail' => 'Download oder Aktivierung des Plugins « @plugin@ » (Version: @version@) waren nicht erfolgreich.',
 	'message_action_finale_geton_ok' => 'Download und Aktivierung des Plugins « @plugin@ » (version : @version@) wurden erfolgreich durchgeführt.',
 	'message_action_finale_install_fail' => 'Die Installation des Plugins « @plugin@ » (Version: @version@) ist fehlgeschlagen.',
@@ -220,8 +227,10 @@ existiert nicht oder hat keinen Schreibrechte.
 	'message_nok_maj_introuvable' => 'Aktualisierung des Plugins @plugin@ nicht auffindbar',
 	'message_nok_plugin_inexistant' => 'Das angeforderte Plugin (@plugin@) existiert nicht.',
 	'message_nok_sql_insert_depot' => 'SQL-Fehler beim Hinzufügen des Depots @objet@',
+	'message_nok_url_archive' => 'Die URL des Archivs ist ungültig',
 	'message_nok_url_depot_incorrecte' => 'Die Adresse « @url@ » ist falsch.',
 	'message_nok_xml_non_conforme' => 'Formatfehler der XML-Datei « @fichier@ » zur Beschreibung des Depots.',
+	'message_nok_xml_non_recupere' => 'Die XML-Datei « @fichier@ » konnte nicht wieder hergestellt werden',
 	'message_ok_aucun_plugin_trouve' => 'Diesen Kriterien entsprcht kein Plugin.',
 	'message_ok_depot_ajoute' => 'Das Depot « @url@ » wurde hinzugefügt.',
 	'message_ok_plugins_trouves' => 'Die Plugin(s) @nb_plugins@ entsprechen den Kriterien (@tri@). Bitte wählen sie, welche sie auf ihren Server laden und aktivieren möchten.',

@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/mots?lang_cible=nl
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -39,20 +41,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <b>@titre_mot@</b> (@type_mot@) te verwijderen. Dit trefwoord is gekoppeld aan 
 <b>@texte_lie@</b>, je dient je beslissing te bevestigen:',
 	'info_groupe_important' => 'Belangrijke groep',
-	'info_modifier_mot' => 'Het sleutelwoord wijzigen :',
+	'info_modifier_mot' => 'Wijzigen van trefwoord:',
 	'info_mots_cles' => 'Trefwoorden',
 	'info_mots_cles_association' => 'Trefwoorden uit deze groep kunnen verbonden worden met:',
-	'info_nb_groupe_mots' => '@nb@ groepen van woorden',
+	'info_nb_groupe_mots' => '@nb@ groepen van trefwoorden',
 	'info_oui_suppression_mot_cle' => 'Ik wil dit trefwoord definitief verwijderen.',
 	'info_question_mots_cles' => 'Wil je gebruik maken van trefwoorden op je site?',
 	'info_qui_attribue_mot_cle' => 'De woorden uit deze groep kunnen toegekend worden door:',
 	'info_remplacer_mot' => '"@titre@" te vervangen',
-	'info_retirer_mot' => 'Verwijder het woord',
+	'info_retirer_mot' => 'Verwijder dit trefwoord',
 	'info_retirer_mots' => 'Alle trefwoorden intrekken',
 	'info_rubriques_liees_mot' => 'Rubrieken gekoppeld aan dit trefwoord',
 	'info_selection_un_seul_mot_cle' => 'Men kan slechts <b>één enkel trefwoord</b> tegelijk kiezen uit deze groep.',
-	'info_supprimer_mot' => 'dit woord verwijderen',
-	'info_titre_mot_cle' => 'Name of titel voor slautelwoord',
+	'info_supprimer_mot' => 'dit trefwoord verwijderen',
+	'info_titre_mot_cle' => 'Name of titel voor trefwoord',
 	'info_un_mot' => 'Een enkel trefwoord',
 	'item_ajout_mots_cles' => 'Gebruik van trefwoorden toestaan op de forums',
 	'item_non_ajout_mots_cles' => 'Gebruik van trefwoorden in de forums niet toestaan',
@@ -62,14 +64,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_utiliser_mots_cles' => 'Trefwoorden gebruiken',
 
 	// L
-	'lien_ajouter_mot' => 'Voeg dit trefwoord',
+	'lien_ajouter_mot' => 'Voeg dit trefwoord toe',
 	'logo_groupe' => 'LOGO VOOR DEZE GROEP',
 	'logo_mot_cle' => 'LOGO VAN HET TREFWOORD',
 
 	// T
-	'texte_config_groupe_mots_cles' => 'Wilt u de geavanceerde configuratie van de sleutelwoorden activeren,
-   door mede te delen bijvoorbeeld dat men een enig woord
- kan selecteren   per groep, dat een groep belangrijk is... ?',
+	'texte_config_groupe_mots_cles' => 'Wilt u de geavanceerde configuratie van de trefwoorden activeren,
+ door bijvoorbeeld aan te geven dat slechts een trefwoord per groep kan worden geselecteerd, of dat een groep belangrijk is?',
 	'texte_mots_cles' => 'Met behulp van trefwoorden kan je thematische verbanden leggen tussen je artikels,
  onafhankelijk van hun plaats in de rubrieken. Zo kan je
  de navigatie op je site verbeteren maar ook de weergave
@@ -78,13 +79,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_nouveau_mot' => 'Nieuw trefwoord',
 	'titre_config_groupe_mots_cles' => 'Configuratie van de groepen trefwoorden',
 	'titre_gauche_mots_edit' => 'WOORD NUMMER:',
-	'titre_groupe_mots' => 'Groep van trefwoord',
-	'titre_groupe_mots_numero' => 'GROEP WOORDEN NUMBER :',
+	'titre_groupe_mots' => 'Groep van trefwoorden',
+	'titre_groupe_mots_numero' => 'GROEPNUMMER:',
 	'titre_groupes_mots' => 'Groepen van trefwoorden',
 	'titre_mots_cles_dans_forum' => 'Trefwoorden in de forums van de publieke site',
 	'titre_mots_tous' => 'Trefwoorden',
 	'titre_nouveau_groupe' => 'Nieuwe groep',
-	'titre_objets_lies_mot' => 'Gerelateerd aan dit trefwoord :',
+	'titre_objets_lies_mot' => 'Gerelateerd aan dit trefwoord:',
 	'titre_page_mots_tous' => 'Trefwoorden'
 );
 

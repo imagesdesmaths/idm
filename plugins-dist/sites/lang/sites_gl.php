@@ -3,7 +3,9 @@
 // extrait automatiquement de http://trad.spip.net/tradlang_module/sites?lang_cible=gl
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -33,12 +35,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_site' => 'Modificar este web',
 	'icone_referencer_nouveau_site' => 'Referencia dun novo web',
 	'icone_voir_sites_references' => 'Ver os webs referidos',
+	'info_1_article_syndique' => '1 artigo sindicado',
+	'info_1_site' => '1 web',
 	'info_a_valider' => '[a validar]',
+	'info_aucun_article_syndique' => 'Ningún artigo sindicado',
+	'info_aucun_site' => 'Ningún sitio',
 	'info_bloquer' => 'bloquear',
 	'info_bloquer_lien' => 'Bloquear esta ligazón',
 	'info_derniere_syndication' => 'A última afiliación deste web fíxose o',
 	'info_liens_syndiques_1' => 'ligazón afiliada',
 	'info_liens_syndiques_2' => 'están agardando pola validación.',
+	'info_nb_articles_syndiques' => '@nb@ artigos sindicados',
+	'info_nb_sites' => '@nb@ sitios',
 	'info_nom_site_2' => '<b>Nome do web</b>[Obrigatorio]',
 	'info_panne_site_syndique' => 'Web afiliado caído',
 	'info_probleme_grave' => 'problema de',

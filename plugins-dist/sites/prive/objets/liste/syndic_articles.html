@@ -8,7 +8,7 @@
 #ANCRE_PAGINATION
 <div class="liste-objets syndic_articles">
 <table class='spip liste'>
-[<caption><span class="image_loading"></span><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_article_syndique,info_nb_articles_syndiques}})</strong></caption>]
+[<caption><span class="image_loading"></span><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{sites:info_1_article_syndique,sites:info_nb_articles_syndiques}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
@@ -25,7 +25,8 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#STATUT|puce_statut{syndic_article})]</td>
 			<td class='titre principale'>[<a
-					href="(#URL_ARTICLE)"
+					href="(#URL_ARTICLE)"[
+					(#LANG|=={#ENV{lang}}|non)hreflang="#LANG"]
 						title="<:info_numero_abbreviation|attribut_html:> #ID_SYNDIC_ARTICLE">#SET{a,'</a>'}]#TITRE[(#GET{a})]
 				<span class="auteurs">([(#LESAUTEURS), ][(#DATE|affdate_court)])</span>
 				[(#TAGS|afficher_enclosures)]
