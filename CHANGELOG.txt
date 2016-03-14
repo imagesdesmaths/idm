@@ -1,0 +1,71 @@
+
+SPIP-Core spip-3.1.0 -> spip-3.1.1  10 mars 2016
+-------------------------------------------------------------
+
+r22715 | cedric    |  (jeu. 07 janv. 2016) | utiliser une URL au protocole implicite pour la css admin
+r22716 | cedric    |  (jeu. 07 janv. 2016) | utiliser une URL au protocole implicite pour la css admin (bis)
+r22720 | cedric    |  (lun. 11 janv. 2016) | Report de r22719 : Perf issue sur les filtres images appliques sur des images distantes en 404 :[(#VAL{http://example.org/fichier_inexistant.png}|image_reduire{64,64})] provoquait 3 operations file_exists sur http://example.org/fichier_inexistant.png.srcque PHP interprete en faisant 3 hits http sur le fichier sauf si PHP bloque ce type d'operation.
+r22723 | cedric    |  (mar. 12 janv. 2016) | Si PHP<5.2.3 alors les fonction htmlspecialchars et htmlentities n'acceptent pas de 4e argument double_encore
+r22724 | cedric    |  (mar. 12 janv. 2016) | coding rules
+r22732 | erational |  (ven. 22 janv. 2016) | report de r22731
+r22736 | marcimat  |  (ven. 29 janv. 2016) | Report de r22735 : extra dans le formulaire dater non conditionné par editable.
+r22737 | rasta     |  (sam. 30 janv. 2016) | Bug dans le sélecteur générique, afficher toutes les rubriques dans le chemin, et utiliser une fonction qui existe…
+r22768 | marcimat  |  (mar. 02 févr. 2016) | Notice PHP en moins.
+r22770 | marcimat  |  (mar. 02 févr. 2016) | Notices PHP en moins à l'installation en mutualisation et évacuation de vieux codes d'hébergeurs disparus.
+r22778 | b_b       |  (mar. 02 févr. 2016) | report de r22734 : jQuery 1.12.0 dans SPIP
+r22780 | b_b       |  (mar. 02 févr. 2016) | report de r22779 : réparer le lien d'accès rapide vers la recherche (cf #3634)
+r22784 | b_b       |  (mar. 02 févr. 2016) | report de r22783 : réparer l'affichage des rubriques attachées à l'auteur dans le formulaire editer_auteur ref #3640
+r22786 | b_b       |  (mar. 02 févr. 2016) | report de r22782 + r22785 : styles des choix pour le formulaire configurer_multilinguisme
+r22791 | rasta     |  (jeu. 04 févr. 2016) | Il manquait plein de attribut_html, qui faisait que ça pétait notamment avec Orthotypo qui ajoute des balises exposants et caps.
+r22794 | gilles    |  (ven. 05 févr. 2016) | Avant de d'utiliser un readdir(), il faut toujours verifier que le résultat de la fonction opendir() est une ressource valide.Problème vu sur http://forum.spip.net/fr_263593.html#forum263596
+r22798 | b_b       |  (ven. 05 févr. 2016) | report de r22797 / retour sur r20228 : réparer l'init de la meta pcre_u, fix #3656
+r22799 | b_b       |  (ven. 05 févr. 2016) | report de r22788 / réparer taille_du_cache() suite à r21067
+r22800 | b_b       |  (ven. 05 févr. 2016) | report de r22796 / il manquait la prise en compte de "?" dans l'analyse de la DTD
+r22802 | james     |  (sam. 06 févr. 2016) | report #22801: éviter des warning dans les logs (Camille Sauvage)
+r22809 | b_b       |  (dim. 07 févr. 2016) | suivre neo-dist, cf http://zone.spip.org/trac/spip-zone/changeset/94998
+r22811 | marcimat  |  (lun. 08 févr. 2016) | Report partiel de r22810 : notice php en moins sur le calcul de la taille du cache.
+r22815 | james     |  (mar. 09 févr. 2016) | report r22814
+r22819 | james     |  (mar. 09 févr. 2016) | report r22818
+r22823 | marcimat  |  (mer. 10 févr. 2016) | Report de r22822 : Le cnx doit être de la même forme dans tous les cas de retour, avec ou sans le login trouvé dans le formulaire de login. Clos https://core.spip.net/issues/3690 (Stéph R).
+r22828 | b_b       |  (jeu. 11 févr. 2016) | report de r22826 et r22827
+r22832 | marcimat  |  (dim. 14 févr. 2016) | Report de r22831 : Éviter une erreur sur opendir lors d'une mise à jour lorsque le cache gd2 n'est pas présent (MiKaël Navarro)https://core.spip.net/issues/3697
+r22835 | marcimat  |  (dim. 14 févr. 2016) | Report de r22833 : Coquille sur un log.
+r22842 | cedric    |  (jeu. 18 févr. 2016) | Report de r22840 : Catcher les erreurs de eval(), ce qui permet de generer une erreur squelette propre avec le nom du squelette qui a genere l'erreur, information qui manquait cruellement. Les utilisatateurs non admin ne voient pas l'erreur, et on genere un commentaire html a la place du resultat
+r22843 | cedric    |  (jeu. 18 févr. 2016) | Report de r22841 : Suite de r22840 : on expose le code PHP du squelette qui fait l'erreur d'eval, avec numerotation des
+r22851 | b_b       |  (dim. 21 févr. 2016) | report de r22850
+r22854 | b_b       |  (lun. 22 févr. 2016) | report de r22853
+r22856 | erational |  (mar. 23 févr. 2016) | report de r22855
+r22857 | marcimat  |  (mer. 24 févr. 2016) | PHPDoc du filtre |setenv
+r22861 | b_b       |  (mer. 24 févr. 2016) | report de r22860 / Fix #3153 : retour sur r21600 qui cassait le fix r21306
+r22864 | b_b       |  (ven. 26 févr. 2016) | report de r22863Fix #3660 : éviter de retomber sur _MEMORY_LIMIT_MIN quand memory_limit est défini à -1 dans php.ini
+r22876 | rasta     |  (ven. 04 mars 2016) | Report de #22875 : Déplantage de la balise #RANG quand on a déclaré autre chose qu'un simple champ pour le titre (par exemple une expression avec fonctions et virgules).On garde exactement le même fonctionnement qu'avant avec un "AS titre_rang" rajouté. Mais on fait deux tests au lieu d'un seul :- d'abord on cherche le titre en se disant que "lang" est défini AVANT- et si on ne trouve pas, là on prend depuis le débutMais dans les deux cas, vu que c'est séparé en deux, et qu'on cherche "lang" explicitement et pas une virgule toute seule : on peut donc prendre tout caractère pour le titre, y compris les virgules qu'il y aurait dans des fonctions.Cela gère donc bien tous les cas, enfin de toute façon plus de cas qu'avant.
+r22882 | cedric    |  (mar. 08 mars 2016) | Bugfix sur fonction de compatibilite recuperer_lapage + recuperer_url ne force un POST que si datas contient bien des donnees et pas juste un header
+r22884 | rasta     |  (mar. 08 mars 2016) | Échapper tous les apostrophes (enfin quote simple) dans les appels javascript.
+r22887 | rasta     |  (mar. 08 mars 2016) | Bon, pour le javascript, on fait un plus brutal "textebrut" avant, là au moins ça marche.
+r22890 | rasta     |  (mar. 08 mars 2016) | attr => val, refait marcher le choix rapide
+r22892 | rasta     |  (mar. 08 mars 2016) | À partir de 3.1 des styles ont changé et pour "choix" ça masque le lien Fermer/ouvrir pour les sélecteurs. On enlève cette classe.
+r22894 | rasta     |  (mar. 08 mars 2016) | On uniformise avec le sélecteur générique.
+r22900 | cedric    |  (jeu. 10 mars 2016) | Report de r22899 : Mise a jour de la liste des bots : Moreover|FunWebProducts|facebook|hootsuite|MetaURI|flipboard sont tous des bots
+r22902 | cedric    |  (jeu. 10 mars 2016) | Report de r22872 : Fix #3680 : on change le format du contexte ajax pour pouvoir verifier la cle de signature du contexte avant de deserializer, ce qui permet de faire confiance au contenu
+r22907 | cedric    |  (jeu. 10 mars 2016) | un var_isbot pour permettre le monitoring par robot (monitoring de la disponibilite user/robot)+ mise a jour de la liste des robots
+r22908 | cedric    |  (jeu. 10 mars 2016) | un filtre filtrer_entites
+
+SPIP-plugins-dist spip-3.1.0 -> spip-3.1.1  10 mars 2016
+-------------------------------------------------------------
+
+r94481 | Francky   |  (mer. 06 janv. 2016) | les plug ne sont que pour spip 3.1, donc les utilises doivent avoir une version qui fonctionne en 3.1, j'ai donc fait un up en prenant la première dispo quand il s'agit d'utilise qui ne sont pas dans les plugin dista savoir pour "memoization" http://zone.spip.org/trac/spip-zone/changeset/86034/_plugins_/memoizationet pour yaml:http://zone.spip.org/trac/spip-zone/changeset/85882/_plugins_/yaml
+r94901 | rasta     |  (mer. 03 févr. 2016) | Solidification du fullscreen et de la prévisu : le code appelait des sélecteurs sur toute la page et non DANS le champ uniquement en question. Au passage ça ne marchait pas non plus pour la prévisu habituelle : là aussi ça buguait si plusieurs champs en avait. Et re au passage "mark" est déjà un objet jQuery donc pas besoin de le remettre dans un $().Fullscreen et prévisu fonctionnent désormais pour plusieurs champs dans la même page.Reste que la sortie de Fullscreen oublie de remettre le champ à la taille qu'il avait (ou à une taille correspondant à son contenu) : ça laisse la hauteur d'écran du fullscreen ! Du coup on se retrouve avec des champs immenses à chaque fois.
+r94998 | b_b       |  (dim. 07 févr. 2016) | neo-dist => distcf http://article.gmane.org/gmane.comp.web.spip.zone/39874
+r94999 | b_b       |  (dim. 07 févr. 2016) | syncro avec la dist du trunkcf http://article.gmane.org/gmane.comp.web.spip.zone/39874
+r95077 | b_b       |  (mer. 10 févr. 2016) | report de r95076 : réparer les liens tout cocher, tout décocher... ​https://core.spip.net/issues/3687utiliser prop et non attr, compat jQuery > 1.9 cf ​https://core.spip.net/issues/3439
+r95129 | marcimat  |  (dim. 14 févr. 2016) | Report de r95128 : pas de notion de 'compressed_size' dans pcltar : notice php en moins.
+r95130 | marcimat  |  (dim. 14 févr. 2016) | Report de r95126 et r95127 sur la vieille lib PCLTar relatifs à PHP7 et aux notices PHP.
+r95236 | b_b       |  (ven. 19 févr. 2016) | report de r95234
+r95274 | b_b       |  (sam. 20 févr. 2016) | report de r95266
+r95345 | b_b       |  (lun. 22 févr. 2016) | report de r95344
+r95474 | b_b       |  (jeu. 25 févr. 2016) | report de r95473 / retour sur r73191 : code de debug certainement envoyé par erreur
+r95498 | b_b       |  (jeu. 25 févr. 2016) | report de r95497 / ménage, pas de code pour un plugin dans la dist
+r95517 | b_b       |  (ven. 26 févr. 2016) | report de r95317
+r95528 | b_b       |  (ven. 26 févr. 2016) | report de r95527
+r95591 | b_b       |  (dim. 28 févr. 2016) | report de r95586 et r95590
+r95777 | cedric    |  (sam. 05 mars 2016) | Eviter une notice
