@@ -37,7 +37,7 @@
                         #SET{lus, #GET{lus}|plus{1}}
                         #SET{non_lus, #GET{non_lus}|moins{1}}
                     </BOUCLE_lus>
-                    <BOUCLE_commentes(spip_idm_relecture) {id_article} {action=read} {id_auteur=#_relecteurstotal:ID_AUTEUR} {fusion id_auteur}>
+                    <BOUCLE_commentes(spip_idm_relecture) {id_article} {action=comment} {id_auteur=#_relecteurstotal:ID_AUTEUR} {fusion id_auteur}>
                         #SET{commentes, #GET{commentes}|plus{1}}
                     </BOUCLE_commentes>
                 </BOUCLE_relecteurstotal>
