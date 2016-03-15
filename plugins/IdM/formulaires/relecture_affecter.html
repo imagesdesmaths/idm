@@ -115,7 +115,7 @@
                     <table class="liste-relecteurs-affectes sortable" style="font-size : 90%">
                         <thead><tr><th></th><th></th><th></th><th></th></tr></thead>
                         <tbody>
-                            <BOUCLE_relecteursaffectes(spip_idm_relecture spip_auteurs) {spip_idm_relecture.id_article=#ID_ARTICLE} {action=affected} {par nom} {fusion id_auteur}>
+                            <BOUCLE_relecteursaffectes(spip_idm_relecture) {spip_idm_relecture.id_auteur=spip_auteurs.id_auteur}{spip_idm_relecture.id_article=#ID_ARTICLE} {action=affected} {fusion id_auteur}>
                             #SET{affectes, 0}
                             #SET{lus, 0}
                             #SET{non_lus, 0}
