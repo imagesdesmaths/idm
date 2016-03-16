@@ -7,6 +7,9 @@ is full of SPIP and PHP and geek stuff).
 
 * Features added to SPIP
 
+  #+ATTR_HTML: title="Join the chat at https://gitter.im/imagesdesmaths/idm"
+  [[https://gitter.im/imagesdesmaths/idm?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge][file:https://badges.gitter.im/imagesdesmaths/idm.svg]]
+
 ** Visible
 
 *** Refereeing support
