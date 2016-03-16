@@ -6,10 +6,19 @@
     <B_articles>
     #ANCRE_PAGINATION
 
-    <div id="content" class="block-left">
+    <div id="content" class="article-full block-left">
 
-        <h1>#TITRE </h1>
-        [<p>(#TEXTE)</p><br>]
+     
+      <h1>#TITRE </h1>
+
+      #SET{image_url, IMG/#LOGO_RUBRIQUE|fichier}
+      [<div class="image"[ style="background:(#GET{image_url}|color_dominant);border-color:[(#GET{image_url}|color_dominant)]"]>
+            (#GET{image_url}|image_reduire{0,270})
+        </div>]
+    
+
+          
+       [<p> (#TEXTE) <p></br>]
 
         <ul>
             <BOUCLE_articles(ARTICLES) {par date} {id_rubrique} {age >= 0} {inverse} {pagination}>
