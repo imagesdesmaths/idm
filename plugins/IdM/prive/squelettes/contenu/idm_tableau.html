@@ -6,12 +6,12 @@
     <div class="hd titrem">
       <h2>
         <:idm:articles_edited:>
-        <span class="readmore button-white" data-alt-text="Masquer"><a href="#" onclick="toggle_visibility('tableau1');">Afficher</a></span>
+        <span class="readmore button-white" data-alt-text="Masquer">Afficher</span>
         <span class="counter">#TOTAL_BOUCLE article[(#TOTAL_BOUCLE|>{1}|?{s})]</span>
       </h2>
     </div>
 
-    <div id="tableau1" style="display:none;" class="bd closable-content">
+    <div class="bd closable-content">
       <table>
         <thead>
           <tr>
@@ -49,12 +49,12 @@
     <div class="hd titrem">
       <h2>
         <:idm:idee_all:>
-        <span class="readmore button-white" data-alt-text="Masquer"><a href="#" onclick="toggle_visibility('tableau2');">Afficher</a></span>
+        <span class="readmore button-white" data-alt-text="Masquer">Afficher</span>
         <span class="counter">#TOTAL_BOUCLE article[(#TOTAL_BOUCLE|>{1}|?{s})]</span>
       </h2>
     </div>
 
-    <div id="tableau2" style="display:none;" class="bd closable-content">
+    <div class="bd closable-content">
       <table>
         <thead>
           <tr>
@@ -93,12 +93,12 @@
     <div class="hd titrem">
       <h2>
         <:idm:idee_mine:>
-        <span class="readmore button-white" data-alt-text="Masquer"><a href="#" onclick="toggle_visibility('tableau1');">Afficher</a></span>
+        <span class="readmore button-white" data-alt-text="Masquer">Afficher</span>
         <span class="counter">#TOTAL_BOUCLE article[(#TOTAL_BOUCLE|>{1}|?{s})]</span>
       </h2>
     </div>
 
-    <div id="tableau3" style="display:none;"  class="bd closable-content">
+    <div class="bd closable-content">
       <table>
         <thead>
           <tr>
@@ -137,12 +137,12 @@
     <div class="hd titrem">
       <h2>
         <:idm:articles_writing_mine:>
-        <span class="readmore button-white" data-alt-text="Masquer"><a href="#" onclick="toggle_visibility('tableau4');">Afficher</a></span>
+        <span class="readmore button-white" data-alt-text="Masquer">Afficher</span>
         <span class="counter">#TOTAL_BOUCLE article[(#TOTAL_BOUCLE|>{1}|?{s})]</span>
       </h2>
     </div>
 
-    <div id="tableau4" style="display:none;" class="bd closable-content">
+    <div class="bd closable-content">
       <table>
         <thead>
           <tr>
@@ -187,12 +187,12 @@
     <div class="hd titrem">
       <h2>
         <:idm:planning:>
-        [(#GET{counter_planning}|>{0}|?{' '})<span class="readmore button-white" data-alt-text="Masquer"><a href="#" onclick="toggle_visibility('tableau5');">Afficher</a></span>]
+        [(#GET{counter_planning}|>{0}|?{' '})<span class="readmore button-white" data-alt-text="Masquer">Afficher</span>]
         <span class="counter">#GET{counter_planning}&nbsp;article[(#GET{counter_planning}|>{1}|?{s})]</span>
       </h2>
     </div>
 
-    <div id="tableau5" style="display:none;" class="bd closable-content">
+    <div class="bd closable-content">
       <table id="planning">
         <thead>
           <tr>
@@ -235,12 +235,12 @@
     <div class="hd titrem">
       <h2>
         <:idm:non_plan:>
-        <span class="readmore button-white" data-alt-text="Masquer"><a href="#" onclick="toggle_visibility('tableau6');">Afficher</a></span>
+        <span class="readmore button-white" data-alt-text="Masquer">Afficher</span>
         <span class="counter">#TOTAL_BOUCLE article[(#TOTAL_BOUCLE|>{1}|?{s})]</span>
       </h2>
     </div>
 
-    <div id="tableau6" style="display:none;" class="bd closable-content">
+    <div class="bd closable-content">
       <table>
         <thead>
           <tr>
@@ -279,12 +279,12 @@
     <div class="hd titrem">
       <h2>
         <:idm:non_plan_prepa:>
-        <span class="readmore button-white" data-alt-text="Masquer"><a href="#" onclick="toggle_visibility('tableau7');">Afficher</a></span>
+        <span class="readmore button-white" data-alt-text="Masquer">Afficher</span>
         <span class="counter">#TOTAL_BOUCLE article[(#TOTAL_BOUCLE|>{1}|?{s})]</span>
       </h2>
     </div>
 
-    <div id="tableau7" style="display:none;" class="bd closable-content">
+    <div class="bd closable-content">
       <table>
         <thead>
           <tr>
@@ -319,11 +319,4 @@
 
 <script type="text/javascript">
   $("#planning").tablesorter( {sortList : [[3,0]]} );
-  function toggle_visibility(id) {
-    var e = document.getElementById(id);
-    if(e.style.display == 'block')
-      e.style.display = 'none';
-    else
-      e.style.display = 'block';
-  }
 </script>
