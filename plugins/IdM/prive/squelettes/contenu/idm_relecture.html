@@ -152,7 +152,7 @@ if(isset($_POST['affecter_relecteurs_a'])) {
 
                 </B_relecteurstotal>
                 <p class="no-reviewer danger">Aucun relecteur n'a été associé à cet article</p>
-                <a  class="button" href="#modal_relecteurs_#ID_ARTICLE">Gérer les relecteurs</a>
+                <a href="javascript:;" class="button" data-modal-open="#modal_relecteurs_#ID_ARTICLE">Gérer les relecteurs</a>
                 <//B_relecteurstotal>
             </div>
 
@@ -166,10 +166,13 @@ if(isset($_POST['affecter_relecteurs_a'])) {
                         </tr>
                     </thead>
                     <tbody>
-                        <BOUCLE_relecteurs2(RELECTEURS_ARTICLES spip_idm_relecteurs spip_auteurs) {id_article}>
-                        <tr>
+                      <BOUCLE_relecteurs2(RELECTEURS_ARTICLES spip_idm_relecteurs spip_auteurs) {id_article}>
+		        <tr>
+			    <BOUCLE_relecteur(AUTEURS){tout}{id_auteur}{0,1}>
+  
                             <td><a href="mailto:#EMAIL*">#NOM</a></td>
                             <td>#STATUS</td>
+			    </BOUCLE_relecteur>
                         </tr>
                         </BOUCLE_relecteurs2>
                     </tbody>
