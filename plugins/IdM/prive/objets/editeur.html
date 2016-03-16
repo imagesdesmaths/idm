@@ -1,10 +1,10 @@
 <div class="formulaire_spip formulaire_editer_liens ">
-<B_editeur>
+  <B_editeur>
     <div class="liste-objets liste-objets-lies auteurs editeurs">
         <table class='spip liste'>
-            <caption><strong class="caption">éditeur</strong></caption>
+            <caption><strong class="caption">Editeur</strong></caption>
             <tbody>
-                <BOUCLE_editeur(AUTEURS){tout}{id_article==#ENV{id_article}}>
+                <BOUCLE_editeur(AUTEURS){id_auteur=#ENV{id_editeur}}>
                 <tr>
                     <td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
                     <td class='nom'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|sinon{<:texte_vide:>})]</a></td>

@@ -21,7 +21,9 @@
     #FORMULAIRE_DATER{article,#ID_ARTICLE}
 </div>
 
-<INCLURE{fond=prive/objets/editeur,env,id_article=#ID_ARTICLE}>
+[(#ID_EDITEUR|=={0}|oui) Pas d'éditeur assigner pour cet article]
+
+<INCLURE{fond=prive/objets/editeur,env,id_editeur=#ID_EDITEUR}>
 
 <div class="ajax">
     #FORMULAIRE_EDITER_LIENS{auteurs,article,#ID_ARTICLE}
