@@ -1,4 +1,7 @@
-<BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
+#SET{modifie,non}
+
+<BOUCLE_securite(AUTEURS){id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
+#SET{modifie,oui}
 <?php
 
    function modifie_editeur() {
@@ -25,17 +28,17 @@ if($reload){
 
 ?>
 
+</BOUCLE_securite>
+
 <div class="formulaire_spip formulaire_editer_liens ">
   <div class="liste-objets liste-objets-lies auteurs editeurs">
     <table class='spip liste'>
       <caption><strong class="caption">Editeur</strong> </caption>
+      [(#GET{modifie}|=={oui}|oui)
       <div class="toggle_box_link" style="display: block;">
-	[<a href="#" onclick="toggle_visibility('test');">Modifier</a>]
-
-      </div>
-      
-      
-      <tbody>
+	&#91;<a href="#" onclick="toggle_visibility('test');">Modifier</a>&#93;
+      </div>]
+        <tbody>
 	<B_editeur>
 	  <BOUCLE_editeur(AUTEURS){tout}{id_auteur=#ENV{id_editeur}}>
             <tr>
@@ -51,14 +54,16 @@ if($reload){
 </tbody>
 </table>
 </div>
+
+
+<BOUCLE_securite2(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
 <div class="selecteur" id="test" style="display:none;">
   <h3 class="titrem">Modification editeur</h3>
   <div class="liste-objets listes-objets-associer auteurs">
     <table class="spip liste">
       <tbody>
 	<form action="#SELF" method="post">
-
-	<BOUCLE_admin(spip_auteurs_liens){id_objet=#ENV{id_rubrique}}{objet=rubrique}>
+	  <BOUCLE_admin(spip_auteurs_liens){id_objet=#ENV{id_rubrique}}{objet=rubrique}>
 	  <BOUCLE_admin_info(AUTEURS){tout}{id_auteur}>
 	    <tr>
 	      <td class='nom'>#NOM</td>
@@ -71,11 +76,13 @@ if($reload){
 </table>
 </div>
 </div>
+</BOUCLE_securite2>
+
 </div>
 
+[(#GET{modifie}|=={oui}|oui)
 <script type="text/javascript">
-  $("#planning").tablesorter( {sortList : [[3,0]]} );
-  function toggle_visibility(id) {
+   function toggle_visibility(id) {
     var e = document.getElementById(id);
     if(e.style.display == 'block')
       e.style.display = 'none';
@@ -83,4 +90,4 @@ if($reload){
       e.style.display = 'block';
   }
 </script>
-</BOUCLE_securite>
+]
