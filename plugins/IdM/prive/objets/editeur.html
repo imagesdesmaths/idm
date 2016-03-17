@@ -1,21 +1,86 @@
+<BOUCLE_securite(AUTEURS) {id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
+<?php
+
+   function modifie_editeur() {
+      $reload=false;
+   if(isset($_POST['modifie_editeur'])) {
+   
+   sql_updateq('spip_articles',array('id_editeur'=>$_POST['modifie_editeur']),"id_article=#ID_ARTICLE");
+$reload=true;
+   
+    }
+
+if($reload){
+    $newpost = array(
+        'nom' => $_POST['nom'],
+        'num' => $_POST['num'],
+        'titre' => $_POST['titre']
+      );
+      $_POST = $newpost;
+   header ("Location: /ecrire/?exec=article&id_article=#ID_ARTICLE");
+   }
+  }
+
+  modifie_editeur();
+
+?>
+
 <div class="formulaire_spip formulaire_editer_liens ">
-  <B_editeur>
-    <div class="liste-objets liste-objets-lies auteurs editeurs">
-        <table class='spip liste'>
-            <caption><strong class="caption">Editeur</strong></caption>
-            <tbody>
-                <BOUCLE_editeur(AUTEURS){id_auteur=#ENV{id_editeur}}>
-                <tr>
-                    <td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
-                    <td class='nom'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|sinon{<:texte_vide:>})]</a></td>
-                </tr>
-                </BOUCLE_editeur>
-            </tbody>
-        </table>
-    </div>
-</B_editeur>
-    <div class="liste-objets liste-objets-lies auteurs caption-wrap">
-        <strong class="caption">Aucun éditeur</strong>
-    </div>
-<//B_editeur>
+  <div class="liste-objets liste-objets-lies auteurs editeurs">
+    <table class='spip liste'>
+      <caption><strong class="caption">Editeur</strong> </caption>
+      <div class="toggle_box_link" style="display: block;">
+	[<a href="#" onclick="toggle_visibility('test');">Modifier</a>]
+
+      </div>
+      
+      
+      <tbody>
+	<B_editeur>
+	  <BOUCLE_editeur(AUTEURS){tout}{id_auteur=#ENV{id_editeur}}>
+            <tr>
+              <td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
+              <td class='nom'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|sinon{<:texte_vide:>})]</a></td>
+            </tr>
+          </BOUCLE_editeur>
+	</B_editeur>
+	<tr>
+	  <td class='nom'>Aucun éditeur</td>
+	</tr>
+       <//B_editeur>
+</tbody>
+</table>
 </div>
+<div class="selecteur" id="test" style="display:none;">
+  <h3 class="titrem">Modification editeur</h3>
+  <div class="liste-objets listes-objets-associer auteurs">
+    <table class="spip liste">
+      <tbody>
+	<form action="#SELF" method="post">
+
+	<BOUCLE_admin(spip_auteurs_liens){id_objet=#ENV{id_rubrique}}{objet=rubrique}>
+	  <BOUCLE_admin_info(AUTEURS){tout}{id_auteur}>
+	    <tr>
+	      <td class='nom'>#NOM</td>
+	      <td class='action'><button type="submit" name="modifie_editeur" class="button link delete" value=#ID_AUTEUR>choisir</button></td>
+	    </tr>
+	  </BOUCLE_admin_info>
+	</BOUCLE_admin>
+	</form>
+      </tbody>
+</table>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+  $("#planning").tablesorter( {sortList : [[3,0]]} );
+  function toggle_visibility(id) {
+    var e = document.getElementById(id);
+    if(e.style.display == 'block')
+      e.style.display = 'none';
+    else
+      e.style.display = 'block';
+  }
+</script>
+</BOUCLE_securite>
