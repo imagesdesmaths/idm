@@ -30,7 +30,9 @@
         <h4><strong>Vous avez des articles à relire :</strong></h4>
         <ul>
         <BOUCLE_relecteurs(relecteurs_articles articles) {id_auteur=#SESSION{id_auteur}}>
+	  <BOUCLE_articlerelire(spip_articles){tout}{id_article}>
             <li><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}">#TITRE</a></li>
+	  </BOUCLE_articlerelire>
         </BOUCLE_relecteurs>
         </ul>
         </B_relecteurs>
