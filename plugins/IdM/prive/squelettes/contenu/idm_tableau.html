@@ -177,7 +177,7 @@
 
 <div class="box simple">
   <div class="inner closable">
-    <BOUCLE_deja1(ARTICLES) {statut = publie} {id_secteur !IN 18} {age<=0} {par date}>
+    <BOUCLE_deja1(ARTICLES) {statut = publie} {id_secteur !IN 18}{id_rubrique !IN 54,56}{age<=0} {par date}>
     #SET{counter_deja, #TOTAL_BOUCLE}
     </BOUCLE_deja1>
     <BOUCLE_prevus1(ARTICLES) {statut IN prop,prepa} {prevu = oui} {par date_prevue}>
@@ -204,7 +204,7 @@
             <th>Modifier</th>
           </tr>
         </thead>
-        <BOUCLE_deja(ARTICLES) {statut = publie} {id_secteur !IN 18} {age<=0} {par date}>
+        <BOUCLE_deja(ARTICLES) {statut = publie} {id_secteur !IN 18}{id_rubrique !IN 54,56}{age<=0} {par date}>
         <tr>
           <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
           <td>#LESAUTEURS</td>
