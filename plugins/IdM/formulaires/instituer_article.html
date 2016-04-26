@@ -214,9 +214,9 @@ if(isset($_POST['depublier'])) {
     ]
 
     [(#REM) Gestion d'un billet]
-    [(#GET{is_billet}|=={1}|?{' '})
+	[(#GET{is_billet}|=={1}|?{' '})
         [(#ENV{statut}|=={prepa}|?{' '})
-            [(#GET{is_auteur}|=={1}|?{' '})
+            [(#GET{is_secretaire}|=={1}|?{' '})
                 <span class="icone s24 horizontale preview-24">
                     <input type="hidden" name="article_author" value="#GET{id_auteur}">
                     <button type="submit" name="programmer_publication_billet" value="1" class="simple-link">
@@ -224,13 +224,15 @@ if(isset($_POST['depublier'])) {
                         <b>Publier le billet</b>
                     </button>
                 </span>
+		]
+		[(#GET{is_auteur}|=={1}|?{' '})
                 <span class="icone s24 horizontale preview-24">
                     <button type="submit" name="abandonner" value="1" class="simple-link">
                         <img src="../prive/themes/spip/images/supprimer-24.png" alt="Abandonner le billet" width="24" height="24">
                         <b>Abandonner le billet</b>
                     </button>
                 </span>
-            ]
+		]
         ]
         [(#ENV{statut}|=={publie}|?{' '})
             [(#GET{is_secretaire}|=={1}|?{' '})
