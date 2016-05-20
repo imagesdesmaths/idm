@@ -5,7 +5,7 @@ $idm_in_readmore;
 function idm_readmore_rempl($texte){
     //if(strpos($texte,'<')===false) return $texte;
     $texte=str_replace('<readmore>','<div class="idm_readmore"><div class="idm_readmore_text">',$texte);
-    $texte=str_replace('</readmore>','</div><div class="idm_readmore_more"><a href="#readmore"><br>... Afficher la suite</a></div><div class="idm_readmore_less"><a href="#readmore">... Réduire le texte</a></div></div>',$texte);
+    $texte=str_replace('</readmore>','</div><div class="idm_readmore_more"><a href="#readmore"><br>⊕ Afficher la suite</a></div><div class="idm_readmore_less"><a href="#readmore">⊖ Réduire le texte</a></div></div>',$texte);
     return $texte;
 }
 

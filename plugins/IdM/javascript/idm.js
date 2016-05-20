@@ -1,6 +1,6 @@
 jQuery(document).ready(function() {
     if($(".idm_readmore").length){
-	$(".article-full").children(".details").prepend('<div class="idm_readmore_control" style="float:right"><a class="idm_readmore_classic" href="#readmore">Affichage classique</a><a class="idm_readmore_compact" href="#readmore">Affichage compacté</a></div><br>');
+	$(".article-full").children(".details").prepend('<div class="idm_readmore_control" style="float:right"><a class="idm_readmore_classic" href="#readmore">Tout afficher</a><a class="idm_readmore_compact" href="#readmore">Tout réduire</a></div><br>');
 	$(".idm_readmore_compact").hide();
 	$(".idm_readmore_less").hide();
 	$(".idm_readmore_text").css('height',80).css('overflow','hidden');
