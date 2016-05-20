@@ -7,9 +7,18 @@ date_default_timezone_set('Europe/Paris');
 ini_set('date.timezone','Europe/Paris');
 define ('_ID_WEBMESTRES', '1:41:2532:2082:2494');
 define ('_SPIP_LOCK_MODE', 0);
-#define ('_LOG_FILTRE_GRAVITE', 7);
+//define ('_LOG_FILTRE_GRAVITE', 7);
 
-ini_set('display_errors', '0');
+//define('_NO_CACHE', -1); 
+// afficher toutes les erreurs
+//error_reporting(E_ALL);
+//@ini_set("display_errors", "On");
+ 
+// afficher toutes les erreurs dans SPIP aussi
+//define('SPIP_ERREUR_REPORT',E_ALL);
+// afficher toutes les erreurs dans les pipelines aussi
+//define('SPIP_ERREUR_REPORT_INCLUDE_PLUGINS',E_ALL);
+//$GLOBALS['taille_des_logs'] = 5000;
 
 $GLOBALS['dossier_squelettes'] = 'squelettes-custom';
 $GLOBALS['elasticsearch_config'] = array(

@@ -1,5 +1,29 @@
 <?php
 
+$idm_in_readmore;
+
+function idm_readmore_rempl($texte){
+    //if(strpos($texte,'<')===false) return $texte;
+    $texte=str_replace('<readmore>','<div class="idm_readmore"><div class="idm_readmore_text">',$texte);
+    $texte=str_replace('</readmore>','</div><div class="idm_readmore_more"><a href="#readmore"><br>... Afficher la suite</a></div><div class="idm_readmore_less"><a href="#readmore">... Réduire le texte</a></div></div>',$texte);
+    return $texte;
+}
+
+function idm_porte_plume_cs_pre_charger($flux){
+    $r=array(array("id"=>'idm_lire_suite',
+                            "name"=>'Insérer un bloc lire la suite',
+                            "className"=>'idm_readmore',
+                            "replaceWith"=>"\n<readmore>\n Texte\n</readmore>\n",
+                   "display"=>true));
+    $flux['edition']=isset($flux['edition'])?array_merge($flux['edition'],$r):$r;
+    return $flux;
+}
+
+function idm_porte_plume_lien_classe_vers_icone($flux){
+    $flux['idm_readmore']='idm_readmore.png';
+    return $flux;
+}
+
 function idm_boite_infos (&$flux) {
   if ($flux['args']['type'] == 'article') {
     $id_article  = $flux['args']['id'];
@@ -97,6 +121,7 @@ function idm_notify ($ids, $message, $subject = "Un message du site \"Images des
 }
 
 function idm_jquery_plugins ($scripts) {
+  $scripts[] = 'javascript/idm.js';
   $scripts[] = 'javascript/jquery.tablesorter.min.js';
   $scripts[] = 'mediaelement/mediaelement-and-player.min.js';
   return $scripts;
@@ -207,7 +232,7 @@ function idm_protect_TeX ($texte) {
 function idm_pre_typo ($texte) {
   $texte = idm_protect_TeX ($texte);
   $texte = idm_clean_TeX ($texte);
-
+  $texte = idm_readmore_rempl ($texte);
   return $texte;
 }
 
@@ -226,6 +251,7 @@ function idm_insert_head ($texte) {
     </script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 END;
+  $mj_insert.="\n<link rel=\"stylesheet\" type =\"text/css\" href=\"".find_in_path("idm.css")."\"/>\n";
   return $texte . $mj_insert;
 }
 
