@@ -216,7 +216,6 @@ function idm_protect_TeX ($texte) {
 
   $texte = str_replace ('\[', '$$', $texte);
   $texte = str_replace ('\]', '$$', $texte);
-  $texte = str_replace ('<','< ',$texte);
   $texte = preg_replace ('/\$\$([^$]+)\$\$/s', '<html>\[\1\]</html>', $texte);
   $texte = echappe_html($texte);
 
