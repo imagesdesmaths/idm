@@ -20,7 +20,7 @@ $sherlock = new Sherlock(
     $GLOBALS['elasticsearch_config']['debug']
 );
 
-$recherche = isset($_POST['recherche'])
+$recherche = htmlentities(isset($_POST['recherche']))
     ? $_POST['recherche']
     : (isset($_GET['recherche'])
         ? $_GET['recherche']
@@ -114,10 +114,10 @@ function interventionDivine($v) {
     if(isset($resultats)){
 
         if($useApproximative) {
-            echo '<p class="alert">Aucun résultat n\'a été trouvé pour le terme exact &#171;&nbsp;'.$recherche.'&nbsp;&#187;&nbsp;</p>';
+            echo '<p class="alert">Aucun résultat n\'a été trouvé pour le terme exact &#171;&nbsp;'.htmlentities($recherche).'&nbsp;&#187;&nbsp;</p>';
         }
 
-        echo '<h1>'.$sherlockresults->getTotalCount().' résultats pour &#171;&nbsp;'.$recherche.'&nbsp;&#187;&nbsp;</h1>';
+        echo '<h1>'.$sherlockresults->getTotalCount().' résultats pour &#171;&nbsp;'.htmlentities($recherche).'&nbsp;&#187;&nbsp;</h1>';
 
         foreach($resultats as $item){
             $resume = '';
@@ -238,7 +238,7 @@ function interventionDivine($v) {
 
     } else {
 
-        echo '<h1>Aucun résultat pour &#171;&nbsp;'.$recherche.'&nbsp;&#187;&nbsp;</h1>';
+        echo '<h1>Aucun résultat pour &#171;&nbsp;'.htmlentities($recherche).'&nbsp;&#187;&nbsp;</h1>';
         echo '<p class="alert">Une erreur est survenue lors de la recherche</p>';
         if($GLOBALS['elasticsearch_config']['debug']) {
             echo '<div class="debug-output">';
