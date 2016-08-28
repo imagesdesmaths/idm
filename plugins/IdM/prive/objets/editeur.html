@@ -3,15 +3,15 @@
 <BOUCLE_securite(AUTEURS){id_auteur=#SESSION{id_auteur}} {statut=0minirezo}>
 #SET{modifie,oui}
 <?php
-
+   
    function modifie_editeur() {
-      $reload=false;
+   $reload=false;
    if(isset($_POST['modifie_editeur'])) {
    
    sql_updateq('spip_articles',array('id_editeur'=>$_POST['modifie_editeur']),"id_article=#ID_ARTICLE");
 $reload=true;
-   
-    }
+
+}
 
 if($reload){
     $newpost = array(
@@ -70,10 +70,17 @@ if($reload){
 	      <td class='action'><button type="submit" name="modifie_editeur" class="button link delete" value=#ID_AUTEUR>choisir</button></td>
 	    </tr>
 	  </BOUCLE_admin_info>
-	</BOUCLE_admin>
+	  </BOUCLE_admin>
 	</form>
       </tbody>
-</table>
+    </table>
+ 
+<br>
+    
+<form action="#SELF" method="post">
+  <label for="value"><strong>Editeur par id </strong></label>: <input type="text" name="modifie_editeur" class="button link delete"/>
+</form>
+
 </div>
 </div>
 </BOUCLE_securite2>
