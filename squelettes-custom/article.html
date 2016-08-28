@@ -23,7 +23,7 @@
         [<a href="#URL_PAGE{mot,id_mot=#GET{track_id}}" class="piste #GET{track_slug}">(#GET{track_title})</a>]
         <span class="date">[(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</span>
         <B_auteur>
-        <span class="authors">&nbsp;-&nbsp;Rédigé par&nbsp;
+        <span class="authors">&nbsp;-&nbsp;Ecrit par&nbsp;
             <BOUCLE_auteur(AUTEURS){id_article=#ID_ARTICLE}>
             <a href="#URL_AUTEUR">#NOM</a>[(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{', ',''})]
             </BOUCLE_auteur>
@@ -58,6 +58,11 @@
         [<div class="chapo">(#CHAPO)</div>]
         [<div class="details wysiwyg">(#TEXTE)</div>]
         [<div class="post-scriptum"><strong>Post-scriptum :</strong> (#PS)</div>]
+	<BOUCLE_editeur(ARTICLES){id_article}{0,1}>
+	  <BOUCLE_editeur_info(AUTEURS){tout}{id_auteur=#ID_EDITEUR}{0,1}>
+	     Article édité par <a href="#URL_AUTEUR">#NOM</a>
+	  </BOUCLE_editeur_info>
+	</BOUCLE_editeur>
         [<div class="notes">
             <h2>Notes</h2>
             (#NOTES)
