@@ -36,28 +36,28 @@
         Voici le contenu du site &laquo; #NOM_SITE_SPIP &raquo; tel qu'il &eacute;tait &agrave; la date du [(#DATE|affdate)] :
     </div>]
 
+
     <nav id="menu" role="navigation">
         <div class="container">
-
             <div class="header-actions">
                 <form class="header-form-search" action="#URL_PAGE{recherche}" method="get">
                     <input type="hidden" name="page" value="recherche">
                     <input type="text" size="10" name="recherche" placeholder="Recherche" id="recherchemobile" value="#ENV{recherche}">
                     <button type="submit" title="Rechercher"><i class="flaticon-search"></i></button>
                 </form>
-
                 <a class="header-search-adv" href="#URL_PAGE{navigation}" class="button"><i class="flaticon-search-adv"></i></a>
 
                 <a class="header-private" class="button" href="#URL_PAGE{perso}" title="[(#SESSION{statut}|=={0minirezo}|?{'Espace privé',[(#SESSION{statut}|=={1comite}|?{'Espace de rédaction','Espace personnel'})]})]"><i class="flaticon-user"></i></a>
+	
             </div>
-
             <INCLURE{fond=inc/menu}>
 
         </div>
     </nav>
 
     <header class="noprint">
-        <div class="container">
+      <div style="float:right;margin-right:5pt">#MENU_LANG</div>
+      <div class="container">
             <h1>
                 <a href="#URL_SITE_SPIP">
                     <img src="#CHEMIN{img/logo-cnrs.png}" alt="CNRS" />
@@ -75,19 +75,22 @@
                 <a class="header-search-adv" href="#URL_PAGE{navigation}" class="button"><i class="flaticon-search-adv"></i></a>
 
                 <a class="header-private" class="button" href="#URL_PAGE{perso}" title="[(#SESSION{statut}|=={0minirezo}|?{'Espace privé',[(#SESSION{statut}|=={1comite}|?{'Espace de rédaction','Espace personnel'})]})]"><i class="flaticon-user"></i></a>
+
             </div>
 
-            <div class="header-descriptif">#DESCRIPTIF_SITE_SPIP</div>
+	   
+            <div class="header-descriptif"><:descriptif_site:></div>
 
             <a class="menu-mobile-toggle" href="#menu"><i class="flaticon-menu"></i> Menu</a>
 
         </div>
+
     </header>
 
     <section class="[(#ENV{class}|sinon{page})] wrap main" role="main">
 
         <aside>
-            [(#INCLURE{fond=inc/bloc_utilisateur}{id_article=#ENV{id_article},id_rubrique=#ENV{id_rubrique},id_auteur=#ENV{id_auteur},id_mot=#ENV{id_mot},id_breve=#ENV{id_breve}})]
+          [(#INCLURE{fond=inc/bloc_utilisateur}{id_article=#ENV{id_article},id_rubrique=#ENV{id_rubrique},id_auteur=#ENV{id_auteur},id_mot=#ENV{id_mot},id_breve=#ENV{id_breve}})]
         </aside>
 
         <div class="container">
