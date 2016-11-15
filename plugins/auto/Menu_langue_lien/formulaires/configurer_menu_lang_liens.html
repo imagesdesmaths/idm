@@ -1,0 +1,52 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=menu_lang_liens -->
+
+<div class="formulaire_spip formulaire_configurer formulaire_configurer_mll">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="editer_mll_langues_invisibles[ (#ENV**{erreurs}|table_valeur{langues_invisibles}|oui)erreur]">
+			<label for="langues_invisibles"><:mll:label_langues_invisibles:></label>
+			<p class="explication"><:mll:explication_langues_invisibles:></p>
+			<select name="langues_invisibles[]" id="langues_invisibles" multiple="oui">
+				<BOUCLE_langues(POUR){tableau #CONFIG{langues_multilingue}|explode{','}}>
+				<option value="#VALEUR"[(#VALEUR|in_array{#ENV{langues_invisibles,#ARRAY}}|oui)selected="selected"]>[(#VALEUR|traduire_nom_langue)]</option>
+				</BOUCLE_langues>
+			</select>
+		</li>
+		<li class="editer_mll_langues_supprimer[ (#ENV**{erreurs}|table_valeur{format}|oui)erreur]">
+			<label for="format"><:mll:label_format:></label>
+			<div class="choix">
+				<input type="radio" name="format" id="abrege" value="abrege" [(#ENV{format,abrege}|=={'abrege'}|?{' ',''})checked]/> 
+				<label for="abrege"><:mll:label_format_abrege:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="format" id="complet" value="complet" [(#ENV{format,abrege}|=={'complet'}|?{' ',''})checked]/> 
+				<label for="complet"><:mll:label_format_complet:></label>
+			</div>
+		</li>
+		<li class="editer_mll_langues_supprimer[ (#ENV**{erreurs}|table_valeur{formatliste}|oui)erreur]">
+			<label for="formatliste"><:mll:label_format_liste:></label>
+			<div class="choix">
+				<input type="radio" name="formatliste" id="bloc" value="bloc" [(#ENV{formatliste,bloc}|=={'bloc'}|?{' ',''})checked]/> 
+				<label for="bloc"><:mll:label_format_liste_bloc:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="formatliste" id="liste" value="liste" [(#ENV{formatliste,bloc}|=={'liste'}|?{' ',''})checked]/> 
+				<label for="liste"><:mll:label_format_liste_liste:></label>
+			</div>
+		</li>
+		<li class="editer_mll_separateur[ (#ENV**{erreurs}|table_valeur{licence_defaut}|oui)erreur]">
+			<label for="seprateur"><:mll:label_separateur:></label>
+			<p class="explication"><:mll:explication_separateur:></p>
+			<input type="texte" name="separateur" id="separateur" class="text" value="#ENV{separateur}" />
+		</li>
+	</ul>
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+	</p>
+</div></form>
+</div>

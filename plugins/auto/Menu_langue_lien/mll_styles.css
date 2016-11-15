@@ -1,0 +1,28 @@
+#menu_lang {
+    list-style: none outside none;    
+}
+
+#menu_lang li {
+    float: left;
+}
+
+#menu_lang li a, #menu_lang li span, #menu_lang li strong {
+    border-left: 1px solid;
+}
+
+#menu_lang li a, #menu_lang li span, #menu_lang li strong {
+    padding: 0 5px;
+    font-size: 11px;
+}
+
+#menu_lang li.first a, #menu_lang li.first span, #menu_lang li.first strong {
+    border: none;
+}
+
+#menu_lang li.last a, #menu_lang li.last span, #menu_lang li.last strong {
+    padding-right: 0;
+}
+
+#menu_lang li a:hover {
+    text-decoration: underline;
+}

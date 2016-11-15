@@ -1,0 +1,53 @@
+<plugin>
+	<nom>
+		<multi>
+			[fr]Menu de langues avec liens
+			[en]Language menu as links
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+		[fr]Afficher les langues sous forme de liens cliquables
+		[en]View languages ​​as clickable links
+		</multi>
+	</slogan>
+	<auteur>[Jacques->http://contrib.spip.net/RealET] - Jean-Baptiste Pressac - Quentin Drouet - Cedric Morin</auteur>
+	<licence>&#169; 2009-2014 GNU/GPL</licence>
+	<lien>http://contrib.spip.net/Menu-de-langues-sous-forme-de-liens</lien>
+	<version>1.2.4</version>
+	<etat>stable</etat>
+	<description>
+		<multi>
+[fr]Remplace le menu d&#233;roulant de langues par un menu cliquable. Ce menu n'est affich&#233; que s'il y a au moins 2 langues vraiment utilis&#233;es dans le site.
+
+Icone par [FatCow->http://www.fatcow.com/free-icons]
+[en]Replace the original language menu by a clickable menu. This menu is displayed only if at least two languages are ​​actually used on the site.
+	
+Icon by [FatCow->http://www.fatcow.com/free-icons]
+		</multi>
+	</description>
+	<prefix>mll</prefix>
+	<icon>img_pack/world_link-32.png</icon>
+	<options>mll_options.php</options>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>mll_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0.10;3.1.99]" />
+	<necessite id='spip_bonux' version='[2.3.3;]' src="http://files.spip.org/spip-zone/spip-bonux.zip" />
+	<utilise id='tradrub' version='[2.1.1;]' src="http://files.spip.org/spip-zone/tradrub_dev.zip" />
+	<utilise id='cfg' version='[1.3.6;]' src="http://files.spip.org/spip-zone/cfg.zip" />
+	<categorie>navigation</categorie>
+	<bouton id="config_mll" parent="configuration">
+		<icone>img_pack/world_link-24.png</icone>
+		<titre>mll:cfg_titre_mll</titre>
+		<url>cfg</url>
+		<args>cfg=menu_lang_liens</args>
+	</bouton>
+	<bouton id="bando_config_mll" parent="bando_configuration">
+		<icone>img_pack/world_link-16.png</icone>
+		<titre>mll:cfg_titre_mll</titre>
+		<url>cfg</url>
+		<args>cfg=menu_lang_liens</args>
+	</bouton>	
+</plugin>

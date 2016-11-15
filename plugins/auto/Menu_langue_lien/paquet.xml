@@ -1,0 +1,23 @@
+<paquet
+	prefix="mll"
+	categorie="navigation"
+	version="1.2.4"
+	etat="stable"
+	compatibilite="[2.0.10;3.1.*]"
+	logo="prive/themes/spip/images/world_link-32.png"
+	documentation="http://contrib.spip.net/Menu-de-langues-sous-forme-de-liens"
+	>
+	<nom>Menu de langues avec liens</nom>
+	<!-- Afficher les langues sous forme de liens cliquables -->
+	<auteur lien="http://contrib.spip.net/RealET">Jacques</auteur>
+	<auteur>Jean-Baptiste Pressac</auteur>
+	<auteur lien="http://www.kent1.info">kent1</auteur>
+	<auteur>Cédric Morin</auteur>
+	<credit lien="http://www.fatcow.com/free-icons">icône par FatCow</credit>
+	<copyright>2009-2014</copyright>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	<pipeline nom="insert_head_css" inclure="mll_pipelines.php" />
+	<necessite nom="spip_bonux" compatibilite="[3.0.7;]" />
+	<utilise nom="tradrub" compatibilite="[2.1.1;[" />
+	<menu nom="config_mll" titre="mll:cfg_titre_mll" parent="menu_squelette" icone="images/world_link-16.png" action="configurer_mll"/>
+</paquet>
