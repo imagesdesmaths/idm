@@ -414,7 +414,7 @@ if(isset($resultats)){
         for (var key in data = args){
             arg += '&'+key+'='+args[key];
         }
-        sendAjax("sherlock/search.php",cb_doRecherche,'post',arg,[args]);
+        sendAjax("sherlock/search_fr.php",cb_doRecherche,'post',arg,[args]);
     }
 
     function cb_doRecherche(text, xml, params){

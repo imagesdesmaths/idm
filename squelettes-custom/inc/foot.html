@@ -1,9 +1,9 @@
+[(#LANG|=={es}|?{#SET{menu_secteurs,#ARRAY{0,60}},#SET{menu_secteurs,#ARRAY{0,26,1,37,2,38,3,48}}})]
 
-            [(#INCLURE{fond=inc/bloc_agenda})]
-
+           [(#LANG|=={fr}|?{#INCLURE{fond=inc/bloc_agenda},})]
             <br class="cf cf-footer">
 
-            <div class="block-right block-suivre">
+            [(#LANG|=={fr}|?{<div class="block-right block-suivre">
                 <h2>Suivre IDM</h2>
 
                 <div class="block-newsletter">
@@ -34,58 +34,49 @@
                         <a href="#" class="link-googleplus" title="Google Plus"><i class="flaticon-googleplus"></i></a>
                     </li>
                     -->
-                    <li>
+                    <!--<li>
                         <a href="#URL_PAGE{backend}" class="link-rss" title="RSS"><i class="flaticon-rss"></i></a>
-                    </li>
+                    </li>-->
                 </ul>
-            </div>
+            </div>})]
 
             <div class="block-left block-navigation">
                 <ul>
                     <li>
-                        <h3>En ce moment</h3>
+                        <h3><:en_ce_moment:></h3>
                         <nav>
                             <ul>
-                                <li><a href="#URL_PAGE{articles-recents}">Articles récents</a></li>
-                                <li><a href="#URL_RUBRIQUE{#RUBRIQUE_TRIBUNES}">Tribunes</a></li>
-                                <li><a href="#URL_PAGE{agenda}">Agenda</a></li>
-                                <li><a href="#URL_RUBRIQUE{#RUBRIQUE_DEFIS_DES_MATHS}">Défis des maths</a></li>
-                                <li><a href="#URL_RUBRIQUE{#RUBRIQUE_DEBAT_DU_18}">Débat du 18</a></li>
-                                <li><a href="#URL_RUBRIQUE{#RUBRIQUE_REVUE_DE_PRESSE}">Revue de presse</a></li>
-                                <li><a href="#URL_PAGE{lexique}">Lexique</a></li>
+                                <li><a href="#URL_PAGE{articles-recents}"><:articles_recents:></a></li>
+                                <li><a href="#URL_RUBRIQUE{#RUBRIQUE_TRIBUNES}"><:tribune:></a></li>
+                                <li><a href="#URL_PAGE{agenda}"><:agenda:></a></li>
+                                <li><a href="#URL_RUBRIQUE{#RUBRIQUE_DEFIS_DES_MATHS}"><:defis_des_maths:></a></li>
+                                <li><a href="#URL_RUBRIQUE{#RUBRIQUE_DEBAT_DU_18}"><:debat_du_18:></a></li>
+                                <li><a href="#URL_RUBRIQUE{#RUBRIQUE_REVUE_DE_PRESSE}"><:revue_de_presse:></a></li>
+                                <li><a href="#URL_PAGE{lexique}"><:lexique:></a></li>
                             </ul>
                         </nav>
                     </li>
                     <li>
-                        <h3>Différentes mathématiques</h3>
+                        <h3><:differentes_mathematiques:></h3>
                         <nav>
                             <ul>
-                                <BOUCLE_rubriques(RUBRIQUES) {id_secteur IN 26,34,37,38,48} {id_rubrique !IN 28,29,37,#RUBRIQUE_DEBAT_DU_18,#RUBRIQUE_DEFIS_DES_MATHS,#RUBRIQUE_REVUE_DE_PRESSE,#RUBRIQUE_FIGURES_SANS_PAROLES} {par num titre, titre} {spip_articles.statut=publie}>
+                                <BOUCLE_rubriques(RUBRIQUES) {id_secteur IN #GET{menu_secteurs}} {id_rubrique !IN 2,28,29,37,60,#RUBRIQUE_DEBAT_DU_18,#RUBRIQUE_DEFIS_DES_MATHS,#RUBRIQUE_REVUE_DE_PRESSE,#RUBRIQUE_FIGURES_SANS_PAROLES} {par num titre, titre}>
                                 <li><a href="#URL_RUBRIQUE">#TITRE</a></li>
                                 </BOUCLE_rubriques>
                             </ul>
                         </nav>
-                    </li>
+			  </li>
+			  [(#LANG|=={fr}|?{#INCLURE{fond=inc/bloc_menu_dossier}})]
                     <li>
-                        <h3>Dossiers</h3>
+                        <h3><:qui_sommes_nous:></h3>
                         <nav>
                             <ul>
-                                <BOUCLE_dossier(MOTS) {type=Dossiers thématiques} {par titre}>
-                                <li><a href="#URL_MOT">#TITRE</a></li>
-                                </BOUCLE_dossier>
-                            </ul>
-                        </nav>
-                    </li>
-                    <li>
-                        <h3>Qui sommes-nous&nbsp;?</h3>
-                        <nav>
-                            <ul>
-                                <li><a href="#URL_ARTICLE{#ARTICLE_PRESENTATION}">Présentation</a></li>
-                                <li><a href="#URL_ARTICLE{#ARTICLE_EQUIPE}">L'équipe</a></li>
-                                <li><a href="#URL_ARTICLE{#ARTICLE_FONCTIONNEMENT}">Fonctionnement du site</a></li>
-                                <li><a href="#URL_PAGE{agenda}">Notre actualité</a></li>
-                                <li><a href="#URL_ARTICLE{#ARTICLE_PARTENAIRES}">Partenaires</a></li>
-                                <li><a href="mailto:#EMAIL_WEBMASTER">Contact</a></li>
+                                <li><a href="#URL_ARTICLE{#ARTICLE_PRESENTATION}"><:presentation:></a></li>
+                                <li><a href="#URL_ARTICLE{#ARTICLE_EQUIPE}"><:equipe:></a></li>
+                                <li><a href="#URL_ARTICLE{#ARTICLE_FONCTIONNEMENT}"><:fonctionnement_site:></a></li>
+                                <li><a href="#URL_PAGE{agenda}"><:notre_actualite:></a></li>
+                                <li><a href="#URL_ARTICLE{#ARTICLE_PARTENAIRES}"><:partenaires:></a></li>
+                                <li><a href="mailto:#EMAIL_WEBMASTER"><:contact:></a></li>
                             </ul>
                         </nav>
                     </li>
@@ -100,10 +91,10 @@
             <div class="col-left">
                 <nav role="navigation">
                     <ul>
-                        <li><a href="#URL_PAGE{plan}">Plan du site</a></li>
-                        <li><a href="#URL_ARTICLES{#ARTICLE_MENTIONS_LEGALES}">Crédits et mentions légales</a></li>
-                        <li><a href="#URL_ARTICLE{#ARTICLE_PARTENAIRES}">Sites web utiles</a></li>
-                        <li><a href="mailto:#EMAIL_WEBMASTER">Contact</a></li>
+                        <li><a href="#URL_PAGE{plan}"><:plan_site:></a></li>
+                        <li><a href="#URL_ARTICLES{#ARTICLE_MENTIONS_LEGALES}"><:credits_legales:></a></li>
+                        <li><a href="#URL_ARTICLE{#ARTICLE_PARTENAIRES}"><:sites_web_utiles:></a></li>
+                        <li><a href="mailto:#EMAIL_WEBMASTER"><:menu_contact:></a></li>
                     </ul>
                 </nav>
             </div>

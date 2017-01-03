@@ -2,43 +2,38 @@
 [(#INCLURE{fond=inc/head}{class=article}{env})]
 
 <BOUCLE_articles_piste(MOTS) {id_article} {type=Difficulté} {0,1}>
-#SET{track_title, #TITRE}
 #SET{track_slug, #TITRE|slug}
 #SET{track_id, #ID_MOT}
 </BOUCLE_articles_piste>
 
+
 <div id="content" class="article-full block-left #GET{track_slug}">
 
-    <BOUCLE_articles(ARTICLES) {id_article}>
+  <BOUCLE_articles(ARTICLES) {id_article}{0,1}>
+ [(#ID_TRAD|!={0}|et{#ID_TRAD|!={#ID_ARTICLE}}|?{#SET{traduction,#ID_TRAD}})]
 
-        <BOUCLE_rubrique(RUBRIQUES){id_rubrique=#ID_RUBRIQUE} {0,1}>
-        #SET{rubrique_name, #TITRE}
-        </BOUCLE_rubrique>
+ <BOUCLE_rubrique(RUBRIQUES){id_rubrique=#ID_RUBRIQUE} {0,1}>
+   #SET{rubrique_name, #TITRE}
+ </BOUCLE_rubrique>
 
-        <div class="category"><a href="#URL_RUBRIQUE">[(#GET{rubrique_name}|sinon{Article})]</a> [<a href="(#URL_RUBRIQUE)" class="backlink">Retour à la rubrique #NOM_RUBRIQUE</a>]</div>
-        [<h4>(#SURTITRE)</h4>]
-        <h1>#TITRE</h1>
-        [<h4>(#SOUSTITRE)</h4>]
+	
+	
+        <div class="category"><a href="#URL_RUBRIQUE">[(#GET{rubrique_name}|sinon{Article})]</a> [<a href="(#URL_RUBRIQUE)" class="backlink"><:retour_rubrique:></a>]</div>
 
-        [<a href="#URL_PAGE{mot,id_mot=#GET{track_id}}" class="piste #GET{track_slug}">(#GET{track_title})</a>]
-        <span class="date">[(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</span>
-        <B_auteur>
-        <span class="authors">&nbsp;-&nbsp;Ecrit par&nbsp;
-            <BOUCLE_auteur(AUTEURS){id_article=#ID_ARTICLE}>
-            <a href="#URL_AUTEUR">#NOM</a>[(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{', ',''})]
-            </BOUCLE_auteur>
-         </span>
-        </B_auteur>
-        <a href="#commentaires" class="comments-top">Voir les commentaires <B_forums>(#COMPTEUR_BOUCLE)<BOUCLE_forums(FORUMS){id_article}{tout}><!-- --></BOUCLE_forums></a>
+	[(#GET{traduction}|?{#INCLURE{fond=inc/bloc_head_trad,id_article,id_original=#GET{traduction},track_id=#GET{track_id},track_slug=#GET{track_slug}},#INCLURE{fond=inc/bloc_head,id_article,track_id=#GET{track_id},track_slug=#GET{track_slug}}})]
+
+       
+	
+        <a href="#commentaires" class="comments-top"><:voir_les_commentaires:> <B_forums>(#COMPTEUR_BOUCLE)<BOUCLE_forums(FORUMS){id_article}{tout}><!-- --></BOUCLE_forums></a>
 
         [(#VARMODE|=={"preview"}|oui)
-            <p class="alert">Vous êtes en mode Prévisualisation.<a href="#URL_ECRIRE{article,id_article=#ID_ARTICLE}" class="right">Retourner à l'article</a></p>
+            <p class="alert"><:vous_etes_en_mode_previsualisation:><a href="#URL_ECRIRE{article,id_article=#ID_ARTICLE}" class="right"><:retourner_a_l_article:></a></p>
         ]
 
         <BOUCLE_partenaire(MOTS) {id_article} {type=Partenariats}>
             <a href="#URL_MOT" class="partenariat">
                 #LOGO_MOT
-                <p>Cet article a été écrit en partenariat avec #TITRE</p>
+                <p><:cet_article_a_ete_ecrit_en_partenariat_avec:> #TITRE</p>
             </a>
         </BOUCLE_partenaire>
 
@@ -58,35 +53,32 @@
         [<div class="chapo">(#CHAPO)</div>]
         [<div class="details wysiwyg">(#TEXTE)</div>]
         [<div class="post-scriptum"><strong>Post-scriptum :</strong> (#PS)</div>]
-	<BOUCLE_editeur(ARTICLES){id_article}{0,1}>
-	  <BOUCLE_editeur_info(AUTEURS){tout}{id_auteur=#ID_EDITEUR}{0,1}>
-	     Article édité par <a href="#URL_AUTEUR">#NOM</a>
-	  </BOUCLE_editeur_info>
-	</BOUCLE_editeur>
+	[(#GET{traduction}|?{#INCLURE{fond=inc/bloc_editeur_trad,id_article,id_original=#GET{traduction}},#INCLURE{fond=inc/bloc_editeur,id_article}})]
+
         [<div class="notes">
-            <h2>Notes</h2>
+            <h2><:notes:></h2>
             (#NOTES)
         </div>]
 
 
         <div class="block-share" id="partager">
-            <h2><a href="#partager">Partager cet article</a></h2>
+            <h2><a href="#partager"><:partager_cet_article:></a></h2>
             <ul class="share">
                 [<li>
-                    <a href="mailto:?subject=[(#TITRE)]&body=[(#TITRE|concat{" - ",#NOM_SITE_SPIP})] : (#SELF|url_absolue)" class="link-contact" title="Envoyer cet article à un ami"><i class="flaticon-contact"></i></a>
+                    <a href="mailto:?subject=[(#TITRE)]&body=[(#TITRE|concat{" - ",#NOM_SITE_SPIP})] : (#SELF|url_absolue)" class="link-contact" title="<:envoyer_cet_article_a_un_ami:>"><i class="flaticon-contact"></i></a>
                 </li>]
                 [<li>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=(#SELF|url_absolue|urlencode)" class="link-facebook" title="Partager cet article sur Facebook" target="popup"><i class="flaticon-facebook"></i></a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=(#SELF|url_absolue|urlencode)" class="link-facebook" title="<:partager_cet_article_sur_facebook:>" target="popup"><i class="flaticon-facebook"></i></a>
                 </li>]
                 [<li>
-                    <a href="https://twitter.com/share?url=(#SELF|url_absolue|urlencode)&text=[(#TITRE|concat{" - @ImagesDesMaths -"}|urlencode)]" class="link-twitter" title="Partager cet article sur Twitter" target="popup"><i class="flaticon-twitter"></i></a>
+                    <a href="https://twitter.com/share?url=(#SELF|url_absolue|urlencode)&text=[(#TITRE|concat{" - @ImagesDesMaths -"}|urlencode)]" class="link-twitter" title="<:partager_cet_article_sur_tweeter:>" target="popup"><i class="flaticon-twitter"></i></a>
                 </li>]
                 [<li>
-                    <a href="https://plus.google.com/share?url=(#SELF|url_absolue|urlencode)" class="link-googleplus" title="Partager cet article sur Google+" target="popup"><i class="flaticon-googleplus"></i></a>
+                    <a href="https://plus.google.com/share?url=(#SELF|url_absolue|urlencode)" class="link-googleplus" title="<:partager_cet_article_sur_google:>" target="popup"><i class="flaticon-googleplus"></i></a>
                 </li>]
             </ul>
             <div class="quote">
-                <h3>Pour citer cet article :</h3>
+                <h3><:pour_citer_cet_article:></h3>
                 <p>
                     <BOUCLE_auteurcite(AUTEURS){id_article=#ID_ARTICLE}>
                     #NOM[(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{', ',''})]
@@ -96,7 +88,7 @@
             </div>
             <div class="credits">
                 #BLOC_TITRE
-                <h3>Crédits image :</h3>
+                <h3><:credits_image:></h3>
                 #BLOC_DEBUT
                 [<a href="IMG/#LOGO_ARTICLE**">Image à la une</a> - (#CREDITS_LOGO|propre|PtoBR)<br/>]
                 <BOUCLE_credits(DOCUMENTS) {id_article} {credits == .} {statut == .}>
@@ -107,22 +99,22 @@
         </div>
 
         <div class="block-comments" id="commentaires">
-            <h2>Commentaire sur l'article <a href="#URL_PAGE{rss_forum_article,id_article=#ID_ARTICLE}" class="link-rss" title="RSS"><i class="flaticon-rss"></i></a></h2>
+            <h2><:commentaire_sur_article:> <a href="#URL_PAGE{rss_forum_article,id_article=#ID_ARTICLE}" class="link-rss" title="RSS"><i class="flaticon-rss"></i></a></h2>
             [(#INCLURE{fond=inc/forum}{id_article}{id_forum}{author_name=#GET{author_name}})]
         </div>
 
         <div class="block-comment" id="commenter">
-            <h2>Laisser un commentaire</h2>
+            <h2><:laisser_un_commentaire:></h2>
             #FORMULAIRE_FORUM
         </div>
 
         <B_lies>
         <div class="block-related" id="suggestions">
-            <h2><a href="#suggestions">Articles suggérés</a></h2>
-            <p>Si vous avez aimé cet article, voici quelques suggestions automatiques qui pourraient vous intéresser :</p>
+            <h2><a href="#suggestions"><:articles_suggeres:></a></h2>
+            <p><:message_articles_suggeres:></p>
             <ul>
                 <BOUCLE_lies(spip_liens){id_article}>
-                    <BOUCLE_lien(ARTICLES){id_article=#ID_TARGET}>
+                    <BOUCLE_lien(ARTICLES){id_article=#ID_TARGET}{lang}>
                     [(#INCLURE{fond=inc/resume_article}{id_article}{image_width=320}{image_height=180})]
                     </BOUCLE_lien>
                 </BOUCLE_lies>
@@ -134,10 +126,10 @@
 
 </div>
 
-[(#INCLURE{fond=inc/bloc_author}{id_article})]
+[(#GET{traduction}|?{#INCLURE{fond=inc/bloc_author_trad,id_article,id_original=#GET{traduction}},#INCLURE{fond=inc/bloc_author,id_article}})]
 [(#INCLURE{fond=inc/bloc_anchors}{id_article})]
-[(#INCLURE{fond=inc/bloc_tags}{id_article})]
-[(#INCLURE{fond=inc/bloc_dossier}{id_article})]
+[(#INCLURE{fond=inc/bloc_tags,id_article})]
+[(#INCLURE{fond=inc/bloc_dossier,id_article})]
 [(#INCLURE{fond=inc/bloc_image})]
 [(#INCLURE{fond=inc/bloc_random})]
 

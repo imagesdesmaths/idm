@@ -1,14 +1,14 @@
 <B_dossier>
 <div class="block-right block-dossier">
     <h2>
-        Dossiers
+        <:registros:>
     </h2>
 
     <BOUCLE_dossier(MOTS) {id_article} {type=Dossiers thématiques} {par titre}>
     [<div class="dossier">
-        <span>Cet article fait partie du dossier</span>
+        <span><:cet_article_fait_partie_du_dossier:></span>
         <span class="title">«(#TITRE)»</span>
-        <a href="#URL_MOT" class="link"><i class="flaticon-plus"></i><span> voir le dossier</span></a>
+        <a href="#URL_MOT" class="link"><i class="flaticon-plus"></i><span> <:voir_le_dossier:></span></a>
         <i class="flaticon-folder"></i>
     </div>]
     </BOUCLE_dossier>

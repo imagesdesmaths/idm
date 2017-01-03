@@ -12,7 +12,6 @@ define ('_SPIP_LOCK_MODE', 0);
 ini_set('display_errors', '0');
 
 $GLOBALS['dossier_squelettes'] = 'squelettes-custom';
-
 $GLOBALS['elasticsearch_config'] = array(
     'host' => 'localhost',
     'index' => 'idm',

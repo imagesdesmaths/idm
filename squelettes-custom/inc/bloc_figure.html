@@ -58,10 +58,10 @@
     <BOUCLE_random(spip_random) {type="figure_sans_paroles"} {par date_picked} {inverse} {0,1}>
         <BOUCLE_figure(ARTICLES) {id_article=#ID_OBJET}>
             <h2>
-                <a class="seemore" href="#URL_ARTICLE"><BOUCLE_rubrique(RUBRIQUES) {id_rubrique=#RUBRIQUE_FIGURES_SANS_PAROLES}>#TITRE</BOUCLE_rubrique> <span class="icon"><i class="flaticon-plus"></i></span></a>
+                <a class="seemore" href="#URL_ARTICLE"><:figure_sans_parole:><span class="icon"><i class="flaticon-plus"></i></span></a>
             </h2>
             <div class="content">
-                <a class="seemore" href="#URL_ARTICLE">Cliquez pour découvrir la figure de cette semaine !</a>
+                <a class="seemore" href="#URL_ARTICLE"><:figure_clique:></a>
             </div>
         </BOUCLE_figure>
     </BOUCLE_random>

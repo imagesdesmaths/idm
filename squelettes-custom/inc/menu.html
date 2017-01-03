@@ -1,37 +1,32 @@
+
 <ul>
-    <li><a href="#URL_SITE_SPIP"><:menu_accueil:></a></li>
-    <li class="expendable"><a href="#menu"><:menu_en_ce_moment:></a>
+    <li><a href="#URL_SITE_SPIP"><:accueil:></a></li>
+    <li class="expendable"><a href="#menu"><:en_ce_moment:></a>
         <ul>
-            <li><a href="#URL_PAGE{articles-recents}"><:menu_articles_recents:></a></li>
-            <li><a href="#URL_RUBRIQUE{#RUBRIQUE_TRIBUNES}"><:menu_tribune:></a></li>
-            <li><a href="#URL_PAGE{agenda}"><:menu_agenda:></a></li>
-            <li><a href="#URL_RUBRIQUE{#RUBRIQUE_DEFIS_DES_MATHS}"><:menu_defis_des_maths:></a></li>
-            <li><a href="#URL_RUBRIQUE{#RUBRIQUE_DEBAT_DU_18}"><:menu_debat_du_18:></a></li>
-            <li><a href="#URL_RUBRIQUE{#RUBRIQUE_REVUE_DE_PRESSE}"><:menu_revu_de_presse:></a></li>
+            <li><a href="#URL_PAGE{articles-recents}"><:articles_recents:></a></li>
+            <li><a href="#URL_RUBRIQUE{#RUBRIQUE_TRIBUNES}"><:tribune:></a></li>
+            <li><a href="#URL_PAGE{agenda}"><:agenda:></a></li>
+            <li><a href="#URL_RUBRIQUE{#RUBRIQUE_DEFIS_DES_MATHS}"><:defis_des_maths:></a></li>
+            <li><a href="#URL_RUBRIQUE{#RUBRIQUE_DEBAT_DU_18}"><:debat_du_18:></a></li>
+            <li><a href="#URL_RUBRIQUE{#RUBRIQUE_REVUE_DE_PRESSE}"><:revue_de_presse:></a></li>
         </ul>
     </li>
-    <li class="expendable"><a href="#menu"><:menu_differentes_mathematiques:></a>
+    <li class="expendable"><a href="#menu"><:differentes_mathematiques:></a>
         <ul class="columns-3">
-            <BOUCLE_rubriques(RUBRIQUES spip_articles) {id_secteur IN 26,34,37,38,48} {id_rubrique !IN 28,29,37,#RUBRIQUE_DEBAT_DU_18,#RUBRIQUE_DEFIS_DES_MATHS,#RUBRIQUE_REVUE_DE_PRESSE,#RUBRIQUE_FIGURES_SANS_PAROLES} {par num titre, titre} {lang}{spip_articles.statut=publie}>
+            <BOUCLE_rubriques(RUBRIQUES) {id_secteur IN #ENV{menu_secteurs}} {id_rubrique !IN 2,28,29,37,60,#RUBRIQUE_DEBAT_DU_18,#RUBRIQUE_DEFIS_DES_MATHS,#RUBRIQUE_REVUE_DE_PRESSE,#RUBRIQUE_FIGURES_SANS_PAROLES} {par num titre, titre}>
             <li><a href="#URL_RUBRIQUE">#TITRE</a></li>
             </BOUCLE_rubriques>
         </ul>
     </li>
-    <li class="expendable"><a href="#menu"><:menu_dossiers:></a>
-        <ul class="columns-3">
-            <BOUCLE_dossier(MOTS spip_articles) {type=Dossiers thématiques} {par titre} {spip_articles.statut=publie}>
-            <li><a href="#URL_MOT">#TITRE</a></li>
-            </BOUCLE_dossier>
-        </ul>
-    </li>
-    <li class="expendable"><a href="#menu"><:menu_qui_sommes_nous:></a>
+    [(#INCLURE{fond=inc/bloc_menu_dossier})]
+      <li class="expendable"><a href="#menu"><:qui_sommes_nous:></a>
         <ul>
-            <li><a href="#URL_ARTICLE{#ARTICLE_PRESENTATION}"><:menu_presentation:></a></li>
-            <li><a href="#URL_ARTICLE{#ARTICLE_EQUIPE}"><:menu_equipe:></a></li>
-            <li><a href="#URL_ARTICLE{#ARTICLE_FONCTIONNEMENT}"><:menu_fonctionnement_site:></a></li>
-            <li><a href="#URL_PAGE{agenda}"><:menu_notre_actualite:></a></li>
-            <li><a href="#URL_ARTICLE{#ARTICLE_PARTENAIRES}#"><:menu_partenaireS:></a></li>
-            <li><a href="mailto:#EMAIL_WEBMASTER"><:menu_contact:></a></li>
+            <li><a href="#URL_ARTICLE{#ARTICLE_PRESENTATION}"><:presentation:></a></li>
+            <li><a href="#URL_ARTICLE{#ARTICLE_EQUIPE}"><:equipe:></a></li>
+            <li><a href="#URL_ARTICLE{#ARTICLE_FONCTIONNEMENT}"><:fonctionnement_site:></a></li>
+            <li><a href="#URL_PAGE{agenda}"><:notre_actualite:></a></li>
+            <li><a href="#URL_ARTICLE{#ARTICLE_PARTENAIRES}#"><:partenaireS:></a></li>
+            <li><a href="mailto:#EMAIL_WEBMASTER"><:contact:></a></li>
         </ul>
     </li>
   

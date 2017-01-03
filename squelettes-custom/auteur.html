@@ -4,7 +4,7 @@
 <div id="content" class="auteur-full block-left">
     <BOUCLE_auteur(AUTEURS){id_auteur}>
       [<div class="image">(#LOGO_AUTEUR|right|image_reduire{160,160})</div>]
-        <div class="category">Auteur</div>
+        <div class="category"><:auteur:></div>
         <h1>#NOM</h1>
 
         <div class="bio">
@@ -18,7 +18,7 @@
         <div class="auteur-articles">
             #ANCRE_PAGINATION
 
-            <h2>Tous ses articles (#GRAND_TOTAL) :</h2>
+            <h2><:tous_ses_articles:> (#GRAND_TOTAL) :</h2>
             <ul>
                 <BOUCLE_articles(ARTICLES) {id_auteur} {id_secteur != 18} {par date} {inverse} {pagination}>
                 [(#INCLURE{fond=inc/resume_article}{id_article}{image_width=160}{image_height=90})]
@@ -31,7 +31,7 @@
         </B_articles>
 
         <div class="lui-ecrire">
-            <h2>Lui écrire</h2>
+            <h2><:lui_ecrire:></h2>
             #FORMULAIRE_ECRIRE_AUTEUR
         </div>
 

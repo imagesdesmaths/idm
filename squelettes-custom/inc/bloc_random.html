@@ -1,8 +1,10 @@
-<div class="block-right block-random">
+<BOUCLE_hasard(ARTICLES){par hasard}{0,1}{lang}>
+  <div class="block-right block-random">
     <h2>
-        <a class="seemore" href="#URL_PAGE{random}">Un article au hasard <span class="icon"><i class="flaticon-plus"></i></span></a>
+        <a class="seemore" href="#URL_ARTICLE"><:article_hasard:><span class="icon"><i class="flaticon-plus"></i></span></a>
     </h2>
     <div class="content">
-        <a class="seemore" href="#URL_PAGE{random}">Cliquez pour découvrir un article au hasard parmi tous les articles publiés !</a>
+        <a class="seemore" href="#URL_ARTICLE"><:article_hasard_clique:></a>
     </div>
 </div>
+</BOUCLE_hasard>

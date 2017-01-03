@@ -3,20 +3,20 @@
     <ul>
         [(#REM Général)]
         [(#SESSION{id_auteur}|oui)
-            <li><a href="#URL_PAGE{perso}" title="Espace personnel"><i class="flaticon-user"></i><span>Espace personnel</span></a></li>
+            <li><a href="#URL_PAGE{perso}" title="<:espace_personnel:>"><i class="flaticon-user"></i><span><:espace_personnel:></span></a></li>
         ]
 
         [(#REM Rédacteur)]
         [(#SESSION{id_auteur}|oui)
             #SET{redacteurs,#ARRAY{0,0minirezo,1,1comite}}
             [(#GET{redacteurs}|find{#SESSION{statut}}|oui)
-                <li><a href="#URL_ECRIRE{articles,id_auteur=#SESSION{id_auteur}}" title="Espace de rédaction"><i class="flaticon-cat-contribute"></i><span>Espace de rédaction</span></a></li>
+                <li><a href="#URL_ECRIRE{articles,id_auteur=#SESSION{id_auteur}}" title="<:espace_de_redaction:>"><i class="flaticon-cat-contribute"></i><span><:espace_de_redaction:></span></a></li>
             ]
         ]
 
         [(#REM Relecteur)]
         <BOUCLE_relecteursarticles(spip_relecteurs_articles) {id_auteur=#SESSION{id_auteur}} {0,1}>
-            <li><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}" title="Un article à relire !" class="relecture"><i class="flaticon-article"></i><span>Un article à relire !</span></a></li>
+            <li><a href="#URL_PAGE{propose,id_article=#ID_ARTICLE}" title="<:un_article_a_relire:>" class="relecture"><i class="flaticon-article"></i><span><:un_article_a_relire:></span></a></li>
         </BOUCLE_relecteursarticles>
 
 
@@ -25,8 +25,8 @@
         <BOUCLE_articlesself(ARTICLES) {id_article}>
             <BOUCLE_auteursself(AUTEURS) {id_article} {id_auteur=#SESSION{id_auteur}}>
                 #SET{self_article,1}
-                <li><a href="#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE}" title="Modifier votre article" class="edition-article"><i class="flaticon-cat-contribute"></i><span>Modifier votre article</span></a></li>
-                <li><a href="#URL_ECRIRE{article,id_article=#ID_ARTICLE}" title="Voir votre article" class="stats-article"><i class="flaticon-stats"></i><span>Visites : #VISITES<br>Popularité : #POPULARITE</span></a></li>
+                <li><a href="#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE}" title="<:modifier_votre_article:>" class="edition-article"><i class="flaticon-cat-contribute"></i><span><:modifier_votre_article:></span></a></li>
+                <li><a href="#URL_ECRIRE{article,id_article=#ID_ARTICLE}" title="<:voir_votre_article:>" class="stats-article"><i class="flaticon-stats"></i><span><:visites:> #VISITES<br><:popularite:> #POPULARITE</span></a></li>
             </BOUCLE_auteursself>
         </BOUCLE_articlesself>
 
@@ -35,43 +35,43 @@
         <BOUCLE_articles(ARTICLES) {statut IN prop,prepa,publie,refuse,poubelle} {id_article}>
             [(#GET{self_article}|=={0}|oui)
                 [(#GET{administrateurs}|find{#SESSION{statut}}|oui)
-                    <li><a href="#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE}" title="Modifier l'article" class="edition-article"><i class="flaticon-cat-contribute"></i><span>Modifier l'article</span></a></li>
-                    <li><a href="#URL_ECRIRE{article,id_article=#ID_ARTICLE}" title="Voir l'article" class="stats-article"><i class="flaticon-stats"></i><span>Visites : #VISITES<br>Popularité : #POPULARITE</span></a></li>
+                    <li><a href="#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE}" title="<:modifier_l_article:>" class="edition-article"><i class="flaticon-cat-contribute"></i><span><:modifier_l_article:></span></a></li>
+                    <li><a href="#URL_ECRIRE{article,id_article=#ID_ARTICLE}" title="<:voir_l_article:>" class="stats-article"><i class="flaticon-stats"></i><span><:visites:> #VISITES<br><:popularite:> : #POPULARITE</span></a></li>
                 ]
             ]
         </BOUCLE_articles>
         <BOUCLE_rubriques(RUBRIQUES) {id_rubrique}>
             [(#GET{administrateurs}|find{#SESSION{statut}}|oui)
-                <li><a href="#URL_ECRIRE{rubrique_edit,id_rubrique=#ID_RUBRIQUE}" title="Modifier la rubrique" class="edition-rubrique"><i class="flaticon-cat-contribute"></i><span>Modifier la rubrique</span></a></li>
-                <li><a href="#URL_ECRIRE{rubrique,id_rubrique=#ID_RUBRIQUE}" title="Voir la rubrique" class="stats-rubrique"><i class="flaticon-stats"></i><span>Voir la rubrique</span></a></li>
+                <li><a href="#URL_ECRIRE{rubrique_edit,id_rubrique=#ID_RUBRIQUE}" title="<modifier_la_rubrique:>" class="edition-rubrique"><i class="flaticon-cat-contribute"></i><span><:modifier_la_rubrique:></span></a></li>
+                <li><a href="#URL_ECRIRE{rubrique,id_rubrique=#ID_RUBRIQUE}" title="<:voir_la_rubrique:>" class="stats-rubrique"><i class="flaticon-stats"></i><span><:voir_la_rubrique:></span></a></li>
             ]
         </BOUCLE_rubriques>
         <BOUCLE_mots(MOTS) {id_mot}>
             [(#GET{administrateurs}|find{#SESSION{statut}}|oui)
-                <li><a href="#URL_ECRIRE{mot_edit,id_mot=#ID_MOT}" title="Modifier le mot-clé" class="edition-mot"><i class="flaticon-cat-contribute"></i><span>Modifier le mot-clé</span></a></li>
-                <li><a href="#URL_ECRIRE{mot,id_mot=#ID_MOT}" title="Voir le mot-clé" class="stats-mot"><i class="flaticon-stats"></i><span>Voir le mot-clé</span></a></li>
+                <li><a href="#URL_ECRIRE{mot_edit,id_mot=#ID_MOT}" title="<:modifier_le_mot_cle:>" class="edition-mot"><i class="flaticon-cat-contribute"></i><span><:modifier_le_mot_cle:></span></a></li>
+                <li><a href="#URL_ECRIRE{mot,id_mot=#ID_MOT}" title="<:voir_le_mot_cle:>" class="stats-mot"><i class="flaticon-stats"></i><span><:voir_le_mot_cle:></span></a></li>
             ]
         </BOUCLE_mots>
         <BOUCLE_auteurs(AUTEURS) {id_auteur}>
             [(#GET{administrateurs}|find{#SESSION{statut}}|oui)
-                <li><a href="#URL_ECRIRE{auteur_edit,id_auteur=#ID_AUTEUR}" title="Modifier l'auteur" class="edition-auteur"><i class="flaticon-cat-contribute"></i><span>Modifier l'auteur</span></a></li>
-                <li><a href="#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}" title="Voir l'auteur" class="stats-auteur"><i class="flaticon-stats"></i><span>Voir l'auteur</span></a></li>
+                <li><a href="#URL_ECRIRE{auteur_edit,id_auteur=#ID_AUTEUR}" title="<:modifier_l_auteur:>" class="edition-auteur"><i class="flaticon-cat-contribute"></i><span><:modifier_l_auteur:></span></a></li>
+                <li><a href="#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}" title="<:voir_l_auteur:>" class="stats-auteur"><i class="flaticon-stats"></i><span><:voir_l_auteur:></span></a></li>
             ]
         </BOUCLE_auteurs>
         <BOUCLE_breves(BREVES) {id_breve}>
             [(#GET{administrateurs}|find{#SESSION{statut}}|oui)
-                <li><a href="#URL_ECRIRE{breve_edit,id_breve=#ID_BREVE}" title="Modifier la brève" class="edition-breve"><i class="flaticon-cat-contribute"></i><span>Modifier la brève</span></a></li>
-                <li><a href="#URL_ECRIRE{breve,id_breve=#ID_BREVE}" title="Voir la brève" class="stats-breve"><i class="flaticon-stats"></i><span>Voir la brève</span></a></li>
+                <li><a href="#URL_ECRIRE{breve_edit,id_breve=#ID_BREVE}" title="<:modifier_la_breve:>" class="edition-breve"><i class="flaticon-cat-contribute"></i><span><:modifier_la_breve:></span></a></li>
+                <li><a href="#URL_ECRIRE{breve,id_breve=#ID_BREVE}" title="<:voir_la_breve:>" class="stats-breve"><i class="flaticon-stats"></i><span><:voir_la_breve:></span></a></li>
             ]
         </BOUCLE_breves>
         [(#GET{administrateurs}|find{#SESSION{statut}}|oui)
-            <li><a href="[(#SELF|parametre_url{var_mode,recalcul})]"><i class="flaticon-refresh"></i><span>Recalculer la page</span>[(#ENV{use_cache})]</a></li>
-            <li><a href="ecrire/" title="Espace privé"><i class="flaticon-private"></i><span>Espace privé</span></a></li>
+            <li><a href="[(#SELF|parametre_url{var_mode,recalcul})]"><i class="flaticon-refresh"></i><span><:recalculer_la_page:></span>[(#ENV{use_cache})]</a></li>
+            <li><a href="ecrire/" title="<:espace_prive:>"><i class="flaticon-private"></i><span><:espace_prive:></span></a></li>
         ]
 
         [(#REM Général)]
         [(#SESSION{id_auteur}|oui)
-            <li><a href="#URL_LOGOUT{#URL_SITE_SPIP}" title="Se déconnecter"><i class="flaticon-logout"></i><span>Se déconnecter</span></a></li>
+            <li><a href="#URL_LOGOUT{#URL_SITE_SPIP}" title="<:se_deconnecter:>"><i class="flaticon-logout"></i><span><:se_deconnecter:></span></a></li>
         ]
     </ul>
 </div>
