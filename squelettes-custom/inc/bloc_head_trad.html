@@ -1,0 +1,45 @@
+[(#ENV{track_id}|=={20}|?{#SET{track_title,<:piste_verte:>}})]
+[(#ENV{track_id}|=={21}|?{#SET{track_title,<:piste_bleue:>}})]
+[(#ENV{track_id}|=={22}|?{#SET{track_title,<:piste_rouge:>}})]
+[(#ENV{track_id}|=={23}|?{#SET{track_title,<:piste_noire:>}})]
+[(#ENV{track_id}|=={24}|?{#SET{track_title,<:hors_piste:>}})]
+
+<BOUCLE_original(ARTICLES){id_article=#ENV{id_original}}{0,1}>
+  #SET{original_title,#TITRE}
+  #SET{original_url,#URL_ARTICLE}
+  #SET{original_date,#DATE}
+</BOUCLE_original>
+
+
+
+<BOUCLE_articles(ARTICLES){id_article=#ENV{id_article}}{0,1}>
+[<h4>(#SURTITRE)</h4>]
+<h1>#TITRE</h1>
+[<h4>(#SOUSTITRE)</h4>]
+
+
+[<a href="#URL_PAGE{mot,id_mot=#ENV{track_id}}" class="piste #ENV{track_slug}">(#GET{track_title})</a>]
+<:le:> <i>[(#GET{original_date}|jour)] [(#GET{original_date}|nom_mois)] [(#GET{original_date}|annee)]</i>
+
+<B_auteur>
+  <span class="authors">&nbsp;-&nbsp;<:ecrit_par:>&nbsp;
+    <BOUCLE_auteur(AUTEURS){id_article=#ENV{id_original}}>
+      <a href="#URL_AUTEUR">#NOM</a>[(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{', ',''})]
+    </BOUCLE_auteur>
+  </span>
+</B_auteur>
+<br>
+
+<:le:> <i>[(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</i>
+<B_traducteur>
+  <span class="authors">&nbsp;-&nbsp<:traduit_par:>&nbsp;
+    <BOUCLE_traducteur(AUTEURS){id_article=#ID_ARTICLE}>
+      <a href="#URL_AUTEUR">#NOM</a>[(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{', ',''})]
+    </BOUCLE_traducteur>
+  </span>
+</B_traducteur>
+
+<br>
+<:article_original:> <a href=#GET{original_url}>#GET{original_title}</a>
+  </BOUCLE_articles>
+

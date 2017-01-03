@@ -1,0 +1,28 @@
+<B_auteur>
+<div class="block-right block-author">
+    <h2>[(#TOTAL_BOUCLE|!={1}|?{<:les_auteurs:>,<:l_auteur:>})]</h2>
+    <BOUCLE_auteur(AUTEURS){id_article=#ENV{id_original}}>
+    <div>
+        [<div class="image"><a href="#URL_AUTEUR">(#LOGO_AUTEUR|image_reduire{90,0})</a></div>]
+        <a href="#URL_AUTEUR">
+            <div class="name">#NOM</div>
+            [<div class="bio">(#BIO)</div>]
+        </a>
+    </div>
+    </BOUCLE_auteur>
+</div>
+</B_auteur>
+<B_traducteur>
+<div class="block-right block-author">
+    <h2>[(#TOTAL_BOUCLE|!={1}|?{<:les_traducteurs:>,<:le_traducteur:>})]</h2>
+    <BOUCLE_traducteur(AUTEURS){id_article}>
+    <div>
+        [<div class="image"><a href="#URL_AUTEUR">(#LOGO_AUTEUR|image_reduire{90,0})</a></div>]
+        <a href="#URL_AUTEUR">
+            <div class="name">#NOM</div>
+            [<div class="bio">(#BIO)</div>]
+        </a>
+    </div>
+    </BOUCLE_traducteur>
+</div>
+</B_traducteur>

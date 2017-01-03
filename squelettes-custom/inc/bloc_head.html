@@ -1,0 +1,24 @@
+[(#ENV{track_id}|=={20}|?{#SET{track_title,<:piste_verte:>}})]
+[(#ENV{track_id}|=={21}|?{#SET{track_title,<:piste_bleue:>}})]
+[(#ENV{track_id}|=={22}|?{#SET{track_title,<:piste_rouge:>}})]
+[(#ENV{track_id}|=={23}|?{#SET{track_title,<:piste_noire:>}})]
+[(#ENV{track_id}|=={24}|?{#SET{track_title,<:hors_piste:>}})]
+
+
+<BOUCLE_articles(ARTICLES){id_article=#ENV{id_article}}>
+[<h4>(#SURTITRE)</h4>]
+<h1>#TITRE</h1>
+[<h4>(#SOUSTITRE)</h4>]
+
+
+[<a href="#URL_PAGE{mot,id_mot=#ENV{track_id}}" class="piste #ENV{track_slug}">(#GET{track_title})</a>]
+<:le:> <i>[(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</i>
+
+<B_auteur>
+  <span class="authors">&nbsp;-&nbsp;<:ecrit_par:>&nbsp;
+    <BOUCLE_auteur(AUTEURS){id_article=#ID_ARTICLE}>
+      <a href="#URL_AUTEUR">#NOM</a>[(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{', ',''})]
+    </BOUCLE_auteur>
+  </span>
+</B_auteur>
+  </BOUCLE_articles>
