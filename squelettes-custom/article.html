@@ -10,7 +10,7 @@
 <div id="content" class="article-full block-left #GET{track_slug}">
 
   <BOUCLE_articles(ARTICLES) {id_article}{0,1}>
- [(#ID_TRAD|!={0}|et{#ID_TRAD|!={#ID_ARTICLE}}|?{#SET{traduction,#ID_TRAD}})]
+ [(#ID_TRAD|!={0}|et{#ID_TRAD|<{#ID_ARTICLE}}|?{#SET{traduction,#ID_TRAD}})]
 
  <BOUCLE_rubrique(RUBRIQUES){id_rubrique=#ID_RUBRIQUE} {0,1}>
    #SET{rubrique_name, #TITRE}

@@ -33,7 +33,7 @@
 <:le:> <i>[(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</i>
 <B_traducteur>
   <span class="authors">&nbsp;-&nbsp<:traduit_par:>&nbsp;
-    <BOUCLE_traducteur(AUTEURS){id_article=#ID_ARTICLE}>
+    <BOUCLE_traducteur(AUTEURS){id_article=#ID_ARTICLE}{par nom}>
       <a href="#URL_AUTEUR">#NOM</a>[(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{', ',''})]
     </BOUCLE_traducteur>
   </span>

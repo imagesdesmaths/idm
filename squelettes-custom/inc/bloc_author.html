@@ -1,7 +1,7 @@
 <B_auteur>
 <div class="block-right block-author">
     <h2>[(#TOTAL_BOUCLE|!={1}|?{<:les_auteurs:>,<:l_auteur:>})]</h2>
-    <BOUCLE_auteur(AUTEURS){id_article}>
+    <BOUCLE_auteur(AUTEURS){id_article}{par nom}>
     <div>
         [<div class="image"><a href="#URL_AUTEUR">(#LOGO_AUTEUR|image_reduire{90,0})</a></div>]
         <a href="#URL_AUTEUR">

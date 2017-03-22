@@ -16,7 +16,7 @@
 
 <B_auteur>
   <span class="authors">&nbsp;-&nbsp;<:ecrit_par:>&nbsp;
-    <BOUCLE_auteur(AUTEURS){id_article=#ID_ARTICLE}>
+    <BOUCLE_auteur(AUTEURS){id_article=#ID_ARTICLE}{par nom}>
       <a href="#URL_AUTEUR">#NOM</a>[(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{', ',''})]
     </BOUCLE_auteur>
   </span>
