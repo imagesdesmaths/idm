@@ -30,7 +30,7 @@
             <p class="alert"><:vous_etes_en_mode_previsualisation:><a href="#URL_ECRIRE{article,id_article=#ID_ARTICLE}" class="right"><:retourner_a_l_article:></a></p>
         ]
 
-        <BOUCLE_partenaire(MOTS) {id_article} {type=Partenariats}>
+        <BOUCLE_partenaire(MOTS) {id_article} {type=Partenariats}{id_mot !IN 61}>
             <a href="#URL_MOT" class="partenariat">
                 #LOGO_MOT
                 <p><:cet_article_a_ete_ecrit_en_partenariat_avec:> #TITRE</p>
