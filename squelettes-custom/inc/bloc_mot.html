@@ -1,0 +1,21 @@
+<BOUCLE_articles_mot(MOTS) {id_mot} {0,1}>
+    <B_articles>
+    #ANCRE_PAGINATION
+
+    <div id="content" class="block-left">
+
+        <h1>#TYPE : #TITRE</h1>
+
+        [(#TEXTE|oui)<div class="texte">#TEXTE</div>]
+
+        <ul class="articles">
+            <BOUCLE_articles(ARTICLES spip_mots_liens) {id_mot} {lang}{par date} {age >= 0} {inverse} {pagination}>
+            [(#INCLURE{fond=inc/resume_article}{id_article}{image_width=320}{image_height=180})]
+            </BOUCLE_articles>
+        </ul>
+
+        #PAGINATION{page}
+
+    </div>
+</B_articles>
+</BOUCLE_articles_mot>
