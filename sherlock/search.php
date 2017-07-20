@@ -119,6 +119,7 @@ function interventionDivine($v) {
 
         echo '<h1>'.$sherlockresults->getTotalCount().' résultats pour &#171;&nbsp;'.htmlentities($recherche).'&nbsp;&#187;&nbsp;</h1>';
 
+	
         foreach($resultats as $item){
             $resume = '';
 
@@ -410,11 +411,12 @@ if(isset($resultats)){
     function doRecherche(){
         $(document).off('click', '[data-facet]');
         $(document).off('click', '[data-pagin]');
-        var arg = 'recherche='+document.getElementById('recherche').value;
+	var arg='recherche='+'<?php echo $recherche;?>'
         for (var key in data = args){
             arg += '&'+key+'='+args[key];
         }
-        sendAjax("sherlock/search_fr.php",cb_doRecherche,'post',arg,[args]);
+        sendAjax("sherlock/search.php",cb_doRecherche,'post',arg,[args]);
+	window.scrollTo(0, 0);
     }
 
     function cb_doRecherche(text, xml, params){

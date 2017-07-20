@@ -15,9 +15,16 @@ function filtre_slug($v) {
 }
 
 function filtre_trunctext($texte, $longeur_max) {
-    if (strlen($texte) > $longeur_max)
+	$pos=strpos($texte,"<");
+	if($pos===false){
+		$longeur=$longeur_max;
+	}
+	else{
+		$longeur=min($pos,$longeur_max);
+	}    
+if (strlen($texte) > $longeur)
     {
-        $texte = substr($texte, 0, $longeur_max);
+        $texte = substr($texte, 0, $longeur);
         $dernier_espace = strrpos($texte, " ");
         $texte = substr($texte, 0, $dernier_espace)."...";
     }

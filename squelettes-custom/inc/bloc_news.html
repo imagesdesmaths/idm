@@ -5,12 +5,32 @@
             <BOUCLE_actu_groupe_mots(GROUPES_MOTS) {id_groupe = 7} {0,1}>
               <BOUCLE_actu_mots(MOTS) {id_groupe}>
 		<BOUCLE_rubrique(RUBRIQUES)>
-		  <BOUCLE_actu(ARTICLES){id_rubrique} {id_mot} {par date} {inverse} {age >= 0} {age <= 30 }{0,1} {doublons}>
-		  </BOUCLE_actu>
+		  <BOUCLE_actu(ARTICLES){id_rubrique} {id_mot} {par
+	  date} {inverse} {age >= 0} {age <= 10 }{0,1} {doublons
+	  articles}>
+	  	  </BOUCLE_actu>
+	  <BOUCLE_actu_breve(BREVES){id_rubrique} {id_mot} {par date}
+	  {inverse} {age >= 0} {age <= 30 }{0,1}{doublons breves}>
+	  </BOUCLE_actu_breve>
 		</BOUCLE_rubrique>
               </BOUCLE_actu_mots>
-            </BOUCLE_actu_groupe_mots>
-	    <BOUCLE_article(ARTICLES){!doublons}{par date}{inverse}{0,4}>
+	  </BOUCLE_actu_groupe_mots>
+
+	  <BOUCLE_breve(BREVES){!doublons breves}{par date}{inverse}{0,4}>
+	      [<li>
+	      <BOUCLE_actu_groupe_mots3(GROUPES_MOTS) {id_groupe = 7} {0,1}>
+		<BOUCLE_actu_mots3(MOTS) {id_breve} {id_groupe} {0,1}>
+		    [<div class="image">(#LOGO_MOT|image_reduire{60,60})</div>]
+		</BOUCLE_actu_mots3>
+		    </BOUCLE_actu_groupe_mots3>
+		<a href="#URL_BREVE" class="resume">
+                <h3>#TITRE</h3>
+                <p>[(#TEXTE|PtoBR|trunctext{200})]</p>
+              </a>
+	      </li>]
+	    </BOUCLE_breve>
+	    
+	    <BOUCLE_article(ARTICLES){!doublons articles}{par date}{inverse}{0,4}>
 	      [<li>
 	      <BOUCLE_actu_groupe_mots2(GROUPES_MOTS) {id_groupe = 7} {0,1}>
 		<BOUCLE_actu_mots2(MOTS) {id_article} {id_groupe} {0,1}>
@@ -22,8 +42,8 @@
                 <p>[(#DESCRIPTIF|PtoBR|trunctext{200})]</p>
               </a>
 	      </li>]
-	    </BOUCLE_article>
-	    
+	      </BOUCLE_article>
+	       
 	</ul>
         <a href="javascript:void();" class="next"><i class="flaticon-arrow-right"></i></a>
     </div>

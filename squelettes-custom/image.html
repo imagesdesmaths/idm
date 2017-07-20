@@ -4,8 +4,11 @@
 <div id="content" class="article-full block-left #GET{track_slug}">
 
     <BOUCLE_img(DOCUMENTS){id_document=#ENV{id_document}}{tous}>
-
-        <div class="category">L'image du jour</div>
+  <BOUCLE_random(spip_random){id_document}{0,1}>
+        <div class="category">Image du [(#DATE_PICKED|nom_jour)]
+  [(#DATE_PICKED|jour)] [(#DATE_PICKED|nom_mois)]</div>
+	</BOUCLE_random>
+	
         <h1>[(#TITRE)]</h1>
 
         <div class="image" style="background:(#URL_DOCUMENT|color_dominant);border-color:[(#URL_DOCUMENT|color_dominant)]">
@@ -17,6 +20,7 @@
 
     </BOUCLE_img>
 
+	<a href="#URL_PAGE{images_du_jour}">Voir d'autres images du jour</a>
 </div>
 
 [(#INCLURE{fond=inc/bloc_tribune})]
