@@ -1,0 +1,21 @@
+<BOUCLE_partenaire(MOTS) {id_article=#ENV{id_article}} {type=Partenariats}{id_mot !IN 61,96}{0,1}>
+<a href="#URL_MOT" class="partenariat">
+#LOGO_MOT
+<p><:cet_article_a_ete_ecrit_en_partenariat_avec:> #TITRE</p>
+</a>
+</BOUCLE_partenaire>
+
+
+<BOUCLE_traduction(MOTS) {id_article=#ENV{id_article}} {type=Partenariats}{id_mot==61}{0,1}>
+<a href="#URL_MOT" class="partenariat">
+#LOGO_MOT
+<p>Article traduit</p>
+</a>
+</BOUCLE_traduction>
+
+<BOUCLE_gazette(MOTS) {id_article=#ENV{id_article}} {type=Partenariats}{id_mot==96}{0,1}>
+<a href="#URL_MOT" class="partenariat">
+#LOGO_MOT
+<p>Une version légèrement abrégée de cet article paraît simultanément dans la Gazette des Mathématiciens</p>
+</a>
+</BOUCLE_gazette>

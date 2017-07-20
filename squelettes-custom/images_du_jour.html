@@ -1,0 +1,40 @@
+#CACHE{3600}
+[(#INCLURE{fond=inc/head}{class=rubrique}{env})]
+
+<B_images>
+  #ANCRE_PAGINATION
+<div id="content" class="article-full block-left}">
+<h1> Les diff&eacute;rentes images du jour </h1>
+  
+<ul>
+  <BOUCLE_images(spip_random) {type="image_du_jour"} {par date_picked} {inverse}{pagination}>
+  <li>
+  <BOUCLE_doc(DOCUMENTS) {tous} {id_document=#ID_OBJET}>
+  <div class="image">
+    <a href="#URL_PAGE{image,id_document=#ID_DOCUMENT}">
+                    [(#LOGO_DOCUMENT)]
+    </a>
+    </div>
+            <div class="resume">
+              <div class="title"><a href="#URL_PAGE{image,id_document=#ID_DOCUMENT}">#TITRE</a></div> 
+ <i>Image du [(#DATE_PICKED|nom_jour)] [(#DATE_PICKED|jour)]
+	      [(#DATE_PICKED|nom_mois)]</i>
+	      <div class="details">[(#DESCRIPTIF|PtoBR|trunctext{200})]</div>
+        <a href="#URL_PAGE{image,id_document=#ID_DOCUMENT}"
+  class="link"><i class="flaticon-plus"></i><span>voir l'image</span></a>
+            
+  </div>
+        </BOUCLE_doc>
+  </li>
+  </BOUCLE_images>
+  </ul>
+
+  #PAGINATION{page}
+
+  </div>
+  </B_images>
+
+
+[(#INCLURE{fond=inc/bloc_tribune})]
+
+[(#INCLURE{fond=inc/foot})]

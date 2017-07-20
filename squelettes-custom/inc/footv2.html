@@ -1,0 +1,161 @@
+[(#LANG|=={es}|?{#SET{menu_secteurs,#ARRAY{0,60}},#SET{menu_secteurs,#ARRAY{0,26,1,37,2,38,3,48}}})]
+
+           [(#LANG|=={fr}|?{#INCLURE{fond=inc/bloc_agenda},})]
+            <br class="cf cf-footer">
+
+[(#LANG|=={fr}|?{<div class="block-right block-suivre">
+                
+           
+	      
+                <ul class="block-social">
+                    <li>
+                        <a href="mailto:#EMAIL_WEBMASTER" class="link-contact" title="Contact"><i class="flaticon-contact"></i></a>
+                    </li>
+		    
+                   <li>
+                        <a href="https://www.facebook.com/ImagesDesMathematiques" class="link-facebook" title="Facebook"><i class="flaticon-facebook"></i></a>
+                    </li>
+                   <li>
+                        <a href="https://twitter.com/imagesdesmaths" class="link-twitter" title="Twitter"><i class="flaticon-twitter"></i></a>
+                    </li>
+                    
+                    <li>
+                        <a href="spip.php?page=backend" class="link-rss" title="Google Plus"><i class="flaticon-rss"></i></a>
+                    </li>
+                    <!--<li>
+                        <a href="#URL_PAGE{backend}" class="link-rss" title="RSS"><i class="flaticon-rss"></i></a>
+                    </li>--!>
+		    <li>
+                        <span class="link-contact" title="News letter"
+                        onclick="javascript:traductionElements();"><i class="flaticon-plane"></i></span>
+                    </li>
+		    
+                </ul>
+            </div>})]
+<div class="block-left block-navigation">
+  <ul>
+    <li>
+    <nav>
+    <ul>
+      <li>
+      <a href="http://www.capmaths.fr">
+      <img style="width:50%;"
+      src="#CHEMIN{img/logo-capmaths.png}" alt="Cap'Maths"/>
+      </a>
+      </li>
+      <li>
+      <a href="http://www.mmi-lyon.fr">
+      <img style="width:50%;"
+      src="#CHEMIN{img/logo-mmi.png}" alt="Maison des
+      Math&eacute;matiques et de l'informatique" />
+      </a>
+      </li>
+    </ul>
+    </nav>
+  </li>
+  
+  <li>
+  <a href="http://www.cnrs.fr">
+  <img style="width:50%;"
+  src="#CHEMIN{img/logo-cnrs-partenaire.png}"
+  alt="CNRS"/>
+  </a>
+  </li>
+
+  <li>
+  <a href="https://www.fondation-hadamard.fr/">
+  <img style="width:50%;"
+  src="#CHEMIN{img/logo-fondation-hadamard.png}"
+  alt="Fondation Jacques Hadamard" />
+  </a>
+  </li>
+
+  <li>
+  <a href="http://www.ihp.fr">
+  <img style="width:50%;"
+  src="#CHEMIN{img/logo-ihp.png}"
+  alt="Institut Henri
+  Poincar&eacute;" />
+  </a>
+  </li>
+    
+
+  </ul>
+                
+  </div>
+            
+
+            
+
+        </div>
+    </section>
+
+   <footer>
+        <div class="container">
+            <div class="col-left">
+                <nav role="navigation">
+                    <ul>
+                        <li><a href="#URL_PAGE{plan}"><:plan_site:></a></li>
+                        <li><a href="#URL_ARTICLES{#ARTICLE_MENTIONS_LEGALES}"><:credits_legales:></a></li>
+                        <li><a href="#URL_ARTICLE{#ARTICLE_PARTENAIRES}"><:sites_web_utiles:></a></li>
+                        <li><a href="mailto:#EMAIL_WEBMASTER"><:menu_contact:></a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-right">
+                [(#REM) <a id="copyright" href="http://www.diatem.net">Created by <strong>diatem</strong></a>]
+            </div>
+        </div>
+    </footer>
+
+	<div style="height:100px"></div>
+
+    #SPIP_CRON
+
+    <script type="text/javascript" src="#CHEMIN{js/slides.min.jquery.js}"></script>
+    <script type="text/javascript" src="#CHEMIN{vendor/cookiesplease/cookiesplease.min.js}"></script>
+    <script type="text/javascript" src="#CHEMIN{js/app.min.js}"></script>
+
+    <script type="text/javascript">
+        var _paq = _paq || [];
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        _paq.push(['setTrackerUrl', '/piwik/piwik.php']);
+        _paq.push(['setSiteId', 1]);
+
+        (function() {
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.type='text/javascript'; g.defer=true; g.async=true; g.src='/piwik/piwik.js';
+            s.parentNode.insertBefore(g,s);
+        })();
+    </script>
+
+<script type="text/javascript">
+<!--
+function traductionElements(){
+	var email_saisie=prompt('Saisir adresse email');
+	event.preventDefault();
+	$.ajax(
+	{
+	url: '/squelettes-custom/newsletter_abonnement.php',
+	dataType: 'json',
+	data: {
+	email: email_saisie
+	}
+	})
+	.always(function(data) {
+	var message = 'Une erreur est survenue.</span>';
+	if(data.success) {
+	message = data.success;
+	} else if(data.error) {
+	message = data.error;
+            }
+	alert(message);
+       });
+}
+-->
+</script>
+
+</body>
+
+</html>
