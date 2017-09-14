@@ -1,7 +1,7 @@
 #CACHE{3600}
 [(#INCLURE{fond=inc/head}{class=mot}{env})]
 
-[(#ID_MOT|=={96}|ou{#ID_MOT|=={67}}|?{#INCLURE{fond=inc/bloc_mot_gazette},#INCLURE{fond=inc/bloc_mot,id_mot}})]
+[(#ID_MOT|=={96}|ou{#ID_MOT|=={67}}|?{#INCLURE{fond=inc/bloc_mot_gazette},#INCLURE{fond=inc/bloc_mot,id_mot,env,ajax}})]
 
 [(#INCLURE{fond=inc/bloc_tribune})]
 [(#INCLURE{fond=inc/bloc_image})]
