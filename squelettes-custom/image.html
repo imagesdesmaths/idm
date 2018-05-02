@@ -14,12 +14,11 @@
         <div class="image" style="background:(#URL_DOCUMENT|color_dominant);border-color:[(#URL_DOCUMENT|color_dominant)]">
             <img src="#URL_DOCUMENT"[ alt="(#TITRE)"] />
         </div>
-
-        <div class="details">[(#DESCRIPTIF)]</div>
-        [<p class="copyright">Crédits : (#CREDITS)</p>]
-
+        <div class="details wysiwyg">[(#DESCRIPTIF)]
+        [<p class="credits">Crédits : (#CREDITS|propre|PtoBR)</p>]
+</div>
     </BOUCLE_img>
-
+<br>
 	<a href="#URL_PAGE{images_du_jour}">Voir d'autres images du jour</a>
 </div>
 
