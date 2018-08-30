@@ -411,7 +411,7 @@ if(isset($resultats)){
     function doRecherche(){
         $(document).off('click', '[data-facet]');
         $(document).off('click', '[data-pagin]');
-	var arg='recherche='+'<?php echo $recherche;?>'
+	var arg='recherche='+'<?php echo htmlentities($recherche);?>'
         for (var key in data = args){
             arg += '&'+key+'='+args[key];
         }
