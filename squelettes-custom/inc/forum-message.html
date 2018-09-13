@@ -8,6 +8,11 @@
         <div class="message">
             [(#TEXTE)]
             [<div class="notes">(#NOTES)</div>]
+	    <BOUCLE_doc(documents){id_forum}{tout}>
+	      Document joint : <a style="color:rgb(209, 56, 39)" href="#URL_DOCUMENT">[(#FICHIER|basename)]</a>
+	      <br>
+	    </BOUCLE_doc>
+
             [<a href="(#SELF|parametre_url{id_forum,#ID_FORUM})#commenter" class="answer">Répondre à ce message</a>]
         </div>
     </div>

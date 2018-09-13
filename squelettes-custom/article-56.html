@@ -44,29 +44,19 @@
                 </li>]
             </ul>
         </div>
+	
+	<div class="block-comments" id="commentaires">
+          <h2><:commentaire_sur_article:> <a href="#URL_PAGE{rss_forum_article,id_article=#ID_ARTICLE}" class="link-rss" title="RSS"><i class="flaticon-rss"></i></a></h2>
+          [(#INCLURE{fond=inc/forum}{id_article}{id_forum}{author_name=#GET{author_name}})]
+	</div>
 
+	
         <div class="block-comment" id="commentaires">
             <h2><a href="#commentaires">Laisser un commentaire</a></h2>
             #FORMULAIRE_FORUM
         </div>
 
-        <div class="block-comments">
-            <ul>
-                <BOUCLE_comments(FORUMS) {id_article}>
-                [<li class="comment[(#EMAIL|=={#GET{author_email}}|?{" owner"})]">
-                    <div class="avatar">
-                        [(#LOGO_AUTEUR|image_reduire{50,0}|image_recadre{50,50,center center})]
-                        [(#LOGO_AUTEUR|non)<i class="flaticon-avatar"></i>]
-                    </div>
-                    <div class="content">
-                        <div class="author">(#NOM) [<span class="date relative">(#DATE|date_relative)</span>]</div>
-                        <div class="message">[(#TEXTE)]</div>
-                    </div>
-                </li>]
-                </BOUCLE_comments>
-            </ul>
-        </div>
-
+  
         <B_lies>
         <div class="block-related" id="suggestions">
             <h2><a href="#suggestions">Articles suggérés</a></h2>
