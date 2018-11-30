@@ -247,7 +247,7 @@ function idm_insert_head ($texte) {
         }
       });
     </script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 END;
   $mj_insert.="\n<link rel=\"stylesheet\" type =\"text/css\" href=\"".find_in_path("idm.css")."\"/>\n";
   return $texte . $mj_insert;
