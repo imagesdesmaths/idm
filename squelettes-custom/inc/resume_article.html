@@ -1,7 +1,8 @@
 <BOUCLE_article(ARTICLES){id_article}>
 <li>
     <div class="image">
-        <a href="#URL_ARTICLE" class="<BOUCLE_articles_piste(MOTS) {id_article}  {type=Difficulté} {0,1}>[(#TITRE|slug)]</BOUCLE_articles_piste>">
+        <a href="#URL_ARTICLE" class="<BOUCLE_articles_piste(MOTS) {id_article}  {type=Difficulté} {0,1}>[(#TITRE|slug)]</BOUCLE_articles_piste>" 
+	title="<BOUCLE_articles_duree(MOTS) {id_article} {id_groupe=8} {0,1}>[Temps de lecture : (#TITRE)]</BOUCLE_articles_duree>">
         #SET{url, IMG/#LOGO_ARTICLE|fichier}
 
         <BOUCLE_articles_auteur_logo(AUTEURS){id_article} {0,1}>
