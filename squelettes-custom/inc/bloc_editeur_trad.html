@@ -1,6 +1,6 @@
 <BOUCLE_editeur(ARTICLES){id_article}{0,1}>
   <BOUCLE_editeur_info(AUTEURS){tout}{id_auteur=#ID_EDITEUR}{0,1}>
-    Article édité par <a href="#URL_AUTEUR">#NOM</a>
+    <:article_edite_par:> <a href="#URL_AUTEUR">#NOM</a>
     #SET{has_editeur,"true"}
   </BOUCLE_editeur_info>
 </BOUCLE_editeur>
@@ -11,6 +11,6 @@
   <BOUCLE_editeur_original_info(AUTEURS){tout}{id_auteur=#ID_EDITEUR}{0,1}>
     [(#GET{has_editeur}|?{<br>})]
     
-    Article original édité par <a href="#URL_AUTEUR">#NOM</a>
+    <:article_original_edite_par:> <a href="#URL_AUTEUR">#NOM</a>
   </BOUCLE_editeur_original_info>
 </BOUCLE_editeur_original>

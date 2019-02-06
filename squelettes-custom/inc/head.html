@@ -57,11 +57,13 @@
     <header class="noprint">
        [(#SESSION{id_auteur}|oui)<div
 	 style="float:right;margin-right:5pt">#MENU_LANG</div>]
-      <div class="container">
+       <div class="container">
+	 #SET{logo_idm,#CHEMIN{img/logo-idm-fr.png}}
+	 [(#LANG|=={es}|?{#SET{logo_idm,#CHEMIN{img/logo-idm-es.png}}})]
             <h1>
                 <a href="#URL_SITE_SPIP">
                     <img src="#CHEMIN{img/logo-cnrs.png}" alt="CNRS" />
-                    <img src="#CHEMIN{img/logo_idm.png}" alt="#NOM_SITE_SPIP" />
+                    <img src="#GET{logo_idm}" alt="#NOM_SITE_SPIP" />
                 </a>
             </h1>
 

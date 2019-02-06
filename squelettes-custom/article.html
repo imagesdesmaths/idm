@@ -86,7 +86,7 @@
                 #BLOC_TITRE
                 <h3><:credits_image:></h3>
                 #BLOC_DEBUT
-                [<a href="IMG/#LOGO_ARTICLE**">Image à la une</a> - (#CREDITS_LOGO|propre|PtoBR)<br/>]
+                [<a href="IMG/#LOGO_ARTICLE**"><:image_a_la_une:></a> - (#CREDITS_LOGO|propre|PtoBR)<br/>]
                 <BOUCLE_credits(DOCUMENTS) {id_article} {credits == .} {statut == .}>
                   <a href="#URL_DOCUMENT">[(#TITRE|sinon{img_#ID_DOCUMENT})]</a> - [(#CREDITS|propre|PtoBR)]<br/>
                 </BOUCLE_credits>

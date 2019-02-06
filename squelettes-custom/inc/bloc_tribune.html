@@ -1,9 +1,13 @@
+
+#SET{id_tribunes,#RUBRIQUE_TRIBUNES}
+[(#LANG|=={es}|?{#SET{id_tribunes,81}})]
+
 <div class="block-right block-tribune">
     <h2>
-        <a class="seemore" href="#URL_RUBRIQUE{#RUBRIQUE_TRIBUNES}">La tribune des mathématiciens <span class="icon"><i class="flaticon-plus"></i></span></a>
+        <a class="seemore" href="#URL_RUBRIQUE{#GET{id_tribunes}}"><:tribune_mathematiciens:><span class="icon"><i class="flaticon-plus"></i></span></a>
     </h2>
     <ul>
-        <BOUCLE_articles(ARTICLES) {id_rubrique = #RUBRIQUE_TRIBUNES} {par date} {age >= 0} {inverse} {0,4}>
+        <BOUCLE_articles(ARTICLES) {id_rubrique = #GET{id_tribunes}} {par date} {age >= 0} {inverse} {0,4}>
         [(#INCLURE{fond=inc/resume_article}{id_article}{image_width=160}{image_height=90})]
         </BOUCLE_articles>
     </ul>

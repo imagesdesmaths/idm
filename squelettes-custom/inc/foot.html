@@ -1,92 +1,129 @@
+
 [(#LANG|=={es}|?{#SET{menu_secteurs,#ARRAY{0,60}},#SET{menu_secteurs,#ARRAY{0,26,1,37,2,38,3,48}}})]
 
            [(#LANG|=={fr}|?{#INCLURE{fond=inc/bloc_agenda},})]
             <br class="cf cf-footer">
 
-            [(#LANG|=={fr}|?{<div class="block-right block-suivre">
-                <h2>Suivre IDM</h2>
-
-                <div class="block-newsletter">
-                    <div class="image">
-                        <i class="flaticon-plane"></i>
-                    </div>
-		     <form id="register_newsletter"  method="post">
-                        <label for="newsletter_email">Newsletter IDM</label>
-                        <input type="text" name="newsletter_email" id="newsletter_email" placeholder="Adresse e-mail">
-                        <button type="submit"><i class="flaticon-check"></i></button>
-                    </form>
-                </div>
-
+[(#LANG|=={fr}|?{<div class="block-right block-suivre">
+                
+           
+	      
                 <ul class="block-social">
                     <li>
-                        <a href="mailto:#EMAIL_WEBMASTER" class="link-contact" title="Contact"><i class="flaticon-contact"></i></a>
+                        <a href="mailto:idm-contact@listes.math.cnrs.fr" class="link-contact" title="Contact"><i class="flaticon-contact"></i></a>
                     </li>
-                    <!--
-                    <li>
+		    
+                   <li>
                         <a href="https://www.facebook.com/ImagesDesMathematiques" class="link-facebook" title="Facebook"><i class="flaticon-facebook"></i></a>
                     </li>
-                    -->
-                    <li>
+                   <li>
                         <a href="https://twitter.com/imagesdesmaths" class="link-twitter" title="Twitter"><i class="flaticon-twitter"></i></a>
                     </li>
-                    <!--
+                    
                     <li>
-                        <a href="#" class="link-googleplus" title="Google Plus"><i class="flaticon-googleplus"></i></a>
+                        <a href="spip.php?page=backend" class="link-rss" title="Google Plus"><i class="flaticon-rss"></i></a>
                     </li>
-                    -->
                     <!--<li>
                         <a href="#URL_PAGE{backend}" class="link-rss" title="RSS"><i class="flaticon-rss"></i></a>
-                    </li>-->
+                    </li>--!>
+
+		    <li>
+                        <span class="link-contact" title="News letter"
+                        onclick="javascript:traductionElements();"><i class="flaticon-plane"></i></span>
+                    </li>
+		    
                 </ul>
             </div>})]
+<div class="block-left block-navigation" style="padding-bottom:0px;">
 
-            <div class="block-left block-navigation">
-                <ul>
-                    <li>
-                        <h3><:en_ce_moment:></h3>
-                        <nav>
-                            <ul>
-                                <li><a href="#URL_PAGE{articles-recents}"><:articles_recents:></a></li>
-                                <li><a href="#URL_RUBRIQUE{#RUBRIQUE_TRIBUNES}"><:tribune:></a></li>
-                                <li><a href="#URL_PAGE{agenda}"><:agenda:></a></li>
-                                <li><a href="#URL_RUBRIQUE{#RUBRIQUE_DEFIS_DES_MATHS}"><:defis_des_maths:></a></li>
-                                <li><a href="#URL_RUBRIQUE{#RUBRIQUE_DEBAT_DU_18}"><:debat_du_18:></a></li>
-                                <li><a href="#URL_RUBRIQUE{#RUBRIQUE_REVUE_DE_PRESSE}"><:revue_de_presse:></a></li>
-                                <li><a href="#URL_PAGE{lexique}"><:lexique:></a></li>
-                            </ul>
-                        </nav>
-                    </li>
-                    <li>
-                        <h3><:differentes_mathematiques:></h3>
-                        <nav>
-                            <ul>
-                                <BOUCLE_rubriques(RUBRIQUES) {id_secteur IN #GET{menu_secteurs}} {id_rubrique !IN 2,28,29,37,60,#RUBRIQUE_DEBAT_DU_18,#RUBRIQUE_DEFIS_DES_MATHS,#RUBRIQUE_REVUE_DE_PRESSE,#RUBRIQUE_FIGURES_SANS_PAROLES} {par num titre, titre}>
-                                <li><a href="#URL_RUBRIQUE">#TITRE</a></li>
-                                </BOUCLE_rubriques>
-                            </ul>
-                        </nav>
-			  </li>
-			  [(#LANG|=={fr}|?{#INCLURE{fond=inc/bloc_menu_dossier}})]
-                    <li>
-                        <h3><:qui_sommes_nous:></h3>
-                        <nav>
-                            <ul>
-                                <li><a href="#URL_ARTICLE{#ARTICLE_PRESENTATION}"><:presentation:></a></li>
-                                <li><a href="#URL_ARTICLE{#ARTICLE_EQUIPE}"><:equipe:></a></li>
-                                <li><a href="#URL_ARTICLE{#ARTICLE_FONCTIONNEMENT}"><:fonctionnement_site:></a></li>
-                                <li><a href="#URL_PAGE{agenda}"><:notre_actualite:></a></li>
-                                <li><a href="#URL_ARTICLE{#ARTICLE_PARTENAIRES}"><:partenaires:></a></li>
-                                <li><a href="mailto:#EMAIL_WEBMASTER"><:contact:></a></li>
-                            </ul>
-                        </nav>
-                    </li>
-                </ul>
-            </div>
+ <ul>
+   
+ <li>
+    <nav>
+    <ul>
+      <li>
+      <a href="http://www.capmaths.fr">
+      <img style="width:50%;"
+      src="#CHEMIN{img/logo-capmaths.png}" alt="Cap'Maths"/>
+      </a>
+      </li>
+      <li>
+      <a href="http://www.mmi-lyon.fr">
+      <img style="width:50%;"
+      src="#CHEMIN{img/logo-mmi.png}" alt="Maison des
+      Math&eacute;matiques et de l'informatique" />
+      </a>
+      </li>
+    </ul>
+    </nav>
+  </li>
+  
+
+<li>
+<nav>
+<ul>
+<li>
+  <a href="http://www.cnrs.fr">
+  <img style="width:50%;"
+  src="#CHEMIN{img/logo-cnrs-partenaire.png}"
+  alt="CNRS"/>
+  </a>
+  </li>
+<li>
+  <a href="https://www.mathrice.fr/">
+  <img style="width:50%;"
+  src="#CHEMIN{img/logo-mathrice.png}"
+  alt="Mathrice"/>
+  </a>
+  </li>
+</ul>
+</nav>
+</li>
+
+  <li>
+<nav>
+<ul>
+<li>
+  <a href="https://www.fondation-hadamard.fr/">
+  <img style="width:50%;"
+  src="#CHEMIN{img/logo-fondation-hadamard.png}"
+  alt="Fondation Jacques Hadamard" />
+  </a>
+  </li>
+<li>
+  <a href="http://audimath.math.cnrs.fr/">
+  <img style="width:50%;"
+  src="#CHEMIN{img/logo-audimath.png}"
+  alt="AuDiMath" />
+  </a>
+  </li>
+</ul>
+</nav>
+</li> 
+ <li>
+  <a href="http://www.ihp.fr">
+  <img style="width:50%;"
+  src="#CHEMIN{img/logo-ihp.png}"
+  alt="Institut Henri
+  Poincar&eacute;" />
+  </a>
+  </li>
+	    
+
+
+  </ul>
+
+</div>
+[(#LANG|=={es}|?{#INCLURE{fond=inc/logo_chili}})]
+                
+
+            
+           
 
         </div>
     </section>
 
-    <footer class="noprint">
+   <footer>
         <div class="container">
             <div class="col-left">
                 <nav role="navigation">
@@ -103,6 +140,8 @@
             </div>
         </div>
     </footer>
+
+	<div style="height:100px"></div>
 
     #SPIP_CRON
 
@@ -123,6 +162,32 @@
             s.parentNode.insertBefore(g,s);
         })();
     </script>
+
+<script type="text/javascript">
+<!--
+function traductionElements(){
+	var email_saisie=prompt('Saisir adresse email');
+	event.preventDefault();
+	$.ajax(
+	{
+	url: '/squelettes-custom/newsletter_abonnement.php',
+	dataType: 'json',
+	data: {
+	email: email_saisie
+	}
+	})
+	.always(function(data) {
+	var message = 'Une erreur est survenue.</span>';
+	if(data.success) {
+	message = data.success;
+	} else if(data.error) {
+	message = data.error;
+            }
+	alert(message);
+       });
+}
+-->
+</script>
 
 </body>
 

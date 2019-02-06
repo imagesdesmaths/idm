@@ -1,4 +1,6 @@
 <BOUCLE_article(ARTICLES){id_article}>
+  #SET{original,#ID_ARTICLE}
+ [(#ID_TRAD|!={0}|et{#ID_TRAD|<{#ID_ARTICLE}}|?{#SET{original,#ID_TRAD}})]
 <li>
     <div class="image">
         <a href="#URL_ARTICLE" class="<BOUCLE_articles_piste(MOTS) {id_article}  {type=Difficulté} {0,1}>[(#TITRE|slug)]</BOUCLE_articles_piste>" 
@@ -21,7 +23,7 @@
         <i><:le_min:> <a href="#URL_ARTICLE">[(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</a></i>
         <B_articles_auteur_nom>
         <div class="author">
-            <BOUCLE_articles_auteur_nom(AUTEURS){id_article}{par nom}>[<a href="#URL_AUTEUR">(#NOM)</a>][(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{', ',''})]</BOUCLE_articles_auteur_nom>
+            <BOUCLE_articles_auteur_nom(AUTEURS){id_article=#GET{original}}{par nom}>[<a href="#URL_AUTEUR">(#NOM)&nbsp; </a> ][(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{', ',''})]</BOUCLE_articles_auteur_nom>
         </div>
         </B_articles_auteur_nom>
         <div class="details">[(#DESCRIPTIF|PtoBR|trunctext{200})]</div>

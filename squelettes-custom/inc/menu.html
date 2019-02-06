@@ -1,14 +1,22 @@
+#SET{id_tribunes,#RUBRIQUE_TRIBUNES}
+#SET{id_defis,#RUBRIQUE_DEFIS_DES_MATHS}
+[(#LANG|=={es}|?{#SET{id_tribunes,81}})]
+[(#LANG|=={es}|?{#SET{id_defis,80}})]
 
+[(#LANG|=={es}|?{#SET{menu_secteurs,#ARRAY{0,60}},#SET{menu_secteurs,#ARRAY{0,26,1,37,2,38,3,48}}})]
 <ul>
     <li><a href="#URL_SITE_SPIP"><:accueil:></a></li>
     <li class="expendable"><a href="#menu"><:en_ce_moment:></a>
         <ul>
-            <li><a href="#URL_PAGE{articles-recents}"><:articles_recents:></a></li>
-            <li><a href="#URL_RUBRIQUE{#RUBRIQUE_TRIBUNES}"><:tribune:></a></li>
-            <li><a href="#URL_PAGE{agenda}"><:agenda:></a></li>
-            <li><a href="#URL_RUBRIQUE{#RUBRIQUE_DEFIS_DES_MATHS}"><:defis_des_maths:></a></li>
-            <li><a href="#URL_RUBRIQUE{#RUBRIQUE_DEBAT_DU_18}"><:debat_du_18:></a></li>
-            <li><a href="#URL_RUBRIQUE{#RUBRIQUE_REVUE_DE_PRESSE}"><:revue_de_presse:></a></li>
+          <li><a href="#URL_PAGE{articles-recents}"><:articles_recents:></a></li>
+	  <li><a href="#URL_RUBRIQUE{#GET{id_tribunes}}"><:tribune:></a></li>
+	  
+
+	  [(#LANG|=={fr}|?{#INCLURE{fond=inc/menu_agenda}})]
+	  <li><a href="#URL_RUBRIQUE{#GET{id_defis}}"><:defis_des_maths:></a></li>
+
+	    [(#LANG|=={fr}|?{#INCLURE{fond=inc/menu_debat_18}})]
+	    [(#LANG|=={fr}|?{#INCLURE{fond=inc/menu_revue_presse}})]
         </ul>
     </li>
     <li class="expendable"><a href="#menu"><:differentes_mathematiques:></a>
@@ -24,7 +32,7 @@
             <li><a href="#URL_ARTICLE{#ARTICLE_PRESENTATION}"><:presentation:></a></li>
             <li><a href="#URL_ARTICLE{#ARTICLE_EQUIPE}"><:equipe:></a></li>
             <li><a href="#URL_ARTICLE{#ARTICLE_FONCTIONNEMENT}"><:fonctionnement_site:></a></li>
-            <li><a href="#URL_PAGE{agenda}"><:notre_actualite:></a></li>
+	     [(#LANG|=={fr}|?{#INCLURE{fond=inc/menu_agenda}})]
             <li><a href="#URL_ARTICLE{#ARTICLE_PARTENAIRES}#"><:partenaireS:></a></li>
             <li><a href="mailto:#EMAIL_WEBMASTER"><:contact:></a></li>
         </ul>
