@@ -1,15 +1,21 @@
 #CACHE{3600}
 [(#LANG|=={es}|?{#SET{menu_secteurs,#ARRAY{0,60}},#SET{menu_secteurs,#ARRAY{0,26,1,37,2,38,3,48}}})]
 
+#SET{html_title,#NOM_SITE_SPIP}
+#SET{html_desc,#DESCRIPTIF_SITE_SPIP}
+[(#LANG|=={es}|?{#SET{html_title,Paisajes Matem&aacute;cos}#SET{html_desc,La investigaci&oacute;n matem&aacute;tica en im&aacute;genes}})]
+
 <!DOCTYPE html>
 <html>
 
-<head>
+  <head>
+  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    [<meta name="description" content="(#ENV{desc}|sinon{#DESCRIPTIF_SITE_SPIP}|couper{150}|textebrut)"/>]
+    [<meta name="description" content="(#ENV{desc}|sinon{#GET{html_desc}}|couper{150}|textebrut)"/>]
 
-    <title>[(#ENV*{title}|textebrut) - ]#NOM_SITE_SPIP</title>
+    <title>[(#ENV*{title}|textebrut) - ]#GET{html_title}</title>
+    
 
     <link rel="stylesheet" type="text/css" media="all" href="#CHEMIN{css/app.min.css}"/>
     <link rel="stylesheet" type="text/css" media="all" href="#CHEMIN{fonts/flaticon/flaticon.css}"/>
