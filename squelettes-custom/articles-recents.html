@@ -8,7 +8,7 @@
 
     <B_articles>
     <ul>
-        <BOUCLE_articles(ARTICLES) {id_rubrique !in #RUBRIQUE_TRIBUNES,#RUBRIQUE_FIGURES_SANS_PAROLES} {par date} {age<30} {inverse} {0, 30}>
+        <BOUCLE_articles(ARTICLES) {id_rubrique !in #RUBRIQUE_TRIBUNES,#RUBRIQUE_FIGURES_SANS_PAROLES} {par date}{lang} {age<30} {inverse} {0, 30}>
         [(#INCLURE{fond=inc/resume_article}{id_article}{image_width=320}{image_height=180})]
         </BOUCLE_articles>
     </ul>
