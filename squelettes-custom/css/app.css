@@ -4356,7 +4356,7 @@ section.plan-du-site #content:before {
 }
 
 .block-last-articles>ul li:first-child .author:before {
-    content: "par";
+    /*content: "par";*/
     display: inline-block;
     margin: 0 5px;
     vertical-align: top
