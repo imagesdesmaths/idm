@@ -1,15 +1,21 @@
-<BOUCLE_articles_mot(MOTS) {id_mot} {0,1}>
+#SET{id_mot_trad,#ENV{id_mot}}
+[(#ENV{id_mot}|=={20}|et{#LANG|=={es}}|?{#SET{id_mot_trad,116}})]
+[(#ENV{id_mot}|=={21}|et{#LANG|=={es}}|?{#SET{id_mot_trad,117}})]
+[(#ENV{id_mot}|=={22}|et{#LANG|=={es}}|?{#SET{id_mot_trad,118}})]
+[(#ENV{id_mot}|=={23}|et{#LANG|=={es}}|?{#SET{id_mot_trad,121}})]
+[(#ENV{id_mot}|=={24}|et{#LANG|=={es}}|?{#SET{id_mot_trad,120}})]
+
+<BOUCLE_articles_mot(MOTS) {id_mot=#GET{id_mot_trad}} {tout}{0,1}>
     <B_articles>
     #ANCRE_PAGINATION
 
     <div id="content" class="block-left">
 
         <h1>#TYPE : #TITRE</h1>
-
         [(#TEXTE|oui)<div class="texte">#TEXTE</div>]
 
         <ul class="articles">
-            <BOUCLE_articles(ARTICLES spip_mots_liens) {id_mot} {lang}{par date} {age >= 0} {inverse} {pagination}>
+            <BOUCLE_articles(ARTICLES spip_mots_liens) {id_mot=#ENV{id_mot}} {lang}{par date} {age >= 0} {inverse} {pagination}>
             [(#INCLURE{fond=inc/resume_article}{id_article}{image_width=320}{image_height=180})]
             </BOUCLE_articles>
         </ul>
