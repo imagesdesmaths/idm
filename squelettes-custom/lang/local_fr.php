@@ -83,7 +83,7 @@
        'tous_ses_articles' => 'Tous ses articles',
        'traduit_par' => 'Traduit par',
        'tribune' => 'Tribune',
-       'tribune_mathematiciens' => 'La tribune des mathématiciens',
+       'tribune_mathematiciens' => 'Tribune',
        'un_article_a_relire' => 'Un article &agrave; relire !',
        'visites' => 'Visites :',
        'voir_le_dossier' => 'voir le dossier',	
