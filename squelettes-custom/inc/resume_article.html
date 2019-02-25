@@ -20,7 +20,7 @@
     </div>
     <div class="resume">
         <div class="title"><a href="#URL_ARTICLE">[(#TITRE)]</a></div>
-        <i><:le_min:> <a href="#URL_ARTICLE">[(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</a></i>
+        <i><:le_min:> <a href="#URL_ARTICLE">[(#DATE|affdate_court)]</a></i>
         <B_articles_auteur_nom>
         <div class="author">
             <BOUCLE_articles_auteur_nom(AUTEURS){id_article=#GET{original}}{par nom}>[<a href="#URL_AUTEUR">(#NOM)&nbsp; </a> ][(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|?{', ',''})]</BOUCLE_articles_auteur_nom>
