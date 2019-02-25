@@ -7,16 +7,16 @@
 		<BOUCLE_rubrique(RUBRIQUES)>
 		  <BOUCLE_actu(ARTICLES){id_rubrique} {id_mot} {par
 	  date} {inverse} {age >= 0} {age <= 10 }{0,1} {doublons
-	  articles}>
+	  articles}{lang}>
 	  	  </BOUCLE_actu>
 	  <BOUCLE_actu_breve(BREVES){id_rubrique} {id_mot} {par date}
-	  {inverse} {age >= 0} {age <= 30 }{0,1}{doublons breves}>
+	  {inverse} {age >= 0} {age <= 30 }{0,1}{doublons breves}{lang}>
 	  </BOUCLE_actu_breve>
 		</BOUCLE_rubrique>
               </BOUCLE_actu_mots>
 	  </BOUCLE_actu_groupe_mots>
 
-	  <BOUCLE_breve(BREVES){!doublons breves}{par date}{inverse}{0,4}>
+	  <BOUCLE_breve(BREVES){!doublons breves}{par date}{inverse}{0,4}{lang}>
 	      [<li>
 	      <BOUCLE_actu_groupe_mots3(GROUPES_MOTS) {id_groupe = 7} {0,1}>
 		<BOUCLE_actu_mots3(MOTS) {id_breve} {id_groupe} {0,1}>
@@ -30,7 +30,7 @@
 	      </li>]
 	    </BOUCLE_breve>
 	    
-	    <BOUCLE_article(ARTICLES){!doublons articles}{par date}{inverse}{0,4}>
+	    <BOUCLE_article(ARTICLES){!doublons articles}{par date}{inverse}{0,4}{lang}>
 	      [<li>
 	      <BOUCLE_actu_groupe_mots2(GROUPES_MOTS) {id_groupe = 7} {0,1}>
 		<BOUCLE_actu_mots2(MOTS) {id_article} {id_groupe} {0,1}>
