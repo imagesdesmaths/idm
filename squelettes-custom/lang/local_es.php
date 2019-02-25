@@ -19,7 +19,7 @@
        'credits_legales' => 'Cr&eacute;ditos y condiciones',
        'debat_du_18' => 'Debate del 18',
        'defis_des_maths' => 'Retos matem&aacute;ticos',
-       'descriptif_site' => 'La investigaci&oacute;n matem&aacute;tica en im&aacute;genes',
+       'descriptif_site' => 'La investigaci&oacute;n matem&aacute;tica en relatos e im&aacute;genes',
        'differentes_mathematiques' => 'Diferentes matem&aacute;ticos',
        'dossiers' => 'Registros',
        'ecrit_par' => 'Escrito por',
