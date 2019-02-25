@@ -89,7 +89,7 @@
        'un_article_a_relire' => '&iexcl;Un art&iacute,cle para releer!',
        'visites' => 'Visitas:',	   
        'voir_le_dossier' => 'consulte el registro',
-       'voir_les_commentaires' => 'Ver los commentarios',
+       'voir_les_commentaires' => 'Ver los comentarios',
        'voir_l_article' => 'Ver el art&iacute;culo',
        'voir_l_auteur' => 'Ver el autor',
        'voir_la_breve' => 'Ver la breve',
