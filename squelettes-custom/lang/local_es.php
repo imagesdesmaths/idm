@@ -74,7 +74,7 @@
        'popularite' => 'Popularidad:',
        'pour_citer_cet_article' => 'Para citar este art&iacute;culo:',
        'presentation' => 'Presentaci&oacute;n ',
-       'qui_sommes_nous' => '&iquest;En que estamos?',
+       'qui_sommes_nous' => '&iquest;En qu&eacute; estamos?',
        'recalculer_la_page' => 'Recalcular la pag&iacute;na',
        'recherche' => 'B&uacute;squeda',
        'retour_rubrique' => 'Volver a la secci&oacute;n',
