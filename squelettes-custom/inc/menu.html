@@ -1,9 +1,16 @@
 #SET{id_tribunes,#RUBRIQUE_TRIBUNES}
 #SET{id_defis,#RUBRIQUE_DEFIS_DES_MATHS}
+#SET{id_presentation,#ARTICLE_PRESENTATION}
+
+
 [(#LANG|=={es}|?{#SET{id_tribunes,81}})]
 [(#LANG|=={es}|?{#SET{id_defis,80}})]
-
-[(#LANG|=={es}|?{#SET{menu_secteurs,#ARRAY{0,60}},#SET{menu_secteurs,#ARRAY{0,26,1,37,2,38,3,48}}})]
+[(#LANG|=={es}|?{#SET{menu_secteurs,#ARRAY{0,60}}})]
+[(#LANG|=={es}|?{#SET{menu_secteurs,#ARRAY{0,26,1,37,2,38,3,48}}})]
+[(#LANG|=={es}|?{#SET{id_presentation,3359}})]
+[(#LANG|=={es}|?{#SET{id_equipe,4740}})]
+[(#LANG|=={es}|?{#SET{id_fonctionnement,4741}})]
+[(#LANG|=={es}|?{#SET{id_partenaires,4742}})]
 <ul>
     <li><a href="#URL_SITE_SPIP"><:accueil:></a></li>
     <li class="expendable"><a href="#menu"><:en_ce_moment:></a>
@@ -29,11 +36,11 @@
     [(#INCLURE{fond=inc/bloc_menu_dossier})]
       <li class="expendable"><a href="#menu"><:qui_sommes_nous:></a>
         <ul>
-            <li><a href="#URL_ARTICLE{#ARTICLE_PRESENTATION}"><:presentation:></a></li>
-            <li><a href="#URL_ARTICLE{#ARTICLE_EQUIPE}"><:equipe:></a></li>
-            <li><a href="#URL_ARTICLE{#ARTICLE_FONCTIONNEMENT}"><:fonctionnement_site:></a></li>
+            <li><a href="#URL_ARTICLE{#GET{id_presentation}}"><:presentation:></a></li>
+            <li><a href="#URL_ARTICLE{#GET{id_equipe}}"><:equipe:></a></li>
+            <li><a href="#URL_ARTICLE{#GET{id_fonctionnement}}"><:fonctionnement_site:></a></li>
 	     [(#LANG|=={fr}|?{#INCLURE{fond=inc/menu_agenda}})]
-            <li><a href="#URL_ARTICLE{#ARTICLE_PARTENAIRES}#"><:partenaireS:></a></li>
+            <li><a href="#URL_ARTICLE{#GET{id_partenaires}}#"><:partenaireS:></a></li>
             <li><a href="mailto:#EMAIL_WEBMASTER"><:contact:></a></li>
         </ul>
     </li>
