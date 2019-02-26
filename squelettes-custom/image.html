@@ -5,8 +5,7 @@
 
     <BOUCLE_img(DOCUMENTS){id_document=#ENV{id_document}}{tous}>
   <BOUCLE_random(spip_random){id_document}{0,1}>
-        <div class="category">Image du [(#DATE_PICKED|nom_jour)]
-  [(#DATE_PICKED|jour)] [(#DATE_PICKED|nom_mois)]</div>
+        <div class="category"><:image_du:> [(#DATE_PICKED|affdate_court)]</div>
 	</BOUCLE_random>
 	
         <h1>[(#TITRE)]</h1>
@@ -15,11 +14,12 @@
             <img src="#URL_DOCUMENT"[ alt="(#TITRE)"] />
         </div>
         <div class="details wysiwyg">[(#DESCRIPTIF)]
-        [<p class="credits">Crédits : (#CREDITS|propre|PtoBR)</p>]
+        [<p class="credits"><:credits:> : (#CREDITS|propre|PtoBR)</p>]
 </div>
     </BOUCLE_img>
-<br>
-	<a href="#URL_PAGE{images_du_jour}">Voir d'autres images du jour</a>
+    <br>
+
+	<a href="#URL_PAGE{images_du_jour}"><:voir_autres_images_du_jour:></a>
 </div>
 
 [(#INCLURE{fond=inc/bloc_tribune})]

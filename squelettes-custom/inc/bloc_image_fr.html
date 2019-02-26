@@ -1,0 +1,82 @@
+<?php
+
+    $results = sql_select(
+        'id_objet',
+        'spip_random',
+        'type = "image_du_jour" AND date_picked >= CURDATE()',
+        '',
+        '',
+        '1'
+    );
+    if($row = sql_fetch($results)) {
+        // L'image du jour est déjà définie aujourd'hui, on la récupère
+    } else {
+        // L'image du jour n'est pas encore définie, on la choisit aléatoirement
+        $results = sql_select(
+            'd.id_document',
+            'spip_documents AS d
+                JOIN spip_documents_liens dl ON (dl.id_document = d.id_document)
+                LEFT JOIN spip_random r ON (d.id_document = r.id_objet AND r.objet = "document")',
+            'r.id_objet IS NULL
+                AND dl.objet = "article"
+                AND dl.id_objet = #ARTICLE_IMAGES_DU_JOUR',
+            '',
+            'RAND()',
+            '1'
+        );
+        if($row = sql_fetch($results)) {
+            // On stocke l'image du jour
+            sql_insertq('spip_random', array(
+                'objet' => 'document',
+                'id_objet' => $row['id_document'],
+                'type' => 'image_du_jour',
+                'date_picked' => date('Y-m-d 00:00:00')
+            ));
+        } else {
+            // Tout à été selectionné une fois, on vide les entrées de spip_random
+            sql_delete('spip_random', 'type = "image_du_jour"');
+            // Et on sélectionne une nouvelle figure aléatoirement
+            $results = sql_select(
+                'd.id_document',
+                'spip_documents AS d
+                    JOIN spip_documents_liens dl ON (dl.id_document = d.id_document)
+                    LEFT JOIN spip_random r ON (d.id_document = r.id_objet AND r.objet = "document")',
+                'r.id_objet IS NULL
+                    AND dl.objet = "article"
+                    AND dl.id_objet = #ARTICLE_IMAGES_DU_JOUR',
+                '',
+                'RAND()',
+                '1'
+            );
+            if($row = sql_fetch($results)) {
+                // On stocke l'image du jour
+                sql_insertq('spip_random', array(
+                    'objet' => 'document',
+                    'id_objet' => $row['id_document'],
+                    'type' => 'image_du_jour',
+                    'date_picked' => date('Y-m-d 00:00:00')
+                ));
+            } else {
+                // Une erreur est survenue (rubrique vide...)
+            }
+        }
+    }
+
+?>
+<B_random>
+    <div class="block-right block-image">
+    <BOUCLE_random(spip_random) {type="image_du_jour"} {par date_picked} {inverse} {0,1}>
+        <BOUCLE_img(DOCUMENTS) {tous} {id_document=#ID_OBJET}>
+            <h2>
+                <a class="seemore" href="#URL_PAGE{image,id_document=#ID_DOCUMENT}"><:image_du_jour:><span class="icon"><i class="flaticon-plus"></i></span></a>
+            </h2>
+            <div>
+                <a href="#URL_PAGE{image,id_document=#ID_DOCUMENT}">
+                    [(#LOGO_DOCUMENT)]
+                    [(#REM) [<div class="title">(#TITRE)</div>]]
+                </a>
+            </div>
+        </BOUCLE_img>
+    </BOUCLE_random>
+    </div>
+</B_random>

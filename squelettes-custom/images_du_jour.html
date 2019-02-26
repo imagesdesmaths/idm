@@ -1,13 +1,14 @@
 #CACHE{3600}
 [(#INCLURE{fond=inc/head}{class=rubrique}{env})]
-
+#SET{id_article_image,167}
+[(#LANG|=={es}|?{#SET{id_article_image,4744}})]
 <B_images>
 #ANCRE_PAGINATION
 <div id="content" class="article-full block-left}">
-<h1> Les diff&eacute;rentes images du jour </h1>
+<h1><:les_differentes_images_du_jour:></h1>
   
 <ul>
-  <BOUCLE_images(DOCUMENTS){inclus=image}{mode=document}{id_article=167}{statut?}{doublons}{pagination 20}>
+  <BOUCLE_images(DOCUMENTS){inclus=image}{mode=document}{id_article=#GET{id_article_image}}{statut?}{doublons}{pagination 20}>
   <li>
 <div class="image">
   <a href="#URL_PAGE{image,id_document=#ID_DOCUMENT}">
@@ -18,7 +19,7 @@
               <div class="title"><a href="#URL_PAGE{image,id_document=#ID_DOCUMENT}">#TITRE</a></div> 
 	      <div class="details">[(#DESCRIPTIF|PtoBR|trunctext{200})]</div>
         <a href="#URL_PAGE{image,id_document=#ID_DOCUMENT}"
-  class="link"><i class="flaticon-plus"></i><span>voir l'image</span></a>
+  class="link"><i class="flaticon-plus"></i><span><:voir_l_image:></span></a>
 
 </div>
 </li>
