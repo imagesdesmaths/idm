@@ -20,8 +20,14 @@
 
             <h2><:tous_ses_articles:> (#GRAND_TOTAL) :</h2>
             <ul>
-                <BOUCLE_articles(ARTICLES) {id_auteur} {id_secteur != 18} {par date} {inverse} {pagination}>
-                [(#INCLURE{fond=inc/resume_article}{id_article}{image_width=160}{image_height=90})]
+              <BOUCLE_articles(ARTICLES) {id_auteur} {id_secteur != 18} {par date} {inverse} {pagination}{origine_traduction}>
+		<B_trad>
+		  <BOUCLE_trad(ARTICLES){traduction}{lang}{0,1}>
+		    [(#INCLURE{fond=inc/resume_article}{id_article}{image_width=160}{image_height=90})]
+		    </BOUCLE_trad>
+		</B_trad>
+		[(#INCLURE{fond=inc/resume_article}{id_article}{image_width=160}{image_height=90})]
+		<//B_trad>
                 </BOUCLE_articles>
             </ul>
 

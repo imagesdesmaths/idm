@@ -42,10 +42,18 @@
                 ]
             ]
         </BOUCLE_articles_auteur_logo>
+	<B_traductions>
+	  <br/>
+	    <BOUCLE_traductions(ARTICLES){traduction}{exclus}{par lang}>
+	      <:lire_l_article_en:> &nbsp;<a href="#URL_ARTICLE"> <img src="squelettes-custom/img/#LANG.png" border="0"></a>
+
+	
+</BOUCLE_traductions>
+		
+	</B_traductions>
         [<div class="image"[ style="background:(#GET{image_url}|color_dominant);border-color:[(#GET{image_url}|color_dominant)]"]>
             (#GET{image_url}|image_reduire{0,350})
         </div>]
-
         [<div class="chapo">(#CHAPO)</div>]
         [<div class="details wysiwyg">(#TEXTE)</div>]
         [<div class="post-scriptum"><strong>Post-scriptum :</strong> (#PS)</div>]

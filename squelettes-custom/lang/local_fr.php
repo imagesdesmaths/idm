@@ -46,6 +46,7 @@
        'les_traducteurs' => 'Les traducteurs',
        'lexique' => 'Lexique',
        'lire_article' => 'lire l\'article',
+       'lire_l_article_en' => 'Lire l\'article en',
        'lui_ecrire' => 'Lui &eacute;crire',
        'message_articles_suggeres' => 'Si vous avez aimé cet article, voici quelques suggestions automatiques qui pourraient vous intéresser :',
        'modifier_l_article' => 'Modifier l\'article',

@@ -46,6 +46,7 @@
        'les_traducteurs' => 'Los traductores',
        'lexique' => 'L&eacute;xico',
        'lire_article' => 'leer art&iacute;culo',
+          'lire_l_article_en' => 'Leer el art&iacute;culo en',	
        'lui_ecrire' => 'Escribirle',
        'menu_contac' => 'Contacto',
        'message_articles_suggeres' => 'Si te ha gustado este art&iacute;culo, he aqu&iacute; algunas sugerencias autom&aacute;ticas que pueden interesarle:',
