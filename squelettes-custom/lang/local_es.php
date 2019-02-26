@@ -85,7 +85,7 @@
        'tous_ses_articles' => 'Todos sus art&iacuteculos',
        'traduit_par' => 'Traducido por',
        'tribune' => 'Tribuna',
-       'tribune_mathematiciens' => 'La tribuna de Matem&aacute;ticos',
+       'tribune_mathematiciens' => 'Tribuna',
        'un_article_a_relire' => '&iexcl;Un art&iacute,cle para releer!',
        'visites' => 'Visitas:',	   
        'voir_le_dossier' => 'consulte el registro',
