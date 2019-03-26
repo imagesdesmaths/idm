@@ -53,4 +53,5 @@ define('MOT_PISTE_ROUGE', 22);
 define('MOT_PISTE_NOIRE', 23);
 define('MOT_HORS_PISTE', 24);
 
+$forcer_lang=true;
 ?>

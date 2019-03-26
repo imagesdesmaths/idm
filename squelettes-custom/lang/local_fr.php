@@ -48,6 +48,7 @@
        'lire_article' => 'lire l\'article',
        'lire_l_article_en' => 'Lire l\'article en',
        'lui_ecrire' => 'Lui &eacute;crire',
+       'menu_contact'=> 'Menu contact',
        'message_articles_suggeres' => 'Si vous avez aimé cet article, voici quelques suggestions automatiques qui pourraient vous intéresser :',
        'modifier_l_article' => 'Modifier l\'article',
        'modifier_la_rubrique' => 'Modifier la rubrique',

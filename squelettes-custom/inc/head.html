@@ -61,10 +61,7 @@
     </nav>
 
     <header class="noprint">
-       [(#SESSION{id_auteur}|oui)<div
-	 style="float:right;margin-right:5pt">#MENU_LANG</div>]
-       <div class="container">
-	 #SET{logo_idm,#CHEMIN{img/logo-idm-fr.png}}
+   	 #SET{logo_idm,#CHEMIN{img/logo-idm-fr.png}}
 	 [(#LANG|=={es}|?{#SET{logo_idm,#CHEMIN{img/logo-idm-es.png}}})]
             <h1>
                 <a href="#URL_SITE_SPIP">
@@ -88,7 +85,11 @@
         </div>
 
     </header>
-	  
+         <div
+	 style="float:left;margin-right:5pt">#MENU_LANG</div>
+	 <div class="container">
+	   
+	
     <section class="[(#ENV{class}|sinon{page})] wrap main" role="main">
 
         <aside>

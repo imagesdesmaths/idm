@@ -1,0 +1,68 @@
+[(#REM) 
+	Stocker les traductions eventuelles de la rubrique en cours si le plugin Tradrub est installe (permet l'utilisation du
+	critere traduction sur les rubriques)
+]
+<BOUCLE_tradrub(CONDITION){si #PLUGIN{tradrub}}>
+	<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+		#SET{ListeTraductions, #ARRAY{}}
+		<BOUCLE_TraductionRubriqueCourante(RUBRIQUES){traduction}{lang !IN #CONFIG{menu_lang_liens/langues_invisibles,#ARRAY}}>
+			#SET_MERGE{ListeTraductions,#GET{ListeTraductions},#ARRAY{#LANG,#URL_RUBRIQUE}}
+		</BOUCLE_TraductionRubriqueCourante>
+	</BOUCLE_rubrique>
+</BOUCLE_tradrub>
+
+[(#REM) 
+	Stocker les traductions eventuelles de l'article en cours
+]
+<BOUCLE_article(ARTICLES){id_article}>
+#SET{ListeTraductions, #ARRAY{}}
+<BOUCLE_TraductionArticleCourant(ARTICLES){traduction}{lang !IN #CONFIG{menu_lang_liens/langues_invisibles,#ARRAY}}>
+	#SET_MERGE{ListeTraductions,#GET{ListeTraductions},#ARRAY{#LANG,#URL_ARTICLE}}
+</BOUCLE_TraductionArticleCourant>
+</BOUCLE_article>
+
+[(#REM) 
+	Y-a-t'il plus d'une langue reellement utilisee dans le site (moins les langues "invisibles") ?
+	Si oui, on affiche le menu de langue
+	Si non, rien
+	
+	Les langues "invisibles" sont les langues que le webmestre peut choisir de ne pas afficher dans le menu,
+	a partir du formulaire de configuration du plugin.
+	
+	Note : 'explode' est une fonction PHP : http://php.net/manual/fr/function.explode.php, utilisee ici pour renvoyer un tableau contenant
+	les langues utilisees, a partir de la variable meta 'langues_utilisees'. Ce tableau est compare avec le tableau des langues invisibles
+	avec la fonction PHP 'array_diff' http://www.php.net/manual/fr/function.array-diff.php qui renvoie elle-meme un tableau.
+]
+
+[(#SET{langues_a_afficher,[(#CONFIG{langues_utilisees}|explode{","}|array_diff{#CONFIG{menu_lang_liens/langues_invisibles, #ARRAY}})]})]
+#SET{liste,#CONFIG{menu_lang_liens/formatliste,bloc}}
+#SET{format,#CONFIG{menu_lang_liens/format,abrege}}
+#SET{separateur,#CONFIG{menu_lang_liens/separateur,''}}
+[(#GET{liste}|=={liste}|?{#SET{separateur,#CONFIG{menu_lang_liens/separateur,''}},''})]
+<BOUCLE_PlusieursLanguesUtilisees(POUR){tableau #GET{langues_a_afficher}}{1,1}>
+<[(#GET{liste}|=={liste}|?{ul,div})] id="menu_lang">[(#REM)
+
+	On liste les langues utilisees dans le site
+	
+]<BOUCLE_ListeLangues(POUR){tableau #GET{langues_a_afficher}}>[(#GET{format}|=={'complet'}|?{[(#SET{nom_langue,[(#VALEUR|traduire_nom_langue)]})],[(#SET{nom_langue,[(#VALEUR)]})]})][
+	(#GET{liste}|=={liste}|oui)<li [(#COMPTEUR_BOUCLE|=={1}|oui)class="first"] [(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)class="last"]>
+	][(#REM)
+		
+		Si la langue n'est pas celle en cours, on fait un lien qui fait 2 actions :
+		- fixer le cookie de langue sur la langue demandee
+		- rediriger sur l'article dans la langue demandee si opportun
+		  sinon, revenir sur la page en cours
+		
+		url_absolue pour éviter des problèmes en urls arbo
+	]
+	[[[[(#GET{separateur})](#GET{liste}|=={liste}|non)](#COMPTEUR_BOUCLE|>{1}|oui)][<a href="[(#SELF|parametre_url{action,converser}|parametre_url{var_lang,#VALEUR}|parametre_url{redirect,#GET{ListeTraductions}|table_valeur{#VALEUR}|sinon{#SELF}|url_absolue})]" rel="alternate" lang="#VALEUR"[(#GET{format}|=={'abrege'}|oui) title="[(#VALEUR|traduire_nom_langue|ucfirst|attribut_html)]"] class="langue_#VALEUR">(#GET{nom_langue}|ucfirst)</a>](#VALEUR|=={#ENV{lang}}|non)][
+	(#REM)
+	
+		Si la langue est celle en cours, afficher celle-ci en gras, sans lien
+
+	][[[[[(#GET{separateur})](#GET{liste}|=={liste}|non)](#COMPTEUR_BOUCLE|>{1}|oui)]<strong class="langue_#VALEUR" title="[(#VALEUR|traduire_nom_langue|ucfirst|attribut_html)]">(#GET{nom_langue}|ucfirst)</strong>](#VALEUR|=={#ENV{lang}}|oui)][
+	(#GET{liste}|=={liste}|oui)</li>
+]</BOUCLE_ListeLangues>
+</[(#GET{liste}|=={liste}|?{ul,div})]>
+</BOUCLE_PlusieursLanguesUtilisees>
+#FILTRE{trim}

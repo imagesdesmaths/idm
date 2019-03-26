@@ -21,7 +21,7 @@
             <th>Modifier</th>
           </tr>
         </thead>
-        <BOUCLE_article_edited(ARTICLES) {statut = prop} {prevu != oui} {par titre}>
+        <BOUCLE_article_edited(ARTICLES) {statut = prop} {prevu != oui} {par titre}{lang=fr}>
         <tr>
           <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
           <td>#LESAUTEURS</td>
@@ -65,7 +65,7 @@
             <th>Fiche</th>
           </tr>
         </thead>
-        <BOUCLE_articles_ideas(ARTICLES) {statut = idee} {par titre}>
+        <BOUCLE_articles_ideas(ARTICLES) {statut = idee} {par titre}{lang=fr}>
         <tr>
           <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
           <td>#LESAUTEURS</td>
@@ -109,7 +109,7 @@
             <th>Fiche</th>
           </tr>
         </thead>
-        <BOUCLE_articles_ideas_mine(ARTICLES) {statut = idee} {id_auteur=#SESSION{id_auteur}} {par titre}>
+        <BOUCLE_articles_ideas_mine(ARTICLES) {statut = idee} {id_auteur=#SESSION{id_auteur}} {par titre}{lang=fr}>
         <tr>
           <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
           <td>#LESAUTEURS</td>
@@ -153,7 +153,7 @@
             <th>Modifier</th>
           </tr>
         </thead>
-        <BOUCLE_articles_writing_mine(ARTICLES) {statut = prepa} {id_auteur=#SESSION{id_auteur}} {par titre}>
+        <BOUCLE_articles_writing_mine(ARTICLES) {statut = prepa} {id_auteur=#SESSION{id_auteur}} {par titre}{lang=fr}>
         <tr>
           <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
           <td>#LESAUTEURS</td>
@@ -177,7 +177,7 @@
 
 <div class="box simple">
   <div class="inner closable">
-    <BOUCLE_deja1(ARTICLES) {statut = publie} {id_secteur !IN 18}{id_rubrique !IN 54,56}{age<=0} {par date}>
+    <BOUCLE_deja1(ARTICLES) {statut = publie} {id_secteur !IN 18}{id_rubrique !IN 54,56}{age<=0} {par date}{lang=fr}>
     #SET{counter_deja, #TOTAL_BOUCLE}
     </BOUCLE_deja1>
     <BOUCLE_prevus1(ARTICLES) {statut IN prop,prepa} {prevu = oui} {par date_prevue}>
@@ -204,7 +204,7 @@
             <th>Modifier</th>
           </tr>
         </thead>
-        <BOUCLE_deja(ARTICLES) {statut = publie} {id_secteur !IN 18}{id_rubrique !IN 54,56}{age<=0} {par date}>
+        <BOUCLE_deja(ARTICLES) {statut = publie} {id_secteur !IN 18}{id_rubrique !IN 54,56}{age<=0} {par date}{lang=fr}>
         <tr>
           <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
           <td>#LESAUTEURS</td>
@@ -251,7 +251,7 @@
             <th>Modifier</th>
           </tr>
         </thead>
-        <BOUCLE_article2(ARTICLES) {statut = prop} {prevu != oui} {par titre}>
+        <BOUCLE_article2(ARTICLES) {statut = prop} {prevu != oui} {par titre}{lang=fr}>
         <tr>
           <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
           <td>#LESAUTEURS</td>
@@ -295,7 +295,7 @@
             <th>Modifier</th>
           </tr>
         </thead>
-        <BOUCLE_article3(ARTICLES) {statut = prepa} {prevu != oui} {par titre}>
+        <BOUCLE_article3(ARTICLES) {statut = prepa} {prevu != oui} {par titre}{lang=fr}>
         <tr>
           <td><a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
           <td>#LESAUTEURS</td>
