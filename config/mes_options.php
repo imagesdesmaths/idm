@@ -34,7 +34,7 @@ define('RUBRIQUE_EN_SORTANT_DE_L_ECOLE', 50);
 define('RUBRIQUE_REVUE_DE_PRESSE', 26);
 define('RUBRIQUE_EVENEMENTS', 33);
 define('RUBRIQUE_FIGURES_SANS_PAROLES', 56);    // squelette lié : squelettes-custom/article-56.html
-
+define('RUBRIQUE_FIGURES_SANS_PAROLES_ES', 84); // squelette lié : squelettes-custom/article-84.html
 define('ARTICLE_IMAGES_DU_JOUR', 167);
 define('ARTICLE_PRESENTATION', 63);
 define('ARTICLE_EQUIPE', 16);

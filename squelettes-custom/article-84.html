@@ -1,0 +1,82 @@
+#CACHE{3600}
+[(#INCLURE{fond=inc/head}{class=figure}{env})]
+
+<BOUCLE_articles_piste(MOTS) {id_article} {type=Difficulté} {0,1}>
+#SET{track_title, #TITRE}
+#SET{track_slug, #TITRE|slug}
+#SET{track_id, #ID_MOT}
+</BOUCLE_articles_piste>
+
+<BOUCLE_auteur(AUTEURS){id_article} {0,1}>
+#SET{author_name, #NOM}
+#SET{author_email, #EMAIL}
+</BOUCLE_auteur>
+
+<div id="content" class="article-full block-left">
+
+    <BOUCLE_articles(ARTICLES) {id_article}>
+
+        <BOUCLE_rubrique(RUBRIQUES){id_rubrique=#ID_RUBRIQUE} {0,1}>
+        #SET{rubrique_name, #TITRE}
+        #SET{rubrique_desc, #TEXTE}
+        </BOUCLE_rubrique>
+
+        <div class="category"><a href="#URL_RUBRIQUE">[(#GET{rubrique_name}|sinon{Article})]</a> [<a href="(#URL_RUBRIQUE)" class="backlink"><:retour_rubrique:> #NOM_RUBRIQUE</a>]</div>
+        <h1>Figura sin palabras ##TITRE</h1>
+
+        <div class="chapo">#GET{rubrique_desc}</div>
+        [<div class="image">(#LOGO_ARTICLE|image_reduire{0,350})</div>]
+
+        <div class="block-share" id="partager">
+            <h2><a href="#partager">Comparte esta figura sin palabras</a></h2>
+            <ul class="share">
+                [<li>
+                    <a href="mailto:?subject=[(#TITRE)]&body=[(#TITRE|concat{" - ",#NOM_SITE_SPIP})] : (#SELF|url_absolue)" class="link-contact" title="<:envoyer_cet_article_a_un_ami:>"><i class="flaticon-contact"></i></a>
+                </li>]
+                [<li>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=(#SELF|url_absolue|urlencode)" class="link-facebook" title="<:partager_cet_article_sur_facebook:>" target="popup"><i class="flaticon-facebook"></i></a>
+                </li>]
+                [<li>
+                    <a href="https://twitter.com/share?url=(#SELF|url_absolue|urlencode)&text=[(#TITRE|concat{" - ",#NOM_SITE_SPIP}|urlencode)]" class="link-twitter" title="<:partager_cet_article_sur_tweeter:>" target="popup"><i class="flaticon-twitter"></i></a>
+                </li>]
+                [<li>
+                    <a href="https://plus.google.com/share?url=(#SELF|url_absolue|urlencode)" class="link-googleplus" title="<:partager_cet_article_sur_google:>" target="popup"><i class="flaticon-googleplus"></i></a>
+                </li>]
+            </ul>
+        </div>
+	
+	<div class="block-comments" id="commentaires">
+          <h2><:commentaire_sur_article:> <a href="#URL_PAGE{rss_forum_article,id_article=#ID_ARTICLE}" class="link-rss" title="RSS"><i class="flaticon-rss"></i></a></h2>
+          [(#INCLURE{fond=inc/forum}{id_article}{id_forum}{author_name=#GET{author_name}})]
+	</div>
+
+	
+        <div class="block-comment" id="commentaires">
+            <h2><a href="#commentaires"><:laisser_un_commentaire:></a></h2>
+            #FORMULAIRE_FORUM
+        </div>
+
+  
+        <B_lies>
+        <div class="block-related" id="suggestions">
+            <h2><a href="#suggestions"><:articles_suggeres:></a></h2>
+            <p><:message_articles_suggeres:></p>
+            <ul>
+                <BOUCLE_lies(spip_liens){id_article}>
+                    <BOUCLE_lien(ARTICLES){id_article=#ID_TARGET}>
+                    [(#INCLURE{fond=inc/resume_article}{id_article}{image_width=320}{image_height=180})]
+                    </BOUCLE_lien>
+                </BOUCLE_lies>
+            </ul>
+        </div>
+        </B_lies>
+
+    </BOUCLE_articles>
+
+</div>
+
+[(#INCLURE{fond=inc/bloc_tribune})]
+[(#INCLURE{fond=inc/bloc_image})]
+[(#INCLURE{fond=inc/bloc_random})]
+
+[(#INCLURE{fond=inc/foot})]
