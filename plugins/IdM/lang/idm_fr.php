@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'menu'               => "Gestion IdM",
     'moderation'         => "Modération",
 
-    'equipe'             => "Équipe “@nom@” :",
+    'equipe'             => "Équipe ",
 
     'lint'               => "Vérificateur",
     'log'                => "Suivi relecture",
