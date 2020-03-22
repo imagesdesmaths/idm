@@ -30,6 +30,8 @@
   </B_images>
 
 
-[(#INCLURE{fond=inc/bloc_tribune})]
+[(#LANG|=={es}|?{#INCLURE{fond=inc/bloc_tribune}})]
+[(#LANG|=={fr}|?{#INCLURE{fond=inc/bloc_colonne_droite}})]
+
 
 [(#INCLURE{fond=inc/foot})]

@@ -75,7 +75,8 @@
 
 </div>
 
-[(#INCLURE{fond=inc/bloc_tribune})]
+[(#LANG|=={es}|?{#INCLURE{fond=inc/bloc_tribune}})]
+[(#LANG|=={fr}|?{#INCLURE{fond=inc/bloc_colonne_droite}})]
 [(#INCLURE{fond=inc/bloc_image})]
 [(#INCLURE{fond=inc/bloc_random})]
 
