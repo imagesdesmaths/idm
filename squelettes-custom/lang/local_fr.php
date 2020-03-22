@@ -15,6 +15,7 @@
        'cet_article_fait_partie_du_dossier' => 'Cet article fait partie du dossier',
        'commentaire_sur_article' => 'Commentaire sur l\'article',
        'contact' => 'Contact',
+	'colonne_droite' => 'Ressources p&eacute;dagogiques',
        'credits' => 'Cr&eacute;dits',
        'credits_image' => 'Cr&eacute;dits image :',
        'credits_legales' => 'Cr&eacutedits et mentions l&eacutegales',

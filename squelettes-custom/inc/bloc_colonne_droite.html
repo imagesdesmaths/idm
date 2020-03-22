@@ -1,0 +1,11 @@
+
+<div class="block-right block-tribune">
+    <h2>
+        <a class="seemore" href="#URL_MOT{149}"><:colonne_droite:><span class="icon"><i class="flaticon-plus"></i></span></a>
+    </h2>
+    <ul>
+        <BOUCLE_articles(ARTICLES) {id_mot = 149} {par date} {age >= 0} {inverse} {0,4}>
+        [(#INCLURE{fond=inc/resume_article}{id_article}{image_width=160}{image_height=90})]
+        </BOUCLE_articles>
+    </ul>
+</div>
