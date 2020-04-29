@@ -61,6 +61,7 @@
     </nav>
 
     <header class="noprint">
+      <div style="float:right;margin-left:10pt;margin-right:10pt;">#MENU_LANG</div>
    	 #SET{logo_idm,#CHEMIN{img/logo-idm-fr.png}}
 	 [(#LANG|=={es}|?{#SET{logo_idm,#CHEMIN{img/logo-idm-es.png}}})]
             <h1>
@@ -71,24 +72,23 @@
             </h1>
 
             <div class="header-actions">
-              [(#LANG|=={fr}|?{#INCLURE{fond=inc/bloc_recherche}})]
-	     
-                <a class="header-private" class="button" href="#URL_PAGE{perso}" title="[(#SESSION{statut}|=={0minirezo}|?{<:espace_prive:>,[(#SESSION{statut}|=={1comite}|?{'Espace de rédaction','Espace personnel'})]})]"><i class="flaticon-user"></i></a>
+	      [(#LANG|=={fr}|?{#INCLURE{fond=inc/bloc_recherche}})]
 
 	      
+                <a class="header-private" class="button" href="#URL_PAGE{perso}" title="[(#SESSION{statut}|=={0minirezo}|?{<:espace_prive:>,[(#SESSION{statut}|=={1comite}|?{'Espace de rédaction','Espace personnel'})]})]"><i class="flaticon-user"></i></a>
+		
+	  
             </div>
 
             <div class="header-descriptif"><:descriptif_site:></div>
 
             <a class="menu-mobile-toggle" href="#menu"><i class="flaticon-menu"></i> Menu</a>
-	
+
         </div>
 
     </header>
-         <div
-	 style="float:left;margin-right:5pt">#MENU_LANG</div>
+
 	 <div class="container">
-	   
 	
     <section class="[(#ENV{class}|sinon{page})] wrap main" role="main">
 
