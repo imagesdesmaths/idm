@@ -40,7 +40,9 @@
             <li><a href="#URL_ARTICLE{#GET{id_presentation}}"><:presentation:></a></li>
             <li><a href="#URL_ARTICLE{#GET{id_equipe}}"><:equipe:></a></li>
             <li><a href="#URL_ARTICLE{#GET{id_fonctionnement}}"><:fonctionnement_site:></a></li>
-	     [(#LANG|=={fr}|?{#INCLURE{fond=inc/menu_agenda}})]
+	    [(#LANG|=={fr}|?{#INCLURE{fond=inc/menu_agenda}})]
+	    [(#LANG|=={fr}|?{#INCLURE{fond=inc/menu_lettre_information}})]
+	    
             <li><a href="#URL_ARTICLE{#GET{id_partenaires}}#"><:partenaireS:></a></li>
             <li><a href="mailto:#EMAIL_WEBMASTER"><:contact:></a></li>
         </ul>
